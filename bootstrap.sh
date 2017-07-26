@@ -35,9 +35,11 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	composer global require "laravel/lumen-installer"
 
 	#install nodejs
-	curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-	sudo bash nodesource_setup.sh
-	sudo apt-get -y install nodejs
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	sudo apt-get update
+	sudo apt-get install -y nodejs
+	sudo ln -sf /usr/bin/nodejs /usr/bin/node
+	sudo apt-get install npm
 	
 	#installing unzip
 	sudo apt-get install -y unzip
@@ -59,6 +61,13 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	#making sure the installations part doesn't run again
 	sudo touch /var/vagrant_provision
 fi
+
+#install nodejs
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get update
+sudo apt-get install -y nodejs
+sudo ln -sf /usr/bin/nodejs /usr/bin/node
+sudo apt-get install npm
 
 # configuration	
 ################
