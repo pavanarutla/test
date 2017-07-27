@@ -23,8 +23,11 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo apt-get autoremove --purge php5-*
 	sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 	sudo apt-get update
-	sudo apt-get install php7.0 php7.0-fpm php7.0-cli php7.0-mbstring php7.0-mysql libapache2-mod-php -y
+	sudo apt-get install php7.1 php7.1-fpm php7.1-cli php7.1-mbstring php7.1-mysql php7.1-mongodb libapache2-mod-php -y
 	sudo a2enmod libapache2-mod-php
+	
+	#installing unzip
+	sudo apt-get install -y unzip
 	
 	#install composer
 	sudo apt-get install curl
@@ -41,8 +44,8 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo ln -sf /usr/bin/nodejs /usr/bin/node
 	sudo apt-get install npm
 	
-	#installing unzip
-	sudo apt-get install -y unzip
+	#global node dependencies
+	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli
 	
 	# check if the public html directory exists
 	if [-L /var/www/html]; then 
@@ -52,6 +55,7 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	if [ -d /var/www/html ]; 
 		then
 			#creating symlink for application
+			sudo rm -rf /var/www/html
 			ln -fs /vagrant/application/public /var/www/html
 		else
 			sudo mkdir /var/www
@@ -61,13 +65,6 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	#making sure the installations part doesn't run again
 	sudo touch /var/vagrant_provision
 fi
-
-#install nodejs
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get update
-sudo apt-get install -y nodejs
-sudo ln -sf /usr/bin/nodejs /usr/bin/node
-sudo apt-get install npm
 
 # configuration	
 ################
@@ -85,3 +82,4 @@ composer update
 # update angular app dependencies
 cd /vagrant/application/public
 npm install
+ng serve
