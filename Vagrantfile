@@ -42,13 +42,14 @@ Vagrant.configure("2") do |config|
   # your network.
   # config.vm.network "public_network"
 
-  config.vm.network :forwarded_port, guest: 80, host: 8001, host_ip: "127.0.0.1"
+  config.vm.network :forwarded_port, guest: 3000, host: 8001, host_ip: "127.0.0.1"
   
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "application", "/application"
+  config.vm.synced_folder "api", "/vagrant/api"
+  config.vm.synced_folder "app", "/vagrant/app"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.

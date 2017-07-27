@@ -56,10 +56,10 @@ if ! [ -f "/var/vagrant_provision" ]; then
 		then
 			#creating symlink for application
 			sudo rm -rf /var/www/html
-			ln -fs /vagrant/application/public /var/www/html
+			ln -fs /vagrant/api /var/www/html
 		else
 			sudo mkdir /var/www
-			ln -fs /vagrant/application/public /var/www/html
+			ln -fs /vagrant/api /var/www/html
 	fi
 		
 	#making sure the installations part doesn't run again
@@ -76,10 +76,10 @@ a2enmod rewrite
 sudo service mongod start
 
 #update Lumen project dependencies
-cd /vagrant/application
+cd /vagrant/api
 composer update
 
 # update angular app dependencies
-cd /vagrant/application/public
+cd /vagrant/app
 npm install
 ng serve
