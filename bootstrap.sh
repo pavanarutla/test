@@ -26,7 +26,7 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo apt-get autoremove --purge php5-*
 	sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 	sudo apt-get update
-	sudo apt-get install php7.1 php7.1-fpm php7.1-cli php7.1-mbstring php7.1-mysql php7.1-mongodb libapache2-mod-php -y
+	sudo apt-get install php7.1 php7.1-fpm php7.1-cli php7.1-mbstring php7.1-mysql php7.1-mongodb php7.1-xml libapache2-mod-php -y
 	sudo a2enmod libapache2-mod-php
 	
 	#installing unzip
