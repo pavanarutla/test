@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# disable stdin
+export DEBIAN_FRONTEND=noninteractive
+
 # Determine if this machine has already been provisioned
 # Basically, run everything after this command once, and only once
 if ! [ -f "/var/vagrant_provision" ]; then 
@@ -39,10 +42,8 @@ if ! [ -f "/var/vagrant_provision" ]; then
 
 	#install nodejs
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt-get update
 	sudo apt-get install -y nodejs
 	sudo ln -sf /usr/bin/nodejs /usr/bin/node
-	sudo apt-get install npm
 	
 	#global node dependencies
 	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli
