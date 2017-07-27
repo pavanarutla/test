@@ -7,6 +7,11 @@ export DEBIAN_FRONTEND=noninteractive
 # Basically, run everything after this command once, and only once
 if ! [ -f "/var/vagrant_provision" ]; then 
 	
+	#install nodejs
+	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+	sudo apt-get install -y nodejs
+	sudo ln -sf /usr/bin/nodejs /usr/bin/node
+	
 	# installing apache2
 	apt-get update
 	apt-get install -y apache2
@@ -40,11 +45,6 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	#install Lumen
 	composer global require "laravel/lumen-installer"
 
-	#install nodejs
-	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt-get install -y nodejs
-	sudo ln -sf /usr/bin/nodejs /usr/bin/node
-	
 	#global node dependencies
 	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli
 	
