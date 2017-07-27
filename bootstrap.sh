@@ -82,4 +82,4 @@ composer update
 # update angular app dependencies
 cd /vagrant/app
 npm install
-ng serve
+ng serve &
