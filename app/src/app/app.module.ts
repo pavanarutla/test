@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
+import { GmapComponent } from './gmap/gmap.component';
 
 @NgModule({
   imports: [
@@ -11,7 +13,7 @@ import { AppComponent } from './app.component';
     FormsModule
   ],
   providers: [],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, GmapComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

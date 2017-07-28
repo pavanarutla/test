@@ -16,7 +16,7 @@ const COORDINATES: Coordinates[] = [
 ];
 
 @Injectable()
-export class MapService {
+export class GMapService {
 
     //constructor(private gmApiWrap: GoogleMapsAPIWrapper) { }
 
