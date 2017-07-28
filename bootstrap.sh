@@ -46,7 +46,7 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	composer global require "laravel/lumen-installer"
 
 	#global node dependencies
-	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli
+	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli --no-bin-links
 	
 	# check if the public html directory exists
 	if [-L /var/www/html]; then 
@@ -82,5 +82,5 @@ composer update
 
 # update angular app dependencies
 cd /vagrant/app
-npm install
+npm install --no-bin-links
 ng serve &
