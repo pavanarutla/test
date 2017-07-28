@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 export class Coordinates{
     lng: number;
@@ -18,10 +21,13 @@ const COORDINATES: Coordinates[] = [
 @Injectable()
 export class GMapService {
 
-    //constructor(private gmApiWrap: GoogleMapsAPIWrapper) { }
+    constructor (private http: Http) {
 
-    getMockCoords(): Promise<Coordinates[]> {
-        return Promise.resolve(COORDINATES);
+    }
+
+    getMockCoords(): Observable<Coordinates[]> {
+        return this.http.get(`http://localhost:8001/api/markers`).map((res:Response) => res.json());
+        // return Promise.resolve(COORDINATES);
     }
     getIntersections(): Promise<Coordinates[]> {
         var ptg = {lat: 17.4574279,  lng: 78.3019645};
