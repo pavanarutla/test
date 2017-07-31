@@ -83,6 +83,11 @@ $app->middleware([
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
+/*==============================
+Mongo Service Provider for Lumen
+==============================*/
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->withEloquent();
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

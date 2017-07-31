@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 
-import {GMapService} from './gmap.service';
+import {GmapService} from './gmap.service';
 declare var google: any;
 
 @Component({
@@ -11,11 +11,12 @@ declare var google: any;
   ]
 })
 
-export class GmapComponent implements OnInit{
+export class GmapComponent{
   lat: number;
   lng: number;
   el:ElementRef;
-  constructor(private elem:ElementRef, private gmapSrvc:GMapService){
+  @Output() onMapInit = new EventEmitter<boolean>();
+  constructor(private elem:ElementRef, private gmapSrvc:GmapService){
     this.el = elem;
     var nativeEl= elem.nativeElement;
     if(nativeEl.getAttribute('lat') === null || nativeEl.getAttribute('lat') === null){
@@ -27,14 +28,17 @@ export class GmapComponent implements OnInit{
       this.lng = nativeEl.getAttribute('lng');
     }
 
-    this.gmapSrvc.getMockCoords().subscribe(data => {
-      console.log(data);
-    });
+    // this.gmapSrvc.getMockCoords().subscribe(data => {
+    //   console.log(data);
+    // });
   }
   ngOnInit() : void{
-    var map = new google.maps.Map(this.el.nativeElement.querySelector('#gmap'), {
-      center: {lat: Number(this.lat), lng: Number(this.lng)},
-      zoom: 14
-    });
+    console.log("in gmap component");
+    let center = {lat: Number(this.lat), lng: Number(this.lng)};
+    this.gmapSrvc.createMap(this.el, center);
+    // 
+  }
+  ngAfterViewInit(): void{
+    this.onMapInit.emit(true);
   }
 }

@@ -31,8 +31,10 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo apt-get autoremove --purge php5-*
 	sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 	sudo apt-get update
-	sudo apt-get install php7.1 php7.1-fpm php7.1-cli php7.1-mbstring php7.1-mysql php7.1-mongodb php7.1-xml libapache2-mod-php -y
+	sudo apt-get install php7.0 php7.0-fpm php7.0-cli php-mbstring php7.0-xml php7.0-mysql php7.0-mongodb libapache2-mod-php7.0 php-xml -y
 	sudo a2enmod libapache2-mod-php
+	sudo phpenmod -v 7.0 xml
+	sudo service apache2 restart
 	
 	#installing unzip
 	sudo apt-get install -y unzip
@@ -46,7 +48,7 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	composer global require "laravel/lumen-installer"
 
 	#global node dependencies
-	sudo npm install -gy webpack webpack-dev-server typescript @angular/cli --no-bin-links
+	# sudo npm install -gy webpack webpack-dev-server typescript @angular/cli --no-bin-links
 	
 	# check if the public html directory exists
 	if [-L /var/www/html]; then 
@@ -80,7 +82,8 @@ sudo service mongod start
 cd /vagrant/api
 composer update
 
+php -S localhost:8000 -t api/public &
 # update angular app dependencies
-cd /vagrant/app
-npm install --no-bin-links
-ng serve &
+# cd /vagrant/app
+# npm install --no-bin-links
+# ng serve &

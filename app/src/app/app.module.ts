@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { GmapComponent } from './gmap/gmap.component';
-import { GMapService } from './gmap/gmap.service';
+import { GmapService } from './gmap/gmap.service';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { GMapService } from './gmap/gmap.service';
     FormsModule,
     HttpModule
   ],
-  providers: [GMapService],
+  providers: [GmapService],
   declarations: [ AppComponent, GmapComponent ],
   bootstrap: [ AppComponent ]
 })
