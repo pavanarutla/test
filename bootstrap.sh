@@ -8,12 +8,12 @@ export DEBIAN_FRONTEND=noninteractive
 if ! [ -f "/var/vagrant_provision" ]; then 
 	
 	#install nodejs
-	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-	sudo apt-get install -y nodejs
-	sudo ln -sf /usr/bin/nodejs /usr/bin/node
+	# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+	# sudo apt-get install -y nodejs
+	# sudo ln -sf /usr/bin/nodejs /usr/bin/node
 	
 	# installing apache2
-	apt-get update
+	# apt-get update
 	apt-get install -y apache2
 	
 	#installing mongodb
@@ -31,8 +31,8 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo apt-get autoremove --purge php5-*
 	sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 	sudo apt-get update
-	sudo apt-get install php7.0 php7.0-fpm php7.0-cli php-mbstring php7.0-xml php7.0-mysql php7.0-mongodb libapache2-mod-php7.0 php-xml -y
-	sudo a2enmod libapache2-mod-php
+	sudo apt-get install php7.0 php7.0-fpm php7.0-cli libapache2-mod-php7.0 php-mbstring php7.0-xml php7.0-mysql php7.0-mongodb libapache2-mod-php7.0 php-xml -y
+	sudo a2enmod libapache2-mod-php7.0
 	sudo phpenmod -v 7.0 xml
 	sudo service apache2 restart
 	
