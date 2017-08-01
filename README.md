@@ -15,7 +15,8 @@ Please find all the necessary information about setting up the project and contr
   * create a directory `BBIndia`(or any name you'd like to use)
   * open cmd/terminal and run the following commands
     * cd \<your_path\>/BBIndia 
-    * git remote add origin(or any other name you'd like) https://mridulkashyap57@bitbucket.org/mridulkashyap57/billboardsindia.git
+    * git init
+    * git remote add origin(or any other name you'd like) https://bitbucket.org/mridulkashyap57/billboardsindia.git
     * git pull origin master
     * cd app
     * npm install
