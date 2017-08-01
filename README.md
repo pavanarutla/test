@@ -12,8 +12,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ## How do I get set up? ##
 
-* Summary of set up
-  ### Angular ###
+### Angular ###
+  
   * install git > 2.12
   * install nodejs > 6.11
   * create a directory `BBIndia`(or any name you'd like to use)
@@ -26,19 +26,14 @@ This README would normally document whatever steps are necessary to get your app
 	* ng serve
   * open browser and go to localhost:4200. you should see the app running
   
-  ### PHP ###
+### PHP ###
   * work in progress. will update here.
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
+  
+## Contribution guidelines ##
 
 * Please create a new local git branch to for the feature you're working on, and push it to the remote repo(this).
 * `master` will be the main branch where the deployment ready code will stay. please **DO NOT PUSH INTO THIS(master) BRANCH**.
 
-### Who do I talk to? ###
+## Who do I talk to? ##
 
 * for any query or concern, please send an email to mridulkashyap57@gmail.com
