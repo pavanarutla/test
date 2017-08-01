@@ -19,7 +19,7 @@ Please find all the necessary information about setting up the project and contr
     * git remote add origin(or any other name you'd like) https://bitbucket.org/mridulkashyap57/billboardsindia.git
     * git pull origin master
     * cd app
-    * npm install -g @angular/cli
+    * npm install -g \@angular/cli
     * npm install
 	* ng serve
   * open browser and go to localhost:4200. you should see the app running
