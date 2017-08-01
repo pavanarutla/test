@@ -1,11 +1,10 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Please find all the necessary information about setting up the project and contribution guidelines.
 
 ## What is this repository for? ##
 
 * BillBoards India project
-* Version 1.0
 
 ## How do I get set up? ##
 
@@ -28,9 +27,10 @@ This README would normally document whatever steps are necessary to get your app
   
 ## Contribution guidelines ##
 
-* Please create a new local git branch to for the feature you're working on, and push it to the remote repo(this). then create a pull request to notify other contributors of your changes.
+* Please create a new local git branch to for the feature you're working on, and push it to the remote repo(this). 
+* create a pull request to notify other contributors of your changes.
 * `master` will be the main branch where the deployment ready code will stay. please **DO NOT PUSH INTO THIS(master) BRANCH**.
 
 ## Who do I talk to? ##
 
-* for any query or concern, please send an email to mridulkashyap57@gmail.com
+* for any query or concern, please send an email to `mridulkashyap57@gmail.com`
