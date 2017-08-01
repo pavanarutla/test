@@ -31,9 +31,12 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	sudo apt-get autoremove --purge php5-*
 	sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 	sudo apt-get update
-	sudo apt-get install php7.0 php7.0-fpm php7.0-cli libapache2-mod-php7.0 php7.0-mbstring php7.0-xml php7.0-mysql php7.0-mongodb php-xml -y
+	sudo apt-get install php7.0 php7.0-fpm php7.0-cli libapache2-mod-php7.0 php7.0-mbstring php7.0-xml php7.0-mysql php7.0-mongodb php7.0-dev php-xml php-pear -y
+	sudo apt-get install pkg-config
+	sudo pecl install mongodb
+	echo 'extension=mongodb.so' | sudo tee /etc/php/7.0/mods-available/mongodb.ini
 	sudo a2enmod libapache2-mod-php7.0
-	sudo phpenmod -v 7.0 xml
+	sudo phpenmod -v 7.0 xml mongodb
 	sudo service apache2 restart
 	
 	#installing unzip

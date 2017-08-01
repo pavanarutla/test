@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 declare var google:any;
+declare var MarkerClusterer: any;
 
 export class Coordinates {
 	lng: number;
@@ -31,7 +32,7 @@ export class GmapService {
 
 	createMap(el, center, zoom?):any{
 		if(!zoom){
-			zoom = 14
+			zoom = 13
 		}
 		this.map = new google.maps.Map(el.nativeElement.querySelector('#gmap'), {
       center: center,
@@ -69,5 +70,17 @@ export class GmapService {
 			map: this.map,
 			title: title
 		});
+	}
+
+	createMarkerCluster(coordinates){
+		var markers = COORDINATES.map(function(location, i) {
+			return new google.maps.Marker({
+				position: location,
+				label: i.toString()
+			});
+		});
+		var markerCluster = new MarkerClusterer(this.map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      
 	}
 }

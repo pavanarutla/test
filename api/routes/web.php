@@ -12,7 +12,7 @@
 */
 
 $app->get('/', function () use ($app){
-    return view('index');
+    return view('test');
 });
 
 $app->group(['prefix' => 'api'], function () use ($app){

@@ -33,8 +33,8 @@ export class GmapComponent{
     // });
   }
   ngOnInit() : void{
-    console.log("in gmap component");
     let center = {lat: Number(this.lat), lng: Number(this.lng)};
+    console.log(center);
     this.gmapSrvc.createMap(this.el, center);
     // 
   }
