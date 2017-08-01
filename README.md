@@ -16,7 +16,7 @@ Please find all the necessary information about setting up the project and contr
   * open cmd/terminal and run the following commands
     * cd \<your_path\>/BBIndia 
     * git remote add origin(or any other name you'd like) https://mridulkashyap57@bitbucket.org/mridulkashyap57/billboardsindia.git
-    * git pull origin test
+    * git pull origin master
     * cd app
     * npm install
 	* ng serve
@@ -29,7 +29,7 @@ Please find all the necessary information about setting up the project and contr
 
 * Please create a new local git branch to for the feature you're working on, and push it to the remote repo(this). 
 * create a pull request to notify other contributors of your changes.
-* `master` will be the main branch where the deployment ready code will stay. please **DO NOT PUSH INTO THIS(master) BRANCH**.
+* `master` will be the main branch where the deployment ready code will stay. please **DO NOT PUSH INTO THIS(master) BRANCH**. You can only take a pull from it.
 
 ## Who do I talk to? ##
 
