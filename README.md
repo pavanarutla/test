@@ -14,15 +14,15 @@ Please find all the necessary information about setting up the project and contr
   * install nodejs > 6.11
   * create a directory `BBIndia`(or any name you'd like to use)
   * open cmd/terminal and run the following commands
-    * cd \<your_path\>/BBIndia 
-    * git init
-    * git remote add origin(or any other name you'd like) https://bitbucket.org/mridulkashyap57/billboardsindia.git
-    * git pull origin master
-    * cd app
-    * npm install -g (@)angular/cli
-    * npm install
-	* ng serve
-  * open browser and go to localhost:4200. you should see the app running
+    * `cd \<your_path\>/BBIndia`
+    * `git init`
+    * `git remote add origin https://bitbucket.org/mridulkashyap57/billboardsindia.git`(you can use any other name in place of `origin` you'd like) 
+    * `git pull origin master`
+    * `cd app`
+    * `npm install -g @angular/cli`
+    * `npm install`
+	* `ng serve`
+  * open browser and go to `localhost:4200`. you should see the app running
   
 ### PHP ###
   * work in progress. will update here.
