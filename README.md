@@ -14,7 +14,7 @@ Please find all the necessary information about setting up the project and contr
   * install nodejs > 6.11
   * create a directory `BBIndia`(or any name you'd like to use)
   * open cmd/terminal and run the following commands
-    * `cd \<your_path\>/BBIndia`
+    * `cd <your_path>/BBIndia`
     * `git init`
     * `git remote add origin https://bitbucket.org/mridulkashyap57/billboardsindia.git`(you can use any other name in place of `origin` you'd like) 
     * `git pull origin master`
