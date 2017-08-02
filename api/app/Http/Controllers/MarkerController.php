@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\DatabaseManager;
 use App\Models\Marker;
 use App\User;
+use Auth;
 
 class MarkerController extends Controller
 {
@@ -20,6 +21,9 @@ class MarkerController extends Controller
         // $db = app('db');
         // $accountsDatabase = $db->connection('accounts');
         // $contentDatabase = $db->connection('content');
+				$this->middleware('auth', ['only' => [
+					'saveMarkers'
+				]]);
     }
 
 	public function getMarkers(){
