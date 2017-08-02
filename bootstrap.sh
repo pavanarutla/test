@@ -26,6 +26,9 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	echo 'mysql-server mysql-server/root_password password mysql' | sudo debconf-set-selections
 	echo 'mysql-server mysql-server/root_password_again password mysql' | sudo debconf-set-selections
 	sudo apt-get -y install mysql-server
+	
+	#create database
+	sudo mysql -uroot -pmysql -e "CREATE DATABASE accounts /*\!40100 DEFAULT CHARACTER SET utf8 */;"
 
 	#install php
 	sudo apt-get autoremove --purge php5-*

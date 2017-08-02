@@ -10,6 +10,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    protected $connection = 'accounts';
+
     use Authenticatable, Authorizable;
 
     /**
