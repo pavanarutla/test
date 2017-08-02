@@ -86,7 +86,8 @@ $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 /*==============================
 Mongo Service Provider for Lumen
 ==============================*/
-$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+// $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->register(Moloquent\MongodbServiceProvider::class);
 $app->withEloquent();
 /*
 |--------------------------------------------------------------------------

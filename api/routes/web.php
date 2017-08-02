@@ -17,4 +17,5 @@ $app->get('/', function () use ($app){
 
 $app->group(['prefix' => 'api'], function () use ($app){
     $app->get('markers', ['uses' => 'MarkerController@getMarkers']);
+    $app->post('markers', ['uses' => 'MarkerController@saveMarkers']);
 });
