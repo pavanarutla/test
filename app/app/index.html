@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope"
+  itemtype="http://schema.org/Product" ng-app="bbManager">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>BillBoards India</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+
+</head>
+
+<body layout="column" ng-cloak ng-controller="bbMngrCtrl">
+  <md-toolbar class="md-menu-toolbar" style="background:#488edf; position: fixed;">
+    <div class="md-toolbar-tools">
+      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
+        <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
+      </md-button>
+      <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
+      <md-menu-bar>
+        <md-menu hide-sm hide-xs show-gt-sm>
+          <md-button aria-label="whyoutdoor" href="#/whyoutdoor">what we do</md-button>
+        </md-menu>
+        <md-menu hide-sm hide-xs show-gt-sm>
+          <md-button aria-label="formats" href="#/formats">formats</md-button>
+        </md-menu>
+        <md-menu hide-sm hide-xs show-gt-sm>
+          <md-button aria-label="locations" href="#">why outdoor</md-button>
+
+        </md-menu>
+        <md-menu role="aboutmenu" hide-sm hide-xs show-gt-sm>
+          <md-button aria-label="about" href="#">contact</md-button>
+        </md-menu>
+        <md-menu role="aboutmenu" hide-sm hide-xs show-gt-sm>
+          <md-button aria-label="about" href="#/pricing">pricing</md-button>
+        </md-menu>
+
+        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
+          BOOK NOW
+        </md-button>
+      </md-menu-bar>
+    </div>
+  </md-toolbar>
+  <md-sidenav md-component-id="left" class="md-sidenav-left" hide-gt-sm>
+    <header layout="column" layout-padding layout-margin>
+      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png"></a>
+    </header>
+    <md-content flex layout="column" role="navigation">
+      <md-menu-item flex layout="column">
+        <md-button ng-href="#/whyoutdoor">WHAT WE DO</md-button>
+      </md-menu-item>
+
+      <md-menu-item flex layout="column">
+        <md-button ng-href="#/formats">FORMATS</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button ng-href="#">WHY OUTDOOR</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button href="#">CONTACT</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button href="#/pricing">PRICING</md-button>
+      </md-menu-item>
+
+  </md-sidenav>
+  <!-- Content section-->
+
+  <div>
+
+    <div ng-view ng-cloak></div>
+
+    <!-- Footer Section-->
+    <footer>
+      <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020">
+        <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
+          <md-button class="md-icon-button fabicon" aria-label="facebook">
+            <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button  fabicon" aria-label="google plus">
+            <md-icon md-svg-src="assets/images/icons/google plus.svg"></md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button  fabicon" aria-label="skype">
+            <md-icon md-svg-src="assets/images/icons/skype.svg"></md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button  fabicon" aria-label="linkedin">
+            <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+            <md-icon md-svg-src="assets/images/icons/vimeo.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+            <md-icon md-svg-src="assets/images/icons/rss.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button fabicon" aria-label="tumblr">
+            <md-icon md-svg-src="assets/images/icons/tumblr.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button  fabicon" aria-label="twitter">
+            <md-icon md-svg-src="assets/images/icons/twitter.svg"></md-icon>
+          </md-button>
+        </div>
+        <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-align="end center" layout-xs="column"
+          layout="column">
+          <p class="md-body-2 text">Billboardsindia @Copyrights 2017. All rights reserved.</p>
+        </div>
+
+      </div>
+      <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:#E1DEDE" />
+      <md-icon style="color: #E75344;">^</md-icon>
+      </md-button>
+    </footer>
+
+    <!--Scripts include-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!-- slick slider-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+
+    <script src="assets/js/angular-slick.js"></script>
+
+    <!-- ////////////
+      custom js 
+    //////////////-->
+    <script type="text/javascript" src="app.js"></script>
+
+    <!-- Controllers -->
+    <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
+    <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
+    <script type="text/javascript" src="controllers/FormatsCtrl.js"></script>
+  </div>
+</body>
+
+</html>
