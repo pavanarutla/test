@@ -6,7 +6,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
-      templateUrl: 'partials/tabDialog.tmpl.html',
+      templateUrl: 'views/tabDialog.tmpl.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })

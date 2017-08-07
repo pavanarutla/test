@@ -10,7 +10,7 @@ var app = angular.module('bbManager', [
 ])
 .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
-    $locationProvider.hashPrefix('!');
+    
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -25,26 +25,20 @@ var app = angular.module('bbManager', [
     });
               
     $routeProvider.when('/', {
-      templateUrl: 'views/home.html',
+      templateUrl: 'views/home.html'
       // controller: 'bbMngrCtrl'
     })
     .when('/formats', {
-      templateUrl: 'views/formats.html',
-      controller: 'LocationController'
+      templateUrl: 'views/formats.html'
+      //controller: 'LocationController'
     })
     .when('/pricing', {
-      templateUrl: 'views/pricing.html',
-      controller: 'LocationController'
-    })
-    .when('/location', {
-      templateUrl: 'views/map.html',
-      controller: 'LocationController',
-      controllerAs: 'LocationCtrl'
+      templateUrl: 'views/pricing.html'
+      //controller: 'LocationController'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
 ]);
-
 
 
 /* ===================
