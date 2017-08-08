@@ -28,10 +28,10 @@ class MarkerController extends Controller
 
 	public function getMarkers(){
 		$markers = Marker::all();
-		$user = new User;
-		$user->name = "mridul";
-		$user->email = "mridulkashyap57@gmail.com";
-		$user->save();
+		// $user = new User;
+		// $user->name = "mridul";
+		// $user->email = "mridulkashyap57@gmail.com";
+		// $user->save();
 		return response()->json($markers);
 	}
 
