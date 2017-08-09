@@ -7,25 +7,28 @@ Please find all the necessary information about setting up the project and contr
 * BillBoards India project
 
 ## How do I get set up? ##
-
-### Angular ###
-  
   * install git > 2.12
-  * install nodejs > 6.11
   * create a directory `BBIndia`(or any name you'd like to use)
+  * `cd <your_path>/BBIndia`
+  * `git init`
+  * `git remote add origin https://bitbucket.org/mridulkashyap57/billboardsindia.git`(you can use any other name in place of `origin` you'd like) 
+  * `git pull origin master`
+
+### Angular ###  
+  * install nodejs > 6.11
   * open cmd/terminal and run the following commands
-    * cd \<your_path\>/BBIndia 
-    * git init
-    * git remote add origin(or any other name you'd like) https://bitbucket.org/mridulkashyap57/billboardsindia.git
-    * git pull origin master
-    * cd app
-    * npm install -g @angular/cli
-    * npm install
-	* ng serve
-  * open browser and go to localhost:4200. you should see the app running
+    * `cd <your_path>/BBIndia/app`
+    * `npm install`
+	* `npm start`
+  * open browser and go to `localhost:8000`. you should see the app running
   
 ### PHP ###
-  * work in progress. will update here.
+  * install vagrant > 1.9.7
+  * install virtualbox > 5.1
+  * open cmd/terminal and run the following commands
+    * `cd <your_path>/BBIndia/api`
+    * `vagrant up --provision` (_Do not panic, it might take upto 30-40 minutes_)
+  * open browser and go to `localhost:8001`. you should see the phpinfo file. it means the setup was successful.
   
 ## Contribution guidelines ##
 

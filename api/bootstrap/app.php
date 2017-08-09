@@ -25,8 +25,6 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-$app->withEloquent();
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -88,6 +86,7 @@ Mongo Service Provider for Lumen
 ==============================*/
 // $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->register(Moloquent\MongodbServiceProvider::class);
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
