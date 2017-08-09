@@ -37,7 +37,7 @@ CREATE TABLE `users` (
   `api_key` varchar(64) DEFAULT NULL,
   `api_key_expire` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,7 +45,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `salt`, `api_key`, `api_key_expire`, `created_at`, `modified_at`, `deleted_at`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `salt`, `api_key`, `api_key_expire`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, NULL, 'mridulkashyap57@gmail.com', '3FBBD196744813DC2973FAE19A303844', '123456', NULL, NULL, '2017-08-02 15:06:30', NULL, NULL);
 
 --

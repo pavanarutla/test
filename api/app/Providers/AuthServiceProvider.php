@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
 
 		$this->app['auth']->viaRequest('api', function ($request) {
 			if ($request->header('Authorization')) {
-				$user = User::where('api_key', $request->header('Authorization'))->first();
+				$user = User::where('api_key', $request->header('Authorization'))->where('api_key_expire', '>', $date = date('Y-m-d h:i:s a', time()))->first();
 				if(!empty($user)){
 					$request->request->add(['userid' => $user->id]);
 				}
