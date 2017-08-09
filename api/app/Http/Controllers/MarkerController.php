@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Database\DatabaseManager;
 use App\Models\Marker;
 use App\Models\User;
@@ -23,7 +22,7 @@ class MarkerController extends Controller
 		]]);
 	}
 
-	public function getMarkers(Request $request){
+	public function getMarkers(){
 		$markers = Marker::all();
 		return response()->json($markers);
 	}
