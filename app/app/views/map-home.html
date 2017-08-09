@@ -1,5 +1,6 @@
-<ng-map center="17.3850, 78.4867" zoom="10" style="width:100%;height:550px;">
-  <custom-control id="home" position="TOP_RIGHT" index="1" on-click="HomeCtrl.click()">
+<div layout="column" style="position:relative" ng-controller="GmapCtrl">
+  <ng-map center="17.3850, 78.4867" zoom="10" style="width:100%;height:100vh;">
+    <custom-control id="home" position="TOP_RIGHT" index="1" on-click="HomeCtrl.click()">
       <div>
         <ul>
           <li>{{HomeCtrl.firstThing}}</li>
@@ -8,4 +9,251 @@
         </ul>
       </div>
     </custom-control>
-</ng-map>
+  </ng-map>
+  <div layout="column" style="top:15%;z-index:9;position:absolute;">
+
+    <!-- filters html start-->
+    <div layout="column" layout-padding>
+
+      <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
+        <div layout="row" ng-init="open = false" ng-click="open = !open">
+
+
+          <div class="md-body-1"><span><img src="assets/images/icons/filter.png"></span><span class="theme-txt">FILTERS</span></div>
+
+          <div flex></div>
+          <div>
+            <md-icon ng-hide="open"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
+            <md-icon ng-show="open"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
+          </div>
+
+        </div>
+
+      </md-content>
+
+      <div layout="column" ng-show="open" style="background:#fff;width:350px;">
+
+
+        <!-- <div class="md-subhead">Check Availability</div>
+        <md-divider></md-divider> -->
+        <!-- dateselection html start-->
+        <!-- <div class="data-section" style="margin:10px 0px 0px">
+
+
+          <div layout="row">
+            <div class="form-group">
+              <div class='input-group'>
+                <input type='text' class="form-control" datepicker-popup ng-model="model.startDate" is-open="opened.start" ng-click="opened.start = !opened.start"
+                  max-date='model.endDate' ng-readonly='true' placeholder="start date" />
+                <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
+                      <i class="glyphicon glyphicon-calendar"></i>
+                  </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class='input-group'>
+                <input type='text' class="form-control" datepicker-popup ng-model="model.endDate" is-open="opened.end" ng-click="opened.end = !opened.end"
+                  min-date='model.startDate' ng-readonly='true' placeholder="end date" />
+                <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <md-divider></md-divider> -->
+        <!-- dateselection html end-->
+        <div class="md-subhead">Area</div>
+        <!-- pincode,area,tab id section start-->
+
+        <form>
+          <md-input-container class="pstcde" style="width:100%">
+            <label for="testInput">Postcode,Area Name,Tab ID</label>
+            <input type="text" id="testInput" ng-model="data" md-autofocus>
+          </md-input-container>
+        </form>
+        <!-- pincode,area,tab id section end-->
+        <!--slider html start -->
+        <div layout="column">
+
+          <md-slider flex md-discrete ng-model="rating" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
+
+          <div layout="row">
+            <div class="rnge">0km</div>
+            <div flex></div>
+            <div class="rnge">100km</div>
+          </div>
+        </div>
+        <!--slider html end -->
+        <md-divider></md-divider>
+        <div class="md-subhead">Select Multiple Locations</div>
+        <md-divider></md-divider>
+        <div layout="row">
+          <div flex="50" class="armrgn">
+            <md-input-container style="z-index:999;width:100%">
+              <label>Select Country </label>
+              <md-select ng-model=" Country" required="required">
+                <md-option value="India">India</md-option>
+                <md-option value="USA">USA</md-option>
+                <md-option value="UK">UK</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="50" class="armrgn">
+            <md-input-container style="width:100%">
+              <label> Select State</label>
+              <md-select ng-model="selectedstates" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                multiple>
+                <md-select-header class="demo-select-header">
+                  <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                <md-optgroup label="states">
+                  <md-option ng-value="state" ng-repeat="state in states |
+              filter:searchTerm">{{state}}</md-option>
+                </md-optgroup>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+        <md-divider></md-divider>
+        <div layout="row">
+          <div flex="50" class="armrgn">
+            <md-input-container style="width:100%">
+              <label>Select City</label>
+              <md-select ng-model="selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                multiple>
+                <md-select-header class="demo-select-header">
+                  <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                <md-optgroup label="citys">
+                  <md-option ng-value="city" ng-repeat="city in citys |
+              filter:searchTerm">{{city}}</md-option>
+                </md-optgroup>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="50" class="armrgn">
+            <md-input-container style="width:100%">
+              <label>Select Areas</label>
+              <md-select ng-model="selectedareas" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                multiple>
+                <md-select-header class="demo-select-header">
+                  <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                <md-optgroup label="areas">
+                  <md-option ng-value="area" ng-repeat="area in areas |
+              filter:searchTerm">{{area}}</md-option>
+                </md-optgroup>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+        <md-divider></md-divider>
+
+        <div layout="row">
+          <md-button class="md-raised md-primary">APPLY</md-button>
+          <md-button class="md-warn "><span class="md-body-1">Reset Feileds</span> </md-button>
+        </div>
+
+
+
+      </div>
+
+    </div>
+    <!-- filters html end-->
+    <!-- formats html start-->
+    <div layout="column" layout-padding>
+
+      <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
+        <div layout="row" ng-init="formats = false" ng-click="formats = !formats">
+
+
+          <div class="md-body-1"><span><img src="assets/images/icons/formats.png"></span><span class="theme-txt">FORMATS</span></div>
+
+          <div flex></div>
+          <div>
+            <md-icon ng-hide="formats"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
+            <md-icon ng-show="formats"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
+          </div>
+
+        </div>
+
+      </md-content>
+
+      <div layout="column" ng-show="formats" style="background:#fff">
+
+        <div style="color:black;">
+          <div class="">item.startdateitem.enddate</div>
+          <div class="">running</div>
+          <div class="">item.price</div>
+          <div class="">item.products</div>
+        </div>
+      </div>
+    </div>
+    <!-- formats html end-->
+    <!--SHORTLIST html start -->
+    <div layout="column" layout-padding>
+
+      <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
+        <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist">
+
+
+          <div class="md-body-1"><span><img src="assets/images/icons/shortlist.png"></span><span class="theme-txt">SHORTLIST</span></div>
+
+          <div flex></div>
+          <div>
+            <md-icon ng-hide="shortlist"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
+            <md-icon ng-show="shortlist"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
+          </div>
+
+        </div>
+
+      </md-content>
+
+      <div layout="column" ng-show="shortlist" style="background:#fff">
+
+        <div style="color:black;">
+          <div class="">item.startdateitem.enddate</div>
+          <div class="">running</div>
+          <div class="">item.price</div>
+          <div class="">item.products</div>
+        </div>
+      </div>
+    </div>
+    <!--SHORTLIST html end -->
+    <!--saved campagin html start -->
+    <div layout="column" layout-padding>
+
+      <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
+        <div layout="row" ng-init="savedcampaign = false" ng-click="savedcampaign = !savedcampaign">
+
+
+          <div class="md-body-1"><span><img src="assets/images/icons/savedcampagin.png"></span><span class="theme-txt">SAVE CAMPAIGNS</span></div>
+
+          <div flex></div>
+          <div>
+            <md-icon ng-hide="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
+            <md-icon ng-show="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
+          </div>
+
+        </div>
+
+      </md-content>
+
+      <div layout="column" ng-show="savedcampaign" style="background:#fff">
+
+        <div style="color:black;">
+          <div class="">item.startdateitem.enddate</div>
+          <div class="">running</div>
+          <div class="">item.price</div>
+          <div class="">item.products</div>
+        </div>
+      </div>
+    </div>
+    <!--saved campagin html end -->
+  </div>
+
+
+
+</div>
