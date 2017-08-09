@@ -3,11 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('bbManager', [
   'ngRoute',
-<<<<<<< HEAD
-   'ngMap',
-=======
   'ngMap',
->>>>>>> e39d61baccfa9aaacaeb350482cb2ee12d8948ab
   'ngMaterial',
   'ngMessages',
   'slickCarousel',
@@ -38,21 +34,12 @@ var app = angular.module('bbManager', [
       controller: 'FormatsCtrl'
     })
     .when('/pricing', {
-<<<<<<< HEAD
-      templateUrl: 'views/pricing.html'
-      //controller: 'LocationController'
-    })
-    .when('/location',{
-      templateUrl: 'views/map-home.html'
-      
-=======
       templateUrl: 'views/pricing.html',
       controller: 'PricingCtrl'
     })
     .when('/location', {
       templateUrl: 'views/map-home.html',
       controller: 'LocationCtrl'
->>>>>>> e39d61baccfa9aaacaeb350482cb2ee12d8948ab
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
