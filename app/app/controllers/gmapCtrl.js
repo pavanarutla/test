@@ -62,4 +62,9 @@ $scope.areas = ['Amerpet' ,'SR nagar' ,'Panjagutta' ,'Somajigudda' ,'Imax'];
           ev.stopPropagation();
 });
   
+// shoartlist
+$scope.closeSideViewAll = function() {
+     $mdSidenav('right').toggle();
+  };
+
 }]);
