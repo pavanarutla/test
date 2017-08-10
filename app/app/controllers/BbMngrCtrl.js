@@ -4,6 +4,10 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
     $mdSidenav('left').toggle();
   };
 
+  $scope.closeSideNavPanel = function() {
+     $mdSidenav('right').toggle();
+  };
+
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/tabDialog.tmpl.html',
@@ -15,6 +19,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
+
 
   //scroll to top
   $(window).scroll(function () {
@@ -29,6 +34,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
     return false;
   });
 
+  
   //slider
   $scope.slickConfig2Loaded = true;
 
@@ -59,4 +65,5 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
     }],
     method: {}
   };
+  
 });

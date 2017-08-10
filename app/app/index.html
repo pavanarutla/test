@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <title>BillBoards India</title>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,27 +27,48 @@
       </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
       <md-menu-bar>
-        <md-menu hide-sm hide-xs show-gt-sm>
+       
           <md-button aria-label="whyoutdoor" href="#">what we do</md-button>
-        </md-menu>
-        <md-menu hide-sm hide-xs show-gt-sm>
+       
+        
           <md-button aria-label="formats" href="#/formats">formats</md-button>
-        </md-menu>
-        <md-menu hide-sm hide-xs show-gt-sm>
+        
+        
           <md-button aria-label="locations" href="#">why outdoor</md-button>
 
-        </md-menu>
-        <md-menu  hide-sm hide-xs show-gt-sm>
+        
+        
           <md-button aria-label="about" href="#">contact</md-button>
-        </md-menu>
-        <md-menu  hide-sm hide-xs show-gt-sm>
+        
+        
           <md-button aria-label="pricing" href="#/pricing">pricing</md-button>
-        </md-menu>
-
-        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
-          BOOK NOW
+        
+        <!--notification button -->
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+          <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
-
+        <!-- profile button start-->
+        <md-menu>
+          <md-button aria-label="userimage" class="md-fab md-mini md-avatar "ng-click="$mdOpenMenu($event)" >
+            <img ng-src="assets/images/product/person.png" class=" ">
+          </md-button>
+          <md-menu-content  width="3" style="z-index:99">
+            <md-menu-item>
+              <md-button >Chanikya varma</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#">Campagin</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button>Account</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button>Sign Out</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- profile button end-->
+        
       </md-menu-bar>
     </div>
   </md-toolbar>
@@ -72,6 +94,23 @@
         <md-button href="#/pricing">PRICING</md-button>
       </md-menu-item>
 
+  </md-sidenav>
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding="">
+      Notifications Panel
+    </md-content>
   </md-sidenav>
   <!-- Content section-->
 
@@ -130,6 +169,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
     <!-- Angular Material Library -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- slick slider-->
@@ -137,6 +178,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 
     <script src="assets/js/angular-slick.js"></script>
+
+    <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
 
     <!-- ////////////
       custom js 
@@ -147,6 +190,7 @@
     <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
     <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
     <script type="text/javascript" src="controllers/FormatsCtrl.js"></script>
+    <script type="text/javascript" src="controllers/GmapCtrl.js"></script>
   </div>
 </body>
 
