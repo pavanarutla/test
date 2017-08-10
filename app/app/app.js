@@ -3,10 +3,12 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('bbManager', [
   'ngRoute',
-  // 'ngMap',
+  'ngMap',
   'ngMaterial',
   'ngMessages',
-  'slickCarousel','vsGoogleAutocomplete'
+  'slickCarousel',
+  'vsGoogleAutocomplete',
+  'ui.bootstrap'
 ])
 .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
@@ -39,6 +41,10 @@ var app = angular.module('bbManager', [
     .when('/filters', {
       templateUrl: 'views/filters.html',
       controller: 'FilterCtrl'
+    })
+    .when('/location',{
+      templateUrl: 'views/map-home.html'
+      
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
@@ -51,4 +57,12 @@ Slick Carasoul Config
 app.config(['slickCarouselConfig', function (slickCarouselConfig) {
   slickCarouselConfig.dots = true;
   slickCarouselConfig.autoplay = false;
+}]);
+app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+    datepickerConfig.startingDay = "Today";
+    datepickerConfig.showWeeks = false;
+    datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
+    // datepickerPopupConfig.currentText = "Now";
+    // datepickerPopupConfig.clearText = "Erase";
+    // datepickerPopupConfig.closeText = "Close";
 }]);

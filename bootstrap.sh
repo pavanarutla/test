@@ -29,6 +29,7 @@ if ! [ -f "/var/vagrant_provision" ]; then
 	
 	#create database
 	sudo mysql -uroot -pmysql -e "CREATE DATABASE accounts /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+	sudo mysql -uroot -pmysql accounts < "/vagrant/api/sql schema/accounts.sql"
 
 	#install php
 	sudo apt-get autoremove --purge php5-*

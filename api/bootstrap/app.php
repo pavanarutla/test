@@ -23,9 +23,7 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
+$app->withFacades();
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +61,9 @@ $app->middleware([
    App\Http\Middleware\CorsMiddleware::class
 ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,8 +76,8 @@ $app->middleware([
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
@@ -89,6 +87,7 @@ Mongo Service Provider for Lumen
 // $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->register(Moloquent\MongodbServiceProvider::class);
 $app->withEloquent();
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
