@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('bbManager', [
   'ngRoute',
-   'ngMap',
+  'ngMap',
   'ngMaterial',
   'ngMessages',
   'slickCarousel',
@@ -56,7 +56,6 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
 app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
     datepickerConfig.startingDay = "Today";
     datepickerConfig.showWeeks = false;
-
     datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
     // datepickerPopupConfig.currentText = "Now";
     // datepickerPopupConfig.clearText = "Erase";
