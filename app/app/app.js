@@ -32,6 +32,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html'
       //controller: 'LocationController'
     })
+    .when('/campaigin', {
+      templateUrl: 'views/campaigin.html'
+      //controller: 'LocationController'
+    })
     .when('/pricing', {
       templateUrl: 'views/pricing.html'
       //controller: 'LocationController'
