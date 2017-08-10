@@ -6,7 +6,7 @@ var app = angular.module('bbManager', [
   // 'ngMap',
   'ngMaterial',
   'ngMessages',
-  'slickCarousel'
+  'slickCarousel','vsGoogleAutocomplete'
 ])
 .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
@@ -35,6 +35,10 @@ var app = angular.module('bbManager', [
     .when('/pricing', {
       templateUrl: 'views/pricing.html'
       //controller: 'LocationController'
+    })
+    .when('/filters', {
+      templateUrl: 'views/filters.html',
+      controller: 'FilterCtrl'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
