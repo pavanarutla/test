@@ -399,8 +399,8 @@ app.factory('MapService', [function(){
     {"position":[49.710939,-54.7332],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/355622.jpg"},
     {"position":[40.612128,31.286316],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/202578.jpg"},
     {"position":[38.571189,21.914872],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/9653590.jpg"},
-    {"position":[35.514553,12.552137],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2371950.jpg"},
-    {"position":[59.548763,11.187515],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/1340803.jpg"},
+    {"position":[38.571189,21.914872],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2371950.jpg"},
+    {"position":[38.571189,21.914872],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/1340803.jpg"},
     {"position":[47.870186,17.466202],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/520878.jpg"},
     {"position":[47.633354,17.571602],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/4738479.jpg"},
     {"position":[43.30031,-79.844792],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2395577.jpg"},
@@ -1086,14 +1086,26 @@ app.factory('MapService', [function(){
     {"position":[36.46133,25.376015],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2702545.jpg"},
     {"position":[40.294126,-105.650969],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/416472.jpg"},
     {"position":[37.213331,-112.946116],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/6080988.jpg"},
-    {"position":[45.162614,-112.997518],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2321382.jpg"},
-    {"position":[36.887447,-111.399908],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/122858.jpg"},
+    {"position":[37.213331,-112.946116],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/2321382.jpg"},
+    {"position":[37.213331,-111.946116],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/122858.jpg"},
     {"position":[47.864486,17.465172],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/4445933.jpg"},
     {"position":[22.661542,-83.677711],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/1238515.jpg"},
     {"position":[61.62182,8.48917],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/398585.jpg"},
     {"position":[49.750107,20.306683],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/10240311.jpg"},
     {"position":[24.781747,110.424957],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/7593894.jpg"}
   ];
+  // markers  = [
+  //   { "position": [17.4574279, 78.3119675] },
+  //   { "position": [17.4474262, 78.3319602] },
+  //   { "position": [17.4474262, 78.3319602] },
+  //   { "position": [17.4474262, 78.3319602] },
+  //   { "position": [17.4474262, 78.3319602] },
+  //   { "position": [17.4364212, 78.3619627] },
+  //   { "position": [17.4444225, 78.3219245] },
+  //   { "position": [17.4494139, 78.3289475] },
+  //   { "position": [17.4414189, 78.3299765] },
+  //   { "position": [17.4354819, 78.3279135] }
+  // ];
   return {
     markers: function(){
       return markers;
