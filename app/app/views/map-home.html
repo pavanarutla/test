@@ -342,7 +342,7 @@
         <md-divider></md-divider>
         <div layout="row">
           <md-button class="md-raised "  ng-click="closeSideViewAll()">VIEW ALL</md-button>
-          <md-button class="md-raised md-primary">SAVE CAMPAIGN</md-button>
+          <md-button class="md-raised md-primary" ng-click="closeSideSavedCampaign()">SAVE CAMPAIGN</md-button>
           <md-button class="md-raised ">SHARE</md-button>
         </div>
 
@@ -380,7 +380,7 @@
         <div class="saved-btn" layout="row" layout-align="space-between center" flex>
           
           <div >
-            <md-button class="md-primary">
+            <md-button class="md-primary" ng-click="closeSideViewAll()">
               VIEW
             </md-button>
           </div>
@@ -405,8 +405,8 @@
   </div>
 
   <!-- side nav for view all-->
- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" style="z-index:99";position:absolute>
-    <md-toolbar layout="row">
+ <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
+    <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
           <span>Notifications</span>
@@ -417,11 +417,94 @@
           <md-icon class="md-default-theme">X</md-icon>
         </md-button>
       </div>
-    </md-toolbar>
+    </div>
     <md-content layout-padding="">
-      Notifications Panel
+      viewAll
     </md-content>
   </md-sidenav>
 
+  <!-- saved campgin-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedCampaign">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideSavedCampaign()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-padding="">
+      saved campaign
+    </md-content>
+  </md-sidenav>
+  <!--saved view all -->
+
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedViewAll">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-primary"  ng-click="closeSideEditList()">
+              Edit
+            </md-button>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-padding="">
+      saved campaign view All
+    </md-content>
+  </md-sidenav>
+
+  <!-- saved capaign edit -->
+
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedEdit">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideEditList()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-padding="">
+      saved campaign edit list
+
+      <md-button class="md-primary md-raised"  ng-click="closeSideSavedCampaign()">saved campagin</md-button>
+    </md-content>
+  </md-sidenav>
+
+  <!-- saved campagin-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedSavedCampaign">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideSavedCampaign()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-padding="">
+      congrulations 
+
+      
+    </md-content>
+  </md-sidenav>
 
 </div>

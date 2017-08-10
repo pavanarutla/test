@@ -1,4 +1,4 @@
-app.controller('GmapCtrl', ['$scope', 'NgMap','$element', function($scope, NgMap,$element) {
+app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav', function($scope, NgMap,$element,$mdSidenav) {
     NgMap.getMap().then(function(map) {
         console.log(map.getCenter());
         console.log('markers', map.markers);
@@ -64,7 +64,25 @@ $scope.areas = ['Amerpet' ,'SR nagar' ,'Panjagutta' ,'Somajigudda' ,'Imax'];
   
 // shoartlist
 $scope.closeSideViewAll = function() {
-     $mdSidenav('right').toggle();
+     $mdSidenav('viewAll').toggle();
+  };
+
+  //saved campaign
+  $scope.closeSideSavedCampaign = function() {
+     $mdSidenav('savedCampaign').toggle();
+  };
+// saved view all side nav
+$scope.closeSideViewAll = function() {
+     $mdSidenav('savedViewAll').toggle();
+  };
+// edit list saved campgin
+$scope.closeSideEditList = function() {
+     $mdSidenav('savedEdit').toggle();
+  };
+// saved campgin
+
+$scope.closeSideSavedCampaign = function() {
+     $mdSidenav('savedSavedCampaign').toggle();
   };
 
 }]);
