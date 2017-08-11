@@ -1,4 +1,4 @@
-<div layout="column" style="position:relative" ng-controller="GmapCtrl">
+  <div layout="column" style="position:relative" ng-controller="GmapCtrl">
   <ng-map center="17.3850, 78.4867" zoom="10" style="width:100%;height:100vh;">
     <custom-control id="home" position="TOP_RIGHT" index="1" on-click="HomeCtrl.click()">
       <div>
@@ -69,8 +69,24 @@
 
         <form>
           <md-input-container class="pstcde" style="width:100%">
-            <label for="testInput">Postcode,Area Name,Tab ID</label>
-            <input type="text" id="testInput" ng-model="data" md-autofocus>
+            <!-- <label for="testInput">Postcode,Area Name,Tab ID</label> -->
+            <input vs-google-autocomplete type="text" id="testInput" ng-model="address" md-autofocus
+                 ng-model="address.name"
+                 vs-place="address.place" 
+                 vs-place-id="address.components.placeId"
+                 vs-street-number="address.components.streetNumber" 
+                 vs-street="address.components.street"
+                 vs-city="address.components.city"
+                 vs-state="address.components.state"
+                 vs-country-short="address.components.countryCode"
+                 vs-country="address.components.country"
+                 vs-post-code="address.components.postCode"
+                 vs-district="address.components.district"
+                 vs-latitude="address.components.location.lat"
+                 vs-longitude="address.components.location.long"
+                 type="text" 
+                 name="address"
+                 >
           </md-input-container>
         </form>
         <!-- pincode,area,tab id section end-->
@@ -87,30 +103,32 @@
         </div>
         <!--slider html end -->
         <md-divider></md-divider>
+        <form name="Locations" onSubmit="savedata()">
         <div class="md-subhead">Select Multiple Locations</div>
         <md-divider></md-divider>
         <div layout="row">
           <div flex="50" class="armrgn">
             <md-input-container style="z-index:999;width:100%">
               <label>Select Country </label>
-              <md-select ng-model=" Country" required="required">
-                <md-option value="India">India</md-option>
-                <md-option value="USA">USA</md-option>
-                <md-option value="UK">UK</md-option>
-              </md-select>
+               <md-select name="repeatSelect" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                  <md-select-header class="demo-select-header">
+                  <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                 <md-option ng-repeat="country in allcountries | filter:searchTerm" value="{{country.Id}}">{{country.Countryname}}</md-option> 
+              </md-select required> 
+              
             </md-input-container>
           </div>
           <div flex="50" class="armrgn">
             <md-input-container style="width:100%">
               <label> Select State</label>
-              <md-select ng-model="selectedstates" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+              <md-select ng-model="selectedStates" ng-disabled="!selectedCountry" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="setStates()"
                 multiple>
                 <md-select-header class="demo-select-header">
                   <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
                 </md-select-header>
                 <md-optgroup label="states">
-                  <md-option ng-value="state" ng-repeat="state in states |
-              filter:searchTerm">{{state}}</md-option>
+                  <md-option ng-value="{{state.Id}}" ng-repeat="state in states | filter:searchTerm">{{state.statename}}</md-option>
                 </md-optgroup>
               </md-select>
             </md-input-container>
@@ -121,14 +139,13 @@
           <div flex="50" class="armrgn">
             <md-input-container style="width:100%">
               <label>Select City</label>
-              <md-select ng-model="selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+              <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setcitys()" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
                 multiple>
                 <md-select-header class="demo-select-header">
                   <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
                 </md-select-header>
                 <md-optgroup label="citys">
-                  <md-option ng-value="city" ng-repeat="city in citys |
-              filter:searchTerm">{{city}}</md-option>
+                  <md-option ng-value="{{city.Id}}" ng-repeat="city in citys | filter:searchTerm">{{city.cityname}}</md-option>
                 </md-optgroup>
               </md-select>
             </md-input-container>
@@ -136,30 +153,27 @@
           <div flex="50" class="armrgn">
             <md-input-container style="width:100%">
               <label>Select Areas</label>
-              <md-select ng-model="selectedareas" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+              <md-select ng-model="selectedareas" ng-change="setareas()"  ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
                 multiple>
                 <md-select-header class="demo-select-header">
                   <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
                 </md-select-header>
                 <md-optgroup label="areas">
-                  <md-option ng-value="area" ng-repeat="area in areas |
-              filter:searchTerm">{{area}}</md-option>
+                  <md-option ng-value="{{area}}" ng-repeat="area in areas | filter:searchTerm">{{area.areaname}}</md-option>                 
                 </md-optgroup>
               </md-select>
             </md-input-container>
           </div>
         </div>
+       
         <md-divider></md-divider>
 
         <div layout="row">
-          <md-button class="md-raised md-primary">APPLY</md-button>
-          <md-button class="md-warn "><span class="md-body-1">Reset Feileds</span> </md-button>
+          <md-button class="md-raised md-primary" type="submit" >APPLY</md-button>
+          <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1">Reset Feileds</span> </md-button>
         </div>
-
-
-
+         </form>
       </div>
-
     </div>
     <!-- filters html end-->
     <!-- formats html start-->
