@@ -1,4 +1,4 @@
-app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav', function($scope, NgMap,$element,$mdSidenav) {
+app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog', function($scope, NgMap, $element, $mdSidenav, $mdDialog ) {
     NgMap.getMap().then(function(map) {
         console.log(map.getCenter());
         console.log('markers', map.markers);
@@ -80,9 +80,30 @@ $scope.closeSideEditList = function() {
      $mdSidenav('savedEdit').toggle();
   };
 // saved campgin
-
 $scope.closeSideSavedCampaign = function() {
      $mdSidenav('savedSavedCampaign').toggle();
   };
 
+// Thanks Message
+$scope.closeSideThanksSidenav = function() {
+     $mdSidenav('thanksCampaign').toggle();
+  };
+// Share Message
+$scope.shareSidenav = function() {
+     $mdSidenav('shareCampaign').toggle();
+  };
+//Confirm Dialog
+  $scope.showAlert = function(ev) {
+    console.log(ev);
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Your Campaign is successfully shared!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
+    );
+  };
 }]);

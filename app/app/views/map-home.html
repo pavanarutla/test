@@ -274,7 +274,7 @@
 
       </md-content>
 
-      <div  ng-show="shortlist" style="background:#fff;width:350px">
+      <div ng-show="shortlist" style="background:#fff;width:350px">
 
         <div layout="column" layout-margin>
           <div layout="row" layout-align="space-around center">
@@ -341,9 +341,13 @@
         </div>
         <md-divider></md-divider>
         <div layout="row">
-          <md-button class="md-raised "  ng-click="closeSideViewAll()">VIEW ALL</md-button>
+          <md-button class="md-raised " ng-click="closeSideViewAll()">VIEW ALL</md-button>
           <md-button class="md-raised md-primary" ng-click="closeSideSavedCampaign()">SAVE CAMPAIGN</md-button>
-          <md-button class="md-raised ">SHARE</md-button>
+          <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
+        </div>
+        <div layout="row">
+
+          <md-button class="md-raised" ng-click="closeSideThanksSidenav()">THANKS</md-button>
         </div>
 
       </div>
@@ -365,7 +369,7 @@
 
       </md-content>
 
-      <div  ng-show="savedcampaign" style="background:#fff">
+      <div ng-show="savedcampaign" style="background:#fff">
 
         <div layout="row">
           <div>
@@ -378,8 +382,8 @@
           </div>
         </div>
         <div class="saved-btn" layout="row" layout-align="space-between center" flex>
-          
-          <div >
+
+          <div>
             <md-button class="md-primary" ng-click="closeSideViewAll()">
               VIEW
             </md-button>
@@ -396,7 +400,7 @@
           </div>
         </div>
         <div layout="column" layout-align="center center">
-            <md-button  class="md-primary">EXPORT ALL</md-button>
+          <md-button class="md-primary">EXPORT ALL</md-button>
         </div>
 
       </div>
@@ -405,7 +409,7 @@
   </div>
 
   <!-- side nav for view all-->
- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
@@ -450,9 +454,9 @@
           <span>Notifications</span>
         </h2>
         <span flex></span>
-        <md-button class="md-primary"  ng-click="closeSideEditList()">
-              Edit
-            </md-button>
+        <md-button class="md-primary" ng-click="closeSideEditList()">
+          Edit
+        </md-button>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme">X</md-icon>
@@ -482,7 +486,7 @@
     <md-content layout-padding="">
       saved campaign edit list
 
-      <md-button class="md-primary md-raised"  ng-click="closeSideSavedCampaign()">saved campagin</md-button>
+      <md-button class="md-primary md-raised" ng-click="closeSideSavedCampaign()">saved campagin</md-button>
     </md-content>
   </md-sidenav>
 
@@ -490,9 +494,9 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedSavedCampaign">
     <div layout="row">
       <div class="md-toolbar-tools">
-        <h2>
+        <!-- <h2>
           <span>Notifications</span>
-        </h2>
+        </h2> -->
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideSavedCampaign()">
           <md-tooltip>Close Side Panel</md-tooltip>
@@ -500,11 +504,74 @@
         </md-button>
       </div>
     </div>
-    <md-content layout-padding="">
-      congrulations 
-
-      
+    <md-content layout-align="center center">
+      <img src="assets/images/core/congrats-star.png" width="100" height="100" alt="Congrats Star">
+      <h3>Congratulations</h3>
+      <h4>Campaingn Saved Succcessfully</h4>
+      <md-button class="md-raised md-warn">REQUEST PROPOSAL</md-button>
+      <md-button class="md-raised">SHARE CAMPAIGN</md-button>
     </md-content>
   </md-sidenav>
 
+
+  <!-- Thanks SideNav-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="thanksCampaign">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideThanksSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-align="center center">
+      <img src="assets/images/core/congrats-star.png" width="100" height="100" alt="Congrats Star">
+      <h3>Thanks</h3>
+      <h4>We will work on your Campaign needs and get back soon to your registered e-mail address</h4>
+    </md-content>
+  </md-sidenav>
+
+
+<!-- Share Campaign SideNav-->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaign" id="popupContainer" ng-cloak>
+  <div layout="row">
+    <div class="md-toolbar-tools">
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareSidenav()">
+        <md-tooltip>Close Side Panel</md-tooltip>
+        <md-icon class="md-default-theme">X</md-icon>
+      </md-button>
+    </div>
+  </div>
+  <md-content layout-align="center center">
+    <h3>Share Campaign Details..</h3>
+    <form name="shareCampaignForm">
+    <md-input-container class="md-block">
+      <label>Recipeint's Name</label>
+      <input required name="recipeintName" ng-model="project.recipeintName">
+      <div ng-messages="shareCampaignForm.recipeintName.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Recipeint's Email Address</label>
+      <input required type="email" name="recipeintEmail" ng-model="project.recipeintEmail" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
+      />
+
+      <div ng-messages="shareCampaignForm.recipeintEmail.$error" role="alert">
+        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+          Your email must be between 10 and 100 characters long and look like an e-mail address.
+        </div>
+      </div>
+    </md-input-container>
+    <md-button class="md-raised md-warn">SHARE CAMPAIGN</md-button>
+            <md-button class="md-primary md-raised" ng-click="showAlert($event)"   >
+                        Alert Dialog {{GmapCtrl.temp}}
+                      </md-button>
+    </form>
+  </md-content>
+</md-sidenav>
+</div>
 </div>

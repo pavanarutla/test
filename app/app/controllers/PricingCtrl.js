@@ -1,3 +1,3 @@
-app.controller('pricingCtrl', function($scope) {
+app.controller('pricingCtrl', function($scope, $mdDialog) {
 
 });
