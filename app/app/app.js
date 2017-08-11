@@ -34,8 +34,8 @@ var app = angular.module('bbManager', [
       //controller: 'LocationController'
     })
     .when('/campaigin', {
-      templateUrl: 'views/campaigin.html'
-      //controller: 'LocationController'
+      templateUrl: 'views/campaigin.html',
+      controller: 'campaiginController'
     })
     .when('/pricing', {
       templateUrl: 'views/pricing.html'
@@ -44,6 +44,9 @@ var app = angular.module('bbManager', [
     .when('/location',{
       templateUrl: 'views/map-home.html'
       
+    })
+    .when('/userprofile',{
+      templateUrl:'views/userprofile.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
