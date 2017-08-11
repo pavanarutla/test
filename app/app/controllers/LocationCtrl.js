@@ -3,20 +3,16 @@
 app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope, NgMap, MapService) {
   $scope.dynMarkers = [];
   $scope.mapObj;
+  var trafficOn = false;
+  var trafficLayer = new google.maps.TrafficLayer(); 
   NgMap.getMap().then(function(map) {
-    for (var i=0; i<1000; i++) {
-      var latLng = new google.maps.LatLng(MapService.markers()[i].position[0], MapService.markers()[i].position[1]);
-      $scope.dynMarkers.push(new google.maps.Marker({position:latLng}));
-    }
-    // $scope.markerClusterer = new MarkerClusterer(map, $scope.dynMarkers, {});
+    // for (var i=0; i<1000; i++) {
+    //   var latLng = new google.maps.LatLng(MapService.markers()[i].position[0], MapService.markers()[i].position[1]);
+    //   $scope.dynMarkers.push(new google.maps.Marker({position:latLng}));
+    // }
     $scope.mapObj = map;
     $scope.arrayGroup();
   });
-  $scope.click = function() {
-    alert(1);
-  };
-  $scope.firstThing = 'AAAAAAAAAAAAAA';
-  $scope.otherThings = ['BBBBBBB','CCCCCCCC'];
 
   $scope.arrayGroup = function(){
     var counts = {};
@@ -102,5 +98,14 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
       }
       marker.setIcon(icon);
     });
+  }
+
+  $scope.toggleTraffic = function(){
+    trafficOn = !trafficOn;
+    var mapVal = null;
+    if(trafficOn){
+      mapVal = $scope.mapObj;
+    }
+    trafficLayer.setMap(mapVal);
   }
 }]);
