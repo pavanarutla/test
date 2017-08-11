@@ -6,10 +6,6 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
   var trafficOn = false;
   var trafficLayer = new google.maps.TrafficLayer(); 
   NgMap.getMap().then(function(map) {
-    // for (var i=0; i<1000; i++) {
-    //   var latLng = new google.maps.LatLng(MapService.markers()[i].position[0], MapService.markers()[i].position[1]);
-    //   $scope.dynMarkers.push(new google.maps.Marker({position:latLng}));
-    // }
     $scope.mapObj = map;
     $scope.arrayGroup();
   });
@@ -34,18 +30,18 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
     /* 
     //// handling clustering ////
     */
-    _.each(uniq_coords, function(value, key){
-      var ll = key.split(',');
-      var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
-      uniq_markers.push(new google.maps.Marker({position:latLng}));
-    });
-    console.log(uniq_markers);
-    var mc = {
-      gridSize: 50,
-      maxZoom: 15,
-      imagePath: 'assets/images/maps/m'
-    };
-    $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
+    // _.each(uniq_coords, function(value, key){
+    //   var ll = key.split(',');
+    //   var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
+    //   uniq_markers.push(new google.maps.Marker({position:latLng}));
+    // });
+    // console.log(uniq_markers);
+    // var mc = {
+    //   gridSize: 50,
+    //   maxZoom: 15,
+    //   imagePath: 'assets/images/maps/m'
+    // };
+    // $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
 
     /*
     //// handling spiderifying ////
@@ -64,12 +60,16 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
           var ll = key.split(',');
           // var markerData = window.mapData[i];  // e.g. { lat: 50.123, lng: 0.123, text: 'XYZ' }
           var icon = {
-            url: 'assets/images/maps/spidered-cluster.png',
+            url: 'assets/images/maps/unspidered-cluster.png',
             scaledSize : new google.maps.Size(20, 20),
             origin: new google.maps.Point(0,0), // origin
             anchor: new google.maps.Point(10, 10) // anchor
           };
-          var marker = new google.maps.Marker({ position: {lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) }, icon: icon });  // markerData works here as a LatLngLiteral
+          var marker = new google.maps.Marker({ 
+            position: {lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) }, 
+            icon: icon, 
+            label: {text: value.toString(), color: "#fff"} 
+          });  // markerData works here as a LatLngLiteral
           google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
             iw.setContent("dummy text");
             iw.open($scope.mapObj, marker);
@@ -80,21 +80,26 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
     });
     oms.addListener('format', function(marker, status) {
       var icon;
+      var label = marker.getLabel();
       if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
         icon = {
-          url: 'assets/images/maps/unspidered-marker.png',
+          url: 'assets/images/maps/spidered-marker.png',
           scaledSize : new google.maps.Size(36, 36),
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(18, 18) // anchor
         };
+        label.class = "visible-label";
+        marker.setLabel(label);
       }
       else{
         icon = {
-          url: 'assets/images/maps/spidered-cluster.png',
+          url: 'assets/images/maps/unspidered-cluster.png',
           scaledSize : new google.maps.Size(20, 20),
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(10, 10) // anchor
         };
+        label.class = "hidden-label";
+        marker.setLabel(label);
       }
       marker.setIcon(icon);
     });
