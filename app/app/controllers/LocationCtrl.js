@@ -30,18 +30,18 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
     /* 
     //// handling clustering ////
     */
-    // _.each(uniq_coords, function(value, key){
-    //   var ll = key.split(',');
-    //   var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
-    //   uniq_markers.push(new google.maps.Marker({position:latLng}));
-    // });
-    // console.log(uniq_markers);
-    // var mc = {
-    //   gridSize: 50,
-    //   maxZoom: 15,
-    //   imagePath: 'assets/images/maps/m'
-    // };
-    // $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
+    _.each(uniq_coords, function(value, key){
+      var ll = key.split(',');
+      var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
+      uniq_markers.push(new google.maps.Marker({position:latLng}));
+    });
+    console.log(uniq_markers);
+    var mc = {
+      gridSize: 50,
+      maxZoom: 15,
+      imagePath: 'assets/images/maps/m'
+    };
+    $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
 
     /*
     //// handling spiderifying ////
@@ -66,13 +66,7 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
       nearbyDistance : 1,
       keepSpiderfied : true
     });
-    // var spiderCircle = new google.maps.Circle({
-    //   strokeColor: 'rgba(127, 127, 127, 1)',
-    //   strokeWeight: 2,
-    //   fillColor: "rgba(175, 175, 175, 0.25)"
-    // });
-
-    // console.log(oms);
+    
     _.each(repeated_coords, function(value, key){
       for(var i = 0; i < value; i++){
         (function() {  // make a closure over the marker and marker data
