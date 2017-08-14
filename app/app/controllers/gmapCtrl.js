@@ -97,6 +97,11 @@ $scope.closeSideThanksSidenav = function() {
 $scope.shareSidenav = function() {
      $mdSidenav('shareCampaign').toggle();
   };
+// Suggest Me dialog 
+$scope.suggestMe = function() {
+     $mdSidenav('suggestMe').toggle();
+  };
+
 //Confirm Dialog
 $scope.showAlert = function(ev) {
     console.log(ev);
@@ -119,6 +124,21 @@ $scope.showConfirmation = function(ev) {
         .parent(angular.element(document.querySelector('body')))
         .clickOutsideToClose(true)
         .title('Your Campaign is successfully Saved!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
+    );
+  };
+
+//Suggest Me Dialog 1
+$scope.suggestMeConfirm = function(ev) {
+    console.log(ev);
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('We will get back to you!!!!')
         .textContent('You can specify some description text in here.')
         .ariaLabel('Alert Dialog Demo')
         .ok('Got it!')
