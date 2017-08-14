@@ -46,19 +46,43 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
     /*
     //// handling spiderifying ////
     */
+
     var iw = new google.maps.InfoWindow();
+    var circleMarker = new google.maps.Marker({ 
+      icon: {
+        url: 'assets/images/maps/Ellipse 55.png',
+        scaledSize : new google.maps.Size(55, 55),
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(27.8, 29.5) // anchor
+      }, 
+    });
     var oms = new OverlappingMarkerSpiderfier($scope.mapObj, { 
       markersWontMove: true, 
       markersWontHide: true,
       basicFormatEvents: true,
-      circleSpiralSwitchover: 6
+      circleSpiralSwitchover: Infinity,
+      legWeight : 0,
+      circleFootSeparation: 32,
+      nearbyDistance : 1,
+      keepSpiderfied : true
     });
-    console.log(repeated_coords);
+    // var spiderCircle = new google.maps.Circle({
+    //   strokeColor: 'rgba(127, 127, 127, 1)',
+    //   strokeWeight: 2,
+    //   fillColor: "rgba(175, 175, 175, 0.25)"
+    // });
+
+    // console.log(oms);
     _.each(repeated_coords, function(value, key){
       for(var i = 0; i < value; i++){
         (function() {  // make a closure over the marker and marker data
+          var label = {};
+          label.text = " ";
+          label.color = "rgba(255, 255, 255, 1)";
+          if(i == 0){
+            label.text = value.toString();
+          }
           var ll = key.split(',');
-          // var markerData = window.mapData[i];  // e.g. { lat: 50.123, lng: 0.123, text: 'XYZ' }
           var icon = {
             url: 'assets/images/maps/unspidered-cluster.png',
             scaledSize : new google.maps.Size(20, 20),
@@ -68,8 +92,9 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
           var marker = new google.maps.Marker({ 
             position: {lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) }, 
             icon: icon, 
-            label: {text: value.toString(), color: "#fff"} 
-          });  // markerData works here as a LatLngLiteral
+            label: label
+          });
+          marker.groupSize = value;
           google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
             iw.setContent("dummy text");
             iw.open($scope.mapObj, marker);
@@ -78,30 +103,47 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
         })();
       }
     });
+
+    // instantiate oms when click occurs on marker-group
     oms.addListener('format', function(marker, status) {
-      var icon;
+      var markerIcon;
       var label = marker.getLabel();
+      var scaledCoord = 32 + (10 * (marker.groupSize-1));
+      var circleMarkerIcon = {
+        url : 'assets/images/maps/Ellipse 55.png',
+        scaledSize : new google.maps.Size(scaledCoord, scaledCoord),
+        origin : new google.maps.Point(0, 0), // origin
+        anchor : new google.maps.Point(scaledCoord/2, scaledCoord/2),
+      };
       if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
-        icon = {
+        // when markers are scattered
+        label.color = "rgba(255, 255, 255, 0)";
+        marker.setLabel(label);
+        circleMarker.setPosition(marker.getPosition());
+        circleMarker.setIcon(circleMarkerIcon);
+        circleMarker.setMap($scope.mapObj);
+        markerIcon = {
           url: 'assets/images/maps/spidered-marker.png',
           scaledSize : new google.maps.Size(36, 36),
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(18, 18) // anchor
         };
-        label.class = "visible-label";
-        marker.setLabel(label);
       }
       else{
-        icon = {
+        // when markers are grouped as one
+        markerIcon = {
           url: 'assets/images/maps/unspidered-cluster.png',
           scaledSize : new google.maps.Size(20, 20),
           origin: new google.maps.Point(0,0), // origin
           anchor: new google.maps.Point(10, 10) // anchor
         };
-        label.class = "hidden-label";
+        label.color = "rgba(255, 255, 255, 1)";
         marker.setLabel(label);
+        // spiderCircle.setMap(null);
+        circleMarker.setMap(null);
+        iw.close();
       }
-      marker.setIcon(icon);
+      marker.setIcon(markerIcon);
     });
   }
 
