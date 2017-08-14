@@ -342,11 +342,11 @@
         <md-divider></md-divider>
         <div layout="row">
           <md-button class="md-raised " ng-click="closeSideViewAll()">VIEW ALL</md-button>
-          <md-button class="md-raised md-primary" ng-click="closeSideSavedCampaign()">SAVE CAMPAIGN</md-button>
+          <md-button class="md-raised md-primary" ng-click="saveCampaignDetails()">SAVE CAMPAIGN</md-button>
           <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
         </div>
         <div layout="row">
-
+          <md-button class="md-raised" ng-click="closeSideSavedCampaign()">Success</md-button>
           <md-button class="md-raised" ng-click="closeSideThanksSidenav()">THANKS</md-button>
         </div>
 
@@ -490,7 +490,7 @@
     </md-content>
   </md-sidenav>
 
-  <!-- saved campagin-->
+  <!-- Success message on saved campagin-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedSavedCampaign">
     <div layout="row">
       <div class="md-toolbar-tools">
@@ -513,6 +513,84 @@
     </md-content>
   </md-sidenav>
 
+  <!-- Save campagin dialog-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2"  style="width:500px; padding:10px;"  md-component-id="saveCampaignDetails">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <!-- <h2>
+          <span>Notifications</span>
+        </h2> -->
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="saveCampaignDetails()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-align="center center">
+
+      <h3>Save Campaign</h3>
+      <h4>We are excited to see your Campaign</h4>
+      <h4>Let's Work Together!</h4>
+    </md-content>
+
+    <form name="saveCampaigndetails">
+      <md-input-container class="md-block">
+        <label>Campaign Name</label>
+        <input md-maxlength="30" required md-no-asterisk name="campname" ng-model="project.campname">
+        <div ng-messages="saveCampaigndetails.campname.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <div layout="row">
+        <md-input-container flex="50">
+          <div flex-gt-xs>
+            <h4>Campaign Start</h4>
+            <md-datepicker ng-model="ctrl.startDate" md-placeholder="Enter date"></md-datepicker>
+          </div>
+        </md-input-container>
+         <md-input-container flex="50">
+          <div flex-gt-xs>
+            <h4>Campaign End</h4>
+            <md-datepicker ng-model="ctrl.endDate" md-placeholder="Enter date"></md-datepicker>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Budget</label>
+        <input required type="number" step="any" name="rate" ng-model="project.rate" min="800" max="4999" ng-pattern="/^1234$/" />
+
+        <div ng-messages="saveCampaigndetails.rate.$error" multiple md-auto-hide="false">
+          <div ng-message="required">
+            You've got to charge something!
+          </div>
+
+          <div ng-message="min">
+            You should charge at least $800 an hour. 
+          </div>
+
+          <div ng-message="pattern">
+            You should charge exactly $1,234.
+          </div>
+
+          <div ng-message="max">
+            {{saveCampaigndetails.rate.$viewValue | currency:"$":0}} an hour? That's a little ridiculous. I doubt even Bill Clinton could afford
+            that.
+          </div>
+        </div>
+      </md-input-container>
+      <div>
+        <md-button class="md-raised md-warn" ng-click="showConfirmation($event)">SAVE CAMPAIGN</md-button>
+
+         <p>Need Suggestions? <md-button class="md-primary md-hue-1" >Suggest Me</md-button> </p>
+      </div>
+
+    </form>
+
+  </md-sidenav>
 
   <!-- Thanks SideNav-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="thanksCampaign">
@@ -533,45 +611,42 @@
   </md-sidenav>
 
 
-<!-- Share Campaign SideNav-->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaign" id="popupContainer" ng-cloak>
-  <div layout="row">
-    <div class="md-toolbar-tools">
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareSidenav()">
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <md-icon class="md-default-theme">X</md-icon>
-      </md-button>
+  <!-- Share Campaign SideNav-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaign" id="popupContainer" ng-cloak>
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
     </div>
-  </div>
-  <md-content layout-align="center center">
-    <h3>Share Campaign Details..</h3>
-    <form name="shareCampaignForm">
-    <md-input-container class="md-block">
-      <label>Recipeint's Name</label>
-      <input required name="recipeintName" ng-model="project.recipeintName">
-      <div ng-messages="shareCampaignForm.recipeintName.$error">
-        <div ng-message="required">This is required.</div>
-      </div>
-    </md-input-container>
+    <md-content layout-align="center center">
+      <h3>Share Campaign Details..</h3>
+      <form name="shareCampaignForm">
+        <md-input-container class="md-block">
+          <label>Recipeint's Name</label>
+          <input required name="recipeintName" ng-model="project.recipeintName">
+          <div ng-messages="shareCampaignForm.recipeintName.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
 
-    <md-input-container class="md-block">
-      <label>Recipeint's Email Address</label>
-      <input required type="email" name="recipeintEmail" ng-model="project.recipeintEmail" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
-      />
+        <md-input-container class="md-block">
+          <label>Recipeint's Email Address</label>
+          <input required type="email" name="recipeintEmail" ng-model="project.recipeintEmail" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
 
-      <div ng-messages="shareCampaignForm.recipeintEmail.$error" role="alert">
-        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-          Your email must be between 10 and 100 characters long and look like an e-mail address.
-        </div>
-      </div>
-    </md-input-container>
-    <md-button class="md-raised md-warn">SHARE CAMPAIGN</md-button>
-            <md-button class="md-primary md-raised" ng-click="showAlert($event)"   >
-                        Alert Dialog {{GmapCtrl.temp}}
-                      </md-button>
-    </form>
-  </md-content>
-</md-sidenav>
+          <div ng-messages="shareCampaignForm.recipeintEmail.$error" role="alert">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              Your email must be between 10 and 100 characters long and look like an e-mail address.
+            </div>
+          </div>
+        </md-input-container>
+        <md-button class="md-raised md-warn" ng-click="showAlert($event)">SHARE CAMPAIGN</md-button>
+
+      </form>
+    </md-content>
+  </md-sidenav>
 </div>
 </div>

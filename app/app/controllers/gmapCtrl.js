@@ -84,6 +84,11 @@ $scope.closeSideSavedCampaign = function() {
      $mdSidenav('savedSavedCampaign').toggle();
   };
 
+// Save Campgin Details
+$scope.saveCampaignDetails = function() {
+     $mdSidenav('saveCampaignDetails').toggle();
+  };
+
 // Thanks Message
 $scope.closeSideThanksSidenav = function() {
      $mdSidenav('thanksCampaign').toggle();
@@ -93,7 +98,7 @@ $scope.shareSidenav = function() {
      $mdSidenav('shareCampaign').toggle();
   };
 //Confirm Dialog
-  $scope.showAlert = function(ev) {
+$scope.showAlert = function(ev) {
     console.log(ev);
     $mdDialog.show(
       $mdDialog.alert()
@@ -106,4 +111,20 @@ $scope.shareSidenav = function() {
         .targetEvent(ev)
     );
   };
+//Confirm Dialog 1
+$scope.showConfirmation = function(ev) {
+    console.log(ev);
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Your Campaign is successfully Saved!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
+    );
+  };
+
+
 }]);
