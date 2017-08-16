@@ -1,4 +1,4 @@
-app.controller('formatsCtrl', function ($scope) {
+app.controller('FormatsCtrl', function ($scope) {
   //slider
   $scope.slickConfig2Loaded = true;
   $scope.slickConfig2 = {
