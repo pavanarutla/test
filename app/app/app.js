@@ -27,21 +27,20 @@ var app = angular.module('bbManager', [
     });
               
     $routeProvider.when('/', {
-      templateUrl: 'views/home.html'
-      // controller: 'bbMngrCtrl'
+      templateUrl: 'views/home.html',
+      controller: 'bbMngrCtrl'
     })
     .when('/formats', {
-      templateUrl: 'views/formats.html'
-      //controller: 'LocationController'
+      templateUrl: 'views/formats.html',
+      controller: 'FormatsCtrl'
     })
     .when('/pricing', {
-      templateUrl: 'views/pricing.html'
-      //controller: 'LocationController'
+      templateUrl: 'views/pricing.html',
+      controller: 'PricingCtrl'
     })
-    .when('/location',{
+    .when('/location', {
       templateUrl: 'views/map-home.html',
-      //controller:'GmapCtrl'
-      
+      controller: 'LocationCtrl'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
