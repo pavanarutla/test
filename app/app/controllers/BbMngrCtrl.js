@@ -20,6 +20,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
     $mdDialog.cancel();
   };
 
+  $scope.whatwedo = function(){
+    window.scroll(0,600)
+  }
+  $scope.contactus = function(){
+    window.scroll(0,4000)
+  }
 
   //scroll to top
   $(window).scroll(function () {
