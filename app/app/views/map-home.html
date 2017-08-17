@@ -10,7 +10,23 @@
       </div>
     </custom-control>
   </ng-map>
-  <div layout="column" style="top:15%;z-index:9;position:absolute;">
+  <div layout="column" style="top:8%;z-index:1;position:absolute;width:350px;">
+    <!-- search html start-->
+    <div layout="row" layout-padding class="search-filed">
+      <md-input-container md-theme="input" flex style="background:#fff;padding:0px;">
+        <label>&nbsp;</label>
+        <input ng-model="search.who" placeholder="Search Billboards" style="height: 40px !important">
+      </md-input-container>
+      <span class="search-icon"><md-icon><i class="material-icons">search</i></md-icon></span>
+      <!-- <span class="search-icon locate-me"><i class="material-icons">location_searching</i></span> -->
+      <md-button class="md-icon-button  locate-me" aria-label="More">
+        <md-icon><i class="material-icons">my_location</i></md-icon>
+      </md-button>
+    </div>
+    <!-- search html start-->
+  </div>
+  <div layout="column" style="top:20%;z-index:1;position:absolute;">
+
     <!-- filters html start-->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
@@ -138,6 +154,7 @@
       </div>
     </div>
     <!-- filters html end-->
+
     <!-- formats html start-->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
@@ -151,79 +168,289 @@
         </div>
       </md-content>
       <div layout="column" ng-show="formats" style="background:#fff">
+
         <div layout="row" layout-align="space-around ceeneter">
-          <div layout="column">
-            <md-tooltip md-direction="bottom" style="background:#fff">
-              <span>
-                <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
-            
-                  <md-icon
-                    md-svg-src="assets/images/icons/linkedin.svg"
-                    style="width: 24px; height: 24px">
-                  </md-icon>
-                </md-button>
-              </span>
-              <span>2</span>
-              <span>3</span>
 
-            </md-tooltip>
-            <img src="assets/images/icons/004-sign.png">
-            <div>ROADSIDE</div>
+          <div layout="column" ng-init="uniploe3 = false" ng-click="uniploe3 = !uniploe3" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+
+            <div layout="row" ng-show="uniploe3" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
           <md-divider></md-divider>
-          <div layout="column">
+          <div layout="column" ng-init="uniploe4 = false" ng-click="uniploe4 = !uniploe4" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
 
-            <img src="assets/images/icons/003-bus.png">
-            <div>TRANSIT</div>
-
+            <div layout="row" ng-show="uniploe4" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
           <md-divider></md-divider>
-          <div layout="column">
-            <img src="assets/images/icons/002-airplane.png">
-            <div>AIRPORT</div>
+          <div layout="column" ng-init="uniploe5 = false" ng-click="uniploe5 = !uniploe5" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+
+            <div layout="row" ng-show="uniploe5" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
         </div>
         <md-divider></md-divider>
+        <!-- more 3-->
         <div layout="row" layout-align="space-around ceeneter">
-          <div layout="column">
-            <img src="assets/images/icons/004-sign.png">
-            <div>ROADSIDE</div>
+
+          <div layout="column" ng-init="uniploe6 = false" ng-click="uniploe6 = !uniploe6" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+
+            <div layout="row" ng-show="uniploe6" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
           <md-divider></md-divider>
-          <div layout="column">
-            <img src="assets/images/icons/003-bus.png">
-            <div>TRANSIT</div>
+          <div layout="column" ng-init="uniploe7 = false" ng-click="uniploe7 = !uniploe7" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+
+            <div layout="row" ng-show="uniploe7" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
           <md-divider></md-divider>
-          <div layout="column">
-            <img src="assets/images/icons/002-airplane.png">
-            <div>AIRPORT</div>
+          <div layout="column" ng-init="uniploe8 = false" ng-click="uniploe8 = !uniploe8" class="digital-board">
+            <div ng-cloak>
+              <md-list flex layout="row" layout-align="center center">
+                <md-list-item>
+                  <div>
+                    <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                      <div class="md-grid-text"> digital </div>
+                    </md-button>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+
+            <div layout="row" ng-show="uniploe8" class="digital-inner md-whiteframe-2dp">
+              <div ng-cloak>
+                <md-list flex layout="row" layout-align="center center">
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                  <md-list-item>
+                    <div>
+                      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+                        <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+                        <div class="md-grid-text"> digital </div>
+                      </md-button>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
           </div>
         </div>
-        <md-divider></md-divider>
-        <!-- <div layout="row">
-          <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
-            <md-tooltip md-direction="bottom"style="background:#fff !importent">
-              <span>
-                <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
-            
-                  <md-icon
-                    md-svg-src="assets/images/icons/linkedin.svg"
-                    style="width: 24px; height: 24px">
-                  </md-icon>
-                </md-button>
-              </span>
-              <span>2</span>
-              <span>3</span>
-
-            </md-tooltip>
-            <md-icon md-svg-src="assets/images/icons/facebook.svg" style="width: 24px; height: 24px">
-            </md-icon>
-            
-          </md-button>
-          <span style="color:black">facebook</span>
-        </div> -->
-
       </div>
     </div>
     <!-- formats html end-->
@@ -356,7 +583,38 @@
     </div>
     <!--saved campagin html end -->
   </div>
+  <!-- reommand button -->
+  <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:0px;right:0;width:100%">
+    <div layout="row" layout-align="end center" style="right:10%">
+      <md-button class="md-raised md-primary" ng-init="Recommended = false" ng-click="Recommended = !Recommended">Recommended<span>
+      <md-icon ng-hide="Recommended"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
+        <span><md-icon ng-show="Recommended"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
+      </md-button>
+      <md-button class="md-raised md-primary"  ng-init="Popular = false" ng-click="Popular = !Popular">Popular Mediums<span>
+      <md-icon ng-hide="Popular"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
+        <span><md-icon ng-show="Popular"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
+      </md-button>
+    </div>
+    <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Recommended">
+      <div>
+        <img src="assets/images/icons/001-shop.png">
 
+      </div>
+    </div>
+    <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Popular">
+      <div>
+        <img src="assets/images/icons/001-shop.png">
+
+      </div>
+      <div>
+        <img src="assets/images/icons/001-shop.png">
+
+      </div>
+    </div>
+
+
+  </div>
+  
   <!-- side nav for view all-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
     <div layout="row">
@@ -372,7 +630,7 @@
       </div>
     </div>
     <md-content layout-padding="">
-     
+
 
     </md-content>
   </md-sidenav>
@@ -410,7 +668,7 @@
       </div>
     </div>
     <md-content layout-padding="">
-       <md-card md-theme="default" md-theme-watch>
+      <md-card md-theme="default" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">BI-79784</span>
@@ -669,11 +927,11 @@
         </md-select>
       </md-input-container>
       </md-input-container>
-    
+
       <div flex-gt-xs class="md-block">
-      <label>Expected Standard Date</label>
-      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
-    </div>
+        <label>Expected Standard Date</label>
+        <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+      </div>
       <div>
         <md-button class="md-raised md-warn" ng-click="suggestMeConfirm($event)">SUGGEST ME</md-button>
       </div>
