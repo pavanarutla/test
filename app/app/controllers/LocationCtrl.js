@@ -8,6 +8,8 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
   NgMap.getMap().then(function(map) {
     $scope.mapObj = map;
     $scope.arrayGroup();
+    $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
+    $scope.mapObj.setZoom(17);  
   });
 
   $scope.arrayGroup = function(){
@@ -30,18 +32,18 @@ app.controller('LocationCtrl', ['$scope', 'NgMap', 'MapService', function($scope
     /* 
     //// handling clustering ////
     */
-    _.each(uniq_coords, function(value, key){
-      var ll = key.split(',');
-      var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
-      uniq_markers.push(new google.maps.Marker({position:latLng}));
-    });
-    console.log(uniq_markers);
-    var mc = {
-      gridSize: 50,
-      maxZoom: 15,
-      imagePath: 'assets/images/maps/m'
-    };
-    $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
+    // _.each(uniq_coords, function(value, key){
+    //   var ll = key.split(',');
+    //   var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
+    //   uniq_markers.push(new google.maps.Marker({position:latLng}));
+    // });
+    // console.log(uniq_markers);
+    // var mc = {
+    //   gridSize: 50,
+    //   maxZoom: 15,
+    //   imagePath: 'assets/images/maps/m'
+    // };
+    // $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
 
     /*
     //// handling spiderifying ////
