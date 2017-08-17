@@ -1,4 +1,4 @@
-  <div layout="column" style="position:relative" ng-controller="GmapCtrl">
+  <div layout="column" style="position:relative">
   <ng-map center="{{address}}" zoom="10" style="width:100%;height:100vh;">
     <custom-control id="home" position="TOP_RIGHT" index="1" on-click="HomeCtrl.click()">
       <div>
@@ -72,6 +72,7 @@
                  vs-longitude="address.components.location.long"
                  type="text" 
                  name="address"
+                 aria-label = "google-autocomplete"
                  >
           </md-input-container>
         </form>

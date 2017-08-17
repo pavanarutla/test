@@ -40,7 +40,7 @@ var app = angular.module('bbManager', [
     })
     .when('/location', {
       templateUrl: 'views/map-home.html',
-      controller: 'LocationCtrl'
+      controller: 'GmapCtrl'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }
