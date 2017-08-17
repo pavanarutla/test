@@ -242,7 +242,6 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     ];
         //$scope.agents = [1,2]
 
-<<<<<<< HEAD
   //Suggest Me Dialog 1
   $scope.suggestMeConfirm = function(ev) {
     console.log(ev);
@@ -255,20 +254,6 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
       .ariaLabel('Alert Dialog Demo')
       .ok('Got it!')
       .targetEvent(ev)
-=======
-//Suggest Me Dialog 1
-$scope.suggestMeConfirm = function(project) {
-    console.log(project);
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('body')))
-        .clickOutsideToClose(true)
-        .title('We will get back to you!!!!')
-        .textContent('You can specify some description text in here.')
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
-        .targetEvent(project)
->>>>>>> 944f9a68469fd8f8b684d69f1df9208cafeb6d3f
     );
   };
 
