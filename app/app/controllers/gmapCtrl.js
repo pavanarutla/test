@@ -29,7 +29,8 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     $scope.rating = 0;
     $scope.disabled = 100;
   };
-  
+  // $rootScope.address = 'Hyderabad'; 
+
   $scope.selectedCountry = { Id: '1', Countryname: 'India' };
   $scope.selectedStates={};
   $scope.selectedcitys={};
@@ -206,6 +207,40 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
       .targetEvent(ev)
     );
   };
+   $scope.IndustrySector = [
+        {model : "automotive"},
+        {model : "Consumer Durables"},
+        {model : "Education"},
+        {model : "Entertainment"},
+        {model : "Fashion & lifestyle"},
+        {model : "Banking, Financial services and Insurance "},
+        {model : "Healthcare"},
+        {model : "Hotels & Restaurant"},
+        {model : "Office Supplies"},
+        {model : "Retail"},
+        {model : "Public Services"},
+        {model : "Real Estate & Infrastructure"},
+        {model : "Telecom"},
+        {model : "Travel & Transport"},
+        {model : "Ecommerce "},
+        {model : "Fast-moving consumer goods"},
+        {model : "IT"},
+        {model : "Classifieds"},
+        {model : "Others"}
+        
+    ];
+      $scope.CampaignDuration = [
+        {model : "10 Days"},
+        {model : "15 Days"},
+        {model : "20 Days"},
+        {model : "25 Days"},
+        {model : "30 Days"},
+        {model : "2 Months"},
+        {model : "3 Months"},    
+        {model : "6 Months"},
+        {model : "1 year"}
+    ];
+        //$scope.agents = [1,2]
 
   //Suggest Me Dialog 1
   $scope.suggestMeConfirm = function(ev) {
