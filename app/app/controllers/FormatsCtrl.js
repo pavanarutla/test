@@ -1,4 +1,18 @@
 app.controller('formatsCtrl', function ($scope) {
+
+  $scope.showBillboardsData = true;
+  $scope.showUnipoleData = false;
+  $scope.showdigitalData = false;
+
+  $scope.showBillboards = function(){
+    $scope.showBillboardsData = true;
+    $scope.showUnipoleData = false;
+  }
+
+  $scope.unipole = function() {
+    $scope.showUnipoleData = true;
+    $scope.showBillboardsData = false;
+  }
   //slider
   $scope.slickConfig2Loaded = true;
   $scope.slickConfig2 = {
@@ -28,4 +42,6 @@ app.controller('formatsCtrl', function ($scope) {
     }],
     method: {}
   };
+ //$scope.unipole = true;
+  
 });
