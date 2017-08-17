@@ -1,9 +1,12 @@
 app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog', function($scope, NgMap, $element, $mdSidenav, $mdDialog ) {
-    NgMap.getMap().then(function(map) {
-        console.log(map.getCenter());
-        console.log('markers', map.markers);
-        console.log('shapes', map.shapes);
-    });
+
+  $scope.address = "Hyderabad, Telangana";
+
+  NgMap.getMap().then(function(map) {
+      console.log(map.getCenter());
+      console.log('markers', map.markers);
+      console.log('shapes', map.shapes);
+  });
 
   // clender
   $scope.opened = {
