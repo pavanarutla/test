@@ -1,12 +1,10 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) {
 
-// side favicon functionality
-
-            
-            this.isOpen = false;
-            this.availableModes = ['md-fling', 'md-scale'];
-            this.selectedMode = 'md-fling';
-            this.selectedDirection = 'up';
+  // side favicon functionality
+  this.isOpen = false;
+  this.availableModes = ['md-fling', 'md-scale'];
+  this.selectedMode = 'md-fling';
+  this.selectedDirection = 'up';
 
 
   $scope.closeSidenav = function () {
