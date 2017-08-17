@@ -361,4 +361,8 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     trafficLayer.setMap(mapVal);
   }
 
+  $scope.savedata = function(){
+    // handles the submitted form data from map-filtering.
+  }
+
 }]);
