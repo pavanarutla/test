@@ -1,4 +1,4 @@
-app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog', function($scope, NgMap, $element, $mdSidenav, $mdDialog ) {
+app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog', function($scope, NgMap, $element, $mdSidenav, $mdDialog,$rootScope ) {
     NgMap.getMap().then(function(map) {
         console.log(map.getCenter());
         console.log('markers', map.markers);
@@ -24,7 +24,8 @@ app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog
     $scope.rating = 0;
     $scope.disabled = 100;
   };
-  
+  // $rootScope.address = 'Hyderabad'; 
+
   $scope.selectedCountry = { Id: '1', Countryname: 'India' };
   $scope.selectedStates={};
   $scope.selectedcitys={};
@@ -200,10 +201,38 @@ $scope.showConfirmation = function(ev) {
         .targetEvent(ev)
     );
   };
+   $scope.IndustrySector = [
+        {model : "Autimotives"},
+        {model : "Consumer Durables"},
+        {model : "Education"},
+        {model : "Entertainment"},
+        {model : "Fashion & lifestyle"},
+        {model : "BFSI"},
+        {model : "Healthcare"},
+        {model : "Hotels & Restaurant"},
+        {model : "Office Supplies"},
+        {model : "Retail"},
+        {model : "Public Services"},
+        {model : "Real Estate & Infrastructure"},
+        {model : "Telecom"},
+        {model : "Travel & Transport"},
+        {model : "Ecommerce "},
+        {model : "FMCG"},
+        {model : "IT"},
+        {model : "Classifieds"},
+        {model : "Others"}
+        
+    ];
+      $scope.newcars = [
+        {model : "Ford Mustang", color : "red"},
+        {model : "Fiat 500", color : "white"},
+        {model : "Volvo XC90", color : "black"}
+    ];
+        $scope.agents = [1,2]
 
 //Suggest Me Dialog 1
-$scope.suggestMeConfirm = function(ev) {
-    console.log(ev);
+$scope.suggestMeConfirm = function(project) {
+    console.log(project);
     $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('body')))
@@ -212,7 +241,7 @@ $scope.suggestMeConfirm = function(ev) {
         .textContent('You can specify some description text in here.')
         .ariaLabel('Alert Dialog Demo')
         .ok('Got it!')
-        .targetEvent(ev)
+        .targetEvent(project)
     );
   };
 
