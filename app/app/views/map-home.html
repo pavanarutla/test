@@ -74,7 +74,6 @@
                  type="text" 
                  name="address"
                  >
-                 <ng-map center="{{address}}"></ng-map>
           </md-input-container>
         </form>
         <!-- pincode,area,tab id section end-->
@@ -704,7 +703,9 @@
             <md-option ng-value="item">Item 4</md-option>
           </md-optgroup>
         </md-select> -->
-        <input placeholder="Months"/>
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+                  <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option> 
+                </md-select required> 
       </md-input-container>
       </md-input-container>
     

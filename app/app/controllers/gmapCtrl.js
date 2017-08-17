@@ -202,12 +202,12 @@ $scope.showConfirmation = function(ev) {
     );
   };
    $scope.IndustrySector = [
-        {model : "Autimotives"},
+        {model : "automotive"},
         {model : "Consumer Durables"},
         {model : "Education"},
         {model : "Entertainment"},
         {model : "Fashion & lifestyle"},
-        {model : "BFSI"},
+        {model : "Banking, Financial services and Insurance "},
         {model : "Healthcare"},
         {model : "Hotels & Restaurant"},
         {model : "Office Supplies"},
@@ -217,18 +217,24 @@ $scope.showConfirmation = function(ev) {
         {model : "Telecom"},
         {model : "Travel & Transport"},
         {model : "Ecommerce "},
-        {model : "FMCG"},
+        {model : "Fast-moving consumer goods"},
         {model : "IT"},
         {model : "Classifieds"},
         {model : "Others"}
         
     ];
-      $scope.newcars = [
-        {model : "Ford Mustang", color : "red"},
-        {model : "Fiat 500", color : "white"},
-        {model : "Volvo XC90", color : "black"}
+      $scope.CampaignDuration = [
+        {model : "10 Days"},
+        {model : "15 Days"},
+        {model : "20 Days"},
+        {model : "25 Days"},
+        {model : "30 Days"},
+        {model : "2 Months"},
+        {model : "3 Months"},    
+        {model : "6 Months"},
+        {model : "1 year"}
     ];
-        $scope.agents = [1,2]
+        //$scope.agents = [1,2]
 
 //Suggest Me Dialog 1
 $scope.suggestMeConfirm = function(project) {
