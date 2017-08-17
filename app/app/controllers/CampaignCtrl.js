@@ -1,4 +1,4 @@
-app.controller('campaiginController', function ($scope, $mdDialog) {
+app.controller('CampaignController', function ($scope, $mdDialog) {
 
 //alert("hello ctrls")
 $scope.showPaymentdailog = function () {	
