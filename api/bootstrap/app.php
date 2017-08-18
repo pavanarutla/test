@@ -55,7 +55,7 @@ $app->singleton(
 | using https://github.com/barryvdh/laravel-cors#lumen
 */
 
-// $app->configure('cors');
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ $app->singleton(
 */
 
 $app->middleware([
-    \App\Http\Middleware\CorsMiddleware::class
+    \Barryvdh\Cors\HandleCors::class,
 ]);
 
 $app->routeMiddleware([
@@ -87,7 +87,7 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
+$app->register(Barryvdh\Cors\LumenServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
