@@ -45,6 +45,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html'
       
     })
+    .when('/productAdding',{
+      templateUrl: 'views/ProductAdding.html',
+      controller:'ProductAddCtrl'      
+    })
     .when('/userprofile',{
       templateUrl:'views/userprofile.html'
     });
