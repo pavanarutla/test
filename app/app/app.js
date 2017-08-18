@@ -40,6 +40,12 @@ var app = angular.module('bbManager', [
     .when('/location',{
       templateUrl: 'views/map-home.html'
       
+    })
+    .when('/campagin',{
+      templateUrl: 'views/campagin.html'
+    })
+    .when('/campaginedit',{
+      templateUrl: 'views/campaginedit.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }

@@ -71,5 +71,23 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
     }],
     method: {}
   };
+
+  $scope.showContact = function(ev) {
+    
+    var confirm = $mdDialog.prompt()
+      .title('Drop Your Contact Number')
+      .placeholder('Enter Your Contact Number')
+      .ariaLabel('Dog name')
+      .targetEvent(ev)
+      .ok('Submit')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function(result) {
+      $scope.status = 'You decided to name your dog ' + result + '.';
+    }, function() {
+      $scope.status = 'You didn\'t name your dog.';
+    });
+    
+  };
   
 });

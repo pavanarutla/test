@@ -13,26 +13,28 @@
 				<md-button class="md-raised md-warn">GET STARTED NOW</md-button>
 			</div>
 		</div>
-		<div class="fab-dail">
-			<div ng-show="fabdail">
-				<div>
-					<md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-						<md-icon aria-label="Facebook"><i class="material-icons">call</i></md-icon>
-					</md-button>
-				</div>
-				<div>
-					<md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-						<md-icon aria-label="Twitter"><i class="material-icons">call</i></md-icon>
-					</md-button>
-				</div>
-			</div>
 
-			<div  ng-init="fabdail = false" ng-click="fabdail = !fabdail">
-				<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-					<md-icon aria-label="Google Hangout"><i class="material-icons">favorite</i></md-icon>
-				</md-button>
+		<div class="fab-dail">
+			<div class="lock-size" layout="row" layout-align="center center">
+				<md-fab-speed-dial md-direction="up" class="md-fling">
+					<md-fab-trigger>
+						<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+							<md-icon aria-label="Google Hangout"><i class="material-icons">favorite</i></md-icon>
+						</md-button>
+					</md-fab-trigger>
+					<md-fab-actions>
+						<md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="showContact($event)">
+							<md-icon aria-label="Facebook"><i class="material-icons">call</i></md-icon>
+						</md-button>
+						<md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+							<md-icon aria-label="Facebook"><i class="material-icons">chat</i></md-icon>
+						</md-button>
+
+					</md-fab-actions>
+				</md-fab-speed-dial>
 			</div>
 		</div>
+
 	</div>
 	<!-- banner html end-->
 
