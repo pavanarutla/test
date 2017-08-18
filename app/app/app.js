@@ -41,8 +41,16 @@ var app = angular.module('bbManager', [
     .when('/location', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
+    })
+    .when('/admin/products', {
+      templateUrl: 'views/admin/products.html',
+      controller: 'ProductsCtrl'
+    })
+    .when('/admin/add-product', {
+      templateUrl: 'views/admin/add-products.html',
+      controller: 'ProductsCtrl'
     });
-    $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider.otherwise({redirectTo: '/'});
   }
 ]);
 

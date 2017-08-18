@@ -6,9 +6,9 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   var trafficLayer = new google.maps.TrafficLayer(); 
   NgMap.getMap().then(function(map) {
     $scope.mapObj = map;
-    $scope.arrayGroup();
+    $scope.processMarkers();
     $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
-    $scope.mapObj.setZoom(17);  
+    $scope.mapObj.setZoom(17);
   });
 
   // clender
@@ -180,7 +180,6 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
 
   //Confirm Dialog
   $scope.showAlert = function(ev) {
-    console.log(ev);
     $mdDialog.show(
       $mdDialog.alert()
       .parent(angular.element(document.querySelector('body')))
@@ -194,7 +193,6 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   };
   //Confirm Dialog 1
   $scope.showConfirmation = function(ev) {
-    console.log(ev);
     $mdDialog.show(
       $mdDialog.alert()
       .parent(angular.element(document.querySelector('body')))
@@ -209,7 +207,6 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
 
   //Suggest Me Dialog 1
   $scope.suggestMeConfirm = function(ev) {
-    console.log(ev);
     $mdDialog.show(
       $mdDialog.alert()
       .parent(angular.element(document.querySelector('body')))
@@ -222,7 +219,7 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     );
   };
 
-  $scope.arrayGroup = function(){
+  $scope.processMarkers = function(){
     var counts = {};
     var uniq_markers = [];
     _.each(MapService.markers(), function(v, i) {
