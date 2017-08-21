@@ -48,17 +48,6 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
-| Configure Cors
-|--------------------------------------------------------------------------
-|
-| enabling Cors for cross origin requests. 
-| using https://github.com/barryvdh/laravel-cors#lumen
-*/
-
-$app->configure('cors');
-
-/*
-|--------------------------------------------------------------------------
 | Register Middleware
 |--------------------------------------------------------------------------
 |
@@ -69,7 +58,7 @@ $app->configure('cors');
 */
 
 $app->middleware([
-    \Barryvdh\Cors\HandleCors::class,
+    App\Http\MiddleWare\CorsMiddleware::class,
 ]);
 
 $app->routeMiddleware([
@@ -87,7 +76,6 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(Barryvdh\Cors\LumenServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
@@ -95,7 +83,6 @@ $app->register(App\Providers\AuthServiceProvider::class);
 /*==============================
 Mongo Service Provider for Lumen
 ==============================*/
-// $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->register(Moloquent\MongodbServiceProvider::class);
 $app->withEloquent();
 

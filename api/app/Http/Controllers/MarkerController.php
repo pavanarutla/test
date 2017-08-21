@@ -51,7 +51,7 @@ class MarkerController extends Controller
 		// $marker_obj->panelSize = $input['panelSize'];
 		// $marker_obj->type  = $input['type'];
 		// $marker_obj->save();
-		echo '<pre>';var_dump($marker_obj); echo '</pre>';die;
+		return response()->json(["message" => "Marker saved successfully."]);
 	}
 
 	public function saveMarkersBulk(Request $request){
