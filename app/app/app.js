@@ -63,17 +63,10 @@ var app = angular.module('bbManager', [
     .when('/campaginedit',{
       templateUrl: 'views/campaginedit.html'
     })
-<<<<<<< HEAD
     .when('/campaginprofile',{
       templateUrl: 'views/campProfile.html'
     }),
     $routeProvider.otherwise({redirectTo: '/home'});
-=======
-    .when('/userprofile',{
-      templateUrl: 'views/userprofile.html'
-    });
-    $routeProvider.otherwise({redirectTo: '/'});
->>>>>>> f76bfb36a820b1dd5b86d42c570bed538f85b782
   }
 ]);
 
