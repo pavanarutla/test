@@ -14,36 +14,35 @@
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
-
   <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
 </head>
 
 <body layout="column" ng-cloak ng-controller="bbMngrCtrl">
-  <md-toolbar class="md-menu-toolbar" style="background:#488edf; position: fixed;">
+  <md-toolbar class="md-menu-toolbar" style="background:#488edf; position: fixed;top:0;overflow:hidden;">
     <div class="md-toolbar-tools">
       <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
       <md-menu-bar>
-          <md-button aria-label="whyoutdoor" href="" ng-click="whatwedo()" ng-animate=" 'animate' ">what we do</md-button>
-          <md-button aria-label="formats" href="#/formats">formats</md-button>
-          <md-button aria-label="locations" href="">why outdoor</md-button>
-          <md-button aria-label="about" href="" ng-click="contactus()">contact</md-button>
-          <md-button aria-label="pricing" href="#/pricing">pricing</md-button>
+        <md-button aria-label="whyoutdoor" href="" ng-click="whatwedo()" ng-animate=" 'animate' ">what we do</md-button>
+        <md-button aria-label="formats" href="#/formats">formats</md-button>
+        <md-button aria-label="locations" href="">why outdoor</md-button>
+        <md-button aria-label="about" href="" ng-click="contactus()">contact</md-button>
+        <md-button aria-label="pricing" href="#/pricing">pricing</md-button>
         <!--notification button -->
-         <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
           <md-icon><i class="material-icons">notifications</i></md-icon>
-        </md-button> 
+        </md-button>
         <!-- profile button start-->
-         <md-menu>
-          <md-button aria-label="userimage" class="md-fab md-mini md-avatar "ng-click="$mdOpenMenu($event)" >
+        <md-menu md-position-mode="target-right target">
+          <md-button aria-label="userimage" class="md-fab md-mini md-avatar " ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class=" ">
           </md-button>
           <md-menu-content  width="3" style="z-index:99">
             <md-menu-item>
-              <md-button >Chanikya varma</md-button>
+              <md-button>Chanikya varma</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
@@ -55,12 +54,12 @@
               <md-button>Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
-        </md-menu> 
+        </md-menu>
         <!-- profile button end-->
         <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
                     BOOK NOW
         </md-button> -->
-        
+
       </md-menu-bar>
     </div>
   </md-toolbar>
@@ -106,9 +105,11 @@
   </md-sidenav>
   <!-- Content section-->
 
-  <div>
 
-    <div ng-view ng-cloak></div>
+  <md-content flex  ng-view ng-cloak style="position:inherit!important;">
+
+  </md-content>
+    <!-- <div ng-view ng-cloak></div> <--></-->
 
     <!-- Footer Section-->
     <footer>
@@ -152,7 +153,7 @@
       <!-- <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:#E1DEDE" />
       <md-icon style="color: #E75344;">^</md-icon>
       </md-button> -->
-    
+
     </footer>
 
     <!--Scripts include-->
@@ -163,7 +164,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
 
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
     <!-- Angular Material Library -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- slick slider-->
@@ -186,7 +187,7 @@
     <script type="text/javascript" src="controllers/GmapCtrl.js"></script>
     <script type="text/javascript" src="controllers/campaiginCtrl.js"></script>
     <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
-  </div>
+ 
 </body>
 
 </html>

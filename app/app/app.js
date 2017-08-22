@@ -46,11 +46,13 @@ var app = angular.module('bbManager', [
     })
     .when('/campaginedit',{
       templateUrl: 'views/campaginedit.html'
-    });
+    })
+    .when('/campaginprofile',{
+      templateUrl: 'views/campProfile.html'
+    }),
     $routeProvider.otherwise({redirectTo: '/home'});
   }
 ]);
-
 
 /* ===================
 Slick Carasoul Config
