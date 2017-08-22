@@ -14,9 +14,17 @@
               <input ng-model="user.payment" type="text" name="password" minlength="6" maxlength="20" required="required"/>
               
             </md-input-container>
-            
-            <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
-              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn">UploadImg</md-button>
+            <div class="row">
+            <div layout="column" layout-fill="layout-fill"  flex="20">
+              <md-button type="button" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="uploadFile(input)">UploadImg</md-button>
+              <input type="text" class="form-control">
+              <span class="input-group-addon">
+                <a onclick="document.getElementById('photo-upload').click();" style="cursor:pointer"><i class="glyphicon glyphicon-folder-open"></i> Select a file</a></span>
+               <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this)" id="photo-upload" style="display: none;"/>
+              
+          </div>
+          <img ng-src="data:image/jpeg;base64,{{data.uploadedPhoto}}" id="photo-id" width="100" height="100" />
+            </div>
             </div>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
               <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn">Submit</md-button>

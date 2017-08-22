@@ -9,7 +9,7 @@ var app = angular.module('bbManager', [
   'slickCarousel',
   'ui.bootstrap'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
   function($locationProvider, $routeProvider, $mdThemingProvider) {
     
 
@@ -30,6 +30,7 @@ var app = angular.module('bbManager', [
       // controller: 'bbMngrCtrl'
     })
     .when('/formats', {
+     
       templateUrl: 'views/formats.html'
       //controller: 'LocationController'
     })
@@ -42,6 +43,13 @@ var app = angular.module('bbManager', [
       //controller: 'LocationController'
     })
     .when('/location',{
+      // resolve:{
+      //   "check": function($location,$rootScope){
+      //     if(!$rootScope.logiIn){
+      //       $location.path('/')
+      //     }
+      //   }
+      //   },
       templateUrl: 'views/map-home.html'
       
     })

@@ -1,12 +1,17 @@
 'user strict'
-app.controller("loginCtrl", function($scope,$mdDialog){
+app.controller("loginCtrl", function($scope,$mdDialog,$location,$rootScope){
 
 $scope.signInpageshow = true;
 $scope.forgotPasswordpage = false;
-$scope.sigInUser = function(user){
 
+$scope.sigInUser = function(user){
+    var username = user.username;
+    var password = user.password;
     if(user.username == "naresh@gmail.com" && user.password == "naresh123"){
-        alert("login successfull");
+        $rootScope.logiIn = true;
+        //alert("login successfull");
+        $location.path('/location');
+        
     }else{
         alert("wrong credentials");
     }

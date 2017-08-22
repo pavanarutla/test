@@ -13,6 +13,39 @@ app.controller('GmapCtrl', ['$scope', 'NgMap','$element', function($scope, NgMap
 
 $scope.today = new Date();
 
+$scope.filter = false;
+$scope.format = false;
+$scope.shortlist = false;
+$scope.savedcampaign = false;
+
+
+$scope.filters = function(){
+  $scope.filter = !$scope.filter;
+  $scope.format = false;
+  $scope.shortlist = false;
+  $scope.savedcampaign = false;
+}
+$scope.formats = function(){
+  $scope.filter= false;
+  $scope.format= !$scope.format;
+  $scope.shortlist = false;
+  $scope.savedcampaign = false;  
+}
+
+$scope.shortlistDiv = function(){
+  $scope.filter = false;
+  $scope.format = false;
+  $scope.shortlist = !$scope.shortlist;
+  $scope.savedcampaign = false; 
+}
+
+$scope.savedcampaignDiv = function(){
+  $scope.filter = false;
+  $scope.format = false;
+  $scope.shortlist = false;
+  $scope.savedcampaign = !$scope.savedcampaign;
+}
+
 //slider
 
 function sliderController ($scope) {
