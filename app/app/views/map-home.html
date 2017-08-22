@@ -56,6 +56,7 @@
         <form>
           <md-input-container class="pstcde" style="width:100%">
             <!-- <label for="testInput">Postcode,Area Name,Tab ID</label> -->
+            
             <input vs-google-autocomplete type="text" id="testInput" ng-model="address" md-autofocus
                  ng-model="address.name"
                  vs-place="address.place" 
@@ -179,10 +180,14 @@
               <span>
                 <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
             
-                  <md-icon
+                  <!-- <md-icon
                     md-svg-src="assets/images/icons/linkedin.svg"
                     style="width: 24px; height: 24px">
-                  </md-icon>
+                  </md-icon> -->
+                   <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="image in property.imageURLs">
+                      <img src={{image}} ng-click="selected_images[image] = {selected: !selected_images[image].selected }"
+                      class="img-responsive"ng-class="{ 'selected-image': selected_images[image].selected }" style="max-height: 120px;" alt="" title="">
+                   </div>
                 </md-button>
               </span>
               <span>2</span>
@@ -431,12 +436,12 @@
         </md-button>
       </div>
     </div>
-    <md-content layout-padding="">
+    <md-content ng-repeat="agent in agents|filter:search" layout="row">
        <md-card md-theme="default" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">BI-79784</span>
-            <span class="md-subhead">Small</span>
+            <span class="md-headline">BI-79784{{agent.RCustId}}</span>
+            <span class="md-subhead">Small{{agent.FullName}}</span>
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-sm card-media"></div>
@@ -661,17 +666,27 @@
         </div>
       </md-input-container>
       <md-input-container class="md-block">
+        <label>Add your Organisation URL:</label>
+        <input type="url" name="homepage" required md-no-asterisk  ng-model="project.orgURL">
+        <div ng-messages="suggestMeform.orgname.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
         <label>Industry Sector</label>
-        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+        <!-- <md-select ng-model="project.selectedItem" md-selected-text="getSelectedText()">
           <md-optgroup label="items">
             <md-option ng-value="item">Item 1</md-option>
             <md-option ng-value="item">Item 2</md-option>
             <md-option ng-value="item">Item 3</md-option>
             <md-option ng-value="item">Item 4</md-option>
           </md-optgroup>
-        </md-select>
+        </md-select> -->
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+                  <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option> 
+                </md-select required> 
       </md-input-container>
-      <md-input-container class="md-block">
+      <md-input-container class="md-block" aria-placeholder="months">
         <label>Estimated Budget</label>
         <input md-maxlength="30" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
         <div ng-messages="suggestMeform.estbudget.$error">
@@ -680,24 +695,27 @@
         </div>
       </md-input-container>
       <md-input-container class="md-block">
-        <label>Campaign Duration Sector</label>
-        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+        <label>Campaign Duration </label>
+        <!-- <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
           <md-optgroup label="items">
             <md-option ng-value="item">Item 1</md-option>
             <md-option ng-value="item">Item 2</md-option>
             <md-option ng-value="item">Item 3</md-option>
             <md-option ng-value="item">Item 4</md-option>
           </md-optgroup>
-        </md-select>
+        </md-select> -->
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+                  <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option> 
+                </md-select required> 
       </md-input-container>
       </md-input-container>
     
       <div flex-gt-xs class="md-block">
-      <label>Expected Standard Date</label>
-      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+      <label>Expected Start Date</label>
+      <md-datepicker ng-model="project.myDate" md-placeholder="Enter date"></md-datepicker>
     </div>
       <div>
-        <md-button class="md-raised md-warn" ng-click="suggestMeConfirm($event)">SUGGEST ME</md-button>
+        <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)">SUGGEST ME</md-button>
       </div>
     </form>
   </md-sidenav>

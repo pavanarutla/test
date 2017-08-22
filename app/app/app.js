@@ -34,6 +34,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
+    .when('/campaign', {
+      templateUrl: 'views/campaign.html',
+      controller: 'CampaignController'
+    })
     .when('/pricing', {
       templateUrl: 'views/pricing.html',
       controller: 'PricingCtrl'
@@ -49,6 +53,9 @@ var app = angular.module('bbManager', [
     .when('/admin/add-product', {
       templateUrl: 'views/admin/add-products.html',
       controller: 'ProductsCtrl'
+    })
+    .when('/userprofile',{
+      templateUrl:'views/user-profile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
   }
