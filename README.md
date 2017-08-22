@@ -18,10 +18,9 @@ Please find all the necessary information about setting up the project and contr
   * install nodejs > 6.11
   * open cmd/terminal and run the following commands
     * `cd <your_path>/BBIndia/app`
-    * `npm install -g @angular/cli`
     * `npm install`
-	* `ng serve`
-  * open browser and go to `localhost:4200`. you should see the app running
+	* `npm start`
+  * open browser and go to `localhost:8000`. you should see the app running
   
 ### PHP ###
   * install vagrant > 1.9.7

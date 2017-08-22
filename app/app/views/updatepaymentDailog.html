@@ -1,0 +1,33 @@
+<md-content class="md-padding">
+
+  <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+    <h5> fill bellow all fields to upload Payment</h5>
+  </div>
+  <form name="payment" novalidate="novalidate">
+    <md-input-container class="md-block">
+      <label>Amount</label>
+      <input ng-model="user.amount" name="amount" type="email" minlength="5" maxlength="10" required="required" onkeypress="if ((event.keyCode == 32) || (event.keyCode == 47) || (event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 45 || event.which > 57)) event.returnValue = false;"
+      />
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>payment Mode</label>
+      <input ng-model="user.payment" type="text" name="password" minlength="6" maxlength="20" required="required" />
+    </md-input-container>
+    <div class="row">
+      <div layout="column" layout-fill="layout-fill" flex="20">
+        <md-button type="button" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="uploadFile(input)">UploadImg</md-button>
+        <input type="text" class="form-control">
+        <span class="input-group-addon">
+      <a onclick="document.getElementById('photo-upload').click();" style="cursor:pointer"><i class="glyphicon glyphicon-folder-open"></i> Select a file</a></span>
+        <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this)" id="photo-upload" style="display: none;"
+        />
+
+      </div>
+      <img ng-src="data:image/jpeg;base64,{{data.uploadedPhoto}}" id="photo-id" width="100" height="100" />
+    </div>
+    </div>
+    <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+      <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn">Submit</md-button>
+    </md-input-container>
+  </form>
+</md-content>

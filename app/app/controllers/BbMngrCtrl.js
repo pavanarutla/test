@@ -1,4 +1,45 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout,$location) {
+
+
+  $scope.filter = false;
+$scope.format = false;
+$scope.shortlist = false;
+$scope.savedcampaign = false;
+
+
+$scope.filters = function(){
+  $scope.filter = !$scope.filter;
+  $scope.format = false;
+  $scope.shortlist = false;
+  $scope.savedcampaign = false;
+}
+$scope.formats = function(){
+  $scope.filter= false;
+  $scope.format= !$scope.format;
+  $scope.shortlist = false;
+  $scope.savedcampaign = false;  
+}
+
+$scope.shortlistDiv = function(){
+  $scope.filter = false;
+  $scope.format = false;
+  $scope.shortlist = !$scope.shortlist;
+  $scope.savedcampaign = false; 
+}
+
+$scope.savedcampaignDiv = function(){
+  $scope.filter = false;
+  $scope.format = false;
+  $scope.shortlist = false;
+  $scope.savedcampaign = !$scope.savedcampaign;
+}
+
+  // side favicon functionality
+  this.isOpen = false;
+  this.availableModes = ['md-fling', 'md-scale'];
+  this.selectedMode = 'md-fling';
+  this.selectedDirection = 'up';
+
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
@@ -10,7 +51,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/tabDialog.tmpl.html',
+      templateUrl: 'views/sigIn.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })
@@ -19,11 +60,22 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
-
-  $scope.whatwedo = function(){
-    window.scroll(0,600)
+ 
+  $scope.whatwedo = function(){   
+     $location.path('/');     
+    window.scroll(0,600);
+    
+  }
+  $scope.formate = function(){
+    $location.path('/');
+    window.scroll(0,1000)
+  }
+    $scope.whyOutdoor = function(){
+    $location.path('/');
+    window.scroll(0,1850)
   }
   $scope.contactus = function(){
+     $location.path('/');
     window.scroll(0,4000)
   }
 
@@ -35,12 +87,26 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout) 
       $('.goToTop').fadeOut();
     }
   });
+
+
   $('.goToTop').click(function () {
     $("html, body").animate({ scrollTop: 0 }, 1000);
     return false;
   });
 
   
+//scroll header color change 
+
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 50) {
+      $(".header").addClass("active");
+  } else {
+      //remove the background property so it comes transparent again (defined in your css)
+     $(".header").removeClass("active");
+  }
+});
+
+
   //slider
   $scope.slickConfig2Loaded = true;
 

@@ -2,62 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\DatabaseManager;
 use App\Models\Marker;
-use App\User;
+use App\Models\User;
+use Auth;
 
 class MarkerController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Resolve dependencies out of container
-        /** @var DatabaseManager $db */
-        // $db = app('db');
-        // $accountsDatabase = $db->connection('accounts');
-        // $contentDatabase = $db->connection('content');
-    }
+	/**
+		* Create a new controller instance.
+		*
+		* @return void
+		*/
+	public function __construct()
+	{
+		// Resolve dependencies out of container
+		// $this->middleware('auth', ['only' => [
+			// 'saveMarkers'
+		// ]]);
+	}
 
 	public function getMarkers(){
-		// $user = new User;
-		// $user->name = "mridul";
-		// $user->email = "mridulkashyap57@gmail.com";
-		// $user->save();
 		$markers = Marker::all();
+		// echo '<pre>';var_dump(config()->all()); echo '</pre>';die;
 		return response()->json($markers);
 	}
 
-	public function saveMarkers(){
-		$markers = [
-				[ 'lat'=> 17.4574279, 'lng'=> 78.3119675 ],
-				[ 'lat'=> 17.4474262, 'lng'=> 78.3319602 ],
-				[ 'lat'=> 17.4364212, 'lng'=> 78.3619627 ],
-				[ 'lat'=> 17.4444225, 'lng'=> 78.3219245 ],
-				[ 'lat'=> 17.4494139, 'lng'=> 78.3289475 ],
-				[ 'lat'=> 17.4414189, 'lng'=> 78.3299765 ],
-				[ 'lat'=> 17.4354819, 'lng'=> 78.3279135 ]
-		];
-		foreach($markers as $marker){
-			$marker_obj = new Marker;
-			$marker_obj->lat = $marker['lat'];
-			$marker_obj->lng = $marker['lng'];
-			$marker_obj->save();
-		}
+	public function saveMarker(Request $request){
+		if ($request->isJson()) {
+        $input = $request->json()->all();
+    } else {
+        $input = $request->all();
+    }
+		$marker_obj = new Marker;
+		// $marker_obj->adStrength = $input['adStrength'];
+		// $marker_obj->address = $input['address'];
+		// $marker_obj->areaName = $input['areaName'];
+		// $marker_obj->company = $input['company'];
+		// $marker_obj->direction = $input['direction'];
+		// $marker_obj->hoardingCost = $input['hoardingCost'];
+		// $marker_obj->image = $input['image'];
+		// $marker_obj->impressions = $input['impressions'];
+		$marker_obj->lat = $input['lat'];
+		// $marker_obj->lighting = $input['lighting'];
+		$marker_obj->lng = $input['lng'];
+		// $marker_obj->mapSymbol = $input['mapSymbol'];
+		// $marker_obj->panelSize = $input['panelSize'];
+		// $marker_obj->type  = $input['type'];
+		// $marker_obj->save();
+		return response()->json(["message" => "Marker saved successfully."]);
 	}
 
-    public function getLatest()
-    {
-        // Look up 3 newest users and 3 newest blog posts
-        $threeNewestUsers = $accountsDatabase->select("SELECT * FROM users ORDER BY created_at DESC LIMIT 3");
-        // $threeLatestPosts = $contentDatabase->select("SELECT * FROM blog_posts ORDER BY created_at DESC LIMIT 3");
-        return [
-            "new_users" => $threeNewestUsers,
-            // "new_posts" => $threeLatestPosts,
-        ];
-    }
-
+	public function saveMarkersBulk(Request $request){
+		if ($request->isJson()) {
+			$input = $request->json()->all();
+		} else {
+			$input = $request->all();
+		}
+		try{
+			Marker::saveBulkMarkers($input);
+			return response()->json(["message" => "Mediums added successfully."]);
+		}
+		catch(Exception $ex){
+			return response()->json(["message" => "Failed to add mediums to database. Please try again."]);
+		}
+	}
 }

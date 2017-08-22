@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="fab-dail">
-			<div class="lock-size" layout="row" layout-align="center center">
+			<!-- <div class="lock-size" layout="row" layout-align="center center">
 				<md-fab-speed-dial md-direction="up" class="md-fling">
 					<md-fab-trigger>
 						<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
@@ -32,7 +32,10 @@
 
 					</md-fab-actions>
 				</md-fab-speed-dial>
-			</div>
+			</div> -->
+			<md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="showContact($event)">
+							<md-icon aria-label="Facebook"><i class="material-icons">call</i></md-icon>
+						</md-button>
 		</div>
 
 	</div>
@@ -47,7 +50,6 @@
 				mattis mauris vel ante maximus, eget scelerisque dolor semper.</p>
 		</div>
 		<div layout="row" layout-margin layout-padding flex-offset-gt-sm="10" flex="80" flex-xs="100" flex-sm="100">
-
 			<div layout="row" flex="33">
 				<div>
 					<!-- <md-icon md-svg-icon="assets/images/icon/gouge.svg" id="left"> </md-icon> -->
@@ -58,8 +60,6 @@
 					<span class="md-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere libero leo, at commodo nunc venenatis ut</span>
 				</div>
 			</div>
-
-
 			<div layout="row" flex="33">
 				<div><img src="assets/images/icons/chat.png" alt="text" /></div>
 				<div class="margin-left">
@@ -67,8 +67,6 @@
 					<span class="md-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere libero leo, at commodo nunc venenatis ut</span>
 				</div>
 			</div>
-
-
 			<div layout="row" flex="33">
 				<div><img src="assets/images/icons/phone.png" alt="text" /></div>
 				<div class="margin-left">
@@ -76,7 +74,6 @@
 					<span class="md-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere libero leo, at commodo nunc venenatis ut</span>
 				</div>
 			</div>
-
 		</div>
 		<div layout="row" layout-margin layout-padding flex-offset-gt-sm="10" flex="80" flex-xs="100" flex-sm="100">
 
@@ -109,6 +106,47 @@
 				</div>
 			</div>
 
+
+			<!-- ficon stuff here -->
+			<div class = "fabSpeedDial" id = "speedDialContainer" ng-controller = "bbMngrCtrl as ctrl" layout = "row" ng-cloak>
+       
+				<md-content>
+					<div class = "lock-size" layout = "row" layout-align = "center center">
+							<md-fab-speed-dial md-open = "ctrl.isOpen"
+								md-direction = "{{ctrl.selectedDirection}}"
+								ng-class = "ctrl.selectedMode">
+								
+								<md-fab-trigger>
+										<md-button aria-label = "menu" class = "md-fab md-warn">
+											<md-icon class = "material-icons">menu</md-icon>
+										</md-button>
+								</md-fab-trigger>
+								
+								<md-fab-actions>
+										<md-button aria-label = "Add" class = "md-fab md-raised md-mini
+											md-accent">
+											<md-icon class = "material-icons" aria-label = "Add">
+													add</md-icon>
+										</md-button>
+										
+										<md-button aria-label = "Insert Link" class = "md-fab md-raised
+											md-mini md-accent">
+											<md-icon class = "material-icons" aria-label = "Insert Link">
+													insert_link</md-icon>
+										</md-button>
+										
+										<md-button aria-label = "Edit" class = "md-fab md-raised md-mini
+													md-accent">
+											<md-icon class = "material-icons" aria-label = "Edit">
+													mode_edit</md-icon>
+										</md-button>
+								</md-fab-actions>
+
+							</md-fab-speed-dial>
+					</div>            
+				</md-content>	 
+			</div>
+			<!-- end here  -->
 		</div>
 	</div>
 	<!-- what we do html end-->
@@ -145,10 +183,12 @@
 		</div>
 
 	</div>
+	<!-- Slider start here html start-->
 	<slick class="slider" settings="slickConfig2" ng-if="slickConfig2Loaded" style="height:273px;margin-top: -100px;">
 
 		<div class="item item-home md-whiteframe-1dp" layout-padding>
-			<h4>billboards</h4>
+			
+			<h4><a href="#/formats">billboards</a></h4>
 			<div class="md-caption">
 				Lorem Ipsum is simply dummy text of the printing and typesetting let. Lorem Ipsum has been the industry. Lorem Ipsum is simply
 				dummy text of the printing and typesetting let. Lorem Ipsum ahas been the industry Printing and typelorem Ipsum has been
@@ -213,9 +253,9 @@
 		</div>
 
 	</slick>
-	<!-- India's No 1Outdoor Advertising Companyhtml end-->
+	<!-- Slider start html end-->
 
-	<div layout-xs="column" layout-gt-xs="column" flex-gt-xs="100" flex-xs="100" style="text-align: center; width: 80%;margin: 0 auto;"
+	<div layout-xs="column" layout-gt-xs="column" flex-gt-xs="100" flex-xs="100" style="text-align: center; width: 80%;margin: 125px auto;"
 	 layout-margin layout-padding>
 		<div class="md-headline">We Make <span class="theme-text">Outdoor Advertising</span> Easy</div>
 		<div class="md-body-2">

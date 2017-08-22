@@ -16,6 +16,11 @@ $app->get('/', function () use ($app){
 });
 
 $app->group(['prefix' => 'api'], function () use ($app){
+    /* Markers */
     $app->get('markers', ['uses' => 'MarkerController@getMarkers']);
-    $app->post('markers', ['uses' => 'MarkerController@saveMarkers']);
+    $app->post('marker', ['uses' => 'MarkerController@saveMarker']);
+    $app->post('markers', ['uses' => 'MarkerController@saveMarkersBulk']);
+    
+    /* Authentication */
+    $app->post('auth', ['uses' => 'UserController@authenticate']);
 });
