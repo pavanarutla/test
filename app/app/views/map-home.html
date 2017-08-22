@@ -14,7 +14,8 @@
     <!-- filters html start-->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
-        <div layout="row" ng-init="open = false" ng-click="open = !open">
+        <!-- <div layout="row" ng-init="open = false" ng-click="open = !open"> -->
+        <div layout="row" ng-click="filters()">
           <div class="md-body-1"><span><img src="assets/images/icons/filter.png"></span><span class="theme-txt">FILTERS</span></div>
           <div flex></div>
           <div>
@@ -24,6 +25,10 @@
         </div>
       </md-content>
       <div layout="column" ng-show="open" style="background:#fff;width:350px;">
+
+      <!-- <div layout="column" ng-show="filter" style="background:#fff;width:350px;"> -->
+
+
         <!-- <div class="md-subhead">Check Availability</div>
         <md-divider></md-divider> -->
         <!-- dateselection html start-->
@@ -164,7 +169,10 @@
     <!-- formats html start-->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
-        <div layout="row" ng-init="formats = false" ng-click="formats = !formats">
+        <!-- <div layout="row" ng-init="formats = false" ng-click="formats = !formats"> -->
+        <div layout="row" ng-click="formats()">
+
+
           <div class="md-body-1"><span><img src="assets/images/icons/formats.png"></span><span class="theme-txt">FORMATS</span></div>
           <div flex></div>
           <div>
@@ -179,7 +187,6 @@
             <md-tooltip md-direction="bottom" style="background:#fff">
               <span>
                 <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
-            
                   <!-- <md-icon
                     md-svg-src="assets/images/icons/linkedin.svg"
                     style="width: 24px; height: 24px">
@@ -211,7 +218,7 @@
           </div>
         </div>
         <md-divider></md-divider>
-        <div layout="row" layout-align="space-around ceeneter">
+        <!-- <div layout="row" layout-align="space-around ceeneter">
           <div layout="column">
             <img src="assets/images/icons/004-sign.png">
             <div>ROADSIDE</div>
@@ -227,7 +234,7 @@
             <div>AIRPORT</div>
           </div>
         </div>
-        <md-divider></md-divider>
+        <md-divider></md-divider> -->
         <!-- <div layout="row">
           <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
             <md-tooltip md-direction="bottom"style="background:#fff !importent">
@@ -254,11 +261,11 @@
       </div>
     </div>
     <!-- formats html end-->
-
     <!--SHORTLIST html start -->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
-        <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist">
+        <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
+        <div layout="row" ng-click="shortlistDiv()">
           <div class="md-body-1"><span><img src="assets/images/icons/shortlist.png"></span><span class="theme-txt">SHORTLIST</span></div>
           <div flex></div>
           <div>
@@ -338,8 +345,8 @@
     <!--saved campagin html start -->
     <div layout="column" layout-padding>
       <md-content class=" md-padding" layout="column" style="width:350px;background:rgba(0, 0, 0, 0.7)">
-        <div layout="row" ng-init="savedcampaign = false" ng-click="savedcampaign = !savedcampaign">
-          <div class="md-body-1"><span><img src="assets/images/icons/savedcampagin.png"></span><span class="theme-txt">SAVED CAMPAIGNS</span></div>
+        <div layout="row" ng-click="savedcampaignDiv()">
+          <div class="md-body-1"><span><img src="assets/images/icons/savedcampagin.png"></span><span class="theme-txt">SAVE CAMPAIGNS</span></div>
           <div flex></div>
           <div>
             <md-icon ng-hide="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>

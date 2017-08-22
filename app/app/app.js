@@ -10,7 +10,7 @@ var app = angular.module('bbManager', [
   'vsGoogleAutocomplete',
   'ui.bootstrap'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
   function($locationProvider, $routeProvider, $mdThemingProvider) {
     
 
@@ -53,6 +53,10 @@ var app = angular.module('bbManager', [
     .when('/admin/add-product', {
       templateUrl: 'views/admin/add-products.html',
       controller: 'ProductsCtrl'
+    })
+    .when('/productAdding',{
+      templateUrl: 'views/ProductAdding.html',
+      controller:'ProductAddCtrl'      
     })
     .when('/userprofile',{
       templateUrl:'views/user-profile.html'
