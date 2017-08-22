@@ -54,12 +54,17 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/add-products.html',
       controller: 'ProductsCtrl'
     })
-    .when('/productAdding',{
-      templateUrl: 'views/ProductAdding.html',
-      controller:'ProductAddCtrl'      
-    })
     .when('/userprofile',{
       templateUrl:'views/user-profile.html'
+    })
+    .when('/campagin',{
+      templateUrl: 'views/campagin.html'
+    })
+    .when('/campaginedit',{
+      templateUrl: 'views/campaginedit.html'
+    })
+    .when('/userprofile',{
+      templateUrl: 'views/userprofile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
   }

@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
   <link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
  
@@ -30,10 +30,10 @@
       </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
       <md-menu-bar>
-          <md-button aria-label="whyoutdoor" href="" ng-click="whatwedo()" ng-animate=" 'animate' ">what we do</md-button>
-          <md-button aria-label="formats" href="#/formats">formats</md-button>
-          <md-button aria-label="locations" href="">why outdoor</md-button>
-          <md-button aria-label="about" href="" ng-click="contactus()">contact</md-button>
+          <md-button aria-label="whyoutdoor"  ng-click="whatwedo()" >what we do</md-button>
+          <md-button aria-label="formats" ng-click="formate()">formats</md-button>
+          <md-button aria-label="locations" ng-click="whyOutdoor()">why outdoor</md-button>
+          <md-button aria-label="about" ng-click="contactus()">contact</md-button>
           <md-button aria-label="pricing" href="#/pricing">pricing</md-button>
         <!--notification button -->
         <!-- <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
@@ -49,7 +49,7 @@
               <md-button >Chanikya varma</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-href="#">Campagin</md-button>
+              <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button>Account</md-button>
@@ -60,6 +60,9 @@
           </md-menu-content>
         </md-menu> -->
         <!-- profile button end-->
+        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
+                    BOOK NOW
+        </md-button> -->
         
 
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
@@ -154,9 +157,10 @@
         </div>
 
       </div>
-      <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:#E1DEDE" />
+      <!-- <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:#E1DEDE" />
       <md-icon style="color: #E75344;">^</md-icon>
-      </md-button>
+      </md-button> -->
+    
     </footer>
 
     <!--Scripts include-->
@@ -201,6 +205,8 @@
     <script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
     <script type="text/javascript" src="controllers/siginCtrl.js"></script>
     <script type="text/javascript" src="controllers/registerCtrl.js"></script>
+    <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
+    <script type="text/javascript" src="controllers/userProfileCtrl.js"></script>
   </div>
 </body>
 
