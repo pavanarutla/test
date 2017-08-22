@@ -46,6 +46,9 @@ var app = angular.module('bbManager', [
     })
     .when('/campaginedit',{
       templateUrl: 'views/campaginedit.html'
+    })
+    .when('/userprofile',{
+      templateUrl: 'views/userprofile.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
   }

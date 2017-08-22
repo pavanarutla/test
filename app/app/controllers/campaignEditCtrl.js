@@ -1,4 +1,4 @@
-app.controller('campaiginEditController', function ($scope,$interval) {
+app.controller('campaiginEditController', function ($scope,$interval,$mdDialog) {
 
 
 $scope.hoardingitems=[
@@ -38,5 +38,19 @@ $scope.hoardingitems=[
       $scope.loadMore = function() {
         $scope.limit = $scope.items.length
       };
+
+      //update payment dailog
+
+    $scope.showPaymentdailog = function () { 
+    $mdDialog.show({
+      templateUrl: 'views/updatepaymentDailog.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true
+    })
+  };
+
+  $scope.cancel = function () {
+    $mdDialog.cancel();
+  };
 
 });

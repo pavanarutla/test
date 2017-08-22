@@ -13,6 +13,10 @@ app.controller('GmapCtrl', ['$scope', 'NgMap','$element','$mdSidenav','$mdDialog
 
 $scope.today = new Date();
 
+
+//accrodin
+
+
 //slider
 
 function sliderController ($scope) {
