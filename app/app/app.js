@@ -10,7 +10,7 @@ var app = angular.module('bbManager', [
   'vsGoogleAutocomplete',
   'ui.bootstrap'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
   function($locationProvider, $routeProvider, $mdThemingProvider) {
     
 
@@ -46,8 +46,25 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .when('/admin/products', {
+      templateUrl: 'views/admin/products.html',
+      controller: 'ProductsCtrl'
+    })
+    .when('/admin/add-product', {
+      templateUrl: 'views/admin/add-products.html',
+      controller: 'ProductsCtrl'
+    })
     .when('/userprofile',{
       templateUrl:'views/user-profile.html'
+    })
+    .when('/campagin',{
+      templateUrl: 'views/campagin.html'
+    })
+    .when('/campaginedit',{
+      templateUrl: 'views/campaginedit.html'
+    })
+    .when('/userprofile',{
+      templateUrl: 'views/userprofile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
   }

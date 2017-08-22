@@ -1,4 +1,4 @@
-app.factory('MapService', [function(){
+app.factory('MapService', ['$http', '$q', function($http, $q){
   var markers=[
     {"position":[-32.202924,-64.404945],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/27932.jpg"},
     {"position":[47.867077,17.470493],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/522084.jpg"},
@@ -1110,21 +1110,21 @@ app.factory('MapService', [function(){
     {"position":[49.750107,20.306683],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/10240311.jpg"},
     {"position":[24.781747,110.424957],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/7593894.jpg"}
   ];
-  // markers  = [
-  //   { "position": [17.4574279, 78.3119675] },
-  //   { "position": [17.4474262, 78.3319602] },
-  //   { "position": [17.4474262, 78.3319602] },
-  //   { "position": [17.4474262, 78.3319602] },
-  //   { "position": [17.4474262, 78.3319602] },
-  //   { "position": [17.4364212, 78.3619627] },
-  //   { "position": [17.4444225, 78.3219245] },
-  //   { "position": [17.4494139, 78.3289475] },
-  //   { "position": [17.4414189, 78.3299765] },
-  //   { "position": [17.4354819, 78.3279135] }
-  // ];
   return {
     markers: function(){
       return markers;
+    },
+    saveMarker: function(){
+      // console.log(markerObj);
+      markerObj = {lat: 61.62182, lng: 20.306683};
+      var dfd = $q.defer();
+      $http.post('http://localhost:8001/api/marker', markerObj).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
+    getMarkers: function(){
+      var dfd = $q.defer();
+      $http.get('http://localhost:8001/api/markers').success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
     }
   }
 }]);

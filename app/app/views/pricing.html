@@ -12,11 +12,15 @@
                
                 <div flex-xs flex-gt-xs="50" layout="column">
                   <md-card>
+                    <form name="standarad" novalidate="novalidate">
                     <md-card-header>
                       
-                      <md-checkbox class="green">
+                      <md-checkbox class="green" name="standarad" required="required">
                                    
                       </md-checkbox>
+                      <div ng-messages="standarad.standarad.$error">
+                          <div ng-message="required">standarad is required.</div>                                    
+                      </div>
                       <md-card-header-text>
                         <div class="md-headline" style="color: #488EDF;">Standarad</div>
                       </md-card-header-text>
@@ -39,9 +43,10 @@
                       </p>
                     </md-card-content>
                      <md-card-actions  layout="column" layout-align="center center">
-                      <md-button class="md-raised md-primary">SIGN UP</md-button>
+                      <md-button class="md-raised md-primary" ng-click="showTabDialog()">LognIn</md-button>
                       
                     </md-card-actions>
+                    </form>
                   </md-card>
                 </div>
                 <div flex-xs flex-gt-xs="50" layout="column">
@@ -73,9 +78,7 @@
                       </p>
                     </md-card-content>
                      <md-card-actions  layout="column" layout-align="center center">
-                      <md-button class="md-raised md-primary md-button">SIGN UP</md-button>
-              
-                      
+                      <md-button class="md-raised md-primary md-button" ng-click="showTabDialog()">LognIn</md-button>
                     </md-card-actions>
                   </md-card>
                 </div>
@@ -90,5 +93,26 @@
             <div class="Confusion-txt">We will help you tochoose a plan appropriate foryour bussiness.</div>
             <md-button class="md-primary md-raised">Contact Us</md-button>
         </div>
+
+        <div class="fab-dail">
+			<div class="lock-size" layout="row" layout-align="center center">
+				<md-fab-speed-dial md-direction="up" class="md-fling">
+					<md-fab-trigger>
+						<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+							<md-icon aria-label="Google Hangout"><i class="material-icons">favorite</i></md-icon>
+						</md-button>
+					</md-fab-trigger>
+					<md-fab-actions>
+						<md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+							<md-icon aria-label="Facebook"><i class="material-icons">call</i></md-icon>
+						</md-button>
+						<md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+							<md-icon aria-label="Facebook"><i class="material-icons">chat</i></md-icon>
+						</md-button>
+
+					</md-fab-actions>
+				</md-fab-speed-dial>
+			</div>
+		</div>
     </div>
 </div>
