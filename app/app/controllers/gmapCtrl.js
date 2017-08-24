@@ -67,7 +67,7 @@ $scope.areas = ['Amerpet' ,'SR nagar' ,'Panjagutta' ,'Somajigudda' ,'Imax'];
 });
   
 // shoartlist
-$scope.closeSideViewAll = function() {
+$scope.viewAllCampaginList = function() {
      $mdSidenav('viewAll').toggle();
   };
 
@@ -92,7 +92,10 @@ $scope.closeSideSavedCampaign = function() {
 $scope.saveCampaignDetails = function() {
      $mdSidenav('saveCampaignDetails').toggle();
   };
-
+// create campgin
+$scope.createCampgin = function() {
+     $mdSidenav('createCampgin').toggle();
+  };
 // Thanks Message
 $scope.closeSideThanksSidenav = function() {
      $mdSidenav('thanksCampaign').toggle();
