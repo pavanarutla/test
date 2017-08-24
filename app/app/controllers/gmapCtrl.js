@@ -25,6 +25,13 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
 
   $scope.Recommended = false;
   $scope.Popular = false;
+  $scope.footerhide = true;
+
+$scope.locationpageonly = true;
+
+$scope.dashboardData = false;
+$scope.locationpageonly = true;
+
 
   $scope.filters = function(){
     $scope.filter = !$scope.filter;
