@@ -3,13 +3,14 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('bbManager', [
   'ngRoute',
-   'ngMap',
+  'ngMap',
   'ngMaterial',
   'ngMessages',
   'slickCarousel',
+  'vsGoogleAutocomplete',
   'ui.bootstrap'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
   function($locationProvider, $routeProvider, $mdThemingProvider) {
     
 
@@ -26,20 +27,35 @@ var app = angular.module('bbManager', [
     });
               
     $routeProvider.when('/', {
-      templateUrl: 'views/home.html'
-      // controller: 'bbMngrCtrl'
+      templateUrl: 'views/home.html',
+      controller: 'bbMngrCtrl'
     })
     .when('/formats', {
-      templateUrl: 'views/formats.html'
-      //controller: 'LocationController'
+      templateUrl: 'views/formats.html',
+      controller: 'FormatsCtrl'
+    })
+    .when('/campaign', {
+      templateUrl: 'views/campaign.html',
+      controller: 'CampaignController'
     })
     .when('/pricing', {
-      templateUrl: 'views/pricing.html'
-      //controller: 'LocationController'
+      templateUrl: 'views/pricing.html',
+      controller: 'PricingCtrl'
     })
-    .when('/location',{
-      templateUrl: 'views/map-home.html'
-      
+    .when('/location', {
+      templateUrl: 'views/map-home.html',
+      controller: 'GmapCtrl'
+    })
+    .when('/admin/products', {
+      templateUrl: 'views/admin/products.html',
+      controller: 'ProductsCtrl'
+    })
+    .when('/admin/add-product', {
+      templateUrl: 'views/admin/add-products.html',
+      controller: 'ProductsCtrl'
+    })
+    .when('/userprofile',{
+      templateUrl:'views/user-profile.html'
     })
     .when('/campagin',{
       templateUrl: 'views/campagin.html'
@@ -50,7 +66,7 @@ var app = angular.module('bbManager', [
     .when('/userprofile',{
       templateUrl: 'views/userprofile.html'
     });
-    $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider.otherwise({redirectTo: '/'});
   }
 ]);
 
@@ -65,7 +81,6 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
 app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
     datepickerConfig.startingDay = "Today";
     datepickerConfig.showWeeks = false;
-
     datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
     // datepickerPopupConfig.currentText = "Now";
     // datepickerPopupConfig.clearText = "Erase";

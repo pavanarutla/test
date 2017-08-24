@@ -34,6 +34,13 @@ $scope.savedcampaignDiv = function(){
   $scope.savedcampaign = !$scope.savedcampaign;
 }
 
+  // side favicon functionality
+  this.isOpen = false;
+  this.availableModes = ['md-fling', 'md-scale'];
+  this.selectedMode = 'md-fling';
+  this.selectedDirection = 'up';
+
+
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
   };
@@ -44,7 +51,7 @@ $scope.savedcampaignDiv = function(){
 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/tabDialog.tmpl.html',
+      templateUrl: 'views/sigIn.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })
@@ -80,12 +87,26 @@ $scope.savedcampaignDiv = function(){
       $('.goToTop').fadeOut();
     }
   });
+
+
   $('.goToTop').click(function () {
     $("html, body").animate({ scrollTop: 0 }, 1000);
     return false;
   });
 
   
+//scroll header color change 
+
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 50) {
+      $(".header").addClass("active");
+  } else {
+      //remove the background property so it comes transparent again (defined in your css)
+     $(".header").removeClass("active");
+  }
+});
+
+
   //slider
   $scope.slickConfig2Loaded = true;
 

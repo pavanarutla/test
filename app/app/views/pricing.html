@@ -1,4 +1,4 @@
-<div layout="column" layout-sm="column" layout-xs="column" class="bbsco"  ng-controller="pricingCtrl" style="margin-top:64px;background: #fff;">
+<div layout="column" layout-sm="column" layout-xs="column" class="bbsco" style="margin-top:64px;background: #fff;">
     <div layout="column" layout-align="center center" class="pricing-head">
         <div class="md-display-2 pricing-inner theme-txt">Start your 30-days trail!</div>
         <div>
@@ -12,11 +12,15 @@
                
                 <div flex-xs flex-gt-xs="50" layout="column">
                   <md-card>
+                    <form name="standarad" novalidate="novalidate">
                     <md-card-header>
                       
-                      <md-checkbox class="green">
+                      <md-checkbox class="green" name="standarad" required="required">
                                    
-                                </md-checkbox>
+                      </md-checkbox>
+                      <div ng-messages="standarad.standarad.$error">
+                          <div ng-message="required">standarad is required.</div>                                    
+                      </div>
                       <md-card-header-text>
                         <div class="md-headline" style="color: #488EDF;">Standarad</div>
                       </md-card-header-text>
@@ -39,9 +43,10 @@
                       </p>
                     </md-card-content>
                      <md-card-actions  layout="column" layout-align="center center">
-                      <md-button class="md-raised md-primary">SIGN UP</md-button>
+                      <md-button class="md-raised md-primary" ng-click="showTabDialog()">LognIn</md-button>
                       
                     </md-card-actions>
+                    </form>
                   </md-card>
                 </div>
                 <div flex-xs flex-gt-xs="50" layout="column">
@@ -73,9 +78,7 @@
                       </p>
                     </md-card-content>
                      <md-card-actions  layout="column" layout-align="center center">
-                      <md-button class="md-raised md-primary md-button">SIGN UP</md-button>
-              
-                      
+                      <md-button class="md-raised md-primary md-button" ng-click="showTabDialog()">LognIn</md-button>
                     </md-card-actions>
                   </md-card>
                 </div>
