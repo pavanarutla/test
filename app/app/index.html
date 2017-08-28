@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope"
-  itemtype="http://schema.org/Product" ng-app="bbManager">
+  itemtype="http://schema.org/Product" ng-app="bbManager"  flow-init flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-files-submitted="$flow.upload()">
 
 <head>
   <meta charset="utf-8">
@@ -182,10 +182,13 @@
     <!-- google autocomplete -->
     <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
 
+
     <!-- ////////////
       custom js 
     //////////////-->
     <script type="text/javascript" src="app.js"></script>
+  <!--File Upload JS-->
+   <script type="text/javascript" src="assets/js/ng-flow-standalone.min.js"></script>
 
     <!-- Services -->
     <script type="text/javascript" src="services/MapService.js"></script>
@@ -200,6 +203,7 @@
     <script type="text/javascript" src="controllers/siginCtrl.js"></script>
     <script type="text/javascript" src="controllers/registerCtrl.js"></script>
     <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
+ 
  
 </body>
 

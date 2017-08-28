@@ -9,51 +9,78 @@
                 <div flex-xs flex-gt-xs="100" layout="column">
                     <md-card>
                         <md-card-header>
-                             <md-card-header-text>
-                                <div style="color: #19D872;"><span class="md-title">$</span><span class="md-display-1">20</span><span class="md-body-1">/month</span></div>
+                            <md-card-header-text>
+                                 <!-- <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">  -->
+                                 <div class="thumbnail" ng-hide="$flow.files.length">
+                                   <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">
+                                </div>
+                                <div class="thumbnail" ng-show="$flow.files.length">
+                                    <img flow-img="$flow.files[0]" />
+                                </div>
+                                <div>
+                                    <a href="#" class="btn" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Select image</a>
+                                    <a href="#" class="btn" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Change</a>
+                                    <a href="#" class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()"> Remove</a>
+                                </div> 
                             </md-card-header-text>
                         </md-card-header>
-                        <md-card-content>
-                            <p class="md-body-1 main-text">
-                                There are many variations of passages of Lorem Ipsum available, but the majority
-                            </p>
+                        <md-card-content layout="row" layout-align="center center" align="center">
+                            <h2>James Bond</h2>
+                            <h3>jamesbond@007.com</h3>
+
+                            <div class="md-body-2">
+                                <md-icon><i class="material-icons">call</i></md-icon>
+                                <span>Phone:</span>(+91)9999999999
+                            </div>
+                            <div class="md-body-2">
+                                <md-icon><i class="material-icons">location_on</i></md-icon>
+                                <span>Address:</span>
+                                <span>K67/68, Sonal Heavy Indl Est, Kanchapadaramchandra Lane Extn, Banjara Hills</span>
+                            </div>
+                            <md-divider md-inset></md-divider>
+                            <h1 align="center">Campaign Info</h1>
+                            <div layour="row" class="layout-row flex">
+
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Running</span>
+                                            <span class="md-headline">4</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Closed</span>
+                                            <span class="md-headline">3</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">No. Of Boards</span>
+                                            <span class="md-headline">5</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Invested</span>
+                                            <span class="md-headline">Rs. 3,50,000</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                            </div>
                         </md-card-content>
-                        <img src="assets/images/product/bycle-image.png" class="md-card-image inner-img" alt="Washed Out">
-                        <md-card-content layout="column" layout-align="center center">
-                            <p class="inner-text">
-                                Morbi condimentum nisl eget enim</br>Quisque sit amet nunc eleifend, dignissim </br>Sed sit
-                                amet sapien ut nulla pretium blandit
-                            </p>
-                        </md-card-content>
-                        <md-card-actions layout="column" layout-align="center center">
-                            <md-button class="md-raised md-primary">SIGN UP</md-button>
-                        </md-card-actions>
                     </md-card>
                 </div>
-            </div>
-
-
-        </div>
-
-
-        <div class="fab-dail">
-            <div class="lock-size" layout="row" layout-align="center center">
-                <md-fab-speed-dial md-direction="up" class="md-fling">
-                    <md-fab-trigger>
-                        <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-                            <md-icon aria-label="Google Hangout"><i class="material-icons">favorite</i></md-icon>
-                        </md-button>
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                        <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                            <md-icon aria-label="Facebook"><i class="material-icons">call</i></md-icon>
-                        </md-button>
-                        <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                            <md-icon aria-label="Facebook"><i class="material-icons">chat</i></md-icon>
-                        </md-button>
-
-                    </md-fab-actions>
-                </md-fab-speed-dial>
             </div>
         </div>
     </div>

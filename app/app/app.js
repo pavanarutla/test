@@ -8,7 +8,8 @@ var app = angular.module('bbManager', [
   'ngMessages',
   'slickCarousel',
   'vsGoogleAutocomplete',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'flow'
 ])
 .config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
   function($locationProvider, $routeProvider, $mdThemingProvider) {
@@ -64,11 +65,30 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaginedit.html'
     })
     .when('/campaginprofile',{
-      templateUrl: 'views/campProfile.html'
+      templateUrl: 'views/campProfile.html',
+      controller:'CampaignController'
     }),
     $routeProvider.otherwise({redirectTo: '/home'});
   }
 ]);
+//Image Upload Config
+app.config(['flowFactoryProvider', function (flowFactoryProvider) {
+  flowFactoryProvider.defaults = {
+    target: 'views/upload.php',
+    permanentErrors: [404, 500, 501],
+    maxChunkRetries: 1,
+    chunkRetryInterval: 5000,
+    simultaneousUploads: 4,
+    singleFile: true
+  };
+  flowFactoryProvider.on('catchAll', function (event) {
+    console.log('catchAll', arguments);
+  });
+  // Can be used with different implementations of Flow.js
+  // flowFactoryProvider.factory = fustyFlowFactory;
+}]);
+
+
 
 /* ===================
 Slick Carasoul Config
