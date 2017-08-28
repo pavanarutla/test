@@ -1,13 +1,31 @@
 app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', function($scope, NgMap, $mdSidenav, $mdDialog, MapService ) {
 
-  $scope.address = "Hyderabad, Telangana";
+  $scope.address = {
+    name: 'Hyderabad, Telangana, India',
+    place: '',
+    components: {
+      placeId: '',
+      streetNumber: '', 
+      street: '',
+      city: '',
+      state: '',
+      countryCode: '',
+      country: '',
+      postCode: '',
+      district: '',
+      location: {
+        lat: '',
+        long: ''
+      }
+    }
+  };
   $scope.mapObj;
   var trafficOn = false;
   var trafficLayer = new google.maps.TrafficLayer(); 
   NgMap.getMap().then(function(map) {
     $scope.mapObj = map;
     $scope.processMarkers();
-    $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
+    // $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
     $scope.mapObj.setZoom(17);
   });
 
@@ -442,5 +460,10 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   $scope.savedata = function(){
     // handles the submitted form data from map-filtering.
   }
+
+  $scope.setNewAddress = function(){
+    console.log($scope.address.components.location);
+  }
+
 
 }]);

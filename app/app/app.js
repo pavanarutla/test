@@ -8,11 +8,11 @@ var app = angular.module('bbManager', [
   'ngMessages',
   'slickCarousel',
   'vsGoogleAutocomplete',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngFileUpload'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
-    
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -86,3 +86,8 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
     // datepickerPopupConfig.clearText = "Erase";
     // datepickerPopupConfig.closeText = "Close";
 }]);
+
+app.constant('config', {
+  apiPath : "http://localhost:8001/api",
+  // apiPath : "http://http://104.236.11.252/api"
+});
