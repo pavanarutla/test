@@ -41,6 +41,8 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   $scope.shortlist = false;
   $scope.savedcampaign = false;
 
+  $scope.Recommended = false;
+  $scope.Popular = false;
 
   $scope.filters = function(){
     $scope.filter = !$scope.filter;
@@ -68,6 +70,18 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     $scope.shortlist = false;
     $scope.savedcampaign = !$scope.savedcampaign;
   }
+
+
+  $scope.RecommendedDiv = function(){
+    $scope.Recommended = !$scope.Recommended;
+    $scope.Popular = false;
+  }
+
+  $scope.PopularDiv = function(){
+    $scope.Recommended = false;
+    $scope.Popular = !$scope.Popular;
+  }
+
 
   //slider
   function sliderController($scope) {
