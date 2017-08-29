@@ -386,7 +386,7 @@ app.controller('GmapCtrl',
         _.each(uniq_coords, function (value, key) {
           key = JSON.parse(key);
           var latLng = new google.maps.LatLng(key['lat'], key['lng']);
-          uniq_markers.push(new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: latLng,
             icon: {
               url: config.serverUrl + key["symbol"],
@@ -394,14 +394,18 @@ app.controller('GmapCtrl',
               // origin: new google.maps.Point(0, 0), // origin
               // anchor: new google.maps.Point(20, 30) // anchor
             }
-          }));
+          });
+          uniq_markers.push(marker);
+          google.maps.event.addListener(marker, 'click', function (e) {
+            console.log(key);
+          });
         });
         var mc = {
           gridSize: 50,
           maxZoom: 13,
           imagePath: 'assets/images/maps/m'
         };
-        $scope.markerClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
+        $scope.keyClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
 
         /*
         //// handling spiderifying ////
