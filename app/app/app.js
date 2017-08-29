@@ -88,6 +88,8 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
 }]);
 
 app.constant('config', {
+  // serverUrl : "http://localhost:8001",
+  serverUrl : "http://104.236.11.252",
   // apiPath : "http://localhost:8001/api",
   apiPath : "http://104.236.11.252/api"
 });
