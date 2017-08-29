@@ -59,7 +59,7 @@ app.controller('ProductsCtrl', ['$scope', '$mdDialog', '$rootScope', 'MapService
       }).then(function (resp) {
         console.log('Success. Marker saved. Response: ', resp);
       }, function (resp) {
-        console.log('Error status: ' + resp);
+        console.log('Error status: ', resp);
       }, function (evt) {
         // console.log(evt);
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
