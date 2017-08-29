@@ -1115,7 +1115,6 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       return markers;
     },
     saveMarker: function(){
-      // console.log(markerObj);
       markerObj = {lat: 61.62182, lng: 20.306683};
       var dfd = $q.defer();
       $http.post(config.apiPath + '/marker', markerObj).success(dfd.resolve).error(dfd.reject);
