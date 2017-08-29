@@ -85,7 +85,7 @@
                  vs-post-code="address.components.postCode"
                  vs-district="address.components.district"
                  vs-latitude="address.components.location.lat"
-                 vs-longitude="address.components.location.long"
+                 vs-longitude="address.components.location.lng"
                  type="text" 
                  name="address"
                  aria-label = "google-autocomplete"
@@ -96,7 +96,7 @@
         <!-- pincode,area,tab id section end-->
         <!--slider html start -->
         <div layout="column">
-          <md-slider flex md-discrete ng-model="rating" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
+          <md-slider flex md-discrete ng-model="radius" ng-change="updateCircleRadius(radius)" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
           <div layout="row">
             <div class="rnge">0km</div>
             <div flex></div>
@@ -948,8 +948,8 @@
       </md-input-container>
       <md-input-container class="md-block">
         <label>Add your Organisation URL:</label>
-        <input type="url" name="homepage" required md-no-asterisk  ng-model="project.orgURL">
-        <div ng-messages="suggestMeform.orgname.$error">
+        <input type="url" name="homepage" required md-no-asterisk name="orgURL"  ng-model="project.orgURL" required>
+        <div ng-messages="suggestMeform.orgURL.$error">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
@@ -969,7 +969,7 @@
       </md-input-container>
       <md-input-container class="md-block" aria-placeholder="months">
         <label>Estimated Budget</label>
-        <input md-maxlength="30" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
+        <input type="number" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
         <div ng-messages="suggestMeform.estbudget.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
