@@ -1,11 +1,7 @@
 app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', function($scope, NgMap, $mdSidenav, $mdDialog, MapService ) {
 
   $scope.address = {
-<<<<<<< HEAD
-    name: 'Hyderabad, Telangana',
-=======
     name: 'Hyderabad, Telangana, India',
->>>>>>> fd2b97640fc6a15f55dc7d66e87a37cddd560f57
     place: '',
     components: {
       placeId: '',
@@ -18,13 +14,8 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
       postCode: '',
       district: '',
       location: {
-<<<<<<< HEAD
         lat: 17.3850,
         lng: 78.4867
-=======
-        lat: '',
-        long: ''
->>>>>>> fd2b97640fc6a15f55dc7d66e87a37cddd560f57
       }
     }
   };
@@ -34,11 +25,7 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   NgMap.getMap().then(function(map) {
     $scope.mapObj = map;
     $scope.processMarkers();
-<<<<<<< HEAD
-    //$scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
-=======
     // $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
->>>>>>> fd2b97640fc6a15f55dc7d66e87a37cddd560f57
     $scope.mapObj.setZoom(17);
   });
 
