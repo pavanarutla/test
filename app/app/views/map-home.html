@@ -625,13 +625,12 @@
   <!-- map html start-->
 
   <div layout="column" style="position:relative;height:800px;margin-top:60px;">
-    <ng-map center="{{address}}" zoom="10" style="width:100%;height:100%;">
-      <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
-        <div style="background-color: white; color:#000;cursor:pointer; padding:10px;">Show Traffic</div>
-      </custom-control>
-    </ng-map>
-  </div>
-  <div layout="column" style="top:8%;position:absolute;width:350px;">
+  <ng-map center="{{address.name}}" zoom="10" style="width:100%;height:100%;">
+    <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
+      <div style="background-color: white; color:#000;cursor:pointer; padding:10px;">Show Traffic</div>
+    </custom-control>
+  </ng-map>
+  <div layout="column" style="top:8%;z-index:1;position:absolute;width:350px;">
     <!-- search html start-->
     <div layout="row" layout-padding class="search-filed">
       <md-input-container flex style="padding:0px;">
@@ -698,13 +697,26 @@
         <form>
           <md-input-container class="pstcde" style="width:100%">
             <!-- <label for="testInput">Postcode,Area Name,Tab ID</label> -->
-
-            <input vs-google-autocomplete type="text" id="testInput" ng-model="address" md-autofocus ng-model="address.name" vs-place="address.place"
-              vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street"
-              vs-city="address.components.city" vs-state="address.components.state" vs-country-short="address.components.countryCode"
-              vs-country="address.components.country" vs-post-code="address.components.postCode" vs-district="address.components.district"
-              vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address"
-              aria-label="google-autocomplete">
+            
+            <input vs-google-autocomplete type="text" id="testInput" md-autofocus
+                 ng-model="address.name"
+                 vs-place="address.place" 
+                 vs-place-id="address.components.placeId"
+                 vs-street-number="address.components.streetNumber" 
+                 vs-street="address.components.street"
+                 vs-city="address.components.city"
+                 vs-state="address.components.state"
+                 vs-country-short="address.components.countryCode"
+                 vs-country="address.components.country"
+                 vs-post-code="address.components.postCode"
+                 vs-district="address.components.district"
+                 vs-latitude="address.components.location.lat"
+                 vs-longitude="address.components.location.lng"
+                 type="text" 
+                 name="address"
+                 aria-label = "google-autocomplete"
+                 ng-change="setNewAddress()"
+                 >
           </md-input-container>
         </form>
         <!-- pincode,area,tab id section end-->

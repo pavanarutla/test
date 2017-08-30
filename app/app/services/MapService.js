@@ -1,4 +1,4 @@
-app.factory('MapService', ['$http', '$q', function($http, $q){
+app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
   var markers=[
     {"position":[-32.202924,-64.404945],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/27932.jpg"},
     {"position":[47.867077,17.470493],"onClick":"markerClicked()","photo":"https://mw2.google.com/mw-panoramio/photos/medium/522084.jpg"},
@@ -1115,15 +1115,14 @@ app.factory('MapService', ['$http', '$q', function($http, $q){
       return markers;
     },
     saveMarker: function(){
-      // console.log(markerObj);
       markerObj = {lat: 61.62182, lng: 20.306683};
       var dfd = $q.defer();
-      $http.post('http://localhost:8001/api/marker', markerObj).success(dfd.resolve).error(dfd.reject);
+      $http.post(config.apiPath + '/marker', markerObj).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     getMarkers: function(){
       var dfd = $q.defer();
-      $http.get('http://localhost:8001/api/markers').success(dfd.resolve).error(dfd.reject);
+      $http.get(config.apiPath + '/markers').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     }
   }

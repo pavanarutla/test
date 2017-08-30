@@ -1,7 +1,7 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout,$location) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location) {
 
 
-  $scope.filter = false;
+$scope.filter = false;
 $scope.format = false;
 $scope.shortlist = false;
 $scope.savedcampaign = false;

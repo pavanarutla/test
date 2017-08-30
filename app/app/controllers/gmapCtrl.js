@@ -1,15 +1,50 @@
 app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', function ($scope, NgMap, $mdSidenav, $mdDialog, MapService) {
 
-  $scope.address = "Hyderabad, Telangana";
+  $scope.address = {
+    name: 'Hyderabad, Telangana, India',
+    place: '',
+    components: {
+      placeId: '',
+      streetNumber: '', 
+      street: '',
+      city: '',
+      state: '',
+      countryCode: '',
+      country: '',
+      postCode: '',
+      district: '',
+      location: {
+        lat: 17.3850,
+        lng: 78.4867
+      }
+    }
+  };
   $scope.mapObj;
   var trafficOn = false;
   var trafficLayer = new google.maps.TrafficLayer();
   NgMap.getMap().then(function (map) {
     $scope.mapObj = map;
     $scope.processMarkers();
-    $scope.mapObj.setCenter({ lat: 17.3850, lng: 78.4867 });
-    $scope.mapObj.setZoom(17);
+    // $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
   });
+
+  // range circle
+  $scope.radius = 0;
+  circle = new google.maps.Circle({
+    strokeColor   : '#FF0099',
+    strokeOpacity : 1,
+    strokeWeight  : 2,
+    fillColor     : '#009ee0',
+    fillOpacity   : 0.2
+  });
+  $scope.updateCircleRadius = function(val) {
+    circle.setCenter($scope.address.components.location);
+    circle.setRadius(Number(val));
+    circle.setMap($scope.mapObj);
+  }
+  circleBounds = circle.getBounds();
+            
+  // range end
 
   // clender
   $scope.opened = {
@@ -75,7 +110,7 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     $scope.rating = 0;
     $scope.disabled = 100;
   };
-  // $rootScope.address = 'Hyderabad'; 
+ 
 
   $scope.selectedCountry = { Id: '1', Countryname: 'India' };
   $scope.selectedStates = {};
@@ -259,40 +294,55 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
         .targetEvent(ev)
     );
   };
-  $scope.IndustrySector = [
-    { model: "automotive" },
-    { model: "Consumer Durables" },
-    { model: "Education" },
-    { model: "Entertainment" },
-    { model: "Fashion & lifestyle" },
-    { model: "Banking, Financial services and Insurance " },
-    { model: "Healthcare" },
-    { model: "Hotels & Restaurant" },
-    { model: "Office Supplies" },
-    { model: "Retail" },
-    { model: "Public Services" },
-    { model: "Real Estate & Infrastructure" },
-    { model: "Telecom" },
-    { model: "Travel & Transport" },
-    { model: "Ecommerce " },
-    { model: "Fast-moving consumer goods" },
-    { model: "IT" },
-    { model: "Classifieds" },
-    { model: "Others" }
-
-  ];
-  $scope.CampaignDuration = [
-    { model: "10 Days" },
-    { model: "15 Days" },
-    { model: "20 Days" },
-    { model: "25 Days" },
-    { model: "30 Days" },
-    { model: "2 Months" },
-    { model: "3 Months" },
-    { model: "6 Months" },
-    { model: "1 year" }
-  ];
-  //$scope.agents = [1,2]
+   $scope.IndustrySector = [
+        {model : "Aerospace"},
+        {model : "Agriculture"},
+        {model : "Automotive"},
+        {model : "Banking, Financial services and Insurance"},
+        {model : "Construction, Engineering, Architectural"},
+        {model :"Classifieds"},
+        {model : "Consumer Durables"},
+        {model : "Energy - Oil & Gas"},
+        {model : "Energy - Other"},
+        {model : "Energy – Utilities"},
+        {model : "Entertainment"},
+        {model : "Ecommerce"},
+        {model : "Environment"},
+        {model : "Education"},
+        {model : "Forestry"},
+        {model : "Fast-moving consumer goods"},
+        {model : "Fashion & lifestyle"},
+        {model : "GIS/Mapping/Cadastral"},
+        {model : "Global Development"},
+        {model : "Government – Civil"},
+        {model : "Government - Defense &Intelligence"},
+        {model : "Healthcare"},
+        {model : "Hotels & Restaurant"},
+        {model : "Insurance"},
+        {model : "Logistics"},
+        {model : "Marine / Fishing"},
+        {model : "Media / Communications"},
+        {model : "Office Supplies"},
+        {model : "Public Services"},
+        {model : "Retail"},
+        {model : "Real Estate & Infrastructure"},
+        {model : "Telecom"},
+        {model : "Travel & Transport"},
+        {model : "Others"}
+        
+    ];
+      $scope.CampaignDuration = [
+        {model : "10 Days"},
+        {model : "15 Days"},
+        {model : "20 Days"},
+        {model : "25 Days"},
+        {model : "30 Days"},
+        {model : "2 Months"},
+        {model : "3 Months"},    
+        {model : "6 Months"},
+        {model : "1 year"}
+    ];
+        //$scope.agents = [1,2]
 
   //Suggest Me Dialog 1
   $scope.suggestMeConfirm = function (ev) {
@@ -450,5 +500,13 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   $scope.savedata = function () {
     // handles the submitted form data from map-filtering.
   }
+$scope.setNewAddress = function(){
+    console.log($scope.address.components.location);
+  }  
+
+  $scope.setNewAddress = function(){
+    console.log($scope.address.components.location);
+  }
+
 
 }]);
