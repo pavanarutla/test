@@ -419,10 +419,10 @@
 
   </md-sidenav>
   <!-- map poniter click show the content SideNav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="thanksCampaign" style="width:500px;">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content>
       <div layout="column" class="map-img">
-        <img src="assets/images/product/Mask Group.png" />
+        <img src="{{product.image}}" />
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeSideThanksSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -430,10 +430,10 @@
       </div>
       <div layout="row" layout-margin>
         <div layout="column" layout-align="center start" flex="50">
-          <div>BI-79784</div>
+          <div>{{product.siteNo}}</div>
         </div>
         <div layout="column" layout-align="center end " flex="50">
-          <div><span><md-icon><i class="material-icons">lightbulb_outline</i></md-icon></span><span>40*20</span></div>
+          <div><span><md-icon><i class="material-icons">lightbulb_outline</i></md-icon></span><span>{{product.panelSize}}</span></div>
         </div>
       </div>
       <div layout="row" layout-margin>
@@ -441,7 +441,7 @@
           <div>Location</div>
         </div>
         <div layout="column" layout-align="center end " flex="50" style="text-align:right">
-          <div>Nampally Station Road Cricle on Top Of Shalimar Funiture</div>
+          <div>{{product.address}}</div>
 
         </div>
       </div>
@@ -450,7 +450,7 @@
           <div>Impressions</div>
         </div>
         <div layout="column" layout-align="center end " flex="50">
-          <div>5,87,500</div>
+          <div>{{impressions}}</div>
           <div>Week (Approx.)</div>
         </div>
       </div>
@@ -459,7 +459,7 @@
           <div>Facing</div>
         </div>
         <div layout="column" layout-align="center end" flex="50" style="text-align:right">
-          <div>From Abids Towards Nampally Station-50001</div>
+          <div>{{direction}}</div>
 
         </div>
       </div>
@@ -625,7 +625,7 @@
   <!-- map html start-->
 
   <div layout="column" style="position:relative;height:800px;margin-top:60px;">
-  <ng-map center="{{address.name}}" zoom="10" style="width:100%;height:100%;">
+  <ng-map center="{{address.name}}" zoom="4" max-zoom="15" style="width:100%;height:100%;">
     <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
       <div style="background-color: white; color:#000;cursor:pointer; padding:10px;">Show Traffic</div>
     </custom-control>
