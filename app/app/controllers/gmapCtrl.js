@@ -1,4 +1,4 @@
-app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', function($scope, NgMap, $mdSidenav, $mdDialog, MapService ) {
+app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', function ($scope, NgMap, $mdSidenav, $mdDialog, MapService) {
 
   $scope.address = {
     name: 'Hyderabad, Telangana, India',
@@ -21,12 +21,11 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   };
   $scope.mapObj;
   var trafficOn = false;
-  var trafficLayer = new google.maps.TrafficLayer(); 
-  NgMap.getMap().then(function(map) {
+  var trafficLayer = new google.maps.TrafficLayer();
+  NgMap.getMap().then(function (map) {
     $scope.mapObj = map;
     $scope.processMarkers();
     // $scope.mapObj.setCenter({lat: 17.3850, lng: 78.4867});
-    $scope.mapObj.setZoom(17);
   });
 
   // range circle
@@ -62,27 +61,27 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   $scope.Recommended = false;
   $scope.Popular = false;
 
-  $scope.filters = function(){
+  $scope.filters = function () {
     $scope.filter = !$scope.filter;
     $scope.format = false;
     $scope.shortlist = false;
     $scope.savedcampaign = false;
   }
-  $scope.formats = function(){
-    $scope.filter= false;
-    $scope.format= !$scope.format;
+  $scope.formats = function () {
+    $scope.filter = false;
+    $scope.format = !$scope.format;
     $scope.shortlist = false;
-    $scope.savedcampaign = false;  
+    $scope.savedcampaign = false;
   }
 
-  $scope.shortlistDiv = function(){
+  $scope.shortlistDiv = function () {
     $scope.filter = false;
     $scope.format = false;
     $scope.shortlist = !$scope.shortlist;
-    $scope.savedcampaign = false; 
+    $scope.savedcampaign = false;
   }
 
-  $scope.savedcampaignDiv = function(){
+  $scope.savedcampaignDiv = function () {
     $scope.filter = false;
     $scope.format = false;
     $scope.shortlist = false;
@@ -90,12 +89,12 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   }
 
 
-  $scope.RecommendedDiv = function(){
+  $scope.RecommendedDiv = function () {
     $scope.Recommended = !$scope.Recommended;
     $scope.Popular = false;
   }
 
-  $scope.PopularDiv = function(){
+  $scope.PopularDiv = function () {
     $scope.Recommended = false;
     $scope.Popular = !$scope.Popular;
   }
@@ -114,9 +113,9 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
  
 
   $scope.selectedCountry = { Id: '1', Countryname: 'India' };
-  $scope.selectedStates={};
-  $scope.selectedcitys={};
-  $scope.selectedareas={};
+  $scope.selectedStates = {};
+  $scope.selectedcitys = {};
+  $scope.selectedareas = {};
   $scope.allcountries = [];
   $scope.states = [];
   $scope.citys = [];
@@ -131,7 +130,7 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     { Id: '5', Countryname: 'Germany' },
     { Id: '6', Countryname: 'NewYork' }
   ];
- 
+
   // select state
   var states = [
     { Id: '1', statename: 'Telangana', countriesId: 1 },
@@ -154,12 +153,12 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
 
   // city selection
   var citys = [
-    { Id: '1', cityname: 'Hyderabad ',statesId:1 },
-    { Id: '2', cityname: 'Bengaluru',statesId:2 },
-    { Id: '3', cityname: 'Mumbai',statesId:3 },
-    { Id: '4', cityname: 'Thiruvananthapuram',statesId:4 },
-    { Id: '5', cityname: 'Bhubaneswar',statesId:5 },
-    { Id: '6', cityname: 'Chennai',statesId:6 }
+    { Id: '1', cityname: 'Hyderabad ', statesId: 1 },
+    { Id: '2', cityname: 'Bengaluru', statesId: 2 },
+    { Id: '3', cityname: 'Mumbai', statesId: 3 },
+    { Id: '4', cityname: 'Thiruvananthapuram', statesId: 4 },
+    { Id: '5', cityname: 'Bhubaneswar', statesId: 5 },
+    { Id: '6', cityname: 'Chennai', statesId: 6 }
   ];
   $scope.searchTerm;
   $scope.clearSearchTerm = function () {
@@ -171,15 +170,20 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   // $element.find('input').on('keydown', function (ev) {
   //   ev.stopPropagation();
   // });
-  
+
+  // shoartlist
+  $scope.viewAllCampaginList = function () {
+    $mdSidenav('viewAll').toggle();
+  }
+
   // areas
   var areas = [
-    { Id: '1', areaname: 'Amerpet',citysId: 1 },
-    { Id: '2', areaname: 'SR nagar',citysId: 2 },
-    { Id: '3', areaname: 'Panjagutta',citysId: 3 },
-    { Id: '4', areaname: 'Somajigudda',citysId: 4 },
-    { Id: '5', areaname: 'Imax',citysId: 5 },
-    { Id: '6', areaname: 'Imax',citysId: 6 }
+    { Id: '1', areaname: 'Amerpet', citysId: 1 },
+    { Id: '2', areaname: 'SR nagar', citysId: 2 },
+    { Id: '3', areaname: 'Panjagutta', citysId: 3 },
+    { Id: '4', areaname: 'Somajigudda', citysId: 4 },
+    { Id: '5', areaname: 'Imax', citysId: 5 },
+    { Id: '6', areaname: 'Imax', citysId: 6 }
   ];
   $scope.searchTerm;
   $scope.clearSearchTerm = function () {
@@ -201,90 +205,93 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
   // };
 
   $scope.allcountries = countries;
-  $scope.setCountry = function(){
+  $scope.setCountry = function () {
     $scope.states = states.filter(function (st) {
       return st.countriesId == parseInt($scope.selectedCountry);
     });
   }
 
-  $scope.setStates = function(){
+  $scope.setStates = function () {
     $scope.citys = citys.filter(function (citi) {
       return citi.statesId == parseInt($scope.selectedStates);
     });
   }
-  $scope.setcitys = function(){
+  $scope.setcitys = function () {
     $scope.areas = areas.filter(function (ar) {
       return ar.citysId == parseInt($scope.selectedcitys);
     });
   }
-  
-  // shortlist
-  $scope.closeSideViewAll = function() {
-    $mdSidenav('viewAll').toggle();
-  };
 
   //saved campaign
-  $scope.closeSideSavedCampaign = function() {
-      $mdSidenav('savedCampaign').toggle();
+  $scope.closeSideSavedCampaign = function () {
+    $mdSidenav('savedCampaign').toggle();
   };
 
   // saved view all side nav
-  $scope.closeSideViewAll = function() {
-      $mdSidenav('savedViewAll').toggle();
+  $scope.closeSideViewAll = function () {
+    $mdSidenav('savedViewAll').toggle();
   };
 
   // edit list saved campgin
-  $scope.closeSideEditList = function() {
-      $mdSidenav('savedEdit').toggle();
+  $scope.closeSideEditList = function () {
+    $mdSidenav('savedEdit').toggle();
   };
 
   // saved campgin
-  $scope.closeSideSavedCampaign = function() {
-      $mdSidenav('savedSavedCampaign').toggle();
+  $scope.closeSideSavedCampaign = function () {
+    $mdSidenav('savedSavedCampaign').toggle();
   };
 
   // Save Campgin Details
-  $scope.saveCampaignDetails = function() {
+  $scope.saveCampaignDetails = function () {
     $mdSidenav('saveCampaignDetails').toggle();
   };
+  // create campgin
+  $scope.createCampgin = function () {
+    $mdSidenav('createCampgin').toggle();
+  };
+  // Thanks Message
+  $scope.closeSideThanksSidenav = function () {
+    $mdSidenav('thanksCampaign').toggle();
+  }
 
   // Thanks Message
   $scope.closeSideThanksSidenav = function() {
     $mdSidenav('thanksCampaign').toggle();
   };
   // Share Message
-  $scope.shareSidenav = function() {
+  $scope.shareSidenav = function () {
     $mdSidenav('shareCampaign').toggle();
   };
   // Suggest Me dialog 
-  $scope.suggestMe = function() {
+  $scope.suggestMe = function () {
     $mdSidenav('suggestMe').toggle();
   };
 
   //Confirm Dialog
-  $scope.showAlert = function(ev) {
+  $scope.showAlert = function (ev) {
     $mdDialog.show(
       $mdDialog.alert()
-      .parent(angular.element(document.querySelector('body')))
-      .clickOutsideToClose(true)
-      .title('Your Campaign is successfully shared!!!!')
-      .textContent('You can specify some description text in here.')
-      .ariaLabel('Alert Dialog Demo')
-      .ok('Got it!')
-      .targetEvent(ev)
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Your Campaign is successfully shared!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
     );
   };
   //Confirm Dialog 1
-  $scope.showConfirmation = function(ev) {
+  $scope.showConfirmation = function (ev) {
     $mdDialog.show(
       $mdDialog.alert()
-      .parent(angular.element(document.querySelector('body')))
-      .clickOutsideToClose(true)
-      .title('Your Campaign is successfully Saved!!!!')
-      .textContent('You can specify some description text in here.')
-      .ariaLabel('Alert Dialog Demo')
-      .ok('Got it!')
-      .targetEvent(ev)
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Your Campaign is successfully Saved!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
     );
   };
    $scope.IndustrySector = [
@@ -338,43 +345,43 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
         //$scope.agents = [1,2]
 
   //Suggest Me Dialog 1
-  $scope.suggestMeConfirm = function(ev) {
+  $scope.suggestMeConfirm = function (ev) {
     $mdDialog.show(
       $mdDialog.alert()
-      .parent(angular.element(document.querySelector('body')))
-      .clickOutsideToClose(true)
-      .title('We will get back to you!!!!')
-      .textContent('You can specify some description text in here.')
-      .ariaLabel('Alert Dialog Demo')
-      .ok('Got it!')
-      .targetEvent(ev)
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('We will get back to you!!!!')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent(ev)
     );
   };
 
-  $scope.processMarkers = function(){
+  $scope.processMarkers = function () {
     var counts = {};
     var uniq_markers = [];
-    _.each(MapService.markers(), function(v, i) {
+    _.each(MapService.markers(), function (v, i) {
       if (counts[v.position]) {
         counts[v.position]++;
       } else {
         counts[v.position] = 1;
       }
     });
-    var uniq_coords = _.pick(counts, function(value, key){
+    var uniq_coords = _.pick(counts, function (value, key) {
       return value == 1;
     });
-    var repeated_coords = _.pick(counts, function(value, key){
+    var repeated_coords = _.pick(counts, function (value, key) {
       return value > 1;
     });
 
     /* 
     //// handling clustering ////
     */
-    _.each(uniq_coords, function(value, key){
+    _.each(uniq_coords, function (value, key) {
       var ll = key.split(',');
       var latLng = new google.maps.LatLng(parseFloat(ll[0]), parseFloat(ll[1]));
-      uniq_markers.push(new google.maps.Marker({position:latLng}));
+      uniq_markers.push(new google.maps.Marker({ position: latLng }));
     });
     var mc = {
       gridSize: 50,
@@ -388,48 +395,48 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     */
 
     var iw = new google.maps.InfoWindow();
-    var circleMarker = new google.maps.Marker({ 
+    var circleMarker = new google.maps.Marker({
       icon: {
         url: 'assets/images/maps/Ellipse 55.png',
-        scaledSize : new google.maps.Size(55, 55),
+        scaledSize: new google.maps.Size(55, 55),
         origin: new google.maps.Point(0, 0), // origin
         anchor: new google.maps.Point(27.8, 29.5) // anchor
-      }, 
+      },
     });
-    var oms = new OverlappingMarkerSpiderfier($scope.mapObj, { 
-      markersWontMove: true, 
+    var oms = new OverlappingMarkerSpiderfier($scope.mapObj, {
+      markersWontMove: true,
       markersWontHide: true,
       basicFormatEvents: true,
       circleSpiralSwitchover: Infinity,
-      legWeight : 0,
+      legWeight: 0,
       circleFootSeparation: 32,
-      nearbyDistance : 1,
-      keepSpiderfied : true
+      nearbyDistance: 1,
+      keepSpiderfied: true
     });
-    
-    _.each(repeated_coords, function(value, key){
-      for(var i = 0; i < value; i++){
-        (function() {  // make a closure over the marker and marker data
+
+    _.each(repeated_coords, function (value, key) {
+      for (var i = 0; i < value; i++) {
+        (function () {  // make a closure over the marker and marker data
           var label = {};
           label.text = " ";
           label.color = "rgba(255, 255, 255, 1)";
-          if(i == 0){
+          if (i == 0) {
             label.text = value.toString();
           }
           var ll = key.split(',');
           var icon = {
             url: 'assets/images/maps/unspidered-cluster.png',
-            scaledSize : new google.maps.Size(20, 20),
-            origin: new google.maps.Point(0,0), // origin
+            scaledSize: new google.maps.Size(20, 20),
+            origin: new google.maps.Point(0, 0), // origin
             anchor: new google.maps.Point(10, 10) // anchor
           };
-          var marker = new google.maps.Marker({ 
-            position: {lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) }, 
-            icon: icon, 
+          var marker = new google.maps.Marker({
+            position: { lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) },
+            icon: icon,
             label: label
           });
           marker.groupSize = value;
-          google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
+          google.maps.event.addListener(marker, 'spider_click', function (e) {  // 'spider_click', not plain 'click'
             iw.setContent("dummy text");
             iw.open($scope.mapObj, marker);
           });
@@ -439,17 +446,17 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     });
 
     // instantiate oms when click occurs on marker-group
-    oms.addListener('format', function(marker, status) {
+    oms.addListener('format', function (marker, status) {
       var markerIcon;
       var label = marker.getLabel();
-      var scaledCoord = 32 + (10 * (marker.groupSize-1));
+      var scaledCoord = 32 + (10 * (marker.groupSize - 1));
       var circleMarkerIcon = {
-        url : 'assets/images/maps/Ellipse 55.png',
-        scaledSize : new google.maps.Size(scaledCoord, scaledCoord),
-        origin : new google.maps.Point(0, 0), // origin
-        anchor : new google.maps.Point(scaledCoord/2, scaledCoord/2),
+        url: 'assets/images/maps/Ellipse 55.png',
+        scaledSize: new google.maps.Size(scaledCoord, scaledCoord),
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(scaledCoord / 2, scaledCoord / 2),
       };
-      if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
+      if (status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED) {
         // when markers are scattered
         label.color = "rgba(255, 255, 255, 0)";
         marker.setLabel(label);
@@ -458,17 +465,17 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
         circleMarker.setMap($scope.mapObj);
         markerIcon = {
           url: 'assets/images/maps/spidered-marker.png',
-          scaledSize : new google.maps.Size(36, 36),
-          origin: new google.maps.Point(0,0), // origin
+          scaledSize: new google.maps.Size(36, 36),
+          origin: new google.maps.Point(0, 0), // origin
           anchor: new google.maps.Point(18, 18) // anchor
         };
       }
-      else{
+      else {
         // when markers are grouped as one
         markerIcon = {
           url: 'assets/images/maps/unspidered-cluster.png',
-          scaledSize : new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0,0), // origin
+          scaledSize: new google.maps.Size(20, 20),
+          origin: new google.maps.Point(0, 0), // origin
           anchor: new google.maps.Point(10, 10) // anchor
         };
         label.color = "rgba(255, 255, 255, 1)";
@@ -481,16 +488,16 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     });
   }
 
-  $scope.toggleTraffic = function(){
+  $scope.toggleTraffic = function () {
     trafficOn = !trafficOn;
     var mapVal = null;
-    if(trafficOn){
+    if (trafficOn) {
       mapVal = $scope.mapObj;
     }
     trafficLayer.setMap(mapVal);
   }
 
-  $scope.savedata = function(){
+  $scope.savedata = function () {
     // handles the submitted form data from map-filtering.
   }
 $scope.setNewAddress = function(){
