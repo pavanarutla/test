@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, MapService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService','LocationService', 'config',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, MapService,LocationService, config) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -26,6 +26,13 @@ app.controller('GmapCtrl',
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
       });
+      $scope.countries=[];
+      $scope.states=[];
+      $scope.cities=[];
+      LocationService.getCountries().then(function (countries) {
+        $scope.countries = countries;
+      });
+      
       var trafficOn = false;
       var trafficLayer = new google.maps.TrafficLayer();
       NgMap.getMap().then(function (map) {
@@ -125,101 +132,32 @@ app.controller('GmapCtrl',
       $scope.states = [];
       $scope.citys = [];
       $scope.areas = [];
-
-      //select country
-      var countries = [
-        { Id: '1', Countryname: 'India' },
-        { Id: '2', Countryname: 'USA' },
-        { Id: '3', Countryname: 'Australia' },
-        { Id: '4', Countryname: 'Brazil' },
-        { Id: '5', Countryname: 'Germany' },
-        { Id: '6', Countryname: 'NewYork' }
-      ];
-
-      // select state
-      var states = [
-        { Id: '1', statename: 'Telangana', countriesId: 1 },
-        { Id: '2', statename: 'Karnataka', countriesId: 1 },
-        { Id: '3', statename: 'Maharashtra', countriesId: 1 },
-        { Id: '4', statename: 'Kerala', countriesId: 1 },
-        { Id: '5', statename: 'Odisha', countriesId: 1 },
-        { Id: '6', statename: 'Tamil Nadu', countriesId: 1 }
-      ]
+      
       $scope.searchTerm;
       $scope.clearSearchTerm = function () {
         $scope.searchTerm = '';
       };
-
-      // The md-select directive eats keydown events for some quick select
-      // logic. Since we have a search input here, we don't need that logic.
-      // $element.find('input').on('keydown', function (ev) {
-      //   ev.stopPropagation();
-      // });
-
-      // city selection
-      var citys = [
-        { Id: '1', cityname: 'Hyderabad ', statesId: 1 },
-        { Id: '2', cityname: 'Bengaluru', statesId: 2 },
-        { Id: '3', cityname: 'Mumbai', statesId: 3 },
-        { Id: '4', cityname: 'Thiruvananthapuram', statesId: 4 },
-        { Id: '5', cityname: 'Bhubaneswar', statesId: 5 },
-        { Id: '6', cityname: 'Chennai', statesId: 6 }
-      ];
-      $scope.searchTerm;
-      $scope.clearSearchTerm = function () {
-        $scope.searchTerm = '';
-      };
-
-      // The md-select directive eats keydown events for some quick select
-      // logic. Since we have a search input here, we don't need that logic.
-      // $element.find('input').on('keydown', function (ev) {
-      //   ev.stopPropagation();
-      // });
-
-      // areas
-      var areas = [
-        { Id: '1', areaname: 'Amerpet', citysId: 1 },
-        { Id: '2', areaname: 'SR nagar', citysId: 2 },
-        { Id: '3', areaname: 'Panjagutta', citysId: 3 },
-        { Id: '4', areaname: 'Somajigudda', citysId: 4 },
-        { Id: '5', areaname: 'Imax', citysId: 5 },
-        { Id: '6', areaname: 'Imax', citysId: 6 }
-      ];
-      $scope.searchTerm;
-      $scope.clearSearchTerm = function () {
-        $scope.searchTerm = '';
-      };
-
-      // The md-select directive eats keydown events for some quick select
-      // logic. Since we have a search input here, we don't need that logic.
-      // $element.find('input').on('keydown', function (ev) {
-      //   ev.stopPropagation();
-      // });
-
-
-      // $scope.Submit = function (data) {
-      //   $scope.data = data;
-      //   console.log("posting data....");
-      //   formData = $scope.form;
-      //   console.log(formData);
-      // };
-
-      $scope.allcountries = countries;
       $scope.setCountry = function () {
-        $scope.states = states.filter(function (st) {
-          return st.countriesId == parseInt($scope.selectedCountry);
+        // console.log($scope.selectedCountry);
+        LocationService.getStates($scope.selectedCountry).then(function (states) {
+          $scope.states = states;
+          console.log($scope.states,"state");
         });
       }
 
       $scope.setStates = function () {
-        $scope.citys = citys.filter(function (citi) {
-          return citi.statesId == parseInt($scope.selectedStates);
+        LocationService.getCities($scope.selectedStates).then(function (cities) {
+          $scope.cities = cities;
+          console.log($scope.cities,"city");
         });
       }
+      
       $scope.setCities = function () {
-        $scope.areas = areas.filter(function (ar) {
-          return ar.citysId == parseInt($scope.selectedcitys);
-        });
+        console.log("selected cities:", $scope.selectedcitys);
+        LocationService.getareas($scope.selectedcitys).then(function (areas) {
+          $scope.areas = areas;
+          console.log($scope.areas,"area");
+        });      
       }
 
       // shortlist
@@ -379,8 +317,8 @@ app.controller('GmapCtrl',
         var repeated_coords = _.pick(counts, function (value, key) {
           return value > 1;
         });
-        console.log(uniq_coords);
-        console.log("repeated", repeated_coords);
+        // console.log(uniq_coords);
+        // console.log("repeated", repeated_coords);
         /* 
         //// handling clustering ////
         */
