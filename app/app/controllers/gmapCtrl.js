@@ -25,6 +25,12 @@ app.controller('GmapCtrl',
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
       });
+      $scope.applyFilters = function(){
+        MapService.getMarkers({area : $scope.selectedareas, type : ""}).then(function(filteredMarkers){
+          $scope.filteredMarkers = filteredMarkers;
+          $scope.processMarkers();
+        });  
+      }
       var trafficOn = false;
       var trafficLayer = new google.maps.TrafficLayer();
       NgMap.getMap().then(function (map) {
@@ -398,6 +404,7 @@ app.controller('GmapCtrl',
           uniq_markers.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             console.log(key);
+             //$mdSidenav('suggestMe').toggle();
           });
         });
         var mc = {
