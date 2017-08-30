@@ -65,28 +65,34 @@ app.controller('GmapCtrl',
 
       $scope.Recommended = false;
       $scope.Popular = false;
+      $scope.footerhide = true;
+      
+      $scope.locationpageonly = true;
 
-      $scope.filters = function () {
+      $scope.dashboardData = false;
+      $scope.locationpageonly = true;
+      
+      $scope.filters = function(){
         $scope.filter = !$scope.filter;
         $scope.format = false;
         $scope.shortlist = false;
         $scope.savedcampaign = false;
       }
-      $scope.formats = function () {
-        $scope.filter = false;
-        $scope.format = !$scope.format;
+      $scope.formats = function(){
+        $scope.filter= false;
+        $scope.format= !$scope.format;
         $scope.shortlist = false;
-        $scope.savedcampaign = false;
+        $scope.savedcampaign = false;  
       }
 
-      $scope.shortlistDiv = function () {
+      $scope.shortlistDiv = function(){
         $scope.filter = false;
         $scope.format = false;
         $scope.shortlist = !$scope.shortlist;
-        $scope.savedcampaign = false;
+        $scope.savedcampaign = false; 
       }
 
-      $scope.savedcampaignDiv = function () {
+      $scope.savedcampaignDiv = function(){
         $scope.filter = false;
         $scope.format = false;
         $scope.shortlist = false;
@@ -94,12 +100,12 @@ app.controller('GmapCtrl',
       }
 
 
-      $scope.RecommendedDiv = function () {
+      $scope.RecommendedDiv = function(){
         $scope.Recommended = !$scope.Recommended;
         $scope.Popular = false;
       }
 
-      $scope.PopularDiv = function () {
+      $scope.PopularDiv = function(){
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
@@ -115,12 +121,12 @@ app.controller('GmapCtrl',
         $scope.rating = 0;
         $scope.disabled = 100;
       };
-
+      // $rootScope.address = 'Hyderabad'; 
 
       $scope.selectedCountry = { Id: '1', Countryname: 'India' };
-      $scope.selectedStates = {};
-      $scope.selectedcitys = {};
-      $scope.selectedareas = {};
+      $scope.selectedStates={};
+      $scope.selectedcitys={};
+      $scope.selectedareas={};
       $scope.allcountries = [];
       $scope.states = [];
       $scope.citys = [];
@@ -135,7 +141,7 @@ app.controller('GmapCtrl',
         { Id: '5', Countryname: 'Germany' },
         { Id: '6', Countryname: 'NewYork' }
       ];
-
+    
       // select state
       var states = [
         { Id: '1', statename: 'Telangana', countriesId: 1 },
@@ -158,12 +164,12 @@ app.controller('GmapCtrl',
 
       // city selection
       var citys = [
-        { Id: '1', cityname: 'Hyderabad ', statesId: 1 },
-        { Id: '2', cityname: 'Bengaluru', statesId: 2 },
-        { Id: '3', cityname: 'Mumbai', statesId: 3 },
-        { Id: '4', cityname: 'Thiruvananthapuram', statesId: 4 },
-        { Id: '5', cityname: 'Bhubaneswar', statesId: 5 },
-        { Id: '6', cityname: 'Chennai', statesId: 6 }
+        { Id: '1', cityname: 'Hyderabad ',statesId:1 },
+        { Id: '2', cityname: 'Bengaluru',statesId:2 },
+        { Id: '3', cityname: 'Mumbai',statesId:3 },
+        { Id: '4', cityname: 'Thiruvananthapuram',statesId:4 },
+        { Id: '5', cityname: 'Bhubaneswar',statesId:5 },
+        { Id: '6', cityname: 'Chennai',statesId:6 }
       ];
       $scope.searchTerm;
       $scope.clearSearchTerm = function () {
@@ -175,15 +181,15 @@ app.controller('GmapCtrl',
       // $element.find('input').on('keydown', function (ev) {
       //   ev.stopPropagation();
       // });
-
+      
       // areas
       var areas = [
-        { Id: '1', areaname: 'Amerpet', citysId: 1 },
-        { Id: '2', areaname: 'SR nagar', citysId: 2 },
-        { Id: '3', areaname: 'Panjagutta', citysId: 3 },
-        { Id: '4', areaname: 'Somajigudda', citysId: 4 },
-        { Id: '5', areaname: 'Imax', citysId: 5 },
-        { Id: '6', areaname: 'Imax', citysId: 6 }
+        { Id: '1', areaname: 'Amerpet',citysId: 1 },
+        { Id: '2', areaname: 'SR nagar',citysId: 2 },
+        { Id: '3', areaname: 'Panjagutta',citysId: 3 },
+        { Id: '4', areaname: 'Somajigudda',citysId: 4 },
+        { Id: '5', areaname: 'Imax',citysId: 5 },
+        { Id: '6', areaname: 'Imax',citysId: 6 }
       ];
       $scope.searchTerm;
       $scope.clearSearchTerm = function () {
@@ -205,90 +211,90 @@ app.controller('GmapCtrl',
       // };
 
       $scope.allcountries = countries;
-      $scope.setCountry = function () {
+      $scope.setCountry = function(){
         $scope.states = states.filter(function (st) {
           return st.countriesId == parseInt($scope.selectedCountry);
         });
       }
 
-      $scope.setStates = function () {
+      $scope.setStates = function(){
         $scope.citys = citys.filter(function (citi) {
           return citi.statesId == parseInt($scope.selectedStates);
         });
       }
-      $scope.setCities = function () {
+      $scope.setcitys = function(){
         $scope.areas = areas.filter(function (ar) {
           return ar.citysId == parseInt($scope.selectedcitys);
         });
       }
-
+      
       // shortlist
-      $scope.closeSideViewAll = function () {
+      $scope.closeSideViewAll = function() {
         $mdSidenav('viewAll').toggle();
       };
 
       //saved campaign
-      $scope.closeSideSavedCampaign = function () {
-        $mdSidenav('savedCampaign').toggle();
+      $scope.closeSideSavedCampaign = function() {
+          $mdSidenav('savedCampaign').toggle();
       };
 
       // saved view all side nav
-      $scope.closeSideViewAll = function () {
-        $mdSidenav('savedViewAll').toggle();
+      $scope.closeSideViewAll = function() {
+          $mdSidenav('savedViewAll').toggle();
       };
 
       // edit list saved campgin
-      $scope.closeSideEditList = function () {
-        $mdSidenav('savedEdit').toggle();
+      $scope.closeSideEditList = function() {
+          $mdSidenav('savedEdit').toggle();
       };
 
       // saved campgin
-      $scope.closeSideSavedCampaign = function () {
-        $mdSidenav('savedSavedCampaign').toggle();
+      $scope.closeSideSavedCampaign = function() {
+          $mdSidenav('savedSavedCampaign').toggle();
       };
 
       // Save Campgin Details
-      $scope.saveCampaignDetails = function () {
+      $scope.saveCampaignDetails = function() {
         $mdSidenav('saveCampaignDetails').toggle();
       };
 
       // Thanks Message
-      $scope.closeSideThanksSidenav = function () {
+      $scope.closeSideThanksSidenav = function() {
         $mdSidenav('thanksCampaign').toggle();
       };
       // Share Message
-      $scope.shareSidenav = function () {
+      $scope.shareSidenav = function() {
         $mdSidenav('shareCampaign').toggle();
       };
       // Suggest Me dialog 
-      $scope.suggestMe = function () {
+      $scope.suggestMe = function() {
         $mdSidenav('suggestMe').toggle();
       };
 
       //Confirm Dialog
-      $scope.showAlert = function (ev) {
+      $scope.showAlert = function(ev) {
         $mdDialog.show(
           $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('Your Campaign is successfully shared!!!!')
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Your Campaign is successfully shared!!!!')
+          .textContent('You can specify some description text in here.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
         );
       };
       //Confirm Dialog 1
-      $scope.showConfirmation = function (ev) {
+      $scope.showConfirmation = function(ev) {
         $mdDialog.show(
           $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('Your Campaign is successfully Saved!!!!')
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Your Campaign is successfully Saved!!!!')
+          .textContent('You can specify some description text in here.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
         );
       };
       $scope.IndustrySector = [

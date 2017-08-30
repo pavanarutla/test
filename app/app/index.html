@@ -30,17 +30,18 @@
       </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
       <md-menu-bar>
-          <md-button aria-label="whyoutdoor"  ng-click="whatwedo()" >what we do</md-button>
-          <md-button aria-label="formats" ng-click="formate()">formats</md-button>
-          <md-button aria-label="locations" ng-click="whyOutdoor()">why outdoor</md-button>
-          <md-button aria-label="about" ng-click="contactus()">contact</md-button>
-          <md-button aria-label="pricing" href="#/pricing">pricing</md-button>
+          <md-button aria-label="whyoutdoor"  ng-click="whatwedo()" ng-if="!footerhide">what we do</md-button>
+          <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide">formats</md-button>
+          <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide">why outdoor</md-button>
+          <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide">contact</md-button>
+          <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
+
         <!--notification button -->
-        <!-- <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="browabillboard">
           <md-icon><i class="material-icons">notifications</i></md-icon>
-        </md-button> -->
+        </md-button>
         <!-- profile button start-->
-        <!-- <md-menu>
+        <md-menu ng-show="browabillboard">
           <md-button aria-label="userimage" class="md-fab md-mini md-avatar "ng-click="$mdOpenMenu($event)" >
             <img ng-src="assets/images/product/person.png" class=" ">
           </md-button>
@@ -55,19 +56,26 @@
               <md-button>Account</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button>Sign Out</md-button>
+              <md-button ng-click="logOut()"
+              >Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
-        </md-menu> -->
+        </md-menu>
         <!-- profile button end-->
         <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
                     BOOK NOW
         </md-button> -->
         
 
-        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
+        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
             BOOK NOW
         </md-button>
+        <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="#/location">
+          Browse BillBoards</a>
+      </md-button>
+      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard" >
+        suggestItems
+    </md-button>
 
       </md-menu-bar>
     </div>
@@ -116,8 +124,8 @@
     <div ng-view ng-cloak></div>
 
     <!-- Footer Section-->
-    <footer>
-      <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020">
+    <footer >
+      <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
         <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
           <md-button class="md-icon-button fabicon" aria-label="facebook">
             <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
