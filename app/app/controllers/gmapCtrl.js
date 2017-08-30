@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
       $scope.mapObj;
+      $scope.product = {};
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
       });
@@ -215,7 +216,7 @@ app.controller('GmapCtrl',
           return citi.statesId == parseInt($scope.selectedStates);
         });
       }
-      $scope.setcitys = function () {
+      $scope.setCities = function () {
         $scope.areas = areas.filter(function (ar) {
           return ar.citysId == parseInt($scope.selectedcitys);
         });
@@ -397,7 +398,14 @@ app.controller('GmapCtrl',
           });
           uniq_markers.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
-            console.log(key);
+            $scope.product.image = config.serverUrl + key['image'];
+            $scope.product.siteNo = key['siteNo'];
+            $scope.product.panelSize = key['panelSize'];
+            $scope.product.address = key['address'];
+            $scope.product.impressions = key['impressions'];
+            $scope.product.direction = key['direction'];
+            $scope.product.availableDates = key['availableDates'];
+            $mdSidenav('productDetails').toggle();
           });
         });
         var mc = {
