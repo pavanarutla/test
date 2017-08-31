@@ -43,13 +43,13 @@ var app = angular.module('bbManager', [
       controller: 'PricingCtrl'
     })
     .when('/location', {
-      resolve:{
-          "check": function($location,$rootScope){
-             if(!$rootScope.logiIn){
-              $location.path('/')
-            }
-           }
-           },
+      // resolve:{
+      //   "check": function($location,$rootScope){
+      //     if(!$rootScope.logiIn){
+      //       $location.path('/')
+      //     }
+      //   }
+      // },
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
@@ -94,6 +94,7 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
     // datepickerPopupConfig.clearText = "Erase";
     // datepickerPopupConfig.closeText = "Close";
 }]);
+
 app.run( ['$rootScope', '$location', '$http', function($rootScope, $location, $http) {
   
   $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
