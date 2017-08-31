@@ -315,35 +315,23 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
-        if($scope.selectedProduct == marker){
-          $scope.selectedProduct = null;
-          selectorMarker.setMap(null);
-        }
-        else{
-          $scope.selectedProduct = marker;
-          selectorMarker.setPosition(marker.position);
-          selectorMarker.setMap($scope.mapObj);
-          $scope.product.image = config.serverUrl + marker.properties['image'];
-          $scope.product.siteNo = marker.properties['siteNo'];
-          $scope.product.panelSize = marker.properties['panelSize'];
-          $scope.product.address = marker.properties['address'];
-          $scope.product.impressions = marker.properties['impressions'];
-          $scope.product.direction = marker.properties['direction'];
-          $scope.product.availableDates = marker.properties['availableDates'];
-          if($scope.selectedProduct == marker){
-            $mdSidenav('productDetails').toggle();
-          }
-          else{
-            if($mdSidenav('productDetails').isOpen()){
-              // update values in open sidenav
-            }
-            else{
-              $mdSidenav('productDetails').open();
-            }
-          }
-        }
+        $scope.selectedProduct = marker;
+        selectorMarker.setPosition(marker.position);
+        selectorMarker.setMap($scope.mapObj);
+        $scope.product.image = config.serverUrl + marker.properties['image'];
+        $scope.product.siteNo = marker.properties['siteNo'];
+        $scope.product.panelSize = marker.properties['panelSize'];
+        $scope.product.address = marker.properties['address'];
+        $scope.product.impressions = marker.properties['impressions'];
+        $scope.product.direction = marker.properties['direction'];
+        $scope.product.availableDates = marker.properties['availableDates'];
+        $mdSidenav('productDetails').toggle();
       }
       
+      google.maps.event.addListener(selectorMarker, 'click', function(e){
+        $scope.selectedProduct = null;
+        selectorMarker.setMap(null);
+      });
 
       $scope.processMarkers = function () {
         var counts = [];
