@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapService','LocationService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, MapService,LocationService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', 'MapService', 'LocationService', 'config',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, MapService, LocationService, config) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -22,6 +22,15 @@ app.controller('GmapCtrl',
         }
       };
       $scope.mapObj;
+      $scope.selectedProduct = null;
+      var selectorMarker = new google.maps.Marker({
+        icon: {
+          url: 'assets/images/maps/Ellipse 75.png',
+          scaledSize: new google.maps.Size(40, 40),
+          // origin: new google.maps.Point(0, 0), // origin
+          // anchor: new google.maps.Point(20, 30) // anchor
+        }
+      });
       $scope.product = {};
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
@@ -200,6 +209,10 @@ app.controller('GmapCtrl',
       $scope.closeSideThanksSidenav = function() {
         $mdSidenav('thanksCampaign').toggle();
       };
+      // Product Details
+      $scope.closeProductDetailSidenav = function() {
+        $mdSidenav('productDetails').toggle();
+      };
       // Share Message
       $scope.shareSidenav = function() {
         $mdSidenav('shareCampaign').toggle();
@@ -306,6 +319,37 @@ app.controller('GmapCtrl',
         return arr;
       }
 
+      function selectMarker(marker){
+        if($scope.selectedProduct == marker){
+          $scope.selectedProduct = null;
+          selectorMarker.setMap(null);
+        }
+        else{
+          $scope.selectedProduct = marker;
+          selectorMarker.setPosition(marker.position);
+          selectorMarker.setMap($scope.mapObj);
+          $scope.product.image = config.serverUrl + marker.properties['image'];
+          $scope.product.siteNo = marker.properties['siteNo'];
+          $scope.product.panelSize = marker.properties['panelSize'];
+          $scope.product.address = marker.properties['address'];
+          $scope.product.impressions = marker.properties['impressions'];
+          $scope.product.direction = marker.properties['direction'];
+          $scope.product.availableDates = marker.properties['availableDates'];
+          if($scope.selectedProduct == marker){
+            $mdSidenav('productDetails').toggle();
+          }
+          else{
+            if($mdSidenav('productDetails').isOpen()){
+              // update values in open sidenav
+            }
+            else{
+              $mdSidenav('productDetails').open();
+            }
+          }
+        }
+      }
+      
+
       $scope.processMarkers = function () {
         var counts = [];
         var uniq_markers = [];
@@ -323,8 +367,7 @@ app.controller('GmapCtrl',
         var repeated_coords = _.pick(counts, function (value, key) {
           return value > 1;
         });
-        // console.log(uniq_coords);
-        // console.log("repeated", repeated_coords);
+
         /* 
         //// handling clustering ////
         */
@@ -340,16 +383,10 @@ app.controller('GmapCtrl',
               // anchor: new google.maps.Point(20, 30) // anchor
             }
           });
+          marker.properties = key;
           uniq_markers.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
-            $scope.product.image = config.serverUrl + key['image'];
-            $scope.product.siteNo = key['siteNo'];
-            $scope.product.panelSize = key['panelSize'];
-            $scope.product.address = key['address'];
-            $scope.product.impressions = key['impressions'];
-            $scope.product.direction = key['direction'];
-            $scope.product.availableDates = key['availableDates'];
-            $mdSidenav('productDetails').toggle();
+            selectMarker(marker);
           });
         });
         var mc = {
@@ -405,10 +442,10 @@ app.controller('GmapCtrl',
                 label: label
               });
               marker.groupSize = value;
-              google.maps.event.addListener(marker, 'spider_click', function (e) {  // 'spider_click', not plain 'click'
-                iw.setContent("dummy text");
-                iw.open($scope.mapObj, marker);
-              });
+              // google.maps.event.addListener(marker, 'spider_click', function (e) {  // 'spider_click', not plain 'click'
+              //   iw.setContent("dummy text");
+              //   iw.open($scope.mapObj, marker);
+              // });
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
             })();
           }
@@ -476,6 +513,12 @@ app.controller('GmapCtrl',
 
       $scope.setNewAddress = function () {
         console.log($scope.address.components.location);
+      }
+
+      $scope.shortlistSelected = function(){
+        MapService.shortListProduct($scope.selectedProduct.properties._id).then(function(){
+
+        });
       }
 
     }

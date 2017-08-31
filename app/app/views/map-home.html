@@ -422,8 +422,8 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content>
       <div layout="column" class="map-img">
-        <img src="{{product.image}}" />
-        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeSideThanksSidenav()">
+        <img src="{{product.image}}" style="width:380px;height:380px;"/>
+        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -467,7 +467,7 @@
         <div>Available Dates</div>
       </div>
       <div layout="column" layout-margin>
-        <md-button layout-fill class="md-raised md-warn">SHORTLIST</md-button>
+        <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
       <div layout="column" layout-margin>
         <md-button layout-fill class="md-raised" ng-click="closeSideSavedCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
@@ -480,7 +480,7 @@
         <div>Let's work Together!</div>
       </div>
       <div layout="row" layout-margin>
-        <div><img src="assets/images/product/pointer.png" /></div>
+        <div><img src="{{product.image}}" style="width:111px; height:111px;"/></div>
         <div>Nampally Station Road Circle On Top Of Shalimar Furniture - 500001</div>
       </div>
       <div layout="row" layout-margin>
@@ -783,7 +783,7 @@
             <div flex="50" class="armrgn">
               <md-input-container style="width:100%">
                 <label>Select Areas</label>
-                <md-select ng-model="selectedareas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
                   multiple>
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
