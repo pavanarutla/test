@@ -460,6 +460,15 @@ app.controller('GmapCtrl',
         trafficLayer.setMap(mapVal);
       }
 
+ 
+      $scope.applyFilter = function(){
+        console.log("$scope.selectedAreas:",$scope.selectedAreas)
+        MapService.getMarkers($scope.selectedAreas).then(function (markers) {
+        $scope.filteredMarkersdata = markers;
+        console.log("filterdata",$scope.filteredMarkersdata);
+      });
+      }
+
       $scope.savedata = function () {
         // handles the submitted form data from map-filtering.
       }

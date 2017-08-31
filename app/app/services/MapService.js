@@ -1126,6 +1126,11 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       var dfd = $q.defer();
       $http.get(config.apiPath + '/markers').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
+    },
+     getMarkers: function(selectedAreas){
+      var dfd = $q.defer();
+      $http.post(config.apiPath + '/markers' + selectedAreas).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
     }
   }
 }]);
