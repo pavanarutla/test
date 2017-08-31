@@ -114,8 +114,8 @@ app.run( ['$rootScope', '$location', '$http', function($rootScope, $location, $h
 }]);
 
 app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
 });

@@ -320,6 +320,7 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
+        console.log(marker.properties);
         if($scope.selectedProduct == marker){
           $scope.selectedProduct = null;
           selectorMarker.setMap(null);
@@ -516,8 +517,8 @@ app.controller('GmapCtrl',
       }
 
       $scope.shortlistSelected = function(){
-        MapService.shortListProduct($scope.selectedProduct.properties._id).then(function(){
-
+        MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
+          alert(response.message);
         });
       }
 
