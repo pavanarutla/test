@@ -153,25 +153,20 @@ app.controller('GmapCtrl',
         $scope.searchTerm = '';
       };
       $scope.setCountry = function () {
-        // console.log($scope.selectedCountry);
         LocationService.getStates($scope.selectedCountry).then(function (states) {
           $scope.states = states;
-          console.log($scope.states,"state");
         });
       }
 
       $scope.setStates = function () {
         LocationService.getCities($scope.selectedStates).then(function (cities) {
           $scope.cities = cities;
-          console.log($scope.cities,"city");
         });
       }
       
       $scope.setCities = function () {
-        console.log("selected cities:", $scope.selectedcitys);
-        LocationService.getareas($scope.selectedcitys).then(function (areas) {
+        LocationService.getAreas($scope.selectedcitys).then(function (areas) {
           $scope.areas = areas;
-          console.log($scope.areas,"area");
         });      
       }
       
@@ -320,7 +315,6 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
-        console.log(marker.properties);
         if($scope.selectedProduct == marker){
           $scope.selectedProduct = null;
           selectorMarker.setMap(null);
@@ -504,16 +498,8 @@ app.controller('GmapCtrl',
         trafficLayer.setMap(mapVal);
       }
 
-      $scope.savedata = function () {
-        // handles the submitted form data from map-filtering.
-      }
-
       $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
-      }
-
-      $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
+        // console.log($scope.address.components.location);
       }
 
       $scope.shortlistSelected = function(){
