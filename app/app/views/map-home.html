@@ -743,7 +743,8 @@
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                   </md-select-header>
-                  <md-option ng-repeat="country in allcountries | filter:searchTerm" value="{{country.Id}}">{{country.Countryname}}</md-option>
+                  <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}
+                  </md-option>
                 </md-select required>
 
               </md-input-container>
@@ -757,7 +758,7 @@
                     <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="states">
-                    <md-option ng-value="{{state.Id}}" ng-repeat="state in states | filter:searchTerm">{{state.statename}}</md-option>
+                    <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
@@ -768,13 +769,13 @@
             <div flex="50" class="armrgn">
               <md-input-container style="width:100%">
                 <label>Select City</label>
-                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setcitys()" md-on-close="clearSearchTerm()"
+                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
                   data-md-container-class="selectdemoSelectHeader" multiple>
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="citys">
-                    <md-option ng-value="{{city.Id}}" ng-repeat="city in citys | filter:searchTerm">{{city.cityname}}</md-option>
+                    <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
@@ -788,7 +789,7 @@
                     <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="areas">
-                    <md-option ng-value="{{area}}" ng-repeat="area in areas | filter:searchTerm">{{area.areaname}}</md-option>
+                    <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
