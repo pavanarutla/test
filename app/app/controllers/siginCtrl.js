@@ -9,9 +9,15 @@ $scope.sigInUser = function(user){
     var password = user.password;
     if(user.username == "naresh@gmail.com" && user.password == "naresh123"){
         $rootScope.logiIn = true;
-        //alert("login successfull");
+        //localStorage.setItem('login', $scope.Save); 
+        // var token = "xxx";
+        // localStorage.setItem("token", token);
+        //localStorage.getItem("token"); //returns "xxx"
+
+        localStorage.setItem('logindata', $rootScope.logiIn);
+         $rootScope.$broadcast('loginDone');
         $location.path('/location');
-        
+        $mdDialog.cancel();        
     }else{
         alert("wrong credentials");
     }

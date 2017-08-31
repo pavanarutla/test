@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout,$location, $rootScope) {
 
 
 $scope.filter = false;
@@ -6,7 +6,27 @@ $scope.format = false;
 $scope.shortlist = false;
 $scope.savedcampaign = false;
 
+$scope.showfooter = true;
 
+
+$scope.browabillboard = false;
+
+$scope.dashboardData = true;
+$scope.locationpageonly = false;
+
+//hide and show based on the login status
+
+$rootScope.$on('loginDone', function(){
+ // $scope.bookNow = false;
+  $scope.browabillboard = true;
+ 
+// var loginStatus = localStorage.getItem('logindata');
+// console.log("logindata",loginStatus)
+// if(loginStatus == true){
+//   $scope.bookNow = false;
+//   $scope.browabillboard = true;
+// }
+});
 $scope.filters = function(){
   $scope.filter = !$scope.filter;
   $scope.format = false;
