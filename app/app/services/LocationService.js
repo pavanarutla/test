@@ -11,12 +11,17 @@ app.factory('LocationService',
         },  
         getStates: function(countryId){
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/states?countryId=' + countryId).success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/states/' + countryId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
         getCities: function(stateIds){
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/cities?stateIds=' + stateIds).success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/cities/' + stateIds).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getareas: function(citiIds){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/areas/' + citiIds).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         }
       }

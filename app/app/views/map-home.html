@@ -422,8 +422,8 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content>
       <div layout="column" class="map-img">
-        <img src="{{product.image}}" />
-        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeSideThanksSidenav()">
+        <img src="{{product.image}}" style="width:380px;height:380px;"/>
+        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -450,7 +450,7 @@
           <div>Impressions</div>
         </div>
         <div layout="column" layout-align="center end " flex="50">
-          <div>{{impressions}}</div>
+          <div>{{product.impressions}}</div>
           <div>Week (Approx.)</div>
         </div>
       </div>
@@ -459,7 +459,7 @@
           <div>Facing</div>
         </div>
         <div layout="column" layout-align="center end" flex="50" style="text-align:right">
-          <div>{{direction}}</div>
+          <div>{{product.direction}}</div>
 
         </div>
       </div>
@@ -467,7 +467,7 @@
         <div>Available Dates</div>
       </div>
       <div layout="column" layout-margin>
-        <md-button layout-fill class="md-raised md-warn">SHORTLIST</md-button>
+        <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
       <div layout="column" layout-margin>
         <md-button layout-fill class="md-raised" ng-click="closeSideSavedCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
@@ -480,8 +480,8 @@
         <div>Let's work Together!</div>
       </div>
       <div layout="row" layout-margin>
-        <div><img src="assets/images/product/pointer.png" /></div>
-        <div>Nampally Station Road Circle On Top Of Shalimar Furniture - 500001</div>
+        <div><img src="{{product.image}}" style="width:111px; height:111px;"/></div>
+        <div>{{product.address}}</div>
       </div>
       <div layout="row" layout-margin>
 
@@ -743,7 +743,8 @@
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                   </md-select-header>
-                  <md-option ng-repeat="country in allcountries | filter:searchTerm" value="{{country.Id}}">{{country.Countryname}}</md-option>
+                  <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}
+                  </md-option>
                 </md-select required>
 
               </md-input-container>
@@ -757,7 +758,7 @@
                     <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="states">
-                    <md-option ng-value="{{state.Id}}" ng-repeat="state in states | filter:searchTerm">{{state.statename}}</md-option>
+                    <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
@@ -768,13 +769,13 @@
             <div flex="50" class="armrgn">
               <md-input-container style="width:100%">
                 <label>Select City</label>
-                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setcitys()" md-on-close="clearSearchTerm()"
+                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
                   data-md-container-class="selectdemoSelectHeader" multiple>
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="citys">
-                    <md-option ng-value="{{city.Id}}" ng-repeat="city in citys | filter:searchTerm">{{city.cityname}}</md-option>
+                    <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
@@ -782,13 +783,13 @@
             <div flex="50" class="armrgn">
               <md-input-container style="width:100%">
                 <label>Select Areas</label>
-                <md-select ng-model="selectedareas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
                   multiple>
                   <md-select-header class="demo-select-header">
                     <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
                   </md-select-header>
                   <md-optgroup label="areas">
-                    <md-option ng-value="{{area}}" ng-repeat="area in areas | filter:searchTerm">{{area.areaname}}</md-option>
+                    <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>

@@ -3,6 +3,7 @@ app.controller('ProductsCtrl', ['$scope', '$mdDialog', '$rootScope', 'MapService
   
   /* Product Object Definition 
   *
+  * @siteNo
   * @adStrength
   * @address
   * @areaName
@@ -26,7 +27,7 @@ app.controller('ProductsCtrl', ['$scope', '$mdDialog', '$rootScope', 'MapService
     // if ($scope.file.image.$valid && $scope.file.image
     //   || $scope.file.symbol.$valid && $scope.file.symbol) {
     console.log($scope.files);
-    $scope.saveMarker($scope.files);
+    $scope.saveProduct($scope.files);
     // }
     // console.log($scope.file);
     // MapService.saveMarker().then(function(data){
@@ -37,7 +38,7 @@ app.controller('ProductsCtrl', ['$scope', '$mdDialog', '$rootScope', 'MapService
   }
 
   $scope.getProducts = function(){
-    MapService.getMarkers().then(function(data){
+    MapService.getProducts().then(function(data){
       console.log(data);
     }, function(error){
       console.log(error);
@@ -52,12 +53,12 @@ app.controller('ProductsCtrl', ['$scope', '$mdDialog', '$rootScope', 'MapService
   // };
 
   // upload on file select or drop
-  $scope.saveMarker = function (files) {
+  $scope.saveProduct = function (files) {
       Upload.upload({
-        url: config.apiPath + '/marker',
+        url: config.apiPath + '/product',
         data: {image: files.image, symbol: files.symbol, product: $scope.product}
       }).then(function (resp) {
-        console.log('Success. Marker saved. Response: ', resp);
+        console.log('Success. Product saved. Response: ', resp);
       }, function (resp) {
         console.log('Error status: ', resp);
       }, function (evt) {
