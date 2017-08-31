@@ -3,10 +3,10 @@
 
   <form ng-submit="submitProductForm()" >
     <label for="site-no" >Site No: </label><br />
-    <input type="text" id="site-no" ng-model="product.siteNo" /> <br />
+    <input type="text" id="site-no" ng-model="product.siteNo" /> <br /><br />
 
     <label for="site-type">Site Type</label><br />
-    <input type="text" id="site-type" ng-model="product.type" /> <br />
+    <input type="text" id="site-type" ng-model="product.type" /> <br /><br />
 
     <label for="dob" >Hoarding Company Name</label><br />
     <input type="text" id="dob" ng-model="product.company" /> <br /><br />
@@ -18,7 +18,11 @@
     <input type="text" id="dob" ng-model="product.address" /> <br /><br />
 
     <label for="dob" >Area Name</label><br />
-    <input type="text" id="dob" ng-model="product.areaName" /> <br /><br />
+    <select ng-model="product.areaName">
+      <option ng-repeat="area in areas" value="{{area.id}}">{{area.name}}</option>
+    </select> 
+    <br /><br />
+    <!-- <input type="text" id="dob" ng-model="product.areaName" /> <br /><br /> -->
 
     <label for="dob" >Impressions</label><br />
     <input type="text" id="dob" ng-model="product.impressions" /> <br /><br />

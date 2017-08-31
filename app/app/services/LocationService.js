@@ -19,7 +19,7 @@ app.factory('LocationService',
           $http.get(config.apiPath + '/cities/' + stateIds).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        getareas: function(citiIds){
+        getAreas: function(citiIds){
           var dfd = $q.defer();
           $http.get(config.apiPath + '/areas/' + citiIds).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
