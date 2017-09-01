@@ -219,6 +219,18 @@ app.controller('GmapCtrl',
       $scope.suggestMe = function() {
         $mdSidenav('suggestMe').toggle();
       };
+      // Save Campgin Name
+      $scope.saveCampaignName = function() {
+        $mdSidenav('saveCampaignName').toggle();
+      };
+      // View All Campaign List
+      $scope.viewAllCampaginList = function() {
+        $mdSidenav('viewAll').toggle();
+      };
+      // Create Campaign  
+      $scope.createCampaign = function() {
+        $mdSidenav('createCampaign').toggle();
+      };
 
       //Confirm Dialog
       $scope.showAlert = function(ev) {
