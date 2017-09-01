@@ -242,9 +242,13 @@ app.controller('GmapCtrl', ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', 'MapSe
     $mdSidenav('savedSavedCampaign').toggle();
   };
 
-  // Save Campgin Details
+  // Save Campgin Details 
   $scope.saveCampaignDetails = function () {
     $mdSidenav('saveCampaignDetails').toggle();
+  };
+  // Save Campgin dailog two
+  $scope.saveCampaignName = function () {
+    $mdSidenav('saveCampaignName').toggle();
   };
   // create campgin
   $scope.createCampgin = function () {
