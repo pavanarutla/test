@@ -1,4 +1,4 @@
-<div layout="column" style="position:relative" ng-controller="GmapCtrl">
+<div layout="column" style="position:relative">
   <!-- side nav for view all-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="viewAll">
     <div layout="row">
@@ -417,24 +417,28 @@
   </md-sidenav>
 
   <!-- map poniter click show the content SideNav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="thanksCampaign" style="width:500px;">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content>
       <div layout="column" class="map-img">
-        <img src="assets/images/product/Mask Group.png" />
-        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeSideThanksSidenav()">
+        <img src="{{product.image}}" style="width:380px;height:380px;"/>
+        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
       <div layout="row" layout-margin>
         <div layout="column" layout-align="center start" flex="50">
-          <div class="md-headline">BI-79784</div>
+          <div class="md-headline">{{product.siteNo}}</div>
         </div>
         <div layout="row" layout-align="end center" flex="50">
 
           <img src="assets/images/maps/light-3030.jpg" />
           <img src="assets/images/maps/light-color3030.jpg" />
-          <span class="md-subhead plane-size">40*20</span>
+          <span class="md-subhead plane-size">{{product.panelSize}}</span>
+          <!-- <div>{{product.siteNo}}</div>
+        </div>
+        <div layout="column" layout-align="center end " flex="50">
+          <div><span><md-icon><i class="material-icons">lightbulb_outline</i></md-icon></span><span>{{product.panelSize}}</span></div> -->
         </div>
       </div>
       <div layout="row" layout-margin>
@@ -442,7 +446,7 @@
           <div class="md-body-2">Location</div>
         </div>
         <div layout="column" layout-align="center end " flex="50" style="text-align:right">
-          <div class="md-caption">Nampally Station Road Cricle on Top Of Shalimar Funiture</div>
+          <div class="md-caption">{{product.address}}</div>
 
         </div>
       </div>
@@ -451,7 +455,7 @@
           <div class="md-body-2">Impressions</div>
         </div>
         <div layout="column" layout-align="center end " flex="50">
-          <div class="md-body-2" style="color:#D35400">5,87,500</div>
+          <div class="md-body-2" style="color:#D35400">{{product.impressions}}</div>
           <div class="md-caption">Week (Approx.)</div>
         </div>
       </div>
@@ -460,7 +464,7 @@
           <div class="md-body-2">Facing</div>
         </div>
         <div layout="column" layout-align="center end" flex="50" style="text-align:right">
-          <div class="md-caption">From Abids Towards Nampally Station-50001</div>
+          <div class="md-caption">{{product.direction}}</div>
 
         </div>
       </div>
@@ -468,7 +472,7 @@
         <div class="md-body-2">Available Dates</div>
       </div>
       <div layout="column" layout-margin>
-        <md-button layout-fill class="md-raised md-warn">SHORTLIST</md-button>
+        <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
       <div layout="column" layout-margin>
         <md-button layout-fill class="md-raised" ng-click="closeSideSavedCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
@@ -481,10 +485,10 @@
         <div class="md-headline" style="opacity:.5">Let's work Together!</div>
       </div>
       <div layout="row" layout-margin>
-        <div><img src="assets/images/product/pointer.png" /></div>
+        <div><img src="{{product.image}}" /></div>
         <div>
-          <div class="md-headline">BI-79784</div>
-          <div class="md-body-1" style="opacity:.5">Nampally Station Road Circle On Top Of Shalimar Furniture - 500001</div>
+          <div class="md-headline">{{product.siteNo}}</div>
+          <div class="md-body-1" style="opacity:.5">{{product.address}}</div>
         </div>
       </div>
       <div layout="row" layout-margin>
@@ -632,7 +636,7 @@
   
   <!-- map html start-->
   <div layout="column" style="position:relative;height:800px;">
-    <ng-map center="{{address.name}}" zoom="10" style="width:100%;height:100%;">
+    <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;">
       <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
         <div style="background-color: white; color:#000;cursor:pointer; padding:10px;">Show Traffic</div>
       </custom-control>
@@ -728,7 +732,7 @@
           </div>
           <!--slider html end -->
           <md-divider></md-divider>
-          <form name="Locations" onSubmit="savedata()">
+          <form name="Locations">
             <div layout="column" layout-margin>
               <div class="md-body-1">Select Multiple Locations</div>
             </div>
@@ -742,7 +746,7 @@
                     <md-select-header class="demo-select-header">
                       <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
-                    <md-option ng-repeat="country in allcountries | filter:searchTerm" value="{{country.Id}}">{{country.Countryname}}</md-option>
+                    <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                   </md-select required>
 
                 </md-input-container>
@@ -756,7 +760,7 @@
                       <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
                     </md-select-header>
                     <md-optgroup label="states">
-                      <md-option ng-value="{{state.Id}}" ng-repeat="state in states | filter:searchTerm">{{state.statename}}</md-option>
+                      <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
                     </md-optgroup>
                   </md-select>
                 </md-input-container>
@@ -765,32 +769,32 @@
             <md-divider></md-divider>
             <div layout="row" layout-margin>
               <div flex="50" class="armrgn">
-                <md-input-container>
-                  <label>Select City</label>
-                  <md-select ng-model="selectedcitys" class="select-value" ng-disabled="!selectedStates" ng-change="setcitys()" md-on-close="clearSearchTerm()"
-                    data-md-container-class="selectdemoSelectHeader" multiple>
-                    <md-select-header class="demo-select-header">
-                      <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
-                    </md-select-header>
-                    <md-optgroup label="citys">
-                      <md-option ng-value="{{city.Id}}" ng-repeat="city in citys | filter:searchTerm">{{city.cityname}}</md-option>
-                    </md-optgroup>
-                  </md-select>
-                </md-input-container>
-              </div>
-              <div flex="50" class="armrgn">
-                <md-input-container>
-                  <label>Select Areas</label>
-                  <md-select ng-model="selectedareas" class="select-value" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()"
-                    data-md-container-class="selectdemoSelectHeader" multiple>
-                    <md-select-header class="demo-select-header">
-                      <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
-                    </md-select-header>
-                    <md-optgroup label="areas">
-                      <md-option ng-value="{{area}}" ng-repeat="area in areas | filter:searchTerm">{{area.areaname}}</md-option>
-                    </md-optgroup>
-                  </md-select>
-                </md-input-container>
+                <md-input-container style="width:100%">
+                <label>Select City</label>
+                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
+                  data-md-container-class="selectdemoSelectHeader" multiple>
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-optgroup label="citys">
+                    <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div flex="50" class="armrgn">
+              <md-input-container style="width:100%">
+                <label>Select Areas</label>
+                <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                  multiple>
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-optgroup label="areas">
+                    <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
               </div>
             </div>
 
