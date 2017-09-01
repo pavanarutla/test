@@ -21,9 +21,9 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       $http.post(config.apiPath + '/shortlistProduct', {user_id: userId, product_id: productId}).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-     getfiltarea: function(selectedAreas){
+     filterProducts: function(criteria){
       var dfd = $q.defer();
-      $http.post(config.apiPath + '/filterProducts', selectedAreas).success(dfd.resolve).error(dfd.reject);
+      $http.post(config.apiPath + '/filterProducts', criteria).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     }
   }
