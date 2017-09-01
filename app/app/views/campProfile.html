@@ -1,4 +1,4 @@
-<div layout="column" layout-sm="column" layout-xs="column" class="bbsco" ng-controller="campaiginController" style="background: #fff;">
+<div layout="column" layout-sm="column" layout-xs="column" class="bbsco" style="background: #fff;">
     <div layout="column" layout-align="center center" class="pricing-head">
     </div>
     <div class="packages flex">
@@ -10,18 +10,41 @@
                     <md-card>
                         <md-card-header>
                             <md-card-header-text>
-                                 <!-- <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">  -->
-                                 <div class="thumbnail" ng-hide="$flow.files.length">
-                                   <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">
-                                </div>
-                                <div class="thumbnail" ng-show="$flow.files.length">
-                                    <img flow-img="$flow.files[0]" />
-                                </div>
-                                <div>
-                                    <a href="#" class="btn" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Select image</a>
-                                    <a href="#" class="btn" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Change</a>
-                                    <a href="#" class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()"> Remove</a>
-                                </div> 
+                                <!-- <fieldset>
+                                    <legend>Upload on form submit</legend>
+                                    <input
+                                        type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="">
+                                        <i ng-show="myForm.file.$error.required">*required</i>
+                                        <br>
+
+                                        <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+                                        <img width="200" height="100" ngf-src="picFile" class="thumb">
+                                        <span class="progress" ng-show="picFile.progress >= 0">
+                                    <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'" class="ng-binding"></div>
+                                     </span>
+                                        <span ng-show="picFile.result">Upload Successful</span>
+                                </fieldset> -->
+                                <!-- <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">    -->
+                                
+                                <form name="myForm">
+                                    <div>Crop Image and Upload</div>
+                                    <button ngf-select ng-model="picFile" accept="image/*">
+                                      Select Picture</button>
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                        <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                        </img-crop>
+                                    </div>
+                                    <div style="width:400px;height:250px;">
+                                        <img class="md-card-image inner-img" ng-src="{{croppedDataUrl}}" />
+                                    </div>
+                                    <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button>
+
+                                    <span class="progress" ng-show="progress >= 0">
+                                      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                  </span>
+                                    <span ng-show="result">Upload Successful</span>
+                                    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                                </form> 
                             </md-card-header-text>
                         </md-card-header>
                         <md-card-content layout="row" layout-align="center center" align="center">
