@@ -327,7 +327,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $mdSidenav('productDetails').toggle();
       }
-      
+
       google.maps.event.addListener(selectorMarker, 'click', function(e){
         $scope.selectedProduct = null;
         selectorMarker.setMap(null);
