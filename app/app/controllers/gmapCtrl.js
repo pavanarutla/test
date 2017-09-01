@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
       $scope.mapObj;
+      $scope.markersOnMap = [];
       $scope.selectedProduct = null;
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -368,6 +369,7 @@ app.controller('GmapCtrl',
           });
           marker.properties = key;
           uniq_markers.push(marker);
+          $scope.markersOnMap.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
@@ -430,6 +432,7 @@ app.controller('GmapCtrl',
               //   iw.open($scope.mapObj, marker);
               // });
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+              $scope.markersOnMap(marker);
             })();
           }
         });
@@ -486,9 +489,31 @@ app.controller('GmapCtrl',
         trafficLayer.setMap(mapVal);
       }
 
+ 
+      $scope.applyFilter = function(){
+        console.log("$scope.selectedAreas:",$scope.selectedAreas);
+        var filterObj = {area: $scope.selectedAreas, product_type: null};
+        MapService.getfiltarea(filterObj).then(function (markers) {
+          console.log(markers);
+          if(markers != null){
+            console.log("yep! the markers are not null");
+            $scope.markersOnMap = [];
+            NgMap.getMap().then(function (map) {
+              $scope.mapObj = map;
+              // $scope.filteredMarkers = markers;
+              // $scope.processMarkers();
+            });
+          }
+          else{
+            alert("no marker found in the area(s) you selected");
+          }
+        });
+      }
+
       $scope.setNewAddress = function () {
         // console.log($scope.address.components.location);
       }
+
 
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
