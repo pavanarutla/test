@@ -1,4 +1,4 @@
-<div layout="column" style="position:relative" ng-controller="GmapCtrl">
+<div layout="column" style="position:relative">
   <!-- side nav for view all-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:590px;" md-component-id="viewAll">
     <div layout="row">
@@ -100,8 +100,50 @@
       </div>
     </div>
     <md-content>
-      <div>
+       <div  ng-repeat="shortlisted in shortListeddata">
         <div layout="column" layout-margin>
+          <div layout="row">
+            <div layout="column" layout-align="center start" flex="50">
+              <div>{{shortlisted.siteNo}}</div>
+            </div>
+            <div layout="column" layout-align="center end " flex="50">
+              <div><span><md-icon><i class="material-icons">lightbulb_outline</i></md-icon></span><span>{{shortlisted.panelSize}}</span></div>
+            </div>
+          </div>
+          <div layout="row">
+            <div layout="column" flex="33" layout-align="center start">
+              <div>{{Shortlisted.type}}</div>
+
+            </div>
+            <div layout="column" flex="33" layout-align="center start">
+              <div>{{shortlisted.direction}}</div>
+            </div>
+            <div layout="column" flex="33" layout-align="center end ">
+              <div>{{shortlisted.impressions}}</div>
+            </div>
+          </div>
+          <div layout="row">
+            <div layout="column" flex="33" layout-align="center start">
+              <div>{{shortlisted.address}}</div>
+              <div>500001</div>
+            </div>
+            <div layout="column" flex="33" layout-align=" start center">
+
+              <div></div>
+            </div>
+            <div layout="column" flex="33" layout-align="start end ">
+              <div>{{shortlisted.hoardingCost}}</div>
+              <div>week(Approx)</div>
+            </div>
+          </div>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button>View</md-button>
+            <md-button ng-click="deletShortlisted(shortlisted.id)">Delete</md-button>
+          </md-card-actions>
+          <md-divider></md-divider>
+        </div>
+      </div> 
+         <!-- <div layout="column" layout-margin>
           <div layout="row">
             <div layout="column" layout-align="center start" flex="50">
               <div>BI-79784</div>
@@ -141,8 +183,8 @@
             <md-button>Delete</md-button>
           </md-card-actions>
           <md-divider></md-divider>
-        </div>
-        <div layout="column" layout-margin>
+        </div>  -->
+         <!-- <div layout="column" layout-margin>
           <div layout="row">
             <div layout="column" layout-align="center start" flex="50">
               <div>BI-79784</div>
@@ -182,51 +224,7 @@
             <md-button>Delete</md-button>
           </md-card-actions>
           <md-divider></md-divider>
-        </div>
-        <div layout="column" layout-margin>
-          <div layout="row">
-            <div layout="column" layout-align="center start" flex="50">
-              <div>BI-79784</div>
-            </div>
-            <div layout="column" layout-align="center end " flex="50">
-              <div><span><md-icon><i class="material-icons">lightbulb_outline</i></md-icon></span><span>40*20</span></div>
-            </div>
-          </div>
-          <div layout="row">
-            <div layout="column" flex="33" layout-align="center start">
-              <div>Billboards</div>
-
-            </div>
-            <div layout="column" flex="33" layout-align="center start">
-              <div>Facing</div>
-            </div>
-            <div layout="column" flex="33" layout-align="center end ">
-              <div>Impressions</div>
-            </div>
-          </div>
-          <div layout="row">
-            <div layout="column" flex="33" layout-align="center start">
-              <div>Nampally Station Road Cricle on Top Of Shalimar Funiture</div>
-              <div>500001</div>
-            </div>
-            <div layout="column" flex="33" layout-align=" start center">
-
-              <div>From Abids Towers Nampally station(Mj Market)</div>
-            </div>
-            <div layout="column" flex="33" layout-align="start end ">
-              <div>3,87,000</div>
-              <div>week(Approx)</div>
-            </div>
-          </div>
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button>View</md-button>
-            <md-button>Delete</md-button>
-          </md-card-actions>
-          <md-divider></md-divider>
-        </div>
-
-
-      </div>
+        </div>  -->
       <div layout="column" layout-margin>
         <md-button class="md-raised md-warn" layout-fill> SAVED CAMPAGIN</md-button>
         <div><span>Need Suggestions?</span><span><a ng-href="#">SUGGEST ME</a></span></div>
@@ -799,7 +797,7 @@
           <md-divider></md-divider>
           <div layout="row">
             <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
-            <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1">Reset Feileds</span> </md-button>
+            <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feileds</span> </md-button>
           </div>
         </form>
       </div>

@@ -22,7 +22,7 @@ app.controller('GmapCtrl',
         }
       };
       $scope.mapObj;
-      $scope.markersOnMap = [];
+      var markersOnMap = [];
       $scope.selectedProduct = null;
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -316,35 +316,23 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
-        if($scope.selectedProduct == marker){
-          $scope.selectedProduct = null;
-          selectorMarker.setMap(null);
-        }
-        else{
-          $scope.selectedProduct = marker;
-          selectorMarker.setPosition(marker.position);
-          selectorMarker.setMap($scope.mapObj);
-          $scope.product.image = config.serverUrl + marker.properties['image'];
-          $scope.product.siteNo = marker.properties['siteNo'];
-          $scope.product.panelSize = marker.properties['panelSize'];
-          $scope.product.address = marker.properties['address'];
-          $scope.product.impressions = marker.properties['impressions'];
-          $scope.product.direction = marker.properties['direction'];
-          $scope.product.availableDates = marker.properties['availableDates'];
-          if($scope.selectedProduct == marker){
-            $mdSidenav('productDetails').toggle();
-          }
-          else{
-            if($mdSidenav('productDetails').isOpen()){
-              // update values in open sidenav
-            }
-            else{
-              $mdSidenav('productDetails').open();
-            }
-          }
-        }
+        $scope.selectedProduct = marker;
+        selectorMarker.setPosition(marker.position);
+        selectorMarker.setMap($scope.mapObj);
+        $scope.product.image = config.serverUrl + marker.properties['image'];
+        $scope.product.siteNo = marker.properties['siteNo'];
+        $scope.product.panelSize = marker.properties['panelSize'];
+        $scope.product.address = marker.properties['address'];
+        $scope.product.impressions = marker.properties['impressions'];
+        $scope.product.direction = marker.properties['direction'];
+        $scope.product.availableDates = marker.properties['availableDates'];
+        $mdSidenav('productDetails').toggle();
       }
-      
+
+      google.maps.event.addListener(selectorMarker, 'click', function(e){
+        $scope.selectedProduct = null;
+        selectorMarker.setMap(null);
+      });
 
       $scope.processMarkers = function () {
         var counts = [];
@@ -374,14 +362,12 @@ app.controller('GmapCtrl',
             position: latLng,
             icon: {
               url: config.serverUrl + key["symbol"],
-              scaledSize: new google.maps.Size(40, 40),
-              // origin: new google.maps.Point(0, 0), // origin
-              // anchor: new google.maps.Point(20, 30) // anchor
+              scaledSize: new google.maps.Size(40, 40)
             }
           });
           marker.properties = key;
           uniq_markers.push(marker);
-          $scope.markersOnMap.push(marker);
+          markersOnMap.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
@@ -439,12 +425,8 @@ app.controller('GmapCtrl',
                 label: label
               });
               marker.groupSize = value;
-              // google.maps.event.addListener(marker, 'spider_click', function (e) {  // 'spider_click', not plain 'click'
-              //   iw.setContent("dummy text");
-              //   iw.open($scope.mapObj, marker);
-              // });
+              markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
-              $scope.markersOnMap(marker);
             })();
           }
         });
@@ -500,21 +482,23 @@ app.controller('GmapCtrl',
         }
         trafficLayer.setMap(mapVal);
       }
-
  
       $scope.applyFilter = function(){
-        console.log("$scope.selectedAreas:",$scope.selectedAreas);
         var filterObj = {area: $scope.selectedAreas, product_type: null};
-        MapService.getfiltarea(filterObj).then(function (markers) {
-          console.log(markers);
+        MapService.filterProducts(filterObj).then(function (markers) {          
           if(markers != null){
-            console.log("yep! the markers are not null");
-            $scope.markersOnMap = [];
-            NgMap.getMap().then(function (map) {
-              $scope.mapObj = map;
-              // $scope.filteredMarkers = markers;
-              // $scope.processMarkers();
+            _.each(markersOnMap, function(v, i){
+              v.setMap(null);
+              $scope.keyClusterer.removeMarker(v);
             });
+            markersOnMap = [];
+            $scope.filteredMarkers = markers;
+            $scope.processMarkers();
+            var bounds = new google.maps.LatLngBounds();
+            _.each(markersOnMap, function(v, i){
+              bounds.extend(v.getPosition());
+            });
+            $scope.mapObj.fitBounds(bounds);
           }
           else{
             alert("no marker found in the area(s) you selected");
@@ -525,7 +509,6 @@ app.controller('GmapCtrl',
       $scope.setNewAddress = function () {
         // console.log($scope.address.components.location);
       }
-      $scope.shortListeddata = [];
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
           alert(response.message);
@@ -540,6 +523,27 @@ app.controller('GmapCtrl',
           console.log(response,"deleted data")
         })
       };
+
+      $scope.resetFilters = function(){
+        $scope.selectedAreas = null;
+        $scope.selectedcitys = null;
+        $scope.selectedStates = null;
+        _.each(markersOnMap, function(v, i){
+          v.setMap(null);
+          $scope.keyClusterer.removeMarker(v);
+        });
+        markersOnMap = [];
+        MapService.markers().then(function (markers) {
+          $scope.filteredMarkers = markers;
+          $scope.processMarkers();
+          var bounds = new google.maps.LatLngBounds();
+          _.each(markersOnMap, function(v, i){
+            bounds.extend(v.getPosition());
+          });
+          $scope.mapObj.fitBounds(bounds);
+        });
+      }
+
     }
   ]
 );
