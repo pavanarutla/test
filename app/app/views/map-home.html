@@ -1144,27 +1144,27 @@
           </div>
         </div>
         <md-divider></md-divider>
-        <div layout="">
+        <div layout="" ng-repeat="shortlisted in shortListeddata">
           <md-list flex>
             <md-list-item class="md-3-line">
               <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" />
               <div class="md-list-item-text" layout="column" flex>
-                <h3>Kondapur</h3>
-                <h4>70 Bowman St. </h4>
-                <p> South Windsor, CT 06074</p>
+                <h3>{{shortlisted.areaname}}</h3>
+                <p>{{shortlisted.address}}</p>
+                <p> {{shortlisted.siteNo}}</p>
               </div>
             </md-list-item>
           </md-list>
           <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
             <md-checkbox aria-label="Disabled checkbox" ng-model="data.cb3">
             </md-checkbox>
-            <md-button class="md-icon-button">
+            <md-button class="md-icon-button" ng-click="deletShortlisted(shortlisted.id)">
               <md-icon><i class="material-icons ">delete</i></md-icon>
             </md-button>
           </div>
         </div>
         <md-divider></md-divider>
-        <div layout="">
+         <!-- <div layout="">
           <md-list flex>
             <md-list-item class="md-3-line">
               <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" />
@@ -1182,7 +1182,7 @@
               <md-icon><i class="material-icons ">delete</i></md-icon>
             </md-button>
           </div>
-        </div>
+        </div>  -->
         <md-divider></md-divider>
         <div layout="row">
           <md-button class="md-raised " ng-click="closeSideViewAll()">VIEW ALL</md-button>

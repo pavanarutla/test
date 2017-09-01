@@ -525,14 +525,21 @@ app.controller('GmapCtrl',
       $scope.setNewAddress = function () {
         // console.log($scope.address.components.location);
       }
-
-
+      $scope.shortListeddata = [];
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
           alert(response.message);
         });
       }
-
+      MapService.getshortListProduct("23fkf23vlh").then(function(response){ 
+          $scope.shortListeddata = response;
+          console.log($scope.shortListeddata,"$scope.shortListeddata");
+        })
+      $scope.deletShortlisted =function (product){
+        MapService.deleteshortListProduct("23fkf23vlh","product").then(function(response){
+          console.log(response,"deleted data")
+        })
+      };
     }
   ]
 );
