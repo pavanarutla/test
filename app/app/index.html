@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
   <link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
  
@@ -23,13 +23,13 @@
 </head>
 
 <body layout="column" ng-cloak ng-controller="bbMngrCtrl">
-  <md-toolbar class="md-menu-toolbar header" style="background:#488edf;">
+  <md-toolbar class="md-menu-toolbar header">
     <div class="md-toolbar-tools">
       <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
-      <md-menu-bar>
+      <md-menu-bar class="main-menu">
           <md-button aria-label="whyoutdoor"  ng-click="whatwedo()" ng-if="!footerhide">what we do</md-button>
           <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide">formats</md-button>
           <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide">why outdoor</md-button>
@@ -67,22 +67,22 @@
         </md-button> -->
         
 
-        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
-            BOOK NOW
-        </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="#/location">
+      <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
+          BOOK NOW
+      </md-button>
+      <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="#/location">
           Browse BillBoards</a>
       </md-button>
-      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard" >
-        suggestItems
-    </md-button>
+      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard"  ng-click="suggestMe()" >
+          suggestItems
+      </md-button>
 
       </md-menu-bar>
     </div>
   </md-toolbar>
   <md-sidenav md-component-id="left" class="md-sidenav-left" hide-gt-sm>
     <header layout="column" layout-padding layout-margin>
-      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png"></a>
+      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
     </header>
     <md-content flex layout="column" role="navigation">
       <md-menu-item flex layout="column">
