@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
       $scope.mapObj;
+      $scope.markersOnMap = [];
       $scope.selectedProduct = null;
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -153,25 +154,20 @@ app.controller('GmapCtrl',
         $scope.searchTerm = '';
       };
       $scope.setCountry = function () {
-        // console.log($scope.selectedCountry);
         LocationService.getStates($scope.selectedCountry).then(function (states) {
           $scope.states = states;
-          console.log($scope.states,"state");
         });
       }
 
       $scope.setStates = function () {
         LocationService.getCities($scope.selectedStates).then(function (cities) {
           $scope.cities = cities;
-          console.log($scope.cities,"city");
         });
       }
       
       $scope.setCities = function () {
-        console.log("selected cities:", $scope.selectedcitys);
-        LocationService.getareas($scope.selectedcitys).then(function (areas) {
+        LocationService.getAreas($scope.selectedcitys).then(function (areas) {
           $scope.areas = areas;
-          console.log($scope.areas,"area");
         });      
       }
       
@@ -320,7 +316,6 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
-        console.log(marker.properties);
         if($scope.selectedProduct == marker){
           $scope.selectedProduct = null;
           selectorMarker.setMap(null);
@@ -386,6 +381,7 @@ app.controller('GmapCtrl',
           });
           marker.properties = key;
           uniq_markers.push(marker);
+          $scope.markersOnMap.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
@@ -448,6 +444,7 @@ app.controller('GmapCtrl',
               //   iw.open($scope.mapObj, marker);
               // });
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+              $scope.markersOnMap(marker);
             })();
           }
         });
@@ -504,17 +501,31 @@ app.controller('GmapCtrl',
         trafficLayer.setMap(mapVal);
       }
 
-      $scope.savedata = function () {
-        // handles the submitted form data from map-filtering.
+ 
+      $scope.applyFilter = function(){
+        console.log("$scope.selectedAreas:",$scope.selectedAreas);
+        var filterObj = {area: $scope.selectedAreas, product_type: null};
+        MapService.getfiltarea(filterObj).then(function (markers) {
+          console.log(markers);
+          if(markers != null){
+            console.log("yep! the markers are not null");
+            $scope.markersOnMap = [];
+            NgMap.getMap().then(function (map) {
+              $scope.mapObj = map;
+              // $scope.filteredMarkers = markers;
+              // $scope.processMarkers();
+            });
+          }
+          else{
+            alert("no marker found in the area(s) you selected");
+          }
+        });
       }
 
       $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
+        // console.log($scope.address.components.location);
       }
 
-      $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
-      }
 
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
