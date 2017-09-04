@@ -35,6 +35,16 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       var dfd = $q.defer();
       $http.post(config.apiPath + '/filterProducts', criteria).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
-    }
+    },
+    getIndustrySectors: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/Sectors').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },  
+        getDurationSectors:function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/DurationSectors').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
   }
 }]);

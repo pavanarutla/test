@@ -55,14 +55,10 @@
           </md-card-actions>
           <md-divider></md-divider>
         </div>
-
-
-
       </div>
       <div layout="column" layout-margin>
         <md-button class="md-raised md-warn" layout-fill> REQUEST PROPOSAL</md-button>
         <md-button class="md-raised " layout-fill> SHARE CAMPAIGN</md-button>
-
       </div>
     </md-content>
   </md-sidenav>
@@ -129,10 +125,10 @@
             </div>
             <div layout="column" flex="33" layout-align=" start center">
 
-              <div></div>
+              <div>{{shortlisted.direction}}</div>
             </div>
             <div layout="column" flex="33" layout-align="start end ">
-              <div>{{shortlisted.hoardingCost}}</div>
+              <div>{{shortlisted.impressions}}</div>
               <div>week(Approx)</div>
             </div>
           </div>
@@ -300,7 +296,7 @@
         <form name="saveCampaigndetails">
           <md-input-container class="md-block">
             <label>Campaign Name</label>
-            <input required md-no-asterisk name="campname" ng-model="project.campname">
+            <input required md-no-asterisk name="campname" ng-model="user.campname">
             <div ng-messages="saveCampaigndetails.campname.$error">
               <div ng-message="required">This is required.</div>
               <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
@@ -311,12 +307,12 @@
 
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctrl.startDate" md-placeholder="Campaign Start "></md-datepicker>
+                <md-datepicker ng-model="user.ctrl.startDate" md-placeholder="Campaign Start "></md-datepicker>
               </md-input-container>
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctr.endDate" md-placeholder="Campaign End"></md-datepicker>
+                <md-datepicker ng-model="user.ctr.endDate" md-placeholder="Campaign End"></md-datepicker>
               </md-input-container>
             </div>
 
@@ -331,7 +327,7 @@
           </md-input-container>
 
           <div>
-            <md-button class="md-raised md-warn" ng-click="showConfirmation($event)" layout-fill>SAVE CAMPAIGN</md-button>
+            <md-button class="md-raised md-warn" ng-click="showConfirmation(user)" layout-fill>SAVE CAMPAIGN</md-button>
 
             <p>Need Suggestions?
               <md-button class="md-primary md-hue-1">Suggest Me</md-button>
@@ -580,15 +576,17 @@
         </div>
       </md-input-container>
       <md-input-container class="md-block">
+          <label>Add your Organisation URL:</label>
+          <input  required md-no-asterisk name="orgname" ng-model="project.orgURL">
+          <div ng-messages="suggestMeform.orgname.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      <md-input-container class="md-block">
         <label>Industry Sector</label>
-        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-          <md-optgroup label="items">
-            <md-option ng-value="item">Item 1</md-option>
-            <md-option ng-value="item">Item 2</md-option>
-            <md-option ng-value="item">Item 3</md-option>
-            <md-option ng-value="item">Item 4</md-option>
-          </md-optgroup>
-        </md-select>
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+            <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
       </md-input-container>
       <md-input-container class="md-block">
         <label>Estimated Budget</label>
@@ -600,23 +598,16 @@
       </md-input-container>
       <md-input-container class="md-block">
         <label>Campaign Duration Sector</label>
-        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-          <md-optgroup label="items">
-            <md-option ng-value="item">Item 1</md-option>
-            <md-option ng-value="item">Item 2</md-option>
-            <md-option ng-value="item">Item 3</md-option>
-            <md-option ng-value="item">Item 4</md-option>
-          </md-optgroup>
-        </md-select>
+         <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+            <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
       </md-input-container>
-      </md-input-container>
-
       <div flex-gt-xs class="md-block">
         <label>Expected Standard Date</label>
-        <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+        <md-datepicker ng-model="project.ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
       </div>
       <div>
-        <md-button class="md-raised md-warn" ng-click="suggestMeConfirm($event)">SUGGEST ME</md-button>
+        <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)">SUGGEST ME</md-button>
       </div>
     </form>
   </md-sidenav>
@@ -1561,69 +1552,6 @@
         <h3>Don't think! </h3>
         <h4>Let me help you on your Campaign Needs..</h4>
       </md-content>
-
-      <form name="suggestMeform">
-        <md-input-container class="md-block">
-          <label>Organisation Name</label>
-          <input md-maxlength="30" required md-no-asterisk name="orgname" ng-model="project.orgname">
-          <div ng-messages="suggestMeform.orgname.$error">
-            <div ng-message="required">This is required.</div>
-            <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Add your Organisation URL:</label>
-          <input type="url" name="homepage" required md-no-asterisk ng-model="project.orgURL">
-          <div ng-messages="suggestMeform.orgname.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Industry Sector</label>
-          <!-- <md-select ng-model="project.selectedItem" md-selected-text="getSelectedText()">
-          <md-optgroup label="items">
-            <md-option ng-value="item">Item 1</md-option>
-            <md-option ng-value="item">Item 2</md-option>
-            <md-option ng-value="item">Item 3</md-option>
-            <md-option ng-value="item">Item 4</md-option>
-          </md-optgroup>
-        </md-select> -->
-          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
-            <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
-          </md-select required>
-        </md-input-container>
-        <md-input-container class="md-block" aria-placeholder="months">
-          <label>Estimated Budget</label>
-          <input md-maxlength="30" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
-          <div ng-messages="suggestMeform.estbudget.$error">
-            <div ng-message="required">This is required.</div>
-            <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Campaign Duration </label>
-          <!-- <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-          <md-optgroup label="items">
-            <md-option ng-value="item">Item 1</md-option>
-            <md-option ng-value="item">Item 2</md-option>
-            <md-option ng-value="item">Item 3</md-option>
-            <md-option ng-value="item">Item 4</md-option>
-          </md-optgroup>
-        </md-select> -->
-          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
-            <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
-          </md-select required>
-        </md-input-container>
-        </md-input-container>
-
-        <div flex-gt-xs class="md-block">
-          <label>Expected Start Date</label>
-          <md-datepicker ng-model="project.myDate" md-placeholder="Enter date"></md-datepicker>
-        </div>
-        <div>
-          <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)">SUGGEST ME</md-button>
-        </div>
-      </form>
     </md-sidenav>
 
 

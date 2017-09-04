@@ -42,6 +42,14 @@ app.controller('GmapCtrl',
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
       });
+      $scope.Sectors=[];
+      MapService.getIndustrySectors().then(function(Sectors){
+        $scope.Sectors = Sectors;
+      });
+      $scope.DurationSectors=[];
+      MapService.getDurationSectors().then(function(DurationSectors){
+        $scope.DurationSectors = DurationSectors;
+      });
       
       var trafficOn = false;
       var trafficLayer = new google.maps.TrafficLayer();
@@ -232,7 +240,7 @@ app.controller('GmapCtrl',
         );
       };
       //Confirm Dialog 1
-      $scope.showConfirmation = function(ev) {
+      $scope.showConfirmation = function(user) {
         $mdDialog.show(
           $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))
@@ -241,7 +249,7 @@ app.controller('GmapCtrl',
           .textContent('You can specify some description text in here.')
           .ariaLabel('Alert Dialog Demo')
           .ok('Got it!')
-          .targetEvent(ev)
+          .targetEvent(user)
         );
       };
       $scope.IndustrySector = [
@@ -295,7 +303,7 @@ app.controller('GmapCtrl',
       //$scope.agents = [1,2]
 
       //Suggest Me Dialog 1
-      $scope.suggestMeConfirm = function (ev) {
+      $scope.suggestMeConfirm = function (project) {
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('body')))
@@ -304,7 +312,7 @@ app.controller('GmapCtrl',
             .textContent('You can specify some description text in here.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
-            .targetEvent(ev)
+            .targetEvent(project)
         );
       };
 
