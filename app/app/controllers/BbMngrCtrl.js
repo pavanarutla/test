@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, Upload, $interval) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, Upload, $interval) {
 
 
 $scope.filter = false;

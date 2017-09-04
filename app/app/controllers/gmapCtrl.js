@@ -245,7 +245,6 @@ app.controller('GmapCtrl',
         );
       };
 
-       };
 
       //Toaster Function Call
       var isDlgOpen;
@@ -497,38 +496,6 @@ app.controller('GmapCtrl',
           marker.setIcon(markerIcon);
         });
       }
-<<<<<<< HEAD
-      else {
-        // when markers are grouped as one
-        markerIcon = {
-          url: 'assets/images/maps/unspidered-cluster.png',
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0), // origin
-          anchor: new google.maps.Point(10, 10) // anchor
-        };
-        label.color = "rgba(255, 255, 255, 1)";
-        marker.setLabel(label);
-        // spiderCircle.setMap(null);
-        circleMarker.setMap(null);
-        iw.close();
-      }
-      marker.setIcon(markerIcon);
-    });
-  }
-
-  $scope.toggleTraffic = function () {
-    trafficOn = !trafficOn;
-    var mapVal = null;
-    if (trafficOn) {
-      mapVal = $scope.mapObj;
-    }
-    trafficLayer.setMap(mapVal);
-  }
-
-  $scope.savedata = function () {
-    // handles the submitted form data from map-filtering.
-  }
-=======
 
       $scope.toggleTraffic = function () {
         trafficOn = !trafficOn;
@@ -565,7 +532,6 @@ app.controller('GmapCtrl',
       $scope.setNewAddress = function () {
         // console.log($scope.address.components.location);
       }
->>>>>>> 65730cc5744148868d20729d4c35e7ab930a2a92
 
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
