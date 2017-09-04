@@ -12,9 +12,8 @@ var app = angular.module('bbManager', [
   'ngFileUpload',
   'ngImgCrop'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider',
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
-    
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -45,6 +44,13 @@ var app = angular.module('bbManager', [
       controller: 'PricingCtrl'
     })
     .when('/location', {
+      // resolve:{
+      //   "check": function($location,$rootScope){
+      //     if(!$rootScope.logiIn){
+      //       $location.path('/')
+      //     }
+      //   }
+      // },
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
@@ -61,6 +67,7 @@ var app = angular.module('bbManager', [
     })
     .when('/campagin',{
       templateUrl: 'views/campagin.html'
+     //console:'CampaignController'
     })
     .when('/campaginedit',{
       templateUrl: 'views/campaginedit.html'
@@ -92,3 +99,28 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
     // datepickerPopupConfig.clearText = "Erase";
     // datepickerPopupConfig.closeText = "Close";
 }]);
+
+app.run( ['$rootScope', '$location', '$http', function($rootScope, $location, $http) {
+  
+  $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
+    console.log('Current route name: ' + $location.path());
+    // Get all URL parameter
+    if($location.path() == "/location"){
+      $rootScope.footerhide = true;
+    }
+    else{
+      $rootScope.footerhide = false;
+    }
+    $rootScope.logOut = function(){      
+      localStorage.getItem("logindata");
+      $rootScope.logiIn = false;
+    }
+  });
+}]);
+
+app.constant('config', {
+  // serverUrl : "http://localhost:8001",
+  // apiPath : "http://localhost:8001/api",
+  serverUrl : "http://104.236.11.252",
+  apiPath : "http://104.236.11.252/api"
+});
