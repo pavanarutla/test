@@ -72,8 +72,14 @@ $scope.savedcampaignDiv = function(){
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/sigIn.html',
+      fullscreen: $scope.customFullscreen
+    })
+  };
+  $scope.showVideo = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/video.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: flase
+      clickOutsideToClose:true,
     })
   };
 
