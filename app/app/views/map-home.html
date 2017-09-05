@@ -86,21 +86,21 @@
     </div>
     <md-content>
 
-      <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
+      <div layout="column" layout-margin ng-repeat="shortlisted in shortlistSelected" style="margin: 0 8px 0 8px;">
         <div layout="row">
           <div layout="column" layout-align="center start" flex="50">
-            <div class="md-headline">BI-79784</div>
+            <div class="md-headline">{{shortlisted.siteNo}}</div>
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
             <img src="assets/images/maps/light-3030.jpg" />
             <img src="assets/images/maps/light-color3030.jpg" />
-            <span class="md-subhead plane-size">40*20</span>
+            <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
           </div>
         </div>
         <div layout="row" style="margin: 0 8px 0 8px;">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-body-2">Billboards</div>
+            <div class="md-body-2">{{Shortlisted.type}}</div>
 
           </div>
           <div layout="column" flex="35" layout-align="center start">
@@ -112,15 +112,15 @@
         </div>
         <div layout="row">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-caption">Nampally Station Road Cricle on Top Of Shalimar Funiture</div>
+            <div class="md-caption">{{shortlisted.address}}</div>
             <div class="md-caption">500001</div>
           </div>
           <div layout="column" flex="35" layout-align=" start center">
 
-            <div class="md-caption">From Abids Towers Nampally station(Mj Market)</div>
+            <div class="md-caption">{{shortlisted.direction}}</div>
           </div>
           <div layout="column" flex="30" layout-align="start end ">
-            <div class="md-caption">3,87,000</div>
+            <div class="md-caption">{{shortlisted.impressions}}</div>
             <div class="md-caption">week(Approx)</div>
           </div>
         </div>
