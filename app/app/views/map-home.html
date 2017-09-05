@@ -1,6 +1,6 @@
 <div layout="column" style="position:relative">
   <!-- side nav for view all-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="viewAll">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListeddata" style="width:500px;" md-component-id="viewAll">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
@@ -17,35 +17,35 @@
       <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
         <div layout="row">
           <div layout="column" layout-align="center start" flex="50">
-            <div class="md-headline">BI-79784</div>
+            <div class="md-headline">{{shortlisted.siteNo}}</div>
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
             <img src="assets/images/maps/light-3030.jpg" />
             <img src="assets/images/maps/light-color3030.jpg" />
-            <span class="md-subhead plane-size">40*20</span>
+            <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
           </div>
         </div>
         <div layout="row" style="margin: 0 8px 0 8px;">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-body-2">Billboards</div>
+            <div class="md-body-2">{{Shortlisted.type}}</div>
 
           </div>
           <div layout="column" flex="35" layout-align="center start">
             <div class="md-body-2">Facing</div>
           </div>
           <div layout="column" flex="30" layout-align="center end ">
-            <div class="md-body-2">Impressions</div>
+            <div class="md-body-2">{{shortlisted.impressions}}</div>
           </div>
         </div>
         <div layout="row">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-caption">Nampally Station Road Cricle on Top Of Shalimar Funiture</div>
+            <div class="md-caption">{{shortlisted.address}}</div>
             <div class="md-caption">500001</div>
           </div>
           <div layout="column" flex="35" layout-align=" start center">
 
-            <div class="md-caption">From Abids Towers Nampally station(Mj Market)</div>
+            <div class="md-caption">{{shortlisted.direction}}</div>
           </div>
           <div layout="column" flex="30" layout-align="start end ">
             <div class="md-caption">3,87,000</div>
@@ -587,16 +587,18 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Industry Sector</label>
-          <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-            <md-optgroup label="items">
-              <md-option ng-value="item">Item 1</md-option>
-              <md-option ng-value="item">Item 2</md-option>
-              <md-option ng-value="item">Item 3</md-option>
-              <md-option ng-value="item">Item 4</md-option>
-            </md-optgroup>
-          </md-select>
+          <label>Add your Organisation URL:</label>
+          <input  required md-no-asterisk name="orgname" ng-model="project.orgURL">
+          <div ng-messages="suggestMeform.orgname.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
         </md-input-container>
+         <md-input-container class="md-block">
+        <label>Industry Sector</label>
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+            <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
+      </md-input-container>
         <md-input-container class="md-block">
           <label>Estimated Budget</label>
           <input required md-no-asterisk name="estbudget" ng-model="project.estbudget">
@@ -606,23 +608,18 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Campaign Duration Sector</label>
-          <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-            <md-optgroup label="items">
-              <md-option ng-value="item">Item 1</md-option>
-              <md-option ng-value="item">Item 2</md-option>
-              <md-option ng-value="item">Item 3</md-option>
-              <md-option ng-value="item">Item 4</md-option>
-            </md-optgroup>
-          </md-select>
+        <label>Campaign Duration Sector</label>
+         <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+            <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
         </md-input-container>
-        </md-input-container>
+        
 
         <div class="sug-dates">
-          <md-datepicker ng-model="ctrl.myDate" md-placeholder="Expected Standard Date" layout-fill></md-datepicker>
+          <md-datepicker ng-model="project.ctrl.myDate" md-placeholder="Expected Standard Date" layout-fill></md-datepicker>
         </div>
         <div layout="row" layout-margin>
-          <md-button class="md-raised md-warn" ng-click="suggestMeConfirm($event)" layout-fill>SUGGEST ME</md-button>
+          <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)" layout-fill>SUGGEST ME</md-button>
         </div>
       </form>
     </md-content>
@@ -1148,7 +1145,7 @@
             </div>
           </div>
           <md-divider></md-divider> -->
-          <div layout="row" flex>
+          <div layout="row" flex ng-repeat="shortlisted in shortListeddata">
             <md-list flex>
               <md-list-item class="md-3-line list-img">
                 <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
@@ -1156,15 +1153,15 @@
                   <span class="md-title">B</span>
                 </div>
                 <div class="md-list-item-text list-item-text" layout="column" flex>
-                  <h3 class="md-body-1">Kondapur</h3>
-                  <p class="md-caption">70 Bowman St. South Windsor, CT 06074 </p>
+                  <h3 class="md-body-1">{{shortlisted.areaname}}</h3>
+                  <p class="md-caption">{{shortlisted.address}}</P></p>{{shortlisted.siteNo}}</p>
                   <p> </p>
                 </div>
               </md-list-item>
             </md-list>
             <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
               <md-checkbox class="md-secondary list-checkbox" ng-model="person.selected"></md-checkbox>
-              <md-button class="md-icon-button">
+              <md-button class="md-icon-button" ng-click="deletShortlisted(shortlisted.id)" >
                 <md-icon><i class="material-icons ">delete</i></md-icon>
               </md-button>
             </div>
