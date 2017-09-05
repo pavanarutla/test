@@ -525,6 +525,15 @@ app.controller('GmapCtrl',
           alert(response.message);
         });
       }
+      MapService.getshortListProduct("23fkf23vlh").then(function(response){ 
+          $scope.shortListeddata = response;
+          console.log($scope.shortListeddata,"$scope.shortListeddata");
+        })
+        $scope.deletShortlisted =function (product){
+        MapService.deleteshortListProduct("23fkf23vlh","product").then(function(response){
+          console.log(response,"deleted data")
+        })
+      };
 
       $scope.resetFilters = function(){
         $scope.selectedAreas = null;
