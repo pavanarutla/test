@@ -44,7 +44,14 @@ app.controller('GmapCtrl',
         $scope.countries = countries;
         console.log(countries);
       });
-      
+      $scope.Sectors=[];
+      MapService.getIndustrySectors().then(function(Sectors){
+        $scope.Sectors = Sectors;
+      });
+      $scope.DurationSectors=[];
+      MapService.getDurationSectors().then(function(DurationSectors){
+        $scope.DurationSectors = DurationSectors;
+      });
       var trafficOn = false;
       var trafficLayer = new google.maps.TrafficLayer();
       NgMap.getMap().then(function (map) {
@@ -305,7 +312,7 @@ app.controller('GmapCtrl',
       //$scope.agents = [1,2]
 
       //Suggest Me Dialog 1
-      $scope.suggestMeConfirm = function (ev) {
+      $scope.suggestMeConfirm = function (project) {
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('body')))
@@ -314,7 +321,7 @@ app.controller('GmapCtrl',
             .textContent('You can specify some description text in here.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
-            .targetEvent(ev)
+            .targetEvent(project)
         );
       };
 
@@ -525,6 +532,15 @@ app.controller('GmapCtrl',
           alert(response.message);
         });
       }
+      MapService.getshortListProduct("23fkf23vlh").then(function(response){ 
+          $scope.shortListeddata = response;
+          console.log($scope.shortListeddata,"$scope.shortListeddata");
+        })
+        $scope.deletShortlisted =function (product){
+        MapService.deleteshortListProduct("23fkf23vlh","product").then(function(response){
+          console.log(response,"deleted data")
+        })
+      };
 
       $scope.resetFilters = function(){
         $scope.selectedAreas = null;

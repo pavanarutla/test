@@ -21,10 +21,30 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       $http.post(config.apiPath + '/shortlistProduct', {user_id: userId, product_id: productId}).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
+     getshortListProduct: function(user_id){
+      var dfd = $q.defer();
+      $http.get(config.apiPath + '/shortlistedProducts/' + user_id).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
+     deleteshortListProduct: function(user_id,product_id){
+      var dfd = $q.defer();
+      $http.delete(config.apiPath + '/shortlistedProduct/', {user_id :user_id, product_id :product_id}).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
      filterProducts: function(criteria){
       var dfd = $q.defer();
       $http.post(config.apiPath + '/filterProducts', criteria).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
-    }
+    },
+    getIndustrySectors: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/Sectors').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },  
+        getDurationSectors:function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/DurationSectors').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
   }
 }]);
