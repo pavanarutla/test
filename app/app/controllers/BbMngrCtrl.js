@@ -72,8 +72,14 @@ $scope.savedcampaignDiv = function(){
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/sigIn.html',
+      fullscreen: $scope.customFullscreen
+    })
+  };
+  $scope.showVideo = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/video.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose:true,
     })
   };
 
@@ -83,20 +89,20 @@ $scope.savedcampaignDiv = function(){
  
   $scope.whatwedo = function(){   
      $location.path('/');     
-    window.scroll(0,600);
+    window.scroll(0,675);
     
   }
   $scope.formate = function(){
     $location.path('/');
-    window.scroll(0,1000)
+    window.scroll(0,1535)
   }
     $scope.whyOutdoor = function(){
     $location.path('/');
-    window.scroll(0,1850)
+    window.scroll(0,2270)
   }
   $scope.contactus = function(){
      $location.path('/');
-    window.scroll(0,4000)
+    window.scroll(0,4300)
   }
 
   //scroll to top

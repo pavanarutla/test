@@ -37,10 +37,12 @@ app.controller('GmapCtrl',
         $scope.filteredMarkers = markers;
       });
       $scope.countries=[];
-      $scope.states=[];
-      $scope.cities=[];
+      $scope.states = [];
+      $scope.cities=[];      
+      $scope.areas = [];
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
+        console.log(countries);
       });
       
       var trafficOn = false;
@@ -144,10 +146,6 @@ app.controller('GmapCtrl',
       $scope.selectedStates={};
       $scope.selectedcitys={};
       $scope.selectedareas={};
-      $scope.allcountries = [];
-      $scope.states = [];
-      $scope.citys = [];
-      $scope.areas = [];
       
       $scope.searchTerm;
       $scope.clearSearchTerm = function () {
@@ -216,6 +214,18 @@ app.controller('GmapCtrl',
       // Suggest Me dialog 
       $scope.suggestMe = function() {
         $mdSidenav('suggestMe').toggle();
+      };
+      // Save Campgin Name
+      $scope.saveCampaignName = function() {
+        $mdSidenav('saveCampaignName').toggle();
+      };
+      // View All Campaign List
+      $scope.viewAllCampaginList = function() {
+        $mdSidenav('viewAll').toggle();
+      };
+      // Create Campaign  
+      $scope.createCampaign = function() {
+        $mdSidenav('createCampaign').toggle();
       };
 
       //Confirm Dialog
