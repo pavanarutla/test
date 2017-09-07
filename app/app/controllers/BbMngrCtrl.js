@@ -1,4 +1,5 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout,$location, $rootScope) {
+app.controller('bbMngrCtrl',['$scope','$mdDialog','$mdSidenav','$timeout','ContactService','$location','$rootScope', 
+function ($scope, $mdDialog, $mdSidenav, $timeout,ContactService,$location, $rootScope) {
 
 
 $scope.filter = false;
@@ -163,7 +164,13 @@ $(window).on("scroll", function() {
     }],
     method: {}
   };
-
+  $scope.feed={};
+$scope.sendfeedback = function (feed) {
+   ContactService.feedBackData($scope.feed).then(function(response){
+          alert(response.message);
+        });
+  $scope.feed="";
+      };
   $scope.showContact = function(ev) {
     
     var confirm = $mdDialog.prompt()
@@ -175,11 +182,14 @@ $(window).on("scroll", function() {
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
+    ContactService.contactNumber(result).then(function(response){
+          alert(response.message);
+        });
+      
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
     
   };
   
-});
+}]);
