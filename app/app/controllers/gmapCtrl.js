@@ -24,6 +24,8 @@ app.controller('GmapCtrl',
       $scope.mapObj;
       var markersOnMap = [];
       $scope.selectedProduct = null;
+      var trafficOn = false;
+      var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
         icon: {
           url: 'assets/images/maps/Ellipse 75.png',
@@ -35,6 +37,10 @@ app.controller('GmapCtrl',
       $scope.product = {};
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
+        NgMap.getMap().then(function (map) {
+          $scope.mapObj = map;
+          $scope.processMarkers();
+        });
       });
       $scope.countries=[];
       $scope.states = [];
@@ -45,19 +51,13 @@ app.controller('GmapCtrl',
         console.log(countries);
       });
       $scope.Sectors=[];
-      MapService.getIndustrySectors().then(function(Sectors){
-        $scope.Sectors = Sectors;
-      });
+      // MapService.getIndustrySectors().then(function(Sectors){
+      //   $scope.Sectors = Sectors;
+      // });
       $scope.DurationSectors=[];
-      MapService.getDurationSectors().then(function(DurationSectors){
-        $scope.DurationSectors = DurationSectors;
-      });
-      var trafficOn = false;
-      var trafficLayer = new google.maps.TrafficLayer();
-      NgMap.getMap().then(function (map) {
-        $scope.mapObj = map;
-        $scope.processMarkers();
-      });
+      // MapService.getDurationSectors().then(function(DurationSectors){
+      //   $scope.DurationSectors = DurationSectors;
+      // });
 
       // range circle
       $scope.radius = 0;

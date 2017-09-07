@@ -9,10 +9,17 @@ var app = angular.module('bbManager', [
   'slickCarousel',
   'vsGoogleAutocomplete',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'satellizer'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
-  function($locationProvider, $routeProvider, $mdThemingProvider) {
+app.constant('config', {
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
+})
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$authProvider', 'config',
+  function($locationProvider, $routeProvider, $mdThemingProvider, $authProvider, config) {
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -75,6 +82,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/userprofile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
+
+    $authProvider.baseUrl = config.apiPath;
+    $authProvider.loginUrl = '/login';
+    $authProvider.signupUrl = '/signup';
+    // $authProvider.unlinkUrl = '/auth/unlink/';
   }
 ]);
 
@@ -96,26 +108,18 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
 }]);
 
 app.run( ['$rootScope', '$location', '$http', function($rootScope, $location, $http) {
-  
-  $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
-    console.log('Current route name: ' + $location.path());
-    // Get all URL parameter
-    if($location.path() == "/location"){
-      $rootScope.footerhide = true;
-    }
-    else{
-      $rootScope.footerhide = false;
-    }
-    $rootScope.logOut = function(){      
-      localStorage.getItem("logindata");
-      $rootScope.logiIn = false;
-    }
-  });
+  // $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
+  //   // console.log('Current route name: ' + $location.path());
+  //   // Get all URL parameter
+  //   if($location.path() == "/location"){
+  //     $rootScope.footerhide = true;
+  //   }
+  //   else{
+  //     $rootScope.footerhide = false;
+  //   }
+  //   $rootScope.logOut = function(){      
+  //     localStorage.getItem("logindata");
+  //     $rootScope.logiIn = false;
+  //   }
+  // });
 }]);
-
-app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
-});

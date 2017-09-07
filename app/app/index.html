@@ -67,13 +67,13 @@
         </md-button> -->
         
 
-      <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
+      <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!authenticated">
           BOOK NOW
       </md-button>
-      <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="#/location">
+      <md-button aria-label="location" class=" md-primary md-raised" ng-show="authenticated && !footerhide"><a href="#/location">
           Browse BillBoards</a>
       </md-button>
-      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard"  ng-click="suggestMe()" >
+      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && authenticated"  ng-click="suggestMe()" >
           suggest me
       </md-button>
 
@@ -191,9 +191,10 @@
     <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <!-- Overlapping marker spiderifier -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
-
     <!-- google autocomplete -->
     <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
+    <!-- Satellizer jwt -->
+    <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
 
     <!-- ////////////
       custom js 
@@ -212,7 +213,7 @@
     <script type="text/javascript" src="controllers/admin/ProductsCtrl.js"></script>
     <script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
     <script type="text/javascript" src="controllers/campaiginCtrl.js"></script>
-    <script type="text/javascript" src="controllers/siginCtrl.js"></script>
+    <script type="text/javascript" src="controllers/signInCtrl.js"></script>
     <script type="text/javascript" src="controllers/registerCtrl.js"></script>
     <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
     <script type="text/javascript" src="controllers/userProfileCtrl.js"></script>
