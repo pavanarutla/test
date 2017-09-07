@@ -700,6 +700,7 @@
           </div>
         </div>
         <md-divider></md-divider> -->
+<<<<<<< HEAD
           <!-- dateselection html end-->
           <div layout="column" layout-padding>
             <div class="md-subhead">Area</div>
@@ -714,6 +715,88 @@
                   vs-post-code="address.components.postCode" vs-district="address.components.district" vs-latitude="address.components.location.lat"
                   vs-longitude="address.components.location.lng" type="text" name="address" aria-label="google-autocomplete"
                   ng-change="setNewAddress()">
+=======
+        <!-- dateselection html end-->
+        <div class="md-subhead">Area</div>
+        <!-- pincode,area,tab id section start-->
+        <form>
+          <md-input-container class="pstcde" style="width:100%">
+            <!-- <label for="testInput">Postcode,Area Name,Tab ID</label> -->
+<<<<<<< HEAD
+
+            <input vs-google-autocomplete type="text" id="testInput" ng-model="address" md-autofocus ng-model="address.name" vs-place="address.place"
+              vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street"
+              vs-city="address.components.city" vs-state="address.components.state" vs-country-short="address.components.countryCode"
+              vs-country="address.components.country" vs-post-code="address.components.postCode" vs-district="address.components.district"
+              vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address"
+              aria-label="google-autocomplete">
+=======
+            
+            <input vs-google-autocomplete type="text" id="testInput" md-autofocus
+                 ng-model="address.name"
+                 vs-place="address.place" 
+                 vs-place-id="address.components.placeId"
+                 vs-street-number="address.components.streetNumber" 
+                 vs-street="address.components.street"
+                 vs-city="address.components.city"
+                 vs-state="address.components.state"
+                 vs-country-short="address.components.countryCode"
+                 vs-country="address.components.country"
+                 vs-post-code="address.components.postCode"
+                 vs-district="address.components.district"
+                 vs-latitude="address.components.location.lat"
+                 vs-longitude="address.components.location.lng"
+                 type="text" 
+                 name="address"
+                 aria-label = "google-autocomplete"
+                 ng-change="setNewAddress()"
+                 >
+>>>>>>> 65730cc5744148868d20729d4c35e7ab930a2a92
+          </md-input-container>
+        </form>
+        <!-- pincode,area,tab id section end-->
+        <!--slider html start -->
+          
+          <div layout="row" class="slider-part">
+            <div class="range md-subhead" flex="20">Range</div>
+            <div flex class="slider-range">
+              <md-slider  md-discrete ng-model="rating" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
+            </div>
+            <div class="rnge md-body-1" flex="20">KMS</div>
+          </div>
+      
+        <!--slider html end -->
+        <md-divider></md-divider>
+        <form name="Locations">
+          <div class="md-subhead">Select Multiple Locations</div>
+          <md-divider></md-divider>
+          <div layout="row">
+            <div flex="50" class="armrgn">
+              <md-input-container style="z-index:999;width:100%">
+                <label>Select Country </label>
+                <md-select name="repeatSelect" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-option ng-repeat="country in allcountries | filter:searchTerm" value="{{country.Id}}">{{country.Countryname}}</md-option>
+                  <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}
+                  </md-option>
+                </md-select required>
+
+              </md-input-container>
+            </div>
+            <div flex="50" class="armrgn">
+              <md-input-container style="width:100%">
+                <label> Select State</label>
+                <md-select ng-model="selectedStates" ng-disabled="!selectedCountry" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                  ng-change="setStates()" multiple>
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-optgroup label="states">
+                    <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
+                  </md-optgroup>
+                </md-select>
               </md-input-container>
             </form>
             <!-- pincode,area,tab id section end-->
@@ -793,7 +876,46 @@
                   </md-select>
                 </md-input-container>
               </div>
+          <div layout="row">
+            <div flex="50" class="armrgn">
+              <md-input-container style="width:100%">
+                <label>Select City</label>
+                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setcitys()" md-on-close="clearSearchTerm()"
+                <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
+                  data-md-container-class="selectdemoSelectHeader" multiple>
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-optgroup label="citys">
+                    <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
             </div>
+            <div flex="50" class="armrgn">
+              <md-input-container style="width:100%">
+                <label>Select Areas</label>
+
+                <md-select ng-model="selectedareas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+
+                <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+
+                  multiple>
+                  <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <md-optgroup label="areas">
+
+                    <md-option ng-value="{{area}}" ng-repeat="area in areas | filter:searchTerm">{{area.areaname}}</md-option>
+
+                    <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
+
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+
+            </div>
+
 
             <md-divider></md-divider>
             <div layout="row">
@@ -802,6 +924,19 @@
             </div>
           </form>
         </div>
+
+          <md-divider></md-divider>
+          <div layout="row">
+
+            <md-button class="md-raised md-primary" type="submit">APPLY</md-button>
+            <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1">Reset Feileds</span> </md-button>
+
+            <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
+            <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feileds</span> </md-button>
+
+          </div>
+        </form>
+
       </div>
       <!-- filters html end-->
 
@@ -1178,6 +1313,30 @@
           </div>
         </div>
 
+
+
+        <md-divider></md-divider>
+        <div layout="row">
+          <md-button class="md-raised " ng-click="closeSideViewAll()">VIEW ALL</md-button>
+          <md-button class="md-raised md-primary" ng-click="saveCampaignDetails()">SAVE CAMPAIGN</md-button>
+          <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
+        </div>
+        <div layout="row">
+          <!-- <md-button class="md-raised" >Success</md-button> -->
+          <md-button class="md-raised" ng-click="closeSideThanksSidenav()">Map pointer</md-button>
+          <md-button class="md-raised" ng-click="suggestMe()">Suggest me</md-button>
+          <md-button ng-click="showCustomToast()" class="md-raised">
+            Toast
+          </md-button>
+        </div>
+      </div>
+      <div ng-show="shortlist" style="background:#F1FBFD">
+        <div layout="column" layout-margin layout-align="center center">
+          <img src="assets/images/product/shortlistimg.png" alt="image" width="214px;height:174px">
+        </div>
+        <div layout="column" layout-align="center center" layout-margin>
+          <md-button class="md-raised md-warn" ng-click="createCampgin()">ADD PRODUCT</md-button>
+        </div>
       </div>
       <!--SHORTLIST html end -->
 
@@ -1247,9 +1406,178 @@
         </md-button>
         <!-- <md-button class="md-raised md-primary" ng-init="Popular = false" ng-click="Popular = !Popular">Popular Mediums<span> -->
         <md-button class="md-raised md-primary" ng-click="PopularDiv()">Popular Mediums<span> 
+
+        <span><md-icon ng-show="Recommended"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
+      </md-button>
+
+      <md-button class="md-raised md-primary" ng-init="Popular = false" ng-click="Popular = !Popular">Popular Mediums<span>
+
+<!-- <md-button class="md-raised md-primary" ng-init="Popular = false" ng-click="Popular = !Popular">Popular Mediums<span> -->
+       <md-button class="md-raised md-primary"  ng-click="PopularDiv()">Popular Mediums<span> 
+
       <md-icon ng-hide="Popular"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
           <span><md-icon ng-show="Popular"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
         </md-button>
+    </div>
+    <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Recommended">
+      <div>
+        <img src="assets/images/icons/001-shop.png">
+
+      </div>
+    </div>
+    <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Popular">
+      <div>
+        <img src="assets/images/icons/001-shop.png">
+
+      </div>
+      <div>
+        <img src="assets/images/icons/001-shop.png">
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- side nav for view all-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </div>
+  </div>
+  <!-- side nav for view all-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="viewAll">
+      <div layout="row">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Notifications</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
+      </div>
+      <md-content layout-padding="">
+
+
+      </md-content>
+    </md-sidenav>
+
+    <!-- saved campgin-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedCampaign">
+      <div layout="row">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Notifications</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideSavedCampaign()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
+      </div>
+      <md-content layout-padding="">
+        saved campaign
+      </md-content>
+    </md-sidenav>
+
+    <!--saved view all Shortlisted -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="savedViewAll">
+      <div layout="row">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Shortlisted Products</span>
+          </h2>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
+      </div>
+    </div>
+    <md-content ng-repeat="agent in agents|filter:search" layout="row">
+      <md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">BI-79784{{agent.RCustId}}</span>
+            <span class="md-subhead">Small{{agent.FullName}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>View</md-button>
+          <md-button>Delete</md-button>
+        </md-card-actions>
+      </md-card>
+    </md-content>
+  </md-sidenav>
+      <md-content ng-repeat="agent in agents|filter:search" layout="row">
+        <md-card >
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">BI-79784{{agent.RCustId}}</span>
+              <span class="md-subhead">Small{{agent.FullName}}</span>
+            </md-card-title-text>
+            <md-card-title-media>
+              <div class="md-media-sm card-media"></div>
+            </md-card-title-media>
+          </md-card-title>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button>View</md-button>
+            <md-button>Delete</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-content>
+    </md-sidenav>
+
+    <!-- saved capaign edit -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedEdit">
+      <div layout="row">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Notifications</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideEditList()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
+      </div>
+      <md-content layout-padding="">
+        saved campaign edit list
+
+        <md-button class="md-primary md-raised" ng-click="closeSideSavedCampaign()">saved campagin</md-button>
+      </md-content>
+    </md-sidenav>
+
+    <!-- Success message on saved campagin-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedSavedCampaign">
+      <div layout="row">
+        <div class="md-toolbar-tools">
+          <!-- <h2>
+          <span>Notifications</span>
+        </h2> -->
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideSavedCampaign()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
       </div>
       <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Recommended">
         <div>
@@ -1268,6 +1596,126 @@
         </div>
       </div>
     </div>
+      <md-content layout-align="center center">
+        <h3>Don't think! </h3>
+        <h4>Let me help you on your Campaign Needs..</h4>
+      </md-content>
+    <form name="suggestMeform">
+      <md-input-container class="md-block">
+        <label>Organisation Name</label>
+        <input md-maxlength="30" required md-no-asterisk name="orgname" ng-model="project.orgname">
+        <div ng-messages="suggestMeform.orgname.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Add your Organisation URL:</label>
+        <input type="url" name="homepage" required md-no-asterisk ng-model="project.orgURL">
+        <div ng-messages="suggestMeform.orgname.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Industry Sector</label>
+        <!-- <md-select ng-model="project.selectedItem" md-selected-text="getSelectedText()">
+=======
+      <form name="suggestMeform">
+        <md-input-container class="md-block">
+          <label>Organisation Name</label>
+          <input md-maxlength="30" required md-no-asterisk name="orgname" ng-model="project.orgname">
+          <div ng-messages="suggestMeform.orgname.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Add your Organisation URL:</label>
+          <input type="url" name="homepage" required md-no-asterisk ng-model="project.orgURL">
+          <div ng-messages="suggestMeform.orgname.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Industry Sector</label>
+          <!-- <md-select ng-model="project.selectedItem" md-selected-text="getSelectedText()">
+>>>>>>> 65730cc5744148868d20729d4c35e7ab930a2a92
+          <md-optgroup label="items">
+            <md-option ng-value="item">Item 1</md-option>
+            <md-option ng-value="item">Item 2</md-option>
+            <md-option ng-value="item">Item 3</md-option>
+            <md-option ng-value="item">Item 4</md-option>
+          </md-optgroup>
+        </md-select> -->
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+          <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
+        </md-select required>
+      </md-input-container>
+      <md-input-container class="md-block" aria-placeholder="months">
+        <label>Estimated Budget</label>
+        <input md-maxlength="30" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
+        <div ng-messages="suggestMeform.estbudget.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Campaign Duration </label>
+        <!-- <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+=======
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+            <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
+        </md-input-container>
+        <md-input-container class="md-block" aria-placeholder="months">
+          <label>Estimated Budget</label>
+          <input md-maxlength="30" required md-no-asterisk name="estbudget" ng-model="project.estbudget">
+          <div ng-messages="suggestMeform.estbudget.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Campaign Duration </label>
+          <!-- <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+>>>>>>> 65730cc5744148868d20729d4c35e7ab930a2a92
+          <md-optgroup label="items">
+            <md-option ng-value="item">Item 1</md-option>
+            <md-option ng-value="item">Item 2</md-option>
+            <md-option ng-value="item">Item 3</md-option>
+            <md-option ng-value="item">Item 4</md-option>
+          </md-optgroup>
+        </md-select> -->
+        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+          <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
+        </md-select required>
+      </md-input-container>
+      </md-input-container>
+
+      <div flex-gt-xs class="md-block">
+        <label>Expected Start Date</label>
+        <md-datepicker ng-model="project.myDate" md-placeholder="Enter date"></md-datepicker>
+      </div>
+      <div>
+        <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)">SUGGEST ME</md-button>
+      </div>
+    </form>
+  </md-sidenav>
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+            <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
+          </md-select required>
+        </md-input-container>
+        </md-input-container>
+
+        <div flex-gt-xs class="md-block">
+          <label>Expected Start Date</label>
+          <md-datepicker ng-model="project.myDate" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div>
+          <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)">SUGGEST ME</md-button>
+        </div>
+      </form>
+    </md-sidenav>
 
   </div>
 </div>

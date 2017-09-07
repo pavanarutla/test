@@ -1,0 +1,110 @@
+<div layout="column" layout-sm="column" layout-xs="column" class="bbsco" style="background: #fff;">
+    <div layout="column" layout-align="center center" class="pricing-head">
+    </div>
+    <div class="packages flex">
+
+        <div layout="column" class="news-inner" flex-offset-gt-sm="20" flex="60" flex-xs="100" flex-sm="100">
+            <div layout="row">
+
+                <div flex-xs flex-gt-xs="100" layout="column">
+                    <md-card>
+                        <md-card-header>
+                            <md-card-header-text>
+                                <!-- <fieldset>
+                                    <legend>Upload on form submit</legend>
+                                    <input
+                                        type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="">
+                                        <i ng-show="myForm.file.$error.required">*required</i>
+                                        <br>
+
+                                        <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+                                        <img width="200" height="100" ngf-src="picFile" class="thumb">
+                                        <span class="progress" ng-show="picFile.progress >= 0">
+                                    <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'" class="ng-binding"></div>
+                                     </span>
+                                        <span ng-show="picFile.result">Upload Successful</span>
+                                </fieldset> -->
+                                <!-- <img src="assets/images/product/user_avathar.png" class="md-card-image inner-img" alt="Washed Out">    -->
+                                
+                                <form name="myForm">
+                                    <div>Crop Image and Upload</div>
+                                    <button ngf-select ng-model="picFile" accept="image/*">
+                                      Select Picture</button>
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                        <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                        </img-crop>
+                                    </div>
+                                    <div style="width:400px;height:250px;">
+                                        <img class="md-card-image inner-img" ng-src="{{croppedDataUrl}}" />
+                                    </div>
+                                    <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button>
+
+                                    <span class="progress" ng-show="progress >= 0">
+                                      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                  </span>
+                                    <span ng-show="result">Upload Successful</span>
+                                    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                                </form> 
+                            </md-card-header-text>
+                        </md-card-header>
+                        <md-card-content layout="row" layout-align="center center" align="center">
+                            <h2>James Bond</h2>
+                            <h3>jamesbond@007.com</h3>
+
+                            <div class="md-body-2">
+                                <md-icon><i class="material-icons">call</i></md-icon>
+                                <span>Phone:</span>(+91)9999999999
+                            </div>
+                            <div class="md-body-2">
+                                <md-icon><i class="material-icons">location_on</i></md-icon>
+                                <span>Address:</span>
+                                <span>K67/68, Sonal Heavy Indl Est, Kanchapadaramchandra Lane Extn, Banjara Hills</span>
+                            </div>
+                            <md-divider md-inset></md-divider>
+                            <h1 align="center">Campaign Info</h1>
+                            <div layour="row" class="layout-row flex">
+
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Running</span>
+                                            <span class="md-headline">4</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Closed</span>
+                                            <span class="md-headline">3</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">No. Of Boards</span>
+                                            <span class="md-headline">5</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                                <md-card flex="" layout-align="center center" class="demo-swipe layout-align-center-center layout-row flex">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <img src="assets/images/icons/001-shop.png" class="md-card-image inner-img" alt="Running">
+                                            <span class="md-subhead">Invested</span>
+                                            <span class="md-headline">Rs. 3,50,000</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                </md-card>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

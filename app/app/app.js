@@ -9,7 +9,8 @@ var app = angular.module('bbManager', [
   'slickCarousel',
   'vsGoogleAutocomplete',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'ngImgCrop'
 ])
 .config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
   function($locationProvider, $routeProvider, $mdThemingProvider) {
@@ -71,12 +72,16 @@ var app = angular.module('bbManager', [
     .when('/campaginedit',{
       templateUrl: 'views/campaginedit.html'
     })
-    .when('/userprofile',{
-      templateUrl: 'views/userprofile.html'
-    });
-    $routeProvider.otherwise({redirectTo: '/'});
+    .when('/campaginprofile',{
+      templateUrl: 'views/campProfile.html',
+      // controller:'MyCtrl'
+     //controller:'bbMngrCtrl'
+    controller: 'CampaiginController'
+    }),
+    $routeProvider.otherwise({redirectTo: '/home'});
   }
 ]);
+
 
 
 /* ===================

@@ -261,6 +261,29 @@ app.controller('GmapCtrl',
           .targetEvent(ev)
         );
       };
+
+
+      //Toaster Function Call
+      var isDlgOpen;
+      $scope.showCustomToast = function () {
+        $mdToast.show({
+          hideDelay: 5000,
+          position: 'top center',
+          controller: 'GmapCtrl',
+          templateUrl: 'views/toast-template.html'
+        });
+      };
+      $scope.closeToast = function() {
+        if (isDlgOpen) return;
+        $mdToast
+          .hide()
+          .then(function() {
+            isDlgOpen = false;
+          });
+      };
+        
+      //Toaster Function Call
+
       $scope.IndustrySector = [
         { model: "Aerospace" },
         { model: "Agriculture" },

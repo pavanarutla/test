@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope"
-  itemtype="http://schema.org/Product" ng-app="bbManager">
+  itemtype="http://schema.org/Product" ng-app="bbManager"  flow-init flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-files-submitted="$flow.upload()">
 
 <head>
   <meta charset="utf-8">
@@ -15,15 +15,12 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
- 
-
-
   <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
 </head>
 
 <body layout="column" ng-cloak ng-controller="bbMngrCtrl">
-  <md-toolbar class="md-menu-toolbar header">
+  <md-toolbar class="md-menu-toolbar header" style="background:#488edf;">
     <div class="md-toolbar-tools">
       <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
@@ -47,7 +44,7 @@
           </md-button>
           <md-menu-content  width="3" style="z-index:99">
             <md-menu-item>
-              <md-button >Chanikya varma</md-button>
+              <md-button>Chanikya varma</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
@@ -162,10 +159,10 @@
         </div>
 
       </div>
-       <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)" />
-      <md-icon style="color: #fff;">^</md-icon>
-      </md-button> 
-    
+      <!-- <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:#E1DEDE" />
+      <md-icon style="color: #E75344;">^</md-icon>
+      </md-button> -->
+
     </footer>
 
     <!--Scripts include-->
@@ -192,8 +189,14 @@
     <!-- Overlapping marker spiderifier -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
 
+    <!--File Upload JS-->
+    <script src="https://angular-file-upload.appspot.com/js/ng-file-upload-shim.js"></script>
+    <script src="https://angular-file-upload.appspot.com/js/ng-file-upload.js"></script>
+    <script src="https://rawgit.com/alexk111/ngImgCrop/master/compile/unminified/ng-img-crop.js"></script>
+
     <!-- google autocomplete -->
     <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
+
 
     <!-- ////////////
       custom js 
