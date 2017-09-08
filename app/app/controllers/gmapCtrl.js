@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', 'MapService', 'LocationService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, MapService, LocationService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -48,7 +48,7 @@ app.controller('GmapCtrl',
       $scope.areas = [];
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
-        console.log(countries);
+        // console.log(countries);
       });
       $scope.Sectors=[];
       // MapService.getIndustrySectors().then(function(Sectors){
@@ -534,7 +534,7 @@ app.controller('GmapCtrl',
       }
       MapService.getshortListProduct("23fkf23vlh").then(function(response){ 
           $scope.shortListeddata = response;
-          console.log($scope.shortListeddata,"$scope.shortListeddata");
+          // console.log($scope.shortListeddata,"$scope.shortListeddata");
         })
         $scope.deletShortlisted =function (product){
         MapService.deleteshortListProduct("23fkf23vlh","product").then(function(response){
@@ -561,7 +561,6 @@ app.controller('GmapCtrl',
           $scope.mapObj.fitBounds(bounds);
         });
       }
-
     }
   ]
 );
