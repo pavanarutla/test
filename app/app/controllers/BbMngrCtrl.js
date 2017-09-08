@@ -171,6 +171,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.logout = function(){
     $auth.logout().then(function(){
       $rootScope.isAuthenticated = false;
+      $location.path('/');
       toastr.success('You have successfully signed out!');
     });
   }
