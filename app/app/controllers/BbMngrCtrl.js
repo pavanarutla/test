@@ -72,12 +72,20 @@ $scope.savedcampaignDiv = function(){
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/sigIn.html',
-      fullscreen: $scope.customFullscreen
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
     })
   };
   $scope.showVideo = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/video.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+    })
+  };
+   $scope.shareForm = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/shareform.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
     })
@@ -164,22 +172,28 @@ $(window).on("scroll", function() {
     method: {}
   };
 
-  $scope.showContact = function(ev) {
+  // $scope.showContact = function(ev) {
     
-    var confirm = $mdDialog.prompt()
-      .title('Drop Your Contact Number')
-      .placeholder('Enter Your Contact Number')
-      .ariaLabel('Dog name')
-      .targetEvent(ev)
-      .ok('Submit')
-      .cancel('Cancel');
+  //   var confirm = $mdDialog.prompt()
+  //     .title('Drop Your Contact Number')
+  //     .placeholder('Enter Your Contact Number')
+  //     .ariaLabel('Dog name')
+  //     .targetEvent(ev)
+  //     .ok('Submit')
+  //     .cancel('Cancel');
 
-    $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
-    }, function() {
-      $scope.status = 'You didn\'t name your dog.';
-    });
+  //   $mdDialog.show(confirm).then(function(result) {
+  //     $scope.status = 'You decided to name your dog ' + result + '.';
+  //   }, function() {
+  //     $scope.status = 'You didn\'t name your dog.';
+  //   });
     
+  // };
+   $scope.showContact = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/showcontact.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+    })
   };
-  
 });

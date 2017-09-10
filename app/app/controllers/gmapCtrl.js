@@ -21,6 +21,9 @@ app.controller('GmapCtrl',
           }
         }
       };
+      //formats
+      $scope.toggle = false;
+
       $scope.mapObj;
       $scope.selectedProduct = null;
       var selectorMarker = new google.maps.Marker({
