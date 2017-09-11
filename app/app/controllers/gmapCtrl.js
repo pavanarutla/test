@@ -36,7 +36,7 @@ app.controller('GmapCtrl',
       });
       $scope.product = {};
       MapService.markers().then(function (markers) {
-        $scope.filteredMarkers = markers;
+        $scope.filteredMarkers = markers;        
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
@@ -325,13 +325,6 @@ app.controller('GmapCtrl',
         );
       };
 
-      function Marker(markerObj) {
-        var arr = [];
-        arr["lat"] = parseFloat(markerObj.lat);
-        arr["lng"] = parseFloat(markerObj.lng);
-        return arr;
-      }
-
       function selectMarker(marker){
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
@@ -351,39 +344,58 @@ app.controller('GmapCtrl',
         selectorMarker.setMap(null);
       });
 
-      $scope.processMarkers = function () {
-        var counts = [];
-        var uniq_markers = [];
+      var productList = [];
+      var locArr = [];
+      var uniqueMarkers = [];
+      var concentricMarkers = {};
+      $scope.processMarkers = function () {  
+        // console.log($scope.filteredMarkers);
         _.each($scope.filteredMarkers, function (v, i) {
-          var coordObj = JSON.stringify(v);
-          if (counts[coordObj]) {
-            counts[coordObj]++;
+          var product = {position: {lat: v.lat, lng: v.lng}, data: {v}};
+          productList.push(product);
+          if (locArr[JSON.stringify(product.position)]) {
+            locArr[JSON.stringify(product.position)]++;
           } else {
-            counts[coordObj] = 1;
+            locArr[JSON.stringify(product.position)] = 1;
           }
         });
-        var uniq_coords = _.pick(counts, function (value, key) {
-          return value == 1;
+        // console.log(locArr);
+        _.each(productList, function(v, i){
+          if(locArr[JSON.stringify(v.position)] > 1){            
+            if(concentricMarkers[JSON.stringify(v.position)]){
+              concentricMarkers[JSON.stringify(v.position)].count++;
+              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data.v);
+            }
+            else{
+              concentricMarkers[JSON.stringify(v.position)] = {};
+              concentricMarkers[JSON.stringify(v.position)].markers = [];
+              concentricMarkers[JSON.stringify(v.position)].count = 1;
+              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data.v);
+            }
+          }
+          else{
+            uniqueMarkers.push(v.data.v);
+          }
         });
-        var repeated_coords = _.pick(counts, function (value, key) {
-          return value > 1;
-        });
+
+        // console.log(uniqueMarkers);
+        console.log(concentricMarkers);
 
         /* 
         //// handling clustering ////
         */
-        _.each(uniq_coords, function (value, key) {
-          key = JSON.parse(key);
-          var latLng = new google.maps.LatLng(key['lat'], key['lng']);
+        var uniqueMarkerArr = [];
+        _.each(uniqueMarkers, function (markerData, index) {
+          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
           var marker = new google.maps.Marker({
             position: latLng,
             icon: {
-              url: config.serverUrl + key["symbol"],
+              url: config.serverUrl + markerData.symbol,
               scaledSize: new google.maps.Size(40, 40)
             }
           });
-          marker.properties = key;
-          uniq_markers.push(marker);
+          marker.properties = markerData;
+          uniqueMarkerArr.push(marker);
           markersOnMap.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
@@ -394,7 +406,7 @@ app.controller('GmapCtrl',
           maxZoom: 13,
           imagePath: 'assets/images/maps/m'
         };
-        $scope.keyClusterer = new MarkerClusterer($scope.mapObj, uniq_markers, mc);
+        $scope.Clusterer = new MarkerClusterer($scope.mapObj, uniqueMarkerArr, mc);
 
         /*
         //// handling spiderifying ////
@@ -420,16 +432,15 @@ app.controller('GmapCtrl',
           keepSpiderfied: true
         });
 
-        _.each(repeated_coords, function (value, key) {
-          for (var i = 0; i < value; i++) {
+        _.each(concentricMarkers, function (markerData, index){          
+          for (var i = 0; i < markerData.count; i++) {
             (function () {  // make a closure over the marker and marker data
               var label = {};
               label.text = " ";
               label.color = "rgba(255, 255, 255, 1)";
               if (i == 0) {
-                label.text = value.toString();
+                label.text = markerData.count.toString();
               }
-              var ll = key.split(',');
               var icon = {
                 url: 'assets/images/maps/unspidered-cluster.png',
                 scaledSize: new google.maps.Size(20, 20),
@@ -437,11 +448,11 @@ app.controller('GmapCtrl',
                 anchor: new google.maps.Point(10, 10) // anchor
               };
               var marker = new google.maps.Marker({
-                position: { lat: parseFloat(ll[0]), lng: parseFloat(ll[1]) },
+                position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
                 icon: icon,
                 label: label
               });
-              marker.groupSize = value;
+              marker.groupSize = markerData.count;
               markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
             })();
@@ -450,6 +461,7 @@ app.controller('GmapCtrl',
 
         // instantiate oms when click occurs on marker-group
         oms.addListener('format', function (marker, status) {
+          console.log(marker);
           var markerIcon;
           var label = marker.getLabel();
           var scaledCoord = 32 + (10 * (marker.groupSize - 1));
@@ -506,7 +518,7 @@ app.controller('GmapCtrl',
           if(markers != null){
             _.each(markersOnMap, function(v, i){
               v.setMap(null);
-              $scope.keyClusterer.removeMarker(v);
+              $scope.Clusterer.removeMarker(v);
             });
             markersOnMap = [];
             $scope.filteredMarkers = markers;
@@ -548,7 +560,7 @@ app.controller('GmapCtrl',
         $scope.selectedStates = null;
         _.each(markersOnMap, function(v, i){
           v.setMap(null);
-          $scope.keyClusterer.removeMarker(v);
+          $scope.Clusterer.removeMarker(v);
         });
         markersOnMap = [];
         MapService.markers().then(function (markers) {
