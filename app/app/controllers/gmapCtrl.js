@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', 'MapService', 'LocationService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, MapService, LocationService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -27,6 +27,8 @@ app.controller('GmapCtrl',
       $scope.mapObj;
       var markersOnMap = [];
       $scope.selectedProduct = null;
+      var trafficOn = false;
+      var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
         icon: {
           url: 'assets/images/maps/Ellipse 75.png',
@@ -38,6 +40,10 @@ app.controller('GmapCtrl',
       $scope.product = {};
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
+        NgMap.getMap().then(function (map) {
+          $scope.mapObj = map;
+          $scope.processMarkers();
+        });
       });
       $scope.countries=[];
       $scope.states = [];
@@ -45,15 +51,16 @@ app.controller('GmapCtrl',
       $scope.areas = [];
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
-        console.log(countries);
+        // console.log(countries);
       });
-      
-      var trafficOn = false;
-      var trafficLayer = new google.maps.TrafficLayer();
-      NgMap.getMap().then(function (map) {
-        $scope.mapObj = map;
-        $scope.processMarkers();
-      });
+      $scope.Sectors=[];
+      // MapService.getIndustrySectors().then(function(Sectors){
+      //   $scope.Sectors = Sectors;
+      // });
+      $scope.DurationSectors=[];
+      // MapService.getDurationSectors().then(function(DurationSectors){
+      //   $scope.DurationSectors = DurationSectors;
+      // });
 
       // range circle
       $scope.radius = 0;
@@ -308,7 +315,7 @@ app.controller('GmapCtrl',
       //$scope.agents = [1,2]
 
       //Suggest Me Dialog 1
-      $scope.suggestMeConfirm = function (ev) {
+      $scope.suggestMeConfirm = function (project) {
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('body')))
@@ -317,7 +324,7 @@ app.controller('GmapCtrl',
             .textContent('You can specify some description text in here.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
-            .targetEvent(ev)
+            .targetEvent(project)
         );
       };
 
@@ -528,6 +535,15 @@ app.controller('GmapCtrl',
           alert(response.message);
         });
       }
+      MapService.getshortListProduct("23fkf23vlh").then(function(response){ 
+          $scope.shortListeddata = response;
+          // console.log($scope.shortListeddata,"$scope.shortListeddata");
+        })
+        $scope.deletShortlisted =function (product){
+        MapService.deleteshortListProduct("23fkf23vlh","product").then(function(response){
+          console.log(response,"deleted data")
+        })
+      };
 
       $scope.resetFilters = function(){
         $scope.selectedAreas = null;
@@ -548,7 +564,6 @@ app.controller('GmapCtrl',
           $scope.mapObj.fitBounds(bounds);
         });
       }
-
     }
   ]
 );

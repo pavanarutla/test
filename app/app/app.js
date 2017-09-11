@@ -9,10 +9,18 @@ var app = angular.module('bbManager', [
   'slickCarousel',
   'vsGoogleAutocomplete',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'satellizer',
+  'toastr'
 ])
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', 
-  function($locationProvider, $routeProvider, $mdThemingProvider) {
+app.constant('config', {
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
+})
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', 'config',
+  function($locationProvider, $routeProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, config) {
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -43,13 +51,6 @@ var app = angular.module('bbManager', [
       controller: 'PricingCtrl'
     })
     .when('/location', {
-      // resolve:{
-      //   "check": function($location,$rootScope){
-      //     if(!$rootScope.logiIn){
-      //       $location.path('/')
-      //     }
-      //   }
-      // },
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
@@ -75,6 +76,13 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/agency-profile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
+
+    $authProvider.baseUrl = config.apiPath;
+    $authProvider.loginUrl = '/login';
+    $authProvider.signupUrl = '/signup';
+    // $authProvider.unlinkUrl = '/auth/unlink/';
+
+    $mdAriaProvider.disableWarnings();
   }
 ]);
 
@@ -86,6 +94,7 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
   slickCarouselConfig.dots = true;
   slickCarouselConfig.autoplay = false;
 }]);
+
 app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
     datepickerConfig.startingDay = "Today";
     datepickerConfig.showWeeks = false;
@@ -95,27 +104,85 @@ app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerCon
     // datepickerPopupConfig.closeText = "Close";
 }]);
 
-app.run( ['$rootScope', '$location', '$http', function($rootScope, $location, $http) {
-  
-  $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
-    console.log('Current route name: ' + $location.path());
-    // Get all URL parameter
-    if($location.path() == "/location"){
-      $rootScope.footerhide = true;
-    }
-    else{
-      $rootScope.footerhide = false;
-    }
-    $rootScope.logOut = function(){      
-      localStorage.getItem("logindata");
-      $rootScope.logiIn = false;
-    }
+/*========================
+  Toastr Config
+========================*/
+app.config(['toastrConfig', function(toastrConfig) {
+  angular.extend(toastrConfig, {
+    autoDismiss: false,
+    containerId: 'toast-container',
+    maxOpened: 0,    
+    newestOnTop: true,
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: false,
+    preventOpenDuplicates: false,
+    target: 'body'
   });
 }]);
 
-app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
-});
+app.run(
+  ['$rootScope', '$location', '$http', '$auth', '$mdDialog', 'toastr',
+    function($rootScope, $location, $http, $auth, $mdDialog, toastr) {
+      $rootScope.$on('$routeChangeStart', function(event, curr, next) {
+        // Get all URL parameter
+        if($location.path() == "/location"){
+          $rootScope.footerhide = true;
+        }
+        else{
+          $rootScope.footerhide = false;
+        }
+      
+        /*===========================================
+          Restricting routes to Authenticated Users
+        ===========================================*/
+        var adminRoutes = [
+          '/admin/add-product',
+          '/admin/products'
+        ];
+        var ownerRoutes = [
+          
+        ];
+        var requiresLogin = [
+          '/location'
+        ];
+
+        // routes for authenticated Users
+        if(_.indexOf(requiresLogin, curr.originalPath) != -1){
+          if(!$auth.isAuthenticated()){
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sigIn.html',
+              fullscreen: true
+            });
+          }
+        }
+        else if( _.indexOf(adminRoutes, curr.originalPath) != -1 ){
+          if(!$auth.isAuthenticated()){
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sigIn.html',
+              fullscreen: true
+            });
+          }
+          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'admin') == -1){
+            event.preventDefault();
+            toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
+          }
+        }
+        else if( _.indexOf(ownerRoutes, curr.originalPath) != -1 ){
+          if(!$auth.isAuthenticated()){
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sigIn.html',
+              fullscreen: true
+            });
+          }
+          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){
+            event.preventDefault();
+            toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
+          }
+        }
+      });
+    }
+  ]
+);
