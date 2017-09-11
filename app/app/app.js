@@ -151,7 +151,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
@@ -160,7 +160,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
@@ -173,7 +173,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
