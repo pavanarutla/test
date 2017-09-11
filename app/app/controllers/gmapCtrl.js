@@ -25,6 +25,7 @@ app.controller('GmapCtrl',
       $scope.toggle = false;
 
       $scope.mapObj;
+      var markersOnMap = [];
       $scope.selectedProduct = null;
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -154,25 +155,20 @@ app.controller('GmapCtrl',
         $scope.searchTerm = '';
       };
       $scope.setCountry = function () {
-        // console.log($scope.selectedCountry);
         LocationService.getStates($scope.selectedCountry).then(function (states) {
           $scope.states = states;
-          console.log($scope.states,"state");
         });
       }
 
       $scope.setStates = function () {
         LocationService.getCities($scope.selectedStates).then(function (cities) {
           $scope.cities = cities;
-          console.log($scope.cities,"city");
         });
       }
       
       $scope.setCities = function () {
-        console.log("selected cities:", $scope.selectedcitys);
-        LocationService.getareas($scope.selectedcitys).then(function (areas) {
+        LocationService.getAreas($scope.selectedcitys).then(function (areas) {
           $scope.areas = areas;
-          console.log($scope.areas,"area");
         });      
       }
       
@@ -333,36 +329,23 @@ app.controller('GmapCtrl',
       }
 
       function selectMarker(marker){
-        console.log(marker.properties);
-        if($scope.selectedProduct == marker){
-          $scope.selectedProduct = null;
-          selectorMarker.setMap(null);
-        }
-        else{
-          $scope.selectedProduct = marker;
-          selectorMarker.setPosition(marker.position);
-          selectorMarker.setMap($scope.mapObj);
-          $scope.product.image = config.serverUrl + marker.properties['image'];
-          $scope.product.siteNo = marker.properties['siteNo'];
-          $scope.product.panelSize = marker.properties['panelSize'];
-          $scope.product.address = marker.properties['address'];
-          $scope.product.impressions = marker.properties['impressions'];
-          $scope.product.direction = marker.properties['direction'];
-          $scope.product.availableDates = marker.properties['availableDates'];
-          if($scope.selectedProduct == marker){
-            $mdSidenav('productDetails').toggle();
-          }
-          else{
-            if($mdSidenav('productDetails').isOpen()){
-              // update values in open sidenav
-            }
-            else{
-              $mdSidenav('productDetails').open();
-            }
-          }
-        }
+        $scope.selectedProduct = marker;
+        selectorMarker.setPosition(marker.position);
+        selectorMarker.setMap($scope.mapObj);
+        $scope.product.image = config.serverUrl + marker.properties['image'];
+        $scope.product.siteNo = marker.properties['siteNo'];
+        $scope.product.panelSize = marker.properties['panelSize'];
+        $scope.product.address = marker.properties['address'];
+        $scope.product.impressions = marker.properties['impressions'];
+        $scope.product.direction = marker.properties['direction'];
+        $scope.product.availableDates = marker.properties['availableDates'];
+        $mdSidenav('productDetails').toggle();
       }
-      
+
+      google.maps.event.addListener(selectorMarker, 'click', function(e){
+        $scope.selectedProduct = null;
+        selectorMarker.setMap(null);
+      });
 
       $scope.processMarkers = function () {
         var counts = [];
@@ -392,13 +375,12 @@ app.controller('GmapCtrl',
             position: latLng,
             icon: {
               url: config.serverUrl + key["symbol"],
-              scaledSize: new google.maps.Size(40, 40),
-              // origin: new google.maps.Point(0, 0), // origin
-              // anchor: new google.maps.Point(20, 30) // anchor
+              scaledSize: new google.maps.Size(40, 40)
             }
           });
           marker.properties = key;
           uniq_markers.push(marker);
+          markersOnMap.push(marker);
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
@@ -456,10 +438,7 @@ app.controller('GmapCtrl',
                 label: label
               });
               marker.groupSize = value;
-              // google.maps.event.addListener(marker, 'spider_click', function (e) {  // 'spider_click', not plain 'click'
-              //   iw.setContent("dummy text");
-              //   iw.open($scope.mapObj, marker);
-              // });
+              markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
             })();
           }
@@ -516,22 +495,57 @@ app.controller('GmapCtrl',
         }
         trafficLayer.setMap(mapVal);
       }
-
-      $scope.savedata = function () {
-        // handles the submitted form data from map-filtering.
+ 
+      $scope.applyFilter = function(){
+        var filterObj = {area: $scope.selectedAreas, product_type: null};
+        MapService.filterProducts(filterObj).then(function (markers) {          
+          if(markers != null){
+            _.each(markersOnMap, function(v, i){
+              v.setMap(null);
+              $scope.keyClusterer.removeMarker(v);
+            });
+            markersOnMap = [];
+            $scope.filteredMarkers = markers;
+            $scope.processMarkers();
+            var bounds = new google.maps.LatLngBounds();
+            _.each(markersOnMap, function(v, i){
+              bounds.extend(v.getPosition());
+            });
+            $scope.mapObj.fitBounds(bounds);
+          }
+          else{
+            alert("no marker found in the area(s) you selected");
+          }
+        });
       }
 
       $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
-      }
-
-      $scope.setNewAddress = function () {
-        console.log($scope.address.components.location);
+        // console.log($scope.address.components.location);
       }
 
       $scope.shortlistSelected = function(){
         MapService.shortListProduct($scope.selectedProduct.properties.id, "23fkf23vlh").then(function(response){
           alert(response.message);
+        });
+      }
+
+      $scope.resetFilters = function(){
+        $scope.selectedAreas = null;
+        $scope.selectedcitys = null;
+        $scope.selectedStates = null;
+        _.each(markersOnMap, function(v, i){
+          v.setMap(null);
+          $scope.keyClusterer.removeMarker(v);
+        });
+        markersOnMap = [];
+        MapService.markers().then(function (markers) {
+          $scope.filteredMarkers = markers;
+          $scope.processMarkers();
+          var bounds = new google.maps.LatLngBounds();
+          _.each(markersOnMap, function(v, i){
+            bounds.extend(v.getPosition());
+          });
+          $scope.mapObj.fitBounds(bounds);
         });
       }
 
