@@ -36,7 +36,12 @@ app.controller('GmapCtrl',
       });
       $scope.product = {};
       MapService.markers().then(function (markers) {
-        $scope.filteredMarkers = markers;        
+        $scope.filteredMarkers = markers;
+        // var map = new google.maps.Map(document.getElementById('gmap'), {
+        //   zoom: 4,
+        //   center: $scope.address.location,
+        //   disableDefaultUI: true
+        // });  
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
@@ -384,29 +389,29 @@ app.controller('GmapCtrl',
         /* 
         //// handling clustering ////
         */
-        var uniqueMarkerArr = [];
-        _.each(uniqueMarkers, function (markerData, index) {
-          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            icon: {
-              url: config.serverUrl + markerData.symbol,
-              scaledSize: new google.maps.Size(40, 40)
-            }
-          });
-          marker.properties = markerData;
-          uniqueMarkerArr.push(marker);
-          markersOnMap.push(marker);
-          google.maps.event.addListener(marker, 'click', function (e) {
-            selectMarker(marker);
-          });
-        });
-        var mc = {
-          gridSize: 50,
-          maxZoom: 13,
-          imagePath: 'assets/images/maps/m'
-        };
-        $scope.Clusterer = new MarkerClusterer($scope.mapObj, uniqueMarkerArr, mc);
+        // var uniqueMarkerArr = [];
+        // _.each(uniqueMarkers, function (markerData, index) {
+        //   var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+        //   var marker = new google.maps.Marker({
+        //     position: latLng,
+        //     icon: {
+        //       url: config.serverUrl + markerData.symbol,
+        //       scaledSize: new google.maps.Size(40, 40)
+        //     }
+        //   });
+        //   marker.properties = markerData;
+        //   uniqueMarkerArr.push(marker);
+        //   markersOnMap.push(marker);
+        //   google.maps.event.addListener(marker, 'click', function (e) {
+        //     selectMarker(marker);
+        //   });
+        // });
+        // var mc = {
+        //   gridSize: 50,
+        //   maxZoom: 13,
+        //   imagePath: 'assets/images/maps/m'
+        // };
+        // $scope.Clusterer = new MarkerClusterer($scope.mapObj, uniqueMarkerArr, mc);
 
         /*
         //// handling spiderifying ////
