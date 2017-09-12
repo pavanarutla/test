@@ -37,17 +37,17 @@
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
 
         <!--notification button -->
-        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="browabillboard">
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
         <!-- profile button start-->
-        <md-menu ng-show="browabillboard">
+        <md-menu ng-show="isAuthenticated">
           <md-button aria-label="userimage" class="md-fab md-mini md-avatar " ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class=" ">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button>Chanikya varma</md-button>
+              <md-button>{{user.username}}</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>

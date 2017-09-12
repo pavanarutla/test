@@ -1,5 +1,11 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
 
+  // if($auth.isAuthenticated()){
+  //   $rootScope.isAuthenticated = true;
+  //   var userObj = $auth.getPayload();
+  //   $rootScope.user = userObj.user;
+  //   console.log($rootScope.user);
+  // }
 
   $scope.filter = false;
   $scope.format = false;

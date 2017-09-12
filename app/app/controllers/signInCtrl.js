@@ -7,7 +7,9 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 	$scope.signInUser = function () {
 		$auth.login($scope.user).then(function (res) {
 			if($auth.isAuthenticated()){
-				$rootScope.isAuthenticated = true; 
+				$rootScope.isAuthenticated = true;
+				var userObj = $auth.getPayload();
+				$rootScope.user = userObj.user;
 				toastr.success('You have successfully signed in!');
 			}
 			else{
