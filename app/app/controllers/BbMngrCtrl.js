@@ -1,11 +1,9 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
 
-  // if($auth.isAuthenticated()){
-  //   $rootScope.isAuthenticated = true;
-  //   var userObj = $auth.getPayload();
-  //   $rootScope.user = userObj.user;
-  //   console.log($rootScope.user);
-  // }
+  if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
 
   $scope.filter = false;
   $scope.format = false;
@@ -177,7 +175,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.logout = function(){
     $auth.logout().then(function(){
       $rootScope.isAuthenticated = false;
-      toastr.success('You have successfully signed out!');
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');
     });
   }
 

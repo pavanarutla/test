@@ -331,21 +331,21 @@
 
   </md-sidenav>
 
-  <!--create campagin -->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="createCampaign">
+  <!--create campaign -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="createCampaignSidenav">
 
     <div lauout=" column">
       <div layout="row">
         <div class="md-toolbar-tools">
 
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="createCampaign()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCreateCampaignSidenav()">
 
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </div>
       </div>
-      <md-content layout="column" style="overflow:hidden">
+      <md-content layout="column" style="overflow:hidden" ng-if="!campaignSaved">
         <div layout="column" layout-margin>
           <div class="md-headline">Create Campaign</div>
           <div class="md-headline">We are excited to see your Campaign</div>
@@ -388,13 +388,13 @@
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button class="md-raised md-warn" layout-fill> CREATE CAMPAGIN</md-button>
+              <md-button class="md-raised md-warn" layout-fill ng-click="createNewCampaign()">CREATE CAMPAIGN</md-button>
             </div>
             <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
           </div>
         </form>
       </md-content>
-      <md-content layout="column" style="margin-top:20%">
+      <md-content layout="column" style="margin-top:20%" ng-if="campaignSaved">
         <div layout="column" layout-align="center center" layout-margin>
           <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
           <div class="md-display-1">Congratulations</div>
@@ -418,7 +418,7 @@
 
   <!-- map poniter click show the content SideNav-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
-    <md-content>
+    <md-content ng-if="!hideSelectedMarkerDetail">
       <div layout="column" class="map-img">
         <img src="{{product.image}}" style="width:380px;height:380px;" />
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
@@ -475,11 +475,11 @@
         <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
       <div layout="column" layout-margin>
-        <md-button layout-fill class="md-raised" ng-click="closeSideSavedCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
+        <md-button layout-fill class="md-raised" ng-click="addSelectedMarkerToCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
       </div>
     </md-content>
 
-    <md-conetent layout-margin layout-padding>
+    <md-conetent layout-margin layout-padding ng-if="hideSelectedMarkerDetail">
       <div layout="column" layout-margin>
         <div class="md-headline">Add to existing Campaign</div>
         <div class="md-headline" style="opacity:.5">Let's work Together!</div>
@@ -632,7 +632,7 @@
   </md-sidenav>
 
   <!-- map html start-->
-  <div layout="column" style="position:relative;height:800px;">
+  <div layout="column" style="position:relative;" id="map-container">
     <!-- <div id="gmap"></div> -->
     <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="15" disable-default-u-i="true">
       <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
@@ -1233,7 +1233,7 @@
             <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
           </div>
           <div layout="column" layout-align="center center" layout-margin>
-            <md-button class="md-raised md-warn" ng-click="createCampaign()">CREATE CAMPAIGN</md-button>
+            <md-button class="md-raised md-warn" ng-click="toggleCreateCampaignSidenav()">CREATE CAMPAIGN</md-button>
           </div>
         </div>
       </div>
@@ -1272,3 +1272,10 @@
 
   </div>
 </div>
+
+
+<script>
+  var height = $(document).height();
+  console.log(height);
+  $('#map-container').height(height - 64);
+</script>

@@ -47,7 +47,7 @@
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button>{{user.username}}</md-button>
+              <md-button>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
@@ -56,7 +56,7 @@
               <md-button>Account</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="logOut()">Sign Out</md-button>
+              <md-button ng-click="logout()">Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -75,10 +75,6 @@
         <md-button aria-label="location" class="md-primary md-raised" ng-if="footerhide && isAuthenticated" ng-click="suggestMe()">
           suggest me
         </md-button>
-        <md-button aria-label="logout" class="md-warn md-raised" ng-if="isAuthenticated" ng-click="logout()">
-          log out
-        </md-button>
-
       </md-menu-bar>
     </div>
   </md-toolbar>
