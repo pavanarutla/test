@@ -37,17 +37,17 @@
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
 
         <!--notification button -->
-        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="browabillboard">
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
         <!-- profile button start-->
-        <md-menu ng-show="browabillboard">
+        <md-menu ng-show="isAuthenticated">
           <md-button aria-label="userimage" class="md-fab md-mini md-avatar " ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class=" ">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button>Chanikya varma</md-button>
+              <md-button>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
@@ -56,7 +56,7 @@
               <md-button>Account</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="logOut()">Sign Out</md-button>
+              <md-button ng-click="logout()">Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -75,10 +75,6 @@
         <md-button aria-label="location" class="md-primary md-raised" ng-if="footerhide && isAuthenticated" ng-click="suggestMe()">
           suggest me
         </md-button>
-        <md-button aria-label="logout" class="md-warn md-raised" ng-if="isAuthenticated" ng-click="logout()">
-          log out
-        </md-button>
-
       </md-menu-bar>
     </div>
   </md-toolbar>
@@ -190,7 +186,7 @@
   <!-- Underscore -->
   <script src="assets/js/underscore-min.js"></script>
   <!-- NgMap -->
-  <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+  <script src="assets/js/ng-map.min.js"></script>
   <!-- Overlapping marker spiderifier -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
   <!-- google autocomplete -->
