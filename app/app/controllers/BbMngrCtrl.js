@@ -63,7 +63,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/sigIn.html',
+      templateUrl: 'views/signIn.html',
       fullscreen: $scope.customFullscreen
     })
   };
