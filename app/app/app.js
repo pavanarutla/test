@@ -19,8 +19,8 @@ app.constant('config', {
   // serverUrl : "http://104.236.11.252",
   // apiPath : "http://104.236.11.252/api"
 })
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', 'config',
-  function($locationProvider, $routeProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, config) {
+.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$httpProvider', 'config',
+  function($locationProvider, $routeProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $httpProvider, config) {
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -54,14 +54,6 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .when('/admin/products', {
-      templateUrl: 'views/admin/products.html',
-      controller: 'ProductsCtrl'
-    })
-    .when('/admin/add-product', {
-      templateUrl: 'views/admin/add-products.html',
-      controller: 'ProductsCtrl'
-    })
     .when('/userprofile',{
       templateUrl:'views/user-profile.html'
     })
@@ -74,6 +66,20 @@ app.constant('config', {
     })
     .when('/userprofile',{
       templateUrl: 'views/userprofile.html'
+    })
+    // .when('/admin', {
+    //   controller: function(){
+    //     window.location.href="http://localhost:8080/admin"
+    //   },
+    //   template:"<div></div>"
+    // })
+    .when('/admin/products', {
+      templateUrl: 'views/admin/products.html',
+      controller: 'ProductsCtrl'
+    })
+    .when('/admin/add-product', {
+      templateUrl: 'views/admin/add-products.html',
+      controller: 'ProductsCtrl'
     });
     $routeProvider.otherwise({redirectTo: '/'});
 
@@ -150,7 +156,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
@@ -159,11 +165,11 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'admin') == -1){
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1){
             event.preventDefault();
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
           }
@@ -172,11 +178,11 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1){
             event.preventDefault();
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
           }

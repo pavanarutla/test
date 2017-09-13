@@ -16,19 +16,19 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       $http.get(config.apiPath + '/products').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-    shortListProduct: function(productId, userId){
+    shortListProduct: function(productId, userMongoId){
       var dfd = $q.defer();
-      $http.post(config.apiPath + '/shortlistProduct', {user_id: userId, product_id: productId}).success(dfd.resolve).error(dfd.reject);
+      $http.post(config.apiPath + '/shortlistProduct', {user_mongo_id: userMongoId, product_id: productId}).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-     getshortListProduct: function(user_id){
+     getshortListProduct: function(userMongoId){
       var dfd = $q.defer();
-      $http.get(config.apiPath + '/shortlistedProducts/' + user_id).success(dfd.resolve).error(dfd.reject);
+      $http.get(config.apiPath + '/shortlistedProducts/' + userMongoId).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-     deleteshortListProduct: function(user_id,product_id){
+     deleteShortlistedProduct: function(userMongoId, productId){
       var dfd = $q.defer();
-      $http.delete(config.apiPath + '/shortlistedProduct/', {user_id :user_id, product_id :product_id}).success(dfd.resolve).error(dfd.reject);
+      $http.delete(config.apiPath + '/shortlistedProduct/' + productId).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
      filterProducts: function(criteria){

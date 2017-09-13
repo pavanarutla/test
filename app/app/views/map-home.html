@@ -420,7 +420,7 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content ng-if="!hideSelectedMarkerDetail">
       <div layout="column" class="map-img">
-        <img src="{{product.image}}" style="width:380px;height:380px;" />
+        <img ng-src="{{product.image}}" style="width:380px;height:380px;" />
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -485,7 +485,7 @@
         <div class="md-headline" style="opacity:.5">Let's work Together!</div>
       </div>
       <div layout="row" layout-margin>
-        <div><img src="{{product.image}}" / width="150px" height="150px"></div>
+        <div><img ng-src="{{product.image}}" width="150px" height="150px"></div>
         <div>
           <div class="md-headline">{{product.siteNo}}</div>
           <div class="md-body-1" style="opacity:.5">{{product.address}}</div>
@@ -1162,7 +1162,7 @@
             </md-list>
             <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
               <md-checkbox class="md-secondary list-checkbox" ng-model="person.selected" aria-lebel = "random label" aria-labelledby="delete"></md-checkbox>
-              <md-button class="md-icon-button" ng-click="deletShortlisted(shortlisted.id)" >
+              <md-button class="md-icon-button" ng-click="deletShortlisted($event, shortlisted.id)" >
                 <md-icon><i class="material-icons ">delete</i></md-icon>
               </md-button>
             </div>
@@ -1275,7 +1275,6 @@
 
 
 <script>
-  var height = $(document).height();
-  console.log(height);
+  var height = $(window).height();
   $('#map-container').height(height - 64);
 </script>
