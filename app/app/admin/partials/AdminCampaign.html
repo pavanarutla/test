@@ -1,4 +1,12 @@
 <div layout="column" layout-fill="layout-fill" ng-controller="dataTable">
+    <div class="md-title" style="background: #447bde;color: #fff;" layout="row">
+        <div flex="50"><h3>Campaigns</h3></div>
+        <div layout-align="center end" layout="column" flex="50">
+            <md-button class="md-raised md-warn">
+                 Add New Campaign <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
+            </md-button>
+        </div>
+    </div>
     <md-tabs  md-dynamic-height >
       <md-tab label="Proposals">
             <div  layout-padding="layout-padding">
@@ -10,11 +18,11 @@
                         <div flex="15">EndDate</div>
                         <div flex="10">Status</div>
                         <div flex="10">Price</div>
-                        <div flex="10">products</div>
-                        <div flex="10">Actions</div>
+                        <div flex="5">products</div>
+                        <div flex="15"layout="row" layout-align="center center">Actions</div>
                     </md-list-item>
                 </div>
-                <div layout="column" layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column"  ng-repeat="item in myData | limitTo:limit" class="contbg">
+                <div layout="column" layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column"  ng-repeat="item in myData | limitTo:limit" class="contbg" style="padding:0px">
                     
                     <md-divider hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg></md-divider>
                     <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
@@ -125,7 +133,7 @@
                             <div class="md-body-1">{{item.price}}</div>
                         </div> 
                     </div>
-                    <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+                    <div flex="5" flex-xs="100" flex-sm="100" flex-gt-sm="5" layout-xs="row" layout-sm="row">
                         <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
                             <md-icon md-svg-icon="images/c6.svg" ></md-icon>
                         </div> 
@@ -134,21 +142,26 @@
                         </div> 
                     </div>
                       
-                    <div flex="10" hide-xs hide-sm> 
+                    <div flex="15" hide-xs hide-sm> 
                         <span>
-                        <a ng-href="#/campaignedit" ng-click="">
+                        <a ng-href="#/campaginproposalsummary" ng-click="">
                         <md-tooltip md-direction="top" md-visible="tooltipEdit">Edit</md-tooltip>
-                        <md-icon md-svg-icon="images/edit_new.svg"  class="icsz"></md-icon></a>
+                        <md-icon><i class="material-icons">mode_edit</i></md-icon></a>
                         </span>
                         <span> 
                         <a ng-href="#" ng-click="">
+                        <md-tooltip md-direction="top" md-visible="tooltipShare">finalise</md-tooltip>
+                        <md-icon ><i class="material-icons">add_circle_outline</i></a>
+                        </span>
+                         <span> 
+                        <a ng-href="#" ng-click="">
                         <md-tooltip md-direction="top" md-visible="tooltipShare">Share</md-tooltip>
-                        <md-icon md-svg-icon="images/share_new.svg"  class="icsz"></md-icon></a>
+                        <md-icon ><i class="material-icons">share</i></md-icon></a>
                         </span>
                         <span> 
                         <a  ng-click="removeItem($index)">
                         <md-tooltip md-direction="top" md-visible="tooltipDelete">Delete</md-tooltip>
-                        <md-icon md-svg-icon="images/delete_new.svg"  class="icsz"></md-icon></a>
+                        <md-icon><i class="material-icons">delete</i></md-icon></md-icon></a>
                         </span>
                     </div>
                 </div>  
@@ -173,7 +186,7 @@
                     <div flex="10">Status</div>
                     <div flex="10">Price</div>
                     <div flex="10">products</div>
-                    <div flex="10">Actions</div>
+                    <div flex="10" layout="row" layout-align="center center">Actions</div>
                 </md-list-item>
             </div>
             <div layout="column" layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column"  ng-repeat="item in myData | limitTo:limit" class="contbg">
@@ -193,7 +206,7 @@
                                 </md-button>
                                 <md-menu-content>
                                     <md-menu-item>
-                                        <md-button ng-href="#">View</md-button>
+                                        <md-button ng-href="/campaginrunningsummary">View</md-button>
                                     </md-menu-item>
                                      <md-menu-item>
                                         <md-button>Share</md-button>
@@ -295,14 +308,14 @@
                       
                     <div flex="10" hide-xs hide-sm> 
                         <span>
-                        <a ng-href="#" ng-click="">
-                        <md-tooltip md-direction="top" md-visible="tooltipEdit">Edit</md-tooltip>
-                        <md-icon md-svg-icon="assets/images/image-view.svg" ></md-icon></a>
+                        <a ng-href="#/campaginrunningsummary">
+                        <md-tooltip md-direction="top" md-visible="tooltipEdit">View</md-tooltip>
+                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
                         </span>
                         <span> 
                         <a ng-href="#" ng-click="">
                         <md-tooltip md-direction="top" md-visible="tooltipShare">Share</md-tooltip>
-                        <md-icon md-svg-icon="assets/images/share.svg"  ></md-icon></a>
+                        <md-icon ><i class="material-icons">share</i></md-icon></a>
                         </span>
                         
                     </div>
@@ -344,14 +357,9 @@
                                 </md-button>
                                 <md-menu-content>
                                     <md-menu-item>
-                                        <md-button ng-href="#">Edit</md-button>
+                                        <md-button ng-href="#/campaginclosedsummary">View</md-button>
                                     </md-menu-item>
-                                     <md-menu-item>
-                                        <md-button>Share</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button>Delete</md-button>
-                                    </md-menu-item>
+                                     
                                 </md-menu-content>
                             </md-menu>
                         </div> 
@@ -449,20 +457,11 @@
                       
                     <div flex="10" hide-xs hide-sm> 
                         <span>
-                        <a ng-href="#" ng-click="">
-                        <md-tooltip md-direction="top" md-visible="tooltipEdit">Edit</md-tooltip>
-                        <md-icon md-svg-icon="images/edit_new.svg"  class="icsz"></md-icon></a>
+                        <a ng-href="#/campaginclosedsummary" ng-click="">
+                        <md-tooltip md-direction="top" md-visible="tooltipEdit">View</md-tooltip>
+                        <md-icon  ><i class="material-icons">remove_red_eye</i></md-icon></a>
                         </span>
-                        <span> 
-                        <a ng-href="#" ng-click="">
-                        <md-tooltip md-direction="top" md-visible="tooltipShare">Share</md-tooltip>
-                        <md-icon md-svg-icon="images/share_new.svg"  class="icsz"></md-icon></a>
-                        </span>
-                        <span> 
-                        <a  ng-click="removeItem($index)">
-                        <md-tooltip md-direction="top" md-visible="tooltipDelete">Delete</md-tooltip>
-                        <md-icon md-svg-icon="images/delete_new.svg"  class="icsz"></md-icon></a>
-                        </span>
+                        
                     </div>
                 </div>  
                 </div>

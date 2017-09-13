@@ -4,9 +4,9 @@
         $scope.myData = response;
       });
 
-      $scope.limit= 5;
+      $scope.limit= 3;
       $scope.loadMore = function() {
-        $scope.limit = $scope.items.length
+        $scope.limit = $scope.items.length;
       };
 
     //   $scope.openOffscreen = function(ev) {

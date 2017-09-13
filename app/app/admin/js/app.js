@@ -1,6 +1,6 @@
 
   /** * You must include the dependency on 'ngMaterial' */
-    var app = angular.module('bbAdminManager', ['ngMaterial','ngRoute','ngMessages','googlechart']);
+    var app = angular.module('bbAdminManager', ['ngMaterial','ngRoute','ngMessages','googlechart','ui.grid', 'ui.grid.edit','ui.grid.pagination']);
     
     app.config(function($mdThemingProvider,$routeProvider) {
       $mdThemingProvider.theme('default')
@@ -13,16 +13,36 @@
         
         $routeProvider.when('/', {
         templateUrl: 'partials/home.html'
-        }).when('/home',{
+        })
+        .when('/home',{
         templateUrl: 'partials/home.html' 
-        }).when('/Feeds',{
+        })
+        .when('/Feeds',{
         templateUrl: 'partials/campaignSearchFeed.html' 
-        }).when('/campaginsuggestion',{
+        })
+        .when('/campaginsuggestion',{
         templateUrl: 'partials/campaignsugg.html' 
-        }).when('/admincampaign',{
+        })
+        .when('/admincampaign',{
         templateUrl: 'partials/AdminCampaign.html' 
-        }).when('/Enterarea',{
-        templateUrl: 'partials/enterAreaDetails.html' 
+        })
+        .when('/campaginproposalsummary',{
+        templateUrl: 'partials/campaignproposalsummary.html' 
+        })
+        .when('/campaginrunningsummary',{
+        templateUrl: 'partials/campaignrunningsummary.html' 
+        })
+        .when('/campaginclosedsummary',{
+        templateUrl: 'partials/campaignclosedsummary.html' 
+        })
+        .when('/registration',{
+        templateUrl: 'partials/registration.html' 
+        })
+        .when('/companies',{
+        templateUrl: 'partials/companys.html' 
+        })
+        .when('/hoardinglist',{
+        templateUrl: 'partials/hoardinglist.html' 
         });
         $routeProvider.otherwise({redirectTo: '/'});
     });
