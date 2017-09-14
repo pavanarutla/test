@@ -62,9 +62,6 @@ app.constant('config', {
       templateUrl: 'views/admin/add-products.html',
       controller: 'ProductsCtrl'
     })
-    .when('/userprofile',{
-      templateUrl:'views/user-profile.html'
-    })
     .when('/campagin',{
       templateUrl: 'views/campagin.html'
      //console:'CampaignController'
@@ -74,6 +71,9 @@ app.constant('config', {
     })
     .when('/userprofile',{
       templateUrl: 'views/userprofile.html'
+    })
+    .when('/agencyprofile',{
+      templateUrl: 'views/agency-profile.html'
     });
     $routeProvider.otherwise({redirectTo: '/'});
 
@@ -150,7 +150,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
@@ -159,7 +159,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
@@ -172,7 +172,7 @@ app.run(
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/sigIn.html',
+              templateUrl: 'views/signIn.html',
               fullscreen: true
             });
           }
