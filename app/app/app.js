@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('bbManager', [
   'ngRoute',
+  'ui.router',
   'ngMap',
   'ngMaterial',
   'ngMessages',
@@ -19,8 +20,8 @@ app.constant('config', {
   serverUrl : "http://104.236.11.252",
   apiPath : "http://104.236.11.252/api"
 })
-.config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', 'config',
-  function($locationProvider, $routeProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, config) {
+.config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', 'config',
+  function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, config) {
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -33,49 +34,162 @@ app.constant('config', {
       'hue-1':'600',
       'hue-2':'400',
     });
-              
-    $routeProvider.when('/', {
-      templateUrl: 'views/home.html',
+
+    $stateProvider.state('index', {
+      abstract: true,
+      url: '/',
+      templateUrl: 'layouts/default.html',
       controller: 'bbMngrCtrl'
     })
-    .when('/formats', {
+    .state('index.home', {
+      url: 'home',
+      templateUrl: 'views/home.html'      
+    })
+    .state('index.formats', {
+      url: '/formats',
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .when('/campaign', {
+    .state('index.campaign', {
+      url: '/campaign',
       templateUrl: 'views/campaign.html',
       controller: 'CampaignController'
     })
-    .when('/pricing', {
+    .state('index.pricing', {
+      url: '/pricing',
       templateUrl: 'views/pricing.html',
       controller: 'PricingCtrl'
     })
-    .when('/location', {
+    .state('index.location', {
+      url: '/location',
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .when('/admin/products', {
-      templateUrl: 'views/admin/products.html',
-      controller: 'ProductsCtrl'
-    })
-    .when('/admin/add-product', {
-      templateUrl: 'views/admin/add-products.html',
-      controller: 'ProductsCtrl'
-    })
-    .when('/campagin',{
+    .state('index.campagin', {
+      url: '/campagin',
       templateUrl: 'views/campagin.html'
      //console:'CampaignController'
     })
-    .when('/campaginedit',{
+    .state('index.campaginedit', {
+      url: '/campaginedit',
       templateUrl: 'views/campaginedit.html'
     })
-    .when('/userprofile',{
+    .state('index.userprofile', {
+      url: '/userprofile',
       templateUrl: 'views/userprofile.html'
     })
-    .when('/agencyprofile',{
+    .state('index.agency-rofile', {
+      url: '/agency-rofile',
       templateUrl: 'views/agency-profile.html'
+    })
+    .state('admin', {
+      // abstract: true,
+      url: '/admin', 
+      templateUrl: 'layouts/admin.html'
+    })
+    .state('admin.products', {
+      url: '/admin/products',
+      templateUrl: 'views/admin/products.html',
+      controller: 'ProductsCtrl'
+    })
+    .state('admin.add-products', {
+      url: '/admin/add-products',
+      templateUrl: 'views/admin/add-products.html',
+      controller: 'ProductsCtrl'
+    })
+    .state('admin.home',{
+      url: '/home',
+      templateUrl: 'views/admin/home.html' 
+    })
+    .state('admin.Feeds',{
+      url: '/feeds',
+      templateUrl: 'views/admin/campaignSearchFeed.html' 
+    })
+    .state('admin.campaign-suggestion',{
+      url: '/campaign-suggestion',
+      templateUrl: 'views/admin/campaignsugg.html' 
+    })
+    .state('admin.campaign',{
+      url: '/campaign',
+      templateUrl: 'views/admin/AdminCampaign.html' 
+    })
+    .state('admin.campaign-proposal-summary',{
+      url: '/campaign-proposal-summary',
+      templateUrl: 'views/admin/campaignproposalsummary.html' 
+    })
+    .state('admin.campaign-running-summary',{
+      url: '/campaign-running-summary',
+      templateUrl: 'views/admin/campaignrunningsummary.html' 
+    })
+    .state('admin.campaign-closed-summary',{
+      url: '/campaign-closed-summary',
+      templateUrl: 'views/admin/campaignclosedsummary.html' 
+    })
+    .state('admin.registration',{
+      url: '/registration',
+      templateUrl: 'views/admin/registration.html' 
+    })
+    .state('admin.companies',{
+      url: '/companies',
+      templateUrl: 'views/admin/companys.html' 
+    })
+    .state('admin.hoarding-list',{
+      url: '/hoarding-list',
+      templateUrl: 'views/admin/hoardinglist.html' 
     });
-    $routeProvider.otherwise({redirectTo: '/'});
+
+    $urlRouterProvider.when('/', '/home');
+    $urlRouterProvider.when('/admin', '/admin/home');
+    $urlRouterProvider.otherwise('/');
+
+    // $routeProvider.when('/', {
+    //   templateUrl: 'views/home.html',
+    //   controller: 'bbMngrCtrl'
+    // })
+    // .when('/formats', {
+    //   templateUrl: 'views/formats.html',
+    //   controller: 'FormatsCtrl'
+    // })
+    // .when('/campaign', {
+    //   templateUrl: 'views/campaign.html',
+    //   controller: 'CampaignController'
+    // })
+    // .when('/pricing', {
+    //   templateUrl: 'views/pricing.html',
+    //   controller: 'PricingCtrl'
+    // })
+    // .when('/location', {
+    //   templateUrl: 'views/map-home.html',
+    //   controller: 'GmapCtrl'
+    // })
+    // .when('/admin/products', {
+    //   templateUrl: 'views/admin/products.html',
+    //   controller: 'ProductsCtrl'
+    // })
+    // .when('/admin/add-product', {
+    //   templateUrl: 'views/admin/add-products.html',
+    //   controller: 'ProductsCtrl'
+    // })
+    // .when('/campagin',{
+    //   templateUrl: 'views/campagin.html'
+    //  //console:'CampaignController'
+    // })
+    // .when('/campaginedit',{
+    //   templateUrl: 'views/campaginedit.html'
+    // })
+    // .when('/userprofile',{
+    //   templateUrl: 'views/userprofile.html'
+    // })
+    // .when('/agencyprofile',{
+    //   templateUrl: 'views/agency-profile.html'
+    // })
+    // .when('/admin', {
+    //   template: "<div></div>",
+    //   controller:function(){
+    //     window.location.href = '/admin';
+    //   }
+    // });
+    // $routeProvider.otherwise({redirectTo: '/'});
 
     $authProvider.baseUrl = config.apiPath;
     $authProvider.loginUrl = '/login';

@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+
+
+
+<md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
+  <header layout="column" layout-padding >
+      <a ng-href="#/"><img ng-src="assets/images/logo.png" alt="logo"></a>
+  </header>
+  <md-list>
+    <md-menu-item>
+      <md-button ng-href="#/home" ng-click="changeName()">
+        <md-icon md-svg-icon="assets/images/menu/home.svg"></md-icon>Feeds</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#/admincampaign" ng-click="changeProfile()">
+            <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Campaigns</md-button>
+    </md-menu-item>
+
+    <md-menu-item>
+        <md-button ng-href="#/campaign" ng-click="changeCampains()">
+            <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Location</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#/hoardinglist" ng-click="changeRequest()" >
+            <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#/registration" ng-click="changeHoardingList()">
+          <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Registration</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#/team" ng-click="changeTeam()">
+            <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Payement</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#/outsourcing" ng-click="changeAgent()">
+          <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>User Management</md-button>
+    </md-menu-item>
+    
+    <!--  <md-menu-item>
+        <md-button ng-href="#/settings"  >
+            <md-icon md-svg-icon="images/menu/help.svg"> </md-icon>Settings</md-button>
+    </md-menu-item> -->
+    <md-menu-item>
+        <md-button  ng-href="#/companies" ng-click="companies()">
+            <md-icon md-svg-icon="assets/images/menu/help.svg"> </md-icon>Companies</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#" ng-click="callCenterInfo()">
+            <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Call Centre info</md-button>
+    </md-menu-item>
+    <md-menu-item>
+        <md-button ng-href="#" ng-click="offers()">
+            <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Offers</md-button>
+    </md-menu-item>
+  </md-list>
+</md-sidenav>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+      <h2>
+        <span>Notifications</span>
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+        <md-tooltip>Close Side Panel</md-tooltip>
+        <md-icon class="md-default-theme">X</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar> 
+  <md-content layout-padding="">
+    Notifications Panel
+  </md-content> 
+</md-sidenav>
+
+<div layout="column" flex>
+  <md-toolbar  class="md-whiteframe-z1 contbg">
+    <div class="md-toolbar-tools">
+      <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="closeSidenav()">
+          <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
+      </md-button>
+      <!-- <md-button aria-label="logo" class="md-icon">
+        <img ng-src="images/logo.png" alt="logo" class="mrgn">
+      </md-button> -->
+      <h2 style="color: #52b2d7">{{firstname}}</h2>
+      <span flex></span>
+      <div class="message">
+      <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+        <md-icon md-svg-icon="assets/images/notification_24px.svg" ></md-icon>
+      </md-button>
+      <p style="background: #fac306"><span >3</span></p>
+      </div>
+      <div class="message">
+        <md-button aria-label="message" class="md-icon-button" >
+        <md-icon md-svg-icon="assets/images/message_black_24px.svg" ></md-icon>
+
+      </md-button>
+      <p><span>34</span></p>
+      </div>
+      
+      <!-- <md-button class=" md-secondary md-mini" aria-label="personimage">
+          <img ng-src="images/person.png" class="md-avatar" style="margin: 12px 0 0 0;">
+      </md-button>   -->
+
+      <md-menu>
+      <!-- Trigger element is a md-button with an icon -->
+        <md-button ng-click="$mdOpenMenu($event)" aria-label="" class="md-secondary md-mini">
+          <img ng-src="assets/images/person.png" class="md-avatar" style="margin: 12px 0 0 0;">
+        </md-button>
+        <md-menu-content width="3">
+          <md-menu-item>
+            <md-button href="" ng-click="$mdMenu.hide()">Hyderbad</md-button>
+          </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+    </div>
+  </md-toolbar><!--toolbar end -->
+  
+  <!-- <md-content  ng-view  ng-cloak> -->
+  <ui-view></ui-view>
+  </md-content>
+    <div layout="column" layout-align="center center" style="background: #CCC;padding: 5px 0;">
+    <div >Copyright  BILLBOARDS INDIA. All rights reserved </div>
+  </div> 
+</div>
