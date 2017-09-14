@@ -24,6 +24,7 @@ app.controller('GmapCtrl',
       $scope.mapObj;
       var markersOnMap = [];
       $scope.selectedProduct = null;
+      $scope.selectedForNewCampaign = [];
       var trafficOn = false;
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
@@ -560,6 +561,28 @@ app.controller('GmapCtrl',
           $scope.mapObj.fitBounds(bounds);
         });
       }
+
+      $scope.toggleSelectedShortlistedForNewCampaign = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+
+      $scope.existsShortlistedForNewCampaign = function (item, list) {
+        return list.indexOf(item) > -1;
+      };
+
+      $scope.saveNewCampaign = function(){
+        console.log($scope.selectedForNewCampaign);
+        // if no radio buttons clicked, select all and combine with form data and send to api
+        // else, pick the selected products, combine with form data and send to api
+      }
+
+
     }
   ]
 );

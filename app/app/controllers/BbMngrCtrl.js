@@ -199,8 +199,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   };
 
   // saved view all side nav
-  $scope.closeSideViewAll = function() {
-      $mdSidenav('savedViewAll').toggle();
+  $scope.toggleViewAllShortlisted = function() {
+      $mdSidenav('shortlistAndSave').toggle();
   };
 
   // edit list saved campgin
@@ -214,8 +214,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   };
 
   // Save Campgin Details
-  $scope.saveCampaignDetails = function() {
-    $mdSidenav('saveCampaignDetails').toggle();
+  $scope.toggleSaveNewCampaign = function() {
+    $mdSidenav('saveNewCampaign').toggle();
   };
 
   // Thanks Message

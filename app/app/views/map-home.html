@@ -71,14 +71,14 @@
   </md-sidenav>
 
   <!--saved view all Shortlisted -->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="savedViewAll">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shortlistAndSave">
     <div layout="row">
       <div class="md-toolbar-tools">
 
         <div class="md-title">Shortlisted Products</div>
         <div flex></div>
 
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideViewAll()">
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleViewAllShortlisted()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -133,7 +133,7 @@
 
       <div layout="column" layout-margin>
         <div>
-          <md-button class="md-raised md-warn" layout-fill ng-click="saveCampaignDetails()"> SAVED CAMPAGIN</md-button>
+          <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveNewCampaign()">SAVE TO NEW CAMPAGIN</md-button>
         </div>
         <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
       </div>
@@ -163,16 +163,16 @@
   </md-sidenav>
 
   <!-- Save campagin dialog-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="saveCampaignDetails">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="saveNewCampaign">
     <div lauout=" column">
       <div layout="row">
         <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="saveCampaignDetails()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveNewCampaign()">
 
             <md-icon class="md-default-theme"><i class="material-icons">arrow_back</i></md-icon>
           </md-button>
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="saveCampaignDetails()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveNewCampaign()">
 
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
@@ -221,7 +221,7 @@
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button class="md-raised md-warn" layout-fill> SAVED CAMPAGIN</md-button>
+              <md-button class="md-raised md-warn" layout-fill ng-click="saveNewCampaign()">SAVE CAMPGAIN</md-button>
             </div>
             <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
           </div>
@@ -1151,7 +1151,7 @@
               <md-list-item class="md-3-line list-img">
                 <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
                 <div class="list-name">
-                  <span class="md-title">B</span>
+                  <span class="md-title">{{shortlisted.type | PickFirstLetter}}</span>
                 </div>
                 <div class="md-list-item-text list-item-text" layout="column" flex>
                   <h3 class="md-body-1">{{shortlisted.areaname}}</h3>
@@ -1161,7 +1161,10 @@
               </md-list-item>
             </md-list>
             <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
-              <md-checkbox class="md-secondary list-checkbox" ng-model="person.selected" aria-lebel = "random label" aria-labelledby="delete"></md-checkbox>
+              <md-checkbox class="md-secondary list-checkbox" 
+                ng-checked="existsShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" 
+                ng-click="toggleSelectedShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" aria-lebel ="random label" aria-labelledby="delete">
+              </md-checkbox>
               <md-button class="md-icon-button" ng-click="deletShortlisted($event, shortlisted.id)" >
                 <md-icon><i class="material-icons ">delete</i></md-icon>
               </md-button>
@@ -1169,13 +1172,13 @@
           </div>
           <md-divider></md-divider>
           <div layout="row">
-            <md-button class="md-raised " ng-click="closeSideViewAll()">VIEW ALL</md-button>
+            <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
             <md-button class="md-raised md-primary" ng-click="saveCampaignName()">SAVE </md-button>
             <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
           </div>
           <div layout="row">
             <!-- <md-button class="md-raised" >Success</md-button> -->
-            <md-button class="md-raised" ng-click="suggestMe()">Suggest me</md-button>
+            <md-button class="md-raised" ng-click="suggestMe()">Suggest me</md-button>            
           </div>
         </div>
 
