@@ -1,59 +1,55 @@
+<<<<<<< HEAD
 app.controller('bbMngrCtrl',['$scope','$mdDialog','$mdSidenav','$timeout','ContactService','$location','$rootScope', 
 function ($scope, $mdDialog, $mdSidenav, $timeout,ContactService,$location, $rootScope) {
+=======
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
+>>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
 
+  if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
 
-$scope.filter = false;
-$scope.format = false;
-$scope.shortlist = false;
-$scope.savedcampaign = false;
-
-$scope.showfooter = true;
-
-
-$scope.browabillboard = false;
-
-$scope.dashboardData = true;
-$scope.locationpageonly = false;
-
-//hide and show based on the login status
-
-$rootScope.$on('loginDone', function(){
- // $scope.bookNow = false;
-  $scope.browabillboard = true;
- 
-// var loginStatus = localStorage.getItem('logindata');
-// console.log("logindata",loginStatus)
-// if(loginStatus == true){
-//   $scope.bookNow = false;
-//   $scope.browabillboard = true;
-// }
-});
-$scope.filters = function(){
-  $scope.filter = !$scope.filter;
+  $scope.filter = false;
   $scope.format = false;
   $scope.shortlist = false;
   $scope.savedcampaign = false;
-}
-$scope.formats = function(){
-  $scope.filter= false;
-  $scope.format= !$scope.format;
-  $scope.shortlist = false;
-  $scope.savedcampaign = false;  
-}
 
-$scope.shortlistDiv = function(){
-  $scope.filter = false;
-  $scope.format = false;
-  $scope.shortlist = !$scope.shortlist;
-  $scope.savedcampaign = false; 
-}
+  $scope.showfooter = true;
 
-$scope.savedcampaignDiv = function(){
-  $scope.filter = false;
-  $scope.format = false;
-  $scope.shortlist = false;
-  $scope.savedcampaign = !$scope.savedcampaign;
-}
+  $scope.browabillboard = false;
+
+  $scope.dashboardData = true;
+  $scope.locationpageonly = false;
+
+  $rootScope.isAuthenticated = $auth.isAuthenticated();
+
+  $scope.filters = function () {
+    $scope.filter = !$scope.filter;
+    $scope.format = false;
+    $scope.shortlist = false;
+    $scope.savedcampaign = false;
+  }
+  $scope.formats = function () {
+    $scope.filter = false;
+    $scope.format = !$scope.format;
+    $scope.shortlist = false;
+    $scope.savedcampaign = false;
+  }
+
+  $scope.shortlistDiv = function () {
+    $scope.filter = false;
+    $scope.format = false;
+    $scope.shortlist = !$scope.shortlist;
+    $scope.savedcampaign = false;
+  }
+
+  $scope.savedcampaignDiv = function () {
+    $scope.filter = false;
+    $scope.format = false;
+    $scope.shortlist = false;
+    $scope.savedcampaign = !$scope.savedcampaign;
+  }
 
   // side favicon functionality
   this.isOpen = false;
@@ -66,8 +62,8 @@ $scope.savedcampaignDiv = function(){
     $mdSidenav('left').toggle();
   };
 
-  $scope.closeSideNavPanel = function() {
-     $mdSidenav('right').toggle();
+  $scope.closeSideNavPanel = function () {
+    $mdSidenav('right').toggle();
   };
 
   $scope.showTabDialog = function (ev) {
@@ -80,30 +76,30 @@ $scope.savedcampaignDiv = function(){
     $mdDialog.show({
       templateUrl: 'views/video.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
+      clickOutsideToClose: true,
     })
   };
 
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
- 
-  $scope.whatwedo = function(){   
-     $location.path('/');     
-    window.scroll(0,675);
-    
-  }
-  $scope.formate = function(){
+
+  $scope.whatwedo = function () {
     $location.path('/');
-    window.scroll(0,1535)
+    window.scroll(0, 675);
+
   }
-    $scope.whyOutdoor = function(){
+  $scope.formate = function () {
     $location.path('/');
-    window.scroll(0,2270)
+    window.scroll(0, 1535)
   }
-  $scope.contactus = function(){
-     $location.path('/');
-    window.scroll(0,4300)
+  $scope.whyOutdoor = function () {
+    $location.path('/');
+    window.scroll(0, 2270)
+  }
+  $scope.contactus = function () {
+    $location.path('/');
+    window.scroll(0, 4300)
   }
 
   //scroll to top
@@ -121,17 +117,17 @@ $scope.savedcampaignDiv = function(){
     return false;
   });
 
-  
-//scroll header color change 
 
-$(window).on("scroll", function() {
-  if($(window).scrollTop() > 50) {
+  //scroll header color change 
+
+  $(window).on("scroll", function () {
+    if ($(window).scrollTop() > 50) {
       $(".header").addClass("active");
-  } else {
+    } else {
       //remove the background property so it comes transparent again (defined in your css)
-     $(".header").removeClass("active");
-  }
-});
+      $(".header").removeClass("active");
+    }
+  });
 
 
   //slider
@@ -164,6 +160,7 @@ $(window).on("scroll", function() {
     }],
     method: {}
   };
+<<<<<<< HEAD
   $scope.feed={};
 $scope.sendfeedback = function (feed) {
    ContactService.feedBackData($scope.feed).then(function(response){
@@ -173,6 +170,10 @@ $scope.sendfeedback = function (feed) {
       };
   $scope.showContact = function(ev) {
     
+=======
+
+  $scope.showContact = function (ev) {
+>>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
     var confirm = $mdDialog.prompt()
       .title('Drop Your Contact Number')
       .placeholder('Enter Your Contact Number')
@@ -189,7 +190,20 @@ $scope.sendfeedback = function (feed) {
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
-    
   };
+<<<<<<< HEAD
   
 }]);
+=======
+
+  $scope.logout = function(){
+    $auth.logout().then(function(){
+      $rootScope.isAuthenticated = false;
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');
+    });
+  }
+
+});
+>>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
