@@ -1,0 +1,67 @@
+<div layout="column" layout-padding="layout-padding" >
+  
+    <div class="md-title" style="background: #447bde;color: #fff;">Your Daily feed</div>
+  
+  <div layout="column">
+
+    <div layout="row">
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">2</div>
+      <div flex="20">3</div>
+      <div flex="20">4</div>
+      <div flex="20">5</div>
+    </div>
+    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height-xs="1:1.1" md-row-height-sm="1:1.1" md-row-height-md="1:1.3" md-row-height-gt-md="1:1.3" md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px" > 
+      <md-grid-tile ng-repeat="room in floorDetails.roomDetails" ng-style="{'background': '#fff'}">  
+        <div layout="column" >
+          <div layout="column" >
+            <img src="assets/images/hoarding.png">
+          </div>
+          <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+              <div layout="column" flex="33" layout-align="center center">
+                <div><img src="assets/images/bb.png" ></div>
+                <div>$50,0000</div>
+              </div>
+            <div layout="column" flex="33" layout-align="center center">
+                <div><img src="assets/images/lit.png"></div>
+                <div>Lit:yes</div>
+            </div>
+              <div layout="column" flex="33" layout-align="center center">
+                <div><img src="assets/images/size.png"></div>
+                <div>size:20*40</div>
+              </div>
+          </div>
+          <md-divider></md-divider>
+          <div layout="row" layout-padding="layout-padding">
+            <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div>
+            <div flex="80"><span >Ameerpet,Hyderbad<br><span class="md-caption">Faceing Ameerpet To Sr Nagar<span></span></div>
+          </div>
+          <md-divider></md-divider>
+          <div layout="row" layout-padding="layout-padding">
+            <div flex="10"><span><md-icon md-svg-icon="assets/images/impression.svg"></md-icon></span></div>
+            <div flex="80"><span class="md-caption">Impressions</div>
+          </div>
+          <md-divider></md-divider>
+          <div layout="row" layout-padding="layout-padding">
+            <div flex="50">
+              <md-button class="md-raised md-primary">Add</md-button>
+              
+            </div>
+            <div flex="50">
+              <md-button >Shortlist
+               <!--  <md-icon><i class="material-icons">share</i></md-icon> -->
+              </md-button>
+            </div>
+          </div>
+        </div>
+      </md-grid-tile>        
+    </md-grid-list>  
+    </div>
+</div>
