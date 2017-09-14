@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-app.controller('bbMngrCtrl',['$scope','$mdDialog','$mdSidenav','$timeout','ContactService','$location','$rootScope', 
-function ($scope, $mdDialog, $mdSidenav, $timeout,ContactService,$location, $rootScope) {
-=======
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
->>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, ContactService, toastr) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -160,20 +155,16 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     }],
     method: {}
   };
-<<<<<<< HEAD
   $scope.feed={};
-$scope.sendfeedback = function (feed) {
-   ContactService.feedBackData($scope.feed).then(function(response){
-          alert(response.message);
-        });
-  $scope.feed="";
-      };
-  $scope.showContact = function(ev) {
-    
-=======
-
-  $scope.showContact = function (ev) {
->>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
+  
+  $scope.sendfeedback = function (feed) {
+    ContactService.feedBackData($scope.feed).then(function(response){
+      alert(response.message);
+    });
+    $scope.feed="";
+  };
+  
+  $scope.showContact = function(ev) {    
     var confirm = $mdDialog.prompt()
       .title('Drop Your Contact Number')
       .placeholder('Enter Your Contact Number')
@@ -191,10 +182,6 @@ $scope.sendfeedback = function (feed) {
       $scope.status = 'You didn\'t name your dog.';
     });
   };
-<<<<<<< HEAD
-  
-}]);
-=======
 
   $scope.logout = function(){
     $auth.logout().then(function(){
@@ -206,4 +193,3 @@ $scope.sendfeedback = function (feed) {
   }
 
 });
->>>>>>> ea7aad4cf333447079dbe159a4b1fb444f37c2fa
