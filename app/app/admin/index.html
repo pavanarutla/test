@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body layout="row" flex ng-cloak  ng-controller="bbAdminMgrAppCtrl">
-    <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 260px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
       <header layout="column" layout-padding >
           <a ng-href="#/"><img ng-src="assets/images/logo.png" alt="logo"></a>
       </header>
@@ -31,10 +31,21 @@
             <md-button ng-href="#/campaign" ng-click="changeCampains()">
                 <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Location</md-button>
         </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/hoardinglist" ng-click="changeRequest()" >
-                <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
-        </md-menu-item>
+           <md-menu-item flex layout="column">
+                <md-button aria-expanded="flase" ng-click="toogelMenu()" class="md-button-toggle">
+                    <div layout="row"> <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon> <span style="color:#fff">Billboard</span><span flex></span><span> <md-icon md-svg-src="images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showFormats"></md-icon><md-icon md-svg-src="images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showFormats"></md-icon></span></div>
+                </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+               <md-button ng-href="#/hoardinglist" ng-click="changeRequest()" >
+                <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon> <span style="color:#000">Hoarding List</span></md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+               <md-button ng-href="#"  >
+                <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon> <span style="color:#000">Formats</span></md-button>
+            </md-menu-item>
+            </md-menu-item> 
+            
         <md-menu-item>
             <md-button ng-href="#/registration" ng-click="changeHoardingList()">
               <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Registration</md-button>
@@ -64,6 +75,7 @@
             <md-button ng-href="#" ng-click="offers()">
                 <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Offers</md-button>
         </md-menu-item>
+        
       </md-list>
     </md-sidenav>
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
