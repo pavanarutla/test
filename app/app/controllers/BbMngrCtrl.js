@@ -214,8 +214,10 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   };
 
   // Save Campgin Details
+  $scope.campaignSavedSuccessfully = false;
   $scope.toggleSaveNewCampaign = function() {
     $mdSidenav('saveNewCampaign').toggle();
+    $scope.campaignSavedSuccessfully = false;
   };
 
   // Thanks Message

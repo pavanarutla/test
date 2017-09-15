@@ -45,6 +45,11 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       var dfd = $q.defer();
       $http.get(config.apiPath + '/DurationSectors').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
+    },
+    searchBySiteNo : function(siteNo){
+      var dfd = $q.defer();
+      $http.get(config.apiPath + '/searchBySiteNo/' + siteNo).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
     }
   }
 }]);

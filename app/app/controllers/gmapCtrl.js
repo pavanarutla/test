@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config', 'toastr', 
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -26,6 +26,7 @@ app.controller('GmapCtrl',
       $scope.selectedProduct = null;
       $scope.selectedForNewCampaign = [];
       var trafficOn = false;
+      $scope.siteNoSearch = "";
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -271,6 +272,7 @@ app.controller('GmapCtrl',
         $scope.product.panelSize = marker.properties['panelSize'];
         $scope.product.address = marker.properties['address'];
         $scope.product.impressions = marker.properties['impressions'];
+        $scope.product.lighting = marker.properties['lighting'];
         $scope.product.direction = marker.properties['direction'];
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
@@ -286,6 +288,7 @@ app.controller('GmapCtrl',
         $scope.product.address = marker.properties['address'];
         $scope.product.impressions = marker.properties['impressions'];
         $scope.product.direction = marker.properties['direction'];
+        $scope.product.lighting = marker.properties['lighting'];
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
@@ -514,12 +517,13 @@ app.controller('GmapCtrl',
 
       function getShortListedProducts(){
         MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function(response){
-          $scope.shortListeddata = response;
+          $scope.shortListedProducts = response;
+          console.log(response);
         });
       }
       getShortListedProducts();
       
-      $scope.deletShortlisted =function(ev, productId){
+      $scope.deleteShortlisted =function(ev, productId){
         // console.log(productId);
         MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function(response){          
           $mdDialog.show(
@@ -576,12 +580,38 @@ app.controller('GmapCtrl',
         return list.indexOf(item) > -1;
       };
 
-      $scope.saveNewCampaign = function(){
-        console.log($scope.selectedForNewCampaign);
-        // if no radio buttons clicked, select all and combine with form data and send to api
-        // else, pick the selected products, combine with form data and send to api
+      $scope.viewAndSaveNewCampaign = function(){
+        if($scope.selectedForNewCampaign.length == 0){
+          // add all shortlisted products to campaign
+          console.log($scope.shortListedProducts);
+          // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
+          //   $scope.campaignSavedSuccessfully = true;
+          // });
+        }
+        else{
+          // add all selected products for new campaign
+          console.log($scope.selectedForNewCampaign);
+          // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
+          //   $scope.campaignSavedSuccessfully = true;
+          // });
+        }
       }
 
+      $scope.searchBySiteNo = function(){
+        MapService.searchBySiteNo($scope.siteNoSearch).then(function(markerProperties){          
+          if(markerProperties.id){
+            var marker = {};
+            marker.properties = markerProperties;
+            selectMarker(marker);
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend({lat:parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng)});
+            $scope.mapObj.fitBounds(bounds);
+          }
+          else{
+            toastr.error('No product found with that tab id', 'error');
+          }
+        });
+      }
 
     }
   ]
