@@ -584,21 +584,21 @@ app.controller('GmapCtrl',
         // console.log($scope.address.components.location);
       }
 
-      $scope.shortlistSelected = function(){
-        MapService.shortListProduct($scope.selectedProduct.properties.id, localStorage.loggedInUser.id).then(function(response){
-          alert(response.message);
-        });
-      }
+      // $scope.shortlistSelected = function(){
+      //   MapService.shortListProduct($scope.selectedProduct.properties.id, localStorage.loggedInUser.id).then(function(response){
+      //     alert(response.message);
+      //   });
+      // }
 
-      MapService.getshortListProduct( localStorage.loggedInUser.id).then(function(response){ 
-        $scope.shortListeddata = response;
-      });
+      // MapService.getshortListProduct( localStorage.loggedInUser.id).then(function(response){ 
+      //   $scope.shortListeddata = response;
+      // });
 
-      $scope.deletShortlisted =function (product){
-        MapService.deleteshortListProduct(localStorage.loggedInUser.id, product).then(function(response){
-          console.log(response,"deleted data")
-        })
-      };
+      // $scope.deletShortlisted =function (product){
+      //   MapService.deleteshortListProduct(localStorage.loggedInUser.id, product).then(function(response){
+      //     console.log(response,"deleted data")
+      //   })
+      // };
 
       $scope.resetFilters = function(){
         productList = [];

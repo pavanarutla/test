@@ -15,6 +15,8 @@ app.controller('hoardingListCtrl', function($scope,$mdDialog,$http) {
     //     })
     //   };
 
+    $scope.hoardingData = {};
+
        $scope.gridHoarding = {  
             paginationPageSizes: [25, 50, 75],
             paginationPageSize: 25,
@@ -67,4 +69,15 @@ app.controller('hoardingListCtrl', function($scope,$mdDialog,$http) {
       }
       $scope.gridHoarding.data = data;
     });
+
+    $scope.cancel = function(){
+      $mdDialog.cancel();
+    }
+    // add new hoarding Campanies
+
+
+    $scope.hoardingSave = function(hoarding){
+      $scope.hoardingData = $scope.hoarding;
+      console.log($scope.hoardingData,"hoarding")
+    }
 });

@@ -1,7 +1,13 @@
 
   /** * You must include the dependency on 'ngMaterial' */
-    var app = angular.module('bbAdminManager', ['ngMaterial','ngRoute','ngMessages','googlechart','ui.grid', 'ui.grid.edit','ui.grid.pagination']);
+    var app = angular.module('bbAdminManager', ['ngMaterial','ngRoute','ngMessages','googlechart','ui.grid', 'ui.grid.edit','ui.grid.pagination','toastr']);
     
+    app.constant('config', {
+      // serverUrl : "http://localhost:8001",
+      // apiPath : "http://localhost:8001/api",
+      serverUrl : "http://104.236.11.252",
+      apiPath : "http://104.236.11.252/api"
+    });
     app.config(function($mdThemingProvider,$routeProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('red',{

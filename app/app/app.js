@@ -54,6 +54,12 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .when('/admin', {
+      template: "<div></div>",
+      controller: function(){
+        window.location.href="http://localhost:8080/admin";
+      }
+    })
     .when('/admin/products', {
       templateUrl: 'views/admin/products.html',
       controller: 'ProductsCtrl'

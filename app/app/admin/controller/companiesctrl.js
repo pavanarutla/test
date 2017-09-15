@@ -101,6 +101,17 @@ app.controller('companiesCtrl', function($scope,$mdDialog,$http) {
       }
       $scope.gridHoardingCompany.data = data;
     });
+
+    // companies Functionolity start here 
+    $scope.cancel = function(){
+      $mdDialog.cancel();
+    }
+    $scope.companiesList = {}
+
+  $scope.companySave  = function(company){
+    $scope.companiesList = $scope.company;
+    console.log($scope.companiesList);
+  }
 })
 
 // .filter('mapGender', function() {
