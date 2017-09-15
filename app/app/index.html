@@ -6,47 +6,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <title>BillBoards India</title>
+  <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css"> -->
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
 </head>
 
-<body layout="column" ng-cloak ng-controller="bbMngrCtrl">
+<body>
   
   <ui-view></ui-view>
 
-  <!--Scripts include-->
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
-  <script type="text/javascript" src="assets/js/ng-file-upload-shim.min.js"></script>
-  <script type="text/javascript" src="assets/js/ng-file-upload.min.js"></script>
-  <script type="text/javascript" src="assets/js/ng-google-chart.js"></script>
-  <script src="http://ui-grid.info/release/ui-grid.js"></script>
-
-  <script src="assets/js/angular-slick.js"></script>
-  <!-- NgMap -->
-  <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
-  <!-- google autocomplete -->
+  <script src="assets/js/ng-map.min.js"></script>
   <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-  <!-- slick slider-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+  <script src="assets/js/angular-slick.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-  <!-- Overlapping marker spiderifier -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
-  <!-- Satellizer jwt -->
-  <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
   <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
-  <!-- Underscore -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="assets/js/ng-file-upload-shim.min.js"></script>
+  <script type="text/javascript" src="assets/js/ng-file-upload.min.js"></script>
   <script src="assets/js/underscore-min.js"></script>
 
   <!-- ////////////
@@ -54,10 +50,9 @@
   //////////////-->
   <script type="text/javascript" src="app.js"></script>
 
-  <!-- Services -->
-  <script type="text/javascript" src="services/MapService.js"></script>
-  <script type="text/javascript" src="services/LocationService.js"></script>
-
+   <!--===============
+  |  Default Section |
+  =================-->  
   <!-- Controllers -->
   <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
   <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
@@ -70,6 +65,21 @@
   <script type="text/javascript" src="controllers/registerCtrl.js"></script>
   <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
   <script type="text/javascript" src="controllers/userProfileCtrl.js"></script>
+  <!-- Services -->
+  <script type="text/javascript" src="services/MapService.js"></script>
+  <script type="text/javascript" src="services/LocationService.js"></script>  
+
+  <!--==============
+  |  Admin Section |
+  ================-->
+  <!-- Controllers -->
+  <script type="text/javascript" src="controllers/admin/adminMgrAppCtrl.js"></script>
+  <script type="text/javascript" src="controllers/admin/AuthCtrl.js"></script>
+  <script type="text/javascript" src="controllers/admin/campaignSuggestionCtrl.js"></script>
+  <script type="text/javascript" src="controllers/admin/AdminCampaign.js"></script>
+  <script type="text/javascript" src="controllers/admin/registrationctrl.js"></script>
+  <script type="text/javascript" src="controllers/admin/companiesctrl.js"></script>
+  <script type="text/javascript" src="controllers/admin/hoardinglistctrl.js"></script>
 
 </body>
 

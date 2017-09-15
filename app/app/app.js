@@ -46,46 +46,47 @@ app.constant('config', {
       templateUrl: 'views/home.html'      
     })
     .state('index.formats', {
-      url: '/formats',
+      url: 'formats',
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
     .state('index.campaign', {
-      url: '/campaign',
+      url: 'campaign',
       templateUrl: 'views/campaign.html',
       controller: 'CampaignController'
     })
     .state('index.pricing', {
-      url: '/pricing',
+      url: 'pricing',
       templateUrl: 'views/pricing.html',
       controller: 'PricingCtrl'
     })
     .state('index.location', {
-      url: '/location',
+      url: 'location',
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
     .state('index.campagin', {
-      url: '/campagin',
+      url: 'campagin',
       templateUrl: 'views/campagin.html'
      //console:'CampaignController'
     })
     .state('index.campaginedit', {
-      url: '/campaginedit',
+      url: 'campaginedit',
       templateUrl: 'views/campaginedit.html'
     })
     .state('index.userprofile', {
-      url: '/userprofile',
+      url: 'userprofile',
       templateUrl: 'views/userprofile.html'
     })
     .state('index.agency-rofile', {
-      url: '/agency-rofile',
+      url: 'agency-rofile',
       templateUrl: 'views/agency-profile.html'
     })
     .state('admin', {
-      // abstract: true,
+      abstract: true,
       url: '/admin', 
-      templateUrl: 'layouts/admin.html'
+      templateUrl: 'layouts/admin.html',
+      controller: 'bbAdminMgrAppCtrl'
     })
     .state('admin.products', {
       url: '/admin/products',
@@ -142,55 +143,6 @@ app.constant('config', {
     $urlRouterProvider.when('/admin', '/admin/home');
     $urlRouterProvider.otherwise('/');
 
-    // $routeProvider.when('/', {
-    //   templateUrl: 'views/home.html',
-    //   controller: 'bbMngrCtrl'
-    // })
-    // .when('/formats', {
-    //   templateUrl: 'views/formats.html',
-    //   controller: 'FormatsCtrl'
-    // })
-    // .when('/campaign', {
-    //   templateUrl: 'views/campaign.html',
-    //   controller: 'CampaignController'
-    // })
-    // .when('/pricing', {
-    //   templateUrl: 'views/pricing.html',
-    //   controller: 'PricingCtrl'
-    // })
-    // .when('/location', {
-    //   templateUrl: 'views/map-home.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .when('/admin/products', {
-    //   templateUrl: 'views/admin/products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .when('/admin/add-product', {
-    //   templateUrl: 'views/admin/add-products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .when('/campagin',{
-    //   templateUrl: 'views/campagin.html'
-    //  //console:'CampaignController'
-    // })
-    // .when('/campaginedit',{
-    //   templateUrl: 'views/campaginedit.html'
-    // })
-    // .when('/userprofile',{
-    //   templateUrl: 'views/userprofile.html'
-    // })
-    // .when('/agencyprofile',{
-    //   templateUrl: 'views/agency-profile.html'
-    // })
-    // .when('/admin', {
-    //   template: "<div></div>",
-    //   controller:function(){
-    //     window.location.href = '/admin';
-    //   }
-    // });
-    // $routeProvider.otherwise({redirectTo: '/'});
-
     $authProvider.baseUrl = config.apiPath;
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
@@ -235,11 +187,11 @@ app.config(['toastrConfig', function(toastrConfig) {
 }]);
 
 app.run(
-  ['$rootScope', '$location', '$http', '$auth', '$mdDialog', 'toastr',
-    function($rootScope, $location, $http, $auth, $mdDialog, toastr) {
-      $rootScope.$on('$routeChangeStart', function(event, curr, next) {
+  ['$rootScope', '$location', '$http', '$auth', '$mdDialog', '$transitions', 'toastr',
+    function($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr) {
+      $transitions.onStart({}, function(transition) {
         // Get all URL parameter
-        if($location.path() == "/location"){
+        if(transition.to().name == "index.location"){
           $rootScope.footerhide = true;
         }
         else{
@@ -250,40 +202,42 @@ app.run(
           Restricting routes to Authenticated Users
         ===========================================*/
         var adminRoutes = [
-          '/admin/add-product',
-          '/admin/products'
+          'admin.add-product',
+          'admin.products'
         ];
         var ownerRoutes = [
           
         ];
         var requiresLogin = [
-          // '/location'
+          'index.location'
         ];
 
         // routes for authenticated Users
-        if(_.indexOf(requiresLogin, curr.originalPath) != -1){
+        if(_.indexOf(requiresLogin, transition.to().name) != -1){
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/signIn.html',
               fullscreen: true
             });
+            return false;
           }
         }
-        else if( _.indexOf(adminRoutes, curr.originalPath) != -1 ){
+        else if( _.indexOf(adminRoutes, transition.to().name) != -1 ){
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/signIn.html',
               fullscreen: true
             });
+            return false;
           }
           else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'admin') == -1){
-            event.preventDefault();
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
+            return false;
           }
         }
-        else if( _.indexOf(ownerRoutes, curr.originalPath) != -1 ){
+        else if( _.indexOf(ownerRoutes, transition.to().name) != -1 ){
           if(!$auth.isAuthenticated()){
             $location.path('/');
             $mdDialog.show({
@@ -291,9 +245,9 @@ app.run(
               fullscreen: true
             });
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){
-            event.preventDefault();
+          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){            
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
+            return false;
           }
         }
       });
