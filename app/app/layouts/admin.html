@@ -15,15 +15,56 @@
           <md-button ng-href="#/admin/campaign" ng-click="changeProfile()">
               <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Campaigns</md-button>
       </md-menu-item>
-
-      <md-menu-item>
+      <!-- Locations-->
+      <!-- <md-menu-item>
           <md-button ng-href="#/admin/campaign" ng-click="changeCampains()">
               <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Location</md-button>
+      </md-menu-item> -->
+      <md-menu-item flex layout="column">
+          <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle" ng-href="#admin/locations">
+              <div layout="row"><md-icon md-svg-icon="assets/images/menu/profile.svg"></md-icon><span style="color:#fff">Location</span></div>
+          </md-button>
       </md-menu-item>
-      <md-menu-item>
+      <md-menu-item flex layout="column" ng-show="showArea">
+          <md-button ng-href="#admin/locations-countery" ng-click="changeRequest()">
+          <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">Country</span></div>
+          </md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column" ng-show="showArea">
+          <md-button ng-href="#admin/locations-state">
+          <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">State</span></div>
+        </md-button>
+      </md-menu-item> 
+      <md-menu-item flex layout="column" ng-show="showArea">
+          <md-button ng-href="#admin/locations-city">
+          <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">City</span></div>
+        </md-button>
+      </md-menu-item> 
+      <md-menu-item flex layout="column" ng-show="showArea">
+          <md-button ng-href="#admin/locations-area">
+          <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">Area</span></div>
+        </md-button>
+      </md-menu-item> 
+        <!-- billboards-->
+      <md-menu-item flex layout="column">
+          <md-button aria-expanded="flase" ng-click="toogelMenu()" class="md-button-toggle">
+              <div layout="row"> <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon> <span style="color:#fff">Billboard</span><span flex></span><span> <md-icon md-svg-src="images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showFormats"></md-icon><md-icon md-svg-src="images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showFormats"></md-icon></span></div>
+          </md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column" ng-show="showFormats">
+          <md-button ng-href="#admin/hoarding-list" ng-click="changeRequest()" >
+             <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">Hoarding List</span></div>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column" ng-show="showFormats">
+          <md-button ng-href="#admin/formats">
+             <div layout="row"><span flex="15"></span><span><md-icon> <i class="material-icons">keyboard_arrow_right</i></md-icon></span><span style="color:#000">Formats</span></div>
+        </md-button>
+      </md-menu-item>
+      <!-- <md-menu-item>
           <md-button ng-href="#/admin/hoarding-list" ng-click="changeRequest()" >
               <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
-      </md-menu-item>
+      </md-menu-item> -->
       <md-menu-item>
           <md-button ng-href="#/admin/registration" ng-click="changeHoardingList()">
             <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Registration</md-button>

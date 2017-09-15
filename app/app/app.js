@@ -144,7 +144,31 @@ app.constant('config', {
       url: '/hoarding-list',
       templateUrl: 'views/admin/hoarding-list.html',
       controller: 'hoardingListCtrl'
-    });
+    }).state('admin.formats',{
+      url: '/formats',
+      templateUrl: 'views/admin/formats.html',
+      controller: 'hoardingListCtrl'
+    }).state('admin.locations',{
+      url: '/locations',
+      templateUrl: 'views/admin/adminlocations.html',
+      controller: 'adminLocationCtrl'
+    }).state('admin.locations-countery',{
+      url: '/locations-countery',
+      templateUrl: 'views/admin/location-countery.html',
+      controller: 'adminLocationCtrl'
+    }).state('admin.locations-state',{
+      url: '/locations-state',
+      templateUrl: 'views/admin/location-state.html',
+      controller: 'adminLocationCtrl'
+    }).state('admin.locations-city',{
+      url: '/locations-city',
+      templateUrl: 'views/admin/location-city.html',
+      controller: 'adminLocationCtrl'
+    }).state('admin.locations-area',{
+      url: '/locations-area',
+      templateUrl: 'views/admin/location-area.html',
+      controller: 'adminLocationCtrl'
+    }) ;
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
