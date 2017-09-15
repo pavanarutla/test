@@ -105,5 +105,13 @@ $scope.items = [
 
     ]
   };
+
+    $scope.showFormats = false;
+      $scope.toogelMenu = function() {  
+      
+          $scope.showFormats =!$scope.showFormats;
+      }
+        
+      
      
     });

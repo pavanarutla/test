@@ -2,7 +2,7 @@ app.controller('registrationCtrl', function($scope,$mdDialog,$http) {
 
       $scope.registrationPopup = function (ev) {
         $mdDialog.show({
-          templateUrl: 'partials/registration-popup.html',
+          templateUrl: 'views/admin/registration-popup.html',
           fullscreen: $scope.customFullscreen,
           clickOutsideToClose: true
         })
@@ -79,14 +79,14 @@ app.controller('registrationCtrl', function($scope,$mdDialog,$http) {
             $scope.$apply();
           });
         };
-        $http.get('company.json')
+        $http.get('fakedb/company.json')
     .success(function(data) {
       for(i = 0; i < data.length; i++){
         data[i].registered = new Date(data[i].registered);
       }
       $scope.gridOptions.data = data;
     });
-      $http.get('companyagency.json')
+      $http.get('fakedb/companyagency.json')
     .success(function(data) {
       for(i = 0; i < data.length; i++){
         data[i].registered = new Date(data[i].registered);

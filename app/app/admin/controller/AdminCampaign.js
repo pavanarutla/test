@@ -1,6 +1,6 @@
       //campagin js
       app.controller('dataTable', function($scope,$mdDialog,$http) {
-        $http.get('data.json').success(function(response){
+        $http.get('fakedb/data.json').success(function(response){
         $scope.myData = response;
       });
 

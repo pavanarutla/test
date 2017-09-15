@@ -7,14 +7,16 @@ app.controller('hoardingListCtrl', function($scope,$mdDialog,$http) {
     //       clickOutsideToClose: true
     //     })
     //   };
-    //  $scope.hoardingCompanies = function (ev) {
-    //     $mdDialog.show({
-    //       templateUrl: 'partials/hoardingcompanies-popup.html',
-    //       fullscreen: $scope.customFullscreen,
-    //       clickOutsideToClose: true
-    //     })
-    //   };
-
+     $scope.addNewProduct = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'partials/addnewproduct-popup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true
+        })
+      };
+       $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
        $scope.gridHoarding = {  
             paginationPageSizes: [25, 50, 75],
             paginationPageSize: 25,
@@ -67,4 +69,20 @@ app.controller('hoardingListCtrl', function($scope,$mdDialog,$http) {
       }
       $scope.gridHoarding.data = data;
     });
+    
+      // upload on file select or drop
+      $scope.saveProduct = function (files) {
+        Upload.upload({
+          url: config.apiPath + '/product',
+          data: {image: files.image, symbol: files.symbol, product: $scope.product}
+        }).then(function (resp) {
+          console.log('Success. Product saved. Response: ', resp);
+        }, function (resp) {
+          console.log('Error status: ', resp);
+        }, function (evt) {
+          // console.log(evt);
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+        });
+      };
 });

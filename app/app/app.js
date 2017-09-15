@@ -12,7 +12,10 @@ var app = angular.module('bbManager', [
   'ui.bootstrap',
   'ngFileUpload',
   'satellizer',
-  'toastr'
+  'toastr',
+  'ui.grid', 
+  'ui.grid.edit',
+  'ui.grid.pagination'
 ])
 app.constant('config', {
   // serverUrl : "http://localhost:8001",
@@ -112,7 +115,8 @@ app.constant('config', {
     })
     .state('admin.campaign',{
       url: '/campaign',
-      templateUrl: 'views/admin/AdminCampaign.html' 
+      templateUrl: 'views/admin/AdminCampaign.html',
+      controller: 'dataTable'
     })
     .state('admin.campaign-proposal-summary',{
       url: '/campaign-proposal-summary',
@@ -128,15 +132,18 @@ app.constant('config', {
     })
     .state('admin.registration',{
       url: '/registration',
-      templateUrl: 'views/admin/registration.html' 
+      templateUrl: 'views/admin/registration.html',
+      controller: 'registrationCtrl'
     })
     .state('admin.companies',{
       url: '/companies',
-      templateUrl: 'views/admin/companys.html' 
+      templateUrl: 'views/admin/companies.html',
+      controller: 'companiesCtrl'
     })
     .state('admin.hoarding-list',{
       url: '/hoarding-list',
-      templateUrl: 'views/admin/hoardinglist.html' 
+      templateUrl: 'views/admin/hoarding-list.html',
+      controller: 'hoardingListCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
