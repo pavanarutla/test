@@ -1,0 +1,180 @@
+<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60">
+    <md-dialog-content>
+        <md-content class="md-padding">
+            <div layout="column" layout-align="center center">
+                <img ng-src="assets/images/billboard_popup.png">
+            </div>
+            <div layout="column" layout-align="center center">
+                <div class="md-title">
+                    <h3>Enter Product Details</h3>
+                </div>
+            </div>
+
+            <form name="productadd" novalidate="novalidate">
+                <div layout="row" layout-xs="column" layout-padding>
+
+                    <div layout="column" flex="50">
+                        <md-input-container class="md-block margin-input">
+                            <label>Site No</label>
+                            <input ng-model="product.siteno" type="text" name="siteno" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+                            />
+                            <div ng-messages="productadd.siteno.$error">
+                                <div ng-message="required">Site number is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block margin-input">
+                            <label>Site Type</label>
+                            <input ng-model="product.sitetype" type="text" name="sitetype" required="required" />
+                            <div ng-messages="signin.cname.$error">
+                                <div ng-message="required">Campaign Name is required.</div>
+                            </div>
+                        </md-input-container>
+                
+                        <md-input-container class="md-block margin-input">
+                            <label>Hoarding Cost</label>
+                            <input ng-model="product.hoardingcost" type="text" name="hoardingcost" required="required" />
+                            <div ng-messages="product.hoardingcost.$error">
+                                <div ng-message="required">Phone No is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block margin-input">
+                            <label>Hoarding Campaign Name</label>
+                            <input ng-model="product.hoardingcompany" type="text" name="hoardingcompany" required="required" />
+                            <div ng-messages="product.hoardingcompany.$error">
+                                <div ng-message="required">Campaign Name is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block margin-input">
+                            <label> Type Campaign </label>
+                            <input ng-model="user.companyName" type="text" name="cname" minlength="5" maxlength="60" required="required" />
+                            <div ng-messages="signin.cname.$error">
+                                <div ng-message="required">Campaign Name is required.</div>
+                                <div ng-message="minlength">Campaign Name must have 2 characters.</div>
+                                <div ng-message="maxlength">Campaign Name shouldn't exede 30 characters.</div>
+                            </div>
+                        </md-input-container>
+                        <div layout="row">
+                            <div flex="50" class="armrgn">
+                                <md-input-container>
+                                    <label>Select Country </label>
+                                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                                        <md-select-header class="demo-select-header">
+                                            <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                                        </md-select-header>
+                                        <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                                    </md-select required>
+
+                                </md-input-container>
+                            </div>
+                            <div flex="50" class="armrgn">
+                                <md-input-container>
+                                    <label> Select State</label>
+                                    <md-select ng-model="selectedStates" class="select-value" ng-disabled="!selectedCountry" md-on-close="clearSearchTerm()"
+                                        data-md-container-class="selectdemoSelectHeader" ng-change="setStates()" multiple>
+                                        <md-select-header class="demo-select-header">
+                                            <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
+                                        </md-select-header>
+                                        <md-optgroup label="states">
+                                            <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
+                                        </md-optgroup>
+                                    </md-select>
+                                </md-input-container>
+
+                            </div>
+                        </div>
+                        <textarea placeholder="Address"></textarea>
+
+                        <md-input-container class="md-block ">
+                            <label>Area Name</label>
+                            <input ng-model="product.areaname" type="text" name="areaname"  required="required" />
+                            <div ng-messages="product.areaname.$error">
+                                <div ng-message="required">Area Name is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                     <div layout="column" flex="50">
+                        
+                        <md-input-container class="md-block margin-input">
+                            <label>Impression</label>
+                            <input ng-model="product.impression" type="text" name="impression"  required="required" />
+                            <div ng-messages="product.impression.$error">
+                                <div ng-message="required">Impression is required.</div>
+                            </div>
+                        </md-input-container>
+                  
+                        <md-input-container class="md-block margin-input">
+                            <label>Panel Size</label>
+                            <input ng-model="product.panelsize" type="text" name="panelsize"  required="required"/>
+                            <div ng-messages="product.panelsize.$error">
+                                <div ng-message="required">Panel Size is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block margin-input">
+                            <label>Lighting</label>
+                            <input ng-model="product.lighting" type="text" name="lighting" required="required" />
+                            <div ng-messages="product.lighting.$error">
+                                <div ng-message="required">Lighting is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block margin-input">
+                            <label>Direction</label>
+                            <input ng-model="product.direction" type="text" name="direction"  required="required" />
+                            <div ng-messages="product.direction.$error">
+                                <div ng-message="required">Direction is required.</div>
+                            </div>
+                        </md-input-container>
+                        <div layout="row">
+                            <div flex="50">
+                                <md-input-container class="md-block margin-input">
+                                    <label>Latitude</label>
+                                    <input ng-model="product.latitude" type="text" name="latitude"  required="required"/>
+                                    <div ng-messages="product.latitude.$error">
+                                        <div ng-message="required">Latitude is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex="50">
+                                <md-input-container class="md-block margin-input">
+                                    <label>Longitude</label>
+                                    <input ng-model="product.longitude" type="text" name="longitude"  required="required"/>
+                                    <div ng-messages="product.longitude.$error">
+                                        <div ng-message="required">Longitude is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div layout="row">
+                            <div flex="50"> <label for="dob" >Direction Image</label></div>
+                            <div>
+                            <input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input> <br /><br />
+                            </div>
+                       </div>
+                        <md-input-container class="md-block ">
+                            <label>Advertising Strengths</label>
+                            <input ng-model="product.adverstising" type="text" name="adverstising"  required="required" />
+                            <div ng-messages="product.adverstising.$error">
+                                <div ng-message="required">Area Name is required.</div>
+                            </div>
+                        </md-input-container>
+                         <div layout="row">
+                            <div flex="50"> <label for="dob" >Image</label></div>
+                            <div>
+                            <input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input> <br /><br />
+                            </div>
+                       </div> 
+                     
+                    </div> 
+
+
+
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+                    <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+                </div>
+
+            </form>
+
+        </md-content>
+    </md-dialog-content>
+</md-dialog>
