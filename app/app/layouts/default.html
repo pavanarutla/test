@@ -15,11 +15,11 @@
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
 
         <!--notification button -->
-        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="browabillboard">
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
         <!-- profile button start-->
-        <md-menu ng-show="browabillboard">
+        <md-menu ng-show="isAuthenticated">
           <md-button aria-label="userimage" class="md-fab md-mini md-avatar " ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class=" ">
           </md-button>
@@ -42,13 +42,13 @@
         <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
                     BOOK NOW
         </md-button> -->
-        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
+        <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated">
           BOOK NOW
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="#/location">
+        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide"><a href="#/location">
             Browse BillBoards</a>
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard" ng-click="suggestMe()">
+        <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && isAuthenticated" ng-click="suggestMe()">
           suggest me
         </md-button>
 

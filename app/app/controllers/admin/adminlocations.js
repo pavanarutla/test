@@ -1,4 +1,4 @@
-app.controller('adminLocationCtrl', function ($scope, $http) {
+app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationService) {
   //location js start
   $scope.gridLocation = {
     paginationPageSizes: [25, 50, 75],
@@ -13,7 +13,7 @@ app.controller('adminLocationCtrl', function ($scope, $http) {
     enableRowHeaderSelection: false,
   };
 
- 
+
   $scope.gridLocation.columnDefs = [
     { name: 'countery', enableCellEdit: false, width: '10%' },
     { name: 'state', displayName: 'State ', width: '10%', enableCellEdit: false },
@@ -28,47 +28,9 @@ app.controller('adminLocationCtrl', function ($scope, $http) {
       enableFiltering: false,
     }
   ];
-$scope.msg = {};
- 
+  $scope.msg = {};
+
   $scope.gridLocation.onRegisterApi = function (gridApi) {
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-      $scope.$apply();
-    });
-  };
-$http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridLocation.data = data;
-    });
-
-    //location js end 
-    //add countery js start
- $scope.gridCountery = {
-  
-    enableCellEditOnFocus: false,
-    multiSelect: false,
-    enableFiltering: true,
-    enableSorting: true,
-    showColumnMenu: false,
-    enableGridMenu: true,
-    enableRowSelection: true,
-    enableRowHeaderSelection: false,
-  };
-  $scope.gridCountery.columnDefs = [
-    { name: 'Countery', enableCellEdit: false, width: '50%' },
-    {
-      name: 'Action', field: 'Action', width: '50%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
-      enableFiltering: false,
-    }
-  ];
-
-  
-    $scope.gridCountery.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
@@ -80,12 +42,55 @@ $http.get('fakedb/companyagency.json')
       for (i = 0; i < data.length; i++) {
         data[i].registered = new Date(data[i].registered);
       }
-      $scope.gridCountery.data = data;
+      $scope.gridLocation.data = data;
     });
+
+  //location js end 
+  //add countery js start
+  $scope.gridCountery = {
+    enableCellEditOnFocus: false,
+    multiSelect: false,
+    enableFiltering: true,
+    enableSorting: true,
+    showColumnMenu: false,
+    enableGridMenu: true,
+    enableRowSelection: true,
+    enableRowHeaderSelection: false,
+  };
+
+  $scope.gridCountery.columnDefs = [
+    { name: 'name', enableCellEdit: false, width: '50%' },
+    {
+      name: 'Action', field: 'Action', width: '50%',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      enableFiltering: false,
+    }
+  ];
+
+
+  $scope.gridCountery.onRegisterApi = function (gridApi) {
+    $scope.gridApi = gridApi;
+    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
+      $scope.$apply();
+    });
+  };
+
+  AdminLocationService.getCountries().then(function (data) {
+    console.log(data);
+    // for (i = 0; i < data.length; i++) {
+    //   data[i].registered = new Date(data[i].registered);
+    // }
+    $scope.gridCountery.data = data;
+  });
+  // $http.get('fakedb/companyagency.json')
+  //   .success(function (data) {
+
+  //   });
   //add countery js end
   //add state js start
-    $scope.gridState = {
-  
+  $scope.gridState = {
+
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -105,8 +110,8 @@ $http.get('fakedb/companyagency.json')
     }
   ];
 
-  
-    $scope.gridState.onRegisterApi = function (gridApi) {
+
+  $scope.gridState.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
@@ -124,7 +129,7 @@ $http.get('fakedb/companyagency.json')
   //add state js end
   //add city js start
   $scope.gridCity = {
-  
+
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -145,8 +150,8 @@ $http.get('fakedb/companyagency.json')
     }
   ];
 
-  
-    $scope.gridCity.onRegisterApi = function (gridApi) {
+
+  $scope.gridCity.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
@@ -162,8 +167,8 @@ $http.get('fakedb/companyagency.json')
     });
   //add city js end
   //add area js start
-    $scope.gridArea = {
-  
+  $scope.gridArea = {
+
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -188,8 +193,8 @@ $http.get('fakedb/companyagency.json')
     }
   ];
 
-  
-    $scope.gridArea.onRegisterApi = function (gridApi) {
+
+  $scope.gridArea.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
@@ -204,5 +209,20 @@ $http.get('fakedb/companyagency.json')
       $scope.gridArea.data = data;
     });
   //add area js end
-})
+
+
+  $scope.saveCountry = function(){
+    AdminLocationService.saveCountry($scope.country.name).then(function(data){
+      if(data.status == 1){
+        console.log("Country saved successfully.");
+      }
+      else{
+        console.log("An error occured while saving the country.");
+      }
+    });
+  }
+
+
+
+});
 
