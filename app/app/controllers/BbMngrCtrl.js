@@ -64,7 +64,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/signIn.html',
-      fullscreen: $scope.customFullscreen
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
     })
   };
   $scope.showVideo = function (ev) {
@@ -72,6 +73,13 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       templateUrl: 'views/video.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
+    })
+  };
+   $scope.shareForm = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/shareform.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
     })
   };
 
@@ -156,20 +164,29 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     method: {}
   };
 
-  $scope.showContact = function (ev) {
-    var confirm = $mdDialog.prompt()
-      .title('Drop Your Contact Number')
-      .placeholder('Enter Your Contact Number')
-      .ariaLabel('Dog name')
-      .targetEvent(ev)
-      .ok('Submit')
-      .cancel('Cancel');
+  // $scope.showContact = function(ev) {
+    
+  //   var confirm = $mdDialog.prompt()
+  //     .title('Drop Your Contact Number')
+  //     .placeholder('Enter Your Contact Number')
+  //     .ariaLabel('Dog name')
+  //     .targetEvent(ev)
+  //     .ok('Submit')
+  //     .cancel('Cancel');
 
-    $mdDialog.show(confirm).then(function (result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
-    }, function () {
-      $scope.status = 'You didn\'t name your dog.';
-    });
+  //   $mdDialog.show(confirm).then(function(result) {
+  //     $scope.status = 'You decided to name your dog ' + result + '.';
+  //   }, function() {
+  //     $scope.status = 'You didn\'t name your dog.';
+  //   });
+    
+  // };
+   $scope.showContact = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/showcontact.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+    })
   };
 
   $scope.logout = function(){
