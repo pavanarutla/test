@@ -237,7 +237,6 @@ app.run(
           'admin.products'
         ];
         var ownerRoutes = [
-          
         ];
         var requiresLogin = [
           'index.location'
