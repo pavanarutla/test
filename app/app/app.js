@@ -91,16 +91,16 @@ app.constant('config', {
       templateUrl: 'layouts/admin.html',
       controller: 'bbAdminMgrAppCtrl'
     })
-    .state('admin.products', {
-      url: '/admin/products',
-      templateUrl: 'views/admin/products.html',
-      controller: 'ProductsCtrl'
-    })
-    .state('admin.add-products', {
-      url: '/admin/add-products',
-      templateUrl: 'views/admin/add-products.html',
-      controller: 'ProductsCtrl'
-    })
+    // .state('admin.products', {
+    //   url: '/admin/products',
+    //   templateUrl: 'views/admin/products.html',
+    //   controller: 'ProductsCtrl'
+    // })
+    // .state('admin.add-products', {
+    //   url: '/admin/add-products',
+    //   templateUrl: 'views/admin/add-products.html',
+    //   controller: 'ProductsCtrl'
+    // })
     .state('admin.home',{
       url: '/home',
       templateUrl: 'views/admin/home.html' 
