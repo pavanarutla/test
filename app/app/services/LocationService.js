@@ -1,4 +1,3 @@
-
 app.factory('LocationService', 
   ['$http', '$q', 'config', 
     function($http, $q, config){
