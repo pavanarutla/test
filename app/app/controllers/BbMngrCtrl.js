@@ -63,8 +63,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.showTabDialog = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/sigIn.html',
-      fullscreen: $scope.customFullscreen
+      templateUrl: 'views/signIn.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
     })
   };
   $scope.showVideo = function (ev) {
@@ -72,6 +73,13 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       templateUrl: 'views/video.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
+    })
+  };
+   $scope.shareForm = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/shareform.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
     })
   };
 
@@ -164,7 +172,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.feed="";
   };
   
-  $scope.showContact = function(ev) {    
+  $scope.showContact = function(ev) {
     var confirm = $mdDialog.prompt()
       .title('Drop Your Contact Number')
       .placeholder('Enter Your Contact Number')

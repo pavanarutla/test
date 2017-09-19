@@ -1,0 +1,85 @@
+<div layout="column" layout-fill="layout-fill" ng-controller="adminLocationCtrl">
+
+    <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+        <div>
+            <h3>Add Area</h3>
+        </div>
+    </div>
+
+
+    <div layout="column" layout-margin layout-padding flex="50">
+        <div layout="column" layout-margin layout-padding flex="50">
+            <md-input-container>
+                <label>Select Country </label>
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                    <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                    </md-select-header>
+                    <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                </md-select required>
+
+            </md-input-container>
+            <md-input-container>
+                <label>Select State </label>
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                    <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                    </md-select-header>
+                    <md-option>AP</md-option>
+                    <md-option>LS</md-option>
+                </md-select required>
+
+            </md-input-container>
+
+            <md-input-container>
+                <label>Select City </label>
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                    <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                    </md-select-header>
+                    <md-option>Hyderbad</md-option>
+                    <md-option>Dehli</md-option>
+                </md-select required>
+
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Enter Sub area</label>
+                <input ng-model="product.counteryname" type="text" name="counteryname" required="required" />
+                <div ng-messages="product.counteryname.$error">
+                    <div ng-message="required">City Name is required</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block ">
+                <label>Enter Pincode</label>
+                <input ng-model="product.pincode" type="text" name="pincode" required="required" />
+                <div ng-messages="product.pincode.$error">
+                    <div ng-message="required">Area Name is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block margin-input">
+                <label>Latitude</label>
+                <input ng-model="product.latitude" type="text" name="latitude" required="required" />
+                <div ng-messages="product.latitude.$error">
+                    <div ng-message="required">Latitude is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block margin-input">
+                <label>Longitude</label>
+                <input ng-model="product.longitude" type="text" name="longitude" required="required" />
+                <div ng-messages="product.longitude.$error">
+                    <div ng-message="required">Longitude is required.</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+            <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+        </div>
+    </div>
+
+    <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div>
+</div>
+
+</div>
