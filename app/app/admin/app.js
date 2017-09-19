@@ -1,6 +1,16 @@
 
   /** * You must include the dependency on 'ngMaterial' */
-    var app = angular.module('bbAdminManager', ['ngMaterial','ngRoute','ngMessages','googlechart','ui.grid', 'ui.grid.edit','ui.grid.pagination','toastr']);
+    var app = angular.module('bbAdminManager', [
+      'ngMaterial',
+      'ngRoute',
+      'ngMessages',
+      'googlechart',
+      'ui.grid', 
+      'ui.grid.edit',
+      'ui.grid.pagination',
+      'satellizer',
+      'toastr'
+    ]);
     
     app.constant('config', {
       // serverUrl : "http://localhost:8001",
@@ -18,37 +28,38 @@
         .accentPalette('orange');
         
         $routeProvider.when('/', {
-        templateUrl: 'partials/home.html'
+          templateUrl: 'partials/login.html',
+          controller: 'AuthCtrl'
         })
         .when('/home',{
-        templateUrl: 'partials/home.html' 
+          templateUrl: 'partials/home.html' 
         })
         .when('/Feeds',{
-        templateUrl: 'partials/campaignSearchFeed.html' 
+          templateUrl: 'partials/campaignSearchFeed.html' 
         })
         .when('/campaginsuggestion',{
-        templateUrl: 'partials/campaignsugg.html' 
+          templateUrl: 'partials/campaignsugg.html' 
         })
         .when('/admincampaign',{
-        templateUrl: 'partials/AdminCampaign.html' 
+          templateUrl: 'partials/AdminCampaign.html' 
         })
         .when('/campaginproposalsummary',{
-        templateUrl: 'partials/campaignproposalsummary.html' 
+          templateUrl: 'partials/campaignproposalsummary.html' 
         })
         .when('/campaginrunningsummary',{
-        templateUrl: 'partials/campaignrunningsummary.html' 
+          templateUrl: 'partials/campaignrunningsummary.html' 
         })
         .when('/campaginclosedsummary',{
-        templateUrl: 'partials/campaignclosedsummary.html' 
+          templateUrl: 'partials/campaignclosedsummary.html' 
         })
         .when('/registration',{
-        templateUrl: 'partials/registration.html' 
+          templateUrl: 'partials/registration.html' 
         })
         .when('/companies',{
-        templateUrl: 'partials/companys.html' 
+          templateUrl: 'partials/companys.html' 
         })
         .when('/hoardinglist',{
-        templateUrl: 'partials/hoardinglist.html' 
+          templateUrl: 'partials/hoardinglist.html' 
         });
         $routeProvider.otherwise({redirectTo: '/'});
     });

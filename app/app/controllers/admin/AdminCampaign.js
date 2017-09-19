@@ -8,7 +8,6 @@
       $scope.loadMore = function() {
         $scope.limit = $scope.items.length;
       };
-
     //   $scope.openOffscreen = function(ev) {
     //     $mdDialog.show({
     //       templateUrl:'partials/addcampaign.html',
