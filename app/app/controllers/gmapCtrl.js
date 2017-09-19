@@ -521,7 +521,6 @@ app.controller('GmapCtrl',
       function getShortListedProducts(){
         MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function(response){
           $scope.shortListedProducts = response;
-          console.log(response);
         });
       }
       getShortListedProducts();
@@ -601,7 +600,8 @@ app.controller('GmapCtrl',
       }
 
       $scope.searchBySiteNo = function(){
-        MapService.searchBySiteNo($scope.siteNoSearch).then(function(markerProperties){          
+        MapService.searchBySiteNo($scope.siteNoSearch).then(function(markerProperties){
+          console.log(markerProperties);
           if(markerProperties.id){
             var marker = {};
             marker.properties = markerProperties;
