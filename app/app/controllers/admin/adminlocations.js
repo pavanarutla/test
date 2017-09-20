@@ -59,7 +59,7 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
   };
 
   $scope.gridCountery.columnDefs = [
-    { name: 'name', enableCellEdit: false, width: '50%' },
+    { name: 'name', enableCellEdit: true, width: '50%' },
     {
       name: 'Action', field: 'Action', width: '50%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
@@ -82,6 +82,7 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     //   data[i].registered = new Date(data[i].registered);
     // }
     $scope.gridCountery.data = data;
+    $scope.countrydata = data;
   });
   // $http.get('fakedb/companyagency.json')
   //   .success(function (data) {
@@ -101,8 +102,8 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridState.columnDefs = [
-    { name: 'Countery', enableCellEdit: false, width: '33%' },
-    { name: 'state', displayName: 'State ', width: '33%', enableCellEdit: false },
+   { name: 'conuntryname', displayName: 'Country ', enableCellEdit: false, width: '33%' },
+    { name: 'name', displayName: 'State ', width: '33%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '33%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
@@ -118,13 +119,24 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
       $scope.$apply();
     });
   };
-  $http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridState.data = data;
-    });
+
+$scope.setCountry=function(country){
+   AdminLocationService.getStates(country.id).then(function (data) {
+    console.log(data);
+    for(i=0;i<data.length;i++){
+      data[i]['conuntryname']=country.name;
+    }
+    $scope.gridState.data = data;
+   
+  });
+}
+  // $http.get('fakedb/companyagency.json')
+  //   .success(function (data) {
+  //     for (i = 0; i < data.length; i++) {
+  //       data[i].registered = new Date(data[i].registered);
+  //     }
+  //     $scope.gridState.data = data;
+  //   });
 
   //add state js end
   //add city js start
@@ -211,17 +223,34 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
   //add area js end
 
 
-  $scope.saveCountry = function(){
-    AdminLocationService.saveCountry($scope.country.name).then(function(data){
-      if(data.status == 1){
+  $scope.saveCountry = function () {
+    AdminLocationService.saveCountry($scope.country.name).then(function (data) {
+      if (data.status == 1) {
         console.log("Country saved successfully.");
       }
-      else{
+      else {
         console.log("An error occured while saving the country.");
       }
     });
   }
-
+$scope.saveState = function () {
+    AdminLocationService.saveState({country_id: $scope.country.id, state_name: $scope.state.name}).then(function (data) {
+      if (data.status == 1) {
+AdminLocationService.getStates($scope.country.id).then(function (data) {
+    console.log(data);
+      for(i=0;i<data.length;i++){
+      data[i]['conuntryname']=$scope.country.name;
+    }
+    $scope.gridState.data = data;
+  });
+        
+        console.log("Country saved successfully.");
+      }
+      else {
+        console.log("An error occured while saving the country.");
+      }
+    });
+  }
 
 
 });

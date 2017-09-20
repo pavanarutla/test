@@ -29,7 +29,7 @@ app.factory('AdminLocationService',
       },  
       saveState: function(state){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/state', state).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/state', state).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       saveCity: function(city){

@@ -11,24 +11,24 @@
         <div layout="column" layout-margin layout-padding flex="50">
              <md-input-container>
                   <label>Select Country </label>
-                  <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                  <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="country" ng-change="setCountry(country)">
                     <md-select-header class="demo-select-header">
                       <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
-                    <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    <md-option ng-repeat="country in countrydata | filter:searchTerm" ng-value="country">{{country.name}}</md-option>
                   </md-select required>
 
                 </md-input-container>
             <md-input-container class="md-block" >
                 <label>Add State</label>
-                <input ng-model="product.counteryname" type="text" name="counteryname" required="required" />
-                <div ng-messages="product.counteryname.$error">
+                <input ng-model="state.name" type="text" name="counteryname" required="required" />
+                <div ng-messages="state.$error">
                     <div ng-message="required">Counter Name is required</div>
                 </div>
             </md-input-container>
         </div>
         <div layout="row">
-            <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" ng-click="saveState()">SUBMIT</md-button>
             <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
         </div>
     </div>
