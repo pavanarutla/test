@@ -1,4 +1,4 @@
-app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope) {
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();

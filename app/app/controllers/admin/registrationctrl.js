@@ -1,4 +1,6 @@
-app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr, RegistrationService) {
+app.controller('RegistrationCtrl', function ($scope, $mdDialog, $http, toastr, AdminUserService) {
+
+  $scope.msg = {};
 
   $scope.registrationPopup = function (ev) {
     $mdDialog.show({
@@ -8,10 +10,29 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr, R
     })
   };
 
-  $scope.userData = {};
-  $scope.agencyData = {};
+  /* 
+  ==== Switching between user and agency pop up form ====
+  */
+  $scope.usersFormVisible = true;
+  $scope.userChecked = true;
 
-  $scope.gridOptions = {
+  $scope.showUser = function () {
+    $scope.userChecked = true;
+    $scope.usersFormVisible = true;
+  }
+  $scope.showAgency = function () {
+    $scope.userChecked = false;
+    $scope.usersFormVisible = false;
+  }
+  /* 
+  ==== Switching between user and agency pop up form ends ====
+  */
+
+  /* 
+  ======== Users Grid ========
+  */
+
+  $scope.gridUsers = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 10,
     enableCellEditOnFocus: false,
@@ -23,6 +44,43 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr, R
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
+  $scope.gridUsers.columnDefs = [
+    { name: 'name', displayName: 'Name (editable)', width: '25%', enableCellEdit: false,
+      cellTemplate: '<div>{{row.entity.first_name}} {{row.entity.last_name}}</div>'
+    },
+    { name: 'email', displayName: 'Email id (editable)', width: '20%' },
+    { name: 'phone', displayName: 'Phone', type: 'number', width: '15%' },
+    { name: 'company_name', displayName: 'Company(editable)', width: '15%' },
+    { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
+    {
+      name: 'Action', field: 'Action', width: '10%',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      enableFiltering: false,
+    }
+  ];
+
+  $scope.gridUsers.onRegisterApi = function (gridApiUser) {
+    //set gridApi on scope
+    $scope.gridApiUser = gridApiUser;
+    gridApiUser.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
+      $scope.$apply();
+    });
+  };
+
+  AdminUserService.getUsers().then(function (response) {    
+    $scope.gridUsers.data = response;
+  });
+
+  /* 
+  ======== Users Grid ends ========
+  */
+
+
+  /* 
+  ======== Agency Grid ========
+  */
+
   $scope.gridAgency = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 25,
@@ -35,155 +93,117 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr, R
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
-  $scope.gridOptions.columnDefs = [
-    { name: 'id', enableCellEdit: false, width: '5%' },
-    { name: 'name', displayName: 'Name (editable)', width: '20%', enableCellEdit: false },
-    { name: 'email', displayName: 'Email id (editable)', width: '20%' },
-    { name: 'phone', displayName: 'Phone', type: 'number', width: '15%' },
-    { name: 'Company', displayName: 'Company(editable)', width: '15%' },
-    { name: 'typeofcompany', displayName: 'TypeofCompany(editable)', width: '15%' },
-    {
-      name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
-      enableFiltering: false,
-    }
-  ];
+  
   $scope.gridAgency.columnDefs = [
-    { name: 'id', enableCellEdit: false, width: '10%' },
-    { name: 'name', displayName: 'Ad Agency Name', width: '20%', enableCellEdit: false },
+    { name: 'company_name', displayName: 'Ad Agency Name', width: '25%', enableCellEdit: false },
     { name: 'email', displayName: 'Email id (editable)', width: '25%' },
-    { name: 'phone', displayName: 'Phone', type: 'number', width: '20%' },
-    { name: 'typeofcompany', displayName: 'TypeofCompany(editable)', width: '15%' },
-
+    { name: 'phone', displayName: 'Phone', type: 'number', width: '25%' },
+    { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
     {
       name: 'Action', field: 'Action', width: '10%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
-
-  $scope.msg = {};
-  $scope.gridOptions.onRegisterApi = function (gridApi) {
+ 
+  $scope.gridAgency.onRegisterApi = function (gridApiAgencies) {
     //set gridApi on scope
-
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+    $scope.gridApiAgencies = gridApiAgencies;
+    gridApiAgencies.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
       $scope.$apply();
     });
   };
-  $scope.gridAgency.onRegisterApi = function (gridApi) {
-    //set gridApi on scope
-
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-      $scope.$apply();
-    });
-  };
-  $http.get('company.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridOptions.data = data;
-    });
-  $http.get('companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridAgency.data = data;
-    });
-
-  // Service 
-  RegistrationService.getUsers().then(function (response) {
-    console.log(response);
-  })
-  RegistrationService.getAgencies().then(function (response) {
-    console.log(response);
+  
+  AdminUserService.getAgencies().then(function (response) {
+    $scope.gridAgency.data = response;
   });
-  $scope.userChecked = true;
-  $scope.agencyChecked = false;
-  //$scope.agency = false;
 
-  $scope.userCheck = function () {
-    $scope.users = true;
-    $scope.agencyChecked = false;
-    $scope.agencyshow = false;
-  }
-  $scope.Advagency = function () {
-    $scope.userChecked = false;
-    $scope.users = false;
-    $scope.agencyshow = true;
-  }
+  /* 
+  ======== Agency Grid ends ========
+  */
 
 
-  // Users functionality
-  $scope.users = true;
-  $scope.userData = {
-    userName: '', Email: '', phonenumber: '', companyName: '',
-    companyType: ''
-  };
-  $scope.userSave = function (user) {
-    $scope.userData = $scope.user;
-    console.log($scope.userData, "userSave");
-    //alert("submited successfully",$scope.userData);
-    // $mdDialog.cancel();
-    toastr.success('You have successfully submiteed');
+  /* 
+  ======== Adding New User ========
+  */
+  $scope.addUser = function () {
+    AdminUserService.saveUser($scope.user).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getUsers().then(function (response) {    
+          $scope.gridUsers.data = response;
+        });
+        toastr.success('You have successfully submiteed');
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
   }
+  /* 
+  ======== Adding New User ends ========
+  */
+
+  /* 
+  ======== Adding New Agency ========
+  */
+  $scope.addAgency = function () {
+    AdminUserService.saveAgency($scope.agency).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getAgencies().then(function (response) {    
+          $scope.gridAgency.data = response;
+        });
+        toastr.success('You have successfully submiteed');
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  /* 
+  ======== Adding New Agency ends========
+  */
 
   $scope.cancel = function () {
     $mdDialog.cancel();
   }
 
-  //   $scope.agencyData = {
-  //     userName: '', Email: '', phonenumber: '',companyType: ''
-  //  };
-  // $scope.agency = true;
-  // agencySave Functionality
-  $scope.agencySave = function (agency) {
-    $scope.agencyData = agency;
-    // $scope.agencyData = angular.copy(agency);
-    // var newData = JSON.stringify($scope.agencyData);
-    // $scope.agencyData = JSON.parse($scope.agency);
-    console.log($scope.agencyData, "agencyData");
-  }
+});
+
+app.filter('mapGender', function () {
+  var genderHash = {
+    1: 'male',
+    2: 'female'
+  };
+
+  return function (input) {
+    if (!input) {
+      return '';
+    } else {
+      return genderHash[input];
+    }
+  };
 })
 
-  .filter('mapGender', function () {
-    var genderHash = {
-      1: 'male',
-      2: 'female'
-    };
+app.filter('mapStatus', function () {
+  var genderHash = {
+    1: 'Bachelor',
+    2: 'Nubile',
+    3: 'Married'
+  };
 
-    return function (input) {
-      if (!input) {
-        return '';
-      } else {
-        return genderHash[input];
-      }
-    };
-  })
+  return function (input) {
+    if (!input) {
+      return '';
+    } else {
+      return genderHash[input];
+    }
+  };
+})
 
-  .filter('mapStatus', function () {
-    var genderHash = {
-      1: 'Bachelor',
-      2: 'Nubile',
-      3: 'Married'
-    };
-
-    return function (input) {
-      if (!input) {
-        return '';
-      } else {
-        return genderHash[input];
-      }
-    };
-  })
-
-  .filter('address', function () {
-    return function (input) {
-      return input.street + ', ' + input.city + ', ' + input.state + ', ' + input.zip;
-    };
-  });
+app.filter('address', function () {
+  return function (input) {
+    return input.street + ', ' + input.city + ', ' + input.state + ', ' + input.zip;
+  };
+});

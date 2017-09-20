@@ -89,7 +89,7 @@ app.constant('config', {
       abstract: true,
       url: '/admin', 
       templateUrl: 'layouts/admin.html',
-      controller: 'bbAdminMgrAppCtrl'
+      controller: 'AdminMgrAppCtrl'
     })
     // .state('admin.products', {
     //   url: '/admin/products',
@@ -137,7 +137,7 @@ app.constant('config', {
     .state('admin.registration',{
       url: '/registration',
       templateUrl: 'views/admin/registration.html',
-      controller: 'registrationCtrl',
+      controller: 'RegistrationCtrl',
       title: "User Registration"
     })
     .state('admin.companies',{
