@@ -1,5 +1,4 @@
-
-app.factory('AdminUserService', 
+app.service('AdminUserService', 
 ['$http', '$q', 'config', 
   function($http, $q, config){
     return {
