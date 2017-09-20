@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config', 'toastr', 
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -27,7 +27,10 @@ app.controller('GmapCtrl',
       $scope.mapObj;
       var markersOnMap = [];
       $scope.selectedProduct = null;
+      $scope.selectedForNewCampaign = [];
+      $scope.newCampaign = {};
       var trafficOn = false;
+      $scope.siteNoSearch = "";
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -39,12 +42,7 @@ app.controller('GmapCtrl',
       });
       $scope.product = {};
       MapService.markers().then(function (markers) {
-        $scope.filteredMarkers = markers;
-        // var map = new google.maps.Map(document.getElementById('gmap'), {
-        //   zoom: 4,
-        //   center: $scope.address.location,
-        //   disableDefaultUI: true
-        // });  
+        $scope.filteredMarkers = markers; 
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
@@ -56,7 +54,6 @@ app.controller('GmapCtrl',
       $scope.areas = [];
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
-        // console.log(countries);
       });
       $scope.Sectors=[];
       // MapService.getIndustrySectors().then(function(Sectors){
@@ -103,8 +100,7 @@ app.controller('GmapCtrl',
       
       $scope.locationpageonly = true;
 
-      $scope.dashboardData = false;
-      $scope.locationpageonly = true;
+      $scope.dashboardData = false;      
       
       $scope.filters = function(){
         $scope.filter = !$scope.filter;
@@ -157,7 +153,8 @@ app.controller('GmapCtrl',
       };
       // $rootScope.address = 'Hyderabad'; 
 
-      $scope.selectedCountry = { Id: '1', Countryname: 'India' };
+      // $scope.selectedCountry = { Id: '1', Countryname: 'India' };
+      $scope.selectedCountry = {};
       $scope.selectedStates={};
       $scope.selectedcitys={};
       $scope.selectedareas={};
@@ -171,88 +168,15 @@ app.controller('GmapCtrl',
           $scope.states = states;
         });
       }
-
       $scope.setStates = function () {
         LocationService.getCities($scope.selectedStates).then(function (cities) {
           $scope.cities = cities;
         });
       }
-      
       $scope.setCities = function () {
         LocationService.getAreas($scope.selectedcitys).then(function (areas) {
           $scope.areas = areas;
         });      
-      }
-      
-      // shortlist
-      $scope.closeSideViewAll = function() {
-        $mdSidenav('viewAll').toggle();
-      };
-
-      $scope.hideSelectedMarkerDetail = false;
-      //saved campaign
-      $scope.addSelectedMarkerToCampaign = function() {
-        // shortlist and save to campagin
-        $scope.hideSelectedMarkerDetail = true;
-        // $mdSidenav('savedCampaign').toggle();
-      };
-
-      // saved view all side nav
-      $scope.closeSideViewAll = function() {
-          $mdSidenav('savedViewAll').toggle();
-      };
-
-      // edit list saved campgin
-      $scope.closeSideEditList = function() {
-          $mdSidenav('savedEdit').toggle();
-      };
-
-      // saved campgin
-      $scope.closeSideSavedCampaign = function() {
-          $mdSidenav('savedSavedCampaign').toggle();
-      };
-
-      // Save Campgin Details
-      $scope.saveCampaignDetails = function() {
-        $mdSidenav('saveCampaignDetails').toggle();
-      };
-
-      // Thanks Message
-      $scope.closeSideThanksSidenav = function() {
-        $mdSidenav('thanksCampaign').toggle();
-      };
-      // Product Details
-      $scope.closeProductDetailSidenav = function() {
-        $mdSidenav('productDetails').toggle();
-      };
-      // Share Message
-      $scope.shareSidenav = function() {
-        $mdSidenav('shareCampaign').toggle();
-      };
-      // Suggest Me dialog 
-      $scope.suggestMe = function() {
-        $mdSidenav('suggestMe').toggle();
-      };
-      // Save Campgin Name
-      $scope.saveCampaignName = function() {
-        $mdSidenav('saveCampaignName').toggle();
-      };
-      // View All Campaign List
-      $scope.viewAllCampaginList = function() {
-        $mdSidenav('viewAll').toggle();
-      };
-      // Create Campaign sidenav
-      $scope.toggleCreateCampaignSidenav = function() {
-        $scope.campaignSaved = false;
-        $mdSidenav('createCampaignSidenav').toggle();
-      };
-
-      $scope.campaignSaved = false;
-      $scope.createNewCampaign = function(){
-        // submit form data to api and on success show message
-        // CampaignService.saveCampaign(data).then(function(res){
-          $scope.campaignSaved = true;
-        // });
       }
 
       //Confirm Dialog
@@ -316,7 +240,6 @@ app.controller('GmapCtrl',
         { model: "Telecom" },
         { model: "Travel & Transport" },
         { model: "Others" }
-
       ];
       $scope.CampaignDuration = [
         { model: "10 Days" },
@@ -329,7 +252,6 @@ app.controller('GmapCtrl',
         { model: "6 Months" },
         { model: "1 year" }
       ];
-      //$scope.agents = [1,2]
 
       //Suggest Me Dialog 1
       $scope.suggestMeConfirm = function (project) {
@@ -354,6 +276,7 @@ app.controller('GmapCtrl',
         $scope.product.panelSize = marker.properties['panelSize'];
         $scope.product.address = marker.properties['address'];
         $scope.product.impressions = marker.properties['impressions'];
+        $scope.product.lighting = marker.properties['lighting'];
         $scope.product.direction = marker.properties['direction'];
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
@@ -361,7 +284,6 @@ app.controller('GmapCtrl',
       }
       
       function selectSpideredMarker(marker){
-        console.log(marker.properties);
         $scope.selectedProduct = marker;
         selectorMarker.setMap(null);
         $scope.product.image = config.serverUrl + marker.properties['image'];
@@ -370,6 +292,7 @@ app.controller('GmapCtrl',
         $scope.product.address = marker.properties['address'];
         $scope.product.impressions = marker.properties['impressions'];
         $scope.product.direction = marker.properties['direction'];
+        $scope.product.lighting = marker.properties['lighting'];
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
@@ -386,7 +309,6 @@ app.controller('GmapCtrl',
       var uniqueMarkers = [];
       var concentricMarkers = {};
       $scope.processMarkers = function () {  
-        // console.log($scope.filteredMarkers);
         _.each($scope.filteredMarkers, function (v, i) {
           var product = {position: {lat: v.lat, lng: v.lng}, data: {v}};
           productList.push(product);
@@ -396,7 +318,6 @@ app.controller('GmapCtrl',
             locArr[JSON.stringify(product.position)] = 1;
           }
         });
-        // console.log(locArr);
         _.each(productList, function(v, i){
           if(locArr[JSON.stringify(v.position)] > 1){            
             if(concentricMarkers[JSON.stringify(v.position)]){
@@ -414,9 +335,8 @@ app.controller('GmapCtrl',
             uniqueMarkers.push(v.data.v);
           }
         });
-
         // console.log(uniqueMarkers);
-        console.log(concentricMarkers);
+        // console.log(concentricMarkers);
 
         /* 
         //// handling clustering ////
@@ -448,7 +368,6 @@ app.controller('GmapCtrl',
         /*
         //// handling spiderifying ////
         */
-
         var iw = new google.maps.InfoWindow();
         var circleMarker = new google.maps.Marker({
           icon: {
@@ -584,21 +503,45 @@ app.controller('GmapCtrl',
         // console.log($scope.address.components.location);
       }
 
-      // $scope.shortlistSelected = function(){
-      //   MapService.shortListProduct($scope.selectedProduct.properties.id, localStorage.loggedInUser.id).then(function(response){
-      //     alert(response.message);
-      //   });
-      // }
+      $scope.shortlistSelected = function(ev){
+        MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function(response){
+          $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('ShortList Product')
+            .textContent(response.message)
+            .ariaLabel('shortlist-success')
+            .ok('Got it!')
+            .targetEvent(ev)
+          );
+          getShortListedProducts();
+        });
+      }
 
-      // MapService.getshortListProduct( localStorage.loggedInUser.id).then(function(response){ 
-      //   $scope.shortListeddata = response;
-      // });
-
-      // $scope.deletShortlisted =function (product){
-      //   MapService.deleteshortListProduct(localStorage.loggedInUser.id, product).then(function(response){
-      //     console.log(response,"deleted data")
-      //   })
-      // };
+      function getShortListedProducts(){
+        MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function(response){
+          $scope.shortListedProducts = response;
+        });
+      }
+      getShortListedProducts();
+      
+      $scope.deleteShortlisted =function(ev, productId){
+        // console.log(productId);
+        MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function(response){          
+          $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('ShortList Product')
+            .textContent(response.message)
+            .ariaLabel('delete-shortlisted')
+            .ok('Got it!')
+            .targetEvent(ev)
+          );
+          getShortListedProducts();
+        });
+      };
 
       $scope.resetFilters = function(){
         productList = [];
@@ -625,6 +568,65 @@ app.controller('GmapCtrl',
           $scope.mapObj.fitBounds(bounds);
         });
       }
+
+      $scope.toggleSelectedShortlistedForNewCampaign = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+
+      $scope.existsShortlistedForNewCampaign = function (item, list) {
+        return list.indexOf(item) > -1;
+      };
+
+      $scope.viewAndSaveNewCampaign = function(){
+        // If we finally decide to use selecting products for a campaign
+        // if($scope.selectedForNewCampaign.length == 0){
+        //   // add all shortlisted products to campaign
+        //   console.log($scope.shortListedProducts);
+        //   // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // else{
+        //   // add all shortlisted products for new campaign
+        //   console.log($scope.selectedForNewCampaign);
+        //   // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // campaign.products = $scope.selectedForNewCampaign;
+        var campaign = $scope.newCampaign;
+        campaign.products = [];
+        _.each($scope.shortListedProducts, function(v, i){
+          campaign.products.push(v.id);
+        });
+        CampaignService.saveCampaign(campaign).then(function(response){
+          $scope.campaignSavedSuccessfully = true;
+        });
+      }
+
+      $scope.searchBySiteNo = function(){
+        MapService.searchBySiteNo($scope.siteNoSearch).then(function(markerProperties){
+          console.log(markerProperties);
+          if(markerProperties.id){
+            var marker = {};
+            marker.properties = markerProperties;
+            selectMarker(marker);
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend({lat:parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng)});
+            $scope.mapObj.fitBounds(bounds);
+          }
+          else{
+            toastr.error('No product found with that tab id', 'error');
+          }
+        });
+      }
+
     }
   ]
 );

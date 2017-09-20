@@ -32,12 +32,12 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 
 	$scope.signInAgency = function (agency) {
 
-		$scope.data = agency;
-		if (agency.email == "naresh@gmail.com" && agency.password == "naresh123") {
-			alert("login successfull")
-		} else {
-			alert("wrong credentials");
-		}
+		// $scope.data = agency;
+		// if (agency.email == "naresh@gmail.com" && agency.password == "naresh123") {
+		// 	alert("login successfull")
+		// } else {
+		// 	alert("wrong credentials");
+		// }
 	}
 
 

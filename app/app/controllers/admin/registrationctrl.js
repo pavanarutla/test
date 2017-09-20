@@ -101,13 +101,11 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr,Re
   
       // Service 
       RegistrationService.getUsers().then(function(response){ 
-          $scope.userData = response;
-          console.log($scope.userData,'$scope.userData');
+         console.log(response);
       })
       RegistrationService.getAgencies().then(function(response){
-        $scope.agencies = response;
-        console.log($scope.agencies,"agenciesData");
-      })
+        console.log(response);
+      });
       $scope.userChecked = true;
       $scope.agencyChecked = false;
       //$scope.agency = false;

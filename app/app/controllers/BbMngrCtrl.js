@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, UserService) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -194,8 +194,89 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');
+      toastr.warning('You have successfully signed out!');        
     });
   }
+
+  /*=================================
+  |  Sidenav Functionality
+  =================================*/
+
+  // shortlist
+  $scope.closeSideViewAll = function() {
+    $mdSidenav('viewAll').toggle();
+  };
+
+  $scope.hideSelectedMarkerDetail = false;
+  //saved campaign
+  $scope.addSelectedMarkerToCampaign = function() {
+    // shortlist and save to campagin
+    $scope.hideSelectedMarkerDetail = true;
+    // $mdSidenav('savedCampaign').toggle();
+  };
+
+  // saved view all side nav
+  $scope.toggleViewAllShortlisted = function() {
+      $mdSidenav('shortlistAndSave').toggle();
+  };
+
+  // edit list saved campgin
+  $scope.closeSideEditList = function() {
+      $mdSidenav('savedEdit').toggle();
+  };
+
+  // saved campgin
+  $scope.closeSideSavedCampaign = function() {
+      $mdSidenav('savedSavedCampaign').toggle();
+  };
+
+  // Save Campgin Details
+  $scope.campaignSavedSuccessfully = false;
+  $scope.toggleSaveNewCampaign = function() {
+    $mdSidenav('saveNewCampaign').toggle();
+    $scope.campaignSavedSuccessfully = false;
+  };
+
+  // Thanks Message
+  $scope.closeSideThanksSidenav = function() {
+    $mdSidenav('thanksCampaign').toggle();
+  };
+  // Product Details
+  $scope.closeProductDetailSidenav = function() {
+    $mdSidenav('productDetails').toggle();
+  };
+  // Share Message
+  $scope.shareSidenav = function() {
+    $mdSidenav('shareCampaign').toggle();
+  };
+  // Suggest Me dialog 
+  $scope.suggestMe = function() {
+    $mdSidenav('suggestMe').toggle();
+  };
+  // Save Campgin Name
+  $scope.saveCampaignName = function() {
+    $mdSidenav('saveCampaignName').toggle();
+  };
+  // View All Campaign List
+  $scope.viewAllCampaginList = function() {
+    $mdSidenav('viewAll').toggle();
+  };
+  // Create Campaign sidenav
+  $scope.toggleCreateCampaignSidenav = function() {
+    $scope.campaignSaved = false;
+    $mdSidenav('createCampaignSidenav').toggle();
+  };
+
+  $scope.campaignSaved = false;
+  $scope.createNewCampaign = function(){
+    // submit form data to api and on success show message
+    // CampaignService.saveCampaign(data).then(function(res){
+      $scope.campaignSaved = true;
+    // });
+  }
+
+  /*=================================
+  |  Sidenav Functionality Ends
+  =================================*/
 
 });
