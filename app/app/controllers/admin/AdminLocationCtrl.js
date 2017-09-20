@@ -1,4 +1,9 @@
-app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationService) {
+app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationService, toastr) {
+  
+  $scope.countryList = [];
+  $scope.stateListForCountry = [];
+  $scope.cityListForState = [];
+
   //location js start
   $scope.gridLocation = {
     paginationPageSizes: [25, 50, 75],
@@ -12,16 +17,14 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
-
-
   $scope.gridLocation.columnDefs = [
-    { name: 'countery', enableCellEdit: false, width: '10%' },
-    { name: 'state', displayName: 'State ', width: '10%', enableCellEdit: false },
-    { name: 'city', displayName: 'City ', width: '10%' },
-    { name: 'area', displayName: 'area', width: '15%' },
+    { name: 'country_name', displayName: 'Country', enableCellEdit: false, width: '10%' },
+    { name: 'state_name', displayName: 'State ', width: '10%', enableCellEdit: false },
+    { name: 'city_name', displayName: 'City ', width: '10%' },
+    { name: 'name', displayName: 'Area', width: '15%' },
     { name: 'pincode', displayName: 'Pincode', type: 'number', width: '15%' },
-    { name: 'longitude', displayName: 'Longitude', width: '15%' },
-    { name: 'latitude', displayName: 'Latitude', width: '15%' },
+    { name: 'lat', displayName: 'Latitude', width: '15%' },
+    { name: 'lng', displayName: 'Longitude', width: '15%' },
     {
       name: 'Action', field: 'Action', width: '10%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
@@ -29,7 +32,6 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     }
   ];
   $scope.msg = {};
-
   $scope.gridLocation.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -37,17 +39,13 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
       $scope.$apply();
     });
   };
-  $http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridLocation.data = data;
-    });
-
+  AdminLocationService.getAllAreas().then(function (data) {
+    $scope.gridLocation.data = data;
+  });
   //location js end 
-  //add countery js start
-  $scope.gridCountery = {
+
+  //add country js start
+  $scope.gridCountry = {
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -57,40 +55,29 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
-
-  $scope.gridCountery.columnDefs = [
-    { name: 'name', enableCellEdit: false, width: '50%' },
+  $scope.gridCountry.columnDefs = [
+    { name: 'name', displayName: 'Country Name', enableCellEdit: false, width: '50%' },
     {
       name: 'Action', field: 'Action', width: '50%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
-
-
-  $scope.gridCountery.onRegisterApi = function (gridApi) {
+  $scope.gridCountry.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
       $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
       $scope.$apply();
     });
   };
-
   AdminLocationService.getCountries().then(function (data) {
-    console.log(data);
-    // for (i = 0; i < data.length; i++) {
-    //   data[i].registered = new Date(data[i].registered);
-    // }
-    $scope.gridCountery.data = data;
+    $scope.countryList = data;
+    $scope.gridCountry.data = data;
   });
-  // $http.get('fakedb/companyagency.json')
-  //   .success(function (data) {
+  //add country js end
 
-  //   });
-  //add countery js end
   //add state js start
   $scope.gridState = {
-
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -101,16 +88,14 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridState.columnDefs = [
-    { name: 'Countery', enableCellEdit: false, width: '33%' },
-    { name: 'state', displayName: 'State ', width: '33%', enableCellEdit: false },
+    { name: 'country_name', displayName:'Country', enableCellEdit: false, width: '33%' },
+    { name: 'name', displayName: 'State ', width: '33%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '33%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
-
-
   $scope.gridState.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -118,18 +103,14 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
       $scope.$apply();
     });
   };
-  $http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridState.data = data;
-    });
+  AdminLocationService.getAllStates().then(function (data) {
+    $scope.gridState.data = data;
+  });
 
   //add state js end
+
   //add city js start
   $scope.gridCity = {
-
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -140,17 +121,15 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridCity.columnDefs = [
-    { name: 'Countery', enableCellEdit: false, width: '25%' },
-    { name: 'state', displayName: 'State ', width: '25%', enableCellEdit: false },
-    { name: 'city', displayName: 'City ', width: '25%', enableCellEdit: false },
+    { name: 'country_name', displayName: 'Country', enableCellEdit: false, width: '25%' },
+    { name: 'state_name', displayName: 'State', width: '25%', enableCellEdit: false },
+    { name: 'name', displayName: 'City', width: '25%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '25%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
-
-
   $scope.gridCity.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -158,17 +137,13 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
       $scope.$apply();
     });
   };
-  $http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridCity.data = data;
-    });
+  AdminLocationService.getAllCities().then(function (data) {
+    $scope.gridCity.data = data;
+  });
   //add city js end
+
   //add area js start
   $scope.gridArea = {
-
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
@@ -179,21 +154,19 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridArea.columnDefs = [
-    { name: 'Countery', enableCellEdit: false, width: '15%' },
-    { name: 'state', displayName: 'State ', width: '15%', enableCellEdit: false },
-    { name: 'city', displayName: 'City ', width: '15%', enableCellEdit: false },
-    { name: 'area', displayName: 'Area ', width: '15%', enableCellEdit: false },
+    { name: 'country_name',  displayName: 'Country', enableCellEdit: false, width: '15%' },
+    { name: 'state_name', displayName: 'State', width: '15%', enableCellEdit: false },
+    { name: 'city_name', displayName: 'City', width: '15%', enableCellEdit: false },
+    { name: 'name', displayName: 'Area', width: '15%', enableCellEdit: false },
     { name: 'pincode', displayName: 'Pincode', width: '10%', enableCellEdit: false },
-    { name: 'latitude', displayName: 'Latitude', width: '10%', enableCellEdit: false },
-    { name: 'longitude', displayName: 'Longitude', width: '10%', enableCellEdit: false },
+    { name: 'lat', displayName: 'Latitude', width: '10%', enableCellEdit: false },
+    { name: 'lng', displayName: 'Longitude', width: '10%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '10%',
       cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button>Edit</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
-
-
   $scope.gridArea.onRegisterApi = function (gridApi) {
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -201,28 +174,79 @@ app.controller('adminLocationCtrl', function ($scope, $http, AdminLocationServic
       $scope.$apply();
     });
   };
-  $http.get('fakedb/companyagency.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridArea.data = data;
-    });
+  AdminLocationService.getAllAreas().then(function (data) {
+    $scope.gridArea.data = data;
+  });
   //add area js end
 
 
-  $scope.saveCountry = function(){
-    AdminLocationService.saveCountry($scope.country.name).then(function(data){
-      if(data.status == 1){
-        console.log("Country saved successfully.");
+  $scope.saveCountry = function () {
+    AdminLocationService.saveCountry($scope.country.name).then(function (data) {
+      if (data.status == 1) {
+        toastr.success('Country added to database successfully!');
+        AdminLocationService.getCountries().then(function (data) {
+          $scope.gridCountry.data = data;
+        });
       }
-      else{
-        console.log("An error occured while saving the country.");
+      else {
+        toastr.error(data.message);
       }
     });
   }
 
+  $scope.getStateList = function(country){
+    AdminLocationService.getStates(country).then(function (data) {
+      console.log(data);
+      $scope.stateListForCountry = data;
+    });
+  }
 
+  $scope.getCityList = function(state){
+    AdminLocationService.getCities(state).then(function (data) {
+      $scope.cityListForState = data;
+    });
+  }
+
+  $scope.saveState = function () {
+    AdminLocationService.saveState($scope.state).then(function (data) {
+      if (data.status == 1) {
+        toastr.success('State added to database successfully!');
+        AdminLocationService.getAllStates().then(function (data) {
+          $scope.gridState.data = data;
+        });
+      }
+      else {
+        toastr.error(data.message);
+      }
+    });
+  }
+
+  $scope.saveCity = function () {
+    AdminLocationService.saveCity($scope.city).then(function (data) {
+      if (data.status == 1) {
+        toastr.success('City added to database successfully!');
+        AdminLocationService.getAllCities().then(function (data) {
+          $scope.gridCity.data = data;
+        });
+      }
+      else {
+        toastr.error(data.message);
+      }
+    });
+  }
+
+  $scope.saveArea = function () {
+    AdminLocationService.saveArea($scope.area).then(function (data) {
+      if (data.status == 1) {
+        toastr.success('Area added to database successfully!');
+        AdminLocationService.getAllAreas().then(function (data) {
+          $scope.gridArea.data = data;
+        });
+      }
+      else {
+        toastr.error(data.message);
+      }
+    });
+  }
 
 });
-
