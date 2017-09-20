@@ -1,12 +1,4 @@
-app.controller('hoardingListCtrl', function ($scope, $mdDialog, $http) {
-
-  //   $scope.companiesPopup = function (ev) {
-  //     $mdDialog.show({
-  //       templateUrl: 'partials/companies-popup.html',
-  //       fullscreen: $scope.customFullscreen,
-  //       clickOutsideToClose: true
-  //     })
-  //   };
+app.controller('hoardingListCtrl', function ($scope, $mdDialog, $http,hoardingListService,toastr) {
   $scope.addNewProduct = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/admin/addnewproduct-popup.html',
@@ -24,6 +16,45 @@ app.controller('hoardingListCtrl', function ($scope, $mdDialog, $http) {
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
+
+  hoardingListService.getHoardingList().then(function(response){
+    $scope.HoardingList = response;
+    toastr.success('You have successfully loaded');
+  });
+
+  hoardingListService.getFormates().then(function(response){
+    $scope.FormatesList = response;
+    toastr.success('You have successfully loaded');
+  });
+  // hoarding List Functionolity
+  $scope.product = {};
+
+  $scope.productSave = function(){
+
+   console.log("product",$scope.product);
+  }
+
+  $scope.FormatesList = {}
+// formats Stuff Here ..
+$scope.addNewFormat = function(){
+  console.log("$scope.FormatesList",$scope.FormatesList);
+}
+
+  $scope.addNewformats = function (files) {
+    Upload.upload({
+      url: config.apiPath + '/product',
+      data: {image: files.image, symbol: files.symbol, product: $scope.product}
+    }).then(function (resp) {
+      console.log('Success. Product saved. Response: ', resp);
+    }, function (resp) {
+      console.log('Error status: ', resp);
+    }, function (evt) {
+      // console.log(evt);
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
+  };
+
   //gridFormats
   $scope.gridHoarding = {
     paginationPageSizes: [25, 50, 75],

@@ -125,14 +125,13 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr,Re
   
   
       // Users functionality
-      $scope.users = true;
-      $scope.userData = {
-        userName: '', Email: '', phonenumber: '',companyName: '',
-        companyType: ''
-     };
-      $scope.userSave = function(user){
-        $scope.userData = $scope.user;
-        console.log($scope.userData,"userSave");
+      $scope.users = true;    
+      $scope.userSave = function(){
+       // $scope.userData = user;
+        //console.log($scope.userData,"userSave");
+       // $scope.userData  = JSON.stringify(user)
+
+        console.log($scope.userData,"user");
         //alert("submited successfully",$scope.userData);
        // $mdDialog.cancel();
        toastr.success('You have successfully submiteed');
@@ -147,8 +146,8 @@ app.controller('registrationCtrl', function ($scope, $mdDialog, $http, toastr,Re
     //  };
      // $scope.agency = true;
       // agencySave Functionality
-      $scope.agencySave = function(agency){
-        $scope.agencyData = agency; 
+      $scope.agencySave = function(){
+       // $scope.agencyData = agency; 
         // $scope.agencyData = angular.copy(agency);
         // var newData = JSON.stringify($scope.agencyData);
         // $scope.agencyData = JSON.parse($scope.agency);

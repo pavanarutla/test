@@ -1,4 +1,4 @@
-app.controller('companiesCtrl', function ($scope, $mdDialog, $http) {
+app.controller('companiesCtrl', function ($scope, $mdDialog, $http,CompanysService,toastr ) {
 
   $scope.companiesPopup = function (ev) {
     $mdDialog.show({
@@ -14,6 +14,8 @@ app.controller('companiesCtrl', function ($scope, $mdDialog, $http) {
       clickOutsideToClose: true
     })
   };
+  $scope.companies = {}
+  $scope.hoardingCompaniesList ={}
 
   $scope.gridCompany = {
     paginationPageSizes: [25, 50, 75],
@@ -102,6 +104,40 @@ app.controller('companiesCtrl', function ($scope, $mdDialog, $http) {
       }
       $scope.gridHoardingCompany.data = data;
     });
+
+    // Companies Functionolity
+
+    //Services 
+    
+    CompanysService.getCompanyList().then(function(response){ 
+      $scope.companiesList = response;
+      console.log($scope.companiesList,'$scope.companiesList');
+  })
+  CompanysService.getHoardingList().then(function(response){
+    $scope.hoardingCompaniesList = response;
+    console.log($scope.hoardingCompaniesList,"hoardingCompaniesList");
+  })
+
+
+    $scope.cancel = function(){
+      $mdDialog.cancel();
+    }
+
+  
+    $scope.saveCompanies = function(){
+     // $scope.companiesList = company;
+      console.log($scope.companies,"companiesList");
+      //alert("submited successfully",$scope.userData);
+     // $mdDialog.cancel();
+    // CompanysService.saveCompany
+     toastr.success('You have successfully submiteed');
+    }
+    
+    $scope.saveHoardingList = function(){
+     // $scope.hoardingCompaniesList  = hoarding;
+      console.log("$scope.hoardingCompanies", $scope.hoardingCompaniesList);
+      toastr.success('You have successfully submiteed');
+    }
 })
 
 // .filter('mapGender', function() {
