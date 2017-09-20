@@ -75,7 +75,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       clickOutsideToClose: true,
     })
   };
-   $scope.shareForm = function (ev) {
+  $scope.shareForm = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/shareform.html',
       fullscreen: $scope.customFullscreen,
@@ -164,15 +164,27 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     method: {}
   };
   $scope.feed={};
-  
+
   $scope.sendfeedback = function (feed) {
     ContactService.feedBackData($scope.feed).then(function(response){
       alert(response.message);
     });
     $scope.feed="";
   };
-  
-  $scope.showContact = function(ev) {
+  ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+    $scope.feedBackData = response;
+  });
+  $scope.subscribehere = function () {
+    ContactService.subscribeData($scope.email).then(function (response) {
+      alert(response.message);
+      $scope.email="";
+    });
+    angular.element($('#subscriber-email')).val('');
+  };
+  ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+    $scope.feedBackData = response;
+  });
+  $scope.showContact = function (ev) {
     var confirm = $mdDialog.prompt()
       .title('Drop Your Contact Number')
       .placeholder('Enter Your Contact Number')
@@ -182,10 +194,10 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-    ContactService.contactNumber(result).then(function(response){
-          alert(response.message);
-        });
-      
+      ContactService.contactNumber(result).then(function(response){
+        alert(response.message);
+      });
+
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
@@ -219,17 +231,17 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   // saved view all side nav
   $scope.toggleViewAllShortlisted = function() {
-      $mdSidenav('shortlistAndSave').toggle();
+    $mdSidenav('shortlistAndSave').toggle();
   };
 
   // edit list saved campgin
   $scope.closeSideEditList = function() {
-      $mdSidenav('savedEdit').toggle();
+    $mdSidenav('savedEdit').toggle();
   };
 
   // saved campgin
   $scope.closeSideSavedCampaign = function() {
-      $mdSidenav('savedSavedCampaign').toggle();
+    $mdSidenav('savedSavedCampaign').toggle();
   };
 
   // Save Campgin Details
@@ -273,7 +285,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.createNewCampaign = function(){
     // submit form data to api and on success show message
     // CampaignService.saveCampaign(data).then(function(res){
-      $scope.campaignSaved = true;
+    $scope.campaignSaved = true;
     // });
   }
 
