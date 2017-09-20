@@ -1,4 +1,4 @@
-app.controller('CompaniesCtrl', function ($scope, $mdDialog, $http, CompanyService) {
+app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService, toastr) {
 
   $scope.msg = {};
 
@@ -27,12 +27,12 @@ app.controller('CompaniesCtrl', function ($scope, $mdDialog, $http, CompanyServi
   };
 
   $scope.gridCompany.columnDefs = [
-    { name: 'Company Name', enableCellEdit: false, width: '15%' },
-    { name: 'clienttype', displayName: 'Client Type ', width: '15%', enableCellEdit: false },
-    { name: 'personname', displayName: 'Person Name ', width: '20%' },
+    { name: 'name', displayName: 'Company Name', enableCellEdit: false, width: '15%' },
+    { name: 'client_type', displayName: 'Client Type ', width: '15%', enableCellEdit: false },
+    { name: 'person_name', displayName: 'Person Name ', width: '20%' },
     { name: 'email', displayName: 'Email', width: '15%' },
     { name: 'phone', displayName: 'Phone', type: 'number', width: '15%' },
-    { name: 'adders', displayName: 'Address', width: '15%' },
+    { name: 'address', displayName: 'Address', width: '15%' },
 
     {
       name: 'Action', field: 'Action', width: '5%',
@@ -49,16 +49,23 @@ app.controller('CompaniesCtrl', function ($scope, $mdDialog, $http, CompanyServi
     });
   };
 
-  // $http.get('fakedb/company.json').success(function (data) {
-  //   for (i = 0; i < data.length; i++) {
-  //     data[i].registered = new Date(data[i].registered);
-  //   }
-  //   $scope.gridCompany.data = data;
-  // });
-
-  AdminUserService.getCompanies().then(function (response) {    
+  CompanyService.getCompanies().then(function (response) {
     $scope.gridCompany.data = response;
   });
+
+  $scope.addCompany = function(){
+    CompanyService.saveCompany($scope.company).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+        CompanyService.getCompanies().then(function (response) {    
+          $scope.gridCompany.data = response;
+        });
+      }
+      else {
+        toastr.error(data.message);
+      }
+    });
+  }
   /*
   ======== Companies ends ========
   */
@@ -89,9 +96,8 @@ app.controller('CompaniesCtrl', function ($scope, $mdDialog, $http, CompanyServi
   };
 
   $scope.gridHoardingCompany.columnDefs = [
-    { name: 'id', displayName: 'S.NO', enableCellEdit: false, width: '5%' },
-    { name: 'name', displayName: 'Comapny Name', width: '15%', enableCellEdit: false },
-    { name: 'ownername', displayName: 'Owner Name', width: '20%', enableCellEdit: false },
+    { name: 'name', displayName: 'Comapny Name', width: '20%', enableCellEdit: false },
+    { name: 'owner', displayName: 'Owner Name', width: '20%', enableCellEdit: false },
     { name: 'email', displayName: 'Email id (editable)', width: '20%' },
     { name: 'phone', displayName: 'Phone', type: 'number', width: '20%' },
     { name: 'hoardinglist', displayName: 'List fo hoarding', width: '10%' },
@@ -110,16 +116,23 @@ app.controller('CompaniesCtrl', function ($scope, $mdDialog, $http, CompanyServi
     });
   };
 
-  // $http.get('fakedb/companyagency.json').success(function (data) {
-  //   for (i = 0; i < data.length; i++) {
-  //     data[i].registered = new Date(data[i].registered);
-  //   }
-  //   $scope.gridHoardingCompany.data = data;
-  // });
-
-  AdminUserService.getCompanies().then(function (response) {    
-    $scope.gridCompany.data = response;
+  CompanyService.getHoardingCompanies().then(function (response) {
+    $scope.gridHoardingCompany.data = response;
   });
+
+  $scope.addHoardingCompany = function(){
+    CompanyService.saveHoardingCompany($scope.hoardingCompany).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+        CompanyService.getHoardingCompanies().then(function (response) {    
+          $scope.gridCompany.data = response;
+        });
+      }
+      else {
+        toastr.error(data.message);
+      }
+    });
+  }
   /*
   ======== Hoarding Companies ========
   */

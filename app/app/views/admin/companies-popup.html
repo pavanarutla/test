@@ -1,4 +1,4 @@
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="CompanyCtrl">
 	<md-dialog-content>
 		<md-content class="md-padding">
 			<div layout="column" layout-align="center center">
@@ -7,60 +7,60 @@
 			<div layout="row" layout-align="center center" layout-margin>
 				<div>Enter Company Details</div>
 			</div>
-			<form name="addCompany" novalidate="novalidate">
+			<form name="addCompanyForm" novalidate="novalidate">
 				<div layout="column" layout-xs="column" layout-padding flex="60" flex-offset-gt-sm="20">
 					<md-input-container class="md-block margin-input">
 						<label>Company Name</label>
 						<input ng-model="company.name" type="text" name="name" minlength="5" maxlength="60" required="required" />
-						<div ng-messages="addCompany.name.$error">
+						<div ng-messages="addCompanyForm.name.$error">
 							<div ng-message="required">Company Name is required.</div>
 							<div ng-message="minlength">Company Name must have 2 characters.</div>
-							<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
+							<div ng-message="maxlength">Company Name shouldn't exceed 30 characters.</div>
 						</div>
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label> Client Type </label>
-						<input ng-model="company.client_type" type="text" name="client_type" minlength="5" maxlength="60" required="required" />
-						<div ng-messages="addCompany.client_type.$error">
+						<input ng-model="company.client_type" type="text" name="client_type" minlength="2" maxlength="60" required="required" />
+						<div ng-messages="addCompanyForm.client_type.$error">
 							<div ng-message="required">Client Type is required.</div>
 							<div ng-message="minlength">Client Type must have 2 characters.</div>
-							<div ng-message="maxlength">Client Type shouldn't exede 30 characters.</div>
+							<div ng-message="maxlength">Client Type shouldn't exceed 30 characters.</div>
 						</div>
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Person Name</label>
 						<input ng-model="company.person_name" type="text" name="person_name" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
-						<div ng-messages="addCompany.person_name.$error">
+						<div ng-messages="addCompanyForm.person_name.$error">
 							<div ng-message="required">Person Name is required.</div>
 							<div ng-message="minlength">Person Name must have 3 characters.</div>
-							<div ng-message="maxlength">Person Name shouldn't exede 30 characters. </div>
+							<div ng-message="maxlength">Person Name shouldn't exceed 30 characters. </div>
 							<div ng-message="pattern">Person Name should contain only Alpha Numeric and _ - . symbols.</div>
 						</div>
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Email</label>
 						<input ng-model="company.email" name="email" type="email" minlength="10" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
-						<div ng-messages="addCompany.email.$error">
+						<div ng-messages="addCompanyForm.email.$error">
 							<div ng-message="required">Email is required.</div>
 							<div ng-message="minlength">Email must have 10 characters.</div>
-							<div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
-							<div ng-message="pattern">Enter a valied EmailId.</div>
+							<div ng-message="maxlength">Email shouldn't exceed 30 characters. </div>
+							<div ng-message="pattern">Enter a valid EmailId.</div>
 						</div>
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Phone No</label>
 						<input ng-model="company.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
-						<div ng-messages="addCompany.phone.$error">
+						<div ng-messages="addCompanyForm.phone.$error">
 							<div ng-message="required">Phone No is required.</div>
 							<div ng-message="minlength">Phone No must have 10 characters.</div>
-							<div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
+							<div ng-message="maxlength">Phone No shouldn't exceed 10 characters.</div>
 							<div ng-message="pattern">Phone No should be only numbe.</div>
 						</div>
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label> Adderss </label>
 						<input ng-model="company.address" type="text" name="address" required="required" />
-						<div ng-messages="addCompany.address.$error">
+						<div ng-messages="addCompanyForm.address.$error">
 							<div ng-message="required">Campaign Name is required.</div>
 						</div>
 					</md-input-container>

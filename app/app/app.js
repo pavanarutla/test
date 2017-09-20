@@ -143,7 +143,7 @@ app.constant('config', {
     .state('admin.companies',{
       url: '/companies',
       templateUrl: 'views/admin/companies.html',
-      controller: 'CompaniesCtrl'
+      controller: 'CompanyCtrl'
     })
     .state('admin.hoarding-list',{
       url: '/hoarding-list',

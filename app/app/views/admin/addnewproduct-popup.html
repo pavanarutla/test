@@ -1,4 +1,4 @@
-<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60">
+<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60" ng-controller="hoardingListCtrl">
     <md-dialog-content>
         <md-content class="md-padding">
             <div layout="column" layout-align="center center">
@@ -25,7 +25,7 @@
                         <md-input-container class="md-block margin-input">
                             <label>Site Type</label>
                             <input ng-model="product.sitetype" type="text" name="sitetype" required="required" />
-                            <div ng-messages="signin.cname.$error">
+                            <div ng-messages="productadd.cname.$error">
                                 <div ng-message="required">Campaign Name is required.</div>
                             </div>
                         </md-input-container>
@@ -33,21 +33,21 @@
                         <md-input-container class="md-block margin-input">
                             <label>Hoarding Cost</label>
                             <input ng-model="product.hoardingcost" type="text" name="hoardingcost" required="required" />
-                            <div ng-messages="product.hoardingcost.$error">
+                            <div ng-messages="productadd.hoardingcost.$error">
                                 <div ng-message="required">Phone No is required.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block margin-input">
                             <label>Hoarding Campaign Name</label>
                             <input ng-model="product.hoardingcompany" type="text" name="hoardingcompany" required="required" />
-                            <div ng-messages="product.hoardingcompany.$error">
+                            <div ng-messages="productadd.hoardingcompany.$error">
                                 <div ng-message="required">Campaign Name is required.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block margin-input">
                             <label> Type Campaign </label>
-                            <input ng-model="user.companyName" type="text" name="cname" minlength="5" maxlength="60" required="required" />
-                            <div ng-messages="signin.cname.$error">
+                            <input ng-model="product.companyName" type="text" name="cname" minlength="5" maxlength="60" required="required" />
+                            <div ng-messages="productadd.cname.$error">
                                 <div ng-message="required">Campaign Name is required.</div>
                                 <div ng-message="minlength">Campaign Name must have 2 characters.</div>
                                 <div ng-message="maxlength">Campaign Name shouldn't exede 30 characters.</div>
@@ -57,7 +57,7 @@
                             <div flex="50" class="armrgn">
                                 <md-input-container>
                                     <label>Select Country </label>
-                                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.selectedCountry" ng-change="setCountry()">
                                         <md-select-header class="demo-select-header">
                                             <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                                         </md-select-header>
@@ -83,11 +83,10 @@
                             </div>
                         </div>
                         <textarea placeholder="Address"></textarea>
-
                         <md-input-container class="md-block ">
                             <label>Area Name</label>
                             <input ng-model="product.areaname" type="text" name="areaname"  required="required" />
-                            <div ng-messages="product.areaname.$error">
+                            <div ng-messages="productadd.areaname.$error">
                                 <div ng-message="required">Area Name is required.</div>
                             </div>
                         </md-input-container>
@@ -97,7 +96,7 @@
                         <md-input-container class="md-block margin-input">
                             <label>Impression</label>
                             <input ng-model="product.impression" type="text" name="impression"  required="required" />
-                            <div ng-messages="product.impression.$error">
+                            <div ng-messages="productadd.impression.$error">
                                 <div ng-message="required">Impression is required.</div>
                             </div>
                         </md-input-container>
@@ -105,21 +104,21 @@
                         <md-input-container class="md-block margin-input">
                             <label>Panel Size</label>
                             <input ng-model="product.panelsize" type="text" name="panelsize"  required="required"/>
-                            <div ng-messages="product.panelsize.$error">
+                            <div ng-messages="productadd.panelsize.$error">
                                 <div ng-message="required">Panel Size is required.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block margin-input">
                             <label>Lighting</label>
                             <input ng-model="product.lighting" type="text" name="lighting" required="required" />
-                            <div ng-messages="product.lighting.$error">
+                            <div ng-messages="productadd.lighting.$error">
                                 <div ng-message="required">Lighting is required.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block margin-input">
                             <label>Direction</label>
                             <input ng-model="product.direction" type="text" name="direction"  required="required" />
-                            <div ng-messages="product.direction.$error">
+                            <div ng-messages="productadd.direction.$error">
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </md-input-container>
@@ -128,7 +127,7 @@
                                 <md-input-container class="md-block margin-input">
                                     <label>Latitude</label>
                                     <input ng-model="product.latitude" type="text" name="latitude"  required="required"/>
-                                    <div ng-messages="product.latitude.$error">
+                                    <div ng-messages="productadd.latitude.$error">
                                         <div ng-message="required">Latitude is required.</div>
                                     </div>
                                 </md-input-container>
@@ -137,7 +136,7 @@
                                 <md-input-container class="md-block margin-input">
                                     <label>Longitude</label>
                                     <input ng-model="product.longitude" type="text" name="longitude"  required="required"/>
-                                    <div ng-messages="product.longitude.$error">
+                                    <div ng-messages="productadd.longitude.$error">
                                         <div ng-message="required">Longitude is required.</div>
                                     </div>
                                 </md-input-container>
@@ -152,7 +151,7 @@
                         <md-input-container class="md-block ">
                             <label>Advertising Strengths</label>
                             <input ng-model="product.adverstising" type="text" name="adverstising"  required="required" />
-                            <div ng-messages="product.adverstising.$error">
+                            <div ng-messages="productadd.adverstising.$error">
                                 <div ng-message="required">Area Name is required.</div>
                             </div>
                         </md-input-container>
@@ -161,20 +160,14 @@
                             <div>
                             <input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input> <br /><br />
                             </div>
-                       </div> 
-                     
-                    </div> 
-
-
-
+                       </div>
+                    </div>
                 </div>
                 <div layout="row" layout-align="center center">
-                    <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+                    <md-button type="submit" Class="md-raised md-primary" ng-click="productSave()">SUBMIT</md-button>
                     <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
                 </div>
-
             </form>
-
         </md-content>
     </md-dialog-content>
 </md-dialog>
