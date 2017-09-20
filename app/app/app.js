@@ -173,7 +173,19 @@ app.constant('config', {
       url: '/locations-area',
       templateUrl: 'views/admin/location-area.html',
       controller: 'AdminLocationCtrl'
-    }) ;
+    }).state('admin.subscribers',{
+      url: '/subscribers',
+      templateUrl: 'views/admin/subscribers.html',
+      controller: 'subscribersCtrl'
+    }).state('admin.queries',{
+      url: '/queries',
+      templateUrl: 'views/admin/queries.html',
+      controller: 'queriesCtrl'
+    }).state('admin.callcenterinfo',{
+      url: '/callcenterinfo',
+      templateUrl: 'views/admin/callcenterinfo.html',
+      controller: 'callCenterCtrl'
+    });
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
