@@ -10,9 +10,14 @@ feedBackData: function(feed){
       $http.get(config.apiPath + '/getfeedBackData').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-    contactNumber: function(result){
+    contactNumber: function(contact){
       var dfd = $q.defer();
-      $http.post(config.apiPath + '/contactNumber', result).success(dfd.resolve).error(dfd.reject);
+      $http.post(config.apiPath + '/contactNumber',contact ).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
+    getcontactNumber: function(){
+      var dfd = $q.defer();
+      $http.get(config.apiPath + '/getcontactNumber').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     subscribeData: function(email){
