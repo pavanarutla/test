@@ -6,37 +6,6 @@ app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav) {
   $scope.closeSideNavPanel = function () {
     $mdSidenav('right').toggle();
   };
-  $scope.firstname = "Feeds";
-  $scope.changeName = function () {
-    $scope.firstname = "Feeds";
-  };
-  $scope.changeProfile = function () {
-    $scope.firstname = "Campaigns";
-  };
-  $scope.changeCampains = function () {
-    $scope.firstname = " Location";
-  };
-  $scope.changeRequest = function () {
-    $scope.firstname = "Billboards";
-  };
-  $scope.changeHoardingList = function () {
-    $scope.firstname = "Registration";
-  };
-  $scope.changeTeam = function () {
-    $scope.firstname = "Payement";
-  };
-  $scope.changeAgent = function () {
-    $scope.firstname = "User Management";
-  };
-  $scope.companies = function () {
-    $scope.firstname = "Companies";
-  };
-  $scope.callCenterInfo = function () {
-    $scope.firstname = "Call Centre info";
-  };
-  $scope.offers = function () {
-    $scope.firstname = "Offers";
-  };
 
   $scope.limit = 3;
 
@@ -82,7 +51,7 @@ app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav) {
 
   $scope.showCampaignDetails = function (ev) {
     $mdDialog.show({
-      templateUrl: 'partials/campaignDetails-model.html',
+      templateUrl: 'views/admin/campaignDetails-model.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
     })

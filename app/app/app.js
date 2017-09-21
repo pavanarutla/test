@@ -18,10 +18,10 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination'
 ])
 app.constant('config', {
-  serverUrl : "http://localhost:8001",
-  apiPath : "http://localhost:8001/api",
-  // serverUrl : "http://104.236.11.252",
-  // apiPath : "http://104.236.11.252/api"
+  // serverUrl : "http://localhost:8001",
+  // apiPath : "http://localhost:8001/api",
+  serverUrl : "http://104.236.11.252",
+  apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, config) {
@@ -103,7 +103,8 @@ app.constant('config', {
     })
     .state('admin.home',{
       url: '/home',
-      templateUrl: 'views/admin/home.html' 
+      templateUrl: 'views/admin/home.html' ,
+      title:'Feeds'
     })
     .state('admin.Feeds',{
       url: '/feeds',
@@ -116,7 +117,8 @@ app.constant('config', {
     .state('admin.campaign',{
       url: '/campaign',
       templateUrl: 'views/admin/AdminCampaign.html',
-      controller: 'dataTable'
+      controller: 'dataTable',
+      title:'Campagin'
     })
     .state('admin.campaign-proposal-summary',{
       url: '/campaign-proposal-summary',
@@ -133,7 +135,8 @@ app.constant('config', {
     .state('admin.registration',{
       url: '/registration',
       templateUrl: 'views/admin/registration.html',
-      controller: 'registrationCtrl'
+      controller: 'registrationCtrl',
+      title:'Registration'
     })
     .state('admin.companies',{
       url: '/companies',
@@ -234,6 +237,7 @@ app.run(
     function($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr) {
       $transitions.onStart({}, function(transition) {
         // Get all URL parameter
+        $rootScope.currentTitle = transition.to().title;
         if(transition.to().name == "index.location"){
           $rootScope.footerhide = true;
         }
