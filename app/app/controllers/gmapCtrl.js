@@ -28,6 +28,7 @@ app.controller('GmapCtrl',
       var markersOnMap = [];
       $scope.selectedProduct = null;
       $scope.selectedForNewCampaign = [];
+      $scope.newCampaign = {};
       var trafficOn = false;
       $scope.siteNoSearch = "";
       var trafficLayer = new google.maps.TrafficLayer();
@@ -583,20 +584,30 @@ app.controller('GmapCtrl',
       };
 
       $scope.viewAndSaveNewCampaign = function(){
-        if($scope.selectedForNewCampaign.length == 0){
-          // add all shortlisted products to campaign
-          console.log($scope.shortListedProducts);
-          // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
-          //   $scope.campaignSavedSuccessfully = true;
-          // });
-        }
-        else{
-          // add all selected products for new campaign
-          console.log($scope.selectedForNewCampaign);
-          // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
-          //   $scope.campaignSavedSuccessfully = true;
-          // });
-        }
+        // If we finally decide to use selecting products for a campaign
+        // if($scope.selectedForNewCampaign.length == 0){
+        //   // add all shortlisted products to campaign
+        //   console.log($scope.shortListedProducts);
+        //   // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // else{
+        //   // add all shortlisted products for new campaign
+        //   console.log($scope.selectedForNewCampaign);
+        //   // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // campaign.products = $scope.selectedForNewCampaign;
+        var campaign = $scope.newCampaign;
+        campaign.products = [];
+        _.each($scope.shortListedProducts, function(v, i){
+          campaign.products.push(v.id);
+        });
+        CampaignService.saveCampaign(campaign).then(function(response){
+          $scope.campaignSavedSuccessfully = true;
+        });
       }
 
       $scope.searchBySiteNo = function(){

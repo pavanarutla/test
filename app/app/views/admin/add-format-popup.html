@@ -1,0 +1,36 @@
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="ProductCtrl">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="column" layout-align="center center">
+				<img ng-src="assets/images/billboard_popup.png">
+			</div>
+			<div layout="column" layout-align="center center">
+				<div class="md-title">
+					<h3>Enter Formats Details</h3>
+				</div>
+			</div>
+			<form name="addFormatForm" novalidate="novalidate">
+				<div layout="column" flex="60" flex-offset-gt-sm="20" layout-padding>
+					<md-input-container class="md-block margin-input">
+						<label>Format</label>
+						<input ng-model="format.name" type="text" name="name" required="required" />
+						<div ng-messages="formats.name.$error">
+							<div ng-message="required">Format Name is required.</div>
+						</div>
+					</md-input-container>
+					<div layout="row">
+						<div flex="50"> <label for="dob">Icon Image</label></div>
+						<div>
+							<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input>
+							<br /><br />
+						</div>
+					</div>
+				</div>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary" ng-click="addFormat()">SUBMIT</md-button>
+					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>
