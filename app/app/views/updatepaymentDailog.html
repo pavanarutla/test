@@ -1,33 +1,51 @@
-<md-content class="md-padding">
-
-  <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
-    <h5> fill bellow all fields to upload Payment</h5>
-  </div>
-  <form name="payment" novalidate="novalidate">
-    <md-input-container class="md-block">
-      <label>Amount</label>
-      <input ng-model="user.amount" name="amount" type="email" minlength="5" maxlength="10" required="required" onkeypress="if ((event.keyCode == 32) || (event.keyCode == 47) || (event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 45 || event.which > 57)) event.returnValue = false;"
-      />
-    </md-input-container>
-    <md-input-container class="md-block">
-      <label>payment Mode</label>
-      <input ng-model="user.payment" type="text" name="password" minlength="6" maxlength="20" required="required" />
-    </md-input-container>
-    <div class="row">
-      <div layout="column" layout-fill="layout-fill" flex="20">
-        <md-button type="button" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="uploadFile(input)">UploadImg</md-button>
-        <input type="text" class="form-control">
-        <span class="input-group-addon">
-      <a onclick="document.getElementById('photo-upload').click();" style="cursor:pointer"><i class="glyphicon glyphicon-folder-open"></i> Select a file</a></span>
-        <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this)" id="photo-upload" style="display: none;"
-        />
-
+<md-dialog flex-xs="100" flex="50" flex-md="50" flex-sm="60">
+  <md-dialog-content>
+    <md-content class="md-padding">
+      <div layout="column" layout-align="center center">
+        <img ng-src="assets/images/billboard_popup.png">
       </div>
-      <img ng-src="data:image/jpeg;base64,{{data.uploadedPhoto}}" id="photo-id" width="100" height="100" />
-    </div>
-    </div>
-    <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-      <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn">Submit</md-button>
-    </md-input-container>
-  </form>
-</md-content>
+      <div layout="column" layout-align="center center">
+        <div class="md-title">
+          <h3>Enter Payment Details</h3>
+        </div>
+      </div>
+
+      <form name="productadd" novalidate="novalidate">
+
+        <div layout="column" flex-offset-gt-sm="25" flex="50" flex-sm="100" layout-margin>
+
+          <md-input-container class="md-block margin-input">
+            <label>Amount Rs</label>
+            <input ng-model="product.hoardingcost" type="text" name="hoardingcost" required="required" />
+            <div ng-messages="product.hoardingcost.$error">
+              <div ng-message="required">Phone No is required.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Payment Type </label>
+            <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+              <md-select-header class="demo-select-header">
+                <input ng-model="searchTerm" type="search" placeholder="Search for payment type.." class="demo-header-searchbox md-text">
+              </md-select-header>
+              <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+            </md-select required>
+
+          </md-input-container>
+          <div lauout="column" layout-align="center end">
+
+            <input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input>
+
+          </div>
+
+        </div>
+        <div layout="row" layout-align="center center" layout-margin>
+          <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+          <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+        </div>
+
+      </form>
+
+    </md-content>
+  </md-dialog-content>
+</md-dialog>
