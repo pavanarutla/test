@@ -1,6 +1,11 @@
-app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService, config, Upload, toastr) {
+app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
   $scope.msg = {};
+  $scope.countryList = [];
+  $scope.stateList = [];
+  $scope.cityList = [];
+  $scope.areaList = [];
+  $scope.hoardingCompaniesList = [];
 
   $scope.test = "test";
   /*
@@ -57,6 +62,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   // Get Formats list
   ProductService.getFormatList().then(function(result){
     $scope.gridFormats.data = result;
+    $scope.formatList = result;
   });
 
   // Adding new format
@@ -73,14 +79,14 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
       url: config.apiPath + '/format',
       data: {image: $scope.files.image, format: $scope.format}
     }).then(function (result) {
-      if(result.status == 1){
+      if(result.data.status == 1){
         ProductService.getFormatList().then(function(result){
           $scope.gridFormats.data = result;
         });
-        toastr.success(result.message);
+        toastr.success(result.data.message);
       }
       else{
-        toastr.error(result.message);
+        toastr.error(result.data.message);
       }
     }, function (resp) {
       console.log('Error status: ', resp);
@@ -94,7 +100,29 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   ======== Formats section ends ========
   */
 
+  AdminLocationService.getCountries().then(function(result){
+    $scope.countryList = result;
+  });
+  CompanyService.getHoardingCompanies().then(function(result){
+    $scope.hoardingCompaniesList = result;
+  });
 
+  $scope.getStateList = function(){
+    AdminLocationService.getStates($scope.product.country).then(function(result){
+      $scope.stateList = result;
+    });
+  }
+  $scope.getCityList = function(){
+    AdminLocationService.getCities($scope.product.state).then(function(result){
+      $scope.cityList = result;
+    });
+  }
+  $scope.getAreaList = function(){
+    AdminLocationService.getAreas($scope.product.city).then(function(result){
+      $scope.areaList = result;
+    });
+  }
+  
   /*
   ======== Products section ========
   */
@@ -123,17 +151,16 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   };
   
   $scope.gridProducts.columnDefs = [
-    { name: 'id', displayName: 'S.NO', enableCellEdit: false, width: '5%' },
-    { name: 'siteno', displayName: 'Site No', enableCellEdit: false, width: '10%' },
-    { name: 'sitetype', displayName: 'Site type', enableCellEdit: false, width: '10%' },
+    { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
+    { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
     { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
-    { name: 'impression', displayName: 'Impression', width: '10%', enableCellEdit: false },
-    { name: 'area', displayName: 'Area', width: '20%' },
-    { name: 'palnesize', displayName: 'Palne Size', type: 'number', width: '20%' },
+    { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
+    { name: 'area_name', displayName: 'Area', width: '20%' },
+    { name: 'panelSize', displayName: 'Panel Size', type: 'number', width: '20%' },
     { name: 'lighting', displayName: 'lighting', width: '10%' },
     { name: 'direction', displayName: 'Direction', width: '10%', enableCellEdit: false, },
     { name: 'image', displayName: 'Image', width: '10%', enableCellEdit: false, },
-    { name: 'image', displayName: 'Price', width: '10%', enableCellEdit: false, },
+    { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
     {
       name: 'Action', field: 'Action', width: '10%',
       cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
@@ -153,6 +180,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   // Get products list
   ProductService.getProductList().then(function(result){
     $scope.gridProducts.data = result;
+    console.log(result);
   });
 
   // Adding Products
@@ -165,19 +193,20 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   // });
 
   $scope.product = {};
-  $scope.addProduct = function (files) {
+  $scope.files = {};
+  $scope.addProduct = function () {
     Upload.upload({
       url: config.apiPath + '/product',
-      data: { image: files.image, symbol: files.symbol, product: $scope.product }
+      data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
     }).then(function (result) {
-      if(result.status == 1){
+      if(result.data.status == "1"){
         ProductService.getProductList().then(function(result){
           $scope.gridProducts.data = result;
         });
-        toastr.success(result.message);
+        toastr.success(result.data.message);
       }
       else{
-        toastr.error(result.message);
+        toastr.error(result.data.message);
       }
     }, function (resp) {
       console.log('Error status: ', resp);
