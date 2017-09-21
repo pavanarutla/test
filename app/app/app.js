@@ -148,40 +148,49 @@ app.constant('config', {
     .state('admin.hoarding-list',{
       url: '/hoarding-list',
       templateUrl: 'views/admin/hoarding-list.html',
-      controller: 'hoardingListCtrl'
-    }).state('admin.formats',{
+      controller: 'ProductCtrl'
+    })
+    .state('admin.formats',{
       url: '/formats',
       templateUrl: 'views/admin/formats.html',
-      controller: 'hoardingListCtrl'
-    }).state('admin.locations',{
+      controller: 'ProductCtrl'
+    })
+    .state('admin.locations',{
       url: '/locations',
       templateUrl: 'views/admin/locations.html',
       controller: 'AdminLocationCtrl'
-    }).state('admin.locations-country',{
+    })
+    .state('admin.locations-country',{
       url: '/locations-country',
       templateUrl: 'views/admin/location-country.html',
       controller: 'AdminLocationCtrl'
-    }).state('admin.locations-state',{
+    })
+    .state('admin.locations-state',{
       url: '/locations-state',
       templateUrl: 'views/admin/location-state.html',
       controller: 'AdminLocationCtrl'
-    }).state('admin.locations-city',{
+    })
+    .state('admin.locations-city',{
       url: '/locations-city',
       templateUrl: 'views/admin/location-city.html',
       controller: 'AdminLocationCtrl'
-    }).state('admin.locations-area',{
+    })
+    .state('admin.locations-area',{
       url: '/locations-area',
       templateUrl: 'views/admin/location-area.html',
       controller: 'AdminLocationCtrl'
-    }).state('admin.subscribers',{
+    })
+    .state('admin.subscribers',{
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
       controller: 'subscribersCtrl'
-    }).state('admin.queries',{
+    })
+    .state('admin.queries',{
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
       controller: 'queriesCtrl'
-    }).state('admin.callcenterinfo',{
+    })
+    .state('admin.callcenterinfo',{
       url: '/callcenterinfo',
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'

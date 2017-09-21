@@ -56,10 +56,10 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   $scope.addCompany = function(){
     CompanyService.saveCompany($scope.company).then(function(result){
       if(result.status == 1){
-        toastr.success(result.message);
         CompanyService.getCompanies().then(function (response) {    
           $scope.gridCompany.data = response;
         });
+        toastr.success(result.message);
       }
       else {
         toastr.error(data.message);
@@ -124,10 +124,10 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   $scope.addHoardingCompany = function(){
     CompanyService.saveHoardingCompany($scope.hoardingCompany).then(function(result){
       if(result.status == 1){
-        toastr.success(result.message);
         CompanyService.getHoardingCompanies().then(function (response) {    
-          $scope.gridCompany.data = response;
+          $scope.gridHoardingCompany.data = response;
         });
+        toastr.success(result.message);
       }
       else {
         toastr.error(data.message);

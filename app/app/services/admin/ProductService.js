@@ -1,16 +1,16 @@
 app.factory('ProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getHoardingList: function () {
+			getProductList: function () {
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/hoardingList').success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/products').success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
-			getFormates: function () {
+			getFormatList: function () {
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/formatesList').success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/formats').success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			}
 		}
-	}]
-);
+	}
+]);
