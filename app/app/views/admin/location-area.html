@@ -1,4 +1,4 @@
-<div layout="column" layout-fill="layout-fill" ng-controller="adminLocationCtrl">
+<div layout="column" layout-fill="layout-fill">
 
     <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
         <div>
@@ -11,69 +11,67 @@
         <div layout="column" layout-margin layout-padding flex="50">
             <md-input-container>
                 <label>Select Country </label>
-                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="area.country_id" ng-change="getStateList(area.country_id)">
                     <md-select-header class="demo-select-header">
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
-                    <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                 </md-select required>
 
             </md-input-container>
             <md-input-container>
                 <label>Select State </label>
-                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="area.state_id" ng-change="getCityList(area.state_id)">
                     <md-select-header class="demo-select-header">
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
-                    <md-option>AP</md-option>
-                    <md-option>LS</md-option>
+                    <md-option ng-repeat="state in stateListForCountry | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
                 </md-select required>
 
             </md-input-container>
 
             <md-input-container>
                 <label>Select City </label>
-                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="area.city_id">
                     <md-select-header class="demo-select-header">
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
-                    <md-option>Hyderbad</md-option>
-                    <md-option>Dehli</md-option>
+                    <md-option ng-repeat="city in cityListForState | filter:searchTerm" value="{{city.id}}">{{city.name}}</md-option>
                 </md-select required>
 
             </md-input-container>
             <md-input-container class="md-block">
-                <label>Enter Sub area</label>
-                <input ng-model="product.counteryname" type="text" name="counteryname" required="required" />
-                <div ng-messages="product.counteryname.$error">
-                    <div ng-message="required">City Name is required</div>
+                <label>Enter Area Name</label>
+                <input ng-model="area.area_name" type="text" name="area_name" required="required" />
+                <div ng-messages="area.area_name.$error">
+                    <div ng-message="required">Area Name is required</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block ">
                 <label>Enter Pincode</label>
-                <input ng-model="product.pincode" type="text" name="pincode" required="required" />
-                <div ng-messages="product.pincode.$error">
-                    <div ng-message="required">Area Name is required.</div>
+                <input ng-model="area.pincode" type="text" name="pincode" required="required" />
+                <div ng-messages="area.pincode.$error">
+                    <div ng-message="required">Pincode is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block margin-input">
                 <label>Latitude</label>
-                <input ng-model="product.latitude" type="text" name="latitude" required="required" />
-                <div ng-messages="product.latitude.$error">
+                <input ng-model="area.lat" type="text" name="lat" required="required" />
+                <div ng-messages="area.lat.$error">
                     <div ng-message="required">Latitude is required.</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block margin-input">
                 <label>Longitude</label>
-                <input ng-model="product.longitude" type="text" name="longitude" required="required" />
-                <div ng-messages="product.longitude.$error">
+                <input ng-model="area.lng" type="text" name="lng" required="required" />
+                <div ng-messages="area.lng.$error">
                     <div ng-message="required">Longitude is required.</div>
                 </div>
             </md-input-container>
         </div>
         <div layout="row">
-            <md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" ng-click="saveArea()">SUBMIT</md-button>
             <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
         </div>
     </div>

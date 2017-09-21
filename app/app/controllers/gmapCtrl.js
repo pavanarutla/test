@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config', 'toastr', 
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService','config', 'toastr', 
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -28,6 +28,8 @@ app.controller('GmapCtrl',
       var markersOnMap = [];
       $scope.selectedProduct = null;
       $scope.selectedForNewCampaign = [];
+      $scope.newCampaign = {};
+      $scope.serverUrl = config.serverUrl;
       var trafficOn = false;
       $scope.siteNoSearch = "";
       var trafficLayer = new google.maps.TrafficLayer();
@@ -46,6 +48,10 @@ app.controller('GmapCtrl',
           $scope.mapObj = map;
           $scope.processMarkers();
         });
+      });
+      ProductService.getFormatList().then(function(formats){
+        console.log(formats);
+        $scope.formatsList = formats;
       });
       $scope.countries=[];
       $scope.states = [];
@@ -583,20 +589,30 @@ app.controller('GmapCtrl',
       };
 
       $scope.viewAndSaveNewCampaign = function(){
-        if($scope.selectedForNewCampaign.length == 0){
-          // add all shortlisted products to campaign
-          console.log($scope.shortListedProducts);
-          // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
-          //   $scope.campaignSavedSuccessfully = true;
-          // });
-        }
-        else{
-          // add all selected products for new campaign
-          console.log($scope.selectedForNewCampaign);
-          // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
-          //   $scope.campaignSavedSuccessfully = true;
-          // });
-        }
+        // If we finally decide to use selecting products for a campaign
+        // if($scope.selectedForNewCampaign.length == 0){
+        //   // add all shortlisted products to campaign
+        //   console.log($scope.shortListedProducts);
+        //   // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // else{
+        //   // add all shortlisted products for new campaign
+        //   console.log($scope.selectedForNewCampaign);
+        //   // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
+        //   //   $scope.campaignSavedSuccessfully = true;
+        //   // });
+        // }
+        // campaign.products = $scope.selectedForNewCampaign;
+        var campaign = $scope.newCampaign;
+        campaign.products = [];
+        _.each($scope.shortListedProducts, function(v, i){
+          campaign.products.push(v.id);
+        });
+        CampaignService.saveCampaign(campaign).then(function(response){
+          $scope.campaignSavedSuccessfully = true;
+        });
       }
 
       $scope.searchBySiteNo = function(){

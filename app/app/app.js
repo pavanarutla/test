@@ -89,36 +89,38 @@ app.constant('config', {
       abstract: true,
       url: '/admin', 
       templateUrl: 'layouts/admin.html',
-      controller: 'bbAdminMgrAppCtrl'
+      controller: 'AdminMgrAppCtrl'
     })
-    .state('admin.products', {
-      url: '/admin/products',
-      templateUrl: 'views/admin/products.html',
-      controller: 'ProductsCtrl'
-    })
-    .state('admin.add-products', {
-      url: '/admin/add-products',
-      templateUrl: 'views/admin/add-products.html',
-      controller: 'ProductsCtrl'
-    })
+    // .state('admin.products', {
+    //   url: '/admin/products',
+    //   templateUrl: 'views/admin/products.html',
+    //   controller: 'ProductsCtrl'
+    // })
+    // .state('admin.add-products', {
+    //   url: '/admin/add-products',
+    //   templateUrl: 'views/admin/add-products.html',
+    //   controller: 'ProductsCtrl'
+    // })
     .state('admin.home',{
       url: '/home',
-      templateUrl: 'views/admin/home.html' ,
-      title:'Feeds'
+      templateUrl: 'views/admin/home.html',
+      title: 'Feeds'
     })
     .state('admin.Feeds',{
       url: '/feeds',
-      templateUrl: 'views/admin/campaignSearchFeed.html' 
+      templateUrl: 'views/admin/campaignSearchFeed.html',
+      title: 'Feeds'
     })
     .state('admin.campaign-suggestion',{
       url: '/campaign-suggestion',
-      templateUrl: 'views/admin/campaignsugg.html' 
+      templateUrl: 'views/admin/campaignsugg.html',
+      title: 'Campaign Suggestion'
     })
     .state('admin.campaign',{
       url: '/campaign',
       templateUrl: 'views/admin/AdminCampaign.html',
       controller: 'dataTable',
-      title:'Campagin'
+      title: 'Campaign'
     })
     .state('admin.campaign-proposal-summary',{
       url: '/campaign-proposal-summary',
@@ -135,51 +137,60 @@ app.constant('config', {
     .state('admin.registration',{
       url: '/registration',
       templateUrl: 'views/admin/registration.html',
-      controller: 'registrationCtrl',
-      title:'Registration'
+      controller: 'RegistrationCtrl',
+      title: "User Registration"
     })
     .state('admin.companies',{
       url: '/companies',
       templateUrl: 'views/admin/companies.html',
-      controller: 'companiesCtrl'
+      controller: 'CompanyCtrl'
     })
     .state('admin.hoarding-list',{
       url: '/hoarding-list',
       templateUrl: 'views/admin/hoarding-list.html',
-      controller: 'hoardingListCtrl'
-    }).state('admin.formats',{
+      controller: 'ProductCtrl'
+    })
+    .state('admin.formats',{
       url: '/formats',
       templateUrl: 'views/admin/formats.html',
-      controller: 'hoardingListCtrl'
-    }).state('admin.locations',{
+      controller: 'ProductCtrl'
+    })
+    .state('admin.locations',{
       url: '/locations',
-      templateUrl: 'views/admin/adminlocations.html',
-      controller: 'adminLocationCtrl'
-    }).state('admin.locations-countery',{
-      url: '/locations-countery',
-      templateUrl: 'views/admin/location-countery.html',
-      controller: 'adminLocationCtrl'
-    }).state('admin.locations-state',{
+      templateUrl: 'views/admin/locations.html',
+      controller: 'AdminLocationCtrl'
+    })
+    .state('admin.locations-country',{
+      url: '/locations-country',
+      templateUrl: 'views/admin/location-country.html',
+      controller: 'AdminLocationCtrl'
+    })
+    .state('admin.locations-state',{
       url: '/locations-state',
       templateUrl: 'views/admin/location-state.html',
-      controller: 'adminLocationCtrl'
-    }).state('admin.locations-city',{
+      controller: 'AdminLocationCtrl'
+    })
+    .state('admin.locations-city',{
       url: '/locations-city',
       templateUrl: 'views/admin/location-city.html',
-      controller: 'adminLocationCtrl'
-    }).state('admin.locations-area',{
+      controller: 'AdminLocationCtrl'
+    })
+    .state('admin.locations-area',{
       url: '/locations-area',
       templateUrl: 'views/admin/location-area.html',
-      controller: 'adminLocationCtrl'
-    }).state('admin.subscribers',{
+      controller: 'AdminLocationCtrl'
+    })
+    .state('admin.subscribers',{
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
       controller: 'subscribersCtrl'
-    }).state('admin.queries',{
+    })
+    .state('admin.queries',{
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
       controller: 'queriesCtrl'
-    }).state('admin.callcenterinfo',{
+    })
+    .state('admin.callcenterinfo',{
       url: '/callcenterinfo',
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
@@ -191,6 +202,7 @@ app.constant('config', {
 
     $authProvider.baseUrl = config.apiPath;
     $authProvider.loginUrl = '/login';
+    $authProvider.logoutUrl = '/logout'
     $authProvider.signupUrl = '/signup';
     // $authProvider.unlinkUrl = '/auth/unlink/';
 
@@ -249,8 +261,28 @@ app.run(
           Restricting routes to Authenticated Users
         ===========================================*/
         var adminRoutes = [
-          'admin.add-product',
-          'admin.products'
+          'admin.html',
+          'admin.products',
+          'admin.add-products',
+          'admin.home',
+          'admin.Feeds',
+          'admin.campaign-suggestion',
+          'admin.campaign',
+          'admin.campaign-proposal-summary',
+          'admin.campaign-running-summary',
+          'admin.campaign-closed-summary',
+          'admin.registration',
+          'admin.companies',
+          'admin.hoarding-list',
+          'admin.formats',
+          'admin.locations',
+          'admin.locations-country',
+          'admin.locations-state',
+          'admin.locations-city',
+          'admin.locations-area',
+          'admin.subscribers',
+          'admin.queries',
+          'admin.callcenterinfo'
         ];
         var ownerRoutes = [
         ];
@@ -278,7 +310,7 @@ app.run(
             });
             return false;
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'admin') == -1){
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1){
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -291,7 +323,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){            
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1){            
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

@@ -1,83 +1,69 @@
- <md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
-  <md-dialog-content>
-    <md-content class="md-padding">
-      <div layout="column" layout-align="center center">
-        <img ng-src="assets/images/campaign_popup_icon.png" >
-      </div>
-      <div layout="row" layout-align="center center" layout-margin>
-            <div>Enter Hoarding Company Details</div>
-      </div>
-      <form name="signin" novalidate="novalidate">
-		 	<div layout="column" layout-xs="column" layout-padding  flex="60" flex-offset-gt-sm="20">
-				
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="CompanyCtrl">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="column" layout-align="center center">
+				<img ng-src="assets/images/campaign_popup_icon.png">
+			</div>
+			<div layout="row" layout-align="center center" layout-margin>
+				<div>Enter Hoarding Company Details</div>
+			</div>
+			<form name="hoardingCoData" novalidate="novalidate">
+				<div layout="column" layout-xs="column" layout-padding flex="60" flex-offset-gt-sm="20">
 					<md-input-container class="md-block margin-input">
-						<label>Campaign Name</label>
-						<input ng-model="user.companyName" type="text" name="cname" minlength="5" maxlength="60" required="required"/>
-						<div ng-messages="signin.cname.$error">
-							<div ng-message="required">Campaign Name is required.</div>
-							<div ng-message="minlength">Campaign Name must have 2 characters.</div>
-							<div ng-message="maxlength">Campaign Name shouldn't exede 30 characters.</div>
+						<label>Company Name</label>
+						<input ng-model="hoardingCompany.name" type="text" name="name" minlength="5" maxlength="60" required="required" />
+						<div ng-messages="hoardingCoData.name.$error">
+							<div ng-message="required">Company Name is required.</div>
+							<div ng-message="minlength">Company Name must have 2 characters.</div>
+							<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
 						</div>
-                    </md-input-container>
-                     <!-- <md-input-container class="md-block margin-input">
-						<label> Client Type </label>
-						<input ng-model="user.companyName" type="text" name="cname" minlength="5" maxlength="60" required="required"/>
-						<div ng-messages="signin.cname.$error">
-							<div ng-message="required">Campaign Name is required.</div>
-							<div ng-message="minlength">Campaign Name must have 2 characters.</div>
-							<div ng-message="maxlength">Campaign Name shouldn't exede 30 characters.</div>
-						</div>
-                    </md-input-container> -->
+					</md-input-container>
+
 					<md-input-container class="md-block margin-input">
 						<label>Owner Name</label>
-						<input ng-model="user.userName" type="text" name="uname" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
-						<div ng-messages="signin.uname.$error">
-							<div ng-message="required">User Name is required.</div>
-							<div ng-message="minlength">User Name must have 3 characters.</div>
-							<div ng-message="maxlength">User Name shouldn't exede 30 characters. </div>
-							<div ng-message="pattern">User Name should contain only Alpha Numeric and _ - . symbols.</div>
+						<input ng-model="hoardingCompany.owner" type="text" name="owner" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/"
+						/>
+						<div ng-messages="hoardingCoData.owner.$error">
+							<div ng-message="required">Owner Name is required.</div>
+							<div ng-message="minlength">Owner Name must have 3 characters.</div>
+							<div ng-message="maxlength">Owner Name shouldn't exede 30 characters. </div>
+							<div ng-message="pattern">Owner Name should contain only Alpha Numeric and _ - . symbols.</div>
 						</div>
-                    </md-input-container>
-                    <md-input-container class="md-block margin-input">
-                            <label>Email</label>
-                            <input ng-model="user.email" name="email" type="email" minlength="10" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-                            <div ng-messages="signin.email.$error">
-                                <div ng-message="required">Email is required.</div>
-                                <div ng-message="minlength">Email must have 10 characters.</div>
-                                <div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
-                                <div ng-message="pattern">Enter a valied EmailId.</div>
-                            </div>
-                        </md-input-container>
+					</md-input-container>
 					<md-input-container class="md-block margin-input">
-						<label>Phone No</label>
-						<input ng-model="user.phoneNo" type="text" name="pno" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
-						<div ng-messages="signin.pno.$error">
+						<label>Phone</label>
+						<input ng-model="hoardingCompany.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
+						<div ng-messages="hoardingCoData.phone.$error">
 							<div ng-message="required">Phone No is required.</div>
 							<div ng-message="minlength">Phone No must have 10 characters.</div>
 							<div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
 							<div ng-message="pattern">Phone No should be only numbe.</div>
 						</div>
-                    </md-input-container>
-                   
-                    <md-input-container class="md-block margin-input">
-						<label> List Of Hoarding </label>
-						<input ng-model="user.HoardingList" type="text" name="hoardinglist" required="required"/>
-						<div ng-messages="signin.cname.$error">
-							<div ng-message="required">Campaign Name is required.</div>
-							
+					</md-input-container>
+					<md-input-container class="md-block margin-input">
+						<label>Email</label>
+						<input ng-model="hoardingCompany.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+						<div ng-messages="hoardingCoData.email.$error">
+							<div ng-message="required">Email is required.</div>
+							<!-- <div ng-message="minlength">Email must have 10 characters.</div> -->
+							<div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
+							<div ng-message="pattern">Enter a valied EmailId.</div>
 						</div>
-                    </md-input-container>
+					</md-input-container>
 
-            
+					<md-input-container class="md-block margin-input">
+						<label> No. Of Hoarding </label>
+						<input ng-model="hoardingCompany.noOfHoardings" type="text" name="noOfHoardings" />
+						<div ng-messages="hoardingCoData.noOfHoardings.$error">
+							<div ng-message="required">No. of hordings is required.</div>
+						</div>
+					</md-input-container>
 				</div>
-				<div layout="row"  layout-align="center center" >
-			<md-button Class="md-raised md-primary" ng-click="save()">SUBMIT</md-button>
-      		<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
-		</div>
-			
-		</form>
-		
-       
-    </md-content>
-  </md-dialog-content>
-</md-dialog> 
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary" ng-click="addHoardingCompany()">SUBMIT</md-button>
+					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

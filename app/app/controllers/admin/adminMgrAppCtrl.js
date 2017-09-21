@@ -1,4 +1,4 @@
-app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope) {
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
@@ -6,7 +6,7 @@ app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav) {
   $scope.closeSideNavPanel = function () {
     $mdSidenav('right').toggle();
   };
-
+  
   $scope.limit = 3;
 
   $scope.loadMore = function () {
@@ -81,8 +81,7 @@ app.controller('bbAdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav) {
   }
   $scope.showArea = false;
   $scope.toogelLocation = function () {
-    $scope.showArea  = !$scope.showArea ;
+    $scope.showArea = !$scope.showArea;
   }
-
 
 });

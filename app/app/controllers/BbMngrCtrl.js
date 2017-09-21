@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, UserService) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -194,7 +194,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');
+      toastr.warning('You have successfully signed out!');        
     });
   }
 
