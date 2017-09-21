@@ -15,7 +15,8 @@ var app = angular.module('bbManager', [
   'toastr',
   'ui.grid', 
   'ui.grid.edit',
-  'ui.grid.pagination'
+  'ui.grid.pagination',
+  'ngMaterialDateRangePicker'
 ])
 app.constant('config', {
   // serverUrl : "http://localhost:8001",
@@ -107,7 +108,9 @@ app.constant('config', {
     })
     .state('admin.Feeds',{
       url: '/feeds',
-      templateUrl: 'views/admin/campaignSearchFeed.html' 
+      templateUrl: 'views/admin/campaignSearchFeed.html',
+      controller:'hoardingListCtrl'
+
     })
     .state('admin.campaign-suggestion',{
       url: '/campaign-suggestion',

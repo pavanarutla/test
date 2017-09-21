@@ -8,7 +8,8 @@
       'ui.grid', 
       'ui.grid.edit',
       'ui.grid.pagination',
-      'satellizer'
+      'satellizer',
+      'ngMaterialDateRangePicker'
     ]);
     
     app.config(function($mdThemingProvider,$routeProvider) {

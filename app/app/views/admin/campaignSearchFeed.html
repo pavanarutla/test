@@ -1,10 +1,67 @@
-<div layout="column" layout-padding="layout-padding" >
-  
-    <div class="md-title" style="background: #447bde;color: #fff;">Your Daily feed</div>
-  
+<div layout="column" layout-padding="layout-padding">
+
+  <div class="md-title" style="background: #447bde;color: #fff;">Your Daily feed</div>
+
   <div layout="column">
 
     <div layout="row">
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search by ID" class="search-bg">
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Hoarding Company</label>
+            <md-select ng-model="user.hoardCompany">
+              <md-option ng-repeat="hoardCompany in hoardCompanys" value="{{hoardCompany.abbrev}}">
+                {{hoardCompany.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Format</label>
+            <md-select ng-model="user.formatType">
+              <md-option ng-repeat="formatType in formatTypes" value="{{formatType.abbrev}}">
+                {{formatType.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+
+          <md-autocomplete ng-disabled="isDisabled" md-no-cache="noCache" md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)"
+            md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(searchText)"
+            md-item-text="item.display" md-min-length="0" placeholder="Area">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            <md-not-found>
+              No states matching "{{searchText}}" were found.
+              <a ng-click="newState(searchText)">Create a new one!</a>
+            </md-not-found>
+          </md-autocomplete>
+
+        </div>
+      </div>
+
+      <div flex="20">
+        <div layout="row" layout-padding class="search-filed">
+          <md-button class="md-raised md-primary" ng-click="pick($event, false)">Estimated Date</md-button>
+          <!-- <h5>Selected Date Range: {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}</h5> -->
+        </div>
+      </div>
+
       <div flex="20">
         <div layout="row" layout-padding class="search-filed">
           <md-input-container flex class="search-input">
@@ -13,35 +70,33 @@
           </md-input-container>
         </div>
       </div>
-      <div flex="20">2</div>
-      <div flex="20">3</div>
-      <div flex="20">4</div>
-      <div flex="20">5</div>
     </div>
-    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height-xs="1:1.1" md-row-height-sm="1:1.1" md-row-height-md="1:1.3" md-row-height-gt-md="1:1.3" md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px" > 
-      <md-grid-tile ng-repeat="room in floorDetails.roomDetails" ng-style="{'background': '#fff'}">  
-        <div layout="column" >
-          <div layout="column" >
+    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height-xs="1:1.1"
+      md-row-height-sm="1:1.1" md-row-height-md="1:1.3" md-row-height-gt-md="1:1.3" md-gutter-gt-md="16px" md-gutter-xs="16px"
+      md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+      <md-grid-tile ng-repeat="room in floorDetails.roomDetails" ng-style="{'background': '#fff'}">
+        <div layout="column">
+          <div layout="column">
             <img src="assets/images/hoarding.png">
           </div>
-          <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
-              <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/bb.png" ></div>
-                <div>$50,0000</div>
-              </div>
+          <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
             <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/lit.png"></div>
-                <div>Lit:yes</div>
+              <div><img src="assets/images/bb.png"></div>
+              <div>$50,0000</div>
             </div>
-              <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/size.png"></div>
-                <div>size:20*40</div>
-              </div>
+            <div layout="column" flex="33" layout-align="center center">
+              <div><img src="assets/images/lit.png"></div>
+              <div>Lit:yes</div>
+            </div>
+            <div layout="column" flex="33" layout-align="center center">
+              <div><img src="assets/images/size.png"></div>
+              <div>size:20*40</div>
+            </div>
           </div>
           <md-divider></md-divider>
           <div layout="row" layout-padding="layout-padding">
             <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div>
-            <div flex="80"><span >Ameerpet,Hyderbad<br><span class="md-caption">Faceing Ameerpet To Sr Nagar<span></span></div>
+            <div flex="80"><span>Ameerpet,Hyderbad<br><span class="md-caption">Facing Ameerpet To Sr Nagar<span></span></div>
           </div>
           <md-divider></md-divider>
           <div layout="row" layout-padding="layout-padding">
