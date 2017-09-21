@@ -1,6 +1,7 @@
 <div layout="column" style="position:relative">
   <!-- side nav for view all-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListedProducts" style="width:500px;" md-component-id="viewAll">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListedProducts" style="width:500px;"
+    md-component-id="viewAll">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
@@ -21,8 +22,8 @@
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
-            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0"/>
-            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1"/>
+            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
+            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
             <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
           </div>
         </div>
@@ -93,14 +94,14 @@
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
-            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0"/>
-            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1"/>
+            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
+            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
             <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
           </div>
         </div>
         <div layout="row" style="margin: 0 8px 0 8px;">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-body-2">{{shortlisted.type}}</div>
+            <div class="md-body-2">{{shortlisted.format_name}}</div>
 
           </div>
           <div layout="column" flex="35" layout-align="center start">
@@ -178,7 +179,7 @@
           </md-button>
         </div>
       </div>
-      <md-content layout="column" style="overflow:hidden"  ng-if="!campaignSavedSuccessfully">
+      <md-content layout="column" style="overflow:hidden" ng-if="!campaignSavedSuccessfully">
         <div layout="column" layout-margin>
           <div class="md-headline">Save Campaign</div>
           <div class="md-headline">We are excited to see your Campaign</div>
@@ -420,7 +421,7 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content ng-if="!hideSelectedMarkerDetail">
       <div layout="column" class="map-img">
-        <img ng-src="{{product.image}}" style="width:380px;height:200px;"/>
+        <img ng-src="{{product.image}}" style="width:380px;height:200px;" />
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -431,8 +432,8 @@
           <div class="md-headline">{{product.siteNo}}</div>
         </div>
         <div layout="row" layout-align="end center" flex="50">
-          <img src="assets/images/maps/light-3030.jpg" ng-if="product.lighting == 0"/>
-          <img src="assets/images/maps/light-color3030.jpg" ng-if="product.lighting == 1"/>
+          <img src="assets/images/maps/light-3030.jpg" ng-if="product.lighting == 0" />
+          <img src="assets/images/maps/light-color3030.jpg" ng-if="product.lighting == 1" />
           <span class="md-subhead plane-size">{{product.panelSize}}</span>
         </div>
       </div>
@@ -583,17 +584,17 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label>Add your Organisation URL:</label>
-          <input  required md-no-asterisk name="orgname" ng-model="project.orgURL">
+          <input required md-no-asterisk name="orgname" ng-model="project.orgURL">
           <div ng-messages="suggestMeform.orgname.$error">
             <div ng-message="required">This is required.</div>
           </div>
         </md-input-container>
-         <md-input-container class="md-block">
-        <label>Industry Sector</label>
-        <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
+        <md-input-container class="md-block">
+          <label>Industry Sector</label>
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
             <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
           </md-select required>
-      </md-input-container>
+        </md-input-container>
         <md-input-container class="md-block">
           <label>Estimated Budget</label>
           <input required md-no-asterisk name="estbudget" ng-model="project.estbudget">
@@ -603,12 +604,12 @@
           </div>
         </md-input-container>
         <md-input-container class="md-block">
-        <label>Campaign Duration Sector</label>
-         <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+          <label>Campaign Duration Sector</label>
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
             <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
           </md-select required>
         </md-input-container>
-        
+
 
         <div class="sug-dates">
           <md-datepicker ng-model="project.ctrl.myDate" md-placeholder="Expected Standard Date" layout-fill></md-datepicker>
@@ -818,24 +819,18 @@
           </div>
         </md-content>
         <div layout="column" ng-show="format" class="formats-types">
-
           <div layout="row" layout-align="space-around center">
-
-            <div layout="column"  class="digital-board">
+            <div layout="column" class="digital-board">
               <div ng-cloak style="border-right:1px solid #ccc">
-               
-                    
-                      <md-button class="md-grid-item-content" ng-click="toggleone = !toggleone" ng-class="{'red' : toggleone}">
-                        <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
-                        <img src="assets/images/maps/billboard.png" / class="img-size">
-                        <div class="md-grid-text"> Billboard </div>
-                      </md-button>
-                    
-               
+                <md-button class="md-grid-item-content" ng-click="toggleone = !toggleone" ng-class="{'red' : toggleone}">
+                  <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
+                  <img src="assets/images/maps/billboard.png" / class="img-size">
+                  <div class="md-grid-text"> Billboard </div>
+                </md-button>
               </div>
             </div>
             <md-divider></md-divider>
-            <div layout="column"  class="digital-board">
+            <div layout="column" class="digital-board">
               <div ng-cloak>
                 <md-list flex layout="row" layout-align="center center">
                   <md-list-item>
@@ -843,7 +838,6 @@
                       <md-button class="md-grid-item-content" ng-click="toggletwo = !toggletwo" ng-class="{'red' : toggletwo}">
                         <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                         <img src="assets/images/maps/digital.png" / class="img-size">
-
                         <div class="md-grid-text"> digital </div>
                       </md-button>
                     </div>
@@ -860,7 +854,6 @@
                       <md-button class="md-grid-item-content" ng-click="togglethree = !togglethree" ng-class="{'red' : togglethree}">
                         <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                         <img src="assets/images/maps/bus-stop.png" / class="img-size">
-
                         <div class="md-grid-text"> Retail </div>
                       </md-button>
                     </div>
@@ -872,7 +865,6 @@
           <md-divider></md-divider>
           <!-- more 3-->
           <div layout="row" layout-align="space-around center">
-
             <div layout="column" class="digital-board">
               <div ng-cloak style="border-right:1px solid #ccc">
                 <md-list flex layout="row" layout-align="center center">
@@ -903,15 +895,14 @@
                   </md-list-item>
                 </md-list>
               </div>
-
             </div>
             <md-divider></md-divider>
-            <div layout="column"  class="digital-board">
+            <div layout="column" class="digital-board">
               <div ng-cloak style="border-left:1px solid #ccc">
                 <md-list flex layout="row" layout-align="center center">
                   <md-list-item>
                     <div>
-                      <md-button class="md-grid-item-content"ng-click="togglesix = !togglesix" ng-class="{'red' : togglesix}">
+                      <md-button class="md-grid-item-content" ng-click="togglesix = !togglesix" ng-class="{'red' : togglesix}">
                         <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                         <img src="assets/images/maps/announcer.png" / class="img-size">
                         <div class="md-grid-text"> Ambience </div>
@@ -920,7 +911,6 @@
                   </md-list-item>
                 </md-list>
               </div>
-
               <div layout="row" ng-show="uniploe8" class="digital-inner md-whiteframe-2dp">
                 <div ng-cloak>
                   <md-list flex layout="row" layout-align="center center">
@@ -953,7 +943,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <!-- formats html end-->
@@ -990,21 +979,22 @@
               <md-list-item class="md-3-line list-img">
                 <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
                 <div class="list-name">
-                  <span class="md-title">{{shortlisted.type | PickFirstLetter}}</span>
+                  <span class="md-title">{{shortlisted.format_name | PickFirstLetter}}</span>
                 </div>
                 <div class="md-list-item-text list-item-text" layout="column" flex>
-                  <h3 class="md-body-1">{{shortlisted.areaname}}</h3>
-                  <p class="md-caption">{{shortlisted.address}}</P></p>{{shortlisted.siteNo}}</p>
+                  <h3 class="md-body-1">{{shortlisted.area_name}}</h3>
+                  <p class="md-caption">{{shortlisted.address}}</P>
+                  </p>{{shortlisted.siteNo}}</p>
                   <p> </p>
                 </div>
               </md-list-item>
             </md-list>
             <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
-              <md-checkbox class="md-secondary list-checkbox" 
+              <!-- <md-checkbox class="md-secondary list-checkbox" 
                 ng-checked="existsShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" 
                 ng-click="toggleSelectedShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" aria-lebel ="random label" aria-labelledby="delete">
-              </md-checkbox>
-              <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)" >
+              </md-checkbox> -->
+              <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
                 <md-icon><i class="material-icons ">delete</i></md-icon>
               </md-button>
             </div>
@@ -1014,10 +1004,6 @@
             <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
             <md-button class="md-raised md-primary" ng-click="saveCampaignName()">SAVE </md-button>
             <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
-          </div>
-          <div layout="row">
-            <!-- <md-button class="md-raised" >Success</md-button> -->
-            <md-button class="md-raised" ng-click="suggestMe()">Suggest me</md-button>            
           </div>
         </div>
 
@@ -1119,4 +1105,5 @@
 <script>
   var height = $(window).height();
   $('#map-container').height(height - 64);
+
 </script>

@@ -261,8 +261,28 @@ app.run(
           Restricting routes to Authenticated Users
         ===========================================*/
         var adminRoutes = [
-          'admin.add-product',
-          'admin.products'
+          'admin.html',
+          'admin.products',
+          'admin.add-products',
+          'admin.home',
+          'admin.Feeds',
+          'admin.campaign-suggestion',
+          'admin.campaign',
+          'admin.campaign-proposal-summary',
+          'admin.campaign-running-summary',
+          'admin.campaign-closed-summary',
+          'admin.registration',
+          'admin.companies',
+          'admin.hoarding-list',
+          'admin.formats',
+          'admin.locations',
+          'admin.locations-country',
+          'admin.locations-state',
+          'admin.locations-city',
+          'admin.locations-area',
+          'admin.subscribers',
+          'admin.queries',
+          'admin.callcenterinfo'
         ];
         var ownerRoutes = [
         ];
@@ -290,7 +310,7 @@ app.run(
             });
             return false;
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'admin') == -1){
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1){
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -303,7 +323,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if( _.indexOf(_.pluck($auth.getPayload().roles, 'name'), 'owner') == -1){            
+          else if( _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1){            
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

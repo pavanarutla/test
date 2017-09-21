@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'config', 'toastr', 
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService','config', 'toastr', 
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -29,6 +29,7 @@ app.controller('GmapCtrl',
       $scope.selectedProduct = null;
       $scope.selectedForNewCampaign = [];
       $scope.newCampaign = {};
+      $scope.serverUrl = config.serverUrl;
       var trafficOn = false;
       $scope.siteNoSearch = "";
       var trafficLayer = new google.maps.TrafficLayer();
@@ -47,6 +48,10 @@ app.controller('GmapCtrl',
           $scope.mapObj = map;
           $scope.processMarkers();
         });
+      });
+      ProductService.getFormatList().then(function(formats){
+        console.log(formats);
+        $scope.formatsList = formats;
       });
       $scope.countries=[];
       $scope.states = [];

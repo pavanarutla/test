@@ -17,6 +17,7 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 				localStorage.isAuthenticated = true;
 				localStorage.loggedInUser = JSON.stringify(userData);
 				toastr.success('You have successfully signed in!');
+				$location.path('/location');
 			}
 			else {
 				toastr.error(res.data.message);
