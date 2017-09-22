@@ -50,7 +50,23 @@ app.controller('GmapCtrl',
         });
       });
       ProductService.getFormatList().then(function(formats){
-        $scope.formatsList = formats;
+        // $scope.formatList = formats;
+        $scope.formatGrid = [];
+        $scope.selectedFormats = [];
+        var x = 3;
+        var y = formats.length / x;
+        var k = 0;
+        for(var i = 0; i < y; i++){
+          var tempArr = [];
+          for(var j = 0; j < x; j++){
+            tempArr.push(formats[k]);
+            if(formats[k]){
+              $scope.selectedFormats.push(formats[k].id);
+              k++;
+            }
+          }
+          $scope.formatGrid.push(tempArr);
+        }
       });
       $scope.countries=[];
       $scope.states = [];
@@ -490,7 +506,7 @@ app.controller('GmapCtrl',
         locArr = [];
         uniqueMarkers = [];
         concentricMarkers = {};
-        var filterObj = {area: $scope.selectedAreas, product_type: null};
+        var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
         MapService.filterProducts(filterObj).then(function (markers) {          
           if(markers != null){
             _.each(markersOnMap, function(v, i){
@@ -659,6 +675,21 @@ app.controller('GmapCtrl',
             toastr.error(result.message);
           }
         });
+      }
+
+      $scope.toggleFormatSelection = function(formatId){
+        if(_.contains($scope.selectedFormats, formatId)){
+          $scope.selectedFormats = _.reject($scope.selectedFormats, function(v){return v == formatId});
+          // console.log(_.reject($scope.selectedFormats, function(v){return v == formatId}));
+        }
+        else{
+          $scope.selectedFormats.push(formatId);
+        }
+        $scope.applyFilter();
+      }
+
+      $scope.isFormatSelected = function(formatId){
+        return _.contains($scope.selectedFormats, formatId);
       }
     }
   ]
