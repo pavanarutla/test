@@ -127,7 +127,7 @@
         </div>
         <md-card-actions layout="row" layout-align="end center" style="margin:0px">
           <md-button style="margin:0px">View</md-button>
-          <md-button style="margin:0px">Delete</md-button>
+          <md-button style="margin:0px" ng-click="deleteShortlisted($event, shortlisted.id)">Delete</md-button>
         </md-card-actions>
         <md-divider></md-divider>
       </div>
@@ -136,7 +136,7 @@
         <div>
           <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveNewCampaign()">SAVE TO CAMPAGIN</md-button>
         </div>
-        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
+        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#" ng-click="toggleSuggestMeSidenav()">SUGGEST ME</a></span></div>
       </div>
     </md-content>
 
@@ -186,12 +186,12 @@
           <div class="md-headline">Let's Work Together!</div>
         </div>
 
-        <form name="saveCampaigndetails">
+        <form name="viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
-              <input required md-no-asterisk name="campname" ng-model="newCampaign.name">
-              <div ng-messages="saveCampaigndetails.campname.$error">
+              <input required md-no-asterisk name="campname" ng-model="campaign.name">
+              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -201,12 +201,12 @@
 
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="newCampaign.startDate" md-placeholder="Campaign Start "></md-datepicker>
+                <md-datepicker ng-model="campaign.start_date" md-placeholder="Campaign Start "></md-datepicker>
               </md-input-container>
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="newCampaign.endDate" md-placeholder="Campaign End"></md-datepicker>
+                <md-datepicker ng-model="campaign.end_date" md-placeholder="Campaign End"></md-datepicker>
               </md-input-container>
             </div>
 
@@ -214,17 +214,17 @@
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
-              <input ng-model="newCampaign.budget" type="text" name="budget" required="required" />
-              <div ng-messages="saveCampaigndetails.budget.$error">
+              <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" />
+              <div ng-messages="viewAndSaveCampaignForm.est_budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
             </md-input-container>
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button class="md-raised md-warn" layout-fill ng-click="viewAndSaveNewCampaign()">SAVE CAMPAIGN</md-button>
+              <md-button class="md-raised md-warn" layout-fill ng-click="viewAndSaveCampaign()">SAVE CAMPAIGN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-click="toggleSuggestMeSidenav()">SUGGEST ME</a></span></div>
           </div>
         </form>
       </md-content>
@@ -269,12 +269,12 @@
           <div class="md-headline">Let's Work Together!</div>
         </div>
 
-        <form name="saveCampaigndetails">
+        <form name="viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input required md-no-asterisk name="campname" ng-model="project.campname">
-              <div ng-messages="saveCampaigndetails.campname.$error">
+              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -289,7 +289,7 @@
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctr.endDate" md-placeholder="Campaign End"></md-datepicker>
+                <md-datepicker ng-model="ctrl.endDate" md-placeholder="Campaign End"></md-datepicker>
               </md-input-container>
             </div>
 
@@ -298,7 +298,7 @@
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
               <input ng-model="user.budget" type="text" name="budget" required="required" />
-              <div ng-messages="saveCampaigndetails.budget.$error">
+              <div ng-messages="viewAndSaveCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
             </md-input-container>
@@ -353,12 +353,12 @@
           <div class="md-headline">Let's Work Together!</div>
         </div>
 
-        <form name="saveCampaigndetails">
+        <form name="viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input required md-no-asterisk name="campname" ng-model="project.campname">
-              <div ng-messages="saveCampaigndetails.campname.$error">
+              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -382,7 +382,7 @@
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
               <input ng-model="user.budget" type="text" name="budget" required="required" />
-              <div ng-messages="saveCampaigndetails.budget.$error">
+              <div ng-messages="viewAndSaveCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
             </md-input-container>
@@ -563,64 +563,74 @@
     <div layout="row">
       <div class="md-toolbar-tools">
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="suggestMe()">
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSuggestMeSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
     </div>
-    <md-content layout-align="center center" layout-padding>
+    <md-content layout-align="center center" layout-padding ng-if="!suggestMeRequestSent">
       <h3 class="md-headline">Don't think! Let me help you on your Campaign Needs.. </h3>
 
 
       <form name="suggestMeform">
         <md-input-container class="md-block">
           <label>Organisation Name</label>
-          <input required md-no-asterisk name="orgname" ng-model="project.orgname">
-          <div ng-messages="suggestMeform.orgname.$error">
+          <input required md-no-asterisk name="org_name" ng-model="suggestionRequest.org_name">
+          <div ng-messages="suggestMeform.org_name.$error">
             <div ng-message="required">This is required.</div>
             <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Add your Organisation URL:</label>
-          <input required md-no-asterisk name="orgname" ng-model="project.orgURL">
-          <div ng-messages="suggestMeform.orgname.$error">
+          <input required md-no-asterisk name="org_url" ng-model="suggestionRequest.org_url">
+          <div ng-messages="suggestMeform.org_url.$error">
             <div ng-message="required">This is required.</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Industry Sector</label>
-          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.selectedIndustrySector">
-            <md-option ng-repeat="x in IndustrySector " value="{{x.model}}">{{x.model}}</md-option>
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="suggestionRequest.industry_sector">
+            <md-option ng-repeat="x in industrySectorList " value="{{x.name}}">{{x.name}}</md-option>
           </md-select required>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Estimated Budget</label>
-          <input required md-no-asterisk name="estbudget" ng-model="project.estbudget">
-          <div ng-messages="suggestMeform.estbudget.$error">
+          <input required md-no-asterisk name="est_budget" ng-model="suggestionRequest.est_budget">
+          <div ng-messages="suggestMeform.est_budget.$error">
             <div ng-message="required">This is required.</div>
             <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
           </div>
         </md-input-container>
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
           <label>Campaign Duration Sector</label>
-          <md-select name="repeatSelect" id="repeatSelect" ng-model="project.CampaignDuration">
+          <md-select name="repeatSelect" id="repeatSelect" ng-model="suggestionRequest.CampaignDuration">
             <md-option ng-repeat="x in CampaignDuration " value="{{x.model}}">{{x.model}}</md-option>
           </md-select required>
-        </md-input-container>
-
-
-        <div class="sug-dates">
-          <md-datepicker ng-model="project.ctrl.myDate" md-placeholder="Expected Standard Date" layout-fill></md-datepicker>
+        </md-input-container> -->
+        <!-- <div class="sug-dates">
+          <md-datepicker ng-model="suggestionRequest.ctrl.myDate" md-placeholder="Expected Start Date" layout-fill></md-datepicker>
+        </div> -->
+        <div layout="row" flex="100" class="saved-dates">
+          <div layout="column" flex="50">
+            <md-input-container>
+              <md-datepicker ng-model="suggestionRequest.expected_start_date" md-placeholder="Campaign Start "></md-datepicker>
+            </md-input-container>
+          </div>
+          <div layout="column" flex="50">
+            <md-input-container>
+              <md-datepicker ng-model="suggestionRequest.expected_end_date" md-placeholder="Campaign End"></md-datepicker>
+            </md-input-container>
+          </div>
         </div>
         <div layout="row" layout-margin>
-          <md-button class="md-raised md-warn" ng-click="suggestMeConfirm(project)" layout-fill>SUGGEST ME</md-button>
+          <md-button class="md-raised md-warn" ng-click="sendSuggestionRequest($event)" layout-fill>SUGGEST ME</md-button>
         </div>
       </form>
     </md-content>
 
-    <md-content layout-align="center center" layout-margin layout="column" style="top:10%">
+    <md-content layout-align="center center" layout-margin layout="column" style="top:10%" ng-if="suggestMeRequestSent">
       <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
       <h3 class="md-display-1">Thanks !</h3>
       <h4 class="md-subhead" style="opacity:.5;text-align:center">We will work on your Campaign needs and get back soon to your registered e-mail address</h4>
@@ -1023,15 +1033,16 @@
             </div>
           </div>
         </md-content>
-        <div ng-show="savedcampaign" class="saved-campagin">
-          <div layout="row" layout-padding>
+        <div class="saved-campagin" ng-if="userCampaigns.length > 0 && savedcampaign">
+          <div layout="row" layout-padding ng-repeat="userCampaign in userCampaigns">
             <div>
-              <div class="md-body-1">Apple</div>
-              <div class="md-body-1 campagin-name">Iphone7</div>
+              <!-- <div class="md-body-1">{{userCampaign.org_name}}</div> -->
+              <div class="md-body-1 campagin-name">{{userCampaign.name}}</div>
             </div>
             <div flex></div>
             <div class="saved-date">
-              <span class="saved-border">01 Aug 2017</span><span class="saved-border">15 Aug 2017</span>
+              <!-- <span class="saved-border">01 Aug 2017</span><span class="saved-border">15 Aug 2017</span> -->
+              <span class="saved-border">{{userCampaign.start_date | date:'dd-MM-yy'}}</span><span class="saved-border">{{userCampaign.end_date | date:'dd-MM-yy'}}</span>
             </div>
           </div>
           <div class="saved-btn" layout="row" layout-align="space-between center" flex>
@@ -1047,7 +1058,7 @@
             </div>
             <div>
               <md-button class="md-icon-button">
-                <md-icon><i class="material-icons ">delete</i></md-icon>
+                <md-icon><i class="material-icons" ng-click="deletePlannedCampaign(userCampaign.id)">delete</i></md-icon>
               </md-button>
             </div>
           </div>
@@ -1056,7 +1067,7 @@
           </div>
 
         </div>
-        <div ng-show="savedcampaign" style="background:#F1FBFD">
+        <div style="background:#F1FBFD" ng-if="userCampaigns.length == 0 && savedcampaign">
           <div layout="column" layout-margin layout-align="center center">
             <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
           </div>

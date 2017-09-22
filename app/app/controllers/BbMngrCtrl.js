@@ -250,7 +250,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('shareCampaign').toggle();
   };
   // Suggest Me dialog 
-  $scope.suggestMe = function() {
+  $scope.toggleSuggestMeSidenav = function() {
     $mdSidenav('suggestMe').toggle();
   };
   // Save Campgin Name
@@ -278,5 +278,15 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   /*=================================
   |  Sidenav Functionality Ends
   =================================*/
+
+  /*===============================================
+  | Custom Filters associated with Angualr's filter
+  ===============================================*/
+  // $scope.formatDate = function(format){
+  //   return function(date){
+  //     console.log(date);
+  //     console.log(moment(date).format(format));
+  //   }
+  // }
 
 });
