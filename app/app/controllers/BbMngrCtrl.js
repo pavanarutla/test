@@ -89,20 +89,20 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.whatwedo = function () {
     $location.path('/');
-    window.scroll(0, 675);
+    window.scroll(0, 740);
 
   }
   $scope.formate = function () {
     $location.path('/');
-    window.scroll(0, 1535)
+    window.scroll(0, 1686)
   }
   $scope.whyOutdoor = function () {
     $location.path('/');
-    window.scroll(0, 2270)
+    window.scroll(0, 2505)
   }
   $scope.contactus = function () {
     $location.path('/');
-    window.scroll(0, 4300)
+    window.scroll(0, 3728)
   }
 
   //scroll to top

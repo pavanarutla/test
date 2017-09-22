@@ -51,7 +51,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
 
   $scope.showCampaignDetails = function (ev) {
     $mdDialog.show({
-      templateUrl: 'partials/campaignDetails-model.html',
+      templateUrl: 'views/admin/campaignDetails-model.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
     })
