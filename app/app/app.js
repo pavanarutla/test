@@ -108,7 +108,7 @@ app.constant('config', {
     })
     .state('admin.Feeds',{
       url: '/feeds',
-      templateUrl: 'views/admin/campaignSearchFeed.html',
+      templateUrl: 'views/admin/adminproductlist.html',
       title: 'Feeds'
     })
     .state('admin.campaign-suggestion',{

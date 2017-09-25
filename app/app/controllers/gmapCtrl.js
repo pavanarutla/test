@@ -476,6 +476,10 @@ app.controller('GmapCtrl',
         }
         trafficLayer.setMap(mapVal);
       }
+      $scope.showTraffice = false;
+        $scope.showTraffic = function () {
+          $scope.showTraffice = !$scope.showTraffice;
+        }
  
       $scope.applyFilter = function(){
         productList = [];
