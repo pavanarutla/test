@@ -5,6 +5,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
+  // handles traffic layer on map
+  $scope.trafficOn = false;
+
   $scope.filter = false;
   $scope.format = false;
   $scope.shortlist = false;
@@ -52,6 +55,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   this.selectedMode = 'md-fling';
   this.selectedDirection = 'up';
 
+  $scope.toggleTraffic = function(){
+    $scope.trafficOn = !$scope.trafficOn;
+  }
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();

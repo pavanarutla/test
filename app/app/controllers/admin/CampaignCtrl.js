@@ -1,22 +1,21 @@
-//campagin js
-app.controller('dataTable', function ($scope, $mdDialog, $http) {
-  $http.get('fakedb/data.json').success(function (response) {
-    $scope.myData = response;
-  });
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignService) {
 
   // $scope.limit= 3;
   // $scope.loadMore = function() {
   //   $scope.limit = $scope.items.length;
   // };
-  $scope.openOffscreen = function () {
+  
+  $scope.showAddCampaignPopup = function () {
     $mdDialog.show({
-      templateUrl: 'views/admin/addcampaign.html',
+      templateUrl: 'views/admin/add-campaign.html',
       clickOutsideToClose: true,
       fullscreen: $scope.customFullscreen,
     });
   };
 
-  // campagin proposal grid
+  /*
+  *========= campagin proposal(planned) grid =========
+  */
 
   $scope.gridProposal = {
     paginationPageSizes: [25, 50, 75],
@@ -55,13 +54,14 @@ app.controller('dataTable', function ($scope, $mdDialog, $http) {
       $scope.$apply();
     });
   };
-  $http.get('fakedb/data.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridProposal.data = data;
-    });
+  AdminCampaignService.getPlannedCampaigns().then(function(result){
+    console.log(result);
+    $scope.gridProposal.data = result;
+  });
+
+  /*
+  *========= campagin proposal(planned) grid ends =========
+  */
 
   //campagin running grid
 

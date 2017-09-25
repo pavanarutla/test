@@ -45,8 +45,13 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated">
           BOOK NOW
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
-            Browse BillBoards</a>
+        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide">
+          <a href="#/location" style="padding:10px 0px;text-decoration:none;">
+            Browse BillBoards
+          </a>
+        </md-button>
+        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
+          <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
         </md-button>
         <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
           suggest me
