@@ -15,6 +15,9 @@ app.controller('dataTable', function ($scope, $mdDialog, $http) {
       fullscreen: $scope.customFullscreen,
     });
   };
+  $scope.cancel = function(){
+  $mdDialog.hide();
+  };
 
   // campagin proposal grid
 
