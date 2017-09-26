@@ -272,7 +272,15 @@ app.controller('GmapCtrl',
         { model: "6 Months" },
         { model: "1 year" }
       ];
+      //export all 
 
+      $scope.ExportToExcel = function () {
+
+        var blob = new Blob([document.getElementById('divExport').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        saveAs(blob, "ReportRIS.xls");
+    };
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
