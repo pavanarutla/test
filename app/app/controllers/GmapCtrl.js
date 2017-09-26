@@ -22,6 +22,8 @@ app.controller('GmapCtrl',
         }
       };
 
+      $scope.today = new Date();
+
       $scope.mapObj;
       var markersOnMap = [];
       $scope.selectedProduct = null;
@@ -45,7 +47,7 @@ app.controller('GmapCtrl',
       var selectorMarker = new google.maps.Marker({
         icon: {
           url: 'assets/images/maps/Ellipse 75.png',
-          scaledSize: new google.maps.Size(35, 35),
+          scaledSize: new google.maps.Size(30, 30),
           // origin: new google.maps.Point(0, 0), // origin
           // anchor: new google.maps.Point(20, 30) // anchor
         }
@@ -388,7 +390,7 @@ app.controller('GmapCtrl',
             position: latLng,
             icon: {
               url: config.serverUrl + markerData.symbol,
-              scaledSize: new google.maps.Size(35, 35)
+              scaledSize: new google.maps.Size(30, 30)
             }
           });
           marker.properties = markerData;
@@ -480,9 +482,9 @@ app.controller('GmapCtrl',
             circleMarker.setMap($scope.mapObj);
             markerIcon = {
               url: config.serverUrl + marker.properties['symbol'],//'assets/images/maps/spidered-marker.png',
-              scaledSize: new google.maps.Size(36, 36),
+              scaledSize: new google.maps.Size(30, 30),
               origin: new google.maps.Point(0, 0), // origin
-              anchor: new google.maps.Point(18, 18) // anchor
+              anchor: new google.maps.Point(15, 15) // anchor
             };
           }
           else {
@@ -631,7 +633,6 @@ app.controller('GmapCtrl',
         _.each($scope.shortListedProducts, function(v, i){
           $scope.campaign.products.push(v.id);
         });
-        console.log($scope.campaign);
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
         });

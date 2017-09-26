@@ -54,7 +54,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignSe
       $scope.$apply();
     });
   };
-  AdminCampaignService.getPlannedCampaigns().then(function(result){
+  AdminCampaignService.getAllCampaignRequests().then(function(result){
     console.log(result);
     $scope.gridProposal.data = result;
   });
@@ -102,13 +102,12 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignSe
       $scope.$apply();
     });
   };
-  $http.get('fakedb/data.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridRunning.data = data;
-    });
+  // $http.get('fakedb/data.json').success(function (data) {
+  //   for (i = 0; i < data.length; i++) {
+  //     data[i].registered = new Date(data[i].registered);
+  //   }
+  //   $scope.gridRunning.data = data;
+  // });
 
   // campagin Closed grid
 
@@ -149,12 +148,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignSe
       $scope.$apply();
     });
   };
-  $http.get('fakedb/data.json')
-    .success(function (data) {
-      for (i = 0; i < data.length; i++) {
-        data[i].registered = new Date(data[i].registered);
-      }
-      $scope.gridClosed.data = data;
-    });
+  // $http.get('fakedb/data.json').success(function (data) {
+  //   for (i = 0; i < data.length; i++) {
+  //     data[i].registered = new Date(data[i].registered);
+  //   }
+  //   $scope.gridClosed.data = data;
+  // });
 
 });
