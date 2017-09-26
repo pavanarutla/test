@@ -68,9 +68,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       {
         bedIds: []
       },
-      {
-        bedIds: []
-      },
+      
 
     ]
   };
