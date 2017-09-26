@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService','config', 'toastr', 
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr', 
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -50,8 +50,23 @@ app.controller('GmapCtrl',
         });
       });
       ProductService.getFormatList().then(function(formats){
-        console.log(formats);
-        $scope.formatsList = formats;
+        // $scope.formatList = formats;
+        $scope.formatGrid = [];
+        $scope.selectedFormats = [];
+        var x = 3;
+        var y = formats.length / x;
+        var k = 0;
+        for(var i = 0; i < y; i++){
+          var tempArr = [];
+          for(var j = 0; j < x; j++){
+            tempArr.push(formats[k]);
+            if(formats[k]){
+              $scope.selectedFormats.push(formats[k].id);
+              k++;
+            }
+          }
+          $scope.formatGrid.push(tempArr);
+        }
       });
       $scope.countries=[];
       $scope.states = [];
@@ -210,41 +225,41 @@ app.controller('GmapCtrl',
           .targetEvent(ev)
         );
       };
-      $scope.IndustrySector = [
-        { model: "Aerospace" },
-        { model: "Agriculture" },
-        { model: "Automotive" },
-        { model: "Banking, Financial services and Insurance" },
-        { model: "Construction, Engineering, Architectural" },
-        { model: "Classifieds" },
-        { model: "Consumer Durables" },
-        { model: "Energy - Oil & Gas" },
-        { model: "Energy - Other" },
-        { model: "Energy – Utilities" },
-        { model: "Entertainment" },
-        { model: "Ecommerce" },
-        { model: "Environment" },
-        { model: "Education" },
-        { model: "Forestry" },
-        { model: "Fast-moving consumer goods" },
-        { model: "Fashion & lifestyle" },
-        { model: "GIS/Mapping/Cadastral" },
-        { model: "Global Development" },
-        { model: "Government – Civil" },
-        { model: "Government - Defense &Intelligence" },
-        { model: "Healthcare" },
-        { model: "Hotels & Restaurant" },
-        { model: "Insurance" },
-        { model: "Logistics" },
-        { model: "Marine / Fishing" },
-        { model: "Media / Communications" },
-        { model: "Office Supplies" },
-        { model: "Public Services" },
-        { model: "Retail" },
-        { model: "Real Estate & Infrastructure" },
-        { model: "Telecom" },
-        { model: "Travel & Transport" },
-        { model: "Others" }
+      $scope.industrySectorList = [
+        { name: "Aerospace" },
+        { name: "Agriculture" },
+        { name: "Automotive" },
+        { name: "Banking, Financial services and Insurance" },
+        { name: "Construction, Engineering, Architectural" },
+        { name: "Classifieds" },
+        { name: "Consumer Durables" },
+        { name: "Energy - Oil & Gas" },
+        { name: "Energy - Other" },
+        { name: "Energy – Utilities" },
+        { name: "Entertainment" },
+        { name: "Ecommerce" },
+        { name: "Environment" },
+        { name: "Education" },
+        { name: "Forestry" },
+        { name: "Fast-moving consumer goods" },
+        { name: "Fashion & lifestyle" },
+        { name: "GIS/Mapping/Cadastral" },
+        { name: "Global Development" },
+        { name: "Government – Civil" },
+        { name: "Government - Defense &Intelligence" },
+        { name: "Healthcare" },
+        { name: "Hotels & Restaurant" },
+        { name: "Insurance" },
+        { name: "Logistics" },
+        { name: "Marine / Fishing" },
+        { name: "Media / Communications" },
+        { name: "Office Supplies" },
+        { name: "Public Services" },
+        { name: "Retail" },
+        { name: "Real Estate & Infrastructure" },
+        { name: "Telecom" },
+        { name: "Travel & Transport" },
+        { name: "Others" }
       ];
       $scope.CampaignDuration = [
         { model: "10 Days" },
@@ -258,18 +273,27 @@ app.controller('GmapCtrl',
         { model: "1 year" }
       ];
 
-      //Suggest Me Dialog 1
-      $scope.suggestMeConfirm = function (project) {
-        $mdDialog.show(
-          $mdDialog.alert()
+      //Suggest Me Dialog 1      
+      $scope.suggestionRequest = {};
+      $scope.suggestMeRequestSent = false;
+      $scope.sendSuggestionRequest = function (ev) {
+        $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
+        console.log($scope.suggestionRequest);
+        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function(result){
+          if(result.status == 1){
+            $scope.suggestMeRequestSent = true;
+          }
+          $mdDialog.show(
+            $mdDialog.alert()
             .parent(angular.element(document.querySelector('body')))
             .clickOutsideToClose(true)
             .title('We will get back to you!!!!')
-            .textContent('You can specify some description text in here.')
+            .textContent(result.message)
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
-            .targetEvent(project)
-        );
+            .targetEvent(ev)
+          );   
+        });
       };
 
       function selectMarker(marker){
@@ -486,7 +510,7 @@ app.controller('GmapCtrl',
         locArr = [];
         uniqueMarkers = [];
         concentricMarkers = {};
-        var filterObj = {area: $scope.selectedAreas, product_type: null};
+        var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
         MapService.filterProducts(filterObj).then(function (markers) {          
           if(markers != null){
             _.each(markersOnMap, function(v, i){
@@ -592,7 +616,8 @@ app.controller('GmapCtrl',
         return list.indexOf(item) > -1;
       };
 
-      $scope.viewAndSaveNewCampaign = function(){
+      $scope.campaign = {};
+      $scope.viewAndSaveCampaign = function(){
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){
         //   // add all shortlisted products to campaign
@@ -609,12 +634,13 @@ app.controller('GmapCtrl',
         //   // });
         // }
         // campaign.products = $scope.selectedForNewCampaign;
-        var campaign = $scope.newCampaign;
-        campaign.products = [];
+        $scope.campaign.products = [];
+        $scope.campaign.user_mongo_id = $rootScope.loggedInUser.id;
         _.each($scope.shortListedProducts, function(v, i){
-          campaign.products.push(v.id);
+          $scope.campaign.products.push(v.id);
         });
-        CampaignService.saveCampaign(campaign).then(function(response){
+        console.log($scope.campaign);
+        CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
         });
       }
@@ -636,6 +662,39 @@ app.controller('GmapCtrl',
         });
       }
 
+      $scope.userCampaigns = [];
+      $scope.loadUserCampaigns = function(){
+        CampaignService.getCampaigns($rootScope.loggedInUser.id).then(function(result){
+          $scope.userCampaigns = result;
+        });
+      }
+      $scope.loadUserCampaigns();
+
+      $scope.deletePlannedCampaign = function(campaignId){
+        CampaignService.deleteCampaign(campaignId).then(function(result){
+          if(result.status == 1){
+            toastr.success(result.message);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+
+      $scope.toggleFormatSelection = function(formatId){
+        if(_.contains($scope.selectedFormats, formatId)){
+          $scope.selectedFormats = _.reject($scope.selectedFormats, function(v){return v == formatId});
+          // console.log(_.reject($scope.selectedFormats, function(v){return v == formatId}));
+        }
+        else{
+          $scope.selectedFormats.push(formatId);
+        }
+        $scope.applyFilter();
+      }
+
+      $scope.isFormatSelected = function(formatId){
+        return _.contains($scope.selectedFormats, formatId);
+      }
     }
   ]
 );

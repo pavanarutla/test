@@ -14,7 +14,7 @@
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
         <!--sugg -->
-        <md-button aria-label="location" class=" md-primary " ng-if="footerhide && isAuthenticated" ng-click="suggestMe()">
+        <md-button aria-label="location" class=" md-primary " ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
           suggest me
         </md-button>
         <!--notification button -->
@@ -48,10 +48,9 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated">
           BOOK NOW
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide"><a href="#/location">
+        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
             Browse BillBoards</a>
         </md-button>
-        
 
       </md-menu-bar>
     </div>
@@ -141,7 +140,7 @@
 
     </div>
     <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
-    <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
+      <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
     </md-button>
   </footer>
 </div>

@@ -11,7 +11,6 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 				_.each($auth.getPayload().userMongo, function (v, k) {
 					userData[k] = v;
 				});
-				console.log(userData);
 				$rootScope.isAuthenticated = true;
 				$rootScope.loggedInUser = userData;
 				localStorage.isAuthenticated = true;

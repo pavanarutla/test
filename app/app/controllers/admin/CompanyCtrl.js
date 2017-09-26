@@ -7,7 +7,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   */
   $scope.companiesPopup = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/admin/companies-popup.html',
+      templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })
