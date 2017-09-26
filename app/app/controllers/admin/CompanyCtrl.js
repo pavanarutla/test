@@ -2,6 +2,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
   $scope.msg = {};
 
+  $scope.cancel = function(){
+    $mdDialog.hide();
+  }
   /*
   ======== Companies ========
   */
@@ -60,6 +63,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
           $scope.gridCompany.data = response;
         });
         toastr.success(result.message);
+        $mdDialog.hide();
       }
       else {
         toastr.error(data.message);
@@ -103,7 +107,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     { name: 'hoardinglist', displayName: 'List fo hoarding', width: '10%' },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a href="" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteHoardingCompany(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
    
@@ -128,11 +132,26 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
           $scope.gridHoardingCompany.data = response;
         });
         toastr.success(result.message);
+        $mdDialog.hide();
       }
       else {
         toastr.error(data.message);
       }
     });
+  }
+  $scope.deleteHoardingCompany = function(row){
+     // CompanyService.deleteHoardingCompanies(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
+  //   if(response == 200){
+  //     toastr.success("deleted successpully");
+  //   }else{
+  //     toastr.error("not completed")
+  //   }
+  //   getFormatList();
+  // });
+    console.log("row deleted");
+    var index = $scope.gridHoardingCompany.data.indexOf(row);
+    $scope.gridHoardingCompany.data.splice(index, 1);
+    toastr.success("HoardingCompanies deleted successfully");
   }
   /*
   ======== Hoarding Companies ========

@@ -1,5 +1,8 @@
 <!-- Register pages-->
 <md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="registerCtrl">
+        <div layout="column" layout-align="center end" layout-fill="layout-fill" layout-align-xs="right right">
+                <a href="javascript:void(0)" style="width: 37px;margin: 2% 0% -1%;" class="md-primary udrlin" ng-click="close()">X </a>
+             </div>
            <md-dialog-content>
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab label="Users">
@@ -28,12 +31,12 @@
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <label>Email</label>
-                                <input ng-model="user.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                                <input ng-model="user.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
                                 />
                                 <div ng-messages="registerUser.email.$error">
                                     <div class="alret alert-danger" ng-message="required">Email is required.</div>                                   
-                                    <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                                    <div ng-message="pattern">Enter a valied username</div>
+                                    <div ng-message="maxlength">email shouldn't exede 50 characters. </div>
+                                    <div ng-message="pattern">Enter a valied email</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block">

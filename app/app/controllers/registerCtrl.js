@@ -3,7 +3,9 @@
 app.controller("registerCtrl", function ($scope, $mdDialog) {
 
 	//alert("Registration page user and Agency skeleton and functionality implemented  ");
-
+$scope.close = function(){
+	$mdDialog.hide();
+}
 	$scope.UserData = {};
 	$scope.AgencyData = {};
 

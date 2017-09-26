@@ -1,5 +1,5 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr', 
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr',
     function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
@@ -43,24 +43,24 @@ app.controller('GmapCtrl',
       });
       $scope.product = {};
       MapService.markers().then(function (markers) {
-        $scope.filteredMarkers = markers; 
+        $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
         });
       });
-      ProductService.getFormatList().then(function(formats){
+      ProductService.getFormatList().then(function (formats) {
         // $scope.formatList = formats;
         $scope.formatGrid = [];
         $scope.selectedFormats = [];
         var x = 3;
         var y = formats.length / x;
         var k = 0;
-        for(var i = 0; i < y; i++){
+        for (var i = 0; i < y; i++) {
           var tempArr = [];
-          for(var j = 0; j < x; j++){
+          for (var j = 0; j < x; j++) {
             tempArr.push(formats[k]);
-            if(formats[k]){
+            if (formats[k]) {
               $scope.selectedFormats.push(formats[k].id);
               k++;
             }
@@ -68,18 +68,18 @@ app.controller('GmapCtrl',
           $scope.formatGrid.push(tempArr);
         }
       });
-      $scope.countries=[];
+      $scope.countries = [];
       $scope.states = [];
-      $scope.cities=[];      
+      $scope.cities = [];
       $scope.areas = [];
       LocationService.getCountries().then(function (countries) {
         $scope.countries = countries;
       });
-      $scope.Sectors=[];
+      $scope.Sectors = [];
       // MapService.getIndustrySectors().then(function(Sectors){
       //   $scope.Sectors = Sectors;
       // });
-      $scope.DurationSectors=[];
+      $scope.DurationSectors = [];
       // MapService.getDurationSectors().then(function(DurationSectors){
       //   $scope.DurationSectors = DurationSectors;
       // });
@@ -117,32 +117,32 @@ app.controller('GmapCtrl',
       $scope.Recommended = false;
       $scope.Popular = false;
       $scope.footerhide = true;
-      
+
       $scope.locationpageonly = true;
 
-      $scope.dashboardData = false;      
-      
-      $scope.filters = function(){
+      $scope.dashboardData = false;
+
+      $scope.filters = function () {
         $scope.filter = !$scope.filter;
         $scope.format = false;
         $scope.shortlist = false;
         $scope.savedcampaign = false;
       }
-      $scope.formats = function(){
-        $scope.filter= false;
-        $scope.format= !$scope.format;
+      $scope.formats = function () {
+        $scope.filter = false;
+        $scope.format = !$scope.format;
         $scope.shortlist = false;
-        $scope.savedcampaign = false;  
+        $scope.savedcampaign = false;
       }
 
-      $scope.shortlistDiv = function(){
+      $scope.shortlistDiv = function () {
         $scope.filter = false;
         $scope.format = false;
         $scope.shortlist = !$scope.shortlist;
-        $scope.savedcampaign = false; 
+        $scope.savedcampaign = false;
       }
 
-      $scope.savedcampaignDiv = function(){
+      $scope.savedcampaignDiv = function () {
         $scope.filter = false;
         $scope.format = false;
         $scope.shortlist = false;
@@ -150,12 +150,12 @@ app.controller('GmapCtrl',
       }
 
 
-      $scope.RecommendedDiv = function(){
+      $scope.RecommendedDiv = function () {
         $scope.Recommended = !$scope.Recommended;
         $scope.Popular = false;
       }
 
-      $scope.PopularDiv = function(){
+      $scope.PopularDiv = function () {
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
@@ -175,10 +175,10 @@ app.controller('GmapCtrl',
 
       // $scope.selectedCountry = { Id: '1', Countryname: 'India' };
       $scope.selectedCountry = {};
-      $scope.selectedStates={};
-      $scope.selectedcitys={};
-      $scope.selectedareas={};
-      
+      $scope.selectedStates = {};
+      $scope.selectedcitys = {};
+      $scope.selectedareas = {};
+
       $scope.searchTerm;
       $scope.clearSearchTerm = function () {
         $scope.searchTerm = '';
@@ -196,33 +196,33 @@ app.controller('GmapCtrl',
       $scope.setCities = function () {
         LocationService.getAreas($scope.selectedcitys).then(function (areas) {
           $scope.areas = areas;
-        });      
+        });
       }
 
       //Confirm Dialog
-      $scope.showAlert = function(ev) {
+      $scope.showAlert = function (ev) {       
         $mdDialog.show(
           $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Your Campaign is successfully shared!!!!')
-          .textContent('You can specify some description text in here.')
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
-        );
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('Your Campaign is successfully shared!!!!')
+            .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );     
       };
       //Confirm Dialog 1
-      $scope.showConfirmation = function(ev) {
+      $scope.showConfirmation = function (ev) {
         $mdDialog.show(
           $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Your Campaign is successfully Saved!!!!')
-          .textContent('You can specify some description text in here.')
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('Your Campaign is successfully Saved!!!!')
+            .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
         );
       };
       $scope.industrySectorList = [
@@ -276,27 +276,51 @@ app.controller('GmapCtrl',
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
+      // date picker validation
+      // $scope.checkErr = function (startDate, endDate) {
+      //   $scope.errMessage = '';
+      //   var curDate = new Date();
+
+      //   if (new Date(startDate) > new Date(endDate)) {
+      //     $scope.errMessage = 'End Date should be greater than start date';
+      //     return false;
+      //   }
+      //   if (new Date(startDate) < curDate) {
+      //     $scope.errMessage = 'Start date should not be before today.';
+      //     return false;
+      //   }
+      // };
+      $scope.newDate = new Date();
+     // console.log($scope.start_date,"$scope.start_date")
+    // $scope.start_date = new Date();
+      $scope.endDate = $scope.start_date + 1;
+
+  //    if(start_date > end_date){
+  //     $scope.errMessage = 'end date should not be before start day.';
+  //     return false;
+  //  }
+
       $scope.sendSuggestionRequest = function (ev) {
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
         console.log($scope.suggestionRequest);
-        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function(result){
-          if(result.status == 1){
+        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
+          if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
           }
           $mdDialog.show(
             $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('We will get back to you!!!!')
-            .textContent(result.message)
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-          );   
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('We will get back to you!!!!')
+              .textContent(result.message)
+              .ariaLabel('Alert Dialog Demo')
+              .ok('Got it!')
+              .targetEvent(ev)
+          );
         });
       };
 
-      function selectMarker(marker){
+      function selectMarker(marker) {
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -311,8 +335,8 @@ app.controller('GmapCtrl',
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
       }
-      
-      function selectSpideredMarker(marker){
+
+      function selectSpideredMarker(marker) {
         $scope.selectedProduct = marker;
         selectorMarker.setMap(null);
         $scope.product.image = config.serverUrl + marker.properties['image'];
@@ -327,7 +351,7 @@ app.controller('GmapCtrl',
         $mdSidenav('productDetails').toggle();
       }
 
-      google.maps.event.addListener(selectorMarker, 'click', function(e){
+      google.maps.event.addListener(selectorMarker, 'click', function (e) {
         $scope.selectedProduct = null;
         selectorMarker.setMap(null);
       });
@@ -337,9 +361,9 @@ app.controller('GmapCtrl',
       var locArr = [];
       var uniqueMarkers = [];
       var concentricMarkers = {};
-      $scope.processMarkers = function () {  
+      $scope.processMarkers = function () {
         _.each($scope.filteredMarkers, function (v, i) {
-          var product = {position: {lat: v.lat, lng: v.lng}, data: {v}};
+          var product = { position: { lat: v.lat, lng: v.lng }, data: { v } };
           productList.push(product);
           if (locArr[JSON.stringify(product.position)]) {
             locArr[JSON.stringify(product.position)]++;
@@ -347,20 +371,20 @@ app.controller('GmapCtrl',
             locArr[JSON.stringify(product.position)] = 1;
           }
         });
-        _.each(productList, function(v, i){
-          if(locArr[JSON.stringify(v.position)] > 1){            
-            if(concentricMarkers[JSON.stringify(v.position)]){
+        _.each(productList, function (v, i) {
+          if (locArr[JSON.stringify(v.position)] > 1) {
+            if (concentricMarkers[JSON.stringify(v.position)]) {
               concentricMarkers[JSON.stringify(v.position)].count++;
               concentricMarkers[JSON.stringify(v.position)].markers.push(v.data.v);
             }
-            else{
+            else {
               concentricMarkers[JSON.stringify(v.position)] = {};
               concentricMarkers[JSON.stringify(v.position)].markers = [];
               concentricMarkers[JSON.stringify(v.position)].count = 1;
               concentricMarkers[JSON.stringify(v.position)].markers.push(v.data.v);
             }
           }
-          else{
+          else {
             uniqueMarkers.push(v.data.v);
           }
         });
@@ -417,7 +441,7 @@ app.controller('GmapCtrl',
           keepSpiderfied: true
         });
 
-        _.each(concentricMarkers, function (markerData, index){          
+        _.each(concentricMarkers, function (markerData, index) {
           for (var i = 0; i < markerData.count; i++) {
             (function () {  // make a closure over the marker and marker data
               var label = {};
@@ -500,16 +524,16 @@ app.controller('GmapCtrl',
         }
         trafficLayer.setMap(mapVal);
       }
- 
-      $scope.applyFilter = function(){
+
+      $scope.applyFilter = function () {
         productList = [];
         locArr = [];
         uniqueMarkers = [];
         concentricMarkers = {};
-        var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
-        MapService.filterProducts(filterObj).then(function (markers) {          
-          if(markers != null){
-            _.each(markersOnMap, function(v, i){
+        var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats };
+        MapService.filterProducts(filterObj).then(function (markers) {
+          if (markers != null) {
+            _.each(markersOnMap, function (v, i) {
               v.setMap(null);
               $scope.Clusterer.removeMarker(v);
             });
@@ -517,12 +541,12 @@ app.controller('GmapCtrl',
             $scope.filteredMarkers = markers;
             $scope.processMarkers();
             var bounds = new google.maps.LatLngBounds();
-            _.each(markersOnMap, function(v, i){
+            _.each(markersOnMap, function (v, i) {
               bounds.extend(v.getPosition());
             });
             $scope.mapObj.fitBounds(bounds);
           }
-          else{
+          else {
             alert("no marker found in the area(s) you selected");
           }
         });
@@ -532,47 +556,47 @@ app.controller('GmapCtrl',
         // console.log($scope.address.components.location);
       }
 
-      $scope.shortlistSelected = function(ev){
-        MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function(response){
+      $scope.shortlistSelected = function (ev) {
+        MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $mdDialog.show(
             $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('ShortList Product')
-            .textContent(response.message)
-            .ariaLabel('shortlist-success')
-            .ok('Got it!')
-            .targetEvent(ev)
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('ShortList Product')
+              .textContent(response.message)
+              .ariaLabel('shortlist-success')
+              .ok('Got it!')
+              .targetEvent(ev)
           );
           getShortListedProducts();
         });
       }
 
-      function getShortListedProducts(){
-        MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function(response){
+      function getShortListedProducts() {
+        MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $scope.shortListedProducts = response;
         });
       }
       getShortListedProducts();
-      
-      $scope.deleteShortlisted =function(ev, productId){
+
+      $scope.deleteShortlisted = function (ev, productId) {
         // console.log(productId);
-        MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function(response){          
+        MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function (response) {
           $mdDialog.show(
             $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('ShortList Product')
-            .textContent(response.message)
-            .ariaLabel('delete-shortlisted')
-            .ok('Got it!')
-            .targetEvent(ev)
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('ShortList Product')
+              .textContent(response.message)
+              .ariaLabel('delete-shortlisted')
+              .ok('Got it!')
+              .targetEvent(ev)
           );
           getShortListedProducts();
         });
       };
 
-      $scope.resetFilters = function(){
+      $scope.resetFilters = function () {
         productList = [];
         locArr = [];
         uniqueMarkers = [];
@@ -580,18 +604,18 @@ app.controller('GmapCtrl',
         $scope.selectedAreas = null;
         $scope.selectedcitys = null;
         $scope.selectedStates = null;
-        _.each(markersOnMap, function(v, i){
+        _.each(markersOnMap, function (v, i) {
           v.setMap(null);
           $scope.Clusterer.removeMarker(v);
           delete v;
         });
         markersOnMap = [];
-        MapService.markers().then(function (markers){
+        MapService.markers().then(function (markers) {
           console.log(markers);
           $scope.filteredMarkers = markers;
           $scope.processMarkers();
           var bounds = new google.maps.LatLngBounds();
-          _.each(markersOnMap, function(v, i){
+          _.each(markersOnMap, function (v, i) {
             bounds.extend(v.getPosition());
           });
           $scope.mapObj.fitBounds(bounds);
@@ -613,7 +637,7 @@ app.controller('GmapCtrl',
       };
 
       $scope.campaign = {};
-      $scope.viewAndSaveCampaign = function(){
+      $scope.viewAndSaveCampaign = function () {
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){
         //   // add all shortlisted products to campaign
@@ -632,63 +656,63 @@ app.controller('GmapCtrl',
         // campaign.products = $scope.selectedForNewCampaign;
         $scope.campaign.products = [];
         $scope.campaign.user_mongo_id = $rootScope.loggedInUser.id;
-        _.each($scope.shortListedProducts, function(v, i){
+        _.each($scope.shortListedProducts, function (v, i) {
           $scope.campaign.products.push(v.id);
         });
         console.log($scope.campaign);
-        CampaignService.saveCampaign($scope.campaign).then(function(response){
+        CampaignService.saveCampaign($scope.campaign).then(function (response) {
           $scope.campaignSavedSuccessfully = true;
         });
       }
 
-      $scope.searchBySiteNo = function(){
-        MapService.searchBySiteNo($scope.siteNoSearch).then(function(markerProperties){
+      $scope.searchBySiteNo = function () {
+        MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
           console.log(markerProperties);
-          if(markerProperties.id){
+          if (markerProperties.id) {
             var marker = {};
             marker.properties = markerProperties;
             selectMarker(marker);
             var bounds = new google.maps.LatLngBounds();
-            bounds.extend({lat:parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng)});
+            bounds.extend({ lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) });
             $scope.mapObj.fitBounds(bounds);
           }
-          else{
+          else {
             toastr.error('No product found with that tab id', 'error');
           }
         });
       }
 
       $scope.userCampaigns = [];
-      $scope.loadUserCampaigns = function(){
-        CampaignService.getCampaigns($rootScope.loggedInUser.id).then(function(result){
+      $scope.loadUserCampaigns = function () {
+        CampaignService.getCampaigns($rootScope.loggedInUser.id).then(function (result) {
           $scope.userCampaigns = result;
         });
       }
       $scope.loadUserCampaigns();
 
-      $scope.deletePlannedCampaign = function(campaignId){
-        CampaignService.deleteCampaign(campaignId).then(function(result){
-          if(result.status == 1){
+      $scope.deletePlannedCampaign = function (campaignId) {
+        CampaignService.deleteCampaign(campaignId).then(function (result) {
+          if (result.status == 1) {
             toastr.success(result.message);
           }
-          else{
+          else {
             toastr.error(result.message);
           }
         });
       }
 
-      $scope.toggleFormatSelection = function(formatId){
-        if(_.contains($scope.selectedFormats, formatId)){
-          $scope.selectedFormats = _.reject($scope.selectedFormats, function(v){return v == formatId});
+      $scope.toggleFormatSelection = function (formatId) {
+        if (_.contains($scope.selectedFormats, formatId)) {
+          $scope.selectedFormats = _.reject($scope.selectedFormats, function (v) { return v == formatId });
           // console.log(_.reject($scope.selectedFormats, function(v){return v == formatId}));
         }
-        else{
+        else {
           $scope.selectedFormats.push(formatId);
         }
         $scope.applyFilter();
       }
 
-      $scope.isFormatSelected = function(formatId){
+      $scope.isFormatSelected = function (formatId) {
         return _.contains($scope.selectedFormats, formatId);
       }
     }

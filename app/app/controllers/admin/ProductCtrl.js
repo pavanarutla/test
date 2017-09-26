@@ -45,7 +45,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'name', displayName: 'Format Type', enableCellEdit: false, width: '30%' },
     {
       name: 'Action', field: 'Action', width: '30%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteFormat(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false
     }
   ];
@@ -64,6 +64,22 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $scope.gridFormats.data = result;
     $scope.formatList = result;
   });
+
+  // Delete Format
+   
+  $scope.deleteFormat = function(row){    
+     // ProductService.deleteFormatsList(JSON.parse(localStorage.loggedInUser).id, rowEntity).then(function (response) {
+  //   if(response == 200){
+  //     toastr.success("deleted successpully");
+  //   }else{
+  //     toastr.error("not completed")
+  //   }
+  //   getFormatList();
+  // });
+    var index = $scope.gridFormats.data.indexOf(row);
+    $scope.gridFormats.data.splice(index, 1);
+    toastr.success("format deleted successfully");
+  }
 
   // Adding new format
   // $http.get('fakedb/companyagency.json').success(function (data) {
@@ -163,7 +179,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href=""  ng-click="grid.appScope.deleteProduct(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -180,8 +196,31 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   // Get products list
   ProductService.getProductList().then(function(result){
     $scope.gridProducts.data = result;
-    console.log(result);
+    console.log(result,"productList");
   });
+
+  function getProductList(){
+    ProductService.getProductList().then(function(result){
+      $scope.gridProducts.data = result;
+      console.log(result,"productList1");
+    });
+  }
+
+  // delete product List
+  $scope.deleteProduct = function(row){
+    console.log("item clicked");
+  // ProductService.deleteProductList(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
+  //   if(response == 200){
+  //     toastr.success("deleted successpully");
+  //   }else{
+  //     toastr.error("not completed")
+  //   }
+  //   getProductList();
+  // });
+  var index = $scope.gridProducts.data.indexOf(row);
+  $scope.gridProducts.data.splice(index, 1);
+  toastr.success("Product deleted successfully");
+};
 
   // Adding Products
   // $http.get('fakedb/companyagency.json')

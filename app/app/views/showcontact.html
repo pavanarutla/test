@@ -1,5 +1,7 @@
-<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60">
-  
+<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60" ng-controller="bbMngrCtrl">
+        <div layout="column" layout-align="center end" layout-fill="layout-fill" layout-align-xs="right right">
+                <a href="javascript:void(0)" style="width: 37px;margin: 2% 0% -1%;" class="md-primary udrlin" ng-click="cancel()">X </a>
+             </div>
     <md-dialog-content>
         
         <div layout="row" layout-margin>
@@ -13,20 +15,29 @@
                     <div class="md-headline" style="font-weight: 500;margin:0 0 0 32px">Request a call back</div>
                 </div>
                 <div layout="row" layout-margin layout-padding style="margin:0 0 0 32px">
-                    <form name="signin" method="post" ng-submit="userSignin()" novalidate="novalidate" layout="row" layout-xs="column" flex="80"
+                    <form name="request" method="post" ng-submit="userSignin()" novalidate="novalidate" layout="row" layout-xs="column" flex="80"
                     flex-lg="100" flex-md="80" flex-sm="100" flex-xs="100">
                         <div layout-fill="layout-fill" layout-fill="$mdMedia('gt-sm')" class="bbsct">
                         
-                            <md-input-container class="md-block">
+                            <!-- <md-input-container class="md-block">
                                 <label>Drop us your number</label>
-                                <input ng-model="user.phoneNo" type="text" name="pno" minlength="10" maxlength="11" ng-pattern="/^[0-9]{10}$/" required="required"/>
+                                <input ng-model="user.phoneNo" type="text" name="pno" minlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
                                 <div ng-messages="signup.pno.$error">
                                     <div ng-message="required">Phone No is required.</div>
                                     <div ng-message="minlength">Phone No must have 10 characters.</div>
                                     <div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
                                     <div ng-message="pattern">Phone No should be only numbe.</div>
                                 </div>
-                            </md-input-container>
+                            </md-input-container> -->
+                            <md-input-container class="md-block">
+                                    <label>Mobile number</label>
+                                    <input ng-model="user.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" />
+                                    <div ng-messages="request.mobile.$error" role="alert" multiple>
+                                        <div ng-message="required" class="my-message">Mobile no is required.</div>
+                                        <div ng-message="pattern">Enter a valied Mobile no</div>
+                                        <div ng-message="maxlength">Mobile shouldn't exede 10. </div>
+                                    </div>
+                                </md-input-container>
                         </div>
                         <div class="bbscont">
                             <md-button aria-label="submitRCB" class="md-raised md-primary newbbsub">SUBMIT</md-button>
