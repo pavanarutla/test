@@ -69,7 +69,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Companies ends ========
   */
-
+ $scope.cancel = function(){
+  $mdDialog.hide();
+  };
 
   /*
   ======== Hoarding Companies ========
