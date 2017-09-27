@@ -18,10 +18,10 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination'
 ])
 app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, config) {
@@ -104,11 +104,13 @@ app.constant('config', {
     .state('admin.home',{
       url: '/home',
       templateUrl: 'views/admin/home.html',
+      controller: 'AdminFeedsCtrl',
       title: 'Feeds'
     })
     .state('admin.Feeds',{
       url: '/feeds',
-      templateUrl: 'views/admin/adminproductlist.html',
+      templateUrl: 'views/admin/suggest-products.html',
+      controller: 'AdminFeedsCtrl',
       title: 'Feeds'
     })
     .state('admin.campaign-suggestion',{
@@ -118,8 +120,8 @@ app.constant('config', {
     })
     .state('admin.campaign',{
       url: '/campaign',
-      templateUrl: 'views/admin/AdminCampaign.html',
-      controller: 'dataTable',
+      templateUrl: 'views/admin/campaign-list.html',
+      controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
     .state('admin.campaign-proposal-summary',{

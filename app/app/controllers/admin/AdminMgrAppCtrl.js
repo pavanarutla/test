@@ -7,11 +7,6 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     $mdSidenav('right').toggle();
   };
   
-  $scope.limit = 3;
-
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
   $scope.items = [
     {
       "campaignname": "Flipkart",
@@ -46,16 +41,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       "price": "50000",
       "products": "0"
     }
-  ]
-
-
-  $scope.showCampaignDetails = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/admin/campaignDetails-model.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true,
-    })
-  };
+  ];
 
   $scope.floorDetails = {
     roomDetails: [

@@ -38,3 +38,9 @@ app.filter('address', function () {
     return input.street + ', ' + input.city + ', ' + input.state + ', ' + input.zip;
   };
 });
+
+app.filter('dateify',function(){
+  return function(date){
+    return new Date(date);
+  }
+})

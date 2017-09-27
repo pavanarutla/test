@@ -4,7 +4,7 @@ app.service('CampaignService',
       return {
         getCampaigns: function(user_mongo_id){
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/campaigns/' + user_mongo_id).success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/campaigns').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
         saveCampaign: function(campaign){

@@ -2,7 +2,6 @@
   <div class="md-title" style="background: #447bde;color: #fff;">Your Daily feed</div>
   <md-content layout="column" layout-sm="column" layout-xs="column" class="contbg">
     <md-tabs md-dynamic-height md-border-bottom>
-
       <!-- <md-tab label="Latest updates">
         <md-content class="md-padding" layout="column">
           <h3>Latest updates</h3>
@@ -14,52 +13,44 @@
         </md-content>
       </md-tab> -->
       <md-tab label="Request">
-       
-          <!-- <div layout="column" flex="40" layout-margin>
-
-            <h4>Send A Request</h4>
-            <div>
-              <label>Title:</label>
-              <input type="text" name="title" placeholder="title" style="width:85%">
-            </div>
+        <!-- <div layout="column" flex="40" layout-margin>
+          <h4>Send A Request</h4>
+          <div>
+            <label>Title:</label>
+            <input type="text" name="title" placeholder="title" style="width:85%">
           </div>
-          <div layout="row">
-            <div flex="40">
-              <label>Details:</label>
-              <textarea cols="5" rows="5" placeholder="Enter Details" style="width:81%"></textarea>
+        </div>
+        <div layout="row">
+          <div flex="40">
+            <label>Details:</label>
+            <textarea cols="5" rows="5" placeholder="Enter Details" style="width:81%"></textarea>
+          </div>
+          <div flex="30">
+            <md-button class="md-raised md-primary" style="margin-top:55px">Send</md-button>
+          </div>
+        </div> -->
+        <div layout="column" layout-margin layout-padding ng-repeat="request in requestList">
+          <div layout="row" layout-fill layout-margin style="background-color: #a3c4e8">
+            <div layout="column" layout-align="center center" flex="10">
+              <img ng-src="{{request.user_avatar}}" class="md-avatar face">
             </div>
-            <div flex="30">
-              <md-button class="md-raised md-primary" style="margin-top:55px">Send</md-button>
-            </div>
-
-          </div> -->
-          <div layout="column"  layout-margin layout-padding>
-
-
-            <div layout="row" layout-fill layout-margin style="background-color: #a3c4e8">
-
-              <div layout="column" layout-align="center center" flex="10">
-                <img ng-src="assets/images/avatar.jpg" class="md-avatar face">
+            <div flex="70" layout="column" layout-align="center start" layout-margin>
+              <div>
+                <h3 ng-show="request.status == 0">{{request.user_full_name}} has requested for a campaign suggestion.</h3>
+                <h3 ng-show="request.status == 1">{{request.user_full_name}} has requested for a campaign proposal.</h3>
+                <h3 ng-show="request.status == 2">{{request.user_full_name}} has requested for the launch of their campaign.</h3>
               </div>
-              <div flex="70" layout="column" layout-align="center start" layout-margin>
-                <div>
-                  <h3> srikant has Request for A Compain suggetions </h3>
-                </div>
-                <div><span>Today: 11:25am 26.09.2017</span></div>
-
-                <div>
-                  <md-button class="md-raised md-primary" ng-click="showCampaignDetails()">View Details</md-button>
-                </div>
+              <div><span>{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span></div>
+              <div>
+                <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)">View Details</md-button>
               </div>
-             
             </div>
-            
-            
           </div>
-          <div layout="column" layout-margin>
-            <md-button class="md-raised md-primary" layout-fill  ng-click='loadMore()'>Show More</md-button>
-          </div>
+        </div>
+        <div layout="column" layout-margin>
+          <md-button class="md-raised md-primary" layout-fill ng-click='loadMore()'>Show More</md-button>
+        </div>
       </md-tab>
     </md-tabs>
   </md-content>
-  </div>
+</div>
