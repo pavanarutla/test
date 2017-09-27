@@ -6,14 +6,24 @@
       <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
-      <md-button aria-label="locations" href="#/" md-no-ink class="logo"><img ng-src="assets/images/product/logo.png" width="100%" height="100%" ></md-button><span flex></span>
+      <!-- <md-button aria-label="locations" href="#/" md-no-ink class="logo">
+         <img ng-src="assets/images/product/logo.png" width="100%" height="100%" > 
+        
+      </md-button> -->
+        <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
+          <img ng-src="assets/images/orgnl.png" width="160" >
+        </md-button>
+      <span flex></span>
       <md-menu-bar class="main-menu">
-        <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide">what we do</md-button>
-        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide">formats</md-button>
-        <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide">why outdoor</md-button>
-        <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide">contact</md-button>
+        <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm>what we do</md-button>
+        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm>formats</md-button>
+        <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm>why outdoor</md-button>
+        <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
-
+        <!--sugg -->
+        <md-button aria-label="location" class=" md-primary " ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
+          suggest me
+        </md-button>
         <!--notification button -->
         <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
@@ -45,16 +55,11 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated">
           BOOK NOW
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && !footerhide">
-          <a href="#/location" style="padding:10px 0px;text-decoration:none;">
-            Browse BillBoards
-          </a>
+        <md-button aria-label="location" class=" md-primary md-raised browse-btn" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
+            Browse BillBoards</a>
         </md-button>
         <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
           <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
-        </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
-          suggest me
         </md-button>
 
       </md-menu-bar>
@@ -66,21 +71,21 @@
     </header>
     <md-content flex layout="column" role="navigation">
       <md-menu-item flex layout="column">
-        <md-button ng-href="#/whyoutdoor">WHAT WE DO</md-button>
+        <md-button  ng-click="whatwedo()">WHAT WE DO</md-button>
       </md-menu-item>
 
       <md-menu-item flex layout="column">
-        <md-button ng-href="#/formats">FORMATS</md-button>
+        <md-button ng-click="formate()">FORMATS</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button ng-href="#/location">WHY OUTDOOR</md-button>
+        <md-button ng-click="whyOutdoor()">WHY OUTDOOR</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button href="#">CONTACT</md-button>
+        <md-button ng-click="contactus()">CONTACT</md-button>
       </md-menu-item>
-      <md-menu-item flex layout="column">
+      <!-- <md-menu-item flex layout="column">
         <md-button href="#/pricing">PRICING</md-button>
-      </md-menu-item>
+      </md-menu-item> -->
 
   </md-sidenav>
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">

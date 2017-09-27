@@ -1,7 +1,6 @@
 <div layout="column" style="position:relative">
   <!-- side nav for view all-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListedProducts" style="width:500px;"
-    md-component-id="viewAll">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListedProducts" style="width:500px;"md-component-id="viewAll" id="divExport">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
@@ -18,7 +17,7 @@
       <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
         <div layout="row">
           <div layout="column" layout-align="center start" flex="50">
-            <div class="md-headline">{{shortlisted.siteNo}}</div>
+            <div class="md-body-2">{{shortlisted.siteNo}}</div>
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
@@ -87,10 +86,10 @@
     </div>
     <md-content>
 
-      <div layout="column" layout-margin ng-repeat="shortlisted in shortListedProducts" style="margin: 0 8px 0 8px;">
+      <div layout="column"  layout-margin ng-repeat="shortlisted in shortListedProducts" style="margin: 0 8px 0 8px;">
         <div layout="row">
           <div layout="column" layout-align="center start" flex="50">
-            <div class="md-headline">{{shortlisted.siteNo}}</div>
+            <div class="md-body-2">{{shortlisted.siteNo}}</div>
           </div>
           <div layout="row" layout-align="end center" flex="50">
 
@@ -136,7 +135,7 @@
         <div>
           <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveNewCampaign()">SAVE TO CAMPAGIN</md-button>
         </div>
-        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#" ng-click="toggleSuggestMeSidenav()">SUGGEST ME</a></span></div>
+        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
       </div>
     </md-content>
 
@@ -264,9 +263,9 @@
       </div>
       <md-content layout="column" style="overflow:hidden">
         <div layout="column" layout-margin>
-          <div class="md-headline">Save Campaign</div>
-          <div class="md-headline">We are excited to see your Campaign</div>
-          <div class="md-headline">Let's Work Together!</div>
+          <div class="md-title">Save Campaign</div>
+          <div class="md-subhead">We are excited to see your Campaign</div>
+          <div class="md-subhead">Let's Work Together!</div>
         </div>
 
         <form name="viewAndSaveCampaignForm">
@@ -307,7 +306,7 @@
             <div>
               <md-button class="md-raised md-warn" layout-fill> SAVED CAMPAGIN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
@@ -315,7 +314,7 @@
         <div layout="column" layout-align="center center" layout-margin>
           <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
           <div class="md-display-1">Congratulations</div>
-          <div class="md-headline">Campaingn Saved Succcessfully</div>
+          <div class="md-title">Campaingn Saved Succcessfully</div>
         </div>
         <div layout="column" layout-margin>
           <div>
@@ -348,9 +347,9 @@
       </div>
       <md-content layout="column" style="overflow:hidden" ng-if="!campaignSaved">
         <div layout="column" layout-margin>
-          <div class="md-headline">Create Campaign</div>
-          <div class="md-headline">We are excited to see your Campaign</div>
-          <div class="md-headline">Let's Work Together!</div>
+          <div class="md-title">Create Campaign</div>
+          <div class="md-subhead">We are excited to see your Campaign</div>
+          <div class="md-subhead">Let's Work Together!</div>
         </div>
 
         <form name="viewAndSaveCampaignForm">
@@ -391,7 +390,7 @@
             <div>
               <md-button class="md-raised md-warn" layout-fill ng-click="createNewCampaign()">CREATE CAMPAIGN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
@@ -429,7 +428,7 @@
       </div>
       <div layout="row" layout-margin>
         <div layout="column" layout-align="center start" flex="50">
-          <div class="md-headline">{{product.siteNo}}</div>
+          <div class="md-title">{{product.siteNo}}</div>
         </div>
         <div layout="row" layout-align="end center" flex="50">
           <img src="assets/images/maps/light-3030.jpg" ng-if="product.lighting == 0" />
@@ -522,7 +521,7 @@
       </div>
     </div>
     <md-content layout-align="center center" layout-margin layout-padding>
-      <h3 class="md-headline">Share Campaign Details..</h3>
+      <h3 class="md-headline">Share Campaign Details</h3>
       <form name="shareCampaignForm">
 
         <div layout="column">
@@ -615,7 +614,7 @@
         <div layout="row" flex="100" class="saved-dates">
           <div layout="column" flex="50">
             <md-input-container>
-              <md-datepicker ng-model="suggestionRequest.expected_start_date" md-min-date="today" md-placeholder="Campaign Start "></md-datepicker>
+              <md-datepicker ng-model="suggestionRequest.expected_start_date" md-placeholder="Campaign Start "></md-datepicker>
             </md-input-container>
           </div>
           <div layout="column" flex="50">
@@ -641,6 +640,14 @@
   <div layout="column" style="position:relative;" id="map-container">
     <!-- <div id="gmap"></div> -->
     <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" disable-default-u-i="true">
+      <custom-control id="traffic-toggle" position="TOP_RIGHT" index="1" ng-click="toggleTraffic()" style="margin-top:10px;margin-right:10px;">
+        <div style="background-color: white; color:#000;cursor:pointer; padding:10px;font-size:14px">Show Live Impression</div>
+      </custom-control>
+      <custom-control  position="TOP_RIGHT" index="1"  style="margin-top:10px;margin-right:10px;">
+        
+        <md-button class="md-button md-fab md-mini" ng-click="showTraffic()"><md-icon><i class="material-icons">error_outline</i></md-icon></md-button>
+         
+      </custom-control>
     </ng-map>
     <div layout="column" class="search-part">
       <!-- search html start-->
@@ -660,7 +667,7 @@
     <div layout="column" class="map-sidenav">
 
       <!-- filters html start-->
-      <div layout="column" layout-padding>
+      <div layout="column" layout-padding class="side-navpadding"> 
         <md-content class="md-padding main-part" layout="column" ng-click="filters()">
           <!-- <div layout="row" ng-init="open = false" ng-click="open = !open"> -->
           <div layout="row">
@@ -723,7 +730,7 @@
             <!-- pincode,area,tab id section end-->
             <!--slider html start -->
 
-            <div layout="row" class="slider-part">
+            <div layout="row" class="">
               <div class="range md-body-1" flex="20">Range</div>
               <div flex class="slider-range">
                 <md-slider md-discrete ng-model="rating" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
@@ -802,16 +809,16 @@
             <md-divider></md-divider>
             <div layout="row">
               <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
-              <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feileds</span> </md-button>
+              <md-button class="md-warn" type="reset" value="Reset" ng-click="resetFilters()" style="font-size:10px" layout-align="center end" layout="column">
+                Reset Feileds
+              </md-button>
             </div>
           </form>
         </div>
       </div>
       <!-- filters html end-->
-
-
       <!-- formats html start-->
-      <div layout="column" layout-padding>
+      <div layout="column" layout-padding class="side-navpadding">
         <md-content class=" md-padding main-part" layout="column" ng-click="formats()">
           <!-- <div layout="row" ng-init="formats = false" ng-click="formats = !formats"> -->
           <div layout="row">
@@ -834,7 +841,7 @@
                       <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}" ng-if="format">
                         <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                         <img ng-src="{{serverUrl + format.image}}" class="img-size">
-                        <div class="md-grid-text">{{format.name}}</div>
+                        <div class="md-caption">{{format.name}}</div>
                       </md-button>
                       <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
                     </div>
@@ -848,7 +855,7 @@
       </div>
       <!-- formats html end-->
       <!--SHORTLIST html start -->
-      <div layout="column" layout-padding>
+      <div layout="column" layout-padding class="side-navpadding">
         <md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()">
           <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
           <div layout="row">
@@ -909,9 +916,8 @@
         </div>
       </div>
       <!--SHORTLIST html end -->
-
       <!--saved campagin html start -->
-      <div layout="column" layout-padding>
+      <div layout="column" layout-padding class="side-navpadding">
         <md-content class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()">
           <div layout="row">
             <div class="main-icon"><img src="assets/images/icons/savedcampagin.png"></div>
@@ -934,27 +940,28 @@
               <!-- <span class="saved-border">01 Aug 2017</span><span class="saved-border">15 Aug 2017</span> -->
               <span class="saved-border">{{userCampaign.start_date | date:'dd-MM-yy'}}</span><span class="saved-border">{{userCampaign.end_date | date:'dd-MM-yy'}}</span>
             </div>
+            
           </div>
-          <div class="saved-btn" layout="row" layout-align="space-between center" flex>
-            <div>
-              <md-button class="md-primary" ng-click="viewAllCampaginList()">
-                VIEW
-              </md-button>
-            </div>
-            <div class="btn-margin-saved">
-              <md-button class="md-icon-button ">
-                <md-icon><i class="material-icons ">share</i></md-icon>
-              </md-button>
-            </div>
-            <div>
-              <md-button class="md-icon-button">
-                <md-icon><i class="material-icons" ng-click="deletePlannedCampaign(userCampaign.id)">delete</i></md-icon>
-              </md-button>
-            </div>
+          <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
+            
+            <md-button class="md-primary saved-btn" ng-click="viewAllCampaginList()"> VIEW</md-button>
+           
+            <md-button class="md-primary saved-btn" ng-click="shareSidenav()">share</md-button>
+            
+            <md-button class="md-primary saved-btn" ng-click="deletePlannedCampaign(userCampaign.id)">delete</md-button>
+            
+            
           </div>
-          <div layout="column" layout-align="center center" layout-margin>
-            <md-button class="md-primary">EXPORT ALL</md-button>
+          <md-divider></md-divider>
+          <div layout="column" layout-align="center center">
+            <md-button class="md-primary md-raised" ng-click="ExportToExcel()">EXPORT ALL</md-button>
+            </div>
+          
           </div>
+          
+          <!-- <div layout="column" layout-align="center center" layout-margin>
+            
+          </div> -->
 
         </div>
         <div style="background:#F1FBFD" ng-if="userCampaigns.length == 0 && savedcampaign">
@@ -971,12 +978,12 @@
     <!-- reommand button -->
     <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:0px;right:0;width:100%">
       <div layout="row" layout-align="end center" style="right:10%">
-        <md-button class="md-raised md-primary" ng-click="RecommendedDiv()">Recommended<span>
+        <md-button class="md-raised md-primary remm-btn" ng-click="RecommendedDiv()">Recommended<span>
       <md-icon ng-hide="Recommended"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
           <span><md-icon ng-show="Recommended"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
         </md-button>
         <!-- <md-button class="md-raised md-primary" ng-init="Popular = false" ng-click="Popular = !Popular">Popular Mediums<span> -->
-        <md-button class="md-raised md-primary" ng-click="PopularDiv()">Popular Mediums<span> 
+        <md-button class="md-raised md-primary remm-btn" ng-click="PopularDiv()">Popular Mediums<span> 
       <md-icon ng-hide="Popular"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
           <span><md-icon ng-show="Popular"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
         </md-button>
@@ -999,6 +1006,23 @@
       </div>
     </div>
 
+    <!-- traffic-->
+    <div   ng-show="showTraffice" >
+      <div layout="row" flex="20" style="background-color: white; width:100%;top:10%;z-index:1;position:absolute;right:2%;">
+        <div flex="40" layout="column" layout-margin layout-align="center">
+          <div class="light"></div>
+          <div class="moderate"></div>
+          <div class="havey"></div>
+          <div class="extrem"></div>
+        </div>
+        <div flex="60" layout="column" layout-margin>
+          <div class="md-body-2">Light Traffic</div>
+          <div class="md-body-2">Moderate Traffic</div>
+          <div class="md-body-2">Heavy Traffic</div>
+          <div class="md-body-2">Extreme Traffic</div>
+        </div>
+      </div>
+    </div> 
   </div>
 </div>
 
