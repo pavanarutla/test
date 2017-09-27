@@ -1,5 +1,6 @@
 app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
+  var vm = this;
   $scope.msg = {};
   $scope.countryList = [];
   $scope.stateList = [];
@@ -132,7 +133,9 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
   
@@ -163,7 +166,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity.id)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -215,6 +218,34 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
       console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   };
+
+  $scope.editProduct = function(product){
+    // console.log(product);
+    product.country = null;
+    product.state = null;
+    product.city = null;
+    product.area = null;
+    // product.company = null;
+    $scope.product = product;
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-product-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
+  $scope.deleteProduct = function(productId){
+    ProductService.deleteProduct(productId).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
   /*
   ======== Products section ends ========
