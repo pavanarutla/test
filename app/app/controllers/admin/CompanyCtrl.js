@@ -5,7 +5,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Companies ========
   */
-  $scope.companiesPopup = function (ev) {
+  $scope.showAddCompanyPopup = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
@@ -76,9 +76,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Hoarding Companies ========
   */
-  $scope.hoardingCompanies = function (ev) {
+  $scope.showAddHoardingCompanyPopup = function (ev) {
     $mdDialog.show({
-      templateUrl: 'views/admin/hoardingcompanies-popup.html',
+      templateUrl: 'views/admin/add-hoarding-company-popup.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })
