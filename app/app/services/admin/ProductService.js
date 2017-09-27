@@ -10,6 +10,11 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/formats').success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			deleteProduct: function(productId){
+				var dfd = $q.defer();
+				$http.delete(config.apiPath + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}

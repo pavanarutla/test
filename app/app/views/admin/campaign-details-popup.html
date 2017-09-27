@@ -10,7 +10,6 @@
       </div>
       <div class="md-dialog-content" layout="row" layout-align="center center" layout-margin="layout-margin">
         <div  layout="column" layout-margin="layout-margin" layout-align="center end">
-          <div>companyName:</div>
           <div>Organization:</div>
           <div>ClientName:</div>
           <div>Mobile no:</div>
@@ -20,23 +19,20 @@
           <div>Estimate Budget:</div>
         </div>
         <div  layout="column" layout-margin="layout-margin">
-        <div>Google</div>
-        <div>Google India</div>
-        <div> Rahul Gupta</div>
-        <div>(+91) 9494437916</div>
-        <div>09/15/17</div>
-        <div>12/30/17</div>
-        <div>naresh@gmail.com</div>
-        <div>Rs:25,000</div>
+        <div>{{campaign.org_name}}</div>
+        <div>{{campaign.user_full_name}}</div>
+        <div>{{campaign.phone}}</div>
+        <div>{{campaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
+        <div>{{campaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+        <div>{{campaign.email}}</div>
+        <div>{{campaign.est_budget}}</div>
         </div>
-
       </div>
       <div layout-align="center center" layout="column">
         <md-input-container >
-          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/feeds" ng-click="Suggest()">Suggest</md-button>
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/feeds" ng-click="closeCampaignRequestDetails()">Suggest</md-button>
         </md-input-container>     
       </div>
-      
     </md-content>
   </md-dialog-content>
 </md-dialog>
