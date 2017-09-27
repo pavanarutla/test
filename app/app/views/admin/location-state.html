@@ -6,34 +6,36 @@
         </div>
     </div>
 
-    
+<form name="stateform" novalidate>
     <div layout="column" layout-margin layout-padding flex="50">
         <div layout="column" layout-margin layout-padding flex="50">
-             <md-input-container>
-                  <label>Select Country </label>
-                  <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="state.country_id">
+            <md-input-container>
+                <label>Select Country </label>
+                <md-select name="countrydrop" class="select-value" id="repeatSelect" ng-model="state.country_id" required>
                     <md-select-header class="demo-select-header">
-                      <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                     </md-select-header>
                     <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
-                  </md-select required>
+                </md-select>
 
-                </md-input-container>
-            <md-input-container class="md-block" >
+            </md-input-container>
+            <md-input-container class="md-block">
                 <label>Add State</label>
-                <input ng-model="state.state_name" type="text" name="state_name" required="required" />
-                <div ng-messages="state.state_name.$error">
-                    <div ng-message="required">Country Name is required</div>
+                <input ng-model="state.state_name" type="text" name="state_name" required />
+                <div ng-messages="stateform.state_name.$error">
+                    <p ng-message="required">State Name is required</p>
                 </div>
             </md-input-container>
         </div>
         <div layout="row">
-            <md-button Class="md-raised md-primary" ng-click="saveState()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" type="submit" ng-click="saveState()">SUBMIT</md-button>
             <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
         </div>
     </div>
+    </form>
 
-     <div ui-grid="gridState"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    </div>
-    
+    <div ui-grid="gridState" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div>
+</div>
+
 </div>

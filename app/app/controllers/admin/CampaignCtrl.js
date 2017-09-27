@@ -12,6 +12,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignSe
       fullscreen: $scope.customFullscreen,
     });
   };
+  $scope.cancel = function(){
+  $mdDialog.hide();
+  };
 
   /*
   *========= campagin proposal(planned) grid =========
