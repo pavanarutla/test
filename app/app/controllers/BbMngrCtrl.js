@@ -149,6 +149,13 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         infinite: true
       }
     }, {
+      breakpoint: 959,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    },
+    {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
