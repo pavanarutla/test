@@ -36,7 +36,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
     {
       name: 'Action', field: 'Action', width: '5%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span ><md-button  class="md-icon-button"><md-icon><i class="material-icons">mode_edit</i> </md-button></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span><a href="" ng-click="grid.appScope.editCompany(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -62,9 +62,24 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
       }
       else {
-        toastr.error(data.message);
+        toastr.error(result.message);
       }
     });
+  }
+
+  $scope.editCompany = function(company){
+    console.log(company);
+    $scope.company = company;
+    var index = $scope.gridCompany.data.indexOf(company);
+      $scope.gridCompany.data.splice(index, 1);
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-company-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+     
   }
   /*
   ======== Companies ends ========
