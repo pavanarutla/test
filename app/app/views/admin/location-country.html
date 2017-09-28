@@ -6,22 +6,26 @@
 		</div>
 	</div>
 
-
+<form  name="country" novalidate>
 	<div layout="column" layout-margin layout-padding flex="50">
 		<div layout="column" layout-margin layout-padding flex="50">
 			<md-input-container class="md-block">
 				<label>Enter Country Name</label>
-				<input ng-model="country.name" type="text" name="countryname" required="required" />
-				<div ng-messages="country.$error">
-					<div ng-message="required">Country Name is required</div>
+				<input ng-model="country.name" type="text" name="countryname" required/>
+				<div ng-messages="country.countryname.$error">
+				<p ng-message="required">Please complete this field.</p>
 				</div>
+				<!-- <div ng-messages="country.$error">
+					<div ng-message="required">Country Name is required</div>
+				</div> -->
 			</md-input-container>
 		</div>
 		<div layout="row">
-			<md-button Class="md-raised md-primary" ng-click="saveCountry()">SUBMIT</md-button>
+			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
 			<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 		</div>
 	</div>
+	</form>
 
 	<div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
 	 ui-grid-auto-resize class="grid"></div>

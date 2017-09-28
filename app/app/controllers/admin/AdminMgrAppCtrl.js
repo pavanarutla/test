@@ -63,6 +63,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.toogelMenu = function () {
     $scope.showFormats = !$scope.showFormats;
   }
+   $scope.showLocation = false;
+  $scope.toogelLocation = function () {
+    $scope.showLocation = !$scope.showLocation;
+  }
   $scope.showArea = false;
   $scope.toogelLocation = function () {
     $scope.showArea = !$scope.showArea;

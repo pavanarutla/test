@@ -46,7 +46,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'name', displayName: 'Format Type', enableCellEdit: false, width: '30%' },
     {
       name: 'Action', field: 'Action', width: '30%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editFormat(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click="grid.appScope.deleteFormat(row.entity.id)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false
     }
   ];
@@ -97,6 +97,28 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     });
   };
 
+  $scope.editFormat = function(format){
+    console.log(format);
+    $scope.format = format;
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-format-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
+  $scope.deleteFormat = function(formatId){
+    ProductService.deleteFormat(formatId).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
   /*
   ======== Formats section ends ========
   */
@@ -166,7 +188,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity.id)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -215,7 +237,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
       console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   };
 
@@ -236,9 +258,11 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     });
   }
 
-  $scope.deleteProduct = function(productId){
-    ProductService.deleteProduct(productId).then(function(result){
+  $scope.deleteProduct = function(product){
+    ProductService.deleteProduct(product.id).then(function(result){
       if(result.status == 1){
+        var index = $scope.gridProducts.data.indexOf(product);
+        $scope.gridProducts.data.splice(index, 1);
         toastr.success(result.message);
       }
       else{

@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, AdminCampaignService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -7,7 +7,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, AdminCampai
     ======== Campaign requests =======
     */
     AdminCampaignService.getAllCampaignRequests().then(function(result){
-      console.log(result);
       $scope.requestList = result;
       // $scope.groupedRequests = _.groupBy(requestList, function(request){
       //   return request.status;
@@ -18,14 +17,13 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, AdminCampai
     */
 
     $scope.showCampaignDetailsPopup = function (ev, campaignData) {
+      $scope.selectedRequestDetails = campaignData;
       $mdDialog.show({
-        locals:{data: campaignData},
         templateUrl: 'views/admin/campaign-details-popup.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose: true,
-        controller: function ($scope, data) {
-          $scope.campaign = data;
-        }
+        preserveScope: true,
+        scope: $scope
       })
     };
 
@@ -36,6 +34,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, AdminCampai
     /*
     ======== Campaign Suggestions(planned) ========
     */
+    $scope.suggestProductsForCampaign = function(){
+      AdminCampaignService.saveCampaignData($scope.selectedRequestDetails);
+      $location.path('/admin/suggest-products');
+    }
     // AdminCampaignService.getPlannedCampaigns().then(function(result){
     //   $scope.campaignProposalList = result;
     // });

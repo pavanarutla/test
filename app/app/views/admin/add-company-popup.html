@@ -1,4 +1,4 @@
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="CompanyCtrl">
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
 	<md-dialog-content>
 		<md-content class="md-padding">
 			<div layout="column" layout-align="center center">
@@ -8,6 +8,7 @@
 				<div>Enter Company Details</div>
 			</div>
 			<form name="addCompanyForm" novalidate="novalidate">
+				<input type="hidden" ng-model="company.id" />
 				<div layout="column" layout-xs="column" layout-padding flex="60" flex-offset-gt-sm="20">
 					<md-input-container class="md-block margin-input">
 						<label>Company Name</label>
@@ -66,7 +67,7 @@
 					</md-input-container>
 				</div>
 				<div layout="row" layout-align="center center">
-					<md-button Class="md-raised md-primary" ng-click="addCompany()">SUBMIT</md-button>
+					<md-button Class="md-raised md-primary" type="submit" ng-click="addCompany()">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 				</div>
 			</form>

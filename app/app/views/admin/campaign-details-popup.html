@@ -19,19 +19,25 @@
           <div>Estimate Budget:</div>
         </div>
         <div  layout="column" layout-margin="layout-margin">
-        <div>{{campaign.org_name}}</div>
-        <div>{{campaign.user_full_name}}</div>
-        <div>{{campaign.phone}}</div>
-        <div>{{campaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
-        <div>{{campaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-        <div>{{campaign.email}}</div>
-        <div>{{campaign.est_budget}}</div>
+        <div>{{selectedRequestDetails.org_name}}</div>
+        <div>{{selectedRequestDetails.user_full_name}}</div>
+        <div>{{selectedRequestDetails.phone}}</div>
+        <div>{{selectedRequestDetails.start_date | dateify | date:'dd-MM-yyyy'}}</div>
+        <div>{{selectedRequestDetails.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+        <div>{{selectedRequestDetails.email}}</div>
+        <div>{{selectedRequestDetails.est_budget}}</div>
         </div>
       </div>
       <div layout-align="center center" layout="column">
-        <md-input-container >
-          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/feeds" ng-click="closeCampaignRequestDetails()">Suggest</md-button>
-        </md-input-container>     
+        <md-input-container ng-if="selectedRequestDetails.status == 0">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="suggestProductsForCampaign()">Suggest Products</md-button>
+        </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 1">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="closeCampaignRequestDetails()">Prepare Quote</md-button>
+        </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 2">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="closeCampaignRequestDetails()">View and Launch Campaign</md-button>
+        </md-input-container>
       </div>
     </md-content>
   </md-dialog-content>

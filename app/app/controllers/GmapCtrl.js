@@ -32,6 +32,7 @@ app.controller('GmapCtrl',
       $scope.serverUrl = config.serverUrl;
       var trafficOn = false;
       $scope.siteNoSearch = "";
+      $scope.showTrafficLegend = false;
 
       $scope.$watch(
         function() { return $mdSidenav('productDetails').isOpen(); },
@@ -695,6 +696,10 @@ app.controller('GmapCtrl',
 
       $scope.isFormatSelected = function(formatId){
         return _.contains($scope.selectedFormats, formatId);
+      }
+
+      $scope.toggleTrafficLegends = function(){
+        $scope.showTrafficLegend = !$scope.showTrafficLegend;
       }
     }
   ]
