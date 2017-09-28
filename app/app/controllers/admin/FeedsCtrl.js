@@ -1,7 +1,11 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
+
+    ProductService.getProductList().then(function(result){
+      $scope.productList = result;
+    });
 
     /*
     ======== Campaign requests =======
