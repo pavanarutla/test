@@ -1,141 +1,241 @@
 <!-- Register pages-->
 <md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="registerCtrl">
-           <md-dialog-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="Users">
-                    <md-content class="md-padding">
-                        <!-- <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
-                            <h5> fill below all fields to Register</h5>
-                        </div> -->
-                        <form name="registerUser" novalidate="novalidate">
-                            <md-input-container class="md-block">
-                                <label>user Name</label>
-                                <input ng-model="user.name" name="username" type="text"  maxlength="30" required="required"/>
-                                <div ng-messages="registerUser.username.$error">
-                                    <div class="alret alert-danger" ng-message="required">user Name is required.</div>
-                                    <div ng-message="maxlength">user Name shouldn't exede 30 characters. </div>
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>username</label>
-                                <input ng-model="user.username" name="userName" type="text" minlength="6" maxlength="30" required="required"/>
-                                <div ng-messages="registerUser.userName.$error">
-                                    <div class="alret alert-danger" ng-message="required">username is required.</div>
-                                    <div class="alret alert-warning" ng-message="minlength">username must have 6 characters.</div>
-                                    <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                                    
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Email</label>
-                                <input ng-model="user.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-                                />
-                                <div ng-messages="registerUser.email.$error">
-                                    <div class="alret alert-danger" ng-message="required">Email is required.</div>                                   
-                                    <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                                    <div ng-message="pattern">Enter a valied username</div>
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                    <label>Mobile number</label>
-                                    <input ng-model="user.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" />
-                                    <div ng-messages="registerUser.mobile.$error" role="alert" multiple>
-                                        <div ng-message="required" class="my-message">Mobile no is required.</div>
-                                        <div ng-message="pattern">Enter a valied Mobile no</div>
-                                        <div ng-message="maxlength">Mobile shouldn't exede 10. </div>
-                                    </div>
-                                </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Address </label>
-                                <input ng-model="user.address" name="address" type="text" minlength="10" maxlength="30" required="required" />
-                                <div ng-messages="registerUser.address.$error">
-                                    <div class="alret alert-danger" ng-message="required">address is required.</div>
-                                    <div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
-                                    <div ng-message="maxlength">address shouldn't exede 130 characters. </div>                                    
-                                </div>
-                            </md-input-container>
-                            
-                            <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
-                                <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+    <md-dialog-content>
+        <div layout="column" flex layout-align="center end">
+                   
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="close()">
+                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>
+        </div>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Users">
+                <md-content class="md-padding">
+                    <!-- <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+                        <h5> fill below all fields to Register</h5>
+                    </div> -->
+                    <form name="registerUser" novalidate="novalidate">
+                        <md-input-container class="md-block">
+                            <label>user Name</label>
+                            <input ng-model="user.name" name="username" type="text"  maxlength="30" required="required"/>
+                            <div ng-messages="registerUser.username.$error">
+                                <div class="alret alert-danger" ng-message="required">user Name is required.</div>
+                                <div ng-message="maxlength">user Name shouldn't exede 30 characters. </div>
                             </div>
-                            <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-                                <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerUserSave(user)">Register</md-button>
-                            </md-input-container>
-                            <div layout="row" layout-xs="column">
-                                <p>Verify the E-mail address to Sign In </p>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>username</label>
+                            <input ng-model="user.username" name="userName" type="text" minlength="6" maxlength="30" required="required"/>
+                            <div ng-messages="registerUser.userName.$error">
+                                <div class="alret alert-danger" ng-message="required">username is required.</div>
+                                <div class="alret alert-warning" ng-message="minlength">username must have 6 characters.</div>
+                                <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+                                
                             </div>
-                        </form>
-                    </md-content>
-
-                </md-tab>
-                <md-tab label="Agency">
-                    <md-content class="md-padding">
-                        <!-- <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
-                            <h5> fill below all fields to Register</h5>
-                        </div> -->
-                        <form name="registerAgency" novalidate="novalidate">
-                            <md-input-container class="md-block">
-                                <label>Agency Name</label>
-                                <input ng-model="agency.name" name="agencyname" type="text" maxlength="30" required="required"/>
-                                <div ng-messages="registerAgency.agencyname.$error">
-                                    <div class="alret alert-danger" ng-message="required">Agency is required.</div>                                   
-                                    <div ng-message="maxlength">Agency shouldn't exede 30 characters. </div>
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Agency Username</label>
-                                <input ng-model="agency.username" name="username" type="text" minlength="6" maxlength="30" required="required"/>
-                                <div ng-messages="registerAgency.username.$error">
-                                    <div class="alret alert-danger" ng-message="required">user name is required.</div>
-                                    <div class="alret alert-warning" ng-message="minlength">user name must have 10 characters.</div>
-                                    <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                                    
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Email</label>
-                                <input ng-model="agency.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-                                />
-                                <div ng-messages="registerAgency.email.$error">
-                                    <div class="alret alert-danger" ng-message="required">Email is required.</div>                                    
-                                    <div ng-message="maxlength">Email shouldn't exede 50 characters. </div>
-                                    <div ng-message="pattern">Enter a valied Email</div>
-                                </div>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                    <label>Mobile number</label>
-                                    <input ng-model="agency.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" />
-                                    <div ng-messages="registerAgency.mobile.$error" role="alert" multiple>
-                                        <div ng-message="required" class="my-message">Mobile no is required.</div>
-                                        <div ng-message="pattern">Enter a valied Mobile no</div>
-                                        <div ng-message="maxlength">Mobile shouldn't exede 10. </div>
-                                    </div>
-                                </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Address </label>
-                                <input ng-model="agency.address" name="address" type="text" minlength="10" maxlength="130" required="required"/>
-                                <div ng-messages="registerAgency.address.$error">
-                                    <div class="alret alert-danger" ng-message="required">address is required.</div>
-                                    <div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
-                                    <div ng-message="maxlength">username shouldn't exede 130 characters. </div>                                    
-                                </div>
-                            </md-input-container>
-
-
-                            <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
-                                <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Email</label>
+                            <input ng-model="user.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                            />
+                            <div ng-messages="registerUser.email.$error">
+                                <div class="alret alert-danger" ng-message="required">Email is required.</div>                                   
+                                <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+                                <div ng-message="pattern">Enter a valied username</div>
                             </div>
-                            <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-                                <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerAgencySave(agency)">Register</md-button>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                                <label>Mobile number</label>
+                                <input ng-model="user.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" />
+                                <div ng-messages="registerUser.mobile.$error" role="alert" multiple>
+                                    <div ng-message="required" class="my-message">Mobile no is required.</div>
+                                    <div ng-message="pattern">Enter a valied Mobile no</div>
+                                    <div ng-message="maxlength">Mobile shouldn't exede 10. </div>
+                                </div>
                             </md-input-container>
-                            <div layout="row" layout-xs="column">
-                                <p>Verify the E-mail address to Sign In </p>
+                        <md-input-container class="md-block">
+                            <label>Address </label>
+                            <input ng-model="user.address" name="address" type="text" minlength="10" maxlength="30" required="required" />
+                            <div ng-messages="registerUser.address.$error">
+                                <div class="alret alert-danger" ng-message="required">address is required.</div>
+                                <div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
+                                <div ng-message="maxlength">address shouldn't exede 130 characters. </div>                                    
                             </div>
-                        </form>
+                        </md-input-container>
+                        
+                        <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+                            <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+                        </div>
+                        <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+                            <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerUserSave(user)">Register</md-button>
+                        </md-input-container>
+                        <div layout="row" layout-xs="column">
+                            <p>Verify the E-mail address to Sign In </p>
+                        </div>
+                    </form>
+                </md-content>
 
-                    </md-content>
-                </md-tab>
-            </md-tabs>            
-        </md-dialog-content>
-        
+            </md-tab>
+            <md-tab label="Agency">
+                <md-content class="md-padding">
+                    <!-- <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+                        <h5> fill below all fields to Register</h5>
+                    </div> -->
+                    <form name="registerAgency" novalidate="novalidate">
+                        <md-input-container class="md-block">
+                            <label>Agency Name</label>
+                            <input ng-model="agency.name" name="agencyname" type="text" maxlength="30" required="required"/>
+                            <div ng-messages="registerAgency.agencyname.$error">
+                                <div class="alret alert-danger" ng-message="required">Agency is required.</div>                                   
+                                <div ng-message="maxlength">Agency shouldn't exede 30 characters. </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Agency Username</label>
+                            <input ng-model="agency.username" name="username" type="text" minlength="6" maxlength="30" required="required"/>
+                            <div ng-messages="registerAgency.username.$error">
+                                <div class="alret alert-danger" ng-message="required">user name is required.</div>
+                                <div class="alret alert-warning" ng-message="minlength">user name must have 10 characters.</div>
+                                <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+                                
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Email</label>
+                            <input ng-model="agency.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                            />
+                            <div ng-messages="registerAgency.email.$error">
+                                <div class="alret alert-danger" ng-message="required">Email is required.</div>                                    
+                                <div ng-message="maxlength">Email shouldn't exede 50 characters. </div>
+                                <div ng-message="pattern">Enter a valied Email</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                                <label>Mobile number</label>
+                                <input ng-model="agency.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" />
+                                <div ng-messages="registerAgency.mobile.$error" role="alert" multiple>
+                                    <div ng-message="required" class="my-message">Mobile no is required.</div>
+                                    <div ng-message="pattern">Enter a valied Mobile no</div>
+                                    <div ng-message="maxlength">Mobile shouldn't exede 10. </div>
+                                </div>
+                            </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Address </label>
+                            <input ng-model="agency.address" name="address" type="text" minlength="10" maxlength="130" required="required"/>
+                            <div ng-messages="registerAgency.address.$error">
+                                <div class="alret alert-danger" ng-message="required">address is required.</div>
+                                <div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
+                                <div ng-message="maxlength">username shouldn't exede 130 characters. </div>                                    
+                            </div>
+                        </md-input-container>
+
+
+                        <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+                            <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+                        </div>
+                        <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+                            <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerAgencySave(agency)">Register</md-button>
+                        </md-input-container>
+                        <div layout="row" layout-xs="column">
+                            <p>Verify the E-mail address to Sign In </p>
+                        </div>
+                    </form>
+
+                </md-content>
+            </md-tab>
+        </md-tabs> 
+              <md-content class="md-padding">
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="usersRegit()" name="users">Users</md-nav-item>
+      <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item>
+
+      <span flex></span>
+
+      <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon  aria-label="Close dialog">X</md-icon>
+        </md-button>
+    </md-nav-bar>
+    <div ng-if="userForm">
+      <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+              <h5> Log Into Your BillBoards India Account</h5>
+            </div>
+            <form name="signin" novalidate>
+              <md-input-container class="md-block">
+                <label>Email</label>
+                <input ng-model="user.email" name="user.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                />
+                <div ng-messages="signin.email.$error">
+                  <div class="alret alert-danger" ng-message="required">Email is required.</div>
+                  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+                  <div ng-message="pattern">Enter a valied username</div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Password</label>
+                <input ng-model="user.password" type="password" name="user.password" minlength="6" maxlength="20" required="required" />
+                <div ng-messages="signin.password.$error">
+                  <div ng-message="required">Password is required.</div>
+                  <div ng-message="minlength">Password must have 6 characters.</div>
+                  <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+                </div>
+              </md-input-container>
+
+          
+              <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+                <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)">SIGN IN</md-button>
+              </md-input-container>
+              <div layout="row" layout-xs="column">
+                <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
+                  <p class="alrhvacc"> <a class="md-primary udrlin" ng-click="showForgotPasswordDialog()">Forgot Password ?</a></p>
+                </div>
+                <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
+                  <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
+                </div>
+
+              </div>
+            </form>
+    </div>
+    <div ng-if="agencyForm">
+         <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+              <h5> Log Into Your BillBoards India Account</h5>
+            </div>
+            <form name="agency" novalidate>
+              <md-input-container class="md-block">
+                <label>Email</label>
+                <input ng-model="agency.email" name="agency.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                />
+                <div ng-messages="agency.email.$error">
+                  <div class="alret alert-danger" ng-message="required">Email is required.</div>
+                  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+                  <div ng-message="pattern">Enter a valied username</div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Password</label>
+                <input ng-model="agency.password" type="password" name="agency.password" minlength="6" maxlength="20" required="required" />
+                <div ng-messages="agency.password.$error">
+                  <div ng-message="required">Password is required.</div>
+                  <div ng-message="minlength">Password must have 6 characters.</div>
+                  <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+                </div>
+              </md-input-container>
+
+          
+              <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+                <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)">SIGN IN</md-button>
+              </md-input-container>
+              <div layout="row" layout-xs="column">
+                <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
+                  <p class="alrhvacc"> <a class="md-primary udrlin" ng-click="showForgotPasswordDialog()">Forgot Password ?</a></p>
+                </div>
+                <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
+                  <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
+                </div>
+
+              </div>
+            </form>
+    </div>
+  </md-content>  
+            
+
+    </md-dialog-content>
+
 </md-dialog>
