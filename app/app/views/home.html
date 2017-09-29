@@ -325,37 +325,34 @@
 				</div>
 				
 			</div>
-			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class=" contsr" layout-matgin layout-padding>
-
+			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class="contsr" layout-matgin layout-padding>
 				<div layout="column" layout-sm="column" class="confor">
 					<form>
+						<input type="hidden" ng-model="query.type" value="3" />
 						<md-input-container class="md-block">
 							<label>Name</label>
-							<input ng-model="name" />
+							<input ng-model="query.name" />
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label> Email</label>
-							<input ng-model="email" />
+							<input ng-model="query.email" />
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Company Name</label>
-							<input ng-model="companyName" />
+							<input ng-model="query.companyName" />
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Message</label>
-							<input ng-model="message" />
+							<input ng-model="query.message" />
 						</md-input-container>
-
 						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm">Send Message</md-button>
+							<md-button class="md-raised md-primary forsubm" ng-click="sendQuery()">Send Message</md-button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 	<!-- new letter-->
 	<div class="newletter">
 		<div layout="column">
@@ -371,7 +368,6 @@
 						This application provides all the details about OOH, Digital, Transit, Retail etc. 
 						in the country and user can shortlist the billboards required, 
 						and our company helps users to guide and suggest about campaigns. 
-						
 					</div>
 				</div>
 				<div layout="column" flex="50" flex-xs="100" flex-sm="100" class="theme-txt">
@@ -380,12 +376,12 @@
 						<form name="signin" novalidate="novalidate">
 							<md-input-container class="md-block">
 								<label style="color: #eee">Email Address</label>
-								<input ng-model="user.email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-								/ style="border-bottom: 1px solid #fff;">
+								<input type="hidden" ng-model="subscriberData.type" value="1" />
+								<input ng-model="subscriberData.email" id="subscriber-email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" style="outline: 1px solid #fff;border: none">
+								<md-button class="md-primary md-raised" ng-click="subscribe()">Send</md-button>
 							</md-input-container>
 						</form>
 					</div>
-					<div><md-button class="md-primary md-raised">Send</md-button></div>
 					<!-- <div class="md-subhead line-text">eusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
 				</div>
 				<!-- <div layout="column" flex="33">
@@ -396,17 +392,14 @@
 							<div class=" ">Themecurve</div>
 							<div class="">Kreativeshowcase</div>
 							<div class="">Freebiescurve</div>
-
 						</div>
 						<div ayout="column" flex="50" class="theme-txt md-body-1 line-text">
 							<div class="">Themeforest</div>
 							<div class="">Microsoft</div>
 							<div class="">Google</div>
 							<div class="">Freebiescurve</div>
-
 						</div>
 					</div>
-
 				</div> -->
 			</div>
 		</div>
