@@ -1,143 +1,182 @@
 <div layout="column" layout-padding="layout-padding">
-
   <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
-
   <div layout="column">
-
     <div layout="row">
       <div flex="20">
-        <div layout="row" layout-padding class="search-filed">
+        <div layout="row" layout-padding class="search-field">
           <md-input-container flex class="search-input">
             <label>&nbsp;</label>
             <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
           </md-input-container>
         </div>
       </div>
-      <div flex="20">2</div>
-      <div flex="20">3</div>
-      <div flex="20">4</div>
-      <div flex="20">5</div>
-    </div>
-    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height-xs="1:1.1"
-      md-row-height-sm="1:1.1" md-row-height-md="1:1.3" md-row-height-gt-md="1:1.3" md-gutter-gt-md="16px" md-gutter-xs="16px"
-      md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-      <md-grid-tile ng-repeat="room in floorDetails.roomDetails" ng-style="{'background': '#fff'}">
-        <div layout="column" class="md-whiteframe-2dp">
-          <div layout="column" class="admin-img">
-            <img src="assets/images/hoarding.png">
-            <div layout="row" class="adminimg-content" flex>
-              <div class="md-body-2" style="margin:8px 0 0 15px" flex=50 layout="column">BI-123(Billboards)</div>
-              <!-- <md-button class="md-icon-bitton"></md-button> -->
-              <!-- <div class="preview-glyphs" ng-clicl="showcalender()" layout-align=" center end" layout="column">
-                <md-icon ><i class="material-icons">perm_contact_calendar</i></md-icon>
-              </div> -->
-              <div layout="column" flex="50" layout-align=" center end">
-                <md-button class="md-icon-button md-accent" aria-label="Calender">
-                  <md-icon md-svg-icon="assets/images/calendar_white_18px.svg"></md-icon>
-                </md-button>
-              </div>
-            </div>
-          </div>
-          <div class="content-innerone">
-            <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
-              <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/bb.png"></div>
-                <div>$50,0000</div>
-              </div>
-              <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/lit.png"></div>
-                <div>Lit:yes</div>
-              </div>
-              <div layout="column" flex="33" layout-align="center center">
-                <div><img src="assets/images/size.png"></div>
-                <div>size:20*40</div>
-              </div>
-            </div>
-            <md-divider></md-divider>
-            <div layout="row" layout-padding="layout-padding">
-              <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div>
-              <div flex="80"><span>Ameerpet,Hyderbad<br><span class="md-caption">Faceing Ameerpet To Sr Nagar<span></span></div>
-            </div>
-            <md-divider></md-divider>
-            <div layout="row" layout-padding="layout-padding">
-              <div flex="10"><span><md-icon md-svg-icon="assets/images/impression.svg"></md-icon></span></div>
-              <div flex="80"><span class="md-caption">Impressions</div>
-          </div>
-          <md-divider></md-divider>
-          <div layout="column" layout-padding="layout-padding">
-            <div layout="row" flex>
-              <div flex="50">
-                <md-button class="md-raised md-primary">Add</md-button>
-                
-              </div>
-              <div flex="50">
-                <md-button >Shortlist</md-button>
-              </div>
-            </div>
-            <div layout="row" flex>
-              <div flex="60">
-                <div class="md-caption">Campagin Name:google</div>
-                <div class="md-caption">From 12-sep-2017To 30-sep-2017</div>
-              </div>
-              <div flex="40">
-                <md-button class="md-raised md-warn">Remove</md-button>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div class="content-innertwo">
-            
-            <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
-              <md-button class="md-icon-button" aria-label="backarrow" >
-                <md-icon><i class="material-icons">arrow_back</i></md-icon>
-              </md-button>
-              <div class="form-group">
-                <div class='input-group' style="width:130px">
-                    <input type='text' class="form-control" 
-                          datepicker-popup
-                          ng-model="model.startDate" 
-                          is-open="opened.start" 
-                          ng-click="opened.start = !opened.start" 
-                          max-date='model.endDate'
-                          ng-readonly='true' placeholder="start date" />
-                    <span class="input-group-addon" for='start' 
-                          ng-click="opened.start = !opened.start; $event.stopPropagation()">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class='input-group' style="width:130px">
-                <input type='text' class="form-control" datepicker-popup ng-model="model.endDate" is-open="opened.end" ng-click="opened.end = !opened.end"
-                  min-date='model.startDate' ng-readonly='true' placeholder="end date" />
-                <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
-            <div layout="row">
-
-              <md-input-container class="md-block margin-input">
-                <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                <input ng-model="product.price" type="text" name="price" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
-                />
-
-              </md-input-container>
-
-              <md-button class="md-primary ">Change Price</md-button>
-            </div>
-            <div>Note:This Price Will not affected actual price</div>
-
-          </div>
-          <div layout="row" layout-align="center center">
-            <md-button class="md-raised md-primary">Add</md-button>
-          </div>
-
+      <div flex="20">
+        <div layout="row" layout-padding class="search-field">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+          </md-input-container>
         </div>
-      </md-grid-tile>
-    </md-grid-list>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-field">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-field">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+          </md-input-container>
+        </div>
+      </div>
+      <div flex="20">
+        <div layout="row" layout-padding class="search-field">
+          <md-input-container flex class="search-input">
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" 
+        md-cols-gt-md="3" md-row-height-xs="1:1.1" md-row-height-sm="1:1.1" md-row-height-md="1:1.3" 
+        md-row-height-gt-md="1:1.3" md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" 
+        md-gutter-gt-sm="8px" md-gutter="4px">
+        <md-grid-tile ng-repeat="product in productList" ng-style="{'background': '#fff'}">
+          <div layout="column" class="md-whiteframe-2dp">
+            <div layout="column" class="admin-img">
+              <img ng-src="{{serverUrl + product.image}}" style="width:100%;height:200px;">
+              <div layout="row" class="adminimg-content" flex>
+                <div class="md-body-2" style="margin:8px 0 0 15px" flex=50 layout="column">{{product.siteNo}}({{product.format_name}})</div>
+                <!-- <md-button class="md-icon-bitton"></md-button> -->
+                <!-- <div class="preview-glyphs" ng-clicl="showcalender()" layout-align=" center end" layout="column">
+                  <md-icon ><i class="material-icons">perm_contact_calendar</i></md-icon>
+                </div> -->
+                <div layout="column" flex="50" layout-align=" center end">
+                  <md-button class="md-icon-button md-accent" aria-label="Calender">
+                    <md-icon md-svg-icon="assets/images/calendar_white_18px.svg"></md-icon>
+                  </md-button>
+                </div>
+              </div>
+            </div>
+            <md-tabs md-dynamic-height md-border-bottom>
+              <md-tab label="details">
+                <md-content class="md-padding">
+                  <div class="content-innerone">
+                    <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+                      <div layout="column" flex="33" layout-align="center center">
+                        <div><img src="assets/images/bb.png"></div>
+                        <div>{{product.hoardingCost}}</div>
+                      </div>
+                      <div layout="column" flex="33" layout-align="center center">
+                        <div><img src="assets/images/lit.png"></div>
+                        <div>
+                          Lit:<span ng-if="product.lighting">Yes</span>
+                          <span ng-if="!product.lighting">No</span>
+                        </div>
+                      </div>
+                      <div layout="column" flex="33" layout-align="center center">
+                        <div><img src="assets/images/size.png"></div>
+                        <div>size:{{product.panelSize}}</div>
+                      </div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="row" layout-padding="layout-padding">
+                      <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div>
+                      <div flex="80"><span>{{product.location}}<br><span class="md-caption">{{product.direction}}<span></span></div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="row" layout-padding="layout-padding">
+                      <div flex="10"><span><md-icon md-svg-icon="assets/images/impression.svg"></md-icon></span></div>
+                      <div flex="80"><span class="md-caption">{{product.impressions}}</div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="column" layout-padding="layout-padding">
+                      <!-- <div layout="row" flex>
+                        <div flex="50">
+                          <md-button class="md-raised md-primary">Add</md-button>
+                        </div>
+                        <div flex="50">
+                          <md-button >Shortlist</md-button>
+                        </div>
+                    </div> -->
+                    <div layout="row" flex>
+                        <div flex="60">
+                          <div class="md-caption">Campagin Name:google</div>
+                          <div class="md-caption">From 12-sep-2017To 30-sep-2017</div>
+                        </div>
+                        <div flex="40">
+                          <md-button class="md-raised md-warn">Remove</md-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </md-content>
+                </md-tab>
+                <md-tab label="Add">
+                  <md-content class="md-padding">
+                    <div class="content-innertwo">
+                      <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+                        <!-- <md-button class="md-icon-button" aria-label="backarrow" >
+                          <md-icon><i class="material-icons">arrow_back</i></md-icon>
+                        </md-button> -->
+                        <div class="form-group">
+                          <div class='input-group' style="width:130px">
+                            <input type='text' class="form-control" 
+                              datepicker-popup
+                              ng-model="model.startDate" 
+                              is-open="opened.start" 
+                              ng-click="opened.start = !opened.start" 
+                              max-date='model.endDate'
+                              ng-readonly='true' placeholder="start date" />
+                            <span class="input-group-addon" for='start' 
+                                ng-click="opened.start = !opened.start; $event.stopPropagation()">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class='input-group' style="width:130px">
+                          <input type='text' class="form-control" 
+                            datepicker-popup 
+                            ng-model="model.endDate" 
+                            is-open="opened.end" 
+                            ng-click="opened.end = !opened.end"
+                            min-date='model.startDate' 
+                            ng-readonly='true' placeholder="end date" />
+                          <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
+                      <div layout="row">
+                        <md-input-container class="md-block margin-input">
+                          <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
+                          <input ng-model="product.price" type="text" name="price" required="required" 
+                            ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" />
+                        </md-input-container>
+                        <md-button class="md-primary ">Change Price</md-button>
+                      </div>
+                      <div>Note:This Price Will not affected actual price</div>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                      <md-button class="md-raised md-primary">Add</md-button>
+                    </div>
+                  </div>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+          </div>
+        </md-grid-tile>
+      </md-grid-list>
+    </div>
   </div>
 </div>

@@ -108,7 +108,7 @@ app.constant('config', {
       title: 'Feeds'
     })
     .state('admin.Feeds',{
-      url: '/feeds',
+      url: '/suggest-products',
       templateUrl: 'views/admin/suggest-products.html',
       controller: 'AdminFeedsCtrl',
       title: 'Feeds'

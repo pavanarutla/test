@@ -2,6 +2,13 @@ app.service('AdminCampaignService',
 ['$http', '$q', 'config', 
   function($http, $q, config){
     return {
+      campaignData:{},
+      saveCampaignData: function(campaignData){
+        this.campaignData = campaignData;
+      },
+      getCampaignData: function(){
+        return this.campaignData;
+      },
       getAllCampaignRequests: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaign-requests').success(dfd.resolve).error(dfd.reject);
