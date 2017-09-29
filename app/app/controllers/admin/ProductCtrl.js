@@ -66,6 +66,22 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $scope.formatList = result;
   });
 
+  // Delete Format
+   
+  $scope.deleteFormat = function(row){    
+     // ProductService.deleteFormatsList(JSON.parse(localStorage.loggedInUser).id, rowEntity).then(function (response) {
+  //   if(response == 200){
+  //     toastr.success("deleted successpully");
+  //   }else{
+  //     toastr.error("not completed")
+  //   }
+  //   getFormatList();
+  // });
+    var index = $scope.gridFormats.data.indexOf(row);
+    $scope.gridFormats.data.splice(index, 1);
+    toastr.success("format deleted successfully");
+  }
+
   // Adding new format
   // $http.get('fakedb/companyagency.json').success(function (data) {
   //   for (i = 0; i < data.length; i++) {
@@ -204,9 +220,31 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
 
   // Get products list
   ProductService.getProductList().then(function(result){
-    $scope.gridProducts.data = result;
-    console.log(result);
+    $scope.gridProducts.data = result;    
   });
+
+  function getProductList(){
+    ProductService.getProductList().then(function(result){
+      $scope.gridProducts.data = result;
+      console.log(result,"productList1");
+    });
+  }
+
+  // delete product List
+  $scope.deleteProduct = function(row){
+    console.log("item clicked");
+  // ProductService.deleteProductList(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
+  //   if(response == 200){
+  //     toastr.success("deleted successpully");
+  //   }else{
+  //     toastr.error("not completed")
+  //   }
+  //   getProductList();
+  // });
+  var index = $scope.gridProducts.data.indexOf(row);
+  $scope.gridProducts.data.splice(index, 1);
+  toastr.success("Product deleted successfully");
+};
 
   // Adding Products
   // $http.get('fakedb/companyagency.json')
