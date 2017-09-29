@@ -58,7 +58,6 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, AdminCampaignSe
     });
   };
   AdminCampaignService.getAllCampaignRequests().then(function(result){
-    console.log(result);
     $scope.gridProposal.data = result;
   });
 

@@ -204,8 +204,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
 
   // Get products list
   ProductService.getProductList().then(function(result){
-    $scope.gridProducts.data = result;
-    console.log(result);
+    $scope.gridProducts.data = result;    
   });
 
   // Adding Products
