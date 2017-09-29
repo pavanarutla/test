@@ -56,7 +56,12 @@ app.factory('AdminLocationService',
         var dfd = $q.defer();
         $http.post(config.apiPath + '/area', area).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
-      }
+      },
+      deleteArea: function(areaId){
+				var dfd = $q.defer();
+				$http.delete(config.apiPath + '/area/' + areaId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			}
     }
   }
 ]

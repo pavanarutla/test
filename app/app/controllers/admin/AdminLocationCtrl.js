@@ -163,7 +163,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'lng', displayName: 'Longitude', width: '10%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteArea(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -245,6 +245,19 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
       else {
         toastr.error(data.message);
+      }
+    });
+  }
+
+  $scope.deleteArea = function(area){
+    AdminLocationService.deleteArea(area.id).then(function(result){
+      if(result.status == 1){
+        var index = $scope.gridArea.data.indexOf(area);
+        $scope.gridArea.data.splice(index, 1);
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
       }
     });
   }

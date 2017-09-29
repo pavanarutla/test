@@ -1,4 +1,6 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, config) {
+
+  $rootScope.serverUrl = config.serverUrl;
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
