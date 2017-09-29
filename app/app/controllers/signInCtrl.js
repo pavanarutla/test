@@ -31,7 +31,6 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 	///Agency Sign In functionolity
 
 	$scope.signInAgency = function (agency) {
-
 		// $scope.data = agency;
 		// if (agency.email == "naresh@gmail.com" && agency.password == "naresh123") {
 		// 	alert("login successfull")
