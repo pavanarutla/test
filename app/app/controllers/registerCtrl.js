@@ -29,4 +29,20 @@ app.controller("registerCtrl", function ($scope, $mdDialog) {
 		//$scope.AgencyData = JSON.parse(NewAgencyData);
 	}
 
+	//form
+	$scope.currentNavItem = 'users';
+	$scope.userForm = true;
+	$scope.agencyForm = false;
+	$scope.showUserRegPanel = function(){
+		$scope.userForm = true;
+		// $scope.agencyForm = false;
+	}
+	$scope.showAgencyRegPanel= function(){
+		// $scope.agencyForm = true;
+		$scope.userForm = false;
+	}
+
+	$scope.close = function () {
+		$mdDialog.hide();
+	}
 })
