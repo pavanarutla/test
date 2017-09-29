@@ -11,7 +11,7 @@
         
       </md-button> -->
         <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
-          <img ng-src="assets/images/orgnl.png" width="160" >
+          <img ng-src="assets/images/menu/orgnl.png" width="160" >
         </md-button>
       <span flex></span>
       <md-menu-bar class="main-menu">
@@ -30,9 +30,12 @@
         </md-button>
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated">
-          <md-button aria-label="userimage" class="md-fab md-mini md-avatar " ng-click="$mdOpenMenu($event)">
-            <img ng-src="assets/images/product/person.png" class=" ">
-          </md-button>
+          <!-- <md-button aria-label="userimage" class="md-fab md-mini" ng-click="$mdOpenMenu($event)">
+            <img ng-src="assets/images/product/person.png" class="md-avatar ">
+          </md-button> -->
+          <button class="md-secondary md-mini md-button" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+              <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope" src="images/person.png">
+          </button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
               <md-button>Chanikya varma</md-button>
@@ -58,9 +61,9 @@
         <md-button aria-label="location" class=" md-primary md-raised browse-btn" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
             Browse BillBoards</a>
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
+        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
           <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
-        </md-button>
+        </md-button> -->
 
       </md-menu-bar>
     </div>
