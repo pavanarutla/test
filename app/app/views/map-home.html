@@ -1,63 +1,61 @@
 <div layout="column" style="position:relative">
-  <!-- side nav for view all-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" ng-repeat="shortlisted in shortListedProducts" style="width:500px;"
-    md-component-id="viewAll" id="divExport">
+  <!-- Campaign Detail Sidenav -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="campaignDetailSidenav" id="divExport">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
-          <span>Apple -Iphone 7</span>
+          <span>{{campaignDetails.name}}</span>
         </h2>
         <span flex></span>
         <a class="md-button md-primary" href="#">Edit</a>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="viewAllCampaginList()">
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCampaignDetailSidenav()">
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
     </div>
     <md-content>
       <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
-        <div layout="row">
-          <div layout="column" layout-align="center start" flex="50">
-            <div class="md-body-2">{{shortlisted.siteNo}}</div>
+        <div ng-repeat="product in campaignDetails.products">
+          <div layout="row">
+            <div layout="column" layout-align="center start" flex="50">
+              <div class="md-body-2">{{product.siteNo}}</div>
+            </div>
+            <div layout="row" layout-align="end center" flex="50">
+              <img src="assets/images/maps/light-3030.jpg" ng-if="product.lighting == 0" />
+              <img src="assets/images/maps/light-color3030.jpg" ng-if="product.lighting == 1" />
+              <span class="md-subhead plane-size">{{product.panelSize}}</span>
+            </div>
           </div>
-          <div layout="row" layout-align="end center" flex="50">
-
-            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
-            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
-            <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
+          <div layout="row" style="margin: 0 8px 0 8px;">
+            <div layout="column" flex="35" layout-align="center start" class="margin-con">
+              <div class="md-body-2">{{product.format_name}}</div>
+            </div>
+            <div layout="column" flex="35" layout-align="center start">
+              <div class="md-body-2">Facing</div>
+            </div>
+            <div layout="column" flex="30" layout-align="center end ">
+              <div class="md-body-2">Impressions</div>
+            </div>
           </div>
+          <div layout="row">
+            <div layout="column" flex="35" layout-align="center start" class="margin-con">
+              <div class="md-caption">{{product.address}}</div>
+              <div class="md-caption">500001</div>
+            </div>
+            <div layout="column" flex="35" layout-align=" start center">
+              <div class="md-caption">{{product.direction}}</div>
+            </div>
+            <div layout="column" flex="30" layout-align="start end ">
+              <div class="md-caption">{{product.impressions}}</div>
+              <div class="md-caption">week(Approx)</div>
+            </div>
+          </div>
+          <md-card-actions layout="row" layout-align="end center" style="margin:0px">
+            <md-button style="margin:0px">View</md-button>
+            <md-button style="margin:0px">Delete</md-button>
+          </md-card-actions>
+          <md-divider></md-divider>
         </div>
-        <div layout="row" style="margin: 0 8px 0 8px;">
-          <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-body-2">{{shortlisted.format_name}}</div>
-
-          </div>
-          <div layout="column" flex="35" layout-align="center start">
-            <div class="md-body-2">Facing</div>
-          </div>
-          <div layout="column" flex="30" layout-align="center end ">
-            <div class="md-body-2">{{shortlisted.impressions}}</div>
-          </div>
-        </div>
-        <div layout="row">
-          <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-caption">{{shortlisted.address}}</div>
-            <div class="md-caption">500001</div>
-          </div>
-          <div layout="column" flex="35" layout-align=" start center">
-
-            <div class="md-caption">{{shortlisted.direction}}</div>
-          </div>
-          <div layout="column" flex="30" layout-align="start end ">
-            <div class="md-caption">3,87,000</div>
-            <div class="md-caption">week(Approx)</div>
-          </div>
-        </div>
-        <md-card-actions layout="row" layout-align="end center" style="margin:0px">
-          <md-button style="margin:0px">View</md-button>
-          <md-button style="margin:0px">Delete</md-button>
-        </md-card-actions>
-        <md-divider></md-divider>
       </div>
       <div layout="column" layout-margin>
         <div>
@@ -70,9 +68,10 @@
       </div>
     </md-content>
   </md-sidenav>
+  <!-- Campaign Detail Sidenav ends -->
 
-  <!--saved view all Shortlisted -->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shortlistAndSave">
+  <!-- List of shortlisted products' details sidenav -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shortlistAndSaveSidenav">
     <div layout="row">
       <div class="md-toolbar-tools">
 
@@ -134,16 +133,17 @@
 
       <div layout="column" layout-margin>
         <div>
-          <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveNewCampaign()">SAVE TO CAMPAGIN</md-button>
+          <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenav()">SAVE TO CAMPAIGN</md-button>
         </div>
         <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
       </div>
     </md-content>
 
   </md-sidenav>
+  <!-- List of shortlisted products' details sidenav ends -->
 
   <!-- saved capaign edit -->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedEdit">
+  <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedEdit">
     <div layout="row">
       <div class="md-toolbar-tools">
         <h2>
@@ -158,23 +158,21 @@
     </div>
     <md-content layout-padding="">
       saved campaign edit list
-
       <md-button class="md-primary md-raised" ng-click="closeSideSavedCampaign()">saved campagin</md-button>
     </md-content>
-  </md-sidenav>
+  </md-sidenav> -->
 
-  <!-- Save campagin dialog-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="saveNewCampaign">
+  <!-- Save campaign sidenav -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="saveCampaignSidenav">
     <div lauout=" column">
       <div layout="row">
         <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveNewCampaign()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
 
             <md-icon class="md-default-theme"><i class="material-icons">arrow_back</i></md-icon>
           </md-button>
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveNewCampaign()">
-
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </div>
@@ -228,9 +226,9 @@
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="viewAndSaveCampaign()">SAVE CAMPAIGN</md-button>
+              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()">SAVE CAMPAIGN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-click="toggleSuggestMeSidenav()">SUGGEST ME</a></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-button ng-click="toggleSuggestMeSidenav()">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
@@ -245,25 +243,22 @@
             <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
           </div>
           <div>
-            <md-button class="md-raised" layout-fill ng-click="shareSidenav()">SHARE CAMPAIGN</md-button>
+            <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
           </div>
         </div>
-
       </md-content>
-
     </div>
-
   </md-sidenav>
+  <!-- Save campaign sidenav ends -->
 
   <!-- saved campagin dialog two start-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="saveCampaignName">
+  <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="emptyCampaignSidenav">
     <div lauout=" column">
       <div layout="row">
         <div class="md-toolbar-tools">
 
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="saveCampaignName()">
-
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </div>
@@ -279,7 +274,7 @@
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
-              <input required md-no-asterisk name="campname" ng-model="project.campname">
+              <input required md-no-asterisk name="campname" ng-model="campaign.name">
               <div ng-messages="viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
@@ -287,23 +282,21 @@
             </md-input-container>
           </div>
           <div layout="row" flex="100" class="saved-dates">
-
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctrl.startDate" md-min-date="newDate" md-placeholder="Campaign Start "></md-datepicker>
+                <md-datepicker ng-model="campaign.start_date" md-min-date="newDate" md-placeholder="Campaign Start "></md-datepicker>
               </md-input-container>
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctrl.endDate" md-min-date="newDate" md-placeholder="Campaign End"></md-datepicker>
+                <md-datepicker ng-model="campaign.end_ate" md-min-date="newDate" md-placeholder="Campaign End"></md-datepicker>
               </md-input-container>
             </div>
-
           </div>
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
-              <input ng-model="user.budget" type="text" name="budget" required="required" />
+              <input ng-model="campaign.budget" type="text" name="budget" required="required" />
               <div ng-messages="viewAndSaveCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
@@ -311,7 +304,7 @@
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button class="md-raised md-warn" layout-fill> SAVED CAMPAGIN</md-button>
+              <md-button class="md-raised md-warn" layout-fill ng-click="saveEmptyCampaign()">SAVE CAMPAIGN</md-button>
             </div>
             <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
           </div>
@@ -328,7 +321,7 @@
             <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
           </div>
           <div>
-            <md-button class="md-raised" layout-fill ng-click="shareSidenav()">SHARE CAMPAIGN</md-button>
+            <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
           </div>
         </div>
 
@@ -336,9 +329,9 @@
 
     </div>
 
-  </md-sidenav>
+  </md-sidenav> -->
 
-  <!--create campaign -->
+  <!-- Create campaign sidenav -->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="createCampaignSidenav">
 
     <div lauout=" column">
@@ -413,7 +406,7 @@
             <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
           </div>
           <div>
-            <md-button class="md-raised" layout-fill ng-click="shareSidenav()">SHARE CAMPAIGN</md-button>
+            <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
           </div>
         </div>
 
@@ -422,13 +415,14 @@
     </div>
 
   </md-sidenav>
+  <!-- Create campaign sidenav ends -->
 
-  <!-- map poniter click show the content SideNav-->
+  <!-- Selected product detail sidenav-->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
-    <md-content ng-if="!hideSelectedMarkerDetail">
+    <md-content ng-if="!existingCampaignSidenavVisible">
       <div layout="column" class="map-img">
         <img ng-src="{{product.image}}" style="width:380px;height:200px;" />
-        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="closeProductDetailSidenav()">
+        <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="toggleProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -477,11 +471,11 @@
         <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
       <div layout="column" layout-margin>
-        <md-button layout-fill class="md-raised" ng-click="addSelectedMarkerToCampaign()">ADD TO EXISTING CAMPAIGN</md-button>
+        <md-button layout-fill class="md-raised" ng-click="toggleExistingCampaignSidenav()">ADD TO EXISTING CAMPAIGN</md-button>
       </div>
     </md-content>
 
-    <md-conetent layout-margin layout-padding ng-if="hideSelectedMarkerDetail">
+    <md-conetent layout-margin layout-padding ng-if="existingCampaignSidenavVisible">
       <div layout="column" layout-margin>
         <div class="md-headline">Add to existing Campaign</div>
         <div class="md-headline" style="opacity:.5">Let's work Together!</div>
@@ -494,32 +488,29 @@
         </div>
       </div>
       <div layout="row" layout-margin>
-
         <md-input-container style="z-index:999;width:100%">
-          <label>Select Campaign  </label>
-          <md-select ng-model=" campagin" required="required">
-            <md-option value="Flipkart">Flipkart</md-option>
-            <md-option value="Amezon">Amezon</md-option>
-            <md-option value="LG">LG</md-option>
+          <label>Select Campaign</label>
+          <md-select ng-model="existingCampaign.id" required="required">
+            <md-option ng-value="campaign.id" ng-repeat="campaign in userCampaigns">{{campaign.name}}</md-option>
           </md-select>
         </md-input-container>
-
       </div>
       <div layout="column" layout-margin>
         <div>
-          <md-button class="md-raised md-warn" layout-fill> ADD CAMPAIGN</md-button>
+          <md-button class="md-raised md-warn" layout-fill ng-click="addProductToExistingCampaign(existingCampaign)"> ADD TO THIS CAMPAIGN</md-button>
         </div>
         <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><a ng-href="#">SUGGEST ME</a></span></div>
       </div>
     </md-conetent>
   </md-sidenav>
+  <!-- Selected product detail sidenav ends-->
 
-  <!-- Share Campaign SideNav-->
+  <!-- Share Campaign Sidenav -->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shareCampaign" id="popupContainer">
     <div layout="row">
       <div class="md-toolbar-tools">
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareSidenav()">
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon>
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -533,7 +524,7 @@
 
         <div layout="column">
 
-          <md-input-container class="md-block">
+          <!-- <md-input-container class="md-block">
             <label>Campaign Name</label>
             <input ng-model="user.userName" type="text" name="uname" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
             />
@@ -542,11 +533,11 @@
 
               <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
             </div>
-          </md-input-container>
+          </md-input-container> -->
 
           <md-input-container class="md-block">
             <label>Email</label>
-            <input ng-model="user.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+            <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
             />
             <div ng-messages="shareCampaignForm.email.$error">
               <div ng-message="required">Email is required.</div>
@@ -556,15 +547,16 @@
           </md-input-container>
 
         </div>
-        <md-button type="submit" class="md-raised md-warn" ng-click="showAlert($event)" layout-fill>SHARE CAMPAIGN</md-button>
+        <md-button type="submit" class="md-raised md-warn" ng-click="shareCampaign($event, shareCampaign)" layout-fill>SHARE CAMPAIGN</md-button>
 
       </form>
     </md-content>
 
 
   </md-sidenav>
+  <!-- Share Campaign Sidenav ends -->
 
-  <!-- Suggest Me dialog-->
+  <!-- Suggest Me sidenav -->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="suggestMe">
     <div layout="row">
       <div class="md-toolbar-tools">
@@ -639,16 +631,16 @@
       <h4 class="md-subhead" style="opacity:.5;text-align:center">We will work on your Campaign needs and get back soon to your registered e-mail address</h4>
     </md-content>
   </md-sidenav>
+  <!-- Suggest Me sidenav ends -->
 
-  <!-- map html start-->
+  <!-- map html start (left side controls) -->
   <div layout="column" style="position:relative;" id="map-container">
-    <!-- <div id="gmap"></div> -->
     <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" disable-default-u-i="true">
-      <custom-control position="TOP_RIGHT" index="1" style="margin-top:10px;margin-right:10px;">
+      <!-- <custom-control position="TOP_RIGHT" index="1" style="margin-top:10px;margin-right:10px;">
         <md-button class="md-button md-fab md-mini" ng-click="toggleTrafficLegends()">
           <md-icon><i class="material-icons">error_outline</i></md-icon>
         </md-button>
-      </custom-control>
+      </custom-control> -->
     </ng-map>
     <div layout="column" class="search-part">
       <!-- search html start-->
@@ -700,7 +692,7 @@
               <div layout="row" class="">
                 <div class="range md-body-1" flex="20">Range</div>
                 <div flex class="slider-range">
-                  <md-slider md-discrete ng-model="rating" min="0" max="100" gap="0" aria-label="rating" id="red-slider"></md-slider>
+                  <md-slider md-discrete ng-model="circleRadius" min="0" max="100" gap="0" aria-label="rating" id="red-slider" ng-change="updateCircle()"></md-slider>
                 </div>
                 <div class="rnge md-body-1" flex="20">KMS</div>
               </div>
@@ -879,8 +871,8 @@
           <md-divider></md-divider>
           <div layout="row">
             <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
-            <md-button class="md-raised md-primary" ng-click="saveCampaignName()">SAVE </md-button>
-            <md-button class="md-raised" ng-click="shareSidenav()">SHARE</md-button>
+            <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
+            <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
           </div>
         </div>
       </div>
@@ -918,7 +910,7 @@
                     </md-button>
                     <md-menu-content>
                       <md-menu-item>
-                        <md-button ng-click="shareSidenav()">Share</md-button>
+                        <md-button ng-click="toggleShareCampaignSidenav(userCampaign)">Share</md-button>
                       </md-menu-item>
                       <md-menu-item>
                         <md-button ng-click="deletePlannedCampaign(userCampaign.id)">Delete</md-button>
@@ -928,8 +920,8 @@
                 </div>
               </div>
               <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
-                <md-button class="md-primary saved-btn" ng-click="viewAllCampaginList()"> VIEW</md-button>
-                <md-button class="md-primary saved-btn">Request Proposal</md-button>
+                <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(userCampaign.id)"> VIEW</md-button>
+                <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign()">Request Proposal</md-button>
               </div>
             </div>
           </div>
@@ -949,7 +941,9 @@
       <!--saved campagin html end -->
     </div>
   </div>
-  <!-- reommand button -->
+  <!-- map html start (left side controls) ends -->
+
+  <!-- recommend button -->
   <!-- <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:0px;right:0;width:100%">
     <div layout="row" layout-align="end center" style="right:10%">
       <md-button class="md-raised md-primary remm-btn" ng-click="RecommendedDiv()">Recommended<span>
@@ -988,7 +982,7 @@
       </div>
     </div>
   </div> -->
-  <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:100%">
+  <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:170px">
 
     <!-- traffic-->
     <div layout="row" layout-align="end center">

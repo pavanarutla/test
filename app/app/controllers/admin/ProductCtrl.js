@@ -46,7 +46,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     { name: 'name', displayName: 'Format Type', enableCellEdit: false, width: '30%' },
     {
       name: 'Action', field: 'Action', width: '30%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editFormat(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click="grid.appScope.deleteFormat(row.entity.id)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editFormat(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click="grid.appScope.deleteFormat(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false
     }
   ];
@@ -65,30 +65,6 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $scope.gridFormats.data = result;
     $scope.formatList = result;
   });
-
-  // Delete Format
-   
-  $scope.deleteFormat = function(row){    
-     // ProductService.deleteFormatsList(JSON.parse(localStorage.loggedInUser).id, rowEntity).then(function (response) {
-  //   if(response == 200){
-  //     toastr.success("deleted successpully");
-  //   }else{
-  //     toastr.error("not completed")
-  //   }
-  //   getFormatList();
-  // });
-    var index = $scope.gridFormats.data.indexOf(row);
-    $scope.gridFormats.data.splice(index, 1);
-    toastr.success("format deleted successfully");
-  }
-
-  // Adding new format
-  // $http.get('fakedb/companyagency.json').success(function (data) {
-  //   for (i = 0; i < data.length; i++) {
-  //     data[i].registered = new Date(data[i].registered);
-  //   }
-  //   $scope.gridFormats.data = data;
-  // });
 
   $scope.format = {};
   $scope.addFormat = function () {
@@ -125,9 +101,11 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     });
   }
 
-  $scope.deleteFormat = function(formatId){
-    ProductService.deleteFormat(formatId).then(function(result){
+  $scope.deleteFormat = function(format){
+    ProductService.deleteFormat(format.id).then(function(result){
       if(result.status == 1){
+        var index = $scope.gridFormats.data.indexOf(format);
+        $scope.gridFormats.data.splice(index, 1);
         toastr.success(result.message);
       }
       else{
@@ -168,6 +146,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
 
   // Opens the product form popup
   $scope.showProductForm = function (ev) {
+    $scope.product = {};
     $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
       fullscreen: $scope.customFullscreen,
@@ -230,34 +209,10 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     });
   }
 
-  // delete product List
-  $scope.deleteProduct = function(row){
-    console.log("item clicked");
-  // ProductService.deleteProductList(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
-  //   if(response == 200){
-  //     toastr.success("deleted successpully");
-  //   }else{
-  //     toastr.error("not completed")
-  //   }
-  //   getProductList();
-  // });
-  var index = $scope.gridProducts.data.indexOf(row);
-  $scope.gridProducts.data.splice(index, 1);
-  toastr.success("Product deleted successfully");
-};
-
-  // Adding Products
-  // $http.get('fakedb/companyagency.json')
-  // .success(function (data) {
-  //   for (i = 0; i < data.length; i++) {
-  //     data[i].registered = new Date(data[i].registered);
-  //   }
-  //   $scope.gridHoarding.data = data;
-  // });
-
   $scope.product = {};
   $scope.files = {};
   $scope.addProduct = function () {
+    console.log($scope.files, $scope.product);
     Upload.upload({
       url: config.apiPath + '/product',
       data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
@@ -280,7 +235,6 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   };
 
   $scope.editProduct = function(product){
-    // console.log(product);
     product.country = null;
     product.state = null;
     product.city = null;

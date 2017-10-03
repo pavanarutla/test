@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, ContactService, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, ContactService, CampaignService, UserService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -241,17 +241,16 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('viewAll').toggle();
   };
 
-  $scope.hideSelectedMarkerDetail = false;
+  $scope.existingCampaignSidenavVisible = false;
   //saved campaign
-  $scope.addSelectedMarkerToCampaign = function () {
-    // shortlist and save to campagin
-    $scope.hideSelectedMarkerDetail = true;
-    // $mdSidenav('savedCampaign').toggle();
+  $scope.toggleExistingCampaignSidenav = function () {
+    // save to existing campagin
+    $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
   };
 
   // saved view all side nav
   $scope.toggleViewAllShortlisted = function () {
-    $mdSidenav('shortlistAndSave').toggle();
+    $mdSidenav('shortlistAndSaveSidenav').toggle();
   };
 
   // edit list saved campgin
@@ -266,8 +265,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   // Save Campgin Details
   $scope.campaignSavedSuccessfully = false;
-  $scope.toggleSaveNewCampaign = function () {
-    $mdSidenav('saveNewCampaign').toggle();
+  $scope.toggleSaveCampaignSidenav = function () {
+    $mdSidenav('saveCampaignSidenav').toggle();
     $scope.campaignSavedSuccessfully = false;
   };
 
@@ -276,11 +275,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('thanksCampaign').toggle();
   };
   // Product Details
-  $scope.closeProductDetailSidenav = function () {
+  $scope.toggleProductDetailSidenav = function () {
     $mdSidenav('productDetails').toggle();
   };
   // Share Message
-  $scope.shareSidenav = function () {
+  $scope.toggleShareCampaignSidenav = function (campaign) {
+    $scope.campaignToShare = campaign;
     $mdSidenav('shareCampaign').toggle();
   };
   // Suggest Me dialog 
@@ -288,12 +288,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('suggestMe').toggle();
   };
   // Save Campgin Name
-  $scope.saveCampaignName = function () {
-    $mdSidenav('saveCampaignName').toggle();
+  $scope.toggleEmptyCampaignSidenav = function () {
+    $mdSidenav('emptyCampaignSidenav').toggle();
   };
   // View All Campaign List
-  $scope.viewAllCampaginList = function () {
-    $mdSidenav('viewAll').toggle();
+  $scope.toggleCampaignDetailSidenav = function () {
+    $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
   $scope.toggleCreateCampaignSidenav = function () {
@@ -324,6 +324,30 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   // }
 
   $rootScope.serverUrl = config.serverUrl;
+
+  $scope.shareCampaign = function(ev, shareCampaign){
+    var campaignToEmail = {
+      campaign_id: $scope.campaignToShare.id,
+      email: shareCampaign.email
+    };
+    CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );          
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
   $scope.close = function(){
     $mdDialog.hide();

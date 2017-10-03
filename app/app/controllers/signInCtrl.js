@@ -5,7 +5,6 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 	$scope.forgotPasswordpage = false;
 
 	$scope.signInUser = function () {
-		console.log($scope.user,'userdata');
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
 				var userData = $auth.getPayload().user;

@@ -17,6 +17,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
   <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+  <style>
+    .modal-overlay {
+      background: #000000;
+      opacity: 0.6;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+      filter: alpha(opacity=60);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index:1500;
+    }
+    
+    md-progress-circular {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      z-index:1505;
+      /* height: 100px;
+      width: 100px;
+      background: #FFFFFF url('assets/images/ajax-loader.gif') no-repeat;
+      border-radius: 10px; */
+    }
+  </style>
 </head>
 
 <body>
@@ -26,6 +51,15 @@
     </div>  -->
 
   <ui-view></ui-view>
+
+  <!-- <div ng-show="loading">
+    <div id="ajaxLoadingBox"></div>
+  </div> -->
+
+  <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+    <div class="modal-overlay"></div>
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -84,6 +118,8 @@
   <script type="text/javascript" src="filters/Filters.js"></script>
   <!-- Directives -->
   <script type="text/javascript" src="directives/Directives.js"></script>
+  <!-- Interceptors -->
+  <script type="text/javascript" src="interceptors/LoadingInterceptor.js"></script>  
 
   <!--==============
   |  Admin Section |
