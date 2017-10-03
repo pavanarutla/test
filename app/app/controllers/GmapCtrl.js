@@ -40,6 +40,7 @@ app.controller('GmapCtrl',
           if(newValue == false){
             $scope.selectedProduct = null;
             selectorMarker.setMap(null);
+            $scope.$parent.existingCampaignSidenavVisible = false;
           }
         }
       );
@@ -53,6 +54,7 @@ app.controller('GmapCtrl',
           // anchor: new google.maps.Point(20, 30) // anchor
         }
       });
+
       $scope.product = {};
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
@@ -211,19 +213,6 @@ app.controller('GmapCtrl',
         });
       }
 
-      //Confirm Dialog
-      $scope.showAlert = function (ev) {       
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('Your Campaign is successfully shared!!!!')
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );     
-      };
       //Confirm Dialog 1
       $scope.showConfirmation = function (ev) {
         $mdDialog.show(
@@ -644,7 +633,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.campaign = {};
-      $scope.viewAndSaveCampaign = function () {
+      $scope.saveCampaign = function () {
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){
         //   // add all shortlisted products to campaign
@@ -668,6 +657,8 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
+          $scope.loadUserCampaigns();
+          getShortListedProducts();
         });
       }
 
@@ -724,6 +715,62 @@ app.controller('GmapCtrl',
 
       $scope.toggleTrafficLegends = function(){
         $scope.showTrafficLegend = !$scope.showTrafficLegend;
+      }
+
+      // Drawing a circle
+      // var rangeCircle = new google.maps.Marker({
+      //   icon: {
+      //     path: google.maps.SymbolPath.CIRCLE,
+      //     fillOpacity: 0.3,
+      //     fillColor: "#ffffff",
+      //     strokeOpacity: 1.0,
+      //     strokeColor: "red",
+      //     strokeWeight: 1.0,
+      //     size: 26000,
+      //     scale: 1.0
+      //   },
+      //   position: $scope.address.location
+      // });
+
+      rangeCircle = new google.maps.Circle({
+        strokeColor: "#0000ff",
+        strokeOpacity: 1.0,
+        strokeWeight: 0.5,
+        fillColor: "#0000ff",
+        fillOpacity: 0.2,
+      });
+
+      $scope.updateCircle = function(){        
+        rangeCircle.setMap(null);
+        rangeCircle.setRadius($scope.circleRadius*1000);
+        rangeCircle.setCenter($scope.mapObj.getCenter());
+        // rangeCircle.setPosition($scope.mapObj.getCenter());
+        rangeCircle.setMap($scope.mapObj);
+      }
+      // Drawing a circle ends
+
+      $scope.viewCampaignDetails = function(campaignId){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+          console.log(campaignDetails);
+          $scope.campaignDetails = campaignDetails;
+          $scope.toggleCampaignDetailSidenav();
+        });
+      }
+
+      $scope.addProductToExistingCampaign = function(existingCampaign){
+        var productToCampaign = {
+          product_id: $scope.selectedProduct.properties.id,
+          campaign_id: existingCampaign.id
+        };
+        CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
+          if(result.status == 1){
+            toastr.success(result.message);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+
       }
     }
   ]
