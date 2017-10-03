@@ -751,7 +751,6 @@ app.controller('GmapCtrl',
 
       $scope.viewCampaignDetails = function(campaignId){
         CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
-          console.log(campaignDetails);
           $scope.campaignDetails = campaignDetails;
           $scope.toggleCampaignDetailSidenav();
         });
