@@ -632,18 +632,18 @@
   <div layout="column" style="position:relative;" id="map-container">
     <!-- <div id="gmap"></div> -->
     <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" disable-default-u-i="true">
-      <custom-control position="TOP_RIGHT" index="1" style="margin-top:10px;margin-right:10px;">
+       <!-- <custom-control position="TOP_RIGHT" index="1" style="margin-top:10px;margin-right:10px;">
         <md-button class="md-button md-fab md-mini" ng-click="toggleTrafficLegends()">
           <md-icon><i class="material-icons">error_outline</i></md-icon>
         </md-button>
-      </custom-control>
+      </custom-control>-->
     </ng-map>
     <div layout="column" class="search-part">
       <!-- search html start-->
       <div layout="row" layout-padding class="search-field">
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
-          <input ng-model="siteNoSearch" placeholder="Search billboards by tab id and area" class="search-bg" on-enter="searchBySiteNo()">
+          <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id and Area" class="search-bg" on-enter="searchBySiteNo()">
         </md-input-container>
       </div>
       <!-- search html start-->
@@ -656,7 +656,7 @@
           <!-- <div layout="row" ng-init="open = false" ng-click="open = !open"> -->
           <div layout="row">
             <div class="main-icon"><img src="assets/images/icons/filter.png"></div>
-            <div class="md-caption theme-txt">FILTERS</div>
+            <div class="md-caption theme-txt txt-mrng">FILTERS</div>
             <div flex></div>
             <div>
               <md-icon ng-hide="filter"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
@@ -778,7 +778,7 @@
           <div layout="row">
 
             <div class="main-icon"><img src="assets/images/icons/formats.png"></div>
-            <div class="md-caption theme-txt">FORMATS</div>
+            <div class="md-caption theme-txt txt-mrng">FORMATS</div>
             <div flex></div>
             <div>
               <md-icon ng-hide="format"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
@@ -815,7 +815,7 @@
           <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
           <div layout="row">
             <div class="main-icon"><img src="assets/images/icons/shortlist.png"></div>
-            <div class="md-caption theme-txt">SHORTLIST</div>
+            <div class="md-caption theme-txt txt-mrng">SHORTLIST</div>
             <div flex></div>
             <div>
               <md-icon ng-hide="shortlist"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
@@ -838,7 +838,8 @@
             </div>
           </div>
           <md-divider></md-divider> -->
-            <div layout="row" flex ng-repeat="shortlisted in shortListedProducts">
+          <div layout="column" ng-repeat="shortlisted in shortListedProducts">
+            <div layout="row" flex >
               <md-list flex style="padding:0px">
                 <md-list-item class="md-3-line list-img">
                   <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
@@ -863,6 +864,8 @@
                 </md-button>
               </div>
             </div>
+            <md-divider></md-divider>
+            </div>
           </div>
           <md-divider></md-divider>
           <div layout="row">
@@ -878,7 +881,7 @@
         <md-content class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()">
           <div layout="row">
             <div class="main-icon"><img src="assets/images/icons/savedcampagin.png"></div>
-            <div class="md-caption theme-txt">SAVE CAMPAIGNS</div>
+            <div class="md-caption theme-txt txt-mrng">SAVE CAMPAIGNS</div>
             <div flex></div>
             <div>
               <md-icon ng-hide="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
@@ -890,17 +893,16 @@
           <div class="savescrollbar" id="savecamp-style">
             <div layout="column" ng-repeat="userCampaign in userCampaigns">
               <div layout="row" layout-padding>
-                <div flex="">
+               
                   <!-- <div class="md-body-1">{{userCampaign.org_name}}</div> -->
-                  <div class="md-body-1 campagin-name">{{userCampaign.name}}</div>
-                </div>
+                  <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{userCampaign.name}}</div>
+                
                 <!-- <div flex></div> -->
-                <div class="saved-date">
-                  <!-- <span class="saved-border">01 Aug 2017</span><span class="saved-border">15 Aug 2017</span> -->
-                  <span class="saved-border">{{userCampaign.start_date | date:'dd-MM-yy'}}</span><span class="saved-border">{{userCampaign.end_date | date:'dd-MM-yy'}}</span>
+                <div class="saved-date" flex="55" style="padding:0px">
+                  <span class="saved-border md-caption ">{{userCampaign.start_date | date:'dd-MM-yy'}}</span><span class="saved-border md-caption ">{{userCampaign.end_date | date:'dd-MM-yy'}}</span>
                 </div>
-                <div flex-xs="5" flex-sm="5">
-                  <md-menu>
+                <div flex-xs="5" flex-sm="5" style="padding:0px">
+                  <md-menu md-position-mode="target-right target">
                     <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
                       <md-icon><i class="material-icons">more_vert</i></md-icon>
                     </md-button>
@@ -915,12 +917,14 @@
                   </md-menu>
                 </div>
               </div>
-              <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
+              <div class="" layout="row" layout-align="space-between center" flex style="margin:-10px 5px 5px 5px">
                 <md-button class="md-primary saved-btn" ng-click="viewAllCampaginList()"> VIEW</md-button>
                 <md-button class="md-primary saved-btn">Request Proposal</md-button>
               </div>
+              <md-divider></md-divider>
             </div>
           </div>
+          <md-divider></md-divider>
           <div layout="column" layout-align="center center">
             <md-button class="md-primary md-raised" ng-click="ExportToExcel()">EXPORT ALL</md-button>
           </div>
@@ -967,13 +971,14 @@
       </div>
     </div>
   </div> -->
-  <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:100%">
+  <!-- traffic-->
 
-    <!-- traffic-->
+   <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:100%">
+
     <div layout="row" layout-align="end center">
       <md-button class="md-raised md-primary remm-btn" ng-click="toggleTraffic()" id="traffic-toggle"><span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression</md-button>
     </div>
-    <div ng-show="showTrafficLegend">
+    <!-- <div ng-show="showTrafficLegend">
       <div layout="row" flex="20" style="background-color: white; width:100%;top:10%;z-index:1;position:absolute;right:2%;">
         <div flex="40" layout="column" layout-margin layout-align="center">
           <div class="light"></div>
@@ -988,8 +993,8 @@
           <div class="md-body-2">Extreme Traffic</div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+  </div> 
 </div>
 
 

@@ -89,9 +89,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     })
   };
 
-  $scope.cancel = function () {
-    $mdDialog.cancel();
-  };
+ 
 
   $scope.whatwedo = function () {
     $location.path('/');
@@ -104,11 +102,11 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   }
   $scope.whyOutdoor = function () {
     $location.path('/');
-    window.scroll(0, 2505)
+    window.scroll(0, 2440)
   }
   $scope.contactus = function () {
     $location.path('/');
-    window.scroll(0, 3728)
+    window.scroll(0, 3670)
   }
 
   //scroll to top
@@ -200,6 +198,10 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
     })
+  };
+
+   $scope.close = function(){
+    $mdDialog.hide();
   };
 
   $scope.logout = function(){
