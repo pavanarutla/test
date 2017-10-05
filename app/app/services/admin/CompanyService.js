@@ -21,6 +21,11 @@ app.service('CompanyService',
         var dfd = $q.defer();
         $http.post(config.apiPath + '/hoarding-company', hoardingCompany).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
-      }
+      },
+      deleteHoardingCompanies: function(hoardingCompanyId){
+				var dfd = $q.defer();
+				$http.delete(config.apiPath + '/hoarding-companies/' + formatId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			}
     }
 }]);

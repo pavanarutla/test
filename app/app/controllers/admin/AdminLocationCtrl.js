@@ -106,7 +106,6 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   AdminLocationService.getAllStates().then(function (data) {
     $scope.gridState.data = data;
   });
-
   //add state js end
 
   //add city js start

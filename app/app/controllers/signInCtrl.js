@@ -1,7 +1,7 @@
 'user strict'
 app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr) {
 
-	$scope.signInpageshow = true;
+	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
 
 	$scope.user = {};
@@ -29,6 +29,10 @@ app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope,
 		});
 	}
 
+	$scope.close = function(){
+		$mdDialog.hide();
+	}
+	
 	///Agency Sign In functionolity
 
 

@@ -23,8 +23,8 @@ app.constant('config', {
   serverUrl : "http://104.236.11.252",
   apiPath : "http://104.236.11.252/api"
 })
-.config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', 'config',
-  function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, config) {
+.config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
+  function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
 
     $mdThemingProvider.theme('default')
     .primaryPalette('red',{
@@ -209,6 +209,7 @@ app.constant('config', {
     // $authProvider.unlinkUrl = '/auth/unlink/';
 
     $mdAriaProvider.disableWarnings();
+    $httpProvider.interceptors.push('LoadingInterceptor');
   }
 ]);
 
