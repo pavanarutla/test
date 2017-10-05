@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, ContactService, CampaignService, UserService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -81,7 +81,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       clickOutsideToClose: true,
     })
   };
-   $scope.shareForm = function (ev) {
+  $scope.shareForm = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/shareform.html',
       fullscreen: $scope.customFullscreen,
@@ -175,34 +175,53 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     method: {}
   };
 
-  // $scope.showContact = function(ev) {
-    
-  //   var confirm = $mdDialog.prompt()
-  //     .title('Drop Your Contact Number')
-  //     .placeholder('Enter Your Contact Number')
-  //     .ariaLabel('Dog name')
-  //     .targetEvent(ev)
-  //     .ok('Submit')
-  //     .cancel('Cancel');
-
-  //   $mdDialog.show(confirm).then(function(result) {
-  //     $scope.status = 'You decided to name your dog ' + result + '.';
-  //   }, function() {
-  //     $scope.status = 'You didn\'t name your dog.';
-  //   });
-    
-  // };
-   $scope.showContact = function (ev) {
+  $scope.query={};
+  $scope.sendQuery = function () {
+    ContactService.sendQuery($scope.query).then(function (response) {
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+    $scope.query={};
+  };
+  // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+  //   $scope.feedBackData = response;
+  // });
+  $scope.subscriberData = {};
+  $scope.subscribe = function () {
+    ContactService.subscribe($scope.subscriberData).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+    angular.element($('#subscriber-email')).val('');
+  };
+  $scope.showContact = function () {
     $mdDialog.show({
-      templateUrl: 'views/showcontact.html',
+      templateUrl: 'views/show-contact.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
+      clickOutsideToClose: true,
     })
   };
-
-   $scope.close = function () {
-		$mdDialog.hide();
-	}
+  
+  $scope.callbackRequest = {};
+  $scope.requestCallBack = function () {
+    ContactService.requestCallBack(callbackRequest).then(function (response) {
+      if(result.status == 1){
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
   $scope.logout = function(){
     $auth.logout().then(function(result){
@@ -219,50 +238,50 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   =================================*/
 
   // shortlist
-  $scope.closeSideViewAll = function() {
+  $scope.closeSideViewAll = function () {
     $mdSidenav('viewAll').toggle();
   };
 
-  $scope.hideSelectedMarkerDetail = false;
+  $scope.existingCampaignSidenavVisible = false;
   //saved campaign
-  $scope.addSelectedMarkerToCampaign = function() {
-    // shortlist and save to campagin
-    $scope.hideSelectedMarkerDetail = true;
-    // $mdSidenav('savedCampaign').toggle();
+  $scope.toggleExistingCampaignSidenav = function () {
+    // save to existing campagin
+    $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
   };
 
   // saved view all side nav
-  $scope.toggleViewAllShortlisted = function() {
-      $mdSidenav('shortlistAndSave').toggle();
+  $scope.toggleViewAllShortlisted = function () {
+    $mdSidenav('shortlistAndSaveSidenav').toggle();
   };
 
   // edit list saved campgin
-  $scope.closeSideEditList = function() {
-      $mdSidenav('savedEdit').toggle();
+  $scope.closeSideEditList = function () {
+    $mdSidenav('savedEdit').toggle();
   };
 
   // saved campgin
-  $scope.closeSideSavedCampaign = function() {
-      $mdSidenav('savedSavedCampaign').toggle();
+  $scope.closeSideSavedCampaign = function () {
+    $mdSidenav('savedSavedCampaign').toggle();
   };
 
   // Save Campgin Details
   $scope.campaignSavedSuccessfully = false;
-  $scope.toggleSaveNewCampaign = function() {
-    $mdSidenav('saveNewCampaign').toggle();
+  $scope.toggleSaveCampaignSidenav = function () {
+    $mdSidenav('saveCampaignSidenav').toggle();
     $scope.campaignSavedSuccessfully = false;
   };
 
   // Thanks Message
-  $scope.closeSideThanksSidenav = function() {
+  $scope.closeSideThanksSidenav = function () {
     $mdSidenav('thanksCampaign').toggle();
   };
   // Product Details
-  $scope.closeProductDetailSidenav = function() {
+  $scope.toggleProductDetailSidenav = function () {
     $mdSidenav('productDetails').toggle();
   };
   // Share Message
-  $scope.shareSidenav = function() {
+  $scope.toggleShareCampaignSidenav = function (campaign) {
+    $scope.campaignToShare = campaign;
     $mdSidenav('shareCampaign').toggle();
   };
   // Suggest Me dialog 
@@ -270,24 +289,24 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('suggestMe').toggle();
   };
   // Save Campgin Name
-  $scope.saveCampaignName = function() {
-    $mdSidenav('saveCampaignName').toggle();
+  $scope.toggleEmptyCampaignSidenav = function () {
+    $mdSidenav('emptyCampaignSidenav').toggle();
   };
   // View All Campaign List
-  $scope.viewAllCampaginList = function() {
-    $mdSidenav('viewAll').toggle();
+  $scope.toggleCampaignDetailSidenav = function () {
+    $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
-  $scope.toggleCreateCampaignSidenav = function() {
+  $scope.toggleCreateCampaignSidenav = function () {
     $scope.campaignSaved = false;
     $mdSidenav('createCampaignSidenav').toggle();
   };
 
   $scope.campaignSaved = false;
-  $scope.createNewCampaign = function(){
+  $scope.createNewCampaign = function () {
     // submit form data to api and on success show message
     // CampaignService.saveCampaign(data).then(function(res){
-      $scope.campaignSaved = true;
+    $scope.campaignSaved = true;
     // });
   }
 
@@ -307,4 +326,31 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $rootScope.serverUrl = config.serverUrl;
 
+  $scope.shareCampaign = function(ev, shareCampaign){
+    var campaignToEmail = {
+      campaign_id: $scope.campaignToShare.id,
+      email: shareCampaign.email
+    };
+    CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );          
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.close = function(){
+    $mdDialog.hide();
+  }
 });
