@@ -139,7 +139,7 @@ app.constant('config', {
     .state('admin.registration',{
       url: '/registration',
       templateUrl: 'views/admin/registration.html',
-      controller: 'RegistrationCtrl',
+      controller: 'AdminRegistrationCtrl',
       title: "User Registration"
     })
     .state('admin.companies',{

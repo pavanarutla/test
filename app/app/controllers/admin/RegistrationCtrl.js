@@ -1,4 +1,4 @@
-app.controller('RegistrationCtrl', function ($scope, $mdDialog, $http, toastr, AdminUserService) {
+app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toastr, AdminUserService) {
 
   $scope.msg = {};
 
