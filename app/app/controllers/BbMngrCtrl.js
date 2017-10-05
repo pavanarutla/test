@@ -200,9 +200,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     })
   };
 
-   $scope.close = function(){
-    $mdDialog.hide();
-  };
+   $scope.close = function () {
+		$mdDialog.hide();
+	}
 
   $scope.logout = function(){
     $auth.logout().then(function(result){

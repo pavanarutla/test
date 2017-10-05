@@ -1,7 +1,7 @@
 <div layout="column">
 	<!-- banner html start-->
-	<div layout="column" class="banner">
-		<img src="assets/images/product/banner@2x.png" />
+	<div layout="column" class="banner" id="homeCarousel" style="background-image:url(/assets/images/homepage-banner.png);">
+		<!-- <img src="assets/images/product/banner@2x.png" /> -->
 		<div class="banner-text11">
 			<div hide-xs>
 				<span class="md-headline bannertet-top">Our Clients Are Our Frist priority</span></br>
@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="fab-dail">
-			<!-- <div class="lock-size" layout="row" layout-align="center center">
+			<!--<div class="lock-size" layout="row" layout-align="center center">
 				<md-fab-speed-dial md-direction="up" class="md-fling">
 					<md-fab-trigger>
 						<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
@@ -32,7 +32,7 @@
 
 					</md-fab-actions>
 				</md-fab-speed-dial>
-			</div> -->
+			</div>-->
 			<md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="showContact($event)" style="background:#488edf;width:50px;height:50px;">
 				<md-icon aria-label="Facebook"><i class="material-icons" style="color: #fff;">call</i></md-icon>
 			</md-button>
@@ -412,3 +412,18 @@
 	</div>
 	<!-- slider-->
 </div>
+ <!-- <script>
+   
+    $(document).ready(function(){  
+    height = $(window).height();  //getting windows height
+    jQuery('#homeCarousel').css('height', height-40+'px');   //and setting height of carousel
+    if($(window).width() < 992){
+    jQuery('#homeCarousel').css('height', height-20+'px');
+    }
+    });
+  </script> -->
+<script>
+  var height = $(window).height();
+  $('#homeCarousel').height(height - 64);
+
+</script>
