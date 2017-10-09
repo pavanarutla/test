@@ -209,6 +209,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       clickOutsideToClose: true,
     })
   };
+  
   $scope.callbackRequest = {};
   $scope.requestCallBack = function () {
     ContactService.requestCallBack(callbackRequest).then(function (response) {

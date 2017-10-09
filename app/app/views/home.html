@@ -1,12 +1,12 @@
 <div layout="column">
 	<!-- banner html start-->
-	<div layout="column" class="banner">
-		<img src="assets/images/product/banner@2x.png" />
+	<div layout="column" class="banner" id="homeCarousel" style="background-image:url(/assets/images/banner.png);">
+		<!-- <img src="assets/images/product/banner@2x.png" /> -->
 		<div class="banner-text11">
 			<div hide-xs>
-				<span class="md-headline bannertet-top">Our Clients Are Our Frist priority</span></br>
+				<span class="md-headline bannertet-top" style="color:#3c3a3b">Our Clients Are Our Frist priority</span></br>
 				</span>
-				<span class="md-display-2 bannertet-bottm" style="font-weight:900"> WELCOME TO BILLBOARDS INDIA</span>
+				<span class="md-display-2 bannertet-bottm" style="font-weight:900;color:#980000"> WELCOME TO BILLBOARDS INDIA</span>
 			</div>
 			<div layout="row">
 				<!-- <md-button class="md-primary watch-btn" ng-click="showVideo($event)">WATCH VIDEO</md-button> -->
@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="fab-dail">
-			<!-- <div class="lock-size" layout="row" layout-align="center center">
+			<!--<div class="lock-size" layout="row" layout-align="center center">
 				<md-fab-speed-dial md-direction="up" class="md-fling">
 					<md-fab-trigger>
 						<md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
@@ -32,7 +32,7 @@
 
 					</md-fab-actions>
 				</md-fab-speed-dial>
-			</div> -->
+			</div>-->
 			<md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="showContact($event)" style="background:#488edf;width:50px;height:50px;">
 				<md-icon aria-label="Facebook"><i class="material-icons" style="color: #fff;">call</i></md-icon>
 			</md-button>
@@ -43,8 +43,9 @@
 
 	<!-- what we do html start-->
 
-	<div class="whtwedo contbg" id="code">
-		<div layout=" column" layout-align="center center" layout-margin layout-padding ng-animate="'animate'">
+	<div class="bbsco" id="code">
+		<div class="whtwedo">
+			<div layout=" column" layout-align="center center" layout-margin layout-padding ng-animate="'animate'">
 			<h2 class="md-headline">WHAT WE DO</h2>
 			<p class="md-title whatwetext campagin-name">Billboards india specializes in outdoor advertising , accessing every outdoor billboard sites from urban ,metropolitan & towns.</p>
 		</div>
@@ -107,10 +108,12 @@
 
 			<!-- end here  -->
 		</div>
+		</div>
+		
 	</div>
 	<!-- search html start-->
 
-	<div layout="column" layout-sm="column" layout-xs="column" class="bbsco">
+	<div layout="column" layout-sm="column" layout-xs="column" class="contbg">
 		<div layout="row" layout-xs="column" layout-sm="column" layout-margin layout-padding>
 			<div layout="column" flex="50" flex-lg="50" flex-md="50" flex-sm="100" flex-xs="100">
 				<div class="bbscb">Search every Billboard in india</div>
@@ -372,12 +375,12 @@
 				</div>
 				<div layout="column" flex="50" flex-xs="100" flex-sm="100" class="theme-txt">
 					<div class="md-headline line-sub">Subscribe to Newsletter</div>
-					<form name="Subscribe" novalidate="novalidate">
+					<form name="Subscribe" novalidate="novalidate" class="newsletter">
 						<md-input-container class="md-block">
 							<label style="color: #eee">Email Address</label>
 							<input type="hidden" ng-model="subscriberData.type" value="1" />
-							<input ng-model="subscriberData.email" id="subscriber-email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" style="outline: 1px solid #fff;border: none">
-							<md-button class="md-primary md-raised" ng-click="subscribe()">Send</md-button>
+							<input ng-model="subscriberData.email" id="subscriber-email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+							<md-button class="md-primary md-raised newsletter-btn" ng-click="subscribe()">Send</md-button>
 						</md-input-container>
 					</form>
 					<!-- <div class="md-subhead line-text">eusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
@@ -404,3 +407,18 @@
 	</div>
 	<!-- slider-->
 </div>
+<!-- <script>
+  var height = $(window).height();
+  $('#homeCarousel').height(height - 64);
+
+</script> -->
+ <script>
+   
+    $(document).ready(function(){  
+    height = $(window).height();  //getting windows height
+    jQuery('#homeCarousel').css('height', height-65+'px');   //and setting height of carousel
+    if($(window).width() < 992){
+    jQuery('#homeCarousel').css('height', height-112+'px');
+    }
+    });
+  </script> 
