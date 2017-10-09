@@ -20,6 +20,10 @@
         <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm>why outdoor</md-button>
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
+        <!-- browse-->
+        <md-button aria-label="location" class=" md-primary browse-btn" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
+            Browse BillBoards</a>
+        </md-button>
         <!--sugg -->
         <md-button aria-label="location" class=" md-primary " ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
           suggest me
@@ -33,9 +37,9 @@
           <!-- <md-button aria-label="userimage" class="md-fab md-mini" ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class="md-avatar ">
           </md-button> -->
-          <button class="md-secondary md-mini md-button" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-              <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope" src="images/person.png">
-          </button>
+          <md-button class="md-secondary md-mini md-button" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+              <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope">
+          </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
               <md-button>Chanikya varma</md-button>
@@ -58,9 +62,7 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated">
           BOOK NOW
         </md-button>
-        <md-button aria-label="location" class=" md-primary md-raised browse-btn" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
-            Browse BillBoards</a>
-        </md-button>
+        
         <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
           <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
         </md-button> -->
@@ -98,9 +100,13 @@
           <span>Notifications</span>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+        <!--<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme">X</md-icon>
+        </md-button>-->
+
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
     </md-toolbar>
