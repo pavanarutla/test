@@ -1,4 +1,4 @@
-app.controller('CampaignController', function ($scope, $mdDialog) {
+app.controller('CampaignController', function ($scope, $mdDialog, $interval) {
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({

@@ -16,6 +16,11 @@ app.service('UserService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/user', user).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        isMailVerified: function(code){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/verify-email/' + code).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

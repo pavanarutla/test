@@ -18,10 +18,10 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination'
 ])
 app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -82,8 +82,34 @@ app.constant('config', {
       templateUrl: 'views/userprofile.html'
     })
     .state('index.agency-rofile', {
-      url: 'agency-rofile',
+      url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
+    })
+    .state('index.verify_email', {
+      url: 'verify_email/{code}',
+      templateUrl: 'views/home.html',
+      controller: function($scope, $stateParams, UserService, toastr) { 
+        console.log($stateParams.code);
+        UserService.isMailVerified($stateParams.code).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show({
+              templateUrl: 'views/verification-success.html',
+              fullscreen: $scope.customFullscreen,
+              clickOutsideToClose: true
+            });
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+        $scope.goToLogin() = function(){
+          $location.path('/');
+          $mdDialog.show({
+            templateUrl: 'views/signIn.html',
+            fullscreen: true
+          });
+        }
+      }
     })
     .state('admin', {
       abstract: true,
