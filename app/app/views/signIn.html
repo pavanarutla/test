@@ -1,19 +1,15 @@
 <!-- login pages-->
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="signInCtrl">
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="AuthCtrl">
   <form>
     <md-dialog-content>
-  
-      <md-content class="md-padding">
+      <md-content class="">
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
           <md-nav-item md-nav-click="users()" name="users">Users</md-nav-item>
           <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item>
-
           <span flex></span>
-
           <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="close()">
-                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
-        
         </md-nav-bar>
         <div ng-if="userForm">
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
@@ -39,8 +35,6 @@
                 <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
               </div>
             </md-input-container>
-
-
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
               <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()">SIGN IN</md-button>
             </md-input-container>
@@ -51,7 +45,6 @@
               <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
                 <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
               </div>
-
             </div>
           </form>
         </div>
@@ -80,8 +73,6 @@
                 <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
               </div>
             </md-input-container>
-
-
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
               <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)">SIGN IN</md-button>
             </md-input-container>
@@ -92,12 +83,10 @@
               <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
                 <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
               </div>
-
             </div>
           </form>
         </div>
       </md-content>
-
        <div ng-if="forgotPasswordpage">
         <md-content class="md-padding">
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
