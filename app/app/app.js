@@ -70,12 +70,13 @@ app.constant('config', {
     })
     .state('index.campaigns', {
       url: 'campaigns',
-      templateUrl: 'views/campaigns.html'
-     //console:'CampaignController'
+      templateUrl: 'views/campaigns.html',
+      controller:'CampaignCtrl'
     })
-    .state('index.campaginedit', {
-      url: 'campaginedit',
-      templateUrl: 'views/campaginedit.html'
+    .state('index.edit-campaign', {
+      url: 'edit-campaign',
+      templateUrl: 'views/edit-campaign.html',
+      controller: 'CampaignCtrl'
     })
     .state('index.profile', {
       url: 'profile',
