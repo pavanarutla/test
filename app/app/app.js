@@ -77,9 +77,9 @@ app.constant('config', {
       url: 'campaginedit',
       templateUrl: 'views/campaginedit.html'
     })
-    .state('index.userprofile', {
-      url: 'userprofile',
-      templateUrl: 'views/userprofile.html'
+    .state('index.profile', {
+      url: 'profile',
+      templateUrl: 'views/user-profile.html'
     })
     .state('index.agency-rofile', {
       url: 'agency-profile',
