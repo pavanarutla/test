@@ -79,7 +79,7 @@ app.constant('config', {
     })
     .state('index.userprofile', {
       url: 'userprofile',
-      templateUrl: 'views/userprofile.html'
+      templateUrl: 'views/user-profile.html'
     })
     .state('index.agency-rofile', {
       url: 'agency-rofile',
