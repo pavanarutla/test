@@ -772,6 +772,23 @@ app.controller('GmapCtrl',
         });
 
       }
+
+      $scope.shareShortlistedProducts = function (email) {
+        shortListedProductsIds = _.pluck($scope.shortListedProducts, 'id');
+        var sendObj = {
+          email: email,
+          shortlisted_products: shortListedProductsIds
+        };
+        CampaignService.shareShortListedProducts(sendObj).then(function (result) {
+          if(result.status == 1){
+            toastr.success(result.message);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      };
+
     }
   ]
 );

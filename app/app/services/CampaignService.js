@@ -36,7 +36,12 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/share-campaign', campaignToEmail).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        shareShortListedProducts: function (obj) {
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/share-shortlisted', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
       }
     }
   ]
