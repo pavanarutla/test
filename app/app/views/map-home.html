@@ -141,7 +141,80 @@
 
   </md-sidenav>
   <!-- List of shortlisted products' details sidenav ends -->
+  <!-- List of shortlisted products' share details to clint -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shareAndshortlist">
+    <div layout="row">
+      <div class="md-toolbar-tools">
 
+        <div class="md-title">Shortlisted Products</div>
+        <div flex></div>
+
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareShortlistedSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content>
+
+      <div layout="column" layout-margin ng-repeat="shortlisted in shortListedProducts" style="margin: 0 8px 0 8px;">
+        <div layout="row">
+          <div layout="column" layout-align="center start" flex="50">
+            <div class="md-body-2">{{shortlisted.siteNo}}</div>
+          </div>
+          <div layout="row" layout-align="end center" flex="50">
+
+            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
+            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
+            <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
+          </div>
+        </div>
+        <div layout="row" style="margin: 0 8px 0 8px;">
+          <div layout="column" flex="35" layout-align="center start" class="margin-con">
+            <div class="md-body-2">{{shortlisted.format_name}}</div>
+
+          </div>
+          <div layout="column" flex="35" layout-align="center start">
+            <div class="md-body-2">Facing</div>
+          </div>
+          <div layout="column" flex="30" layout-align="center end ">
+            <div class="md-body-2">Impressions</div>
+          </div>
+        </div>
+        <div layout="row">
+          <div layout="column" flex="35" layout-align="center start" class="margin-con">
+            <div class="md-caption">{{shortlisted.address}}</div>
+            <div class="md-caption">500001</div>
+          </div>
+          <div layout="column" flex="35" layout-align=" start center">
+
+            <div class="md-caption">{{shortlisted.direction}}</div>
+          </div>
+          <div layout="column" flex="30" layout-align="start end ">
+            <div class="md-caption">{{shortlisted.impressions}}</div>
+            <div class="md-caption">week(Approx)</div>
+          </div>
+        </div>
+      </div>
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+        />
+        <div ng-messages="shareCampaignForm.email.$error">
+          <div ng-message="required">Email is required.</div>
+
+          <div ng-message="pattern">Enter a valied Email Id.</div>
+        </div>
+      </md-input-container>
+      <div layout="column" layout-margin>
+        <div>
+          <md-button class="md-raised md-warn" layout-fill ng-click="toggleShareShortlistCampaignSidenav(shareCampaign.email)">SHARE CAMPAIGN</md-button>
+        </div>
+      </div>
+    </md-content>
+
+  </md-sidenav>
+   <!-- List of shortlisted products' share details to clint ends -->
   <!-- saved capaign edit -->
   <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="savedEdit">
     <div layout="row">

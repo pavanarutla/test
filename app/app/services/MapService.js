@@ -21,6 +21,11 @@ app.factory('MapService', ['$http', '$q', 'config', function($http, $q, config){
       $http.post(config.apiPath + '/shortlistProduct', {user_mongo_id: userMongoId, product_id: productId}).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
+    shareShortList: function(email){
+      var dfd = $q.defer();
+      $http.post(config.apiPath + '/shareShortList',email ).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
      getshortListProduct: function(userMongoId){
       var dfd = $q.defer();
       $http.get(config.apiPath + '/shortlistedProducts/' + userMongoId).success(dfd.resolve).error(dfd.reject);

@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, ContactService, CampaignService, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -252,6 +252,16 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   // saved view all side nav
   $scope.toggleViewAllShortlisted = function () {
     $mdSidenav('shortlistAndSaveSidenav').toggle();
+  };
+  $scope.toggleShareShortlistedSidenav = function () {
+    $mdSidenav('shareAndshortlist').toggle();
+  };
+  $scope.toggleShareShortlistCampaignSidenav = function (email) {
+   $scope.email = email;
+    MapService.shareShortList(email).then(function (response) {
+      //$scope.shortListedProducts = response;
+      console.log("email",email)
+    });
   };
 
   // edit list saved campgin
