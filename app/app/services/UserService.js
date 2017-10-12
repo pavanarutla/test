@@ -12,6 +12,11 @@ app.service('UserService',
           $http.get(config.apiPath + '/users').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        registerUser: function(user){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/user', user).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
       }
     }
   ]

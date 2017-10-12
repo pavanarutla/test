@@ -90,6 +90,16 @@
     custom js 
   //////////////-->
   <script type="text/javascript" src="app.js"></script>
+  <script>
+   
+    $(document).ready(function(){  
+    height = $(window).height();  //getting windows height
+    jQuery('#homeCarousel').css('height', height-40+'px');   //and setting height of carousel
+    if($(window).width() < 992){
+    jQuery('#homeCarousel').css('height', height-112+'px');
+    }
+    });
+  </script>
 
    <!--===============
   |  Default Section |
@@ -100,9 +110,8 @@
   <script type="text/javascript" src="controllers/FormatsCtrl.js"></script>
   <script type="text/javascript" src="controllers/GmapCtrl.js"></script>
   <script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
-  <script type="text/javascript" src="controllers/campaiginCtrl.js"></script>
-  <script type="text/javascript" src="controllers/signInCtrl.js"></script>
-  <script type="text/javascript" src="controllers/registerCtrl.js"></script>
+  <script type="text/javascript" src="controllers/AuthCtrl.js"></script>
+  <script type="text/javascript" src="controllers/RegistrationCtrl.js"></script>
   <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
   <script type="text/javascript" src="controllers/userProfileCtrl.js"></script>
   <script type="text/javascript" src="controllers/admin/subscribersCtrl.js"></script>

@@ -690,6 +690,7 @@ app.controller('GmapCtrl',
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
+            $scope.loadUserCampaigns();
             toastr.success(result.message);
           }
           else {
