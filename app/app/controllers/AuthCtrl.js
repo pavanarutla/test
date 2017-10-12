@@ -1,5 +1,5 @@
 'user strict'
-app.controller("signInCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr) {
+app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;

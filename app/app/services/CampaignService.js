@@ -27,9 +27,9 @@ app.service('CampaignService',
           $http.post(config.apiPath + '/suggestion-request', suggestionRequest).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        deleteCampaign : function(campaginId){
+        deleteCampaign : function(campaignId){
           var dfd = $q.defer();
-          $http.post(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          $http.delete(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
         shareCampaignToEmail: function(campaignToEmail){
