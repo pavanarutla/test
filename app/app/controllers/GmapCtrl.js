@@ -680,12 +680,13 @@ app.controller('GmapCtrl',
       }
 
       $scope.userCampaigns = [];
-      $scope.loadUserCampaigns = function () {
-        CampaignService.getCampaigns($rootScope.loggedInUser.id).then(function (result) {
-          $scope.userCampaigns = result;
+      $scope.loadPlannedUserCampaigns = function () {
+        CampaignService.getPlannedCampaigns().then(function (result) {
+          console.log(result);
+          $scope.plannedUserCampaigns = result;
         });
       }
-      $scope.loadUserCampaigns();
+      $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
@@ -788,6 +789,30 @@ app.controller('GmapCtrl',
           }
         });
       };
+
+      $scope.shareCampaign = function(ev, shareCampaign){
+        var campaignToEmail = {
+          campaign_id: $scope.campaignToShare.id,
+          email: shareCampaign.email
+        };
+        CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                .textContent('You can specify some description text in here.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );          
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
 
     }
   ]

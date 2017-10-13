@@ -53,11 +53,6 @@ app.constant('config', {
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .state('index.campaign', {
-      url: 'campaign',
-      templateUrl: 'views/campaign.html',
-      controller: 'CampaignController'
-    })
     .state('index.pricing', {
       url: 'pricing',
       templateUrl: 'views/pricing.html',
@@ -73,14 +68,15 @@ app.constant('config', {
       templateUrl: 'views/campaigns.html',
       controller:'CampaignCtrl'
     })
-    .state('index.edit-campaign', {
-      url: 'edit-campaign',
+    .state('index.edit_campaign', {
+      url: 'edit-campaign/{campaignId}',
       templateUrl: 'views/edit-campaign.html',
       controller: 'CampaignCtrl'
     })
     .state('index.profile', {
       url: 'profile',
-      templateUrl: 'views/user-profile.html'
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
     })
     .state('index.agency-rofile', {
       url: 'agency-profile',

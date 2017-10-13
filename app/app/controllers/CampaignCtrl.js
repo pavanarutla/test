@@ -1,4 +1,13 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService) {
+
+  $scope.CAMPAIGN_STATUS = [
+    "",                 // index 0
+    "Draft",            // index 1
+    "Launch Requested", // index 2
+    "Running",          // index 3
+    "Suspended",        // index 4
+    "Stopped"           // index 5
+  ];
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -128,5 +137,26 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval) {
   $interval(function () {
     self.mode = (self.mode == 'query' ? 'determinate' : 'query');
   }, 7200, 0, true);
+
+  // get all Campaigns by a user to show it in campaign management page
+  $scope.getUserCampaigns = function () {
+    CampaignService.getCampaigns().then(function (result) {
+      $scope.plannedCampaigns = _.where(result, { status: 1 });
+      $scope.runningCampaigns = _.where(result, { status: 3 });
+      $scope.closedCampaigns = _.where(result, { status: 5 });
+    });
+  }
+  $scope.getUserCampaigns();
+  // get all Campaigns by a user to show it in campaign management page ends
+
+  $scope.getCampaignDetails = function(campaignId){
+    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+      console.log(result);
+      $scope.campaignDetails = result;
+    });
+  }
+  if($stateParams.campaignId){
+    $scope.getCampaignDetails($stateParams.campaignId);
+  }
 
 });

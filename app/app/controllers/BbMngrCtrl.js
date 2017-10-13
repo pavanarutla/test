@@ -329,30 +329,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $rootScope.serverUrl = config.serverUrl;
 
-  $scope.shareCampaign = function(ev, shareCampaign){
-    var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
-      email: shareCampaign.email
-    };
-    CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
-      if(result.status == 1){
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title(result.message)
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );          
-      }
-      else{
-        toastr.error(result.message);
-      }
-    });
-  }
-
   $scope.close = function(){
     $mdDialog.hide();
   }

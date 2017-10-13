@@ -21,6 +21,11 @@ app.service('UserService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/verify-email/' + code).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        getProfile: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/user-profile').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

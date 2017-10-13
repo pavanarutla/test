@@ -1,7 +1,14 @@
-app.controller('UserProfileCtrl', function($scope, $stateParams) {
+app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
 
   console.log($stateParams.code);
   
+  $scope.getLoggedInUserProfile = function(){
+    UserService.getProfile().then(function(result){
+      $scope.userProfile = result;
+    });
+  }
+  $scope.getLoggedInUserProfile();
+
   $scope.hoardingitems=[
     {
       cname:'Flipkart',
