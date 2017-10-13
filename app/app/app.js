@@ -85,8 +85,7 @@ app.constant('config', {
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
-      controller: function($scope, $stateParams, UserService, toastr) { 
-        console.log($stateParams.code);
+      controller: function($scope, $stateParams, UserService, toastr) {
         UserService.isMailVerified($stateParams.code).then(function(result){
           if(result.status == 1){
             $mdDialog.show({
@@ -107,6 +106,11 @@ app.constant('config', {
           });
         }
       }
+    })
+    .state('index.reset-password', {
+      url: 'reset_password/{code}',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
     })
     .state('admin', {
       abstract: true,

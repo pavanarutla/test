@@ -26,6 +26,16 @@ app.service('UserService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/user-profile').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        requestResetPassword: function(sendObj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/request-reset-password', sendObj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        resetPassword: function(resetPwdObj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/reset-password', resetPwdObj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }
