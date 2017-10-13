@@ -79,11 +79,15 @@ app.constant('config', {
     })
     .state('index.userprofile', {
       url: 'userprofile',
-      templateUrl: 'views/userprofile.html'
+      templateUrl: 'views/user-profile.html'
     })
     .state('index.agency-rofile', {
       url: 'agency-rofile',
       templateUrl: 'views/agency-profile.html'
+    })
+    .state('index.user-settings', {
+      url: 'user-settings',
+      templateUrl: 'views/resetpasword.html'
     })
     .state('admin', {
       abstract: true,
