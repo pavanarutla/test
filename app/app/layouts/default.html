@@ -3,7 +3,7 @@
 <div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
   <md-toolbar class="md-menu-toolbar header">
     <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
+      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
       <!-- <md-button aria-label="locations" href="#/" md-no-ink class="logo">
@@ -21,28 +21,33 @@
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> --> 
         <!-- browse-->
-        <md-button aria-label="location" class=" md-primary browse-btn" ng-show="isAuthenticated && !footerhide"><a href="#/location" style="padding:10px 0px;text-decoration:none;">
+        <md-button aria-label="location" class="browse-btn" ng-href="#/location" ng-show="isAuthenticated && !footerhide">
+          <!-- <a  style="padding:10px 0px;text-decoration:none;"> -->
             Browse BillBoards</a>
         </md-button>
         <!--sugg -->
-        <md-button aria-label="location" class=" md-primary " ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
           suggest me
         </md-button>
+         <!--search button -->
+        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-gt-xs>
+          <md-icon><i class="material-icons">search</i></md-icon>
+        </md-button>
         <!--notification button -->
-        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
+        <md-button aria-label="notifications" class="md-icon-button notiftn-btn" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
         <!-- profile button start-->
-        <md-menu ng-show="isAuthenticated">
+        <md-menu ng-show="isAuthenticated" class="profile-menu">
           <!-- <md-button aria-label="userimage" class="md-fab md-mini" ng-click="$mdOpenMenu($event)">
             <img ng-src="assets/images/product/person.png" class="md-avatar ">
           </md-button> -->
-          <md-button class="md-secondary md-mini md-button" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
               <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button>Chanikya varma</md-button>
+              <md-button href="#/userprofile">Chanikya varma</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
