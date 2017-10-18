@@ -68,11 +68,6 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .state('index.campagin', {
-      url: 'campagin',
-      templateUrl: 'views/campagin.html'
-     //console:'CampaignController'
-    })
     .state('index.campaginedit', {
       url: 'campaginedit',
       templateUrl: 'views/campaginedit.html'
@@ -88,6 +83,12 @@ app.constant('config', {
     .state('index.user-settings', {
       url: 'user-settings',
       templateUrl: 'views/resetpasword.html'
+    })
+    .state('index.filters', {
+      url: 'filters',
+      templateUrl: 'views/fliters.html',
+      controller: 'GmapCtrl'
+     
     })
     .state('admin', {
       abstract: true,

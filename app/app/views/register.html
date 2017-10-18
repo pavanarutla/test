@@ -1,6 +1,6 @@
 <!-- Register pages-->
 <md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="RegistrationCtrl">
-	<md-dialog-content>
+	   <md-dialog-content>
 		<md-content class="md-padding">
 			<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
 				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Users</md-nav-item>
@@ -130,6 +130,22 @@
 						</div>
 					</form>
 				</md-content>
+			</div>
+		</md-content>
+	</md-dialog-content>   
+	<md-dialog-content>
+		<md-content layout-fill="layout-fill" class="sucessContent" ng-show="success" >
+			<div layout="column" layout-align="center end" >
+				
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="close()">
+					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+				</md-button>
+			</div>
+			<div layout="column" layout-align="center center" layout-margin layout-padding>
+				<h1 class="md-title">A Mail As Been Sent To Your Registred Email</h1>
+				<div class="md-subhead">Go to Your Email and click link into verify...</div>
+				
+				
 			</div>
 		</md-content>
 	</md-dialog-content>
