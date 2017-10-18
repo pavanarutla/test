@@ -184,6 +184,14 @@
         </div>
       </div>
       <md-input-container class="md-block">
+        <label>Name</label>
+        <input ng-model="shareShortlisted.name" name="name" required="required"/>
+        <div ng-messages="shareCampaignForm.name.$error">
+          <div ng-message="required">Name is required.</div>
+          <div ng-message="pattern">Enter a valid Name.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
         <label>Email</label>
         <input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
         <div ng-messages="shareCampaignForm.email.$error">
@@ -193,7 +201,7 @@
       </md-input-container>
       <div layout="column" layout-margin>
         <div>
-          <md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProducts(shareShortlisted.email)">SHARE CAMPAIGN</md-button>
+          <md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProducts(shareShortlisted)">SHARE PRODUCT LIST</md-button>
         </div>
       </div>
     </md-content>
@@ -559,23 +567,20 @@
       <h3 class="md-headline">Share Campaign Details</h3>
       <form name="shareCampaignForm">
         <div layout="column">
-          <!-- <md-input-container class="md-block">
-            <label>Campaign Name</label>
-            <input ng-model="user.userName" type="text" name="uname" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
-            />
-            <div ng-messages="shareCampaignForm.uname.$error">
-              <div ng-message="required">Campaign Name is required.</div>
-
-              <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+          <md-input-container class="md-block">
+            <label>Recipient Name</label>
+            <input ng-model="shareCampaign.receiver_name" type="text" name="name" required="required"/>
+            <div ng-messages="shareCampaignForm.name.$error">
+              <div ng-message="required">Recipient Name is required.</div>
+              <div ng-message="pattern">Recipient Name should contain only Characters.</div>
             </div>
-          </md-input-container> -->
+          </md-input-container>
           <md-input-container class="md-block">
             <label>Email</label>
             <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
             />
             <div ng-messages="shareCampaignForm.email.$error">
               <div ng-message="required">Email is required.</div>
-
               <div ng-message="pattern">Enter a valied Email Id.</div>
             </div>
           </md-input-container>

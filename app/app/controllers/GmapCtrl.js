@@ -774,11 +774,10 @@ app.controller('GmapCtrl',
 
       }
 
-      $scope.shareShortlistedProducts = function (email) {
-        shortListedProductsIds = _.pluck($scope.shortListedProducts, 'id');
+      $scope.shareShortlistedProducts = function (shareShortlisted) {
         var sendObj = {
-          email: email,
-          shortlisted_products: shortListedProductsIds
+          email: shareShortlisted.email,
+          receiver_name: shareShortlisted.name
         };
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
           if(result.status == 1){
@@ -793,7 +792,8 @@ app.controller('GmapCtrl',
       $scope.shareCampaign = function(ev, shareCampaign){
         var campaignToEmail = {
           campaign_id: $scope.campaignToShare.id,
-          email: shareCampaign.email
+          email: shareCampaign.email,
+          receiver_name: shareCampaign.receiver_name
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
           if(result.status == 1){
@@ -802,7 +802,7 @@ app.controller('GmapCtrl',
                 .parent(angular.element(document.querySelector('body')))
                 .clickOutsideToClose(true)
                 .title(result.message)
-                .textContent('You can specify some description text in here.')
+                // .textContent('You can specify some description text in here.')
                 .ariaLabel('Alert Dialog Demo')
                 .ok('Got it!')
                 .targetEvent(ev)
