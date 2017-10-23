@@ -188,7 +188,7 @@ app.controller('GmapCtrl',
       $scope.campaigns  = function(){
         $scope.iscampaigns = !$scope.iscampaigns;
       }
-      $scope.formats = function(){
+      $scope.format = function(){
         $scope.isformats = !$scope.isformats;
       }
       $scope.suggestme = function(){

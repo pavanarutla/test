@@ -21,9 +21,8 @@
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> --> 
         <!-- browse-->
-        <md-button aria-label="location" class="browse-btn" ng-href="#/location" ng-show="isAuthenticated && !footerhide" hide-xs hide-sm>
-          <!-- <a  style="padding:10px 0px;text-decoration:none;"> -->
-            Browse BillBoards</a>
+        <md-button aria-label="location"  ng-href="#/location" class="browse-btn" ng-show="isAuthenticated && !footerhide" hide-xs>
+            Browse BillBoards
         </md-button>
         <!--sugg -->
         <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
@@ -39,9 +38,7 @@
         </md-button>
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated" class="profile-menu">
-          <!-- <md-button aria-label="userimage" class="md-fab md-mini" ng-click="$mdOpenMenu($event)">
-            <img ng-src="assets/images/product/person.png" class="md-avatar ">
-          </md-button> -->
+ 
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
               <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope">
           </md-button>
@@ -61,9 +58,7 @@
           </md-menu-content>
         </md-menu>
         <!-- profile button end-->
-        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
-                    BOOK NOW
-        </md-button> -->
+   
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated" style="color:#fff !important">
           BOOK NOW
         </md-button>
@@ -125,7 +120,7 @@
   <ui-view></ui-view>
 
   <!-- Footer Section-->
-  <footer hide-xs hide-sm>
+  <footer hide-xs >
     <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
         <md-button class="md-icon-button fabicon" aria-label="facebook">

@@ -84,12 +84,7 @@ app.constant('config', {
       url: 'user-settings',
       templateUrl: 'views/resetpasword.html'
     })
-    .state('index.filters', {
-      url: 'filters',
-      templateUrl: 'views/fliters.html',
-      controller: 'GmapCtrl'
-     
-    })
+   
     .state('admin', {
       abstract: true,
       url: '/admin', 
