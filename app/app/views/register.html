@@ -15,30 +15,38 @@
 					<form name="registerUser" novalidate="novalidate">
 						<md-input-container class="md-block">
 							<label>Name</label>
-							<input ng-model="user.name" name="username" type="text" maxlength="30" required="required" />
-							<div ng-messages="registerUser.username.$error">
-								<div class="alret alert-danger" ng-message="required">user Name is required.</div>
-								<div ng-message="maxlength">user Name shouldn't exede 30 characters. </div>
+							<input ng-model="user.name" name="name" type="text" maxlength="30" required="required" />
+							<div ng-messages="registerUser.name.$error">
+								<div class="alret alert-danger" ng-message="required">Name is required.</div>
+								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
-							<label>Username</label>
-							<input ng-model="user.username" name="userName" type="text" minlength="6" maxlength="30" />
-							<div ng-messages="registerUser.userName.$error">
-								<div class="alret alert-warning" ng-message="minlength">username must have 6 characters.</div>
-								<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+							<label>Company Name</label>
+							<input ng-model="user.company_name" name="companyName" type="text" minlength="6" maxlength="30" />
+							<div ng-messages="registerUser.companyName.$error">
+								<div class="alret alert-warning" ng-message="minlength">company name must have 6 characters.</div>
+								<div ng-message="maxlength">company name shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Email</label>
-							<input ng-model="user.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-							/>
+							<input ng-model="user.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
 							<div ng-messages="registerUser.email.$error">
 								<div class="alret alert-danger" ng-message="required">Email is required.</div>
 								<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
 								<div ng-message="pattern">Enter a valied username</div>
 							</div>
 						</md-input-container>
+						<md-input-container class="md-block">
+								<label>Password</label>
+								<input ng-model="user.password" name="password" type="password" maxlength="30" required="required" ng-pattern="/.*[A-Z]+[a-z]+[0-9]+[!@#\$%\^&*\(\)_~\.]+.*/" />
+								<div ng-messages="registerUser.password.$error">
+									<div class="alret alert-danger" ng-message="required">Password is required.</div>
+									<div ng-message="maxlength">Password shouldn't exede 30 characters. </div>
+									<div ng-message="pattern">Enter a valied Password</div>
+								</div>
+							</md-input-container>
 						<md-input-container class="md-block">
 							<label>Mobile number</label>
 							<input ng-model="user.phone" name="phone" type="mobile" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"

@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
 
+      $scope.selectedAreaFilter = null;
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -99,20 +100,20 @@ app.controller('GmapCtrl',
       // });
 
       // range circle
-      $scope.radius = 0;
-      circle = new google.maps.Circle({
-        strokeColor: '#FF0099',
-        strokeOpacity: 1,
-        strokeWeight: 2,
-        fillColor: '#009ee0',
-        fillOpacity: 0.2
-      });
-      $scope.updateCircleRadius = function (val) {
-        circle.setCenter($scope.address.components.location);
-        circle.setRadius(Number(val));
-        circle.setMap($scope.mapObj);
-      }
-      circleBounds = circle.getBounds();
+      // $scope.radius = 0;
+      // circle = new google.maps.Circle({
+      //   strokeColor: '#FF0099',
+      //   strokeOpacity: 1,
+      //   strokeWeight: 2,
+      //   fillColor: '#009ee0',
+      //   fillOpacity: 0.2
+      // });
+      // $scope.updateCircleRadius = function (val) {
+      //   circle.setCenter($scope.address.components.location);
+      //   circle.setRadius(Number(val));
+      //   circle.setMap($scope.mapObj);
+      // }
+      // circleBounds = circle.getBounds();
 
       // range end
 
@@ -330,6 +331,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
+        console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -657,6 +659,9 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
+          $timeout(function(){
+            $scope.campaignSavedSuccessfully = false;
+          },1500)
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -737,16 +742,18 @@ app.controller('GmapCtrl',
         strokeColor: "#0000ff",
         strokeOpacity: 1.0,
         strokeWeight: 0.5,
-        fillColor: "#0000ff",
-        fillOpacity: 0.2,
+        // fillColor: "#0000ff",
+        fillOpacity: 0.0,
       });
 
+      $scope.circleRadius = 0;
       $scope.updateCircle = function(){        
         rangeCircle.setMap(null);
         rangeCircle.setRadius($scope.circleRadius*1000);
-        rangeCircle.setCenter($scope.mapObj.getCenter());
+        rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
+        $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }
       // Drawing a circle ends
 
@@ -754,6 +761,12 @@ app.controller('GmapCtrl',
         CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
           $scope.campaignDetails = campaignDetails;
           $scope.toggleCampaignDetailSidenav();
+        });
+      }
+
+      var updateCampaignDetailSidenav = function(campaignId){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+          $scope.campaignDetails = campaignDetails;
         });
       }
 
@@ -813,6 +826,44 @@ app.controller('GmapCtrl',
         });
       }
 
+      $scope.viewProduct = function(product){
+        $scope.product.image = config.serverUrl + product.image;
+        $scope.product.siteNo = product.siteNo;
+        $scope.product.panelSize = product.panelSize;
+        $scope.product.address = product.address;
+        $scope.product.impressions = product.impressions;
+        $scope.product.direction = product.direction;
+        $scope.product.lighting = product.lighting;
+        $scope.product.availableDates = product.availableDates;
+        $scope.hideSelectedMarkerDetail = false;
+        $mdSidenav('productDetails').toggle();
+      }
+
+      $scope.deleteProductFromCampaign = function(productId, campaignId){
+        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+          if(result.status == 1){
+            toastr.success(result.message);
+           updateCampaignDetailSidenav(campaignId);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+
+      $scope.autoCompleteArea = function(query) {
+        return LocationService.getAreasWithAutocomplete(query);
+      }
+
+      $scope.selectedAreaChanged = function(area){
+        $scope.selectedAreaFilter = area;
+        if(area){
+          $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+          $scope.mapObj.fitBounds(bounds);
+        }
+      }
     }
   ]
 );
