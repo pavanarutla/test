@@ -330,6 +330,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
+        console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -657,6 +658,9 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
+          $timeout(function(){
+            $scope.campaignSavedSuccessfully = false;
+          },1500)
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -757,6 +761,12 @@ app.controller('GmapCtrl',
         });
       }
 
+      var updateCampaignDetailSidenav = function(campaignId){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+          $scope.campaignDetails = campaignDetails;
+        });
+      }
+
       $scope.addProductToExistingCampaign = function(existingCampaign){
         var productToCampaign = {
           product_id: $scope.selectedProduct.properties.id,
@@ -813,6 +823,30 @@ app.controller('GmapCtrl',
         });
       }
 
+      $scope.viewProduct = function(product){
+        $scope.product.image = config.serverUrl + product.image;
+        $scope.product.siteNo = product.siteNo;
+        $scope.product.panelSize = product.panelSize;
+        $scope.product.address = product.address;
+        $scope.product.impressions = product.impressions;
+        $scope.product.direction = product.direction;
+        $scope.product.lighting = product.lighting;
+        $scope.product.availableDates = product.availableDates;
+        $scope.hideSelectedMarkerDetail = false;
+        $mdSidenav('productDetails').toggle();
+      }
+
+      $scope.deleteProductFromCampaign = function(productId, campaignId){
+        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+          if(result.status == 1){
+            toastr.success(result.message);
+           updateCampaignDetailSidenav(campaignId);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
     }
   ]
 );
