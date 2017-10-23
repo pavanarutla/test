@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr','$q',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr,$q) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -561,6 +561,63 @@ app.controller('GmapCtrl',
           }
         });
       }
+
+      /// autocomplete for filters
+
+          //var self = this;
+      
+          // list of `state` value/display objects
+          $scope.areas        = loadAll();
+          $scope.selectedItem  = null;
+          $scope.searchText    = null;
+          $scope.querySearch   = querySearch;
+      
+          // ******************************
+          // Internal methods
+          // ******************************
+      
+          /**
+           * Search for area... use $timeout to simulate
+           * remote dataservice call.
+           */
+          function querySearch (query) {
+            var results = query ? $scope.areas.filter( createFilterFor(query) ) : $scope.areas;
+            var deferred = $q.defer();
+            $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+            return deferred.promise;
+          }
+      
+          /**
+           * Build `states` list of key/value pairs
+           */
+          function loadAll() {
+            var allAreas = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+                    Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+                    Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+                    Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+                    North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+                    South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+                    Wisconsin, Wyoming';
+            return allAreas.split(/, +/g).map( function (area) {
+              return {
+                value: area.toLowerCase(),
+                display: area
+              };
+            });
+          }
+      
+          /**
+           * Create filter function for a query string
+           */
+          function createFilterFor(query) {
+            var lowercaseQuery = angular.lowercase(query);
+      
+            return function filterFn(area) {
+              return (area.value.indexOf(lowercaseQuery) === 0);
+            };
+      
+          }
+        //}
 
       $scope.setNewAddress = function () {
         // console.log($scope.address.components.location);

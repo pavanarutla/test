@@ -670,12 +670,23 @@
                 <form class="filter-form">
                   <md-input-container class="pstcde" style="width:100%">
                     <!-- <label for="testInput">Postcode,Area Name,Tab ID</label> -->
-                    <input vs-google-autocomplete type="text" id="testInput" md-autofocus ng-model="address.name" vs-place="address.place" vs-place-id="address.components.placeId"
+                    <!-- <input vs-google-autocomplete type="text" id="testInput" md-autofocus ng-model="address.name" vs-place="address.place" vs-place-id="address.components.placeId"
                       vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city"
                       vs-state="address.components.state" vs-country-short="address.components.countryCode" vs-country="address.components.country"
                       vs-post-code="address.components.postCode" vs-district="address.components.district" vs-latitude="address.components.location.lat"
                       vs-longitude="address.components.location.lng" type="text" name="address" aria-label="google-autocomplete"
-                      ng-change="setNewAddress()">
+                      ng-change="setNewAddress()">-->
+                      <md-autocomplete                      
+                      md-input-minlength="2"
+                      md-selected-item="selectedItem"
+                      md-search-text="searchText"
+                      md-items="item in querySearch(searchText)"
+                      md-item-text="item.display"                      
+                      md-floating-label="area search">
+                    <md-item-template>
+                      <span md-highlight-text="searchText">{{item.display}}</span>
+                    </md-item-template>                    
+                  </md-autocomplete>
                   </md-input-container>
                 </form>
                 <!-- pincode,area,tab id section end-->
