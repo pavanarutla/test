@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
 
+      $scope.selectedAreaFilter = null;
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -99,20 +100,20 @@ app.controller('GmapCtrl',
       // });
 
       // range circle
-      $scope.radius = 0;
-      circle = new google.maps.Circle({
-        strokeColor: '#FF0099',
-        strokeOpacity: 1,
-        strokeWeight: 2,
-        fillColor: '#009ee0',
-        fillOpacity: 0.2
-      });
-      $scope.updateCircleRadius = function (val) {
-        circle.setCenter($scope.address.components.location);
-        circle.setRadius(Number(val));
-        circle.setMap($scope.mapObj);
-      }
-      circleBounds = circle.getBounds();
+      // $scope.radius = 0;
+      // circle = new google.maps.Circle({
+      //   strokeColor: '#FF0099',
+      //   strokeOpacity: 1,
+      //   strokeWeight: 2,
+      //   fillColor: '#009ee0',
+      //   fillOpacity: 0.2
+      // });
+      // $scope.updateCircleRadius = function (val) {
+      //   circle.setCenter($scope.address.components.location);
+      //   circle.setRadius(Number(val));
+      //   circle.setMap($scope.mapObj);
+      // }
+      // circleBounds = circle.getBounds();
 
       // range end
 
@@ -741,16 +742,18 @@ app.controller('GmapCtrl',
         strokeColor: "#0000ff",
         strokeOpacity: 1.0,
         strokeWeight: 0.5,
-        fillColor: "#0000ff",
-        fillOpacity: 0.2,
+        // fillColor: "#0000ff",
+        fillOpacity: 0.0,
       });
 
+      $scope.circleRadius = 0;
       $scope.updateCircle = function(){        
         rangeCircle.setMap(null);
         rangeCircle.setRadius($scope.circleRadius*1000);
-        rangeCircle.setCenter($scope.mapObj.getCenter());
+        rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
+        $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }
       // Drawing a circle ends
 
@@ -846,6 +849,20 @@ app.controller('GmapCtrl',
             toastr.error(result.message);
           }
         });
+      }
+
+      $scope.autoCompleteArea = function(query) {
+        return LocationService.getAreasWithAutocomplete(query);
+      }
+
+      $scope.selectedAreaChanged = function(area){
+        $scope.selectedAreaFilter = area;
+        if(area){
+          $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+          $scope.mapObj.fitBounds(bounds);
+        }
       }
     }
   ]
