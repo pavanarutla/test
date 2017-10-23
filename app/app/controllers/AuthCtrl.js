@@ -1,5 +1,5 @@
 'user strict'
-app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr) {
+app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr, UserService) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
@@ -65,6 +65,20 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$scope.agencyForm = true;
 		$scope.userForm = false;
 		$scope.forgotPasswordpage = false;
+	}
+
+	$scope.requestResetPassword = function(forgotPwd){
+		var sendObj = {
+			email : forgotPwd.email
+		};
+		UserService.requestResetPassword(sendObj).then(function(result){
+			if(result.status == 1){
+				toastr.success(result.message);
+			}
+			else{
+				toastr.error(result.error);
+			}
+		});
 	}
 
 	$scope.close = function () {

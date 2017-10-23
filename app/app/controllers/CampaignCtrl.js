@@ -1,4 +1,13 @@
-app.controller('CampaignController', function ($scope, $mdDialog) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService) {
+
+  $scope.CAMPAIGN_STATUS = [
+    "",                 // index 0
+    "Draft",            // index 1
+    "Launch Requested", // index 2
+    "Running",          // index 3
+    "Suspended",        // index 4
+    "Stopped"           // index 5
+  ];
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -20,27 +29,22 @@ app.controller('CampaignController', function ($scope, $mdDialog) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-
         //Sets the Old Image to new New Image
         $('#photo-id').attr('src', e.target.result);
-
         //Create a canvas and draw image on Client Side to get the byte[] equivalent
         var canvas = document.createElement("canvas");
         var imageElement = document.createElement("img");
-
         imageElement.setAttribute('src', e.target.result);
         canvas.width = imageElement.width;
         canvas.height = imageElement.height;
         var context = canvas.getContext("2d");
         context.drawImage(imageElement, 0, 0);
         var base64Image = canvas.toDataURL("image/jpeg");
-
         //Removes the Data Type Prefix 
         //And set the view model to the new value
         $scope.data.uploadedPhoto = e.target.result.replace(/data:image\/jpeg;base64,/g, '');
         // console.log($scope.data.uploadedPhoto);
       }
-
       //Renders Image on Page
       reader.readAsDataURL(input.files[0]);
     }
@@ -133,5 +137,26 @@ app.controller('CampaignController', function ($scope, $mdDialog) {
   $interval(function () {
     self.mode = (self.mode == 'query' ? 'determinate' : 'query');
   }, 7200, 0, true);
+
+  // get all Campaigns by a user to show it in campaign management page
+  $scope.getUserCampaigns = function () {
+    CampaignService.getCampaigns().then(function (result) {
+      $scope.plannedCampaigns = _.where(result, { status: 1 });
+      $scope.runningCampaigns = _.where(result, { status: 3 });
+      $scope.closedCampaigns = _.where(result, { status: 5 });
+    });
+  }
+  $scope.getUserCampaigns();
+  // get all Campaigns by a user to show it in campaign management page ends
+
+  $scope.getCampaignDetails = function(campaignId){
+    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+      console.log(result);
+      $scope.campaignDetails = result;
+    });
+  }
+  if($stateParams.campaignId){
+    $scope.getCampaignDetails($stateParams.campaignId);
+  }
 
 });

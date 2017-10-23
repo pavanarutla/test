@@ -657,7 +657,7 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
-          $scope.loadUserCampaigns();
+          $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
       }
@@ -679,18 +679,18 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.userCampaigns = [];
-      $scope.loadUserCampaigns = function () {
-        CampaignService.getCampaigns($rootScope.loggedInUser.id).then(function (result) {
-          $scope.userCampaigns = result;
+      $scope.plannedUserCampaigns = [];
+      $scope.loadPlannedUserCampaigns = function () {
+        CampaignService.getPlannedCampaigns().then(function (result) {
+          $scope.plannedUserCampaigns = result;
         });
       }
-      $scope.loadUserCampaigns();
+      $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
-            $scope.loadUserCampaigns();
+            $scope.loadPlannedUserCampaigns();
             toastr.success(result.message);
           }
           else {
@@ -772,6 +772,47 @@ app.controller('GmapCtrl',
         });
 
       }
+
+      $scope.shareShortlistedProducts = function (shareShortlisted) {
+        var sendObj = {
+          email: shareShortlisted.email,
+          receiver_name: shareShortlisted.name
+        };
+        CampaignService.shareShortListedProducts(sendObj).then(function (result) {
+          if(result.status == 1){
+            toastr.success(result.message);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      };
+
+      $scope.shareCampaign = function(ev, shareCampaign){
+        var campaignToEmail = {
+          campaign_id: $scope.campaignToShare.id,
+          email: shareCampaign.email,
+          receiver_name: shareCampaign.receiver_name
+        };
+        CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                // .textContent('You can specify some description text in here.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );          
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+
     }
   ]
 );
