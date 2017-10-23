@@ -657,7 +657,7 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
-          $scope.loadUserCampaigns();
+          $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
       }
@@ -679,10 +679,9 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.userCampaigns = [];
+      $scope.plannedUserCampaigns = [];
       $scope.loadPlannedUserCampaigns = function () {
         CampaignService.getPlannedCampaigns().then(function (result) {
-          console.log(result);
           $scope.plannedUserCampaigns = result;
         });
       }
@@ -691,7 +690,7 @@ app.controller('GmapCtrl',
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
-            $scope.loadUserCampaigns();
+            $scope.loadPlannedUserCampaigns();
             toastr.success(result.message);
           }
           else {

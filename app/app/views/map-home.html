@@ -7,7 +7,6 @@
           <span>{{campaignDetails.name}}</span>
         </h2>
         <span flex></span>
-        <a class="md-button md-primary" href="#">Edit</a>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCampaignDetailSidenav()">
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -62,7 +61,7 @@
           <md-button class="md-raised md-warn" layout-fill> REQUEST PROPOSAL</md-button>
         </div>
         <div>
-          <md-button class="md-raised " layout-fill> SHARE CAMPAIGN</md-button>
+          <md-button class="md-raised " layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
         </div>
 
       </div>
@@ -138,7 +137,6 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px;" md-component-id="shortlistSharingSidenav">
     <div layout="row">
       <div class="md-toolbar-tools">
-        <div class="md-title">Shortlisted Products</div>
         <div flex></div>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareShortlistedSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
@@ -146,64 +144,29 @@
         </md-button>
       </div>
     </div>
-    <md-content>
-      <div layout="column" layout-margin ng-repeat="shortlisted in shortListedProducts" style="margin: 0 8px 0 8px;">
-        <div layout="row">
-          <div layout="column" layout-align="center start" flex="50">
-            <div class="md-body-2">{{shortlisted.siteNo}}</div>
-          </div>
-          <div layout="row" layout-align="end center" flex="50">
-            <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
-            <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
-            <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
-          </div>
-        </div>
-        <div layout="row" style="margin: 0 8px 0 8px;">
-          <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-body-2">{{shortlisted.format_name}}</div>
-          </div>
-          <div layout="column" flex="35" layout-align="center start">
-            <div class="md-body-2">Facing</div>
-          </div>
-          <div layout="column" flex="30" layout-align="center end ">
-            <div class="md-body-2">Impressions</div>
-          </div>
-        </div>
-        <div layout="row">
-          <div layout="column" flex="35" layout-align="center start" class="margin-con">
-            <div class="md-caption">{{shortlisted.address}}</div>
-            <div class="md-caption">500001</div>
-          </div>
-          <div layout="column" flex="35" layout-align=" start center">
-            <div class="md-caption">{{shortlisted.direction}}</div>
-          </div>
-          <div layout="column" flex="30" layout-align="start end ">
-            <div class="md-caption">{{shortlisted.impressions}}</div>
-            <div class="md-caption">week(Approx)</div>
-          </div>
-        </div>
-      </div>
-      <md-input-container class="md-block">
-        <label>Name</label>
-        <input ng-model="shareShortlisted.name" name="name" required="required"/>
-        <div ng-messages="shareCampaignForm.name.$error">
-          <div ng-message="required">Name is required.</div>
-          <div ng-message="pattern">Enter a valid Name.</div>
-        </div>
-      </md-input-container>
-      <md-input-container class="md-block">
-        <label>Email</label>
-        <input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-        <div ng-messages="shareCampaignForm.email.$error">
-          <div ng-message="required">Email is required.</div>
-          <div ng-message="pattern">Enter a valied Email Id.</div>
-        </div>
-      </md-input-container>
-      <div layout="column" layout-margin>
-        <div>
+    <md-content layout-align="center center" layout-margin layout-padding>
+      <h3 class="md-headline">Share Shortlisted Products</h3>
+      <form name="shareShortlistedForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <input ng-model="shareShortlisted.name" name="name" required="required"/>
+            <div ng-messages="shareShortlistedForm.name.$error">
+              <div ng-message="required">Name is required.</div>
+              <div ng-message="pattern">Enter a valid Name.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <div ng-messages="shareShortlistedForm.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valied Email Id.</div>
+            </div>
+          </md-input-container>
           <md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProducts(shareShortlisted)">SHARE PRODUCT LIST</md-button>
         </div>
-      </div>
+      </form>
     </md-content>
   </md-sidenav>
   <!-- List of shortlisted products' share details to client ends -->
@@ -536,7 +499,7 @@
         <md-input-container style="z-index:999;width:100%">
           <label>Select Campaign</label>
           <md-select ng-model="existingCampaign.id" required="required">
-            <md-option ng-value="campaign.id" ng-repeat="campaign in userCampaigns">{{campaign.name}}</md-option>
+            <md-option ng-value="campaign.id" ng-repeat="campaign in plannedUserCampaigns">{{campaign.name}}</md-option>
           </md-select>
         </md-input-container>
       </div>
@@ -679,7 +642,7 @@
       <div layout="row" layout-padding class="search-field">
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
-          <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id and Area" class="search-bg" on-enter="searchBySiteNo()">
+          <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id" class="search-bg" on-enter="searchBySiteNo()">
         </md-input-container>
       </div>
       <!-- search html start-->
