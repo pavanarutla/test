@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, $auth, toastr, ContactService, CampaignService, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -260,6 +260,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.toggleViewAllShortlisted = function () {
     $mdSidenav('shortlistAndSaveSidenav').toggle();
   };
+  $scope.toggleShareShortlistedSidenav = function () {
+    $mdSidenav('shortlistSharingSidenav').toggle();
+  };
 
   // edit list saved campgin
   $scope.closeSideEditList = function () {
@@ -332,30 +335,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   // }
 
   $rootScope.serverUrl = config.serverUrl;
-
-  $scope.shareCampaign = function(ev, shareCampaign){
-    var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
-      email: shareCampaign.email
-    };
-    CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
-      if(result.status == 1){
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title(result.message)
-            .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );          
-      }
-      else{
-        toastr.error(result.message);
-      }
-    });
-  }
 
   $scope.close = function(){
     $mdDialog.hide();
