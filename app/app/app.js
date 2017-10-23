@@ -223,10 +223,22 @@ app.constant('config', {
       url: '/callcenterinfo',
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
+    })
+    .state('owner', {
+      abstract: true,
+      url: '/owner', 
+      templateUrl: 'layouts/owner.html',
+      controller: 'OwnerMngrCtrl'
+    })
+    .state('owner.dashboard',{
+      url: '/dashboard',
+      templateUrl: 'views/owner/dashboard.html',
+      controller: 'DashboardCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
+    $urlRouterProvider.when('/owner', '/owner/dashboard');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
