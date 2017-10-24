@@ -63,11 +63,11 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-<<<<<<< HEAD
-    .state('index.campaginedit', {
-      url: 'campaginedit',
-      templateUrl: 'views/campaginedit.html'
-=======
+    .state('index.campaign', {
+      url: 'campaign',
+      templateUrl: 'views/campaign.html',
+      controller:'CampaignCtrl'
+    })
     .state('index.campaigns', {
       url: 'campaigns',
       templateUrl: 'views/campaigns.html',
@@ -77,7 +77,6 @@ app.constant('config', {
       url: 'edit-campaign/{campaignId}',
       templateUrl: 'views/edit-campaign.html',
       controller: 'CampaignCtrl'
->>>>>>> 4a0af8ad72b652ee13c5b104772e564149aa4e85
     })
     .state('index.profile', {
       url: 'profile',
