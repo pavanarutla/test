@@ -636,6 +636,13 @@
           <md-icon><i class="material-icons">error_outline</i></md-icon>
         </md-button>
       </custom-control> -->
+      <div layout="row" layout="fill" class="top-section" layout-align="end center" show-xs hide-gt-xs>
+        <md-button class="md-button topbtn-one" ng-click="filters()">
+          Filter
+        </md-button>
+        
+      <md-button class="md-primary topbtn-two" ng-click="toggleTraffic()" id="traffic-toggle" > Live Traffic</md-button>
+      </div>
     </ng-map>
     <div layout="column" class="search-part" id="sideNavPart" hide-xs>
       <!-- search html start-->
@@ -789,9 +796,9 @@
             </div>
           </md-content>
           <div layout="column" ng-show="format" class="formats-types">
-            <div ng-repeat="formatGroup in formatGrid">
+            <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
               <div layout="row" layout-align="space-around center">
-                <div ng-repeat="format in formatGroup track by $index">
+                <div ng-repeat="format in formatGroup track by $index" class="formatgridpart">
                   <div layout="column" class="digital-board">
                     <div ng-cloak style="border-right:1px solid #ccc">
                       <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
@@ -803,7 +810,7 @@
                       <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
                     </div>
                   </div>
-                  <md-divider></md-divider>
+                  <md-divider hide-xs></md-divider>
                 </div>
               </div>
               <md-divider></md-divider>
@@ -1005,56 +1012,160 @@
       </div>
     </div> -->
   </div> 
-  <div layout="row" style="top:auto;z-index:1;position:absolute;bottom:0px;width:100%;background:#fff;height: 45px;" show-xs hide-gt-xs>
-    <md-list flex layout="row">
-      <md-list-item style="padding:5px">
-        <div>
-          <md-button class="md-grid-item-content">
-            <span><md-icon md-svg-icon="assets/images/icons/004-sign.svg"></md-icon></span>
-            <div class="md-caption"> roadeside </div>
-          </md-button>
+  
+  <div layout="row" class="bottom-btn" show-xs hide-gt-xs  layout-align="space-around center">
+    <div style="margin:0 0 0 10px">
+      <a ng-click="Home()" class="">
+      <span ng-hide="isactive"><img src="assets/mobile-icons/home.png" alt="home" /></span>
+      <span ng-show="isactive"><img src="assets/mobile-icons/home-clicked.png" alt="home" /></span>
+      </a>
+    </div>
+    <div>
+      <a ng-click="shortlisted()">
+        <span ng-hide="isshortlisted"> <img src="assets/mobile-icons/shortlisted.png" alt="shortlisted"/></span>
+        <span ng-show="isshortlisted"> <img src="assets/mobile-icons/shortlisted-clicked.png" alt="shortlisted"/></span>
+      </a>
+    </div>
+    <div>
+      <a ng-click="campaigns()">
+        <span ng-hide="iscampaigns"><img src="assets/mobile-icons/campaigns.png" alt="campaigns"/></span>
+        <span ng-show="iscampaigns"><img src="assets/mobile-icons/campaign-clicked.png" alt="campaigns"/></span>
+      </a>
+    </div>
+    <div>
+      <a ng-click="format()">
+        <span ng-hide="isformats" ><img src="assets/mobile-icons/formats.png" alt="home"/></span>
+        <span ng-show="isformats"><img src="assets/mobile-icons/formats-clicked.png" alt="home"/></span>
+      </a>
+    </div>
+    <div>
+      <a ng-click="suggestme()">
+        <span ng-hide="issuggestme"><img src="assets/mobile-icons/suggestme.png" alt="home"></span>
+        <span ng-show="issuggestme"><img src="assets/mobile-icons/suggest-clicked.png" alt="home"/></span>
+      </a>
+    </div>
+  
+  </div>
+  <!-- formats mobile vesrion-->
+  <div layout="row" class="formats-bottom-btn" show-xs hide-gt-xs  layout-align="space-around center" ng-show="isformats">
+
+    <div layout="column" ng-show="format" class="formats-types">
+      <div ng-repeat="formatGroup in formatGrid">
+        <div layout="row" layout-align="space-around center">
+          <div ng-repeat="format in formatGroup track by $index">
+            <div layout="column" class="digital-board">
+              <div ng-cloak style="border-right:1px solid #ccc">
+                <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+                  ng-if="format">
+                  <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
+                  <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                  <div class="md-caption">{{format.name}}</div>
+                </md-button>
+                <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
+              </div>
+            </div>
+            <md-divider></md-divider>
+          </div>
         </div>
-      </md-list-item>
-      <md-list-item style="padding:5px">
-        <div>
-          <md-button class="md-grid-item-content">
-            <span><md-icon md-svg-icon="assets/images/icons/003-bus.svg"></md-icon></span>
-            <div class="md-caption"> TRANSIT </div>
-          </md-button>
+        <md-divider></md-divider>
+      </div>
+    </div>
+
+  </div>
+  <!-- shortlist mobile vesrion-->  
+  <div layout="column" class="formats-bottom-btn contbg md-whiteframe-2dp shortlist-mobile" show-xs hide-gt-xs   ng-show="isshortlisted">
+    <div class="md-body-2" layout="column" layout-margin>Selected List</div>
+
+    <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
+
+      <div layout="row" flex layout-fill >
+        <div flex="20"> 
+          <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
         </div>
-      </md-list-item>
-      <md-list-item style="padding:5px">
-        <div>
-          <md-button class="md-grid-item-content">
-            <span><md-icon md-svg-icon="assets/images/icons/002-airplane.svg"></md-icon></span>
-            <div class="md-caption">airport </div>
-          </md-button>
+        <div flex="60">
+            <div class="md-body-2">BI-73784</div>
+            <div class="md-caption">
+              LB Nagar towards Vanasthalipuram
+            </div>
         </div>
-      </md-list-item>
-      <md-list-item style="padding:5px">
-        <div>
-          <md-button class="md-grid-item-content">
-            <span><md-icon md-svg-icon="assets/images/icons/001-bus-stop.svg"></md-icon></span>
-            <div class="md-caption"> bus shelter</div>
+        <div flex="20">
+           
+          <md-button class="md-icon-button" aria-label="Close Side Panel">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
+        
+          <div class="md-caption theme-text" >12,33,333</div>
         </div>
-      </md-list-item>
-      <md-list-item style="padding:5px">
-        <div>
-          <md-button class="md-grid-item-content">
-            <span><md-icon md-svg-icon="assets/images/icons/003-billboard.svg"></md-icon></span>
-            <div class="md-caption"> digital </div>
+
+      </div>
+    </div>
+    <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
+
+      <div layout="row" flex layout-fill >
+        <div flex="20"> 
+          <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
+        </div>
+        <div flex="60">
+            <div class="md-body-2">BI-73784</div>
+            <div class="md-caption">
+              LB Nagar towards Vanasthalipuram
+            </div>
+        </div>
+        <div flex="20">
+           
+          <md-button class="md-icon-button" aria-label="Close Side Panel">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
+        
+          <div class="md-caption theme-text" >12,33,333</div>
         </div>
-      </md-list-item>
-    </md-list> 
+
+      </div>
+    </div>
+    <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
+
+      <div layout="row" flex layout-fill >
+        <div flex="20"> 
+          <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
+        </div>
+        <div flex="60">
+            <div class="md-body-2">BI-73784</div>
+            <div class="md-caption">
+              LB Nagar towards Vanasthalipuram
+            </div>
+        </div>
+        <div flex="20">
+           
+          <md-button class="md-icon-button" aria-label="Close Side Panel">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+          </md-button>
+        
+          <div class="md-caption theme-text" >12,33,333</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>
 </div>
 
 
-<script>
+<!-- <script>
   var height = $(window).height();
   $('#map-container').height(height - 64);
 
-</script>
+</script> -->
+ <script>
+   
+    $(document).ready(function(){  
+    height = $(window).height();  //getting windows height
+    jQuery('#map-container').css('height', height-64+'px');   //and setting height of carousel
+    if($(window).width() < 600){
+    jQuery('#map-container').css('height', height-100+'px');
+    }
+    });
+  </script>  
