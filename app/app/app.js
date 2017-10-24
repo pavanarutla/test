@@ -63,6 +63,11 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.campaign', {
+      url: 'campaign',
+      templateUrl: 'views/campaign.html',
+      controller:'CampaignCtrl'
+    })
     .state('index.campaigns', {
       url: 'campaigns',
       templateUrl: 'views/campaigns.html',
@@ -112,6 +117,7 @@ app.constant('config', {
       templateUrl: 'views/reset-password.html',
       controller: 'UserSettingsCtrl'
     })
+   
     .state('admin', {
       abstract: true,
       url: '/admin', 

@@ -174,8 +174,38 @@ app.controller('GmapCtrl',
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
+      // mobile bottom menu
+      $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+      $scope.Home = function(){
+        $scope.isactive = !$scope.isactive;
+      }
+      $scope.shortlisted = function(){
+        $scope.isshortlisted = !$scope.isshortlisted;
+      }
+      $scope.campaigns  = function(){
+        $scope.iscampaigns = !$scope.iscampaigns;
+      }
+      $scope.format = function(){
+        $scope.isformats = !$scope.isformats;
+      }
+      $scope.suggestme = function(){
+        $scope.issuggestme = !$scope.issuggestme;
+      }
 
-
+      $scope.filters = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/fliters.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.close = function(){
+        $mdDialog.hide();
+      }
       //slider
       function sliderController($scope) {
         $scope.color = {
