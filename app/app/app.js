@@ -53,11 +53,6 @@ app.constant('config', {
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .state('index.campaign', {
-      url: 'campaign',
-      templateUrl: 'views/campaign.html',
-      controller: 'CampaignController'
-    })
     .state('index.pricing', {
       url: 'pricing',
       templateUrl: 'views/pricing.html',
@@ -68,26 +63,73 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .state('index.campagin', {
-      url: 'campagin',
-      templateUrl: 'views/campagin.html'
-     //console:'CampaignController'
+    .state('index.campaign', {
+      url: 'campaign',
+      templateUrl: 'views/campaign.html',
+      controller:'CampaignCtrl'
     })
-    .state('index.campaginedit', {
-      url: 'campaginedit',
-      templateUrl: 'views/campaginedit.html'
+    .state('index.campaigns', {
+      url: 'campaigns',
+      templateUrl: 'views/campaigns.html',
+      controller:'CampaignCtrl'
     })
-    .state('index.userprofile', {
-      url: 'userprofile',
-      templateUrl: 'views/user-profile.html'
+    .state('index.edit_campaign', {
+      url: 'edit-campaign/{campaignId}',
+      templateUrl: 'views/edit-campaign.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.profile', {
+      url: 'profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
     })
     .state('index.agency-rofile', {
-      url: 'agency-rofile',
+      url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
-    .state('index.user-settings', {
-      url: 'user-settings',
-      templateUrl: 'views/resetpasword.html'
+    .state('index.shortlist-mobile', {
+      url: 'shortlist-mobile',
+      templateUrl: 'views/shortlist-mobile.html'
+    })
+    .state('index.formats-mobile', {
+      url: 'formats-mobile',
+      templateUrl: 'views/formats-mobile.html',
+      controller: 'GmapCtrl'
+    })
+    .state('index.suggest-mobile', {
+      url: 'suggest-mobile',
+      templateUrl: 'views/suggest-mobile.html',
+      controller: 'GmapCtrl'
+    })
+    .state('index.verify_email', {
+      url: 'verify_email/{code}',
+      templateUrl: 'views/home.html',
+      controller: function($scope, $stateParams, UserService, toastr) {
+        UserService.isMailVerified($stateParams.code).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show({
+              templateUrl: 'views/verification-success.html',
+              fullscreen: $scope.customFullscreen,
+              clickOutsideToClose: true
+            });
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+        $scope.goToLogin() = function(){
+          $location.path('/');
+          $mdDialog.show({
+            templateUrl: 'views/signIn.html',
+            fullscreen: true
+          });
+        }
+      }
+    })
+    .state('index.reset-password', {
+      url: 'reset_password/{code}',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
     })
     .state('admin', {
       abstract: true,
@@ -200,10 +242,22 @@ app.constant('config', {
       url: '/callcenterinfo',
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
+    })
+    .state('owner', {
+      abstract: true,
+      url: '/owner', 
+      templateUrl: 'layouts/owner.html',
+      controller: 'OwnerMngrCtrl'
+    })
+    .state('owner.dashboard',{
+      url: '/dashboard',
+      templateUrl: 'views/owner/dashboard.html',
+      controller: 'DashboardCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
+    $urlRouterProvider.when('/owner', '/owner/dashboard');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;

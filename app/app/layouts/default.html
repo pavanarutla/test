@@ -47,13 +47,13 @@
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button href="#/userprofile">Chanikya varma</md-button>
+              <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button aria-label="campagin" href="#/campagin">Campagin</md-button>
+              <md-button aria-label="campagins" ng-href="#/campaigns">Campaigns</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button>Account</md-button>
+              <md-button ng-href="#">Account</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-click="logout()">Sign Out</md-button>
@@ -122,11 +122,13 @@
 
   <!-- Content section-->
   <!-- <div ui-view ng-cloak></div> -->
-  <ui-view></ui-view>
+  <ui-view>
+    
+  </ui-view>
 
   <!-- Footer Section-->
   <footer>
-    <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
+    <div  hide-xs show-gt-xs layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
         <md-button class="md-icon-button fabicon" aria-label="facebook">
           <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
@@ -163,9 +165,45 @@
       </div>
 
     </div>
-    <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
+    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
     </md-button>
+  
+    <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
+      <div style="margin:0 0 0 10px">
+        <a ng-click="Home()" class="" href="#/location">
+        <span ng-hide="isactive"><img src="assets/mobile-icons/home.png" alt="home" /></span>
+        <span ng-show="isactive"><img src="assets/mobile-icons/home-clicked.png" alt="home" /></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="shortlisted()" href="#/shortlist-mobile">
+          <span ng-hide="isshortlisted"> <img src="assets/mobile-icons/shortlisted.png" alt="shortlisted"/></span>
+          <span ng-show="isshortlisted"> <img src="assets/mobile-icons/shortlisted-clicked.png" alt="shortlisted"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="campaigns()" href="#/campaign">
+          <span ng-hide="iscampaigns"><img src="assets/mobile-icons/campaigns.png" alt="campaigns"/></span>
+          <span ng-show="iscampaigns"><img src="assets/mobile-icons/campaign-clicked.png" alt="campaigns"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="formatmobile()" href="#/formats-mobile">
+          <span ng-hide="isformats" ><img src="assets/mobile-icons/formats.png" alt="home"/></span>
+          <span ng-show="isformats"><img src="assets/mobile-icons/formats-clicked.png" alt="home"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="suggestme()" href="#/suggest-mobile">
+          <span ng-hide="issuggestme"><img src="assets/mobile-icons/suggestme.png" alt="home"></span>
+          <span ng-show="issuggestme"><img src="assets/mobile-icons/suggest-clicked.png" alt="home"/></span>
+        </a>
+      </div>
+  
+    </div>
   </footer>
+
+ 
 </div>
 

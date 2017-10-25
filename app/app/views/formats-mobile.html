@@ -1,0 +1,25 @@
+<div layout="row" class="formats-bottom-btn" show-xs hide-gt-xs  layout-align="space-around center">
+
+    <div layout="column" ng-show="format" class="formats-types">
+      <div ng-repeat="formatGroup in formatGrid">
+        <div layout="row" layout-align="space-around center">
+          <div ng-repeat="format in formatGroup track by $index">
+            <div layout="column" class="digital-board">
+              <div ng-cloak style="border-right:1px solid #ccc">
+                <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+                  ng-if="format">
+                
+                  <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                  <div class="md-caption">{{format.name}}</div>
+                </md-button>
+                <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
+              </div>
+            </div>
+            <md-divider></md-divider>
+          </div>
+        </div>
+        <md-divider></md-divider>
+      </div>
+    </div>
+
+  </div> 
