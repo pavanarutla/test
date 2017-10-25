@@ -153,7 +153,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
 
   $scope.getCampaignDetails = function(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      console.log(result);
       $scope.campaignDetails = result;
     });
   }

@@ -619,10 +619,6 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.setNewAddress = function () {
-        // console.log($scope.address.components.location);
-      }
-
       $scope.shortlistSelected = function (ev) {
         MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $mdDialog.show(

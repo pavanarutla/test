@@ -195,7 +195,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
 
   $scope.getStateList = function(country){
     AdminLocationService.getStates(country).then(function (data) {
-      console.log(data);
+      // console.log(data);
       $scope.stateListForCountry = data;
     });
   }
