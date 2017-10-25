@@ -35,16 +35,16 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
 
-      $scope.$watch(
-        function() { return $mdSidenav('productDetails').isOpen(); },
-        function(newValue, oldValue) {
-          if(newValue == false){
-            $scope.selectedProduct = null;
-            selectorMarker.setMap(null);
-            $scope.$parent.existingCampaignSidenavVisible = false;
-          }
-        }
-      );
+      // $scope.$watch(
+      //   function() { return $mdSidenav('productDetails').isOpen(); },
+      //   function(newValue, oldValue) {
+      //     if(newValue == false){
+      //       $scope.selectedProduct = null;
+      //       selectorMarker.setMap(null);
+      //       $scope.$parent.existingCampaignSidenavVisible = false;
+      //     }
+      //   }
+      // );
 
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
@@ -174,31 +174,56 @@ app.controller('GmapCtrl',
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
+     
+      $scope.pointermap = function(){
+        $scope.ispointer = !$scope.ispointer;
+      };
       // mobile bottom menu
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      $scope.Home = function(){
-        $scope.isactive = !$scope.isactive;
-      }
-      $scope.shortlisted = function(){
-        $scope.isshortlisted = !$scope.isshortlisted;
-      }
-      $scope.campaigns  = function(){
-        $scope.iscampaigns = !$scope.iscampaigns;
-      }
-      $scope.format = function(){
-        $scope.isformats = !$scope.isformats;
-      }
-      $scope.suggestme = function(){
-        $scope.issuggestme = !$scope.issuggestme;
-      }
+      // $scope.isactive = false;
+      // $scope.isshortlisted = false;
+      // $scope.iscampaigns = false;
+      // $scope.isformats = false;
+      // $scope.issuggestme= false;
+      // $scope.Home = function(){
+      //   $scope.isactive = !$scope.isactive;
+      // }
+      // $scope.shortlisted = function(){
+      //   $scope.isshortlisted = !$scope.isshortlisted;
+      // }
+      // $scope.campaigns  = function(){
+      //   $scope.iscampaigns = !$scope.iscampaigns;
+      // }
+      // $scope.formatmobile = function(){
+      //   $scope.isformats = !$scope.isformats;
+      // }
+      // $scope.suggestme = function(){
+      //   $scope.issuggestme = !$scope.issuggestme;
+      // }
 
-      $scope.filters = function (ev) {
+      $scope.filtermobilepopup = function (ev) {
         $mdDialog.show({
           templateUrl: 'views/fliters.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.productdetailspopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/map-productpopup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.exisitingcampaginpopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/existingcampginpopup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.mobilesharepopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/shareform.html',
           fullscreen: $scope.customFullscreen,
           clickOutsideToClose:true,
         })

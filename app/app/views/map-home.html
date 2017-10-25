@@ -637,8 +637,11 @@
         </md-button>
       </custom-control> -->
       <div layout="row" layout="fill" class="top-section" layout-align="end center" show-xs hide-gt-xs>
-        <md-button class="md-button topbtn-one" ng-click="filters()">
+        <md-button class="md-button topbtn-one" ng-click="filtermobilepopup()">
           Filter
+        </md-button>
+        <md-button class="md-button topbtn-one" ng-click="pointermap()">
+          pointer
         </md-button>
         
       <md-button class="md-primary topbtn-two" ng-click="toggleTraffic()" id="traffic-toggle" > Live Traffic</md-button>
@@ -995,25 +998,9 @@
     <div layout="row" layout-align="end center" hide-xs>
       <md-button class="md-raised md-primary remm-btn" ng-click="toggleTraffic()" id="traffic-toggle"><span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression</md-button>
     </div>
-    <!-- <div ng-show="showTrafficLegend">
-      <div layout="row" flex="20" style="background-color: white; width:100%;top:10%;z-index:1;position:absolute;right:2%;">
-        <div flex="40" layout="column" layout-margin layout-align="center">
-          <div class="light"></div>
-          <div class="moderate"></div>
-          <div class="havey"></div>
-          <div class="extrem"></div>
-        </div>
-        <div flex="60" layout="column" layout-margin>
-          <div class="md-body-2">Light Traffic</div>
-          <div class="md-body-2">Moderate Traffic</div>
-          <div class="md-body-2">Heavy Traffic</div>
-          <div class="md-body-2">Extreme Traffic</div>
-        </div>
-      </div>
-    </div> -->
   </div> 
   
-  <div layout="row" class="bottom-btn" show-xs hide-gt-xs  layout-align="space-around center">
+  <!-- <div layout="row" class="bottom-btn" show-xs hide-gt-xs  layout-align="space-around center">
     <div style="margin:0 0 0 10px">
       <a ng-click="Home()" class="">
       <span ng-hide="isactive"><img src="assets/mobile-icons/home.png" alt="home" /></span>
@@ -1033,7 +1020,7 @@
       </a>
     </div>
     <div>
-      <a ng-click="format()">
+      <a ng-click="formatmobile()">
         <span ng-hide="isformats" ><img src="assets/mobile-icons/formats.png" alt="home"/></span>
         <span ng-show="isformats"><img src="assets/mobile-icons/formats-clicked.png" alt="home"/></span>
       </a>
@@ -1045,9 +1032,9 @@
       </a>
     </div>
   
-  </div>
+  </div> -->
   <!-- formats mobile vesrion-->
-  <div layout="row" class="formats-bottom-btn" show-xs hide-gt-xs  layout-align="space-around center" ng-show="isformats">
+   <!-- <div layout="row" class="formats-bottom-btn" show-xs hide-gt-xs  layout-align="space-around center" ng-show="isformats">
 
     <div layout="column" ng-show="format" class="formats-types">
       <div ng-repeat="formatGroup in formatGrid">
@@ -1057,7 +1044,7 @@
               <div ng-cloak style="border-right:1px solid #ccc">
                 <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
                   ng-if="format">
-                  <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
+                
                   <img ng-src="{{serverUrl + format.image}}" class="img-size">
                   <div class="md-caption">{{format.name}}</div>
                 </md-button>
@@ -1071,18 +1058,18 @@
       </div>
     </div>
 
-  </div>
-  <!-- shortlist mobile vesrion-->  
-  <div layout="column" class="formats-bottom-btn contbg md-whiteframe-2dp shortlist-mobile" show-xs hide-gt-xs   ng-show="isshortlisted">
-    <div class="md-body-2" layout="column" layout-margin>Selected List</div>
+  </div>  -->
+  <!-- map pointer mobile vesrion-->  
+   <div layout="column" class="formats-bottom-btn contbg md-whiteframe-2dp" show-xs hide-gt-xs   ng-show="ispointer">
+    
 
     <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
 
       <div layout="row" flex layout-fill >
-        <div flex="20"> 
+        <div flex="20" ng-click="productdetailspopup()"> 
           <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
         </div>
-        <div flex="60">
+        <div flex="60" ng-click="productdetailspopup()">
             <div class="md-body-2">BI-73784</div>
             <div class="md-caption">
               LB Nagar towards Vanasthalipuram
@@ -1090,57 +1077,8 @@
         </div>
         <div flex="20">
            
-          <md-button class="md-icon-button" aria-label="Close Side Panel">
-            <md-tooltip>Close Side Panel</md-tooltip>
-            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-          </md-button>
-        
-          <div class="md-caption theme-text" >12,33,333</div>
-        </div>
-
-      </div>
-    </div>
-    <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
-
-      <div layout="row" flex layout-fill >
-        <div flex="20"> 
-          <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
-        </div>
-        <div flex="60">
-            <div class="md-body-2">BI-73784</div>
-            <div class="md-caption">
-              LB Nagar towards Vanasthalipuram
-            </div>
-        </div>
-        <div flex="20">
-           
-          <md-button class="md-icon-button" aria-label="Close Side Panel">
-            <md-tooltip>Close Side Panel</md-tooltip>
-            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-          </md-button>
-        
-          <div class="md-caption theme-text" >12,33,333</div>
-        </div>
-
-      </div>
-    </div>
-    <div layout="column" class="md-whiteframe-2dp" layout-margin style="margin-right:4px;margin-left:4px">
-
-      <div layout="row" flex layout-fill >
-        <div flex="20"> 
-          <img src="assets/images/banner-setting.png" alt="shortlist-image" style="width:60px;height:60px">
-        </div>
-        <div flex="60">
-            <div class="md-body-2">BI-73784</div>
-            <div class="md-caption">
-              LB Nagar towards Vanasthalipuram
-            </div>
-        </div>
-        <div flex="20">
-           
-          <md-button class="md-icon-button" aria-label="Close Side Panel">
-            <md-tooltip>Close Side Panel</md-tooltip>
-            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+          <md-button class="md-icon-button" aria-label="Panel">
+            <md-icon class="md-default-theme"><i class="material-icons">bookmark_border</i></md-icon>
           </md-button>
         
           <div class="md-caption theme-text" >12,33,333</div>
@@ -1149,7 +1087,8 @@
       </div>
     </div>
 
-  </div>
+  </div> 
+</div>
 </div>
 </div>
 
