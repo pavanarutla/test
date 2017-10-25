@@ -367,7 +367,7 @@ app.controller('GmapCtrl',
 
       $scope.sendSuggestionRequest = function (ev) {
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        console.log($scope.suggestionRequest);
+        // console.log($scope.suggestionRequest);
         CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
           if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
@@ -386,7 +386,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
-        console.log(marker);
+        // console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -674,7 +674,7 @@ app.controller('GmapCtrl',
         });
         markersOnMap = [];
         MapService.markers().then(function (markers) {
-          console.log(markers);
+          // console.log(markers);
           $scope.filteredMarkers = markers;
           $scope.processMarkers();
           var bounds = new google.maps.LatLngBounds();
@@ -720,7 +720,7 @@ app.controller('GmapCtrl',
 
       $scope.searchBySiteNo = function () {
         MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          console.log(markerProperties);
+          // console.log(markerProperties);
           if (markerProperties.id) {
             var marker = {};
             marker.properties = markerProperties;
@@ -800,7 +800,7 @@ app.controller('GmapCtrl',
       $scope.circleRadius = 0;
       $scope.updateCircle = function(){        
         rangeCircle.setMap(null);
-        rangeCircle.setRadius($scope.circleRadius*1000);
+        rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
         rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
