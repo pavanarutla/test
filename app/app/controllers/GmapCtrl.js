@@ -214,6 +214,20 @@ app.controller('GmapCtrl',
           clickOutsideToClose:true,
         })
       };
+      $scope.exisitingcampaginpopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/existingcampginpopup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.mobilesharepopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/shareform.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
       $scope.close = function(){
         $mdDialog.hide();
       }
