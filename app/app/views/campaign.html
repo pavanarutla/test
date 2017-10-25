@@ -1,27 +1,47 @@
 <style>
-     /* .detail{
+     .detail{
        display:none; 
-    }   */
+    } 
 </style>
 <div ng-cloak flex-offset-gt-sm="10" flex="80" flex-xs="100"flex-sm="100">
     <md-content layout="column" layout-sm="column" layout-xs="column">
         <md-tabs md-dynamic-height md-border-bottom class="profile-campagin">
 
-              <md-card-content>
+            <!-- planed tab start-->
+            <md-tab label="Planned">
+                <div class="inputDiv">
+                    <md-icon><i class="material-icons">search</i></md-icon>
+                    <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
+                </div>
+                <div>
+                    <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+                        <md-list-item>
+                            <div flex="15">Campaign Name</div>
+                            <div flex="15">Client Contact</div>
+                            <div flex="15">Start Date</div>
+                            <div flex="15">EndDate</div>
+                            <div flex="10">Status</div>
+                            <div flex="10">Price</div>
+                            <div flex="10">products</div>
+                            <div flex="10">Actions</div>
+                        </md-list-item>
+                    </div>
+                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in items"
+                        class="contbg md-whiteframe-3dp">
 
-                        <div layout="row" style="padding:0" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+                        <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
 
-                            <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="campaign-name">
+                            <div flex="15"  flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="campaign-name">
 
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
                                     <md-icon md-svg-icon="assets/images/c1-new.svg"></md-icon>
                                 </div>
                                 <div flex-xs="80" flex-sm="85">
-                                    <div class="md-body-1 campagin-title">{{item.campaignname}}</div>
+                                    <div class="md-body-1">{{item.campaignname}}</div>
                                 </div>
                                 <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
                                     <md-menu>
-                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin: -8px 0 0 0;">
+                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
                                             <md-icon><i class="material-icons">settings</i></md-icon>
                                         </md-button>
                                         <md-menu-content>
@@ -44,7 +64,7 @@
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
                                     <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
                                         <div style="display:inline !important;">
-                                            <md-icon md-svg-icon="assests/images/c2.svg"></md-icon>
+                                            <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
@@ -54,7 +74,7 @@
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
                                     <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
                                         <div>
-                                            <md-icon md-svg-icon="images/c3.svg"></md-icon>
+                                            <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
@@ -64,7 +84,7 @@
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
                                     <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
                                         <div>
-                                            <md-icon md-svg-icon="images/c4.svg"></md-icon>
+                                            <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
@@ -189,7 +209,7 @@
                             <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
 
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-                                    <md-icon md-svg-icon="images/c1.svg"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/c1-new.svg"></md-icon>
                                 </div>
                                 <div flex-xs="80" flex-sm="85">
                                     <div class="md-body-1">{{item.campaignname}}</div>
@@ -212,197 +232,142 @@
                             <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
                                 hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
 
-        <div ng-cloak="" layout="column">
-          <div layout="column" flex>
-            <div layout="row" flex>
-              <div class="myCell" flex>ROW 1, CELL 1</div>
-              <div class="myCell" flex>ROW 1, CELL 2</div>
-              <div class="myCell" flex>ROW 1, CELL 3</div>
-            </div>
-            <div layout="row" flex>
-              <div class="myCell" flex>A LONGER CELL</div>
-              <div class="myCell" flex>ROW 2, CELL 2</div>
-              <div class="myCell" flex>ROW 2, CELL 3</div>
-            </div>
-          </div>
-        </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.clientcomapanyname}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.clientname}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.clientcontent}}</div>
+                                    </div>
+                                </div>
+                            </div >
+                            <!-- hide in lg -->
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.clientcomapanyname}}</div>
+                                </div>
+                            </div hide-xs hide-sm>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.clientname}}</div>
+                                </div>
+                            </div hide-xs hide-sm>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.clientcontent}}</div>
+                                </div>
+                            </div hide-xs hide-sm>
 
-      </md-tab>
-      <!-- first tab closed -->
+                            <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c5.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+                                    <div class="md-body-1">{{item.startdate}} To {{item.enddate}}</div>
+                                </div>
+                                <div hide-xs hide-sm class="md-body-1">{{item.startdate}}</div>
+                            </div hide-xs hide-sm>
+                            <div flex="15" hide-xs hide-sm>
+                                <div class="md-body-1">{{item.enddate}}</div>
+                            </div hide-xs hide-sm>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.status}}</div>
+                                </div>
+                            </div hide-xs hide-sm>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.price}}</div>
+                                </div>
+                            </div hide-xs hide-sm>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.products}}</div>
+                                </div>
+                            </div>
 
-      <md-tab label="Planned">
-        <md-content class="md-padding">
-          <div class="inputDiv">
-            <md-icon></md-icon>
-            <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
-          </div>
-          <div class="header" style="height:90px;background-color:#488edf"></div>
-          <div layout="row" style="margin-top:-3%">
-            <div flex="30" flex-offset="15">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
+                            <div flex="10" hide-xs hide-sm>
+                        
+                                <md-button class="md-primary">VIEW</md-button>
+                            </div>
+                        </div>
 
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-            <div flex="30">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-          </div>
-          <div layout="row">
-            <div flex="30" flex-offset="15">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
+                    </div>
+                    <div layout="column" layout-align="center end" class="loadmore">
+                        <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+                    </div>
+                </div>
 
-                </md-card-content>
-              </md-card>
-            </div>
-            <div flex="30">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-          </div>
-        </md-content>
-      </md-tab>
-      <md-tab label="Closed">
-        <md-content class="md-padding">
-          <div class="inputDiv">
-            <md-icon></md-icon>
-            <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
-          </div>
-          <div class="header" style="height:90px;background-color:#488edf"></div>
-          <div layout="row" style="margin-top:-3%">
-            <div flex="30" flex-offset="15">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
 
-                </md-card-content>
-              </md-card>
-            </div>
-            <div flex="30">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-          </div>
-           <div layout="row">
-            <div flex="30" flex-offset="15">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-            <div flex="30">
-              <md-card>
-                <md-card-header>
-                  <md-card-avatar>
-                    <img src="assets/images/icons/004-sign.png" />
-                  </md-card-avatar>
-                </md-card-header>
-                <md-card-title-text>
-                  <span class="md-title">Clent Details</span>
-                </md-card-title-text>
-                <md-card-content>
-                  <p>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest
-                    Greene's musical language: feel it. It's a simple request, as well...
-                  </p>
-                </md-card-content>
-              </md-card>
-            </div>
-          </div>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+            </md-tab>
+            <!--closed campagin start -->
+            <md-tab label="Closed">
+                
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </div>
+ <script>
+    // $scope.list="flase"
+    // $scope.tooglt = function(){
+    //   $scope.list = !$scope.list;
+    //   if($scope.list){
+    //       var ele = document.getElementById("clickBy");
+    //       ele.className = "list-one";
+    //   }
+    // else{
+    //     var ele = document.getElementById("clickBy");
+    //       ele.className = "";
+    // }
+        
+        
+    // };
+    $(document).on('click', '.campaign-name', function(e){
+        if($(window).width() < 599){
+            $('.detail').slideUp();
+            if($(this).parent().find('.detail').css('display') == "none"){
+                $(this).parent().find('.detail').slideDown();
+            }
+        }
+    });
+</script>

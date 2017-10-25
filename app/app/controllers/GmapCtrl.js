@@ -35,16 +35,16 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
 
-      $scope.$watch(
-        function() { return $mdSidenav('productDetails').isOpen(); },
-        function(newValue, oldValue) {
-          if(newValue == false){
-            $scope.selectedProduct = null;
-            selectorMarker.setMap(null);
-            $scope.$parent.existingCampaignSidenavVisible = false;
-          }
-        }
-      );
+      // $scope.$watch(
+      //   function() { return $mdSidenav('productDetails').isOpen(); },
+      //   function(newValue, oldValue) {
+      //     if(newValue == false){
+      //       $scope.selectedProduct = null;
+      //       selectorMarker.setMap(null);
+      //       $scope.$parent.existingCampaignSidenavVisible = false;
+      //     }
+      //   }
+      // );
 
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
