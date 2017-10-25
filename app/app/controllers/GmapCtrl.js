@@ -790,9 +790,9 @@ app.controller('GmapCtrl',
       // });
 
       rangeCircle = new google.maps.Circle({
-        strokeColor: "#0000ff",
+        strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
-        strokeWeight: 0.5,
+        strokeWeight: 1.5,
         // fillColor: "#0000ff",
         fillOpacity: 0.0,
       });

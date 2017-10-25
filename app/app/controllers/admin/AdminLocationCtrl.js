@@ -193,6 +193,19 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
+  $scope.deleteCountry = function(country){
+    AdminLocationService.deleteCountry(country.id).then(function(result){
+      if(result.status == 1){
+        var index = $scope.gridCountry.data.indexOf(country);
+        $scope.gridCountry.data.splice(index, 1);
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   $scope.getStateList = function(country){
     AdminLocationService.getStates(country).then(function (data) {
       // console.log(data);
@@ -220,6 +233,19 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
+  $scope.deleteState = function(state){
+    AdminLocationService.deleteState(state.id).then(function(result){
+      if(result.status == 1){
+        var index = $scope.gridState.data.indexOf(state);
+        $scope.gridState.data.splice(index, 1);
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   $scope.saveCity = function () {
     AdminLocationService.saveCity($scope.city).then(function (data) {
       if (data.status == 1) {
@@ -230,6 +256,19 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
       else {
         toastr.error(data.message);
+      }
+    });
+  }
+
+  $scope.deleteCity = function(city){
+    AdminLocationService.deleteCity(city.id).then(function(result){
+      if(result.status == 1){
+        var index = $scope.gridCity.data.indexOf(city);
+        $scope.gridCity.data.splice(index, 1);
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
       }
     });
   }
