@@ -131,8 +131,15 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     })
   };
 
+ // email verification succes massage
+ $scope.emailSucess = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/email-verification-sucess.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+    })
+  };
  
-
   $scope.whatwedo = function () {
     $location.path('/');
     window.scroll(0, 740);

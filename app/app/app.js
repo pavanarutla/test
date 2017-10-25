@@ -131,6 +131,7 @@ app.constant('config', {
       templateUrl: 'views/reset-password.html',
       controller: 'UserSettingsCtrl'
     })
+   
     .state('admin', {
       abstract: true,
       url: '/admin', 
