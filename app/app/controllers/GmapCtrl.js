@@ -367,7 +367,7 @@ app.controller('GmapCtrl',
 
       $scope.sendSuggestionRequest = function (ev) {
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        console.log($scope.suggestionRequest);
+        // console.log($scope.suggestionRequest);
         CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
           if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
@@ -386,7 +386,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
-        console.log(marker);
+        // console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -619,10 +619,6 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.setNewAddress = function () {
-        // console.log($scope.address.components.location);
-      }
-
       $scope.shortlistSelected = function (ev) {
         MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $mdDialog.show(
@@ -637,6 +633,7 @@ app.controller('GmapCtrl',
               $mdSidenav('productDetails').close()
           );
           getShortListedProducts();
+          $mdSidenav('productDetails').close();
         });
       }
 
@@ -679,7 +676,7 @@ app.controller('GmapCtrl',
         });
         markersOnMap = [];
         MapService.markers().then(function (markers) {
-          console.log(markers);
+          // console.log(markers);
           $scope.filteredMarkers = markers;
           $scope.processMarkers();
           var bounds = new google.maps.LatLngBounds();
@@ -728,7 +725,7 @@ app.controller('GmapCtrl',
 
       $scope.searchBySiteNo = function () {
         MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          console.log(markerProperties);
+          // console.log(markerProperties);
           if (markerProperties.id) {
             var marker = {};
             marker.properties = markerProperties;
@@ -798,9 +795,9 @@ app.controller('GmapCtrl',
       // });
 
       rangeCircle = new google.maps.Circle({
-        strokeColor: "#0000ff",
+        strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
-        strokeWeight: 0.5,
+        strokeWeight: 1.5,
         // fillColor: "#0000ff",
         fillOpacity: 0.0,
       });
@@ -808,7 +805,7 @@ app.controller('GmapCtrl',
       $scope.circleRadius = 0;
       $scope.updateCircle = function(){        
         rangeCircle.setMap(null);
-        rangeCircle.setRadius($scope.circleRadius*1000);
+        rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
         rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
@@ -837,6 +834,7 @@ app.controller('GmapCtrl',
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('productDetails').close();
           }
           else{
             toastr.error(result.message);

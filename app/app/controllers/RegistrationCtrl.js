@@ -32,7 +32,7 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 				toastr.error(result.message);
 			}
 		}, function(result){
-			console.log(result);
+			// console.log(result);
 			toastr.error(result);
 		});
 	}
@@ -46,7 +46,7 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 	*/
 	$scope.agency = {};
 	$scope.registerNewAgency = function () {
-		console.log($scope.agency);
+		// console.log($scope.agency);
 	}
 	/*
 	* ============ Agency Registration Ends ============
