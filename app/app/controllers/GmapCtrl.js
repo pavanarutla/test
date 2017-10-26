@@ -62,6 +62,10 @@ app.controller('GmapCtrl',
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
+          $scope.mapObj.addListener('zoom_changed', function() {
+            $scope.selectedProduct = null;
+            selectorMarker.setMap(null);
+          });
         });
       });
       ProductService.getFormatList().then(function (formats) {
@@ -423,7 +427,6 @@ app.controller('GmapCtrl',
         $scope.selectedProduct = null;
         selectorMarker.setMap(null);
       });
-
 
       var productList = [];
       var locArr = [];
