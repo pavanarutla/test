@@ -632,6 +632,7 @@ app.controller('GmapCtrl',
               .targetEvent(ev)
           );
           getShortListedProducts();
+          $mdSidenav('productDetails').close();
         });
       }
 
@@ -711,6 +712,7 @@ app.controller('GmapCtrl',
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
           $timeout(function(){
+            $mdSidenav('saveCampaignSidenav').close();
             $scope.campaignSavedSuccessfully = false;
           },1500)
           $scope.loadPlannedUserCampaigns();
@@ -829,6 +831,7 @@ app.controller('GmapCtrl',
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('productDetails').close();
           }
           else{
             toastr.error(result.message);

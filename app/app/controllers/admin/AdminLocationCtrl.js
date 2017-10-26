@@ -59,7 +59,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'Country Name', enableCellEdit: false, width: '50%' },
     {
       name: 'Action', field: 'Action', width: '50%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCountry(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -92,7 +92,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'State ', width: '33%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '33%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteState(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -125,7 +125,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'City', width: '25%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '25%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCity(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -162,7 +162,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'lng', displayName: 'Longitude', width: '10%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteArea(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href="" ng-click="grid.appScope.deleteArea(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
