@@ -274,7 +274,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.logout = function(){
     $auth.logout().then(function(result){
-      console.log(result);
+      // console.log(result);
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
