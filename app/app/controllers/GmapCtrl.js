@@ -629,7 +629,8 @@ app.controller('GmapCtrl',
               .textContent(response.message)
               .ariaLabel('shortlist-success')
               .ok('Got it!')
-              .targetEvent(ev)
+              .targetEvent(ev),
+              $mdSidenav('productDetails').close()
           );
           getShortListedProducts();
           $mdSidenav('productDetails').close();
@@ -711,10 +712,12 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
+          $scope.campaign={};
           $timeout(function(){
             $mdSidenav('saveCampaignSidenav').close();
+            $mdSidenav('shortlistAndSaveSidenav').close();
             $scope.campaignSavedSuccessfully = false;
-          },1500)
+          },3000);
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -848,6 +851,7 @@ app.controller('GmapCtrl',
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('shortlistSharingSidenav').close()
           }
           else{
             toastr.error(result.message);
@@ -863,6 +867,7 @@ app.controller('GmapCtrl',
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
           if(result.status == 1){
+            $mdSidenav('shareCampaign').close();
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('body')))
