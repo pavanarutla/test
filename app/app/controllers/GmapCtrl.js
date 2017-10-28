@@ -35,16 +35,16 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
 
-      // $scope.$watch(
-      //   function() { return $mdSidenav('productDetails').isOpen(); },
-      //   function(newValue, oldValue) {
-      //     if(newValue == false){
-      //       $scope.selectedProduct = null;
-      //       selectorMarker.setMap(null);
-      //       $scope.$parent.existingCampaignSidenavVisible = false;
-      //     }
-      //   }
-      // );
+      $scope.$watch(
+        function() { return $mdSidenav('productDetails').isOpen(); },
+        function(newValue, oldValue) {
+          if(newValue == false){
+            $scope.selectedProduct = null;
+            selectorMarker.setMap(null);
+            $scope.$parent.existingCampaignSidenavVisible = false;
+          }
+        }
+      );
 
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
@@ -672,6 +672,8 @@ app.controller('GmapCtrl',
         $scope.selectedAreas = null;
         $scope.selectedcitys = null;
         $scope.selectedStates = null;
+        $scope.selectedArea = null;
+        $scope.circleRadius = null;
         _.each(markersOnMap, function (v, i) {
           v.setMap(null);
           $scope.Clusterer.removeMarker(v);
