@@ -335,13 +335,17 @@ app.controller('GmapCtrl',
       ];
       //export all 
 
-      $scope.ExportToExcel = function () {
+      $scope.exportAllCampaigns = function () {
+        CampaignService.exportCampaignsPdf().then(function(result){
+          if(result.status == 1){
 
-        var blob = new Blob([document.getElementById('divExport').innerHTML], {
-            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+          }
+          else{
+            toastr.error(result.meesage);
+          }
         });
-        saveAs(blob, "ReportRIS.xls");
-    };
+      };
+
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
