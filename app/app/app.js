@@ -63,6 +63,11 @@ app.constant('config', {
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.campaign', {
+      url: 'campaign',
+      templateUrl: 'views/campaign.html',
+      controller:'CampaignCtrl'
+    })
     .state('index.campaigns', {
       url: 'campaigns',
       templateUrl: 'views/campaigns.html',
@@ -81,6 +86,20 @@ app.constant('config', {
     .state('index.agency-rofile', {
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
+    })
+    .state('index.shortlist-mobile', {
+      url: 'shortlist-mobile',
+      templateUrl: 'views/shortlist-mobile.html'
+    })
+    .state('index.formats-mobile', {
+      url: 'formats-mobile',
+      templateUrl: 'views/formats-mobile.html',
+      controller: 'GmapCtrl'
+    })
+    .state('index.suggest-mobile', {
+      url: 'suggest-mobile',
+      templateUrl: 'views/suggest-mobile.html',
+      controller: 'GmapCtrl'
     })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
@@ -112,6 +131,7 @@ app.constant('config', {
       templateUrl: 'views/reset-password.html',
       controller: 'UserSettingsCtrl'
     })
+   
     .state('admin', {
       abstract: true,
       url: '/admin', 

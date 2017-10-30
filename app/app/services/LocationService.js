@@ -22,6 +22,11 @@ app.factory('LocationService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/areas/' + citiIds).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        getAreasWithAutocomplete: function(searchText){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/autocomplete-area/' + searchText).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

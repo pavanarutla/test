@@ -48,7 +48,49 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.shortlist = false;
     $scope.savedcampaign = !$scope.savedcampaign;
   }
+  // mobile footer version
 
+      $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+      $scope.Home = function(){
+        $scope.isactive = !$scope.isactive;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+      }
+      $scope.shortlisted = function(){
+        $scope.isshortlisted = !$scope.isshortlisted;
+        $scope.isactive = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+
+      }
+      $scope.campaigns  = function(){
+        $scope.iscampaigns = !$scope.iscampaigns;
+        $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+      }
+      $scope.formatmobile = function(){
+        $scope.isformats = !$scope.isformats;
+        $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.issuggestme= false;
+      }
+      $scope.suggestme = function(){
+        $scope.issuggestme = !$scope.issuggestme;
+        $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      }
   // side favicon functionality
   this.isOpen = false;
   this.availableModes = ['md-fling', 'md-scale'];
@@ -89,8 +131,15 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     })
   };
 
+ // email verification succes massage
+ $scope.emailSucess = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/email-verification-sucess.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+    })
+  };
  
-
   $scope.whatwedo = function () {
     $location.path('/');
     window.scroll(0, 740);
@@ -225,7 +274,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.logout = function(){
     $auth.logout().then(function(result){
-      console.log(result);
+      // console.log(result);
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();

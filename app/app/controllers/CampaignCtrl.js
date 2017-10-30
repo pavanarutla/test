@@ -1,3 +1,4 @@
+
 app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService) {
 
   $scope.CAMPAIGN_STATUS = [
@@ -8,6 +9,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     "Suspended",        // index 4
     "Stopped"           // index 5
   ];
+
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -151,7 +153,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
 
   $scope.getCampaignDetails = function(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      console.log(result);
       $scope.campaignDetails = result;
     });
   }

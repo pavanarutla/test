@@ -72,7 +72,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   }
 
   $scope.editCompany = function(company){
-    console.log(company);
+    // console.log(company);
     $scope.company = company;
     var index = $scope.gridCompany.data.indexOf(company);
       $scope.gridCompany.data.splice(index, 1);
@@ -165,7 +165,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   //   }
   //   getFormatList();
   // });
-    console.log("row deleted");
+    // console.log("row deleted");
     var index = $scope.gridHoardingCompany.data.indexOf(row);
     $scope.gridHoardingCompany.data.splice(index, 1);
     toastr.success("HoardingCompanies deleted successfully");

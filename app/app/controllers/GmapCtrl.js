@@ -22,6 +22,7 @@ app.controller('GmapCtrl',
         }
       };
 
+      $scope.selectedAreaFilter = null;
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -34,16 +35,16 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
 
-      $scope.$watch(
-        function() { return $mdSidenav('productDetails').isOpen(); },
-        function(newValue, oldValue) {
-          if(newValue == false){
-            $scope.selectedProduct = null;
-            selectorMarker.setMap(null);
-            $scope.$parent.existingCampaignSidenavVisible = false;
-          }
-        }
-      );
+      // $scope.$watch(
+      //   function() { return $mdSidenav('productDetails').isOpen(); },
+      //   function(newValue, oldValue) {
+      //     if(newValue == false){
+      //       $scope.selectedProduct = null;
+      //       selectorMarker.setMap(null);
+      //       $scope.$parent.existingCampaignSidenavVisible = false;
+      //     }
+      //   }
+      // );
 
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
@@ -99,20 +100,20 @@ app.controller('GmapCtrl',
       // });
 
       // range circle
-      $scope.radius = 0;
-      circle = new google.maps.Circle({
-        strokeColor: '#FF0099',
-        strokeOpacity: 1,
-        strokeWeight: 2,
-        fillColor: '#009ee0',
-        fillOpacity: 0.2
-      });
-      $scope.updateCircleRadius = function (val) {
-        circle.setCenter($scope.address.components.location);
-        circle.setRadius(Number(val));
-        circle.setMap($scope.mapObj);
-      }
-      circleBounds = circle.getBounds();
+      // $scope.radius = 0;
+      // circle = new google.maps.Circle({
+      //   strokeColor: '#FF0099',
+      //   strokeOpacity: 1,
+      //   strokeWeight: 2,
+      //   fillColor: '#009ee0',
+      //   fillOpacity: 0.2
+      // });
+      // $scope.updateCircleRadius = function (val) {
+      //   circle.setCenter($scope.address.components.location);
+      //   circle.setRadius(Number(val));
+      //   circle.setMap($scope.mapObj);
+      // }
+      // circleBounds = circle.getBounds();
 
       // range end
 
@@ -173,8 +174,63 @@ app.controller('GmapCtrl',
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
+     
+      $scope.pointermap = function(){
+        $scope.ispointer = !$scope.ispointer;
+      };
+      // mobile bottom menu
+      // $scope.isactive = false;
+      // $scope.isshortlisted = false;
+      // $scope.iscampaigns = false;
+      // $scope.isformats = false;
+      // $scope.issuggestme= false;
+      // $scope.Home = function(){
+      //   $scope.isactive = !$scope.isactive;
+      // }
+      // $scope.shortlisted = function(){
+      //   $scope.isshortlisted = !$scope.isshortlisted;
+      // }
+      // $scope.campaigns  = function(){
+      //   $scope.iscampaigns = !$scope.iscampaigns;
+      // }
+      // $scope.formatmobile = function(){
+      //   $scope.isformats = !$scope.isformats;
+      // }
+      // $scope.suggestme = function(){
+      //   $scope.issuggestme = !$scope.issuggestme;
+      // }
 
-
+      $scope.filtermobilepopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/fliters.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.productdetailspopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/map-productpopup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.exisitingcampaginpopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/existingcampginpopup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.mobilesharepopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/shareform.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.close = function(){
+        $mdDialog.hide();
+      }
       //slider
       function sliderController($scope) {
         $scope.color = {
@@ -311,7 +367,7 @@ app.controller('GmapCtrl',
 
       $scope.sendSuggestionRequest = function (ev) {
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        console.log($scope.suggestionRequest);
+        // console.log($scope.suggestionRequest);
         CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
           if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
@@ -330,6 +386,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
+        // console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -562,67 +619,6 @@ app.controller('GmapCtrl',
         });
       }
 
-      /// autocomplete for filters
-
-          //var self = this;
-      
-          // list of `state` value/display objects
-          $scope.areas        = loadAll();
-          $scope.selectedItem  = null;
-          $scope.searchText    = null;
-          $scope.querySearch   = querySearch;
-      
-          // ******************************
-          // Internal methods
-          // ******************************
-      
-          /**
-           * Search for area... use $timeout to simulate
-           * remote dataservice call.
-           */
-          function querySearch (query) {
-            var results = query ? $scope.areas.filter( createFilterFor(query) ) : $scope.areas;
-            var deferred = $q.defer();
-            $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-            return deferred.promise;
-          }
-      
-          /**
-           * Build `states` list of key/value pairs
-           */
-          function loadAll() {
-            var allAreas = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-                    Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-                    Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-                    Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-                    North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-                    South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-                    Wisconsin, Wyoming';
-            return allAreas.split(/, +/g).map( function (area) {
-              return {
-                value: area.toLowerCase(),
-                display: area
-              };
-            });
-          }
-      
-          /**
-           * Create filter function for a query string
-           */
-          function createFilterFor(query) {
-            var lowercaseQuery = angular.lowercase(query);
-      
-            return function filterFn(area) {
-              return (area.value.indexOf(lowercaseQuery) === 0);
-            };
-      
-          }
-        //}
-
-      $scope.setNewAddress = function () {
-        // console.log($scope.address.components.location);
-      }
-
       $scope.shortlistSelected = function (ev) {
         MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $mdDialog.show(
@@ -633,9 +629,11 @@ app.controller('GmapCtrl',
               .textContent(response.message)
               .ariaLabel('shortlist-success')
               .ok('Got it!')
-              .targetEvent(ev)
+              .targetEvent(ev),
+              $mdSidenav('productDetails').close()
           );
           getShortListedProducts();
+          $mdSidenav('productDetails').close();
         });
       }
 
@@ -678,7 +676,7 @@ app.controller('GmapCtrl',
         });
         markersOnMap = [];
         MapService.markers().then(function (markers) {
-          console.log(markers);
+          // console.log(markers);
           $scope.filteredMarkers = markers;
           $scope.processMarkers();
           var bounds = new google.maps.LatLngBounds();
@@ -714,6 +712,12 @@ app.controller('GmapCtrl',
         });
         CampaignService.saveCampaign($scope.campaign).then(function(response){
           $scope.campaignSavedSuccessfully = true;
+          $scope.campaign={};
+          $timeout(function(){
+            $mdSidenav('saveCampaignSidenav').close();
+            $mdSidenav('shortlistAndSaveSidenav').close();
+            $scope.campaignSavedSuccessfully = false;
+          },3000);
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -721,7 +725,7 @@ app.controller('GmapCtrl',
 
       $scope.searchBySiteNo = function () {
         MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          console.log(markerProperties);
+          // console.log(markerProperties);
           if (markerProperties.id) {
             var marker = {};
             marker.properties = markerProperties;
@@ -791,19 +795,21 @@ app.controller('GmapCtrl',
       // });
 
       rangeCircle = new google.maps.Circle({
-        strokeColor: "#0000ff",
+        strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
-        strokeWeight: 0.5,
-        fillColor: "#0000ff",
-        fillOpacity: 0.2,
+        strokeWeight: 1.5,
+        // fillColor: "#0000ff",
+        fillOpacity: 0.0,
       });
 
+      $scope.circleRadius = 0;
       $scope.updateCircle = function(){        
         rangeCircle.setMap(null);
-        rangeCircle.setRadius($scope.circleRadius*1000);
-        rangeCircle.setCenter($scope.mapObj.getCenter());
+        rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
+        rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
+        $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }
       // Drawing a circle ends
 
@@ -811,6 +817,12 @@ app.controller('GmapCtrl',
         CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
           $scope.campaignDetails = campaignDetails;
           $scope.toggleCampaignDetailSidenav();
+        });
+      }
+
+      var updateCampaignDetailSidenav = function(campaignId){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+          $scope.campaignDetails = campaignDetails;
         });
       }
 
@@ -822,6 +834,7 @@ app.controller('GmapCtrl',
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('productDetails').close();
           }
           else{
             toastr.error(result.message);
@@ -838,6 +851,7 @@ app.controller('GmapCtrl',
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('shortlistSharingSidenav').close()
           }
           else{
             toastr.error(result.message);
@@ -853,6 +867,7 @@ app.controller('GmapCtrl',
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
           if(result.status == 1){
+            $mdSidenav('shareCampaign').close();
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('body')))
@@ -870,6 +885,44 @@ app.controller('GmapCtrl',
         });
       }
 
+      $scope.viewProduct = function(product){
+        $scope.product.image = config.serverUrl + product.image;
+        $scope.product.siteNo = product.siteNo;
+        $scope.product.panelSize = product.panelSize;
+        $scope.product.address = product.address;
+        $scope.product.impressions = product.impressions;
+        $scope.product.direction = product.direction;
+        $scope.product.lighting = product.lighting;
+        $scope.product.availableDates = product.availableDates;
+        $scope.hideSelectedMarkerDetail = false;
+        $mdSidenav('productDetails').toggle();
+      }
+
+      $scope.deleteProductFromCampaign = function(productId, campaignId){
+        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+          if(result.status == 1){
+            toastr.success(result.message);
+           updateCampaignDetailSidenav(campaignId);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+
+      $scope.autoCompleteArea = function(query) {
+        return LocationService.getAreasWithAutocomplete(query);
+      }
+
+      $scope.selectedAreaChanged = function(area){
+        $scope.selectedAreaFilter = area;
+        if(area){
+          $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+          $scope.mapObj.fitBounds(bounds);
+        }
+      }
     }
   ]
 );

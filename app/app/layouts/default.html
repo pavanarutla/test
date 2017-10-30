@@ -21,7 +21,7 @@
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> --> 
         <!-- browse-->
-        <md-button aria-label="location" class="browse-btn" ng-href="#/location" ng-show="isAuthenticated && !footerhide">
+        <md-button hide-xs aria-label="location" class="browse-btn" ng-href="#/location" ng-show="isAuthenticated && !footerhide">
           <!-- <a  style="padding:10px 0px;text-decoration:none;"> -->
             Browse BillBoards</a>
         </md-button>
@@ -39,9 +39,7 @@
         </md-button>
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated" class="profile-menu">
-          <!-- <md-button aria-label="userimage" class="md-fab md-mini" ng-click="$mdOpenMenu($event)">
-            <img ng-src="assets/images/product/person.png" class="md-avatar ">
-          </md-button> -->
+ 
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
               <img ng-src="assets/images/product/person.png" class="md-avatar ng-scope">
           </md-button>
@@ -61,9 +59,7 @@
           </md-menu-content>
         </md-menu>
         <!-- profile button end-->
-        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
-                    BOOK NOW
-        </md-button> -->
+   
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated" style="color:#fff !important">
           BOOK NOW
         </md-button>
@@ -122,11 +118,13 @@
 
   <!-- Content section-->
   <!-- <div ui-view ng-cloak></div> -->
-  <ui-view></ui-view>
+  <ui-view>
+    
+  </ui-view>
 
   <!-- Footer Section-->
   <footer>
-    <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
+    <div  hide-xs show-gt-xs layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
         <md-button class="md-icon-button fabicon" aria-label="facebook">
           <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
@@ -163,9 +161,45 @@
       </div>
 
     </div>
-    <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
+    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
     </md-button>
+  
+    <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
+      <div style="margin:0 0 0 10px">
+        <a ng-click="Home()" class="" href="#/location">
+        <span ng-hide="isactive"><img src="assets/mobile-icons/home.png" alt="home" /></span>
+        <span ng-show="isactive"><img src="assets/mobile-icons/home-clicked.png" alt="home" /></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="shortlisted()" href="#/shortlist-mobile">
+          <span ng-hide="isshortlisted"> <img src="assets/mobile-icons/shortlisted.png" alt="shortlisted"/></span>
+          <span ng-show="isshortlisted"> <img src="assets/mobile-icons/shortlisted-clicked.png" alt="shortlisted"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="campaigns()" href="#/campaign">
+          <span ng-hide="iscampaigns"><img src="assets/mobile-icons/campaigns.png" alt="campaigns"/></span>
+          <span ng-show="iscampaigns"><img src="assets/mobile-icons/campaign-clicked.png" alt="campaigns"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="formatmobile()" href="#/formats-mobile">
+          <span ng-hide="isformats" ><img src="assets/mobile-icons/formats.png" alt="home"/></span>
+          <span ng-show="isformats"><img src="assets/mobile-icons/formats-clicked.png" alt="home"/></span>
+        </a>
+      </div>
+      <div>
+        <a ng-click="suggestme()" href="#/suggest-mobile">
+          <span ng-hide="issuggestme"><img src="assets/mobile-icons/suggestme.png" alt="home"></span>
+          <span ng-show="issuggestme"><img src="assets/mobile-icons/suggest-clicked.png" alt="home"/></span>
+        </a>
+      </div>
+  
+    </div>
   </footer>
+
+ 
 </div>
 

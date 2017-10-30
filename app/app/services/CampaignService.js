@@ -46,6 +46,11 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/share-shortlisted', obj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        deleteProductFromCampaign: function(campaignId, productId){
+          var dfd = $q.defer();
+          $http.delete(config.apiPath + '/campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

@@ -57,6 +57,21 @@ app.factory('AdminLocationService',
         $http.post(config.apiPath + '/area', area).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
+      deleteCountry: function(countryId){
+        var dfd = $q.defer();
+				$http.delete(config.apiPath + '/country/' + countryId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+      deleteState: function(stateId){
+        var dfd = $q.defer();
+				$http.delete(config.apiPath + '/state/' + stateId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+      deleteCity: function(cityId){
+        var dfd = $q.defer();
+        $http.delete(config.apiPath + '/city/' + cityId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
       deleteArea: function(areaId){
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/area/' + areaId).success(dfd.resolve).error(dfd.reject);
