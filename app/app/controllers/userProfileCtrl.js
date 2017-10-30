@@ -1,5 +1,4 @@
 app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
-  
   $scope.getLoggedInUserProfile = function(){
     UserService.getProfile().then(function(result){
       $scope.userProfile = result;
