@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -337,12 +337,11 @@ app.controller('GmapCtrl',
 
       $scope.exportAllCampaigns = function () {
         CampaignService.exportCampaignsPdf().then(function(result){
-          if(result.status == 1){
-
-          }
-          else{
-            toastr.error(result.meesage);
-          }
+          // var data = new Blob([result], { type: 'application/pdf;charset=utf-8' });
+          // FileSaver.saveAs(data, 'campaigns.pdf');
+          // if(result.status){
+          //   toastr.error(result.meesage);
+          // }
         });
       };
 
