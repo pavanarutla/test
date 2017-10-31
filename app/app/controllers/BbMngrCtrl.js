@@ -48,6 +48,24 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.shortlist = false;
     $scope.savedcampaign = !$scope.savedcampaign;
   }
+
+  // Slider
+
+  $scope.dataArray = [
+      
+      
+      {
+        src: 'assets/images/bnr.png'
+      },
+      {
+        src: 'assets/images/formats.png'
+      }
+     
+      // {
+      //   src: 'assets/images/banner.png'
+      // }
+      
+    ];
   // mobile footer version
 
       $scope.isactive = false;
