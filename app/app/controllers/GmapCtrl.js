@@ -232,6 +232,7 @@ app.controller('GmapCtrl',
           clickOutsideToClose:true,
         })
       };
+      // product detalies popup for maps
       $scope.productdetailspopup = function (ev) {
         $mdDialog.show({
           templateUrl: 'views/map-productpopup.html',
@@ -246,9 +247,17 @@ app.controller('GmapCtrl',
           clickOutsideToClose:true,
         })
       };
+      
       $scope.mobilesharepopup = function (ev) {
         $mdDialog.show({
           templateUrl: 'views/shareform.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      $scope.mobilesavepopup = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/shavepopupmobile.html',
           fullscreen: $scope.customFullscreen,
           clickOutsideToClose:true,
         })
