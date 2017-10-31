@@ -22,7 +22,16 @@ app.controller('GmapCtrl',
         }
       };
 
-      $scope.selectedAreaFilter = null;
+      var setDefaultArea = function(){
+        $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
+        var area = $scope.selectedArea;
+        $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+        $scope.mapObj.fitBounds(bounds);
+        localStorage.removeItem('areaFromHome');
+      };
+      
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -50,7 +59,6 @@ app.controller('GmapCtrl',
         function() { return $mdSidenav('suggestMe').isOpen(); },
         function(newValue, oldValue) {
           if(newValue == false){
-            console.log("closed");
             $scope.suggestMeRequestSent = false;
           }
         }
@@ -72,6 +80,9 @@ app.controller('GmapCtrl',
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
+          if(localStorage.areaFromHome){
+            setDefaultArea();
+          }
           $scope.mapObj.addListener('zoom_changed', function() {
             $scope.selectedProduct = null;
             selectorMarker.setMap(null);
@@ -841,10 +852,10 @@ app.controller('GmapCtrl',
       });
 
       $scope.circleRadius = 0;
-      $scope.updateCircle = function(){        
+      $scope.updateCircle = function(){
         rangeCircle.setMap(null);
         rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
-        rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
+        rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
         $scope.mapObj.fitBounds(rangeCircle.getBounds());
@@ -953,7 +964,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.selectedAreaChanged = function(area){
-        $scope.selectedAreaFilter = area;
+        $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
           var bounds = new google.maps.LatLngBounds();
