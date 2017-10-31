@@ -349,9 +349,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
-  $scope.toggleCreateCampaignSidenav = function () {
+  $scope.toggleCreateEmptyCampaignSidenav = function () {
     $scope.campaignSaved = false;
-    $mdSidenav('createCampaignSidenav').toggle();
+    $mdSidenav('createEmptyCampaignSidenav').toggle();
   };
 
   $scope.campaignSaved = false;

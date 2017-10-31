@@ -46,6 +46,16 @@ app.controller('GmapCtrl',
         }
       );
 
+      $scope.$watch(
+        function() { return $mdSidenav('suggestMe').isOpen(); },
+        function(newValue, oldValue) {
+          if(newValue == false){
+            console.log("closed");
+            $scope.suggestMeRequestSent = false;
+          }
+        }
+      );
+
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
         icon: {
@@ -337,11 +347,11 @@ app.controller('GmapCtrl',
 
       $scope.exportAllCampaigns = function () {
         CampaignService.exportCampaignsPdf().then(function(result){
-          // var data = new Blob([result], { type: 'application/pdf;charset=utf-8' });
-          // FileSaver.saveAs(data, 'campaigns.pdf');
-          // if(result.status){
-          //   toastr.error(result.meesage);
-          // }
+          var campaignPdf = new Blob([result], { type: 'application/pdf;charset=utf-8' });
+          FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+          if(result.status){
+            toastr.error(result.meesage);
+          }
         });
       };
 
@@ -631,7 +641,7 @@ app.controller('GmapCtrl',
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('body')))
               .clickOutsideToClose(true)
-              .title('ShortList Product')
+              .title('Shortlist Product')
               .textContent(response.message)
               .ariaLabel('shortlist-success')
               .ok('Got it!')
@@ -713,18 +723,37 @@ app.controller('GmapCtrl',
         //   // });
         // }
         // campaign.products = $scope.selectedForNewCampaign;
+        if($scope.shortListedProducts.length > 0){
+          $scope.campaign.products = [];
+          _.each($scope.shortListedProducts, function (v, i) {
+            $scope.campaign.products.push(v.id);
+          });
+          CampaignService.saveCampaign($scope.campaign).then(function(response){
+            $scope.campaignSavedSuccessfully = true;
+            $scope.campaign={};
+            $timeout(function(){
+              $mdSidenav('saveCampaignSidenav').close();
+              $mdSidenav('shortlistAndSaveSidenav').close();
+              $scope.campaignSavedSuccessfully = false;
+            },3000);
+            $scope.loadPlannedUserCampaigns();
+            getShortListedProducts();
+          });
+        }
+        else{
+          toastr.error("Please shortlist some products first.");
+        }
+      }
+
+      $scope.emptyCampaign = {};
+      $scope.createEmptyCampaign = function () {
         $scope.campaign.products = [];
-        $scope.campaign.user_mongo_id = $rootScope.loggedInUser.id;
-        _.each($scope.shortListedProducts, function (v, i) {
-          $scope.campaign.products.push(v.id);
-        });
-        CampaignService.saveCampaign($scope.campaign).then(function(response){
-          $scope.campaignSavedSuccessfully = true;
-          $scope.campaign={};
+        CampaignService.saveCampaign($scope.emptyCampaign).then(function(response){
+          $scope.emptyCampaignSaved = true;
+          $scope.emptyCampaign = {};
           $timeout(function(){
-            $mdSidenav('saveCampaignSidenav').close();
-            $mdSidenav('shortlistAndSaveSidenav').close();
-            $scope.campaignSavedSuccessfully = false;
+            $mdSidenav('createEmptyCampaignSidenav').close();
+            $scope.emptyCampaignSaved = false;
           },3000);
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
@@ -754,7 +783,7 @@ app.controller('GmapCtrl',
           $scope.plannedUserCampaigns = result;
         });
       }
-      $scope.loadPlannedUserCampaigns();
+      // $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
