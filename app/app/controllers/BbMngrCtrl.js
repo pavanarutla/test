@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -349,9 +349,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
-  $scope.toggleCreateCampaignSidenav = function () {
+  $scope.toggleCreateEmptyCampaignSidenav = function () {
     $scope.campaignSaved = false;
-    $mdSidenav('createCampaignSidenav').toggle();
+    $mdSidenav('createEmptyCampaignSidenav').toggle();
   };
 
   $scope.campaignSaved = false;
@@ -365,6 +365,19 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   /*=================================
   |  Sidenav Functionality Ends
   =================================*/
+
+  /*=================================
+  | Area autocomplete
+  ==================================*/
+
+  $scope.autoCompleteArea = function(query) {
+    return LocationService.getAreasWithAutocomplete(query);
+  }
+
+  $scope.selectedAreaChanged = function(area){
+    localStorage.areaFromHome = JSON.stringify(area);
+  }
+
 
   /*===============================================
   | Custom Filters associated with Angualr's filter
