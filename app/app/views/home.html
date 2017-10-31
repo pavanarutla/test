@@ -145,12 +145,24 @@
 			 flex-lg="50" flex-md="50" flex-sm="100" flex-xs="100">
 				<div layout-fill="layout-fill" layout-fill="$mdMedia('gt-sm')" class="bbsct">
 					<md-input-container class="md-block">
-						<label>Area Name (or) Postcode</label>
-						<input ng-model="RCBack" type="text" />
+						<!-- <label>Area Name (or) Postcode</label> -->
+						<md-autocomplete                      
+							md-input-minlength="2"
+							md-selected-item = "selectedArea"
+							md-selected-item-change="selectedAreaChanged(item)"
+							md-search-text="searchText"
+							md-items="item in autoCompleteArea(searchText)"
+							md-item-text="item.name"                      
+							md-floating-label="area search"
+							style="margin-top:-18px;">
+							<md-item-template>
+								<span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
+							</md-item-template>                    
+						</md-autocomplete>
 					</md-input-container>
 				</div>
 				<div class="bbscont">
-					<md-button aria-label="submitRCB" class="md-raised md-primary newbbsub">Browse Billboards</md-button>
+					<md-button aria-label="submitRCB" class="md-raised md-primary newbbsub" ng-href="#/location" ng-disabled="!selectedArea">Browse Billboards</md-button>
 				</div>
 			</form>
 		</div>

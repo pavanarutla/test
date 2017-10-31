@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'config', 'toastr',
-    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, config, toastr) {
+  ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr',
+    function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr) {
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -22,7 +22,16 @@ app.controller('GmapCtrl',
         }
       };
 
-      $scope.selectedAreaFilter = null;
+      var setDefaultArea = function(){
+        $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
+        var area = $scope.selectedArea;
+        $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+        $scope.mapObj.fitBounds(bounds);
+        localStorage.removeItem('areaFromHome');
+      };
+      
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -35,16 +44,25 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
 
-      // $scope.$watch(
-      //   function() { return $mdSidenav('productDetails').isOpen(); },
-      //   function(newValue, oldValue) {
-      //     if(newValue == false){
-      //       $scope.selectedProduct = null;
-      //       selectorMarker.setMap(null);
-      //       $scope.$parent.existingCampaignSidenavVisible = false;
-      //     }
-      //   }
-      // );
+      $scope.$watch(
+        function() { return $mdSidenav('productDetails').isOpen(); },
+        function(newValue, oldValue) {
+          if(newValue == false){
+            $scope.selectedProduct = null;
+            selectorMarker.setMap(null);
+            $scope.$parent.existingCampaignSidenavVisible = false;
+          }
+        }
+      );
+
+      $scope.$watch(
+        function() { return $mdSidenav('suggestMe').isOpen(); },
+        function(newValue, oldValue) {
+          if(newValue == false){
+            $scope.suggestMeRequestSent = false;
+          }
+        }
+      );
 
       var trafficLayer = new google.maps.TrafficLayer();
       var selectorMarker = new google.maps.Marker({
@@ -62,6 +80,13 @@ app.controller('GmapCtrl',
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
+          if(localStorage.areaFromHome){
+            setDefaultArea();
+          }
+          $scope.mapObj.addListener('zoom_changed', function() {
+            $scope.selectedProduct = null;
+            selectorMarker.setMap(null);
+          });
         });
       });
       ProductService.getFormatList().then(function (formats) {
@@ -340,13 +365,16 @@ app.controller('GmapCtrl',
       ];
       //export all 
 
-      $scope.ExportToExcel = function () {
-
-        var blob = new Blob([document.getElementById('divExport').innerHTML], {
-            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+      $scope.exportAllCampaigns = function () {
+        CampaignService.exportCampaignsPdf().then(function(result){
+          var campaignPdf = new Blob([result], { type: 'application/pdf;charset=utf-8' });
+          FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+          if(result.status){
+            toastr.error(result.meesage);
+          }
         });
-        saveAs(blob, "ReportRIS.xls");
-    };
+      };
+
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
@@ -376,8 +404,9 @@ app.controller('GmapCtrl',
 
       $scope.sendSuggestionRequest = function (ev) {
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        console.log($scope.suggestionRequest);
+        // console.log($scope.suggestionRequest);
         CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
+          $scope.suggestionRequest = {};
           if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
           }
@@ -395,7 +424,7 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
-        console.log(marker);
+        // console.log(marker);
         $scope.selectedProduct = marker;
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -432,7 +461,6 @@ app.controller('GmapCtrl',
         $scope.selectedProduct = null;
         selectorMarker.setMap(null);
       });
-
 
       var productList = [];
       var locArr = [];
@@ -628,23 +656,21 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.setNewAddress = function () {
-        // console.log($scope.address.components.location);
-      }
-
       $scope.shortlistSelected = function (ev) {
         MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('body')))
               .clickOutsideToClose(true)
-              .title('ShortList Product')
+              .title('Shortlist Product')
               .textContent(response.message)
               .ariaLabel('shortlist-success')
               .ok('Got it!')
-              .targetEvent(ev)
+              .targetEvent(ev),
+              $mdSidenav('productDetails').close()
           );
           getShortListedProducts();
+          $mdSidenav('productDetails').close();
         });
       }
 
@@ -680,6 +706,8 @@ app.controller('GmapCtrl',
         $scope.selectedAreas = null;
         $scope.selectedcitys = null;
         $scope.selectedStates = null;
+        $scope.selectedArea = null;
+        $scope.circleRadius = null;
         _.each(markersOnMap, function (v, i) {
           v.setMap(null);
           $scope.Clusterer.removeMarker(v);
@@ -687,7 +715,7 @@ app.controller('GmapCtrl',
         });
         markersOnMap = [];
         MapService.markers().then(function (markers) {
-          console.log(markers);
+          // console.log(markers);
           $scope.filteredMarkers = markers;
           $scope.processMarkers();
           var bounds = new google.maps.LatLngBounds();
@@ -716,16 +744,38 @@ app.controller('GmapCtrl',
         //   // });
         // }
         // campaign.products = $scope.selectedForNewCampaign;
+        if($scope.shortListedProducts.length > 0){
+          $scope.campaign.products = [];
+          _.each($scope.shortListedProducts, function (v, i) {
+            $scope.campaign.products.push(v.id);
+          });
+          CampaignService.saveCampaign($scope.campaign).then(function(response){
+            $scope.campaignSavedSuccessfully = true;
+            $scope.campaign={};
+            $timeout(function(){
+              $mdSidenav('saveCampaignSidenav').close();
+              $mdSidenav('shortlistAndSaveSidenav').close();
+              $scope.campaignSavedSuccessfully = false;
+            },3000);
+            $scope.loadPlannedUserCampaigns();
+            getShortListedProducts();
+          });
+        }
+        else{
+          toastr.error("Please shortlist some products first.");
+        }
+      }
+
+      $scope.emptyCampaign = {};
+      $scope.createEmptyCampaign = function () {
         $scope.campaign.products = [];
-        $scope.campaign.user_mongo_id = $rootScope.loggedInUser.id;
-        _.each($scope.shortListedProducts, function (v, i) {
-          $scope.campaign.products.push(v.id);
-        });
-        CampaignService.saveCampaign($scope.campaign).then(function(response){
-          $scope.campaignSavedSuccessfully = true;
+        CampaignService.saveCampaign($scope.emptyCampaign).then(function(response){
+          $scope.emptyCampaignSaved = true;
+          $scope.emptyCampaign = {};
           $timeout(function(){
-            $scope.campaignSavedSuccessfully = false;
-          },1500)
+            $mdSidenav('createEmptyCampaignSidenav').close();
+            $scope.emptyCampaignSaved = false;
+          },3000);
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -733,7 +783,7 @@ app.controller('GmapCtrl',
 
       $scope.searchBySiteNo = function () {
         MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          console.log(markerProperties);
+          // console.log(markerProperties);
           if (markerProperties.id) {
             var marker = {};
             marker.properties = markerProperties;
@@ -803,18 +853,18 @@ app.controller('GmapCtrl',
       // });
 
       rangeCircle = new google.maps.Circle({
-        strokeColor: "#0000ff",
+        strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
-        strokeWeight: 0.5,
+        strokeWeight: 1.5,
         // fillColor: "#0000ff",
         fillOpacity: 0.0,
       });
 
       $scope.circleRadius = 0;
-      $scope.updateCircle = function(){        
+      $scope.updateCircle = function(){
         rangeCircle.setMap(null);
-        rangeCircle.setRadius($scope.circleRadius*1000);
-        rangeCircle.setCenter({lat: Number($scope.selectedAreaFilter.lat), lng: Number($scope.selectedAreaFilter.lng)});
+        rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
+        rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
         // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
         $scope.mapObj.fitBounds(rangeCircle.getBounds());
@@ -842,6 +892,7 @@ app.controller('GmapCtrl',
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('productDetails').close();
           }
           else{
             toastr.error(result.message);
@@ -858,6 +909,7 @@ app.controller('GmapCtrl',
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
           if(result.status == 1){
             toastr.success(result.message);
+            $mdSidenav('shortlistSharingSidenav').close()
           }
           else{
             toastr.error(result.message);
@@ -873,6 +925,7 @@ app.controller('GmapCtrl',
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
           if(result.status == 1){
+            $mdSidenav('shareCampaign').close();
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('body')))
@@ -920,7 +973,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.selectedAreaChanged = function(area){
-        $scope.selectedAreaFilter = area;
+        $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
           var bounds = new google.maps.LatLngBounds();

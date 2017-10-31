@@ -82,15 +82,15 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         toastr.error(result.data.message);
       }
     }, function (resp) {
-      console.log('Error status: ', resp);
+      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+      // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   };
 
   $scope.editFormat = function(format){
-    console.log(format);
+    // console.log(format);
     $scope.format = format;
     $mdDialog.show({
       templateUrl: 'views/admin/add-format-popup.html',
@@ -205,14 +205,13 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   function getProductList(){
     ProductService.getProductList().then(function(result){
       $scope.gridProducts.data = result;
-      console.log(result,"productList1");
+      // console.log(result,"productList1");
     });
   }
 
   $scope.product = {};
   $scope.files = {};
   $scope.addProduct = function () {
-    console.log($scope.files, $scope.product);
     Upload.upload({
       url: config.apiPath + '/product',
       data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
@@ -227,7 +226,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         toastr.error(result.data.message);
       }
     }, function (resp) {
-      console.log('Error status: ', resp);
+      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);

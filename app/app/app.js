@@ -15,13 +15,14 @@ var app = angular.module('bbManager', [
   'toastr',
   'ui.grid', 
   'ui.grid.edit',
-  'ui.grid.pagination'
+  'ui.grid.pagination',
+  'ngFileSaver'
 ])
 app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
