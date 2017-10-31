@@ -386,6 +386,7 @@ app.controller('GmapCtrl',
         $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
         // console.log($scope.suggestionRequest);
         CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
+          $scope.suggestionRequest = {};
           if (result.status == 1) {
             $scope.suggestMeRequestSent = true;
           }
