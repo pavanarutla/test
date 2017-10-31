@@ -783,7 +783,7 @@ app.controller('GmapCtrl',
           $scope.plannedUserCampaigns = result;
         });
       }
-      // $scope.loadPlannedUserCampaigns();
+      $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (result) {
