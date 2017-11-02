@@ -50,6 +50,24 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.shortlist = false;
     $scope.savedcampaign = !$scope.savedcampaign;
   }
+
+  // Slider
+
+  $scope.dataArray = [
+      
+      
+      {
+        src: 'assets/images/bnr.png'
+      },
+      {
+        src: 'assets/images/formats.png'
+      }
+     
+      // {
+      //   src: 'assets/images/banner.png'
+      // }
+      
+    ];
   // mobile footer version
 
       $scope.isactive = false;
@@ -351,9 +369,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
-  $scope.toggleCreateCampaignSidenav = function () {
+  $scope.toggleCreateEmptyCampaignSidenav = function () {
     $scope.campaignSaved = false;
-    $mdSidenav('createCampaignSidenav').toggle();
+    $mdSidenav('createEmptyCampaignSidenav').toggle();
   };
 
   $scope.campaignSaved = false;
@@ -367,6 +385,19 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   /*=================================
   |  Sidenav Functionality Ends
   =================================*/
+
+  /*=================================
+  | Area autocomplete
+  ==================================*/
+
+  $scope.autoCompleteArea = function(query) {
+    return LocationService.getAreasWithAutocomplete(query);
+  }
+
+  $scope.selectedAreaChanged = function(area){
+    localStorage.areaFromHome = JSON.stringify(area);
+  }
+
 
   /*===============================================
   | Custom Filters associated with Angualr's filter

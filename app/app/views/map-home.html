@@ -259,8 +259,8 @@
       <md-content layout="column" style="margin-top:20%" ng-if="campaignSavedSuccessfully">
         <div layout="column" layout-align="center center" layout-margin>
           <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
-          <div class="md-display-1">Congratulations</div>
-          <div class="md-headline">Campaingn Saved Succcessfully</div>
+          <div class="md-display-1">Congratulations!</div>
+          <div class="md-headline">Campaign Saved Succcessfully</div>
         </div>
         <div layout="column" layout-margin>
           <div>
@@ -352,28 +352,28 @@
   </md-sidenav> -->
 
   <!-- Create campaign sidenav -->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="createCampaignSidenav">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="width:500px; padding:10px;" md-component-id="createEmptyCampaignSidenav">
     <div lauout=" column">
       <div layout="row">
         <div class="md-toolbar-tools">
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCreateCampaignSidenav()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCreateEmptyCampaignSidenav()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </div>
       </div>
-      <md-content layout="column" style="overflow:hidden" ng-if="!campaignSaved">
+      <md-content layout="column" style="overflow:hidden" ng-if="!emptyCampaignSaved">
         <div layout="column" layout-margin>
           <div class="md-title">Create Campaign</div>
           <div class="md-subhead">We are excited to see your Campaign</div>
           <div class="md-subhead">Let's Work Together!</div>
         </div>
-        <form name="viewAndSaveCampaignForm">
+        <form name="newEmptyCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
-              <input required md-no-asterisk name="campname" ng-model="project.campname">
-              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
+              <input required md-no-asterisk name="campname" ng-model="emptyCampaign.name">
+              <div ng-messages="newEmptyCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -382,38 +382,39 @@
           <div layout="row" flex="100" class="saved-dates">
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctrl.startDate" md-min-date="newDate" md-placeholder="Campaign Start "></md-datepicker>
+                <md-datepicker ng-model="emptyCampaign.start_date" md-min-date="newDate" md-placeholder="Campaign Start "></md-datepicker>
               </md-input-container>
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="ctr.endDate" md-min-date="newDate" md-placeholder="Campaign End"></md-datepicker>
+                <md-datepicker ng-model="emptyCampaign.end_date" md-min-date="newDate" md-placeholder="Campaign End"></md-datepicker>
               </md-input-container>
             </div>
           </div>
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
-              <input ng-model="user.budget" type="text" name="budget" required="required" />
-              <div ng-messages="viewAndSaveCampaignForm.budget.$error">
+              <input ng-model="emptyCampaign.budget" type="text" name="budget" required="required" ng-pattern="/[0-9]+/"/>
+              <div ng-messages="newEmptyCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
+                <div ng-message="pattern">Please enter numbers only.</div>
               </div>
             </md-input-container>
           </div>
           <div layout="column" layout-margin>
             <div>
-              <md-button class="md-raised md-warn" layout-fill ng-click="createNewCampaign()">CREATE CAMPAIGN</md-button>
+              <md-button class="md-raised md-warn" layout-fill ng-click="createEmptyCampaign()">CREATE CAMPAIGN</md-button>
             </div>
             <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
-      <md-content layout="column" style="margin-top:20%" ng-if="campaignSaved">
+      <md-content layout="column" style="margin-top:20%" ng-if="emptyCampaignSaved">
         <div layout="column" layout-align="center center" layout-margin>
           <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
           <div class="md-display-1">Congratulations</div>
           <div class="md-title">Campaingn Created Succcessfully</div>
-          <div class="md-title" style="color: rgb(255, 75, 78);">Add Products To This campagin</div>
+          <!-- <div class="md-title" style="color: rgb(255, 75, 78);">Add Products To This campagin</div> -->
         </div>
         <div layout="column" layout-margin>
           <div>
@@ -473,9 +474,9 @@
           <div class="md-caption">{{product.direction}}</div>
         </div>
       </div>
-      <div layout="column" layout-margin>
+      <!-- <div layout="column" layout-margin>
         <div class="md-body-2">Available Dates</div>
-      </div>
+      </div> -->
       <div layout="column" layout-margin>
         <md-button layout-fill class="md-raised md-warn" ng-click="shortlistSelected()">SHORTLIST</md-button>
       </div>
@@ -680,6 +681,7 @@
                 <form class="filter-form">
                   <md-autocomplete                      
                     md-input-minlength="2"
+                    md-selected-item = "selectedArea"
                     md-selected-item-change="selectedAreaChanged(item)"
                     md-search-text="searchText"
                     md-items="item in autoCompleteArea(searchText)"
@@ -704,7 +706,7 @@
                 <div layout="row" class="">
                   <div class="range md-body-1" flex="20">Range</div>
                   <div flex class="slider-range">
-                    <md-slider md-discrete ng-model="circleRadius" min="0" max="500" step="1" aria-label="rating" id="red-slider" ng-change="updateCircle()" ng-disabled="!selectedAreaFilter"></md-slider>
+                    <md-slider md-discrete ng-model="circleRadius" min="0" max="500" step="1" aria-label="rating" id="red-slider" ng-change="updateCircle()" ng-disabled="!selectedArea"></md-slider>
                   </div>
                   <div class="rnge md-body-1" flex="20">KMS</div>
                 </div>
@@ -779,7 +781,7 @@
             <md-divider></md-divider>
             <div layout="row">
               <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
-              <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feileds</span> </md-button>
+              <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feilds</span> </md-button>
             </div>
           </div>
         </div>
@@ -935,7 +937,7 @@
             </div>
             <md-divider></md-divider>
             <div layout="column" layout-align="center center">
-              <md-button class="md-primary md-raised" ng-click="ExportToExcel()">EXPORT ALL</md-button>
+              <md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
             </div>
           </div>
           <div style="background:#F1FBFD" ng-if="plannedUserCampaigns.length == 0 && savedcampaign">
@@ -943,7 +945,7 @@
               <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
             </div>
             <div layout="column" layout-align="center center" layout-margin>
-              <md-button class="md-raised md-warn" ng-click="toggleCreateCampaignSidenav()">CREATE CAMPAIGN</md-button>
+              <md-button class="md-raised md-warn" ng-click="toggleCreateEmptyCampaignSidenav()">CREATE CAMPAIGN</md-button>
             </div>
           </div>
         </div>
