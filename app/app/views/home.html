@@ -1,7 +1,29 @@
+<style>
+	 md-card {
+  margin: auto;
+  left: 0;
+  right: 0;
+  margin-bottom: 20px;
+} 
+</style>
 <div layout="column">
 	<!-- banner html start-->
+	<md-divider></md-divider>
 	<div layout="column" class="banner" id="homeCarousel" style="background-image:url(/assets/images/banner1-1920.png);">
 		<!-- <img src="assets/images/product/banner@2x.png" /> -->
+		<!-- slider-->
+	
+	 <!-- <div layout="column" style="padding:0px;" >
+		<md-card layout="column" style="padding-bottom: 10px" >
+			<jk-carousel
+				data="dataArray"
+				item-template-url="'views/item-template.html'"
+				max-height="500"
+				auto-slide="true"
+				auto-slide-time="2000" >
+			</jk-carousel>
+		</md-card>
+	</div>  -->
 		<div class="banner-text11">
 			<div hide-xs>
 				<span class="md-headline bannertet-top" style="color:#3c3a3b">Our Clients Are Our First priority</span></br>
@@ -123,12 +145,24 @@
 			 flex-lg="50" flex-md="50" flex-sm="100" flex-xs="100">
 				<div layout-fill="layout-fill" layout-fill="$mdMedia('gt-sm')" class="bbsct">
 					<md-input-container class="md-block">
-						<label>Area Name (or) Postcode</label>
-						<input ng-model="RCBack" type="text" />
+						<!-- <label>Area Name (or) Postcode</label> -->
+						<md-autocomplete                      
+							md-input-minlength="2"
+							md-selected-item = "selectedArea"
+							md-selected-item-change="selectedAreaChanged(item)"
+							md-search-text="searchText"
+							md-items="item in autoCompleteArea(searchText)"
+							md-item-text="item.name"                      
+							md-floating-label="area search"
+							style="margin-top:-18px;">
+							<md-item-template>
+								<span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
+							</md-item-template>                    
+						</md-autocomplete>
 					</md-input-container>
 				</div>
 				<div class="bbscont">
-					<md-button aria-label="submitRCB" class="md-raised md-primary newbbsub">Browse Billboards</md-button>
+					<md-button aria-label="submitRCB" class="md-raised md-primary newbbsub" ng-href="#/location" ng-disabled="!selectedArea">Browse Billboards</md-button>
 				</div>
 			</form>
 		</div>
@@ -138,7 +172,7 @@
 	<!-- India's No 1 Outdoor Advertising Company html start-->
 	<div layout="column" class="nocompany">
 
-		<img src="assets/images/formats.png" />
+		<img src="assets/images/bnrnew.png" />
 		<!-- <div class="banner-two">
 			<md-button class=" md-primary adplace-btn">PLACE YOUR AD HERE</md-button>
 		</div> -->
@@ -405,13 +439,14 @@
 			</div>
 		</div>
 	</div>
-	<!-- slider-->
+	
+	
 </div>
- <script>
+  <script>
   var height = $(window).height();
   $('#homeCarousel').height(height - 97);
 
-</script> 
+</script>  
  <!-- <script>
    
     $(document).ready(function(){  

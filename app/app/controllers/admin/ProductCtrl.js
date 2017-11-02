@@ -212,7 +212,6 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   $scope.product = {};
   $scope.files = {};
   $scope.addProduct = function () {
-    // console.log($scope.files, $scope.product);
     Upload.upload({
       url: config.apiPath + '/product',
       data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }

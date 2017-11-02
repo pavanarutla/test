@@ -15,7 +15,8 @@ var app = angular.module('bbManager', [
   'toastr',
   'ui.grid', 
   'ui.grid.edit',
-  'ui.grid.pagination'
+  'ui.grid.pagination',
+  'ngFileSaver'
 ])
 app.constant('config', {
   serverUrl : "http://localhost:8001",
@@ -101,6 +102,11 @@ app.constant('config', {
       templateUrl: 'views/suggest-mobile.html',
       controller: 'GmapCtrl'
     })
+    .state('index.savedcamapign-mobile', {
+      url: 'suggest-mobile',
+      templateUrl: 'views/savedcamapign-mobile.html',
+      
+    })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -117,7 +123,7 @@ app.constant('config', {
             toastr.error(result.message);
           }
         });
-        $scope.goToLogin() = function(){
+        $scope.goToLogin = function(){
           $location.path('/');
           $mdDialog.show({
             templateUrl: 'views/signIn.html',
