@@ -19,10 +19,10 @@ var app = angular.module('bbManager', [
   'ngFileSaver'
 ])
 app.constant('config', {
-  serverUrl : "http://localhost:8001",
-  apiPath : "http://localhost:8001/api",
-  // serverUrl : "http://104.236.11.252",
-  // apiPath : "http://104.236.11.252/api"
+  // serverUrl : "http://localhost:8001",
+  // apiPath : "http://localhost:8001/api",
+  serverUrl : "http://104.236.11.252",
+  apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -102,6 +102,11 @@ app.constant('config', {
       templateUrl: 'views/suggest-mobile.html',
       controller: 'GmapCtrl'
     })
+    .state('index.savedcamapign-mobile', {
+      url: 'suggest-mobile',
+      templateUrl: 'views/savedcamapign-mobile.html',
+      
+    })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -118,7 +123,7 @@ app.constant('config', {
             toastr.error(result.message);
           }
         });
-        $scope.goToLogin() = function(){
+        $scope.goToLogin = function(){
           $location.path('/');
           $mdDialog.show({
             templateUrl: 'views/signIn.html',

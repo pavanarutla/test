@@ -433,7 +433,10 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content ng-if="!existingCampaignSidenavVisible">
       <div layout="column" class="map-img">
-        <img ng-src="{{product.image}}" style="width:380px;height:200px;" />
+        <div ng-click=showimage()>
+          <img ng-src="{{product.image}}" style="width:380px;height:200px;" />
+        </div>
+        
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="toggleProductDetailSidenav()">
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -637,7 +640,7 @@
           <md-icon><i class="material-icons">error_outline</i></md-icon>
         </md-button>
       </custom-control> -->
-      <div layout="row" layout="fill" class="top-section" layout-align="end center" show-xs hide-gt-xs>
+      <!-- <div layout="row" layout="fill" class="top-section" layout-align="end center" show-xs hide-gt-xs>
         <md-button class="md-button topbtn-one" ng-click="filtermobilepopup()">
           Filter
         </md-button>
@@ -646,7 +649,7 @@
         </md-button>
         
       <md-button class="md-primary topbtn-two" ng-click="toggleTraffic()" id="traffic-toggle" > Live Traffic</md-button>
-      </div>
+      </div> -->
     </ng-map>
     <div layout="column" class="search-part" id="sideNavPart" hide-xs>
       <!-- search html start-->
@@ -781,7 +784,7 @@
             <md-divider></md-divider>
             <div layout="row">
               <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
-              <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Feilds</span> </md-button>
+              <md-button class="md-warn " type="reset" value="Reset"><span class="md-body-1" ng-click="resetFilters()">Reset Fields</span> </md-button>
             </div>
           </div>
         </div>

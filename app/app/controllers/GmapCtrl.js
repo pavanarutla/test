@@ -203,7 +203,19 @@ app.controller('GmapCtrl',
       $scope.pointermap = function(){
         $scope.ispointer = !$scope.ispointer;
       };
-      // mobile bottom menu
+
+      $scope.showimage = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/showimage.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
+      
+      /*======================================
+      | MOBILE VIEW CODE
+      ======================================*/
+      
       // $scope.isactive = false;
       // $scope.isshortlisted = false;
       // $scope.iscampaigns = false;
@@ -225,37 +237,46 @@ app.controller('GmapCtrl',
       //   $scope.issuggestme = !$scope.issuggestme;
       // }
 
-      $scope.filtermobilepopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/fliters.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.productdetailspopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/map-productpopup.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.exisitingcampaginpopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/existingcampginpopup.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.mobilesharepopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/shareform.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.close = function(){
-        $mdDialog.hide();
-      }
+      // $scope.filtermobilepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/fliters.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // // product detalies popup for maps
+      // $scope.productdetailspopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/map-productpopup.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.exisitingcampaginpopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/existingcampginpopup.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      
+      // $scope.mobilesharepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/shareform.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.mobilesavepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/shavepopupmobile.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.close = function(){
+      //   $mdDialog.hide();
+      // }
       //slider
       function sliderController($scope) {
         $scope.color = {
@@ -266,6 +287,11 @@ app.controller('GmapCtrl',
         $scope.rating = 0;
         $scope.disabled = 100;
       };
+
+      /*======================================
+      | MOBILE VIEW CODE ENDS
+      ======================================*/
+
       // $rootScope.address = 'Hyderabad'; 
 
       // $scope.selectedCountry = { Id: '1', Countryname: 'India' };
