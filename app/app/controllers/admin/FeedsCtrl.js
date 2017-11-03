@@ -7,6 +7,15 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     $scope.productList = [];
     $scope.loadProductList = function(){
       ProductService.getProductForPage($scope.pageNo).then(function(result){
+        var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+        if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
+          _.map(result, function(p){
+            if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
+              p.alreadyAdded = true;
+              return p;
+            } 
+          });  
+        } 
         $scope.pageNo += 1;
         $scope.productList = $scope.productList.concat(result);
       });
@@ -50,6 +59,12 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     // as it's used for redirecting the user to suggest-product page with campaign details saved,
     // while suggestProductForCampaign actually adds a product in the campaign
 
+    // $scope.alreadyAdded = function(productId){
+    //   console.log(count++);
+    //   console.log($scope.productList.length);
+    //   // return _.find(campaign.products, {id: productId}) !== undefined;
+    // }
+
     $scope.suggestProductsForCampaign = function(){
       localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
       $location.path('/admin/suggest-products');
@@ -72,6 +87,15 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         };
         AdminCampaignService.proposeProductForCampaign(postObj).then(function(result){
           if(result.status == 1){
+            AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
+              localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
+              _.map($scope.productList, function(product){
+                if(product.id == suggestedProduct.id){
+                  product.alreadyAdded = true;             
+                }
+                return product;
+              });
+            });
             toastr.success(result.message);
           }
           else{
@@ -79,6 +103,23 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
           }
         });
       }
+    }
+
+    $scope.removeProductFromCampaignSuggestion = function(productId){
+      var campaignId = JSON.parse(localStorage.campaignForSuggestion).id;
+      AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+        if(result.status == 1){
+          AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
+            localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
+          });
+          _.map($scope.productList, function(product){
+            if(product.id == productId){
+              product.alreadyAdded = false;             
+            }
+            return product;
+          });          
+        }
+      });
     }
 
     // AdminCampaignService.getPlannedCampaigns().then(function(result){
@@ -91,5 +132,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     $scope.loadMore = function () {
       $scope.limit = $scope.items.length
     }
+
   });
   

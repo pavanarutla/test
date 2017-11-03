@@ -19,10 +19,10 @@ var app = angular.module('bbManager', [
   'ngFileSaver'
 ])
 app.constant('config', {
-  // serverUrl : "http://localhost:8001",
-  // apiPath : "http://localhost:8001/api",
-  serverUrl : "http://104.236.11.252",
-  apiPath : "http://104.236.11.252/api"
+  serverUrl : "http://localhost:8001",
+  apiPath : "http://localhost:8001/api",
+  // serverUrl : "http://104.236.11.252",
+  // apiPath : "http://104.236.11.252/api"
 })
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -88,25 +88,25 @@ app.constant('config', {
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
-    .state('index.shortlist-mobile', {
-      url: 'shortlist-mobile',
-      templateUrl: 'views/shortlist-mobile.html'
-    })
-    .state('index.formats-mobile', {
-      url: 'formats-mobile',
-      templateUrl: 'views/formats-mobile.html',
-      controller: 'GmapCtrl'
-    })
-    .state('index.suggest-mobile', {
-      url: 'suggest-mobile',
-      templateUrl: 'views/suggest-mobile.html',
-      controller: 'GmapCtrl'
-    })
-    .state('index.savedcamapign-mobile', {
-      url: 'suggest-mobile',
-      templateUrl: 'views/savedcamapign-mobile.html',
+    // .state('index.shortlist-mobile', {
+    //   url: 'shortlist-mobile',
+    //   templateUrl: 'views/shortlist-mobile.html'
+    // })
+    // .state('index.formats-mobile', {
+    //   url: 'formats-mobile',
+    //   templateUrl: 'views/formats-mobile.html',
+    //   controller: 'GmapCtrl'
+    // })
+    // .state('index.suggest-mobile', {
+    //   url: 'suggest-mobile',
+    //   templateUrl: 'views/suggest-mobile.html',
+    //   controller: 'GmapCtrl'
+    // })
+    // .state('index.savedcamapign-mobile', {
+    //   url: 'suggest-mobile',
+    //   templateUrl: 'views/savedcamapign-mobile.html',
       
-    })
+    // })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',

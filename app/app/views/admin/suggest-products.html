@@ -110,20 +110,20 @@
                         <md-button >Shortlist</md-button>
                       </div>
                   </div> -->
-                  <div layout="row" flex>
+                  <div layout="row" flex ng-if="product.alreadyAdded">
                       <div flex="60">
-                        <div class="md-caption">Campagin Name:google</div>
-                        <div class="md-caption">From 12-sep-2017To 30-sep-2017</div>
+                        <div class="md-caption">Product Already Added</div>
+                        <!-- <div class="md-caption">From 12-sep-2017To 30-sep-2017</div> -->
                       </div>
                       <div flex="40">
-                        <md-button class="md-raised md-warn">Remove</md-button>
+                        <md-button class="md-raised md-warn" ng-click="removeProductFromCampaignSuggestion(product.id)">Remove</md-button>
                       </div>
                     </div>
                   </div>
                 </div>
                 </md-content>
               </md-tab>
-              <md-tab label="Add">
+              <md-tab label="Add" ng-disabled="product.alreadyAdded">
                 <md-content class="md-padding">
                   <div class="content-innertwo">
                     <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
