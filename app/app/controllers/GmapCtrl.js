@@ -203,7 +203,16 @@ app.controller('GmapCtrl',
       $scope.pointermap = function(){
         $scope.ispointer = !$scope.ispointer;
       };
+
+      $scope.showimage = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/showimage.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose:true,
+        })
+      };
       // mobile bottom menu
+
       // $scope.isactive = false;
       // $scope.isshortlisted = false;
       // $scope.iscampaigns = false;

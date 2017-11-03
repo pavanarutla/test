@@ -1,5 +1,5 @@
 
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -9,7 +9,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     "Suspended",        // index 4
     "Stopped"           // index 5
   ];
-
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -52,6 +51,19 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     }
   };
 
+  //view in location pages
+
+  $scope.viewlocation = function(){
+    $window.open('#/location', '_blank');
+  }
+
+  $scope.campaignDetails = {};
+
+  ///Delete the Products
+  $scope.deleteProducts = function(item){
+    var index = $scope.campaignDetails.indexOf(item);
+    $scope.campaignDetails.splice(index, 1);   
+  }
 
   $scope.limit = 3;
 
