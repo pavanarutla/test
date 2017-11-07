@@ -5,6 +5,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
+  $scope.selectedAreaFilter = null;
+
   // handles traffic layer on map
   $scope.trafficOn = false;
 
@@ -411,5 +413,26 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   $scope.close = function(){
     $mdDialog.hide();
+  }
+  // autocomplete for location search 
+  $scope.autoCompleteArea = function(query) {
+    return LocationService.getAreasWithAutocomplete(query);
+  }
+  $scope.selectedAreaChanged = function(area){
+    //$state.go('/location');
+    localStorage.setItem(areaitem,"area");
+    localStorage.getItem(areaitem);
+
+    console.log(areaitem);
+    $scope.selectedAreaFilter = area;
+    if(area){
+      $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+      var bounds = new google.maps.LatLngBounds();
+      bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+      $scope.mapObj.fitBounds(bounds);
+    }
+  }
+  $scope.BrowseBillboards = function(){
+    $location.path('/location');
   }
 });
