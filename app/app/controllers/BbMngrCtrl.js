@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config,$window) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -420,10 +420,22 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   }
   $scope.selectedAreaChanged = function(area){
     //$state.go('/location');
-    localStorage.setItem(areaitem,"area");
-    localStorage.getItem(areaitem);
+    // localStorage.setItem(area,"areaitem");
+    // localStorage.getItem("areaitem");
+    var interval = setInterval(function(){
+      if (document.readyState == 'complete') {
+        $window.scrollTo(0, 1000);
+        clearInterval(interval);
+      }
+    }, 100);
+  sessionStorage.setItem("area",area);
+  sessionStorage.getItem("area");
+  console.log("area",area);
 
-    console.log(areaitem);
+   // window.localStorage.set("areaitem", JSON.stringify(area));
+    // var area = JSON.parse(window.localStorage.get("areaitem"));
+
+    console.log(area,'areaItem');
     $scope.selectedAreaFilter = area;
     if(area){
       $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});

@@ -1,5 +1,5 @@
 'user strict'
-app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr, UserService) {
+app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr, UserService,$state) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
@@ -30,7 +30,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	}
 
 	$scope.close = function(){
-		$mdDialog.hide();
+		$mdDialog.hide();		
 	}
 	
 	///Agency Sign In functionolity
@@ -83,5 +83,6 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 
 	$scope.close = function () {
 		$mdDialog.hide();
+		$state.reload();
 	}
 })
