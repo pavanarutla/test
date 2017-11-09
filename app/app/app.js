@@ -238,12 +238,12 @@ app.constant('config', {
     .state('admin.subscribers',{
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
-      controller: 'subscribersCtrl'
+      controller: 'ContactCtrl'
     })
     .state('admin.queries',{
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
-      controller: 'queriesCtrl'
+      controller: 'ContactCtrl'
     })
     .state('admin.callcenterinfo',{
       url: '/callcenterinfo',
