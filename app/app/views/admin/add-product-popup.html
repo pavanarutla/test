@@ -9,15 +9,6 @@
 					<h3>Enter Product Details</h3>
 				</div>
 			</div>
-			<!-- <div layout="column" layout-align="center center">
-				<ul>
-					<li ng-repeat="(key, errors) in addProductForm.$error track by $index"> <strong>{{ key }}</strong> errors
-						<ul>
-							<li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
-						</ul>
-					</li>
-				</ul>
-			</div> -->
 			<form name="addProductForm" novalidate="novalidate">
 				<input type="hidden" ng-model="product.id" />
 				<div layout="row" layout-xs="column" layout-padding>
@@ -159,7 +150,7 @@
 						<div layout="row">
 							<div flex="50"> <label for="dob">Direction Image</label></div>
 							<div>
-								<input type="file" ngf-select ng-model="files.symbol" name="files.symbol" accept="image/*" ngf-max-size="2MB" required></input>
+								<input type="file" ngf-select ng-model="files.symbol" name="files.symbol" accept="image/*" ngf-max-size="2MB" ng-required="!product.id"></input>
 								<br /><br />
 							</div>
 						</div>
@@ -175,12 +166,22 @@
 								<label for="files.image">Image</label>
 							</div>
 							<div>
-								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" required></input>
+								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id"></input>
 								<br /><br />
 							</div>
 						</div>
 					</div>
 				</div>
+				<div layout="row" layout-align="center center">
+				<ul>
+					<li ng-repeat="(key, errors) in addProductForm.$error track by $index">
+						<strong>{{ key }}</strong> errors
+						<ul>
+							<li style="color:#f00;" ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 				<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
