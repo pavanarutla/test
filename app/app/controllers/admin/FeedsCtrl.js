@@ -7,15 +7,17 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     $scope.productList = [];
     $scope.loadProductList = function(){
       ProductService.getProductForPage($scope.pageNo).then(function(result){
-        var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
-        if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
-          _.map(result, function(p){
-            if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
-              p.alreadyAdded = true;
-              return p;
-            } 
-          });  
-        } 
+        if(localStorage.campaignForSuggestion){
+          var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+          if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
+            _.map(result, function(p){
+              if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
+                p.alreadyAdded = true;
+                return p;
+              } 
+            });  
+          } 
+        }
         $scope.pageNo += 1;
         $scope.productList = $scope.productList.concat(result);
       });
