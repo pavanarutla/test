@@ -142,6 +142,8 @@ app.controller('GmapCtrl',
 
       // range end
 
+   
+
       // clender
       $scope.opened = {
         start: false,
@@ -211,6 +213,7 @@ app.controller('GmapCtrl',
           clickOutsideToClose:true,
         })
       };
+ 
       // mobile bottom menu
 
       // $scope.isactive = false;
