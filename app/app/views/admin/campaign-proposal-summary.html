@@ -13,24 +13,24 @@
                         layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
                         <div layout="column" layout-align="center center">
                             <div><span><img src="assets/images/client_details.png"></span></div>
-                            <h3>Cleient Details</h2>
+                            <h3>Client Details</h2>
                         </div>
 
                         <div layout="row" layout-align="center center">
                             <div flex="50">Campaign Name:</div>
-                            <div flex="50">Paytm</div>
+                            <div flex="50">{{campaignDetails.name}}</div>
                         </div>
                         <div layout="row" layout-align="center center">
                             <div flex="50">Client Name:</div>
-                            <div flex="50">Srikanth Bijjala</div>
+                            <div flex="50">{{campaignDetails.user_full_name}}</div>
                         </div>
                         <div layout="row" layout-align="center center">
-                            <div flex="50">Content:</div>
-                            <div flex="50">9999999999</div>
+                            <div flex="50">Contact:</div>
+                            <div flex="50">{{campaignDetails.user_phone}}</div>
                         </div>
                         <div layout="row" layout-align="center center">
                             <div flex="50">Email:</div>
-                            <div flex="50">srikanthbijjala1990@gmail.com</div>
+                            <div flex="50">{{campaignDetails.user_email}}</div>
                         </div>
 
                     </div>
@@ -40,30 +40,30 @@
 
                         <div layout="column" layout-align="center center">
                             <div><img src="assets/images/capaign_details.png"></div>
-                            <h3>Campaign Summery</h2>
+                            <h3>Campaign Summary</h2>
                         </div>
                         <div layout="row">
                             <div flex="50">Staring:</div>
-                            <div flex="50">From 20-Feb-17 To 28-Feb-2017</div>
+                            <div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date: "dd-MMM-yyyy" }}</div>
                         </div>
                         <div layout="row">
                             <div flex="50">Estimated Budget:</div>
-                            <div flex="50">Rs.2,00,000</div>
+                            <div flex="50">Rs.{{campaignDetails.est_budget}}</div>
                         </div>
                         <div layout="row">
                             <div flex="50">Actul Budget:</div>
-                            <div flex="50">Rs.2,00,000</div>
+                            <div flex="50">Rs.{{campaignDetails.budget}}</div>
                         </div>
                         <div layout="row">
                             <div flex="50">Status:</div>
-                            <div flex="50">Draft</div>
+                            <div flex="50">{{campaignDetails.status | stringifyCampaignStatus }}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div layout="row" layout-margin>
                 <div flex="50">
-                    <div style="margin: 30px 0 0 0;font-size: 20px;">Products(15)</div>
+                    <div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
                 </div>
                 <div flex="50" layout="row" layout-align="end center">
 

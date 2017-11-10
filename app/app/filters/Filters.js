@@ -66,3 +66,14 @@ app.filter('stringifyCampaignStatus', function(){
     return returnStatus;
   }
 });
+
+app.filter('boolToYesNo', function(){
+  return function(n){
+    if(n){
+      return "Yes";
+    }
+    else{
+      return "No";
+    }
+  }
+});
