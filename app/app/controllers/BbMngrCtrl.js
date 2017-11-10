@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
@@ -48,49 +48,50 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.shortlist = false;
     $scope.savedcampaign = !$scope.savedcampaign;
   }
+
+  
   // mobile footer version
 
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      $scope.Home = function(){
-        $scope.isactive = !$scope.isactive;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      }
-      $scope.shortlisted = function(){
-        $scope.isshortlisted = !$scope.isshortlisted;
-        $scope.isactive = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-
-      }
-      $scope.campaigns  = function(){
-        $scope.iscampaigns = !$scope.iscampaigns;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      }
-      $scope.formatmobile = function(){
-        $scope.isformats = !$scope.isformats;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.issuggestme= false;
-      }
-      $scope.suggestme = function(){
-        $scope.issuggestme = !$scope.issuggestme;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      }
+  $scope.isactive = false;
+  $scope.isshortlisted = false;
+  $scope.iscampaigns = false;
+  $scope.isformats = false;
+  $scope.issuggestme= false;
+  $scope.Home = function(){
+    $scope.isactive = !$scope.isactive;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.shortlisted = function(){
+    $scope.isshortlisted = !$scope.isshortlisted;
+    $scope.isactive = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.campaigns  = function(){
+    $scope.iscampaigns = !$scope.iscampaigns;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.formatmobile = function(){
+    $scope.isformats = !$scope.isformats;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.issuggestme= false;
+  }
+  $scope.suggestme = function(){
+    $scope.issuggestme = !$scope.issuggestme;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+  }
   // side favicon functionality
   this.isOpen = false;
   this.availableModes = ['md-fling', 'md-scale'];
@@ -349,9 +350,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $mdSidenav('campaignDetailSidenav').toggle();
   };
   // Create Campaign sidenav
-  $scope.toggleCreateCampaignSidenav = function () {
+  $scope.toggleCreateEmptyCampaignSidenav = function () {
     $scope.campaignSaved = false;
-    $mdSidenav('createCampaignSidenav').toggle();
+    $mdSidenav('createEmptyCampaignSidenav').toggle();
   };
 
   $scope.campaignSaved = false;
@@ -365,6 +366,19 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   /*=================================
   |  Sidenav Functionality Ends
   =================================*/
+
+  /*=================================
+  | Area autocomplete
+  ==================================*/
+
+  $scope.autoCompleteArea = function(query) {
+    return LocationService.getAreasWithAutocomplete(query);
+  }
+
+  $scope.selectedAreaChanged = function(area){
+    localStorage.areaFromHome = JSON.stringify(area);
+  }
+
 
   /*===============================================
   | Custom Filters associated with Angualr's filter
@@ -381,4 +395,5 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.close = function(){
     $mdDialog.hide();
   }
+  
 });

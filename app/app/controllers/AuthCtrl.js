@@ -1,5 +1,5 @@
 'user strict'
-app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr, UserService) {
+app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
@@ -17,7 +17,12 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				localStorage.isAuthenticated = true;
 				localStorage.loggedInUser = JSON.stringify(userData);
 				toastr.success('You have successfully signed in!');
-				$location.path('/location');
+				if($rootScope.postLoginState){
+					$state.go($rootScope.postLoginState, null);
+				}
+				else{
+					$state.go("index.location", null);
+				}
 			}
 			else {
 				toastr.error(res.data.message);
@@ -27,10 +32,6 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 			toastr.error(error.data.message, error.status);
 			$mdDialog.hide();
 		});
-	}
-
-	$scope.close = function(){
-		$mdDialog.hide();
 	}
 	
 	///Agency Sign In functionolity

@@ -1,14 +1,8 @@
 app.service('AdminCampaignService', 
 ['$http', '$q', 'config', 
   function($http, $q, config){
+    
     return {
-      campaignData:{},
-      saveCampaignData: function(campaignData){
-        this.campaignData = campaignData;
-      },
-      getCampaignData: function(){
-        return this.campaignData;
-      },
       getAllCampaignRequests: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaign-requests').success(dfd.resolve).error(dfd.reject);
@@ -37,6 +31,21 @@ app.service('AdminCampaignService',
       deleteCampaign : function(campaginId){
         var dfd = $q.defer();
         $http.post(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      proposeProductForCampaign: function(obj){
+        var dfd = $q.defer();
+        $http.post(config.apiPath + '/propose-product-for-campaign', obj).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      deleteProductFromCampaign: function(campaignId, productId){
+        var dfd = $q.defer();
+        $http.delete(config.apiPath + '/campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      getCampaignWithProducts: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       }
     }

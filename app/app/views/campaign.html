@@ -1,14 +1,14 @@
 <style>
-     .detail{
+     /* .detail{
        display:none; 
-    } 
+    }  */
 </style>
 <div ng-cloak flex-offset-gt-sm="10" flex="80" flex-xs="100"flex-sm="100">
     <md-content layout="column" layout-sm="column" layout-xs="column">
         <md-tabs md-dynamic-height md-border-bottom class="profile-campagin">
 
             <!-- planed tab start-->
-            <md-tab label="Planned">
+            <md-tab label="Planed">
                 <div class="inputDiv">
                     <md-icon><i class="material-icons">search</i></md-icon>
                     <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
@@ -49,7 +49,7 @@
                                                 <md-button ng-href="#">Launch</md-button>
                                             </md-menu-item>
                                             <md-menu-item>
-                                                <md-button ng-href="#/campaginedit">Edit</md-button>
+                                                <md-button ng-href="#/edit_campaign">Edit</md-button>
                                             </md-menu-item>
                                             <md-menu-item>
                                                 <md-button>Delete</md-button>
@@ -95,7 +95,7 @@
                             <!-- hide in lg -->
                             <div flex="10" flex-xs="100" class="campaign-name" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/c1-new.svg"></md-icon>
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
                                     <div class="md-body-1">{{item.clientcomapanyname}}</div>
@@ -103,7 +103,7 @@
                             </div>
                             <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-                                    <md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
                                     <div class="md-body-1">{{item.clientname}}</div>
@@ -345,6 +345,10 @@
                 
             </md-tab>
         </md-tabs>
+
+        <!-- <div ng-repeat="item in items" class="slide">
+            {{ item }}
+        </div> -->
     </md-content>
 </div>
  <script>
