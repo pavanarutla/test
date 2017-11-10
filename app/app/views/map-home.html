@@ -433,8 +433,8 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="productDetails" style="width:500px;">
     <md-content ng-if="!existingCampaignSidenavVisible">
       <div layout="column" class="map-img">
-        <div ng-click=showimage()>
-          <img ng-src="{{product.image}}" style="width:380px;height:200px;" />
+        <div ng-click="showProductImagePopup($event, product.image)">
+          <img ng-src="{{product.image}}" style="width:100%;height:200px;" />
         </div>
         
         <md-button class="md-icon-button close-btn" aria-label="Close Side Panel" ng-click="toggleProductDetailSidenav()">

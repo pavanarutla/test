@@ -5,8 +5,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
-  $scope.selectedAreaFilter = null;
-
   // handles traffic layer on map
   $scope.trafficOn = false;
 
@@ -51,66 +49,49 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.savedcampaign = !$scope.savedcampaign;
   }
 
-  // Slider
-
-  $scope.dataArray = [
-      
-      
-      {
-        src: 'assets/images/bnr.png'
-      },
-      {
-        src: 'assets/images/formats.png'
-      }
-     
-      // {
-      //   src: 'assets/images/banner.png'
-      // }
-      
-    ];
+  
   // mobile footer version
 
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      $scope.Home = function(){
-        $scope.isactive = !$scope.isactive;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      }
-      $scope.shortlisted = function(){
-        $scope.isshortlisted = !$scope.isshortlisted;
-        $scope.isactive = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-
-      }
-      $scope.campaigns  = function(){
-        $scope.iscampaigns = !$scope.iscampaigns;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-      }
-      $scope.formatmobile = function(){
-        $scope.isformats = !$scope.isformats;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.issuggestme= false;
-      }
-      $scope.suggestme = function(){
-        $scope.issuggestme = !$scope.issuggestme;
-        $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      }
+  $scope.isactive = false;
+  $scope.isshortlisted = false;
+  $scope.iscampaigns = false;
+  $scope.isformats = false;
+  $scope.issuggestme= false;
+  $scope.Home = function(){
+    $scope.isactive = !$scope.isactive;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.shortlisted = function(){
+    $scope.isshortlisted = !$scope.isshortlisted;
+    $scope.isactive = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.campaigns  = function(){
+    $scope.iscampaigns = !$scope.iscampaigns;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.isformats = false;
+    $scope.issuggestme= false;
+  }
+  $scope.formatmobile = function(){
+    $scope.isformats = !$scope.isformats;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.issuggestme= false;
+  }
+  $scope.suggestme = function(){
+    $scope.issuggestme = !$scope.issuggestme;
+    $scope.isactive = false;
+    $scope.isshortlisted = false;
+    $scope.iscampaigns = false;
+    $scope.isformats = false;
+  }
   // side favicon functionality
   this.isOpen = false;
   this.availableModes = ['md-fling', 'md-scale'];
@@ -414,37 +395,5 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.close = function(){
     $mdDialog.hide();
   }
-  // autocomplete for location search 
-  $scope.autoCompleteArea = function(query) {
-    return LocationService.getAreasWithAutocomplete(query);
-  }
-  $scope.selectedAreaChanged = function(area){
-    //$state.go('/location');
-    // localStorage.setItem(area,"areaitem");
-    // localStorage.getItem("areaitem");
-    var interval = setInterval(function(){
-      if (document.readyState == 'complete') {
-        $window.scrollTo(0, 1000);
-        clearInterval(interval);
-      }
-    }, 100);
-  sessionStorage.setItem("area",area);
-  sessionStorage.getItem("area");
-  console.log("area",area);
-
-   // window.localStorage.set("areaitem", JSON.stringify(area));
-    // var area = JSON.parse(window.localStorage.get("areaitem"));
-
-    console.log(area,'areaItem');
-    $scope.selectedAreaFilter = area;
-    if(area){
-      $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
-      var bounds = new google.maps.LatLngBounds();
-      bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
-      $scope.mapObj.fitBounds(bounds);
-    }
-  }
-  $scope.BrowseBillboards = function(){
-    $location.path('/location');
-  }
+  
 });
