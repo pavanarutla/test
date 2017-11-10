@@ -993,7 +993,7 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){
+      $scope.selectedAreaChanged = function(area){        
         $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
