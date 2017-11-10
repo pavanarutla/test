@@ -52,7 +52,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   };
 
   //view in location pages
-
   $scope.viewlocation = function(){
     $window.open('#/location', '_blank');
   }
