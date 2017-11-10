@@ -41,6 +41,28 @@ app.filter('address', function () {
 
 app.filter('dateify',function(){
   return function(date){
-    return new Date(date);
+    if(date){
+      return new Date(date);
+    }
+    else{
+      return "N/A";
+    }
   }
-})
+});
+
+app.filter('stringifyCampaignStatus', function(){
+  return function(status){
+    switch (status) {
+      case 0:
+        returnStatus = "Planning";
+        break;
+      case 1:
+        returnStatus = "Planned";
+        break;
+      default:
+        return status = "Unknown";
+        break;
+    }
+    return returnStatus;
+  }
+});

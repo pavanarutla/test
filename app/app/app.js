@@ -172,8 +172,9 @@ var app = angular.module('bbManager', [
         title: 'Campaign'
       })
       .state('admin.campaign-proposal-summary', {
-        url: '/campaign-proposal-summary',
-        templateUrl: 'views/admin/campaignproposalsummary.html'
+        url: '/campaign-proposal-summary/{campaignId}',
+        templateUrl: 'views/admin/campaign-proposal-summary.html',
+        controller: 'CampaignProposalCtrl',
       })
       .state('admin.campaign-running-summary', {
         url: '/campaign-running-summary',
