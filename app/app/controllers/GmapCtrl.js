@@ -204,15 +204,23 @@ app.controller('GmapCtrl',
         $scope.ispointer = !$scope.ispointer;
       };
 
-      $scope.showimage = function (ev) {
+      $scope.showProductImagePopup = function (ev, img_src) {
+        console.log(img_src);
         $mdDialog.show({
-          templateUrl: 'views/showimage.html',
+          locals:{ src: img_src },
+          templateUrl: 'views/image-popup-large.html',
           fullscreen: $scope.customFullscreen,
           clickOutsideToClose:true,
-        })
+          controller:function($scope, src){
+            $scope.img_src = src;
+          }
+        });
       };
-      // mobile bottom menu
-
+      
+      /*======================================
+      | MOBILE VIEW CODE
+      ======================================*/
+      
       // $scope.isactive = false;
       // $scope.isshortlisted = false;
       // $scope.iscampaigns = false;
@@ -234,46 +242,46 @@ app.controller('GmapCtrl',
       //   $scope.issuggestme = !$scope.issuggestme;
       // }
 
-      $scope.filtermobilepopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/fliters.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      // product detalies popup for maps
-      $scope.productdetailspopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/map-productpopup.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.exisitingcampaginpopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/existingcampginpopup.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
+      // $scope.filtermobilepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/fliters.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // // product detalies popup for maps
+      // $scope.productdetailspopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/map-productpopup.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.exisitingcampaginpopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/existingcampginpopup.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
       
-      $scope.mobilesharepopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/shareform.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.mobilesavepopup = function (ev) {
-        $mdDialog.show({
-          templateUrl: 'views/shavepopupmobile.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-        })
-      };
-      $scope.close = function(){
-        $mdDialog.hide();
-      }
+      // $scope.mobilesharepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/shareform.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.mobilesavepopup = function (ev) {
+      //   $mdDialog.show({
+      //     templateUrl: 'views/shavepopupmobile.html',
+      //     fullscreen: $scope.customFullscreen,
+      //     clickOutsideToClose:true,
+      //   })
+      // };
+      // $scope.close = function(){
+      //   $mdDialog.hide();
+      // }
       //slider
       function sliderController($scope) {
         $scope.color = {
@@ -284,6 +292,11 @@ app.controller('GmapCtrl',
         $scope.rating = 0;
         $scope.disabled = 100;
       };
+
+      /*======================================
+      | MOBILE VIEW CODE ENDS
+      ======================================*/
+
       // $rootScope.address = 'Hyderabad'; 
 
       // $scope.selectedCountry = { Id: '1', Countryname: 'India' };
@@ -433,11 +446,9 @@ app.controller('GmapCtrl',
       };
 
       function selectMarker(marker) {
-        // console.log(marker);
-        $scope.selectedProduct = marker;
+        $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
-        $scope.mapObj.setCenter(marker.position);
         $scope.product.image = config.serverUrl + marker.properties['image'];
         $scope.product.siteNo = marker.properties['siteNo'];
         $scope.product.panelSize = marker.properties['panelSize'];
@@ -448,12 +459,12 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+        $scope.selectedProduct = marker;
       }
 
       function selectSpideredMarker(marker) {
-        $scope.selectedProduct = marker;
-        selectorMarker.setMap(null);
         $scope.mapObj.setCenter(marker.position);
+        selectorMarker.setMap(null);
         $scope.product.image = config.serverUrl + marker.properties['image'];
         $scope.product.siteNo = marker.properties['siteNo'];
         $scope.product.panelSize = marker.properties['panelSize'];
@@ -464,6 +475,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+        $scope.selectedProduct = marker;
       }
 
       google.maps.event.addListener(selectorMarker, 'click', function (e) {
@@ -792,14 +804,14 @@ app.controller('GmapCtrl',
 
       $scope.searchBySiteNo = function () {
         MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          // console.log(markerProperties);
           if (markerProperties.id) {
             var marker = {};
+            // marker.position = { lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) };
             marker.properties = markerProperties;
-            selectMarker(marker);
             var bounds = new google.maps.LatLngBounds();
             bounds.extend({ lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) });
             $scope.mapObj.fitBounds(bounds);
+            selectMarker(marker);
           }
           else {
             toastr.error('No product found with that tab id', 'error');
@@ -981,7 +993,7 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){
+      $scope.selectedAreaChanged = function(area){        
         $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});

@@ -13,16 +13,13 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
   /* 
   ==== Switching between user and agency pop up form ====
   */
-  $scope.usersFormVisible = true;
   $scope.userChecked = true;
 
   $scope.showUser = function () {
-    $scope.userChecked = true;
-    $scope.usersFormVisible = true;
+    $scope.userChecked = true;    
   }
   $scope.showAgency = function () {
     $scope.userChecked = false;
-    $scope.usersFormVisible = false;
   }
   /* 
   ==== Switching between user and agency pop up form ends ====
@@ -133,7 +130,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
         AdminUserService.getUsers().then(function (response) {    
           $scope.gridUsers.data = response;
         });
-        toastr.success('You have successfully submiteed');
+        $mdDialog.hide();
+        toastr.success('User has been created successfully.');
       }
       else{
         toastr.error(result.message);
@@ -153,7 +151,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
         AdminUserService.getAgencies().then(function (response) {    
           $scope.gridAgency.data = response;
         });
-        toastr.success('You have successfully submiteed');
+        $mdDialog.hide();
+        toastr.success('Agency has been successfully created.');
       }
       else{
         toastr.error(result.message);
