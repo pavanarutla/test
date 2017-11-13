@@ -205,7 +205,6 @@ app.controller('GmapCtrl',
       };
 
       $scope.showProductImagePopup = function (ev, img_src) {
-        console.log(img_src);
         $mdDialog.show({
           locals:{ src: img_src },
           templateUrl: 'views/image-popup-large.html',
