@@ -26,11 +26,11 @@
                         </div>
                         <div layout="row" layout-align="center center">
                             <div flex="50">Contact:</div>
-                            <div flex="50">{{campaignDetails.user_phone}}</div>
+                            <div flex="50">{{campaignDetails.user_phone || "N/A"}}</div>
                         </div>
                         <div layout="row" layout-align="center center">
                             <div flex="50">Email:</div>
-                            <div flex="50">{{campaignDetails.user_email}}</div>
+                            <div flex="50">{{campaignDetails.user_email || "N/A"}}</div>
                         </div>
 
                     </div>
@@ -48,11 +48,11 @@
                         </div>
                         <div layout="row">
                             <div flex="50">Estimated Budget:</div>
-                            <div flex="50">Rs.{{campaignDetails.est_budget}}</div>
+                            <div flex="50"><span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
                         </div>
                         <div layout="row">
                             <div flex="50">Actul Budget:</div>
-                            <div flex="50">Rs.{{campaignDetails.act_budget}}</div>
+                            <div flex="50"><span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
                         </div>
                         <div layout="row">
                             <div flex="50">Status:</div>
