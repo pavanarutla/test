@@ -1272,34 +1272,31 @@
       <md-button class="md-raised md-primary remm-btn" ng-click="toggleTraffic()" id="traffic-toggle"><span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression</md-button>
     </div>
   </div>
-  <div layout="column" style="top:20%;z-index:1;position:absolute;;right:auto" hide-xs hide-lg>
+  <div layout="column" style="top:20%;z-index:1;position:absolute;;right:auto" hide-xs hide-lg hide-gt-lg>
     <div layout="colmun">
       <md-button class="md-fab md-mini fliterside-btn" aria-label="Eat cake" ng-click="toggleViewAllFilter()">
-              <md-icon><img src="assets/images/icons/filter.png"></md-icon>
+        <md-icon><img src="assets/images/icons/filter.png"></md-icon>
       </md-button>
     </div>
     <div layout="colmun">
       <md-button class="md-fab md-mini fliterside-btn" aria-label="Eat cake" ng-click="mapFilter()">
-              <md-icon style="margin-top:-8px"><img src="assets/images/icons/formats.png"></md-icon>
+        <md-icon style="margin-top:-8px"><img src="assets/images/icons/formats.png"></md-icon>
       </md-button>
-      
     </div>
     <div layout="colmun">
       <md-button class="md-fab md-mini fliterside-btn" aria-label="Eat cake" ng-click="shortListed()">
-              <md-icon style="margin-top:-8px"><img src="assets/images/icons/shortlist.png"></md-icon>
+        <md-icon style="margin-top:-8px"><img src="assets/images/icons/shortlist.png"></md-icon>
       </md-button>
-      
     </div>
     <div layout="row" >
       <div>
         <md-button class="md-fab md-mini fliterside-btn" aria-label="Eat cake" ng-click="savedCampagin()" ng-mouseenter="open = true" ng-mouseleave="open = false" >
-              <md-icon><img src="assets/images/icons/savedcampagin.png"></md-icon>
+          <md-icon><img src="assets/images/icons/savedcampagin.png"></md-icon>
         </md-button>
       </div>
       <div ng-show="open">
         <div>saved campagin</div>
       </div>
-      
     </div>
   </div>  
 </div>
@@ -1315,13 +1312,10 @@
  <script>
    
     $(document).ready(function(){  
-    height = $(window).height();  //getting windows height
-    jQuery('#map-container').css('height', height-64+'px');   //and setting height of carousel
-    if($(window).width() < 600){
-    jQuery('#map-container').css('height', height-100+'px');
-    }
+      height = $(window).height();  //getting windows height
+      jQuery('#map-container').css('height', height-64+'px');   //and setting height of carousel
+      if($(window).width() < 600){
+        jQuery('#map-container').css('height', height-100+'px');
+      }
     });
 </script>  
-<script>
-    $scope.open = false;
-</script>
