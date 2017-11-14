@@ -162,7 +162,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'lng', displayName: 'Longitude', width: '10%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href="" ng-click="grid.appScope.deleteArea(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="" ng-click="grid.appScope.editArea(row.entity)" style="cursor:pointer;"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href="" ng-click="grid.appScope.deleteArea(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -287,6 +287,13 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
+  $scope.editArea = function(area){
+    $scope.area = area;
+    $scope.area.state_id = null;
+    $scope.area.city_id = null;
+    $scope.area.area_name = area.name;
+  }
+
   $scope.deleteArea = function(area){
     AdminLocationService.deleteArea(area.id).then(function(result){
       if(result.status == 1){
@@ -298,6 +305,10 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.error(result.message);
       }
     });
+  }
+
+  $scope.resetAreaForm = function(){
+    $scope.area = {};
   }
 
 });
