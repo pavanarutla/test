@@ -142,6 +142,8 @@ app.controller('GmapCtrl',
 
       // range end
 
+   
+
       // clender
       $scope.opened = {
         start: false,
@@ -395,7 +397,22 @@ app.controller('GmapCtrl',
           }
         });
       };
-
+      ////////////////////////////////////////////////////////////////////////
+      // tablet filters filtersMap
+      
+      $scope.toggleViewAllFilter = function() {
+        $mdSidenav('filtersMobile').toggle();
+      };
+      $scope.mapFilter = function() {
+        $mdSidenav('filtersMap').toggle();
+      };
+      $scope.shortListed = function() {
+        $mdSidenav('shortlistedList').toggle();
+      };
+      $scope.savedCampagin = function() {
+        $mdSidenav('savedCamapgin').toggle();
+      };
+      ////////////////////////////////////////////////////////////////////
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
