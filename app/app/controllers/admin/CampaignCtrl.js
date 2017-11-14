@@ -28,7 +28,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   *========= campagin proposal(planned) grid =========
   */
 
-  $scope.gridProposal = {
+  $scope.gridPreLaunch = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 25,
     enableCellEditOnFocus: false,
@@ -40,7 +40,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
-  $scope.gridProposal.columnDefs = [
+  $scope.gridPreLaunch.columnDefs = [
     { name: 'created_by', displayName: 'Created By', enableCellEdit: false, width: '5%', headerCellClass: 'grid-align', cellClass: 'grid-align', },
     { name: 'name', displayName: 'Campagin Name ', width: '15%', enableCellEdit: false, headerCellClass: 'grid-align', cellClass: 'grid-align', },
     { name: 'user_full_name', displayName: 'Client Name', width: '15%', headerCellClass: 'grid-align', cellClass: 'grid-align', },
@@ -65,7 +65,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     }
   ];
   $scope.msg = {};
-  $scope.gridProposal.onRegisterApi = function (gridApi) {
+  $scope.gridPreLaunch.onRegisterApi = function (gridApi) {
     //set gridApi on scope
     $scope.gridApi = gridApi;
     gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -74,7 +74,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     });
   };
   AdminCampaignService.getAllCampaignRequests().then(function(result){
-    $scope.gridProposal.data = result;
+    $scope.gridPreLaunch.data = result;
   });
 
   /*

@@ -2,12 +2,14 @@
 app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
-    "",                 // index 0
-    "Draft",            // index 1
-    "Launch Requested", // index 2
-    "Running",          // index 3
-    "Suspended",        // index 4
-    "Stopped"           // index 5
+    'suggestion-requested',     // index 0,
+    'campaign-preparing',       // index 1,
+    'campaign-created',         // index 2,
+    'quote-requested',          // index 3,
+    'launch-requested',         // index 4,
+    'running',                  // index 5, 
+    'suspended',                // index 6,
+    'stopped'                   // index 7, 
   ];
 
   $scope.showPaymentdailog = function () {
