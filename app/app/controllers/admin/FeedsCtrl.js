@@ -56,17 +56,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     ======== Campaign Suggestions(planned) ========
     */
 
-    // saves the campaign details in a service so it can be accessed on suggest-product page.
-    // different from sugggestProductForCampaign (no 's', and a parameter 'suggestedProduct')
-    // as it's used for redirecting the user to suggest-product page with campaign details saved,
-    // while suggestProductForCampaign actually adds a product in the campaign
-
-    // $scope.alreadyAdded = function(productId){
-    //   console.log(count++);
-    //   console.log($scope.productList.length);
-    //   // return _.find(campaign.products, {id: productId}) !== undefined;
-    // }
-
     $scope.suggestProductsForCampaign = function(){
       localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
       $location.path('/admin/suggest-products');
@@ -129,6 +118,18 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     // });
     /*
     ======== Campaign Suggestions(planned) ends ========
+    */
+
+    /*
+    ======= Campaign Proposals =======
+    */
+    $scope.prepareQuoteForCampaign = function(campaignId){
+      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/admin/campaign-proposal-summary/' + campaignId);
+    }
+
+    /*
+    ======= Campaign Proposals =======
     */
 
     $scope.loadMore = function () {
