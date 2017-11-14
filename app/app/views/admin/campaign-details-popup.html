@@ -32,10 +32,10 @@
         <md-input-container ng-if="selectedRequestDetails.status == 0">
           <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="suggestProductsForCampaign()">Suggest Products</md-button>
         </md-input-container>
-        <md-input-container ng-if="selectedRequestDetails.status == 1">
-          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="closeCampaignRequestDetails()">Prepare Quote</md-button>
+        <md-input-container ng-if="selectedRequestDetails.status == 3">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Prepare Quote</md-button>
         </md-input-container>
-        <md-input-container ng-if="selectedRequestDetails.status == 2">
+        <md-input-container ng-if="selectedRequestDetails.status == 4">
           <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="closeCampaignRequestDetails()">View and Launch Campaign</md-button>
         </md-input-container>
       </div>

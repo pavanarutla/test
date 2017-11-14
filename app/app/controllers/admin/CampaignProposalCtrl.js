@@ -1,0 +1,124 @@
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
+
+  if($stateParams.campaignId){
+    var campaignId = $stateParams.campaignId;
+    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+      $scope.campaignDetails = result;
+      $scope.gridCampaignProducts.data = result.products;
+    });
+  }
+  if(!localStorage.campaignForSuggestion){
+    toastr.error("Choose a campaign first.");
+    $location.path('/admin/campaign');
+  }
+
+  $scope.gridCampaignProducts = {  
+    paginationPageSizes: [25, 50, 75],
+    paginationPageSize: 25,
+    enableCellEditOnFocus: false,
+    multiSelect: false,
+    enableFiltering: true,
+    enableSorting: true,
+    showColumnMenu: false,
+    enableGridMenu: true,
+    enableRowSelection: true,
+    enableRowHeaderSelection: false,
+     rowHeight: 60,
+  };
+  $scope.gridCampaignProducts.columnDefs = [
+    // { name: 'id',displayName: 'ID ', enableCellEdit: false, width: '5%',headerCellClass: 'grid-align',cellClass: 'grid-align', },
+    { name: 'format_name', displayName: 'Type ', width: '15%', enableCellEdit: false,headerCellClass: 'grid-align',cellClass: 'grid-align', },
+    { name: 'area_name', displayName: 'Area', width: '15%',headerCellClass: 'grid-align',cellClass: 'grid-align', },
+    { name: 'panelSize', displayName: 'Size' , type: 'number', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align', },
+    { name: 'lighting', displayName: 'Lighting' , width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align', 
+      cellTemplate: '<div>{{row.entity.lighting | boolToYesNo}}</div>',
+    },
+    { name: 'from_date', displayName: 'Start Date' , width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align', 
+      cellTemplate: '<div>{{ row.entity.from_date | dateify | date:"dd-MM-yyyy" }}</div>'
+    },
+    { name: 'to_date', displayName: 'End Date' , width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align', 
+      cellTemplate: '<div>{{ row.entity.to_date | dateify | date:"dd-MM-yyyy" }}</div>'
+    },
+    {
+      name: 'View',displayName: 'Image ', field: 'Action', width: '7%',headerCellClass: 'grid-align',cellClass: 'grid-align',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><md-button ng-click="grid.appScope.viewProductImage(row.entity.image)" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>',
+      enableFiltering: false,
+    },
+
+    {
+      name: 'price', displayName: 'Price', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
+      // cellTemplate: '<div class="ui-grid-cell-contents"><span><md-button  ng-click="grid.appScope.setPrice()">SetPrice</md-button></span></div>',
+      enableFiltering: false,
+    },            
+    {
+      name: 'Action', field: 'Action', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  ng-click="grid.appScope.editProposedProduct(row.entity.id)" style="cursor:pointer;"><md-icon><i class="material-icons">edit</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      enableFiltering: false,
+    }
+  ];
+  $scope.msg = {};
+  $scope.gridCampaignProducts.onRegisterApi = function(gridApi){
+    //set gridApi on scope
+    $scope.gridApi = gridApi;
+    gridApi.edit.on.afterCellEdit($scope,function(rowEntity, colDef, newValue, oldValue){
+      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue ;
+      $scope.$apply();
+    });
+  };
+
+  $scope.addNewProductToCampaign = function(){
+    localStorage.campaignForSuggestion = JSON.stringify($scope.campaignDetails);
+    $location.path('/admin/suggest-products');
+  }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
+  $scope.editProposedProduct = function(productId){
+    var productObj = {
+      id: productId
+    };
+    $mdDialog.show({
+      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/admin/edit-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
+        $scope.updateProposedProduct = function(product){
+          productObj.from_date = product.from_date;
+          productObj.to_date = product.to_date;
+          productObj.price = product.price;
+          AdminCampaignService.updateProposedProduct(campaignId, productObj).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+                ctrlScope.campaignDetails = result;
+                ctrlScope.gridCampaignProducts.data = result.products;
+                $mdDialog.hide();
+              });
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
+
+});

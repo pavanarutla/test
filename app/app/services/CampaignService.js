@@ -56,6 +56,11 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/export-all-campaigns', { responseType: 'arraybuffer' }).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        requestCampaignProposal: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/request-proposal/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

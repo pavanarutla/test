@@ -41,6 +41,45 @@ app.filter('address', function () {
 
 app.filter('dateify',function(){
   return function(date){
-    return new Date(date);
+    if(date){
+      return new Date(date);
+    }
+    else{
+      return "N/A";
+    }
   }
-})
+});
+
+app.filter('stringifyCampaignStatus', function(){
+  return function(status){
+    switch (status) {
+      case 0:
+        returnStatus = "Requested Suggestion";
+        break;
+      case 1:
+        returnStatus = "Preparing";
+        break;
+      case 2:
+        returnStatus = "Prepared";
+        break;
+      case 3:
+        returnStatus = "Quote Requested";
+        break;        
+      default:
+        return status = "Unknown";
+        break;
+    }
+    return returnStatus;
+  }
+});
+
+app.filter('boolToYesNo', function(){
+  return function(n){
+    if(n){
+      return "Yes";
+    }
+    else{
+      return "No";
+    }
+  }
+});

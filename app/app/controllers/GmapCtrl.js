@@ -142,6 +142,8 @@ app.controller('GmapCtrl',
 
       // range end
 
+   
+
       // clender
       $scope.opened = {
         start: false,
@@ -205,7 +207,6 @@ app.controller('GmapCtrl',
       };
 
       $scope.showProductImagePopup = function (ev, img_src) {
-        console.log(img_src);
         $mdDialog.show({
           locals:{ src: img_src },
           templateUrl: 'views/image-popup-large.html',
@@ -396,7 +397,22 @@ app.controller('GmapCtrl',
           }
         });
       };
-
+      ////////////////////////////////////////////////////////////////////////
+      // tablet filters filtersMap
+      
+      $scope.toggleViewAllFilter = function() {
+        $mdSidenav('filtersMobile').toggle();
+      };
+      $scope.mapFilter = function() {
+        $mdSidenav('filtersMap').toggle();
+      };
+      $scope.shortListed = function() {
+        $mdSidenav('shortlistedList').toggle();
+      };
+      $scope.savedCampagin = function() {
+        $mdSidenav('savedCamapgin').toggle();
+      };
+      ////////////////////////////////////////////////////////////////////
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
@@ -1001,6 +1017,23 @@ app.controller('GmapCtrl',
           bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
           $scope.mapObj.fitBounds(bounds);
         }
+      }
+
+      $scope.requestProposalForCampaign = function(campaignId, ev){
+        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+          if (result.status == 1) {
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title('We will get back to you!!!!')
+                .textContent(result.message)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+        });
       }
     }
   ]
