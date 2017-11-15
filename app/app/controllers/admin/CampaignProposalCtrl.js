@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
 
   if($stateParams.campaignId){
     var campaignId = $stateParams.campaignId;
@@ -6,6 +6,10 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       $scope.campaignDetails = result;
       $scope.gridCampaignProducts.data = result.products;
     });
+  }
+  if(!localStorage.campaignForSuggestion){
+    toastr.error("Choose a campaign first.");
+    $location.path('/admin/campaign');
   }
 
   $scope.gridCampaignProducts = {  
@@ -37,18 +41,18 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     },
     {
       name: 'View',displayName: 'Image ', field: 'Action', width: '7%',headerCellClass: 'grid-align',cellClass: 'grid-align',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><md-button ng-click="grid.appScope.viewImage()" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><md-button ng-click="grid.appScope.viewProductImage(row.entity.image)" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>',
       enableFiltering: false,
     },
 
     {
-      name: 'price',displayName: 'Price', field: 'Action', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
+      name: 'price', displayName: 'Price', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
       // cellTemplate: '<div class="ui-grid-cell-contents"><span><md-button  ng-click="grid.appScope.setPrice()">SetPrice</md-button></span></div>',
       enableFiltering: false,
     },            
     {
       name: 'Action', field: 'Action', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#"><md-icon><i class="material-icons">edit</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  ng-click="grid.appScope.editProposedProduct(row.entity.id)" style="cursor:pointer;"><md-icon><i class="material-icons">edit</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -61,5 +65,60 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       $scope.$apply();
     });
   };
+
+  $scope.addNewProductToCampaign = function(){
+    localStorage.campaignForSuggestion = JSON.stringify($scope.campaignDetails);
+    $location.path('/admin/suggest-products');
+  }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
+  $scope.editProposedProduct = function(productId){
+    var productObj = {
+      id: productId
+    };
+    $mdDialog.show({
+      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/admin/edit-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
+        $scope.updateProposedProduct = function(product){
+          productObj.from_date = product.from_date;
+          productObj.to_date = product.to_date;
+          productObj.price = product.price;
+          AdminCampaignService.updateProposedProduct(campaignId, productObj).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+                ctrlScope.campaignDetails = result;
+                ctrlScope.gridCampaignProducts.data = result.products;
+                $mdDialog.hide();
+              });
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
 
 });

@@ -54,11 +54,17 @@ app.filter('stringifyCampaignStatus', function(){
   return function(status){
     switch (status) {
       case 0:
-        returnStatus = "Planning";
+        returnStatus = "Requested Suggestion";
         break;
       case 1:
-        returnStatus = "Planned";
+        returnStatus = "Preparing";
         break;
+      case 2:
+        returnStatus = "Prepared";
+        break;
+      case 3:
+        returnStatus = "Quote Requested";
+        break;        
       default:
         return status = "Unknown";
         break;
