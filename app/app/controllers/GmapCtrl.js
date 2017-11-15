@@ -21,7 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
-
+      $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
         var area = $scope.selectedArea;
