@@ -51,11 +51,20 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     }
   };
 
-  //view in location pages
-  $scope.viewlocation = function(){
-    $window.open('#/location', '_blank');
-  }
-
+  
+   $scope.ProductImageView = function (ev, img_src) {
+    console.log(img_src);
+    $mdDialog.show({
+      locals:{ src: img_src },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  };
+  
   $scope.campaignDetails = {};
 
   ///Delete the Products
