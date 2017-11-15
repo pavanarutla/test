@@ -56,9 +56,30 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     ======== Campaign Suggestions(planned) ========
     */
 
-    $scope.suggestProductsForCampaign = function(){
-      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
-      $location.path('/admin/suggest-products');
+    $scope.createCampaignToSuggest = function(emptyCampaign){
+      $mdDialog.show({
+        locals: {emptyCampaign: emptyCampaign},
+        templateUrl: 'views/admin/add-campaign.html',
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen,
+        controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, toastr){
+          $scope.campaign = emptyCampaign;
+          $scope.saveCampaign = function(){
+            console.log($scope.campaign);
+            AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
+              if(result.status == 1){
+                toastr.success(result.message);
+              }
+              else{
+                toastr.error(result.message);
+              }
+            });
+          }
+          $scope.close = function(){
+            $mdDialog.hide();
+          }
+        }
+      });
     }
 
     // adds a product in the campaign
