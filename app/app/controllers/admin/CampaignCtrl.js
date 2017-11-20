@@ -73,7 +73,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
       $scope.$apply();
     });
   };
-  AdminCampaignService.getAllCampaignRequests().then(function(result){
+  AdminCampaignService.getAllCampaigns().then(function(result){
     $scope.gridPreLaunch.data = result;
   });
 

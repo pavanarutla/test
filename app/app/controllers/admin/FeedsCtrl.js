@@ -58,17 +58,19 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
 
     $scope.createCampaignToSuggest = function(emptyCampaign){
       $mdDialog.show({
-        locals: {emptyCampaign: emptyCampaign},
+        locals: {emptyCampaign: emptyCampaign, campaignPartial: $scope.selectedRequestDetails},
         templateUrl: 'views/admin/add-campaign.html',
         clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen,
-        controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, toastr){
+        controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, campaignPartial, toastr){
+          emptyCampaign = _.extend(emptyCampaign, campaignPartial);
+          // console.log(emptyCampaign);
           $scope.campaign = emptyCampaign;
           $scope.saveCampaign = function(){
-            console.log($scope.campaign);
             AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
               if(result.status == 1){
                 toastr.success(result.message);
+                $mdDialog.hide();
               }
               else{
                 toastr.error(result.message);
@@ -150,7 +152,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     }
 
     /*
-    ======= Campaign Proposals =======
+    ======= Campaign Proposals Ends =======
     */
 
     $scope.loadMore = function () {

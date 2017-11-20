@@ -3,6 +3,11 @@ app.service('AdminCampaignService',
   function($http, $q, config){
     
     return {
+      getAllCampaigns: function(){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/get-all-campaigns').success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
       getAllCampaignRequests: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaign-requests').success(dfd.resolve).error(dfd.reject);
