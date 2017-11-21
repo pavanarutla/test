@@ -4,6 +4,12 @@ app.filter('PickFirstLetter', function() {
     return input.substring(0,1);
   }
 });
+app.filter('PickFirst2Letters', function(){
+  return function(input) {
+    input = input || '';
+    return input.substring(0,2).toUpperCase();
+  }
+});
 app.filter('mapGender', function () {
   var genderHash = {
     1: 'male',
@@ -64,7 +70,22 @@ app.filter('stringifyCampaignStatus', function(){
         break;
       case 3:
         returnStatus = "Quote Requested";
-        break;        
+        break;
+      case 4:
+        returnStatus = "Quote Provided";
+        break;
+      case 5:
+        returnStatus = "Launch Requested";
+        break;
+      case 6:
+        returnStatus = "Running";
+        break;
+      case 7:
+        returnStatus = "Suspended";
+        break;
+      case 8:
+        returnStatus = "Stopped";
+        break;
       default:
         return status = "Unknown";
         break;

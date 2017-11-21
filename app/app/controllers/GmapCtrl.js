@@ -839,6 +839,7 @@ app.controller('GmapCtrl',
       $scope.loadPlannedUserCampaigns = function () {
         CampaignService.getPlannedCampaigns().then(function (result) {
           $scope.plannedUserCampaigns = result;
+          console.log(result);
         });
       }
       $scope.loadPlannedUserCampaigns();
@@ -1032,6 +1033,9 @@ app.controller('GmapCtrl',
                 .ok('Got it!')
                 .targetEvent(ev)
             );
+          }
+          else{
+            toastr.error(result.message);
           }
         });
       }

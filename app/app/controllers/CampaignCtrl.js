@@ -1,15 +1,15 @@
-
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
-    'suggestion-requested',     // index 0,
-    'campaign-preparing',       // index 1,
-    'campaign-created',         // index 2,
-    'quote-requested',          // index 3,
-    'launch-requested',         // index 4,
-    'running',                  // index 5, 
-    'suspended',                // index 6,
-    'stopped'                   // index 7, 
+    'suggestion-requested',  //    0
+    'campaign-preparing',    //    1
+    'campaign-created',      //    2
+    'quote-requested',       //    3
+    'quote-given',           //    4
+    'launch-requested',      //    5
+    'running',               //    6
+    'suspended',             //    7
+    'stopped'                //    8
   ];
 
   $scope.showPaymentdailog = function () {
@@ -156,9 +156,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
     CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
+      $scope.plannedCampaigns = _.filter(result, function(c){
+        return c.status < 6;
+      });
+      $scope.runningCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['running'] });
+      $scope.closedCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['stopped'] });
     });
   }
   $scope.getUserCampaigns();
@@ -171,6 +173,19 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   }
   if($stateParams.campaignId){
     $scope.getCampaignDetails($stateParams.campaignId);
+  }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
   }
 
 });

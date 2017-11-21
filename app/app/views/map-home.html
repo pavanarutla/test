@@ -207,7 +207,7 @@
     </div>
   </md-sidenav>
   <!-- shortlisted  moblie  end-->
-  <!-- saved campagin   start -->
+  <!-- saved campagin start -->
   <md-sidenav class="md-sidenav-left" md-component-id="savedCamapgin" style="position:absolute;margin-left:8px;top: 22%;
     background: none;" hide-xs hide-lg hide-gt-lg>
     
@@ -1201,7 +1201,9 @@
                 </div>
                 <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
                   <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(plannedUserCampaign.id)"> VIEW</md-button>
-                  <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign(plannedUserCampaign.id, $event)">Request Proposal</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 3" ng-disabled="true">Propsal Requested</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 4" ng-disabled="true">Quote Received</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status != 3 && plannedUserCampaign.status != 4" ng-click="requestProposalForCampaign(plannedUserCampaign.id, $event)">Request Proposal</md-button>
                 </div>
                 <md-divider></md-divider>
               </div>

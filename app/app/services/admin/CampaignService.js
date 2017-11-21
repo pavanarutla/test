@@ -57,6 +57,11 @@ app.service('AdminCampaignService',
         var dfd = $q.defer();
         $http.put(config.apiPath + '/proposed-product-for-campaign/' + campaignId, obj).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
+      },
+      finalizeCampaignByAdmin: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/quote-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
       }
     }
   }

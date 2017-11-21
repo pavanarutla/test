@@ -41,7 +41,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     enableRowHeaderSelection: false,
   };
   $scope.gridPreLaunch.columnDefs = [
-    { name: 'created_by', displayName: 'Created By', enableCellEdit: false, width: '5%', headerCellClass: 'grid-align', cellClass: 'grid-align', },
+    { name: 'created_by', displayName: 'Created By', enableCellEdit: false, width: '5%', headerCellClass: 'grid-align', cellClass: 'grid-align', 
+      cellTemplate: '<div>{{ row.entity.created_by }}, {{ row.entity.delegated_to | PickFirst2Letters }}</div>'
+    },
     { name: 'name', displayName: 'Campagin Name ', width: '15%', enableCellEdit: false, headerCellClass: 'grid-align', cellClass: 'grid-align', },
     { name: 'user_full_name', displayName: 'Client Name', width: '15%', headerCellClass: 'grid-align', cellClass: 'grid-align', },
     { name: 'user_phone', displayName: 'Client Contact', type: 'number', width: '10%', headerCellClass: 'grid-align', cellClass: 'grid-align', },

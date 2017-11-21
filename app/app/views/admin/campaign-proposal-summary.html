@@ -68,11 +68,14 @@
                 <div flex="50" layout="row" layout-align="end center">
 
                     <div>
-                        <md-button class="md-raised md-warn">
-                           Finalized <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
+                        <md-button class="md-raised md-warn" ng-disabled="campaignDetails.status >= 4" ng-click="finalizeCampaign()">
+                           Finalize <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
                         </md-button>
-                        <md-button class="md-raised md-primary" ng-click="addNewProductToCampaign()" ng-disabled="!campaignDetails">
+                        <md-button class="md-raised md-warn" ng-disabled="campaignDetails.status >= 4" ng-click="addNewProductToCampaign()" ng-disabled="!campaignDetails">
                            Add New Product <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
+                        </md-button>
+                        <md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 5" ng-click="launchCampaign()">
+                            Launch <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
                         </md-button>
                     </div>
                 </div>

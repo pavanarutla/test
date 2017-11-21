@@ -121,4 +121,32 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+  $scope.finalizeCampaign = function(){
+    if($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget){
+      var budget_check = confirm("Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?");
+      if(budget_check){
+        AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
+          if(result.status == 1){
+            $scope.campaignDetails.status = 4;
+            toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+    }
+    else{
+      AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
+        if(result.status == 1){
+          $scope.campaignDetails.status = 4;
+          toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+    }
+  }
+
 });
