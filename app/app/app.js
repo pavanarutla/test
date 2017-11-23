@@ -68,9 +68,9 @@ var app = angular.module('bbManager', [
         templateUrl: 'views/campaigns.html',
         controller: 'CampaignCtrl'
       })
-      .state('index.edit_campaign', {
-        url: 'edit-campaign/{campaignId}',
-        templateUrl: 'views/edit-campaign.html',
+      .state('index.view_campaign', {
+        url: 'view-campaign/{campaignId}',
+        templateUrl: 'views/campaign.html',
         controller: 'CampaignCtrl'
       })
       .state('index.profile', {

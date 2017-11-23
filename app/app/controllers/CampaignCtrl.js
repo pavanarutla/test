@@ -188,4 +188,25 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     });
   }
 
+  $scope.requestLaunchCampaign = function(ev, campaignId){
+    CampaignService.requestLaunch(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            .textContent('The Admin will soon launch your campaign and intimate you about it.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
 });

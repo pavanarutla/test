@@ -44,10 +44,10 @@
 										</md-button>
 										<md-menu-content>
 											<md-menu-item>
-												<md-button ng-href="#">Launch</md-button>
+												<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-href="#/edit-campaign/{{pCampaign.id}}">Edit</md-button>
+												<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
 											</md-menu-item>
 											<md-menu-item>
 												<md-button>Delete</md-button>
@@ -164,10 +164,10 @@
 									</md-button>
 									<md-menu-content>
 										<md-menu-item>
-											<md-button ng-href="#">Launch</md-button>
+											<md-button ng-disabled="pCampaign.status != 4">Launch</md-button>
 										</md-menu-item>
 										<md-menu-item>
-											<md-button ng-href="#/edit-campaign/{{pCampaign.id}}">Edit</md-button>
+											<md-button ng-href="#/view-campaign/{{pCampaign.id}}" ng-click="requestLaunchCampaign($event, pCampaign.id)">View</md-button>
 										</md-menu-item>
 										<md-menu-item>
 											<md-button>Delete</md-button>
