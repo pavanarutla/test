@@ -40,7 +40,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	
 	///Agency Sign In functionolity
 
-
+	$scope.userAgencyHeader = true;
 
 	/// Register Dailog start here
 

@@ -38,7 +38,7 @@
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()">SIGN IN</md-button>
+              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()" ng-disabled="userform.$invalid" >SIGN IN</md-button>
             </md-input-container>
             <div layout="row" layout-xs="column">
               <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
@@ -78,7 +78,7 @@
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)">SIGN IN</md-button>
+              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)" ng-disabled="agency.$invalid">SIGN IN</md-button>
             </md-input-container>
             <div layout="row" layout-xs="column">
               <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
@@ -114,7 +114,7 @@
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="requestResetPassword(forgotPwd)">Reset Password</md-button>
+              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forgotPassword.$invalid" ng-click="requestResetPassword(forgotPwd)">Reset Password</md-button>
             </md-input-container>
           </form>
         </md-content>
