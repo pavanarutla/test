@@ -75,15 +75,18 @@ app.filter('stringifyCampaignStatus', function(){
         returnStatus = "Quote Provided";
         break;
       case 5:
+        returnStatus = "Quote Change Requested";
+        break;
+      case 5:
         returnStatus = "Launch Requested";
         break;
-      case 6:
+      case 7:
         returnStatus = "Running";
         break;
-      case 7:
+      case 8:
         returnStatus = "Suspended";
         break;
-      case 8:
+      case 9:
         returnStatus = "Stopped";
         break;
       default:

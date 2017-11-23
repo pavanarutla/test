@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" ng-if="campaignDetails.status > 5">
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" ng-if="campaignDetails.status > 6">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 					layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
@@ -141,6 +141,16 @@
 					</md-list-item>
 					<md-list-item>
 						<div>
+							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 1">
+								<span>
+									<md-icon md-svg-icon="assets/images/icons/add.svg"></md-icon>
+								</span>
+								<div class="md-caption"> Add Product </div>
+							</md-button>
+						</div>
+					</md-list-item>
+					<md-list-item>
+						<div>
 							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 4"  ng-click="requestLaunchCampaign($event, campaignDetails.id)">
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/finalized.svg"></md-icon>
@@ -151,11 +161,11 @@
 					</md-list-item>
 					<md-list-item>
 						<div>
-							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 1">
+							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 4" ng-click="openRequestChangeQuoteForm(campaignDetails.id)">
 								<span>
-									<md-icon md-svg-icon="assets/images/icons/add.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/icons/thumb-down.svg"></md-icon>
 								</span>
-								<div class="md-caption"> Add Product </div>
+								<div class="md-caption"> Request Change </div>
 							</md-button>
 						</div>
 					</md-list-item>
@@ -198,7 +208,7 @@
 										<md-button ng-href="#">View Image</md-button>
 									</md-menu-item>
 									<md-menu-item>
-										<md-button>Delete</md-button>
+										<md-button ng-disabled="campaignDetails.status != 1 || campaignDetails.status != 5" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">Delete</md-button>
 									</md-menu-item>
 								</md-menu-content>
 							</md-menu>
@@ -246,7 +256,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{product.from_date}}</div>
+							<div class="md-body-1">{{product.from_date | dateify | date:"dd-MMM-yyyy"}}</div>
 						</div>
 					</div>
 					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
@@ -254,7 +264,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{product.to_date}}</div>
+							<div class="md-body-1">{{product.to_date | dateify | date:"dd-MMM-yyyy"}}</div>
 						</div>
 					</div>
 					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md show-xs show-sm>
@@ -280,7 +290,7 @@
 									<i class="material-icons">remove_red_eye</i>
 								</md-icon>
 							</md-button>
-							<md-button class="md-icon-button">
+							<md-button class="md-icon-button" ng-disabled="campaignDetails.status != 1 || campaignDetails.status != 5" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">
 								<md-icon>
 									<i class="material-icons">delete</i>
 								</md-icon>

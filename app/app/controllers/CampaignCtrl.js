@@ -6,10 +6,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     'campaign-created',      //    2
     'quote-requested',       //    3
     'quote-given',           //    4
-    'launch-requested',      //    5
-    'running',               //    6
-    'suspended',             //    7
-    'stopped'                //    8
+    'change-requested',      //    5 
+    'launch-requested',      //    6
+    'running',               //    7
+    'suspended',             //    8
+    'stopped'                //    9
   ];
 
   $scope.showPaymentdailog = function () {
@@ -205,6 +206,34 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
       }
       else{
         toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.deleteProductFromCampaign = function(productId, campaignId){
+    CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+      if(result.status == 1){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+          $scope.campaignDetails = result;
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.openRequestChangeQuoteForm = function(campaignId){
+    $mdDialog.show({
+      locals: {ctrlScope: $scope},
+      templateUrl: 'views/admin/request-quote-change.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller: function(){
+        $scope.requestChangeInQuote = function($scope, ctrlScope, CampaignService){
+          // make the api call to create a change request.
+        }
       }
     });
   }
