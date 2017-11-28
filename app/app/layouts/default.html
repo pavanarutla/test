@@ -3,7 +3,7 @@
 <div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
   <md-toolbar class="md-menu-toolbar header">
     <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
+      <md-button ng-click="closeSidenav()" ng-if="!footerhide" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
        <md-button aria-label="locations" href="#/" md-no-ink class="logo" >
@@ -13,7 +13,7 @@
         <!-- <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
           <img ng-src="assets/images/menu/orgnl.png" width="160" >
         </md-button> -->
-      <span flex class="safari-width"></span>
+      <span flex class=""></span>
       <md-menu-bar class="main-menu">
         <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">what we do</md-button>
         <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">formats</md-button>
@@ -125,35 +125,40 @@
   <!-- Footer Section-->
   <footer>
     <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
-      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-sm="row" class="fmson">
-        <md-button class="md-icon-button fabicon" aria-label="facebook">
-          <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
+      <div flex="40" flex-md="50" flex-sm="100" flex-xs="100"  flex-offset-lg="10" layout-align-sm="center center" layout-sm="row" class="fmson">
+        
+        <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="google plus">
-          <md-icon md-svg-src="assets/images/icons/google plus.svg"></md-icon>
+        <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="skype">
+        <!-- <md-button class="md-icon-button  fabicon" aria-label="skype">
           <md-icon md-svg-src="assets/images/icons/skype.svg"></md-icon>
-        </md-button>
+        </md-button> -->
 
-        <md-button class="md-icon-button  fabicon" aria-label="linkedin">
+        <md-button class="md-icon-button  fabicon" aria-label="linkedin" href="https://www.linkedin.com/company/13259222/" target="_blank">
           <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+        <!-- <md-button class="md-icon-button  fabicon" aria-label="vimeo">
           <md-icon md-svg-src="assets/images/icons/vimeo.svg"></md-icon>
         </md-button>
+
         <md-button class="md-icon-button  fabicon" aria-label="vimeo">
           <md-icon md-svg-src="assets/images/icons/rss.svg"></md-icon>
         </md-button>
-        <!-- <md-button class="md-icon-button fabicon" aria-label="tumblr">
+
+         <md-button class="md-icon-button fabicon" aria-label="tumblr">
           <md-icon md-svg-src="assets/images/icons/tumblr.svg"></md-icon>
-        </md-button> -->
-        <md-button class="md-icon-button  fabicon" aria-label="twitter">
-          <md-icon md-svg-src="assets/images/icons/twitter.svg"></md-icon>
+        </md-button>  -->
+
+        <md-button class="md-icon-button  fabicon" aria-label="twitter" href="https://twitter.com/billboardsindia" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon>
         </md-button>
+
       </div>
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="end center" layout-xs="column"
         layout="column">
@@ -161,9 +166,9 @@
       </div>
 
     </div>
-    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
+    <!-- <md-button hide-xs class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
-    </md-button>
+    </md-button> -->
   
     <!-- <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
       <div style="margin:0 0 0 10px">
