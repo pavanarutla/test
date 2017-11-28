@@ -1,8 +1,11 @@
 <!-- login pages-->
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="AuthCtrl">
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="AuthCtrl" style="border-radius:0px">
   <form>
     <md-dialog-content>
-      <md-content class="">
+      <md-content class="" style="background:#fff">
+        <!-- <div layout="column" layout-align="center center">
+          <img src="assets/images/man(1).png">
+        </div> -->
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
           <md-nav-item md-nav-click="users()" name="users">Users</md-nav-item>
           <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item>
@@ -11,11 +14,11 @@
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </md-nav-bar>
-        <div ng-if="userForm">
+        <div ng-if="userForm" style="padding:15px">
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
             <h5> Log Into Your BillBoards India Account</h5>
           </div>
-          <form name="signin" novalidate>
+          <form name="signin" novalidate layout-padding>
             <md-input-container class="md-block">
               <label>Email</label>
               <input ng-model="user.email" name="user.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
@@ -48,11 +51,11 @@
             </div>
           </form>
         </div>
-        <div ng-if="agencyForm">
+        <div ng-if="agencyForm" style="padding:15px" >
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
             <h5> Log Into Your BillBoards India Account</h5>
           </div>
-          <form name="agency" novalidate>
+          <form name="agency" novalidate >
             <md-input-container class="md-block">
               <label>Email</label>
               <input ng-model="agency.email" name="agency.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
