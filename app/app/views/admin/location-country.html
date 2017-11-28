@@ -12,6 +12,7 @@
 			<md-input-container class="md-block">
 				<label>Enter Country Name</label>
 				<input ng-model="country.name" type="text" name="countryname" required/>
+				<input type="hidden" name="country_id" ng-model="country.id" />
 				<div ng-messages="country.countryname.$error">
 				<p ng-message="required">Please complete this field.</p>
 				</div>
@@ -22,7 +23,7 @@
 		</div>
 		<div layout="row">
 			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
-			<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+			<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
 		</div>
 	</div>
 	</form>

@@ -59,7 +59,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'Country Name', enableCellEdit: false, width: '50%' },
     {
       name: 'Action', field: 'Action', width: '50%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCountry(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editCountry(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCountry(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -92,7 +92,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'State ', width: '33%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '33%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteState(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editState(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteState(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -125,7 +125,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'City', width: '25%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '25%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCity(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editCity(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCity(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -205,6 +205,9 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
     });
   }
+  $scope.editCountry = function(country){
+  $scope.country = country;
+  }
 
   $scope.getStateList = function(country){
     AdminLocationService.getStates(country).then(function (data) {
@@ -245,6 +248,12 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
     });
   }
+  $scope.editState = function(state){
+    $scope.state={};
+    $scope.state.country_id = state.country_id;
+    $scope.state.state_name = state.name;
+    console.log(state);
+    }
 
   $scope.saveCity = function () {
     AdminLocationService.saveCity($scope.city).then(function (data) {
@@ -272,6 +281,15 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
     });
   }
+  $scope.editCity = function(city){
+    $scope.city={};
+    $scope.city.country_id = city.country_id;
+    $scope.city.state_id = city.state_id;
+    $scope.city.city_name = city.name;
+    $scope.city.country_id=null;
+    $scope.city.state_id=null;
+    // console.log(city);
+    }
 
   $scope.saveArea = function () {
     AdminLocationService.saveArea($scope.area).then(function (data) {
@@ -306,6 +324,16 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       }
     });
   }
+  $scope.editArea = function(area){
+    $scope.area={};
+    $scope.area= area;
+    $scope.area.area_name=area.name;
+  $scope.area.country_id=null;
+  $scope.area.state_id=null;
+  $scope.area.city_id=null;
+    
+    console.log(area);
+    }
 
   $scope.resetAreaForm = function(){
     $scope.area = {};
