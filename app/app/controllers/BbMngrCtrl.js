@@ -1,4 +1,4 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config) {
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config,$window) {
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
     $rootScope.isAuthenticated = localStorage.isAuthenticated || false;

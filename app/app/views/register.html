@@ -49,17 +49,17 @@
 							</md-input-container>
 						<md-input-container class="md-block">
 							<label>Mobile number</label>
-							<input ng-model="user.phone" name="phone" type="mobile" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+							<input ng-model="user.phone" name="phone" type="mobile" minlength="10" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 							/>
 							<div ng-messages="registerUser.phone.$error" role="alert" multiple>
-								<div ng-message="required" class="my-message">Mobile no is required.</div>
-								<div ng-message="pattern">Enter a valied Mobile no</div>
-								<div ng-message="maxlength">Mobile shouldn't exede 10. </div>
+								<div ng-message="required" class="my-message">Mobile Number is required.</div>
+								<div ng-message="pattern">Enter a valied Mobile Number</div>
+								<div ng-message="minlength">Mobile Number must have 10 digites. </div>
 							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Address </label>
-							<input ng-model="user.address" name="address" type="text" minlength="10" maxlength="30" />
+							<input ng-model="user.address" name="address" type="text" minlength="10" maxlength="50" />
 							<div ng-messages="registerUser.address.$error">
 								<div class="alret alert-danger" ng-message="required">address is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
@@ -70,7 +70,7 @@
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerNewUser()">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
 						</md-input-container>
 						<div layout="row" layout-xs="column">
 							<p>Verify the E-mail address to Sign In </p>
@@ -94,7 +94,7 @@
 							<input ng-model="agency.username" name="username" type="text" minlength="6" maxlength="30" required="required" />
 							<div ng-messages="registerAgency.username.$error">
 								<div class="alret alert-danger" ng-message="required">user name is required.</div>
-								<div class="alret alert-warning" ng-message="minlength">user name must have 10 characters.</div>
+								<div class="alret alert-warning" ng-message="minlength">user name must have 6 characters.</div>
 								<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
@@ -110,12 +110,12 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Mobile number</label>
-							<input ng-model="agency.mobile" name="mobile" type="mobile" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+							<input ng-model="agency.mobile" name="mobile" type="mobile" minlength="10" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 							/>
 							<div ng-messages="registerAgency.mobile.$error" role="alert" multiple>
-								<div ng-message="required" class="my-message">Mobile no is required.</div>
-								<div ng-message="pattern">Enter a valied Mobile no</div>
-								<div ng-message="maxlength">Mobile shouldn't exede 10. </div>
+								<div ng-message="required" class="my-message">Mobile Number is required.</div>
+								<div ng-message="pattern">Enter a valied Mobile Number</div>
+								<div ng-message="minlength">Mobile Number must have 10 digites.</div>
 							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
@@ -131,7 +131,7 @@
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="registerNewAgency(agency)">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerAgency.$invalid" ng-click="registerNewAgency(agency)">Register</md-button>
 						</md-input-container>
 						<div layout="row" layout-xs="column">
 							<p>Verify the E-mail address to Sign In </p>
