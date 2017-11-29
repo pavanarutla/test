@@ -75,6 +75,7 @@ app.controller('GmapCtrl',
       });
 
       $scope.product = {};
+
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
