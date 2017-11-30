@@ -21,7 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
-
+      $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
         var area = $scope.selectedArea;
@@ -75,6 +75,7 @@ app.controller('GmapCtrl',
       });
 
       $scope.product = {};
+
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
@@ -1032,6 +1033,9 @@ app.controller('GmapCtrl',
                 .ok('Got it!')
                 .targetEvent(ev)
             );
+          }
+          else{
+            toastr.error(result.message);
           }
         });
       }

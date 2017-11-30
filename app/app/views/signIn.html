@@ -1,9 +1,9 @@
 <!-- login pages-->
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="AuthCtrl">
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60" ng-controller="AuthCtrl" style="border-radius:0px">
   <form>
     <md-dialog-content>
       <md-content class="">
-        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+        <md-nav-bar md-selected-nav-item="currentNavItem" ng-if="userAgencyHeader" nav-bar-aria-label="navigation links">
           <md-nav-item md-nav-click="users()" name="users">Users</md-nav-item>
           <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item>
           <span flex></span>
@@ -11,32 +11,34 @@
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </md-nav-bar>
+        <!-- user for start here -->
         <div ng-if="userForm">
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
             <h5> Log Into Your BillBoards India Account</h5>
           </div>
-          <form name="signin" novalidate>
+          <form name="userform" novalidate>
             <md-input-container class="md-block">
               <label>Email</label>
-              <input ng-model="user.email" name="user.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+              <input ng-model="user.email" name="useremail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
               />
-              <div ng-messages="signin.email.$error">
+              <div ng-messages="userform.useremail.$error">
                 <div class="alret alert-danger" ng-message="required">Email is required.</div>
                 <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                <div ng-message="pattern">Enter a valied username</div>
+                <div ng-message="pattern">Enter a valied email</div>
               </div>
             </md-input-container>
+
             <md-input-container class="md-block">
               <label>Password</label>
-              <input ng-model="user.password" type="password" name="user.password" minlength="6" maxlength="20" required="required" />
-              <div ng-messages="signin.password.$error">
+              <input ng-model="user.password" type="password" name="userpassword" minlength="6" maxlength="20" required="required" />
+              <div ng-messages="userform.userpassword.$error">
                 <div ng-message="required">Password is required.</div>
                 <div ng-message="minlength">Password must have 6 characters.</div>
                 <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()">SIGN IN</md-button>
+              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()" ng-disabled="userform.$invalid" >SIGN IN</md-button>
             </md-input-container>
             <div layout="row" layout-xs="column">
               <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
@@ -47,34 +49,37 @@
               </div>
             </div>
           </form>
-        </div>
+        </div>    
+        <!-- user form ends here -->
+
+        <!-- Agency form start here -->
         <div ng-if="agencyForm">
           <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
             <h5> Log Into Your BillBoards India Account</h5>
           </div>
-          <form name="agency" novalidate>
+          <form name="agency" novalidate >
             <md-input-container class="md-block">
               <label>Email</label>
-              <input ng-model="agency.email" name="agency.email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+              <input ng-model="agency.email" name="agencyemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
               />
-              <div ng-messages="agency.email.$error">
+              <div ng-messages="agency.agencyemail.$error">
                 <div class="alret alert-danger" ng-message="required">Email is required.</div>
                 <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-                <div ng-message="pattern">Enter a valied username</div>
+                <div ng-message="pattern">Enter a valied email</div>
               </div>
             </md-input-container>
             <md-input-container class="md-block">
               <label>Password</label>
-              <input ng-model="agency.password" type="password" name="agency.password" minlength="6" maxlength="20" required="required"
+              <input ng-model="agency.password" type="password" name="Agencypassword" minlength="6" maxlength="20" required="required"
               />
-              <div ng-messages="agency.password.$error">
+              <div ng-messages="agency.Agencypassword.$error">
                 <div ng-message="required">Password is required.</div>
                 <div ng-message="minlength">Password must have 6 characters.</div>
                 <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)">SIGN IN</md-button>
+              <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)" ng-disabled="agency.$invalid">SIGN IN</md-button>
             </md-input-container>
             <div layout="row" layout-xs="column">
               <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
@@ -102,15 +107,15 @@
             </md-input-container> -->
             <md-input-container class="md-block">
               <label>Email</label>
-              <input ng-model="forgotPwd.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-              <div ng-messages="forgotPassword.email.$error">
+              <input ng-model="forgotPwd.email" name="forgotpasswordemail" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+              <div ng-messages="forgotPassword.forgotpasswordemail.$error">
                 <div class="alret alert-danger" ng-message="required">Email is required.</div>
                 <div ng-message="maxlength">email shouldn't exede 50 characters. </div>
                 <div ng-message="pattern">Enter a valied email Id</div>
               </div>
             </md-input-container>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="requestResetPassword(forgotPwd)">Reset Password</md-button>
+              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forgotPassword.$invalid" ng-click="requestResetPassword(forgotPwd)">Reset Password</md-button>
             </md-input-container>
           </form>
         </md-content>
