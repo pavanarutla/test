@@ -236,12 +236,25 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   $scope.openRequestChangeQuoteForm = function(campaignId){
     $mdDialog.show({
       locals: {ctrlScope: $scope},
-      templateUrl: 'views/admin/request-quote-change.html',
+      templateUrl: 'views/request-quote-change.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
-      controller: function(){
-        $scope.requestChangeInQuote = function($scope, ctrlScope, CampaignService){
-          // make the api call to create a change request.
+      controller: function($scope, $mdDialog, ctrlScope, CampaignService, toastr){
+        $scope.changeRequest = {};
+        $scope.changeRequest.for_campaign_id = ctrlScope.campaignDetails.id;
+        $scope.requestChangeInQuote = function(){          
+          CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
+            if(result.status == 1){
+              $mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });          
+        }
+        $scope.close = function(){
+          $mdDialog.hide();
         }
       }
     });
