@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
     .png-icon {
         margin: 5px auto auto;
         padding: 0;
@@ -6,38 +6,79 @@
         background-repeat: no-repeat no-repeat;
         pointer-events: none;
     }
-
     #similar {
         float: right;
         margin-top: 20px;
         margin-right: 50px;
     }
-</style>
-<div class="header">
-    <div class="md-toolbar-tools" style="padding: 0px!important;background-color:#2196F3;">
-        <div flex="100">
-            <md-button ng-click="toggleLeft()" class="md-primary">
-                <i class="material-icons">&#xE5C8;</i>
-            </md-button>
-        </div>
-        <div class="left" style="float:left;">
-            <md-button class="md-icon-button">
-                <i class="material-icons" style="float:right;">&#xE7F4;</i>
-            </md-button>
-        </div>
-    </div>
-</div>
-<div>
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="position: absolute;">
+</style> -->
+<link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
+
+<!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <body layout="row" flex ng-cloak>
+    <!-- <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px" md-is-locked-open="$mdMedia('gt-sm')">
+      <header layout="column" layout-padding >
+          <a ng-href="#/"><img ng-src="images/billboards.png" alt="logo"></a>
+      </header>
+      <md-list>
+        <md-menu-item>
+          <md-button ng-href="#/home" ng-click="changeName()">
+            <md-icon md-svg-icon="images/menu/home.svg"></md-icon>Home</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#/profile" ng-click="changeProfile()">
+                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Profile</md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+            <md-button ng-href="#/campaign" ng-click="changeCampains()">
+                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Campains</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#/requesthoarding" ng-click="changeRequest()" >
+                <md-icon md-svg-icon="images/menu/hoarding.svg"> </md-icon>Requested Hoardings</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#/hoardingslist" ng-click="changeHoardingList()">
+                <md-icon md-svg-icon="images/menu/hoarding.svg"> </md-icon>Hoardings List</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#/team" ng-click="changeTeam()">
+                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Team</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#/outsourcing" ng-click="changeAgent()">
+                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Outsourcing Agents</md-button>
+        </md-menu-item>
+        <md-divider> </md-divider>
+        <md-menu-item>
+            <md-button ng-href="#/settings"  >
+                <md-icon md-svg-icon="images/menu/help.svg"> </md-icon>Settings</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button  ng-click="sendFeedback($event)">
+                <md-icon md-svg-icon="images/menu/help.svg"> </md-icon>Send feedback</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#" ng-model="color.name">
+                <md-icon md-svg-icon="images/menu/help.svg"></md-icon>Help</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-href="#" ng-click="logout()">
+                <md-icon md-svg-icon="images/menu/help.svg"></md-icon>Log Out</md-button>
+        </md-menu-item>
+      </md-list>
+    </md-sidenav> -->
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="position:absolute;width:280px">
         <md-toolbar class="md-theme-indigo" style="background-color: #FFFFFF;min-height: 75px !important;">
             <img class="png-icon" src="assets/images/billboards.png">
         </md-toolbar>
         <md-divider></md-divider>
-        <md-content layout-padding style="height: auto;">
+        <md-content>
             <div>
-                <md-content style="width: 100% !important;">
+                <div style="width: 100% !important;">
                     <md-list>
-                        <div style="padding: 2px 2px 15px 4px;">
+                        <div >
                             <md-button style="min-width: 0px !important; min-height: 0px !important; margin: 0px !important;">
                                 <img class="png-icon" src="assets/images/person.png" style="width: 80px;height: 75px;">
                             </md-button>
@@ -50,64 +91,123 @@
                             </div>
                         </div>
                         <md-divider></md-divider>
-                        <md-list-item>
-                            <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
-                            <p>Home</p>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE8A6;</md-icon>
-                            <p>Profile</p>
-                            <div class="md-secondary">3</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
-                            <p>Campaigns</p>
-                            <div class="md-secondary">9</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
-                            <p>Request Hoarding</p>
-                            <div class="md-secondary">4</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
-                            <p>Hoarding List</p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
-                            <p>Team</p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
-                            <p>Feeds</p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
-                            <p>Payments</p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
-                            <p>Outsourcing Agents</p>
-                            <div class="md-secondary">8</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
-                            <p>Settings</p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
-                        <md-list-item>
-                            <md-icon class="md-default-theme" class="material-icons">&#xE61E;</md-icon>
-                            <p>Help </p>
-                            <div class="md-secondary"></div>
-                        </md-list-item>
+                        
+                        <md-menu-item>
+                            <md-button ng-href="#/home" ng-click="changeName()">
+                                <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>Home
+                            </md-button>
+                        </md-menu-item>
+                        
+                        <md-menu-item>
+                            <md-button ng-href="#/profile" ng-click="changeProfile()">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE8A6;</md-icon>
+                                Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#/campaign" ng-click="changeCampains()">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
+                                Campains
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#/requesthoarding" ng-click="changeRequest()" >
+                                <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
+                                Requested Hoardings
+                            </md-button>
+                        </md-menu-item>
+                        
+                        <md-menu-item>
+                            <md-button ng-href="#/hoardingslist" ng-click="changeHoardingList()">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
+                                Hoardings List
+                            </md-button>
+                        </md-menu-item>
+    
+                        <md-menu-item>
+                            <md-button ng-href="#/team" ng-click="changeTeam()">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+                                Team
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#" ng-click="">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
+                                Feeds
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#" ng-click="">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
+                                Payments
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#/outsourcing" ng-click="changeAgent()">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
+                                Outsourcing Agents
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button  ng-click="">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
+                                Send feedback
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#" ng-model="color.name">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE61E;</md-icon>
+                                Help
+                            </md-button>
+                        </md-menu-item>
                     </md-list>
-                </md-content>
+                </div>
             </div>
         </md-content>
     </md-sidenav>
-    <ui-view></ui-view>
-</div>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+      <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Notifications</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme">X</md-icon>
+          </md-button>
+        </div>
+      </md-toolbar> 
+      <md-content layout-padding="">
+        Notifications Panel
+      </md-content> 
+    </md-sidenav>
+
+    <div layout="column" flex>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="closeSidenav()">
+              <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
+          </md-button>
+         <!-- <md-button aria-label="logo" class="md-icon">
+            <img ng-src="images/logo.png" alt="logo" class="mrgn">
+          </md-button> -->
+          <h2>{{firstname}}</h2>
+          <span flex></span>
+          <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+            <md-icon md-svg-icon="assets/images/notification_24px.svg" ></md-icon>
+          </md-button>
+         
+        </div>
+      </md-toolbar><!--toolbar end -->
+      
+      <!-- <md-content flex ng-view  ng-cloak>
+      </md-content> -->
+      <ui-view flex  ng-cloak></ui-view>
+      
+      <div layout="column" layout-align="center center" style="background: #CCC">
+        <div style="padding: 5px 0;">Powered By Billboards India</div>
+      </div>
+    </div>
+  
+  </dic>
