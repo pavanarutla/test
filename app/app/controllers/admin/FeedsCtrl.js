@@ -33,9 +33,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     */
     AdminCampaignService.getAllCampaignRequests().then(function(result){
       $scope.requestList = result;
-      // $scope.groupedRequests = _.groupBy(requestList, function(request){
-      //   return request.status;
-      // });
     });
     /*
     ======== Campaign requests ends =======
@@ -52,14 +49,9 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
       })
     };
 
-    $scope.closeCampaignRequestDetails = function(){
-      $mdDialog.hide();
-    }
-  
     /*
     ======== Campaign Suggestions(planned) ========
     */
-
     $scope.createCampaignToSuggest = function(emptyCampaign){
       $mdDialog.show({
         locals: {emptyCampaign: emptyCampaign, campaignPartial: $scope.selectedRequestDetails},
@@ -145,10 +137,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         }
       });
     }
-
-    // AdminCampaignService.getPlannedCampaigns().then(function(result){
-    //   $scope.campaignProposalList = result;
-    // });
     /*
     ======== Campaign Suggestions(planned) ends ========
     */
@@ -156,13 +144,23 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     /*
     ======= Campaign Proposals =======
     */
+    $scope.viewAndLaunchCampaign = function(campaignId){
+      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/admin/campaign-proposal-summary/' + campaignId);
+    }
+    /*
+    ======= Campaign Proposals Ends =======
+    */
+
+    /*
+    ======= View and Launch Campaign =======
+    */
     $scope.prepareQuoteForCampaign = function(campaignId){
       localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
       $location.path('/admin/campaign-proposal-summary/' + campaignId);
     }
-
     /*
-    ======= Campaign Proposals Ends =======
+    ======= View and Launch Campaign ands =======
     */
 
     $scope.loadMore = function () {

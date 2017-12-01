@@ -1,91 +1,158 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
-    <div layout="column" layout-sm="column" layout-xs="column">
+	<div layout="column" layout-sm="column" layout-xs="column">
 
-        <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>
-            Proposal
-        </div>
+		<div class="md-title" style="background: #447bde;color: #fff;" layout-padding>
+			Proposal
+		</div>
 
-        <div class="Planned">
+		<div class="Planned">
 
-            <div class="bg-part">
+			<div class="bg-part">
 
-                <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+				<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+					<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+					 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+						<div layout="column" layout-align="center center">
+							<div>
+								<span>
+									<img src="assets/images/client_details.png">
+								</span>
+							</div>
+							<h3>Client Details</h2>
+						</div>
+						<div layout="row" layout-align="center center">
+							<div flex="50">Campaign Name:</div>
+							<div flex="50">{{campaignDetails.name}}</div>
+						</div>
+						<div layout="row" layout-align="center center">
+							<div flex="50">Client Name:</div>
+							<div flex="50">{{campaignDetails.user_full_name}}</div>
+						</div>
+						<div layout="row" layout-align="center center">
+							<div flex="50">Contact:</div>
+							<div flex="50">{{campaignDetails.user_phone || "N/A"}}</div>
+						</div>
+						<div layout="row" layout-align="center center">
+							<div flex="50">Email:</div>
+							<div flex="50">{{campaignDetails.user_email || "N/A"}}</div>
+						</div>
+					</div>
+					<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+					 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+						<div layout="column" layout-align="center center">
+							<div>
+								<img src="assets/images/capaign_details.png">
+							</div>
+							<h3>Campaign Summary</h2>
+						</div>
+						<div layout="row">
+							<div flex="50">Staring:</div>
+							<div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date:
+								"dd-MMM-yyyy" }}</div>
+						</div>
+						<div layout="row">
+							<div flex="50">Estimated Budget:</div>
+							<div flex="50">
+								<span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
+						</div>
+						<div layout="row">
+							<div flex="50">Actul Budget:</div>
+							<div flex="50">
+								<span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
+						</div>
+						<div layout="row">
+							<div flex="50">Status:</div>
+							<div flex="50">
+								<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
+								<span layout-align="center center" ng-if="campaignDetails.status == 5">
+									<i class="material-icons">info_outline</i>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay" ng-if="campaignDetails.status >= 7">
+				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+						<div layout="column" layout-align="center center">
+							<!-- <div><span><md-icon md-svg-icon="assets/images/icons/wallet.svg"></md-icon></span></div> -->
+							<h3>Payment Details</h2>
+						</div>
+						<div layout="row">
+							<div flex="50" layout="column" layout-align="center center">Total amount:</div>
+							<div flex="50" layout="column" layout-align="center center">Rs. 2,30,000</div>
+						</div>
+						<div layout="row">
+							<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
+							<div flex="50" layout="column" layout-align="center center">Rs. 1,30,000</div>
+						</div>
+						<div layout="row">
+							<div flex="100" layout="column" layout-align="center center">
+								<md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
+									Update Payment
+								</md-button>
+							</div>
+						</div>
+					</div>
+					<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+					 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+						<div layout="column" layout-align="center center">
+							<!-- <div><span><md-icon md-svg-icon="assets/images/icons/credit-card.svg"></md-icon></span></div> -->
+							<h3>Recently Updated Payments</h2>
+						</div>
+						<div layout="column" layout-margin style="height:150px; overflow:auto;">
+							<div layout="row">
+								<div flex="50" layout="column" layout-align="center center">Date</div>
+								<div flex="50" layout="column" layout-align="center center">Amount</div>
+							</div>
+							<div layout="row" ng-if="!campaignPayments">
+								<div flex="50" layout="column" layout-align="center center">N/A</div>
+								<div flex="50" layout="column" layout-align="center center">Rs. 0</div>
+							</div>
+							<div layout="row" ng-repeat="payment in campaignPayments">
+								<div flex="50" layout="column" layout-align="center center">23/07/17</div>
+								<div flex="50" layout="column" layout-align="center center">Rs. 50,000</div>
+							</div>
+						</div>
+						<!-- <div layout="row" layout-align="center center"> 
+								<md-button class="md-button md-primary md-raised" ng-click="showPaymentdailog()">UPDATE PAYMENT</md-button>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			<div layout="row" layout-margin>
+				<div flex="50">
+					<div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
+				</div>
+				<div flex="50" layout="row" layout-align="end center">
 
-                    <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-                        layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-                        <div layout="column" layout-align="center center">
-                            <div><span><img src="assets/images/client_details.png"></span></div>
-                            <h3>Client Details</h2>
-                        </div>
-
-                        <div layout="row" layout-align="center center">
-                            <div flex="50">Campaign Name:</div>
-                            <div flex="50">{{campaignDetails.name}}</div>
-                        </div>
-                        <div layout="row" layout-align="center center">
-                            <div flex="50">Client Name:</div>
-                            <div flex="50">{{campaignDetails.user_full_name}}</div>
-                        </div>
-                        <div layout="row" layout-align="center center">
-                            <div flex="50">Contact:</div>
-                            <div flex="50">{{campaignDetails.user_phone || "N/A"}}</div>
-                        </div>
-                        <div layout="row" layout-align="center center">
-                            <div flex="50">Email:</div>
-                            <div flex="50">{{campaignDetails.user_email || "N/A"}}</div>
-                        </div>
-
-                    </div>
-
-                    <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
-                        layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-
-                        <div layout="column" layout-align="center center">
-                            <div><img src="assets/images/capaign_details.png"></div>
-                            <h3>Campaign Summary</h2>
-                        </div>
-                        <div layout="row">
-                            <div flex="50">Staring:</div>
-                            <div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date: "dd-MMM-yyyy" }}</div>
-                        </div>
-                        <div layout="row">
-                            <div flex="50">Estimated Budget:</div>
-                            <div flex="50"><span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
-                        </div>
-                        <div layout="row">
-                            <div flex="50">Actul Budget:</div>
-                            <div flex="50"><span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
-                        </div>
-                        <div layout="row">
-                            <div flex="50">Status:</div>
-                            <div flex="50">
-                                <span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-                                <span layout-align="center center" ng-if="campaignDetails.status == 5" ><i class="material-icons">info_outline</i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div layout="row" layout-margin>
-                <div flex="50">
-                    <div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
-                </div>
-                <div flex="50" layout="row" layout-align="end center">
-
-                    <div>
-                        <md-button class="md-raised md-warn" ng-disabled="campaignDetails.status >= 4" ng-click="finalizeCampaign()">
-                           Finalize <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
-                        </md-button>
-                        <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5" ng-click="addNewProductToCampaign()">
-                           Add New Product <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
-                        </md-button>
-                        <md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 5" ng-click="launchCampaign()">
-                            Launch <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
-                        </md-button>
-                    </div>
-                </div>
-            </div>
-            <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-        </div>
-    </div>
+					<div>
+						<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4" ng-click="finalizeCampaign()">
+							Finalize
+							<span>
+								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+							</span>
+						</md-button>
+						<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5"
+						 ng-click="addNewProductToCampaign()">
+							Add New Product
+							<span>
+								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+							</span>
+						</md-button>
+						<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 6" ng-if="campaignDetails && campaignDetails.status != 7"
+						 ng-click="launchCampaign(campaignDetails.id, $event)">
+							Launch
+							<span>
+								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+							</span>
+						</md-button>
+					</div>
+				</div>
+			</div>
+			<div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
+			 ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+		</div>
+	</div>
 </div>
