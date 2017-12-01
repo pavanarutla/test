@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr) {
 
   if($stateParams.campaignId){
     var campaignId = $stateParams.campaignId;
@@ -162,5 +162,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       });
     }
   }
+   /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
 });
