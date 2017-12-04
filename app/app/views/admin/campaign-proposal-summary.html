@@ -85,7 +85,7 @@
 						</div>
 						<div layout="row">
 							<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
-							<div flex="50" layout="column" layout-align="center center">Rs. 1,30,000</div>
+							<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
 						</div>
 						<div layout="row">
 							<div flex="100" layout="column" layout-align="center center">
@@ -103,16 +103,25 @@
 						</div>
 						<div layout="column" layout-margin style="height:150px; overflow:auto;">
 							<div layout="row">
-								<div flex="50" layout="column" layout-align="center center">Date</div>
-								<div flex="50" layout="column" layout-align="center center">Amount</div>
+								<div flex="20" layout="column" layout-align="center center">Date</div>
+								<div flex="20" layout="column" layout-align="center center">Amount</div>
+								<div flex="20" layout="column" layout-align="center center">Txn Type</div>
+								<div flex="20" layout="column" layout-align="center center">Ref. No.</div>
+								<div flex="20" layout="column" layout-align="center center">Accepted by</div>
 							</div>
 							<div layout="row" ng-if="!campaignPayments">
-								<div flex="50" layout="column" layout-align="center center">N/A</div>
-								<div flex="50" layout="column" layout-align="center center">Rs. 0</div>
+								<div flex="20" layout="column" layout-align="center center">N/A</div>
+								<div flex="20" layout="column" layout-align="center center">Rs. 0</div>
+								<div flex="20" layout="column" layout-align="center center">N/A</div>
+								<div flex="20" layout="column" layout-align="center center">N/A</div>
+								<div flex="20" layout="column" layout-align="center center">N/A</div>								
 							</div>
-							<div layout="row" ng-repeat="payment in campaignPayments">
-								<div flex="50" layout="column" layout-align="center center">23/07/17</div>
-								<div flex="50" layout="column" layout-align="center center">Rs. 50,000</div>
+							<div layout="row" ng-repeat="payment in campaignPayments.all_payments">
+								<div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
+								<div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
+								<div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
+								<div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
+								<div flex="20" layout="column" layout-align="center center">{{payment.updated_by_admin_name }}</div>
 							</div>
 						</div>
 						<!-- <div layout="row" layout-align="center center"> 
@@ -128,6 +137,12 @@
 				<div flex="50" layout="row" layout-align="end center">
 
 					<div>
+						<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 7 && campaignDetails.status != 8)" ng-click="closeCampaign(campaignDetails.id, $event)">
+							Close Campaign
+							<span>
+								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+							</span>
+						</md-button>
 						<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4" ng-click="finalizeCampaign()">
 							Finalize
 							<span>
