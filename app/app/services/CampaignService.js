@@ -61,6 +61,16 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/request-proposal/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        requestLaunch: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/request-campaign-launch/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        requestChangeInQuote: function(sendObj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/request-quote-change', sendObj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

@@ -11,8 +11,8 @@
 	
 	<div layout="column" class="banner" id="homeCarousel">
 		 <img src="assets/images/banner1-1920.png" hide-sm hide-md/> 
-		 <img src="assets/images/banner-today1.png" hide-lg hide-md hide-gt-lg alt="sm"/> 
-		 <img src="assets/images/banner1(1280).png" hide-sm hide-lg hide-gt-lg alt="md"/> 
+		 <img src="assets/images/banner-today1.png" hide-lg hide-md hide-gt-lg hide-xs alt="sm"/> 
+		 <img src="assets/images/banner1(1280).png" hide-sm hide-lg hide-gt-lg hide-xs alt="md"/> 
 		<!-- slider-->
 	
 	 <!-- <div layout="column" style="padding:0px;" >
@@ -34,7 +34,7 @@
 			</div>
 			<div layout="row">
 				<!-- <md-button class="md-primary watch-btn" ng-click="showVideo($event)">WATCH VIDEO</md-button> -->
-				<md-button class="md-raised md-primary getstart-btn " ng-click="showTabDialog($event)">GET STARTED NOW</md-button>
+				<md-button class="md-raised md-primary getstart-btn " ng-click="showTabDialog($event)" style="margin-left:0px" >GET STARTED NOW</md-button>
 			</div>
 		</div>
 
@@ -79,21 +79,21 @@
 					<!-- <md-icon md-svg-icon="assets/images/icon/gouge.svg" id="left"> </md-icon> -->
 					<img src="assets/images/icons/gouge.png" alt="text" class="mrgn-top" />
 				</div>
-				<div class="">
+				<div class="safari-whtwedo">
 					<span class="md-subhead fnt-weight">Point of Interest</span></br>
 					<span class="md-caption campagin-name">Choose from the showcase of various (OOH) advertising formats that help drive your brand reach its audience.</span>
 				</div>
 			</div>
 			<div layout="row" flex="33" flex-sm="100" layout-margin>
 				<div><img src="assets/images/icons/chat.png" alt="text" class="mrgn-top" /></div>
-				<div class="">
+				<div class="safari-whtwedo">
 					<span class="md-subhead fnt-weight">Check Availability</span></br>
 					<span class="md-caption campagin-name">These components helps you interpret the result of availability check, In case already the hoarding is booked it will reflect in the booking status within the time period with this you can quickly process your campaign.</span>
 				</div>
 			</div>
 			<div layout="row" flex="33" flex-sm="100" layout-margin>
 				<div><img src="assets/images/icons/phone.png" alt="text" style="margin-top:10px" /></div>
-				<div class="">
+				<div class="safari-whtwedo">
 					<span class="md-subhead fnt-weight">Shortlist</span></br>
 					<span class="md-caption campagin-name">Pick the best advertising formats by using various options that filter according to your preferences and shortlist them for your campaign.</span>
 				</div>
@@ -106,7 +106,7 @@
 					<!-- <md-icon md-svg-icon="assets/images/icon/gouge.svg" id="left"> </md-icon> -->
 					<img src="assets/images/icons/adjustments.png" alt="text" class="mrgn-top" />
 				</div>
-				<div class="">
+				<div class="safari-whtwedo">
 					<span class="md-subhead fnt-weight">Save Campaings</span></br>
 					<span class="md-caption campagin-name">Save your shortlisted items with a campaign name</span>
 				</div>
@@ -115,7 +115,7 @@
 
 			<div layout="row" flex="33" flex-sm="100" layout-margin>
 				<div><img src="assets/images/icons/cart.png" alt="text" class="mrgn-top" /></div>
-				<div class="">
+				<div class=" safari-whtwedo">
 					<span class="md-subhead fnt-weight"> Request Proposal</span></br>
 					<span class="md-caption campagin-name">Request a proposal for your campaign, we will get back with a quote.During the exchanging of quotations, you can negotiate the prices.we speak to the vendors on your behalf</span>
 				</div>
@@ -124,7 +124,7 @@
 			<!-- chart png image -->
 			<div layout="row" flex="33" flex-sm="100" layout-margin>
 				<div><img src="assets/images/icons/chart.png" alt="text" class="mrgn-top" /></div>
-				<div class="">
+				<div class="safari-whtwedo">
 					<span class="md-subhead fnt-weight">Excute Campaings</span></br>
 					<span class="md-caption campagin-name">A proper guidance will be provided for better outcomes so that execution of campain is expidicted</span>
 				</div>
@@ -143,10 +143,10 @@
 				<div class="bbscb">Search every Billboard in india</div>
 				<div class="bbscl">India's No. 1 search site for billboards </div>
 			</div>
-			<form name="signin" method="post" novalidate="novalidate" layout="row" layout-xs="column" flex="50"
-			 flex-lg="50" flex-md="50" flex-sm="100" flex-xs="100" class="outdoormedia">
+			<form novalidate="novalidate" layout="row" layout-xs="column" flex="50"
+			 flex-lg="50" flex-md="50" flex-sm="100" flex-xs="100">
 				<div layout-fill="layout-fill" layout-fill="$mdMedia('gt-sm')" class="bbsct">
-					<md-input-container class="md-block">
+					<!-- <md-input-container class="md-block"> -->
 						<!-- <label>Area Name (or) Postcode</label> -->
 						<md-autocomplete                      
 							md-input-minlength="2"
@@ -154,14 +154,14 @@
 							md-selected-item-change="selectedAreaChanged(item)"
 							md-search-text="searchText"
 							md-items="item in autoCompleteArea(searchText)"
-							md-item-text="item.name"                      
+							md-item-text="item.name"           
 							md-floating-label="area search"
-							style="margin-top:-18px;">
+							style="margin-top:-18px;width:100%">
 							<md-item-template>
 								<span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
 							</md-item-template>                    
 						</md-autocomplete>
-					</md-input-container>
+					<!-- </md-input-container> -->
 				</div>
 				<div class="bbscont">
 					<md-button aria-label="submitRCB" class="md-raised md-primary newbbsub" ng-href="#/location" ng-disabled="!selectedArea">Browse Billboards</md-button>
@@ -371,15 +371,27 @@
 			</div>
 			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class="contsr" layout-matgin layout-padding>
 				<div layout="column" layout-sm="column" class="confor">
-					<form>
+					<form name="sendquery" novalidate>
 						<input type="hidden" ng-model="query.type" value="3" />
 						<md-input-container class="md-block">
 							<label>Name</label>
-							<input ng-model="query.name" />
+							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" />
+							<div ng-messages="sendquery.queryname.$error">
+								<div class="alret alert-danger" ng-message="required">Name is required.</div>
+								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
+							</div>
+
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label> Email</label>
-							<input ng-model="query.email" />
+							<!-- <input ng-model="query.email" required="required"  /> -->
+							<input ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							/>
+							<div ng-messages="sendquery.queryemail.$error">
+							  <div class="alret alert-danger" ng-message="required">Email is required.</div>
+							  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+							  <div ng-message="pattern">Enter a valied email</div>
+							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Company Name</label>
@@ -387,10 +399,15 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Message</label>
-							<input ng-model="query.message" />
+							<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required"  />
+							<div ng-messages="sendquery.querymsg.$error">
+								<div class="alret alert-danger" ng-message="required">message is required.</div>
+								<div ng-message="maxlength">message shouldn't exede 150 characters. </div>
+								<div ng-message="minlength">message should be 10 characters</div>
+							  </div>
 						</md-input-container>
 						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm" ng-click="sendQuery()">Send Message</md-button>
+							<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
 						</div>
 					</form>
 				</div>
@@ -420,7 +437,14 @@
 						<md-input-container class="md-block">
 							<label style="color: #eee">Email Address</label>
 							<input type="hidden" ng-model="subscriberData.type" value="1" />
-							<input ng-model="subscriberData.email" id="subscriber-email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+							<!-- <input ng-model="subscriberData.email" id="subscriber-email" name="email" type="email" minlength="10" maxlength="30" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"> -->
+							<input ng-model="subscriberData.email" id="subscriber-email" name="subscriberemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							/>
+							<div ng-messages="Subscribe.subscriberemail.$error">
+								<div class="alret alert-danger" ng-message="required">Email is required.</div>
+								<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+								<div ng-message="pattern">Enter a valied email</div>
+							  </div>
 							<md-button class="md-primary md-raised newsletter-btn" ng-click="subscribe()">Send</md-button>
 						</md-input-container>
 					</form>
@@ -464,10 +488,10 @@
     }
     });
   </script>  -->
- <script>
+ <!-- <script>
 	if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) 
 {
-   document.getElementsByClassName("safari-width")[0].className += " safari";
+   document.getElementsByClassName("safari-width")[0].className += " ";
 	document.getElementsByClassName("outdoormedia")[0].className += " outdoorwidth";
    document.getElementsByClassName("outdoormedia")[1].className += " outdoorwidth";
    document.getElementsByClassName("outdoormedia")[2].className += " outdoorwidth";
@@ -475,10 +499,16 @@
    document.getElementsByClassName("outdoormedia")[4].className += " outdoorwidth";
    document.getElementsByClassName("outdoormedia")[5].className += " outdoorwidth";
    document.getElementsByClassName("outdoormedia")[6].className += " outdoorwidth";
-   document.getElementsByClassName("outdoormedia")[7].className += " outdoorwidth";
+   document.getElementsByClassName("search-width")[0].className += " formwidth";
    document.getElementsByClassName("bbsct")[0].className += " outdoorwidth";
+   document.getElementsByClassName("safari-whtwedo")[0].className += " whtwedo-width";
+   document.getElementsByClassName("safari-whtwedo")[1].className += " whtwedo-width";
+   document.getElementsByClassName("safari-whtwedo")[2].className += " whtwedo-width";
+   document.getElementsByClassName("safari-whtwedo")[3].className += " whtwedo-width";
+   document.getElementsByClassName("safari-whtwedo")[4].className += " whtwedo-width";
+   document.getElementsByClassName("safari-whtwedo")[5].className += " whtwedo-width";
 }
-</script>
+</script> -->
 <!-- <script>
 	if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) 
 {

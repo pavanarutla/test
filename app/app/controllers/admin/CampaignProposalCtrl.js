@@ -52,7 +52,20 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     },            
     {
       name: 'Action', field: 'Action', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  ng-click="grid.appScope.editProposedProduct(row.entity.id)" style="cursor:pointer;"><md-icon><i class="material-icons">edit</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: `
+        <div class="ui-grid-cell-contents" ng-if="grid.appScope.campaignDetails.status < 4 || grid.appScope.campaignDetails.status == 5">
+          <span>
+            <a ng-click="grid.appScope.editProposedProduct(row.entity.id, row.entity.from_date, row.entity.to_date, row.entity.price)" style="cursor:pointer;">
+              <md-icon><i class="material-icons">edit</i></md-icon>
+            </a>
+          </span>
+          <span>
+            <a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a>
+          </span>
+          <span>
+            <a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a>
+          </span>
+        </div>`,
       enableFiltering: false,
     }
   ];
@@ -84,9 +97,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
-  $scope.editProposedProduct = function(productId){
+  $scope.editProposedProduct = function(productId, from_date, to_date, price){
     var productObj = {
-      id: productId
+      id: productId,
+      from_date: from_date,
+      to_date: to_date,
+      price: price
     };
     $mdDialog.show({
       locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
@@ -94,11 +110,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
       controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
+        $scope.product = productObj;
         $scope.updateProposedProduct = function(product){
-          productObj.from_date = product.from_date;
-          productObj.to_date = product.to_date;
-          productObj.price = product.price;
-          AdminCampaignService.updateProposedProduct(campaignId, productObj).then(function(result){
+          AdminCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
             if(result.status == 1){
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
@@ -119,6 +133,34 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         }
       }
     });
+  }
+
+  $scope.finalizeCampaign = function(){
+    if($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget){
+      var budget_check = confirm("Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?");
+      if(budget_check){
+        AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
+          if(result.status == 1){
+            $scope.campaignDetails.status = 4;
+            toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }
+    }
+    else{
+      AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
+        if(result.status == 1){
+          $scope.campaignDetails.status = 4;
+          toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+    }
   }
 
 });

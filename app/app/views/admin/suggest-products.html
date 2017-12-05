@@ -1,3 +1,8 @@
+<style>
+  .red{
+    color:#f00;
+  }
+</style>
 <div layout="column" layout-padding="layout-padding">
   <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
   <div layout="row">
@@ -183,7 +188,13 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-  <div layout="column" layout-align="center center">
+  <div layout="column" layout-align="center center" style="margin-top:50px;">
     <md-button class="md-raised md-accent" ng-click="loadProductList()">Load More</md-button>
   </div>
+</div>
+<div style="position:fixed;bottom:60px;right:60px;width:200px;height:135px;background:#fff;border-radius:5px;padding-left:10px;box-shadow:0px 0px 4px #888;">
+  <p>From <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b></p>
+  <p>To <b>{{ campaignEndDate | dateify | date:"dd-MM-yyyy" }}</b></p>
+  <p>Expected Budget <b>{{ campaignEstBudget || "N/A" }}</b></p>
+  <p>Actual Budget <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b></p>
 </div>

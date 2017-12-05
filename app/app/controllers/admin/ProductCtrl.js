@@ -173,6 +173,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   $scope.gridProducts.columnDefs = [
     { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
     { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
+    { name: 'company_name', displayName: 'Company', enableCellEdit: false, width: '10%' },
     { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
     { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
     { name: 'area_name', displayName: 'Area', width: '20%' },
@@ -205,7 +206,6 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   function getProductList(){
     ProductService.getProductList().then(function(result){
       $scope.gridProducts.data = result;
-      // console.log(result,"productList1");
     });
   }
 

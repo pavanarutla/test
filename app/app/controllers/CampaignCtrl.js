@@ -1,15 +1,16 @@
-
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
-    'suggestion-requested',     // index 0,
-    'campaign-preparing',       // index 1,
-    'campaign-created',         // index 2,
-    'quote-requested',          // index 3,
-    'launch-requested',         // index 4,
-    'running',                  // index 5, 
-    'suspended',                // index 6,
-    'stopped'                   // index 7, 
+    'suggestion-requested',  //    0
+    'campaign-preparing',    //    1
+    'campaign-created',      //    2
+    'quote-requested',       //    3
+    'quote-given',           //    4
+    'change-requested',      //    5 
+    'launch-requested',      //    6
+    'running',               //    7
+    'suspended',             //    8
+    'stopped'                //    9
   ];
 
   $scope.showPaymentdailog = function () {
@@ -53,11 +54,20 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     }
   };
 
-  //view in location pages
-  $scope.viewlocation = function(){
-    $window.open('#/location', '_blank');
-  }
-
+  
+   $scope.ProductImageView = function (ev, img_src) {
+    console.log(img_src);
+    $mdDialog.show({
+      locals:{ src: img_src },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  };
+  
   $scope.campaignDetails = {};
 
   ///Delete the Products
@@ -156,9 +166,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
     CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
+      $scope.plannedCampaigns = _.filter(result, function(c){
+        return c.status < 6;
+      });
+      $scope.runningCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['running'] });
+      $scope.closedCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['stopped'] });
     });
   }
   $scope.getUserCampaigns();
@@ -171,6 +183,81 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   }
   if($stateParams.campaignId){
     $scope.getCampaignDetails($stateParams.campaignId);
+  }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
+  $scope.requestLaunchCampaign = function(ev, campaignId){
+    CampaignService.requestLaunch(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            .textContent('The Admin will soon launch your campaign and intimate you about it.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.deleteProductFromCampaign = function(productId, campaignId){
+    CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+      if(result.status == 1){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+          $scope.campaignDetails = result;
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.openRequestChangeQuoteForm = function(campaignId){
+    $mdDialog.show({
+      locals: {ctrlScope: $scope},
+      templateUrl: 'views/request-quote-change.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller: function($scope, $mdDialog, ctrlScope, CampaignService, toastr){
+        $scope.changeRequest = {};
+        $scope.changeRequest.for_campaign_id = ctrlScope.campaignDetails.id;
+        $scope.requestChangeInQuote = function(){          
+          CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
+            if(result.status == 1){
+              $mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });          
+        }
+        $scope.close = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
   }
 
 });

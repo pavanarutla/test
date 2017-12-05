@@ -3,6 +3,11 @@ app.service('AdminCampaignService',
   function($http, $q, config){
     
     return {
+      getAllCampaigns: function(){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/get-all-campaigns').success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
       getAllCampaignRequests: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaign-requests').success(dfd.resolve).error(dfd.reject);
@@ -51,6 +56,11 @@ app.service('AdminCampaignService',
       updateProposedProduct: function(campaignId, obj){
         var dfd = $q.defer();
         $http.put(config.apiPath + '/proposed-product-for-campaign/' + campaignId, obj).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      finalizeCampaignByAdmin: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/quote-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       }
     }
