@@ -5,7 +5,9 @@ app.service('LoadingInterceptor',
 
       return {
         request: function(config) {
-          $rootScope.loading = true;
+          if(!config.skipInterceptor){
+            $rootScope.loading = true;
+          }
           return config;
         },
         requestError: function(rejection) {
@@ -18,7 +20,6 @@ app.service('LoadingInterceptor',
           return response;
         },
         responseError: function(rejection) {
-          console.log(rejection);
           $rootScope.loading = false;
           var toastr = $injector.get('toastr');
           var $mdDialog = $injector.get('$mdDialog');

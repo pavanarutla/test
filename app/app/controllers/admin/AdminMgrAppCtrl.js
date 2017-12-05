@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config) {
 
   $rootScope.serverUrl = config.serverUrl;
 
@@ -72,6 +72,39 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.showArea = false;
   $scope.toogelLocation = function () {
     $scope.showArea = !$scope.showArea;
+  }
+
+  /*================================
+  === Long polling notifications ===
+  ================================*/
+  var getAdminNotifs = function(){
+    AdminNotificationService.getAllAdminNotifications().then(function(result){
+      $scope.adminReadNotifCount = _.chain(result).filter(function(notif){
+        return notif.status == 1;
+      }).value().length;
+      $scope.adminUnreadNotifCount = _.chain(result).filter(function(notif){
+        return notif.status == 0;
+      }).value().length;
+      $scope.adminNotifs = result;
+    });
+  }
+  getAdminNotifs();
+  $interval(getAdminNotifs, 10000);
+
+  /*===============================
+  |   Notification navigation 
+  ===============================*/
+  $scope.showCampaignDetails = function(notificationId){
+    AdminNotificationService.updateNotifRead(notificationId).then(function(result){
+      if(result == 1){
+        getAdminNotifs();
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+    $mdSidenav('right').toggle();
+    $location.path('/admin/home');
   }
 
 });
