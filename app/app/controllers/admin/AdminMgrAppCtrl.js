@@ -96,7 +96,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   ===============================*/
   $scope.showCampaignDetails = function(notificationId){
     AdminNotificationService.updateNotifRead(notificationId).then(function(result){
-      if(result == 1){
+      if(result.status == 1){
         getAdminNotifs();
       }
       else{

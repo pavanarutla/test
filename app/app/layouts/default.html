@@ -105,14 +105,19 @@
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme">X</md-icon>
         </md-button>-->
-
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-content layout-padding="">
-      Notifications Panel
+      <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+          <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
+          <p>{{ notif.message }}</p>
+        </a>
+      </div>
     </md-content>
   </md-sidenav>
 
