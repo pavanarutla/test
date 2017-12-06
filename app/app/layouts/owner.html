@@ -15,66 +15,13 @@
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
 
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-    <body layout="row" flex ng-cloak>
-    <!-- <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px" md-is-locked-open="$mdMedia('gt-sm')">
-      <header layout="column" layout-padding >
-          <a ng-href="#/"><img ng-src="images/billboards.png" alt="logo"></a>
-      </header>
-      <md-list>
-        <md-menu-item>
-          <md-button ng-href="#/home" ng-click="changeName()">
-            <md-icon md-svg-icon="images/menu/home.svg"></md-icon>Home</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/profile" ng-click="changeProfile()">
-                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Profile</md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-            <md-button ng-href="#/campaign" ng-click="changeCampains()">
-                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Campains</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/requesthoarding" ng-click="changeRequest()" >
-                <md-icon md-svg-icon="images/menu/hoarding.svg"> </md-icon>Requested Hoardings</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/hoardingslist" ng-click="changeHoardingList()">
-                <md-icon md-svg-icon="images/menu/hoarding.svg"> </md-icon>Hoardings List</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/team" ng-click="changeTeam()">
-                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Team</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#/outsourcing" ng-click="changeAgent()">
-                <md-icon md-svg-icon="images/menu/profile.svg"> </md-icon>Outsourcing Agents</md-button>
-        </md-menu-item>
-        <md-divider> </md-divider>
-        <md-menu-item>
-            <md-button ng-href="#/settings"  >
-                <md-icon md-svg-icon="images/menu/help.svg"> </md-icon>Settings</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button  ng-click="sendFeedback($event)">
-                <md-icon md-svg-icon="images/menu/help.svg"> </md-icon>Send feedback</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#" ng-model="color.name">
-                <md-icon md-svg-icon="images/menu/help.svg"></md-icon>Help</md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <md-button ng-href="#" ng-click="logout()">
-                <md-icon md-svg-icon="images/menu/help.svg"></md-icon>Log Out</md-button>
-        </md-menu-item>
-      </md-list>
-    </md-sidenav> -->
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" style="position:absolute;width:280px">
-        <md-toolbar class="md-theme-indigo" style="background-color: #FFFFFF;min-height: 75px !important;">
+    <div layout="row" flex >
+    <md-sidenav class="md-sidenav-left" md-component-id="ownerLeft" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="4" style="width:280px">
+        <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;">
             <img class="png-icon" src="assets/images/billboards.png">
         </md-toolbar>
         <md-divider></md-divider>
-        <md-content>
+        <md-content style="height:600px;overflow-x:auto">
             <div>
                 <div style="width: 100% !important;">
                     <md-list>
@@ -184,9 +131,9 @@
     </md-sidenav>
 
     <div layout="column" flex>
-      <md-toolbar>
+      <md-toolbar style="">
         <div class="md-toolbar-tools">
-          <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="closeSidenav()">
+          <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="ownerSidenav()">
               <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
           </md-button>
          <!-- <md-button aria-label="logo" class="md-icon">
@@ -203,11 +150,11 @@
       
       <!-- <md-content flex ng-view  ng-cloak>
       </md-content> -->
-      <ui-view flex  ng-cloak></ui-view>
+      <ui-view ></ui-view>
       
       <div layout="column" layout-align="center center" style="background: #CCC">
         <div style="padding: 5px 0;">Powered By Billboards India</div>
       </div>
     </div>
   
-  </dic>
+  </div>

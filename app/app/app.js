@@ -53,6 +53,11 @@ var app = angular.module('bbManager', [
         templateUrl: 'views/pricing.html',
         controller: 'PricingCtrl'
       })
+      .state('index.suggestme', {
+        url: 'suggestme',
+        templateUrl: 'views/suggestme.html',
+        controller: 'PricingCtrl'
+      })
       .state('index.location', {
         url: 'location',
         templateUrl: 'views/map-home.html',
@@ -82,6 +87,7 @@ var app = angular.module('bbManager', [
         url: 'agency-profile',
         templateUrl: 'views/agency-profile.html'
       })
+      
       // .state('index.shortlist-mobile', {
       //   url: 'shortlist-mobile',
       //   templateUrl: 'views/shortlist-mobile.html'
