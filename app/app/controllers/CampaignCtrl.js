@@ -260,4 +260,28 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
     });
   }
 
+  $scope.sendSuggestionRequest = function (ev) {
+    console.log($scope.suggestionRequest);
+    CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
+      $scope.suggestionRequest = {};
+      if (result.status == 1) {
+        $scope.suggestMeRequestSent = true;
+      }
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('We will get back to you!!!!')
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+      );
+    });
+  };
+
+  $scope.resetSuggestionForm = function(){
+    $scope.suggestionRequest = {};
+  }
+
 });

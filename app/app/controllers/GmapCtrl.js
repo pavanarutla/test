@@ -441,28 +441,7 @@ app.controller('GmapCtrl',
   //     return false;
   //  }
 
-      $scope.sendSuggestionRequest = function (ev) {
-        $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        // console.log($scope.suggestionRequest);
-        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-          $scope.suggestionRequest = {};
-          if (result.status == 1) {
-            $scope.suggestMeRequestSent = true;
-          }
-          $mdDialog.show(
-            $mdDialog.alert()
-              .parent(angular.element(document.querySelector('body')))
-              .clickOutsideToClose(true)
-              .title('We will get back to you!!!!')
-              .textContent(result.message)
-              .ariaLabel('Alert Dialog Demo')
-              .ok('Got it!')
-              .targetEvent(ev)
-          );
-        });
-      };
-
-      function selectMarker(marker) {
+       function selectMarker(marker) {
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);

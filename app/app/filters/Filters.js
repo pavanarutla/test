@@ -77,7 +77,7 @@ app.filter('stringifyCampaignStatus', function(){
       case 5:
         returnStatus = "Quote Change Requested";
         break;
-      case 5:
+      case 6:
         returnStatus = "Launch Requested";
         break;
       case 7:

@@ -19,6 +19,7 @@
                 is-open="opened.start" 
                 ng-click="opened.start = !opened.start" 
                 max-date='product.to_date'
+                ng-model-options="{timezone: 'utc'}"
                 ng-readonly='true' placeholder="start date" />
               <span class="input-group-addon" for='start' 
                   ng-click="opened.start = !opened.start; $event.stopPropagation()">
@@ -35,6 +36,7 @@
                 is-open="opened.end" 
                 ng-click="opened.end = !opened.end"
                 min-date='product.from_date' 
+                ng-model-options="{timezone: 'utc'}"
                 ng-readonly='true' placeholder="end date" />
               <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
                 <span class="glyphicon glyphicon-calendar"></span>

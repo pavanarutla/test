@@ -4,6 +4,13 @@
 			<div layout="column" layout-align="center center">
 				<img ng-src="assets/images/billboard_popup.png">
 			</div>
+			<ul>
+				<li ng-repeat="(key, errors) in addFormatForm.$error track by $index"> <strong>{{ key }}</strong> errors
+					<ul>
+						<li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+					</ul>
+				</li>
+			</ul>
 			<div layout="column" layout-align="center center">
 				<div class="md-title">
 					<h3>Enter Formats Details</h3>
