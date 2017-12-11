@@ -380,7 +380,10 @@ app.run(
             });
             return false;
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1) {
+          else if (
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
+          ) {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
