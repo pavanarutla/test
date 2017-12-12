@@ -1,6 +1,6 @@
 app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
 
-  function loadCampaignData(campaignId){
+  function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.gridCampaignProducts.data = result.products;

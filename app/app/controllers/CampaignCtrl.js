@@ -56,7 +56,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
 
   
    $scope.ProductImageView = function (ev, img_src) {
-    console.log(img_src);
     $mdDialog.show({
       locals:{ src: img_src },
       templateUrl: 'views/image-popup-large.html',
@@ -266,9 +265,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
       if (result.status == 1) {
         $scope.suggestMeRequestSent = true;
       }
-      var result = {
-        message: "hello"
-      };
+      // var result = {
+      //   message: "hello"
+      // };
       $mdDialog.show(
         $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))

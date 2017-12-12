@@ -122,7 +122,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         if(result.status == 1){
           AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
             localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
-            console.log(JSON.stringify(updatedCampaignData));
+            // console.log(JSON.stringify(updatedCampaignData));
             $scope.campaignActBudget = updatedCampaignData.act_budget;
           });
           _.map($scope.productList, function(product){

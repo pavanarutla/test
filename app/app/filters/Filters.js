@@ -87,7 +87,7 @@ app.filter('stringifyCampaignStatus', function(){
         returnStatus = "Suspended";
         break;
       case 9:
-        returnStatus = "Stopped";
+        returnStatus = "Closed";
         break;
       default:
         return status = "Unknown";
