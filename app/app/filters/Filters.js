@@ -48,7 +48,9 @@ app.filter('address', function () {
 app.filter('dateify',function(){
   return function(date){
     if(date){
-      return new Date(date);
+      console.log(date);
+      console.log(moment(date).local().format('DD-MM-YYYY'));
+      return moment(date).local().format('DD-MM-YYYY');
     }
     else{
       return "N/A";

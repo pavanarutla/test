@@ -4,7 +4,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.gridCampaignProducts.data = result.products;
-      loadCampaignPayments(campaignId);
+      if(result.status > 7){
+        loadCampaignPayments(campaignId);
+      }
     });
   }
 
