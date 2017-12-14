@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -166,6 +166,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     $scope.loadMore = function () {
       $scope.limit = $scope.items.length
     }
+    /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
   });
   

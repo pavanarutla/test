@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr) {
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
@@ -180,6 +180,10 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       });
     }
   }
+   /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
   $scope.launchCampaign = function(campaignId, ev){
     AdminCampaignService.launchCampaign(campaignId).then(function(result){
