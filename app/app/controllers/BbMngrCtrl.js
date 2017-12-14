@@ -412,8 +412,10 @@ app.controller('bbMngrCtrl',
         $scope.notifs = result;
       });
     }
-    getUserNotifs();
-    $interval(getUserNotifs, 10000);
+    if($rootScope.isAuthenticated){
+      getUserNotifs();
+      $interval(getUserNotifs, 10000);
+    }
 
     /*===============================
     |   Notification navigation 

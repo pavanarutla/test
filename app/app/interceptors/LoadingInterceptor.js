@@ -24,7 +24,7 @@ app.service('LoadingInterceptor',
           var toastr = $injector.get('toastr');
           var $mdDialog = $injector.get('$mdDialog');
           if(rejection.status == 401){
-            if(!JSON.parse(localStorage.signInOpened)){
+            if(localStorage.signInOpened && JSON.parse(localStorage.signInOpened)){
               $rootScope.isAuthenticated = false;
               localStorage.clear();
               toastr.error('Your session has expired. Please login again.');

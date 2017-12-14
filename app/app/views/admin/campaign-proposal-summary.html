@@ -1,6 +1,24 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
 	<div layout="column" layout-sm="column" layout-xs="column">
 
+		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
+			<md-toolbar layout="row" style="    background: #48869c;">
+			  <div class="md-toolbar-tools">
+				<h2>
+				  <span>Client Request</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
+				  <md-icon><i class="material-icons">clear</i></md-icon>
+				</md-button>
+			  </div>
+			</md-toolbar> 
+			<md-content layout-padding>
+			  <div class="md-whiteframe-z2 md-body-1">
+				  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			  </div>
+			</md-content> 
+		</md-sidenav>
 		<div class="md-title" style="background: #447bde;color: #fff;" layout-padding>
 			Proposal
 		</div>
@@ -143,7 +161,7 @@
 								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 							</span>
 						</md-button>
-						<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4" ng-click="finalizeCampaign()">
+						<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5" ng-click="finalizeCampaign()">
 							Finalize
 							<span>
 								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -156,7 +174,7 @@
 								<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 							</span>
 						</md-button>
-						<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 6" ng-if="campaignDetails && campaignDetails.status != 7"
+						<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 6" ng-if="campaignDetails && campaignDetails.status <= 7"
 						 ng-click="launchCampaign(campaignDetails.id, $event)">
 							Launch
 							<span>

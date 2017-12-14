@@ -48,7 +48,7 @@ app.filter('address', function () {
 app.filter('dateify',function(){
   return function(date){
     if(date){
-      return new Date(date);
+      return moment(date).local().format('DD-MM-YYYY');
     }
     else{
       return "N/A";
@@ -87,7 +87,7 @@ app.filter('stringifyCampaignStatus', function(){
         returnStatus = "Suspended";
         break;
       case 9:
-        returnStatus = "Stopped";
+        returnStatus = "Closed";
         break;
       default:
         return status = "Unknown";

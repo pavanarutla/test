@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -122,7 +122,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         if(result.status == 1){
           AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
             localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
-            console.log(JSON.stringify(updatedCampaignData));
+            // console.log(JSON.stringify(updatedCampaignData));
             $scope.campaignActBudget = updatedCampaignData.act_budget;
           });
           _.map($scope.productList, function(product){
@@ -166,6 +166,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     $scope.loadMore = function () {
       $scope.limit = $scope.items.length
     }
+    /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
   });
   

@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, $location, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
     'suggestion-requested',  //    0
@@ -56,7 +56,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
 
   
    $scope.ProductImageView = function (ev, img_src) {
-    console.log(img_src);
     $mdDialog.show({
       locals:{ src: img_src },
       templateUrl: 'views/image-popup-large.html',
@@ -261,12 +260,14 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   }
 
   $scope.sendSuggestionRequest = function (ev) {
-    console.log($scope.suggestionRequest);
     CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-      $scope.suggestionRequest = {};
+      // $scope.suggestionRequest = {};
       if (result.status == 1) {
         $scope.suggestMeRequestSent = true;
       }
+      // var result = {
+      //   message: "hello"
+      // };
       $mdDialog.show(
         $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))
@@ -276,7 +277,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
           .ariaLabel('Alert Dialog Demo')
           .ok('Got it!')
           .targetEvent(ev)
-      );
+      ).finally(function(){
+        $location.path('#/home')
+      });
     });
   };
 

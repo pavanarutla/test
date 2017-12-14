@@ -8,7 +8,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   if($stateParams.campaignId){
     var campaignId = $stateParams.campaignId;
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      console.log(result);
+      // console.log(result);
     });
   }
   
