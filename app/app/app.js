@@ -87,6 +87,7 @@ var app = angular.module('bbManager', [
         url: 'agency-profile',
         templateUrl: 'views/agency-profile.html'
       })
+      
       // .state('index.shortlist-mobile', {
       //   url: 'shortlist-mobile',
       //   templateUrl: 'views/shortlist-mobile.html'
