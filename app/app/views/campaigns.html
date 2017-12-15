@@ -170,7 +170,7 @@
 											<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
 										</md-menu-item>
 										<md-menu-item>
-											<md-button>Delete</md-button>
+											<md-button ng-disabled="pCampaign.status > 3" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
 										</md-menu-item>
 									</md-menu-content>
 								</md-menu>

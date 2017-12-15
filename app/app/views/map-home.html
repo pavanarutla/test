@@ -238,7 +238,7 @@
                     <md-button ng-click="toggleShareCampaignSidenav(plannedUserCampaign)">Share</md-button>
                   </md-menu-item>
                   <md-menu-item>
-                    <md-button ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
+                    <md-button ng-if="plannedUserCampaign.status <= 3" ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
@@ -1280,7 +1280,7 @@
                           <md-button ng-click="toggleShareCampaignSidenav(plannedUserCampaign)">Share</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                          <md-button ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
+                          <md-button ng-if="plannedUserCampaign.status <= 3" ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
                         </md-menu-item>
                       </md-menu-content>
                     </md-menu>
