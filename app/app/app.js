@@ -53,6 +53,11 @@ var app = angular.module('bbManager', [
         templateUrl: 'views/pricing.html',
         controller: 'PricingCtrl'
       })
+      .state('index.suggest_campaign', {
+        url: 'suggest-campaign',
+        templateUrl: 'views/suggest-a-campaign.html',
+        controller: 'CampaignCtrl'
+      })
       .state('index.location', {
         url: 'location',
         templateUrl: 'views/map-home.html',
@@ -82,6 +87,7 @@ var app = angular.module('bbManager', [
         url: 'agency-profile',
         templateUrl: 'views/agency-profile.html'
       })
+      
       // .state('index.shortlist-mobile', {
       //   url: 'shortlist-mobile',
       //   templateUrl: 'views/shortlist-mobile.html'
@@ -375,7 +381,10 @@ app.run(
             });
             return false;
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1) {
+          else if (
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
+          ) {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }

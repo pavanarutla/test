@@ -62,6 +62,26 @@ app.service('AdminCampaignService',
         var dfd = $q.defer();
         $http.get(config.apiPath + '/quote-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
+      },
+      launchCampaign: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/launch-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      getCampaignPaymentDetails: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/campaign-payments/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      updateCampaignPayment: function(obj){
+        var dfd = $q.defer();
+        $http.post(config.apiPath + '/campaign-payment', obj).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      closeCampaign: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/close-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
       }
     }
   }

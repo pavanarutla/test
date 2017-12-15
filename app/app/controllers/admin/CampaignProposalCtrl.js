@@ -1,16 +1,34 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, config, toastr) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr) {
 
-  if($stateParams.campaignId){
-    var campaignId = $stateParams.campaignId;
+  function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.gridCampaignProducts.data = result.products;
+      if(result.status > 7){
+        loadCampaignPayments(campaignId);
+      }
     });
   }
-  if(!localStorage.campaignForSuggestion){
-    toastr.error("Choose a campaign first.");
-    $location.path('/admin/campaign');
+
+  function loadCampaignPayments(campaignId){
+    if($scope.campaignDetails.status >= 7 ){
+      AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
+        $scope.campaignPayments = result;
+      });
+    }
+    else{
+      toastr.error('Payments are only available for running or stopped campaigns.');
+    }
   }
+
+  if($stateParams.campaignId){
+    var campaignId = $stateParams.campaignId;
+    loadCampaignData(campaignId);
+  }
+  // if(!localStorage.campaignForSuggestion){
+  //   toastr.error("Choose a campaign first.");
+  //   $location.path('/admin/campaign');
+  // }
 
   $scope.gridCampaignProducts = {  
     paginationPageSizes: [25, 50, 75],
@@ -161,6 +179,86 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         }
       });
     }
+  }
+   /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
+
+  $scope.launchCampaign = function(campaignId, ev){
+    AdminCampaignService.launchCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Congrats!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        loadCampaignData(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.showUpdatePaymentForm = function(){
+    $mdDialog.show({
+      locals:{ campaignId: $scope.campaignDetails.id, ctrlScope : $scope },
+      templateUrl: 'views/admin/update-campaign-payment.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId){
+        $scope.paymentTypes = [
+          {name: "Cash"},
+          {name: "Cheque"},
+          {name: "Online"},
+          {name: "Transfer"}
+        ];
+        $scope.updateCampaignPayment = function(){
+          $scope.campaignPayment.campaign_id = campaignId;
+          AdminCampaignService.updateCampaignPayment($scope.campaignPayment).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              loadCampaignPayments(campaignId);
+              toastr.success(result.message);
+              $scope.cancel();
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
+
+  $scope.closeCampaign = function(campaignId, ev){
+    AdminCampaignService.closeCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Success!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        loadCampaignData(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
   }
 
 });
