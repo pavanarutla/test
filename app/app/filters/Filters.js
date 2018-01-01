@@ -4,6 +4,12 @@ app.filter('PickFirstLetter', function() {
     return input.substring(0,1);
   }
 });
+app.filter('PickFirst2Letters', function(){
+  return function(input) {
+    input = input || '';
+    return input.substring(0,2).toUpperCase();
+  }
+});
 app.filter('mapGender', function () {
   var genderHash = {
     1: 'male',
@@ -41,6 +47,63 @@ app.filter('address', function () {
 
 app.filter('dateify',function(){
   return function(date){
-    return new Date(date);
+    if(date){
+      return moment(date).local().format('DD-MM-YYYY');
+    }
+    else{
+      return "N/A";
+    }
   }
-})
+});
+
+app.filter('stringifyCampaignStatus', function(){
+  return function(status){
+    switch (status) {
+      case 0:
+        returnStatus = "Requested Suggestion";
+        break;
+      case 1:
+        returnStatus = "Preparing";
+        break;
+      case 2:
+        returnStatus = "Prepared";
+        break;
+      case 3:
+        returnStatus = "Quote Requested";
+        break;
+      case 4:
+        returnStatus = "Quote Provided";
+        break;
+      case 5:
+        returnStatus = "Quote Change Requested";
+        break;
+      case 6:
+        returnStatus = "Launch Requested";
+        break;
+      case 7:
+        returnStatus = "Running";
+        break;
+      case 8:
+        returnStatus = "Suspended";
+        break;
+      case 9:
+        returnStatus = "Closed";
+        break;
+      default:
+        return status = "Unknown";
+        break;
+    }
+    return returnStatus;
+  }
+});
+
+app.filter('boolToYesNo', function(){
+  return function(n){
+    if(n){
+      return "Yes";
+    }
+    else{
+      return "No";
+    }
+  }
+});

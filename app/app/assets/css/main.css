@@ -19,6 +19,7 @@ html,body{
 /*campaign css start*/
 body{
   background: none !important;
+  height:auto;
 }
 .contbg,.item{
   background: #fff
@@ -30,20 +31,24 @@ body{
   color: #E85647;
 }
 /* home css start*/
-.banner{
+/* .banner{
   
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     min-height: 578px;
+} */
+  .logo-img {
+    width: 140px;
+    margin: 10px 0 0 0;
 }
 .banner,.nocompany{
   position: relative;
 }
-/* .banner img{
+ .banner img{
   width: auto;
-  max-width: 100%;
-} */
+   max-width: 100%; 
+} 
 .banner-text11{
   color: #fff;
   position: absolute;
@@ -286,7 +291,7 @@ z-index: 9;
   position: fixed;
 right: 10px;
 z-index: 99;
-bottom: 55%;
+bottom: 20%;
 
 }
 /* profile page */
@@ -298,8 +303,8 @@ background: #ccc;
 }
 .inputDiv .search{
 background: rgb(204, 204, 204) none repeat scroll 0% 0%;
-width: 25%;
-height: 25px;
+    width: 90%;
+    height: 0px;
 margin: 5px 0 5px 0;
 }
 /* campagin edit page css */
@@ -597,19 +602,30 @@ display: block;
 }
 .frt-text{
   font-size: 20px;
-line-height: 27px;
-font-family: regluar;
-margin-bottom: 10px;
+  line-height: 27px;
+  font-family: regluar;
+  margin-bottom: 10px;
 }
-.slick-prev::before, .slick-next::before {
+.slick-prev::before {
     content: '←';
     z-index: 9;
     color:#eee;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+}
+.slick-prev::before{
+  content: '' !important;
+  background-image: url('/assets/images/bb.png')
 }
 .slick-next::before{
- content: '→' !important;
+ content: '' !important;
+}
+.slick-next::before{
+
+ z-index: 9;
+    color:#eee;
+    width: 50px;
+    height: 50px;
 }
 .item{
   text-align: center;
@@ -620,7 +636,7 @@ margin-bottom: 10px;
   color: #000;
   padding:30px !important;
   border-radius: 10px;
-  height:280px !important;
+  height: 200px !important;
 }
 .item .caption{
 font-size: 34px;
@@ -692,7 +708,7 @@ background: #e99d11;
 /*keep in touch css start*/
 .conts{
   background: #fff;
-  padding-top: 50px;
+  padding-top: 65px;
 }
 .confor{
   width: 70%;
@@ -701,8 +717,9 @@ background: #e99d11;
 }
   /* contact form */
   .never-miss{
-    margin: 30px 0 0 0;
+       margin-top: 30px;
     letter-spacing: 2px;
+    margin-left: 8px;
   }
   .expose-brand{
     font-weight: 700;
@@ -716,7 +733,8 @@ background: #e99d11;
   }
   /*slider*/
   .fontfamily{
-    font-family: roboto;
+    font-family: roboto !important;
+    opacity: .8;
   }
   /*map*/
   .red {
@@ -738,6 +756,16 @@ background: #e99d11;
   .extrem{
     background: #330B09;
   }
+
+.call-btn{
+    background: #488edf !important;
+    width: 50px !important;
+    height: 50px !important;
+}
+.goto-top{
+  width: 50px !important;
+    height: 50px !important;
+}
   /*loader*/
 .ajax-loader {
   position: absolute;
@@ -757,54 +785,7 @@ background: #e99d11;
   background-color: grey;
   opacity: .8;
 }
-/*media qureys*/
-@media screen and (min-width: 600px) and (max-width: 959px) {
-  /* header n banner start*/
-  .logo {
-    margin-left: 0px !important;
-  }
-  .browse-btn{font-size: 12px !important}
-  .bannertet-top{font-size: 20px !important; }
-  .bannertet-bottm{ font-size: 22px !important; }
-  .getstart-btn {
-    padding: 0px 15px 0 15px;
-    margin: 0px;
-  }
-  /* header n banner end*/
-  /*what we do start*/
-  .whtwedo {
-    padding-top: 70px;
-    padding-bottom: 100px;
-  }
-  .whtwedo p{width: 100%;}
-  /*what we do end*/
-  /*slick slider*/
-  .item-home {
-    padding: 10px !important;
-  }
-  .slider-text{font-size: 12px !important;
-  }
-  .item .caption {
-    font-size: 24px;}
-  /*what we do*/
-  .wemake-outdoor {
-    text-align: center;
-    width: 100%;
-  }
-  /*keep in tounch*/
-  .conts {
-    background:none;
-    padding-top: 30px;
-  }
-  .keepin-text{
-    text-align: center;
-  }
-  .confor {
-    width: 100%;
-  }
-  
-}
-  
+
 /*Vasu .CSS*/
 #shortlistscrollbar-style::-webkit-scrollbar
 {
@@ -948,7 +929,373 @@ background: #e99d11;
  li.pane6, 
  li.pane9 { background: #d06b64; }
 
-/*moblie app design*/
+
+ /*reset passwordpage*/
+.setting-page{
+    background-image: url('/assets/images/banner-setting.png');
+    background-position: center center;
+    background-size: cover;
+}
+.top-section{
+  position: absolute;
+  top: 0%;
+  z-index: 9;
+  background: #ccc;
+  width: 100%;
+  height: 35px;
+}
+.topbtn-one{
+  margin: 0;
+  padding: 0;
+}
+.topbtn-two{
+  margin: 0 5px 0 0px;
+  padding: 0;
+}
+.bottom-mobilebtn{
+  top:auto;
+  z-index:1;
+  position: fixed;
+  bottom:0px;
+  width:100%;
+  background:#f2f2f2;
+   height: 50px; 
+}
+.top-toolbar{
+    background: #7b7878;
+    color: #fff;
+}
+.filters-text{
+  margin-top: 10px;
+}
+.formats-bottom-btn{
+  position: absolute;
+  bottom: 1px;
+}
+.shortlist-mobile{
+  bottom: 2px !important;
+}
+
+.red-one{
+  display: hide;
+}
+
+.blue-one{
+  display: show;
+}
+.rquest-width{
+  width:100%;
+}
+/*safari componets alignment*/
+ /* .safari {
+    margin:0 0 0 63%;
+    
+}
+.outdoorwidth{
+  width: 50% !important;
+} */
+/* .formwidth{
+  width: 50% !important;
+} */
+.fliterside-btn{
+      background: #2C3E50 !important;
+}
+.sidenav-width{
+  width: 500px;
+}
+/* .whtwedo-width{
+  width:80%;
+} */
+/* suggest me css start*/
+.suggest-inner{
+  width: 70%;
+    text-align: center;
+    margin: 20px 0;
+}
+.suggest-logo{
+    margin: 30px 0;
+}
+.name-suggest{
+  padding: 30px 0;
+  border-bottom: 1px solid #ccc;
+}
+/*media qureys*/
+@media screen and (min-width: 600px) and (max-width: 750px){
+   .whtwedo {
+    padding-top: 50px;
+     padding-bottom: 50px; 
+  }
+}
+@media screen and (min-width: 751px) and (max-width: 959px){
+    .whtwedo {
+    padding-top: 50px;
+     padding-bottom: 50px; 
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  /* header n banner start*/
+  .logo {
+    margin: 12px 0px 0 0 !important;
+  }
+  .logo-img{
+     width:130px;
+  }
+ .call-btn{
+    background: #488edf !important;
+    width: 40px !important;
+    height: 40px !important;
+ }
+  .main-slider {
+    margin-top: 0;
+  }
+  .banner{
+    width:auto;
+  }
+  
+  .browse-btn{font-size: 12px !important}
+  .bannertet-top{font-size: 18px !important; }
+  .bannertet-bottm{ font-size: 20px !important; }
+  .getstart-btn {
+    padding: 0px 10px 0 10px;
+    margin: 0px;
+  }
+  /* header n banner end*/
+  /*what we do start*/
+  /* .whtwedo {
+    margin: 120px 0 0 0;
+     padding-bottom: 50px; 
+  } */
+  .whatwe-do{
+    font-size: 20px !important;
+  }
+  .campagin-name {
+    font-size: 16px !important;
+  }
+  .bbscb {
+    font-size: 24px !important;
+  }
+  .bbscl {
+    font-size: 24px !important;
+  }
+  .wemake-text{
+    font-size: 24px !important;
+  }
+  .wemake-inner-text{
+    font-size: 16px !important;
+  }
+  .border {
+    padding: 6px !important;
+  }
+  .contact-text{
+    font-size: 20px !important;
+  }
+  .whtwedo p{width: 100%;}
+  /*what we do end*/
+  /*slick slider*/
+  .item-home {
+    padding: 10px !important;
+  }
+  .item-home {
+    height: 250px !important;
+  }
+  .slider-text{font-size: 12px !important;
+  }
+  .item .caption {
+    font-size: 24px;
+  }
+  /*what we do*/
+  .wemake-outdoor {
+    text-align: center;
+    width: 100%;
+    margin-bottom:40px !important;
+  }
+  .outdoor-text{
+    font-size: 24px !important;
+  }
+  .outdoor-inner{
+    font-size: 40px !important;
+  }
+  .keepin-main{
+    font-size: 24px !important;
+  }
+  /*keep in tounch*/
+  .conts {
+    background:none;
+    padding-top: 30px;
+  }
+  .keepin-text{
+    text-align: center;
+  }
+  .confor {
+    width: 100%;
+  }
+  .out-media .part-three {
+    border-top: 1px solid #fff;
+  }
+  
+  .part-four {
+    padding: 30px !important;
+  }
+  .contsr{
+    padding:0px !important;
+  }
+  .inputDiv .search{
+    width: 89%;
+    height: 0px;
+  }
+  .inputDiv {
+    padding: 0px;
+  }
+  /* .outdoorwidth {
+  width: 100% !important;
+  } */
+  .sidenav-width{
+  width: 350px !important;
+  }
+  .rquest-width {
+    width: 85%;
+  }
+  .never-miss {
+    margin-top: 0px;
+    font-size: 22px !important;
+  }
+  .expose-brand{
+    font-size: 24px !important;
+  }
+  .rquest-text{
+    font-size: 20px !important;
+  }
+}
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+
+  .logo {
+    margin: 12px 0 0 0 !important;
+  }.outdoorwidth {
+    width: 100% !important;
+  }
+  /*  */
+  .logo-img{
+    width:125px;
+    margin: 4px 0 0 0;
+  }
+  .main-slider {
+    margin-top: 0;
+  }
+  .banner{
+    width:auto;
+    max-width: auto !important;
+  }
+  .toolbar-btn{
+    margin: 0px;
+  }
+  .browse-btn{font-size: 14px !important}
+  .bannertet-top{font-size: 20px !important; }
+  .bannertet-bottm{ font-size: 28px !important; }
+  .getstart-btn {
+    padding: 0px 15px 0 15px;
+    margin: 0px;
+  }
+  /* header n banner end*/
+  /*what we do start*/
+  .whtwedo {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+  .bbscb {
+    font-size: 24px !important;
+  }
+  .bbscl {
+    font-size: 24px !important;
+  }
+  .bbscont .newbbsub {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .wemake-inner-text{
+    font-size: 16px !important;
+  }
+  .border {
+    padding: 6px;
+  }
+  .contact-text{
+    font-size: 20px !important;
+  }
+  .outdoor-text{
+    font-size: 26px !important;
+  }
+  .whatwetext{
+    font-size: 16px !important;
+  }
+  .keepin-main{
+    font-size: 28px !important;
+  }
+  /* .campagin-name {
+    font-size: 16px !important;
+  } */
+  .whatwe-do{
+    font-size: 22px !important; 
+  }
+  .whtwedo p{width: 100%;}
+  /*what we do end*/
+  /*slick slider*/
+  .item-home {
+    padding: 10px !important;
+  }
+  .item-home {
+    height: 250px !important;
+  }
+  .slider-text{font-size: 12px !important;
+  }
+  .item .caption {
+    font-size: 24px;}
+  /*what we do*/
+  .wemake-outdoor {
+    text-align: center;
+    width: 100%;
+  }
+  /*keep in tounch*/
+  .conts {
+    background:none;
+    padding-top: 30px;
+  }
+  .keepin-text{
+    text-align: center;
+  }
+  .confor {
+    width: 100%;
+  }
+  .out-media .part-three {
+    border-top: 1px solid #fff;
+  }
+  .part-four {
+    padding: 30px !important;
+  }
+  .inputDiv .search{
+    width: 90%;
+    height: 0px;
+    margin: 0px 0 0px 0;
+  }
+  .inputDiv {
+    padding: 10px;
+  }
+  .sidenav-width{
+  width: 350px !important;
+  }
+  .never-miss{
+    font-size: 30px !important;
+  }
+  .rquest-width{
+    width:90%;
+  }
+  /*.banner{
+         min-height: 260px !important;
+
+  }
+  #homeCarousel{
+             height: 260px !important;
+  }*/
+}
 @media screen and (max-width: 599px) {
   .logo {
   margin-left: 0px;
@@ -1018,59 +1365,9 @@ background: #e99d11;
     width: calc(100% - 0px);
     min-width: calc(100% - 0px);
      max-width: calc(100% - 0px); 
-}
-}
-
-/*reset passwordpage*/
-.setting-page{
-    background-image: url('/assets/images/banner-setting.png');
-    background-position: center center;
-    background-size: cover;
-}
-.top-section{
-  position: absolute;
-  top: 0%;
-  z-index: 9;
-  background: #ccc;
-  width: 100%;
-  height: 35px;
-}
-.topbtn-one{
-  margin: 0;
-  padding: 0;
-}
-.topbtn-two{
-  margin: 0 5px 0 0px;
-  padding: 0;
-}
-.bottom-mobilebtn{
-  top:auto;
-  z-index:1;
-  position: fixed;
-  bottom:0px;
-  width:100%;
-  background:#f2f2f2;
-   height: 50px; 
-}
-.top-toolbar{
-    background: #7b7878;
-    color: #fff;
-}
-.filters-text{
-  margin-top: 10px;
-}
-.formats-bottom-btn{
-  position: absolute;
-  bottom: 1px;
-}
-.shortlist-mobile{
-  bottom: 2px !important;
-}
-
-.red-one{
-  display: hide;
-}
-
-.blue-one{
-  display: show;
+  }
+  .suggest-inner{
+    width:100%
+  }
+    
 }

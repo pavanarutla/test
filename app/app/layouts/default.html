@@ -3,22 +3,22 @@
 <div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
   <md-toolbar class="md-menu-toolbar header">
     <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
+      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
-      <!-- <md-button aria-label="locations" href="#/" md-no-ink class="logo">
-         <img ng-src="assets/images/product/logo.png" width="100%" height="100%" > 
+       <md-button aria-label="locations" href="#/" md-no-ink class="logo" >
+         <img ng-src="assets/images/product/billboards.png"  class="logo-img"> 
         
-      </md-button> -->
-        <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
+      </md-button> 
+        <!-- <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
           <img ng-src="assets/images/menu/orgnl.png" width="160" >
-        </md-button>
-      <span flex></span>
+        </md-button> -->
+      <span flex class=""></span>
       <md-menu-bar class="main-menu">
-        <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm>what we do</md-button>
-        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm>formats</md-button>
-        <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm>why outdoor</md-button>
-        <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm>contact</md-button>
+        <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">what we do</md-button>
+        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">formats</md-button>
+        <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">why outdoor</md-button>
+        <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> --> 
         <!-- browse-->
         <md-button hide-xs aria-label="location" class="browse-btn" ng-href="#/location" ng-show="isAuthenticated && !footerhide">
@@ -26,7 +26,7 @@
             Browse BillBoards</a>
         </md-button>
         <!--sugg -->
-        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest-campaign">
           suggest me
         </md-button>
          <!--search button -->
@@ -45,7 +45,7 @@
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
+              <md-button ng-href="#/profile" ng-if="">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button aria-label="campagins" ng-href="#/campaigns">Campaigns</md-button>
@@ -105,14 +105,19 @@
           <md-tooltip>Close Side Panel</md-tooltip>
           <md-icon class="md-default-theme">X</md-icon>
         </md-button>-->
-
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-content layout-padding="">
-      Notifications Panel
+      <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+          <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
+          <p>{{ notif.message }}</p>
+        </a>
+      </div>
     </md-content>
   </md-sidenav>
 
@@ -124,48 +129,53 @@
 
   <!-- Footer Section-->
   <footer>
-    <div  hide-xs show-gt-xs layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
-      <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
-        <md-button class="md-icon-button fabicon" aria-label="facebook">
-          <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
+    <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
+      <div flex="40" flex-md="50" flex-sm="100" flex-xs="100"  flex-offset-lg="10" layout-align-sm="center center" layout-sm="row" class="fmson">
+        
+        <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="google plus">
-          <md-icon md-svg-src="assets/images/icons/google plus.svg"></md-icon>
+        <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="skype">
+        <!-- <md-button class="md-icon-button  fabicon" aria-label="skype">
           <md-icon md-svg-src="assets/images/icons/skype.svg"></md-icon>
-        </md-button>
+        </md-button> -->
 
-        <md-button class="md-icon-button  fabicon" aria-label="linkedin">
+        <md-button class="md-icon-button  fabicon" aria-label="linkedin" href="https://www.linkedin.com/company/13259222/" target="_blank">
           <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
         </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+        <!-- <md-button class="md-icon-button  fabicon" aria-label="vimeo">
           <md-icon md-svg-src="assets/images/icons/vimeo.svg"></md-icon>
         </md-button>
+
         <md-button class="md-icon-button  fabicon" aria-label="vimeo">
           <md-icon md-svg-src="assets/images/icons/rss.svg"></md-icon>
         </md-button>
-        <md-button class="md-icon-button fabicon" aria-label="tumblr">
+
+         <md-button class="md-icon-button fabicon" aria-label="tumblr">
           <md-icon md-svg-src="assets/images/icons/tumblr.svg"></md-icon>
+        </md-button>  -->
+
+        <md-button class="md-icon-button  fabicon" aria-label="twitter" href="https://twitter.com/billboardsindia" target="_blank">
+          <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon>
         </md-button>
-        <md-button class="md-icon-button  fabicon" aria-label="twitter">
-          <md-icon md-svg-src="assets/images/icons/twitter.svg"></md-icon>
-        </md-button>
+
       </div>
-      <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-align="end center" layout-xs="column"
+      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="end center" layout-xs="column"
         layout="column">
         <p class="md-body-2 text">BBI Advertising pvt Ltd @Copyrights 2017. All rights reserved.</p>
       </div>
 
     </div>
-    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)">
+     <md-button hide-xs class="goToTop md-fab md-mini bottom-btn goto-top" style="display:none;background-color:rgb(198, 40, 40)">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
-    </md-button>
+    </md-button> 
   
-    <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
+    <!-- <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
       <div style="margin:0 0 0 10px">
         <a ng-click="Home()" class="" href="#/location">
         <span ng-hide="isactive"><img src="assets/mobile-icons/home.png" alt="home" /></span>
@@ -197,7 +207,7 @@
         </a>
       </div>
   
-    </div>
+    </div> -->
   </footer>
 
  

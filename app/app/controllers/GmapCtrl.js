@@ -21,7 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
-
+      $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
         var area = $scope.selectedArea;
@@ -75,6 +75,7 @@ app.controller('GmapCtrl',
       });
 
       $scope.product = {};
+
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
@@ -142,6 +143,8 @@ app.controller('GmapCtrl',
 
       // range end
 
+   
+
       // clender
       $scope.opened = {
         start: false,
@@ -205,7 +208,6 @@ app.controller('GmapCtrl',
       };
 
       $scope.showProductImagePopup = function (ev, img_src) {
-        console.log(img_src);
         $mdDialog.show({
           locals:{ src: img_src },
           templateUrl: 'views/image-popup-large.html',
@@ -396,7 +398,22 @@ app.controller('GmapCtrl',
           }
         });
       };
-
+      ////////////////////////////////////////////////////////////////////////
+      // tablet filters filtersMap
+      
+      $scope.toggleViewAllFilter = function() {
+        $mdSidenav('filtersMobile').toggle();
+      };
+      $scope.mapFilter = function() {
+        $mdSidenav('filtersMap').toggle();
+      };
+      $scope.shortListed = function() {
+        $mdSidenav('shortlistedList').toggle();
+      };
+      $scope.savedCampagin = function() {
+        $mdSidenav('savedCamapgin').toggle();
+      };
+      ////////////////////////////////////////////////////////////////////
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};
       $scope.suggestMeRequestSent = false;
@@ -424,28 +441,7 @@ app.controller('GmapCtrl',
   //     return false;
   //  }
 
-      $scope.sendSuggestionRequest = function (ev) {
-        $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        // console.log($scope.suggestionRequest);
-        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-          $scope.suggestionRequest = {};
-          if (result.status == 1) {
-            $scope.suggestMeRequestSent = true;
-          }
-          $mdDialog.show(
-            $mdDialog.alert()
-              .parent(angular.element(document.querySelector('body')))
-              .clickOutsideToClose(true)
-              .title('We will get back to you!!!!')
-              .textContent(result.message)
-              .ariaLabel('Alert Dialog Demo')
-              .ok('Got it!')
-              .targetEvent(ev)
-          );
-        });
-      };
-
-      function selectMarker(marker) {
+       function selectMarker(marker) {
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -993,7 +989,7 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){
+      $scope.selectedAreaChanged = function(area){        
         $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
@@ -1001,6 +997,26 @@ app.controller('GmapCtrl',
           bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
           $scope.mapObj.fitBounds(bounds);
         }
+      }
+
+      $scope.requestProposalForCampaign = function(campaignId, ev){
+        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+          if (result.status == 1) {
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title('We will get back to you!!!!')
+                .textContent(result.message)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
       }
     }
   ]

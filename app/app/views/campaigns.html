@@ -16,10 +16,10 @@
 							<div flex="15">Campaign Name</div>
 							<div flex="15">Client Contact</div>
 							<div flex="15">Start Date</div>
-							<div flex="15">EndDate</div>
+							<div flex="15">End Date</div>
 							<div flex="10">Status</div>
 							<div flex="10">Price</div>
-							<div flex="10">products</div>
+							<div flex="10">Products</div>
 							<div flex="10">Actions</div>
 						</md-list-item>
 					</div>
@@ -44,10 +44,10 @@
 										</md-button>
 										<md-menu-content>
 											<md-menu-item>
-												<md-button ng-href="#">Launch</md-button>
+												<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-href="#/edit-campaign/{{pCampaign.id}}">Edit</md-button>
+												<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
 											</md-menu-item>
 											<md-menu-item>
 												<md-button>Delete</md-button>
@@ -164,13 +164,13 @@
 									</md-button>
 									<md-menu-content>
 										<md-menu-item>
-											<md-button ng-href="#">Launch</md-button>
+											<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
 										</md-menu-item>
 										<md-menu-item>
-											<md-button ng-href="#/edit-campaign/{{pCampaign.id}}">Edit</md-button>
+											<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
 										</md-menu-item>
 										<md-menu-item>
-											<md-button>Delete</md-button>
+											<md-button ng-disabled="pCampaign.status > 3" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
 										</md-menu-item>
 									</md-menu-content>
 								</md-menu>

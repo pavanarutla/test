@@ -33,10 +33,14 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 			$mdDialog.hide();
 		});
 	}
+
+	$scope.close = function(){
+		$mdDialog.hide();		
+	}
 	
 	///Agency Sign In functionolity
 
-
+	$scope.userAgencyHeader = true;
 
 	/// Register Dailog start here
 
@@ -52,6 +56,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$scope.userForm = false;
 		$scope.forgotPasswordpage = true;
 		$scope.agencyForm = false;
+		$scope.userAgencyHeader = false;
 	}
 	//form
 	$scope.currentNavItem = 'users';
@@ -84,5 +89,6 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 
 	$scope.close = function () {
 		$mdDialog.hide();
+		$state.reload();
 	}
 })

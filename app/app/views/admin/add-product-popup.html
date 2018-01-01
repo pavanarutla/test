@@ -9,6 +9,15 @@
 					<h3>Enter Product Details</h3>
 				</div>
 			</div>
+			<div layout="column" layout-align="center center">
+				<!-- <ul>
+					<li ng-repeat="(key, errors) in addProductForm.$error track by $index"> <strong>{{ key }}</strong> errors
+						<ul>
+							<li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+						</ul>
+					</li>
+				</ul> -->
+			</div>
 			<form name="addProductForm" novalidate="novalidate">
 				<input type="hidden" ng-model="product.id" />
 				<div layout="row" layout-xs="column" layout-padding>
@@ -99,7 +108,7 @@
 					</div>
 					<div layout="column" flex="50">
 						<md-input-container class="md-block margin-input">
-							<label>Impressions</label>
+							<label>No. of Views</label>
 							<input ng-model="product.impressions" type="text" name="impressions" required="required" />
 							<div ng-messages="addProductForm.impressions.$error">
 								<div ng-message="required">Impression is required.</div>

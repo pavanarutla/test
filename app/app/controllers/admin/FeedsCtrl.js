@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -9,6 +9,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
       ProductService.getProductForPage($scope.pageNo).then(function(result){
         if(localStorage.campaignForSuggestion){
           var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+          $scope.campaignStartDate = campaignForSuggestion.start_date;
+          $scope.campaignEndDate = campaignForSuggestion.end_date;
+          $scope.campaignEstBudget = campaignForSuggestion.est_budget;
+          $scope.campaignActBudget = campaignForSuggestion.act_budget;
           if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
             _.map(result, function(p){
               if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
@@ -29,9 +33,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     */
     AdminCampaignService.getAllCampaignRequests().then(function(result){
       $scope.requestList = result;
-      // $scope.groupedRequests = _.groupBy(requestList, function(request){
-      //   return request.status;
-      // });
     });
     /*
     ======== Campaign requests ends =======
@@ -48,28 +49,34 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
       })
     };
 
-    $scope.closeCampaignRequestDetails = function(){
-      $mdDialog.hide();
-    }
-  
     /*
     ======== Campaign Suggestions(planned) ========
     */
-
-    // saves the campaign details in a service so it can be accessed on suggest-product page.
-    // different from sugggestProductForCampaign (no 's', and a parameter 'suggestedProduct')
-    // as it's used for redirecting the user to suggest-product page with campaign details saved,
-    // while suggestProductForCampaign actually adds a product in the campaign
-
-    // $scope.alreadyAdded = function(productId){
-    //   console.log(count++);
-    //   console.log($scope.productList.length);
-    //   // return _.find(campaign.products, {id: productId}) !== undefined;
-    // }
-
-    $scope.suggestProductsForCampaign = function(){
-      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
-      $location.path('/admin/suggest-products');
+    $scope.createCampaignToSuggest = function(emptyCampaign){
+      $mdDialog.show({
+        locals: {emptyCampaign: emptyCampaign, campaignPartial: $scope.selectedRequestDetails},
+        templateUrl: 'views/admin/add-campaign.html',
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen,
+        controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, campaignPartial, toastr){
+          emptyCampaign = _.extend(emptyCampaign, campaignPartial);
+          $scope.campaign = emptyCampaign;
+          $scope.saveCampaign = function(){
+            AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
+              if(result.status == 1){
+                toastr.success(result.message);
+                $mdDialog.hide();
+              }
+              else{
+                toastr.error(result.message);
+              }
+            });
+          }
+          $scope.close = function(){
+            $mdDialog.hide();
+          }
+        }
+      });
     }
 
     // adds a product in the campaign
@@ -91,6 +98,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
           if(result.status == 1){
             AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
               localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
+              $scope.campaignActBudget = updatedCampaignData.act_budget;
               _.map($scope.productList, function(product){
                 if(product.id == suggestedProduct.id){
                   product.alreadyAdded = true;             
@@ -113,6 +121,8 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         if(result.status == 1){
           AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
             localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
+            // console.log(JSON.stringify(updatedCampaignData));
+            $scope.campaignActBudget = updatedCampaignData.act_budget;
           });
           _.map($scope.productList, function(product){
             if(product.id == productId){
@@ -121,19 +131,44 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
             return product;
           });          
         }
+        else{
+          toastr.error(result.message);
+        }
       });
     }
-
-    // AdminCampaignService.getPlannedCampaigns().then(function(result){
-    //   $scope.campaignProposalList = result;
-    // });
     /*
     ======== Campaign Suggestions(planned) ends ========
+    */
+
+    /*
+    ======= Campaign Proposals =======
+    */
+    $scope.viewAndLaunchCampaign = function(campaignId){
+      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/admin/campaign-proposal-summary/' + campaignId);
+    }
+    /*
+    ======= Campaign Proposals Ends =======
+    */
+
+    /*
+    ======= View and Launch Campaign =======
+    */
+    $scope.prepareQuoteForCampaign = function(campaignId){
+      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/admin/campaign-proposal-summary/' + campaignId);
+    }
+    /*
+    ======= View and Launch Campaign ands =======
     */
 
     $scope.loadMore = function () {
       $scope.limit = $scope.items.length
     }
+    /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
   });
   
