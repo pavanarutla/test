@@ -1,21 +1,8 @@
-<!-- <style>
-    .png-icon {
-        margin: 5px auto auto;
-        padding: 0;
-        display: inline-block;
-        background-repeat: no-repeat no-repeat;
-        pointer-events: none;
-    }
-    #similar {
-        float: right;
-        margin-top: 20px;
-        margin-right: 50px;
-    }
-</style> -->
-<link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/admin-main.css" /> -->
+<link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" /> 
 
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-    <div layout="row" flex >
+<div layout="row" flex >
     <md-sidenav class="md-sidenav-left" md-component-id="ownerLeft" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="4" style="width:280px">
         <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;">
             <img class="png-icon" src="assets/images/billboards.png">
@@ -25,7 +12,7 @@
             <div>
                 <div style="width: 100% !important;">
                     <md-list>
-                        <div >
+                        <!-- <div >
                             <md-button style="min-width: 0px !important; min-height: 0px !important; margin: 0px !important;">
                                 <img class="png-icon" src="assets/images/person.png" style="width: 80px;height: 75px;">
                             </md-button>
@@ -37,35 +24,34 @@
                                 </div>
                             </div>
                         </div>
-                        <md-divider></md-divider>
+                        <md-divider></md-divider> -->
                         
                         <md-menu-item>
-                            <md-button ng-href="#/home" ng-click="changeName()">
+                            <md-button ng-href="#/home" ng-click="changeName()" class="home-btn">
                                 <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>Home
                             </md-button>
                         </md-menu-item>
-                        
-                        <md-menu-item>
+                        <!-- <md-menu-item>
                             <md-button ng-href="#/profile" ng-click="changeProfile()">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE8A6;</md-icon>
                                 Profile
                             </md-button>
-                        </md-menu-item>
+                        </md-menu-item> -->
                         <md-menu-item>
-                            <md-button ng-href="#/campaign" ng-click="changeCampains()">
+                            <md-button ng-href="#/owner/ownerCampaign">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
                                 Campains
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button ng-href="#/requesthoarding" ng-click="changeRequest()" >
+                            <md-button ng-href="#/owner/requestHoarding" ng-click="changeRequest()" >
                                 <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
                                 Requested Hoardings
                             </md-button>
                         </md-menu-item>
                         
                         <md-menu-item>
-                            <md-button ng-href="#/hoardingslist" ng-click="changeHoardingList()">
+                            <md-button ng-href="#/owner/hoardinglist" ng-click="changeHoardingList()">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
                                 Hoardings List
                             </md-button>
@@ -78,7 +64,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button ng-href="#" ng-click="">
+                            <md-button ng-href="#/owner/dashboard" ng-click="">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
                                 Feeds
                             </md-button>
@@ -112,16 +98,16 @@
             </div>
         </md-content>
     </md-sidenav>
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ownerRight">
       <md-toolbar layout="row">
-        <div class="md-toolbar-tools">
+        <div class="md-toolbar-tools" style="background:#980000 !important">
           <h2>
             <span>Notifications</span>
           </h2>
           <span flex></span>
-          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
             <md-tooltip>Close Side Panel</md-tooltip>
-            <md-icon class="md-default-theme">X</md-icon>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
           </md-button>
         </div>
       </md-toolbar> 
@@ -131,20 +117,39 @@
     </md-sidenav>
 
     <div layout="column" flex>
-      <md-toolbar style="">
+      <md-toolbar>
         <div class="md-toolbar-tools">
           <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="ownerSidenav()">
-              <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
+              <md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
           </md-button>
          <!-- <md-button aria-label="logo" class="md-icon">
             <img ng-src="images/logo.png" alt="logo" class="mrgn">
           </md-button> -->
           <h2>{{firstname}}</h2>
           <span flex></span>
-          <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()">
+          <md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
             <md-icon md-svg-icon="assets/images/notification_24px.svg" ></md-icon>
           </md-button>
-         
+            <md-menu  class="profile-menu mrng-top">
+                <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)">
+                    <img ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+                </md-button>
+                <md-menu-content width="3" style="z-index:99">
+                    <md-menu-item>
+                    <md-button ng-href="#/owner/profile">Srikanth B</md-button>
+                    </md-menu-item>
+                    <!-- <md-menu-item>
+                    <md-button aria-label="campagins" ng-href="#/campaign">Campaigns</md-button>
+                    </md-menu-item> -->
+                    <md-menu-item>
+                    <md-button ng-href="#/owner/settings">Account</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                    <md-button ng-click="logout()">Sign Out</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+  
         </div>
       </md-toolbar><!--toolbar end -->
       

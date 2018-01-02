@@ -16,7 +16,8 @@ var app = angular.module('bbManager', [
   'ui.grid',
   'ui.grid.edit',
   'ui.grid.pagination',
-  'ngFileSaver'
+  'ngFileSaver',
+  'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -41,7 +42,8 @@ var app = angular.module('bbManager', [
     })
       .state('index.home', {
         url: 'home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/home.html',
+        controller: 'bbMngrCtrl'
       })
       .state('index.formats', {
         url: 'formats',
@@ -259,7 +261,43 @@ var app = angular.module('bbManager', [
       .state('owner.dashboard', {
         url: '/dashboard',
         templateUrl: 'views/owner/dashboard.html',
-        controller: 'DashboardCtrl'
+         controller: 'OwnerFeedsCtrl',
+        
+      })
+      .state('owner.ownerCampaign', {
+        url: '/ownerCampaign',
+        templateUrl: 'views/owner/campaign.html',
+        controller:  'CampaignownerCtrl'
+      })
+      .state('owner.editCampaign', {
+        url: '/editCampaign',
+        templateUrl: 'views/owner/editcampaign.html',
+        controller: 'CampaignownerCtrl'
+      })
+      .state('owner.requestHoarding', {
+        url: '/requestHoarding',
+        templateUrl: 'views/owner/requesthoarding.html',
+        controller: 'CampaignownerCtrl'
+      })
+      .state('owner.suggestproducts', {
+        url: '/suggestproducts',
+        templateUrl: 'views/owner/suggest-products.html',
+        controller: 'OwnerFeedsCtrl'
+      })
+      .state('owner.hoardinglist', {
+        url: '/hoardinglist',
+        templateUrl: 'views/owner/hoardinglist.html',
+        controller: 'OwnerFeedsCtrl'
+      })
+      .state('owner.settings', {
+        url: '/settings',
+        templateUrl: 'views/owner/accountsetting.html',
+        controller: ''
+      })
+      .state('owner.profile', {
+        url: '/profile',
+        templateUrl: 'views/owner/user-profile.html',
+        
       });
 
       $urlRouterProvider.when('/', '/home');

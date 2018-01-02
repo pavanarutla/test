@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
   <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
-  <!-- <link rel="stylesheet" href="assets/css/jk-carousel.min.css" /> -->
+  <link rel="stylesheet" href="assets/css/angular-carousel.css" type="text/css">
   <style>
     .modal-overlay {
       background: #000000;
@@ -39,16 +39,19 @@
       z-index:1505;
 
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <ui-view></ui-view>
   
   <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
     <div class="modal-overlay"></div>
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
+
+</head>
+<body>
+
+
+<ui-view></ui-view>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -60,6 +63,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
   <script src="assets/js/ng-map.min.js"></script>
+  <script src="assets/js/angular-touch.js"></script>
+  <script src="assets/js/angular-carousel.js"></script>
   <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
   <script src="assets/js/angular-slick.js"></script>
@@ -75,13 +80,16 @@
   <script src="http://ui-grid.info/release/ui-grid.js"></script>
   <script type="text/javascript" src="assets/js/FileSaver.js"></script>
   <script type="text/javascript" src="assets/js/angular-file-saver.bundle.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app-config.js"></script>
   
+
+
 
   <!-- ////////////
     custom js 
   //////////////-->
-  <script type="text/javascript" src="app.js"></script>
-  <script type="text/javascript" src="app-config.js"></script>
+  
 
   <!--hammer -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
@@ -145,6 +153,10 @@
   <!-- Controllers -->
   <script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
   <script type="text/javascript" src="controllers/owner/DashboardCtrl.js"></script>
+  <script type="text/javascript" src="controllers/owner/AdminFeedsCtrl.js"></script>
+  <script type="text/javascript" src="controllers/owner/requestingCtrl.js"></script>
+  <script type="text/javascript" src="controllers/owner/CampaignCtrl.js"></script>
+  <script type="text/javascript" src="controllers/owner/FeedsCtrl.js"></script>
 
 </body>
 

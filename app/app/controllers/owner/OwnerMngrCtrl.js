@@ -11,8 +11,11 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log) {
     //       });
     //   };
     // }
-    $scope.ownerSidenav = function () {
+  $scope.ownerSidenav = function () {
     $mdSidenav('ownerLeft').toggle();
+  };
+   $scope.ownerRightSidenav = function () {
+    $mdSidenav('ownerRight').toggle();
   };
 
 })

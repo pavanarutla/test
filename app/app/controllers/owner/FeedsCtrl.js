@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -135,5 +135,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
       $scope.limit = $scope.items.length
     }
 
+    // shortlist popup
+
+    $scope.shortlistProduct = function() {
+        $mdSidenav('shortlistAndSaveOwnerSidenav').toggle();
+      };
   });
  

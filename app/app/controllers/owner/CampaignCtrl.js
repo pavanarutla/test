@@ -1,5 +1,5 @@
 
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('CampaignownerCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -13,6 +13,13 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
       templateUrl: 'views/updatepaymentDailog.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true
+    })
+  };
+  $scope.addOwnerCampagin = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/owner/addcampaign.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })

@@ -5,6 +5,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
+
+
   // handles traffic layer on map
   $scope.trafficOn = false;
 
@@ -158,6 +160,20 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $location.path('/');
     window.scroll(0, 3810)
   }
+//jk caraosel
+ $scope.dataArray = [
+      {
+        src: 'assets/images/banner1-1920.png'
+      },
+      {
+        src: 'assets/images/bnr.png'
+      },
+      {
+        src: 'assets/images/banner1-1920.png'
+      }
+      
+    ];
+
 
   //scroll to top
   $(window).scroll(function () {
@@ -395,5 +411,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   $scope.close = function(){
     $mdDialog.hide();
   }
+
   
 });
