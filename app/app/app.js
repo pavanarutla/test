@@ -17,6 +17,7 @@ var app = angular.module('bbManager', [
   'ui.grid.edit',
   'ui.grid.pagination',
   'ngFileSaver',
+  'googlechart',
   'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
@@ -262,7 +263,6 @@ var app = angular.module('bbManager', [
         url: '/dashboard',
         templateUrl: 'views/owner/dashboard.html',
          controller: 'OwnerFeedsCtrl',
-        
       })
       .state('owner.ownerCampaign', {
         url: '/ownerCampaign',
@@ -298,6 +298,24 @@ var app = angular.module('bbManager', [
         url: '/profile',
         templateUrl: 'views/owner/user-profile.html',
         
+      })
+      .state('owner.home', {
+        url: '/home',
+        templateUrl: 'views/owner/home.html',
+      })
+      .state('owner.outsourcingagent', {
+        url: '/outsourcingagent',
+        templateUrl: 'views/owner/outsourcingagent.html',
+        controller:'outSourcing'
+      }).state('owner.teamPage', {
+        url: '/teamPage',
+        templateUrl: 'views/owner/team.html',
+        controller:'teamPage'
+      })
+      .state('owner.feedBack', {
+        url: '/feedBack',
+        templateUrl: 'views/owner/feedback.html',
+        controller:'feedback'
       });
 
       $urlRouterProvider.when('/', '/home');
