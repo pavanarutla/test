@@ -21,6 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
+      $scope.markerInfoWindow = null;
       $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -474,6 +475,18 @@ app.controller('GmapCtrl',
         $scope.selectedProduct = marker;
       }
 
+      function showInfoWindow(marker){
+        $scope.markerInfoWindow =  new google.maps.InfoWindow({
+          content: '',
+          map: $scope.mapObj
+        });
+        $scope.markerInfoWindow.open($scope.mapObj, marker);
+      }
+
+      function hideInfoWindow(marker){
+        $scope.markerInfoWindow.close();
+      }
+
       google.maps.event.addListener(selectorMarker, 'click', function (e) {
         $scope.selectedProduct = null;
         selectorMarker.setMap(null);
@@ -532,6 +545,12 @@ app.controller('GmapCtrl',
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
+          google.maps.event.addListener(marker, 'mouseover', function(e){
+            showInfoWindow(marker);
+          });
+          google.maps.event.addListener(marker, 'mouseout', function(e){
+            hideInfoWindow(marker);
+          });
         });
         var mc = {
           gridSize: 50,
@@ -587,6 +606,12 @@ app.controller('GmapCtrl',
               marker.groupSize = markerData.count;
               google.maps.event.addListener(marker, 'spider_click', function (e) {
                 selectSpideredMarker(marker);
+              });
+              google.maps.event.addListener(marker, 'mouseover', function(e){
+                showInfoWindow(marker);
+              });
+              google.maps.event.addListener(marker, 'mouseout', function(e){
+                hideInfoWindow(marker);
               });
               markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
