@@ -476,8 +476,10 @@ app.controller('GmapCtrl',
       }
 
       function showInfoWindow(marker){
+        var htmlContent = '<p><b>Location</b>:&nbsp&nbsp&nbsp' + marker.properties.address + '</p>' + 
+                          '<p><b>No. of Views</b>:&nbsp&nbsp&nbsp' + marker.properties.impressions + '</p>';
         $scope.markerInfoWindow =  new google.maps.InfoWindow({
-          content: '',
+          content: htmlContent,
           map: $scope.mapObj
         });
         $scope.markerInfoWindow.open($scope.mapObj, marker);
