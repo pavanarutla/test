@@ -194,13 +194,25 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   //scroll header color change 
 
   $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 50) {
+    if ($(window).scrollTop() > 200) {
       $(".header").addClass("active");
+      $(".toolbar-btn").addClass("active-one");
+      $(".browse-btn").addClass("active-one");
     } else {
       //remove the background property so it comes transparent again (defined in your css)
       $(".header").removeClass("active");
+      $(".toolbar-btn").removeClass("active-one");
+      $(".browse-btn").removeClass("active-one");
     }
   });
+
+  // $(window).on("scroll", function () {
+  //   if ($(window).scrollTop() > 600) {
+  //     $(".what-we").addClass("active-two");
+  //   } else {
+  //     $(".what-we").removeClass("active-two"); 
+  //   }
+  // });
 
 
   //slider
