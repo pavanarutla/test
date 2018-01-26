@@ -1,4 +1,4 @@
-app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toastr, AdminUserService) {
+app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, toastr, AdminUserService) {
 
   $scope.msg = {};
 
@@ -10,19 +10,24 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
     })
   };
 
+  /*
+  ==== checking if user has owner role ====
+  */
+  $scope.isUserOwner = _.indexOf(_.pluck($auth.getPayload().user.roles, "name"), "owner") != -1;
+  /*
+  ==== checking if user has owner role ends ====
+  */
+
   /* 
   ==== Switching between user and agency pop up form ====
   */
-  $scope.usersFormVisible = true;
   $scope.userChecked = true;
 
   $scope.showUser = function () {
-    $scope.userChecked = true;
-    $scope.usersFormVisible = true;
+    $scope.userChecked = true;    
   }
   $scope.showAgency = function () {
     $scope.userChecked = false;
-    $scope.usersFormVisible = false;
   }
   /* 
   ==== Switching between user and agency pop up form ends ====
@@ -54,7 +59,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
     { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
@@ -133,7 +138,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
         AdminUserService.getUsers().then(function (response) {    
           $scope.gridUsers.data = response;
         });
-        toastr.success('You have successfully submiteed');
+        $mdDialog.hide();
+        toastr.success('User has been created successfully.');
       }
       else{
         toastr.error(result.message);
@@ -145,6 +151,26 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
   */
 
   /* 
+  ======== Activating New User ========
+  */
+  $scope.activateUser = function(userMId){
+    AdminUserService.activateUser(userMId).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getUsers().then(function (response) {    
+          $scope.gridUsers.data = response;
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+  /* 
+  ======== Activating New User ends ========
+  */
+
+  /* 
   ======== Adding New Agency ========
   */
   $scope.addAgency = function () {
@@ -153,7 +179,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, toas
         AdminUserService.getAgencies().then(function (response) {    
           $scope.gridAgency.data = response;
         });
-        toastr.success('You have successfully submiteed');
+        $mdDialog.hide();
+        toastr.success('Agency has been successfully created.');
       }
       else{
         toastr.error(result.message);

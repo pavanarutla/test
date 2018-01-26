@@ -1,5 +1,5 @@
 'user strict'
-app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, toastr, UserService) {
+app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
@@ -17,7 +17,12 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				localStorage.isAuthenticated = true;
 				localStorage.loggedInUser = JSON.stringify(userData);
 				toastr.success('You have successfully signed in!');
-				$location.path('/location');
+				if($rootScope.postLoginState){
+					$state.go($rootScope.postLoginState, null);
+				}
+				else{
+					$state.go("index.location", null);
+				}
 			}
 			else {
 				toastr.error(res.data.message);
@@ -30,12 +35,12 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	}
 
 	$scope.close = function(){
-		$mdDialog.hide();
+		$mdDialog.hide();		
 	}
 	
 	///Agency Sign In functionolity
 
-
+	$scope.userAgencyHeader = true;
 
 	/// Register Dailog start here
 
@@ -51,6 +56,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$scope.userForm = false;
 		$scope.forgotPasswordpage = true;
 		$scope.agencyForm = false;
+		$scope.userAgencyHeader = false;
 	}
 	//form
 	$scope.currentNavItem = 'users';
@@ -83,5 +89,6 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 
 	$scope.close = function () {
 		$mdDialog.hide();
+		$state.reload();
 	}
 })

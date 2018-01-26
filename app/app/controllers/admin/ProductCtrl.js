@@ -18,7 +18,9 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $mdDialog.show({
       templateUrl: 'views/admin/add-format-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
   
@@ -82,15 +84,15 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         toastr.error(result.data.message);
       }
     }, function (resp) {
-      console.log('Error status: ', resp);
+      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+      // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   };
 
   $scope.editFormat = function(format){
-    console.log(format);
+    // console.log(format);
     $scope.format = format;
     $mdDialog.show({
       templateUrl: 'views/admin/add-format-popup.html',
@@ -173,6 +175,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   $scope.gridProducts.columnDefs = [
     { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
     { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
+    { name: 'company_name', displayName: 'Company', enableCellEdit: false, width: '10%' },
     { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
     { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
     { name: 'area_name', displayName: 'Area', width: '20%' },
@@ -205,14 +208,12 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   function getProductList(){
     ProductService.getProductList().then(function(result){
       $scope.gridProducts.data = result;
-      console.log(result,"productList1");
     });
   }
 
   $scope.product = {};
   $scope.files = {};
   $scope.addProduct = function () {
-    console.log($scope.files, $scope.product);
     Upload.upload({
       url: config.apiPath + '/product',
       data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
@@ -227,7 +228,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         toastr.error(result.data.message);
       }
     }, function (resp) {
-      console.log('Error status: ', resp);
+      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);

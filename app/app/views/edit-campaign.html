@@ -98,7 +98,7 @@
 							</md-list-item>
 							<md-list-item>
 								<div>
-									<md-button class="md-grid-item-content">
+									<md-button class="md-grid-item-content" ng-href="#/location">
 										<span>
 											<md-icon md-svg-icon="assets/images/icons/add.svg"></md-icon>
 										</span>
@@ -129,7 +129,7 @@
 						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c1.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-sm="85">
 									<div class="md-body-1">{{product.siteNo}}</div>
@@ -157,7 +157,7 @@
 								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
 									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
 										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
+											<md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
 										</div>
 									</div>
 									<div flex-xs="80" flex-gt-xs="85">
@@ -167,7 +167,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{product.area_name}}</div>
@@ -175,7 +175,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{product.panelSize}}</div>
@@ -183,7 +183,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1" ng-show="product.lighting == 1">Yes</div>
@@ -192,7 +192,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{product.booked_from_date}}</div>
@@ -200,7 +200,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{product.booked_to_date}}</div>
@@ -208,7 +208,7 @@
 							</div>
 							<!-- <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-md show-xs show-sm>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">From {{product.booked_from_date}} To {{product.booked_to_date}}</div>
@@ -216,7 +216,7 @@
 							</div> -->
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{product.cost}}</div>
@@ -228,12 +228,12 @@
 							<div flex="10" hide-xs hide-sm>
 								<div layout="row">
 									<md-button class="md-icon-button">
-										<md-icon>
+										<md-icon ng-click="ProductImageView($event, serverUrl+product.image)">
 											<i class="material-icons">remove_red_eye</i>
 										</md-icon>
 									</md-button>
 									<md-button class="md-icon-button">
-										<md-icon>
+										<md-icon ng-click="deleteProducts(item)">
 											<i class="material-icons">delete</i>
 										</md-icon>
 									</md-button>
@@ -390,7 +390,7 @@
 						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c1.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-sm="85">
 									<div class="md-body-1">{{hoarding.id}}</div>
@@ -418,7 +418,7 @@
 								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
 									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
 										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
+											<md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
 										</div>
 									</div>
 									<div flex-xs="80" flex-gt-xs="85">
@@ -428,7 +428,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.area}}</div>
@@ -436,7 +436,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.size}}</div>
@@ -444,7 +444,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.light}}</div>
@@ -452,7 +452,7 @@
 							</div>
 							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.sdate}}</div>
@@ -460,7 +460,7 @@
 							</div>
 							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.edate}}</div>
@@ -468,7 +468,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-md show-xs show-sm>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">From{{hoarding.sdate}}To{{hoarding.edate}}</div>
@@ -476,7 +476,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.price}}</div>
@@ -633,7 +633,7 @@
 						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c1.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-sm="85">
 									<div class="md-body-1">{{hoarding.id}}</div>
@@ -661,7 +661,7 @@
 								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
 									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
 										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
+											<md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
 										</div>
 									</div>
 									<div flex-xs="80" flex-gt-xs="85">
@@ -671,7 +671,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.area}}</div>
@@ -679,7 +679,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.size}}</div>
@@ -687,7 +687,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.light}}</div>
@@ -695,7 +695,7 @@
 							</div>
 							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.sdate}}</div>
@@ -703,7 +703,7 @@
 							</div>
 							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.edate}}</div>
@@ -711,7 +711,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-md show-xs show-sm>
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">From{{hoarding.sdate}}To{{hoarding.edate}}</div>
@@ -719,7 +719,7 @@
 							</div>
 							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
 								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+									<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 								</div>
 								<div flex-xs="80" flex-gt-xs="85">
 									<div class="md-body-1">{{hoarding.price}}</div>

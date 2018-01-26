@@ -51,6 +51,26 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.delete(config.apiPath + '/campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        exportCampaignsPdf: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/export-all-campaigns', { responseType: 'arraybuffer' }).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        requestCampaignProposal: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/request-proposal/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        requestLaunch: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/request-campaign-launch/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        requestChangeInQuote: function(sendObj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/request-quote-change', sendObj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }
