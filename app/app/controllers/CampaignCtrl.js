@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
     'suggestion-requested',  //    0
@@ -298,5 +298,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
       }
     });
   }
+  $scope.ShareShortlistedSidenav = function () {
+    $mdSidenav('shortlistSharingSidenav').toggle();
+  };
+
 
 });
