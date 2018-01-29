@@ -36,6 +36,11 @@ app.service('UserService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/reset-password', resetPwdObj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        changePassword: function(resetPwdObj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/change-password', resetPwdObj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

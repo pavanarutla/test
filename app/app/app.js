@@ -24,16 +24,16 @@ var app = angular.module('bbManager', [
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('red', {
-        'default': '800',
-        'hue-1': '500',
-        'hue-2': '700',
-      })
-      .accentPalette('orange', {
-        'default': '800',
-        'hue-1': '600',
-        'hue-2': '400',
-      });
+    .primaryPalette('red', {
+      'default': '800',
+      'hue-1': '500',
+      'hue-2': '700',
+    })
+    .accentPalette('orange', {
+      'default': '800',
+      'hue-1': '600',
+      'hue-2': '400',
+    });
 
     $stateProvider.state('index', {
       abstract: true,
@@ -89,7 +89,11 @@ var app = angular.module('bbManager', [
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
+<<<<<<< HEAD
     
+=======
+        
+>>>>>>> ae05ade5db97c78a34c179e233b8d89b37c63b76
     // .state('index.shortlist-mobile', {
     //   url: 'shortlist-mobile',
     //   templateUrl: 'views/shortlist-mobile.html'
@@ -135,11 +139,26 @@ var app = angular.module('bbManager', [
       }
     })
     .state('index.reset-password', {
+<<<<<<< HEAD
       url: 'reset_password/{code}',
       templateUrl: 'views/reset-password.html',
       controller: 'UserSettingsCtrl'
     })
 
+=======
+      url: 'reset_password/:code',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
+    // .state('index.reset-password', {
+    //   url: 'reset_password',
+    //   templateUrl: 'views/reset-password.html',
+    //   controller: 'UserSettingsCtrl'
+    // })
+>>>>>>> ae05ade5db97c78a34c179e233b8d89b37c63b76
     .state('admin', {
       abstract: true,
       url: '/admin',
@@ -262,7 +281,7 @@ var app = angular.module('bbManager', [
     .state('owner.dashboard', {
       url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
-       controller: 'OwnerFeedsCtrl',
+      controller: 'OwnerFeedsCtrl',
     })
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
