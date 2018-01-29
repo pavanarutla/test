@@ -89,11 +89,7 @@ var app = angular.module('bbManager', [
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
-<<<<<<< HEAD
     
-=======
-        
->>>>>>> ae05ade5db97c78a34c179e233b8d89b37c63b76
     // .state('index.shortlist-mobile', {
     //   url: 'shortlist-mobile',
     //   templateUrl: 'views/shortlist-mobile.html'
@@ -139,13 +135,6 @@ var app = angular.module('bbManager', [
       }
     })
     .state('index.reset-password', {
-<<<<<<< HEAD
-      url: 'reset_password/{code}',
-      templateUrl: 'views/reset-password.html',
-      controller: 'UserSettingsCtrl'
-    })
-
-=======
       url: 'reset_password/:code',
       templateUrl: 'views/reset-password.html',
       controller: 'UserSettingsCtrl',
@@ -158,7 +147,6 @@ var app = angular.module('bbManager', [
     //   templateUrl: 'views/reset-password.html',
     //   controller: 'UserSettingsCtrl'
     // })
->>>>>>> ae05ade5db97c78a34c179e233b8d89b37c63b76
     .state('admin', {
       abstract: true,
       url: '/admin',
