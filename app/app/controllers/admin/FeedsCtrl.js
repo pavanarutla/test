@@ -171,4 +171,4 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     };
 
   });
-  
+ 

@@ -1008,11 +1008,21 @@
     </ng-map>
     <div layout="column" class="search-part" id="sideNavPart" hide-xs>
       <!-- search html start-->
-      <div layout="row" layout-padding class="search-field">
-        <md-input-container flex class="search-input" style="margin-top:0px">
+      <div layout="row" layout-padding class="">
+        <!-- <md-input-container flex class="search-input" style="margin-top:0px">
           <label>&nbsp;</label>
           <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id" class="search-bg" on-enter="searchBySiteNo()">
-        </md-input-container>
+        </md-input-container> -->
+        <div id="custom-search-input" >
+                <div class="input-group ">
+                    <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </span>
+                </div>
+            </div>
       </div>
       <!-- search html start-->
       <div layout="column" class="map-sidenav" hide-xs hide-sm hide-md>

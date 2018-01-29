@@ -16,7 +16,9 @@ var app = angular.module('bbManager', [
   'ui.grid',
   'ui.grid.edit',
   'ui.grid.pagination',
-  'ngFileSaver'
+  'ngFileSaver',
+  'googlechart',
+  'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -260,7 +262,59 @@ var app = angular.module('bbManager', [
     .state('owner.dashboard', {
       url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
-      controller: 'DashboardCtrl'
+       controller: 'OwnerFeedsCtrl',
+    })
+    .state('owner.ownerCampaign', {
+      url: '/ownerCampaign',
+      templateUrl: 'views/owner/campaign.html',
+      controller:  'CampaignownerCtrl'
+    })
+    .state('owner.editCampaign', {
+      url: '/editCampaign',
+      templateUrl: 'views/owner/editcampaign.html',
+      controller: 'CampaignownerCtrl'
+    })
+    .state('owner.requestHoarding', {
+      url: '/requestHoarding',
+      templateUrl: 'views/owner/requesthoarding.html',
+      controller: 'CampaignownerCtrl'
+    })
+    .state('owner.suggestproducts', {
+      url: '/suggestproducts',
+      templateUrl: 'views/owner/suggest-products.html',
+      controller: 'OwnerFeedsCtrl'
+    })
+    .state('owner.hoardinglist', {
+      url: '/hoardinglist',
+      templateUrl: 'views/owner/hoardinglist.html',
+      controller: 'OwnerFeedsCtrl'
+    })
+    .state('owner.settings', {
+      url: '/settings',
+      templateUrl: 'views/owner/accountsetting.html',
+      controller: ''
+    })
+    .state('owner.profile', {
+      url: '/profile',
+      templateUrl: 'views/owner/user-profile.html',
+    })
+    .state('owner.home', {
+      url: '/home',
+      templateUrl: 'views/owner/home.html',
+    })
+    .state('owner.outsourcingagent', {
+      url: '/outsourcingagent',
+      templateUrl: 'views/owner/outsourcingagent.html',
+      controller:'outSourcing'
+    }).state('owner.teamPage', {
+      url: '/teamPage',
+      templateUrl: 'views/owner/team.html',
+      controller:'teamPage'
+    })
+    .state('owner.feedBack', {
+      url: '/feedBack',
+      templateUrl: 'views/owner/feedback.html',
+      controller:'feedback'
     });
 
     $urlRouterProvider.when('/', '/home');
