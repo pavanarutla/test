@@ -62,10 +62,6 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated" style="color:#fff !important">
           BOOK NOW
         </md-button>
-        
-        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
-          <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
-        </md-button> -->
 
       </md-menu-bar>
     </div>
@@ -93,9 +89,9 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" md-component-id="right">
     <md-toolbar layout="row">
-      <div class="md-toolbar-tools">
+      <div class="md-toolbar-tools" style="background:#788492 !important">
         <h2>
           <span>Notifications</span>
         </h2>
@@ -107,10 +103,36 @@
       </div>
     </md-toolbar>
     <md-content layout-padding="">
-      Notifications Panel
+
+      <md-card  class="ng-scope" style="padding:0px">
+        <md-list-item class="md-2-line" role="listitem" tabindex="-1" href="#">
+          <div class="md-list-item-inner ng-scope">
+            <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
+              <div class="md-list-item-text layout-column" layout="column">
+                <!--<h3>{{orderMessage.user.displayName}}</h3>-->
+                <h3 class="bb-p-cust md-title" style="font-size:24px">Campaign launch</h3>
+                <p style="font-weight:400;color:#980000">Your Campaign has been launched!<p>
+              </div>
+                            <!--<md-divider></md-divider>-->
+          </div>
+          <div class="md-ripple-container" style=""></div></a></md-list-item>
+      </md-card>
+      <md-card  class="ng-scope" style="padding:0px">
+        <md-list-item class="md-2-line" role="listitem" tabindex="-1" href="#">
+          <div class="md-list-item-inner ng-scope">
+            <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
+              <div class="md-list-item-text layout-column" layout="column">
+                <!--<h3>{{orderMessage.user.displayName}}</h3>-->
+                <h3 class="bb-p-cust md-title" style="font-size:24px">Quote for campaign.</h3>
+                <p style="font-weight:400;color:#980000">You have received a quote for your campaign.!<p>
+              </div>
+                            <!--<md-divider></md-divider>-->
+          </div>
+          <div class="md-ripple-container" style=""></div></a></md-list-item>
+      </md-card>
     </md-content>
   </md-sidenav>
-
+ 
   <!-- Content section-->
   <!-- <div ui-view ng-cloak></div> -->
   <ui-view>
@@ -145,9 +167,9 @@
       </div>
 
     </div>
-    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn " style="display:none;">
+    <!-- <md-button hide-xs class="goToTop md-fab md-mini bottom-btn " style="display:none;">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
-    </md-button> 
+    </md-button>  -->
   
     <!-- <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
       <div style="margin:0 0 0 10px">
