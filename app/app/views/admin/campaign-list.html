@@ -1,34 +1,32 @@
 <div layout="column" layout-fill="layout-fill">
     <div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-        <div flex="50">
+        <div flex="100">
           <div class="md-title" style="margin: 10px 0 0 15px;">Campaigns</div>
         </div>
         <div layout-align="center end" layout="column" flex="50">
-            <md-button class="md-raised md-warn" ng-click="openOffscreen()">
-                 Add New Campaign <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
-            </md-button>
+          <md-button class="md-raised md-warn" ng-click="showAddCampaignPopup()">
+            Add New Campaign
+            <span>
+              <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+            </span>
+          </md-button>
         </div>
     </div>
-    <md-tabs  md-dynamic-height >
-      <md-tab label="Proposals">
-           
-            <div ui-grid="gridProposal"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    
-      </md-tab>
+  </div>
+  <md-tabs md-dynamic-height>
+    <md-tab label="Proposals">
+      <div ui-grid="gridPreLaunch" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div>
+    </md-tab>
 
-      <md-tab label="Running">
-       
-        <div ui-grid="gridRunning"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+    <md-tab label="Running">
+      <div ui-grid="gridRunning" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div>
+    </md-tab>
 
-      </md-tab>
-
-      <md-tab label="Closed">
-      
-        
-        <div ui-grid="gridClosed"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-        
-
-      </md-tab>
-    </md-tabs>
-
+    <md-tab label="Closed">
+      <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div>
+    </md-tab>
+  </md-tabs>
 </div>

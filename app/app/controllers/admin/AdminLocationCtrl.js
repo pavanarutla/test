@@ -1,5 +1,5 @@
 app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationService, toastr) {
-  
+
   $scope.countryList = [];
   $scope.stateListForCountry = [];
   $scope.cityListForState = [];
@@ -59,7 +59,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'Country Name', enableCellEdit: false, width: '50%' },
     {
       name: 'Action', field: 'Action', width: '50%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCountry(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editCountry(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCountry(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -88,11 +88,11 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridState.columnDefs = [
-    { name: 'country_name', displayName:'Country', enableCellEdit: false, width: '33%' },
+    { name: 'country_name', displayName: 'Country', enableCellEdit: false, width: '33%' },
     { name: 'name', displayName: 'State ', width: '33%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '33%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteState(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a  style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editState(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteState(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -125,7 +125,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     { name: 'name', displayName: 'City', width: '25%', enableCellEdit: false },
     {
       name: 'Action', field: 'Action', width: '25%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCity(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a style="cursor: pointer;" ng-href="" ng-click="grid.appScope.editCity(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a style="cursor: pointer;" ng-href=""  ng-click="grid.appScope.deleteCity(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];
@@ -153,7 +153,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     enableRowHeaderSelection: false,
   };
   $scope.gridArea.columnDefs = [
-    { name: 'country_name',  displayName: 'Country', enableCellEdit: false, width: '15%' },
+    { name: 'country_name', displayName: 'Country', enableCellEdit: false, width: '15%' },
     { name: 'state_name', displayName: 'State', width: '15%', enableCellEdit: false },
     { name: 'city_name', displayName: 'City', width: '15%', enableCellEdit: false },
     { name: 'name', displayName: 'Area', width: '15%', enableCellEdit: false },
@@ -193,27 +193,30 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
-  $scope.deleteCountry = function(country){
-    AdminLocationService.deleteCountry(country.id).then(function(result){
-      if(result.status == 1){
+  $scope.deleteCountry = function (country) {
+    AdminLocationService.deleteCountry(country.id).then(function (result) {
+      if (result.status == 1) {
         var index = $scope.gridCountry.data.indexOf(country);
         $scope.gridCountry.data.splice(index, 1);
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
   }
+  $scope.editCountry = function (country) {
+    $scope.country = country;
+  }
 
-  $scope.getStateList = function(country){
+  $scope.getStateList = function (country) {
     AdminLocationService.getStates(country).then(function (data) {
       // console.log(data);
       $scope.stateListForCountry = data;
     });
   }
 
-  $scope.getCityList = function(state){
+  $scope.getCityList = function (state) {
     AdminLocationService.getCities(state).then(function (data) {
       $scope.cityListForState = data;
     });
@@ -233,17 +236,24 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
-  $scope.deleteState = function(state){
-    AdminLocationService.deleteState(state.id).then(function(result){
-      if(result.status == 1){
+  $scope.deleteState = function (state) {
+    AdminLocationService.deleteState(state.id).then(function (result) {
+      if (result.status == 1) {
         var index = $scope.gridState.data.indexOf(state);
         $scope.gridState.data.splice(index, 1);
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
+  }
+
+  $scope.editState = function (state) {
+    $scope.state = {};
+    $scope.state.country_id = state.country_id;
+    $scope.state.state_name = state.name;
+    // console.log(state);
   }
 
   $scope.saveCity = function () {
@@ -260,17 +270,26 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
-  $scope.deleteCity = function(city){
-    AdminLocationService.deleteCity(city.id).then(function(result){
-      if(result.status == 1){
+  $scope.deleteCity = function (city) {
+    AdminLocationService.deleteCity(city.id).then(function (result) {
+      if (result.status == 1) {
         var index = $scope.gridCity.data.indexOf(city);
         $scope.gridCity.data.splice(index, 1);
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
+  }
+  $scope.editCity = function (city) {
+    $scope.city = {};
+    $scope.city.country_id = city.country_id;
+    $scope.city.state_id = city.state_id;
+    $scope.city.city_name = city.name;
+    $scope.city.country_id = null;
+    $scope.city.state_id = null;
+    // console.log(city);
   }
 
   $scope.saveArea = function () {
@@ -287,27 +306,36 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     });
   }
 
-  $scope.editArea = function(area){
+  $scope.editArea = function (area) {
     $scope.area = area;
     $scope.area.state_id = null;
     $scope.area.city_id = null;
     $scope.area.area_name = area.name;
   }
 
-  $scope.deleteArea = function(area){
-    AdminLocationService.deleteArea(area.id).then(function(result){
-      if(result.status == 1){
+  $scope.deleteArea = function (area) {
+    AdminLocationService.deleteArea(area.id).then(function (result) {
+      if (result.status == 1) {
         var index = $scope.gridArea.data.indexOf(area);
         $scope.gridArea.data.splice(index, 1);
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
   }
+  $scope.editArea = function (area) {
+    $scope.area = {};
+    $scope.area = area;
+    $scope.area.area_name = area.name;
+    $scope.area.country_id = null;
+    $scope.area.state_id = null;
+    $scope.area.city_id = null;
+    // console.log(area);
+  }
 
-  $scope.resetAreaForm = function(){
+  $scope.resetAreaForm = function () {
     $scope.area = {};
   }
 

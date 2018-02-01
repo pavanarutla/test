@@ -3,7 +3,7 @@
 <div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
   <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
     <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" ng-if="!footerhide" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
+      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
        <md-button aria-label="locations" href="#/" md-no-ink class="logo" >
@@ -25,7 +25,7 @@
             Browse BillBoards</a>
         </md-button>
         <!--sugg -->
-        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-click="toggleSuggestMeSidenav()">
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest-campaign">
           suggest me
         </md-button>
          <!--search button -->
@@ -47,10 +47,10 @@
               <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button aria-label="campagins" ng-href="#/campaign">Campaigns</md-button>
+              <md-button aria-label="campagins" ng-href="#/campaigns">Campaigns</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-href="#">Account</md-button>
+              <md-button ng-href="#/reset_password">Reset Password</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-click="logout()">Sign Out</md-button>
@@ -96,7 +96,6 @@
           <span>Notifications</span>
         </h2>
         <span flex></span>
-
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
             <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
         </md-button>
@@ -104,32 +103,27 @@
     </md-toolbar>
     <md-content layout-padding="">
 
-      <md-card  class="ng-scope" style="padding:0px">
+      <md-card  class="ng-scope" style="padding:0px"  ng-repeat="notif in notifs">
         <md-list-item class="md-2-line" role="listitem" tabindex="-1" href="#">
           <div class="md-list-item-inner ng-scope">
             <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
               <div class="md-list-item-text layout-column" layout="column">
                 <!--<h3>{{orderMessage.user.displayName}}</h3>-->
-                <h3 class="bb-p-cust md-title" style="font-size:24px">Campaign launch</h3>
-                <p style="font-weight:400;color:#980000">Your Campaign has been launched!<p>
+                <h3 class="bb-p-cust md-title" style="font-size:24px">{{ notif.desc }}</h3>
+                <p style="font-weight:400;color:#980000">{{ notif.message }}<p>
               </div>
                             <!--<md-divider></md-divider>-->
           </div>
           <div class="md-ripple-container" style=""></div></a></md-list-item>
       </md-card>
-      <md-card  class="ng-scope" style="padding:0px">
-        <md-list-item class="md-2-line" role="listitem" tabindex="-1" href="#">
-          <div class="md-list-item-inner ng-scope">
-            <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
-              <div class="md-list-item-text layout-column" layout="column">
-                <!--<h3>{{orderMessage.user.displayName}}</h3>-->
-                <h3 class="bb-p-cust md-title" style="font-size:24px">Quote for campaign.</h3>
-                <p style="font-weight:400;color:#980000">You have received a quote for your campaign.!<p>
-              </div>
-                            <!--<md-divider></md-divider>-->
-          </div>
-          <div class="md-ripple-container" style=""></div></a></md-list-item>
-      </md-card>
+     
+      <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+          <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
+          <p>{{ notif.message }}</p>
+        </a>
+      </div> -->
     </md-content>
   </md-sidenav>
  

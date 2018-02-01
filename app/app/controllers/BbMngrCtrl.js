@@ -1,167 +1,166 @@
-app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope,MapService, $auth, toastr, ContactService, CampaignService, UserService, LocationService, config) {
+app.controller('bbMngrCtrl', 
+  function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
+  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
 
-  if(localStorage.isAuthenticated && localStorage.loggedInUser){
-    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
-    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
-  }
+    if(localStorage.isAuthenticated && localStorage.loggedInUser){
+      $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+      $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+    }
 
+    // handles traffic layer on map
+    $scope.trafficOn = false;
 
-
-  // handles traffic layer on map
-  $scope.trafficOn = false;
-
-  $scope.filter = false;
-  $scope.format = false;
-  $scope.shortlist = false;
-  $scope.savedcampaign = false;
-
-  $scope.showfooter = true;
-
-  $scope.browabillboard = false;
-
-  $scope.dashboardData = true;
-  $scope.locationpageonly = false;
-
-  $rootScope.isAuthenticated = $auth.isAuthenticated();
-
-  $scope.filters = function () {
-    $scope.filter = !$scope.filter;
-    $scope.format = false;
-    $scope.shortlist = false;
-    $scope.savedcampaign = false;
-  }
-  $scope.formats = function () {
-    $scope.filter = false;
-    $scope.format = !$scope.format;
-    $scope.shortlist = false;
-    $scope.savedcampaign = false;
-  }
-
-  $scope.shortlistDiv = function () {
-    $scope.filter = false;
-    $scope.format = false;
-    $scope.shortlist = !$scope.shortlist;
-    $scope.savedcampaign = false;
-  }
-
-  $scope.savedcampaignDiv = function () {
     $scope.filter = false;
     $scope.format = false;
     $scope.shortlist = false;
-    $scope.savedcampaign = !$scope.savedcampaign;
-  }
+    $scope.savedcampaign = false;
 
-  
-  // mobile footer version
+    $scope.showfooter = true;
 
-  $scope.isactive = false;
-  $scope.isshortlisted = false;
-  $scope.iscampaigns = false;
-  $scope.isformats = false;
-  $scope.issuggestme= false;
-  $scope.Home = function(){
-    $scope.isactive = !$scope.isactive;
+    $scope.browabillboard = false;
+
+    $scope.dashboardData = true;
+    $scope.locationpageonly = false;
+
+    $rootScope.isAuthenticated = $auth.isAuthenticated();
+
+    $scope.filters = function () {
+      $scope.filter = !$scope.filter;
+      $scope.format = false;
+      $scope.shortlist = false;
+      $scope.savedcampaign = false;
+    }
+    $scope.formats = function () {
+      $scope.filter = false;
+      $scope.format = !$scope.format;
+      $scope.shortlist = false;
+      $scope.savedcampaign = false;
+    }
+
+    $scope.shortlistDiv = function () {
+      $scope.filter = false;
+      $scope.format = false;
+      $scope.shortlist = !$scope.shortlist;
+      $scope.savedcampaign = false;
+    }
+
+    $scope.savedcampaignDiv = function () {
+      $scope.filter = false;
+      $scope.format = false;
+      $scope.shortlist = false;
+      $scope.savedcampaign = !$scope.savedcampaign;
+    }
+
+    
+    // mobile footer version
+
+    $scope.isactive = false;
     $scope.isshortlisted = false;
     $scope.iscampaigns = false;
     $scope.isformats = false;
     $scope.issuggestme= false;
-  }
-  $scope.shortlisted = function(){
-    $scope.isshortlisted = !$scope.isshortlisted;
-    $scope.isactive = false;
-    $scope.iscampaigns = false;
-    $scope.isformats = false;
-    $scope.issuggestme= false;
-  }
-  $scope.campaigns  = function(){
-    $scope.iscampaigns = !$scope.iscampaigns;
-    $scope.isactive = false;
-    $scope.isshortlisted = false;
-    $scope.isformats = false;
-    $scope.issuggestme= false;
-  }
-  $scope.formatmobile = function(){
-    $scope.isformats = !$scope.isformats;
-    $scope.isactive = false;
-    $scope.isshortlisted = false;
-    $scope.iscampaigns = false;
-    $scope.issuggestme= false;
-  }
-  $scope.suggestme = function(){
-    $scope.issuggestme = !$scope.issuggestme;
-    $scope.isactive = false;
-    $scope.isshortlisted = false;
-    $scope.iscampaigns = false;
-    $scope.isformats = false;
-  }
-  // side favicon functionality
-  this.isOpen = false;
-  this.availableModes = ['md-fling', 'md-scale'];
-  this.selectedMode = 'md-fling';
-  this.selectedDirection = 'up';
+    $scope.Home = function(){
+      $scope.isactive = !$scope.isactive;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+    }
+    $scope.shortlisted = function(){
+      $scope.isshortlisted = !$scope.isshortlisted;
+      $scope.isactive = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+    }
+    $scope.campaigns  = function(){
+      $scope.iscampaigns = !$scope.iscampaigns;
+      $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.isformats = false;
+      $scope.issuggestme= false;
+    }
+    $scope.formatmobile = function(){
+      $scope.isformats = !$scope.isformats;
+      $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.issuggestme= false;
+    }
+    $scope.suggestme = function(){
+      $scope.issuggestme = !$scope.issuggestme;
+      $scope.isactive = false;
+      $scope.isshortlisted = false;
+      $scope.iscampaigns = false;
+      $scope.isformats = false;
+    }
+    // side favicon functionality
+    this.isOpen = false;
+    this.availableModes = ['md-fling', 'md-scale'];
+    this.selectedMode = 'md-fling';
+    this.selectedDirection = 'up';
 
-  $scope.toggleTraffic = function(){
-    $scope.trafficOn = !$scope.trafficOn;
-  }
+    $scope.toggleTraffic = function(){
+      $scope.trafficOn = !$scope.trafficOn;
+    }
 
-  $scope.closeSidenav = function () {
-    $mdSidenav('left').toggle();
-  };
+    $scope.closeSidenav = function () {
+      $mdSidenav('left').toggle();
+    };
 
-  $scope.closeSideNavPanel = function () {
-    $mdSidenav('right').toggle();
-  };
+    $scope.closeSideNavPanel = function () {
+      $mdSidenav('right').toggle();
+    };
 
-  $scope.showTabDialog = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/signIn.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-    })
-  };
-  $scope.showVideo = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/video.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true,
-    })
-  };
-  $scope.shareForm = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/shareform.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-    })
-  };
+    $scope.showTabDialog = function (ev) {
+      $mdDialog.show({
+        templateUrl: 'views/signIn.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose:true,
+      })
+    };
+    $scope.showVideo = function (ev) {
+      $mdDialog.show({
+        templateUrl: 'views/video.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose: true,
+      })
+    };
+    $scope.shareForm = function (ev) {
+      $mdDialog.show({
+        templateUrl: 'views/shareform.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose:true,
+      })
+    };
 
- // email verification succes massage
- $scope.emailSucess = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/email-verification-sucess.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-    })
-  };
- 
-  $scope.whatwedo = function () {
-    $location.path('/');
-    window.scroll(0, 680);
+    // email verification succes massage
+    $scope.emailSucess = function (ev) {
+      $mdDialog.show({
+        templateUrl: 'views/email-verification-sucess.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose:true,
+      })
+    };
 
-  }
-  $scope.formate = function () {
-    $location.path('/');
-    window.scroll(0, 1630)
-  }
-  $scope.whyOutdoor = function () {
-    $location.path('/');
-    window.scroll(0, 2570)
-  }
-  $scope.contactus = function () {
-    $location.path('/');
-    window.scroll(0, 3810)
-  }
-//jk caraosel
- $scope.dataArray = [
+    $scope.whatwedo = function () {
+      $location.path('/');
+      window.scroll(0, 740);
+    }
+    $scope.formate = function () {
+      $location.path('/');
+      window.scroll(0, 1630)
+    }
+    $scope.whyOutdoor = function () {
+      $location.path('/');
+      window.scroll(0, 2570)
+    }
+    $scope.contactus = function () {
+      $location.path('/');
+      window.scroll(0, 3810)
+    }
+    //jk caraosel
+    $scope.dataArray = [
       {
         src: 'assets/images/banner1-1920.png'
       },
@@ -171,9 +170,20 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       {
         src: 'assets/images/banner1-1920.png'
       }
-      
     ];
 
+    // $scope.formate = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 1686)
+    // }
+    // $scope.whyOutdoor = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 2440)
+    // }
+    // $scope.contactus = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 3670)
+    // }
 
   //scroll to top
   $(window).scroll(function () {
@@ -190,8 +200,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     return false;
   });
 
-
-  //scroll header color change 
 
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 200) {
@@ -254,6 +262,56 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
   };
 
   $scope.query={};
+  // $scope.sendQuery = function () {
+  //   ContactService.sendQuery($scope.query).then(function (response) {
+  //     if(result.status == 1){
+  //       toastr.success(result.message);
+  //     }
+  //     else{
+  //       toastr.error(result.message);
+  //     }
+  //   });
+  // }
+
+  //slider
+  $scope.slickConfig2Loaded = true;
+
+  $scope.slickConfig2 = {
+    autoplay: false,
+    infinite: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [{
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        infinite: true
+      }
+    }, {
+      breakpoint: 959,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    }, {
+      breakpoint: 320,
+      settings: {
+        slidesToShow: 1,
+        infinite: true
+      }
+    }],
+    method: {}
+  };
+
+  $scope.query={};
   $scope.sendQuery = function () {
     ContactService.sendQuery($scope.query).then(function (response) {
       if(result.status == 1){
@@ -264,7 +322,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       }
     });
     $scope.query={};
-  };
+  }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
   //   $scope.feedBackData = response;
   // });
@@ -287,7 +345,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       clickOutsideToClose: true,
     })
   };
-  
+    
   $scope.callbackRequest = {};
   $scope.requestCallBack = function () {
     ContactService.requestCallBack(callbackRequest).then(function (response) {
@@ -311,118 +369,152 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     });
   }
 
-  /*=================================
-  |  Sidenav Functionality
-  =================================*/
+    /*=================================
+    |  Sidenav Functionality
+    =================================*/
 
-  // shortlist
-  $scope.closeSideViewAll = function () {
-    $mdSidenav('viewAll').toggle();
-  };
+    // shortlist
+    $scope.closeSideViewAll = function () {
+      $mdSidenav('viewAll').toggle();
+    };
 
-  $scope.existingCampaignSidenavVisible = false;
-  //saved campaign
-  $scope.toggleExistingCampaignSidenav = function () {
-    // save to existing campagin
-    $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
-  };
+    $scope.existingCampaignSidenavVisible = false;
+    //saved campaign
+    $scope.toggleExistingCampaignSidenav = function () {
+      // save to existing campagin
+      $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
+    };
 
-  // saved view all side nav
-  $scope.toggleViewAllShortlisted = function () {
-    $mdSidenav('shortlistAndSaveSidenav').toggle();
-  };
-  $scope.toggleShareShortlistedSidenav = function () {
-    $mdSidenav('shortlistSharingSidenav').toggle();
-  };
+    // saved view all side nav
+    $scope.toggleViewAllShortlisted = function () {
+      $mdSidenav('shortlistAndSaveSidenav').toggle();
+    };
+    $scope.toggleShareShortlistedSidenav = function () {
+      $mdSidenav('shortlistSharingSidenav').toggle();
+    };
 
-  // edit list saved campgin
-  $scope.closeSideEditList = function () {
-    $mdSidenav('savedEdit').toggle();
-  };
+    // edit list saved campgin
+    $scope.closeSideEditList = function () {
+      $mdSidenav('savedEdit').toggle();
+    };
 
-  // saved campgin
-  $scope.closeSideSavedCampaign = function () {
-    $mdSidenav('savedSavedCampaign').toggle();
-  };
+    // saved campgin
+    $scope.closeSideSavedCampaign = function () {
+      $mdSidenav('savedSavedCampaign').toggle();
+    };
 
-  // Save Campgin Details
-  $scope.campaignSavedSuccessfully = false;
-  $scope.toggleSaveCampaignSidenav = function () {
-    $mdSidenav('saveCampaignSidenav').toggle();
+    // Save Campgin Details
     $scope.campaignSavedSuccessfully = false;
-  };
+    $scope.toggleSaveCampaignSidenav = function () {
+      $mdSidenav('saveCampaignSidenav').toggle();
+      $scope.campaignSavedSuccessfully = false;
+    };
 
-  // Thanks Message
-  $scope.closeSideThanksSidenav = function () {
-    $mdSidenav('thanksCampaign').toggle();
-  };
-  // Product Details
-  $scope.toggleProductDetailSidenav = function () {
-    $mdSidenav('productDetails').toggle();
-  };
-  // Share Message
-  $scope.toggleShareCampaignSidenav = function (campaign) {
-    $scope.campaignToShare = campaign;
-    $mdSidenav('shareCampaign').toggle();
-  };
-  // Suggest Me dialog 
-  $scope.toggleSuggestMeSidenav = function() {
-    $mdSidenav('suggestMe').toggle();
-  };
-  // Save Campgin Name
-  $scope.toggleEmptyCampaignSidenav = function () {
-    $mdSidenav('emptyCampaignSidenav').toggle();
-  };
-  // View All Campaign List
-  $scope.toggleCampaignDetailSidenav = function () {
-    $mdSidenav('campaignDetailSidenav').toggle();
-  };
-  // Create Campaign sidenav
-  $scope.toggleCreateEmptyCampaignSidenav = function () {
+    // Thanks Message
+    $scope.closeSideThanksSidenav = function () {
+      $mdSidenav('thanksCampaign').toggle();
+    };
+    // Product Details
+    $scope.toggleProductDetailSidenav = function () {
+      $mdSidenav('productDetails').toggle();
+    };
+    // Share Message
+    $scope.toggleShareCampaignSidenav = function (campaign) {
+      $scope.campaignToShare = campaign;
+      $mdSidenav('shareCampaign').toggle();
+    };
+    // Suggest Me dialog 
+    $scope.toggleSuggestMeSidenav = function() {
+      $mdSidenav('suggestMe').toggle();
+    };
+    // Save Campgin Name
+    $scope.toggleEmptyCampaignSidenav = function () {
+      $mdSidenav('emptyCampaignSidenav').toggle();
+    };
+    // View All Campaign List
+    $scope.toggleCampaignDetailSidenav = function () {
+      $mdSidenav('campaignDetailSidenav').toggle();
+    };
+    // Create Campaign sidenav
+    $scope.toggleCreateEmptyCampaignSidenav = function () {
+      $scope.campaignSaved = false;
+      $mdSidenav('createEmptyCampaignSidenav').toggle();
+    };
+
     $scope.campaignSaved = false;
-    $mdSidenav('createEmptyCampaignSidenav').toggle();
-  };
+    $scope.createNewCampaign = function () {
+      // submit form data to api and on success show message
+      // CampaignService.saveCampaign(data).then(function(res){
+      $scope.campaignSaved = true;
+      // });
+    }
 
-  $scope.campaignSaved = false;
-  $scope.createNewCampaign = function () {
-    // submit form data to api and on success show message
-    // CampaignService.saveCampaign(data).then(function(res){
-    $scope.campaignSaved = true;
-    // });
+    /*=================================
+    |  Sidenav Functionality Ends
+    =================================*/
+
+    /*=================================
+    | Area autocomplete
+    ==================================*/
+
+    $scope.autoCompleteArea = function(query) {
+      return LocationService.getAreasWithAutocomplete(query);
+    }
+
+    $scope.selectedAreaChanged = function(area){
+      localStorage.areaFromHome = JSON.stringify(area);
+    }
+
+
+    /*===============================================
+    | Custom Filters associated with Angualr's filter
+    ===============================================*/
+    // $scope.formatDate = function(format){
+    //   return function(date){
+    //     console.log(date);
+    //     console.log(moment(date).format(format));
+    //   }
+    // }
+
+    $rootScope.serverUrl = config.serverUrl;
+
+    $scope.close = function(){
+      $mdDialog.hide();
+    }
+    
+    /*================================
+    === Long polling notifications ===
+    ================================*/
+    var getUserNotifs = function(){
+      NotificationService.getAllNotifications().then(function(result){
+        $scope.readNotifCount = _.chain(result).filter(function(notif){
+          return notif.status == 1;
+        }).value().length;
+        $scope.unreadNotifCount = _.chain(result).filter(function(notif){
+          return notif.status == 0;
+        }).value().length;
+        $scope.notifs = result;
+      });
+    }
+    if($rootScope.isAuthenticated){
+      getUserNotifs();
+      $interval(getUserNotifs, 10000);
+    }
+
+    /*===============================
+    |   Notification navigation 
+    ===============================*/
+    $scope.showCampaignDetails = function(notificationId){
+      NotificationService.updateNotifRead(notificationId).then(function(result){
+        if(result.status == 1){
+          getUserNotifs();
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+      $mdSidenav('right').toggle();
+      $location.path('/campaigns');
+    }
   }
-
-  /*=================================
-  |  Sidenav Functionality Ends
-  =================================*/
-
-  /*=================================
-  | Area autocomplete
-  ==================================*/
-
-  $scope.autoCompleteArea = function(query) {
-    return LocationService.getAreasWithAutocomplete(query);
-  }
-
-  $scope.selectedAreaChanged = function(area){
-    localStorage.areaFromHome = JSON.stringify(area);
-  }
-
-
-  /*===============================================
-  | Custom Filters associated with Angualr's filter
-  ===============================================*/
-  // $scope.formatDate = function(format){
-  //   return function(date){
-  //     console.log(date);
-  //     console.log(moment(date).format(format));
-  //   }
-  // }
-
-  $rootScope.serverUrl = config.serverUrl;
-
-  $scope.close = function(){
-    $mdDialog.hide();
-  }
-
-  
-});
+);

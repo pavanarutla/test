@@ -1,4 +1,29 @@
-<div layout="column" layout-padding="layout-padding">
+<style>
+  .red{
+    color:#f00;
+  }
+</style>
+
+<div layout="column">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
+    <md-toolbar layout="row" style="    background: #48869c;">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Client Request</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
+      
+          <md-icon><i class="material-icons">clear</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar> 
+    <md-content layout-padding>
+      <div class="md-whiteframe-z2 md-body-1">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+    </md-content> 
+  </md-sidenav>
   <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
   <div layout="row">
     <div flex="20">
@@ -183,7 +208,16 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-  <div layout="column" layout-align="center center">
+  <div layout="column" layout-align="center center" style="margin-top:50px;">
     <md-button class="md-raised md-accent" ng-click="loadProductList()">Load More</md-button>
   </div>
+</div>
+<div style="position:fixed;bottom:60px;right:60px;width:200px;height:190px;background:#fff;border-radius:5px;padding-left:10px;box-shadow:0px 0px 4px #888;">
+  <p>From <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b></p>
+  <p>To <b>{{ campaignEndDate | dateify | date:"dd-MM-yyyy" }}</b></p>
+  <p>Expected Budget <b>{{ campaignEstBudget || "N/A" }}</b></p>
+  <p>Actual Budget <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b></p>
+  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="closeInputPanel()" style="margin:0px">
+      <md-icon >!</md-icon>
+  </md-button>
 </div>

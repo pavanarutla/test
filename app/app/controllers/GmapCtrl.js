@@ -21,7 +21,8 @@ app.controller('GmapCtrl',
           }
         }
       };
-
+      $scope.markerInfoWindow = null;
+      $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
         var area = $scope.selectedArea;
@@ -75,6 +76,7 @@ app.controller('GmapCtrl',
       });
 
       $scope.product = {};
+
       MapService.markers().then(function (markers) {
         $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
@@ -207,7 +209,6 @@ app.controller('GmapCtrl',
       };
 
       $scope.showProductImagePopup = function (ev, img_src) {
-        console.log(img_src);
         $mdDialog.show({
           locals:{ src: img_src },
           templateUrl: 'views/image-popup-large.html',
@@ -441,28 +442,7 @@ app.controller('GmapCtrl',
   //     return false;
   //  }
 
-      $scope.sendSuggestionRequest = function (ev) {
-        $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        // console.log($scope.suggestionRequest);
-        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-          $scope.suggestionRequest = {};
-          if (result.status == 1) {
-            $scope.suggestMeRequestSent = true;
-          }
-          $mdDialog.show(
-            $mdDialog.alert()
-              .parent(angular.element(document.querySelector('body')))
-              .clickOutsideToClose(true)
-              .title('We will get back to you!!!!')
-              .textContent(result.message)
-              .ariaLabel('Alert Dialog Demo')
-              .ok('Got it!')
-              .targetEvent(ev)
-          );
-        });
-      };
-
-      function selectMarker(marker) {
+       function selectMarker(marker) {
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -493,6 +473,20 @@ app.controller('GmapCtrl',
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
         $scope.selectedProduct = marker;
+      }
+
+      function showInfoWindow(marker){
+        var htmlContent = '<p><b>Location</b>:&nbsp&nbsp&nbsp' + marker.properties.address + '</p>' + 
+                          '<p><b>No. of Views</b>:&nbsp&nbsp&nbsp' + marker.properties.impressions + '</p>';
+        $scope.markerInfoWindow =  new google.maps.InfoWindow({
+          content: htmlContent,
+          map: $scope.mapObj
+        });
+        $scope.markerInfoWindow.open($scope.mapObj, marker);
+      }
+
+      function hideInfoWindow(marker){
+        $scope.markerInfoWindow.close();
       }
 
       google.maps.event.addListener(selectorMarker, 'click', function (e) {
@@ -553,6 +547,12 @@ app.controller('GmapCtrl',
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
+          google.maps.event.addListener(marker, 'mouseover', function(e){
+            showInfoWindow(marker);
+          });
+          google.maps.event.addListener(marker, 'mouseout', function(e){
+            hideInfoWindow(marker);
+          });
         });
         var mc = {
           gridSize: 50,
@@ -608,6 +608,12 @@ app.controller('GmapCtrl',
               marker.groupSize = markerData.count;
               google.maps.event.addListener(marker, 'spider_click', function (e) {
                 selectSpideredMarker(marker);
+              });
+              google.maps.event.addListener(marker, 'mouseover', function(e){
+                showInfoWindow(marker);
+              });
+              google.maps.event.addListener(marker, 'mouseout', function(e){
+                hideInfoWindow(marker);
               });
               markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
@@ -1018,6 +1024,26 @@ app.controller('GmapCtrl',
           bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
           $scope.mapObj.fitBounds(bounds);
         }
+      }
+
+      $scope.requestProposalForCampaign = function(campaignId, ev){
+        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+          if (result.status == 1) {
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title('We will get back to you!!!!')
+                .textContent(result.message)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
       }
     }
   ]
