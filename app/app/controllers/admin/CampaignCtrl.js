@@ -48,8 +48,10 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   $scope.gridPreLaunch = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 25,
+    rowHeight: 45,
     enableCellEditOnFocus: false,
     multiSelect: false,
+    enableCellEdit: false,
     enableFiltering: true,
     enableSorting: true,
     showColumnMenu: false,
@@ -107,6 +109,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     paginationPageSize: 25,
     enableCellEditOnFocus: false,
     multiSelect: false,
+    enableCellEdit: false,
+    rowHeight: 45,
     enableFiltering: true,
     enableSorting: true,
     showColumnMenu: false,
@@ -151,6 +155,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   $scope.gridClosed = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 25,
+    enableCellEdit: false,
+    rowHeight: 45,
     enableCellEditOnFocus: false,
     multiSelect: false,
     enableFiltering: true,
