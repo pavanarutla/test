@@ -893,7 +893,7 @@
       </form>
     </md-content>
     <md-content layout-align="center center" layout-margin layout="column" style="top:10%" ng-if="suggestMeRequestSent">
-      <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
+      <img src="assets/images/core/congrats-tar.png" width="150px" height="150px" alt="Congrats Star">
       <h3 class="md-display-1">Thanks !</h3>
       <h4 class="md-subhead" style="opacity:.5;text-align:center">We will work on your Campaign needs and get back soon to your registered e-mail address</h4>
     </md-content>
@@ -1412,9 +1412,11 @@
    
     $(document).ready(function(){  
       height = $(window).height();  //getting windows height
-      jQuery('#map-container').css('height', height-64+'px');   //and setting height of carousel
+      $('#map-container').css('height', height-64+'px');   //and setting height of map container
+      $('ng-map').css('height', height-64+'px');   //and setting height of map container
       if($(window).width() < 600){
-        jQuery('#map-container').css('height', height-100+'px');
+        $('#map-container').css('height', height-100+'px');
+        $('ng-map').css('height', height-100+'px');
       }
     });
 </script>  
