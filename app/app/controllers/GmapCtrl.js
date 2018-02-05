@@ -44,6 +44,7 @@ app.controller('GmapCtrl',
       var trafficOn = false;
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
+      $scope.isMapInitialized = false;
 
       $scope.$watch(
         function() { return $mdSidenav('productDetails').isOpen(); },
@@ -1018,7 +1019,7 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){        
+      $scope.selectedAreaChanged = function(area){
         $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
@@ -1047,6 +1048,21 @@ app.controller('GmapCtrl',
           }
         });
       }
+
+      // sets the height of the div containing the map.
+      function setMapContainerHeight(){
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
+        if(windowHeight < 600){
+          document.querySelector('#map-container').style['height'] = windowHeight-100+'px';
+          // $('#map-container').css('height', height-100+'px');
+        }
+        else{
+          document.querySelector('#map-container').style['height'] = windowHeight-64+'px';   //and setting height of map container
+        }
+        $scope.mapContainerHeightSet = true;
+      }
+      setMapContainerHeight();
+
     }
   ]
 );
