@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
     'suggestion-requested',  //    0
@@ -168,8 +168,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
       $scope.plannedCampaigns = _.filter(result, function(c){
         return c.status < 6;
       });
-      $scope.runningCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['running'] });
-      $scope.closedCampaigns = _.where(result, { status: $scope.CAMPAIGN_STATUS['stopped'] });
+      $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
+      $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
     });
   }
   $scope.getUserCampaigns();
@@ -298,5 +298,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $interval, $statePar
       }
     });
   }
+  $scope.ShareShortlistedSidenav = function () {
+    $mdSidenav('shortlistSharingSidenav').toggle();
+  };
+
 
 });

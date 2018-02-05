@@ -395,7 +395,7 @@
         <div>
           <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenav()">SAVE TO CAMPAIGN</md-button>
         </div>
-        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
+        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button></span></div>
       </div>
     </md-content>
   </md-sidenav>
@@ -520,7 +520,7 @@
             <div>
               <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()">SAVE CAMPAIGN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-button ng-click="toggleSuggestMeSidenav()">SUGGEST ME</md-button></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-button ng-href="#/suggest-campaign">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
@@ -673,7 +673,7 @@
             <div>
               <md-button class="md-raised md-warn" layout-fill ng-click="createEmptyCampaign()">CREATE CAMPAIGN</md-button>
             </div>
-            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
+            <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button></span></div>
           </div>
         </form>
       </md-content>
@@ -893,7 +893,7 @@
       </form>
     </md-content>
     <md-content layout-align="center center" layout-margin layout="column" style="top:10%" ng-if="suggestMeRequestSent">
-      <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
+      <img src="assets/images/core/congrats-tar.png" width="150px" height="150px" alt="Congrats Star">
       <h3 class="md-display-1">Thanks !</h3>
       <h4 class="md-subhead" style="opacity:.5;text-align:center">We will work on your Campaign needs and get back soon to your registered e-mail address</h4>
     </md-content>
@@ -1008,11 +1008,21 @@
     </ng-map>
     <div layout="column" class="search-part" id="sideNavPart" hide-xs>
       <!-- search html start-->
-      <div layout="row" layout-padding class="search-field">
-        <md-input-container flex class="search-input" style="margin-top:0px">
+      <div layout="row" layout-padding class="">
+        <!-- <md-input-container flex class="search-input" style="margin-top:0px">
           <label>&nbsp;</label>
           <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id" class="search-bg" on-enter="searchBySiteNo()">
-        </md-input-container>
+        </md-input-container> -->
+        <div id="custom-search-input" >
+                <div class="input-group ">
+                    <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </span>
+                </div>
+            </div>
       </div>
       <!-- search html start-->
       <div layout="column" class="map-sidenav" hide-xs hide-sm hide-md>
@@ -1402,9 +1412,11 @@
    
     $(document).ready(function(){  
       height = $(window).height();  //getting windows height
-      jQuery('#map-container').css('height', height-64+'px');   //and setting height of carousel
+      $('#map-container').css('height', height-64+'px');   //and setting height of map container
+      $('ng-map').css('height', height-64+'px');   //and setting height of map container
       if($(window).width() < 600){
-        jQuery('#map-container').css('height', height-100+'px');
+        $('#map-container').css('height', height-100+'px');
+        $('ng-map').css('height', height-100+'px');
       }
     });
 </script>  
