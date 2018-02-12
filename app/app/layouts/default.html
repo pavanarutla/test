@@ -103,20 +103,20 @@
     </md-toolbar>
     <md-content layout-padding="">
 
-      <md-card  class="ng-scope" style="padding:0px"  ng-repeat="notif in notifs">
-        <md-list-item class="md-2-line" role="listitem" tabindex="-1" href="#">
+      <md-card  class="ng-scope" style="padding:0px"  ng-repeat="notif in notifs" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <md-list-item class="md-2-line" role="listitem" tabindex="-1"ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
           <div class="md-list-item-inner ng-scope">
             <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
               <div class="md-list-item-text layout-column" layout="column">
                 <!--<h3>{{orderMessage.user.displayName}}</h3>-->
-                <h3 class="bb-p-cust md-title" style="font-size:24px">{{ notif.desc }}</h3>
-                <p style="font-weight:400;color:#980000">{{ notif.message }}<p>
+                <h4 class="bb-p-cust md-title" style="font-size:24px">{{ notif.desc }}</h4>
+                <p style="color:#980000">{{ notif.message }}<p>
               </div>
-                            <!--<md-divider></md-divider>-->
+            <!--<md-divider></md-divider>-->
           </div>
           <div class="md-ripple-container" style=""></div></a></md-list-item>
       </md-card>
-     
+
       <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
       ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
         <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
