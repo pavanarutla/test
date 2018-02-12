@@ -59,7 +59,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button ng-click="grid.appScope.deleteUser(row.entity.id)">Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
@@ -148,6 +148,27 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   }
   /* 
   ======== Adding New User ends ========
+  */
+
+  /* 
+  ======== Deleting User ========
+  */
+  $scope.deleteUser = function (userMongoid) {    
+    AdminUserService.deleteUser(userMongoid).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getUsers().then(function (response) {    
+          $scope.gridUsers.data = response;
+        });
+        $mdDialog.hide();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+  /* 
+  ======== Deleting User ends ========
   */
 
   /* 
