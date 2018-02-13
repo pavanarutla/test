@@ -11,6 +11,9 @@
 			<div ng-if="!userProfile.user.profile_pic">
 				<img src="assets/images/product/user_avatar.png" alt="team" style="width:150px;margin: -78px 0 0 0;">
 			</div>
+			<div>
+			<input type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required></input>
+			</div>
 			<div>{{userProfile.user.name}}</div>
 			<div>{{userProfile.user.email}}</div>
 			<div class="md-body-2" ng-if="userProfile.user.phone">

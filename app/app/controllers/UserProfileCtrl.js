@@ -1,7 +1,8 @@
-app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
+app.controller('UserProfileCtrl', function($scope, $stateParams,$window, UserService,Upload,config) {
   
   $scope.getLoggedInUserProfile = function(){
     UserService.getProfile().then(function(result){
+      console.log(result);
       $scope.userProfile = result;
     });
   }
@@ -32,6 +33,21 @@ app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
   $scope.limit= 5;
   $scope.loadMore = function() {
     $scope.limit = $scope.items.length
+  };
+
+  $scope.uploadProfilePic = function () {
+    Upload.upload({
+      url: config.apiPath + '/update-profile-pic',
+      data: { image: $scope.files.image}
+    }).then(function (result) {
+      if(result.data.status == "1"){
+        $window.location.reload();   
+      }
+    }, function (resp) {
+      // console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    });
   };
 
 });
