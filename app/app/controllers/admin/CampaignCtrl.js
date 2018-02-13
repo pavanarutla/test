@@ -46,7 +46,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   */
 
   $scope.gridPreLaunch = {
-    paginationPageSizes: [25, 50, 75],
+    paginationPageSizes: [25],
     paginationPageSize: 25,
     rowHeight: 45,
     enableCellEditOnFocus: false,

@@ -180,6 +180,12 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/campaignsugg.html',
       title: 'Campaign Suggestion'
     })
+    
+    .state('admin.productd', {
+      url: '/productd',
+      templateUrl: 'views/admin/product-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
     .state('admin.campaign', {
       url: '/campaign',
       templateUrl: 'views/admin/campaign-list.html',
