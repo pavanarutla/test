@@ -60,7 +60,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
         fullscreen: $scope.customFullscreen,
         controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, campaignPartial, toastr){
           emptyCampaign = _.extend(emptyCampaign, campaignPartial);
-          // console.log(emptyCampaign);
           $scope.campaign = emptyCampaign;
           $scope.saveCampaign = function(){
             AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
@@ -172,4 +171,4 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     };
 
   });
-  
+ 

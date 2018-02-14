@@ -134,156 +134,240 @@ app.controller('bbMngrCtrl',
       })
     };
 
-  // email verification succes massage
-  $scope.emailSucess = function (ev) {
+    // email verification succes massage
+    $scope.emailSucess = function (ev) {
       $mdDialog.show({
         templateUrl: 'views/email-verification-sucess.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
       })
     };
-  
+
     $scope.whatwedo = function () {
       $location.path('/');
       window.scroll(0, 740);
-
     }
     $scope.formate = function () {
       $location.path('/');
-      window.scroll(0, 1686)
+      window.scroll(0, 1630)
     }
     $scope.whyOutdoor = function () {
       $location.path('/');
-      window.scroll(0, 2440)
+      window.scroll(0, 2570)
     }
     $scope.contactus = function () {
       $location.path('/');
-      window.scroll(0, 3670)
+      window.scroll(0, 3810)
     }
-
-    //scroll to top
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 300) {
-        $('.goToTop').fadeIn();
-      } else {
-        $('.goToTop').fadeOut();
-      }
-    });
-
-
-    $('.goToTop').click(function () {
-      $("html, body").animate({ scrollTop: 0 }, 1000);
-      return false;
-    });
-
-
-    //scroll header color change 
-
-    $(window).on("scroll", function () {
-      if ($(window).scrollTop() > 50) {
-        $(".header").addClass("active");
-      } else {
-        //remove the background property so it comes transparent again (defined in your css)
-        $(".header").removeClass("active");
-      }
-    });
-
-
-    //slider
-    $scope.slickConfig2Loaded = true;
-
-    $scope.slickConfig2 = {
-      autoplay: false,
-      infinite: true,
-      autoplaySpeed: 5000,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [{
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          infinite: true
-        }
-      }, {
-        breakpoint: 959,
-        settings: {
-          slidesToShow: 2,
-          infinite: true
-        }
+    //jk caraosel
+    $scope.dataArray = [
+      {
+        src: 'assets/images/banner1-1920.png'
       },
       {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          infinite: true
-        }
-      }, {
-        breakpoint: 320,
-        settings: {
-          slidesToShow: 1,
-          infinite: true
-        }
-      }],
-      method: {}
-    };
+        src: 'assets/images/bnr.png'
+      },
+      {
+        src: 'assets/images/banner1-1920.png'
+      }
+    ];
 
+    // $scope.formate = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 1686)
+    // }
+    // $scope.whyOutdoor = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 2440)
+    // }
+    // $scope.contactus = function () {
+    //   $location.path('/');
+    //   window.scroll(0, 3670)
+    // }
+
+  //scroll to top
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      $('.goToTop').fadeIn();
+    } else {
+      $('.goToTop').fadeOut();
+    }
+  });
+
+
+  $('.goToTop').click(function () {
+    $("html, body").animate({ scrollTop: 0 }, 1000);
+    return false;
+  });
+
+
+  $(window).on("scroll", function () {
+    if ($(window).scrollTop() > 200) {
+      $(".header").addClass("active");
+      $(".toolbar-btn").addClass("active-one");
+      $(".browse-btn").addClass("active-one");
+    } else {
+      //remove the background property so it comes transparent again (defined in your css)
+      $(".header").removeClass("active");
+      $(".toolbar-btn").removeClass("active-one");
+      $(".browse-btn").removeClass("active-one");
+    }
+  });
+
+  // $(window).on("scroll", function () {
+  //   if ($(window).scrollTop() > 600) {
+  //     $(".what-we").addClass("active-two");
+  //   } else {
+  //     $(".what-we").removeClass("active-two"); 
+  //   }
+  // });
+
+
+  //slider
+  $scope.slickConfig2Loaded = true;
+
+  $scope.slickConfig2 = {
+    autoplay: false,
+    infinite: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [{
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        infinite: true
+      }
+    }, {
+      breakpoint: 959,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    }, {
+      breakpoint: 320,
+      settings: {
+        slidesToShow: 1,
+        infinite: true
+      }
+    }],
+    method: {}
+  };
+
+  $scope.query={};
+  // $scope.sendQuery = function () {
+  //   ContactService.sendQuery($scope.query).then(function (response) {
+  //     if(result.status == 1){
+  //       toastr.success(result.message);
+  //     }
+  //     else{
+  //       toastr.error(result.message);
+  //     }
+  //   });
+  // }
+
+  //slider
+  $scope.slickConfig2Loaded = true;
+
+  $scope.slickConfig2 = {
+    autoplay: false,
+    infinite: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [{
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        infinite: true
+      }
+    }, {
+      breakpoint: 959,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        infinite: true
+      }
+    }, {
+      breakpoint: 320,
+      settings: {
+        slidesToShow: 1,
+        infinite: true
+      }
+    }],
+    method: {}
+  };
+
+  $scope.query={};
+  $scope.sendQuery = function () {
+    ContactService.sendQuery($scope.query).then(function (response) {
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
     $scope.query={};
-    $scope.sendQuery = function () {
-      ContactService.sendQuery($scope.query).then(function (response) {
-        if(result.status == 1){
-          toastr.success(result.message);
-        }
-        else{
-          toastr.error(result.message);
-        }
-      });
-      $scope.query={};
-    };
-    // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
-    //   $scope.feedBackData = response;
-    // });
-    $scope.subscriberData = {};
-    $scope.subscribe = function () {
-      ContactService.subscribe($scope.subscriberData).then(function (result) {
-        if(result.status == 1){
-          toastr.success(result.message);
-        }
-        else{
-          toastr.error(result.message);
-        }
-      });
-      angular.element($('#subscriber-email')).val('');
-    };
-    $scope.showContact = function () {
-      $mdDialog.show({
-        templateUrl: 'views/show-contact.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true,
-      })
-    };
+  }
+  // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+  //   $scope.feedBackData = response;
+  // });
+  $scope.subscriberData = {};
+  $scope.subscribe = function () {
+    ContactService.subscribe($scope.subscriberData).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+    angular.element($('#subscriber-email')).val('');
+  };
+  $scope.showContact = function () {
+    $mdDialog.show({
+      templateUrl: 'views/show-contact.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+    })
+  };
     
-    $scope.callbackRequest = {};
-    $scope.requestCallBack = function () {
-      ContactService.requestCallBack(callbackRequest).then(function (response) {
-        if(result.status == 1){
-          toastr.success(result.message);
-          $mdDialog.hide();
-        }
-        else{
-          toastr.error(result.message);
-        }
-      });
-    }
+  $scope.callbackRequest = {};
+  $scope.requestCallBack = function () {
+    ContactService.requestCallBack(callbackRequest).then(function (response) {
+      if(result.status == 1){
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
-    $scope.logout = function(){
-      $auth.logout().then(function(result){
-        // console.log(result);
-        $rootScope.isAuthenticated = false;
-        $location.path('/');
-        localStorage.clear();
-        toastr.warning('You have successfully signed out!');        
-      });
-    }
+  $scope.logout = function(){
+    $auth.logout().then(function(result){
+      // console.log(result);
+      $rootScope.isAuthenticated = false;
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');        
+    });
+  }
 
     /*=================================
     |  Sidenav Functionality

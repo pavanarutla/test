@@ -14,9 +14,26 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   
   $scope.showAddCampaignPopup = function () {
     $mdDialog.show({
-      templateUrl: 'views/admin/add-campaign.html',
+      templateUrl: 'views/admin/add-full-campaign.html',
       clickOutsideToClose: true,
       fullscreen: $scope.customFullscreen,
+      controller: function($scope, $mdDialog, AdminCampaignService, toastr){
+        $scope.campaign = {};
+        $scope.saveCampaign = function(){
+          AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
+            if(result.status == 1){
+              toastr.success(result.message);
+              $mdDialog.hide();
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.close = function(){
+          $mdDialog.hide();
+        }
+      }
     });
   };
 

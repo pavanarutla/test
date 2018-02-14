@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log) {
+app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
     // $scope.toggleLeft = buildToggler('left');
     
     // function buildToggler(navID) {
@@ -11,8 +11,18 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log) {
     //       });
     //   };
     // }
-    $scope.ownerSidenav = function () {
+  $scope.ownerSidenav = function () {
     $mdSidenav('ownerLeft').toggle();
   };
+   $scope.ownerRightSidenav = function () {
+    $mdSidenav('ownerRight').toggle();
+  };
+  $scope.openScreen = function(ev) {
+        $mdDialog.show({
+          templateUrl:'views/owner/helpnsupport.html',
+          clickOutsideToClose:true,
+   
+        });
+    };
 
 })
