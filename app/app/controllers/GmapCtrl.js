@@ -898,7 +898,6 @@ app.controller('GmapCtrl',
       //   },
       //   position: $scope.address.location
       // });
-
       rangeCircle = new google.maps.Circle({
         strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
@@ -907,7 +906,8 @@ app.controller('GmapCtrl',
         fillOpacity: 0.0,
       });
 
-      $scope.circleRadius = 0;
+      $scope.range = {};
+      $scope.range.circleRadius = 0;
       $scope.updateCircle = function(){
         rangeCircle.setMap(null);
         rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
