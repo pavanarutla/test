@@ -1,5 +1,6 @@
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
-
+  var vm = $scope;
+  vm.limit = 2;
   // $scope.limit= 3;
   // $scope.loadMore = function() {
   //   $scope.limit = $scope.items.length;
@@ -36,7 +37,66 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
       }
     });
   };
-
+  
+  $scope.loadMore = function() {
+    var increamented = vm.limit + 2;
+    vm.limit = increamented > $scope.cruises.length ? $scope.cruises.length : increamented;
+  };
+  $scope.cruises = [{
+    Campaginname: 'New',
+    Clientname: 'New1',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'1,00,000'
+  },
+  {
+    Campaginname: 'New2',
+    Clientname: 'New1',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'1,00,000'
+  },
+  {
+    Campaginname: 'New3',
+    Clientname: 'New1',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'1,00,000'
+  }
+  //  {
+  //   img: 'img2',
+  //   title: 'title2',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img3',
+  //   title: 'title3',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img4',
+  //   title: 'title4',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img5',
+  //   title: 'title5',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img6',
+  //   title: 'title6',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img7',
+  //   title: 'title7',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img8',
+  //   title: 'title8',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // }, {
+  //   img: 'img9',
+  //   title: 'title9',
+  //   desc: 'lorem ipsusm bla ba bla lbla blall'
+  // },
+ ];
   $scope.cancel = function(){
     $mdDialog.hide();
   };

@@ -11,7 +11,7 @@
 </head>
 <body> -->
 
-<div class="container jumbotron" ng-controller="AdminCampaignCtrl" style="width: 77em;">
+<div class="container jumbotron" ng-controller="AdminCampaignCtrl" style="width: 77em;margin-top: 1em;">
     <!-- <img src="./img/hybridslogo.png" class="img-rounded"> -->
 	<p>Campagin IMAGE</p>
 </div>
@@ -121,29 +121,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-		<td>Doe</td>
-		<td>Doe</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-		<td>Doe</td>
-		<td>Doe</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-		<td>Doe</td>
-		<td>Doe</td>
-      </tr>
+      <tr ng-repeat="list in cruises | limitTo:limit">
+        <td>{{list.Campaginname}}</td>
+        <td>{{list.Clientname}}</td>
+        <td>{{list.StartDate}}</td>
+		    <td>{{list.EndDate}}</td>
+		    <td>{{list.EstimatedBudget}}</td>
+      </tr>      
     </tbody>
   </table>
+  <button style="width:120px;text-align:center;margin:auto" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
 </div><br><br>
 <!-- </body>
 </html> -->
