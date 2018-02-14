@@ -21,7 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
-      $scope.markerInfoWindow = null;
+
       $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -476,19 +476,19 @@ app.controller('GmapCtrl',
         $scope.selectedProduct = marker;
       }
 
-      function showInfoWindow(marker){
-        var htmlContent = '<p><b>Location</b>:&nbsp&nbsp&nbsp' + marker.properties.address + '</p>' + 
-                          '<p><b>No. of Views</b>:&nbsp&nbsp&nbsp' + marker.properties.impressions + '</p>';
-        $scope.markerInfoWindow =  new google.maps.InfoWindow({
-          content: htmlContent,
-          map: $scope.mapObj
-        });
-        $scope.markerInfoWindow.open($scope.mapObj, marker);
-      }
+      // function showInfoWindow(marker){
+      //   var htmlContent = '<p><b>Location</b>:&nbsp&nbsp&nbsp' + marker.properties.address + '</p>' + 
+      //                     '<p><b>No. of Views</b>:&nbsp&nbsp&nbsp' + marker.properties.impressions + '</p>';
+      //   $scope.markerInfoWindow =  new google.maps.InfoWindow({
+      //     content: htmlContent,
+      //     map: $scope.mapObj
+      //   });
+      //   $scope.markerInfoWindow.open($scope.mapObj, marker);
+      // }
 
-      function hideInfoWindow(marker){
-        $scope.markerInfoWindow.close();
-      }
+      // function hideInfoWindow(marker){
+      //   $scope.markerInfoWindow.close();
+      // }
 
       google.maps.event.addListener(selectorMarker, 'click', function (e) {
         $scope.selectedProduct = null;
@@ -549,12 +549,6 @@ app.controller('GmapCtrl',
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
-          // google.maps.event.addListener(marker, 'mouseover', function(e){
-          //   showInfoWindow(marker);
-          // });
-          // google.maps.event.addListener(marker, 'mouseout', function(e){
-          //   hideInfoWindow(marker);
-          // });
         });
         var mc = {
           gridSize: 50,
@@ -566,7 +560,6 @@ app.controller('GmapCtrl',
         /*
         //// handling spiderifying ////
         */
-        var iw = new google.maps.InfoWindow();
         var circleMarker = new google.maps.Marker({
           icon: {
             url: 'assets/images/maps/Ellipse 55.png',
@@ -612,12 +605,6 @@ app.controller('GmapCtrl',
               google.maps.event.addListener(marker, 'spider_click', function (e) {
                 selectSpideredMarker(marker);
               });
-              // google.maps.event.addListener(marker, 'mouseover', function(e){
-              //   showInfoWindow(marker);
-              // });
-              // google.maps.event.addListener(marker, 'mouseout', function(e){
-              //   hideInfoWindow(marker);
-              // });
               markersOnMap.push(marker);
               oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
               $scope.Clusterer.addMarker(marker);
@@ -661,8 +648,7 @@ app.controller('GmapCtrl',
             label.color = "rgba(255, 255, 255, 1)";
             marker.setLabel(label);
             // spiderCircle.setMap(null);
-            circleMarker.setMap(null);
-            iw.close();
+            circleMarker.setMap(null);            
           }
           marker.setIcon(markerIcon);
         });
@@ -884,20 +870,6 @@ app.controller('GmapCtrl',
         $scope.showTrafficLegend = !$scope.showTrafficLegend;
       }
 
-      // Drawing a circle
-      // var rangeCircle = new google.maps.Marker({
-      //   icon: {
-      //     path: google.maps.SymbolPath.CIRCLE,
-      //     fillOpacity: 0.3,
-      //     fillColor: "#ffffff",
-      //     strokeOpacity: 1.0,
-      //     strokeColor: "red",
-      //     strokeWeight: 1.0,
-      //     size: 26000,
-      //     scale: 1.0
-      //   },
-      //   position: $scope.address.location
-      // });
       rangeCircle = new google.maps.Circle({
         strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
@@ -912,7 +884,6 @@ app.controller('GmapCtrl',
         rangeCircle.setMap(null);
         rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
         rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
-        // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
         $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }

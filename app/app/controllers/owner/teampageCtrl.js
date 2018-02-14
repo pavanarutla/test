@@ -1,32 +1,3 @@
-// app.controller('teamPage', function($scope,$mdDialog) {
-
-//       $scope.teammembers =[
-//         {
-//           image:'team',
-//           name:'Shiva Shankar Reddy',
-//           designation:'Designer',
-//           phone:'8899667755',
-//           email:'siva@billboardsindia.com',
-//         },
-//         {
-//           image:'teamfour',
-//           name:'Srikanth Bijjala',
-//           designation:'Developer',
-//           phone:'9966016136',
-//           email:'srikanth@billboardsindia.com',
-//         },
-//         {
-//           image:'teamtwo',
-//           name:'Dinesh Varma',
-//           designation:'Designer',
-//           phone:'8899667755',
-//           email:'dinesh@billboardsindia.com',
-//         },
-//       ]
-   
-    
-//     });
-
 app.controller('teamPage',['$scope','$mdDialog', function($scope,$mdDialog){
   $scope.teammembers =[
     {

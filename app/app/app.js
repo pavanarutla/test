@@ -274,17 +274,17 @@ var app = angular.module('bbManager', [
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
       templateUrl: 'views/owner/campaign.html',
-      controller:  'CampaignownerCtrl'
+      controller:  'OwnerCampaignCtrl'
     })
     .state('owner.editCampaign', {
       url: '/editCampaign',
       templateUrl: 'views/owner/editcampaign.html',
-      controller: 'CampaignownerCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'CampaignownerCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
