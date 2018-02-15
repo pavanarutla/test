@@ -1,4 +1,5 @@
-app.controller('bbMngrCtrl', 
+app.controller('bbMngrCtrl',['$scope', '$mdDialog', '$mdSidenav', '$timeout', '$location', '$rootScope', 'MapService', '$auth', 'toastr', 'ContactService', 
+'CampaignService', 'UserService', 'LocationService', 'NotificationService', 'config', '$window', '$interval', 
   function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
 
@@ -516,5 +517,5 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
       $location.path('/campaigns');
     }
-  }
+  }]
 );

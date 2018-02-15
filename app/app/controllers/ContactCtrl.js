@@ -1,5 +1,5 @@
 'user strict'
-app.controller("ContactCtrl", function ($scope,$http) {
+app.controller("ContactCtrl",['$scope','$http', function ($scope,$http) {
 
 
     ///** Queries Start **///
@@ -98,4 +98,4 @@ $scope.gridSubscribers.data = data;
 
 
 ///** Subscribers End  **///
-})
+}])

@@ -1,4 +1,4 @@
- app.controller('outSourcing', function($scope,$mdDialog) {
+ app.controller('outSourcing',['$scope','$mdDialog', function($scope,$mdDialog) {
 
     $scope.showBillboardsData = true;
     $scope.showUnipoleData = false;
@@ -58,4 +58,4 @@
         });
       };
 
-    });
+    }]);

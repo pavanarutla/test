@@ -1,4 +1,4 @@
-app.controller('FormatsCtrl', function ($scope) {
+app.controller('FormatsCtrl',['$scope', function ($scope) {
 
   $scope.showBillboardsData = true;
   $scope.showUnipoleData = false;
@@ -271,4 +271,4 @@ var carousel = new Carousel("#carousel");
 carousel.init();
 carousel.showPane(1);
   
-});
+}]);

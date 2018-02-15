@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
+app.controller('OwnerMngrCtrl',['$scope','$mdSidenav','$log','$mdDialog',function ($scope,$mdSidenav,$log,$mdDialog) {
     // $scope.toggleLeft = buildToggler('left');
     
     // function buildToggler(navID) {
@@ -25,4 +25,4 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
         });
     };
 
-})
+}])

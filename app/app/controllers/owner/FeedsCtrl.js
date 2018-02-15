@@ -1,4 +1,4 @@
-app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr) {
+app.controller('OwnerFeedsCtrl',['$scope', '$mdDialog', '$http','$mdSidenav','$location', 'AdminCampaignService', 'ProductService', 'toastr', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -140,5 +140,5 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     $scope.shortlistProduct = function() {
         $mdSidenav('shortlistAndSaveOwnerSidenav').toggle();
       };
-  });
+  }]);
  

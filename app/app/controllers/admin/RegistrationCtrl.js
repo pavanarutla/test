@@ -1,4 +1,4 @@
-app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, toastr, AdminUserService) {
+app.controller('AdminRegistrationCtrl',['$scope', '$mdDialog', '$http', '$rootScope', '$auth', 'toastr', 'AdminUserService', function ($scope, $mdDialog, $http, $rootScope, $auth, toastr, AdminUserService) {
 
   $scope.msg = {};
 
@@ -196,4 +196,4 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     $mdDialog.cancel();
   }
 
-});
+}]);

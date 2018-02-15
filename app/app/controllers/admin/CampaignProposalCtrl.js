@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr) {
+app.controller('CampaignProposalCtrl',['$scope', '$mdDialog', '$stateParams','$mdSidenav', '$location', 'CampaignService', 'AdminCampaignService', 'config', 'toastr', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr) {
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
@@ -261,4 +261,4 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
-});
+}]);

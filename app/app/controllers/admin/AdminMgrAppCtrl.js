@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config) {
+app.controller('AdminMgrAppCtrl',['$scope', '$mdDialog', '$mdSidenav', '$rootScope', '$interval', '$location', 'AdminNotificationService', 'config', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config) {
 
   $rootScope.serverUrl = config.serverUrl;
 
@@ -107,4 +107,4 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     $location.path('/admin/home');
   }
 
-});
+}]);

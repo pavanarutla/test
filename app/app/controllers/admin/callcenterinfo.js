@@ -1,4 +1,4 @@
-app.controller('callCenterCtrl', function($scope,$http,toastr) {
+app.controller('callCenterCtrl',['$scope','$http','toastr', function($scope,$http,toastr) {
     
        $scope.gridcallCenter = {  
             paginationPageSizes: [25, 50, 75],
@@ -49,4 +49,4 @@ app.controller('callCenterCtrl', function($scope,$http,toastr) {
   $scope.gridcallCenter.data.splice(index, 1);
   toastr.success("CallCenterInfo deleted successfully");
  }
-});
+}]);

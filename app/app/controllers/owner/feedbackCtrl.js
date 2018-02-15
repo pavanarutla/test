@@ -1,4 +1,4 @@
-app.controller('feedback', function($scope,$mdDialog,Upload) {
+app.controller('feedback',['$scope','$mdDialog','Upload', function($scope,$mdDialog,Upload) {
 
       $scope.uploadFiles = function(files, errFiles) {
         $scope.files = files;
@@ -22,4 +22,4 @@ app.controller('feedback', function($scope,$mdDialog,Upload) {
             });
         });
     }
-});
+}]);

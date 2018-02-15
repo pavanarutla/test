@@ -1,4 +1,4 @@
-app.controller('PricingCtrl', function($scope, $mdDialog) {
+app.controller('PricingCtrl',['$scope', '$mdDialog', function($scope, $mdDialog) {
 
     $scope.showTabDialog = function (ev) {
         $mdDialog.show({
@@ -7,4 +7,4 @@ app.controller('PricingCtrl', function($scope, $mdDialog) {
           clickOutsideToClose: true
         })
       };
-});
+}]);

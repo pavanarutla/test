@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
+app.controller('AdminCampaignCtrl',['$scope', '$mdDialog', '$stateParams', 'CampaignService', 'AdminCampaignService', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
 
   // $scope.limit= 3;
   // $scope.loadMore = function() {
@@ -192,4 +192,4 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   //   $scope.gridClosed.data = data;
   // });
 
-});
+}]);

@@ -1,4 +1,4 @@
-app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
+app.controller('UserProfileCtrl', ['$scope', '$stateParams', 'UserService',function($scope, $stateParams, UserService) {
   
   $scope.getLoggedInUserProfile = function(){
     UserService.getProfile().then(function(result){
@@ -34,4 +34,4 @@ app.controller('UserProfileCtrl', function($scope, $stateParams, UserService) {
     $scope.limit = $scope.items.length
   };
 
-});
+}]);

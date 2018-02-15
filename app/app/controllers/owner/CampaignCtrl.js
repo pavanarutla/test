@@ -1,5 +1,5 @@
 
-app.controller('CampaignownerCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('CampaignownerCtrl', ['$scope', '$mdDialog', '$interval', '$stateParams', 'CampaignService', '$window',function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -217,4 +217,4 @@ app.controller('CampaignownerCtrl', function ($scope, $mdDialog, $interval, $sta
     $scope.getCampaignDetails($stateParams.campaignId);
   }
 
-});
+}]);
