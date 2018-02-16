@@ -1,6 +1,6 @@
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
   var vm = $scope;
-  vm.limit = 2;
+  vm.limit = 5;
   // $scope.limit= 3;
   // $scope.loadMore = function() {
   //   $scope.limit = $scope.items.length;
@@ -38,6 +38,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     });
   };
   
+  // Load More Code
   $scope.loadMore = function() {
     var increamented = vm.limit + 2;
     vm.limit = increamented > $scope.cruises.length ? $scope.cruises.length : increamented;
@@ -57,11 +58,32 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     EstimatedBudget:'1,00,000'
   },
   {
-    Campaginname: 'New3',
-    Clientname: 'New1',
+    Campaginname: 'TVS',
+    Clientname: 'Apache',
     StartDate: '1-2-18',
     EndDate:'2-2-18',
     EstimatedBudget:'1,00,000'
+  },
+  {
+    Campaginname: 'Hero',
+    Clientname: 'CD-Delux',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'400'
+  },
+  {
+    Campaginname: 'Bajaj',
+    Clientname: 'Avenger-150',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'300'
+  },
+  {
+    Campaginname: 'Honda',
+    Clientname: 'City',
+    StartDate: '1-2-18',
+    EndDate:'2-2-18',
+    EstimatedBudget:'100'
   }
   //  {
   //   img: 'img2',
@@ -97,6 +119,10 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   //   desc: 'lorem ipsusm bla ba bla lbla blall'
   // },
  ];
+
+//  Table --- Filter code 
+$scope.headers = Object.keys($scope.cruises[0]);
+//  Filter code-End
   $scope.cancel = function(){
     $mdDialog.hide();
   };

@@ -110,6 +110,20 @@
 </form>
 </div>
 <div class="container" style="margin-top: 1em;">    
+        <!-- <div>Filter by: 
+                <select ng-model="sortExpression">
+                  <option value="Name">Campagin Name</option>
+                  <option value="Price">Client Name</option>
+                </select>
+                <input type="text" placeholder="&nbsp search here..." ng-model="search.$" style="margin-bottom: 1em;margin-left: 1em;" />
+        </div>    -->
+        Search By 
+    <select ng-model="columns" ng-options="e for e in headers">
+        <option value=""></option>
+    </select> 
+    Search <input type="text" ng-model="search[columns]" 
+        placeholder="Enter some text to search" />
+            
 <table class="table table-striped">
     <thead>
       <tr>
@@ -121,7 +135,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="list in cruises | limitTo:limit">
+      <tr ng-repeat="list in cruises | limitTo:limit | filter:search">
         <td>{{list.Campaginname}}</td>
         <td>{{list.Clientname}}</td>
         <td>{{list.StartDate}}</td>
