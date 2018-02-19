@@ -47,7 +47,9 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
         scope: $scope
       })
     };
-
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+     };
     $scope.closeCampaignRequestDetails = function(){
       $mdDialog.hide();
     }

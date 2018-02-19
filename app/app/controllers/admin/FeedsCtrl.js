@@ -48,6 +48,9 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
         scope: $scope
       })
     };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+     };
 
     /*
     ======== Campaign Suggestions(planned) ========

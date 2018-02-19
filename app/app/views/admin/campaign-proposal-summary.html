@@ -184,9 +184,9 @@
 					</div>
 				</div>
 			</div>
-			 <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
+			 <!-- <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
 			 ui-grid-move-columns ui-grid-auto-resize class="grid">
-			</div> 
+			</div>  -->
 
 			<!-- table grid start  -->
 				<div style="margin-top: 1em;">
@@ -208,15 +208,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="list in personalcampsdata | limitTo:limit">
+							<tr ng-repeat="list in campaignDetails | limitTo:limit">
+								
 							<td>{{list.format_name}}</td>
 							<td>{{list.area_name}}</td>
 							<td>{{list.panelSize}}</td>
-							<td>{{list.lighting}}</td>
-							<td>{{list.from_date | date }}</td>
-							<td>{{list.to_date | date }}</td>
-							<td>{{list.View }}</td>
-							
+							<td>{{list.lighting | boolToYesNo}}</td>
+							<td>{{list.from_date | dateify | date:"dd-MM-yyyy" }}</td>
+							<td>{{list.to_date | dateify | date:"dd-MM-yyyy" }}</td>
+							<td><div><span><md-button ng-click="viewProductImage(list)" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>
+							</td>							
 							<td>{{list.price}}</td>
 							<td>
 								<span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>

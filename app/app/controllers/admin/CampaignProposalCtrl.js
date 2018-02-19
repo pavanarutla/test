@@ -2,7 +2,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      $scope.campaignDetails = result;
+      $scope.campaignDetails = result.products;
       $scope.gridCampaignProducts.data = result.products;
       if(result.status > 7){
         loadCampaignPayments(campaignId);
@@ -103,7 +103,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   $scope.viewProductImage = function(image){
-    var imagePath = config.serverUrl + image;
+    var imagePath = config.serverUrl + image.image;
     $mdDialog.show({
       locals:{ src: imagePath },
       templateUrl: 'views/image-popup-large.html',
@@ -114,7 +114,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       }
     });
   }
-
+  
   $scope.editProposedProduct = function(productId, from_date, to_date, price){
     var productObj = {
       id: productId,
@@ -146,7 +146,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
           });
         }
 
-        $scope.cancel = function(){
+        $scope.cancel = function(x){
           $mdDialog.hide();
         }
       }
@@ -233,9 +233,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
             }
           });
         }
-        $scope.cancel = function(){
-          $mdDialog.hide();
-        }
+        $scope.cancel = function () {
+          $mdDialog.cancel();
+        };
       }
     });
   }
