@@ -1,15 +1,15 @@
 <div layout="column" layout-fill="layout-fill">
-	<div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-		<div flex="50">
-			<h3>Companies</h3>
-		</div>
+	<div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+		
+		<h3>Companies</h3>
+	
 		<!-- <div layout-align="center end" layout="column" flex="50">
 				<md-button class="md-raised md-warn" ng-click="companiesPopup()">
 							Add New Companies <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
 				</md-button>
 		</div> -->
 	</div>
-	<div layout-margin layout="column">
+	<div layout="column" >
 		<md-tabs md-dynamic-height class="contbg">
 			<md-tab label="Companies">
 
@@ -18,9 +18,48 @@
 						Add New Company <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span>
 					</md-button>
 				</div>
-				<div ui-grid="gridCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-				 ui-grid-auto-resize class="grid"></div>
 
+				<div ui-grid="gridCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+				 ui-grid-auto-resize class="grid">
+				</div>
+				
+				<!-- ========new code for tables html start ========= -->
+				<div style="margin-top: 1em;">
+					<div class="table-responsive">    
+						<table class="table table-striped table-bordered ">
+						<thead>
+							<tr>
+								<th>Campagin Name</th>
+								<th>Client Type</th>
+								<th>Person Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Address</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="company in companyList | limitTo:limit">
+							<td>{{company.name}}</td>
+							<td>{{company.client_type}}</td>
+							<td>{{company.person_name}}</td>
+							<td>{{company.email}}</td>
+							<td>{{company.phone }}</td>
+							<td>{{company.address }}</td>
+							
+							<td>
+								<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+								
+							</td>
+							</tr>      
+						</tbody>
+						</table>
+					</div>
+					<div layout="colmun" layout-align="end center" layout-margin>
+						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+					</div>
+				</div>
+				<!-- ========new code for tables html end ========= -->
 			</md-tab>
 			<md-tab label="Hoarding Companies ">
 				<div layout-align="center end" layout="column" flex="100">
@@ -29,7 +68,43 @@
 					</md-button>
 				</div>
 				<div ui-grid="gridHoardingCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
-				 ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+				 ui-grid-move-columns ui-grid-auto-resize class="grid">
+				</div>
+				<!-- ========new code for tables html start ========= -->
+				<div style="margin-top: 1em;">
+					<div class="table-responsive">    
+						<table class="table table-striped table-bordered ">
+							<thead>
+								<tr>
+									<th>Campagin Name</th>
+									<th>Owner Name</th>>
+									<th>Email id</th>
+									<th>Phone</th>
+									<th>List Of Hoardings</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="company in hoardingCompany | limitTo:limit">
+								<td>{{company.name}}</td>
+								<td>{{company.owner}}</td>
+								<td>{{company.email}}</td>
+								<td>{{company.phone }}</td>
+								<td>{{company.hoardinglist }}</td>
+								
+								<td>
+									<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+									
+								</td>
+								</tr>      
+							</tbody>
+						</table>
+					</div>
+					<div layout="colmun" layout-align="end center" layout-margin>
+						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+					</div>
+				</div>
+				<!-- ========new code for tables html end ========= -->
 			</md-tab>
 		</md-tabs>
 	</div>

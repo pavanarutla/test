@@ -261,4 +261,13 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+    // tables code start
+      var vm = $scope;
+      vm.limit = 10;
+      $scope.loadMore = function() {
+        var increamented = vm.limit + 5;
+        vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
+      };
+    // tables code end
+
 });

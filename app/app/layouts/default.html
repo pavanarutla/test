@@ -6,7 +6,7 @@
       <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
         <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
       </md-button>
-       <md-button aria-label="locations" href="#/" md-no-ink class="logo" >
+       <md-button aria-label="locations" href="#/" md-no-ink class="logo" style="margin-left:2.5%">
          <img ng-src="assets/images/product/billboards.png"  class="logo-img"> 
       </md-button> 
         <!-- <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo">
@@ -62,10 +62,6 @@
         <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!isAuthenticated" style="color:#fff !important">
           BOOK NOW
         </md-button>
-        
-        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-show="isAuthenticated && footerhide" ng-click="toggleTraffic()">
-          <span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression
-        </md-button> -->
 
       </md-menu-bar>
     </div>
@@ -93,9 +89,9 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" md-component-id="right">
     <md-toolbar layout="row">
-      <div class="md-toolbar-tools">
+      <div class="md-toolbar-tools" style="background:#788492 !important">
         <h2>
           <span>Notifications</span>
         </h2>
@@ -106,16 +102,31 @@
       </div>
     </md-toolbar>
     <md-content layout-padding="">
-      <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+
+      <md-card  class="ng-scope" style="padding:0px"  ng-repeat="notif in notifs" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <md-list-item class="md-2-line" role="listitem" tabindex="-1"ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+          <div class="md-list-item-inner ng-scope">
+            <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
+              <div class="md-list-item-text layout-column" layout="column">
+                <!--<h3>{{orderMessage.user.displayName}}</h3>-->
+                <h4 class="bb-p-cust md-title" style="font-size:24px">{{ notif.desc }}</h4>
+                <p style="color:#980000">{{ notif.message }}<p>
+              </div>
+            <!--<md-divider></md-divider>-->
+          </div>
+          <div class="md-ripple-container" style=""></div></a></md-list-item>
+      </md-card>
+
+      <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
       ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
         <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
           <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
           <p>{{ notif.message }}</p>
         </a>
-      </div>
+      </div> -->
     </md-content>
   </md-sidenav>
-
+ 
   <!-- Content section-->
   <!-- <div ui-view ng-cloak></div> -->
   <ui-view>
@@ -125,34 +136,34 @@
   <!-- Footer Section-->
   <footer>
     <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
-      <div flex="40" flex-md="50" flex-sm="100" flex-xs="100"  flex-offset-lg="10" layout-align-sm="center center" layout-sm="row" class="fmson">
-        
-        <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
-          <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon"></md-icon>
-        </md-button>
+      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="fmson">
+        <div class="" style="margin-left:5%">
+          <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
+            <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon"></md-icon>
+          </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">
-          <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon>
-        </md-button>
+          <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">
+            <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon>
+          </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="linkedin" href="https://www.linkedin.com/company/13259222/" target="_blank">
-          <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
-        </md-button>
+          <md-button class="md-icon-button  fabicon" aria-label="linkedin" href="https://www.linkedin.com/company/13259222/" target="_blank">
+            <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
+          </md-button>
 
-        <md-button class="md-icon-button  fabicon" aria-label="twitter" href="https://twitter.com/billboardsindia" target="_blank">
-          <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon>
-        </md-button>
-
+          <md-button class="md-icon-button  fabicon" aria-label="twitter" href="https://twitter.com/billboardsindia" target="_blank">
+            <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon>
+          </md-button>
+        </div>
       </div>
-      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="end center" layout-xs="column"
+      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="center end" layout-xs="column"
         layout="column">
         <p class="md-body-2 text">BBI Advertising pvt Ltd @Copyrights 2017. All rights reserved.</p>
       </div>
 
     </div>
-    <md-button hide-xs class="goToTop md-fab md-mini bottom-btn " style="display:none;">
+    <!-- <md-button hide-xs class="goToTop md-fab md-mini bottom-btn " style="display:none;">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
-    </md-button> 
+    </md-button>  -->
   
     <!-- <div layout="row" class="bottom-mobilebtn" show-xs hide-gt-xs  layout-align="space-around center">
       <div style="margin:0 0 0 10px">
