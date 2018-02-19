@@ -70,20 +70,19 @@ app.controller('CampaignProposalCtrl',['$scope', '$mdDialog', '$stateParams','$m
     },            
     {
       name: 'Action', field: 'Action', width: '10%',headerCellClass: 'grid-align',cellClass: 'grid-align',
-      cellTemplate: `
-        <div class="ui-grid-cell-contents" ng-if="grid.appScope.campaignDetails.status < 4 || grid.appScope.campaignDetails.status == 5">
-          <span>
-            <a ng-click="grid.appScope.editProposedProduct(row.entity.id, row.entity.from_date, row.entity.to_date, row.entity.price)" style="cursor:pointer;">
-              <md-icon><i class="material-icons">edit</i></md-icon>
-            </a>
-          </span>
-          <span>
-            <a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a>
-          </span>
-          <span>
-            <a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a>
-          </span>
-        </div>`,
+      cellTemplate: '<div class="ui-grid-cell-contents" ng-if="grid.appScope.campaignDetails.status < 4 || grid.appScope.campaignDetails.status == 5">' + 
+          '<span>' + 
+            '<a ng-click="grid.appScope.editProposedProduct(row.entity.id, row.entity.from_date, row.entity.to_date, row.entity.price)" style="cursor:pointer;">' + 
+              '<md-icon><i class="material-icons">edit</i></md-icon>' + 
+            '</a>' + 
+          '</span>' + 
+          '<span>' + 
+            '<a ng-href="#"><md-icon><i class="material-icons">done</i></md-icon></a>' + 
+          '</span>' + 
+          '<span>' + 
+            '<a ng-href="#"><md-icon><i class="material-icons">delete</i></md-icon></a>' + 
+          '</span>' + 
+        '</div>',
       enableFiltering: false,
     }
   ];
