@@ -1,4 +1,4 @@
-app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
+app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
   var vm = this;
   $scope.msg = {};
@@ -66,6 +66,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   ProductService.getFormatList().then(function(result){
     $scope.gridFormats.data = result;
     $scope.formatList = result;
+    console.log($scope.formatList,"$scope.formatList");
   });
 
   $scope.format = {};
@@ -121,14 +122,19 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
 
   AdminLocationService.getCountries().then(function(result){
     $scope.countryList = result;
+
   });
   CompanyService.getHoardingCompanies().then(function(result){
     $scope.hoardingCompaniesList = result;
   });
 
   $scope.getStateList = function(){
+    
+      console.log("$scope.product.country",$scope.product.country)
+    
     AdminLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
+      console.log("$scope.stateList",$scope.stateList)
     });
   }
   $scope.getCityList = function(){
@@ -159,6 +165,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   };
   
   // UI-Grid for products
+  // 
   $scope.gridProducts = {
     paginationPageSizes: [25, 50, 75],
     paginationPageSize: 25,
@@ -202,7 +209,8 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
 
   // Get products list
   ProductService.getProductList().then(function(result){
-    $scope.gridProducts.data = result;    
+    $scope.gridProducts.data = result;   
+    $scope.hoardinglistdata = result; 
   });
 
   function getProductList(){
@@ -212,6 +220,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   }
 
   $scope.product = {};
+ 
   $scope.files = {};
   $scope.addProduct = function () {
     Upload.upload({
@@ -236,6 +245,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   };
 
   $scope.editProduct = function(product){
+    console.log(product);
     product.country = null;
     product.state = null;
     product.city = null;
@@ -272,4 +282,12 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $mdDialog.cancel();
   };
 
-});
+    // tables code start
+    var vm = $scope;
+    vm.limit = 5;
+    $scope.loadMore = function() {
+      var increamented = vm.limit + 5;
+      vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
+    };
+  // tables code end
+}]);

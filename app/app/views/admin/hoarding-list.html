@@ -9,8 +9,54 @@
             </md-button>
         </div> 
     </div>
-    <div layout-margin layout="column">
+    <div  layout="column">
   
-    <div ui-grid="gridProducts"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+     <!-- <div ui-grid="gridProducts"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+    </div>  -->
+
+    <div style="margin-top: 1em;">
+        <div class="table-responsive">    
+          <table class="table table-striped table-bordered ">
+            <thead>
+                <tr>
+                  <th>Site No</th>
+                  <th>Site type</th>
+                  <th>Company</th>
+                  <th>Address</th>
+                  <th>Impression</th>
+                  <th>Area</th>
+                  <th>Panel Size</th>
+                  <th>lighting</th>
+                  <th>Direction</th>
+                  <th>Image</th>
+                  <th>Symbol</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="list in hoardinglistdata | limitTo:limit">
+                <td>{{list.siteNo}}</td>
+                <td>{{list.format_name}}</td>
+                <td>{{list.company_name}}</td>
+                <td>{{list.address}}</td>
+                <td>{{list.impressions}}</td>
+                <td>{{list.area_name }}</td>
+                <td>{{list.panelSize }}</td>
+                <td>{{list.lighting}}</td>
+                <td>{{list.direction}}</td>
+                <td>{{image}}</td>
+                <td>{{symbol}}</td>
+                <td>
+                    <span><a href="" ng-click="editProduct(list)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                    <span><a ng-href="" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+                    <span><a href="" ng-click="deleteProduct(list)"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                </td>
+              </tr>      
+            </tbody>
+          </table>
+        </div>
+        <div layout="colmun" layout-align="end center" layout-margin>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        </div>
     </div>
 </div>
