@@ -8,8 +8,6 @@ const mainBowerFiles = require('main-bower-files');
 var order = require("gulp-order");
 const minify_css = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
-const changed = require('gulp-changed');
-
 
 
 //tasks
@@ -18,12 +16,12 @@ const app = {
     src_compress : 'src_compress',
     assets : 'assets',
     mincss : 'mincss',
-    minimage : 'minimage',
     vendor_uglify : 'vendor_uglify', 
-    templates : 'templates'
+    templates : 'templates',
+    imagemin : 'imagemin'
 }
 
-gulp.task('build',['app.clean','app.vendor_uglify','app.assets','app.src_compress','app.templates'],function(){
+gulp.task('build',['app.clean','app.mincss','app.assets','app.src_compress','app.templates','app.vendor_uglify','app.imagemin'],function(){
     console.log('testing the gulp runner');
 });
 
@@ -59,10 +57,10 @@ gulp.task('app.assets',function(){
 });
 
 gulp.task('app.vendor',function(){
-    gulp.src(mainBowerFiles())
+   return gulp.src(mainBowerFiles())
         .pipe(gulp.dest('temp'))
 });
-gulp.task('app.vendor_uglify', ['app.vendor'], function() {
+gulp.task('app.vendor_uglify',['app.vendor'], function() {
     gulp.src('temp/*.js')
         .pipe(order([
             "temp/jquery.js",
@@ -92,16 +90,21 @@ gulp.task('app.vendor_uglify', ['app.vendor'], function() {
 
 gulp.task('app.templates',function(){
     gulp.src(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'])
-    .pipe(ngTemplates('bbManager'))
+    .pipe(ngTemplates({
+        module: 'bbManager',
+        path: function (path, base) {
+            var split = base.split('\\');
+            var replacedPath = (split[split.length-2]) + '/';
+            return path.replace(base, replacedPath).replace('/templates', '');
+        }
+    }))
     .pipe(gulp.dest('dist/scripts'))
 })
 
 gulp.task('app.imagemin', function() {
-    var imgSrc = 'app/assets/images/add2lst.png',
-    imgDst = 'dist';
-    
+    var imgSrc = ['app/assets/images/*','app/assets/images/**/*','app/assets/mobile-icons/*'],
+    imgDst = 'dist/images';
     gulp.src(imgSrc)
-    .pipe(changed(imgDst))
     .pipe(imagemin())
     .pipe(gulp.dest(imgDst));
  });
