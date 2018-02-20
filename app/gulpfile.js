@@ -21,7 +21,7 @@ const app = {
     imagemin : 'imagemin'
 }
 
-gulp.task('build',['app.clean','app.mincss','app.assets','app.src_compress','app.templates','app.vendor_uglify','app.imagemin'],function(){
+gulp.task('build',['app.clean','app.assets','app.src_compress','app.templates','app.vendor_uglify'],function(){
     console.log('testing the gulp runner');
 });
 
@@ -38,10 +38,13 @@ gulp.task('app.mincss',function(){
 
 
 gulp.task('app.src_compress',function(){
-    var controllers = ['app/app.js', 
-                        'app/app-config.js',
-                        'app/**/*.js',
-                        'app/**/**/*.js']
+    var controllers = ['app/controllers/**/*.js','app/controllers/*.js',
+    'app/directives/*.js',
+    'app/filters/*.js',
+    'app/interceptors/*.js',
+    'app/services/*.js',
+    'app/services/**/*.js',
+    '!app/controllers/homeController.js']
     gulp.src(controllers)
         .pipe(uglify())
         .pipe(concat("app.min.js"))
@@ -50,7 +53,7 @@ gulp.task('app.src_compress',function(){
 
 
 gulp.task('app.assets',function(){
-    gulp.src(['app/assets/js/*.js'])
+    gulp.src(['app/assets/js/*.js','!app/assets/js/mainapp.js','!app/assets/js/main.js'])
     .pipe(uglify())
     .pipe(concat("app.assets.min.js"))
         .pipe(gulp.dest('dist/scripts'))
