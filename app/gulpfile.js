@@ -8,32 +8,40 @@ const mainBowerFiles = require('main-bower-files');
 var order = require("gulp-order");
 const minify_css = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
+const plugins = require("gulp-load-plugins");
+const runSequence = require("run-sequence");
 
 
 //tasks
 const app = {
     clean: 'clean',
     src_compress : 'src_compress',
-    assets : 'assets',
     customcss : 'customcss',
     vendor_uglify : 'vendor_uglify', 
     templates : 'templates',
-    imagemin : 'imagemin'
+    imagemin : 'imagemin',
+    vendorcss : 'vendorcss'
 }
 
-gulp.task('build',['app.clean','app.customcss','app.src_compress','app.templates','app.vendor_uglify','app.imagemin'],function(){
-    console.log('testing the gulp runner');
+gulp.task('build',function(){
+        runSequence('app.clean',
+        ['app.customcss',
+        'app.src_compress',
+        'app.templates',
+        'app.vendor_uglify'],
+        'app.vendorcss',
+        'app.imagemin')
 });
 
 gulp.task('app.clean',function(){
-    clean(["dist/*","temp",""])   
+    clean(["dist/asstes","dist/scripts","temp"])   
 });
 
 gulp.task('app.customcss',function(){
      gulp.src(['app/assets/css/*.css'])
      .pipe(minify_css())
      .pipe(concat('custom.min.css'))
-     .pipe(gulp.dest('dist/scripts/styles'))
+     .pipe(gulp.dest('dist/assets/css'))
 });
 
 
@@ -69,8 +77,8 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
             "temp/angular.js",
             "temp/angular-animate.js",
             "temp/angular-aria.js",
-            "temp/angular-material",
-            "temp/angular-messages",
+            "temp/angular-material.js",
+            "temp/angular-messages.js",
             "temp/angular-route.js",
             "temp/angular-ui-router.js",
             "temp/ng-map.js",
@@ -92,13 +100,24 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
             "temp/ng-google-chart.js",
             "temp/oms.min.js",
             "temp/popper.js",
-            "temp/hammer",
+            "temp/hammer.js",
             "temp/satellizer.min.js",
             "temp/vs-google-autocomplete.js"
         ], { base: './' }))
         .pipe(concat("app.vendor.min.js"))
         .pipe(gulp.dest('dist/scripts'))
 })
+
+gulp.task('app.vendorcss', function() {
+    gulp.src('temp/*.css')
+    .pipe(order([
+        "temp/angular-material.css"
+    ], { base: './' }))
+    .pipe(minify_css())
+    .pipe(concat("app.vendor.css"))
+    .pipe(gulp.dest('dist/scripts'))
+});
+
 
 gulp.task('app.templates',function(){
     gulp.src(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'])
