@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-const babel = require('gulp-babel');
 const clean = require('del');
 const ngTemplates = require('gulp-ng-templates');
 const mainBowerFiles = require('main-bower-files');
@@ -111,7 +110,9 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
 gulp.task('app.vendorcss', function() {
     gulp.src('temp/*.css')
     .pipe(order([
-        "temp/angular-material.css"
+        "temp/angular-material.css",
+        "temp/angular-toastr.css",
+        "temp/slick.css"
     ], { base: './' }))
     .pipe(minify_css())
     .pipe(concat("app.vendor.css"))
