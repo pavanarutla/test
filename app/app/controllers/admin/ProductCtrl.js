@@ -179,37 +179,37 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     enableRowHeaderSelection: false,
   };
   
-  $scope.gridProducts.columnDefs = [
-    { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
-    { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
-    { name: 'company_name', displayName: 'Company', enableCellEdit: false, width: '10%' },
-    { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
-    { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
-    { name: 'area_name', displayName: 'Area', width: '20%' },
-    { name: 'panelSize', displayName: 'Panel Size', type: 'number', width: '20%' },
-    { name: 'lighting', displayName: 'lighting', width: '10%' },
-    { name: 'direction', displayName: 'Direction', width: '10%', enableCellEdit: false, },
-    { name: 'image', displayName: 'Image', width: '10%', enableCellEdit: false, },
-    { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
-    {
-      name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
-      enableFiltering: false,
-    }
-  ];
+  // $scope.gridProducts.columnDefs = [
+  //   { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
+  //   { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
+  //   { name: 'company_name', displayName: 'Company', enableCellEdit: false, width: '10%' },
+  //   { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
+  //   { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
+  //   { name: 'area_name', displayName: 'Area', width: '20%' },
+  //   { name: 'panelSize', displayName: 'Panel Size', type: 'number', width: '20%' },
+  //   { name: 'lighting', displayName: 'lighting', width: '10%' },
+  //   { name: 'direction', displayName: 'Direction', width: '10%', enableCellEdit: false, },
+  //   { name: 'image', displayName: 'Image', width: '10%', enableCellEdit: false, },
+  //   { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
+  //   {
+  //     name: 'Action', field: 'Action', width: '10%',
+  //     cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+  //     enableFiltering: false,
+  //   }
+  // ];
   
-  $scope.gridProducts.onRegisterApi = function (gridApi) {
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-      $scope.$apply();
-    });
-  };
+  // $scope.gridProducts.onRegisterApi = function (gridApi) {
+  //   $scope.gridApi = gridApi;
+  //   gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+  //     $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
+  //     $scope.$apply();
+  //   });
+  // };
   // UI-Grid for products ends
 
   // Get products list
   ProductService.getProductList().then(function(result){
-    $scope.gridProducts.data = result;   
+    //$scope.gridProducts.data = result;   
     $scope.hoardinglistdata = result; 
   });
 
@@ -245,7 +245,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   };
 
   $scope.editProduct = function(product){
-    console.log(product);
+    //console.log(product);
     product.country = null;
     product.state = null;
     product.city = null;

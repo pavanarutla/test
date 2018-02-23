@@ -15,7 +15,7 @@
                         <md-select-header class="demo-select-header">
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                        <md-option ng-repeat="country in countrytList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                     </md-select required>
 
                     </md-input-container>
@@ -25,7 +25,7 @@
                         <md-select-header class="demo-select-header">
                         <input ng-model="searchTerm" type="search" placeholder="Search for a State.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="state in stateListForCountry | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
+                        <md-option ng-repeat="state in stateareaList | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
                     </md-select required>
 
                     </md-input-container>
@@ -44,8 +44,8 @@
         </div>
     </form>
 
-     <div ui-grid="gridCity"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    </div>
+     <!-- <div ui-grid="gridCity"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+    </div> -->
 
     <!-- tables grid html start-->
      <div style="margin-top: 1em;">
@@ -60,20 +60,20 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="list in citylocationdata | limitTo:limit">
-                <td>{{list.country_name}}</td>
-                <td>{{list.state_name}}</td>
-                <td>{{list.name}}</td>
+              <tr ng-repeat="city in citylocationdata | limitTo:limit">
+                <td>{{city.country_name}}</td>
+                <td>{{city.state_name}}</td>
+                <td>{{city.name}}</td>
                 <td>
-                  <span><a ng-href="#" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                  <span><a ng-click="editCity(city)"><md-icon><i class="material-icons" style="cursor: pointer;">mode_edit</i></md-icon></a></span>
+                  <span><a ng-click="deleteCity(city)"><md-icon><i class="material-icons" style="cursor: pointer;">delete</i></md-icon></a></span>
                 </td>
               </tr>      
             </tbody>
           </table>
         </div>
         <div layout="colmun" layout-align="end center" layout-margin>
-          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="CityloadMore()">Load More!</button>
         </div>
       </div>
 

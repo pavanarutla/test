@@ -15,7 +15,7 @@
                         <md-select-header class="demo-select-header">
                             <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                        <md-option ng-repeat="country in countrytList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                     </md-select required>
 
                 </md-input-container>
@@ -23,9 +23,9 @@
                     <label>Select State </label>
                     <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="area.state_id" ng-change="getCityList(area.state_id)"required>
                         <md-select-header class="demo-select-header">
-                            <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                            <input ng-model="searchTerm" type="search" placeholder="Search for a State.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="state in stateListForCountry | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
+                        <md-option ng-repeat="state in stateareaList | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
                     </md-select required>
 
                 </md-input-container>
@@ -34,9 +34,9 @@
                     <label>Select City </label>
                     <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="area.city_id"required>
                         <md-select-header class="demo-select-header">
-                            <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                            <input ng-model="searchTerm" type="search" placeholder="Search for a City.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="city in cityListForState | filter:searchTerm" value="{{city.id}}">{{city.name}}</md-option>
+                        <md-option ng-repeat="city in citylocationdata | filter:searchTerm" value="{{city.id}}">{{city.name}}</md-option>
                     </md-select required>
 
                 </md-input-container>
@@ -80,9 +80,9 @@
             <md-button Class="md-raised" ng-click="resetAreaForm()">CANCEL</md-button>
         </div>
     </form>
-    <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+    <!-- <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
         ui-grid-auto-resize class="grid">
-    </div>
+    </div> -->
     <!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -109,7 +109,7 @@
                 <td>{{locations.lat }}</td>
                 <td>{{locations.lng }}</td>
                 <td>
-                <span><a ng-href="" ng-click="editArea()"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                <span><a ng-href="" ng-click="editArea(locations)"><md-icon><i class="material-icons"style="cursor: pointer;" >mode_edit</i></md-icon></a></span>
                 <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
                 </td>
             </tr>      
@@ -117,7 +117,7 @@
         </table>
         </div>
         <div layout="colmun" layout-align="end center" layout-margin>
-        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="ArealoadMore()">Load More!</button>
         </div>
     </div>
     <!-- ===== table new code end=======-->

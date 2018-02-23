@@ -16,7 +16,7 @@
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                         <input type="hidden" name="state_id" ng-model="state.id" />
                     </md-select-header>
-                    <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    <md-option ng-repeat="country in countrytList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                 </md-select>
 
             </md-input-container>
@@ -35,9 +35,9 @@
     </div>
     </form>
 
-    <div ui-grid="gridState" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+    <!-- <div ui-grid="gridState" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
         ui-grid-auto-resize class="grid">
-    </div>
+    </div> -->
     <!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -51,19 +51,19 @@
 					</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="state in stateList | limitTo:limit">
+				<tr ng-repeat="state in stateareaList | limitTo:limit">
 					<td>{{state.country_name}}</td>
 					<td>{{state.name}}</td>
 					<td>
-					<span><a ng-href="" ng-click="editArea()"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-					<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+					<span><a ng-click="editState(area)"><md-icon><i class="material-icons" style="cursor: pointer;">mode_edit</i></md-icon></a></span>
+					<span><a ng-click="deleteState(state)"><md-icon><i class="material-icons" style="cursor: pointer;">delete</i></md-icon></a></span>
 					</td>
 				</tr>      
 				</tbody>
 			</table>
         </div>
         <div layout="colmun" layout-align="end center" layout-margin>
-        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="StateloadMore()">Load More!</button>
         </div>
     </div>
 </div>

@@ -28,9 +28,9 @@
 		</div>
 	</form>
 
-	<div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+	<!-- <div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
 	 ui-grid-auto-resize class="grid">
-	</div>
+	</div> -->
 	<!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -43,18 +43,18 @@
 					</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="country in countrtList | limitTo:limit">
+				<tr ng-repeat="country in countryList | limitTo:limit">
 					<td>{{country.name}}</td>
 					<td>
-					<span><a ng-href="" ng-click="editArea()"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-					<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+					<span><a ng-href="" ng-click="editCountry(country)"><md-icon><i class="material-icons" style="cursor: pointer;">mode_edit</i></md-icon></a></span>
+					<span><a ng-href="" ng-click="deleteCountry(country)"><md-icon><i class="material-icons" style="cursor: pointer;">delete</i></md-icon></a></span>
 					</td>
 				</tr>      
 				</tbody>
 			</table>
         </div>
         <div layout="colmun" layout-align="end center" layout-margin>
-        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="CountryloadMore()">Load More!</button>
         </div>
     </div>
     <!-- ===== table new code end=======-->

@@ -33,23 +33,23 @@
                   <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-              <tr ng-repeat="list in hoardinglistdata | limitTo:limit">
-                <td>{{list.siteNo}}</td>
-                <td>{{list.format_name}}</td>
-                <td>{{list.company_name}}</td>
-                <td>{{list.address}}</td>
-                <td>{{list.impressions}}</td>
-                <td>{{list.area_name }}</td>
-                <td>{{list.panelSize }}</td>
-                <td>{{list.lighting}}</td>
-                <td>{{list.direction}}</td>
+            <tbody>                 
+              <tr ng-repeat="product in hoardinglistdata | limitTo:limit">
+                <td>{{product.siteNo}}</td>
+                <td>{{product.format_name}}</td>
+                <td>{{product.company_name}}</td>
+                <td>{{product.address}}</td>
+                <td>{{product.impressions}}</td>
+                <td>{{product.area_name }}</td>
+                <td>{{product.panelSize }}</td>
+                <td>{{product.lighting}}</td>
+                <td>{{product.direction}}</td>
                 <td>{{image}}</td>
                 <td>{{symbol}}</td>
                 <td>
-                    <span><a href="" ng-click="editProduct(list)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                    <span><a href="" ng-click="editProduct(product)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
                     <span><a ng-href="" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-                    <span><a href="" ng-click="deleteProduct(list)"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                    <span><a href="" ng-click="deleteProduct(product)"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
                 </td>
               </tr>      
             </tbody>
