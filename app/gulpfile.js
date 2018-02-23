@@ -9,6 +9,7 @@ const minify_css = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
 const plugins = require("gulp-load-plugins");
 const runSequence = require("run-sequence");
+const replace = require("gulp-replace");
 
 
 //tasks
@@ -33,7 +34,7 @@ gulp.task('build',function(){
 });
 
 gulp.task('app.clean',function(){
-    clean(["dist/asstes","dist/scripts","temp"])   
+    clean(["!dist/index.html","!dist/app.js","!dist/app-config.js","dist/asstes/*","dist/scripts/*","temp"])   
 });
 
 gulp.task('app.customcss',function(){
@@ -60,7 +61,7 @@ gulp.task('app.src_compress',function(){
 
 
 gulp.task('app.assets',function(){
-    gulp.src(['app/assets/js/*.js','!app/assets/js/mainapp.js','!app/assets/js/main.js'])
+    gulp.src(['bower_components/modernizr/modernizr.js','app/assets/js/*.js','!app/assets/js/mainapp.js','!app/assets/js/main.js'])
     .pipe(uglify())
         .pipe(gulp.dest('temp'))
 });
@@ -100,9 +101,11 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
             "temp/oms.min.js",
             "temp/popper.js",
             "temp/hammer.js",
+            "temp/modernizr.js",
             "temp/satellizer.min.js",
             "temp/vs-google-autocomplete.js"
         ], { base: './' }))
+        .pipe(uglify())
         .pipe(concat("app.vendor.min.js"))
         .pipe(gulp.dest('dist/scripts'))
 })
