@@ -10,6 +10,7 @@ const imagemin = require('gulp-imagemin');
 const plugins = require("gulp-load-plugins");
 const runSequence = require("run-sequence");
 const replace = require("gulp-replace");
+var inject = require('gulp-inject');
 
 
 //tasks
@@ -44,15 +45,49 @@ gulp.task('app.customcss',function(){
      .pipe(gulp.dest('dist/assets/css'))
 });
 
+/*starttag: '"{{ext}}": [',
+    endtag: ']',
+    transform: function (filepath, file, i, length) {
+      return '  "' + filepath + '"' + (i + 1 < length ? ',' : '');
+    }*/
+
+gulp.task('index', function () {
+  gulp.src('app/index.html')
+  .pipe(inject(gulp.src([
+		'dist/scripts/app.vendor.min.js',
+		'dist/scripts/app.min.js', 
+		'dist/scripts/templates.min.js',
+		'dist/scripts/app.vendor.css',
+		'dist/assets/css/custom.min.css',
+	], {read: false}), {
+    transform: function(filepath, file, i, length) {
+		var tmp = filepath.split('/');
+		tmp.splice(0, 2);
+		console.log(tmp);
+		if (tmp[tmp.length - 1].indexOf('js') != -1) {
+			return "<script src='" + tmp.join('/') + "'></script>";
+		} else if (tmp[tmp.length - 1].indexOf('css') != -1) {
+			return "<link rel='stylesheet' href='" + tmp.join('/') + "'>";
+		}
+	}
+  }))
+  .pipe(gulp.dest('dist'));
+});
+
 
 gulp.task('app.src_compress',function(){
-    var controllers = ['app/controllers/**/*.js','app/controllers/*.js',
-    'app/directives/*.js',
-    'app/filters/*.js',
-    'app/interceptors/*.js',
-    'app/services/*.js',
-    'app/services/**/*.js',
-    '!app/controllers/homeController.js']
+    var controllers = [
+		'app/app.js',
+		'app/app-config.js',
+		'app/controllers/**/*.js',
+		'app/controllers/*.js',
+		'app/directives/*.js',
+		'app/filters/*.js',
+		'app/interceptors/*.js',
+		'app/services/*.js',
+		'app/services/**/*.js',
+		'!app/controllers/homeController.js'
+	]
     gulp.src(controllers)
         .pipe(uglify())
         .pipe(concat("app.min.js"))
@@ -127,6 +162,7 @@ gulp.task('app.templates',function(){
     gulp.src(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'])
     .pipe(ngTemplates({
         module: 'bbManager',
+		standalone: false,
         path: function (path, base) {
             var split = base.split('\\');
             var replacedPath = (split[split.length-2]) + '/';

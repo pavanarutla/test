@@ -9,8 +9,10 @@
         
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i"> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./../dist/scripts/app.vendor.css">
-    <link rel="stylesheet" href="./../dist/assets/css/custom.min.css">
+	<!-- inject:css -->
+		<link rel="stylesheet" href="./../dist/scripts/app.vendor.css">
+		<link rel="stylesheet" href="./../dist/assets/css/custom.min.css">
+	<!-- endinject -->
     
    
     <style>
@@ -43,12 +45,77 @@
   <body>
 
    <ui-view></ui-view>
-   <script src="../dist/scripts/app.vendor.min.js"></script>
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj3Y032pqw8rM5JFxFO7WBVoqw8ZlRrzI&libraries=places"></script>   
-   <script type="text/javascript" src="app.js"></script>
-   <script type="text/javascript" src="app-config.js"></script>
-   <script src="../dist/scripts/templates.min.js"></script>
-   <script type="text/javascript" src="../dist/scripts/app.min.js"></script>
+   <!-- inject:js -->
+   
+		<script src="../dist/scripts/app.vendor.min.js"></script>
+		
+		<!-- Controllers -->
+		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="app-config.js"></script>
+		
+		<script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
+		<script type="text/javascript" src="controllers/PricingCtrl.js"></script>
+		<script type="text/javascript" src="controllers/FormatsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/GmapCtrl.js"></script>
+		<script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
+		<script type="text/javascript" src="controllers/AuthCtrl.js"></script>
+		<script type="text/javascript" src="controllers/RegistrationCtrl.js"></script>
+		<script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
+		<script type="text/javascript" src="controllers/UserProfileCtrl.js"></script>
+		<script type="text/javascript" src="controllers/UserSettingsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/ContactCtrl.js"></script> -->
+		<!-- Services -->
+		<script type="text/javascript" src="services/MapService.js"></script>
+		<script type="text/javascript" src="services/LocationService.js"></script>
+		<script type="text/javascript" src="services/UserService.js"></script>
+		<script type="text/javascript" src="services/CampaignService.js"></script>
+		<script type="text/javascript" src="services/ContactService.js"></script>
+		<script type="text/javascript" src="services/NotificationService.js"></script> -->
+		<!-- Filters -->
+		<script type="text/javascript" src="filters/Filters.js"></script>
+		<!-- Directives -->
+		<script type="text/javascript" src="directives/Directives.js"></script>
+		<!-- Interceptors -->
+		<script type="text/javascript" src="interceptors/LoadingInterceptor.js"></script>
+
+		<!--==============
+		|  Admin Section |
+		================-->
+		<!-- Controllers -->
+		<script type="text/javascript" src="controllers/admin/AdminMgrAppCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/RegistrationCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/AdminLocationCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/CampaignCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/CampaignProposalCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/CompanyCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/ProductCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/FeedsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/admin/callcenterinfo.js"></script>
+		
+		<!-- Services -->
+		<script type="text/javascript" src="services/admin/AdminLocationService.js"></script>
+		<script type="text/javascript" src="services/admin/UserService.js"></script>
+		<script type="text/javascript" src="services/admin/CompanyService.js"></script>
+		<script type="text/javascript" src="services/admin/ProductService.js"></script>
+		<script type="text/javascript" src="services/admin/CampaignService.js"></script>
+		<script type="text/javascript" src="services/admin/NotificationService.js"></script>
+
+		<!--==============
+		|  Owner Section |
+		================-->
+		<!-- Controllers -->
+		<script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/DashboardCtrl.js"></script>
+		<script type="text/javascript" src="app/controllers/owner/AdminFeedsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/requestingCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/CampaignCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/FeedsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/outsourcingCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/teampageCtrl.js"></script>
+		<script type="text/javascript" src="controllers/owner/feedbackCtrl.js"></script>
+		
+   <!-- endinject -->
 
   </body>
 
