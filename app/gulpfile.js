@@ -9,7 +9,6 @@ const minify_css = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
 const plugins = require("gulp-load-plugins");
 const runSequence = require("run-sequence");
-const replace = require("gulp-replace");
 var inject = require('gulp-inject');
 
 
@@ -31,11 +30,12 @@ gulp.task('build',function(){
         'app.templates',
         'app.vendor_uglify'],
         'app.vendorcss',
-        'app.imagemin')
+        'app.imagemin',
+        'app.index')
 });
 
 gulp.task('app.clean',function(){
-    clean(["!dist/index.html","!dist/app.js","!dist/app-config.js","dist/asstes/*","dist/scripts/*","temp"])   
+    clean(["dist","temp"])   
 });
 
 gulp.task('app.customcss',function(){
@@ -51,16 +51,17 @@ gulp.task('app.customcss',function(){
       return '  "' + filepath + '"' + (i + 1 < length ? ',' : '');
     }*/
 
-gulp.task('index', function () {
+gulp.task('app.index', function () {
   gulp.src('app/index.html')
   .pipe(inject(gulp.src([
-		'dist/scripts/app.vendor.min.js',
+		'dist/scripts/vendor.min.js',
 		'dist/scripts/app.min.js', 
 		'dist/scripts/templates.min.js',
 		'dist/scripts/app.vendor.css',
 		'dist/assets/css/custom.min.css',
 	], {read: false}), {
     transform: function(filepath, file, i, length) {
+        console.log(filepath)
 		var tmp = filepath.split('/');
 		tmp.splice(0, 2);
 		console.log(tmp);
@@ -85,7 +86,7 @@ gulp.task('app.src_compress',function(){
 		'app/filters/*.js',
 		'app/interceptors/*.js',
 		'app/services/*.js',
-		'app/services/**/*.js',
+        'app/services/**/*.js',
 		'!app/controllers/homeController.js'
 	]
     gulp.src(controllers)
@@ -96,7 +97,11 @@ gulp.task('app.src_compress',function(){
 
 
 gulp.task('app.assets',function(){
-    gulp.src(['bower_components/modernizr/modernizr.js','app/assets/js/*.js','!app/assets/js/mainapp.js','!app/assets/js/main.js'])
+    gulp.src(['bower_components/modernizr/modernizr.js',
+    'bower_components/ng-file-upload/ng-file-upload-shim.min.js',
+    'app/assets/js/*.js',
+    '!app/assets/js/mainapp.js',
+    '!app/assets/js/main.js'])
     .pipe(uglify())
         .pipe(gulp.dest('temp'))
 });
@@ -123,6 +128,7 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
             "temp/slick.js",
             "temp/angular-toastr.tpls.js",
             "temp/ng-file-upload.js",
+            "temp/ng-file-upload-shim.min.js",
             "temp/underscore.js",
             "temp/moment.js",
             "temp/ui-grid.js",
@@ -134,14 +140,14 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
             "temp/angular-ui-bootstrap.js",
             "temp/ng-google-chart.js",
             "temp/oms.min.js",
-            "temp/popper.js",
+            "temp/popper.min.js",
             "temp/hammer.js",
             "temp/modernizr.js",
             "temp/satellizer.min.js",
             "temp/vs-google-autocomplete.js"
         ], { base: './' }))
         .pipe(uglify())
-        .pipe(concat("app.vendor.min.js"))
+        .pipe(concat("vendor.min.js"))
         .pipe(gulp.dest('dist/scripts'))
 })
 
