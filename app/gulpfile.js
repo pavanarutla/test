@@ -39,7 +39,7 @@ gulp.task('app.clean',function(){
 });
 
 gulp.task('app.customcss',function(){
-     gulp.src(['app/assets/css/*.css'])
+    return gulp.src(['app/assets/css/*.css'])
      .pipe(minify_css())
      .pipe(concat('custom.min.css'))
      .pipe(gulp.dest('dist/assets/css'))
@@ -52,7 +52,7 @@ gulp.task('app.customcss',function(){
     }*/
 
 gulp.task('app.index', function () {
-  gulp.src('app/index.html')
+  return gulp.src('app/index.html')
   .pipe(inject(gulp.src([
 		'dist/scripts/vendor.min.js',
 		'dist/scripts/app.min.js', 
@@ -89,7 +89,7 @@ gulp.task('app.src_compress',function(){
         'app/services/**/*.js',
 		'!app/controllers/homeController.js'
 	]
-    gulp.src(controllers)
+    return gulp.src(controllers)
         .pipe(uglify())
         .pipe(concat("app.min.js"))
         .pipe(gulp.dest('dist/scripts'))
@@ -97,7 +97,7 @@ gulp.task('app.src_compress',function(){
 
 
 gulp.task('app.assets',function(){
-    gulp.src(['bower_components/modernizr/modernizr.js',
+   return gulp.src(['bower_components/modernizr/modernizr.js',
     'bower_components/ng-file-upload/ng-file-upload-shim.min.js',
     'app/assets/js/*.js',
     '!app/assets/js/mainapp.js',
@@ -111,7 +111,7 @@ gulp.task('app.vendor',['app.assets'],function(){
         .pipe(gulp.dest('temp'))
 });
 gulp.task('app.vendor_uglify',['app.vendor'], function() {
-    gulp.src('temp/*.js')
+   return gulp.src('temp/*.js')
         .pipe(order([
             "temp/jquery.js",
             "temp/angular.js",
@@ -152,7 +152,9 @@ gulp.task('app.vendor_uglify',['app.vendor'], function() {
 })
 
 gulp.task('app.vendorcss', function() {
-    gulp.src('temp/*.css')
+   return gulp.src(['temp/*.css',  
+    'bower_components/bootstrap/dist/css/bootstrap.min.css']
+)
     .pipe(order([
         "temp/angular-material.css",
         "temp/angular-toastr.css",
@@ -165,7 +167,7 @@ gulp.task('app.vendorcss', function() {
 
 
 gulp.task('app.templates',function(){
-    gulp.src(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'])
+   return gulp.src(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'])
     .pipe(ngTemplates({
         module: 'bbManager',
 		standalone: false,
@@ -181,7 +183,7 @@ gulp.task('app.templates',function(){
 gulp.task('app.imagemin', function() {
     var imgSrc = ['app/assets/images/*','app/assets/images/**/*','app/assets/mobile-icons/*'],
     imgDst = 'dist/assets/images';
-    gulp.src(imgSrc)
+   return gulp.src(imgSrc)
     .pipe(imagemin())
     .pipe(gulp.dest(imgDst));
  });
