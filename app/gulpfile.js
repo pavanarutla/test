@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-const clean = require('del');
+const clean = require('gulp-clean');
 const ngTemplates = require('gulp-ng-templates');
 const mainBowerFiles = require('main-bower-files');
 var order = require("gulp-order");
@@ -10,6 +10,7 @@ const imagemin = require('gulp-imagemin');
 const plugins = require("gulp-load-plugins");
 const runSequence = require("run-sequence");
 var inject = require('gulp-inject');
+var svgmin = require('gulp-svgmin');
 
 
 //tasks
@@ -35,7 +36,8 @@ gulp.task('build',function(){
 });
 
 gulp.task('app.clean',function(){
-    clean(["dist","temp"])   
+   return gulp.src(['temp','dist'], {read: false})
+    .pipe(clean())  
 });
 
 gulp.task('app.customcss',function(){
@@ -187,3 +189,26 @@ gulp.task('app.imagemin', function() {
     .pipe(imagemin())
     .pipe(gulp.dest(imgDst));
  });
+
+ gulp.task('app.testsvg',function(){
+    return gulp.src('app/assets/images/*.svg')
+        .pipe(svgmin(
+            {
+                plugins: [{
+                    removeDoctype: false
+                }, {
+                    removeComments: false
+                }, {
+                    cleanupNumericValues: {
+                        floatPrecision: 2
+                    }
+                }, {
+                    convertColors: {
+                        names2hex: false,
+                        rgb2hex: false
+                    }
+                }]
+            }
+        ))
+        .pipe(gulp.dest('dist/assets/testimg'))
+})
