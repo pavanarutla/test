@@ -63,10 +63,8 @@ gulp.task('app.index', function () {
 		'dist/assets/css/custom.min.css',
 	], {read: false}), {
     transform: function(filepath, file, i, length) {
-        console.log(filepath)
-		var tmp = filepath.split('/');
+        var tmp = filepath.split('/');
 		tmp.splice(0, 2);
-		console.log(tmp);
 		if (tmp[tmp.length - 1].indexOf('js') != -1) {
 			return "<script src='" + tmp.join('/') + "'></script>";
 		} else if (tmp[tmp.length - 1].indexOf('css') != -1) {
