@@ -26,6 +26,11 @@ app.service('AdminUserService',
         var dfd = $q.defer();
         $http.get(config.apiPath + '/activate-user/' + userMID).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
+      },
+      deleteUser: function(userMID){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/delete-user/' + userMID).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
       }
     }
 }]);
