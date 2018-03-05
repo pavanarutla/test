@@ -7,16 +7,13 @@
 			<div layout="row" layout-margin >
 				<h4>Enter Hoarding Company Details</h4>
 				<div flex></div>
-				<md-button class="md-icon-button md-button" type="button" ng-transclude="">
-					<i class="material-icons">close</i>
-					<div class="md-ripple-container"></div>
-				</md-button>
+				<button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" style="position: absolute;right: 0em;" type="button"  ng-click="cancel()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X</button>
 			</div>
 			<form name="hoardingCoData" novalidate="novalidate">
 				<div layout="column" layout-xs="column" layout-padding flex="100">
 					<md-input-container class="md-block margin-input">
 						<label>Company Name</label>
-						<input ng-model="hoardingCompany.name" type="text" name="name" minlength="5" maxlength="60" required="required" />
+						<input ng-model="hoarding.name" type="text" name="name" minlength="5" maxlength="60" required="required" />
 						<div ng-messages="hoardingCoData.name.$error">
 							<div ng-message="required">Company Name is required.</div>
 							<div ng-message="minlength">Company Name must have 2 characters.</div>
@@ -26,7 +23,7 @@
 
 					<md-input-container class="md-block margin-input">
 						<label>Owner Name</label>
-						<input ng-model="hoardingCompany.owner" type="text" name="owner" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/"
+						<input ng-model="hoarding.owner" type="text" name="owner" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/"
 						/>
 						<div ng-messages="hoardingCoData.owner.$error">
 							<div ng-message="required">Owner Name is required.</div>
@@ -37,7 +34,7 @@
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Phone</label>
-						<input ng-model="hoardingCompany.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
+						<input ng-model="hoarding.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
 						<div ng-messages="hoardingCoData.phone.$error">
 							<div ng-message="required">Phone No is required.</div>
 							<div ng-message="minlength">Phone No must have 10 characters.</div>
@@ -47,7 +44,7 @@
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Email</label>
-						<input ng-model="hoardingCompany.email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+						<input ng-model="hoarding.email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
 						<div ng-messages="hoardingCoData.email.$error">
 							<div ng-message="required">Email is required.</div>
 							<!-- <div ng-message="minlength">Email must have 10 characters.</div> -->
@@ -58,14 +55,14 @@
 
 					<md-input-container class="md-block margin-input">
 						<label> No. Of Hoarding </label>
-						<input ng-model="hoardingCompany.noOfHoardings" type="text" name="noOfHoardings" />
+						<input ng-model="hoarding.noOfHoardings" type="text" name="noOfHoardings" />
 						<div ng-messages="hoardingCoData.noOfHoardings.$error">
 							<div ng-message="required">No. of hordings is required.</div>
 						</div>
 					</md-input-container>
 				</div>
 				<div layout="row" layout-align="center center">
-					<md-button type="submit" Class="md-raised md-primary" ng-click="addHoardingCompany()">SUBMIT</md-button>
+					<md-button type="submit" Class="md-raised md-primary" ng-click="addHoardingCompany(hoarding)">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 				</div>
 			</form>

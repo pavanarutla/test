@@ -9,7 +9,7 @@
 				</md-button>
 		</div> -->
 	</div>
-	<div layout="column" >
+	<div layout="column">
 		<md-tabs md-dynamic-height class="contbg">
 			<md-tab label="Companies">
 
@@ -19,9 +19,9 @@
 					</md-button>
 				</div>
 
-				<div ui-grid="gridCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+				<!-- <div ui-grid="gridCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
 				 ui-grid-auto-resize class="grid">
-				</div>
+				</div> -->
 				
 				<!-- ========new code for tables html start ========= -->
 				<div style="margin-top: 1em;">
@@ -48,7 +48,7 @@
 							<td>{{company.address }}</td>
 							
 							<td>
-								<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+								<span><a ng-href=""><md-icon><i class="material-icons" style="cursor: pointer;" ng-click="editCompany(company)">mode_edit</i></md-icon></a></span>
 								
 							</td>
 							</tr>      
@@ -61,15 +61,15 @@
 				</div>
 				<!-- ========new code for tables html end ========= -->
 			</md-tab>
-			<md-tab label="Hoarding Companies ">
+			<md-tab label="Hoarding Companies">
 				<div layout-align="center end" layout="column" flex="100">
 					<md-button class="md-raised md-warn" ng-click="showAddHoardingCompanyPopup()">
 						Add New Hoarding Company <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span>
 					</md-button>
 				</div>
-				<div ui-grid="gridHoardingCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
+				<!-- <div ui-grid="gridHoardingCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
 				 ui-grid-move-columns ui-grid-auto-resize class="grid">
-				</div>
+				</div> -->
 				<!-- ========new code for tables html start ========= -->
 				<div style="margin-top: 1em;">
 					<div class="table-responsive">    
@@ -85,15 +85,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="company in hoardingCompany | limitTo:limit">
-								<td>{{company.name}}</td>
-								<td>{{company.owner}}</td>
-								<td>{{company.email}}</td>
-								<td>{{company.phone }}</td>
-								<td>{{company.hoardinglist }}</td>
+								<tr ng-repeat="hoarding in hoardingCompany | limitTo:limit">
+								<td>{{hoarding.name}}</td>
+								<td>{{hoarding.owner}}</td>
+								<td>{{hoarding.email}}</td>
+								<td>{{hoarding.phone }}</td>
+								<td>{{hoarding.hoardinglist }}</td>
 								
 								<td>
-									<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+									<span><a ng-href=""><md-icon><i class="material-icons" style="cursor: pointer;" ng-click="edithoardingCompany(hoarding)">mode_edit</i></md-icon></a></span>
 									
 								</td>
 								</tr>      

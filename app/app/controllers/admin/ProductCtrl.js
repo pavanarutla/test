@@ -103,7 +103,9 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
       scope: $scope
     });
   }
-
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+   };
   $scope.deleteFormat = function(format){
     ProductService.deleteFormat(format.id).then(function(result){
       if(result.status == 1){
