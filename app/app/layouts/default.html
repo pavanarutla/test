@@ -15,7 +15,7 @@
       <span flex class=""></span>
       <md-menu-bar class="main-menu">
         <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">what we do</md-button>
-        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">formats</md-button>
+        <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">our services</md-button>
         <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">why outdoor</md-button>
         <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">contact</md-button>
         <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> --> 
@@ -89,34 +89,37 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" md-component-id="right">
-    <md-toolbar layout="row">
-      <div class="md-toolbar-tools" style="background:#788492 !important">
-        <h2>
-          <span>Notifications</span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
-            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-content layout-padding="">
-
-      <md-card  class="ng-scope" style="padding:0px"  ng-repeat="notif in notifs" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-        <md-list-item class="md-2-line" role="listitem" tabindex="-1"ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
-          <div class="md-list-item-inner ng-scope">
-            <!-- <md-icon class="bb-f20 fa fa-tasks material-icons" style="margin-right:15px" aria-hidden="true"></md-icon> -->
-              <div class="md-list-item-text layout-column" layout="column">
-                <!--<h3>{{orderMessage.user.displayName}}</h3>-->
-                <h4 class="bb-p-cust md-title" style="font-size:24px">{{ notif.desc }}</h4>
-                <p style="color:#980000">{{ notif.message }}<p>
-              </div>
-            <!--<md-divider></md-divider>-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right">
+    
+    <md-content>
+      <ul style="padding:0px;margin:0px">
+        <li>
+          <div class="notification_header">
+            <h3>You have 2 new notification  <span style="    margin: 0 0 0 40px;">
+              <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+                <md-icon class="md-default-theme" ><i class="material-icons" style="font-size:18px">close</i></md-icon>
+            </md-button>
+            </span></h3>
+           
+            <div class="clearfix"></div>
           </div>
-          <div class="md-ripple-container" style=""></div></a></md-list-item>
-      </md-card>
-
+        </li>
+        <li ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+          <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+            
+            <div class="notification_desc">
+                <p>{{ notif.desc }}</p>
+                <p><span>{{ notif.message }}</span></p>
+            </div>
+            <div class="clearfix"></div>
+            </a>
+        </li>
+       
+        <!-- <li style="    position: fixed;bottom: 0px;width: 100%;">
+            <div class="notification_bottom"> <a href="#">See all notifications</a> </div>
+        </li> -->
+      </ul>
       <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
       ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
         <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
@@ -135,7 +138,7 @@
 
   <!-- Footer Section-->
   <footer>
-    <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
+     <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="fmson">
         <div class="" style="margin-left:5%">
           <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
@@ -160,7 +163,7 @@
         <p class="md-body-2 text">BBI Advertising pvt Ltd @Copyrights 2017. All rights reserved.</p>
       </div>
 
-    </div>
+    </div> 
     <!-- <md-button hide-xs class="goToTop md-fab md-mini bottom-btn " style="display:none;">
       <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon>
     </md-button>  -->
@@ -198,6 +201,8 @@
       </div>
   
     </div> -->
+
+
   </footer>
 
  

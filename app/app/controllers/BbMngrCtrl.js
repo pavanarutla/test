@@ -145,19 +145,19 @@ app.controller('bbMngrCtrl',
 
     $scope.whatwedo = function () {
       $location.path('/');
-      window.scroll(0, 740);
+      window.scroll(0, 580);
     }
     $scope.formate = function () {
       $location.path('/');
-      window.scroll(0, 1630)
+      window.scroll(0, 1550)
     }
     $scope.whyOutdoor = function () {
       $location.path('/');
-      window.scroll(0, 2570)
+      window.scroll(0, 2430)
     }
     $scope.contactus = function () {
       $location.path('/');
-      window.scroll(0, 3810)
+      window.scroll(0, 3270)
     }
     //jk caraosel
     $scope.dataArray = [

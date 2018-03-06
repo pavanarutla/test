@@ -270,6 +270,7 @@ var app = angular.module('bbManager', [
       url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
+      
     })
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
@@ -313,7 +314,8 @@ var app = angular.module('bbManager', [
       url: '/outsourcingagent',
       templateUrl: 'views/owner/outsourcingagent.html',
       controller:'outSourcing'
-    }).state('owner.teamPage', {
+    })
+    .state('owner.teamPage', {
       url: '/teamPage',
       templateUrl: 'views/owner/team.html',
       controller:'teamPage'
