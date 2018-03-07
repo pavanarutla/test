@@ -25,7 +25,7 @@ var stylish = require('jshint-stylish'); // More stylish debugging
 // Task to clean the distributable directory
 gulp.task('app.clean',function(){
   return del([
-    'build',
+    'build/*',
     // we don't want to clean this file though so we negate the pattern
     '!bulid/index.html'
   ]);
@@ -42,6 +42,7 @@ gulp.task('compile-scss', function() {
 gulp.task('styles', ['compile-scss'], function() {
   gulp.src('./app/assets/css/*.css')
   .pipe(minifyCSS())
+  .pipe(concat('style.css'))
   .pipe(gulp.dest('./build/styles/'))
   .pipe(browserSync.reload({
     stream: true,
@@ -64,7 +65,8 @@ gulp.task('scripts', function() {
             './app/directives/*.js',
             './app/filters/*.js',
             './app/interceptors/*.js',
-            '!./app/app-config.js'
+            '!./app/app-config.js',
+            '!./app/assets/js/markerclusterer.1.0.1.js'
   ])
     .pipe(concat('script.js'))
     .pipe(stripDebug())
