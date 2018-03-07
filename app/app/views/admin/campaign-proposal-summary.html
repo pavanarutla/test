@@ -208,22 +208,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="list in campaignDetails | limitTo:limit">
+							<tr ng-repeat="product in campaignDetails.products | limitTo:limit">
 								
-							<td>{{list.format_name}}</td>
-							<td>{{list.area_name}}</td>
-							<td>{{list.panelSize}}</td>
-							<td>{{list.lighting | boolToYesNo}}</td>
-							<td>{{list.from_date | dateify | date:"dd-MM-yyyy" }}</td>
-							<td>{{list.to_date | dateify | date:"dd-MM-yyyy" }}</td>
-							<td><div><span><md-button ng-click="viewProductImage(list)" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>
+							<td>{{product.format_name}}</td>
+							<td>{{product.area_name}}</td>
+							<td>{{product.panelSize}}</td>
+							<td>{{product.lighting | boolToYesNo}}</td>
+							<td>{{product.from_date | dateify | date:"dd-MM-yyyy" }}</td>
+							<td>{{product.to_date | dateify | date:"dd-MM-yyyy" }}</td>
+							<td><div><span><md-button ng-click="viewProductImage(product)" class="md-icon-button"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></md-button></span></div>
 							</td>							
-							<td>{{list.price}}</td>
+							<td>{{product.price}}</td>
 							<td>
-								<span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
-								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+								<span><md-button ng-click="editproposedlist(product)" class="md-icon-button" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></md-button></span>
+								<!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+								<span><md-button ng-click="removeProductFromProposal(product)" class="md-icon-button"><md-icon><i class="material-icons">delete</i></md-icon></md-button></span>
 							</td>
 							</tr>      
 						</tbody>

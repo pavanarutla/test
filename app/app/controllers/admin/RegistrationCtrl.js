@@ -148,7 +148,7 @@ $scope.Useredit = function(user){
   /* 
   ======== Adding New User ========
   */
-  $scope.addUser = function () {
+  $scope.addUser = function (user) {
     AdminUserService.saveUser($scope.user).then(function(result){
       if(result.status == 1){
         AdminUserService.getUsers().then(function (response) {    

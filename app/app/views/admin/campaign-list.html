@@ -32,21 +32,21 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="list in personalcampsdata | limitTo:limit">
-                <td>{{list.created_by}}</td>
-                <td>{{list.name}}</td>
-                <td>{{list.user_full_name}}</td>
-                <td>{{list.user_phone}}</td>
-                <td>{{list.start_date | date }}</td>
-                <td>{{list.end_date | date }}</td>
-                <td>{{list.status | stringifyCampaignStatus }}</td>
-                <td>{{list.products.length}}</td>
-                <td>{{list.est_budget}}</td>
+              <tr ng-repeat="campagin in personalcampsdata | limitTo:limit">
+                <td>{{campagin.created_by}}</td>
+                <td>{{campagin.name}}</td>
+                <td>{{campagin.user_full_name}}</td>
+                <td>{{campagin.user_phone}}</td>
+                <td>{{campagin.start_date | date }}</td>
+                <td>{{campagin.end_date | date }}</td>
+                <td>{{campagin.status | stringifyCampaignStatus }}</td>
+                <td>{{campagin.products.length}}</td>
+                <td>{{campagin.est_budget}}</td>
                 <td>
-                  <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="editProposedProduct(list)" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                  <span><md-button ng-href="#/admin/campaign-proposal-summary/{{campagin.id}}" ng-click="editCampagin(campagin)" ng-if="campagin.status < 4"><md-icon><i class="material-icons">mode_edit</i></md-icon></md-button></span>
+                  <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+                  <span><md-button ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></md-button></span>
                 </td>
               </tr>      
             </tbody>
@@ -90,9 +90,9 @@
                   <td>{{list.products.length}}</td>
                   <td>{{list.est_budget}}</td>
                   <td>
-                    <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-                    <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-                    <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
+                    <!-- <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span> -->
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+                    <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
                     <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
                   </td>
                 </tr>      
@@ -137,9 +137,9 @@
                 <td>{{list.products.length}}</td>
                 <td>{{list.est_budget}}</td>
                 <td>
-                  <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
+                  <!-- <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span> -->
+                  <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
                   <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
                 </td>
               </tr>      

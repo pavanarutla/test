@@ -98,13 +98,13 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Hoarding Companies ========
   */
-  // $scope.showAddHoardingCompanyPopup = function (ev) {
-  //   $mdDialog.show({
-  //     templateUrl: 'views/admin/add-hoarding-company-popup.html',
-  //     fullscreen: $scope.customFullscreen,
-  //     clickOutsideToClose: true
-  //   })
-  // };
+  $scope.showAddHoardingCompanyPopup = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-hoarding-company-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true
+    })
+  };
 
   // $scope.gridHoardingCompany = {
   //   paginationPageSizes: [25, 50, 75],
@@ -148,8 +148,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     $scope.hoardingCompany = response;
   });
 
-  $scope.addHoardingCompany = function(hoarding){
-    CompanyService.saveHoardingCompany($scope.hoardingCompany).then(function(result){
+  $scope.addHoardingCompany = function(hoardingCoData){
+    //console.log(hoardingCoData);
+    CompanyService.saveHoardingCompany(hoardingCoData).then(function(result){
       if(result.status == 1){
         CompanyService.getHoardingCompanies().then(function (response) {    
           //$scope.gridHoardingCompany.data = response;
