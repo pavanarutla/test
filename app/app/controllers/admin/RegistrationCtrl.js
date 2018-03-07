@@ -37,6 +37,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   ======== Users Grid ========
   */
 
+<<<<<<< HEAD
   // $scope.gridUsers = {
   //   paginationPageSizes: [25, 50, 75],
   //   paginationPageSize: 10,
@@ -74,6 +75,46 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   //     $scope.$apply();
   //   });
   // };
+=======
+  $scope.gridUsers = {
+    paginationPageSizes: [25, 50, 75],
+    paginationPageSize: 10,
+    enableCellEditOnFocus: false,
+    multiSelect: false,
+    enableFiltering: true,
+    enableSorting: true,
+    showColumnMenu: false,
+    enableGridMenu: true,
+    enableRowSelection: true,
+    enableRowHeaderSelection: false,
+  };
+  $scope.gridUsers.columnDefs = [
+    { name: 'name', displayName: 'Name (editable)', width: '20%', enableCellEdit: false,
+      cellTemplate: '<div>{{row.entity.first_name}} {{row.entity.last_name}}</div>'
+    },
+    { name: 'activated', displayName: 'Activated', width: '10%',
+      cellTemplate: '<div style="text-align:center;">{{row.entity.activated | boolToYesNo}}</div>'
+    },
+    { name: 'email', displayName: 'Email id (editable)', width: '20%' },
+    { name: 'phone', displayName: 'Phone', type: 'number', width: '10%' },
+    { name: 'company_name', displayName: 'Company(editable)', width: '15%' },
+    { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
+    {
+      name: 'Action', field: 'Action', width: '10%',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button ng-click="grid.appScope.deleteUser(row.entity.id)">Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      enableFiltering: false,
+    }
+  ];
+
+  $scope.gridUsers.onRegisterApi = function (gridApiUser) {
+    //set gridApi on scope
+    $scope.gridApiUser = gridApiUser;
+    gridApiUser.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
+      $scope.$apply();
+    });
+  };
+>>>>>>> 17c8c38ed8f448c6b1bbfabae6b9f5173b5fc553
 
   AdminUserService.getUsers().then(function (response) {    
    // $scope.gridUsers.data = response;
@@ -164,6 +205,27 @@ $scope.Useredit = function(user){
   }
   /* 
   ======== Adding New User ends ========
+  */
+
+  /* 
+  ======== Deleting User ========
+  */
+  $scope.deleteUser = function (userMongoid) {    
+    AdminUserService.deleteUser(userMongoid).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getUsers().then(function (response) {    
+          $scope.gridUsers.data = response;
+        });
+        $mdDialog.hide();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+  /* 
+  ======== Deleting User ends ========
   */
 
   /* 

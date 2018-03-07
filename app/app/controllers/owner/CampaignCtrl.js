@@ -1,5 +1,5 @@
 
-app.controller('CampaignownerCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
