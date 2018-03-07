@@ -18,7 +18,9 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     $mdDialog.show({
       templateUrl: 'views/admin/add-format-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
   

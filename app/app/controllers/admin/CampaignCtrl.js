@@ -8,15 +8,32 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   if($stateParams.campaignId){
     var campaignId = $stateParams.campaignId;
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      console.log(result);
+      // console.log(result);
     });
   }
   
   $scope.showAddCampaignPopup = function () {
     $mdDialog.show({
-      templateUrl: 'views/admin/add-campaign.html',
+      templateUrl: 'views/admin/add-full-campaign.html',
       clickOutsideToClose: true,
       fullscreen: $scope.customFullscreen,
+      controller: function($scope, $mdDialog, AdminCampaignService, toastr){
+        $scope.campaign = {};
+        $scope.saveCampaign = function(){
+          AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
+            if(result.status == 1){
+              toastr.success(result.message);
+              $mdDialog.hide();
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.close = function(){
+          $mdDialog.hide();
+        }
+      }
     });
   };
 
@@ -62,7 +79,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     },
     {
       name: 'Action', field: 'Action', width: '10%', headerCellClass: 'grid-align', cellClass: 'grid-align',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
       enableFiltering: false,
     }
   ];

@@ -1,5 +1,3 @@
-"usert strict",
-
 app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toastr) {
 
 	/*
@@ -52,7 +50,7 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 	* ============ Agency Registration Ends ============
 	*/
 
-		$scope.close = function () {
+	$scope.close = function () {
 		$mdDialog.hide();
 	}
 

@@ -5,7 +5,9 @@ app.service('LoadingInterceptor',
 
       return {
         request: function(config) {
-          $rootScope.loading = true;
+          if(!config.skipInterceptor){
+            $rootScope.loading = true;
+          }
           return config;
         },
         requestError: function(rejection) {
@@ -22,7 +24,7 @@ app.service('LoadingInterceptor',
           var toastr = $injector.get('toastr');
           var $mdDialog = $injector.get('$mdDialog');
           if(rejection.status == 401){
-            if(!localStorage.signInOpened){
+            if(localStorage.signInOpened && JSON.parse(localStorage.signInOpened)){
               $rootScope.isAuthenticated = false;
               localStorage.clear();
               toastr.error('Your session has expired. Please login again.');

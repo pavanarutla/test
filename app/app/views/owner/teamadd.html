@@ -1,0 +1,72 @@
+<md-dialog flex="50"  flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70"  style="border-radius: 0 ">
+	 <md-toolbar >
+		<div  class="md-toolbar-tools md-whiteframe-1dp">
+			<!-- <button class="md-icon-button md-button show-xs md-ink-ripple hide-gt-xs" type="button" ng-transclude="" ng-click="cancel()" show-xs="show-xs" hide-gt-xs="hide-gt-xs"><md-icon md-svg-icon="images/1493121180_Arrow_Back.svg" class="ng-scope" aria-hidden="true"></md-icon></button> -->
+			<span  class="md-title" style="color:#000">Add Team Member</span>
+			<span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
+			<button class="md-icon-button md-button"  ng-click="cancel()">
+				<md-icon style="color:#000"><i class="material-icons">close</i></md-icon>
+			</button>
+		</div>
+	</md-toolbar> 
+	<md-dialog-content >
+		
+		<div layout="column" style="margin-top:15px" layout-sm="column" layout-lg="column" layout-md="column" layout-xs="column" layout-margin="layout-margin" layout-padding>
+	        
+            <md-input-container class="md-block">
+                <label>User Name</label>
+                <input ng-model="user.userName" type="text" name="uname" minlength="3" md-maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
+                <div ng-messages="signin.uname.$error">
+                    <div ng-message="required">User Name is required.</div>
+                    <div ng-message="minlength">User Name must have 3 characters.</div>
+                    <div ng-message="maxlength">User Name shouldn't exede 30 characters. </div>
+                    <div ng-message="pattern">User Name should contain only Alpha Numeric and _ - . symbols.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Designation</label>
+                <input ng-model="user.userName" type="text" name="uname" minlength="3" md-maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
+                <div ng-messages="signin.uname.$error">
+                    <div ng-message="required">User Name is required.</div>
+                    <div ng-message="minlength">User Name must have 3 characters.</div>
+                    <div ng-message="maxlength">User Name shouldn't exede 30 characters. </div>
+                    <div ng-message="pattern">User Name should contain only Alpha Numeric and _ - . symbols.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Phone No</label>
+                <input ng-model="user.phoneNo" type="text" name="pno" minlength="10" md-maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
+                <div ng-messages="signin.pno.$error">
+                    <div ng-message="required">Phone No is required.</div>
+                    <div ng-message="minlength">Phone No must have 10 characters.</div>
+                    <div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
+                    <div ng-message="pattern">Phone No should be only numbe.</div>
+                </div>
+            </md-input-container>
+	        
+			<md-input-container class="md-block">
+            <label>Client Email</label>
+            <input ng-model="user.email" name="email" type="email" minlength="8" md-maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
+            <div ng-messages="signup.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="minlength">Email must have 8 characters.</div>
+              <div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
+              <div ng-message="pattern">Enter a valied Email Id.</div>
+              </div>
+          </md-input-container>
+      	</div>
+		<div layout="row" layout-align="center center">
+			
+			<label for="files.image">Image</label>
+			<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" required></input>
+				<br /><br />
+		</div>
+		<div layout="column" layout-padding layout-margin layout-align="center center">
+			<div layout="row" >
+				<md-button Class="md-raised md-primary" ng-click="save()">Submit</md-button>
+          		<md-button Class="md-raised" ng-click="cancel()">	CANCEL</md-button>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

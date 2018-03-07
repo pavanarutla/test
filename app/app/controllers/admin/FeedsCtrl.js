@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -33,9 +33,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     */
     AdminCampaignService.getAllCampaignRequests().then(function(result){
       $scope.requestList = result;
-      // $scope.groupedRequests = _.groupBy(requestList, function(request){
-      //   return request.status;
-      // });
     });
     /*
     ======== Campaign requests ends =======
@@ -52,14 +49,9 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
       })
     };
 
-    $scope.closeCampaignRequestDetails = function(){
-      $mdDialog.hide();
-    }
-  
     /*
     ======== Campaign Suggestions(planned) ========
     */
-
     $scope.createCampaignToSuggest = function(emptyCampaign){
       $mdDialog.show({
         locals: {emptyCampaign: emptyCampaign, campaignPartial: $scope.selectedRequestDetails},
@@ -68,7 +60,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         fullscreen: $scope.customFullscreen,
         controller: function($scope, $mdDialog, AdminCampaignService, emptyCampaign, campaignPartial, toastr){
           emptyCampaign = _.extend(emptyCampaign, campaignPartial);
-          // console.log(emptyCampaign);
           $scope.campaign = emptyCampaign;
           $scope.saveCampaign = function(){
             AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
@@ -130,7 +121,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         if(result.status == 1){
           AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
             localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
-            console.log(JSON.stringify(updatedCampaignData));
+            // console.log(JSON.stringify(updatedCampaignData));
             $scope.campaignActBudget = updatedCampaignData.act_budget;
           });
           _.map($scope.productList, function(product){
@@ -145,10 +136,6 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
         }
       });
     }
-
-    // AdminCampaignService.getPlannedCampaigns().then(function(result){
-    //   $scope.campaignProposalList = result;
-    // });
     /*
     ======== Campaign Suggestions(planned) ends ========
     */
@@ -156,18 +143,32 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $location, 
     /*
     ======= Campaign Proposals =======
     */
+    $scope.viewAndLaunchCampaign = function(campaignId){
+      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/admin/campaign-proposal-summary/' + campaignId);
+    }
+    /*
+    ======= Campaign Proposals Ends =======
+    */
+
+    /*
+    ======= View and Launch Campaign =======
+    */
     $scope.prepareQuoteForCampaign = function(campaignId){
       localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
       $location.path('/admin/campaign-proposal-summary/' + campaignId);
     }
-
     /*
-    ======= Campaign Proposals Ends =======
+    ======= View and Launch Campaign ands =======
     */
 
     $scope.loadMore = function () {
       $scope.limit = $scope.items.length
     }
+    /*////popu////////*/
+    $scope.closeInputPanel = function() {
+      $mdSidenav('ClientRequest').toggle();
+    };
 
   });
-  
+ 

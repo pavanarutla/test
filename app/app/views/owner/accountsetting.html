@@ -1,0 +1,57 @@
+<div layout="column" layout-fill="layout-fill"> 
+ 	<div>
+ 		<div layout="row" layout-align="center center" layout-fill="layout-fill" class="owrbg owrhg"> 
+ 			<md-whiteframe layout="column" layout-align="center center" style="margin:8% 0" flex="45" layout-padding="layout-padding" class="md-whiteframe-5dp" flex-sm="60" flex-xs="100" flex-md="45">
+ 				<md-content layout-fill="layout-fill" class="contbg" style="padding:30px">
+ 					
+ 					<div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+ 					 	<h4> Change Your Password</h4>
+ 					</div>
+ 					<div layout="column" layout-align="center center" layout-margin="layout-margin" ng-if="errors" class="md-block">
+ 					 <p ng-repeat="error in errors" class="md-body-2">{{error}}</p>
+ 					</div>
+ 					<form name="reset" novalidate="novalidate">
+ 					 	<md-input-container class="md-block">
+ 					 		<label>Current  Password</label>
+ 					 		<input ng-model="user.password" type="password" name="password" minlength="6" maxlength="20" required="required"/>
+ 					 		<div ng-messages="reset.password.$error">
+ 					 		<div ng-message="required">Current is required.</div>
+ 					 		<div ng-message="minlength">Current must have 6 characters.</div>
+ 					 		<div ng-message="maxlength">Current shouldn't exede 20 characters.</div>
+ 					 		</div>
+ 					 	</md-input-container>
+ 					 	<md-input-container class="md-block">
+ 					 		<label> New Password</label>
+ 					 		<input ng-model="user.verfiypassword" type="password" name="password" minlength="6" maxlength="20" required="required"/>
+ 					 		<div ng-messages="reset.password.$error">
+ 					 		<div ng-message="required">Password is required.</div>
+ 					 		<div ng-message="minlength">Password must have 6 characters.</div>
+ 					 		<div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+ 					 		</div>
+						  </md-input-container>
+						<md-input-container class="md-block">
+ 					 		<label> Conform Password</label>
+ 					 		<input ng-model="user.verfiypassword" type="password" name="password" minlength="6" maxlength="20" required="required"/>
+ 					 		<div ng-messages="reset.password.$error">
+ 					 		<div ng-message="required">Password is required.</div>
+ 					 		<div ng-message="minlength">Password must have 6 characters.</div>
+ 					 		<div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+ 					 		</div>
+ 					 	</md-input-container>
+ 					 	<div layout="row">
+							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+ 					 			<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Submit</md-button>
+							</md-input-container>
+							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+ 					 			<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Cancle</md-button>
+ 					 		</md-input-container>
+									 
+						</div>
+ 					 	
+ 					 </form>
+ 					</md-content>
+ 				</md-whiteframe>
+ 			</div>
+ 		</div>
+ 	</div>
+</div>

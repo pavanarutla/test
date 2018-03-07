@@ -108,7 +108,7 @@
 					</div>
 					<div layout="column" flex="50">
 						<md-input-container class="md-block margin-input">
-							<label>Impressions</label>
+							<label>No. of Views</label>
 							<input ng-model="product.impressions" type="text" name="impressions" required="required" />
 							<div ng-messages="addProductForm.impressions.$error">
 								<div ng-message="required">Impression is required.</div>
@@ -181,6 +181,16 @@
 						</div>
 					</div>
 				</div>
+				<div layout="row" layout-align="center center">
+				<ul>
+					<li ng-repeat="(key, errors) in addProductForm.$error track by $index">
+						<strong>{{ key }}</strong> errors
+						<ul>
+							<li style="color:#f00;" ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 				<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>

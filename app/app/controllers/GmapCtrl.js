@@ -21,6 +21,7 @@ app.controller('GmapCtrl',
           }
         }
       };
+
       $scope.hidelocations = false;
       var setDefaultArea = function(){
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -43,6 +44,7 @@ app.controller('GmapCtrl',
       var trafficOn = false;
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
+      $scope.isMapInitialized = false;
 
       $scope.$watch(
         function() { return $mdSidenav('productDetails').isOpen(); },
@@ -441,28 +443,7 @@ app.controller('GmapCtrl',
   //     return false;
   //  }
 
-      $scope.sendSuggestionRequest = function (ev) {
-        $scope.suggestionRequest.user_mongo_id = $rootScope.loggedInUser.id;
-        // console.log($scope.suggestionRequest);
-        CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-          $scope.suggestionRequest = {};
-          if (result.status == 1) {
-            $scope.suggestMeRequestSent = true;
-          }
-          $mdDialog.show(
-            $mdDialog.alert()
-              .parent(angular.element(document.querySelector('body')))
-              .clickOutsideToClose(true)
-              .title('We will get back to you!!!!')
-              .textContent(result.message)
-              .ariaLabel('Alert Dialog Demo')
-              .ok('Got it!')
-              .targetEvent(ev)
-          );
-        });
-      };
-
-      function selectMarker(marker) {
+       function selectMarker(marker) {
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
@@ -494,6 +475,20 @@ app.controller('GmapCtrl',
         $mdSidenav('productDetails').toggle();
         $scope.selectedProduct = marker;
       }
+
+      // function showInfoWindow(marker){
+      //   var htmlContent = '<p><b>Location</b>:&nbsp&nbsp&nbsp' + marker.properties.address + '</p>' + 
+      //                     '<p><b>No. of Views</b>:&nbsp&nbsp&nbsp' + marker.properties.impressions + '</p>';
+      //   $scope.markerInfoWindow =  new google.maps.InfoWindow({
+      //     content: htmlContent,
+      //     map: $scope.mapObj
+      //   });
+      //   $scope.markerInfoWindow.open($scope.mapObj, marker);
+      // }
+
+      // function hideInfoWindow(marker){
+      //   $scope.markerInfoWindow.close();
+      // }
 
       google.maps.event.addListener(selectorMarker, 'click', function (e) {
         $scope.selectedProduct = null;
@@ -545,7 +540,8 @@ app.controller('GmapCtrl',
             icon: {
               url: config.serverUrl + markerData.symbol,
               scaledSize: new google.maps.Size(30, 30)
-            }
+            },
+            title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
           });
           marker.properties = markerData;
           uniqueMarkerArr.push(marker);
@@ -564,7 +560,6 @@ app.controller('GmapCtrl',
         /*
         //// handling spiderifying ////
         */
-        var iw = new google.maps.InfoWindow();
         var circleMarker = new google.maps.Marker({
           icon: {
             url: 'assets/images/maps/Ellipse 55.png',
@@ -602,7 +597,8 @@ app.controller('GmapCtrl',
               var marker = new google.maps.Marker({
                 position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
                 icon: icon,
-                label: label
+                label: label,
+                title: 'Location:' + markerData.markers[i].address + '\nNo. of views: ' + markerData.markers[i].impressions
               });
               marker.properties = markerData.markers[i];
               marker.groupSize = markerData.count;
@@ -652,8 +648,7 @@ app.controller('GmapCtrl',
             label.color = "rgba(255, 255, 255, 1)";
             marker.setLabel(label);
             // spiderCircle.setMap(null);
-            circleMarker.setMap(null);
-            iw.close();
+            circleMarker.setMap(null);            
           }
           marker.setIcon(markerIcon);
         });
@@ -875,21 +870,6 @@ app.controller('GmapCtrl',
         $scope.showTrafficLegend = !$scope.showTrafficLegend;
       }
 
-      // Drawing a circle
-      // var rangeCircle = new google.maps.Marker({
-      //   icon: {
-      //     path: google.maps.SymbolPath.CIRCLE,
-      //     fillOpacity: 0.3,
-      //     fillColor: "#ffffff",
-      //     strokeOpacity: 1.0,
-      //     strokeColor: "red",
-      //     strokeWeight: 1.0,
-      //     size: 26000,
-      //     scale: 1.0
-      //   },
-      //   position: $scope.address.location
-      // });
-
       rangeCircle = new google.maps.Circle({
         strokeColor: "#ea3b37",
         strokeOpacity: 1.0,
@@ -898,12 +878,12 @@ app.controller('GmapCtrl',
         fillOpacity: 0.0,
       });
 
-      $scope.circleRadius = 0;
+      $scope.range = {};
+      $scope.range.circleRadius = 0;
       $scope.updateCircle = function(){
         rangeCircle.setMap(null);
         rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
         rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
-        // rangeCircle.setPosition($scope.mapObj.getCenter());
         rangeCircle.setMap($scope.mapObj);
         $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }
@@ -1010,7 +990,7 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){        
+      $scope.selectedAreaChanged = function(area){
         $scope.selectedArea = area;
         if(area){
           $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
@@ -1039,6 +1019,21 @@ app.controller('GmapCtrl',
           }
         });
       }
+
+      // sets the height of the div containing the map.
+      function setMapContainerHeight(){
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
+        if(windowHeight < 600){
+          document.querySelector('#map-container').style['height'] = windowHeight-100+'px';
+          // $('#map-container').css('height', height-100+'px');
+        }
+        else{
+          document.querySelector('#map-container').style['height'] = windowHeight-64+'px';   //and setting height of map container
+        }
+        $scope.mapContainerHeightSet = true;
+      }
+      setMapContainerHeight();
+
     }
   ]
 );
