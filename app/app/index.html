@@ -107,6 +107,16 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app-config.js"></script>
 
+    <!-- mobile redirect -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.1/mobile-detect.min.js"></script>
+    <script>
+      var md = new MobileDetect(window.navigator.userAgent);
+      if (md.mobile()) {
+          location.href = config.mobileUrl;
+      }
+    </script>
+    
+
 
     <!-- ////////////
       custom js 
