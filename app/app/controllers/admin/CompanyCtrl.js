@@ -12,7 +12,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
 
@@ -73,6 +75,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
       }
     });
   }
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+   };
 
   $scope.editCompany = function(company){
     // console.log(company);
@@ -106,45 +111,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     })
   };
 
-  // $scope.gridHoardingCompany = {
-  //   paginationPageSizes: [25, 50, 75],
-  //   paginationPageSize: 25,
-  //   enableCellEditOnFocus: false,
-  //   multiSelect: false,
-  //   enableCellEdit: false,
-  //   rowHeight: 45,
-  //   enableFiltering: true,
-  //   enableSorting: true,
-  //   showColumnMenu: false,
-  //   enableGridMenu: true,
-  //   enableRowSelection: true,
-  //   enableRowHeaderSelection: false,
-  // };
-
-  // $scope.gridHoardingCompany.columnDefs = [
-  //   { name: 'name', displayName: 'Comapny Name', width: '20%', enableCellEdit: false },
-  //   { name: 'owner', displayName: 'Owner Name', width: '20%', enableCellEdit: false },
-  //   { name: 'email', displayName: 'Email id (editable)', width: '20%' },
-  //   { name: 'phone', displayName: 'Phone', type: 'number', width: '20%' },
-  //   { name: 'hoardinglist', displayName: 'List fo hoarding', width: '10%' },
-  //   {
-  //     name: 'Action', field: 'Action', width: '10%',
-  //     cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a href="" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteHoardingCompany(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
-  //     enableFiltering: false,
-  //   }
-   
-  // ];
-
-  // $scope.gridHoardingCompany.onRegisterApi = function (gridApi) {
-  //   $scope.gridApi = gridApi;
-  //   gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-  //     $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-  //     $scope.$apply();
-  //   });
-  // };
 
   CompanyService.getHoardingCompanies().then(function (response) {
-   // $scope.gridHoardingCompany.data = response;
+
     $scope.hoardingCompany = response;
   });
 
@@ -153,7 +122,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     CompanyService.saveHoardingCompany(hoardingCoData).then(function(result){
       if(result.status == 1){
         CompanyService.getHoardingCompanies().then(function (response) {    
-          //$scope.gridHoardingCompany.data = response;
+
           $scope.hoardingCompany = response;
         });
         toastr.success(result.message);
@@ -206,7 +175,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 // tables code for load more  start
   var vm = $scope;
   vm.limit = 10;
-  $scope.loadMore = function() {
+  $scope.HoardingloadMore = function() {
     var increamented = vm.limit + 5;
     vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
   };

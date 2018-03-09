@@ -16,7 +16,7 @@
                         <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
                         <input type="hidden" name="state_id" ng-model="state.id" />
                     </md-select-header>
-                    <md-option ng-repeat="country in countrytList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
                 </md-select>
 
             </md-input-container>
@@ -45,8 +45,7 @@
 				<thead>
 					<tr>
 					<th>Country</th>
-					<th>State</th>
-				
+					<th>State</th>				
 					<th>Actions</th>
 					</tr>
 				</thead>

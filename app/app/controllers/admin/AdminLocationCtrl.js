@@ -4,7 +4,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   $scope.stateListForCountry = [];
   $scope.cityListForState = [];
 
-  
+  var LodingAllData = function () {
   AdminLocationService.getAllAreas().then(function (data) {
     $scope.listoflocationdata = data;
   });
@@ -17,6 +17,8 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   AdminLocationService.getAllAreas().then(function (data) {
     $scope.arealocationdata = data;
   });
+}
+LodingAllData();
 
 // ************** Country page
 $scope.saveCountry = function () {
@@ -65,6 +67,7 @@ $scope.saveState = function () {
     else {
       toastr.error(data.message);
     }
+    LodingAllData();
     $scope.state.country_id="";
     $scope.state.state_name="";
   });
@@ -73,6 +76,7 @@ $scope.editState = function (state) {
   $scope.state = {};
   $scope.state.country_id = state.country_id;
   $scope.state.state_name = state.name;
+  LodingAllData();
 }
 $scope.stateareaList = function (country) {
   AdminLocationService.getStates(country).then(function (data) {
@@ -87,13 +91,14 @@ $scope.deleteState = function (state) {
     else {
       toastr.error(result.message);
     }
+    LodingAllData();
   });
 }
 // ************** State page End
 
 // ************** City page
 
-$scope.saveCity = function () {
+$scope.saveCity = function (city) {
   AdminLocationService.saveCity($scope.city).then(function (data) {
     if (data.status == 1) {
       toastr.success('City added to successfully!');
@@ -104,12 +109,14 @@ $scope.saveCity = function () {
     else {
       toastr.error(data.message);
     }
+    LodingAllData();
     $scope.city.country_id="";
     $scope.city.state_id="";
     $scope.city.city_name="";
   });
 }
 $scope.editCity = function (city) {
+  console.log(city);
   $scope.city = {};
   $scope.city.country_id = city.country_id;
   $scope.city.state_id = city.state_id;
@@ -123,6 +130,7 @@ $scope.deleteCity = function (city) {
     else {
       toastr.error(result.message);
     }
+    LodingAllData();
   });
 }
 $scope.getCityList = function (state) {
@@ -133,7 +141,8 @@ $scope.getCityList = function (state) {
 // ************** City page End
 
 // ************** Area page
-$scope.saveArea = function () {
+$scope.saveArea = function (area) {
+  console.log(area);
   AdminLocationService.saveArea($scope.area).then(function (data) {
     if (data.status == 1) {
       toastr.success('Area added to database successfully!');
@@ -144,27 +153,29 @@ $scope.saveArea = function () {
     else {
       toastr.error(data.message);
     }
+    LodingAllData();
   });
 }
-$scope.deleteArea = function (area) {
-  AdminLocationService.deleteArea(area.id).then(function (result) {
+$scope.deleteArea = function (locations) {
+  AdminLocationService.deleteArea(locations.id).then(function (result) {
     if (result.status == 1) {
-      // var index = $scope.gridArea.data.indexOf(area);
-      // $scope.gridArea.data.splice(index, 1);
       toastr.success(result.message);
     }
     else {
       toastr.error(result.message);
     }
+    LodingAllData();
   });
 }
 $scope.editArea = function (area) {
+  //console.log(area);
   $scope.area = {};
   $scope.area = area;
   $scope.area.area_name = area.name;
   $scope.area.country_id = area.country_id;
-  $scope.area.state_id = area.state_name;
+  $scope.area.state_id = area.state_id;
   $scope.area.city_id = area.city_id;
+  LodingAllData();
 }
 // ************** Area page END
 

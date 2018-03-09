@@ -25,7 +25,7 @@
                         <md-select-header class="demo-select-header">
                             <input ng-model="searchTerm" type="search" placeholder="Search for a State.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="state in stateareaList | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
+                        <md-option ng-repeat="state in stateareaList" value="{{state.id}}">{{state.name}}</md-option>
                     </md-select required>
 
                 </md-input-container>
@@ -36,7 +36,7 @@
                         <md-select-header class="demo-select-header">
                             <input ng-model="searchTerm" type="search" placeholder="Search for a City.." class="demo-header-searchbox md-text">
                         </md-select-header>
-                        <md-option ng-repeat="city in citylocationdata | filter:searchTerm" value="{{city.id}}">{{city.name}}</md-option>
+                        <md-option ng-repeat="city in citylocationdata" value="{{city.id}}">{{city.name}}</md-option>
                     </md-select required>
 
                 </md-input-container>
@@ -76,13 +76,10 @@
             
         </div>
         <div layout="row" flex layout-align="center center" layout-margin>
-            <md-button Class="md-raised md-primary" type="submit" ng-click="saveArea()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" type="submit" ng-click="saveArea(area)">SUBMIT</md-button>
             <md-button Class="md-raised" ng-click="resetAreaForm()">CANCEL</md-button>
         </div>
     </form>
-    <!-- <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-        ui-grid-auto-resize class="grid">
-    </div> -->
     <!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -109,8 +106,8 @@
                 <td>{{locations.lat }}</td>
                 <td>{{locations.lng }}</td>
                 <td>
-                <span><a ng-href="" ng-click="editArea(locations)"><md-icon><i class="material-icons"style="cursor: pointer;" >mode_edit</i></md-icon></a></span>
-                <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                <span><a ng-click="editArea(locations)"><md-icon><i class="material-icons"style="cursor: pointer;" >mode_edit</i></md-icon></a></span>
+                <span><a ng-click="deleteArea(locations)"><md-icon><i class="material-icons" style="cursor: pointer;">delete</i></md-icon></a></span>
                 </td>
             </tr>      
             </tbody>
