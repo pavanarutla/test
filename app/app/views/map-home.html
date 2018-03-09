@@ -246,7 +246,7 @@
           </div>
           <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
             <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(plannedUserCampaign.id)"> VIEW</md-button>
-            <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign()">Request Proposal</md-button>
+            <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign(plannedUserCampaign.id, $event)">Request Proposal</md-button>
           </div>
           <md-divider></md-divider>
         </div>
@@ -326,7 +326,7 @@
       </div>
       <div layout="column" layout-margin>
         <div>
-          <md-button class="md-raised md-warn" layout-fill> REQUEST PROPOSAL</md-button>
+          <md-button class="md-raised md-warn" ng-if="campaignDetails.status != 3"  ng-click="requestProposalForCampaign(campaignDetails.id, $event)"  layout-fill> REQUEST PROPOSAL</md-button>
         </div>
         <div>
           <md-button class="md-raised " layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>

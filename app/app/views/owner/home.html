@@ -1,4 +1,4 @@
-<div layout="column" ng-controller="homePage">
+<div layout="column">
     <div layout-xs="column" layout-gt-xs="row" flex-gt-xs="100" flex-xs="100"  style="text-align: center;">
         <div layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
             <a flex-xs="50" flex-gt-xs="50" href="#">
@@ -49,7 +49,15 @@
     <div  class="contbg" layout-margin="layout-margin" style="margin-top:30px">
         <div google-chart chart="myChart" style="width: 100%; height: 400px;"></div>
     </div>
-
+    <div ng-controller="OwnerHomeController">
+        <fusioncharts 
+        width="600" 
+        height="400"
+        type="column2d"
+        datasource="{{myDataSource}}"
+    ></fusioncharts>
+    </div>
+   
    <!-- <div class="button-bar">
         <a class="button button-energized" id="weak" 
         ng-class="{active: $parent.selected=='weak'}" ng-click="$parent.selected='weak'">

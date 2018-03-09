@@ -18,6 +18,7 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
+  'ng-fusioncharts',
   // 'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
@@ -314,6 +315,7 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
+      controller: 'OwnerHomeController'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',

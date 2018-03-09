@@ -1000,24 +1000,25 @@ app.controller('GmapCtrl',
         }
       }
 
-      $scope.requestProposalForCampaign = function(campaignId, ev){
-        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
-          if (result.status == 1) {
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.querySelector('body')))
-                .clickOutsideToClose(true)
-                .title('We will get back to you!!!!')
-                .textContent(result.message)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-          }
-          else{
-            toastr.error(result.message);
-          }
-        });
+      $scope.requestProposalForCampaign = function(campaign, ev){
+        // CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+        //   if (result.status == 1) {
+        //     $mdDialog.show(
+        //       $mdDialog.alert()
+        //         .parent(angular.element(document.querySelector('body')))
+        //         .clickOutsideToClose(true)
+        //         .title('We will get back to you!!!!')
+        //         .textContent(result.message)
+        //         .ariaLabel('Alert Dialog Demo')
+        //         .ok('Got it!')
+        //         .targetEvent(ev)
+        //     );
+        //   }
+        //   else{
+        //     toastr.error(result.message);
+        //   }
+        // });
+        console.log(campaign);
       }
 
       // sets the height of the div containing the map.
