@@ -17,6 +17,7 @@ var svgmin = require('gulp-svgmin');
 const app = {
     clean: 'clean',
     src_compress : 'src_compress',
+    app_config : 'app_config',
     customcss : 'customcss',
     vendor_uglify : 'vendor_uglify', 
     templates : 'templates',
@@ -31,6 +32,7 @@ gulp.task('build',function(){
         'app.templates',
         'app.vendor_uglify'],
         'app.vendorcss',
+        'app.app_config',
         'app.imagemin',
         'app.index')
 });
@@ -76,10 +78,16 @@ gulp.task('app.index', function () {
 });
 
 
+gulp.task('app.app_config', function(){
+    return gulp.src('app/app-config.js')
+            .pipe(uglify())
+            .pipe(concat('app-config.js'))
+            .pipe(gulp.dest('dist'))
+})
+
 gulp.task('app.src_compress',function(){
     var controllers = [
 		'app/app.js',
-		'app/app-config.js',
 		'app/controllers/**/*.js',
 		'app/controllers/*.js',
 		'app/directives/*.js',
