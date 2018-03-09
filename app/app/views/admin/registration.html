@@ -1,26 +1,107 @@
 <div layout="column" layout-fill="layout-fill">
-	<div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-		<div flex="50">
-			<h3>Registration</h3>
+	<div class="md-title"  layout="row">
+		<div flex>
+			
 		</div>
-		<div layout-align="center end" layout="column" flex="50">
+		<div layout="column" layout-margin>
 			<md-button class="md-raised md-warn" ng-click="registrationPopup()">
 				New Registration <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span>
 			</md-button>
 		</div>
 	</div>
-	<div layout-margin layout="column">
+	<div  layout="column">
 		<md-tabs md-dynamic-height class="contbg">
 			<md-tab label="Users">
-				<div class="md-subhead" layout="column" layout-padding>List Of Users(8)</div>
-				<div ui-grid="gridUsers" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+				<!-- <div class="md-subhead" layout="column" layout-padding>List Of Users(8)</div> -->
+				<!-- <div ui-grid="gridUsers" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
 					 ui-grid-auto-resize class="grid">
+				</div> -->
+				<div style="margin-top: 1em;">
+					<div class="table-responsive">    
+						<table class="table table-striped table-bordered ">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email ID</th>
+								<th>Phone Number</th>
+								<th>Company Name</th>
+								<th>Type Of Company</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="user in userList | limitTo:limit">
+							<td>{{user.username}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.phone}}</td>
+							<td>{{user.company_name}}</td>
+							<td>{{user.company_type }}</td>
+							<td>
+								<!-- <span> 
+									<md-menu>
+										<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button>
+										<md-menu-content>
+											<md-menu-item>
+												<md-button ng-href="#">Edit</md-button>
+											</md-menu-item>
+											<md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated">
+												<md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button>Delete</md-button>
+											</md-menu-item>
+										</md-menu-content>
+									</md-menu>
+								</span> -->
+								<span><a ng-href="" ng-click="editUser(user)"><md-icon><i class="material-icons" style="cursor: pointer;">edit</i></md-icon></a></span>
+								<span><a ng-href="" ng-click=""><md-icon><i class="material-icons" style="cursor: pointer;"	>delete</i></md-icon></a></span>
+							</td>
+							</tr>       
+						</tbody>
+						</table>
+					</div>
+					<div layout="colmun" layout-align="end center" layout-margin>
+						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="UserloadMore()">Load More!</button>
+					</div>
 				</div>
+				
 			</md-tab>
 			<md-tab label="Advertising Agency ">
-				<div class="md-subhead" layout="column" layout-padding>List Of Advertising Agency(8)</div>
-				<div ui-grid="gridAgency" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+				 <!-- <div class="md-subhead" layout="column" layout-padding>List Of Advertising Agency(8)</div> -->
+				<!-- <div ui-grid="gridAgency" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
 					 ui-grid-auto-resize class="grid">
+				</div>  -->
+				<div style="margin-top: 1em;">
+					<div class="table-responsive">    
+						<table class="table table-striped table-bordered ">
+						<thead>
+							<tr>
+								<th>Ad Agency Name</th>
+								<th>Email ID</th>
+								<th>Phone Number</th>
+								
+								<th>Type Of Company</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="agency in agencyList | limitTo:limit">
+							<td>{{agency.name}}</td>
+							<td>{{agency.email}</td>
+							<td>{{agency.phone}}</td>
+							
+							<td>{{user.company_type }}</td>
+							<td>
+								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">edit</i></md-icon></a></span>
+								<span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+							</td>
+							</tr>       
+						</tbody>
+						</table>
+					</div>
+					<div layout="colmun" layout-align="end center" layout-margin>
+						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="AgencyloadMore()">Load More!</button>
+					</div>
 				</div>
 			</md-tab>
 		</md-tabs>

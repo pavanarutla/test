@@ -1,13 +1,18 @@
-<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60">
+<md-dialog flex-xs="100" flex="60" flex-md="70" flex-sm="60">
 	<md-dialog-content>
-		<md-content class="md-padding">
-			<div layout="column" layout-align="center center">
+		<md-content class="">
+			<!-- <div layout="column" layout-align="center center">
 				<img ng-src="assets/images/billboard_popup.png">
-			</div>
-			<div layout="column" layout-align="center center">
-				<div class="md-title">
+			</div> -->
+			<!-- <div layout="column" layout-align="center center">
+				 <div class="md-title">
 					<h3>Enter Product Details</h3>
-				</div>
+				</div> 
+			</div> -->
+			<div layout="row" layout-margin>
+				<h4>Enter Product Details</h4>
+				<div flex></div>
+				<button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" style="position: absolute;right: 0em;" type="button"  ng-click="cancel()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X</button>
 			</div>
 			<div layout="column" layout-align="center center">
 				<!-- <ul>
@@ -18,8 +23,8 @@
 					</li>
 				</ul> -->
 			</div>
-			<form name="addProductForm" novalidate="novalidate">
-				<input type="hidden" ng-model="product.id" />
+			   <!-- <form name="addProductForm" novalidate="novalidate">
+				<input type="hidden" ng-model="list.id" />
 				<div layout="row" layout-xs="column" layout-padding>
 					<div layout="column" flex="50">
 						<md-input-container class="md-block margin-input">
@@ -53,7 +58,7 @@
 							<div flex="50" class="armrgn">
 								<md-input-container>
 									<label>Select Country </label>
-									<md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList()">
+									<md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="list.country" ng-change="getStateList()">
 										<md-select-header class="demo-select-header">
 											<input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
 										</md-select-header>
@@ -64,7 +69,7 @@
 							<div flex="50" class="armrgn">
 								<md-input-container>
 									<label> Select State</label>
-									<md-select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()"
+									<md-select ng-model="product.state" class="select-value" ng-disabled="!list.country" md-on-close="clearSearchTerm()"
 									 data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()">
 										<md-select-header class="demo-select-header">
 											<input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
@@ -81,7 +86,7 @@
 							<div flex="50" class="armrgn">
 									<md-input-container>
 										<label> Select City</label>
-										<md-select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"
+										<md-select ng-model="product.city" class="select-value" ng-disabled="!list.state" md-on-close="clearSearchTerm()"
 											data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()">
 											<md-select-header class="demo-select-header">
 												<input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
@@ -93,7 +98,7 @@
 									</md-input-container>
 									<md-input-container>
 										<label> Select Area</label>
-										<md-select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"
+										<md-select ng-model="product.area" class="select-value" ng-disabled="!list.city" md-on-close="clearSearchTerm()"
 											data-md-container-class="selectdemoSelectHeader">
 											<md-select-header class="demo-select-header">
 												<input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
@@ -195,7 +200,128 @@
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 				</div>
-			</form>
+			</form>    -->
+
+			<!--new form add product start -->
+			<div table-responsive>
+				<table class="table table-striped table-bordered addproduct-table">
+					<tbody flex="100">
+						<tr >
+							<td flex="33">
+								<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+								/>
+							</td>
+							<td flex="33">
+								
+								<select  id="productType" ng-options ="format.name for format in formatList  track by format.id"  ng-model="product.type" class="select-value" data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
+									<option value="" disabled selected>Site Type</option>
+									<!-- <option ng-value="format.id">{{format.name}}</option> -->
+								</select>
+								 <!-- <select name="mySelect" id="mySelect"
+								ng-options="option.name for option in refData track by option.id"
+								ng-model="selectedOption">
+								<option value="" disabled selected>view current values</option>
+								</select> -->
+							</td>
+							<td flex="33">
+								<input ng-model="product.hoardingcost" placeholder="Hoarding Cost" type="text" name="hoardingcost" />
+							</td>
+							
+						</tr>
+						<tr >
+							<td flex="33">
+								<select ng-model="product.company" class="select-value" ng-options ="hoardingCompany.name for hoardingCompany in hoardingCompaniesList  track by hoardingCompany.id" >
+									<!-- <option ng-repeat="hoardingCompany in hoardingCompaniesList"  ng-value="hoardingCompany.id">{{hoardingCompany.name}}</option> -->
+									<option value="" disabled selected>Company Name</option>
+								</select>
+							</td>
+							<td flex="33">
+								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList(product)" ng-options ="country.name for  country in  countryList   track by country.id | filter:product.country">
+									<!-- <option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</option> -->
+									<option value="" disabled selected>Country</option>
+									<!-- <option value="{{}}" >Country</option> -->
+								</select required>
+							</td>
+							<td flex="33">
+								<select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()"
+										data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()" ng-options ="state.name for state in stateList  track by state.id | filter:product.state">
+									 <!-- <option ng-value="state.id" ng-repeat="state in stateList | filter:searchTerm">{{state.name}}</option>  -->
+									<option value="" disabled selected>view 	 values</option>
+								</select required>
+							</td>
+							
+						</tr>
+						<tr>
+							<td flex="33">
+								<select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"
+												data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()" ng-options ="city.name for city in cityList  track by city.id">
+									<!-- <option ng-value="city.id"  ng-repeat="city in cityList | filter:searchTerm">{{city.name}}</option> -->
+									<option value="" disabled selected>view current values</option>
+								</select>
+							</td>
+							<td flex="33">
+								<select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"
+										data-md-container-class="selectdemoSelectHeader" ng-options ="area.name for area in areaList  track by area.id">
+									<!-- <option ng-value="area.id" ng-repeat="area in areaList | filter:searchTerm">{{area.name}}</option> -->
+									<option value="" disabled selected>view current values</option>
+								</select>
+							</td>
+							<td>
+								<textarea  class="table-address" placeholder="Address" rows="3" ng-model="product.address"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td flex="33">
+								<input ng-model="product.impressions" placeholder="impressions" type="text" name="impressions" required="required" />
+							</td>
+							<td flex="33">
+								<input ng-model="product.panelSize"  placeholder="Panel Size" type="text" name="panelSize" required="required" />
+							</td>
+							<td flex="33">
+								<select ng-model="product.lighting" class="select-value" md-on-close="clearSearchTerm()"
+								data-md-container-class="selectdemoSelectHeader">
+									<option ng-value="1">Yes</option>
+									<option ng-value="0">No</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td flex="33">
+								<input ng-model="product.direction" placeholder="Direction" type="text" name="direction" required="required" />
+							</td>
+							<td flex="33">
+								<input ng-model="product.lat" placeholder="Latitude" type="text" name="lat" required="required" />
+							</td>
+							<td flex="33">
+								<input ng-model="product.lng" placeholder="Longitude" type="text" name="lng" required="required" />
+							</td>
+						</tr>
+						<tr>
+							<td flex="33">
+								<div > <label for="dob">Direction Image</label></div>
+						
+								<input type="file" ngf-select ng-model="files.symbol" name="files.symbol" accept="image/*" ngf-max-size="2MB" ng-required="!product.id"></input>
+							
+							
+							</td>
+							<td flex="33">
+								
+								<label for="files.image">Image</label>
+								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id"></input>
+
+							</td>
+							<td flex="33">
+								<textarea ng-model="product.adStrength"  placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ></textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> 
+			<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
+					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+			</div>
+			<!--new form add product end -->
 		</md-content>
 	</md-dialog-content>
 </md-dialog>

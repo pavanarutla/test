@@ -1,4 +1,4 @@
-<md-dialog flex="50" flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70">
+<md-dialog flex="50" flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70" ng-controller="AdminCampaignCtrl">
   <form ng-cloak name="addEmptyCampaignForm" novalidate>
     <input type="hidden" ng-model="campaign.id" />
     <!-- <md-toolbar>
@@ -9,8 +9,10 @@
       <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button" ng-transclude="" ng-click="openOffscreen()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X<div class="md-ripple-container"></div></button>
     </div>
     </md-toolbar> -->
-    <div layout="row" layout-align="center center" layout-margin>
-      <div class="md-display-1">Enter New Campagin Details</div>
+    <div layout="row" layout-margin>
+      <h4>Enter New Campagin Details</h4>
+      <div flex></div>
+			<button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" style="position: absolute;right: 0em;" type="button"  ng-click="cancel()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X</button>
     </div>
     <md-dialog-content>
       <div layout="row" layout-sm="row" layout-lg="row" layout-md="row" layout-xs="column" layout-margin="layout-margin">

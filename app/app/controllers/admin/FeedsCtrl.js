@@ -48,6 +48,9 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
         scope: $scope
       })
     };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+     };
 
     /*
     ======== Campaign Suggestions(planned) ========
@@ -166,9 +169,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
       $scope.limit = $scope.items.length
     }
     /*////popu////////*/
-    $scope.closeInputPanel = function() {
+    $scope.closeInputPanel = function(ev) {
       $mdSidenav('ClientRequest').toggle();
     };
+    
 
   });
  

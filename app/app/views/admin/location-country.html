@@ -6,28 +6,57 @@
 		</div>
 	</div>
 
-<form  name="country" novalidate>
-	<div layout="column" layout-margin layout-padding flex="50">
-		<div layout="column" layout-margin layout-padding flex="50">
-			<md-input-container class="md-block">
-				<label>Enter Country Name</label>
-				<input ng-model="country.name" type="text" name="countryname" required/>
-				<input type="hidden" name="country_id" ng-model="country.id" />
-				<div ng-messages="country.countryname.$error">
-				<p ng-message="required">Please complete this field.</p>
-				</div>
-				<!-- <div ng-messages="country.$error">
-					<div ng-message="required">Country Name is required</div>
-				</div> -->
-			</md-input-container>
+	<form  name="country" novalidate style="margin-top:25px">
+		<div layout="row" layout-align="center center">
+			<div layout="column" layout-margin flex="50">
+				<md-input-container class="md-block">
+					<label>Enter Country Name</label>
+					<input ng-model="country.name" type="text" name="countryname" required/>
+					<input type="hidden" name="country_id" ng-model="country.id" />
+					<div ng-messages="country.countryname.$error">
+					<p ng-message="required">Please complete this field.</p>
+					</div>
+					<!-- <div ng-messages="country.$error">
+						<div ng-message="required">Country Name is required</div>
+					</div> -->
+				</md-input-container>
+			</div>
+			<div layout="column" layout-margin >
+				<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
+				<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
+			</div>
 		</div>
-		<div layout="row">
-			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
-			<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
-		</div>
-	</div>
 	</form>
 
-	<div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-	 ui-grid-auto-resize class="grid"></div>
+	<!-- <div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+	 ui-grid-auto-resize class="grid">
+	</div> -->
+	<!-- ===== table new code start=======-->
+    <div style="margin-top: 1em;">
+        <div class="table-responsive">    
+			<table class="table table-striped table-bordered add-countery">
+				<thead>
+					<tr>
+					<th>Country</th>
+				
+					<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="country in countryList | limitTo:limit">
+					<td>{{country.name}}</td>
+					<td>
+					<span><a ng-href="" ng-click="editCountry(country)"><md-icon><i class="material-icons" style="cursor: pointer;">mode_edit</i></md-icon></a></span>
+					<span><a ng-href="" ng-click="deleteCountry(country)"><md-icon><i class="material-icons" style="cursor: pointer;">delete</i></md-icon></a></span>
+					</td>
+				</tr>      
+				</tbody>
+			</table>
+        </div>
+        <div layout="colmun" layout-align="end center" layout-margin>
+        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="CountryloadMore()">Load More!</button>
+        </div>
+    </div>
+    <!-- ===== table new code end=======-->
+	
 </div>

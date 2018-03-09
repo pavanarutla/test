@@ -18,6 +18,11 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/all-campaigns/planning').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
+      deleteProposal: function(productId){
+        var dfd = $q.defer();
+        $http.delete(config.apiPath + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
       getPlannedCampaigns: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaigns/planned').success(dfd.resolve).error(dfd.reject);

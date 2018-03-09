@@ -5,6 +5,8 @@ app.controller('callCenterCtrl', function($scope,$http,toastr) {
             paginationPageSize: 25,
             enableCellEditOnFocus: false,
             multiSelect: false,
+            enableCellEdit: false,
+            rowHeight: 45,
             enableFiltering: true,
             enableSorting: true,
             showColumnMenu: false,
