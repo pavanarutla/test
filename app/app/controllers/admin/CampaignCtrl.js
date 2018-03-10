@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload) {
 
   // $scope.limit= 3;
   // $scope.loadMore = function() {
@@ -191,5 +191,43 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   //   }
   //   $scope.gridClosed.data = data;
   // });
+
+  /*
+  //////// Floating campaign section
+  */
+
+  $scope.formRows = [{formId: '1', name: 'floatginCampaignForm1'}];
+  $scope.formRows.images = {};
+  $scope.addNewFormRow = function() {
+    var newItemNo = $scope.formRows.length + 2;
+    $scope.formRows.push({'id' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
+  };
+
+  $scope.generateFloatingCampaignPdf = function(){
+    console.log($scope.formRows);
+    Upload.upload({
+      url: config.apiPath + '/floating-campaign-pdf',
+      data: { product_arr: $scope.formRows },
+      headers : {
+        'Content-Type': ''
+      }
+    }).then(function (result) {
+      if(result.data.status == "1"){
+        // code to download the received pdf.
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    }, function (resp) {
+      // console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
+  } 
+
+  /*
+  //////// Floating campaign section ends
+  */
 
 });
