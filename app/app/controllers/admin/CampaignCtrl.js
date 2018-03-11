@@ -197,20 +197,15 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   */
 
   $scope.formRows = [{formId: '1', name: 'floatginCampaignForm1'}];
-  $scope.formRows.images = {};
   $scope.addNewFormRow = function() {
     var newItemNo = $scope.formRows.length + 2;
-    $scope.formRows.push({'id' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
+    $scope.formRows.push({'formId' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
   };
 
   $scope.generateFloatingCampaignPdf = function(){
-    console.log($scope.formRows);
     Upload.upload({
       url: config.apiPath + '/floating-campaign-pdf',
-      data: { product_arr: $scope.formRows },
-      headers : {
-        'Content-Type': ''
-      }
+      data: { product_arr: $scope.formRows }
     }).then(function (result) {
       if(result.data.status == "1"){
         // code to download the received pdf.
