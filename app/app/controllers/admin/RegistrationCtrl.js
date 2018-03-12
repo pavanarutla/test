@@ -50,19 +50,20 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     enableRowHeaderSelection: false,
   };
   $scope.gridUsers.columnDefs = [
-    { name: 'name', displayName: 'Name (editable)',  enableCellEdit: false,
+    { name: 'name', displayName: 'Name (editable)', width: '20%', enableCellEdit: false,
       cellTemplate: '<div>{{row.entity.first_name}} {{row.entity.last_name}}</div>'
     },
-    { name: 'email', displayName: 'Email id (editable)' },
-    { name: 'phone', displayName: 'Phone', type: 'number' },
-    { name: 'company_name', displayName: 'Company(editable)'},
-    { name: 'company_type', displayName: 'TypeofCompany(editable)'},
-    { name: 'activated', displayName: 'Status' , cellTemplate: 
-' <button class="transparentbutton" ng-disabled="row.entity.activated" ng-click="grid.appScope.activateUser(row.entity.id);">{{row.entity.activated ? "Activated" : "Activate"}}</button>' },
+    { name: 'activated', displayName: 'Activated', width: '10%',
+      cellTemplate: '<div style="text-align:center;">{{row.entity.activated | boolToYesNo}}</div>'
+    },
+    { name: 'email', displayName: 'Email id (editable)', width: '20%' },
+    { name: 'phone', displayName: 'Phone', type: 'number', width: '10%' },
+    { name: 'company_name', displayName: 'Company(editable)', width: '15%' },
+    { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
     {
-      name: 'Action', field: 'Action',
-       cellTemplate: '<div class="ui-grid-cell-contents ">  <a ng-href="#">Edit</a><button class="transparentbutton">Delete</button></div>',
-     enableFiltering: false,
+      name: 'Action', field: 'Action', width: '10%',
+      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button ng-click="grid.appScope.deleteUser(row.entity.id)">Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      enableFiltering: false,
     }
   ];
 
@@ -108,7 +109,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
     {
       name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item><md-button>Share</md-button></md-menu-item><md-menu-item><md-button>Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
       enableFiltering: false,
     }
   ];
@@ -150,6 +151,27 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   }
   /* 
   ======== Adding New User ends ========
+  */
+
+  /* 
+  ======== Deleting User ========
+  */
+  $scope.deleteUser = function (userMongoid) {    
+    AdminUserService.deleteUser(userMongoid).then(function(result){
+      if(result.status == 1){
+        AdminUserService.getUsers().then(function (response) {    
+          $scope.gridUsers.data = response;
+        });
+        $mdDialog.hide();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+  /* 
+  ======== Deleting User ends ========
   */
 
   /* 
