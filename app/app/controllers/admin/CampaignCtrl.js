@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
 
   // $scope.limit= 3;
   // $scope.loadMore = function() {
@@ -205,13 +205,15 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   $scope.generateFloatingCampaignPdf = function(){
     Upload.upload({
       url: config.apiPath + '/floating-campaign-pdf',
-      data: { product_arr: $scope.formRows }
+      data: { product_arr: $scope.formRows },
+      responseType: "arraybuffer"
     }).then(function (result) {
-      if(result.data.status == "1"){
-        // code to download the received pdf.
+      if(result.data){
+        var campaignPdf = new Blob([result.data], { type: 'application/pdf;charset=utf-8' });
+        FileSaver.saveAs(campaignPdf, 'Campaigns Proposal.pdf');
       }
       else{
-        toastr.error(result.data.message);
+        toastr.error(result.message);
       }
     }, function (resp) {
       // console.log('Error status: ', resp);
