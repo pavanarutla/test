@@ -102,3 +102,11 @@
       language: 'en'
     }
   });
+
+
+  import Echo from "laravel-echo"
+
+ window.Echo = new Echo({
+     broadcaster: 'pusher',
+     key: '423593d76e3719eed080'
+});

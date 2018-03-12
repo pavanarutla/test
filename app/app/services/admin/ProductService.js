@@ -25,6 +25,16 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/format/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			getTypeList: function () {
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/bbtypes').success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			saveTypes: function (obj) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/bbtype',obj).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}

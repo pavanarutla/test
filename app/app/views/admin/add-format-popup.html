@@ -26,6 +26,15 @@
 							<div ng-message="required">Format Name is required.</div>
 						</div>
 					</md-input-container>
+					<md-input-container class="md-block margin-input">
+							<label>BillBoard Type</label>
+							<md-select ng-model="format.bbtype" class="select-value"	data-md-container-class="selectdemoSelectHeader" required="required" name="BBType">
+								<md-option ng-repeat="type in typeList" ng-value="type.id">{{type.type}}</md-option>
+							</md-select>
+							<div ng-messages="addFormatForm.BBType.$error">
+								<div ng-message="required">BillBorad type is required.</div>
+							</div>
+					</md-input-container>
 					<div layout="row">
 						<div flex="50"> <label for="dob">Icon Image</label></div>
 						<div>

@@ -312,16 +312,23 @@ app.controller('bbMngrCtrl',
   };
 
   $scope.query={};
-  $scope.sendQuery = function () {
+   $scope.submitted_sendQuery = false;
+
+    $scope.sendQuery = function (form) {
+    $scope.submitted_sendQuery = true;
     ContactService.sendQuery($scope.query).then(function (response) {
-      if(result.status == 1){
-        toastr.success(result.message);
+      if(response.status == 1){
+        toastr.success(response.message);
+        form.$setPristine();
+        form.$setUntouched();
+        $scope.submitted_sendQuery = false;
+        $scope.query={};
       }
       else{
-        toastr.error(result.message);
+        toastr.error(response.message);
       }
     });
-    $scope.query={};
+    
   }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
   //   $scope.feedBackData = response;
@@ -348,13 +355,13 @@ app.controller('bbMngrCtrl',
     
   $scope.callbackRequest = {};
   $scope.requestCallBack = function () {
-    ContactService.requestCallBack(callbackRequest).then(function (response) {
-      if(result.status == 1){
-        toastr.success(result.message);
+    ContactService.requestCallBack($scope.callbackRequest).then(function (response) {
+      if(response.status == 1){
+        toastr.success(response.message);
         $mdDialog.hide();
       }
       else{
-        toastr.error(result.message);
+        toastr.error(response.message);
       }
     });
   }

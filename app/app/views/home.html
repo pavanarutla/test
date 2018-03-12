@@ -493,12 +493,12 @@
 			</div>
 			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class="contsr" layout-matgin layout-padding>
 				<div layout="column" layout-sm="column" class="confor">
-					<form name="sendquery" novalidate>
+					<form name="sendquery" novalidate ng-submit="sendQuery(sendquery)">
 						<input type="hidden" ng-model="query.type" value="3" />
 						<md-input-container class="md-block">
 							<label>Name</label>
 							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" />
-							<div ng-messages="sendquery.queryname.$error">
+							<div ng-messages="sendquery.queryname.$error" ng-if="sendquery.queryname.$error && submitted_sendQuery">
 								<div class="alret alert-danger" ng-message="required">Name is required.</div>
 								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
 							</div>
@@ -509,7 +509,7 @@
 							<!-- <input ng-model="query.email" required="required"  /> -->
 							<input ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
 							/>
-							<div ng-messages="sendquery.queryemail.$error">
+							<div ng-messages="sendquery.queryemail.$error" ng-if="submitted_sendQuery">
 							  <div class="alret alert-danger" ng-message="required">Email is required.</div>
 							  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
 							  <div ng-message="pattern">Enter a valied email</div>
@@ -522,14 +522,14 @@
 						<md-input-container class="md-block">
 							<label>Message</label>
 							<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required"  />
-							<div ng-messages="sendquery.querymsg.$error">
+							<div ng-messages="sendquery.querymsg.$error" ng-if="submitted_sendQuery">
 								<div class="alret alert-danger" ng-message="required">message is required.</div>
 								<div ng-message="maxlength">message shouldn't exede 150 characters. </div>
 								<div ng-message="minlength">message should be 10 characters</div>
 							  </div>
 						</md-input-container>
 						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
+							<button class="md-raised md-primary forsubm" >Send Message</button>
 						</div>
 					</form>
 				</div>

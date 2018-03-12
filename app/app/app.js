@@ -14,7 +14,9 @@ var app = angular.module('bbManager', [
   'satellizer',
   'toastr',
   'ui.grid',
+  'ui.grid.exporter',
   'ui.grid.edit',
+  'ui.grid.selection',
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
@@ -220,6 +222,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
     })
+    .state('admin.billboardtypes', {
+      url: '/billboardtypes',
+      templateUrl: 'views/admin/bbtype.html',
+      controller: 'ProductCtrl'
+    })
     .state('admin.locations', {
       url: '/locations',
       templateUrl: 'views/admin/locations.html',
@@ -248,12 +255,12 @@ var app = angular.module('bbManager', [
     .state('admin.subscribers', {
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
-      controller: 'subscribersCtrl'
+      controller: 'subscriberCtrl'
     })
     .state('admin.queries', {
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
-      controller: 'queriesCtrl'
+      controller: 'customerQueriesCtrl'
     })
     .state('admin.callcenterinfo', {
       url: '/callcenterinfo',
@@ -405,6 +412,7 @@ app.run(
           'admin.companies',
           'admin.hoarding-list',
           'admin.formats',
+          'admin.billboardtypes',
           'admin.locations',
           'admin.locations-country',
           'admin.locations-state',

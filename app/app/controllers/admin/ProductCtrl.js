@@ -150,6 +150,17 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   $scope.showProductForm = function (ev) {
     $scope.product = {};
     $mdDialog.show({
+      template: '<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="60"><md-dialog-content><md-content class="md-padding">  <div layout="column" layout-align="center center"><div class="md-title">  <h3>Choose BillBoard Type </h3> </div> </div><md-input-container class="md-block margin-input">  <label>BillBoard Type</label> <md-select ng-model="format.bbtype" class="select-value"  data-md-container-class="selectdemoSelectHeader" required="required" name="BBType"> <md-option ng-repeat="type in typeList" ng-click="showProductFormNext(type)" ng-value="type.id">{{type.type}}</md-option>   </md-select>    <div ng-messages="addFormatForm.BBType.$error">   <div ng-message="required">BillBorad type is required.</div>   </div> </md-input-container></md-dialog-content></md-dialog>',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    })
+  };
+
+   $scope.showProductFormNext = function (data) {
+    $scope.product = {};
+    $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
@@ -271,5 +282,102 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
+
+
+
+  /*
+  ======== Types section ========
+  */
+
+  // Opens the format form pop up
+  $scope.showBbtypeAddForm = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'addtypes',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    })
+  };
+  
+  // UI-Grid for formats
+  $scope.gridBBTypes = {
+    paginationPageSizes: [25, 50, 75],
+    paginationPageSize: 25,
+    enableCellEditOnFocus: false,
+    multiSelect: false,
+    enableFiltering: false,
+    enableSorting: true,
+    showColumnMenu: false,
+    enableGridMenu: true,
+    enableRowSelection: true,
+    enableRowHeaderSelection: false,
+  };
+
+ 
+
+  $scope.gridBBTypes.columnDefs = [
+    { name: 'id', displayName: 'Id', enableCellEdit: false },
+    { name: 'type', displayName: 'Type', enableCellEdit: false },
+    { name: 'frontshow', displayName: 'Show on frontend', enableCellEdit: false},
+    {
+      name: 'Action', field: 'Action', width: '30%',
+      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editTypes(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click="grid.appScope.deleteFormat(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
+      enableFiltering: false
+    }
+  ];
+
+  $scope.gridBBTypes.onRegisterApi = function (gridApi) {
+    $scope.gridApi1 = gridApi;
+    gridApi1.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
+      $scope.$apply();
+    });
+  };
+  // UI-Grid for formats ends
+
+  // Get Formats list
+  ProductService.getTypeList().then(function(result){
+    $scope.gridBBTypes.data = result;
+    $scope.typeList = result;
+  });
+
+  $scope.btype = {};
+  $scope.addbbtypes = function (data) {
+    $scope.btype.type = data.type;
+    if(data.frontshow){
+      $scope.btype.frontshow  = data.frontshow;
+    }
+    ProductService.saveTypes($scope.btype).then(function(result){
+
+      console.log(result)
+      if(result.status==1){
+        $mdDialog.cancel();
+        toastr.success(result.message);
+      }else{
+        toastr.error(result.message);
+      }
+    });
+  };
+
+  $scope.editTypes = function(btype){
+    $scope.btype = btype;
+    //console.log(btype);
+    if($scope.btype.frontshow == "true"){
+      $scope.btype.frontshow =true;
+    }
+    $mdDialog.show({
+      templateUrl: 'addtypes',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
+ 
+  /*
+  ======== Formats section ends ========
+  */
 
 });

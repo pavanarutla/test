@@ -9,3 +9,41 @@
         <div ui-grid="gridcallCenter" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
     </div>
 </div>
+<script type="text/ng-template" id="templateId">
+
+<md-dialog flex="50" flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70">
+
+  <form ng-cloak name="callFeedback" novalidate>
+       <md-toolbar>
+      <div  class="md-toolbar-tools md-whiteframe-4dp">
+      <span  class="md-title">Call Feedback</span>
+      <span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
+      <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button"  ng-click="cancelFeedbackBox()">X</button>
+    </div>
+    </md-toolbar> 
+    <md-dialog-content>
+      <div layout="row" layout-sm="row" layout-lg="row"  layout-md="row" layout-xs="column" layout-margin="layout-margin">
+        <div layout="column" flex-lg="100">
+          <md-input-container class="md-block" >
+            <label>Call Feedback</label>
+            <textarea ng-model="response.call_feedback" name="call_feedback" minlength="10"  required></textarea>
+            <div ng-messages="callFeedback.call_feedback.$error">
+              <div ng-message="required">Please add Feedback</div>
+              <div ng-message="minlength">Its must have 10 characters.</div>
+            </div>
+          </md-input-container>
+        </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center " >
+      <md-button Class="md-raised md-primary" type="submit" ng-disabled="callFeedback.$invalid" ng-click="savefeedback(response)">
+        save
+      </md-button>
+      <md-button Class="md-raised" ng-click="cancelFeedbackBox()">
+        CANCEL
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+
+</script>

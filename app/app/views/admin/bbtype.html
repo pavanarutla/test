@@ -1,0 +1,64 @@
+<div layout="column" layout-fill="layout-fill">
+    <div class="md-title" style="background: #447bde;color: #fff;" layout="row">
+        <div flex="50">
+            <div class="md-title" style="margin: 10px 0 0 15px;">List Of Types</div>
+        </div>
+         <div layout-align="center end" layout="column" flex="50">
+            <md-button class="md-raised md-warn" ng-click="showBbtypeAddForm()">
+                 Add New Type <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
+            </md-button>
+        </div> 
+    </div>
+    <div layout-margin layout="column">
+  
+    <div ui-grid="gridBBTypes"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+    </div>
+</div>
+
+<script type="text/ng-template"  id="addtypes">
+
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+    <md-dialog-content>
+        <md-content class="md-padding">
+            <div layout="column" layout-align="center center">
+                <img ng-src="assets/images/billboard_popup.png">
+            </div>
+            <ul>
+                <li ng-repeat="(key, errors) in addBBtype.$error track by $index"> <strong>{{ key }}</strong> errors
+                    <ul>
+                        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div layout="column" layout-align="center center">
+                <div class="md-title">
+                    <h3>Add BillBoard Types</h3>
+                </div>
+            </div>
+            <form name="addBBtype" novalidate="novalidate">
+                <input type="hidden" ng-model="btype.id" />
+                <div layout="column" flex="60" flex-offset-gt-sm="20" layout-padding>
+                    <md-input-container class="md-block margin-input">
+                        <label>Format</label>
+                        <input ng-model="btype.type" type="text" name="type" required="required" />
+                        <div ng-messages="addBBtype.type.$error">
+                            <div ng-message="required">Type is required.</div>
+                        </div>
+                    </md-input-container>
+                    <div layout="row">
+                        <div flex="50"> <label for="dob">Show on frontend</label></div>
+                        <div>
+                            <input type="checkbox"  ng-model="btype.frontshow" name="frontshow"></input>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button type="submit" Class="md-raised md-primary" ng-click="addbbtypes(btype)">SUBMIT</md-button>
+                    <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>
+</script>
