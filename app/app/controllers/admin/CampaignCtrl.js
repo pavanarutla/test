@@ -39,14 +39,14 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   };
   $scope.removeCampagin = function(campagin){
     console.log(campagin);
-    // AdminCampaignService.deleteCampaign(campagin.id).then(function (result) {
-    //   if (result.status == 1) {
-    //     toastr.success(result.message);
-    //   }
-    //   else {
-    //     toastr.error(result.message);
-    //   }
-    // });
+    AdminCampaignService.deleteCampaign(campagin.id).then(function (result) {
+      if (result.status == 1) {
+        toastr.success(result.message);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
   };
 
 
