@@ -22,7 +22,6 @@ var app = angular.module('bbManager', [
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
-
     $mdThemingProvider.theme('default')
     .primaryPalette('red', {
       'default': '800',
@@ -285,7 +284,7 @@ var app = angular.module('bbManager', [
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'OwnerCampaignCtrl'
+      controller: 'requestHoarding'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
@@ -309,6 +308,7 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
+      controller: 'OwnerHomeController'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',
@@ -324,6 +324,11 @@ var app = angular.module('bbManager', [
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
+    })
+    .state('owner.signIn', {
+      url: '/signIn',
+      templateUrl: 'views/owner/signin.html',
+      controller:'ownerSigninCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
@@ -382,6 +387,7 @@ app.run(
       $transitions.onStart({}, function (transition) {
         // Get all URL parameter
         $rootScope.currentTitle = transition.to().title;
+        $rootScope.currStateName = transition.to().name;
         if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }

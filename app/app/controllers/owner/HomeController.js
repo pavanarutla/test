@@ -1,5 +1,5 @@
 // angular.module('myApp', ['googlechart'])
-  app.controller('homePage', function($scope) {
+  app.controller('OwnerHomeController', function($scope) {
     var chart1 = {};
     chart1.type = "google.charts.Bar";
     chart1.displayed = false;
