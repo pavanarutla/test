@@ -147,6 +147,12 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
       else{
         toastr.error(result.message);
       }
+    },function(error){
+      if(error.email) {
+        if(error.email[0]=='validation.unique') {
+          toastr.error("Email is already exists");
+        }
+      }
     });
   }
   /* 

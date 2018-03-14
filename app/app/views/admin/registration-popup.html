@@ -71,13 +71,13 @@
 							<input ng-model="user.company_type" type="text" name="company_type" minlength="5" maxlength="60" required="required" />
 							<div ng-messages="userData.company_type.$error">
 								<div ng-message="required">Company Name is required.</div>
-								<div ng-message="minlength">Company Name must have 2 characters.</div>
+								<div ng-message="minlength">Company Name must have 5 characters.</div>
 								<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
-							</div>
+							</div>	
 						</md-input-container>
 
 						<div layout="row" layout-align="center center">
-							<md-button type="submit" Class="md-raised md-primary" ng-click="addUser()">SUBMIT</md-button>
+							<md-button type="submit" Class="md-raised md-primary" ng-click="addUser()" ng-disabled="userData.$invalid">SUBMIT</md-button>
 							<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 						</div>
 					</div>
@@ -122,12 +122,12 @@
 							<input ng-model="agency.company_type" type="text" name="company_type" minlength="5" maxlength="60" required="required" />
 							<div ng-messages="agencyData.company_type.$error">
 								<div ng-message="required">Company Name is required.</div>
-								<div ng-message="minlength">Company Name must have 2 characters.</div>
+								<div ng-message="minlength">Company Name must have 5 characters.</div>
 								<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
 							</div>
 						</md-input-container>
 						<div layout="row" layout-align="center center">
-							<md-button type="submit" Class="md-raised md-primary" ng-click="addAgency()">SUBMIT</md-button>
+							<md-button type="submit" Class="md-raised md-primary" ng-click="addAgency()" ng-disabled="agencyData.$invalid">SUBMIT</md-button>
 							<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 						</div>
 					</div>
