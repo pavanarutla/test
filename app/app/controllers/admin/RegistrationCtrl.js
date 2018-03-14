@@ -215,6 +215,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
       else{
         toastr.error(result.message);
       }
+    },function(error){
+      toastr.error("Email is already exist");
     });
   }
 
