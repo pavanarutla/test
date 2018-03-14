@@ -313,6 +313,7 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
+      controller: 'HomeCtrl'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',
