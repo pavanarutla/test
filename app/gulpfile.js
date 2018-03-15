@@ -4,6 +4,7 @@ const concat = require('gulp-concat');
 const clean = require('gulp-clean');
 const ngTemplates = require('gulp-ng-templates');
 const mainBowerFiles = require('main-bower-files');
+var mainNodeFiles = require('gulp-main-node-files');
 var order = require("gulp-order");
 const minify_css = require('gulp-minify-css');
 const imagemin = require('gulp-imagemin');
@@ -105,8 +106,7 @@ gulp.task('app.src_compress',function(){
 
 
 gulp.task('app.assets',function(){
-   return gulp.src(['bower_components/modernizr/modernizr.js',
-    'bower_components/ng-file-upload/ng-file-upload-shim.min.js',
+   return gulp.src([
     'app/assets/js/*.js',
     '!app/assets/js/mainapp.js',
     '!app/assets/js/main.js'])
@@ -114,8 +114,8 @@ gulp.task('app.assets',function(){
         .pipe(gulp.dest('temp'))
 });
 
-gulp.task('app.vendor',['app.assets'],function(){
-   return gulp.src(mainBowerFiles())
+gulp.task('app.vendor',function(){
+   return gulp.src(mainNodeFiles(),{ base: '.' })
         .pipe(gulp.dest('temp'))
 });
 gulp.task('app.vendor_uglify',['app.vendor'], function() {
