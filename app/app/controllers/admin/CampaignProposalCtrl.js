@@ -75,6 +75,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       templateUrl: 'views/admin/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
+      preserveScope:true,
       controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
         $scope.product = productObj;
         $scope.updateProposedProduct = function(product){
@@ -83,7 +84,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
                 ctrlScope.campaignDetails = result;
-                ctrlScope.gridCampaignProducts.data = result.products;
+                ctrlScope.campaignDetails.products = result.products;
                 $mdDialog.hide();
               });
               toastr.success(result.message);

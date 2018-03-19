@@ -23,48 +23,10 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
       scope: $scope
     })
   };
-  
-  // UI-Grid for formats
-  $scope.gridFormats = {
-    paginationPageSizes: [25, 50, 75],
-    paginationPageSize: 25,
-    enableCellEditOnFocus: false,
-    multiSelect: false,
-    enableFiltering: true,
-    enableSorting: true,
-    showColumnMenu: false,
-    enableGridMenu: true,
-    enableRowSelection: true,
-    enableRowHeaderSelection: false,
-  };
-
-  $scope.generateImageTemplate = function(image){
-    var imagePath = config.serverUrl + image;
-    return imagePath;
-  }
-
-  $scope.gridFormats.columnDefs = [
-    { name: 'image', displayName: 'Icon', width: '40%', enableCellEdit: false },
-    { name: 'name', displayName: 'Format Type', enableCellEdit: false, width: '30%' },
-    {
-      name: 'Action', field: 'Action', width: '30%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editFormat(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click="grid.appScope.deleteFormat(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
-      enableFiltering: false
-    }
-  ];
-
-  $scope.gridFormats.onRegisterApi = function (gridApi) {
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-      $scope.$apply();
-    });
-  };
-  // UI-Grid for formats ends
 
   // Get Formats list
   ProductService.getFormatList().then(function(result){
-    $scope.gridFormats.data = result;
+    //$scope.gridFormats.data = result;
     $scope.formatList = result;
     console.log($scope.formatList,"$scope.formatList");
   });
@@ -77,13 +39,14 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     }).then(function (result) {
       if(result.data.status == 1){
         ProductService.getFormatList().then(function(result){
-          $scope.gridFormats.data = result;
+          $scope.formatList = result;
         });
         toastr.success(result.data.message);
       }
       else{
         toastr.error(result.data.message);
       }
+        $mdDialog.cancel();
     }, function (resp) {
       // console.log('Error status: ', resp);
     }, function (evt) {
@@ -109,8 +72,8 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   $scope.deleteFormat = function(format){
     ProductService.deleteFormat(format.id).then(function(result){
       if(result.status == 1){
-        var index = $scope.gridFormats.data.indexOf(format);
-        $scope.gridFormats.data.splice(index, 1);
+        // var index = $scope.gridFormats.data.indexOf(format);
+        // $scope.gridFormats.data.splice(index, 1);
         toastr.success(result.message);
       }
       else{
@@ -180,34 +143,6 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     enableRowSelection: true,
     enableRowHeaderSelection: false,
   };
-  
-  // $scope.gridProducts.columnDefs = [
-  //   { name: 'siteNo', displayName: 'Site No', enableCellEdit: false, width: '15%' },
-  //   { name: 'format_name', displayName: 'Site type', enableCellEdit: false, width: '10%' },
-  //   { name: 'company_name', displayName: 'Company', enableCellEdit: false, width: '10%' },
-  //   { name: 'address', displayName: 'Address', width: '15%', enableCellEdit: false },
-  //   { name: 'impressions', displayName: 'Impression', width: '10%', enableCellEdit: false },
-  //   { name: 'area_name', displayName: 'Area', width: '20%' },
-  //   { name: 'panelSize', displayName: 'Panel Size', type: 'number', width: '20%' },
-  //   { name: 'lighting', displayName: 'lighting', width: '10%' },
-  //   { name: 'direction', displayName: 'Direction', width: '10%', enableCellEdit: false, },
-  //   { name: 'image', displayName: 'Image', width: '10%', enableCellEdit: false, },
-  //   { name: 'symbol', displayName: 'Symbol', width: '10%', enableCellEdit: false, },
-  //   {
-  //     name: 'Action', field: 'Action', width: '10%',
-  //     cellTemplate: '<div class="ui-grid-cell-contents"><span><a href="" ng-click="grid.appScope.editProduct(row.entity)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span><span><a href="" ng-click="grid.appScope.deleteProduct(row.entity)"><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
-  //     enableFiltering: false,
-  //   }
-  // ];
-  
-  // $scope.gridProducts.onRegisterApi = function (gridApi) {
-  //   $scope.gridApi = gridApi;
-  //   gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-  //     $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-  //     $scope.$apply();
-  //   });
-  // };
-  // UI-Grid for products ends
 
   // Get products list
   ProductService.getProductList().then(function(result){
@@ -266,8 +201,8 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   $scope.deleteProduct = function(product){
     ProductService.deleteProduct(product.id).then(function(result){
       if(result.status == 1){
-        var index = $scope.gridProducts.data.indexOf(product);
-        $scope.gridProducts.data.splice(index, 1);
+        // var index = $scope.gridProducts.data.indexOf(product);
+        // $scope.gridProducts.data.splice(index, 1);
         toastr.success(result.message);
       }
       else{
@@ -279,7 +214,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   /*
   ======== Products section ends ========
   */
-
+ 
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
@@ -292,4 +227,12 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
       vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
     };
   // tables code end
+   // tables code start
+   var vm = $scope;
+   vm.limit = 5;
+   $scope.FormatloadMore = function() {
+     var increamented = vm.limit + 5;
+     vm.limit = increamented > $scope.formatList.length ? $scope.formatList.length : increamented;
+   };
+ // tables code end
 }]);
