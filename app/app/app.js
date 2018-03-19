@@ -267,6 +267,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
     })
+    .state('admin.floating-campaign', {
+      url: '/floating-campaign',
+      templateUrl: 'views/admin/floating-campaign.html',
+      controller: 'AdminCampaignCtrl'
+    })
     .state('owner', {
       abstract: true,
       url: '/owner',
@@ -315,7 +320,7 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
-      controller: 'OwnerHomeController'
+      controller: 'HomeCtrl'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',
