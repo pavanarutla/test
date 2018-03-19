@@ -68,7 +68,7 @@
     <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
@@ -102,6 +102,16 @@
     <!-- Main file -->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app-config.js"></script>
+
+    <!-- mobile redirect -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.1/mobile-detect.min.js"></script>
+    <script>
+      var md = new MobileDetect(window.navigator.userAgent);
+      if (md.mobile()) {
+          location.href = config.mobileUrl;
+      }
+    </script>
+    
 
 
     <!-- ////////////
@@ -165,6 +175,7 @@
     <!-- Controllers -->
     <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
     <script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
+    <script type="text/javascript" src="controllers/owner/HomeCtrl.js"></script>
     <script type="text/javascript" src="controllers/owner/DashboardCtrl.js"></script>
     <script type="text/javascript" src="controllers/owner/requestingCtrl.js"></script>
     <script type="text/javascript" src="controllers/owner/CampaignCtrl.js"></script>

@@ -88,26 +88,6 @@ var app = angular.module('bbManager', [
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
-    
-    // .state('index.shortlist-mobile', {
-    //   url: 'shortlist-mobile',
-    //   templateUrl: 'views/shortlist-mobile.html'
-    // })
-    // .state('index.formats-mobile', {
-    //   url: 'formats-mobile',
-    //   templateUrl: 'views/formats-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.suggest-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/suggest-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.savedcamapign-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/savedcamapign-mobile.html',
-
-    // })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -141,27 +121,12 @@ var app = angular.module('bbManager', [
         code: {squash: true, value: null}
       }
     })
-    // .state('index.reset-password', {
-    //   url: 'reset_password',
-    //   templateUrl: 'views/reset-password.html',
-    //   controller: 'UserSettingsCtrl'
-    // })
     .state('admin', {
       abstract: true,
       url: '/admin',
       templateUrl: 'layouts/admin.html',
       controller: 'AdminMgrAppCtrl'
     })
-    // .state('admin.products', {
-    //   url: '/admin/products',
-    //   templateUrl: 'views/admin/products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .state('admin.add-products', {
-    //   url: '/admin/add-products',
-    //   templateUrl: 'views/admin/add-products.html',
-    //   controller: 'ProductsCtrl'
-    // })
     .state('admin.home', {
       url: '/home',
       templateUrl: 'views/admin/home.html',
@@ -258,6 +223,11 @@ var app = angular.module('bbManager', [
       url: '/callcenterinfo',
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
+    })
+    .state('admin.floating-campaign', {
+      url: '/floating-campaign',
+      templateUrl: 'views/admin/floating-campaign.html',
+      controller: 'AdminCampaignCtrl'
     })
     .state('owner', {
       abstract: true,
