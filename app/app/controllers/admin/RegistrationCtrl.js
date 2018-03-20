@@ -70,8 +70,11 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
       }
       else{
         toastr.error(result.message);
-      }
-    });
+      } 
+    },function(result){
+      console.log(result);
+      toastr.error(result)
+    });    
   }
 
   $scope.editUser = function(user){
