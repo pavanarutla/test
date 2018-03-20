@@ -12,6 +12,10 @@ const plugins = require("gulp-load-plugins");
 const runSequence = require("run-sequence");
 var inject = require('gulp-inject');
 var svgmin = require('gulp-svgmin');
+var gnf = require('gulp-npm-files');
+var rename = require('gulp-rename');
+var watch = require('gulp-watch');
+
 
 
 //tasks
@@ -31,11 +35,51 @@ gulp.task('build',function(){
         ['app.customcss',
         'app.src_compress',
         'app.templates',
-        'app.vendor_uglify'],
-        'app.vendorcss',
+        'app.vendor_uglify',
+		 ],
+		 'app.vendorcss',
         'app.app_config',
-        'app.imagemin',
-        'app.index')
+        'app.imagemin',     
+        'app.index','watch')
+});
+
+gulp.task('test', function () {
+	console.log('Executed test job');
+	// setTimeout(function () {console.log('Executed test job');}, 6000) 
+});
+
+gulp.task("test2",function(){
+    console.log("am done with test 2 execution")
+})
+
+gulp.task('watch', function () {
+    watch([
+        'app/app.js',
+        'app/controllers/**/*.js',
+		'app/controllers/*.js',
+		'app/directives/*.js',
+		'app/filters/*.js',
+		'app/interceptors/*.js',
+		'app/services/*.js',
+        'app/services/**/*.js'
+    ], function () {
+        gulp.start('app.src_compress');		
+    });
+    watch(['app/assets/js/*'],function(){
+        gulp.start('app.vendor_uglify');
+    })
+    watch('app/index.html',function(){
+        gulp.start("app.index");
+    });
+    watch('app/assets/css/*.css',function(){
+        gulp.start('app.customcss');
+    });
+    watch('app/assets/css/vendor/*.css',function(){
+        gulp.start('app.vendorcss');
+    });
+    watch(['app/layouts/*.html','app/views/**/*.html','app/views/*.html'],function(){
+        gulp.start("app.templates");
+    });
 });
 
 gulp.task('app.clean',function(){
@@ -105,70 +149,81 @@ gulp.task('app.src_compress',function(){
 });
 
 
-gulp.task('app.assets',function(){
-   return gulp.src([
-    'app/assets/js/*.js',
-    '!app/assets/js/mainapp.js',
-    '!app/assets/js/main.js'])
-    .pipe(uglify())
-        .pipe(gulp.dest('temp'))
-});
+// gulp.task('app.assets',function(){
+//    return gulp.src([
+//     'app/assets/js/*.js',
+//     '!app/assets/js/mainapp.js',
+//     '!app/assets/js/main.js'])
+//     .pipe(uglify())
+//         .pipe(gulp.dest('temp'))
+// });
 
-gulp.task('app.vendor',function(){
-   return gulp.src(mainNodeFiles(),{ base: '.' })
-        .pipe(gulp.dest('temp'))
-});
-gulp.task('app.vendor_uglify',['app.vendor'], function() {
-   return gulp.src('temp/*.js')
-        .pipe(order([
-            "temp/jquery.js",
-            "temp/angular.js",
-            "temp/angular-animate.js",
-            "temp/angular-aria.js",
-            "temp/angular-material.js",
-            "temp/angular-messages.js",
-            "temp/angular-route.js",
-            "temp/angular-ui-router.js",
-            "temp/ng-map.js",
-            "temp/angular-touch.js",
-            "temp/bootstrap.js",
-            "temp/markerclusterer.js",
-            "temp/slick.js",
-            "temp/angular-toastr.tpls.js",
-            "temp/ng-file-upload.js",
-            "temp/ng-file-upload-shim.min.js",
-            "temp/underscore.js",
-            "temp/moment.js",
-            "temp/ui-grid.js",
-            "temp/FileSaver.js",
-            "temp/angular-file-saver.bundle.js",
-            "temp/angular-carousel.js",
-            "temp/ajax-googleapis.js",
-            "temp/angular-slick.js",
-            "temp/angular-ui-bootstrap.js",
-            "temp/ng-google-chart.js",
-            "temp/oms.min.js",
-            "temp/popper.min.js",
-            "temp/hammer.js",
-            "temp/modernizr.js",
-            "temp/satellizer.min.js",
-            "temp/vs-google-autocomplete.js"
-        ], { base: './' }))
-        .pipe(uglify())
+
+var required = [
+            "jquery.min.js",
+            "angular.min.js",
+            "angular-animate.min.js",
+            "angular-aria.min.js",
+            "angular-material.min.js",
+            "angular-messages.min.js",
+            "angular-route.min.js",
+            "angular-ui-router.min.js",
+            "ng-map.min.js",
+            "angular-touch.min.js",
+            "bootstrap.min.js",
+            "markerclusterer.js",
+            "slick.min.js",
+            "angular-toastr.tpls.min.js",
+            "ng-file-upload.min.js",
+            "ng-file-upload-shim.min.js",
+            "underscore-min.js",
+            "moment.min.js",
+            "ui-grid.min.js",
+            "FileSaver.min.js",
+            "angular-file-saver.bundle.min.js",
+            "angular-carousel.min.js",
+            "ajax-googleapis.js",
+            "angular-slick.min.js",
+            "angular-ui-bootstrap.js",
+            "ng-google-chart.js",
+            "oms.min.js",
+            "popper.min.js",
+            "hammer.min.js",
+            "modernizr.min.js",
+            "satellizer.min.js",
+            "vs-google-autocomplete.js"
+		];
+
+// gulp.task('app.vendor', function () {
+// 	return gulp.src(gnf(), {base:'./'})
+// 	.pipe(rename({dirname: ''}))
+// 	.pipe(gulp.dest('./temp'));
+// });
+
+gulp.task('app.vendor_uglify', function() {
+    var asstes = "app/assets/js/*js"
+    return gulp.src(asstes)
+        .pipe(order(required))
         .pipe(concat("vendor.min.js"))
         .pipe(gulp.dest('dist/scripts'))
 })
 
+
+var cssSrc = [
+    'angular-material.min.css',
+    'bootstrap.min.css',
+    'font-awesome.min.css',
+    'angular-toastr.min.css',
+    'slick.min.css',
+    'slick-theme.min.css',
+    'ui-grid.min.css'
+]
+
 gulp.task('app.vendorcss', function() {
-   return gulp.src(['temp/*.css',  
-    'bower_components/bootstrap/dist/css/bootstrap.min.css']
-)
-    .pipe(order([
-        "temp/angular-material.css",
-        "temp/angular-toastr.css",
-        "temp/slick.css"
-    ], { base: './' }))
-    .pipe(minify_css())
+    var cssAssetes = "app/assets/css/vendor/*.css";
+   return gulp.src(cssAssetes)
+    // .pipe(order(cssSrc, { base: './' }))
+    .pipe(order(cssSrc))
     .pipe(concat("app.vendor.css"))
     .pipe(gulp.dest('dist/scripts'))
 });
