@@ -43,15 +43,6 @@ gulp.task('build',function(){
         'app.index','watch')
 });
 
-gulp.task('test', function () {
-	console.log('Executed test job');
-	// setTimeout(function () {console.log('Executed test job');}, 6000) 
-});
-
-gulp.task("test2",function(){
-    console.log("am done with test 2 execution")
-})
-
 gulp.task('watch', function () {
     watch([
         'app/app.js',
@@ -93,12 +84,6 @@ gulp.task('app.customcss',function(){
      .pipe(concat('custom.min.css'))
      .pipe(gulp.dest('dist/assets/css'))
 });
-
-/*starttag: '"{{ext}}": [',
-    endtag: ']',
-    transform: function (filepath, file, i, length) {
-      return '  "' + filepath + '"' + (i + 1 < length ? ',' : '');
-    }*/
 
 gulp.task('app.index', function () {
   return gulp.src('app/index.html')
@@ -149,16 +134,6 @@ gulp.task('app.src_compress',function(){
 });
 
 
-// gulp.task('app.assets',function(){
-//    return gulp.src([
-//     'app/assets/js/*.js',
-//     '!app/assets/js/mainapp.js',
-//     '!app/assets/js/main.js'])
-//     .pipe(uglify())
-//         .pipe(gulp.dest('temp'))
-// });
-
-
 var required = [
             "jquery.min.js",
             "angular.min.js",
@@ -194,11 +169,6 @@ var required = [
             "vs-google-autocomplete.js"
 		];
 
-// gulp.task('app.vendor', function () {
-// 	return gulp.src(gnf(), {base:'./'})
-// 	.pipe(rename({dirname: ''}))
-// 	.pipe(gulp.dest('./temp'));
-// });
 
 gulp.task('app.vendor_uglify', function() {
     var asstes = "app/assets/js/*js"
@@ -222,7 +192,6 @@ var cssSrc = [
 gulp.task('app.vendorcss', function() {
     var cssAssetes = "app/assets/css/vendor/*.css";
    return gulp.src(cssAssetes)
-    // .pipe(order(cssSrc, { base: './' }))
     .pipe(order(cssSrc))
     .pipe(concat("app.vendor.css"))
     .pipe(gulp.dest('dist/scripts'))
@@ -251,25 +220,25 @@ gulp.task('app.imagemin', function() {
     .pipe(gulp.dest(imgDst));
  });
 
- gulp.task('app.testsvg',function(){
-    return gulp.src('app/assets/images/*.svg')
-        .pipe(svgmin(
-            {
-                plugins: [{
-                    removeDoctype: false
-                }, {
-                    removeComments: false
-                }, {
-                    cleanupNumericValues: {
-                        floatPrecision: 2
-                    }
-                }, {
-                    convertColors: {
-                        names2hex: false,
-                        rgb2hex: false
-                    }
-                }]
-            }
-        ))
-        .pipe(gulp.dest('dist/assets/testimg'))
-})
+//  gulp.task('app.testsvg',function(){
+//     return gulp.src('app/assets/images/*.svg')
+//         .pipe(svgmin(
+//             {
+//                 plugins: [{
+//                     removeDoctype: false
+//                 }, {
+//                     removeComments: false
+//                 }, {
+//                     cleanupNumericValues: {
+//                         floatPrecision: 2
+//                     }
+//                 }, {
+//                     convertColors: {
+//                         names2hex: false,
+//                         rgb2hex: false
+//                     }
+//                 }]
+//             }
+//         ))
+//         .pipe(gulp.dest('dist/assets/testimg'))
+// })
