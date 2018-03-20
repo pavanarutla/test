@@ -1,4 +1,4 @@
-app.controller('UserProfileCtrl', function($scope, $stateParams,$window, UserService,Upload,config) {
+app.controller('UserProfileCtrl', function($scope, $stateParams, $window, UserService, Upload, config) {
   
   $scope.getLoggedInUserProfile = function(){
     UserService.getProfile().then(function(result){
@@ -38,7 +38,7 @@ app.controller('UserProfileCtrl', function($scope, $stateParams,$window, UserSer
   $scope.uploadProfilePic = function () {
     Upload.upload({
       url: config.apiPath + '/update-profile-pic',
-      data: { image: $scope.files.image}
+      data: { profile_pic: $scope.files.image}
     }).then(function (result) {
       if(result.data.status == "1"){
         $window.location.reload();   
