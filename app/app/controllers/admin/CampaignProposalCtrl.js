@@ -83,7 +83,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
                 ctrlScope.campaignDetails = result;
-                ctrlScope.gridCampaignProducts.data = result.products;
+                //ctrlScope.gridCampaignProducts.data = result.products;
                 $mdDialog.hide();
               });
               toastr.success(result.message);

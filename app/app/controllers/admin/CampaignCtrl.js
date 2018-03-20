@@ -172,8 +172,6 @@ $scope.headers = Object.keys($scope.cruises[0]);
   //   $scope.gridClosed.data = data;
   // });
 
-
-  // tables code start
   var vm = $scope;
   vm.limit = 10;
   $scope.loadMore = function() {
@@ -181,5 +179,37 @@ $scope.headers = Object.keys($scope.cruises[0]);
     vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
   };
 // tables code end
+  /*
+  */
+  $scope.formRows = [{formId: '1', name: 'floatginCampaignForm1'}];
+  $scope.addNewFormRow = function() {
+    var newItemNo = $scope.formRows.length + 2;
+    $scope.formRows.push({'formId' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
+  };
+
+  $scope.generateFloatingCampaignPdf = function(){
+    Upload.upload({
+      url: config.apiPath + '/floating-campaign-pdf',
+      data: { product_arr: $scope.formRows },
+      responseType: "arraybuffer"
+    }).then(function (result) {
+      if(result.data){
+        var campaignPdf = new Blob([result.data], { type: 'application/pdf;charset=utf-8' });
+        FileSaver.saveAs(campaignPdf, 'Campaigns Proposal.pdf');
+      }
+      else{
+        toastr.error(result.message);
+      }
+    }, function (resp) {
+      // console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
+  } 
+
+  /*
+  //////// Floating campaign section ends
+  */
 
 });
