@@ -1,3 +1,8 @@
+<style>
+  .red{
+    color:#f00;
+  }
+</style>
 <div layout="column" layout-sm="column" layout-xs="column" class="bbsco contbg">
   <div layout="column" layout-align="center center" class="pricing-head">
     <div class="md-display-1 pricing-inner theme-txt">Different Type of OOH Advertising</div>
@@ -9,7 +14,7 @@
         <md-list flex layout="row">
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn"  ng-click="showBillboards()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                 <span><md-icon md-svg-icon="/assets/images/icons/001-shop.svg"></md-icon></span>
                 <div class="md-body-2"> HOARDING </div>
               </md-button>
@@ -17,7 +22,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="unipole()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 1}" ng-click="selectedFormatIndex = 1">
                 <span><md-icon md-svg-icon="assets/images/icons/004-sign.svg"></md-icon></span>
                 <div class="md-body-2"> Unipole</div>
               </md-button>
@@ -25,7 +30,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="showtransit()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 2}" ng-click="selectedFormatIndex = 2">
                 <span><md-icon md-svg-icon="assets/images/icons/003-bus.svg"></md-icon></span>
                 <div class="md-body-2"> TRANSIT </div>
               </md-button>
@@ -33,7 +38,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn"  ng-click="showairport()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 3}"  ng-click="selectedFormatIndex = 3">
                 <span><md-icon md-svg-icon="assets/images/icons/002-airplane.svg"></md-icon></span>
                 <div class="md-body-2">airport </div>
               </md-button>
@@ -41,7 +46,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="showbus()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 4}" ng-click="selectedFormatIndex = 4">
                 <span><md-icon md-svg-icon="assets/images/icons/001-bus-stop.svg"></md-icon></span>
                 <div class="md-body-2"> bus shelter</div>
               </md-button>
@@ -49,7 +54,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="showdigital()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 5}" ng-click="selectedFormatIndex = 5">
                 <span><md-icon md-svg-icon="assets/images/icons/003-billboard.svg"></md-icon></span>
                 <div class="md-body-2"> digital </div>
               </md-button>
@@ -57,7 +62,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="showrail()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 6}" ng-click="selectedFormatIndex = 6">
                 <span><md-icon md-svg-icon="assets/images/icons/002-train.svg"></md-icon></span>
                 <div class="md-body-2"> rail </div>
               </md-button>
@@ -65,7 +70,7 @@
           </md-list-item>
           <md-list-item style="padding:5px">
             <div>
-              <md-button class="md-grid-item-content hoarding-btn" ng-click="showretail()">
+              <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 7}" ng-click="selectedFormatIndex = 7">
                 <span><md-icon md-svg-icon="assets/images/icons/001-shop.svg"></md-icon></span>
                 <div class="md-body-2"> retail</div>
               </md-button>
@@ -75,7 +80,7 @@
         </md-list> 
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showBillboardsData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 0">
         <div class="md-display-2 frt-head">Billboards</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -160,7 +165,7 @@
 
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showUnipoleData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 1">
         <div class="md-display-2 frt-head">unipole</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -182,7 +187,7 @@
         </div>
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showdigitalData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 2">
         <div class="md-display-2 frt-head">digital</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -204,7 +209,7 @@
         </div>
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showretailData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 3">
         <div class="md-display-2 frt-head">retail</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -226,7 +231,7 @@
         </div>
       </div> 
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showtransitData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 4">
         <div class="md-display-2 frt-head">transit</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -248,7 +253,7 @@
         </div>
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showairportData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 5">
         <div class="md-display-2 frt-head">airport</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -270,7 +275,7 @@
         </div>
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showbusData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 6">
         <div class="md-display-2 frt-head">bus shelter</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy
@@ -292,7 +297,7 @@
         </div>
       </div>
 
-      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="showrailData">
+      <div layout="column" class="formats-page md-whiteframe-3dp" layout-align="space-between" ng-show="selectedFormatIndex == 7">
         <div class="md-display-2 frt-head">rail</div>
         <div class="frt-text">
           A billboard is a large outdoor structure (a billing board), typically found in high-traffic areas such as alongside busy

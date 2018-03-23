@@ -432,5 +432,10 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
       $location.path('/campaigns');
     }
+
+    // Setting up selected format for format page
+    $scope.setSelectedFormat = function(index){
+      $rootScope.formatSelected = index;
+    }
   }
 );
