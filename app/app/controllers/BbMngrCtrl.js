@@ -504,7 +504,6 @@ app.controller('bbMngrCtrl',
     }
     if($rootScope.isAuthenticated){
       getUserNotifs();
-      // $interval(getUserNotifs, 10000);
     }
 
     /*===============================
