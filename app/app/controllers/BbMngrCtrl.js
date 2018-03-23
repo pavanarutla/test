@@ -159,31 +159,6 @@ app.controller('bbMngrCtrl',
       $location.path('/');
       window.scroll(0, 3810)
     }
-    //jk caraosel
-    $scope.dataArray = [
-      {
-        src: 'assets/images/banner1-1920.png'
-      },
-      {
-        src: 'assets/images/bnr.png'
-      },
-      {
-        src: 'assets/images/banner1-1920.png'
-      }
-    ];
-
-    // $scope.formate = function () {
-    //   $location.path('/');
-    //   window.scroll(0, 1686)
-    // }
-    // $scope.whyOutdoor = function () {
-    //   $location.path('/');
-    //   window.scroll(0, 2440)
-    // }
-    // $scope.contactus = function () {
-    //   $location.path('/');
-    //   window.scroll(0, 3670)
-    // }
 
   //scroll to top
   $(window).scroll(function () {
@@ -213,65 +188,6 @@ app.controller('bbMngrCtrl',
       $(".browse-btn").removeClass("active-one");
     }
   });
-
-  // $(window).on("scroll", function () {
-  //   if ($(window).scrollTop() > 600) {
-  //     $(".what-we").addClass("active-two");
-  //   } else {
-  //     $(".what-we").removeClass("active-two"); 
-  //   }
-  // });
-
-
-  //slider
-  $scope.slickConfig2Loaded = true;
-
-  $scope.slickConfig2 = {
-    autoplay: false,
-    infinite: true,
-    autoplaySpeed: 5000,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [{
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        infinite: true
-      }
-    }, {
-      breakpoint: 959,
-      settings: {
-        slidesToShow: 2,
-        infinite: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        infinite: true
-      }
-    }, {
-      breakpoint: 320,
-      settings: {
-        slidesToShow: 1,
-        infinite: true
-      }
-    }],
-    method: {}
-  };
-
-  $scope.query={};
-  // $scope.sendQuery = function () {
-  //   ContactService.sendQuery($scope.query).then(function (response) {
-  //     if(result.status == 1){
-  //       toastr.success(result.message);
-  //     }
-  //     else{
-  //       toastr.error(result.message);
-  //     }
-  //   });
-  // }
 
   //slider
   $scope.slickConfig2Loaded = true;

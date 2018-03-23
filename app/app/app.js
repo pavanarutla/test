@@ -18,7 +18,7 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
-  'angular-carousel'
+  // 'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -260,6 +260,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
     })
+    .state('admin.floating-campaign', {
+      url: '/floating-campaign',
+      templateUrl: 'views/admin/floating-campaign.html',
+      controller: 'AdminCampaignCtrl'
+    })
     .state('owner', {
       abstract: true,
       url: '/owner',
@@ -274,17 +279,17 @@ var app = angular.module('bbManager', [
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
       templateUrl: 'views/owner/campaign.html',
-      controller:  'CampaignownerCtrl'
+      controller:  'OwnerCampaignCtrl'
     })
     .state('owner.editCampaign', {
       url: '/editCampaign',
       templateUrl: 'views/owner/editcampaign.html',
-      controller: 'CampaignownerCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'CampaignownerCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
@@ -308,6 +313,7 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
+      controller: 'HomeCtrl'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',

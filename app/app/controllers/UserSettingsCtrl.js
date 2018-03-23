@@ -2,7 +2,6 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
   
   if($stateParams.code){
     $scope.typeReset = true;
-    console.log($stateParams.code);
   }
 
   $scope.resetPwdObj = {};
