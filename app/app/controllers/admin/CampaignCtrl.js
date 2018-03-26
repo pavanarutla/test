@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService) {
   var vm = $scope;
   vm.limit = 5;
-=======
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
-
->>>>>>> ddcf8fc4154dcdde0bb69abb80ceb6f234b2b7ff
   // $scope.limit= 3;
   // $scope.loadMore = function() {
   //   $scope.limit = $scope.items.length;
@@ -177,7 +172,6 @@ $scope.headers = Object.keys($scope.cruises[0]);
   //   $scope.gridClosed.data = data;
   // });
 
-<<<<<<< HEAD
 
   // tables code start
   var vm = $scope;
@@ -187,7 +181,6 @@ $scope.headers = Object.keys($scope.cruises[0]);
     vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
   };
 // tables code end
-=======
   /*
   //////// Floating campaign section
   */
@@ -222,6 +215,5 @@ $scope.headers = Object.keys($scope.cruises[0]);
   /*
   //////// Floating campaign section ends
   */
->>>>>>> ddcf8fc4154dcdde0bb69abb80ceb6f234b2b7ff
 
 });
