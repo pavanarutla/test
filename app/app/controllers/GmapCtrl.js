@@ -499,6 +499,7 @@ app.controller('GmapCtrl',
       var locArr = [];
       var uniqueMarkers = [];
       var concentricMarkers = {};
+	  var uniqueMarkerArr = [];
       $scope.processMarkers = function () {
         _.each($scope.filteredMarkers, function (v, i) {
           var product = {position: {lat: v.lat, lng: v.lng}, data: v};
@@ -509,6 +510,7 @@ app.controller('GmapCtrl',
             locArr[JSON.stringify(product.position)] = 1;
           }
         });
+		console.log(locArr);
         _.each(productList, function(v, i){
           if(locArr[JSON.stringify(v.position)] > 1){
             if(concentricMarkers[JSON.stringify(v.position)]){
@@ -523,17 +525,34 @@ app.controller('GmapCtrl',
             }
           }
           else{
-            uniqueMarkers.push(v.data);
+			  var markerData = v.data;
+			  uniqueMarkers.push(markerData);
+			  var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+			  var marker = new google.maps.Marker({
+				position: latLng,
+				icon: {
+				  url: config.serverUrl + markerData.symbol,
+				  scaledSize: new google.maps.Size(30, 30)
+				},
+				title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
+			  });
+			  marker.properties = markerData;
+			  uniqueMarkerArr.push(marker);
+			  markersOnMap.push(marker);
+			  google.maps.event.addListener(marker, 'click', function (e) {
+				selectMarker(marker);
+			  });
           }
         });
+		console.log('product list',productList)
         // console.log(uniqueMarkers);
-        // console.log(concentricMarkers);
+         console.log('concentric markers',concentricMarkers);
 
         /* 
         //// handling clustering ////
         */
-        var uniqueMarkerArr = [];
-        _.each(uniqueMarkers, function (markerData, index) {
+        //var uniqueMarkerArr = [];
+        /*_.each(uniqueMarkers, function (markerData, index) {
           var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
           var marker = new google.maps.Marker({
             position: latLng,
@@ -549,7 +568,7 @@ app.controller('GmapCtrl',
           google.maps.event.addListener(marker, 'click', function (e) {
             selectMarker(marker);
           });
-        });
+        });*/
         var mc = {
           gridSize: 50,
           maxZoom: 13,
