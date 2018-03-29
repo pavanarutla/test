@@ -44,7 +44,7 @@
             </md-input-container>
             <div layout="row" layout-xs="column">
               <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
-                <p class="alrhvacc"> <a class="md-primary udrlin" ng-click="showForgotPasswordDialog()">Forgot Password ?</a></p>
+                <p class="alrhvacc"> <a class="md-primary udrlin" ng-click="showForgotPasswordDialog()" style="cursor:pointer">Forgot Password ?</a></p>
               </div>
               <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
                 <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
@@ -99,8 +99,15 @@
         
       </div>
   
-      <div ng-if="forgotPasswordpage">
+    <div ng-if="forgotPasswordpage">
       <md-content class="md-padding">
+        <div layout="row">
+            <div flex></div>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="close()">
+              <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>   
+        </div>
+        
         <form name="forgotPassword" novalidate="novalidate">
           <!-- <md-input-container class="md-block">
             <label>Email</label>

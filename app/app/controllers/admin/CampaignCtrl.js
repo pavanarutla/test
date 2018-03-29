@@ -37,9 +37,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
     });
   };
 
-  $scope.cancel = function(){
-    $mdDialog.hide();
-  };
+  // close popup
+    
+  $scope.closepopup = function(){
+      $mdDialog.hide();
+  }
 
   /*
   *========= campagin proposal(planned) grid =========

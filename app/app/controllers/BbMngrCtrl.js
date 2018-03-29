@@ -7,6 +7,12 @@ app.controller('bbMngrCtrl',
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
     }
 
+    $rootScope.closepopup = function(){
+      $mdDialog.hide();
+  }
+    // $rootScope.on('popup')
+
+    
     // handles traffic layer on map
     $scope.trafficOn = false;
 
@@ -54,46 +60,46 @@ app.controller('bbMngrCtrl',
     
     // mobile footer version
 
-    $scope.isactive = false;
-    $scope.isshortlisted = false;
-    $scope.iscampaigns = false;
-    $scope.isformats = false;
-    $scope.issuggestme= false;
-    $scope.Home = function(){
-      $scope.isactive = !$scope.isactive;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-    }
-    $scope.shortlisted = function(){
-      $scope.isshortlisted = !$scope.isshortlisted;
-      $scope.isactive = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-    }
-    $scope.campaigns  = function(){
-      $scope.iscampaigns = !$scope.iscampaigns;
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.isformats = false;
-      $scope.issuggestme= false;
-    }
-    $scope.formatmobile = function(){
-      $scope.isformats = !$scope.isformats;
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.issuggestme= false;
-    }
-    $scope.suggestme = function(){
-      $scope.issuggestme = !$scope.issuggestme;
-      $scope.isactive = false;
-      $scope.isshortlisted = false;
-      $scope.iscampaigns = false;
-      $scope.isformats = false;
-    }
+    // $scope.isactive = false;
+    // $scope.isshortlisted = false;
+    // $scope.iscampaigns = false;
+    // $scope.isformats = false;
+    // $scope.issuggestme= false;
+    // $scope.Home = function(){
+    //   $scope.isactive = !$scope.isactive;
+    //   $scope.isshortlisted = false;
+    //   $scope.iscampaigns = false;
+    //   $scope.isformats = false;
+    //   $scope.issuggestme= false;
+    // }
+    // $scope.shortlisted = function(){
+    //   $scope.isshortlisted = !$scope.isshortlisted;
+    //   $scope.isactive = false;
+    //   $scope.iscampaigns = false;
+    //   $scope.isformats = false;
+    //   $scope.issuggestme= false;
+    // }
+    // $scope.campaigns  = function(){
+    //   $scope.iscampaigns = !$scope.iscampaigns;
+    //   $scope.isactive = false;
+    //   $scope.isshortlisted = false;
+    //   $scope.isformats = false;
+    //   $scope.issuggestme= false;
+    // }
+    // $scope.formatmobile = function(){
+    //   $scope.isformats = !$scope.isformats;
+    //   $scope.isactive = false;
+    //   $scope.isshortlisted = false;
+    //   $scope.iscampaigns = false;
+    //   $scope.issuggestme= false;
+    // }
+    // $scope.suggestme = function(){
+    //   $scope.issuggestme = !$scope.issuggestme;
+    //   $scope.isactive = false;
+    //   $scope.isshortlisted = false;
+    //   $scope.iscampaigns = false;
+    //   $scope.isformats = false;
+    // }
     // side favicon functionality
     this.isOpen = false;
     this.availableModes = ['md-fling', 'md-scale'];
@@ -161,23 +167,23 @@ app.controller('bbMngrCtrl',
     }
 
   //scroll to top
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-      $('.goToTop').fadeIn();
-    } else {
-      $('.goToTop').fadeOut();
-    }
-  });
+  // $(window).scroll(function () {
+  //   if ($(this).scrollTop() > 300) {
+  //     $('.goToTop').fadeIn();
+  //   } else {
+  //     $('.goToTop').fadeOut();
+  //   }
+  // });
 
 
-  $('.goToTop').click(function () {
-    $("html, body").animate({ scrollTop: 0 }, 1000);
-    return false;
-  });
+  // $('.goToTop').click(function () {
+  //   $("html, body").animate({ scrollTop: 0 }, 1000);
+  //   return false;
+  // });
 
 
   $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 200) {
+    if ($(window).scrollTop() > 0) {
       $(".header").addClass("active");
       $(".toolbar-btn").addClass("active-one");
       $(".browse-btn").addClass("active-one");
@@ -394,7 +400,7 @@ app.controller('bbMngrCtrl',
 
     $rootScope.serverUrl = config.serverUrl;
 
-    $scope.close = function(){
+    $scope.closepopup = function(){
       $mdDialog.hide();
     }
     

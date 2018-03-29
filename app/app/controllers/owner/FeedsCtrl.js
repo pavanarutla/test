@@ -148,5 +148,10 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     $scope.shareProducts = function() {
         $mdSidenav('shareProductOwner').toggle();
     };
+    // close popup
+    
+    $scope.closepopup = function(){
+      $mdDialog.hide();
+    }
   });
  
