@@ -182,10 +182,10 @@ var app = angular.module('bbManager', [
       title: 'Campaign Suggestion'
     })
     
-    .state('admin.productd', {
-      url: '/productd',
+    .state('admin.product-details', {
+      url: '/product-details/{productId}',
       templateUrl: 'views/admin/product-details.html',
-      controller: 'AdminCampaignCtrl'
+      controller: 'ProductCtrl'
     })
     .state('admin.campaign', {
       url: '/campaign',

@@ -11,9 +11,8 @@
 </head>
 <body> -->
 
-<div class="container jumbotron" ng-controller="AdminCampaignCtrl" style="width: 77em;margin-top: 1em;">
-    <!-- <img src="./img/hybridslogo.png" class="img-rounded"> -->
-	<p>Campagin IMAGE</p>
+<div class="container jumbotron" style="width: 77em;margin-top: 1em;">
+    <img ng-src="{{serverUrl + productDetails.image}}" class="img-rounded">	
 </div>
 <div class="contbg md-whiteframe-3dp" style="padding-left: 1em;padding-top: 2em;width: 76em;margin-left: 1em;padding-bottom: 1em;">
 <form>
@@ -21,57 +20,45 @@
         <div flex>
             <div layout="row">
                     <div flex="50" ><b>Site No*</b></div>
-                    <div flex="50">123</div>
+                    <div flex="50">{{productDetails.siteNo}}</div>
                     <div flex="50"><b>No.of Views</b></div>
-                    <div flex="50">100000</div>
+                    <div flex="50">{{productDetails.impressions}}</div>
             </div>
             <div layout="row">
                     <div flex="50" ><b>Site Type</b></div>
-                    <div flex="50">Hording</div>
+                    <div flex="50">{{productDetails.format_name}}</div>
                     <div flex="50" ><b>Panel Size</b></div>
-                    <div flex="50">24*24</div>
+                    <div flex="50">{{productDetails.panelSize}}</div>
             </div>
             <div layout="row">
                     <div flex="50"><b>Hording Cost</b></div>
-                    <div flex="50">100000</div>
+                    <div flex="50">{{productDetails.hoardingCost}}</div>
                     <div flex="50"><b>Lighting</b></div>
-                    <div flex="50">Yes</div>
+                    <div flex="50">{{productDetails.lighting}}</div>
             </div>
             <div layout="row">
                     <div flex="50" ><b>Hording Company Address</b></div>
-                    <div flex="50"> Plot No.1, Whitefields, Hitech City Road, Kondapur, Hitech City, Hyderabad, Telangana 500084</div>
+                    <div flex="50">{{productDetails.address}}</div>
                     <div flex="50" ><b>Direction</b></div>
-                    <div flex="50">Towards Kotaguda</div>
+                    <div flex="50">{{productDetails.direction}}</div>
             </div>
             <div layout="row">
                     <div flex="50"><b>Country</b></div>
-                    <div flex="50">India</div>
+                    <div flex="50">{{productDetails.country_name}}</div>
                     <div flex="50"><b>State</b></div>
-                    <div flex="50">Telengana</div>
+                    <div flex="50">{{productDetails.state_name}}</div>
             </div>
             <div layout="row">
                     <div flex="50"><b>City</b></div>
-                    <div flex="50">Hyderabad</div>	
+                    <div flex="50">{{productDetails.city_name}}</div>	
                     <div flex="50"><b>Area</b></div>
-                    <div flex="50">Whitefields</div>
+                    <div flex="50">{{productDetails.area_name}}</div>
             </div>
             <div layout="row">
                     <div flex="50"><b>Latitude</b></div>
-                    <div flex="50">1.25458</div>
+                    <div flex="50">{{productDetails.lat}}</div>
                     <div flex="50"><b>Longitude</b></div>
-                    <div flex="50">1.56789</div>
-            </div>
-            <div layout="row">
-                    <div flex="50"><b>Comment</b></div>
-                    <div flex="50">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, </div>
-                    <div flex="50"><b>Direction Image</b></div>
-                    <div flex="50">Image name</div>
-            </div>
-            <div layout="row">
-                    <div flex="50"><b>Advertising Strengths</b></div>
-                    <div flex="50">Advertising Strengths</div>
-                    <div flex="50"><b>Image name</b></div>
-                    <div flex="50">Image name</div>
+                    <div flex="50">{{productDetails.lng}}</div>
             </div>
         </div>
     </div>
@@ -117,12 +104,12 @@
                 </select>
                 <input type="text" placeholder="&nbsp search here..." ng-model="search.$" style="margin-bottom: 1em;margin-left: 1em;" />
         </div>    -->
-        Search By 
+        <!-- Search By 
     <select ng-model="columns" ng-options="e for e in headers">
         <option value=""></option>
     </select> 
     Search <input type="text" ng-model="search[columns]" 
-        placeholder="Enter some text to search" />
+        placeholder="Enter some text to search" /> -->
             
 <table class="table table-striped">
     <thead>

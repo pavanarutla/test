@@ -25,6 +25,11 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/format/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			getProductDetails: function(productId){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}

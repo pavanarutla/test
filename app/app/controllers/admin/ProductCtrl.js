@@ -1,4 +1,4 @@
-app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
+app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$stateParams', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http,  $stateParams, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
   var vm = this;
   $scope.msg = {};
@@ -7,6 +7,13 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   $scope.cityList = [];
   $scope.areaList = [];
   $scope.hoardingCompaniesList = [];
+
+  if($stateParams.productId){
+    var productId = $stateParams.productId;
+    ProductService.getProductDetails(productId).then(function(result){  
+      $scope.productDetails = result;
+    });
+  }
 
   $scope.test = "test";
   /*
