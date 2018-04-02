@@ -501,7 +501,7 @@ app.controller('GmapCtrl',
       var concentricMarkers = {};
 	  var uniqueMarkerArr = [];
       $scope.processMarkers = function () {
-        _.each($scope.filteredMarkers, function (v, i) {
+        /*_.each($scope.filteredMarkers, function (v, i) {
           var product = {position: {lat: v.lat, lng: v.lng}, data: v};
           productList.push(product);
           if (locArr[JSON.stringify(product.position)]) {
@@ -509,77 +509,16 @@ app.controller('GmapCtrl',
           } else {
             locArr[JSON.stringify(product.position)] = 1;
           }
-        });
-		console.log(locArr);
-        _.each(productList, function(v, i){
-          if(locArr[JSON.stringify(v.position)] > 1){
-            if(concentricMarkers[JSON.stringify(v.position)]){
-              concentricMarkers[JSON.stringify(v.position)].count++;
-              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data);
-            }
-            else {
-              concentricMarkers[JSON.stringify(v.position)] = {};
-              concentricMarkers[JSON.stringify(v.position)].markers = [];
-              concentricMarkers[JSON.stringify(v.position)].count = 1;
-              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data);
-            }
-          }
-          else{
-			  var markerData = v.data;
-			  uniqueMarkers.push(markerData);
-			  var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
-			  var marker = new google.maps.Marker({
-				position: latLng,
-				icon: {
-				  url: config.serverUrl + markerData.symbol,
-				  scaledSize: new google.maps.Size(30, 30)
-				},
-				title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
-			  });
-			  marker.properties = markerData;
-			  uniqueMarkerArr.push(marker);
-			  markersOnMap.push(marker);
-			  google.maps.event.addListener(marker, 'click', function (e) {
-				selectMarker(marker);
-			  });
-          }
-        });
-		console.log('product list',productList)
-        // console.log(uniqueMarkers);
-         console.log('concentric markers',concentricMarkers);
-
-        /* 
-        //// handling clustering ////
-        */
-        //var uniqueMarkerArr = [];
-        /*_.each(uniqueMarkers, function (markerData, index) {
-          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            icon: {
-              url: config.serverUrl + markerData.symbol,
-              scaledSize: new google.maps.Size(30, 30)
-            },
-            title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
-          });
-          marker.properties = markerData;
-          uniqueMarkerArr.push(marker);
-          markersOnMap.push(marker);
-          google.maps.event.addListener(marker, 'click', function (e) {
-            selectMarker(marker);
-          });
         });*/
-        var mc = {
+		
+		var mc = {
           gridSize: 50,
           maxZoom: 13,
           imagePath: 'assets/images/maps/m'
         };
         $scope.Clusterer = new MarkerClusterer($scope.mapObj, uniqueMarkerArr, mc);
-
-        /*
-        //// handling spiderifying ////
-        */
-        var circleMarker = new google.maps.Marker({
+		
+		var circleMarker = new google.maps.Marker({
           icon: {
             url: 'assets/images/maps/Ellipse 55.png',
             scaledSize: new google.maps.Size(55, 55),
@@ -597,42 +536,9 @@ app.controller('GmapCtrl',
           nearbyDistance: 1,
           keepSpiderfied: true
         });
-
-        _.each(concentricMarkers, function (markerData, index) {
-          for (var i = 0; i < markerData.count; i++) {
-            (function () {  // make a closure over the marker and marker data
-              var label = {};
-              label.text = " ";
-              label.color = "rgba(255, 255, 255, 1)";
-              if (i == 0) {
-                label.text = markerData.count.toString();
-              }
-              var icon = {
-                url: 'assets/images/maps/unspidered-cluster.png',
-                scaledSize: new google.maps.Size(20, 20),
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(10, 10) // anchor
-              };
-              var marker = new google.maps.Marker({
-                position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
-                icon: icon,
-                label: label,
-                title: 'Location:' + markerData.markers[i].address + '\nNo. of views: ' + markerData.markers[i].impressions
-              });
-              marker.properties = markerData.markers[i];
-              marker.groupSize = markerData.count;
-              google.maps.event.addListener(marker, 'spider_click', function (e) {
-                selectSpideredMarker(marker);
-              });
-              markersOnMap.push(marker);
-              oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
-              $scope.Clusterer.addMarker(marker);
-            })();
-          }
-        });
-
-        // instantiate oms when click occurs on marker-group
-        oms.addListener('format', function (marker, status) {
+		
+		
+		oms.addListener('format', function (marker, status) {
           var markerIcon;
           var label = marker.getLabel();
           var scaledCoord = 32 + (10 * (marker.groupSize - 1));
@@ -671,6 +577,140 @@ app.controller('GmapCtrl',
           }
           marker.setIcon(markerIcon);
         });
+		
+		function addNewMarkers(markerData) {
+			for (var i = 0; i < markerData.length; i++) {
+				var label = {};
+				label.text = " ";
+				label.color = "rgba(255, 255, 255, 1)";
+				if (i == 0) {
+					label.text = markerData.length.toString();
+				}
+				var icon = {
+					url: 'assets/images/maps/unspidered-cluster.png',
+					scaledSize: new google.maps.Size(20, 20),
+					origin: new google.maps.Point(0, 0), // origin
+					anchor: new google.maps.Point(10, 10) // anchor
+				};
+				var marker = new google.maps.Marker({
+					position: { lat: parseFloat(markerData[i].lat), lng: parseFloat(markerData[i].lng) },
+					icon: icon,
+					label: label,
+					title: 'Location:' + markerData[i].address + '\nNo. of views: ' + markerData[i].impressions
+				});
+				marker.properties = markerData[i];
+				marker.groupSize = markerData.length;
+				google.maps.event.addListener(marker, 'spider_click', function (e) {
+					selectSpideredMarker(marker);
+				});
+				markersOnMap.push(marker);
+				oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+				$scope.Clusterer.addMarker(marker);
+			}
+		}
+		function addUniqueMarker(markerData) {
+			uniqueMarkers.push(markerData);
+			var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+			var marker = new google.maps.Marker({
+				position: latLng,
+				icon: {
+					url: config.serverUrl + markerData.symbol,
+					scaledSize: new google.maps.Size(30, 30)
+				},
+				title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
+			});
+			marker.properties = markerData; 
+			uniqueMarkerArr.push(marker);
+			markersOnMap.push(marker);
+			$scope.Clusterer.addMarker(marker);
+			
+			google.maps.event.addListener(marker, 'click', function (e) {
+				selectMarker(marker);
+			});
+		}
+		var latLngGroups = _.groupBy($scope.filteredMarkers, function (item) {
+			return item.lat + ', ' + item.lng;
+		});
+		console.log(latLngGroups);
+		_.each(latLngGroups, function (data) {
+			if(data.length == 1) {
+				 addUniqueMarker(data);
+			}
+			else if(data.length > 1) {
+				addNewMarkers(data);
+			}
+		});
+		/*_.each(latLngGroups, function (data) {
+			if(data.length > 1) {
+				addNewMarkers(data);
+			}
+		});*/
+		console.log('markersOnMap: ', markersOnMap.length, uniqueMarkerArr);
+
+        // console.log(uniqueMarkers);
+        // console.log(concentricMarkers);
+
+        /* 
+        //// handling clustering ////
+        */
+        //var uniqueMarkerArr = [];
+        /*_.each(uniqueMarkers, function (markerData, index) {
+          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            icon: {
+              url: config.serverUrl + markerData.symbol,
+              scaledSize: new google.maps.Size(30, 30)
+            },
+            title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
+          });
+          marker.properties = markerData;
+          uniqueMarkerArr.push(marker);
+          markersOnMap.push(marker);
+          google.maps.event.addListener(marker, 'click', function (e) {
+            selectMarker(marker);
+          });
+        });*/
+
+        /*
+        //// handling spiderifying ////
+        */
+
+        /*_.each(concentricMarkers, function (markerData, index) {
+          for (var i = 0; i < markerData.count; i++) {
+            (function () {  // make a closure over the marker and marker data
+              var label = {};
+              label.text = " ";
+              label.color = "rgba(255, 255, 255, 1)";
+              if (i == 0) {
+                label.text = markerData.count.toString();
+              }
+              var icon = {
+                url: 'assets/images/maps/unspidered-cluster.png',
+                scaledSize: new google.maps.Size(20, 20),
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(10, 10) // anchor
+              };
+              var marker = new google.maps.Marker({
+                position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
+                icon: icon,
+                label: label,
+                title: 'Location:' + markerData.markers[i].address + '\nNo. of views: ' + markerData.markers[i].impressions
+              });
+              marker.properties = markerData.markers[i];
+              marker.groupSize = markerData.count;
+              google.maps.event.addListener(marker, 'spider_click', function (e) {
+                selectSpideredMarker(marker);
+              });
+              markersOnMap.push(marker);
+              oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+              $scope.Clusterer.addMarker(marker);
+            })();
+          }
+        });*/
+
+        // instantiate oms when click occurs on marker-group
+		
       }
 
       $scope.$parent.$watch('trafficOn', function(oldValue, newValue){        
