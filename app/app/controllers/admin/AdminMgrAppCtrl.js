@@ -2,6 +2,11 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
 
   $rootScope.serverUrl = config.serverUrl;
 
+  if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
+
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
   };
