@@ -72,25 +72,25 @@
   </div>
   <div layout="row">
     <div flex="50"><b>Client Name</b></div>
-    <div flex="50" >Mridul Kashyap</div>	
+    <div flex="50" >{{runningcampaignsDetails.user_full_name}}</div>	
     <div flex="50" ><b>Contact</b></div>
-    <div flex="50">9999999999</div>	    
+    <div flex="50">{{runningcampaignsDetails.user_phone}}</div>	    
   </div>
   <div layout="row">
         <div flex="50" ><b>Email</b></div>
-        <div flex="50">MridulKashyap@gmail.com</div>
+        <div flex="50">{{runningcampaignsDetails.user_email}}</div>
     <div flex="50" ><b>Start & End Date</b></div>
-    <div flex="50">13-2-2018 to 13-3-2018</div>
+    <div flex="50">{{runningcampaignsDetails.start_date}} to {{runningcampaignsDetails.end_date}}</div>
   </div>
   <div layout="row">
         <div flex="50" ><b>Estimated Budget</b></div>
-        <div flex="50">Rs.3465789</div>
+        <div flex="50">Rs.{{runningcampaignsDetails.est_budget}}</div>
         <div flex="50" ><b>Actul Budget</b></div>
-        <div flex="50">Rs. 5000000</div>        
+        <div flex="50">Rs. {{runningcampaignsDetails.act_budget}}</div>        
   </div>
   <div layout="row">
         <div flex="50" ><b>Status</b></div>
-        <div flex="50">Ready</div>
+        <div flex="50">{{runningcampaignsDetails.status}}</div>
         <div flex="50" ></div>
         <div flex="50"></div>
   </div>
@@ -122,12 +122,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="list in cruises | limitTo:limit | filter:search">
-        <td>{{list.Campaginname}}</td>
-        <td>{{list.Clientname}}</td>
-        <td>{{list.StartDate}}</td>
-		    <td>{{list.EndDate}}</td>
-		    <td>{{list.EstimatedBudget}}</td>
+      <tr ng-repeat="campaigns in campaignsDetails | limitTo:limit | filter:search">
+        <td>{{campaigns.name}}</td>
+        <td>{{campaigns.user_full_name}}</td>
+        <td>{{campaigns.start_date}}</td>
+		    <td>{{campaigns.end_date}}</td>
+		    <td>{{campaigns.est_budget}}</td>
       </tr>      
     </tbody>
   </table>

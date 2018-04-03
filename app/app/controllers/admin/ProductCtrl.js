@@ -11,7 +11,10 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$stateParams', '
   if($stateParams.productId){
     var productId = $stateParams.productId;
     ProductService.getProductDetails(productId).then(function(result){  
-      $scope.productDetails = result;
+      console.log(result);
+      $scope.productDetails = result.product_details;
+     $scope.runningcampaignsDetails = result.running_campaign_details;
+     $scope.campaignsDetails = result.campaigns_with_product;
     });
   }
 
