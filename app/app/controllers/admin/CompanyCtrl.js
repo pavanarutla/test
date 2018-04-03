@@ -57,7 +57,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   });
 
   $scope.addCompany = function(){
+    console.log("am working");
     CompanyService.saveCompany($scope.company).then(function(result){
+      console.log(result);
       if(result.status == 1){
         CompanyService.getCompanies().then(function (response) {    
           $scope.gridCompany.data = response;

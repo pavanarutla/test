@@ -144,15 +144,11 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
         $mdDialog.hide();
         toastr.success('User has been created successfully.');
       }
-      else{
-        toastr.error(result.message);
+      if(status == 0) {
+        toastr.error(result.message[0]);
       }
     },function(error){
-      if(error.email) {
-        if(error.email[0]=='validation.unique') {
-          toastr.error("Email is already exists");
-        }
-      }
+      console.log(error)
     });
   }
   /* 
@@ -210,10 +206,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
           $scope.gridAgency.data = response;
         });
         $mdDialog.hide();
-        toastr.success('Agency has been successfully created.');
-      }
-      else{
-        toastr.error(result.message);
+        toastr.success(result.message);
       }
     },function(error){
       toastr.error("Email is already exist");
