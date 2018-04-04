@@ -144,13 +144,11 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
         $mdDialog.hide();
         toastr.success('User has been created successfully.');
       }
-      if(status == 0) {
-        toastr.error(result.message[0]);
-      }
-    },function(error){
-      console.log(error)
-    });
-  }
+      else if(status == 0) {
+          toastr.error(result.message[0]);
+        }
+          });
+        }
   /* 
   ======== Adding New User ends ========
   */
