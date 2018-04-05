@@ -1,5 +1,25 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config) {
-
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config , $auth,AdminUserService) {
+  
+  roles = $auth.getPayload().user.roles;
+  if(roles[0].name=='billboard'){
+    $scope.showMenus = true;
+  }else{
+    $scope.showMenus = false;
+      AdminUserService.getPermissionsByUsers($auth.getPayload().user.id).then(function (response) {
+        if(response.status==1){
+          $scope.managemenus= response.data;          
+         }else{
+          console.log(roles[0].permissions);
+          console.log(_.indexOf(_.pluck(roles[0].permissions, "name"), "manage-user"));
+          $scope.managemenus= roles[0].permissions;          
+        }
+        $scope.manage_owner = _.indexOf(_.pluck($scope.managemenus, 'name'), 'manage-owner');
+        $scope.manage_agency = _.indexOf(_.pluck($scope.managemenus, 'name'), 'manage-agency');
+        $scope.manage_user = _.indexOf(_.pluck($scope.managemenus, 'name'), 'manage-user');
+        $scope.manage_campaigns = _.indexOf(_.pluck($scope.managemenus, 'name'), 'manage-campaigns');
+        $scope.manage_queries = _.indexOf(_.pluck($scope.managemenus, 'name'), 'manage-queries');
+      });
+  }
   $rootScope.serverUrl = config.serverUrl;
 
   $scope.closeSidenav = function () {
@@ -64,6 +84,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.showFormats = false;
   $scope.toogelMenu = function () {
     $scope.showFormats = !$scope.showFormats;
+  }
+   $scope.showUserM = false;
+  $scope.toogleshowUserM = function () {
+    $scope.showUserM = !$scope.showUserM;
   }
    $scope.showLocation = false;
   $scope.toogelLocation = function () {

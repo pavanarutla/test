@@ -1,0 +1,21 @@
+<div layout="column" layout-fill="layout-fill">
+	<div layout-margin class="md-title" style="background: #447bde;color: #fff;" layout="row">
+		<div flex="50">
+			<h3>Users List</h3>
+		</div>
+		<div layout-align="center end" layout="column" flex="50">
+			<md-button class="md-raised md-warn" ng-click="registrationPopup()">
+				Add New User <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span>
+			</md-button>
+		</div>
+	</div>
+	<div layout-margin layout="column">
+		<div class="md-subhead" layout="column" layout-padding>List Of Advertising Agency({{gridAgency.data.length }})</div>
+				<div ui-grid="gridAgency" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+					 ui-grid-auto-resize class="grid">
+				</div>
+	</div>
+</div>
+<style type="text/css">
+.transparentbutton{background: transparent;    border: navajowhite;}
+</style>

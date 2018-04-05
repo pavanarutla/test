@@ -201,11 +201,29 @@ var app = angular.module('bbManager', [
       url: '/campaign-closed-summary',
       templateUrl: 'views/admin/campaignclosedsummary.html'
     })
-    .state('admin.registration', {
-      url: '/registration',
-      templateUrl: 'views/admin/registration.html',
+    .state('admin.userlist', {
+      url: '/userlist',
+      templateUrl: 'views/admin/userlist.html',
+      controller: 'UserRegistrationCtrl',
+      title: "User "
+    })
+    .state('admin.ownerlist', {
+      url: '/ownerlist',
+      templateUrl: 'views/admin/ownerlist.html',
+      controller: 'OwnerRegistrationCtrl',
+      title: "Owner "
+    })
+    .state('admin.adminlist', {
+      url: '/adminlist',
+      templateUrl: 'views/admin/adminlist.html',
       controller: 'AdminRegistrationCtrl',
-      title: "User Registration"
+      title: "Admin "
+    })
+    .state('admin.agencylist', {
+      url: '/agencylist',
+      templateUrl: 'views/admin/agencylist.html',
+      controller: 'AgencyRegistrationCtrl',
+      title: "Agency "
     })
     .state('admin.companies', {
       url: '/companies',
@@ -451,8 +469,8 @@ app.run(
             return false;
           }
           else if (
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'billboard') == -1 && 
+            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1
           ) {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
@@ -467,7 +485,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1) {
+          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'billboard') == -1) {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

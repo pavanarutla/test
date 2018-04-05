@@ -69,6 +69,7 @@
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
+						<input type="hidden" name="user.role_id" value="5" ng-init="user.role_id=5">
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
 							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
 						</md-input-container>
@@ -83,21 +84,13 @@
 					<form name="registerAgency" novalidate="novalidate">
 						<md-input-container class="md-block">
 							<label>Agency Name</label>
-							<input ng-model="agency.name" name="agencyname" type="text" maxlength="30" required="required" />
-							<div ng-messages="registerAgency.agencyname.$error">
+							<input ng-model="agency.agency_name" name="agency_name" type="text" maxlength="30" required="required" />
+							<div ng-messages="registerAgency.agency_name.$error">
 								<div class="alret alert-danger" ng-message="required">Agency is required.</div>
 								<div ng-message="maxlength">Agency shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
-						<md-input-container class="md-block">
-							<label>Agency Username</label>
-							<input ng-model="agency.username" name="username" type="text" minlength="6" maxlength="30" required="required" />
-							<div ng-messages="registerAgency.username.$error">
-								<div class="alret alert-danger" ng-message="required">user name is required.</div>
-								<div class="alret alert-warning" ng-message="minlength">user name must have 6 characters.</div>
-								<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-							</div>
-						</md-input-container>
+						
 						<md-input-container class="md-block">
 							<label>Email</label>
 							<input ng-model="agency.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
@@ -108,6 +101,15 @@
 								<div ng-message="pattern">Enter a valied Email</div>
 							</div>
 						</md-input-container>
+						<md-input-container class="md-block">
+								<label>Password</label>
+								<input ng-model="agency.password" name="password" type="password" maxlength="30" required="required"/>
+								<div ng-messages="registerAgency.password.$error">
+									<div class="alret alert-danger" ng-message="required">Password is required.</div>
+									<div ng-message="maxlength">Password shouldn't exede 30 characters. </div>
+									<div ng-message="pattern">Enter a valied Password</div>
+								</div>
+							</md-input-container>
 						<md-input-container class="md-block">
 							<label>Mobile number</label>
 							<input ng-model="agency.mobile" name="mobile" type="mobile" minlength="10" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
@@ -130,6 +132,7 @@
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
+						<input type="hidden" name="agency.role_id" value="6" ng-init="agency.role_id=6">
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
 							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerAgency.$invalid" ng-click="registerNewAgency(agency)">Register</md-button>
 						</md-input-container>

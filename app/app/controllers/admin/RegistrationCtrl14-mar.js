@@ -3,16 +3,74 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   $scope.msg = {};
 
   $scope.registrationPopup = function (ev) {
+   // console.log(ev);
+   // $scope.userData= ev;
+
     $mdDialog.show({
       templateUrl: 'views/admin/registration-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      controller: function($scope, $mdDialog, toastr){
+        //alert("Hiiii");
+            $scope.user= ev;
+             console.log(ev);
+               $scope.addUser = function (response) {
+                  if(ev){
+                        AdminUserService.updateUserData(ev.id,response).then(function(result){
+                         console.log(result);
+                      });
+                    }
+                  else{
+                       AdminUserService.saveUser($scope.user).then(function(result){
+                        if(result.status == 1){
+                          AdminUserService.getUsers().then(function (response) {    
+                            $scope.gridUsers.data = response;
+                          });
+                          $mdDialog.hide();
+                          toastr.success('User has been created successfully.');
+                        }
+                        else{
+                          toastr.error(result.message);
+                        }
+                      });
+                  }
+              }
+           
+       /* $scope.FeedbackData = data;
+        $scope.response = {};
+        if(data.call_feedback){
+           $scope.response.call_feedback = data.call_feedback;
+        }
+        if( $rootScope.mydataid == dataId){
+           $scope.response.call_feedback = $rootScope.updated_feedback;
+        }
+        $scope.savefeedback = function(response){
+          AdminContactService.updateCustomerData(dataId,response).then(function(result){
+            if(result.status == 1){
+              console.log(result);
+              toastr.success(result.message);
+              $("#feedbackButton"+dataId).css('background-color','limegreen');
+              $rootScope.updated_feedback = result.data.call_feedback;
+              $rootScope.mydataid = dataId;
+              $mdDialog.hide();
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.cancelFeedbackBox = function(){
+          $mdDialog.hide();
+        }*/
+      }
     })
   };
 
   /*
   ==== checking if user has owner role ====
   */
+
+  $scope.current_user_id = $auth.getPayload().user.id;
   $scope.isUserOwner = _.indexOf(_.pluck($auth.getPayload().user.roles, "name"), "owner") != -1;
   /*
   ==== checking if user has owner role ends ====
@@ -38,32 +96,33 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   */
 
   $scope.gridUsers = {
-    paginationPageSizes: [25, 50, 75],
+    paginationPageSizes: [10,25, 50],
     paginationPageSize: 10,
     enableCellEditOnFocus: false,
     multiSelect: false,
-    enableFiltering: true,
-    enableSorting: true,
+    enableFiltering: false,
+    enableSorting: false,
     showColumnMenu: false,
-    enableGridMenu: true,
-    enableRowSelection: true,
+    enableGridMenu: false,
+    enableRowSelection: false,
     enableRowHeaderSelection: false,
+     enableCellEdit: false,
   };
   $scope.gridUsers.columnDefs = [
-    { name: 'name', displayName: 'Name (editable)', width: '20%', enableCellEdit: false,
+    { name: 'name', displayName: 'Name ', width: '20%',
       cellTemplate: '<div>{{row.entity.first_name}} {{row.entity.last_name}}</div>'
     },
-    { name: 'activated', displayName: 'Activated', width: '10%',
-      cellTemplate: '<div style="text-align:center;">{{row.entity.activated | boolToYesNo}}</div>'
-    },
-    { name: 'email', displayName: 'Email id (editable)', width: '20%' },
+   
+    { name: 'email', displayName: 'Email id ', width: '20%' },
     { name: 'phone', displayName: 'Phone', type: 'number', width: '10%' },
-    { name: 'company_name', displayName: 'Company(editable)', width: '15%' },
-    { name: 'company_type', displayName: 'TypeofCompany(editable)', width: '15%' },
+    { name: 'company_name', displayName: 'Company', width: '15%' },
+    { name: 'company_type', displayName: 'TypeofCompany', width: '15%' },
+     { name: 'activated', displayName: 'Status' , cellTemplate: 
+' <button class="transparentbutton" ng-disabled="row.entity.activated" ng-click="grid.appScope.activateUser(row.entity.id);">{{row.entity.activated ? "Activated" : "Activate"}}</button>' },
     {
-      name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents "><span > <md-menu><md-button ng-click="$mdOpenMenu($event)" class="md-icon-button"><md-icon><i class="material-icons">settings</i></md-icon> </md-button><md-menu-content><md-menu-item><md-button ng-href="#">Edit</md-button></md-menu-item><md-menu-item ng-if="grid.appScope.isUserOwner && !row.entity.activated"><md-button ng-click="grid.appScope.activateUser(row.entity.id)">Activate</md-button></md-menu-item><md-menu-item><md-button ng-click="grid.appScope.deleteUser(row.entity.id)">Delete</md-button></md-menu-item></md-menu-content</md-menu></span></div>',
-      enableFiltering: false,
+      name: 'Action', field: 'Action',
+       cellTemplate: '<div class="ui-grid-cell-contents ">  <a  ng-click="grid.appScope.registrationPopup(row.entity)">Edit</a><button class="transparentbutton">Delete</button></div>',
+     enableFiltering: false,
     }
   ];
 
@@ -135,20 +194,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   /* 
   ======== Adding New User ========
   */
-  $scope.addUser = function () {
-    AdminUserService.saveUser($scope.user).then(function(result){
-      if(result.status == 1){
-        AdminUserService.getUsers().then(function (response) {    
-          $scope.gridUsers.data = response;
-        });
-        $mdDialog.hide();
-        toastr.success('User has been created successfully.');
-      }
-      else{
-        toastr.error(result.message);
-      }
-    });
-  }
+  
   /* 
   ======== Adding New User ends ========
   */

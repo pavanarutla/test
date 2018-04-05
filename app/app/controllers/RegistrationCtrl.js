@@ -43,8 +43,19 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 	* ============ Agency Registration ============
 	*/
 	$scope.agency = {};
-	$scope.registerNewAgency = function () {
-		// console.log($scope.agency);
+	$scope.registerNewAgency = function (agency) {
+		UserService.registerUser(agency).then(function(result){
+			if(result.status == 1){
+				toastr.success(result.message);
+				$mdDialog.hide();
+			}
+			else{
+				toastr.error(result.message);
+			}
+		}, function(result){
+			// console.log(result);
+			toastr.error(result);
+		});
 	}
 	/*
 	* ============ Agency Registration Ends ============

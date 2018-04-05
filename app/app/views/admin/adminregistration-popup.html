@@ -1,0 +1,76 @@
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60"   >
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="column" layout-align="center center">
+				<img ng-src="assets/images/campaign_popup_icon.png">
+			</div>
+			
+		
+			<div>
+				<form name="adminData" novalidate="novalidate">
+					<div layout="column" layout-xs="column" layout-padding flex="60" flex-offset-gt-sm="20">
+						<md-input-container class="md-block margin-input">
+							<label>Full Name</label>
+							<input ng-model="admin.name" type="text" name="name" minlength="3" maxlength="60" required="required" />
+							<div ng-messages="adminData.name.$error">
+								<div ng-message="required"> Name is required.</div>
+								<div ng-message="minlength"> Name must have 3 characters.</div>
+								<div ng-message="maxlength"> Name shouldn't exede 30 characters. </div> 
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Email</label>
+							<input ng-model="admin.email" ng-disabled="(emailDis==true)?true:false" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							/>
+							<div ng-messages="adminData.email.$error">
+								<div ng-message="required">Email is required.</div>
+								<div ng-message="pattern">Enter a valied EmailId.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Phone No</label>
+							<input ng-model="admin.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"
+							/>
+							<div ng-messages="adminData.phone.$error">
+								<div ng-message="required">Phone No is required.</div>
+								<div ng-message="minlength">Phone No must have 10 characters.</div>
+								<div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
+								<div ng-message="pattern">Phone No should be only numbe.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label> Type Company </label>
+							<input ng-model="admin.company_type" type="text" name="company_type" minlength="5" maxlength="60" required="required" />
+							<div ng-messages="adminData.company_type.$error">
+								<div ng-message="required">Company Name is required.</div>
+								<div ng-message="minlength">Company Name must have 2 characters.</div>
+								<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
+							</div>
+						</md-input-container>
+						<div flex="50">
+							<p> <span class="radioValue">Select Permission Type</span> </p>
+							<md-radio-group ng-model="admin.userpermisions"  >
+						      <md-radio-button value="default" ng-disabled="true" >Default</md-radio-button>
+						      <md-radio-button value="manual" ng-disabled="true" > Manual </md-radio-button>
+						    </md-radio-group>
+						</div>
+						<div>
+							<div  ng-repeat="item in defaultUserpermissions" style="display: inline-block;width: 33%;">
+				              <md-checkbox  ng-model="item.Selected" >
+				                {{ item.display_name }} 
+				              </md-checkbox>
+				            </div>
+						</div>
+						<input type="hidden" ng-model="admin.role_id" value="6" ng-init="admin.role_id=2">
+						<input type="hidden" ng-model="admin.added_by" ng-value="{{current_user_id}}"  ng-init="admin.added_by=current_user_id">
+						<div layout="row" layout-align="center center">
+							<md-button type="submit" Class="md-raised md-primary" ng-click="addUser(admin,'add')">SUBMIT</md-button>
+							<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</md-content>
+	</md-dialog-content>
+</md-dialog>
