@@ -69,99 +69,12 @@ app.controller('CampaignCtrl',['$scope', '$mdDialog', '$mdSidenav', '$interval',
   
   $scope.campaignDetails = {};
 
-  ///Delete the Products
-  // $scope.deleteProducts = function(item){
-  //   var index = $scope.campaignDetails.indexOf(item);
-  //   $scope.campaignDetails.splice(index, 1);   
-  // }
-
   $scope.limit = 3;
 
   $scope.loadMore = function () {
     $scope.limit = $scope.items.length
   }
-  // $scope.items = [
-  //   {
-  //     "campaignname": "Flipkart",
-  //     "clientcomapanyname": "Neon",
-  //     "clientname": "Chanikya",
-  //     "clientcontent": "9966016136",
-  //     "startdate": "12-Fed-2017",
-  //     "enddate": "28-Feb-2017",
-  //     "status": "Draft",
-  //     "price": "25000",
-  //     "products": "0"
-  //   },
-  //   {
-  //     "campaignname": "Amezon",
-  //     "clientcomapanyname": "Amezon",
-  //     "clientname": "shiva",
-  //     "clientcontent": "9966016136",
-  //     "startdate": "12-Fed-2017",
-  //     "enddate": "28-Feb-2017",
-  //     "status": "Draft",
-  //     "price": "30000",
-  //     "products": "0"
-  //   },
-  //   {
-  //     "campaignname": "Paytm",
-  //     "clientcomapanyname": "Paytm",
-  //     "clientname": "srikanth",
-  //     "clientcontent": "9966016136",
-  //     "startdate": "12-Fed-2017",
-  //     "enddate": "28-Feb-2017",
-  //     "status": "Draft",
-  //     "price": "50000",
-  //     "products": "0"
-  //   }
-  // ]
-
-  //slider
-  // var self = this, j = 0, counter = 0;
-
-  // self.mode = 'query';
-  // self.activated = true;
-  // self.determinateValue = 30;
-  // self.determinateValue2 = 30;
-
-  // self.showList = [];
-
-  /**
-   * Turn off or on the 5 themed loaders
-   */
-  // self.toggleActivation = function () {
-  //   if (!self.activated) self.showList = [];
-  //   if (self.activated) {
-  //     j = counter = 0;
-  //     self.determinateValue = 30;
-  //     self.determinateValue2 = 30;
-  //   }
-  // };
-
-  // $interval(function () {
-  //   self.determinateValue += 1;
-  //   self.determinateValue2 += 1.5;
-
-  //   if (self.determinateValue > 100) self.determinateValue = 30;
-  //   if (self.determinateValue2 > 100) self.determinateValue2 = 30;
-
-  //   // Incrementally start animation the five (5) Indeterminate,
-  //   // themed progress circular bars
-
-  //   if ((j < 2) && !self.showList[j] && self.activated) {
-  //     self.showList[j] = true;
-  //   }
-  //   if (counter++ % 4 === 0) j++;
-
-  //   // Show the indicator in the "Used within Containers" after 200ms delay
-  //   if (j == 2) self.contained = "indeterminate";
-
-  // }, 100, 0, true);
-
-  // $interval(function () {
-  //   self.mode = (self.mode == 'query' ? 'determinate' : 'query');
-  // }, 7200, 0, true);
-
+  
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
     CampaignService.getCampaigns().then(function (result) {
@@ -261,13 +174,9 @@ app.controller('CampaignCtrl',['$scope', '$mdDialog', '$mdSidenav', '$interval',
 
   $scope.sendSuggestionRequest = function (ev) {
     CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-      // $scope.suggestionRequest = {};
       if (result.status == 1) {
         $scope.suggestMeRequestSent = true;
       }
-      // var result = {
-      //   message: "hello"
-      // };
       $mdDialog.show(
         $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))
