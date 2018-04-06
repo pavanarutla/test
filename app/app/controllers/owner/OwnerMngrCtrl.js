@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
+app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $state) {
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
@@ -12,8 +12,9 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
   //   };
   // }
 
-  // Dummy chart data
 
+  // Dummy chart data
+  
   var chart1 = {};
   chart1.type = "google.charts.Bar";
   chart1.displayed = false;
@@ -129,7 +130,10 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
   $scope.ownerRightSidenav = function () {
     $mdSidenav('ownerRight').toggle();
   };
-  $scope.openScreen = function(ev) {
+  $scope.editProfieSidenav = function () {
+    $mdSidenav('ownereditProfile').toggle();
+  };
+  $scope.openHelpScreen = function(ev) {
     $mdDialog.show({
       templateUrl:'views/owner/helpnsupport.html',
       clickOutsideToClose:true,

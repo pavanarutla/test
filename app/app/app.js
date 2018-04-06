@@ -24,7 +24,6 @@ var app = angular.module('bbManager', [
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
-
     $mdThemingProvider.theme('default')
     .primaryPalette('red', {
       'default': '800',
@@ -91,26 +90,6 @@ var app = angular.module('bbManager', [
       url: 'agency-profile',
       templateUrl: 'views/agency-profile.html'
     })
-    
-    // .state('index.shortlist-mobile', {
-    //   url: 'shortlist-mobile',
-    //   templateUrl: 'views/shortlist-mobile.html'
-    // })
-    // .state('index.formats-mobile', {
-    //   url: 'formats-mobile',
-    //   templateUrl: 'views/formats-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.suggest-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/suggest-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.savedcamapign-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/savedcamapign-mobile.html',
-
-    // })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -144,27 +123,12 @@ var app = angular.module('bbManager', [
         code: {squash: true, value: null}
       }
     })
-    // .state('index.reset-password', {
-    //   url: 'reset_password',
-    //   templateUrl: 'views/reset-password.html',
-    //   controller: 'UserSettingsCtrl'
-    // })
     .state('admin', {
       abstract: true,
       url: '/admin',
       templateUrl: 'layouts/admin.html',
       controller: 'AdminMgrAppCtrl'
     })
-    // .state('admin.products', {
-    //   url: '/admin/products',
-    //   templateUrl: 'views/admin/products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .state('admin.add-products', {
-    //   url: '/admin/add-products',
-    //   templateUrl: 'views/admin/add-products.html',
-    //   controller: 'ProductsCtrl'
-    // })
     .state('admin.home', {
       url: '/home',
       templateUrl: 'views/admin/home.html',
@@ -300,6 +264,7 @@ var app = angular.module('bbManager', [
       url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
+      
     })
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
@@ -314,7 +279,7 @@ var app = angular.module('bbManager', [
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'OwnerCampaignCtrl'
+      controller: 'requestHoarding'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
@@ -338,13 +303,14 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
-      controller: 'HomeCtrl'
+      controller: 'OwnerHomeController'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',
       templateUrl: 'views/owner/outsourcingagent.html',
       controller:'outSourcing'
-    }).state('owner.teamPage', {
+    })
+    .state('owner.teamPage', {
       url: '/teamPage',
       templateUrl: 'views/owner/team.html',
       controller:'teamPage'
@@ -353,6 +319,11 @@ var app = angular.module('bbManager', [
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
+    })
+    .state('owner.signIn', {
+      url: '/signIn',
+      templateUrl: 'views/owner/signin.html',
+      controller:'ownerSigninCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
@@ -411,6 +382,7 @@ app.run(
       $transitions.onStart({}, function (transition) {
         // Get all URL parameter
         $rootScope.currentTitle = transition.to().title;
+        $rootScope.currStateName = transition.to().name;
         if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }

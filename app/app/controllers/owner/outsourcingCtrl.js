@@ -1,4 +1,8 @@
- app.controller('outSourcing', function($scope,$mdDialog) {
+ app.controller('outSourcing', function($scope,$mdDialog,$mdSidenav) {
+  // sidenav 
+     $scope.addOutsourcingAgent = function () {
+    $mdSidenav('ownerAddAgency').toggle();
+    };
 
     $scope.showBillboardsData = true;
     $scope.showUnipoleData = false;
@@ -50,12 +54,12 @@
       },
       ]
 
-      $scope.agentForm = function(ev) {
-        $mdDialog.show({
-          templateUrl:'views/owner/agentform.html',
-          clickOutsideToClose:true,
-          fullscreen:$scope.customFullscreen,
-        });
-      };
+      // $scope.agentForm = function(ev) {
+      //   $mdDialog.show({
+      //     templateUrl:'views/owner/agentform.html',
+      //     clickOutsideToClose:true,
+      //     fullscreen:$scope.customFullscreen,
+      //   });
+      // };
 
     });

@@ -1,6 +1,68 @@
- <div layout="column"  layout-margin="layout-margin" layout-fill="layout-fill">
+ <div layout="column" layout-fill="layout-fill">
     <!-- <md-divider></md-divider> -->
-    <div class="row">
+    <!-- sidenav add team member start -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerAddteam">
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools" style="background:#414143 !important">
+            <h2>
+                <span>Add Team Members</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="addteamSidenav()">
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>
+            </div>
+        </md-toolbar> 
+        <md-content layout-padding="">
+            <form  role="form">
+                <div class="form-group">
+                    <label class="control-label"> Name</label>
+                    <br>
+                    <input class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Designation</label>
+                    <br>
+                    <input class="form-control"  type="text">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email:</label>
+                    <input class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Phone Number</label>
+                    <br>
+                    <input class="form-control"  type="text">
+                </div>
+               
+                <!-- <div class="form-group">
+                    <label class="control-label"> Estimated Bugest</label>
+                    <br>
+                    <input class="form-control" type="text">
+                </div> -->
+                <div class="form-group row">
+                    <label for=""class="col-sm-4 col-form-label">Upload Image</label>
+                    <div class="col-sm-8">
+                        <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                        <input type="file" id="imgInp" style="width:100%">
+                                </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin:10px 0">
+                    <label class="col-md-3 control-label"></label>
+                    <input class="btn btn-primary" value="Save" type="button">
+                    <span></span>
+                    <input class="btn btn-default" value="Cancel" type="reset">
+                </div> 
+     
+            </form>
+        </md-content> 
+    </md-sidenav>
+    <!-- sidenav add team member start -->
+    <div class="row" style="margin-right:0px;margin-left:0px">
         <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="member in teammembers" >
             <div class="inner-content">
                 <div layout="column" layout-align="center center">
@@ -37,13 +99,14 @@
             <md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="ownerProfilesetting($event)">
                 <md-icon aria-label="Facebook"><i class="material-icons">settings</i></md-icon>
             </md-button>
-            <md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="openAddteam($event)">
+            <md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="addteamSidenav()">
                 
                 <md-icon aria-label="Facebook"><i class="material-icons">add</i></md-icon>
             </md-button>
 
         </md-fab-actions>
     </md-fab-speed-dial> 
+    
 	
 </div> 
 

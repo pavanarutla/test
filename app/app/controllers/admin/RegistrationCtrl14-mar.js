@@ -137,6 +137,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
 
   AdminUserService.getUsers().then(function (response) {    
     $scope.gridUsers.data = response;
+     $scope.userList = response;
+     console.log($scope.userList);
   });
 
   /* 
@@ -272,4 +274,12 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     $mdDialog.cancel();
   }
 
+  // tables code start
+    var vm = $scope;
+    vm.limit = 5;
+    $scope.loadMore = function() {
+      var increamented = vm.limit + 5;
+      vm.limit = increamented > $scope.userList.length ? $scope.userList.length : increamented;
+    };
+  // tables code end
 });

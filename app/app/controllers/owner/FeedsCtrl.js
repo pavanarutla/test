@@ -139,6 +139,19 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
 
     $scope.shortlistProduct = function() {
         $mdSidenav('shortlistAndSaveOwnerSidenav').toggle();
-      };
+    };
+    // add product
+
+    $scope.addProductOwner = function() {
+        $mdSidenav('addProductOwnerSidenav').toggle();
+    };
+    $scope.shareProducts = function() {
+        $mdSidenav('shareProductOwner').toggle();
+    };
+    // close popup
+    
+    $scope.closepopup = function(){
+      $mdDialog.hide();
+    }
   });
  

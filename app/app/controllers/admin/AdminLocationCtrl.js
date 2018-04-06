@@ -41,6 +41,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   };
   AdminLocationService.getAllAreas().then(function (data) {
     $scope.gridLocation.data = data;
+    $scope.listoflocationdata = data;
   });
   //location js end 
 
@@ -73,6 +74,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   AdminLocationService.getCountries().then(function (data) {
     $scope.countryList = data;
     $scope.gridCountry.data = data;
+    $scope.countrtList=data;
   });
   //add country js end
 
@@ -105,6 +107,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   };
   AdminLocationService.getAllStates().then(function (data) {
     $scope.gridState.data = data;
+    $scope.stateList= data;
   });
   //add state js end
 
@@ -138,6 +141,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   };
   AdminLocationService.getAllCities().then(function (data) {
     $scope.gridCity.data = data;
+    $scope.citylocationdata =data;
   });
   //add city js end
 
@@ -338,5 +342,30 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   $scope.resetAreaForm = function () {
     $scope.area = {};
   }
+
+  // tables cod load more e start
+    var vm = $scope;
+    vm.limit = 5;
+    $scope.loadMore = function() {
+      var increamented = vm.limit + 5;
+      vm.limit = increamented > $scope.listoflocationdata.length ? $scope.listoflocationdata.length : increamented;
+    };
+  // tables code end 
+   // tables cod load more e start
+    var mv = $scope;
+    mv.limit = 5;
+    $scope.loadMore = function() {
+      var increamented = vm.limit + 5;
+      mv.limit = increamented > $scope.stateList.length ? $scope.stateList.length : increamented;
+    };
+  // tables code end
+  // tables city start
+  var lc = $scope;
+    lc.limit = 5;
+    $scope.loadMore = function() {
+      var increamented = vm.limit + 5;
+      lc.limit = increamented > $scope.citylocationdata.length ? $scope.citylocationdata.length : increamented;
+    };
+  // tables city end
 
 });

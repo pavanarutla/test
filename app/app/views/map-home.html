@@ -123,6 +123,7 @@
       </div>
   </md-sidenav>  
   <!-- filters sidenav end-->
+  
   <!-- map icon filters start-->
   <md-sidenav class="md-sidenav-left" md-component-id="filtersMap" style="position:absolute;margin-left:8px;top: 36%;
         background: none;" hide-xs hide-lg hide-gt-lg>
@@ -1013,30 +1014,30 @@
           <label>&nbsp;</label>
           <input ng-model="siteNoSearch" placeholder="Search billboards by Tab id" class="search-bg" on-enter="searchBySiteNo()">
         </md-input-container> -->
-        <div id="custom-search-input" >
-                <div class="input-group ">
-                    <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="material-icons">search</i>
-                        </button>
-                    </span>
-                </div>
+          <div id="custom-search-input">
+            <div class="input-group ">
+                <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-lg" type="button">
+                        <i class="material-icons">search</i>
+                    </button>
+                </span>
             </div>
+          </div>
       </div>
       <!-- search html start-->
       <div layout="column" class="map-sidenav" hide-xs hide-sm hide-md>
         <!-- filters html start-->
         <div layout="column" layout-padding class="side-navpadding">
-          <md-content class="md-padding main-part" layout="column" ng-click="filters()">
+          <md-content class="md-padding main-part" layout="column" ng-click="filters()" style="cursor:pointer">
             <!-- <div layout="row" ng-init="open = false" ng-click="open = !open"> -->
             <div layout="row">
               <div class="main-icon"><img src="assets/images/icons/filter.png"></div>
               <div class="md-caption theme-txt txt-mrng">FILTERS</div>
               <div flex></div>
               <div>
-                <md-icon ng-hide="filter"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
-                <md-icon ng-show="filter"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
+                <md-icon ng-hide="filter" style="cursor:pointer"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
+                <md-icon ng-show="filter" style="cursor:pointer"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
               </div>
             </div>
           </md-content>
@@ -1325,53 +1326,14 @@
   </div>
   <!-- map html start (left side controls) ends -->
 
-  <!-- recommend button -->
-  <!-- <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:0px;right:0;width:100%">
-    <div layout="row" layout-align="end center" style="right:10%">
-      <md-button class="md-raised md-primary remm-btn" ng-click="RecommendedDiv()">Recommended<span>
-      <md-icon ng-hide="Recommended"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
-        <span><md-icon ng-show="Recommended"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
-      </md-button>
-      
-      <md-button class="md-raised md-primary remm-btn" ng-click="PopularDiv()">Popular Mediums<span> 
-      <md-icon ng-hide="Popular"><i class="material-icons theme-txt"> keyboard_arrow_up</i></md-icon></span>
-          <span><md-icon ng-show="Popular"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon></span>
-        </md-button>
-      </div>
-      <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Recommended">
-        <div>
-          <img style="height: 118px;" title="50000 Week (Approx.)" src="assets/images/icons/apple watch billboard ad.jpg">
-          <img style="height: 118px;" title="87560 Week (Approx.)" src="assets\images\icons\Dunkirk movie teaser billboard.jpg">
-          <img style="height: 118px;" title="85200 Week (Approx.)" src="assets\images\icons\Hitman Agent 47 film billboard.jpg">
-          <img style="height: 118px;" title="25569 Week (Approx.)" src="assets\images\icons\youre next movie billboard.jpg">
-          <img style="height: 118px;" title="78945 Week (Approx.)" src="assets\images\icons\Dunkirk movie teaser billboard.jpg">
-          <img style="height: 118px;" title="32145 Week (Approx.)" src="assets\images\icons\Hitman Agent 47 film billboard.jpg">
-          <img style="height: 118px;" title="85214 Week (Approx.)" src="assets/images/icons/apple watch billboard ad.jpg">
-          <img style="height: 118px;" title="25569 Week (Approx.)" src="assets\images\icons\youre next movie billboard.jpg">
-        </div>
-      </div>
-      <div layout="row" style="bottom:0px;background:#fff;width:100%;height:150px;" ng-show="Popular">
-        <div>
-          <img style="height: 118px;" title="50000 Week (Approx.)" src="assets/images/icons/apple watch billboard ad.jpg">
-          <img style="height: 118px;" title="25569 Week (Approx.)" src="assets\images\icons\youre next movie billboard.jpg">          
-          <img style="height: 118px;" title="87560 Week (Approx.)" src="assets\images\icons\Dunkirk movie teaser billboard.jpg">          
-          <img style="height: 118px;" title="25569 Week (Approx.)" src="assets\images\icons\youre next movie billboard.jpg">
-          <img style="height: 118px;" title="78945 Week (Approx.)" src="assets\images\icons\Dunkirk movie teaser billboard.jpg">
-          <img style="height: 118px;" title="32145 Week (Approx.)" src="assets\images\icons\Hitman Agent 47 film billboard.jpg">
-          <img style="height: 118px;" title="85214 Week (Approx.)" src="assets/images/icons/apple watch billboard ad.jpg">
-          <img style="height: 118px;" title="85200 Week (Approx.)" src="assets\images\icons\Hitman Agent 47 film billboard.jpg">
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- traffic-->
+
 
   <div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:170px">
     <div layout="row" layout-align="end center" hide-xs>
       <md-button class="md-raised md-primary remm-btn" ng-click="toggleTraffic()" id="traffic-toggle"><span ng-show="!trafficOn">Show</span><span ng-show="trafficOn">Hide</span> Live Impression</md-button>
     </div>
   </div>
-  <div layout="column" style="top:18%;z-index:1;position:absolute;;right:auto" hide-xs hide-lg hide-gt-lg>
+  <div layout="column" style="top:10%;z-index:1;position:absolute;;right:auto" hide-xs hide-lg hide-gt-lg>
     <div layout="colmun">
       <md-button class="md-fab md-mini fliterside-btn" aria-label="Eat cake" ng-click="toggleViewAllFilter()">
         <md-icon><img src="assets/images/icons/filter.png"></md-icon>
