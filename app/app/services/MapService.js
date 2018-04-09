@@ -23,7 +23,7 @@ app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config)
     },
     getshortListProduct: function (userMongoId) {
       var dfd = $q.defer();
-      $http.get(config.apiPath + '/shortlistedProducts/' + userMongoId).success(dfd.resolve).error(dfd.reject);
+      $http.get(config.apiPath + '/shortlistedProducts').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     deleteShortlistedProduct: function (userMongoId, productId) {
