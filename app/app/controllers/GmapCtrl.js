@@ -78,8 +78,9 @@ app.controller('GmapCtrl',
 
       $scope.product = {};
 
-      MapService.markers().then(function (markers) {
+      MapService.mapProducts().then(function (markers) {
         $scope.filteredMarkers = markers;
+		console.log("map products",$scope.filteredMarkers)
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
@@ -579,12 +580,13 @@ app.controller('GmapCtrl',
         });
 		
 		function addNewMarkers(markerData) {
-			for (var i = 0; i < markerData.length; i++) {
+			//console.log(markerData)
+			for (var i = 0; i < markerData.product_details.length; i++) {
 				var label = {};
 				label.text = " ";
 				label.color = "rgba(255, 255, 255, 1)";
 				if (i == 0) {
-					label.text = markerData.length.toString();
+					label.text = markerData.product_details.length.toString();
 				}
 				var icon = {
 					url: 'assets/images/maps/unspidered-cluster.png',
@@ -593,13 +595,13 @@ app.controller('GmapCtrl',
 					anchor: new google.maps.Point(10, 10) // anchor
 				};
 				var marker = new google.maps.Marker({
-					position: { lat: parseFloat(markerData[i].lat), lng: parseFloat(markerData[i].lng) },
+					position: { lat: parseFloat(markerData._id.lat), lng: parseFloat(markerData._id.lng) },
 					icon: icon,
 					label: label,
-					title: 'Location:' + markerData[i].address + '\nNo. of views: ' + markerData[i].impressions
+					title: 'Location:' + markerData.product_details[i].address + '\nNo. of views: ' + markerData.product_details[i].impressions
 				});
-				marker.properties = markerData[i];
-				marker.groupSize = markerData.length;
+				marker.properties = markerData.product_details[i];
+				marker.groupSize = markerData.product_details.length;
 				google.maps.event.addListener(marker, 'spider_click', function (e) {
 					selectSpideredMarker(marker);
 				});
@@ -609,17 +611,18 @@ app.controller('GmapCtrl',
 			}
 		}
 		function addUniqueMarker(markerData) {
-			uniqueMarkers.push(markerData);
-			var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+			//console.log('markersdata',markerData.product_details[0].symbol)
+			uniqueMarkers.push(markerData.product_details);
+			var latLng = new google.maps.LatLng(markerData._id.lat, markerData._id.lng);
 			var marker = new google.maps.Marker({
 				position: latLng,
 				icon: {
-					url: config.serverUrl + markerData.symbol,
+					url: config.serverUrl + markerData.product_details[0].symbol,
 					scaledSize: new google.maps.Size(30, 30)
 				},
-				title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
+				title: 'Location:' + markerData.product_details[0].address + '\nNo. of views: ' + markerData.product_details[0].impressions
 			});
-			marker.properties = markerData; 
+			marker.properties = markerData.product_details[0]; 
 			uniqueMarkerArr.push(marker);
 			markersOnMap.push(marker);
 			$scope.Clusterer.addMarker(marker);
@@ -628,15 +631,16 @@ app.controller('GmapCtrl',
 				selectMarker(marker);
 			});
 		}
-		var latLngGroups = _.groupBy($scope.filteredMarkers, function (item) {
-			return item.lat + ', ' + item.lng;
-		});
-		console.log(latLngGroups);
-		_.each(latLngGroups, function (data) {
-			if(data.length == 1) {
+		//var latLngGroups = _.groupBy($scope.filteredMarkers, function (item) {
+			//return item.lat + ', ' + item.lng;
+		//});
+		//console.log(latLngGroups);
+		_.each($scope.filteredMarkers, function (data) {
+			if(data.product_details.length == 1) {
+				//console.log('unique Arrays',data.product_details)
 				 addUniqueMarker(data);
 			}
-			else if(data.length > 1) {
+			else if(data.product_details.length > 1) {
 				addNewMarkers(data);
 			}
 		});
@@ -645,10 +649,9 @@ app.controller('GmapCtrl',
 				addNewMarkers(data);
 			}
 		});*/
-		console.log('markersOnMap: ', markersOnMap.length, uniqueMarkerArr);
+		console.log('markersOnMap: ', markersOnMap.length, 'uniqueMarkers', uniqueMarkerArr.length);
 
-        // console.log(uniqueMarkers);
-        // console.log(concentricMarkers);
+
 
         /* 
         //// handling clustering ////
