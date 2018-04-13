@@ -186,12 +186,12 @@ app.controller('bbMngrCtrl',
     if ($(window).scrollTop() > 0) {
       $(".header").addClass("active");
       $(".toolbar-btn").addClass("active-one");
-      $(".browse-btn").addClass("active-one");
+      $("._browse-btn").addClass("active-one");
     } else {
       //remove the background property so it comes transparent again (defined in your css)
       $(".header").removeClass("active");
       $(".toolbar-btn").removeClass("active-one");
-      $(".browse-btn").removeClass("active-one");
+      $("._browse-btn").removeClass("active-one");
     }
   });
 

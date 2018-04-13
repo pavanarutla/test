@@ -54,6 +54,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/pricing.html',
       controller: 'PricingCtrl'
     })
+    .state('index.whyoutdoor', {
+      url: 'whyoutdoor',
+      templateUrl: 'views/whyoutdoor.html',
+      controller: 'PricingCtrl'
+    })
     .state('index.suggest_campaign', {
       url: 'suggest-campaign',
       templateUrl: 'views/suggest-a-campaign.html',
