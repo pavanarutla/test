@@ -10,3 +10,20 @@ app.directive('onEnter', function() {
       });
   };
 });
+app.directive('onlyNumeric', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, ele, attr, ctrl) {
+            ctrl.$parsers.push(function (viewValue) {
+                if (viewValue) {
+                    var transformedInput = viewValue.replace(/[^0-9]/g, '');
+                    if (transformedInput !== viewValue) {
+                        ctrl.$setViewValue(transformedInput);
+                        ctrl.$render();
+                    }
+                    return transformedInput;
+                }
+            })
+        }
+     }
+})

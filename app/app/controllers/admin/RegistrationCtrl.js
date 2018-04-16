@@ -137,6 +137,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   */
   $scope.addUser = function () {
     AdminUserService.saveUser($scope.user).then(function(result){
+      console.log("working")
       if(result.status == 1){
         AdminUserService.getUsers().then(function (response) {    
           $scope.gridUsers.data = response;

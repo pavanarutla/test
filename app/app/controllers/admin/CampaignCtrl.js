@@ -26,8 +26,13 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
               $mdDialog.hide();
             }
             else{
-              toastr.error(result.message);
+        
+              $scope.campaignDetailsErrorEessages = result.message;
             }
+          },function(result){
+              $scope.campaignDetailsErrorEessages = {
+                startDate : result.start_date ? "start date is not valid" : ""
+              };
           });
         }
         $scope.close = function(){
