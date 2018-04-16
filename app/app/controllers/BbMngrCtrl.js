@@ -233,9 +233,11 @@ app.controller('bbMngrCtrl',
       if(result.status == 1){
         toastr.success(result.message);
       }
-      else{
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.sendQueryErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try agin later");
     });
     $scope.query={};
   }

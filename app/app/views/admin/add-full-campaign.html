@@ -88,17 +88,17 @@
           </md-input-container>
         </div>
       </div>    
-      <div ng-if = "campaignDetailsErrorEessages">
-        <div>Following errors accured</div>
+      <div class="serverErrors" ng-if = "campaignDetailsErrorEessages">
+        <div>please check following errors </div>
         <ul>
-            <li ng-repeat="error in campaignDetailsErrorEessages" ng-if="campaignDetailsErrorEessages[error]">
-              {{campaignDetailsErrorEessages[error]}}
+            <li ng-repeat="error in campaignDetailsErrorEessages">
+              {{error}}
             </li>
         </ul>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="center center">
-      <md-button Class="md-raised md-primary" type="submit" ng-disabled="false" ng-click="saveCampaign()">
+      <md-button Class="md-raised md-primary" type="submit" ng-disabled="addEmptyCampaignForm.$invalid" ng-click="saveCampaign()">
         SUBMIT
       </md-button>
       <md-button Class="md-raised" ng-click="close()">

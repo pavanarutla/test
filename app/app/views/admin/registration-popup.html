@@ -75,7 +75,13 @@
 								<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
 							</div>	
 						</md-input-container>
-
+						<div class="registeredEmailErrors" ng-if ="registerUserErrors">
+								<ul>
+									<li ng-repeat="error in registerUserErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
 						<div layout="row" layout-align="center center">
 							<md-button type="submit" Class="md-raised md-primary" ng-click="addUser()" ng-disabled="userData.$invalid">SUBMIT</md-button>
 							<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
@@ -126,6 +132,13 @@
 								<div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
 							</div>
 						</md-input-container>
+						<div class="registeredEmailErrors" ng-if ="addAgencyErrors">
+								<ul>
+									<li ng-repeat="error in addAgencyErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
 						<div layout="row" layout-align="center center">
 							<md-button type="submit" Class="md-raised md-primary" ng-click="addAgency()" ng-disabled="agencyData.$invalid">SUBMIT</md-button>
 							<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>

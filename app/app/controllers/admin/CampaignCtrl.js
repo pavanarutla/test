@@ -25,14 +25,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
               toastr.success(result.message);
               $mdDialog.hide();
             }
-            else{
-        
+            else if(result.status == 0){
               $scope.campaignDetailsErrorEessages = result.message;
             }
           },function(result){
-              $scope.campaignDetailsErrorEessages = {
-                startDate : result.start_date ? "start date is not valid" : ""
-              };
+              $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
           });
         }
         $scope.close = function(){

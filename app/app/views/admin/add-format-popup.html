@@ -34,6 +34,13 @@
 						</div>
 					</div>
 				</div>
+				<div class = "serverErrors" ng-if ="addFormatErrors">
+						<ul>
+							<li ng-repeat="error in addFormatErrors">
+								{{error}}
+							</li>
+						</ul>
+					</div>
 				<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addFormat()">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>

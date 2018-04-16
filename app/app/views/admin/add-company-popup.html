@@ -64,9 +64,16 @@
 							<div ng-message="required">Campaign Name is required.</div>
 						</div>
 					</md-input-container>
+					<div class="registeredEmailErrors" ng-if ="comapnyErrors">
+							<ul>
+								<li ng-repeat="error in comapnyErrors">
+									{{error}}
+								</li>
+							</ul>
+						</div>
 				</div>
 				<div layout="row" layout-align="center center">
-					<md-button Class="md-raised md-primary" type="submit" ng-click="addCompanyF()" ng-disabled="addCompanyForm.$invalid">SUBMIT</md-button>
+					<md-button Class="md-raised md-primary" type="submit" ng-click="addCompany()" ng-disabled="addCompanyForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 				</div>
 			</form>

@@ -28,12 +28,21 @@
                 </div>
             </md-input-container>
         </div>
+        <div class = "serverErrors" ng-show="stateErrors">
+                <ul>
+                    <li ng-repeat="error in stateErrors.errorMsg">
+                        {{error}}
+                    </li>
+                </ul>
+            </div>
         <div layout="row">
             <md-button Class="md-raised md-primary" type="submit" ng-click="saveState()">SUBMIT</md-button>
             <!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
         </div>
     </div>
     </form>
+    
+   
 
     <div ui-grid="gridState" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
         ui-grid-auto-resize class="grid"></div>

@@ -80,11 +80,11 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         });
         toastr.success(result.data.message);
       }
-      else{
-        toastr.error(result.data.message);
+      else if(result.data.status == 0){
+        $scope.addFormatErrors = result.data.message;
       }
     }, function (resp) {
-      // console.log('Error status: ', resp);
+      toastr.error("somthing went wrong please try again later");
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
@@ -224,10 +224,11 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
         });
         toastr.success(result.data.message);
       }
-      else{
-        toastr.error(result.data.message);
+      else if(result.data.status == 0){
+        $scope.addProductErrors = result.data.message;
       }
     }, function (resp) {
+      toastr.error("somthing went wrong try again later");
       // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);

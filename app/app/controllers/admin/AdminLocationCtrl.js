@@ -187,8 +187,8 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
           $scope.gridCountry.data = data;
         });
       }
-      else {
-        toastr.error(data.message);
+      else if(data.status == 0){
+        toastr.error(data.message[0]);
       }
     });
   }
@@ -230,8 +230,10 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
           $scope.gridState.data = data;
         });
       }
-      else {
-        toastr.error(data.message);
+      else if(data.status == 0) {
+        $scope.stateErrors ={
+          errorMsg : data.message
+        } 
       }
     });
   }
@@ -264,8 +266,8 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
           $scope.gridCity.data = data;
         });
       }
-      else {
-        toastr.error(data.message);
+      else if(data.status == 0){
+        $scope.cityErrors = data.message;
       }
     });
   }
@@ -300,8 +302,8 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
           $scope.gridArea.data = data;
         });
       }
-      else {
-        toastr.error(data.message);
+      else if(data.status == 0){
+        $scope.areaErrors = data.message;
       }
     });
   }

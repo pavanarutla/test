@@ -12,7 +12,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
 
@@ -56,10 +58,8 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     $scope.gridCompany.data = response;
   });
 
-  $scope.addCompanyF = function(){
-    console.log("Testing you...!!!!!!!!!!!!!!!");
+  $scope.addCompany = function(){
     CompanyService.saveCompany($scope.company).then(function(result){
-      console.log(result);
       if(result.status == 1){
         CompanyService.getCompanies().then(function (response) {    
           $scope.gridCompany.data = response;
@@ -67,9 +67,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.comapnyErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again later!");
     });
   }
 
@@ -153,9 +155,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(data.message);
+      else if(result.status == 0){
+        $scope.addHordingErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again");
     });
   }
   $scope.deleteHoardingCompany = function(row){

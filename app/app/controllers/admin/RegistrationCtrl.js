@@ -145,8 +145,8 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
         $mdDialog.hide();
         toastr.success('User has been created successfully.');
       }
-      else if(status == 0) {
-          toastr.error(result.message[0]);
+      else if(result.status == 0) {
+          $scope.registerUserErrors = result.message;
         }
           });
         }
@@ -207,8 +207,11 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
         $mdDialog.hide();
         toastr.success(result.message);
       }
+      else if(result.status == 0){
+        $scope.addAgencyErrors = result.message;
+      }
     },function(error){
-      toastr.error("Email is already exist");
+      toastr.error("somthing went wrong try agin later!");
     });
   }
 
