@@ -232,6 +232,7 @@ app.controller('bbMngrCtrl',
     ContactService.sendQuery($scope.query).then(function (response) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.sendQueryErrors = null;
       }
       else if(result.status == 0){
         $scope.sendQueryErrors = result.message;

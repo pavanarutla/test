@@ -529,7 +529,7 @@
 								<div ng-message="minlength">message should be 10 characters</div>
 							  </div>
 						</md-input-container>
-						<div class="registeredEmailErrors" ng-if ="sendQueryErrors">
+						<div class="registeredEmailErrors" ng-if ="sendQueryErrors && !sendQueryErrors.length == 0">
 								<ul>
 									<li ng-repeat="error in sendQueryErrors">
 										{{error}}
@@ -537,7 +537,7 @@
 								</ul>
 							</div>
 						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm" ng-disabled="false" ng-click="sendQuery()">Send Message</md-button>
+							<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
 						</div>
 					</form>
 				</div>
