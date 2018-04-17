@@ -239,7 +239,7 @@ app.controller('bbMngrCtrl',
     },function(error){
       toastr.error("somthing went wrong please try agin later");
     });
-    $scope.query={};
+    //$scope.query={};
   }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
   //   $scope.feedBackData = response;

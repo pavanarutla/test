@@ -28,7 +28,7 @@
                 </div>
             </md-input-container>
         </div>
-        <div class = "serverErrors" ng-show="stateErrors">
+        <div class = "serverErrors" ng-show="stateErrors && !stateErrors.errorMsg.length == 0">
                 <ul>
                     <li ng-repeat="error in stateErrors.errorMsg">
                         {{error}}
@@ -36,7 +36,7 @@
                 </ul>
             </div>
         <div layout="row">
-            <md-button Class="md-raised md-primary" type="submit" ng-click="saveState()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" type="submit" ng-click="saveState()" ng-disabled="stateform.$invalid">SUBMIT</md-button>
             <!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
         </div>
     </div>

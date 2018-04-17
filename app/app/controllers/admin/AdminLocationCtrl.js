@@ -185,10 +185,11 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.success('Country added to database successfully!');
         AdminLocationService.getCountries().then(function (data) {
           $scope.gridCountry.data = data;
+          $scope.saveCountryErrors = null;
         });
       }
       else if(data.status == 0){
-        toastr.error(data.message[0]);
+        $scope.saveCountryErrors = data.message;
       }
     });
   }
@@ -228,6 +229,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.success('State added to database successfully!');
         AdminLocationService.getAllStates().then(function (data) {
           $scope.gridState.data = data;
+          $scope.stateErrors.errorMsg = null;
         });
       }
       else if(data.status == 0) {
@@ -264,8 +266,9 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.success('City added to database successfully!');
         AdminLocationService.getAllCities().then(function (data) {
           $scope.gridCity.data = data;
+          $scope.cityErrors = null;
         });
-      }
+      }   
       else if(data.status == 0){
         $scope.cityErrors = data.message;
       }
@@ -300,6 +303,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.success('Area added to database successfully!');
         AdminLocationService.getAllAreas().then(function (data) {
           $scope.gridArea.data = data;
+          $scope.areaErrors = null;
         });
       }
       else if(data.status == 0){

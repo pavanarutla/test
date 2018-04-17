@@ -20,9 +20,16 @@
 					<div ng-message="required">Country Name is required</div>
 				</div> -->
 			</md-input-container>
+			<div class = "serverErrors" ng-if ="saveCountryErrors && !saveCountryErrors.length == 0">
+                <ul>
+                    <li ng-repeat="error in saveCountryErrors">
+                        {{error}}
+                    </li>
+                </ul>
+            </div>
 		</div>
 		<div layout="row">
-			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
+			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()" ng-disabled="country.$invalid">SUBMIT</md-button>
 			<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
 		</div>
 	</div>
