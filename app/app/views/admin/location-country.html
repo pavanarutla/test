@@ -13,8 +13,8 @@
 				<label>Enter Country Name</label>
 				<input ng-model="country.name" type="text" name="countryname" required/>
 				<input type="hidden" name="country_id" ng-model="country.id" />
-				<div ng-messages="country.countryname.$error">
-				<p ng-message="required">Please complete this field.</p>
+				<div ng-messages="country.countryname.$error" ng-if = "!$scope.country.name == null">
+				<p ng-message="required" >Please complete this field.</p>
 				</div>
 				<!-- <div ng-messages="country.$error">
 					<div ng-message="required">Country Name is required</div>

@@ -186,6 +186,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         AdminLocationService.getCountries().then(function (data) {
           $scope.gridCountry.data = data;
           $scope.saveCountryErrors = null;
+          $scope.country.name = null;
         });
       }
       else if(data.status == 0){
@@ -230,6 +231,7 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         AdminLocationService.getAllStates().then(function (data) {
           $scope.gridState.data = data;
           $scope.stateErrors.errorMsg = null;
+          $scope.state = undefined;
         });
       }
       else if(data.status == 0) {
