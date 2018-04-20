@@ -9,6 +9,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
 				var loggedInUser = {};
+				console.log($auth.getPayload());
 				var userData = $auth.getPayload().user;
 				var userMongoData = $auth.getPayload().userMongo;
 				loggedInUser.clientId = userData.client_id;

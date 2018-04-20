@@ -272,7 +272,7 @@ var app = angular.module('bbManager', [
       controller: 'OwnerMngrCtrl'
     })
     .state('owner.dashboard', {
-      url: '/dashboard',
+      url: '/:ownerId/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
     })
@@ -332,7 +332,7 @@ var app = angular.module('bbManager', [
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/login');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;

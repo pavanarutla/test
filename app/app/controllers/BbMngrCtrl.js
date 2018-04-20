@@ -437,5 +437,23 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
       $location.path('/campaigns');
     }
+
+    /*===============================
+    |   Switching between views
+    ===============================*/
+    $scope.switchView = function(){
+      var payload = $auth.getPayload();
+      if(payload.user_type == "bbi"){
+        $location.path("/admin");
+      }
+      else if(payload.user_type == "owner"){
+        $location.path("/" + payload.client_name + "/dashboard")
+      }
+    }
+
+    $scope.isUserBasic = function(){
+      var payload = $auth.getPayload();
+      return payload.user_type == "basic";
+    }
   }
 );

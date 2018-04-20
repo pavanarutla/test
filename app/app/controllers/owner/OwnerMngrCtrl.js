@@ -1,4 +1,6 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams) {
+
+  console.log($stateParams);
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
