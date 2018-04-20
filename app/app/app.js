@@ -339,6 +339,7 @@ var app = angular.module('bbManager', [
     $authProvider.loginUrl = '/login';
     $authProvider.logoutUrl = '/logout'
     $authProvider.signupUrl = '/signup';
+    $authProvider.storageType = 'localStorage';
     // $authProvider.unlinkUrl = '/auth/unlink/';
 
     $mdAriaProvider.disableWarnings();
@@ -448,10 +449,7 @@ app.run(
             });
             return false;
           }
-          else if (
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
-          ) {
+          else if ($auth.getPayload().user_type != "bbi") {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -465,7 +463,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1) {
+          else if ($auth.getPayload().user_type != "owner") {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

@@ -5,23 +5,26 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	$scope.forgotPasswordpage = false;
 
 	$scope.user = {};
-	$scope.signInUser = function () {
+	$scope.signInUser = function () {		
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
+				var loggedInUser = {};
 				var userData = $auth.getPayload().user;
-				_.each($auth.getPayload().userMongo, function (v, k) {
-					userData[k] = v;
-				});
+				var userMongoData = $auth.getPayload().userMongo;
+				loggedInUser.clientId = userData.client_id;
+				loggedInUser.email = userData.email;
+				loggedInUser.firstName = userMongoData.first_name;
+				loggedInUser.lastName = userMongoData.last_name;
+				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
-				$rootScope.loggedInUser = userData;
-				localStorage.isAuthenticated = true;
-				localStorage.loggedInUser = JSON.stringify(userData);
+				localStorage.loggedInUser = JSON.stringify(loggedInUser);
 				toastr.success('You have successfully signed in!');
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
 				else{
 					$state.go("index.location", null);
+					location.reload();
 				}
 			}
 			else {
