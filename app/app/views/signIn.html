@@ -37,6 +37,14 @@
                 <div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
               </div>
             </md-input-container>
+            <div class = "serverErrors" ng-show="true">
+                <ul>
+                    <li ng-repeat="error in signInUserError">
+                        {{error}}
+                        
+                    </li>
+                </ul>
+            </div>
             <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
               <md-button type="submit"layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()" ng-disabled="userform.$invalid" md-autofocus>SIGN IN</md-button>
             </md-input-container>
