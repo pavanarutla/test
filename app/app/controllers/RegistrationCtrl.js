@@ -40,14 +40,26 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 
 
 	/*
-	* ============ Agency Registration ============
+	* ============ Company Registration ============
 	*/
-	$scope.agency = {};
-	$scope.registerNewAgency = function () {
-		// console.log($scope.agency);
+
+	$scope.companyTypes = [
+		{id: 1, name: "owner"},
+		{id: 2, name: "agency"}
+	];
+	$scope.company = {};
+	$scope.registerNewCompany = function () {
+		UserService.registerCompany($scope.company).then(function(result){
+			if(result.status == 1){
+				toastr.success(result.message);
+			}
+			else{
+				toastr.error(result.message);
+			}
+		});
 	}
 	/*
-	* ============ Agency Registration Ends ============
+	* ============ Company Registration Ends ============
 	*/
 
 	$scope.close = function () {

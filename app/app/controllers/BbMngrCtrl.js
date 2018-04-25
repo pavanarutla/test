@@ -452,8 +452,13 @@ app.controller('bbMngrCtrl',
     }
 
     $scope.isUserBasic = function(){
-      var payload = $auth.getPayload();
-      return payload.user_type == "basic";
+      if($auth.getPayload()){
+        var payload = $auth.getPayload();
+        return payload.user_type == "basic";
+      }
+      else{
+        return false;
+      }
     }
   }
 );
