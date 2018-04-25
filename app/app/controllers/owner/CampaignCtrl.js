@@ -1,5 +1,5 @@
 
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window,toastr,$rootScope,$state) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -24,8 +24,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //     clickOutsideToClose: true
   //   })
   // };
-  $scope.addCamapginSidenav = function () {
+  $scope.addCamapginSidenav = function ($data) {
     $mdSidenav('ownerAddcmapgin').toggle();
+    console.log("$data");
+    console.log($data);
+    if($data){
+      $scope.campaign = $data;
+    }
   };
   $scope.cancel = function () {
     $mdDialog.hide();
@@ -148,8 +153,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         "edate":"28-April-2017",
         "price":"30,000"
       }
-    ]
-    $scope.viewImage = function () { 
+  ]
+
+  $scope.viewImage = function () { 
     $mdDialog.show({
       templateUrl: 'views/owner/viewimage.html',
       fullscreen: $scope.customFullscreen,
@@ -203,15 +209,32 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     self.mode = (self.mode == 'query' ? 'determinate' : 'query');
   }, 7200, 0, true);
 
+
+
+  
   // get all Campaigns by a user to show it in campaign management page
-  $scope.getUserCampaigns = function () {
+  //$scope.getUserCampaigns = function () {
     CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
+      $planned1 = _.where(result, { status: 0 });
+      $planned2 = _.where(result, { status: 1 });
+      $planned3 = _.where(result, { status: 2 });
+      $planned4 = _.where(result, { status: 3 });
+      $planned5 = _.where(result, { status: 4 });
+      $planned6 = _.where(result, { status: 5 });
+      $planned7 = _.where(result, { status: 6 });
+      $planned8 = _.where(result, { status: 7 });
+      $planned9 = _.where(result, { status: 8 });
+      $planned10 = _.where(result, { status: 9 });
+      console.log('result');
+      $scope.plannedCampaigns = $planned1.concat($planned2,$planned3,$planned4,$planned5,$planned6,$planned7);
+      $scope.runningCampaigns = $planned8.concat($planned9);
+      $scope.closedCampaigns = $planned10;
+      console.log($scope.plannedCampaigns);
+      //$scope.runningCampaigns = _.where(result, { status: 7,status:8 });
+     // $scope.closedCampaigns = _.where(result, { status: 9 });
     });
-  }
-  $scope.getUserCampaigns();
+  //}
+  //$scope.getUserCampaigns();
   // get all Campaigns by a user to show it in campaign management page ends
 
   $scope.getCampaignDetails = function(campaignId){
@@ -222,5 +245,25 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   if($stateParams.campaignId){
     $scope.getCampaignDetails($stateParams.campaignId);
   }
+  
+  $scope.campaign = {};
+  $scope.submittedtrue = false;
+  $scope.saveCampaign = function($detail){
+    $scope.submittedtrue = true;
+    
+    if($scope.signup.$valid) {
+      $scope.campaign.posted_by= $rootScope.owner_detail.user_id;
+      CampaignService.saveCampaign($scope.campaign).then(function(result){
+        if(result.status == 1){
+          toastr.success(result.message);
+          $state.go($state.current, {}, {reload: true});
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+    }
+  }
 
+   
 });

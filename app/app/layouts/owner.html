@@ -41,7 +41,7 @@
                 </md-button>
                 <md-menu-content width="3" style="z-index:99;top:17.5% !important;">
                     <md-menu-item>
-                        <md-button ng-href="#/owner/profile">Srikanth B</md-button>
+                        <md-button ng-href="#/owner/profile"> {{owner_detail.owner_name}}</md-button>
                     </md-menu-item>
                     <md-menu-item>
                         <md-button aria-label="edit profile" ng-click="editProfieSidenav()">Edit Profile</md-button>
@@ -166,55 +166,49 @@
                 </md-button>
                 </div>
             </md-toolbar> 
-            <md-content layout-padding="">
+            <md-content layout-padding="" >
                 <form  role="form">
                     <div class="form-group">
-                        <label class="control-label"> Name</label>
+                        <label class="control-label">Owner Name</label>
                         <br>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" ng-model="owner_detail.owner_name">
                     </div>
                     <div class="form-group">
-                        <label class="control-label"> Company Name</label>
+                        <label class="control-label"> Company Type</label>
                         <br>
-                        <input class="form-control"  type="text">
+                        <input class="form-control"  type="text" ng-model="owner_detail.company_type">
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Email:</label>
-                        <input class="form-control" type="text">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" disabled read-only type="text" ng-model="owner_detail.email">
                     </div>
                     <div class="form-group">
                         <label class="control-label"> Phone Number</label>
                         <br>
-                        <input class="form-control"  type="text">
+                        <input class="form-control"  type="text" ng-model="owner_detail.phone">
                     </div>
                     <div class="form-group">
                         <label class="control-label"> Address</label>
                         <br>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" ng-model="owner_detail.address">
                     </div>
-                    <div class="form-group">
-                        <label class="control-label"> City</label>
-                        <br>
-                        <input class="form-control" type="text">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label class="control-label"> City</label>
-                        <br>
-                        <input class="form-control" type="text">
-                    </div> -->
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
-                                <input type="file" id="imgInp">
+                                <input type="file" id="imgInp" fileinput="file" filepreview="filepreview" ng-model="profile_pic">
                             </span>
                         </span>
-                        
                     </div>
+                    <div class="input-group">
+                       <img ng-src="{{filepreview}}" class="img-responsive" ng-if="filepreview" height="80" width="80"/>  
+                       <img ng-src="{{serverUrl+owner_detail.profile_pic}}" class="img-responsive" ng-if="!filepreview" height="80" width="80"/>  
+                    </div>
+                    <input type="hidden" ng-model="owner_detail.role_id" value="3" ng-init="owner_detail.role_id=3">
                     <div class="form-group" style="margin:10px 0">
                         <label class="col-md-3 control-label"></label>
-                        <input class="btn btn-primary" value="Save" type="button">
+                        <input class="btn btn-primary" value="Save" type="button" ng-click="updateOwnerData(owner_detail)">
                         <span></span>
-                        <input class="btn btn-default" value="Cancel" type="reset">
+                        <input class="btn btn-default" value="Cancel" type="button" ng-click="resetvalues()">
                     </div>
                     
                 </form>

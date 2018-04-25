@@ -15,23 +15,23 @@
 					layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
 						<!-- <div><span><md-icon md-svg-icon="assets/images/icons/megaphone.svg"></md-icon></span></div> -->
-						<h3>Cleient Details</h2>
+						<h3>Client Details</h2>
 					</div>
 					<div layout="row">
 						<div flex="50">Campaign Name:</div>
-						<div flex="50">Paytm</div>
+						<div flex="50">{{campaignDetails.name}}</div>
 					</div>
 					<div layout="row">
 						<div flex="50">Client Name:</div>
-						<div flex="50">Srikanth Bijjala</div>
+						<div flex="50">{{campaignDetails.client_name}}</div>
 					</div>
 					<div layout="row">
-						<div flex="50">Content:</div>
-						<div flex="50">9999999999</div>
+						<div flex="50">Contact:</div>
+						<div flex="50">{{campaignDetails.client_phoneNo}}</div>
 					</div>
 					<div layout="row">
 						<div flex="50">Email:</div>
-						<div flex="50">srikanthbijjala1990@gmail.com</div>
+						<div flex="50">{{campaignDetails.client_email}}</div>
 					</div>
 				</div>
 				<div layout="column" style="padding:20px" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
@@ -42,23 +42,31 @@
 					</div>
 					<div layout="row">
 						<div flex="50">Staring:</div>
-						<div flex="50">From 20-Feb-17 To 28-Feb-2017</div>
+						<div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date:
+							"dd-MMM-yyyy" }}</div>
 					</div>
 					<div layout="row">
 						<div flex="50">Estimated Budget:</div>
-						<div flex="50">Rs.2,00,000</div>
+						<div flex="50">
+							<span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
 					</div>
 					<div layout="row">
 						<div flex="50">Actul Budget:</div>
-						<div flex="50">Rs.2,00,000</div>
+						<div flex="50">
+							<span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
 					</div>
 					<div layout="row">
 						<div flex="50">Status:</div>
-						<div flex="50">Running</div>
+						<div flex="50">
+							<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
+							<span layout-align="center center" ng-if="campaignDetails.status == 5">
+								<i class="material-icons">info_outline</i>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row">
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" ng-if="campaignDetails.status >= 7">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 					layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
@@ -71,7 +79,7 @@
 					</div>
 					<div layout="row">
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
-						<div flex="50" layout="column" layout-align="center center">Rs. 1,30,000</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
 					</div>
 				</div>
 				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
@@ -84,21 +92,9 @@
 						<div flex="50" layout="column" layout-align="center center">Date</div>
 						<div flex="50" layout="column" layout-align="center center">Amount</div>
 					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">23/07/17</div>
-						<div flex="50" layout="column" layout-align="center center">Rs 50,000</div>
-					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">23/07/17</div>
-						<div flex="50" layout="column" layout-align="center center">Rs 50,000</div>
-					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">23/07/17</div>
-						<div flex="50" layout="column" layout-align="center center">Rs 50,000</div>
-					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">23/07/17</div>
-						<div flex="50" layout="column" layout-align="center center">Rs 50,000</div>
+					<div layout="row" ng-repeat="payment in campaignPayments.all_payments">
+						<div flex="50" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
+						<div flex="50" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
 					</div>
 				
 				</div>
@@ -117,13 +113,13 @@
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/share.svg"></md-icon>
 								</span>
-								<div class="md-caption"> share </div>
+								<div class="md-caption"> Share </div>
 							</md-button>
 						</div>
 					</md-list-item>
 					<md-list-item>
 						<div>
-							<md-button class="md-grid-item-content">
+							<md-button class="md-grid-item-content" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)" ng-click="finalizeCampaign()">
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/finalized.svg"></md-icon>
 								</span>
@@ -133,11 +129,34 @@
 					</md-list-item>
 					<md-list-item>
 						<div>
-							<md-button class="md-grid-item-content">
+							<md-button class="md-grid-item-content" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5"
+						 ng-click="addNewProductToCampaign()">
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/add.svg"></md-icon>
 								</span>
 								<div class="md-caption"> Add Product </div>
+							</md-button>
+						</div>
+					</md-list-item>
+
+					<md-list-item>
+						<div>
+							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status < 6" ng-if="campaignDetails && campaignDetails.status <= 7"
+						 ng-click="launchCampaign(campaignDetails.id, $event)">
+								<span>
+									<md-icon md-svg-icon="assets/images/icons/add.svg"></md-icon>
+								</span>
+								<div class="md-caption"> Launch </div>
+							</md-button>
+						</div>
+					</md-list-item>
+					<md-list-item>
+						<div>
+							<md-button class="md-grid-item-content" ng-disabled="!campaignDetails || (campaignDetails.status != 7 && campaignDetails.status != 8)" ng-click="closeCampaign(campaignDetails.id, $event)">
+								<span>
+									<md-icon md-svg-icon="assets/images/icons/close.svg"></md-icon>
+								</span>
+								<div class="md-caption"> Close Campaign </div>
 							</md-button>
 						</div>
 					</md-list-item>
@@ -150,7 +169,7 @@
 					<div flex="10" flex-gt-sm="10">ID</div>
 					<div flex="10" flex-gt-sm="10">Type</div>
 					<div flex="10" flex-gt-sm="10">Area</div>
-					<div flex="10" flex-gt-sm="10"> Size</div>
+					<div flex="10" flex-gt-sm="10">Size</div>
 					<div flex="10" flex-gt-sm="10">illumination</div>
 					<div flex="15" flex-gt-sm="15">Start Date</div>
 					<div flex="15" flex-gt-sm="15">End Date</div>
@@ -195,7 +214,7 @@
 								</div>
 							</div>
 							<div flex-xs="80" flex-gt-xs="85">
-								<div class="md-body-1">{{hoarding.type}}</div>
+								<div class="md-body-1">{{hoarding.format_name}}</div>
 							</div>
 						</div>
 					</div>
@@ -204,7 +223,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{hoarding.area}}</div>
+							<div class="md-body-1">{{hoarding.area_name}}</div>
 						</div>
 					</div>
 					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
@@ -212,7 +231,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{hoarding.size}}</div>
+							<div class="md-body-1">{{hoarding.panelSize}}</div>
 						</div>
 					</div>
 					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
@@ -220,7 +239,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{hoarding.light}}</div>
+							<div class="md-body-1">{{hoarding.lighting}}</div>
 						</div>
 					</div>
 					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
@@ -228,7 +247,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{hoarding.sdate}}</div>
+							<div class="md-body-1">{{hoarding.from_date | date}}</div>
 						</div>
 					</div>
 					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
@@ -236,7 +255,7 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">{{hoarding.edate}}</div>
+							<div class="md-body-1">{{hoarding.to_date | date}}</div>
 						</div>
 					</div>
 					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-md show-xs show-sm>
@@ -244,10 +263,10 @@
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
 						<div flex-xs="80" flex-gt-xs="85">
-							<div class="md-body-1">From{{hoarding.sdate}}To{{hoarding.edate}}</div>
+							<div class="md-body-1">From{{hoarding.from_date | date}}To{{hoarding.to_date | date}}</div>
 						</div>
 					</div>
-					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" >
 						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
 							<md-icon md-svg-icon="assets/images/c6.svg"></md-icon>
 						</div>
@@ -257,7 +276,7 @@
 					</div>
 					<div flex="10" hide-xs hide-sm>
 						<div layout="row">
-							<md-button class="md-icon-button">
+							<md-button class="md-icon-button" ng-click="viewProductImage(hoarding.image)">
 								<md-icon>
 									<i class="material-icons">remove_red_eye</i>
 								</md-icon>

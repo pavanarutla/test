@@ -28,7 +28,8 @@
                 <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md class="table__heading">
                     <md-list-item>
                         <div flex="10" class="table_headig_title">
-                            <label class="owner_container">ID                                
+                            <label class="owner_container">ID
+                                
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
@@ -43,13 +44,29 @@
                         
                     </md-list-item>
                 </div>
-                <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in plannedCampaigns"
+                <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in items"
                     class="contbg md-whiteframe-3dp">
 
                     <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
 
                          <div flex="10" hide-xs hide-sm>
-                            
+                             <!-- <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Launch</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#/owner/editCampaign">View</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>  -->
+                            <!-- <span><input type="checkbox" /></span><span>ID-number</span> -->
                             <label class="owner_container">ID-number
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
@@ -61,7 +78,7 @@
                                 <img src="assets/images/c1.png" alt="c1">
                             </div>
                             <div flex-xs="80" flex-sm="85">
-                                <div class="md-body-1">{{item.name}}</div>
+                                <div class="md-body-1">{{item.campaignname}}</div>
                             </div>
                             <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
                                 <md-menu>
@@ -70,10 +87,10 @@
                                     </md-button>
                                     <md-menu-content>
                                         <md-menu-item>
-                                            <md-button ng-href="#/owner/campaign-proposal/{{item.id}}">View</md-button>
+                                            <md-button ng-href="#/owner/editCampaign">View</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
-                                            <md-button ng-click="addCamapginSidenav($item)">Edit</md-button>
+                                            <md-button ng-click="addCamapginSidenav()">Edit</md-button>
                                         </md-menu-item>
                                         
                                         <md-menu-item>
@@ -86,7 +103,16 @@
 
                         <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
 
-                           
+                            <!-- <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                    <div style="display:inline !important;">
+                                        <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                                    </div>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.clientcomapanyname}}</div>
+                                </div>
+                            </div> -->
                             <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
                                 <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
                                     <div>
@@ -94,10 +120,19 @@
                                     </div>
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.client_name}}</div>
+                                    <div class="md-body-1">{{item.clientname}}</div>
                                 </div>
                             </div>
-                           
+                            <!-- <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                    <div>
+                                        <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                                    </div>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.clientcontent}}</div>
+                                </div>
+                            </div> -->
                         </div> 
                         <!-- hide in lg -->
                         <div flex="10" flex-xs="100" class="campaign-name" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -105,7 +140,7 @@
                                 <img src="assets/images/c8.png" alt="c8">
                             </div>
                             <div flex-xs="80" flex-gt-xs="85">
-                                <div class="md-body-1">{{item.companyName}}</div>
+                                <div class="md-body-1">{{item.clientcomapanyname}}</div>
                             </div>
                         </div>
                         <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -113,7 +148,7 @@
                                 <img src="assets/images/c2.png" alt="c1">
                             </div>
                             <div flex-xs="80" flex-gt-xs="85">
-                                <div class="md-body-1">{{item.client_name}}</div>
+                                <div class="md-body-1">{{item.clientname}}</div>
                             </div>
                         </div>
                         <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -121,7 +156,7 @@
                                 <img src="assets/images/c7.png" alt="c1">
                             </div>
                             <div flex-xs="80" flex-gt-xs="85">
-                                <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                <div class="md-body-1">{{item.clientcontent}}</div>
                             </div>
                         </div>
 
@@ -130,12 +165,12 @@
                                 <img src="assets/images/c3.png" alt="c3">
                             </div>
                             <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-                                <div class="md-body-1">{{item.start_date| date}} To {{item.end_date| date}}</div>
+                                <div class="md-body-1">{{item.startdate}} To {{item.enddate}}</div>
                             </div>
-                                <div hide-xs hide-sm class="md-body-1">{{item.start_date | date}}</div> 
+                                <div hide-xs hide-sm class="md-body-1">{{item.startdate}}</div> 
                         </div>
                         <div flex="15" hide-xs hide-sm>
-                            <div class="md-body-1">{{item.end_date| date}}</div>
+                            <div class="md-body-1">{{item.enddate}}</div>
                         </div>
                         <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
                             <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
@@ -152,7 +187,7 @@
                                 <img src="assets/images/c5.png" alt="c1">
                             </div>
                             <div flex-xs="80" flex-gt-xs="85">
-                                <div class="md-body-1">{{item.est_budget}}</div>
+                                <div class="md-body-1">{{item.price}}</div>
                             </div>
                         </div>
                         <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout="row" layout-xs="row" layout-sm="row" class="detail">
@@ -160,7 +195,7 @@
                                 <img src="assets/images/c6.png" alt="c1">
                             </div>
                             <div flex-xs="80" flex-gt-xs="50">
-                                <div class="md-body-1">{{item.products.length}}</div>
+                                <div class="md-body-1">{{item.products}}</div>
                             </div>
                             <div flex="50" hide-xs hide-sm>
                                 <!-- <a ng-href="#/owner/editCampaign"><img src="assets/images/owner/eye.png"/></a> -->
@@ -170,10 +205,10 @@
                                     </md-button>
                                     <md-menu-content>
                                         <md-menu-item>
-                                            <md-button ng-href="#/owner/campaign-proposal/{{item.id}}">View</md-button>
+                                            <md-button ng-href="#/owner/editCampaign">View</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
-                                            <md-button ng-click="addCamapginSidenav(item)">Edit</md-button>
+                                            <md-button ng-click="addCamapginSidenav()">Edit</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
                                             <md-button>Delete</md-button>
@@ -214,7 +249,7 @@
                             <div flex="10">Actions</div>
                         </md-list-item>
                     </div> 
-                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in runningCampaigns"
+                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in items"
                         class="contbg md-whiteframe-3dp">
 
                         <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
@@ -225,7 +260,7 @@
                                     <img src="assets/images/c1.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-sm="85">
-                                    <div class="md-body-1">{{item.name}}</div>
+                                    <div class="md-body-1">{{item.campaignname}}</div>
                                 </div>
                                 <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
                                     <md-menu>
@@ -252,7 +287,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.companyName}}</div>
+                                        <div class="md-body-1">{{item.clientcomapanyname}}</div>
                                     </div>
                                 </div>
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
@@ -262,7 +297,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.client_name}}</div>
+                                        <div class="md-body-1">{{item.clientname}}</div>
                                     </div>
                                 </div>
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
@@ -272,7 +307,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                        <div class="md-body-1">{{item.clientcontent}}</div>
                                     </div>
                                 </div>
                             </div> 
@@ -282,7 +317,7 @@
                                     <img src="assets/images/c8.png" alt="c8">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.companyName}}</div>
+                                    <div class="md-body-1">{{item.clientcomapanyname}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -290,7 +325,7 @@
                                     <img src="assets/images/c2.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.client_name}}</div>
+                                    <div class="md-body-1">{{item.clientname}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -298,7 +333,7 @@
                                     <img src="assets/images/c7.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                    <div class="md-body-1">{{item.clientcontent}}</div>
                                 </div>
                             </div>
 
@@ -307,12 +342,12 @@
                                     <img src="assets/images/c3.png" alt="c3">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-                                    <div class="md-body-1">{{item.start_date}} To {{item.end_date}}</div>
+                                    <div class="md-body-1">{{item.startdate}} To {{item.enddate}}</div>
                                 </div>
-                                 <div hide-xs hide-sm class="md-body-1">{{item.start_date}}</div> 
+                                 <div hide-xs hide-sm class="md-body-1">{{item.startdate}}</div> 
                             </div>
                             <div flex="15" hide-xs hide-sm>
-                                <div class="md-body-1">{{item.end_date}}</div>
+                                <div class="md-body-1">{{item.enddate}}</div>
                             </div>
                             <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
@@ -329,7 +364,7 @@
                                     <img src="assets/images/c5.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.est_budget}}</div>
+                                    <div class="md-body-1">{{item.price}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
@@ -337,7 +372,7 @@
                                     <img src="assets/images/c6.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.products.length}}</div>
+                                    <div class="md-body-1">{{item.products}}</div>
                                 </div>
                             </div>
 
@@ -384,7 +419,7 @@
                             <div flex="10">Actions</div>
                         </md-list-item>
                     </div> 
-                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in closedCampaigns"
+                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in items"
                         class="contbg md-whiteframe-3dp">
 
                         <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
@@ -395,7 +430,7 @@
                                     <img src="assets/images/c1.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-sm="85">
-                                    <div class="md-body-1 camapgin-name">{{item.name}}</div>
+                                    <div class="md-body-1 camapgin-name">{{item.campaignname}}</div>
                                 </div>
                                 <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
                                     <md-menu>
@@ -422,7 +457,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.companyName}}</div>
+                                        <div class="md-body-1">{{item.clientcomapanyname}}</div>
                                     </div>
                                 </div>
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
@@ -432,7 +467,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.client_name}}</div>
+                                        <div class="md-body-1">{{item.clientname}}</div>
                                     </div>
                                 </div>
                                 <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
@@ -442,7 +477,7 @@
                                         </div>
                                     </div>
                                     <div flex-xs="80" flex-gt-xs="85">
-                                        <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                        <div class="md-body-1">{{item.clientcontent}}</div>
                                     </div>
                                 </div>
                             </div> 
@@ -452,7 +487,7 @@
                                     <img src="assets/images/c8.png" alt="c8">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.companyName}}</div>
+                                    <div class="md-body-1">{{item.clientcomapanyname}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -460,7 +495,7 @@
                                     <img src="assets/images/c2.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.client_name}}</div>
+                                    <div class="md-body-1">{{item.clientname}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
@@ -468,7 +503,7 @@
                                     <img src="assets/images/c7.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                    <div class="md-body-1">{{item.clientcontent}}</div>
                                 </div>
                             </div>
 
@@ -477,12 +512,12 @@
                                     <img src="assets/images/c3.png" alt="c3">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-                                    <div class="md-body-1">{{item.start_date}} To {{item.end_date}}</div>
+                                    <div class="md-body-1">{{item.startdate}} To {{item.enddate}}</div>
                                 </div>
-                                 <div hide-xs hide-sm class="md-body-1">{{item.start_date}}</div> 
+                                 <div hide-xs hide-sm class="md-body-1">{{item.startdate}}</div> 
                             </div>
                             <div flex="15" hide-xs hide-sm>
-                                <div class="md-body-1">{{item.end_date}}</div>
+                                <div class="md-body-1">{{item.enddate}}</div>
                             </div>
                             <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
                                 <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
@@ -499,7 +534,7 @@
                                     <img src="assets/images/c5.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.est_budget}}</div>
+                                    <div class="md-body-1">{{item.price}}</div>
                                 </div>
                             </div>
                             <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
@@ -507,7 +542,7 @@
                                     <img src="assets/images/c6.png" alt="c1">
                                 </div>
                                 <div flex-xs="80" flex-gt-xs="85">
-                                    <div class="md-body-1">{{item.products.length}}</div>
+                                    <div class="md-body-1">{{item.products}}</div>
                                 </div>
                             </div>
 
@@ -577,13 +612,13 @@
             </div>
         </md-toolbar> 
         <md-content layout-padding="">
-            <form ng-cloak name="signup" novalidate>
+            <form ng-cloak name="addEmptyCampaignForm" novalidate>
                 <input type="hidden" ng-model="campaign.id" />
                 <div class="form-group">
                     <label class="control-label"> Campaign Name</label>
                     <br>
-                    <input  class="form-control" ng-model="campaign.name" type="text" name="name" minlength="2" maxlength="30" ng-pattern="/[A-Za-z0-9\-]$/" required/>
-                    <div ng-messages="signup.name.$error" ng-if="submittedtrue">
+                    <input ng-model="campaign.name" type="text" name="name" minlength="2" maxlength="30" ng-pattern="/[A-Za-z0-9\-]$/" required/>
+                    <div ng-messages="addEmptyCampaignForm.name.$error">
                       <div ng-message="required">Campaign Name is required.</div>
                       <div ng-message="minlength">Campaign Name must have 2 characters.</div>
                       <div ng-message="maxlength">Campaign Name shouldn't exceed 20 characters. </div>
@@ -593,8 +628,8 @@
                 <div class="form-group">
                     <label class="control-label"> Company Name</label>
                     <br>
-                    <input  class="form-control" ng-model="campaign.companyName" type="text" name="cname" minlength="2" maxlength="30" required="required"/>
-                    <div ng-messages="signup.cname.$error" ng-if="submittedtrue">
+                    <input class="form-control"  type="text"> <input ng-model="user.companyName" type="text" name="cname" minlength="2" maxlength="30" required="required"/>
+                    <div ng-messages="signup.cname.$error">
                       <div ng-message="required">Company Name is required.</div>
                       <div ng-message="minlength">Company Name must have 2 characters.</div>
                       <div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
@@ -603,8 +638,8 @@
                 <div class="form-group">
                     <label class="control-label"> Client Name</label>
                     <br>
-                     <input  class="form-control" ng-model="campaign.client_name" type="text" name="client_name" minlength="2" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" />
-                    <div ng-messages="signup.client_name.$error" ng-if="submittedtrue">
+                     <input ng-model="campaign.client_name" type="text" name="client_name" minlength="2" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" />
+                    <div ng-messages="signup.uname.$error">
                       <div ng-message="required">Client Name is required.</div>
                       <div ng-message="minlength">Client Name must have 2 characters.</div>
                       <div ng-message="maxlength">Client Name shouldn't exede 30 characters. </div>
@@ -613,8 +648,8 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email:</label>
-                    <input  class="form-control" ng-model="campaign.client_email" name="email" type="email" minlength="8" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-                    <div ng-messages="signup.email.$error" ng-if="submittedtrue">
+                    <input ng-model="user.email" name="email" type="email" minlength="8" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                    <div ng-messages="signup.email.$error">
                       <div ng-message="required">Email is required.</div>
                       <div ng-message="minlength">Email must have 8 characters.</div>
                       <div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
@@ -624,8 +659,8 @@
                 <div class="form-group">
                     <label class="control-label"> Phone Number</label>
                     <br>            
-                    <input  class="form-control" ng-model="campaign.client_phoneNo" type="text" name="pno" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
-                     <div ng-messages="signup.pno.$error" ng-if="submittedtrue">
+                    <input ng-model="user.phoneNo" type="text" name="pno" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
+                     <div ng-messages="signup.pno.$error">
                       <div ng-message="required">Phone No is required.</div>
                       <div ng-message="minlength">Phone No must have 10 characters.</div>
                       <div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
@@ -635,9 +670,12 @@
                 <div class="row">
                     <div class="col-md-6" style="padding-right:0px">
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker6'>                         
+                            <div class='input-group date' id='datetimepicker6'>
+                                <span class="input-group-addon">
+                                    <img src="assets/images/owner/date.png" />
+                                </span>
                                 <md-datepicker name="startDate" ng-model="campaign.start_date" md-placeholder="Start Date" required></md-datepicker>
-                                <div ng-messages="signup.startDate.$error" ng-if="submittedtrue">
+                                <div ng-messages="addEmptyCampaignForm.startDate.$error">
                                   <div ng-message="required">Start Date required.</div>
                                 </div>
                             </div>
@@ -647,8 +685,11 @@
                     <div class="col-md-6" style="padding-left:0px">
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker7'>
-                                <md-datepicker name="endDate" ng-model="campaign.end_date" md-placeholder="End date" required></md-datepicker>
-                                <div ng-messages="signup.endDate.$error" ng-if="submittedtrue">
+                                <span class="input-group-addon">
+                                    <img src="assets/images/owner/date.png" />
+                                </span>
+                               <md-datepicker name="endDate" ng-model="campaign.end_date" md-placeholder="End date" required></md-datepicker>
+                                <div ng-messages="addEmptyCampaignForm.endDate.$error">
                                   <div ng-message="required">End Date required.</div>
                                 </div>                                
                             </div>
@@ -658,14 +699,14 @@
                 <div class="form-group">
                     <label class="control-label"> Estimated Bugest</label>
                     <br>
-                    <input  class="form-control" ng-model="campaign.est_budget" type="text" name="budget" required="required" maxlength="10" />
-                    <div ng-messages="signup.budget.$error" ng-if="submittedtrue">
+                    <input ng-model="user.budget" type="text" name="budget" required="required" maxlength="10" />
+                    <div ng-messages="signup.budget.$error">
                       <div ng-message="required">estimated budget required.</div>
                     </div>
                 </div>
                 <div class="form-group" style="margin:10px 0">
                     <label class="col-md-3 control-label"></label>
-                    <input class="btn btn-primary" value="Save" type="button" ng-click="saveCampaign(this)">
+                    <input class="btn btn-primary" value="Save" type="button" ng-click="saveCampaign()">
                     <span></span>
                     <input class="btn btn-default" value="Cancel" type="reset">
                 </div> 

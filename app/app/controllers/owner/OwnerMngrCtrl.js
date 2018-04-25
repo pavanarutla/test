@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $state) {
+app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $state, $auth,toastr,$rootScope,uploadService,$location,config) {
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
@@ -12,7 +12,7 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
   //   };
   // }
 
-
+  $scope.serverUrl = config.serverUrl;
   // Dummy chart data
   
   var chart1 = {};
@@ -139,6 +139,43 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
       clickOutsideToClose:true,
     });
   };
+//console.log(config.serverUrl);
+  /********************* user data*************************/
+  if(localStorage.OwnerloggedInUser){
+    $rootScope.owner_detail = JSON.parse(localStorage.OwnerloggedInUser);
+    console.log(localStorage.OwnerloggedInUser);
+  }
+
+  $scope.logout = function(){
+    $auth.logout().then(function(result){
+      $rootScope.isOwnerAuthenticated = false;
+      $location.path('/owner/signIn');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');        
+    });
+  }
+
+  $scope.resetvalues = function(){
+    $scope.owner_detail = JSON.parse(localStorage.OwnerloggedInUser);
+    $scope.filepreview = undefined;
+  }
+
+  $scope.updateOwnerData = function(userDetails){
+    userDetails.profile_pic = $scope.file;
+     uploadService.updateUserData(userDetails).then(function(res){  
+      console.log(res);
+      if(res.status == 200){
+         localStorage.OwnerloggedInUser = JSON.stringify(res.data.data);
+         $rootScope.owner_detail = res.data.data;
+         toastr.success('Data updated.');
+      }else{
+        toastr.success('Something went worng');
+      }
+       
+      });
+
+  }
+  
 
 }).value('googleChartApiConfig', {
   version: '1.1',
@@ -146,4 +183,5 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
     packages: ['bar'],
     language: 'en'
   }
+    
 });

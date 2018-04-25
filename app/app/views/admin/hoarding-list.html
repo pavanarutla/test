@@ -17,15 +17,31 @@
     <!-- <div>
         <input type="text" placeholder="search" ng-model="searchText">
     </div> -->
+
+
+
+ 
+
+
+
     <div id="customSsearchInput"  style="margin:8px;" layout-align="center end" layout="column" >
-        <div class="input-group " style="width:50%">
-            <input type="text" class="form-control input-lg" placeholder="Search.." ng-model="searchText"/>
-            <span class="input-group-btn">
-                <button class="btn btn-info btn-lg" type="button">
-                        <i class="material-icons">search</i>
-                </button>
+      <md-autocomplete style="width:50%" ng-disabled="isDisabled"  md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..." md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+          <span class="item-title">
+            <span> {{item.siteNo}} </span>
+          </span>
+          <span class="item-metadata">
+            <span>
+              <strong>{{item.company_name}}</strong> company
             </span>
-        </div>
+            <span>
+              <strong>{{item.address}}</strong> address
+            </span>
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+
+
     </div>
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -73,3 +89,20 @@
         </div>
     </div>
 </div>
+<style>
+.autocomplete-custom-template li {
+  border-bottom: 1px solid #ccc;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal;
+}
+.autocomplete-custom-template li:last-child {
+  border-bottom-width: 0;
+}
+.autocomplete-custom-template .item-title,
+.autocomplete-custom-template .item-metadata {
+  display: block;
+  line-height: 2;
+}
+</style>

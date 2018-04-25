@@ -1,5 +1,61 @@
 app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
+
+    $scope.simulateQuery = false;
+    $scope.isDisabled    = false;
+    $scope.querySearch   = querySearch;
+    $scope.selectedItemChange = selectedItemChange;
+    $scope.searchTextChange   = searchTextChange;
+
+
+    function querySearch (query) {
+      return  ProductService.searchProducts(query.toLowerCase()).then(function(reees){
+      //var results = query ? reees.filter( createFilterFor(query) ) : reees,
+         // deferred;
+        return reees;
+      });
+      
+
+    }
+
+    function searchTextChange(text) {
+      //console.log('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+      //console.log('Item changed to ' + JSON.stringify(item));
+    }
+
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(item) {
+        return (item.siteNo.toLowerCase().indexOf(lowercaseQuery) === 0 ||item.company_name.toLowerCase().indexOf(lowercaseQuery) === 0 || item.address.toLowerCase().indexOf(lowercaseQuery) === 0 ||item.format_name.toLowerCase().indexOf(lowercaseQuery) === 0 || item.area_name.toLowerCase().indexOf(lowercaseQuery) === 0 ||item.panelSize.toLowerCase().indexOf(lowercaseQuery) === 0 || item.direction.toLowerCase().indexOf(lowercaseQuery) === 0);
+      };
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   var vm = this;
   $scope.msg = {};
   $scope.countryList = [];
@@ -214,6 +270,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
   // Get products list
   ProductService.getProductList().then(function(result){
     $scope.gridProducts.data = result;    
+    $scope.hoardinglistdata = result;    
   });
 
   function getProductList(){
@@ -375,7 +432,7 @@ app.controller('ProductCtrl', function ($scope, $mdDialog, $http, ProductService
     });
   }
 
- 
+   
   /*
   ======== Formats section ends ========
   */

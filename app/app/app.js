@@ -271,10 +271,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/campaign.html',
       controller:  'OwnerCampaignCtrl'
     })
-    .state('owner.editCampaign', {
-      url: '/editCampaign',
-      templateUrl: 'views/owner/editcampaign.html',
-      controller: 'OwnerCampaignCtrl'
+    .state('owner.campaignProposal', {
+      url: '/campaign-proposal/{campaignId}',
+      templateUrl: 'views/owner/campaign-proposal.html',
+      controller: 'OwnerCampaignProposalCtrl'
     })
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
@@ -289,7 +289,7 @@ var app = angular.module('bbManager', [
     .state('owner.hoardinglist', {
       url: '/hoardinglist',
       templateUrl: 'views/owner/hoardinglist.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerHoardingCtrl'
     })
     .state('owner.settings', {
       url: '/settings',
@@ -320,8 +320,8 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
     })
-    .state('owner.signIn', {
-      url: '/signIn',
+    .state('OwnersignIn', {
+      url: '/owner/signIn',
       templateUrl: 'views/owner/signin.html',
       controller:'ownerSigninCtrl'
     });
@@ -418,7 +418,7 @@ app.run(
           'admin.queries',
           'admin.callcenterinfo'
         ];
-        var ownerRoutes = [
+        var ownerRoutes = ['owner.home'
         ];
         var requiresLogin = [
           'index.location'
@@ -455,15 +455,12 @@ app.run(
           }
         }
         else if (_.indexOf(ownerRoutes, transition.to().name) != -1) {
+
           if (!$auth.isAuthenticated()) {
-            $rootScope.postLoginState = transition.to().name;
-            $location.path('/');
-            $mdDialog.show({
-              templateUrl: 'views/signIn.html',
-              fullscreen: true
-            });
+            $rootScope.OwnerpostLoginState = transition.to().name;
+            $location.path('/owner/signIn');
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'billboard') == -1) {
+          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1) {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }
