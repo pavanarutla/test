@@ -1,4 +1,4 @@
-app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toastr) {
+app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, CompanyService, toastr) {
 
 	/*
 	* ========== Switching registration forms between User and Agency ===========
@@ -43,13 +43,16 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 	* ============ Company Registration ============
 	*/
 
-	$scope.companyTypes = [
-		{id: 1, name: "owner"},
-		{id: 2, name: "agency"}
-	];
+	function getCompanyTypes(){
+		CompanyService.getCompanyTypes().then(function(result){
+			$scope.companyTypes = result;
+		});
+	}
+	getCompanyTypes();
+
 	$scope.company = {};
 	$scope.registerNewCompany = function () {
-		UserService.registerCompany($scope.company).then(function(result){
+		CompanyService.registerCompany($scope.company).then(function(result){
 			if(result.status == 1){
 				toastr.success(result.message);
 			}

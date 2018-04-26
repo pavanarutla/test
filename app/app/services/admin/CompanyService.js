@@ -2,6 +2,11 @@ app.service('CompanyService',
 ['$http', '$q', 'config', 
   function($http, $q, config){
     return {
+      getCompanyTypes: function(){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/company-types').success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
       getCompanies: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/companies').success(dfd.resolve).error(dfd.reject);
@@ -26,6 +31,11 @@ app.service('CompanyService',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/hoarding-companies/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+      },
+      registerCompany: function(company){
+        var dfd = $q.defer();
+        $http.post(config.apiPath + '/company', company).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      }
     }
 }]);
