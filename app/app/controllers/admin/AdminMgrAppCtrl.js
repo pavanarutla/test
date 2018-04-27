@@ -99,8 +99,8 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       $timeout(getAdminNotifs, 1000);
     });
   }
-  getAdminNotifs();
-  $interval(getAdminNotifs, 10000);
+  // getAdminNotifs();
+  // $interval(getAdminNotifs, 10000);
 
   /*===============================
   |   Notification navigation 

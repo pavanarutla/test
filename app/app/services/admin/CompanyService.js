@@ -36,6 +36,11 @@ app.service('CompanyService',
         var dfd = $q.defer();
         $http.post(config.apiPath + '/company', company).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
+      },
+      grantPasswordGeneration: function(code){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/check-pwd-generation/' + code).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
       }
     }
 }]);

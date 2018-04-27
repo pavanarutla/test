@@ -134,6 +134,14 @@ var app = angular.module('bbManager', [
         }
       }
     })
+    .state('index.generate_password', {
+      url: 'generate_password/:code',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
     .state('index.reset-password', {
       url: 'reset_password/:code',
       templateUrl: 'views/reset-password.html',
@@ -264,6 +272,11 @@ var app = angular.module('bbManager', [
       url: '/floating-campaign',
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.user-management', {
+      url: '/user-management',
+      templateUrl: 'views/admin/user-management.html',
+      controller: 'UserManagementCtrl'
     })
     .state('owner', {
       abstract: true,
