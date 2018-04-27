@@ -690,7 +690,8 @@ app.controller('GmapCtrl',
       }
 
       $scope.shortlistSelected = function (ev) {
-        MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+        MapService.shortListProduct($scope.selectedProduct.properties.id).then(function (response) {
+          console.log(response);
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('body')))
@@ -708,15 +709,16 @@ app.controller('GmapCtrl',
       }
 
       function getShortListedProducts() {
-        MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+        MapService.getshortListProduct().then(function (response) {
           $scope.shortListedProducts = response;
+          console.log(response);
         });
       }
       getShortListedProducts();
 
       $scope.deleteShortlisted = function (ev, productId) {
         // console.log(productId);
-        MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function (response) {
+        MapService.deleteShortlistedProduct(productId).then(function (response) {
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('body')))
