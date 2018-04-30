@@ -16,6 +16,11 @@ app.service('AdminUserManagementService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/users').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        getRoleDetails: function(roleId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/role-details/' + roleId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

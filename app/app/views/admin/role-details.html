@@ -1,7 +1,21 @@
 <div class="row" style="padding:20px;">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <td>Name:</td>
+        <td>{{roleDetails.role.name}}</td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{roleDetails.role.description}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row" style="padding:20px;">
   <div class="col-md-6">
-    <!-- roles table -->
-    <h3 style="padding-left:30px;">System Roles</h3>
+    <!-- users with this role -->
+    <h3 style="padding-left:30px;">Users with this role</h3>
     <div class="table-responsive" style="height:400px; overflow:auto;">    
       <table class="table table-striped table-bordered ">
         <thead>
@@ -22,7 +36,7 @@
             <td>
               <span>
                 <!-- view role -->
-                <a ng-href="#/admin/role-details/{{role.id}}" ng-click=""><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
+                <a ng-href="#/admin/role-detail/{{role.id}}" ng-click=""><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
               </span>
               <span>
                 <!-- assign this role to user -->

@@ -278,6 +278,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/user-management.html',
       controller: 'UserManagementCtrl'
     })
+    .state('admin.role-details', {
+      url: '/role-details/:roleId',
+      templateUrl: 'views/admin/role-details.html',
+      controller: 'UserManagementCtrl'
+    })    
     .state('owner', {
       abstract: true,
       url: '/owner',

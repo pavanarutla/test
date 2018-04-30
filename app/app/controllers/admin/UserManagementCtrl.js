@@ -1,11 +1,10 @@
-app.controller('UserManagementCtrl', function ($scope, $http, AdminUserManagementService) {
+app.controller('UserManagementCtrl', function ($scope, $http, $stateParams, AdminUserManagementService) {
   
   /**
    * Get Users
    */
   var getAllUsers = function(){
     AdminUserManagementService.getAllUsers().then(function(result){
-      console.log(result);
       $scope.allUsers = result;
     });
   }
@@ -22,7 +21,6 @@ app.controller('UserManagementCtrl', function ($scope, $http, AdminUserManagemen
    */
   var getAllRoles = function(){
     AdminUserManagementService.getAllRoles().then(function(result){
-      console.log(result);
       $scope.allRoles = result;
     });
   }
@@ -35,7 +33,19 @@ app.controller('UserManagementCtrl', function ($scope, $http, AdminUserManagemen
     else{
       $scope.selectedRoles.pop(roleId);
     }
-    console.log($scope.selectedRoles);
+  }
+
+  var getRoleDetails = function(roleId){
+    AdminUserManagementService.getRoleDetails(roleId).then(function(result){
+      console.log(result);
+      $scope.roleDetails = result;
+    });
+  }
+
+  // if role id is set, get the role details to 
+  // show on the role details page.
+  if($stateParams.roleId){
+    getRoleDetails($stateParams.roleId);
   }
 
   /*===================
@@ -54,7 +64,6 @@ app.controller('UserManagementCtrl', function ($scope, $http, AdminUserManagemen
    */
   var getAllPermissions = function(){
     AdminUserManagementService.getAllPermissions().then(function(result){
-      console.log(result);
       $scope.allPermissions = result;
     });
   }
@@ -67,7 +76,6 @@ app.controller('UserManagementCtrl', function ($scope, $http, AdminUserManagemen
     else{
       $scope.selectedPermissions.pop(permissionId);
     }
-    console.log($scope.selectedPermissions);
   }
 
   /*==========================
