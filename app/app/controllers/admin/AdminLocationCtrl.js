@@ -62,6 +62,7 @@ $scope.saveState = function () {
       toastr.success('State added to database successfully!');
       AdminLocationService.getAllStates().then(function (data) {
         $scope.stateareaList = data;
+        console.log($scope.stateareaList)
       });
     }
     else {
@@ -209,6 +210,13 @@ $scope.CountryloadMore = function() {
       var increamented = vm.limit + 5;
       mv.limit = increamented > $scope.stateareaList.length ? $scope.stateareaList.length : increamented;
     };
+    $scope.prevloadMore = function(){
+      var decrement = vm.limit - 5;
+      if(decrement == 0){
+        
+      }
+      mv.limit = decrement > $scope.stateareaList.length ? $scope.stateareaList.length : decrement;
+    }
   // tables code end
   // tables city start
   var lc = $scope;
