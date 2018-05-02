@@ -24,39 +24,7 @@ body{
 .theme-text{
     color: #E85647;
 }
-/*======= location page search css start ============*/
-#custom-search-input{
-    padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
-    background-color: #fff;
-    width: 320px;
-}
-#custom-search-input input{
-    border: 0;
-    box-shadow: none;
-}
-#custom-search-input .input-group{
-    height: 30px;
-}
-#custom-search-input button{
-    margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 4px 8px 0 10px;
-    border-left: solid 1px #ccc;
-}
-#custom-search-input button:hover{
-    border: 0;
-    box-shadow: none;
-    border-left: solid 1px #ccc;
-}
-#custom-search-input .material-icons{
-    font-size: 23px;
-}
-/*======= location page search css start ============*/
+
 /* ============= header css start ============*/
 .logo-img {
     width: 160px;
@@ -306,6 +274,7 @@ whtwedo_inner_text .mrgn-top{
 .recent-activities .carousel-control-next, .recent-activities .carousel-control-prev{
   width:0% !important;
   color: #757575;
+  cursor: pointer;
 } 
 .arrow-icon{
   font-size: 40px !important;
@@ -807,6 +776,80 @@ whtwedo_inner_text .mrgn-top{
 }
 /* ============= reset password css start =============*/
 
+/*======= location page search css start ============*/
+/*==search css start==*/
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    /* border-radius: 6px; */
+    background-color: #fff;
+    width: 100%;
+}
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+#custom-search-input .input-group{
+    height: 30px;
+}
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 4px 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input .material-icons{
+    font-size: 23px;
+}
+/* =====scroll bar coustom css start  =====*/
+.scrollbar__style::-webkit-scrollbar
+{
+	width: 4px !important;
+    background-color: #F5F5F5;
+    height: 200px !important;
+}
+.scrollbar__style::-webkit-scrollbar-thumb
+{
+    background-color: #414143 !important;
+    height: 200px !important;
+}
+/* ===== scroll bar coustam css end =====*/
+/*==search css start==*/
+.side-navpadding{
+  padding-top:2px !important;
+  padding-bottom:2px !important;
+}
+/*==side nav ===*/
+.main__sidenav{
+    position: absolute !important;
+    top: 1px !important;
+    /* background: rgb(245, 245, 245,.6); */
+    /* background: rgba(201, 201, 201,.6); */
+    background: none;
+}
+.sidemenu__button{
+    width: 25px;
+    height: 48px;
+    cursor: pointer;
+    padding: 0px;
+    background: rgba(255,255,255,0.9);
+    border-left: 1px solid #D4D4D4;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.sidenav__ineer{
+  max-height: 610px;
+  overflow-y: auto;
+}
+/*======= location page css end ============*/
+
 /*Notification demo css*/
 .shrtlst{
     border: 1px solid #ccc;
@@ -834,34 +877,6 @@ whtwedo_inner_text .mrgn-top{
     font-size: 12px !important;
 }
 
-
-/*transition effects here  */
-.animate-enter, .animate-leave{ 
-    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    position: relative;
-    display: block;
-} 
-.animate-enter.animate-enter-active,.animate-leave {
-    opacity: 1;
-    top: 0;
-    height: 30px;
-}
-.animate-leave.animate-leave-active,
-.animate-enter {
-    opacity: 0;
-    top: -50px;
-    height: 0px;
-}
-.menudemoMenuPositionModes .md-menu-demo {
-    padding: 24px; 
-}
-.menudemoMenuPositionModes .menu-demo-container {
-    min-height: 200px; 
-}
 /*this for Campaign page  */
 .search{
     height: 32px;
@@ -883,7 +898,7 @@ whtwedo_inner_text .mrgn-top{
 md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     border-radius: 2px 2px 0 0;
 }
-.userImg {
+/* .userImg {
     border-radius: 2px 2px 0 0;
     height: 200px;
     border-radius: 65px 63px 66px;
@@ -891,7 +906,7 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     align-content: center;
     float: right;
     margin: 0% 40% 2% 45%;
-}
+} */
 
 /*favicon images here*/
 
@@ -904,7 +919,7 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
 .fabSpeedDial p.note {
     font-size: 1.2rem; 
 }       
-.fabSpeedDial .lock-size {
+.fabSpeedDial .lock-size{
     min-width: 300px;
     min-height: 300px;
     width: 300px;
@@ -931,7 +946,6 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
 .active-two{
   background: #980000 !important;
 }
-/* //.open { display: block;} */
 
 /* formats */
 .digital-board{
@@ -943,7 +957,6 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     background: #fff;
     z-index: 9;
 }
-
 /* profile page */
 .profile-campagin md-tabs-canvas {
     background: #fff
@@ -967,7 +980,7 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     height: 150px;
     background: #488EDF;
 }
- .client-summay{
+.client-summay{
     margin: -90px 0 0 0;
 } 
 /*saved campagin popup*/
@@ -983,17 +996,18 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     top: 10px;
     right: 10px;
 }
-
 /*map css start*/
 
 /* map search fileds */
-.search-field md-input-container .md-errors-spacer{
+/* .search-field md-input-container .md-errors-spacer{
     min-width: 0px;
-}
-.search-part{
-  top:0%;position:absolute;width:350px;
-}
-.search-field .search-bg{
+} */
+/* .search-part{
+  top:0%;
+  position:absolute;
+  width:350px;
+} */
+/* .search-field .search-bg{
     height: 40px !important;
     background-image: url('/assets/images/maps/search.png');
     background-repeat: no-repeat;
@@ -1007,20 +1021,16 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
 }
 .search-input{
     height: 35px !important;
-}
-.map-sidenav{
+} */
+/* .map-sidenav{
   top: 12%;
-    /* z-index: 1; */
-  /*position: absolute;*/
-}
-.side-navpadding{
-  padding-top:4px !important;
-  padding-bottom:4px !important;
-}
+
+} */
+
 .formats-types,.short-list,.saved-campagin{
-  background: #FFF !important;
-  width: 320px !important;
-  padding: 0px;
+   background: #FFF !important;
+   /* width: 320px !important; */
+  padding: 0px;  
 }
 .formats-types md-list-item{
   padding: 0px;
@@ -1035,14 +1045,15 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     margin-right: 8px;
 }
 .main-part{
-  width:320px;
-  background:#2C3E50;
-   opacity: .8; 
-  height: 35px;
+  /* width:320px; */
+  /* background:#2C3E50; */
+      background: rgba(44, 62, 80,.8);
+   /* opacity: .8;  */
+  /* height: 35px; */
 }
 .filters{
   background: #FFF !important;
-  width: 320px !important;
+  /* width: 320px !important; */
 }
 .filter-form{
   height: 40px;
@@ -1076,10 +1087,6 @@ margin: 2px;
     opacity: .5;
 }
 
-/* shortlisted css start*/
-/* .list-img img{
-  margin-top: 25px;
-} */
 .list-name{
     margin: 25px 15px 0 0;
 }
@@ -1131,7 +1138,6 @@ margin: 2px;
 .sug-dates .md-icon-button+.md-datepicker-input-container{
   width: 80%;
 }
-
 /*main site css start*/
 /* homepage css start*/
 /* md-toolbar.md-default-theme.md-menu-toolbar, md-toolbar.md-menu-toolbar {
@@ -1146,16 +1152,11 @@ color: #3c3a3b !important;
     border-radius: 0 !important;
     background-color:#000 !important; 
 }
-
-
 /*weekly site case*/
 .weekly-case{
   padding-top: 50px;
   background: #fff
 }
-
-
-
 /* .logo{
     background:transparent;
     margin-left: 50px;
@@ -1185,10 +1186,9 @@ color: #3c3a3b !important;
     background: #330B09;
 }
 
-
 .goto-top{
   width: 50px !important;
-    height: 50px !important;
+  height: 50px !important;
 }
   /*loader*/
 .ajax-loader {
@@ -1199,7 +1199,6 @@ color: #3c3a3b !important;
   margin-top: -32px; /* -1  image height / 2 */
   display: block;
 }
-
 #mydiv {
   position: absolute;
   top: 0;
@@ -1210,9 +1209,7 @@ color: #3c3a3b !important;
   background-color: grey;
   opacity: .8;
 }
-
 /*Vasu .CSS*/
-
 #shortlistscrollbar-style::-webkit-scrollbar
 {
 	width: 6px;
@@ -1235,10 +1232,10 @@ color: #3c3a3b !important;
 {
 	  background-color: #eee;
 }
-.filterscrollbar {
+/* .filterscrollbar {
     max-height: 240px;
     overflow-y: auto;
-}
+} */
 /* .filterscrollbar:hover {
 overflow-y:scroll;
 } */
@@ -1249,10 +1246,10 @@ overflow-y:scroll;
 }
 #savecamp-style::-webkit-scrollbar-thumb
 {
-	  background-color: #eee;
+	  background-color: #000;
 }
 .savescrollbar {
-    max-height: 240px;
+    max-height: 330px;
     overflow-y: auto;
 }
  
@@ -1268,45 +1265,6 @@ overflow-y:scroll;
 .color-theme{
   color:#a8a8a8;
 }
-/* #subscriber-email{
-    border-bottom: 1px solid rgb(255, 255, 255);
-    color: rgb(255, 255, 255);
-}
-.news-inner{
-       background: #fff; 
-}
-.newsletter{
-  margin: 20px 0px;
-}
-.newsletter-btn{
-  margin: 20px 0 0 0 !important;
-} */
-
-/* .top-section{
-  position: absolute;
-  top: 0%;
-  z-index: 9;
-  background: #ccc;
-  width: 100%;
-  height: 35px;
-}
-.topbtn-one{
-  margin: 0;
-  padding: 0;
-}
-.topbtn-two{
-  margin: 0 5px 0 0px;
-  padding: 0;
-}
-.bottom-mobilebtn{
-  top:auto;
-  z-index:1;
-  position: fixed;
-  bottom:0px;
-  width:100%;
-  background:#f2f2f2;
-  height: 50px; 
-} */
 .top-toolbar{
     background: #7b7878;
     color: #fff;
@@ -1349,7 +1307,7 @@ overflow-y:scroll;
 }
 .name-suggest{
   padding: 10px 0 30px;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
 }
 
 /* .fixed-top {
@@ -1360,8 +1318,76 @@ overflow-y:scroll;
     z-index: 1030;
 } */
 
+/*suggestme page new css*/
+/* form styling */
+#form-container                { background:#FFF; margin-bottom:20px;
+    border-radius:5px; }
+#form-container .page-header   { background:#151515; margin:0; padding:30px; 
+    border-top-left-radius:5px; border-top-right-radius:5px; }
 
+/* numbered buttons */
+#status-buttons                 {  }
+#status-buttons a               { color:#FFF; display:inline-block; font-size:12px; margin-right:10px; text-align:center; text-transform:uppercase; }
+#status-buttons a:hover         { text-decoration:none; }
+#status-buttons span            { background:#080808; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px; 
+    border-radius:50%; }
 
+/* active buttons */
+#status-buttons a.active span   { background:#00BC8C; }
+
+/* ANIMATION STYLINGS
+============================================================================= */
+#signup-form            { position:relative; min-height:418px; overflow:hidden; padding:30px; }
+
+/* basic styling for entering and leaving */
+/* left and right added to ensure full width */
+#form-views.ng-enter,
+#form-views.ng-leave      { position:absolute; left:30px; right:30px;
+    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
+}
+    
+/* enter animation */
+#form-views.ng-enter            { 
+    -webkit-animation:slideInRight 0.5s both ease;
+	-moz-animation:slideInRight 0.5s both ease;
+	animation:slideInRight 0.5s both ease; 
+}
+
+/* leave animation */
+#form-views.ng-leave            { 
+    -webkit-animation:slideOutLeft 0.5s both ease;
+	-moz-animation:slideOutLeft 0.5s both ease;
+	animation:slideOutLeft 0.5s both ease;   
+}
+md-checkbox .md-icon {
+    border-radius: 50% ! important;
+}
+/* ANIMATIONS
+============================================================================= */
+/* slide out to the left */
+@keyframes slideOutLeft {
+	to 		{ transform: translateX(-200%); }
+}
+@-moz-keyframes slideOutLeft {	
+	to 		{ -moz-transform: translateX(-200%); }
+}
+@-webkit-keyframes slideOutLeft {
+	to 		{ -webkit-transform: translateX(-200%); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+	from 	{ transform:translateX(200%); }
+	to 		{ transform: translateX(0); }
+}
+@-moz-keyframes slideInRight {
+	from 	{ -moz-transform:translateX(200%); }
+	to 		{ -moz-transform: translateX(0); }
+}
+@-webkit-keyframes slideInRight {
+	from 	{ -webkit-transform:translateX(200%); }
+	to 		{ -webkit-transform: translateX(0); }
+}
 /* ========================
     //////media qureys//////////
 ==============================*/
@@ -1632,7 +1658,6 @@ overflow-y:scroll;
   }
 }
 /*=====tablet media qureys end =====*/
-
 @media screen and (min-width: 960px) and (max-width: 1279px) {
 
   .logo {

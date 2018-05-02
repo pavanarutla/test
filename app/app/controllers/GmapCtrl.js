@@ -415,6 +415,10 @@ app.controller('GmapCtrl',
       $scope.savedCampagin = function() {
         $mdSidenav('savedCamapgin').toggle();
       };
+      $scope.mainMenu = function() {
+        $mdSidenav('menusideNav').toggle();
+      };
+
       ////////////////////////////////////////////////////////////////////
       //Suggest Me Dialog 1      
       $scope.suggestionRequest = {};

@@ -59,10 +59,54 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/whyoutdoor.html',
       controller: 'PricingCtrl'
     })
-    .state('index.suggest_campaign', {
-      url: 'suggest-campaign',
-      templateUrl: 'views/suggest-a-campaign.html',
-      controller: 'CampaignCtrl'
+    // .state('index.suggest_campaign', {
+    //   url: 'suggest-campaign',
+    //   templateUrl: 'views/suggest-a-campaign.html',
+    //   controller: 'CampaignCtrl'
+    // })
+    // .state('suggest_campaign.profile', {
+    //   url: '/profile',
+    //   templateUrl: 'suggest-campaign-one.html'
+    // })
+        
+    // // url will be /form/interests
+    // .state('suggest_campaign.interests', {
+    //     url: '/interests',
+    //     templateUrl: 'suggest-campaign-two.html'
+    // })
+    
+    // // url will be /form/payment
+    // .state('suggest_campaign.payment', {
+    //     url: '/payment',
+    //     templateUrl: 'suggest-campaign-three.html'
+    // })
+
+    $stateProvider.state('index.suggest', {
+      url: 'suggest',
+      templateUrl: 'views/suggest-a-campaign.html'
+    })
+        
+    // nested states 
+    // each of these sections will have their own view
+    // url will be suggest-Product-Detail
+    .state('index.suggest.profile', {
+        url: '/profile',
+        templateUrl: 'views/suggest-campaign-one.html'
+    })
+    // url will be suggest-market-Detail
+    .state('index.suggest.interests', {
+        url: '/interests',
+        templateUrl: 'views/suggest-campaign-two.html'
+    })
+    // url will be suggest-Advertising-Detail
+    .state('index.suggest.payment', {
+        url: '/payment',
+        templateUrl: 'views/suggest-campaign-three.html'
+    })
+      // url will be suggest-Advertising-Detail
+    .state('index.suggest.otherinfo', {
+        url: '/otherinfo',
+        templateUrl: 'views/suggest-campaign-four.html'
     })
     .state('index.location', {
       url: 'location',
@@ -309,6 +353,7 @@ var app = angular.module('bbManager', [
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
     $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/suggest', '/suggest/profile');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;

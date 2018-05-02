@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
-<div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
+<div  layout="column" ng-cloak ng-controller="bbMngrCtrl" style="min-height: 100%;position: absolute;
+   width: 100%;">
   <!-- header html start-->
   <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
     <div class="md-toolbar-tools">
@@ -23,7 +24,7 @@
             Browse BillBoards</a>
         </md-button>
         <!--sugg -->
-        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest-campaign">
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest/profile">
           suggest me
         </md-button>
          <!--search button -->
@@ -133,7 +134,7 @@
   <!-- Content section-->
   <ui-view> </ui-view>
   <!-- Footer Section html start-->
-  <footer>
+  <footer style="position: absolute;bottom: 0;width: 100%;">
     <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="footer_social_icons">
         <div class="" style="margin-left:5%">
