@@ -43,7 +43,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="country in countryList | limitTo:limit">
+				<tr ng-repeat="country in countryList | limitTo:countryPaginationLimit:counPageIndex">
 					<td>{{country.name}}</td>
 					<td>
 					<span><a ng-href="" ng-click="editCountry(country)"><md-icon><i class="material-icons" style="cursor: pointer;">mode_edit</i></md-icon></a></span>
@@ -52,10 +52,23 @@
 				</tr>      
 				</tbody>
 			</table>
-        </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
+		</div>
+		<div class="container" ng-if ="countryList.length > 0">
+            <ul class="pagination">
+                <li class="page-item" ng-click="countryLocationPrev()">
+                     <a class="page-link" ng-class="{'disable-pagination': (counPageIndex <= 0)}">Prev</a>
+                </li>
+                <li class = "pageResults">
+                    {{counPageIndex + 1 + ' - ' + (countryPaginationLimit + counPageIndex > countryList.length?countryList.length:countryPaginationLimit + counPageIndex)}} of {{countryList.length}}
+                </li>
+                <li class="page-item" ng-click="CountryloadMore()">
+                    <a class="page-link" ng-class="{'disable-pagination': (counPageIndex + countryPaginationLimit >= countryList.length)}">Next</a>
+                </li>
+              </ul>
+          </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
         <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="CountryloadMore()">Load More!</button>
-        </div>
+        </div> -->
     </div>
     <!-- ===== table new code end=======-->
 	

@@ -186,26 +186,42 @@ $scope.editArea = function (area) {
 
 // Location tables cod load more e start
 var vm = $scope;
-vm.limit = 5;
+vm.locPaginationLimit = 10;
+vm.locPageIndex = 0;
 $scope.AllLocationsloadMore = function() {
-  var increamented = vm.limit + 5;
-  vm.limit = increamented > $scope.countryList.length ? $scope.countryList.length : increamented;
+  if (mv.locPageIndex + mv.locPaginationLimit < mv.listoflocationdata.length) {
+    mv.locPageIndex += mv.locPaginationLimit;
+  }
 };
+$scope.allLocationPrev = function(){
+  // console.log(mv.locPageIndex - mv.locPaginationLimit);
+  if (mv.locPageIndex > 0) {
+    mv.locPageIndex -= mv.locPaginationLimit;
+  }
+}
 // Country tables code end 
 
 
 // Country tables cod load more e start
 var vm = $scope;
-vm.limit = 5;
+vm.countryPaginationLimit = 5;
+vm.counPageIndex = 0;
 $scope.CountryloadMore = function() {
-  var increamented = vm.limit + 5;
-  vm.limit = increamented > $scope.countryList.length ? $scope.countryList.length : increamented;
+  if (mv.counPageIndex + mv.countryPaginationLimit < $scope.countryList.length) {
+    mv.counPageIndex += mv.countryPaginationLimit;
+  }
 };
+
+$scope.countryLocationPrev = function(){
+  if (mv.counPageIndex > 0) {
+    mv.counPageIndex -= mv.countryPaginationLimit;
+  }
+}
 // Country tables code end 
 
    // tables cod load more e start
     var mv = $scope;
-    mv.locStatePaginationLimit = 8;
+    mv.locStatePaginationLimit = 5;
     mv.pageIndex = 0;
     $scope.StateloadMore = function() {
       if (mv.pageIndex + mv.locStatePaginationLimit < mv.stateareaList.length) {
@@ -220,20 +236,32 @@ $scope.CountryloadMore = function() {
     }
   // tables code end
   // tables city start
-  var lc = $scope;
-    lc.limit = 5;
+  mv.locCityPaginationLimit = 5;
+  mv.cityPageIndex = 0;
     $scope.CityloadMore = function() {
-      var increamented = vm.limit + 5;
-      lc.limit = increamented > $scope.citylocationdata.length ? $scope.citylocationdata.length : increamented;
+      if (mv.cityPageIndex + mv.locCityPaginationLimit < mv.citylocationdata.length) {
+        mv.cityPageIndex += mv.locCityPaginationLimit;
+      }
     };
+    $scope.cityPrevloadMore = function(){
+      if (mv.cityPageIndex > 0) {
+        mv.cityPageIndex -= mv.locCityPaginationLimit;
+      }
+    }
   // tables city end
     // tables city start
-    var lc = $scope;
-    lc.limit = 5;
+    mv.locAreaPaginationLimit = 10;
+  mv.areaPageIndex = 0;
     $scope.ArealoadMore = function() {
-      var increamented = vm.limit + 5;
-      lc.limit = increamented > $scope.arealocationdata.length ? $scope.arealocationdata.length : increamented;
+      if (mv.areaPageIndex + mv.locAreaPaginationLimit < $scope.arealocationdata.length) {
+        mv.areaPageIndex += mv.locAreaPaginationLimit;
+      }
     };
+    $scope.areaPrevloadMore = function(){
+      if (mv.areaPageIndex > 0) {
+        mv.areaPageIndex -= mv.locAreaPaginationLimit;
+      }
+    }
   // tables city end
 
 });

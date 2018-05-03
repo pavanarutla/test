@@ -97,7 +97,7 @@
                 </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="locations in listoflocationdata | limitTo:limit">
+            <tr ng-repeat="locations in listoflocationdata | limitTo:locAreaPaginationLimit:areaPageIndex">
                 <td>{{locations.country_name}}</td>
                 <td>{{locations.state_name}}</td>
                 <td>{{locations.city_name}}</td>
@@ -113,9 +113,22 @@
             </tbody>
         </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
+        <div class="container" ng-if="listoflocationdata.length > 0">
+            <ul class="pagination">
+                <li class="page-item" ng-click="areaPrevloadMore()">
+                     <a class="page-link" ng-class="{'disable-pagination': (areaPageIndex <= 0)}">Prev</a>
+                </li>
+                <li class = "pageResults">
+                    {{areaPageIndex + 1 + ' - ' + (locAreaPaginationLimit + areaPageIndex > arealocationdata.length?arealocationdata.length:locAreaPaginationLimit + areaPageIndex)}} of {{arealocationdata.length}}
+                </li>
+                <li class="page-item" ng-click="ArealoadMore()">
+                    <a class="page-link" ng-class="{'disable-pagination': (areaPageIndex + locAreaPaginationLimit >= arealocationdata.length)}">Next</a>
+                </li>
+              </ul>
+          </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
         <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="ArealoadMore()">Load More!</button>
-        </div>
+        </div> -->
     </div>
     <!-- ===== table new code end=======-->
     

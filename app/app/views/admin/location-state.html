@@ -64,12 +64,12 @@
         <!-- <div layout="colmun" layout-align="end center" layout-margin>
         <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="StateloadMore()">Load More!</button>
         </div> -->
-        <div class="container">
+        <div class="container"  ng-if = "stateareaList.length > 0">
             <ul class="pagination">
                 <li class="page-item" ng-click="prevloadMore()">
-                     <a class="page-link" ng-class="{'disable-pagination': (pageIndex <= 0)}">Previous</a>
+                     <a class="page-link" ng-class="{'disable-pagination': (pageIndex <= 0)}">Prev</a>
                 </li>
-                <li>
+                <li class = "pageResults">
                     {{pageIndex + 1 + ' - ' + (locStatePaginationLimit + pageIndex > stateareaList.length?stateareaList.length:locStatePaginationLimit + pageIndex)}} of {{stateareaList.length}}
                 </li>
                 <li class="page-item" ng-click="StateloadMore()">

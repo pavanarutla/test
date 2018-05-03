@@ -24,7 +24,7 @@
                   </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="locations in listoflocationdata | limitTo:limit">
+                <tr ng-repeat="locations in listoflocationdata | limitTo:locPaginationLimit:locPageIndex">
                   <td>{{locations.country_name}}</td>
                   <td>{{locations.state_name}}</td>
                   <td>{{locations.city_name}}</td>
@@ -40,8 +40,21 @@
               </tbody>
             </table>
           </div>
-          <div layout="colmun" layout-align="end center" layout-margin>
+          <!-- <div layout="colmun" layout-align="end center" layout-margin>
             <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="AllLocationsloadMore()">Load More!</button>
+          </div> -->
+          <div class="container" ng-if ="listoflocationdata.length > 0">
+            <ul class="pagination">
+                <li class="page-item" ng-click="allLocationPrev()">
+                     <a class="page-link" ng-class="{'disable-pagination': (locPageIndex <= 0)}">Prev</a>
+                </li>
+                <li class = "pageResults">
+                    {{locPageIndex + 1 + ' - ' + (locPaginationLimit + locPageIndex > listoflocationdata.length?listoflocationdata.length:locPaginationLimit + locPageIndex)}} of {{listoflocationdata.length}}
+                </li>
+                <li class="page-item" ng-click="AllLocationsloadMore()">
+                    <a class="page-link" ng-class="{'disable-pagination': (locPageIndex + locPaginationLimit >= listoflocationdata.length)}">Next</a>
+                </li>
+              </ul>
           </div>
       	</div>
 	</div>

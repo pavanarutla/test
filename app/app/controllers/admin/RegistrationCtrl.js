@@ -39,7 +39,6 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   
   AdminUserService.getAgencies().then(function (response) {
     $scope.agencyList = response;
-    console.log($scope.agencyList);
   });
 $scope.Useredit = function(user){
   $scope.user = user;
@@ -143,19 +142,38 @@ $scope.Useredit = function(user){
   }
 
   // tables code start
-    var vm = $scope;
-    vm.limit = 5;
-    $scope.UserloadMore = function() {
-      var increamented = vm.limit + 5;
-      vm.limit = increamented > $scope.userList.length ? $scope.userList.length : increamented;
-    };
+  $scope.registPaginationLimit = 6;
+  $scope.registPageIndex = 0;
+  $scope.nextFeedsShow = function() {
+    if ($scope.registPageIndex + $scope.registPaginationLimit < $scope.userList.length) {
+      $scope.registPageIndex += $scope.registPaginationLimit;
+    }
+  };
+  $scope.prevFeedsShow = function(){
+    if ($scope.registPageIndex > 0) {
+      $scope.registPageIndex -= $scope.registPaginationLimit;
+    }
+  }  
+  
   // tables code end
   // tables code start
-  var vm = $scope;
-  vm.limit = 5;
-  $scope.AgencyloadMore = function() {
-    var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.agencyList.length ? $scope.agencyList.length : increamented;
+  $scope.loadFormatesPaginationLimit = 5;
+  $scope.loadFormatesPageIndex = 0;
+  $scope.nextagencyShow = function() {
+    if ($scope.loadFormatesPageIndex + $scope.loadFormatesPaginationLimit < $scope.agencyList.length) {
+      $scope.loadFormatesPageIndex += $scope.loadFormatesPaginationLimit;
+    }
   };
+  $scope.prevAgencyShow = function(){
+    if ($scope.loadFormatesPageIndex > 0) {
+      $scope.loadFormatesPageIndex -= $scope.loadFormatesPaginationLimit;
+    }
+  }
+  // var vm = $scope;
+  // vm.limit = 5;
+  // $scope.AgencyloadMore = function() {
+  //   var increamented = vm.limit + 5;
+  //   vm.limit = increamented > $scope.agencyList.length ? $scope.agencyList.length : increamented;
+  // };
 // tables code end  
 });

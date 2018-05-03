@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="format in formatList | limitTo:limit">
+              <tr ng-repeat="format in formatList | limitTo:loadFormatesPaginationLimit:loadFormatesPageIndex">
                 <td>{{format.image}}</td>
                 <td>{{format.name}}</td>
                 <td>
@@ -36,8 +36,21 @@
             </tbody>
           </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
+        <div class="container" ng-if="formatList.length > 0">
+            <ul class="pagination">
+                <li class="page-item" ng-click="prevFormatesShow()">
+                     <a class="page-link" ng-class="{'disable-pagination': (loadFormatesPageIndex <= 0)}">Prev</a>
+                </li>
+                <li class = "pageResults">
+                    {{loadFormatesPageIndex + 1 + ' - ' + (loadFormatesPaginationLimit + loadFormatesPageIndex > formatList.length?formatList.length:loadFormatesPaginationLimit + loadFormatesPageIndex)}} of {{formatList.length}}
+                </li>
+                <li class="page-item" ng-click="nextFormatesShow()">
+                    <a class="page-link" ng-class="{'disable-pagination': (loadFormatesPageIndex + loadFormatesPaginationLimit >= formatList.length)}">Next</a>
+                </li>
+              </ul>
+          </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
           <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="FormatloadMore()">Load More!</button>
-        </div>
+        </div> -->
     </div>
 </div>

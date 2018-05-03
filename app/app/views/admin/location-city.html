@@ -60,7 +60,7 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="city in citylocationdata | limitTo:limit">
+              <tr ng-repeat="city in citylocationdata | limitTo:locCityPaginationLimit: cityPageIndex">
                 <td>{{city.country_name}}</td>
                 <td>{{city.state_name}}</td>
                 <td>{{city.name}}</td>
@@ -72,9 +72,22 @@
             </tbody>
           </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
+        <div class="container" ng-if = "citylocationdata.length > 0">
+            <ul class="pagination">
+                <li class="page-item" ng-click="cityPrevloadMore()">
+                     <a class="page-link" ng-class="{'disable-pagination': (cityPageIndex <= 0)}">Prev</a>
+                </li>
+                <li class = "pageResults">
+                    {{cityPageIndex + 1 + ' - ' + (locCityPaginationLimit + cityPageIndex > citylocationdata.length?citylocationdata.length:locCityPaginationLimit + cityPageIndex)}} of {{citylocationdata.length}}
+                </li>
+                <li class="page-item" ng-click="CityloadMore()">
+                    <a class="page-link" ng-class="{'disable-pagination': (cityPageIndex + locCityPaginationLimit >= citylocationdata.length)}">Next</a>
+                </li>
+              </ul>
+          </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
           <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="CityloadMore()">Load More!</button>
-        </div>
+        </div> -->
       </div>
 
     <!-- tables grid html end-->

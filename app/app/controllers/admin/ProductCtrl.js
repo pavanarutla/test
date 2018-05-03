@@ -230,19 +230,31 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$stateParams', '
   };
 
     // tables code start
-    var vm = $scope;
-    vm.limit = 5;
-    $scope.loadMore = function() {
-      var increamented = vm.limit + 5;
-      vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
+    $scope.loadHoardingPaginationLimit = 5;
+    $scope.loadHordingPageIndex = 0;
+    $scope.loadHording = function() {
+      if ($scope.loadHordingPageIndex + $scope.loadHoardingPaginationLimit < $scope.hoardinglistdata.length) {
+        $scope.loadHordingPageIndex += $scope.loadHoardingPaginationLimit;
+      }
     };
+    $scope.PrevHoradingloadMore = function(){
+      if ($scope.loadHordingPageIndex > 0) {
+        $scope.loadHordingPageIndex -= $scope.loadHoardingPaginationLimit;
+      }
+    }
   // tables code end
    // tables code start
-   var vm = $scope;
-   vm.limit = 5;
-   $scope.FormatloadMore = function() {
-     var increamented = vm.limit + 5;
-     vm.limit = increamented > $scope.formatList.length ? $scope.formatList.length : increamented;
+   $scope.loadAgencyPaginationLimit = 5;
+   $scope.loadAgencyPageIndex = 0;
+   $scope.nextagencyShow = function() {
+     if ($scope.loadAgencyPageIndex + $scope.loadAgencyPaginationLimit < $scope.formatList.length) {
+       $scope.loadAgencyPageIndex += $scope.loadAgencyPaginationLimit;
+     }
    };
+   $scope.prevAgencyShow = function(){
+     if ($scope.loadAgencyPageIndex > 0) {
+       $scope.loadAgencyPageIndex -= $scope.loadFormatesPaginationLimit;
+     }
+   }
  // tables code end
 }]);

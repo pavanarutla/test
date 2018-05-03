@@ -55,9 +55,22 @@
 						</tbody>
 						</table>
 					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
+					<div class="container" ng-if="companyList.length > 0">
+						<ul class="pagination">
+							<li class="page-item" ng-click="PrevHoradingloadMore()">
+								 <a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex <= 0)}">Prev</a>
+							</li>
+							<li class = "pageResults">
+								{{loadHordingPageIndex + 1 + ' - ' + (loadHoardingPaginationLimit + loadHordingPageIndex > hoardinglistdata.length?hoardinglistdata.length:loadHoardingPaginationLimit + loadHordingPageIndex)}} of {{hoardinglistdata.length}}
+							</li>
+							<li class="page-item" ng-click="loadHording()">
+								<a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex + loadHoardingPaginationLimit >= hoardinglistdata.length)}">Next</a>
+							</li>
+						  </ul>
+					  </div>
+					<!-- <div layout="colmun" layout-align="end center" layout-margin>
 						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-					</div>
+					</div> -->
 				</div>
 				<!-- ========new code for tables html end ========= -->
 			</md-tab>

@@ -30,7 +30,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="user in userList | limitTo:limit">
+							<tr ng-repeat="user in userList | limitTo:registPaginationLimit:registPageIndex">
 							<td>{{user.username}}</td>
 							<td>{{user.email}}</td>
 							<td>{{user.phone}}</td>
@@ -60,9 +60,22 @@
 						</tbody>
 						</table>
 					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
+					<div class="container" ng-if="userList.length > 0">
+						<ul class="pagination">
+							<li class="page-item" ng-click="prevFeedsShow()">
+								 <a class="page-link" ng-class="{'disable-pagination': (registPageIndex <= 0)}">Prev</a>
+							</li>
+							<li class = "pageResults">
+								{{registPageIndex + 1 + ' - ' + (registPaginationLimit + registPageIndex > userList.length?userList.length:registPaginationLimit + registPageIndex)}} of {{userList.length}}
+							</li>
+							<li class="page-item" ng-click="nextFeedsShow()">
+								<a class="page-link" ng-class="{'disable-pagination': (registPageIndex + registPaginationLimit >= userList.length)}">Next</a>
+							</li>
+						  </ul>
+					  </div>
+					<!-- <div layout="colmun" layout-align="end center" layout-margin>
 						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="UserloadMore()">Load More!</button>
-					</div>
+					</div> -->
 				</div>
 				
 			</md-tab>
@@ -85,7 +98,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="agency in agencyList | limitTo:limit">
+							<tr ng-repeat="agency in agencyList | limitTo:loadFormatesPaginationLimit:loadAgencyPageIndex">
 							<td>{{agency.name}}</td>
 							<td>{{agency.email}</td>
 							<td>{{agency.phone}}</td>
@@ -99,9 +112,22 @@
 						</tbody>
 						</table>
 					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
+					<div class="container" ng-if="agencyList.length > 0">
+						<ul class="pagination">
+							<li class="page-item" ng-click="prevAgencyShow()">
+								 <a class="page-link" ng-class="{'disable-pagination': (loadAgencyPageIndex <= 0)}">Prev</a>
+							</li>
+							<li class = "pageResults">
+								{{loadAgencyPageIndex + 1 + ' - ' + (loadFormatesPaginationLimit + loadAgencyPageIndex > agencyList.length?agencyList.length:loadFormatesPaginationLimit + loadAgencyPageIndex)}} of {{agencyList.length}}
+							</li>
+							<li class="page-item" ng-click="nextagencyShow()">
+								<a class="page-link" ng-class="{'disable-pagination': (loadAgencyPageIndex + loadFormatesPaginationLimit >= agencyList.length)}">Next</a>
+							</li>
+						  </ul>
+					  </div>
+					<!-- <div layout="colmun" layout-align="end center" layout-margin>
 						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="AgencyloadMore()">Load More!</button>
-					</div>
+					</div> -->
 				</div>
 			</md-tab>
 		</md-tabs>

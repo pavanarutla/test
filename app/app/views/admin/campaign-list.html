@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="campagin in personalcampsdata | limitTo:limit">
+              <tr ng-repeat="campagin in personalcampsdata | limitTo:loadCampPaginationLimit:loadCampPageIndex">
                 <td>{{campagin.created_by}}</td>
                 <td>{{campagin.name}}</td>
                 <td>{{campagin.user_full_name}}</td>
@@ -52,9 +52,22 @@
             </tbody>
           </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
-          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        <div class="container" ng-show="personalcampsdata.length > 0">
+          <ul class="pagination">
+              <li class="page-item" ng-click="prevCamploadMore()">
+                   <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex <= 0)}">Prev</a>
+              </li>
+              <li class = "pageResults">
+                  {{loadCampPageIndex + 1 + ' - ' + (loadCampPaginationLimit + loadCampPageIndex > personalcampsdata.length?personalcampsdata.length:loadCampPaginationLimit + loadCampPageIndex)}} of {{personalcampsdata.length}}
+              </li>
+              <li class="page-item" ng-click="loadMoreCamp()">
+                  <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex + loadCampPaginationLimit >= personalcampsdata.length)}">Next</a>
+              </li>
+            </ul>
         </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        </div> -->
       </div>
     </md-tab>
 
@@ -79,7 +92,7 @@
                   </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in personalcampsdata | limitTo:limit">
+                <tr ng-repeat="list in personalcampsdata | limitTo:loadCampPaginationLimit:loadCampPageIndex">
                   <td>{{list.created_by}}</td>
                   <td>{{list.name}}</td>
                   <td>{{list.user_full_name}}</td>
@@ -99,11 +112,26 @@
               </tbody>
             </table>
           </div>
-          <div layout="colmun" layout-align="end center" layout-margin>
+         
+          <!-- <div layout="colmun" layout-align="end center" layout-margin>
             <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-          </div>
+          </div> -->
       </div>
     </md-tab>
+    
+    <div class="container" ng-show="personalcampsdata.length > 0">
+      <ul class="pagination">
+          <li class="page-item" ng-click="prevCamploadMore()">
+               <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex <= 0)}">Prev</a>
+          </li>
+          <li class = "pageResults">
+              {{loadCampPageIndex + 1 + ' - ' + (loadCampPaginationLimit + loadCampPageIndex > personalcampsdata.length?personalcampsdata.length:loadCampPaginationLimit + loadCampPageIndex)}} of {{personalcampsdata.length}}
+          </li>
+          <li class="page-item" ng-click="loadMoreCamp()">
+               <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex + loadCampPaginationLimit >= personalcampsdata.length)}">Next</a>
+          </li>
+        </ul>
+    </div>
 
     <md-tab label="Closed">
       <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
@@ -126,7 +154,7 @@
                 </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="list in personalcampsdata | limitTo:limit">
+              <tr ng-repeat="list in personalcampsdata | limitTo:loadCampPaginationLimit:loadCampPageIndex">
                 <td>{{list.created_by}}</td>
                 <td>{{list.name}}</td>
                 <td>{{list.user_full_name}}</td>
@@ -146,9 +174,22 @@
             </tbody>
           </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
-          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        <div class="container" ng-show="personalcampsdata.length > 0">
+          <ul class="pagination">
+              <li class="page-item" ng-click="prevCamploadMore()">
+                   <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex <= 0)}">Prev</a>
+              </li>
+              <li class = "pageResults">
+                  {{loadCampPageIndex + 1 + ' - ' + (loadCampPaginationLimit + loadCampPageIndex > personalcampsdata.length?personalcampsdata.length:loadCampPaginationLimit + loadCampPageIndex)}} of {{personalcampsdata.length}}
+              </li>
+              <li class="page-item" ng-click="loadMoreCamp()">
+                  <a class="page-link" ng-class="{'disable-pagination': (loadCampPageIndex + loadCampPaginationLimit >= personalcampsdata.length)}">Next</a>
+              </li>
+            </ul>
         </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        </div> -->
       </div>
     </md-tab>
   </md-tabs>

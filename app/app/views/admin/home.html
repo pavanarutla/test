@@ -34,7 +34,7 @@
             <h4>No new feeds. Please come back later.</h4>
           </div>
         </div>
-        <div layout="column" layout-margin layout-padding ng-repeat="request in requestList">
+        <div layout="column" layout-margin layout-padding ng-repeat="request in requestList | limitTo:loadFeedsPaginationLimit:loadFeedsPageIndex">
           <div layout="row" layout-fill layout-margin style="background-color: #a3c4e8">
             <div layout="column" layout-align="center center" flex="10">
               <img ng-src="{{request.user_avatar}}" class="md-avatar face" ng-if="request.user_avatar">
@@ -53,6 +53,19 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="container" ng-if="requestList.length > 0">
+          <ul class="pagination">
+              <li class="page-item" ng-click="prevFeedsShow()">
+                   <a class="page-link" ng-class="{'disable-pagination': (loadFeedsPageIndex <= 0)}">Prev</a>
+              </li>
+              <li class = "pageResults">
+                  {{loadFeedsPageIndex + 1 + ' - ' + (loadFeedsPaginationLimit + loadFeedsPageIndex > requestList.length?requestList.length:loadFeedsPaginationLimit + loadFeedsPageIndex)}} of {{requestList.length}}
+              </li>
+              <li class="page-item" ng-click="nextFeedsShow()">
+                  <a class="page-link" ng-class="{'disable-pagination': (loadFeedsPageIndex + loadFeedsPaginationLimit >= requestList.length)}">Next</a>
+              </li>
+            </ul>
         </div>
         <!-- <div layout="column" layout-margin>
           <md-button class="md-raised md-primary" layout-fill ng-click='loadMore()'>Show More</md-button>

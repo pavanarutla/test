@@ -34,6 +34,18 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     AdminCampaignService.getAllCampaignRequests().then(function(result){
       $scope.requestList = result;
     });
+    $scope.loadFeedsPaginationLimit = 5;
+    $scope.loadFeedsPageIndex = 0;
+    $scope.nextFeedsShow = function() {
+      if ($scope.loadFeedsPageIndex + $scope.loadFeedsPaginationLimit < $scope.requestList.length) {
+        $scope.loadFeedsPageIndex += $scope.loadFeedsPaginationLimit;
+      }
+    };
+    $scope.prevFeedsShow = function(){
+      if ($scope.loadFeedsPageIndex > 0) {
+        $scope.loadFeedsPageIndex -= $scope.loadFeedsPaginationLimit;
+      }
+    }
     /*
     ======== Campaign requests ends =======
     */

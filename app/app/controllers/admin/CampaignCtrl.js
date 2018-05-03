@@ -175,11 +175,18 @@ $scope.headers = Object.keys($scope.cruises[0]);
 
   // tables code start
   var vm = $scope;
-  vm.limit = 10;
-  $scope.loadMore = function() {
-    var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
+  vm.loadCampPaginationLimit = 10;
+  vm.loadCampPageIndex = 0;
+  $scope.loadMoreCamp = function() {
+    if (vm.loadCampPageIndex + vm.loadCampPaginationLimit < vm.personalcampsdata.length) {
+      vm.loadCampPageIndex += vm.loadCampPaginationLimit;
+    }
   };
+  vm.prevCamploadMore = function(){
+    if (vm.loadCampPageIndex > 0) {
+      vm.loadCampPageIndex -= vm.loadCampPaginationLimit;
+    }
+  }
 // tables code end
   /*
   //////// Floating campaign section
