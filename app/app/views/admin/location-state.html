@@ -40,7 +40,7 @@
     </div> -->
     <!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
-        <div class="table-responsive">    
+        <div class="table-responsive">  
 			<table class="table table-striped table-bordered add-countery">
 				<thead>
 					<tr>
@@ -50,7 +50,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="state in stateareaList | limitTo:limit">
+				<tr ng-repeat="state in stateareaList | limitTo:locStatePaginationLimit:pageIndex">
 					<td>{{state.country_name}}</td>
 					<td>{{state.name}}</td>
 					<td>
@@ -66,8 +66,15 @@
         </div> -->
         <div class="container">
             <ul class="pagination">
-                <li class="page-item" ng-click="prevloadMore()"><a class="page-link">Previous</a></li>
-                <li class="page-item" ng-click="StateloadMore()"><a class="page-link">Next</a></li>
+                <li class="page-item" ng-click="prevloadMore()">
+                     <a class="page-link" ng-class="{'disable-pagination': (pageIndex <= 0)}">Previous</a>
+                </li>
+                <li>
+                    {{pageIndex + 1 + ' - ' + (locStatePaginationLimit + pageIndex > stateareaList.length?stateareaList.length:locStatePaginationLimit + pageIndex)}} of {{stateareaList.length}}
+                </li>
+                <li class="page-item" ng-click="StateloadMore()">
+                    <a class="page-link" ng-class="{'disable-pagination': (pageIndex + locStatePaginationLimit >= stateareaList.length)}">Next</a>
+                </li>
               </ul>
           </div>
     </div>

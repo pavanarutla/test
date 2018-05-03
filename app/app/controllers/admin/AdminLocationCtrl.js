@@ -205,17 +205,18 @@ $scope.CountryloadMore = function() {
 
    // tables cod load more e start
     var mv = $scope;
-    mv.limit = 5;
+    mv.locStatePaginationLimit = 8;
+    mv.pageIndex = 0;
     $scope.StateloadMore = function() {
-      var increamented = vm.limit + 5;
-      mv.limit = increamented > $scope.stateareaList.length ? $scope.stateareaList.length : increamented;
+      if (mv.pageIndex + mv.locStatePaginationLimit < mv.stateareaList.length) {
+        mv.pageIndex += mv.locStatePaginationLimit;
+      }
     };
     $scope.prevloadMore = function(){
-      var decrement = vm.limit - 5;
-      if(decrement == 0){
-        
+      console.log(mv.pageIndex - mv.locStatePaginationLimit);
+      if (mv.pageIndex > 0) {
+        mv.pageIndex -= mv.locStatePaginationLimit;
       }
-      mv.limit = decrement > $scope.stateareaList.length ? $scope.stateareaList.length : decrement;
     }
   // tables code end
   // tables city start
