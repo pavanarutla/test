@@ -165,19 +165,43 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   ======== Hoarding Companies ========
   */
   // tables code for load more  start
-  var vm = $scope;
-  vm.limit = 10;
-  $scope.companiesloadMore = function() {
-    var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.companyList.length ? $scope.companyList.length : increamented;
+  // var vm = $scope;
+  // vm.limit = 10;
+  // $scope.companiesloadMore = function() {
+  //   var increamented = vm.limit + 5;
+  //   vm.limit = increamented > $scope.companyList.length ? $scope.companyList.length : increamented;
+  // };
+  $scope.companyPaginationLimit = 6;
+  $scope.companyPageIndex = 0;
+  $scope.nextcompanies = function() {
+    if ($scope.companyPageIndex + $scope.companyPaginationLimit < $scope.companyList.length) {
+      $scope.companyPageIndex += $scope.companyPaginationLimit;
+    }
   };
+  $scope.Prevcompanies = function(){
+    if ($scope.companyPageIndex > 0) {
+      $scope.companyPageIndex -= $scope.companyPaginationLimit;
+    }
+  }
 // tables code end
 // tables code for load more  start
-  var vm = $scope;
-  vm.limit = 10;
-  $scope.HoardingloadMore = function() {
-    var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
+$scope.hordCompanyPaginationLimit = 6;
+  $scope.hordCompanyPageIndex = 0;
+  $scope.nexthording = function() {
+    if ($scope.hordCompanyPageIndex + $scope.hordCompanyPaginationLimit < $scope.hoardingCompany.length) {
+      $scope.hordCompanyPageIndex += $scope.hordCompanyPaginationLimit;
+    }
   };
+  $scope.Prevhording = function(){
+    if ($scope.hordCompanyPageIndex > 0) {
+      $scope.hordCompanyPageIndex -= $scope.hordCompanyPaginationLimit;
+    }
+  }
+// var vm = $scope;
+  // vm.limit = 10;
+  // $scope.HoardingloadMore = function() {
+  //   var increamented = vm.limit + 5;
+  //   vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
+  // };
 // tables code end
 });

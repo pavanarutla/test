@@ -175,7 +175,7 @@ $scope.headers = Object.keys($scope.cruises[0]);
 
   // tables code start
   var vm = $scope;
-  vm.loadCampPaginationLimit = 10;
+  vm.loadCampPaginationLimit = 8;
   vm.loadCampPageIndex = 0;
   $scope.loadMoreCamp = function() {
     if (vm.loadCampPageIndex + vm.loadCampPaginationLimit < vm.personalcampsdata.length) {

@@ -39,7 +39,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="company in companyList | limitTo:limit">
+							<tr ng-repeat="company in companyList | limitTo:companyPaginationLimit:companyPageIndex">
 							<td>{{company.name}}</td>
 							<td>{{company.client_type}}</td>
 							<td>{{company.person_name}}</td>
@@ -57,14 +57,14 @@
 					</div>
 					<div class="container" ng-if="companyList.length > 0">
 						<ul class="pagination">
-							<li class="page-item" ng-click="PrevHoradingloadMore()">
-								 <a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex <= 0)}">Prev</a>
+							<li class="page-item" ng-click="Prevcompanies()">
+								 <a class="page-link" ng-class="{'disable-pagination': (companyPageIndex <= 0)}">Prev</a>
 							</li>
 							<li class = "pageResults">
-								{{loadHordingPageIndex + 1 + ' - ' + (loadHoardingPaginationLimit + loadHordingPageIndex > hoardinglistdata.length?hoardinglistdata.length:loadHoardingPaginationLimit + loadHordingPageIndex)}} of {{hoardinglistdata.length}}
+								{{companyPageIndex + 1 + ' - ' + (companyPaginationLimit + companyPageIndex > companyList.length?companyList.length:companyPaginationLimit + companyPageIndex)}} of {{companyList.length}}
 							</li>
-							<li class="page-item" ng-click="loadHording()">
-								<a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex + loadHoardingPaginationLimit >= hoardinglistdata.length)}">Next</a>
+							<li class="page-item" ng-click="nextcompanies()">
+								<a class="page-link" ng-class="{'disable-pagination': (companyPageIndex + companyPaginationLimit >= companyList.length)}">Next</a>
 							</li>
 						  </ul>
 					  </div>
@@ -94,7 +94,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="hoarding in hoardingCompany | limitTo:limit">
+								<tr ng-repeat="hoarding in hoardingCompany | limitTo:hordCompanyPaginationLimit:hordCompanyPageIndex">
 								<td>{{hoarding.name}}</td>
 								<td>{{hoarding.owner}}</td>
 								<td>{{hoarding.email}}</td>
@@ -109,9 +109,22 @@
 							</tbody>
 						</table>
 					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
+					<div class="container" ng-if="hoardingCompany.length > 0">
+						<ul class="pagination">
+							<li class="page-item" ng-click="Prevhording()">
+								 <a class="page-link" ng-class="{'disable-pagination': (hordCompanyPageIndex <= 0)}">Prev</a>
+							</li>
+							<li class = "pageResults">
+								{{hordCompanyPageIndex + 1 + ' - ' + (hordCompanyPaginationLimit + hordCompanyPageIndex > hoardingCompany.length?hoardingCompany.length:hordCompanyPaginationLimit + hordCompanyPageIndex)}} of {{hoardingCompany.length}}
+							</li>
+							<li class="page-item" ng-click="nexthording()">
+								<a class="page-link" ng-class="{'disable-pagination': (hordCompanyPageIndex + hordCompanyPaginationLimit >= hoardingCompany.length)}">Next</a>
+							</li>
+						  </ul>
+					  </div>
+					<!-- <div layout="colmun" layout-align="end center" layout-margin>
 						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="HoardingloadMore()">Load More!</button>
-					</div>
+					</div> -->
 				</div>
 				<!-- ========new code for tables html end ========= -->
 			</md-tab>
