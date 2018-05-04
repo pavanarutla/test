@@ -66,7 +66,6 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   ProductService.getFormatList().then(function(result){
     $scope.gridFormats.data = result;
     $scope.formatList = result;
-    console.log($scope.formatList,"$scope.formatList");
   });
 
   $scope.format = {};
@@ -272,6 +271,27 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
         toastr.error(result.message);
       }
     });
+  }
+
+  $scope.simulateQuery = false;
+  $scope.isDisabled    = false;
+  $scope.querySearch   = querySearch;
+  $scope.selectedItemChange = selectedItemChange;
+  $scope.searchTextChange   = searchTextChange;
+
+
+  function querySearch (query) {
+    return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  function searchTextChange(text) {
+    //console.log('Text changed to ' + text);
+  }
+
+  function selectedItemChange(item) {
+    //console.log('Item changed to ' + JSON.stringify(item));
   }
 
   /*

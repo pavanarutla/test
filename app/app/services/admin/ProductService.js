@@ -25,6 +25,11 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/format/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			searchProducts: function(word){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/search-products/' + word).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}
