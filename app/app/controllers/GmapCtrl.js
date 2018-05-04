@@ -964,6 +964,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.viewProduct = function(product){
+        $scope.shortlisthide = true;
         $scope.product.image = config.serverUrl + product.image;
         $scope.product.siteNo = product.siteNo;
         $scope.product.panelSize = product.panelSize;
