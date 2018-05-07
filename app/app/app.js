@@ -49,11 +49,6 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .state('index.pricing', {
-      url: 'pricing',
-      templateUrl: 'views/pricing.html',
-      controller: 'PricingCtrl'
-    })
     .state('index.suggest_campaign', {
       url: 'suggest-campaign',
       templateUrl: 'views/suggest-a-campaign.html',
@@ -84,10 +79,6 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/user-profile.html',
       controller: 'UserProfileCtrl'
     })
-    .state('index.agency-rofile', {
-      url: 'agency-profile',
-      templateUrl: 'views/agency-profile.html'
-    })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -107,7 +98,7 @@ var app = angular.module('bbManager', [
         $scope.goToLogin = function () {
           $location.path('/');
           $mdDialog.show({
-            templateUrl: 'views/signIn.html',
+            templateUrl: 'views/sign-in.html',
             fullscreen: true
           });
         }
@@ -139,11 +130,6 @@ var app = angular.module('bbManager', [
       controller: 'AdminFeedsCtrl',
       title: 'Feeds'
     })
-    .state('admin.campaign-suggestion', {
-      url: '/campaign-suggestion',
-      templateUrl: 'views/admin/campaignsugg.html',
-      title: 'Campaign Suggestion'
-    })
     .state('admin.campaign', {
       url: '/campaign',
       templateUrl: 'views/admin/campaign-list.html',
@@ -154,14 +140,6 @@ var app = angular.module('bbManager', [
       url: '/campaign-proposal-summary/{campaignId}',
       templateUrl: 'views/admin/campaign-proposal-summary.html',
       controller: 'CampaignProposalCtrl',
-    })
-    .state('admin.campaign-running-summary', {
-      url: '/campaign-running-summary',
-      templateUrl: 'views/admin/campaignrunningsummary.html'
-    })
-    .state('admin.campaign-closed-summary', {
-      url: '/campaign-closed-summary',
-      templateUrl: 'views/admin/campaignclosedsummary.html'
     })
     .state('admin.registration', {
       url: '/registration',
@@ -214,14 +192,14 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/subscribers.html',
       controller: 'subscribersCtrl'
     })
-    .state('admin.queries', {
+    .state('admin.user-queries', {
       url: '/queries',
-      templateUrl: 'views/admin/queries.html',
+      templateUrl: 'views/admin/user-queries.html',
       controller: 'queriesCtrl'
     })
-    .state('admin.callcenterinfo', {
-      url: '/callcenterinfo',
-      templateUrl: 'views/admin/callcenterinfo.html',
+    .state('admin.callback-requests', {
+      url: '/callback-requests',
+      templateUrl: 'views/admin/callback-requests.html',
       controller: 'callCenterCtrl'
     })
     .state('admin.floating-campaign', {
@@ -261,9 +239,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/suggest-products.html',
       controller: 'OwnerFeedsCtrl'
     })
-    .state('owner.hoardinglist', {
-      url: '/hoardinglist',
-      templateUrl: 'views/owner/hoardinglist.html',
+    .state('owner.hoarding-list', {
+      url: '/hoarding-list',
+      templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerFeedsCtrl'
     })
     .state('owner.settings', {
@@ -404,7 +382,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
             return false;
@@ -415,7 +393,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
             return false;
@@ -433,7 +411,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
           }

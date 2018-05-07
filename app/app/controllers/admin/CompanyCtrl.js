@@ -12,7 +12,9 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
 

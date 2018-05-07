@@ -114,21 +114,7 @@ app.controller('bbMngrCtrl',
 
     $scope.showTabDialog = function (ev) {
       $mdDialog.show({
-        templateUrl: 'views/signIn.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose:true,
-      })
-    };
-    $scope.showVideo = function (ev) {
-      $mdDialog.show({
-        templateUrl: 'views/video.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true,
-      })
-    };
-    $scope.shareForm = function (ev) {
-      $mdDialog.show({
-        templateUrl: 'views/shareform.html',
+        templateUrl: 'views/sign-in.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
       })

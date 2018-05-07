@@ -151,7 +151,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     ]
     $scope.viewImage = function () { 
     $mdDialog.show({
-      templateUrl: 'views/owner/viewimage.html',
+      templateUrl: 'views/owner/view-image.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })

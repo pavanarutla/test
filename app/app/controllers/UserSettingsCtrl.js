@@ -37,7 +37,7 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
             $mdDialog.hide();
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
           }

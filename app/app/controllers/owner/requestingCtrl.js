@@ -10,7 +10,7 @@ app.controller('requestHoarding', function ($scope,$mdDialog,$mdSidenav,$window)
 
     $scope.viewImage = function () { 
         $mdDialog.show({
-        templateUrl: 'views/owner/viewimage.html',
+        templateUrl: 'views/owner/view-image.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose: true
         })

@@ -30,7 +30,7 @@ app.service('LoadingInterceptor',
               toastr.error('Your session has expired. Please login again.');
               $timeout(function(){
                 $mdDialog.show({
-                  templateUrl: 'views/signIn.html',
+                  templateUrl: 'views/sign-in.html',
                   fullscreen: true
                 }).then(function(){
                   localStorage.signInOpened = false;

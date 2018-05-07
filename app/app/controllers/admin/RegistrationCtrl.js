@@ -6,7 +6,9 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
     $mdDialog.show({
       templateUrl: 'views/admin/registration-popup.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
 
