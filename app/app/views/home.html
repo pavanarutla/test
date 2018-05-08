@@ -511,14 +511,14 @@
 				</div>
 
 			</div>
-			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class="contsr" layout-matgin layout-padding>
+			<div layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100" class="contsr" layout-margin layout-padding>
 				<div layout="column" layout-sm="column" class="confor md-whiteframe-2dp">
-					<form name="sendquery" novalidate>
-						<input type="hidden" ng-model="query.type" value="3" />
+					<form name="forms.sendQueryForm" novalidate>
+						<input type="hidden" ng-model="query.type" ng-init="query.type = 3;" />
 						<md-input-container class="md-block">
 							<label>Name</label>
-							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" />
-							<div ng-messages="sendquery.queryname.$error">
+							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" id="query_name"/>
+							<div ng-messages="forms.sendQueryForm.queryname.$error">
 								<div class="alret alert-danger" ng-message="required">Name is required.</div>
 								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
 							</div>
@@ -527,9 +527,9 @@
 						<md-input-container class="md-block">
 							<label> Email</label>
 							<!-- <input ng-model="query.email" required="required"  /> -->
-							<input ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							<input id="query_email" ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
 							/>
-							<div ng-messages="sendquery.queryemail.$error">
+							<div ng-messages="forms.sendQueryForm.queryemail.$error">
 							  <div class="alret alert-danger" ng-message="required">Email is required.</div>
 							  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
 							  <div ng-message="pattern">Enter a valied email</div>
@@ -537,19 +537,19 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Company Name</label>
-							<input ng-model="query.companyName" />
+							<input ng-model="query.companyName" id="query_company_name"/>
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Message</label>
-							<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required"  />
-							<div ng-messages="sendquery.querymsg.$error">
+							<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required" id="query_message"/>
+							<div ng-messages="forms.sendQueryForm.querymsg.$error">
 								<div class="alret alert-danger" ng-message="required">message is required.</div>
 								<div ng-message="maxlength">message shouldn't exede 150 characters. </div>
 								<div ng-message="minlength">message should be 10 characters</div>
 							  </div>
 						</md-input-container>
 						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
+							<md-button class="md-raised md-primary forsubm" ng-disabled="forms.sendQueryForm.$invalid" ng-click="sendQuery()">Send Message</md-button>
 						</div>
 					</form>
 				</div>
@@ -591,10 +591,10 @@
 						</md-input-container>
 					</form> -->
 					<div class="subscribe-form">
-						<form action="" method="post" name="form_73402341704446"  accept-charset="utf-8" class="ng-pristine ng-valid" >
-							<input type="hidden" name="formID" value="73402341704446">
-							<input type="email" placeholder="Enter Your Email Address" id="input_3" name="q3_email" required="">
-							<button type="submit" id="input_2">GO</button>
+						<form name="forms.sendSubscriberForm" >
+							<input type="hidden" ng-model = "subscriberData.type" ng-init = "subscriberData.type = 1;" />
+							<input type= "email" ng-model = "subscriberData.email" placeholder = "Enter Your Email Address" id = "subscribers_email" name = "subscriber_email" required>
+							<button ng-click="subscribe()">GO</button>
 						</form>
 					</div>
 				</div>

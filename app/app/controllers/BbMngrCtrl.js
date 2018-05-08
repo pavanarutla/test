@@ -2,6 +2,8 @@ app.controller('bbMngrCtrl',
   function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
 
+    $scope.forms = {};
+
     if(localStorage.isAuthenticated && localStorage.loggedInUser){
       $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
@@ -215,15 +217,17 @@ app.controller('bbMngrCtrl',
 
   $scope.query={};
   $scope.sendQuery = function () {
-    ContactService.sendQuery($scope.query).then(function (response) {
+    ContactService.sendQuery($scope.query).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
       }
       else{
         toastr.error(result.message);
       }
+      $scope.query = {};
+      $scope.forms.sendQueryForm.$setPristine();
+      $scope.forms.sendQueryForm.$setUntouched();
     });
-    $scope.query={};
   }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
   //   $scope.feedBackData = response;
@@ -240,17 +244,20 @@ app.controller('bbMngrCtrl',
     });
     angular.element($('#subscriber-email')).val('');
   };
+
   $scope.showContact = function () {
     $mdDialog.show({
       templateUrl: 'views/show-contact.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
     
   $scope.callbackRequest = {};
   $scope.requestCallBack = function () {
-    ContactService.requestCallBack(callbackRequest).then(function (response) {
+    ContactService.requestCallBack($scope.callbackRequest).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
         $mdDialog.hide();
