@@ -731,13 +731,15 @@ app.controller('GmapCtrl',
         concentricMarkers = {};
         var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
         MapService.filterProducts(filterObj).then(function (markers) {
+          //console.log("filter products",marksers)
           _.each(markersOnMap, function(v, i){
             v.setMap(null);
             $scope.Clusterer.removeMarker(v);
           });
           markersOnMap = [];
           $scope.filteredMarkers = markers;
-          $scope.processMarkers();
+          console.log("apply filter markers ",$scope.filteredMarkers)
+          $scope.processMarkers(); 
           if(markers.length > 0){
             var bounds = new google.maps.LatLngBounds();
             _.each(markersOnMap, function (v, i) {
