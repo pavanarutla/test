@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 
-<div  layout="column" ng-cloak ng-controller="bbMngrCtrl">
+<div  layout="column" ng-cloak>
   <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
     <div class="md-toolbar-tools">
       <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
@@ -40,7 +40,8 @@
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-              <img ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+              <img ng-src="assets/images/man.png" ng-if="!loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
+              <img ng-src="{{serverUrl + loggedInUser.profile_pic}}" ng-if="loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
