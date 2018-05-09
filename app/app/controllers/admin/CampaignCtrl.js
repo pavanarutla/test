@@ -146,6 +146,17 @@ $scope.headers = Object.keys($scope.cruises[0]);
   AdminCampaignService.getAllCampaigns().then(function(result){
     //$scope.gridPreLaunch.data = result;
      $scope.personalcampsdata = result;
+     $scope.runningCampaigns = [];
+     $scope.closedCampaigns = [];
+     for(var i = 0; i<result.length; i++){
+       var runItem = result[i];
+       if(runItem.status == 7){
+        $scope.runningCampaigns.push(runItem);
+       }
+       if(runItem.status == 9){
+        $scope.closedCampaigns.push(runItem);
+       }
+     }
   });
 
   /*
@@ -174,17 +185,16 @@ $scope.headers = Object.keys($scope.cruises[0]);
 
 
   // tables code start
-  var vm = $scope;
-  vm.loadCampPaginationLimit = 8;
-  vm.loadCampPageIndex = 0;
+  $scope.loadCampPaginationLimit = 8;
+  $scope.loadCampPageIndex = 0;
   $scope.loadMoreCamp = function() {
-    if (vm.loadCampPageIndex + vm.loadCampPaginationLimit < vm.personalcampsdata.length) {
-      vm.loadCampPageIndex += vm.loadCampPaginationLimit;
+    if ($scope.loadCampPageIndex + $scope.loadCampPaginationLimit < $scope.personalcampsdata.length) {
+      $scope.loadCampPageIndex += $scope.loadCampPaginationLimit;
     }
   };
-  vm.prevCamploadMore = function(){
-    if (vm.loadCampPageIndex > 0) {
-      vm.loadCampPageIndex -= vm.loadCampPaginationLimit;
+  $scope.prevCamploadMore = function(){
+    if ($scope.loadCampPageIndex > 0) {
+      $scope.loadCampPageIndex -= $scope.loadCampPaginationLimit;
     }
   }
 // tables code end
@@ -197,6 +207,47 @@ $scope.headers = Object.keys($scope.cruises[0]);
     var newItemNo = $scope.formRows.length + 2;
     $scope.formRows.push({'formId' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
   };
+  $scope.searchCamp = "";
+  $scope.searchCampaign = function(){
+    $scope.loadCampPageIndex = 0;
+    AdminCampaignService.searchCampaign($scope.searchCamp).then(function(result){
+      $scope.personalcampsdata = result;
+      if(result.length == 0){
+        $scope.eamptyCampaign = "sorry we don't have campaigns with this name!"
+      }
+    },function(error){
+      toastr.error("somthing went wrong please try again later");
+    })
+  }
+  //Running campaigns section
+
+  $scope.loadRunCampPaginationLimit = 8;
+  $scope.loadRunCampPageIndex = 0;
+  $scope.loadMoreRunCamp = function() {
+    if ($scope.loadCampPageIndex + $scope.loadCampPaginationLimit < $scope.runningCampaigns.length) {
+      $scope.loadCampPageIndex += $scope.loadCampPaginationLimit;
+    }
+  };
+  $scope.prevRunloadMore = function(){
+    if ($scope.loadCampPageIndex > 0) {
+      $scope.loadCampPageIndex -= $scope.loadCampPaginationLimit;
+    }
+  }
+
+// closed campaigns
+
+$scope.loadCloseCampPaginationLimit = 8;
+$scope.loadCloseCampPageIndex = 0;
+$scope.loadMoreClosedCamp = function() {
+  if ($scope.loadCloseCampPageIndex + $scope.loadCloseCampPaginationLimit < $scope.closedCampaigns.length) {
+    $scope.loadCloseCampPageIndex += $scope.loadCloseCampPaginationLimit;
+  }
+};
+$scope.prevCloseCamploadMore = function(){
+  if ($scope.loadCloseCampPageIndex > 0) {
+    $scope.loadCloseCampPageIndex -= $scope.loadCloseCampPaginationLimit;
+  }
+}
 
   $scope.generateFloatingCampaignPdf = function(){
     Upload.upload({
