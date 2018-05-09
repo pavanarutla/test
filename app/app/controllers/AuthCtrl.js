@@ -26,7 +26,8 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				}
 			}
 			else if(res.data.status == 0){
-				$scope.signInUserError = res.data.message;
+				// $scope.signInUserError = res.data.message;
+				toastr.error(res.data.message);
 			}
 			//$mdDialog.hide();
 		}).catch(function (error) {
