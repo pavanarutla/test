@@ -53,10 +53,10 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	};
 
 	$scope.showForgotPasswordDialog = function () {
-		$scope.userForm = false;
+		// $scope.userForm = false;
 		$scope.forgotPasswordpage = true;
-		$scope.agencyForm = false;
-		$scope.userAgencyHeader = false;
+		// $scope.agencyForm = false;
+		// $scope.userAgencyHeader = false;
 	}
 	//form
 	$scope.currentNavItem = 'users';

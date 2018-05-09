@@ -114,11 +114,12 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
     };
 
-    $scope.showTabDialog = function (ev) {
+    $scope.showSignInDialog = function (ev) {
       $mdDialog.show({
         templateUrl: 'views/sign-in.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
+        controller: 'AuthCtrl'
       })
     };
 
