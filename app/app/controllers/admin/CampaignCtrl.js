@@ -25,9 +25,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
               toastr.success(result.message);
               $mdDialog.hide();
             }
-            else{
-              toastr.error(result.message);
+            else if(result.status == 0){
+              $scope.campaignDetailsErrorEessages = result.message;
             }
+          },function(result){
+              $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
           });
         }
         $scope.close = function(){

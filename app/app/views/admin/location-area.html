@@ -75,8 +75,15 @@
             </div>
             
         </div>
+        <div class = "serverErrors" ng-if ="areaErrors && !areaErrors.length == 0">
+                <ul>
+                    <li ng-repeat="error in areaErrors">
+                        {{error}}
+                    </li>
+                </ul>
+            </div>
         <div layout="row" flex layout-align="center center" layout-margin>
-            <md-button Class="md-raised md-primary" type="submit" ng-click="saveArea()">SUBMIT</md-button>
+            <md-button Class="md-raised md-primary" type="submit" ng-disabled="areaform.$invalid" ng-click="saveArea()">SUBMIT</md-button>
             <md-button Class="md-raised" ng-click="resetAreaForm()">CANCEL</md-button>
         </div>
     </form>

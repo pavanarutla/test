@@ -68,9 +68,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.comapnyErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again later!");
     });
   }
 
@@ -155,9 +157,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(data.message);
+      else if(result.status == 0){
+        $scope.addHordingErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again");
     });
   }
   $scope.deleteHoardingCompany = function(row){

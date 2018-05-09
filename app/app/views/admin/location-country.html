@@ -6,23 +6,30 @@
 		</div>
 	</div>
 
-	<form  name="country" novalidate style="margin-top:25px">
-		<div layout="row" layout-align="center center">
-			<div layout="column" layout-margin flex="50">
+	<form  name="country" novalidate>
+		<div layout="column" layout-margin layout-padding flex="50">
+			<div layout="column" layout-margin layout-padding flex="50">
 				<md-input-container class="md-block">
 					<label>Enter Country Name</label>
 					<input ng-model="country.name" type="text" name="countryname" required/>
 					<input type="hidden" name="country_id" ng-model="country.id" />
-					<div ng-messages="country.countryname.$error">
-					<p ng-message="required">Please complete this field.</p>
+					<div ng-messages="country.countryname.$error" ng-if = "!$scope.country.name == null">
+						<p ng-message="required" >Please complete this field.</p>
 					</div>
 					<!-- <div ng-messages="country.$error">
 						<div ng-message="required">Country Name is required</div>
 					</div> -->
 				</md-input-container>
+				<div class = "serverErrors" ng-if ="saveCountryErrors && !saveCountryErrors.length == 0">
+					<ul>
+						<li ng-repeat="error in saveCountryErrors">
+							{{error}}
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div layout="column" layout-margin >
-				<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
+			<div layout="row">
+				<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()" ng-disabled="country.$invalid">SUBMIT</md-button>
 				<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
 			</div>
 		</div>

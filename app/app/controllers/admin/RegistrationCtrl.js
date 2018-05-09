@@ -141,6 +141,7 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
   */
   $scope.addUser = function () {
     AdminUserService.saveUser($scope.user).then(function(result){
+      console.log("working")
       if(result.status == 1){
         AdminUserService.getUsers().then(function (response) {    
           $scope.gridUsers.data = response;
@@ -148,11 +149,11 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
         $mdDialog.hide();
         toastr.success('User has been created successfully.');
       }
-      else{
-        toastr.error(result.message);
-      }
-    });
-  }
+      else if(result.status == 0) {
+          $scope.registerUserErrors = result.message;
+        }
+          });
+        }
   /* 
   ======== Adding New User ends ========
   */
@@ -208,11 +209,13 @@ app.controller('AdminRegistrationCtrl', function ($scope, $mdDialog, $http, $roo
           $scope.gridAgency.data = response;
         });
         $mdDialog.hide();
-        toastr.success('Agency has been successfully created.');
+        toastr.success(result.message);
       }
-      else{
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.addAgencyErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong try agin later!");
     });
   }
 

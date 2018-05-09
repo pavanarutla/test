@@ -517,10 +517,11 @@
 						<input type="hidden" ng-model="query.type" ng-init="query.type = 3;" />
 						<md-input-container class="md-block">
 							<label>Name</label>
-							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" id="query_name"/>
+							<input ng-model="query.name" name="queryname" required="required" minlength="5" maxlength="30" id="query_name"/>
 							<div ng-messages="forms.sendQueryForm.queryname.$error">
 								<div class="alret alert-danger" ng-message="required">Name is required.</div>
-								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
+								<div ng-message="maxlength">Name shouldn't exceed 30 characters. </div>
+								<div ng-message="minlength">Name should contain atleast 5 charecters. </div>
 							</div>
 
 						</md-input-container>
@@ -548,6 +549,13 @@
 								<div ng-message="minlength">message should be 10 characters</div>
 							  </div>
 						</md-input-container>
+						<div class="registeredEmailErrors" ng-if ="sendQueryErrors && !sendQueryErrors.length == 0">
+								<ul>
+									<li ng-repeat="error in sendQueryErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
 						<div class="forsubmCon">
 							<md-button class="md-raised md-primary forsubm" ng-disabled="forms.sendQueryForm.$invalid" ng-click="sendQuery()">Send Message</md-button>
 						</div>

@@ -17,6 +17,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				localStorage.isAuthenticated = true;
 				localStorage.loggedInUser = JSON.stringify(userData);
 				toastr.success('You have successfully signed in!');
+				$mdDialog.hide();
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
@@ -24,10 +25,10 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 					$state.go("index.location", null);
 				}
 			}
-			else {
-				toastr.error(res.data.message);
+			else if(res.data.status == 0){
+				$scope.signInUserError = res.data.message;
 			}
-			$mdDialog.hide();
+			//$mdDialog.hide();
 		}).catch(function (error) {
 			toastr.error(error.data.message, error.status);
 			$mdDialog.hide();

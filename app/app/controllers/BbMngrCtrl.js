@@ -221,13 +221,16 @@ app.controller('bbMngrCtrl',
     ContactService.sendQuery($scope.query).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.sendQueryErrors = null;
       }
-      else{
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.sendQueryErrors = result.message;
       }
       $scope.query = {};
       $scope.forms.sendQueryForm.$setPristine();
       $scope.forms.sendQueryForm.$setUntouched();
+    },function(error){
+      toastr.error("somthing went wrong please try agin later");
     });
   }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {

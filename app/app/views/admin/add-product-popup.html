@@ -199,6 +199,13 @@
 					</li>
 				</ul>
 			</div>
+			<div class = "serverErrors" ng-if ="addProductErrors">
+					<ul>
+						<li ng-repeat="error in addProductErrors">
+							{{error}}
+						</li>
+					</ul>
+				</div>
 				<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
