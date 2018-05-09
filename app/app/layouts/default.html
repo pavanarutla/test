@@ -40,7 +40,8 @@
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-              <img ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+              <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+              <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
@@ -90,32 +91,27 @@
 
   </md-sidenav>
   <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right">
-    
     <md-content>
       <ul style="padding:0px;margin:0px">
         <li>
           <div class="notification_header">
-            <h3>You have 2 new notification  <span style="    margin: 0 0 0 40px;">
+            <h3>You have 2 new notification<span style="margin: 0 0 0 40px;">
               <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
                 <md-icon class="md-default-theme" ><i class="material-icons" style="font-size:18px">close</i></md-icon>
             </md-button>
             </span></h3>
-           
             <div class="clearfix"></div>
           </div>
         </li>
-        <li ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
-      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+        <li ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
           <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
-            
             <div class="notification_desc">
-                <p>{{ notif.desc }}</p>
-                <p><span>{{ notif.message }}</span></p>
+              <p>{{ notif.desc }}</p>
+              <p><span>{{ notif.message }}</span></p>
             </div>
             <div class="clearfix"></div>
-            </a>
+          </a>
         </li>
-       
         <!-- <li style="    position: fixed;bottom: 0px;width: 100%;">
             <div class="notification_bottom"> <a href="#">See all notifications</a> </div>
         </li> -->
