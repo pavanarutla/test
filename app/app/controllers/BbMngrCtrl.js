@@ -426,6 +426,12 @@ app.controller('bbMngrCtrl',
       NotificationService.updateNotifRead(notificationId).then(function(result){
         if(result.status == 1){
           getUserNotifs();
+          var preStoredNotif = _.find($scope.notifs, function(notif){
+            notif.id = notificationId;
+          });
+          if(preStoredNotif){
+            preStoredNotif.status = 1;
+          }
         }
         else{
           toastr.error(result.message);
