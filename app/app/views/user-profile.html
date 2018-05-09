@@ -4,12 +4,19 @@
 	</div>
 	<div class=" profile-details">
 		<div layout="column" class="news-inner md-whiteframe-3dp contbg" layout-align="center center" layout-margin flex-offset-gt-sm="15"
-		 flex="70" flex-xs="100" flex-sm="100" style="margin-top: -70px">
+		 flex="70" flex-xs="100" flex-sm="100" style="margin-top: -70px; color:#fff;">
 			<div ng-if="userProfile.user.profile_pic">
 				<img ng-src="{{serverUrl + userProfile.user.profile_pic}}" alt="team" style="width:150px;margin: -78px 0 0 0;">
 			</div>
 			<div ng-if="!userProfile.user.profile_pic">
 				<img src="assets/images/product/user_avatar.png" alt="team" style="width:150px;margin: -78px 0 0 0;">
+			</div>
+			<div style="position:relative">
+					<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required>
+						<md-icon style="position:absolute;top:-40px;left:50px;cursor:pointer;">
+							<i class="material-icons" style="color:#fff;">mode_edit</i>
+						</md-icon>
+					</div>
 			</div>
 			<div>{{userProfile.user.name}}</div>
 			<div>{{userProfile.user.email}}</div>

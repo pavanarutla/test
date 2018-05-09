@@ -214,7 +214,8 @@
         <md-menu>
           <!-- Trigger element is a md-button with an icon -->
           <md-button ng-click="$mdOpenMenu($event)" aria-label="" class="md-secondary md-mini">
-            <img ng-src="assets/images/man.png" class="md-avatar" >
+            <img ng-src="assets/images/man.png" ng-if="!loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
+            <img ng-src="{{serverUrl + loggedInUser.profile_pic}}" ng-if="loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
           </md-button>
           <md-menu-content width="3">
             <md-menu-item>

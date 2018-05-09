@@ -1,9 +1,9 @@
 app.service('NotificationService', ['$http', '$q', 'config', 
   function($http, $q, config){
     return {
-      getAllNotifications: function(){
+      getAllNotifications: function(last_notif){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/all-notifications', {skipInterceptor: true}).success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/all-notifications/last-notif/' + last_notif, {skipInterceptor: true}).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       }, 
       updateNotifRead:  function(notifId){

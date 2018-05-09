@@ -398,20 +398,25 @@ app.controller('bbMngrCtrl',
     /*================================
     === Long polling notifications ===
     ================================*/
+    $scope.notifs = [];
     var getUserNotifs = function(){
-      NotificationService.getAllNotifications().then(function(result){
+      var last_notif = 0;
+      if($scope.notifs && $scope.notifs.length > 0){
+        last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
+      }
+      NotificationService.getAllNotifications(last_notif).then(function(result){
         $scope.readNotifCount = _.chain(result).filter(function(notif){
           return notif.status == 1;
         }).value().length;
         $scope.unreadNotifCount = _.chain(result).filter(function(notif){
           return notif.status == 0;
         }).value().length;
-        $scope.notifs = result;
+        $scope.notifs = _.union($scope.notifs, result);
+        $timeout(getUserNotifs, 1000);
       });
     }
     if($rootScope.isAuthenticated){
       getUserNotifs();
-      $interval(getUserNotifs, 10000);
     }
 
     /*===============================

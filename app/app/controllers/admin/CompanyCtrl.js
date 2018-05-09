@@ -76,8 +76,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     });
   }
 
-  $scope.editCompany = function(company){
-    // console.log(company);
+  $scope.editCompany = function(company){    
     $scope.company = company;
     var index = $scope.gridCompany.data.indexOf(company);
       $scope.gridCompany.data.splice(index, 1);

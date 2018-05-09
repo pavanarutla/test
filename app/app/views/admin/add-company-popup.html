@@ -45,7 +45,7 @@
 					</md-input-container>
 					<md-input-container class="md-block margin-input">
 						<label>Email</label>
-						<input ng-model="company.email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
+						<input ng-model="company.email" name="email" type="email" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
 						<div ng-messages="addCompanyForm.email.$error">
 							<div ng-message="required">Email is required.</div>
 							<div ng-message="maxlength">Email shouldn't exceed 30 characters. </div>

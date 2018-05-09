@@ -1,6 +1,11 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $location, AdminNotificationService, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, AdminNotificationService, config) {
 
   $rootScope.serverUrl = config.serverUrl;
+
+  if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
 
   $scope.closeSidenav = function () {
     $mdSidenav('left').toggle();
@@ -77,7 +82,12 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   /*================================
   === Long polling notifications ===
   ================================*/
+  $scope.adminNotifs = [];
   var getAdminNotifs = function(){
+    var last_notif = 0;
+    if($scope.notifs && $scope.notifs.length > 0){
+      last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
+    }
     AdminNotificationService.getAllAdminNotifications().then(function(result){
       $scope.adminReadNotifCount = _.chain(result).filter(function(notif){
         return notif.status == 1;
@@ -85,7 +95,8 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       $scope.adminUnreadNotifCount = _.chain(result).filter(function(notif){
         return notif.status == 0;
       }).value().length;
-      $scope.adminNotifs = result;
+      $scope.adminNotifs = _.union($scope.adminNotifs, result);
+      $timeout(getAdminNotifs, 1000);
     });
   }
   getAdminNotifs();
