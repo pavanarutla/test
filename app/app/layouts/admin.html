@@ -2,7 +2,7 @@
 
 
 <div layout="row" flex>
-  <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
+  <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
     <header layout="column" layout-padding>
       <!-- <a ui-sref="/admin"><img ng-src="assets/images/logo.png" alt="logo"></a> -->
       <md-button aria-label="" href="#admin/home" md-no-ink style="background:transparent" class="logo">
@@ -211,8 +211,8 @@
         <!-- <md-button class=" md-secondary md-mini" aria-label="personimage">
             <img ng-src="images/person.png" class="md-avatar" style="margin: 12px 0 0 0;">
         </md-button>   -->
-        <md-menu>
-          <!-- Trigger element is a md-button with an icon -->
+        <!-- <md-menu>
+          <!-- Trigger element is a md-button with an icon --
           <md-button ng-click="$mdOpenMenu($event)" aria-label="" class="md-secondary md-mini">
             <img ng-src="assets/images/man.png" ng-if="!loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
             <img ng-src="{{serverUrl + loggedInUser.profile_pic}}" ng-if="loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
@@ -226,6 +226,27 @@
             </md-menu-item>
             <md-menu-item>
               <md-button href="#" ng-click="$mdMenu.hide()">Signout</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu> -->
+
+        <md-menu md-offset="0 50">
+          <md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
+              <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+              <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+          </md-button>
+          <md-menu-content width="3" style="z-index:99">
+            <md-menu-item>
+              <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#/location">Switch View</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#/reset_password">Reset Password</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="logout()">Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>

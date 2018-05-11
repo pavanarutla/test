@@ -122,30 +122,7 @@ app.controller('GmapCtrl',
       // MapService.getIndustrySectors().then(function(Sectors){
       //   $scope.Sectors = Sectors;
       // });
-      $scope.DurationSectors = [];
-      // MapService.getDurationSectors().then(function(DurationSectors){
-      //   $scope.DurationSectors = DurationSectors;
-      // });
-
-      // range circle
-      // $scope.radius = 0;
-      // circle = new google.maps.Circle({
-      //   strokeColor: '#FF0099',
-      //   strokeOpacity: 1,
-      //   strokeWeight: 2,
-      //   fillColor: '#009ee0',
-      //   fillOpacity: 0.2
-      // });
-      // $scope.updateCircleRadius = function (val) {
-      //   circle.setCenter($scope.address.components.location);
-      //   circle.setRadius(Number(val));
-      //   circle.setMap($scope.mapObj);
-      // }
-      // circleBounds = circle.getBounds();
-
-      // range end
-
-   
+      $scope.DurationSectors = [];     
 
       // clender
       $scope.opened = {
@@ -361,9 +338,11 @@ app.controller('GmapCtrl',
   //  }
 
        function selectMarker(marker) {
+        $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
         selectorMarker.setMap($scope.mapObj);
+        $scope.product.id = marker.properties['id'];
         $scope.product.image = config.serverUrl + marker.properties['image'];
         $scope.product.siteNo = marker.properties['siteNo'];
         $scope.product.panelSize = marker.properties['panelSize'];
@@ -378,8 +357,10 @@ app.controller('GmapCtrl',
       }
 
       function selectSpideredMarker(marker) {
+        $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setMap(null);
+        $scope.product.id = marker.properties['id'];
         $scope.product.image = config.serverUrl + marker.properties['image'];
         $scope.product.siteNo = marker.properties['siteNo'];
         $scope.product.panelSize = marker.properties['panelSize'];
@@ -809,6 +790,7 @@ app.controller('GmapCtrl',
       $scope.viewCampaignDetails = function(campaignId){
         CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
           $scope.campaignDetails = campaignDetails;
+          $scope.$parent.alreadyShortlisted = true;
           $scope.toggleCampaignDetailSidenav();
         });
       }
@@ -819,10 +801,10 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.addProductToExistingCampaign = function(existingCampaign){
+      $scope.addProductToExistingCampaign = function(existingCampaignId, productId){
         var productToCampaign = {
-          product_id: $scope.selectedProduct.properties.id,
-          campaign_id: existingCampaign.id
+          product_id: productId,
+          campaign_id: existingCampaignId
         };
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
           if(result.status == 1){
@@ -833,7 +815,6 @@ app.controller('GmapCtrl',
             toastr.error(result.message);
           }
         });
-
       }
 
       $scope.shareShortlistedProducts = function (shareShortlisted) {

@@ -1,4 +1,5 @@
-<div layout="column" flex  ><!-- style="height:570px !important;"-->
+<div layout="column" flex>
+  <!-- style="height:570px !important;"-->
   <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>Your Daily feed</div>
   <!-- <md-content layout="column" layout-sm="column" layout-xs="column" class="contbg">
     <md-tabs md-dynamic-height md-border-bottom>
@@ -35,31 +36,49 @@
     </md-tabs>
   </md-content> -->
   <div class="feed-section" style="margin-top:8px">
-      <div class="section-inner">
-          <div class="row" style="margin-left:0px;margin-right:0px">
-            <div class="col-sm-4" ng-repeat="request in requestList" style="margin-bottom:10px">
-              <div style="background-color: #a3c4e8;padding:20px 0">
-             
-                <div layout="column" layout-fill layout-margin >
-                
-                    <div layout="column" layout-align="center center" flex>
-                      <img ng-src="{{request.user_avatar}}" class="md-avatar face" ng-if="request.user_avatar">
-                      <img src="assets/images/man_new.png" class="md-avatar face" ng-if="!request.user_avatar">
-                    </div>
-                    <div layout="column" layout-align="center start" flex class="feed-hdng" >
-                        <h3 class="" ng-show="request.status == 0">{{request.user_full_name}} has requested for a campaign suggestion.</h3>
-                        <h3 ng-show="request.status == 3">{{request.user_full_name}} has requested for a campaign proposal.</h3> 
-                        <h3 ng-show="request.status == 5">{{request.user_full_name}} has requested for a change in provided quote.</h3> 
-                        <h3 ng-show="request.status == 6">{{request.user_full_name}} has requested for the launch of their campaign.</h3>
-                    </div>
-                </div>
-                
-                <div layout="colmun"  style="margin: 0 0 0 8px;"><span>Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span></div>
-                <div layout="colmun"  layout-margin  layout-align="center center"> <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)">View Details</md-button></div>
+    <div class="section-inner">
+      <div class="row" style="margin-left:0px;margin-right:0px">
+        <div class="col-sm-4" ng-repeat="request in requestList.otherCampaignFeeds" style="margin-bottom:10px">
+          <div style="background-color: #a3c4e8;padding:20px 0">
+            <div layout="column" layout-fill layout-margin>
+              <div layout="column" layout-align="center center" flex>
+                <img ng-src="{{request.user_avatar}}" class="md-avatar face" ng-if="request.user_avatar">
+                <img src="assets/images/man_new.png" class="md-avatar face" ng-if="!request.user_avatar">
+              </div>
+              <div layout="column" layout-align="center start" flex class="feed-hdng">
+                <h3 ng-show="request.status == 3">{{request.user_full_name}} has requested for a campaign proposal.</h3>
+                <h3 ng-show="request.status == 5">{{request.user_full_name}} has requested for a change in provided quote.</h3>
+                <h3 ng-show="request.status == 6">{{request.user_full_name}} has requested for the launch of their campaign.</h3>
               </div>
             </div>
-            
+            <div layout="colmun" style="margin: 0 0 0 8px;">
+              <span>Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+            </div>
+            <div layout="colmun" layout-margin layout-align="center center">
+              <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)">View Details</md-button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" ng-repeat="request in requestList.campaignSuggestionRequests" style="margin-bottom:10px">
+            <div style="background-color: #a3c4e8;padding:20px 0">
+              <div layout="column" layout-fill layout-margin>
+                <div layout="column" layout-align="center center" flex>
+                  <img ng-src="{{request.user_avatar}}" class="md-avatar face" ng-if="request.user_avatar">
+                  <img src="assets/images/man_new.png" class="md-avatar face" ng-if="!request.user_avatar">
+                </div>
+                <div layout="column" layout-align="center start" flex class="feed-hdng">
+                  <h3 class="">{{request.user_full_name}} has requested for campaign suggestion.</h3>
+                </div>
+              </div>
+              <div layout="colmun" style="margin: 0 0 0 8px;">
+                <span>Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+              </div>
+              <div layout="colmun" layout-margin layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)">View Details</md-button>
+              </div>
+            </div>
           </div>
       </div>
+    </div>
   </div>
 </div>

@@ -300,6 +300,7 @@ app.controller('bbMngrCtrl',
 
     // saved view all side nav
     $scope.toggleViewAllShortlisted = function () {
+      $scope.alreadyShortlisted = true;
       $mdSidenav('shortlistAndSaveSidenav').toggle();
     };
     $scope.toggleShareShortlistedSidenav = function () {

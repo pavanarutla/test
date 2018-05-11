@@ -31,8 +31,10 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     /*
     ======== Campaign requests =======
     */
+    $scope.requestList = [];
     AdminCampaignService.getAllCampaignRequests().then(function(result){
-      $scope.requestList = result;
+      $scope.requestList.campaignSuggestionRequests = result.requested_campaign_suggestions;
+      $scope.requestList.otherCampaignFeeds = result.other_campaign_feeds;
     });
     /*
     ======== Campaign requests ends =======
@@ -169,7 +171,11 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     $scope.closeInputPanel = function(ev) {
       $mdSidenav('ClientRequest').toggle();
     };
-    
+
+    /* close modal */
+    $scope.close = function(){
+      $mdDialog.hide();
+    }
 
   });
  

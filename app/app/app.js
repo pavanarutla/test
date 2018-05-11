@@ -373,7 +373,8 @@ app.run(
         var ownerRoutes = [
         ];
         var requiresLogin = [
-          'index.location'
+          'index.location',
+          'index.suggest_campaign'
         ];
 
         // routes for authenticated Users
