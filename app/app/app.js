@@ -131,7 +131,7 @@ var app = angular.module('bbManager', [
       title: 'Feeds'
     })
     .state('admin.campaign', {
-      url: '/campaign',
+      url: '/campaigns',
       templateUrl: 'views/admin/campaign-list.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
