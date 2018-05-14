@@ -14,22 +14,23 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   ];
 
   var getAllCampaigns = function(){
-      AdminCampaignService.getAllCampaigns().then(function(result){
-      $scope.plannedCampaigns = _.filter(result, function(c){
+    AdminCampaignService.getAllCampaigns().then(function(result){
+      $scope.plannedCampaigns = _.filter(result.user_campaigns, function(c){
         return c.status < 6;
       });
-      $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
-      $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
+      $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      $scope.adminCampaigns = result.admin_campaigns;
     });
-
-    if($stateParams.campaignId){
-      var campaignId = $stateParams.campaignId;
-      CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-        // console.log(result);
-      });
-    }
   }
   getAllCampaigns();
+
+  if($stateParams.campaignId){
+    var campaignId = $stateParams.campaignId;
+    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+      // console.log(result);
+    });
+  }
 
   /*=====================
   | Filtering Campaigns
@@ -66,8 +67,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
       fullscreen: $scope.customFullscreen,
       controller: function($scope, $mdDialog, AdminCampaignService, toastr){
         $scope.campaign = {};
-        $scope.saveCampaign = function(){
-          AdminCampaignService.saveCampaign($scope.campaign).then(function(result){
+        $scope.saveCampaignByAdmin = function(){
+          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function(result){
             if(result.status == 1){
               toastr.success(result.message);
               $mdDialog.hide();

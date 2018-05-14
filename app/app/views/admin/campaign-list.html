@@ -42,7 +42,7 @@
           <table class="table table-striped table-bordered ">
             <thead>
                 <tr>
-                  <th>Created</th>
+                  <!-- <th>Created</th> -->
                   <th>Campagin Name</th>
                   <th>Client Name</th>
                   <th>Client contact</th>
@@ -56,7 +56,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
-                <td>{{campaign.created_by}}</td>
+                <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
                 <td>{{campaign.user_full_name}}</td>
                 <td>{{campaign.user_phone}}</td>
@@ -89,7 +89,7 @@
             <table class="table table-striped table-bordered ">
               <thead>
                   <tr>
-                    <th>Created</th>
+                    <!-- <th>Created</th> -->
                     <th>Campagin Name</th>
                     <th>Client Name</th>
                     <th>Client contact</th>
@@ -103,7 +103,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="campaign in runningCampaigns | limitTo:limit">
-                  <td>{{campaign.created_by}}</td>
+                  <!-- <td>{{campaign.created_by}}</td> -->
                   <td>{{campaign.name}}</td>
                   <td>{{campaign.user_full_name}}</td>
                   <td>{{campaign.user_phone}}</td>
@@ -136,7 +136,7 @@
           <table class="table table-striped table-bordered ">
             <thead>
                 <tr>
-                  <th>Created</th>
+                  <!-- <th>Created</th> -->
                   <th>Campagin Name</th>
                   <th>Client Name</th>
                   <th>Client contact</th>
@@ -150,10 +150,58 @@
             </thead>
             <tbody>
               <tr ng-repeat="campaign in closedCampaigns | limitTo:limit">
-                <td>{{campaign.created_by}}</td>
+                <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
                 <td>{{campaign.user_full_name}}</td>
                 <td>{{campaign.user_phone}}</td>
+                <td>{{campaign.start_date | date }}</td>
+                <td>{{campaign.end_date | date }}</td>
+                <td>{{campaign.status | stringifyCampaignStatus }}</td>
+                <td>{{campaign.products.length}}</td>
+                <td>{{campaign.est_budget}}</td>
+                <td>
+                  <span><a ng-href="#/admin/campaign-proposal-summary/{{row.entity.id}}" ng-click="" ng-if="row.entity.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
+                  <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                </td>
+              </tr>      
+            </tbody>
+          </table>
+        </div>
+        <!-- <div layout="colmun" layout-align="end center" layout-margin>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+        </div> -->
+      </div>
+    </md-tab>
+    <md-tab label="Admin Campaigns">
+      <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+        ui-grid-auto-resize class="grid"></div> -->
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">    
+          <table class="table table-striped table-bordered ">
+            <thead>
+                <tr>
+                  <!-- <th>Created</th> -->
+                  <th>Campagin Name</th>
+                  <th>Client Name</th>
+                  <th>Client contact</th>
+                  <th>Client email</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status</th>
+                  <th>No.of<br> Product</th>
+                  <th>Estimated <br>Budget</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="campaign in adminCampaigns | limitTo:limit">
+                <!-- <td>{{campaign.created_by}}</td> -->
+                <td>{{campaign.name}}</td>
+                <td>{{campaign.user_full_name}}</td>
+                <td>{{campaign.user_phone}}</td>
+                <td>{{campaign.user_email}}</td>
                 <td>{{campaign.start_date | date }}</td>
                 <td>{{campaign.end_date | date }}</td>
                 <td>{{campaign.status | stringifyCampaignStatus }}</td>

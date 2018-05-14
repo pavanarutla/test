@@ -1,32 +1,32 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
     $scope.pageNo = 1;
 
-    $scope.productList = [];
-    $scope.loadProductList = function(){
-      ProductService.getProductForPage($scope.pageNo).then(function(result){
-        if(localStorage.campaignForSuggestion){
-          var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
-          $scope.campaignStartDate = campaignForSuggestion.start_date;
-          $scope.campaignEndDate = campaignForSuggestion.end_date;
-          $scope.campaignEstBudget = campaignForSuggestion.est_budget;
-          $scope.campaignActBudget = campaignForSuggestion.act_budget;
-          if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
-            _.map(result, function(p){
-              if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
-                p.alreadyAdded = true;
-                return p;
-              } 
-            });  
-          } 
-        }
-        $scope.pageNo += 1;
-        $scope.productList = $scope.productList.concat(result);
-      });
-    }
-    $scope.loadProductList();
+    // $scope.productList = [];
+    // $scope.loadProductList = function(){
+    //   ProductService.getProductForPage($scope.pageNo).then(function(result){
+    //     if(localStorage.campaignForSuggestion){
+    //       var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+    //       $scope.campaignStartDate = campaignForSuggestion.start_date;
+    //       $scope.campaignEndDate = campaignForSuggestion.end_date;
+    //       $scope.campaignEstBudget = campaignForSuggestion.est_budget;
+    //       $scope.campaignActBudget = campaignForSuggestion.act_budget;
+    //       if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
+    //         _.map(result, function(p){
+    //           if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
+    //             p.alreadyAdded = true;
+    //             return p;
+    //           } 
+    //         });  
+    //       } 
+    //     }
+    //     $scope.pageNo += 1;
+    //     $scope.productList = $scope.productList.concat(result);
+    //   });
+    // }
+    // $scope.loadProductList();
 
     /*
     ======== Campaign requests =======
@@ -49,6 +49,19 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
         preserveScope: true,
         scope: $scope
       })
+    };
+
+    $scope.showCampaignSuggestionRequestPopup = function (ev, campaignData) {
+      AdminCampaignService.getSuggestionRequestDetails(campaignData.campaign_id).then(function(result){
+        $scope.selectedRequestDetails = result;
+        $mdDialog.show({
+          templateUrl: 'views/admin/campaign-suggestion-request-popup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true,
+          preserveScope: true,
+          scope: $scope
+        })
+      });
     };
 
     /*

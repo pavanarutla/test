@@ -50,8 +50,8 @@
             <md-menu-item>
               <md-button aria-label="campagins" ng-href="#/campaigns">Campaigns</md-button>
             </md-menu-item>
-            <md-menu-item>
-              <md-button aria-label="campagins" ng-if="loggedInUser.roles[0].name == 'admin'" ng-href="#/admin">Switch View</md-button>
+            <md-menu-item ng-if="loggedInUser.roles[0].name == 'admin'">
+              <md-button aria-label="campagins" ng-href="#/admin">Switch View</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-href="#/reset_password">Reset Password</md-button>

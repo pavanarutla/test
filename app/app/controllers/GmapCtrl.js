@@ -915,6 +915,7 @@ app.controller('GmapCtrl',
           else{
             toastr.error(result.message);
           }
+          $scope.loadPlannedUserCampaigns()
         });
       }
 
