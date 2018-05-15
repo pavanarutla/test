@@ -502,6 +502,8 @@ app.controller('GmapCtrl',
       var concentricMarkers = {};
 	  var uniqueMarkerArr = [];
       $scope.processMarkers = function () {
+        markersOnMap = Object.assign([]);
+        uniqueMarkerArr = Object.assign([]);
         /*_.each($scope.filteredMarkers, function (v, i) {
           var product = {position: {lat: v.lat, lng: v.lng}, data: v};
           productList.push(product);
@@ -736,16 +738,17 @@ app.controller('GmapCtrl',
             v.setMap(null);
             $scope.Clusterer.removeMarker(v);
           });
-          markersOnMap = [];
+          markersOnMap = Object.assign([]);
           $scope.filteredMarkers = markers;
           console.log("apply filter markers ",$scope.filteredMarkers)
           $scope.processMarkers(); 
           if(markers.length > 0){
             var bounds = new google.maps.LatLngBounds();
             _.each(markersOnMap, function (v, i) {
+              console.log(v.getPosition());
               bounds.extend(v.getPosition());
             });
-            $scope.mapObj.fitBounds(bounds);
+            // $scope.mapObj.fitBounds(bounds);
           }
           else{
             toastr.error("no marker found for the criteria you selected");
