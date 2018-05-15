@@ -745,10 +745,9 @@ app.controller('GmapCtrl',
           if(markers.length > 0){
             var bounds = new google.maps.LatLngBounds();
             _.each(markersOnMap, function (v, i) {
-              console.log(v.getPosition());
               bounds.extend(v.getPosition());
             });
-            // $scope.mapObj.fitBounds(bounds);
+            // console.log('map object',$scope.mapObj)
           }
           else{
             toastr.error("no marker found for the criteria you selected");
