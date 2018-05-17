@@ -70,6 +70,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
         $scope.saveCampaignByAdmin = function(){
           AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function(result){
             if(result.status == 1){
+              getAllCampaigns();
               toastr.success(result.message);
               $mdDialog.hide();
             }
@@ -87,10 +88,20 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
     });
   };
 
-  $scope.cancel = function(){
-    $mdDialog.hide();
-  };
-
+  $scope.deleteCampaign = function(campaignId){
+    AdminCampaignService.deleteCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if(result.status == 0){
+        toastr.error(result.message);
+      }
+    },function(result){
+        toastr.error("somthing went wrong please try again after some time!");
+    });
+  }
   /*
   *========= campagin proposal(planned) grid =========
   */
@@ -247,7 +258,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   //   var increamented = vm.limit + 5;
   //   vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
   // };
-// tables code end
+  // tables code end
+  
   /*
   //////// Floating campaign section
   */
@@ -282,5 +294,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   /*
   //////// Floating campaign section ends
   */
+
+  $scope.cancel = function(){
+    $mdDialog.hide();
+  };
 
 });

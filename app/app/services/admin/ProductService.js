@@ -1,9 +1,13 @@
 app.factory('ProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getProductList: function () {
+			getProductList: function (pageNo, pageSize) {
+				var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/products').success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
 			getProductForPage: function(pageNo){

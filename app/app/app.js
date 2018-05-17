@@ -124,10 +124,10 @@ var app = angular.module('bbManager', [
       controller: 'AdminFeedsCtrl',
       title: 'Feeds'
     })
-    .state('admin.Feeds', {
+    .state('admin.suggest-products', {
       url: '/suggest-products',
       templateUrl: 'views/admin/suggest-products.html',
-      controller: 'AdminFeedsCtrl',
+      controller: 'CampaignProposalCtrl',
       title: 'Feeds'
     })
     .state('admin.campaign', {
