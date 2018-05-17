@@ -7,37 +7,44 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   /*===================
   | Pagination
   ===================*/
-  $scope.pageNo = 1;
-  $scope.pageSize = 15;
+  $scope.pagination = {};
+  $scope.pagination.pageNo = 1;
+  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageCount = 0;
   var pageLinks = 20;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
   function createPageLinks(){
     var mid = Math.ceil(pageLinks/2);
-    if($scope.pageCount < $scope.pageSize){
+    if($scope.pagination.pageCount < $scope.pagination.pageSize){
       lowest = 1;
     }
-    else if($scope.pageNo >= ($scope.pageCount - mid) && $scope.pageNo <= $scope.pageCount){
-      lowest = $scope.pageCount - pageLinks;
+    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+      lowest = $scope.pagination.pageCount - pageLinks;
     }
-    else if($scope.pageNo > 0 && $scope.pageNo <= pageLinks/2){
+    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
       lowest = 1;
     }
     else{
-      lowest = $scope.pageNo - mid + 1;
+      lowest = $scope.pagination.pageNo - mid + 1;
     }
-    highest = $scope.pageCount < $scope.pageSize ? $scope.pageCount : lowest + pageLinks;
-    $scope.pageArray = _.range(lowest, highest);
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    $scope.pagination.pageArray = _.range(lowest, highest);
+    console.log($scope.pagination.pageArray);
   }
+
   /*===================
   | Pagination Ends
   ===================*/
-
-  AdminLocationService.getAllAreas($scope.pageNo, $scope.pageSize).then(function (data) {
-    $scope.areas = data.areas;
-    $scope.pageCount = result.page_count;
-    createPageLinks();
-  });
+  $scope.getAllAreas = function(){
+    // console.log($scope.pagination.pageNo, $scope.pagination.pageSize);
+    AdminLocationService.getAllAreas($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (data) {
+      $scope.areas = data.areas;
+      $scope.pagination.pageCount = data.page_count;
+      createPageLinks();
+    });
+  }
+  $scope.getAllAreas();
   //location js end 
 
   //add country js start

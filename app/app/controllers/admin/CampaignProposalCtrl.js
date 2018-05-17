@@ -29,6 +29,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     highest = $scope.pageCount < $scope.pageSize ? $scope.pageCount : lowest + pageLinks;
     $scope.pageArray = _.range(lowest, highest);
   }
+
+  $scope.changePage = function(pageNo){
+    console.log(pageNo);
+    $scope.pageNo = pageNo; 
+    $scope.loadProductList()
+  }
   /*===================
   | Pagination Ends
   ===================*/
@@ -58,12 +64,6 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     
   if($rootScope.currStateName == "admin.suggest-products"){
     $scope.loadProductList();
-  }
-
-  $scope.changePage = function(pageNo){
-    console.log(pageNo);
-    $scope.pageNo = pageNo; 
-    $scope.loadProductList()
   }
 
   function loadCampaignData(campaignId){    
