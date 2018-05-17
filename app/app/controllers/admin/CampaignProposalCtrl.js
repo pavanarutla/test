@@ -2,9 +2,33 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
   $scope.msg = {};
   $scope.limit = 3;
+  $scope.productList = [];
+  
+  /*===================
+  | Pagination
+  ===================*/
   $scope.pageNo = 1;
   $scope.pageSize = 15;
-  $scope.productList = [];
+  var pageLinks = 20;
+  var lowest = 1;
+  var highest = lowest + pageLinks - 1;
+  function createPageLinks(){
+    if($scope.pageNo >= ($scope.pageCount - (pageLinks/2)) && $scope.pageNo <= $scope.pageCount){
+      lowest = $scope.pageCount - pageLinks;
+    }
+    else if($scope.pageNo > 0 && $scope.pageNo <= pageLinks/2){
+      lowest = 1;
+    }
+    else{
+      lowest = $scope.pageNo - (pageLinks/2);
+    }
+    highest = lowest + pageLinks;
+    $scope.pageArray = _.range(lowest, highest);
+  }
+  /*===================
+  | Pagination Ends
+  ===================*/
+
   $scope.loadProductList = function(){
     ProductService.getProductList($scope.pageNo, $scope.pageSize).then(function(result){
       if(localStorage.campaignForSuggestion){
@@ -14,25 +38,28 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.campaignEstBudget = campaignForSuggestion.est_budget;
         $scope.campaignActBudget = campaignForSuggestion.act_budget;
         if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
-          _.map(result, function(p){
+          _.map(result.products, function(p){
             if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
               p.alreadyAdded = true;
               return p;
             }
-          });  
-        } 
-      }      
+          });
+        }
+      }
       $scope.productList = result.products;
       $scope.pageCount = result.page_count;
-      var lowest = ($scope.pageNo <= 15) ? 1 : $scope.pageNo - 5;
-      var highest = $scope.pageNo + 15 - lowest;
-      $scope.pageArray = _.range(lowest, highest);
-      console.log(lowest, highest, $scope.pageArray);
+      createPageLinks();
     });
   }
     
   if($rootScope.currStateName == "admin.suggest-products"){
     $scope.loadProductList();
+  }
+
+  $scope.changePage = function(pageNo){
+    console.log(pageNo);
+    $scope.pageNo = pageNo; 
+    $scope.loadProductList()
   }
 
   function loadCampaignData(campaignId){    
@@ -120,7 +147,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
             product.alreadyAdded = false;             
           }
           return product;
-        });          
+        });
+        toastr.success("Product removed from campaign");
       }
       else{
         toastr.error(result.message);

@@ -2,6 +2,10 @@
   .red {
     color: #f00;
   }
+  .selected-pagelink{
+    border:1px solid #447bde;
+    color:#000 !important;
+  }
 </style>
 
 <div layout="column">
@@ -220,18 +224,15 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-  <div class="container" ng-if="pageCount > 1">
+  <div class="container" ng-if="pageCount > 1" style="margin-top:20px;">
     <ul class="pagination">
-      <!-- <li class="page-item" ng-click="PrevHoradingloadMore()">
-        <a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex <= 0)}">Prev</a>
-      </li> -->
       <li class="pageResults" ng-repeat="i in pageArray track by $index" style="margin:auto;">
-        <!-- {{loadHordingPageIndex + 1 + ' - ' + (loadHoardingPaginationLimit + loadHordingPageIndex > hoardinglistdata.length?hoardinglistdata.length:loadHoardingPaginationLimit + loadHordingPageIndex)}} of {{hoardinglistdata.length}} -->
-        <a ng-click="pageNo = pageArray[$index]; loadProductList()" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">{{pageArray[$index]}}</a>
+        <a ng-click="changePage(pageArray[$index])" 
+          ng-class="{'selected-pagelink' : pageNo == pageArray[$index]}" 
+          style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+          {{pageArray[$index]}}
+        </a>
       </li>
-      <!-- <li class="page-item" ng-click="loadHording()">
-        <a class="page-link" ng-class="{'disable-pagination': (loadHordingPageIndex + loadHoardingPaginationLimit >= hoardinglistdata.length)}">Next</a>
-      </li> -->
     </ul>
   </div>
 </div>
