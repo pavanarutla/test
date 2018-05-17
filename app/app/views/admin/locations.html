@@ -1,12 +1,12 @@
 <div layout="column" layout-fill="layout-fill">
 	<div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
 		<div class="md-title">
-			List Of Location
+			List Of Locations
 		</div>
 	</div>
 	<div layout-margin layout="column">
-		 <div ui-grid="gridLocation" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-		 ui-grid-auto-resize class="grid"></div> 
+		 <!-- <div ui-grid="gridLocation" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+		 ui-grid-auto-resize class="grid"></div>  -->
 		<div style="margin-top: 1em;">
           <div class="table-responsive">    
             <table class="table table-striped table-bordered ">
@@ -19,19 +19,18 @@
                     <th>Pincode</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
-                    
                     <th>Actions</th>
                   </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="locations in listoflocationdata | limitTo:limit">
-                  <td>{{locations.country_name}}</td>
-                  <td>{{locations.state_name}}</td>
-                  <td>{{locations.city_name}}</td>
-                  <td>{{locations.name}}</td>
-                  <td>{{locations.pincode }}</td>
-                  <td>{{locations.lat }}</td>
-                  <td>{{locations.lng }}</td>
+                <tr ng-repeat="location in areas">
+                  <td>{{location.country_name}}</td>
+                  <td>{{location.state_name}}</td>
+                  <td>{{location.city_name}}</td>
+                  <td>{{location.name}}</td>
+                  <td>{{location.pincode }}</td>
+                  <td>{{location.lat }}</td>
+                  <td>{{location.lng }}</td>
                   <td>
                     <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
                     <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>

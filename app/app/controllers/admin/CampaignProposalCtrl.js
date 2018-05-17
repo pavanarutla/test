@@ -9,20 +9,24 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   ===================*/
   $scope.pageNo = 1;
   $scope.pageSize = 15;
-  var pageLinks = 20;
+  var pageLinks = 6;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
   function createPageLinks(){
-    if($scope.pageNo >= ($scope.pageCount - (pageLinks/2)) && $scope.pageNo <= $scope.pageCount){
+    var mid = Math.ceil(pageLinks/2);
+    if($scope.pageCount < $scope.pageSize){
+      lowest = 1;
+    }
+    else if($scope.pageNo >= ($scope.pageCount - mid) && $scope.pageNo <= $scope.pageCount){
       lowest = $scope.pageCount - pageLinks;
     }
     else if($scope.pageNo > 0 && $scope.pageNo <= pageLinks/2){
       lowest = 1;
     }
     else{
-      lowest = $scope.pageNo - (pageLinks/2);
+      lowest = $scope.pageNo - mid + 1;
     }
-    highest = lowest + pageLinks;
+    highest = $scope.pageCount < $scope.pageSize ? $scope.pageCount : lowest + pageLinks;
     $scope.pageArray = _.range(lowest, highest);
   }
   /*===================
