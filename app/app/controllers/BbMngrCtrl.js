@@ -438,5 +438,14 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
       $location.path('/campaigns');
     }
+
+    /// suggestion Page request 
+
+    $scope.suggestionRequest = {}
+
+    $scope.ResetForm = function(){
+      $scope.suggestionRequest = 
+      toastr.success("form reset successfully");
+    }
   }
 );
