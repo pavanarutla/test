@@ -54,7 +54,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="product in productList | filter:searchText">
+						<tr ng-repeat="product in productList">
 							<td>{{product.siteNo}}</td>
 							<td>{{product.format_name}}</td>
 							<td>{{product.company_name}}</td>
@@ -68,21 +68,14 @@
 							<td>{{symbol}}</td>
 							<td>
 								<span>
-									<a href="" ng-click="editProduct(product)">
+									<a style="cursor:pointer;" ng-click="editProduct(product)">
 										<md-icon>
 											<i class="material-icons">mode_edit</i>
 										</md-icon>
 									</a>
 								</span>
 								<span>
-									<a ng-href="" ng-click="">
-										<md-icon>
-											<i class="material-icons">done</i>
-										</md-icon>
-									</a>
-								</span>
-								<span>
-									<a href="" ng-click="deleteProduct(list)">
+									<a style="cursor:pointer;" ng-click="deleteProduct(list)">
 										<md-icon>
 											<i class="material-icons">delete</i>
 										</md-icon>

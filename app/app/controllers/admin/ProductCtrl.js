@@ -331,11 +331,11 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   };
 
     // tables code start
-    var vm = $scope;
-    vm.limit = 5;
-    $scope.loadMore = function() {
-      var increamented = vm.limit + 5;
-      vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
-    };
+    // var vm = $scope;
+    // vm.limit = 5;
+    // $scope.loadMore = function() {
+    //   var increamented = vm.limit + 5;
+    //   vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
+    // };
   // tables code end
 }]);

@@ -213,7 +213,7 @@
 			</form>   
 
 			<!--new form add product start -->
-			 <div table-responsive>
+			<!-- <div table-responsive>
 				<table class="table table-striped table-bordered addproduct-table">
 					<tbody flex="100">
 						<tr >
@@ -225,13 +225,13 @@
 								
 								<select  id="productType" ng-options ="format.name for format in formatList  track by format.id"  ng-model="product.type" class="select-value" data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
 									<option value="" disabled selected>Site Type</option>
-									<!-- <option ng-value="format.id">{{format.name}}</option> -->
+									<!-- <option ng-value="format.id">{{format.name}}</option> --
 								</select>
 								 <!-- <select name="mySelect" id="mySelect"
 								ng-options="option.name for option in refData track by option.id"
 								ng-model="selectedOption">
 								<option value="" disabled selected>view current values</option>
-								</select> -->
+								</select> --
 							</td>
 							<td flex="33">
 								<input ng-model="product.hoardingcost" placeholder="Hoarding Cost" type="text" name="hoardingcost" />
@@ -241,21 +241,21 @@
 						<tr >
 							<td flex="33">
 								<select ng-model="product.company" class="select-value" ng-options ="hoardingCompany.name for hoardingCompany in hoardingCompaniesList  track by hoardingCompany.id" >
-									<!-- <option ng-repeat="hoardingCompany in hoardingCompaniesList"  ng-value="hoardingCompany.id">{{hoardingCompany.name}}</option> -->
+									<!-- <option ng-repeat="hoardingCompany in hoardingCompaniesList"  ng-value="hoardingCompany.id">{{hoardingCompany.name}}</option> --
 									<option value="" disabled selected>Company Name</option>
 								</select>
 							</td>
 							<td flex="33">
 								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList(product)" ng-options ="country.name for  country in  countryList   track by country.id | filter:product.country">
-									<!-- <option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</option> -->
+									<!-- <option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</option> --
 									<option value="" disabled selected>Country</option>
-									<!-- <option value="{{}}" >Country</option> -->
+									<!-- <option value="{{}}" >Country</option> --
 								</select required>
 							</td>
 							<td flex="33">
 								<select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()"
 										data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()" ng-options ="state.name for state in stateList  track by state.id | filter:product.state">
-									 <!-- <option ng-value="state.id" ng-repeat="state in stateList | filter:searchTerm">{{state.name}}</option>  -->
+									 <!-- <option ng-value="state.id" ng-repeat="state in stateList | filter:searchTerm">{{state.name}}</option>  --
 									<option value="" disabled selected>view 	 values</option>
 								</select required>
 							</td>
@@ -265,14 +265,14 @@
 							<td flex="33">
 								<select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"
 												data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()" ng-options ="city.name for city in cityList  track by city.id">
-									<!-- <option ng-value="city.id"  ng-repeat="city in cityList | filter:searchTerm">{{city.name}}</option> -->
+									<!-- <option ng-value="city.id"  ng-repeat="city in cityList | filter:searchTerm">{{city.name}}</option> --
 									<option value="" disabled selected>view current values</option>
 								</select>
 							</td>
 							<td flex="33">
 								<select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"
 										data-md-container-class="selectdemoSelectHeader" ng-options ="area.name for area in areaList  track by area.id">
-									<!-- <option ng-value="area.id" ng-repeat="area in areaList | filter:searchTerm">{{area.name}}</option> -->
+									<!-- <option ng-value="area.id" ng-repeat="area in areaList | filter:searchTerm">{{area.name}}</option> --
 									<option value="" disabled selected>view current values</option>
 								</select>
 							</td>
@@ -326,7 +326,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div> 
+			</div>  -->
 			<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()"  ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
