@@ -8,13 +8,18 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   | Pagination
   ===================*/
   $scope.pageNo = 1;
-  $scope.pageSize = 15;
-  var pageLinks = 20;
+  $scope.pageSize = 8;
+  var pageLinks = 6;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
   function createPageLinks(){
     if($scope.pageNo >= ($scope.pageCount - (pageLinks/2)) && $scope.pageNo <= $scope.pageCount){
-      lowest = $scope.pageCount - pageLinks;
+      if($scope.pageCount > pageLinks){
+        lowest = $scope.pageCount - pageLinks;
+      }else{
+        lowest = 1;
+      }
+      
     }
     else if($scope.pageNo > 0 && $scope.pageNo <= pageLinks/2){
       lowest = 1;
@@ -30,7 +35,13 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   ===================*/
 
   $scope.loadProductList = function(){
-    ProductService.getProductList($scope.pageNo, $scope.pageSize).then(function(result){
+    if($scope.searchAll){
+      var search = $scope.searchAll;
+    }else {
+      search = '';
+    }
+    ProductService.getSearchProductList($scope.pageNo, $scope.pageSize,search).then(function(result){
+      console.log(result);
       if(localStorage.campaignForSuggestion){
         var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
         $scope.campaignStartDate = campaignForSuggestion.start_date;
@@ -61,6 +72,16 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     $scope.pageNo = pageNo; 
     $scope.loadProductList()
   }
+  /****** Search ************/
+   $scope.searchAll = "";
+
+   $scope.clearSearch = function () {
+      $scope.searchAll = "";
+   };
+  $scope.searchHoardingData = function () {
+       $scope.pageNo = 1;
+       $scope.loadProductList();
+  };
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){

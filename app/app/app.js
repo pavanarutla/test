@@ -18,6 +18,7 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
+  'ui.grid.selection'
   // 'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
@@ -190,16 +191,16 @@ var app = angular.module('bbManager', [
     .state('admin.subscribers', {
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
-      controller: 'subscribersCtrl'
+      controller: 'subscriberCtrl'
     })
-    .state('admin.user-queries', {
+    .state('admin.queries', {
       url: '/queries',
-      templateUrl: 'views/admin/user-queries.html',
-      controller: 'queriesCtrl'
+      templateUrl: 'views/admin/queries.html',
+      controller: 'customerQueriesCtrl'
     })
-    .state('admin.callback-requests', {
-      url: '/callback-requests',
-      templateUrl: 'views/admin/callback-requests.html',
+    .state('admin.callcenterinfo', {
+      url: '/callcenterinfo',
+      templateUrl: 'views/admin/callcenterinfo.html',
       controller: 'callCenterCtrl'
     })
     .state('admin.floating-campaign', {
