@@ -42,10 +42,10 @@
       <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
         <ul class="pagination">
           <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-            <a ng-click="pagination.pageNo = pagination.pageArray[$index]; getAllAreas();" 
-              ng-class="{'selected-pagelink' : pagination.pageNo == pagination.pageArray[$index]}" 
+            <a ng-click="pagination.pageNo = i; getAllAreas();" 
+              ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
               style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
-              {{pagination.pageArray[$index]}}
+              {{i}}
             </a>
           </li>
         </ul>

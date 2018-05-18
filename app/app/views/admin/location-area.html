@@ -42,7 +42,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Enter Area Name</label>
-                    <input ng-model="area.area_name" type="text" name="area_name" required />
+                    <input ng-model="area.name" type="text" name="area_name" required />
                     <div ng-messages="areaform.area_name.$error">
                         <div ng-message="required">Area Name is required</div>
                     </div>
@@ -87,9 +87,46 @@
             <md-button Class="md-raised" ng-click="resetAreaForm()">CANCEL</md-button>
         </div>
     </form>
-    <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+    <!-- <div ui-grid="gridArea" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
         ui-grid-auto-resize class="grid">
+    </div> -->
+
+    <div layout="row">
+        <div id="AreaSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="60">
+            <md-autocomplete ng-disabled="isDisabled" md-selected-item="areaSelectedItem" md-search-text-change="areaSearchTextChange(areaSearchText)"
+                md-search-text="areaSearchText" md-selected-item-change="viewSelectedArea(area)" md-items="area in areaSearch(areaSearchText)"
+                md-item-text="area.name" md-min-length="3" placeholder="Search..." style="width:100%" md-clear-button="true">
+                <md-item-template>
+                    <span class="item-title">
+                        <span> {{area.name}} </span>
+                    </span>
+                    <span class="item-metadata">
+                        <span>
+                            <strong>{{area.country_name}}</strong>
+                        </span>
+                        <span>
+                            <strong>{{area.state_name}}</strong>
+                        </span>
+                        <span>
+                            <strong>{{area.city_name}}</strong>
+                        </span>
+                        <span>
+                            <strong>{{area.pincode}}</strong>
+                        </span>
+                    </span>
+                </md-item-template>
+                <md-not-found>
+                    No matches found.
+                </md-not-found>
+            </md-autocomplete>
+        </div>
+        <div flex="40">
+            <md-button class="md-raised" ng-click="getAllAreas()">
+                Cancel
+            </md-button>
+        </div>
     </div>
+
     <!-- ===== table new code start=======-->
     <div style="margin-top: 1em;">
         <div class="table-responsive">    
@@ -107,25 +144,33 @@
                 </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="locations in listoflocationdata | limitTo:limit">
-                <td>{{locations.country_name}}</td>
-                <td>{{locations.state_name}}</td>
-                <td>{{locations.city_name}}</td>
-                <td>{{locations.name}}</td>
-                <td>{{locations.pincode }}</td>
-                <td>{{locations.lat }}</td>
-                <td>{{locations.lng }}</td>
+            <tr ng-repeat="area in areas | limitTo:limit">
+                <td>{{area.country_name}}</td>
+                <td>{{area.state_name}}</td>
+                <td>{{area.city_name}}</td>
+                <td>{{area.name}}</td>
+                <td>{{area.pincode }}</td>
+                <td>{{area.lat }}</td>
+                <td>{{area.lng }}</td>
                 <td>
-                <span><a ng-href="" ng-click="editArea()"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-                <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                <span><a style="cursor:pointer;" ng-click="editArea(area)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                <span><a style="cursor:pointer;" ng-click="deleteArea(area)"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
                 </td>
             </tr>      
             </tbody>
         </table>
         </div>
-        <div layout="colmun" layout-align="end center" layout-margin>
-        <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-        </div>
+    </div>
+    <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+        <ul class="pagination">
+            <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+                <a ng-click="pagination.pageNo = i; getAllAreas();" 
+                    ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+                    style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+                    {{i}}
+                </a>
+            </li>
+        </ul>
     </div>
     <!-- ===== table new code end=======-->
     
