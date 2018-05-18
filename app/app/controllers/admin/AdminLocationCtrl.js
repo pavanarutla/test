@@ -4,45 +4,47 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   $scope.stateListForCountry = [];
   $scope.cityListForState = [];
 
-  //location js start
-  $scope.gridLocation = {
-    paginationPageSizes: [25, 50, 75],
-    paginationPageSize: 25,
-    enableCellEditOnFocus: false,
-    multiSelect: false,
-    enableFiltering: true,
-    enableSorting: true,
-    showColumnMenu: false,
-    enableGridMenu: true,
-    enableRowSelection: true,
-    enableRowHeaderSelection: false,
-  };
-  $scope.gridLocation.columnDefs = [
-    { name: 'country_name', displayName: 'Country', enableCellEdit: false, width: '10%' },
-    { name: 'state_name', displayName: 'State ', width: '10%', enableCellEdit: false },
-    { name: 'city_name', displayName: 'City ', width: '10%' },
-    { name: 'name', displayName: 'Area', width: '15%' },
-    { name: 'pincode', displayName: 'Pincode', type: 'number', width: '15%' },
-    { name: 'lat', displayName: 'Latitude', width: '15%' },
-    { name: 'lng', displayName: 'Longitude', width: '15%' },
-    {
-      name: 'Action', field: 'Action', width: '10%',
-      cellTemplate: '<div class="ui-grid-cell-contents"><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span><span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span></div>',
-      enableFiltering: false,
+  /*===================
+  | Pagination
+  ===================*/
+  $scope.pagination = {};
+  $scope.pagination.pageNo = 1;
+  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageCount = 0;
+  var pageLinks = 20;
+  var lowest = 1;
+  var highest = lowest + pageLinks - 1;
+  function createPageLinks(){
+    var mid = Math.ceil(pageLinks/2);
+    if($scope.pagination.pageCount < $scope.pagination.pageSize){
+      lowest = 1;
     }
-  ];
-  $scope.msg = {};
-  $scope.gridLocation.onRegisterApi = function (gridApi) {
-    $scope.gridApi = gridApi;
-    gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-      $scope.msg.lastCellEdited = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue;
-      $scope.$apply();
+    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+      lowest = $scope.pagination.pageCount - pageLinks;
+    }
+    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
+      lowest = 1;
+    }
+    else{
+      lowest = $scope.pagination.pageNo - mid + 1;
+    }
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    $scope.pagination.pageArray = _.range(lowest, highest);
+    console.log($scope.pagination.pageArray);
+  }
+
+  /*===================
+  | Pagination Ends
+  ===================*/
+  $scope.getAllAreas = function(){
+    // console.log($scope.pagination.pageNo, $scope.pagination.pageSize);
+    AdminLocationService.getAllAreas($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (data) {
+      $scope.areas = data.areas;
+      $scope.pagination.pageCount = data.page_count;
+      createPageLinks();
     });
-  };
-  AdminLocationService.getAllAreas().then(function (data) {
-    $scope.gridLocation.data = data;
-    $scope.listoflocationdata = data;
-  });
+  }
+  $scope.getAllAreas();
   //location js end 
 
   //add country js start

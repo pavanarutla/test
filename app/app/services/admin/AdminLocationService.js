@@ -32,9 +32,13 @@ app.factory('AdminLocationService',
         $http.get(config.apiPath + '/areas/' + citiIds).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      getAllAreas: function(){
+      getAllAreas: function(pageNo, pageSize){
+        var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/allAreas').success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/allAreas' + pageData).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       saveCountry: function(country){
