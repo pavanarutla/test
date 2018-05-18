@@ -43,7 +43,7 @@ app.factory('AdminLocationService',
       },
       saveCountry: function(country){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/country', {country_name: country}).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/country', country).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },  
       saveState: function(state){
@@ -80,7 +80,12 @@ app.factory('AdminLocationService',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/area/' + areaId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+      },
+      searchAreas: function(query){
+        var dfd = $q.defer();
+				$http.get(config.apiPath + '/search-areas/' + query).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+      }
     }
   }
 ]

@@ -230,13 +230,13 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-  <div class="container" ng-if="pageCount > 1" style="margin-top:20px;">
+  <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
     <ul class="pagination">
-      <li class="pageResults" ng-repeat="i in pageArray track by $index" style="margin:auto;">
-        <a ng-click="changePage(pageArray[$index])" 
-          ng-class="{'selected-pagelink' : pageNo == pageArray[$index]}" 
+      <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+        <a ng-click="pagination.pageNo = i; loadProductList();" 
+          ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
           style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
-          {{pageArray[$index]}}
+          {{i}}
         </a>
       </li>
     </ul>

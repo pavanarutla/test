@@ -54,21 +54,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="list in hoardinglistdata | filter:searchText">
-							<td>{{list.siteNo}}</td>
-							<td>{{list.format_name}}</td>
-							<td>{{list.company_name}}</td>
-							<td>{{list.address}}</td>
-							<td>{{list.impressions}}</td>
-							<td>{{list.area_name }}</td>
-							<td>{{list.panelSize }}</td>
-							<td>{{list.lighting}}</td>
-							<td>{{list.direction}}</td>
+						<tr ng-repeat="product in productList | filter:searchText">
+							<td>{{product.siteNo}}</td>
+							<td>{{product.format_name}}</td>
+							<td>{{product.company_name}}</td>
+							<td>{{product.address}}</td>
+							<td>{{product.impressions}}</td>
+							<td>{{product.area_name }}</td>
+							<td>{{product.panelSize }}</td>
+							<td>{{product.lighting}}</td>
+							<td>{{product.direction}}</td>
 							<td>{{image}}</td>
 							<td>{{symbol}}</td>
 							<td>
 								<span>
-									<a href="" ng-click="editProduct(list)">
+									<a href="" ng-click="editProduct(product)">
 										<md-icon>
 											<i class="material-icons">mode_edit</i>
 										</md-icon>
@@ -93,8 +93,16 @@
 					</tbody>
 				</table>
 			</div>
-			<div layout="colmun" layout-align="end center" layout-margin>
-				<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+			<div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+					<ul class="pagination">
+							<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+									<a ng-click="pagination.pageNo = i; getProductList();" 
+											ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+											style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+											{{i}}
+									</a>
+							</li>
+					</ul>
 			</div>
 		</div>
 	</div>

@@ -1,40 +1,35 @@
 app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr) {
 
-  $scope.msg = {};
-  $scope.limit = 3;
   $scope.productList = [];
   
   /*===================
   | Pagination
   ===================*/
-  $scope.pageNo = 1;
-  $scope.pageSize = 15;
-  var pageLinks = 6;
+  $scope.pagination = {};
+  $scope.pagination.pageNo = 1;
+  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageCount = 0;
+  var pageLinks = 20;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
   function createPageLinks(){
     var mid = Math.ceil(pageLinks/2);
-    if($scope.pageCount < $scope.pageSize){
+    if($scope.pagination.pageCount < $scope.pagination.pageSize){
       lowest = 1;
     }
-    else if($scope.pageNo >= ($scope.pageCount - mid) && $scope.pageNo <= $scope.pageCount){
-      lowest = $scope.pageCount - pageLinks;
+    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+      lowest = $scope.pagination.pageCount - pageLinks;
     }
-    else if($scope.pageNo > 0 && $scope.pageNo <= pageLinks/2){
+    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
       lowest = 1;
     }
     else{
-      lowest = $scope.pageNo - mid + 1;
+      lowest = $scope.pagination.pageNo - mid + 1;
     }
-    highest = $scope.pageCount < $scope.pageSize ? $scope.pageCount : lowest + pageLinks;
-    $scope.pageArray = _.range(lowest, highest);
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    $scope.pagination.pageArray = _.range(lowest, highest);
   }
 
-  $scope.changePage = function(pageNo){
-    console.log(pageNo);
-    $scope.pageNo = pageNo; 
-    $scope.loadProductList()
-  }
   /*===================
   | Pagination Ends
   ===================*/
@@ -45,8 +40,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     }else {
       search = '';
     }
-    ProductService.getSearchProductList($scope.pageNo, $scope.pageSize,search).then(function(result){
-      console.log(result);
+    ProductService.getSearchProductList($scope.pagination.pageNo, $scope.pagination.pageSize, search).then(function(result){
       if(localStorage.campaignForSuggestion){
         var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
         $scope.campaignStartDate = campaignForSuggestion.start_date;
@@ -63,7 +57,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         }
       }
       $scope.productList = result.products;
-      $scope.pageCount = result.page_count;
+      $scope.pagination.pageCount = result.page_count;
       createPageLinks();
     });
   }
