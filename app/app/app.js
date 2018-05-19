@@ -141,11 +141,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/campaign-proposal-summary.html',
       controller: 'CampaignProposalCtrl',
     })
-    .state('admin.registration', {
-      url: '/registration',
-      templateUrl: 'views/admin/registration.html',
-      controller: 'AdminRegistrationCtrl',
-      title: "User Registration"
+    .state('admin.user-management', {
+      url: '/user-management',
+      templateUrl: 'views/admin/user-management.html',
+      controller: 'UserMgmtCtrl',
+      title: "User Management"
     })
     .state('admin.companies', {
       url: '/companies',
@@ -357,7 +357,7 @@ app.run(
           'admin.campaign-proposal-summary',
           'admin.campaign-running-summary',
           'admin.campaign-closed-summary',
-          'admin.registration',
+          'admin.user-management',
           'admin.companies',
           'admin.hoarding-list',
           'admin.formats',

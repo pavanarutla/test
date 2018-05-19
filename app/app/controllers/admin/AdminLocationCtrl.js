@@ -255,14 +255,14 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
 
   $scope.areaSearch = function(query) {
     return AdminLocationService.searchAreas(query.toLowerCase()).then(function(res){
-      $scope.pagination.pageCount = 0;
+      $scope.pagination.pageCount = 1;
       $scope.areas = res;
       return res;
     });
   }
 
   $scope.viewSelectedArea = function(area) {
-    $scope.pagination.pageCount = 0;
+    $scope.pagination.pageCount = 1;
     $scope.areas = [area];
   }
 

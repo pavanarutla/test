@@ -14,24 +14,29 @@
 	</div>
 	<div layout="column">
 
-		<div id="customSsearchInput" style="margin:8px;" layout-align="center end" layout="column">
-			<md-autocomplete style="width:50%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)"
-			 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(searchText)"
-			 md-item-text="item.siteNo" md-min-length="4" placeholder="Search..." md-menu-class="autocomplete-custom-template">
-				<md-item-template>
-					<span class="item-title">
-						<span> {{item.siteNo}} </span>
-					</span>
-					<span class="item-metadata">
-						<span>
-							<strong>{{item.company_name}}</strong>
+		<div id="customSsearchInput" style="margin:8px;" layout-align="center end" layout="row">
+			<div flex="60">
+				<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+					<md-item-template>
+						<span class="item-title">
+							<span> {{item.siteNo}} </span>
 						</span>
-						<span>
-							<strong>{{item.address}}</strong>
+						<span class="item-metadata">
+							<span>
+								<strong>{{item.company_name}}</strong>
+							</span>
+							<span>
+								<strong>{{item.address}}</strong>
+							</span>
 						</span>
-					</span>
-				</md-item-template>
-			</md-autocomplete>
+					</md-item-template>
+				</md-autocomplete>
+			</div>
+			<div flex="40">
+				<md-button class="md-raised" ng-click="getProductList()">
+					Cancel
+				</md-button>
+			</div>
 		</div>
 
 		<div style="margin-top: 1em;">
@@ -75,7 +80,7 @@
 									</a>
 								</span>
 								<span>
-									<a style="cursor:pointer;" ng-click="deleteProduct(list)">
+									<a style="cursor:pointer;" ng-click="deleteProduct(product)">
 										<md-icon>
 											<i class="material-icons">delete</i>
 										</md-icon>
