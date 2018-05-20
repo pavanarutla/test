@@ -35,7 +35,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   ===================*/
 
   $scope.loadProductList = function(){
-    ProductService.getProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
+    if($scope.searchAll){
+      var search = $scope.searchAll;
+    }else {
+      search = '';
+    }
+    ProductService.getSearchProductList($scope.pagination.pageNo, $scope.pagination.pageSize, search).then(function(result){
       if(localStorage.campaignForSuggestion){
         var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
         $scope.campaignStartDate = campaignForSuggestion.start_date;
@@ -60,6 +65,19 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   if($rootScope.currStateName == "admin.suggest-products"){
     $scope.loadProductList();
   }
+
+  /****** Search ************/
+   $scope.searchAll = "";
+
+   $scope.clearSearch = function () {
+      $scope.searchAll = "";
+      $scope.pageNo = 1;
+      $scope.loadProductList();
+   };
+  $scope.searchHoardingData = function () {
+       $scope.pageNo = 1;
+       $scope.loadProductList();
+  };
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){

@@ -13,7 +13,6 @@
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
-
           <md-icon>
             <i class="material-icons">clear</i>
           </md-icon>
@@ -32,7 +31,25 @@
   </md-sidenav>
   <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
   <div layout="row">
-    <div flex="20">
+    <div flex="80">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <form ng-submit="searchHoardingData()">
+            <input ng-model="searchAll" placeholder="Search Billboards with ID, Areas, Directions or Locations" >
+            <md-icon ng-if="searchAll!=''">
+              <i class="material-icons"  ng-click="clearSearch()">clear</i>
+            </md-icon>
+            <md-icon ng-if="searchAll==''">
+              <i class="material-icons" >search</i>
+            </md-icon>
+            
+          </form>
+          
+        </md-input-container>
+      </div>
+    </div>
+   <!-- <div flex="20">
       <div layout="row" layout-padding class="search-field">
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
@@ -63,15 +80,7 @@
           <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
         </md-input-container>
       </div>
-    </div>
-    <div flex="20">
-      <div layout="row" layout-padding class="search-field">
-        <md-input-container flex class="search-input">
-          <label>&nbsp;</label>
-          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
-        </md-input-container>
-      </div>
-    </div>
+    </div>-->
   </div>
   <div layout="row">
     <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height="600px"

@@ -10,6 +10,18 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				$http.get(config.apiPath + '/products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
+			getSearchProductList: function (pageNo, pageSize, search) {
+				var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
+				if(search){
+					pageData += "&searchkey=" + search;
+				}
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/search-products' + pageData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
 			getProductForPage: function(pageNo){
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/products/' + pageNo).success(dfd.resolve).error(dfd.reject);
