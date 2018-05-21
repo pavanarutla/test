@@ -3,7 +3,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
     /*
     ======== Campaign requests =======
     */
-    $scope.requestList = [];
+    $scope.requestList = {};
     function getAllFeeds(){
       AdminCampaignService.getAllCampaignRequests().then(function(result){
         $scope.requestList.campaignSuggestionRequests = result.requested_campaign_suggestions;
