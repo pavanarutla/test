@@ -23,16 +23,16 @@ app.controller('GmapCtrl',
       };
 
       $scope.hidelocations = false;
-      var setDefaultArea = function(){
+      var setDefaultArea = function () {
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
         var area = $scope.selectedArea;
-        $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+        $scope.mapObj.setCenter({ lat: Number(area.lat), lng: Number(area.lng) });
         var bounds = new google.maps.LatLngBounds();
-        bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+        bounds.extend({ lat: Number(area.lat), lng: Number(area.lng) });
         $scope.mapObj.fitBounds(bounds);
         localStorage.removeItem('areaFromHome');
       };
-      
+
       $scope.today = new Date();
 
       $scope.mapObj;
@@ -47,9 +47,9 @@ app.controller('GmapCtrl',
       $scope.isMapInitialized = false;
 
       $scope.$watch(
-        function() { return $mdSidenav('productDetails').isOpen(); },
-        function(newValue, oldValue) {
-          if(newValue == false){
+        function () { return $mdSidenav('productDetails').isOpen(); },
+        function (newValue, oldValue) {
+          if (newValue == false) {
             $scope.selectedProduct = null;
             selectorMarker.setMap(null);
             $scope.$parent.existingCampaignSidenavVisible = false;
@@ -58,9 +58,9 @@ app.controller('GmapCtrl',
       );
 
       $scope.$watch(
-        function() { return $mdSidenav('suggestMe').isOpen(); },
-        function(newValue, oldValue) {
-          if(newValue == false){
+        function () { return $mdSidenav('suggestMe').isOpen(); },
+        function (newValue, oldValue) {
+          if (newValue == false) {
             $scope.suggestMeRequestSent = false;
           }
         }
@@ -78,15 +78,15 @@ app.controller('GmapCtrl',
 
       $scope.product = {};
 
-      MapService.getMarkers().then(function (result) {
-        $scope.filteredMarkers = result.products;
+      MapService.mapProducts().then(function (markers) {
+        $scope.filteredMarkers = markers;
         NgMap.getMap().then(function (map) {
           $scope.mapObj = map;
           $scope.processMarkers();
-          if(localStorage.areaFromHome){
+          if (localStorage.areaFromHome) {
             setDefaultArea();
           }
-          $scope.mapObj.addListener('zoom_changed', function() {
+          $scope.mapObj.addListener('zoom_changed', function () {
             $scope.selectedProduct = null;
             selectorMarker.setMap(null);
           });
@@ -122,7 +122,7 @@ app.controller('GmapCtrl',
       // MapService.getIndustrySectors().then(function(Sectors){
       //   $scope.Sectors = Sectors;
       // });
-      $scope.DurationSectors = [];     
+      $scope.DurationSectors = [];
 
       // clender
       $scope.opened = {
@@ -181,18 +181,18 @@ app.controller('GmapCtrl',
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
-     
-      $scope.pointermap = function(){
+
+      $scope.pointermap = function () {
         $scope.ispointer = !$scope.ispointer;
       };
 
       $scope.showProductImagePopup = function (ev, img_src) {
         $mdDialog.show({
-          locals:{ src: img_src },
+          locals: { src: img_src },
           templateUrl: 'views/image-popup-large.html',
           fullscreen: $scope.customFullscreen,
-          clickOutsideToClose:true,
-          controller:function($scope, src){
+          clickOutsideToClose: true,
+          controller: function ($scope, src) {
             $scope.img_src = src;
           }
         });
@@ -286,27 +286,27 @@ app.controller('GmapCtrl',
       //export all 
 
       $scope.exportAllCampaigns = function () {
-        CampaignService.exportCampaignsPdf().then(function(result){
+        CampaignService.exportCampaignsPdf().then(function (result) {
           var campaignPdf = new Blob([result], { type: 'application/pdf;charset=utf-8' });
           FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
-          if(result.status){
+          if (result.status) {
             toastr.error(result.meesage);
           }
         });
       };
       ////////////////////////////////////////////////////////////////////////
       // tablet filters filtersMap
-      
-      $scope.toggleViewAllFilter = function() {
+
+      $scope.toggleViewAllFilter = function () {
         $mdSidenav('filtersMobile').toggle();
       };
-      $scope.mapFilter = function() {
+      $scope.mapFilter = function () {
         $mdSidenav('filtersMap').toggle();
       };
-      $scope.shortListed = function() {
+      $scope.shortListed = function () {
         $mdSidenav('shortlistedList').toggle();
       };
-      $scope.savedCampagin = function() {
+      $scope.savedCampagin = function () {
         $mdSidenav('savedCamapgin').toggle();
       };
       ////////////////////////////////////////////////////////////////////
@@ -328,16 +328,16 @@ app.controller('GmapCtrl',
       //   }
       // };
       $scope.newDate = new Date();
-     // console.log($scope.start_date,"$scope.start_date")
-    // $scope.start_date = new Date();
+      // console.log($scope.start_date,"$scope.start_date")
+      // $scope.start_date = new Date();
       $scope.endDate = $scope.start_date + 1;
 
-  //    if(start_date > end_date){
-  //     $scope.errMessage = 'end date should not be before start day.';
-  //     return false;
-  //  }
+      //    if(start_date > end_date){
+      //     $scope.errMessage = 'end date should not be before start day.';
+      //     return false;
+      //  }
 
-       function selectMarker(marker) {
+      function selectMarker(marker) {
         $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
@@ -397,8 +397,11 @@ app.controller('GmapCtrl',
       var locArr = [];
       var uniqueMarkers = [];
       var concentricMarkers = {};
+      var uniqueMarkerArr = [];
       $scope.processMarkers = function () {
-        _.each($scope.filteredMarkers, function (v, i) {
+        markersOnMap = Object.assign([]);
+        uniqueMarkerArr = Object.assign([]);
+        /*_.each($scope.filteredMarkers, function (v, i) {
           var product = {position: {lat: v.lat, lng: v.lng}, data: v};
           productList.push(product);
           if (locArr[JSON.stringify(product.position)]) {
@@ -406,48 +409,8 @@ app.controller('GmapCtrl',
           } else {
             locArr[JSON.stringify(product.position)] = 1;
           }
-        });
-        _.each(productList, function(v, i){
-          if(locArr[JSON.stringify(v.position)] > 1){
-            if(concentricMarkers[JSON.stringify(v.position)]){
-              concentricMarkers[JSON.stringify(v.position)].count++;
-              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data);
-            }
-            else {
-              concentricMarkers[JSON.stringify(v.position)] = {};
-              concentricMarkers[JSON.stringify(v.position)].markers = [];
-              concentricMarkers[JSON.stringify(v.position)].count = 1;
-              concentricMarkers[JSON.stringify(v.position)].markers.push(v.data);
-            }
-          }
-          else{
-            uniqueMarkers.push(v.data);
-          }
-        });
-        // console.log(uniqueMarkers);
-        // console.log(concentricMarkers);
+        });*/
 
-        /* 
-        //// handling clustering ////
-        */
-        var uniqueMarkerArr = [];
-        _.each(uniqueMarkers, function (markerData, index) {
-          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            icon: {
-              url: config.serverUrl + markerData.symbol,
-              scaledSize: new google.maps.Size(30, 30)
-            },
-            title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
-          });
-          marker.properties = markerData;
-          uniqueMarkerArr.push(marker);
-          markersOnMap.push(marker);
-          google.maps.event.addListener(marker, 'click', function (e) {
-            selectMarker(marker);
-          });
-        });
         var mc = {
           gridSize: 50,
           maxZoom: 13,
@@ -455,9 +418,6 @@ app.controller('GmapCtrl',
         };
         $scope.Clusterer = new MarkerClusterer($scope.mapObj, uniqueMarkerArr, mc);
 
-        /*
-        //// handling spiderifying ////
-        */
         var circleMarker = new google.maps.Marker({
           icon: {
             url: 'assets/images/maps/Ellipse 55.png',
@@ -477,40 +437,7 @@ app.controller('GmapCtrl',
           keepSpiderfied: true
         });
 
-        _.each(concentricMarkers, function (markerData, index) {
-          for (var i = 0; i < markerData.count; i++) {
-            (function () {  // make a closure over the marker and marker data
-              var label = {};
-              label.text = " ";
-              label.color = "rgba(255, 255, 255, 1)";
-              if (i == 0) {
-                label.text = markerData.count.toString();
-              }
-              var icon = {
-                url: 'assets/images/maps/unspidered-cluster.png',
-                scaledSize: new google.maps.Size(20, 20),
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(10, 10) // anchor
-              };
-              var marker = new google.maps.Marker({
-                position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
-                icon: icon,
-                label: label,
-                title: 'Location:' + markerData.markers[i].address + '\nNo. of views: ' + markerData.markers[i].impressions
-              });
-              marker.properties = markerData.markers[i];
-              marker.groupSize = markerData.count;
-              google.maps.event.addListener(marker, 'spider_click', function (e) {
-                selectSpideredMarker(marker);
-              });
-              markersOnMap.push(marker);
-              oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
-              $scope.Clusterer.addMarker(marker);
-            })();
-          }
-        });
 
-        // instantiate oms when click occurs on marker-group
         oms.addListener('format', function (marker, status) {
           var markerIcon;
           var label = marker.getLabel();
@@ -546,42 +473,180 @@ app.controller('GmapCtrl',
             label.color = "rgba(255, 255, 255, 1)";
             marker.setLabel(label);
             // spiderCircle.setMap(null);
-            circleMarker.setMap(null);            
+            circleMarker.setMap(null);
           }
           marker.setIcon(markerIcon);
         });
+
+        function addNewMarkers(markerData) {
+          //console.log(markerData)
+          for (var i = 0; i < markerData.product_details.length; i++) {
+            var label = {};
+            label.text = " ";
+            label.color = "rgba(255, 255, 255, 1)";
+            if (i == 0) {
+              label.text = markerData.product_details.length.toString();
+            }
+            var icon = {
+              url: 'assets/images/maps/unspidered-cluster.png',
+              scaledSize: new google.maps.Size(20, 20),
+              origin: new google.maps.Point(0, 0), // origin
+              anchor: new google.maps.Point(10, 10) // anchor
+            };
+            var marker = new google.maps.Marker({
+              position: { lat: parseFloat(markerData._id.lat), lng: parseFloat(markerData._id.lng) },
+              icon: icon,
+              label: label,
+              title: 'Location:' + markerData.product_details[i].address + '\nNo. of views: ' + markerData.product_details[i].impressions
+            });
+            marker.properties = markerData.product_details[i];
+            marker.groupSize = markerData.product_details.length;
+            google.maps.event.addListener(marker, 'spider_click', function (e) {
+              selectSpideredMarker(marker);
+            });
+            markersOnMap.push(marker);
+            oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+            $scope.Clusterer.addMarker(marker);
+          }
+        }
+        function addUniqueMarker(markerData) {
+          //console.log('markersdata',markerData.product_details[0].symbol)
+          uniqueMarkers.push(markerData.product_details);
+          var latLng = new google.maps.LatLng(markerData._id.lat, markerData._id.lng);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            icon: {
+              url: config.serverUrl + markerData.product_details[0].symbol,
+              scaledSize: new google.maps.Size(30, 30)
+            },
+            title: 'Location:' + markerData.product_details[0].address + '\nNo. of views: ' + markerData.product_details[0].impressions
+          });
+          marker.properties = markerData.product_details[0];
+          uniqueMarkerArr.push(marker);
+          markersOnMap.push(marker);
+          $scope.Clusterer.addMarker(marker);
+
+          google.maps.event.addListener(marker, 'click', function (e) {
+            selectMarker(marker);
+          });
+        }
+        //var latLngGroups = _.groupBy($scope.filteredMarkers, function (item) {
+        //return item.lat + ', ' + item.lng;
+        //});
+        //console.log(latLngGroups);
+        _.each($scope.filteredMarkers, function (data) {
+          if (data.product_details.length == 1) {
+            //console.log('unique Arrays',data.product_details)
+            addUniqueMarker(data);
+          }
+          else if (data.product_details.length > 1) {
+            addNewMarkers(data);
+          }
+        });
+        /*_.each(latLngGroups, function (data) {
+          if(data.length > 1) {
+            addNewMarkers(data);
+          }
+        });*/
+        // console.log('markersOnMap: ', markersOnMap.length, 'uniqueMarkers', uniqueMarkerArr.length);
+
+
+
+        /* 
+        //// handling clustering ////
+        */
+        //var uniqueMarkerArr = [];
+        /*_.each(uniqueMarkers, function (markerData, index) {
+          var latLng = new google.maps.LatLng(markerData.lat, markerData.lng);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            icon: {
+              url: config.serverUrl + markerData.symbol,
+              scaledSize: new google.maps.Size(30, 30)
+            },
+            title: 'Location:' + markerData.address + '\nNo. of views: ' + markerData.impressions
+          });
+          marker.properties = markerData;
+          uniqueMarkerArr.push(marker);
+          markersOnMap.push(marker);
+          google.maps.event.addListener(marker, 'click', function (e) {
+            selectMarker(marker);
+          });
+        });*/
+
+        /*
+        //// handling spiderifying ////
+        */
+
+        /*_.each(concentricMarkers, function (markerData, index) {
+          for (var i = 0; i < markerData.count; i++) {
+            (function () {  // make a closure over the marker and marker data
+              var label = {};
+              label.text = " ";
+              label.color = "rgba(255, 255, 255, 1)";
+              if (i == 0) {
+                label.text = markerData.count.toString();
+              }
+              var icon = {
+                url: 'assets/images/maps/unspidered-cluster.png',
+                scaledSize: new google.maps.Size(20, 20),
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(10, 10) // anchor
+              };
+              var marker = new google.maps.Marker({
+                position: { lat: parseFloat(markerData.markers[i].lat), lng: parseFloat(markerData.markers[i].lng) },
+                icon: icon,
+                label: label,
+                title: 'Location:' + markerData.markers[i].address + '\nNo. of views: ' + markerData.markers[i].impressions
+              });
+              marker.properties = markerData.markers[i];
+              marker.groupSize = markerData.count;
+              google.maps.event.addListener(marker, 'spider_click', function (e) {
+                selectSpideredMarker(marker);
+              });
+              markersOnMap.push(marker);
+              oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+              $scope.Clusterer.addMarker(marker);
+            })();
+          }
+        });*/
+
+        // instantiate oms when click occurs on marker-group
+
       }
 
-      $scope.$parent.$watch('trafficOn', function(oldValue, newValue){        
+      $scope.$parent.$watch('trafficOn', function (oldValue, newValue) {
         var mapVal = null;
         if (!newValue) {
           mapVal = $scope.mapObj;
         }
         trafficLayer.setMap(mapVal);
       });
- 
-      $scope.applyFilter = function(){
+
+      $scope.applyFilter = function () {
         productList = [];
         locArr = [];
         uniqueMarkers = [];
         concentricMarkers = {};
-        var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
+        var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats };
         MapService.filterProducts(filterObj).then(function (markers) {
-          _.each(markersOnMap, function(v, i){
+          //console.log("filter products",marksers)
+          _.each(markersOnMap, function (v, i) {
             v.setMap(null);
             $scope.Clusterer.removeMarker(v);
           });
-          markersOnMap = [];
+          markersOnMap = Object.assign([]);
           $scope.filteredMarkers = markers;
+          console.log("apply filter markers ", $scope.filteredMarkers)
           $scope.processMarkers();
-          if(markers.length > 0){
+          if (markers.length > 0) {
             var bounds = new google.maps.LatLngBounds();
             _.each(markersOnMap, function (v, i) {
               bounds.extend(v.getPosition());
             });
-            $scope.mapObj.fitBounds(bounds);
+            // console.log('map object',$scope.mapObj)
           }
-          else{
+          else {
             toastr.error("no marker found for the criteria you selected");
           }
         });
@@ -598,7 +663,7 @@ app.controller('GmapCtrl',
               .ariaLabel('shortlist-success')
               .ok('Got it!')
               .targetEvent(ev),
-              $mdSidenav('productDetails').close()
+            $mdSidenav('productDetails').close()
           );
           getShortListedProducts();
           $mdSidenav('productDetails').close();
@@ -675,24 +740,24 @@ app.controller('GmapCtrl',
         //   // });
         // }
         // campaign.products = $scope.selectedForNewCampaign;
-        if($scope.shortListedProducts.length > 0){
+        if ($scope.shortListedProducts.length > 0) {
           $scope.campaign.products = [];
           _.each($scope.shortListedProducts, function (v, i) {
             $scope.campaign.products.push(v.id);
           });
-          CampaignService.saveCampaign($scope.campaign).then(function(response){
+          CampaignService.saveCampaign($scope.campaign).then(function (response) {
             $scope.campaignSavedSuccessfully = true;
-            $scope.campaign={};
-            $timeout(function(){
+            $scope.campaign = {};
+            $timeout(function () {
               $mdSidenav('saveCampaignSidenav').close();
               $mdSidenav('shortlistAndSaveSidenav').close();
               $scope.campaignSavedSuccessfully = false;
-            },3000);
+            }, 3000);
             $scope.loadPlannedUserCampaigns();
             getShortListedProducts();
           });
         }
-        else{
+        else {
           toastr.error("Please shortlist some products first.");
         }
       }
@@ -700,13 +765,13 @@ app.controller('GmapCtrl',
       $scope.emptyCampaign = {};
       $scope.createEmptyCampaign = function () {
         $scope.campaign.products = [];
-        CampaignService.saveCampaign($scope.emptyCampaign).then(function(response){
+        CampaignService.saveCampaign($scope.emptyCampaign).then(function (response) {
           $scope.emptyCampaignSaved = true;
           $scope.emptyCampaign = {};
-          $timeout(function(){
+          $timeout(function () {
             $mdSidenav('createEmptyCampaignSidenav').close();
             $scope.emptyCampaignSaved = false;
-          },3000);
+          }, 3000);
           $scope.loadPlannedUserCampaigns();
           getShortListedProducts();
         });
@@ -764,7 +829,7 @@ app.controller('GmapCtrl',
         return _.contains($scope.selectedFormats, formatId);
       }
 
-      $scope.toggleTrafficLegends = function(){
+      $scope.toggleTrafficLegends = function () {
         $scope.showTrafficLegend = !$scope.showTrafficLegend;
       }
 
@@ -778,40 +843,40 @@ app.controller('GmapCtrl',
 
       $scope.range = {};
       $scope.range.circleRadius = 0;
-      $scope.updateCircle = function(){
+      $scope.updateCircle = function () {
         rangeCircle.setMap(null);
-        rangeCircle.setRadius(Math.sqrt($scope.circleRadius*1000 / Math.PI));
-        rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
+        rangeCircle.setRadius(Math.sqrt($scope.circleRadius * 1000 / Math.PI));
+        rangeCircle.setCenter({ lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng) });
         rangeCircle.setMap($scope.mapObj);
         $scope.mapObj.fitBounds(rangeCircle.getBounds());
       }
       // Drawing a circle ends
 
-      $scope.viewCampaignDetails = function(campaignId){
-        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+      $scope.viewCampaignDetails = function (campaignId) {
+        CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
           $scope.$parent.alreadyShortlisted = true;
           $scope.toggleCampaignDetailSidenav();
         });
       }
 
-      var updateCampaignDetailSidenav = function(campaignId){
-        CampaignService.getCampaignWithProducts(campaignId).then(function(campaignDetails){
+      var updateCampaignDetailSidenav = function (campaignId) {
+        CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
         });
       }
 
-      $scope.addProductToExistingCampaign = function(existingCampaignId, productId){
+      $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
         var productToCampaign = {
           product_id: productId,
           campaign_id: existingCampaignId
         };
-        CampaignService.addProductToExistingCampaign(productToCampaign).then(function(result){
-          if(result.status == 1){
+        CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
+          if (result.status == 1) {
             toastr.success(result.message);
             $mdSidenav('productDetails').close();
           }
-          else{
+          else {
             toastr.error(result.message);
           }
         });
@@ -823,24 +888,24 @@ app.controller('GmapCtrl',
           receiver_name: shareShortlisted.name
         };
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
-          if(result.status == 1){
+          if (result.status == 1) {
             toastr.success(result.message);
             $mdSidenav('shortlistSharingSidenav').close()
           }
-          else{
+          else {
             toastr.error(result.message);
           }
         });
       };
 
-      $scope.shareCampaign = function(ev, shareCampaign){
+      $scope.shareCampaign = function (ev, shareCampaign) {
         var campaignToEmail = {
           campaign_id: $scope.campaignToShare.id,
           email: shareCampaign.email,
           receiver_name: shareCampaign.receiver_name
         };
-        CampaignService.shareCampaignToEmail(campaignToEmail).then(function(result){
-          if(result.status == 1){
+        CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+          if (result.status == 1) {
             $mdSidenav('shareCampaign').close();
             $mdDialog.show(
               $mdDialog.alert()
@@ -851,15 +916,15 @@ app.controller('GmapCtrl',
                 .ariaLabel('Alert Dialog Demo')
                 .ok('Got it!')
                 .targetEvent(ev)
-            );          
+            );
           }
-          else{
+          else {
             toastr.error(result.message);
           }
         });
       }
 
-      $scope.viewProduct = function(product){
+      $scope.viewProduct = function (product) {
         $scope.product.image = config.serverUrl + product.image;
         $scope.product.siteNo = product.siteNo;
         $scope.product.panelSize = product.panelSize;
@@ -872,33 +937,33 @@ app.controller('GmapCtrl',
         $mdSidenav('productDetails').toggle();
       }
 
-      $scope.deleteProductFromCampaign = function(productId, campaignId){
-        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
-          if(result.status == 1){
+      $scope.deleteProductFromCampaign = function (productId, campaignId) {
+        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function (result) {
+          if (result.status == 1) {
             toastr.success(result.message);
-           updateCampaignDetailSidenav(campaignId);
+            updateCampaignDetailSidenav(campaignId);
           }
-          else{
+          else {
             toastr.error(result.message);
           }
         });
       }
 
-      $scope.autoCompleteArea = function(query) {
+      $scope.autoCompleteArea = function (query) {
         return LocationService.getAreasWithAutocomplete(query);
       }
 
-      $scope.selectedAreaChanged = function(area){
+      $scope.selectedAreaChanged = function (area) {
         $scope.selectedArea = area;
-        if(area){
-          $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+        if (area) {
+          $scope.mapObj.setCenter({ lat: Number(area.lat), lng: Number(area.lng) });
           var bounds = new google.maps.LatLngBounds();
-          bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+          bounds.extend({ lat: Number(area.lat), lng: Number(area.lng) });
           $scope.mapObj.fitBounds(bounds);
         }
       }
 
-      $scope.requestProposalForCampaign = function(campaignId, ev){
+      $scope.requestProposalForCampaign = function (campaignId, ev) {
         CampaignService.requestCampaignProposal(campaignId).then(function (result) {
           if (result.status == 1) {
             $mdDialog.show(
@@ -912,7 +977,7 @@ app.controller('GmapCtrl',
                 .targetEvent(ev)
             );
           }
-          else{
+          else {
             toastr.error(result.message);
           }
           $scope.loadPlannedUserCampaigns()
@@ -920,14 +985,14 @@ app.controller('GmapCtrl',
       }
 
       // sets the height of the div containing the map.
-      function setMapContainerHeight(){
+      function setMapContainerHeight() {
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
-        if(windowHeight < 600){
-          document.querySelector('#map-container').style['height'] = windowHeight-100+'px';
+        if (windowHeight < 600) {
+          document.querySelector('#map-container').style['height'] = windowHeight - 100 + 'px';
           // $('#map-container').css('height', height-100+'px');
         }
-        else{
-          document.querySelector('#map-container').style['height'] = windowHeight-64+'px';   //and setting height of map container
+        else {
+          document.querySelector('#map-container').style['height'] = windowHeight - 64 + 'px';   //and setting height of map container
         }
         $scope.mapContainerHeightSet = true;
       }
