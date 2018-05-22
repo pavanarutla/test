@@ -237,13 +237,16 @@ app.controller('bbMngrCtrl',
   //   $scope.feedBackData = response;
   // });
   $scope.subscriberData = {};
+  $scope.subscribeErrors = {}
   $scope.subscribe = function () {
     ContactService.subscribe($scope.subscriberData).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.subscriberData.email = null;
+        $scope.subscribeErrors = null
       }
-      else{
-        toastr.error(result.message);
+      else  if(result.status == 0){
+        $scope.subscribeErrors = result.message;
       }
     });
     angular.element($('#subscriber-email')).val('');
@@ -264,6 +267,7 @@ app.controller('bbMngrCtrl',
     ContactService.requestCallBack($scope.callbackRequest).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.callbackRequest.phoneNo = null;
         $mdDialog.hide();
       }
       else{
