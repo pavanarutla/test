@@ -45,6 +45,7 @@ app.controller('GmapCtrl',
       $scope.siteNoSearch = "";
       $scope.showTrafficLegend = false;
       $scope.isMapInitialized = false;
+      $scope.plottingDone = false;
 
       $scope.$watch(
         function () { return $mdSidenav('productDetails').isOpen(); },
@@ -542,6 +543,7 @@ app.controller('GmapCtrl',
           else if (data.product_details.length > 1) {
             addNewMarkers(data);
           }
+          $scope.plottingDone = true;
         });
         /*_.each(latLngGroups, function (data) {
           if(data.length > 1) {
@@ -629,6 +631,7 @@ app.controller('GmapCtrl',
         uniqueMarkers = [];
         concentricMarkers = {};
         var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats };
+        $scope.plottingDone = false;
         MapService.filterProducts(filterObj).then(function (markers) {
           //console.log("filter products",marksers)
           _.each(markersOnMap, function (v, i) {
@@ -637,7 +640,6 @@ app.controller('GmapCtrl',
           });
           markersOnMap = Object.assign([]);
           $scope.filteredMarkers = markers;
-          console.log("apply filter markers ", $scope.filteredMarkers)
           $scope.processMarkers();
           if (markers.length > 0) {
             var bounds = new google.maps.LatLngBounds();
@@ -704,6 +706,7 @@ app.controller('GmapCtrl',
         $scope.selectedStates = null;
         $scope.selectedArea = null;
         $scope.circleRadius = null;
+        $scope.plottingDone = false;
         _.each(markersOnMap, function (v, i) {
           v.setMap(null);
           $scope.Clusterer.removeMarker(v);
@@ -997,6 +1000,18 @@ app.controller('GmapCtrl',
         $scope.mapContainerHeightSet = true;
       }
       setMapContainerHeight();
+
+      $scope.elipsis = "";
+      $scope.productLoader = function(){
+        if(!$scope.filteredMarkers){
+          setTimeout($scope.productLoader, 500);
+        }
+        if($scope.elipsis == "..."){
+          $scope.elipsis = "";
+        }
+        $scope.elipsis += ".";
+        return $scope.elipsis;
+      }
 
     }
   ]
