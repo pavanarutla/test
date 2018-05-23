@@ -589,6 +589,9 @@
 							<input type= "email" ng-model = "subscriberData.email" placeholder = "Enter Your Email Address" id = "subscribers_email" name = "subscriber_email" required>
 							<button ng-click="subscribe()">GO</button>
 						</form>
+						<p ng-repeat="suscribErr in subscribeErrors" style="color:red;margin-top:1em" ng-if="subscribeErrors.length > 0">
+							{{suscribErr}}
+						</p>
 					</div>
 				</div>
 			
@@ -599,10 +602,11 @@
 	
 
 </div>
-<!--<script>
+
+<!-- <script>
   var height = $(window).height();
   $('#homeCarousel').height(height - 97);
-</script>-->
+</script> -->
 
 
 
