@@ -2,6 +2,8 @@ app.controller('bbMngrCtrl',
   function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
 
+    $scope.forms = {};
+
     if(localStorage.isAuthenticated && localStorage.loggedInUser){
       $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
@@ -112,25 +114,12 @@ app.controller('bbMngrCtrl',
       $mdSidenav('right').toggle();
     };
 
-    $scope.showTabDialog = function (ev) {
+    $scope.showSignInDialog = function (ev) {
       $mdDialog.show({
-        templateUrl: 'views/signIn.html',
+        templateUrl: 'views/sign-in.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
-      })
-    };
-    $scope.showVideo = function (ev) {
-      $mdDialog.show({
-        templateUrl: 'views/video.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true,
-      })
-    };
-    $scope.shareForm = function (ev) {
-      $mdDialog.show({
-        templateUrl: 'views/shareform.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose:true,
+        controller: 'AuthCtrl'
       })
     };
 
@@ -145,19 +134,19 @@ app.controller('bbMngrCtrl',
 
     $scope.whatwedo = function () {
       $location.path('/');
-      window.scroll(0, 740);
+      window.scroll(0, 580);
     }
     $scope.formate = function () {
       $location.path('/');
-      window.scroll(0, 1630)
+      window.scroll(0, 1550)
     }
     $scope.whyOutdoor = function () {
       $location.path('/');
-      window.scroll(0, 2570)
+      window.scroll(0, 2430)
     }
     $scope.contactus = function () {
       $location.path('/');
-      window.scroll(0, 3810)
+      window.scroll(0, 3270)
     }
 
   //scroll to top
@@ -229,44 +218,56 @@ app.controller('bbMngrCtrl',
 
   $scope.query={};
   $scope.sendQuery = function () {
-    ContactService.sendQuery($scope.query).then(function (response) {
+    ContactService.sendQuery($scope.query).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.sendQueryErrors = null;
       }
-      else{
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.sendQueryErrors = result.message;
       }
+      $scope.query = {};
+      $scope.forms.sendQueryForm.$setPristine();
+      $scope.forms.sendQueryForm.$setUntouched();
+    },function(error){
+      toastr.error("somthing went wrong please try agin later");
     });
-    $scope.query={};
   }
   // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
   //   $scope.feedBackData = response;
   // });
   $scope.subscriberData = {};
+  $scope.subscribeErrors = {}
   $scope.subscribe = function () {
     ContactService.subscribe($scope.subscriberData).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.subscriberData.email = null;
+        $scope.subscribeErrors = null
       }
-      else{
-        toastr.error(result.message);
+      else  if(result.status == 0){
+        $scope.subscribeErrors = result.message;
       }
     });
     angular.element($('#subscriber-email')).val('');
   };
+
   $scope.showContact = function () {
     $mdDialog.show({
       templateUrl: 'views/show-contact.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
     })
   };
     
   $scope.callbackRequest = {};
   $scope.requestCallBack = function () {
-    ContactService.requestCallBack(callbackRequest).then(function (response) {
+    ContactService.requestCallBack($scope.callbackRequest).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.callbackRequest.phoneNo = null;
         $mdDialog.hide();
       }
       else{
@@ -303,6 +304,7 @@ app.controller('bbMngrCtrl',
 
     // saved view all side nav
     $scope.toggleViewAllShortlisted = function () {
+      $scope.alreadyShortlisted = true;
       $mdSidenav('shortlistAndSaveSidenav').toggle();
     };
     $scope.toggleShareShortlistedSidenav = function () {
@@ -429,6 +431,12 @@ app.controller('bbMngrCtrl',
       NotificationService.updateNotifRead(notificationId).then(function(result){
         if(result.status == 1){
           getUserNotifs();
+          var preStoredNotif = _.find($scope.notifs, function(notif){
+            notif.id = notificationId;
+          });
+          if(preStoredNotif){
+            preStoredNotif.status = 1;
+          }
         }
         else{
           toastr.error(result.message);
@@ -459,6 +467,11 @@ app.controller('bbMngrCtrl',
       else{
         return false;
       }
+    }
+    
+    // Setting up selected format for format page
+    $scope.setSelectedFormat = function(index){
+      $rootScope.formatSelected = index;
     }
   }
 );

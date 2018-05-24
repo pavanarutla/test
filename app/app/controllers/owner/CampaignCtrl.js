@@ -1,5 +1,5 @@
 
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -17,17 +17,23 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $interval, $sta
       clickOutsideToClose: true
     })
   };
-  $scope.addOwnerCampagin = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/owner/addcampaign.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
-    })
+  // $scope.addOwnerCampagin = function (ev) {
+  //   $mdDialog.show({
+  //     templateUrl: 'views/owner/addcampaign.html',
+  //     fullscreen: $scope.customFullscreen,
+  //     clickOutsideToClose: true
+  //   })
+  // };
+  $scope.addCamapginSidenav = function () {
+    $mdSidenav('ownerAddcmapgin').toggle();
   };
-
   $scope.cancel = function () {
-    $mdDialog.cancel();
+    $mdDialog.hide();
   };
+  $scope.sharePerson = false;
+  $scope.shareCampaign = function () {
+        $scope.sharePerson = !$scope.sharePerson;
+  }
 
   ////data for image uploading 
 
@@ -145,7 +151,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $interval, $sta
     ]
     $scope.viewImage = function () { 
     $mdDialog.show({
-      templateUrl: 'views/owner/viewimage.html',
+      templateUrl: 'views/owner/view-image.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })

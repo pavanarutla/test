@@ -3,11 +3,38 @@
         <div><h3>Subscribers</h3></div>
     </div>
     <div layout-margin layout="column"  style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+
         <div><h3>List Of Subscribers</h3></div>
-    </div>
-    <div layout-margin layout="column">
-        <div ui-grid="gridSubscribers" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    </div>
+        <form ng-submit="selected_rows()">
+            <select name="action">
+                <option value="">Action</option>
+                <option value="delete">Unsubscribe</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        <div>
+             <label>Which rows should we export?</label>
+              <select ng-model="export_row_type"</select>
+                <option value='all'>All</option>
+                <option value='visible'>Visible</option>
+                <option value='selected'>Selected</option>
+              </select>
+              <label>What format would you like?</label>
+              <select ng-model="export_format"</select>
+                <option value='csv'>CSV</option>
+                <option value='pdf'>PDF</option>
+              </select>
+              <button ng-click="export()">Export</button>
+              <div class="custom-csv-link-location">
+                <label>Your CSV will show below:</label>
+                <span class="ui-grid-exporter-csv-link">&nbsp</span>
+              </div>
+        </div>  
+        <div layout-margin layout="column">
+            <div ui-grid="gridSubscribers" ui-grid-exporter  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+        </div>
+    </div> 
+    
   
     
 </div>

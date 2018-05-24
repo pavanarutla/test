@@ -6,28 +6,74 @@
 		</div>
 	</div>
 
-<form  name="country" novalidate>
-	<div layout="column" layout-margin layout-padding flex="50">
+	<form name="country" novalidate>
 		<div layout="column" layout-margin layout-padding flex="50">
-			<md-input-container class="md-block">
-				<label>Enter Country Name</label>
-				<input ng-model="country.name" type="text" name="countryname" required/>
-				<input type="hidden" name="country_id" ng-model="country.id" />
-				<div ng-messages="country.countryname.$error">
-				<p ng-message="required">Please complete this field.</p>
+			<div layout="column" layout-margin layout-padding flex="50">
+				<md-input-container class="md-block">
+					<label>Enter Country Name</label>
+					<input ng-model="country.name" type="text" name="countryname" required/>
+					<input type="hidden" name="country_id" ng-model="country.id" />
+					<div ng-messages="country.countryname.$error" ng-if="!$scope.country.name == null">
+						<p ng-message="required">Please complete this field.</p>
+					</div>
+					<!-- <div ng-messages="country.$error">
+						<div ng-message="required">Country Name is required</div>
+					</div> -->
+				</md-input-container>
+				<div class="serverErrors" ng-if="saveCountryErrors && !saveCountryErrors.length == 0">
+					<ul>
+						<li ng-repeat="error in saveCountryErrors">
+							{{error}}
+						</li>
+					</ul>
 				</div>
-				<!-- <div ng-messages="country.$error">
-					<div ng-message="required">Country Name is required</div>
-				</div> -->
-			</md-input-container>
+			</div>
+			<div layout="row">
+				<md-button Class="md-raised md-primary" type="submit" ng-click="saveCountry()" ng-disabled="country.$invalid">SUBMIT</md-button>
+				<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
+			</div>
 		</div>
-		<div layout="row">
-			<md-button Class="md-raised md-primary"  type="submit" ng-click="saveCountry()">SUBMIT</md-button>
-			<!-- <md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button> -->
-		</div>
-	</div>
 	</form>
 
-	<div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-	 ui-grid-auto-resize class="grid"></div>
+	<!-- <div ui-grid="gridCountry" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+	 ui-grid-auto-resize class="grid">
+	</div> -->
+	<!-- ===== table new code start=======-->
+	<div style="margin-top: 1em; margin-bottom:1em;">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered add-countery">
+				<thead>
+					<tr>
+						<th>Sr. No.</th>
+						<th>Country</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="country in countryList track by $index">
+						<td>{{$index + 1}}</td>
+						<td>{{country.name}}</td>
+						<td>
+							<span>
+								<a style="cursor:pointer;" ng-click="editCountry(country)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+							<span>
+								<a style="cursor:pointer;" ng-click="deleteCountry(country)">
+									<md-icon>
+										<i class="material-icons">delete</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- ===== table new code end=======-->
+
 </div>

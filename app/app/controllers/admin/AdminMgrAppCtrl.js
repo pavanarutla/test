@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, AdminNotificationService, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
 
   $rootScope.serverUrl = config.serverUrl;
 
@@ -14,57 +14,15 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     $mdSidenav('right').toggle();
   };
   
-  $scope.items = [
-    {
-      "campaignname": "Flipkart",
-      "clientcomapanyname": "Neon",
-      "clientname": "Chanikya",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "25000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Amezon",
-      "clientcomapanyname": "Amezon",
-      "clientname": "shiva",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "30000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Paytm",
-      "clientcomapanyname": "Paytm",
-      "clientname": "srikanth",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "50000",
-      "products": "0"
-    }
-  ];
-
-  $scope.floorDetails = {
-    roomDetails: [
-      {
-        bedIds: []
-      },
-      {
-        bedIds: []
-      },
-      {
-        bedIds: []
-      },
-      
-
-    ]
-  };
+  $scope.logout = function(){
+    $auth.logout().then(function(result){
+      // console.log(result);
+      $rootScope.isAuthenticated = false;
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');        
+    });
+  }
 
   $scope.showFormats = false;
   $scope.toogelMenu = function () {
@@ -85,10 +43,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.adminNotifs = [];
   var getAdminNotifs = function(){
     var last_notif = 0;
-    if($scope.notifs && $scope.notifs.length > 0){
+    if($scope.adminNotifs && $scope.adminNotifs.length > 0){
       last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
     }
-    AdminNotificationService.getAllAdminNotifications().then(function(result){
+    AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
       $scope.adminReadNotifCount = _.chain(result).filter(function(notif){
         return notif.status == 1;
       }).value().length;
@@ -101,6 +59,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   }
   // getAdminNotifs();
   // $interval(getAdminNotifs, 10000);
+  getAdminNotifs();
 
   /*===============================
   |   Notification navigation 

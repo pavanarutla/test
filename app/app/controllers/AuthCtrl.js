@@ -20,6 +20,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				$rootScope.isAuthenticated = true;
 				localStorage.loggedInUser = JSON.stringify(loggedInUser);
 				toastr.success('You have successfully signed in!');
+				$mdDialog.hide();
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
@@ -28,10 +29,11 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 					location.reload();
 				}
 			}
-			else {
+			else if(res.data.status == 0){
+				// $scope.signInUserError = res.data.message;
 				toastr.error(res.data.message);
 			}
-			$mdDialog.hide();
+			//$mdDialog.hide();
 		}).catch(function (error) {
 			toastr.error(error.data.message, error.status);
 			$mdDialog.hide();
@@ -57,10 +59,10 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	};
 
 	$scope.showForgotPasswordDialog = function () {
-		$scope.userForm = false;
+		// $scope.userForm = false;
 		$scope.forgotPasswordpage = true;
-		$scope.agencyForm = false;
-		$scope.userAgencyHeader = false;
+		// $scope.agencyForm = false;
+		// $scope.userAgencyHeader = false;
 	}
 	//form
 	$scope.currentNavItem = 'users';
@@ -83,6 +85,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		};
 		UserService.requestResetPassword(sendObj).then(function(result){
 			if(result.status == 1){
+				// $scope.passwordEmailSentSuccess = true;
 				toastr.success(result.message);
 			}
 			else{

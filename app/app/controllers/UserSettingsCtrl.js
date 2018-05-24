@@ -17,6 +17,7 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
       }
       else{
         UserService.changePassword($scope.resetPwdObj).then(function (result) {
+          $scope.$parent.logout();
           showPwdChangeSuccessModal(result);
         });
       }
@@ -37,8 +38,10 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
             $mdDialog.hide();
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
-              fullscreen: true
+              templateUrl: 'views/sign-in.html',
+              fullscreen: $scope.customFullscreen,
+              clickOutsideToClose:true,
+              controller: 'AuthCtrl'
             });
           }
         }

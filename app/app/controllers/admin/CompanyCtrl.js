@@ -56,6 +56,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
   CompanyService.getCompanies().then(function (response) {
     $scope.gridCompany.data = response;
+    $scope.companyList = response;
   });
 
   $scope.addCompany = function(){
@@ -67,9 +68,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(result.message);
+      else if(result.status == 0){
+        $scope.comapnyErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again later!");
     });
   }
 
@@ -141,6 +144,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
   CompanyService.getHoardingCompanies().then(function (response) {
     $scope.gridHoardingCompany.data = response;
+    $scope.hoardingCompany = response;
   });
 
   $scope.addHoardingCompany = function(){
@@ -152,9 +156,11 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else {
-        toastr.error(data.message);
+      else if(result.status == 0){
+        $scope.addHordingErrors = result.message;
       }
+    },function(error){
+      toastr.error("somthing went wrong please try again");
     });
   }
   $scope.deleteHoardingCompany = function(row){
@@ -174,4 +180,20 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Hoarding Companies ========
   */
+  // tables code for load more  start
+  var vm = $scope;
+  vm.limit = 10;
+  $scope.loadMore = function() {
+    var increamented = vm.limit + 5;
+    vm.limit = increamented > $scope.companyList.length ? $scope.companyList.length : increamented;
+  };
+// tables code end
+// tables code for load more  start
+  var vm = $scope;
+  vm.limit = 10;
+  $scope.loadMore = function() {
+    var increamented = vm.limit + 5;
+    vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
+  };
+// tables code end
 });

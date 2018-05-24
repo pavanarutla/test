@@ -1,6 +1,6 @@
 <style>
-  .red{
-    color:#f00;
+  .red {
+    color: #f00;
   }
 </style>
 
@@ -13,20 +13,43 @@
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
-      
-          <md-icon><i class="material-icons">clear</i></md-icon>
+          <md-icon>
+            <i class="material-icons">clear</i>
+          </md-icon>
         </md-button>
       </div>
-    </md-toolbar> 
+    </md-toolbar>
     <md-content layout-padding>
       <div class="md-whiteframe-z2 md-body-1">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
+        more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
       </div>
-    </md-content> 
+    </md-content>
   </md-sidenav>
   <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
   <div layout="row">
-    <div flex="20">
+    <div flex="80">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <form ng-submit="searchHoardingData()">
+            <input ng-model="searchAll" placeholder="Search Billboards with ID, Areas, Directions or Locations" >
+            <md-icon ng-if="searchAll!=''">
+              <i class="material-icons"  ng-click="clearSearch()">clear</i>
+            </md-icon>
+            <md-icon ng-if="searchAll==''">
+              <i class="material-icons" >search</i>
+            </md-icon>
+            
+          </form>
+          
+        </md-input-container>
+      </div>
+    </div>
+   <!-- <div flex="20">
       <div layout="row" layout-padding class="search-field">
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
@@ -57,20 +80,11 @@
           <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
         </md-input-container>
       </div>
-    </div>
-    <div flex="20">
-      <div layout="row" layout-padding class="search-field">
-        <md-input-container flex class="search-input">
-          <label>&nbsp;</label>
-          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
-        </md-input-container>
-      </div>
-    </div>
+    </div>-->
   </div>
   <div layout="row">
-    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" 
-      md-cols-gt-md="3" md-row-height="600px"  md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" 
-      md-gutter-gt-sm="8px" md-gutter="4px" ng-style="{'background': '#fff'}">
+    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height="600px"
+      md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px" ng-style="{'background': '#fff'}">
       <md-grid-tile ng-repeat="product in productList" ng-style="{'background': '#fff'}">
         <div layout="column" class="md-whiteframe-2dp">
           <div layout="column" class="admin-img">
@@ -94,36 +108,53 @@
                 <div class="content-innerone">
                   <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
                     <div layout="column" flex="33" layout-align="center center">
-                      <div><img src="assets/images/bb.png"></div>
+                      <div>
+                        <img src="assets/images/bb.png">
+                      </div>
                       <div>{{product.hoardingCost}}</div>
                     </div>
                     <div layout="column" flex="33" layout-align="center center">
-                      <div><img src="assets/images/lit.png"></div>
                       <div>
-                        Lit:<span ng-if="product.lighting">Yes</span>
+                        <img src="assets/images/lit.png">
+                      </div>
+                      <div>
+                        Lit:
+                        <span ng-if="product.lighting">Yes</span>
                         <span ng-if="!product.lighting">No</span>
                       </div>
                     </div>
                     <div layout="column" flex="33" layout-align="center center">
-                      <div><img src="assets/images/size.png"></div>
+                      <div>
+                        <img src="assets/images/size.png">
+                      </div>
                       <div>size:{{product.panelSize}}</div>
                     </div>
                   </div>
                   <md-divider></md-divider>
                   <div layout="row" layout-padding="layout-padding">
                     <!-- <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div> -->
-                    
-                      <span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span>
-                      <div class="ellipsis">
-                        <span >{{product.address}}<br><span class="md-caption" style="color:red">{{product.direction}}</span></span>
-                      </div>
-                      
-                    
+
+                    <span>
+                      <md-icon md-svg-icon="assets/images/loaction.svg"></md-icon>
+                    </span>
+                    <div class="ellipsis">
+                      <span>{{product.address}}
+                        <br>
+                        <span class="md-caption" style="color:red">{{product.direction}}</span>
+                      </span>
+                    </div>
+
+
                   </div>
                   <md-divider></md-divider>
                   <div layout="row" layout-padding="layout-padding">
-                    <div flex="10"><span><md-icon md-svg-icon="assets/images/impression.svg"></md-icon></span></div>
-                    <div flex="80"><span class="md-caption">{{product.impressions}}</div>
+                    <div flex="10">
+                      <span>
+                        <md-icon md-svg-icon="assets/images/impression.svg"></md-icon>
+                      </span>
+                    </div>
+                    <div flex="80">
+                      <span class="md-caption">{{product.impressions}}</div>
                   </div>
                   <md-divider></md-divider>
                   <div layout="column" layout-padding="layout-padding">
@@ -135,7 +166,7 @@
                         <md-button >Shortlist</md-button>
                       </div>
                   </div> -->
-                  <div layout="row" flex ng-if="product.alreadyAdded">
+                    <div layout="row" flex ng-if="product.alreadyAdded">
                       <div flex="60">
                         <div class="md-caption">Product Already Added</div>
                         <!-- <div class="md-caption">From 12-sep-2017To 30-sep-2017</div> -->
@@ -146,40 +177,30 @@
                     </div>
                   </div>
                 </div>
-                </md-content>
-              </md-tab>
-              <md-tab label="Add" ng-disabled="product.alreadyAdded">
-                <md-content class="md-padding">
-                  <div class="content-innertwo">
-                    <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
-                      <!-- <md-button class="md-icon-button" aria-label="backarrow" >
+              </md-content>
+            </md-tab>
+            <md-tab label="Add" ng-disabled="product.alreadyAdded">
+              <md-content class="md-padding">
+                <div class="content-innertwo">
+                  <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+                    <!-- <md-button class="md-icon-button" aria-label="backarrow" >
                         <md-icon><i class="material-icons">arrow_back</i></md-icon>
                       </md-button> -->
-                      <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"/>
-                      <div class="form-group">
-                        <div class='input-group' style="width:130px">
-                          <input type='text' class="form-control" 
-                            datepicker-popup
-                            ng-model="suggestedProduct.start_date" 
-                            is-open="opened.start" 
-                            ng-click="opened.start = !opened.start" 
-                            max-date='model.end_date'
-                            ng-readonly='true' placeholder="start date" />
-                          <span class="input-group-addon" for='start' 
-                              ng-click="opened.start = !opened.start; $event.stopPropagation()">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                          </span>
+                    <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
+                    />
+                    <div class="form-group">
+                      <div class='input-group' style="width:130px">
+                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
+                          max-date='model.end_date' ng-readonly='true' placeholder="start date" />
+                        <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class='input-group' style="width:130px">
-                        <input type='text' class="form-control" 
-                          datepicker-popup 
-                          ng-model="suggestedProduct.end_date" 
-                          is-open="opened.end" 
-                          ng-click="opened.end = !opened.end"
-                          min-date='suggestedProduct.start_date' 
-                          ng-readonly='true' placeholder="end date" />
+                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
+                          min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="end date" />
                         <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -190,8 +211,8 @@
                     <div layout="row">
                       <md-input-container class="md-block margin-input">
                         <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" 
-                          ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"/>
+                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+                        />
                       </md-input-container>
                       <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
                     </div>
@@ -208,16 +229,32 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-  <div layout="column" layout-align="center center" style="margin-top:50px;">
-    <md-button class="md-raised md-accent" ng-click="loadProductList()">Load More</md-button>
+  <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
+    <ul class="pagination">
+      <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+        <a ng-click="pagination.pageNo = i; loadProductList();" 
+          ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+          style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+          {{i}}
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
 <div style="position:fixed;bottom:60px;right:60px;width:200px;height:190px;background:#fff;border-radius:5px;padding-left:10px;box-shadow:0px 0px 4px #888;">
-  <p>From <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b></p>
-  <p>To <b>{{ campaignEndDate | dateify | date:"dd-MM-yyyy" }}</b></p>
-  <p>Expected Budget <b>{{ campaignEstBudget || "N/A" }}</b></p>
-  <p>Actual Budget <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b></p>
+  <p>From
+    <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b>
+  </p>
+  <p>To
+    <b>{{ campaignEndDate | dateify | date:"dd-MM-yyyy" }}</b>
+  </p>
+  <p>Expected Budget
+    <b>{{ campaignEstBudget || "N/A" }}</b>
+  </p>
+  <p>Actual Budget
+    <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b>
+  </p>
   <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="closeInputPanel()" style="margin:0px">
-      <md-icon >!</md-icon>
+    <md-icon>!</md-icon>
   </md-button>
 </div>

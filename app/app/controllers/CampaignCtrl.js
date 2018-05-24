@@ -186,7 +186,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
           .ariaLabel('Alert Dialog Demo')
           .ok('Got it!')
           .targetEvent(ev)
-      ).finally(function(){
+      )
+      .finally(function(){
         $location.path('#/home')
       });
     });

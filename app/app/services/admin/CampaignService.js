@@ -33,9 +33,9 @@ app.service('AdminCampaignService',
         $http.post(config.apiPath + '/suggestion-request', suggestionRequest).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      deleteCampaign : function(campaginId){
+      deleteCampaign : function(campaignId){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        $http.delete(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       proposeProductForCampaign: function(obj){
@@ -81,6 +81,21 @@ app.service('AdminCampaignService',
       closeCampaign: function(campaignId){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/close-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      searchCampaigns: function(searchTerm){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/search-campaigns/' + searchTerm).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      saveCampaignByAdmin: function(campaign){
+        var dfd = $q.defer();
+        $http.post(config.apiPath + '/campaign-by-admin', campaign).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      getSuggestionRequestDetails: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/campaign-suggestion-request-details/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       }
     }

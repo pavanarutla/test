@@ -26,8 +26,8 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 			if(result.status == 1){
 				toastr.success(result.message);
 			}
-			else{
-				toastr.error(result.message);
+			else if(result.status == 0){
+				$scope.regNewUserErrors = result.message;
 			}
 		}, function(result){
 			// console.log(result);

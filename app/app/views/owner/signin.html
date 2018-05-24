@@ -1,0 +1,55 @@
+<div layout="column"   layout-fill="layout-fill" ng-controller="ownerSigninCtrl"> 
+ 	<div class="sigin__bg" layout="row" layout-align="center center" layout-fill="layout-fill" style="">
+ 		 
+        <md-whiteframe layout="column" layout-align="center center" flex="45" layout-padding="layout-padding"
+         class="md-whiteframe-5dp contbg" flex-sm="60" flex-xs="100" flex-md="50">	
+            <md-content layout-fill="layout-fill" class="contbg" layout-pdding layout-margin="layout-margin">
+                <div layout="column" layout-align="center center"  layout-padding="layout-padding">
+                    <img src="assets/images/owner/billboards.png" alt="logo"/>
+                </div>
+                <div layout="column" layout-align="center center"  class="md-block">
+                    <h5> Log Into Your BillBoards India Account</h5>
+                </div>
+                <form name="signin"  novalidate="novalidate" style="margin-top:40px">
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input ng-model="user.email" name="email" type="email" minlength="10" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
+                        <div ng-messages="signin.email.$error">
+                        <div class="alret alert-danger" ng-message="required">Email is required.</div>
+                        <div class="alret alert-warning" ng-message="minlength">Email must have 10 characters.</div>
+                        <div ng-message="maxlength">Email shouldn't exceed 30 characters. </div>
+                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input ng-model="user.password" type="password" name="password" minlength="6" maxlength="20" required="required"/>
+                        <div ng-messages="signin.password.$error">
+                        <div ng-message="required">Password is required.</div>
+                        <div ng-message="minlength">Password must have 6 characters.</div>
+                        <div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
+                        </div>
+                    </md-input-container>
+                    
+                    <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+                        <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW" ></div>
+                    </div>
+                    <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+                        <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn">SIGN UP</md-button>
+                    </md-input-container>
+                    <div layout="row" layout-xs="column">
+                        <div layout="column" layout-align="center start" layout-fill="layout-fill"  flex="50" flex-xs="100"  layout-align-xs="center center">
+                        <p  class="alrhvacc"> <a ng-href="#" class="md-primary udrlin">Forgot Password ?</a></p>
+                        </div>
+                        <div layout="column" layout-align="center end" layout-fill="layout-fill"  flex="50" flex-xs="100" layout-align-xs="center center">
+                        <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin">Sign Up  </a></P>
+                        </div>
+                        
+                    </div>
+                </form>
+            </md-content>
+        </md-whiteframe>
+ 		
+ 	</div>
+</div>
+	

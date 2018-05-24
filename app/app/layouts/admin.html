@@ -1,19 +1,19 @@
 <link rel="stylesheet" type="text/css" href="assets/css/admin-main.css" />
 <div layout="row" flex>
-  <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
+  <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
     <header layout="column" layout-padding>
       <!-- <a ui-sref="/admin"><img ng-src="assets/images/logo.png" alt="logo"></a> -->
-      <md-button aria-label="locations" ui-sref="/admin" md-no-ink style="background:transparent" class="logo">
+      <md-button aria-label="" href="#admin/home" md-no-ink style="background:transparent" class="logo">
         <img ng-src="assets/images/menu/orgnl.png" width="160">
       </md-button>
     </header>
-    <md-list style="margin-top: -34px !important;">
+    <md-list>
       <md-menu-item>
-        <md-button ng-href="#/admin/home" ng-click="changeName()">
+        <md-button ng-href="#/admin/home">
           <md-icon md-svg-icon="assets/images/menu/home.svg"></md-icon>Feeds</md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-href="#/admin/campaign" ng-click="changeProfile()">
+        <md-button ng-href="#/admin/campaigns" ng-click="changeProfile()">
           <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Campaigns</md-button>
       </md-menu-item>
       <!-- Locations-->
@@ -118,36 +118,36 @@
           <md-button ng-href="#/admin/hoarding-list" ng-click="changeRequest()" >
               <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
       </md-menu-item> -->
-      <md-menu-item>
+      <!-- <md-menu-item>
         <md-button ng-href="#/admin/registration" ng-click="changeHoardingList()">
           <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Registration</md-button>
-      </md-menu-item>
+      </md-menu-item> -->
       <md-menu-item>
-        <md-button ng-href="#/admin/team" ng-click="changeTeam()">
-          <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Payement</md-button>
+        <md-button ng-href="#/admin/team">
+          <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Payment</md-button>
       </md-menu-item>
       <md-menu-item>
         <md-button ng-href="#/admin/user-management">
           <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>User Management</md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-href="#/admin/companies" ng-click="companies()">
+        <md-button ng-href="#/admin/companies">
           <md-icon md-svg-icon="assets/images/menu/help.svg"> </md-icon>Companies</md-button>
       </md-menu-item>
-      <md-menu-item>
-        <md-button ng-href="#/admin/callcenterinfo" ng-click="callCenterInfo()">
-          <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Call Centre info</md-button>
+      <md-menu-item ng-if="showMenus || (manage_queries != -1)">
+        <md-button ng-href="#/admin/callcenterinfo" ng-click="callCenterInfo()" >
+          <md-icon md-svg-icon="assets/images/menu/call.svg"></md-icon>Call Centre info</md-button>
       </md-menu-item>
-      <md-menu-item>
+      <md-menu-item ng-if="showMenus || (manage_queries != -1)">
         <md-button ng-href="#/admin/queries" ng-click="">
-          <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Queries</md-button>
+          <md-icon md-svg-icon="assets/images/menu/question.svg"></md-icon>Queries</md-button>
       </md-menu-item>
-      <md-menu-item>
+      <md-menu-item ng-if="showMenus || (manage_queries != -1)">
         <md-button ng-href="#/admin/subscribers" ng-click="">
-          <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Subscribers</md-button>
+          <md-icon md-svg-icon="assets/images/menu/mail.svg"></md-icon>Subscribers</md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-href="#" ng-click="offers()">
+        <md-button ng-href="#">
           <md-icon md-svg-icon="assets/images/menu/help.svg"></md-icon>Offers</md-button>
       </md-menu-item>
       <md-menu-item>
@@ -195,22 +195,22 @@
             <md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
           </md-button>
           <p style="background:#fac306">
-            <span style="line-height: 26px;">{{adminUnreadNotifCount}}</span>
+            <span style="line-height: 26px;">{{adminUnreadNotifCount || 0}}</span>
           </p>
         </div>
-        <div class="message">
+        <!-- <div class="message">
           <md-button aria-label="message" class="md-icon-button">
             <md-icon md-svg-icon="assets/images/message_black_24px.svg"></md-icon>
           </md-button>
           <p>
             <span style="line-height: 26px;">34</span>
           </p>
-        </div>
+        </div> -->
         <!-- <md-button class=" md-secondary md-mini" aria-label="personimage">
             <img ng-src="images/person.png" class="md-avatar" style="margin: 12px 0 0 0;">
         </md-button>   -->
-        <md-menu>
-          <!-- Trigger element is a md-button with an icon -->
+        <!-- <md-menu>
+          <!-- Trigger element is a md-button with an icon --
           <md-button ng-click="$mdOpenMenu($event)" aria-label="" class="md-secondary md-mini">
             <img ng-src="assets/images/man.png" ng-if="!loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
             <img ng-src="{{serverUrl + loggedInUser.profile_pic}}" ng-if="loggedInUser.profile_pic" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:40px; height:40px;">
@@ -227,6 +227,27 @@
             </md-menu-item>
             <md-menu-item>
               <md-button href="#" ng-click="$mdMenu.hide()">Signout</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu> -->
+
+        <md-menu md-offset="0 50">
+          <md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
+              <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+              <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+          </md-button>
+          <md-menu-content width="3" style="z-index:99">
+            <md-menu-item>
+              <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#/location">Switch View</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#/reset_password">Reset Password</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="logout()">Sign Out</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>

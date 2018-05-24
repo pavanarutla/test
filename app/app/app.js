@@ -18,11 +18,11 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
+  'ui.grid.selection'
   // 'angular-carousel'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
-
     $mdThemingProvider.theme('default')
     .primaryPalette('red', {
       'default': '800',
@@ -49,11 +49,6 @@ var app = angular.module('bbManager', [
       url: 'formats',
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
-    })
-    .state('index.pricing', {
-      url: 'pricing',
-      templateUrl: 'views/pricing.html',
-      controller: 'PricingCtrl'
     })
     .state('index.suggest_campaign', {
       url: 'suggest-campaign',
@@ -85,30 +80,6 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/user-profile.html',
       controller: 'UserProfileCtrl'
     })
-    .state('index.agency-rofile', {
-      url: 'agency-profile',
-      templateUrl: 'views/agency-profile.html'
-    })
-    
-    // .state('index.shortlist-mobile', {
-    //   url: 'shortlist-mobile',
-    //   templateUrl: 'views/shortlist-mobile.html'
-    // })
-    // .state('index.formats-mobile', {
-    //   url: 'formats-mobile',
-    //   templateUrl: 'views/formats-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.suggest-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/suggest-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.savedcamapign-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/savedcamapign-mobile.html',
-
-    // })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -128,7 +99,7 @@ var app = angular.module('bbManager', [
         $scope.goToLogin = function () {
           $location.path('/');
           $mdDialog.show({
-            templateUrl: 'views/signIn.html',
+            templateUrl: 'views/sign-in.html',
             fullscreen: true
           });
         }
@@ -150,46 +121,26 @@ var app = angular.module('bbManager', [
         code: {squash: true, value: null}
       }
     })
-    // .state('index.reset-password', {
-    //   url: 'reset_password',
-    //   templateUrl: 'views/reset-password.html',
-    //   controller: 'UserSettingsCtrl'
-    // })
     .state('admin', {
       abstract: true,
       url: '/admin',
       templateUrl: 'layouts/admin.html',
       controller: 'AdminMgrAppCtrl'
     })
-    // .state('admin.products', {
-    //   url: '/admin/products',
-    //   templateUrl: 'views/admin/products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .state('admin.add-products', {
-    //   url: '/admin/add-products',
-    //   templateUrl: 'views/admin/add-products.html',
-    //   controller: 'ProductsCtrl'
-    // })
     .state('admin.home', {
       url: '/home',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminFeedsCtrl',
       title: 'Feeds'
     })
-    .state('admin.Feeds', {
+    .state('admin.suggest-products', {
       url: '/suggest-products',
       templateUrl: 'views/admin/suggest-products.html',
-      controller: 'AdminFeedsCtrl',
+      controller: 'CampaignProposalCtrl',
       title: 'Feeds'
     })
-    .state('admin.campaign-suggestion', {
-      url: '/campaign-suggestion',
-      templateUrl: 'views/admin/campaignsugg.html',
-      title: 'Campaign Suggestion'
-    })
     .state('admin.campaign', {
-      url: '/campaign',
+      url: '/campaigns',
       templateUrl: 'views/admin/campaign-list.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
@@ -199,19 +150,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/campaign-proposal-summary.html',
       controller: 'CampaignProposalCtrl',
     })
-    .state('admin.campaign-running-summary', {
-      url: '/campaign-running-summary',
-      templateUrl: 'views/admin/campaignrunningsummary.html'
-    })
-    .state('admin.campaign-closed-summary', {
-      url: '/campaign-closed-summary',
-      templateUrl: 'views/admin/campaignclosedsummary.html'
-    })
-    .state('admin.registration', {
-      url: '/registration',
-      templateUrl: 'views/admin/registration.html',
-      controller: 'AdminRegistrationCtrl',
-      title: "User Registration"
+    .state('admin.user-management', {
+      url: '/user-management',
+      templateUrl: 'views/admin/user-management.html',
+      controller: 'UserMgmtCtrl',
+      title: "User Management"
     })
     .state('admin.companies', {
       url: '/companies',
@@ -256,12 +199,12 @@ var app = angular.module('bbManager', [
     .state('admin.subscribers', {
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
-      controller: 'subscribersCtrl'
+      controller: 'subscriberCtrl'
     })
     .state('admin.queries', {
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
-      controller: 'queriesCtrl'
+      controller: 'customerQueriesCtrl'
     })
     .state('admin.callcenterinfo', {
       url: '/callcenterinfo',
@@ -293,6 +236,7 @@ var app = angular.module('bbManager', [
       url: '/:ownerId/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
+      
     })
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
@@ -307,16 +251,16 @@ var app = angular.module('bbManager', [
     .state('owner.requestHoarding', {
       url: '/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'OwnerCampaignCtrl'
+      controller: 'requestHoarding'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
       templateUrl: 'views/owner/suggest-products.html',
       controller: 'OwnerFeedsCtrl'
     })
-    .state('owner.hoardinglist', {
-      url: '/hoardinglist',
-      templateUrl: 'views/owner/hoardinglist.html',
+    .state('owner.hoarding-list', {
+      url: '/hoarding-list',
+      templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerFeedsCtrl'
     })
     .state('owner.settings', {
@@ -331,13 +275,14 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
-      controller: 'HomeCtrl'
+      controller: 'OwnerHomeController'
     })
     .state('owner.outsourcingagent', {
       url: '/outsourcingagent',
       templateUrl: 'views/owner/outsourcingagent.html',
       controller:'outSourcing'
-    }).state('owner.teamPage', {
+    })
+    .state('owner.teamPage', {
       url: '/teamPage',
       templateUrl: 'views/owner/team.html',
       controller:'teamPage'
@@ -346,6 +291,11 @@ var app = angular.module('bbManager', [
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
+    })
+    .state('owner.signIn', {
+      url: '/signIn',
+      templateUrl: 'views/owner/signin.html',
+      controller:'ownerSigninCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
@@ -405,6 +355,7 @@ app.run(
       $transitions.onStart({}, function (transition) {
         // Get all URL parameter
         $rootScope.currentTitle = transition.to().title;
+        $rootScope.currStateName = transition.to().name;
         if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
@@ -426,7 +377,7 @@ app.run(
           'admin.campaign-proposal-summary',
           'admin.campaign-running-summary',
           'admin.campaign-closed-summary',
-          'admin.registration',
+          'admin.user-management',
           'admin.companies',
           'admin.hoarding-list',
           'admin.formats',
@@ -442,7 +393,8 @@ app.run(
         var ownerRoutes = [
         ];
         var requiresLogin = [
-          'index.location'
+          'index.location',
+          'index.suggest_campaign'
         ];
 
         // routes for authenticated Users
@@ -451,7 +403,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
             return false;
@@ -462,7 +414,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
             return false;
@@ -477,7 +429,7 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
+              templateUrl: 'views/sign-in.html',
               fullscreen: true
             });
           }

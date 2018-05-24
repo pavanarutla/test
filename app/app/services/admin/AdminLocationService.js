@@ -32,14 +32,18 @@ app.factory('AdminLocationService',
         $http.get(config.apiPath + '/areas/' + citiIds).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      getAllAreas: function(){
+      getAllAreas: function(pageNo, pageSize){
+        var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/allAreas').success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/allAreas' + pageData).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       saveCountry: function(country){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/country', {country_name: country}).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/country', country).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },  
       saveState: function(state){
@@ -76,7 +80,12 @@ app.factory('AdminLocationService',
 				var dfd = $q.defer();
 				$http.delete(config.apiPath + '/area/' + areaId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+      },
+      searchAreas: function(query){
+        var dfd = $q.defer();
+				$http.get(config.apiPath + '/search-areas/' + query).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+      }
     }
   }
 ]

@@ -1,83 +1,151 @@
+<!-- ============ add hoarding list side nav start ============ -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerAddHoarding" style="width:400px !important">
+		<md-toolbar layout="row">
+				<div class="md-toolbar-tools bg_main_color" >
+				<h2>
+						<span>Add Product</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="cancel()">
+						<md-tooltip>Close Side Panel</md-tooltip>
+						<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+				</md-button>
+				</div>
+		</md-toolbar> 
+		<md-content layout-padding="">
+				<form  role="form">
+						<div class="form-group row">
+							<label for="hoardingId"class="col-sm-4 col-form-label">Hoarding ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="hoardingId" placeholder="Hoarding Id">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="hoardingType"class="col-sm-4 col-form-label">Hoarding Type</label>
+							<div class="col-sm-8">
+								<select id="hoardingType" class="form-control">
+								<option selected>Type Of Hoarding</option>
+								<option>...</option>
+							</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="faceingFrom"class="col-sm-4 col-form-label">Faceing From</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="faceingFrom" placeholder="Faceing From">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="faceingTo"class="col-sm-4 col-form-label">Faceing To</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="faceingTo" placeholder="Faceing To">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="hoardingArea"class="col-sm-4 col-form-label">Area</label>
+							<div class="col-sm-8">
+								<select id="hoardingArea" class="form-control">
+								<option selected>Hoarding Area</option>
+								<option>...</option>
+							</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="hoardingSubArea"class="col-sm-4 col-form-label"> SubArea</label>
+							<div class="col-sm-8">
+								<select id="hoardingSubArea" class="form-control">
+								<option selected>Hoarding SubArea</option>
+								<option>...</option>
+							</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="priceId"class="col-sm-4 col-form-label">Price</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="priceId" placeholder="Hoarding Price">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="hoardingLight"class="col-sm-4 col-form-label">Light</label>
+							<div class="col-sm-8">
+								<select id="hoardingLight" class="form-control">
+								<option selected>Light</option>
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="HoardingSize"class="col-sm-4 col-form-label">Panel Size</label>
+							<div class="col-sm-8">
+								<select id="HoardingSize" class="form-control">
+								<option selected>Hoarding Size</option>
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+							</div>
+						</div>
 
-<div layout="column"  layout-margin="layout-margin" layout-fill="layout-fill" ng-controller="requestHoarding">
-	<div layout="row"  flex style="margin:0px;padding:0px">
-    <div layout="column" flex="50">
-      <div class="md-title" style="margin:12px">Request Hoardings</div>
-    </div>
-    <div layout="column" layout-align="center end" flex="50">
+						<div class="form-group row">
+							<label for=""class="col-sm-4 col-form-label">Upload Image</label>
+							<div class="col-sm-8">
+								<span class="input-group-btn">
+										<span class="btn btn-default btn-file">
+												<input type="file" id="imgInp" style="width:100%">
+										</span>
+								</span>
+							</div>
+						</div>
+						
+						<div class="form-group" style="margin:10px 0">
+								<label class="col-md-3 control-label"></label>
+								<input class="btn btn-primary" value="Save" type="button">
+								<span></span>
+								<input class="btn btn-default" value="Cancel" type="reset">
+						</div> 
+	
+				</form>
+		</md-content> 
+</md-sidenav>
+<!-- ============ add hoarding list side nav end ============ -->
+
+<div class="owner__request__hoarding" layout="column"  layout-margin="layout-margin" layout-fill="layout-fill" ng-controller="requestHoarding">
+	<div layout="row" layout-margin="layout-margin" class="req_hrdg_title">
+    <h3 >Request Hoardings</h3>
+		<div flex></div>
+		<div id="customSsearchInput">
+			<div class="input-group ">
+					<input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search.." on-enter="searchBySiteNo()"/>
+					<span class="input-group-btn">
+							<button class="btn btn-info btn-lg" type="button">
+									<i class="material-icons">search</i>
+							</button>
+					</span>
+			</div>
+		</div>
+      <!-- <div layout="column" layout-align="center end" flex="50">
       <md-button aria-label="add" class=" md-fab md-mini" ng-click="openScreen($event)">
           <md-icon><i class="material-icons">&#xE145;</i></md-icon>
       </md-button>
-    </div>
+    </div>   -->
 	</div>
-  <div layout="row"  flex layout-margin>
-      <div layout="column" flex="50" class="contbg" layout-padding>
-        <md-input-container class="md-block">
-					<label>Date</label>
-					<input ng-model="user.hoardingId" type="text" name="hoardingid"   ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
-					<!-- <div ng-messages="requestform.hoardingid.$error">
-						<div ng-message="required">hoarding Id is required.</div>
-						<div ng-message="minlength">hoarding Id must have 2 characters.</div>
-						<div ng-message="maxlength">hoarding Id shouldn't exede 60 characters. </div>
-						<div ng-message="pattern">hoarding Id should contain only Alpha Numeric and _ - . symbols.</div>
-					</div> -->
-				</md-input-container>
-      </div>
-      <div layout="row" flex="50" class="contbg" layout-padding>
-        <div flex="90">
-          <md-input-container class="md-block">
-					<label>Hoarding Id</label>
-					<input ng-model="user.hoardingId" type="text" name="hoardingid"  ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
-					<!-- <div ng-messages="requestform.hoardingid.$error">
-						<div ng-message="required">hoarding Id is required.</div>
-						<div ng-message="minlength">hoarding Id must have 2 characters.</div>
-						<div ng-message="maxlength">hoarding Id shouldn't exede 60 characters. </div>
-						<div ng-message="pattern">hoarding Id should contain only Alpha Numeric and _ - . symbols.</div>
-					</div> -->
-        </md-input-container>
-        </div>
-        
-        <span style="margin-top:30px"><a href="#"><md-icon><i class="material-icons">search</i></md-icon></a></span>
-      </div>
-  </div>
-  <!-- <div layout="column" layout-fill="layout-fill" flex>
-    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="2" md-cols-md="2" md-cols-gt-md="3" md-row-height-xs="1:1.1" md-row-height-sm="1:1.1" md-row-height-md="1:1.1" md-row-height-gt-md="1:1.1" md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px" ng-clock="ng-clock"> 
-      <md-grid-tile ng-repeat="room in floorDetails.roomDetails" ng-style="{'background': '#fff'}">  
-        <div  layout-fill>
-          <div >
-            <img src="assets/images/product/hoarding.png">
-          </div>
-          <div layout="row" layout-padding="layout-padding">
-            <div flex="10"><img src="assets/images/product/map-icon.png"></div>
-            <div flex="80"><span >Ameerpet,Hyderbad<br><span class="md-caption">Faceing Ameerpet To Sr Nagar<span></span></div>
-          </div>
-          <div layout="row" layout-padding="layout-padding">
-            <div flex="10"><img src="assets/images/product/dot.png" ></div>
-            <div flex="80"><span class="md-caption">Waiting for apporval</div>
-          </div>
-          <div layout="row" layout-xs="row"  flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
-              <div  flex="33" layout-align="center center">
-                <div><img src="assets/images/product/bb.png" ></div>
-                <div>$50,0000</div>
-              </div>
-            <div  flex="33" layout-align="center center">
-                <div><img src="assets/images/product/lit.png"></div>
-                <div>Lit:yes</div>
-            </div>
-              <div  flex="33" layout-align="center center">
-                <div><img src="assets/images/product/size.png"></div>
-                <div>size:20*40</div>
-              </div>
-          </div>
-      
-        </div>
-      </md-grid-tile>        
-    </md-grid-list>  
-  </div> -->
-  <div class="campagintable">
+	<div class="hrndg__action" layout="row" layout-align="end	 end">
+		<a  ng-click="addRequestHoarding()"><img src="assets/images/owner/add.png"/></a>
+		<!-- <a ng-click="shareCampaign()"><img src="assets/images/owner/share.png"/></a>
+		<a href="#"><img src="assets/images/owner/edit.png"/></a> -->
+		<a href="#"><img src="assets/images/owner/delete.png"/></a>
+	</div>
+  <div class="hoarding__table">
 			<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
 				<md-list-item>
-					<div flex="10" flex-gt-sm="10">ID</div>
+					<div flex="10" flex-gt-sm="10">
+						<!-- <span><input type="checkbox"></span><span>ID</span> -->
+						<label class="owner_container">ID
+                                
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+					</div>
 					<div flex="10" flex-gt-sm="10">Type</div>
 					<div flex="10" flex-gt-sm="10">Area</div>
 					<div flex="10" flex-gt-sm="10">Size</div>
@@ -96,7 +164,15 @@
 							<img src="assets/images/c1.png" alt="c1">
 						</div>
 						<div flex-xs="80" flex-sm="85">
-							<div class="md-body-1">{{hoarding.id}}</div>
+							<div class="md-body-1">
+								<!-- <span hide-xs hide-sm>
+								<input type="checkbox"></span>{{hoarding.id}} -->
+								<label class="owner_container">{{hoarding.id}}
+                                
+                                <input type="checkbox" hide-xs hide-sm>
+                                <span class="checkmark"></span>
+                            </label>
+							</div>
 						</div>
 						<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
 							<md-menu>
@@ -185,8 +261,8 @@
 							<div class="md-body-1">{{hoarding.price}}</div>
 						</div>
 					</div>
-					<div flex="10" hide-xs hide-sm>
-						<div layout="row">
+					<div flex="10" hide-xs hide-sm layout-xs="row" layout-sm="row" layout="row">
+						<!-- <div layout="row">
 							<md-button class="md-icon-button" ng-click="viewImage()">
 								<md-icon>
 									<i class="material-icons">remove_red_eye</i>
@@ -197,6 +273,17 @@
 									<i class="material-icons">delete</i>
 								</md-icon>
 							</md-button>
+						</div> -->
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<img src="assets/images/c6.png" alt="c6">
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">pedding</div>
+						</div>
+						<div  flex-gt-sm="15" hide-xs hide-sm>
+							<a class="md-icon-button" ng-click="viewImage()">
+									<img src="assets/images/owner/eye.png">
+							</a>
 						</div>
 					</div>
 				</div>

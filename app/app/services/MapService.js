@@ -1,8 +1,13 @@
 app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config) {
   return {
-    markersForMap: function () {
+    mapProducts : function() {
       var dfd = $q.defer();
-      $http.get(config.apiPath + '/map-products').success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/map-products').success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+    },
+    markers: function () {
+      var dfd = $q.defer();
+      $http.get(config.apiPath + '/products').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     saveMarker: function () {
