@@ -154,6 +154,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
       if(result.status == 1){
         CompanyService.getHoardingCompanies().then(function (response) {    
           $scope.gridHoardingCompany.data = response;
+          $scope.hoardingCompanies = response;
         });
         toastr.success(result.message);
         $mdDialog.hide();
