@@ -166,7 +166,7 @@ app.controller('bbMngrCtrl',
 
 
   $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 200) {
+    if ($(window).scrollTop() > 0) {
       $(".header").addClass("active");
       $(".toolbar-btn").addClass("active-one");
       $(".browse-btn").addClass("active-one");
