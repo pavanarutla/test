@@ -339,6 +339,7 @@ app.controller('GmapCtrl',
       //  }
 
       function selectMarker(marker) {
+        console.log(marker);
         $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
@@ -1002,16 +1003,16 @@ app.controller('GmapCtrl',
       setMapContainerHeight();
 
       $scope.elipsis = "";
-      $scope.productLoader = function(){
+      var productLoader = function(){
         if(!$scope.filteredMarkers){
-          setTimeout($scope.productLoader, 500);
+          setTimeout(productLoader, 500);
         }
         if($scope.elipsis == "..."){
           $scope.elipsis = "";
         }
         $scope.elipsis += ".";
-        return $scope.elipsis;
       }
+      productLoader();
 
     }
   ]
