@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl',["$scope", "$mdDialog", "$mdSidenav", "$interval", "$stateParams", "$window", "$location", "CampaignService", "config", function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
 
   $scope.CAMPAIGN_STATUS = [
     'suggestion-requested',  //    0
@@ -212,4 +212,4 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   };
 
 
-});
+}]);

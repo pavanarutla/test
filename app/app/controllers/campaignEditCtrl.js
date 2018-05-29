@@ -1,4 +1,4 @@
-app.controller('campaiginEditController', function ($scope,$interval,$mdDialog) {
+app.controller('campaiginEditController',["$scope","$interval","$mdDialog", function ($scope,$interval,$mdDialog) {
 
 
 $scope.hoardingitems=[
@@ -53,4 +53,4 @@ $scope.hoardingitems=[
     $mdDialog.cancel();
   };
 
-});
+}]);

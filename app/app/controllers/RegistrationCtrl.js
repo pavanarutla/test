@@ -1,4 +1,4 @@
-app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toastr) {
+app.controller("RegistrationCtrl",["$scope", "$mdDialog", "UserService", "toastr", function ($scope, $mdDialog, UserService, toastr) {
 
 	/*
 	* ========== Switching registration forms between User and Agency ===========
@@ -54,4 +54,4 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 		$mdDialog.hide();
 	}
 
-});
+}]);

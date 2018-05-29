@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
+app.controller('AdminCampaignCtrl',["$scope", "$mdDialog", "$stateParams", "CampaignService", "AdminCampaignService", "Upload", "toastr",  "FileSaver", "Blob", function ($scope, $mdDialog, $stateParams, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
 
   // $scope.limit= 3;
   // $scope.loadMore = function() {
@@ -239,4 +239,4 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, C
   //////// Floating campaign section ends
   */
 
-});
+}]);

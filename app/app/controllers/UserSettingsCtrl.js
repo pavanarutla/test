@@ -1,4 +1,4 @@
-app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, UserService, toastr) {
+app.controller("UserSettingsCtrl",["$scope", "$stateParams", "$mdDialog", "UserService", "toastr", function ($scope, $stateParams, $mdDialog, UserService, toastr) {
   
   if($stateParams.code){
     $scope.typeReset = true;
@@ -48,4 +48,4 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
       toastr.error(result.message);
     }
   }
-});
+}]);

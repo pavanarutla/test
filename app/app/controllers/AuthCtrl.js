@@ -1,5 +1,5 @@
 'user strict'
-app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
+app.controller("AuthCtrl",["$scope", "$mdDialog", "$location", "$rootScope", "$auth", "$state", "toastr", "UserService", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
@@ -94,4 +94,4 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$mdDialog.hide();
 		$state.reload();
 	}
-})
+}])

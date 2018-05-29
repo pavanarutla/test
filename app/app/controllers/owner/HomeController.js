@@ -1,5 +1,5 @@
 // angular.module('myApp', ['googlechart'])
-  app.controller('OwnerHomeController', function($scope) {
+  app.controller('OwnerHomeController',["$scope", function($scope) {
     var chart1 = {};
     chart1.type = "google.charts.Bar";
     chart1.displayed = false;
@@ -95,7 +95,7 @@
       }
     };
     $scope.myChart = chart1;
-  }).value('googleChartApiConfig', {
+  }]).value('googleChartApiConfig', {
     version: '1.1',
     optionalSettings: {
       packages: ['bar'],

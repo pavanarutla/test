@@ -1,4 +1,4 @@
-app.controller('ProductAddCtrl', function ($scope) {
+app.controller('ProductAddCtrl',["$scope", function ($scope) {
     $scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
     $scope.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', '...'];
     $scope.submit = function() {
@@ -13,4 +13,4 @@ app.controller('ProductAddCtrl', function ($scope) {
     };
     $scope.reset();
 
-})
+}])

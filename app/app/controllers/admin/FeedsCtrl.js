@@ -1,4 +1,4 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl',["$scope", "$mdDialog", "$http","$mdSidenav", "$location", "AdminCampaignService", "ProductService", "toastr", function ($scope, $mdDialog, $http,$mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -171,5 +171,5 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav, 
     };
     
 
-  });
+  }]);
  

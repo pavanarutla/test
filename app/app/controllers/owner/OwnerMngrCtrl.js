@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $state) {
+app.controller('OwnerMngrCtrl',["$scope","$mdSidenav","$log","$mdDialog", "$state", function ($scope,$mdSidenav,$log,$mdDialog, $state) {
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
@@ -140,7 +140,7 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
     });
   };
 
-}).value('googleChartApiConfig', {
+}]).value('googleChartApiConfig', {
   version: '1.1',
   optionalSettings: {
     packages: ['bar'],

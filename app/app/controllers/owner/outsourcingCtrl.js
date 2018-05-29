@@ -1,4 +1,4 @@
- app.controller('outSourcing', function($scope,$mdDialog,$mdSidenav) {
+ app.controller('outSourcing',["$scope","$mdDialog","$mdSidenav", function($scope,$mdDialog,$mdSidenav) {
   // sidenav 
      $scope.addOutsourcingAgent = function () {
     $mdSidenav('ownerAddAgency').toggle();
@@ -62,4 +62,4 @@
       //   });
       // };
 
-    });
+    }]);

@@ -1,4 +1,4 @@
-app.controller('subscribersCtrl', function ($scope, $http) {
+app.controller('subscribersCtrl',["$scope", "$http", function ($scope, $http) {
 
 
   $scope.gridSubscribers = {
@@ -44,4 +44,4 @@ app.controller('subscribersCtrl', function ($scope, $http) {
       $scope.gridSubscribers.data = data;
     });
 
-});
+}]);

@@ -1,4 +1,4 @@
-app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationService, toastr) {
+app.controller('AdminLocationCtrl',["$scope", "$http", "AdminLocationService", "toastr", function ($scope, $http, AdminLocationService, toastr) {
 
   $scope.countryList = [];
   $scope.stateListForCountry = [];
@@ -376,4 +376,4 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     };
   // tables city end
 
-});
+}]);

@@ -1,4 +1,4 @@
-app.controller('FormatsCtrl', function ($scope,$rootScope) {
+app.controller('FormatsCtrl',["$scope","$rootScope", function ($scope,$rootScope) {
 
   if($rootScope.formatSelected){
     $scope.selectedFormatIndex = $rootScope.formatSelected;
@@ -126,4 +126,4 @@ app.controller('FormatsCtrl', function ($scope,$rootScope) {
   //       $scope.showrailData = false;
   //   }
   // }
-});
+}]);

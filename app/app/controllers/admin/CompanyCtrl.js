@@ -1,4 +1,4 @@
-app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService, toastr) {
+app.controller('CompanyCtrl',["$scope", "$mdDialog", "$http", "CompanyService", "toastr", function ($scope, $mdDialog, $http, CompanyService, toastr) {
 
   $scope.msg = {};
 
@@ -196,4 +196,4 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
   };
 // tables code end
-});
+}]);

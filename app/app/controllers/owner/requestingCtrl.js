@@ -1,4 +1,4 @@
-app.controller('requestHoarding', function ($scope,$mdDialog,$mdSidenav,$window) {
+app.controller('requestHoarding',["$scope","$mdDialog","$mdSidenav","$window", function ($scope,$mdDialog,$mdSidenav,$window) {
     
     $scope.openScreen = function(ev) {
         $mdDialog.show({
@@ -54,4 +54,4 @@ app.controller('requestHoarding', function ($scope,$mdDialog,$mdSidenav,$window)
     ]
    
 
-});
+}]);

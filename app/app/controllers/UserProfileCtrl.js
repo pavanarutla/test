@@ -1,4 +1,4 @@
-app.controller('UserProfileCtrl', function($scope, $stateParams, $window, UserService, Upload, config) {
+app.controller('UserProfileCtrl',["$scope", "$stateParams", "$window", "UserService", "Upload", "config", function($scope, $stateParams, $window, UserService, Upload, config) {
   
   $scope.getLoggedInUserProfile = function(){
     UserService.getProfile().then(function(result){
@@ -49,4 +49,4 @@ app.controller('UserProfileCtrl', function($scope, $stateParams, $window, UserSe
     });
   };
 
-});
+}]);

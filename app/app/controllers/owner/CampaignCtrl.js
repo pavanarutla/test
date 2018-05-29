@@ -1,5 +1,5 @@
 
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl',["$scope", "$mdDialog","$mdSidenav", "$interval", "$stateParams", "CampaignService", "$window", function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -223,4 +223,4 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     $scope.getCampaignDetails($stateParams.campaignId);
   }
 
-});
+}]);
