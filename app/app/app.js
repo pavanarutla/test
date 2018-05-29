@@ -215,74 +215,93 @@ var app = angular.module('bbManager', [
       controller: 'OwnerMngrCtrl'
     })
     .state('owner.dashboard', {
-      url: '/dashboard',
+      url: '/:username/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
+      params: { username: null}
       
     })
     .state('owner.ownerCampaign', {
-      url: '/ownerCampaign',
+      url: '/:username/ownerCampaign',
       templateUrl: 'views/owner/campaign.html',
-      controller:  'OwnerCampaignCtrl'
+      controller:  'OwnerCampaignCtrl',
+      params: { username: null}
     })
-    .state('owner.editCampaign', {
-      url: '/editCampaign',
-      templateUrl: 'views/owner/editcampaign.html',
-      controller: 'OwnerCampaignCtrl'
+    .state('owner.campaignProposal', {
+      url: '/:username/campaign-proposal/{campaignId}',
+      templateUrl: 'views/owner/campaign-proposal.html',
+      controller: 'OwnerCampaignProposalCtrl',
+      params: { username: null}
+
     })
     .state('owner.requestHoarding', {
-      url: '/requestHoarding',
+      url: '/:username/requestHoarding',
       templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'requestHoarding'
+      controller: 'requestHoarding',
+      params: { username: null}
     })
     .state('owner.suggestproducts', {
-      url: '/suggestproducts',
+      url: '/:username/suggestproducts',
       templateUrl: 'views/owner/suggest-products.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerFeedsCtrl',
+      params: { username: null}
     })
-    .state('owner.hoarding-list', {
-      url: '/hoarding-list',
-      templateUrl: 'views/owner/hoarding-list.html',
-      controller: 'OwnerFeedsCtrl'
+    .state('owner.hoardinglist', {
+      url: '/:username/hoardinglist',
+      templateUrl: 'views/owner/hoardinglist.html',
+      controller: 'OwnerHoardingCtrl',
+      params: { username: null}
     })
     .state('owner.settings', {
-      url: '/settings',
+      url: '/:username/settings',
       templateUrl: 'views/owner/accountsetting.html',
-      controller: ''
+      controller: 'UserSettingsCtrl',
+      params: { username: null}
     })
     .state('owner.profile', {
-      url: '/profile',
+      url: '/:username/profile',
       templateUrl: 'views/owner/user-profile.html',
+      params: { username: null}
     })
     .state('owner.home', {
-      url: '/home',
+      url: '/:username/home',
       templateUrl: 'views/owner/home.html',
-      controller: 'OwnerHomeController'
+      controller: 'OwnerHomeController',
+      params: { username: null}
     })
     .state('owner.outsourcingagent', {
-      url: '/outsourcingagent',
+      url: '/:username/outsourcingagent',
       templateUrl: 'views/owner/outsourcingagent.html',
-      controller:'outSourcing'
+      controller:'outSourcing',
+      params: { username: null}
     })
     .state('owner.teamPage', {
-      url: '/teamPage',
+      url: '/:username/teamPage',
       templateUrl: 'views/owner/team.html',
-      controller:'teamPage'
+      controller:'teamPage',
+      params: { username: null}
     })
     .state('owner.feedBack', {
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
-      controller:'feedback'
+      controller:'feedback',
+      params: { username: null}
     })
-    .state('owner.signIn', {
-      url: '/signIn',
+    .state('OwnersignIn', {
+      url: '/owner/signIn',
       templateUrl: 'views/owner/signin.html',
       controller:'ownerSigninCtrl'
     });
-
+    if(localStorage.OwnerloggedInUser){
+      console.log(JSON.parse(localStorage.OwnerloggedInUser));
+      var ownerUsername = JSON.parse(localStorage.OwnerloggedInUser).username;
+    }else{
+      var ownerUsername = '';
+    }
+     
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/'+ownerUsername+'/dashboard');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;

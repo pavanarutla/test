@@ -1,4 +1,4 @@
-app.controller('teamPage',['$scope','$mdDialog', function($scope,$mdDialog){
+app.controller('teamPage',['$scope','$mdDialog','$mdSidenav', function($scope,$mdDialog,$mdSidenav){
   $scope.teammembers =[
     {
       image:'team',
@@ -29,7 +29,14 @@ app.controller('teamPage',['$scope','$mdDialog', function($scope,$mdDialog){
       email:'teamfour@billboardsindia.com',
     },
   ];
+  //add team member sidenav
 
+   $scope.addteamSidenav = function () {
+    $mdSidenav('ownerAddteam').toggle();
+  };
+  $scope.cancel = function () {
+    $mdDialog.hide();
+  };
   $scope.openAddteam = function(ev) {
     $mdDialog.show({
       templateUrl:'views/owner/teamadd.html',
@@ -48,5 +55,8 @@ app.controller('teamPage',['$scope','$mdDialog', function($scope,$mdDialog){
       clickOutsideToClose:true,
     });
   };
-
+  $scope.closepopup = function(){
+      $mdDialog.hide();
+  }
+  
 }])

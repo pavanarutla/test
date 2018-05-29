@@ -1,5 +1,5 @@
 
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window,toastr,$rootScope,$state,OwnerCampaignService,FileSaver) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -24,16 +24,25 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //     clickOutsideToClose: true
   //   })
   // };
-  $scope.addCamapginSidenav = function () {
+  $scope.addCamapginSidenav = function ($data) {
     $mdSidenav('ownerAddcmapgin').toggle();
+    console.log("$data");
+    console.log($data);
+    if($data){
+      $scope.campaign = $data;
+    }
   };
   $scope.cancel = function () {
     $mdDialog.hide();
   };
+
   $scope.sharePerson = false;
   $scope.shareCampaign = function () {
         $scope.sharePerson = !$scope.sharePerson;
   }
+
+
+
 
   ////data for image uploading 
 
@@ -82,76 +91,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.loadMore = function () {
     $scope.limit = $scope.items.length
   }
-  $scope.items = [
-    {
-      "campaignname": "Flipkart",
-      "clientcomapanyname": "Neon",
-      "clientname": "Chanikya",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "25000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Amezon",
-      "clientcomapanyname": "Amezon",
-      "clientname": "shiva",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "30000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Paytm",
-      "clientcomapanyname": "Paytm",
-      "clientname": "srikanth",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "50000",
-      "products": "0"
-    }
-  ]
-  $scope.hoardinglist =[
-      {
-        "id":"AD_001",
-        "type":"Billboard",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"No",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_002",
-        "type":"Unipole",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_003",
-        "type":"Digital",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      }
-    ]
-    $scope.viewImage = function () { 
+
+  $scope.viewImage = function () { 
     $mdDialog.show({
-      templateUrl: 'views/owner/view-image.html',
+      templateUrl: 'views/owner/viewimage.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true
     })
@@ -203,15 +146,34 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     self.mode = (self.mode == 'query' ? 'determinate' : 'query');
   }, 7200, 0, true);
 
+
+
+  
   // get all Campaigns by a user to show it in campaign management page
-  $scope.getUserCampaigns = function () {
-    CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
+  //$scope.getUserCampaigns = function () {
+    OwnerCampaignService.getOwnerCamapigns().then(function (result) {
+      /*$planned1 = _.where(result, { status: 0 });
+      $planned2 = _.where(result, { status: 1 });
+      $planned3 = _.where(result, { status: 2 });
+      $planned4 = _.where(result, { status: 3 });
+      $planned5 = _.where(result, { status: 4 });
+      $planned6 = _.where(result, { status: 5 });
+      $planned7 = _.where(result, { status: 6 });
+      $planned8 = _.where(result, { status: 7 });
+      $planned9 = _.where(result, { status: 8 });
+      $planned10 = _.where(result, { status: 9 });
+      console.log('result');
+      $scope.plannedCampaigns = $planned1.concat($planned2,$planned3,$planned4,$planned5,$planned6,$planned7);
+      $scope.runningCampaigns = $planned8.concat($planned9);
+      $scope.closedCampaigns = $planned10;
+      console.log($scope.plannedCampaigns);*/
+      //$scope.runningCampaigns = _.where(result, { status: 7,status:8 });
+      //$scope.closedCampaigns = _.where(result, { status: 9 });
+      $scope.plannedCampaigns = result;
+
     });
-  }
-  $scope.getUserCampaigns();
+  //}
+  //$scope.getUserCampaigns();
   // get all Campaigns by a user to show it in campaign management page ends
 
   $scope.getCampaignDetails = function(campaignId){
@@ -222,5 +184,75 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   if($stateParams.campaignId){
     $scope.getCampaignDetails($stateParams.campaignId);
   }
+  
+  $scope.campaign = {};
+  $scope.submittedtrue = false;
+  $scope.saveCampaign = function($detail){
+    $scope.submittedtrue = true;
+    
+    if($scope.signup.$valid) {
+      $scope.campaign.posted_by= $rootScope.owner_detail.user_id;
+      CampaignService.saveCampaign($scope.campaign).then(function(result){
+        if(result.status == 1){
+          toastr.success(result.message);
+          $state.go($state.current, {}, {reload: true});
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+    }
+  }
 
+ $scope.campaignList =[];
+    $scope.CheckUncheckHeader = function (plannedCampaigns) {
+      $scope.campaignList =[];
+      $scope.IsAllChecked = true;
+      for (var i = 0; i < plannedCampaigns.length; i++) {
+          if (!plannedCampaigns[i].Selected) {
+              $scope.IsAllChecked = false;
+              //break;
+          }else{
+            $scope.campaignList.push(plannedCampaigns[i].id)
+          }
+      };
+      console.log("ppp");
+      console.log( $scope.campaignList);
+  };
+  //$scope.CheckUncheckHeader();
+
+  $scope.CheckUncheckAll = function () {
+    $scope.campaignList =[];
+      for (var i = 0; i < $scope.plannedCampaigns.length; i++) {
+          $scope.plannedCampaigns[i].Selected = $scope.IsAllChecked;
+          if($scope.plannedCampaigns[i].Selected){
+            $scope.campaignList.push($scope.plannedCampaigns[i].id)
+          }
+      }
+  };
+
+  $scope.exportAllCampaigns = function (data) {
+    if($scope.shareCampaignForm.$valid){
+      if($scope.campaignList.length==0){
+        alert("Please Select some Campaigns to share");
+      }else{
+       var data1 = {campaignsIDS:$scope.campaignList,receiver_name:data.receiver_name,email:data.email};
+        OwnerCampaignService.ownerCamapignPDF(data1).then(function(result){
+         console.log(result);
+          if(result.status==1){
+            toastr.success(result.message);
+             $scope.sharePerson = false;
+          }else{
+            toastr.error(result.message);
+          }
+        });
+      }
+    }else{
+         console.log("Please check validations");
+
+    }
+    
+       
+      };
+   
 });

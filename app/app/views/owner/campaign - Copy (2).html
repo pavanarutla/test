@@ -1,0 +1,717 @@
+<style>
+     /* .detail{
+       display:none; 
+    }  */
+</style>
+<div ng-cloak  flex="100" flex-xs="100" flex-sm="100" flex-md="100">
+    <md-content layout="column" layout-sm="column" layout-xs="column">
+
+       <!-- <md-tabs md-dynamic-height md-border-bottom class="campagin__summarys contbg"> -->
+
+            <!-- planed tab start-->
+           <!-- <md-tab label="Proposals">
+                <!-- <div class="inputDiv">
+                    <a href="#"><md-icon><i class="material-icons">search</i></md-icon></a>
+                    <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
+                </div>  -->
+                <div class="proposal__hedng">
+                    <h3>Campaign</h3>
+                    <div class="proposal__actions">
+                        <a  ng-click="addCamapginSidenav()"><img src="assets/images/owner/add.png"/></a>
+                        <a ng-click="shareCampaign()"><img src="assets/images/owner/share.png"/></a>
+                        <!-- <a href="#"><img src="assets/images/owner/edit.png"/></a>
+                        <a href="#"><img src="assets/images/owner/delete.png"/></a> -->
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md class="table__heading">
+                    <md-list-item>
+                        <div flex="10" class="table_headig_title">
+                            <label class="owner_container">ID                                
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div flex="15" class="table_headig_title">Campaign Name</div>
+                        <div flex="15" class="table_headig_title">Client Contact</div>
+                        <div flex="15" class="table_headig_title">Start Date</div>
+                        <div flex="15" class="table_headig_title">EndDate</div>
+                        <div flex="10" class="table_headig_title">Status</div>
+                        <div flex="10" class="table_headig_title">Price</div>
+                        <div flex="10" >products</div>
+                        
+                    </md-list-item>
+                </div>
+                <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in plannedCampaigns"
+                    class="contbg md-whiteframe-3dp">
+
+                    <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                         <div flex="10" hide-xs hide-sm>
+                            
+                            <label class="owner_container">ID-number
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div> 
+                        <div flex="15"  flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="campaign-name">
+
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c1.png" alt="c1">
+                            </div>
+                            <div flex-xs="80" flex-sm="85">
+                                <div class="md-body-1">{{item.name}}</div>
+                            </div>
+                            <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                                <md-menu>
+                                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                        <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item>
+                                            <md-button ng-href="#/owner/campaign-proposal/{{item.id}}">View</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="addCamapginSidenav($item)">Edit</md-button>
+                                        </md-menu-item>
+                                        
+                                        <md-menu-item>
+                                            <md-button>Delete</md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </div>
+                        </div>
+
+                        <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+
+                           
+                            <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                    <div>
+                                        <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                                    </div>
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.client_name}}</div>
+                                </div>
+                            </div>
+                           
+                        </div> 
+                        <!-- hide in lg -->
+                        <div flex="10" flex-xs="100" class="campaign-name" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c8.png" alt="c8">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85">
+                                <div class="md-body-1">{{item.companyName}}</div>
+                            </div>
+                        </div>
+                        <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c2.png" alt="c1">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85">
+                                <div class="md-body-1">{{item.client_name}}</div>
+                            </div>
+                        </div>
+                        <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c7.png" alt="c1">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85">
+                                <div class="md-body-1">{{item.client_phoneNo}}</div>
+                            </div>
+                        </div>
+
+                        <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="detail">
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c3.png" alt="c3">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+                                <div class="md-body-1">{{item.start_date| date}} To {{item.end_date| date}}</div>
+                            </div>
+                                <div hide-xs hide-sm class="md-body-1">{{item.start_date | date}}</div> 
+                        </div>
+                        <div flex="15" hide-xs hide-sm>
+                            <div class="md-body-1">{{item.end_date| date}}</div>
+                        </div>
+                        <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c9.png" alt="c9">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85">
+                                 <div class="md-body-1">{{item.status | stringifyCampaignStatus}}</div> 
+                                <!-- <md-progress-linear class="md-warn" md-mode="determinate" value="{{campaiginController.determinateValue}}"></md-progress-linear> -->
+                            </div>
+                        </div>
+                        <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <!-- <md-icon md-svg-icon="assets/images/c6.svg"></md-icon> -->
+                                <img src="assets/images/c5.png" alt="c1">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="85">
+                                <div class="md-body-1">{{item.est_budget}}</div>
+                            </div>
+                        </div>
+                        <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout="row" layout-xs="row" layout-sm="row" class="detail">
+                            <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                <img src="assets/images/c6.png" alt="c1">
+                            </div>
+                            <div flex-xs="80" flex-gt-xs="50">
+                                <div class="md-body-1">{{item.products.length}}</div>
+                            </div>
+                            <div flex="50" hide-xs hide-sm>
+                                <!-- <a ng-href="#/owner/editCampaign"><img src="assets/images/owner/eye.png"/></a> -->
+                                 <md-menu>
+                                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin: -8px 0 0 0;padding:0px">
+                                        <i class="material-icons">more_vert</i>
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item>
+                                            <md-button ng-href="#/owner/campaign-proposal/{{item.id}}">View</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="addCamapginSidenav(item)">Edit</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>Delete</md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>  
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                </div>
+                    <div layout="column" layout-align="center end" class="loadmore">
+                    <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+                </div> 
+               
+                <!-- <md-button aria-label="Addacategory" style="top:-5px" ng-click="addOwnerCampagin($event)" class="md-fab md-fab-top-right md-mini" style="position:fixed !important;">
+                    <md-icon md-svg-icon="assets/images/add_plus.svg" id="left"></md-icon>
+                </md-button> -->
+           <!-- </md-tab>-->
+            <!-- running campaign start-->
+            <md-tab label="Running ">
+                <div class="inputDiv">
+                    <md-icon><i class="material-icons">search</i></md-icon>
+                    <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
+                </div> 
+                <div>
+                     <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+                        <md-list-item>
+                            <div flex="15">Campaign Name</div>
+                            <div flex="15">Client Contact</div>
+                            <div flex="15">Start Date</div>
+                            <div flex="15">EndDate</div>
+                            <div flex="10">Status</div>
+                            <div flex="10">Price</div>
+                            <div flex="10">products</div>
+                            <div flex="10">Actions</div>
+                        </md-list-item>
+                    </div> 
+                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in runningCampaigns"
+                        class="contbg md-whiteframe-3dp">
+
+                        <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                            <div flex="15"  flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="campaign-name">
+
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c1.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-sm="85">
+                                    <div class="md-body-1">{{item.name}}</div>
+                                </div>
+                                <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                                    <md-menu>
+                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                            <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                      
+                                            <md-menu-item>
+                                                <md-button ng-href="#/campaign-running">View</md-button>
+                                            </md-menu-item>
+                                            
+                                        </md-menu-content>
+                                    </md-menu>
+                                </div>
+                            </div>
+
+                             <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div style="display:inline !important;">
+                                            <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.companyName}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.client_name}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <!-- hide in lg -->
+                            <div flex="10" flex-xs="100" class="campaign-name" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c8.png" alt="c8">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.companyName}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c2.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.client_name}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c7.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                </div>
+                            </div>
+
+                            <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c3.png" alt="c3">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+                                    <div class="md-body-1">{{item.start_date}} To {{item.end_date}}</div>
+                                </div>
+                                 <div hide-xs hide-sm class="md-body-1">{{item.start_date}}</div> 
+                            </div>
+                            <div flex="15" hide-xs hide-sm>
+                                <div class="md-body-1">{{item.end_date}}</div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                     <img src="assets/images/c9.png" alt="c9">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                     <div class="md-body-1">Running</div> 
+                                    <!-- <md-progress-linear class="md-warn" md-mode="determinate" value="{{campaiginController.determinateValue}}"></md-progress-linear> -->
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <!-- <md-icon md-svg-icon="assets/images/c6.svg"></md-icon> -->
+                                    <img src="assets/images/c5.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.est_budget}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c6.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.products.length}}</div>
+                                </div>
+                            </div>
+
+                            <div flex="10" hide-xs hide-sm>
+                                <md-menu>
+                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                            <md-icon><i class="material-icons">settings</i></md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                            
+                                            <md-menu-item>
+                                                <md-button ng-href="#">Edit</md-button>
+                                            </md-menu-item>
+                                            
+                                        </md-menu-content>
+                                    </md-menu>
+                            </div>
+                        </div>
+
+                    </div>
+                     <div layout="column" layout-align="center end" class="loadmore">
+                        <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+                    </div> 
+                </div>
+
+
+            </md-tab>
+            <!--closed campagin start -->
+            <md-tab label="Closed">
+                <div class="inputDiv">
+                    <md-icon><i class="material-icons">search</i></md-icon>
+                    <input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
+                </div> 
+                <div>
+                     <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+                        <md-list-item>
+                            <div flex="15">Campaign Name</div>
+                            <div flex="15">Client Contact</div>
+                            <div flex="15">Start Date</div>
+                            <div flex="15">EndDate</div>
+                            <div flex="10">Status</div>
+                            <div flex="10">Price</div>
+                            <div flex="10">products</div>
+                            <div flex="10">Actions</div>
+                        </md-list-item>
+                    </div> 
+                    <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in closedCampaigns"
+                        class="contbg md-whiteframe-3dp">
+
+                        <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                            <div flex="15"  flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="campaign-name">
+
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c1.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-sm="85">
+                                    <div class="md-body-1 camapgin-name">{{item.name}}</div>
+                                </div>
+                                <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                                    <md-menu>
+                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                            <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                      
+                                            <md-menu-item>
+                                                <md-button ng-href="#/campaign-closed">View</md-button>
+                                            </md-menu-item>
+                                            
+                                        </md-menu-content>
+                                    </md-menu>
+                                </div>
+                            </div>
+
+                             <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div style="display:inline !important;">
+                                            <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.companyName}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.client_name}}</div>
+                                    </div>
+                                </div>
+                                <div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+                                    <div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+                                        <div>
+                                            <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                                        </div>
+                                    </div>
+                                    <div flex-xs="80" flex-gt-xs="85">
+                                        <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <!-- hide in lg -->
+                            <div flex="10" flex-xs="100" class="campaign-name" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c8.png" alt="c8">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.companyName}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c2.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.client_name}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100"  class="detail" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c7.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.client_phoneNo}}</div>
+                                </div>
+                            </div>
+
+                            <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c3.png" alt="c3">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+                                    <div class="md-body-1">{{item.start_date}} To {{item.end_date}}</div>
+                                </div>
+                                 <div hide-xs hide-sm class="md-body-1">{{item.start_date}}</div> 
+                            </div>
+                            <div flex="15" hide-xs hide-sm>
+                                <div class="md-body-1">{{item.end_date}}</div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                     <img src="assets/images/c9.png" alt="c9">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                     <div class="md-body-1">closed</div> 
+                                    <!-- <md-progress-linear class="md-warn" md-mode="determinate" value="{{campaiginController.determinateValue}}"></md-progress-linear> -->
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <!-- <md-icon md-svg-icon="assets/images/c6.svg"></md-icon> -->
+                                    <img src="assets/images/c5.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.est_budget}}</div>
+                                </div>
+                            </div>
+                            <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" class="detail">
+                                <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                                    <img src="assets/images/c6.png" alt="c1">
+                                </div>
+                                <div flex-xs="80" flex-gt-xs="85">
+                                    <div class="md-body-1">{{item.products.length}}</div>
+                                </div>
+                            </div>
+
+                             <div flex="10" hide-xs hide-sm>
+                                <md-menu>
+                                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                            <md-icon><i class="material-icons">settings</i></md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                            
+                                            <md-menu-item>
+                                                <md-button ng-href="#">Edit</md-button>
+                                            </md-menu-item>
+                                            
+                                        </md-menu-content>
+                                    </md-menu>
+                            </div> 
+                        </div>
+
+                    </div>
+                    <!-- <div layout="column" layout-align="center end" class="loadmore">
+                        <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+                    </div> -->
+                </div>
+            </md-tab>
+      <!--  </md-tabs> -->
+        <!-- share campagin popup html start -->
+        <div class="share__campaign md-whiteframe-5dp" ng-show="sharePerson">
+            <div class="share__person">
+                <h3>Share Campaign</h3>
+            </div>
+            <div class="share__details">
+                <!-- <p>Share With</p>
+                <div class="send__person">
+                    <input type="checkbox" id="shareNews" name="share" value="newsletter">
+                    <label for="shareNews">Bhavan</label>
+                </div>
+                <div class="send__person">
+                    <input type="checkbox" id="shareNews" name="share" value="newsletter">
+                    <label for="shareNews">Siva</label>
+                </div> -->
+                <div class="form-group">
+                    <label class="control-label">Email:</label>
+                    <input class="form-control" type="text">
+                </div>
+                <div layout="row" layout-align="end center">
+					<md-button Class="md-raised md-primary" type="submit" >Send</md-button>
+					<md-button Class="md-raised md-warn" >Cancel</md-button>
+				</div>
+                
+            </div>
+        </div>
+        <!-- share campagin popup html start -->
+        
+    </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerAddcmapgin">
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools" style="background:#414143 !important">
+            <h2>
+                <span>Create Campiagn</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="addCamapginSidenav()">
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>
+            </div>
+        </md-toolbar> 
+        <md-content layout-padding="">
+            <form ng-cloak name="signup" novalidate>
+                <input type="hidden" ng-model="campaign.id" />
+                <div class="form-group">
+                    <label class="control-label"> Campaign Name</label>
+                    <br>
+                    <input  class="form-control" ng-model="campaign.name" type="text" name="name" minlength="2" maxlength="30" ng-pattern="/[A-Za-z0-9\-]$/" required/>
+                    <div ng-messages="signup.name.$error" ng-if="submittedtrue">
+                      <div ng-message="required">Campaign Name is required.</div>
+                      <div ng-message="minlength">Campaign Name must have 2 characters.</div>
+                      <div ng-message="maxlength">Campaign Name shouldn't exceed 20 characters. </div>
+                      <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Company Name</label>
+                    <br>
+                    <input  class="form-control" ng-model="campaign.companyName" type="text" name="cname" minlength="2" maxlength="30" required="required"/>
+                    <div ng-messages="signup.cname.$error" ng-if="submittedtrue">
+                      <div ng-message="required">Company Name is required.</div>
+                      <div ng-message="minlength">Company Name must have 2 characters.</div>
+                      <div ng-message="maxlength">Company Name shouldn't exede 30 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Client Name</label>
+                    <br>
+                     <input  class="form-control" ng-model="campaign.client_name" type="text" name="client_name" minlength="2" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" />
+                    <div ng-messages="signup.client_name.$error" ng-if="submittedtrue">
+                      <div ng-message="required">Client Name is required.</div>
+                      <div ng-message="minlength">Client Name must have 2 characters.</div>
+                      <div ng-message="maxlength">Client Name shouldn't exede 30 characters. </div>
+                      <div ng-message="pattern">Client Name should contain only Alpha Numeric and _ - . symbols.</div>
+                    </div>      
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email:</label>
+                    <input  class="form-control" ng-model="campaign.client_email" name="email" type="email" minlength="8" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                    <div ng-messages="signup.email.$error" ng-if="submittedtrue">
+                      <div ng-message="required">Email is required.</div>
+                      <div ng-message="minlength">Email must have 8 characters.</div>
+                      <div ng-message="maxlength">Email shouldn't exede 30 characters. </div>
+                      <div ng-message="pattern">Enter a valied Email Id.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Phone Number</label>
+                    <br>            
+                    <input  class="form-control" ng-model="campaign.client_phoneNo" type="text" name="pno" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
+                     <div ng-messages="signup.pno.$error" ng-if="submittedtrue">
+                      <div ng-message="required">Phone No is required.</div>
+                      <div ng-message="minlength">Phone No must have 10 characters.</div>
+                      <div ng-message="maxlength">Phone No shouldn't exede 10 characters.</div>
+                      <div ng-message="pattern">Phone No should be only numbe.</div>
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="padding-right:0px">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker6'>                         
+                                <md-datepicker name="startDate" ng-model="campaign.start_date" md-placeholder="Start Date" required></md-datepicker>
+                                <div ng-messages="signup.startDate.$error" ng-if="submittedtrue">
+                                  <div ng-message="required">Start Date required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6" style="padding-left:0px">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker7'>
+                                <md-datepicker name="endDate" ng-model="campaign.end_date" md-placeholder="End date" required></md-datepicker>
+                                <div ng-messages="signup.endDate.$error" ng-if="submittedtrue">
+                                  <div ng-message="required">End Date required.</div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Estimated Bugest</label>
+                    <br>
+                    <input  class="form-control" ng-model="campaign.est_budget" type="text" name="budget" required="required" maxlength="10" />
+                    <div ng-messages="signup.budget.$error" ng-if="submittedtrue">
+                      <div ng-message="required">estimated budget required.</div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin:10px 0">
+                    <label class="col-md-3 control-label"></label>
+                    <input class="btn btn-primary" value="Save" type="button" ng-click="saveCampaign(this)">
+                    <span></span>
+                    <input class="btn btn-default" value="Cancel" type="reset">
+                </div> 
+     
+            </form>
+        </md-content> 
+    </md-sidenav>
+</div>
+<script type="text/javascript">
+//             $(function () {
+//                 $('#datetimepicker1').datetimepicker();
+// });
+  /*   $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });*/
+</script>
+ <script>
+    // $scope.list="flase"
+    // $scope.tooglt = function(){
+    //   $scope.list = !$scope.list;
+    //   if($scope.list){
+    //       var ele = document.getElementById("clickBy");
+    //       ele.className = "list-one";
+    //   }
+    // else{
+    //     var ele = document.getElementById("clickBy");
+    //       ele.className = "";
+    // }
+        
+        
+    // };
+    $(document).on('click', '.campaign-name', function(e){
+        if($(window).width() < 599){
+            $('.detail').slideUp();
+            if($(this).parent().find('.detail').css('display') == "none"){
+                $(this).parent().find('.detail').slideDown();
+            }
+        }
+    });
+</script>

@@ -10,45 +10,48 @@
  					<div layout="column" layout-align="center center" layout-margin="layout-margin" ng-if="errors" class="md-block">
  					 <p ng-repeat="error in errors" class="md-body-2">{{error}}</p>
  					</div>
- 					<form name="reset" novalidate="novalidate">
- 					 	<md-input-container class="md-block">
- 					 		<label>Current  Password</label>
- 					 		<input ng-model="user.password" type="password" name="password" minlength="6" maxlength="20" required="required"/>
- 					 		<div ng-messages="reset.password.$error">
- 					 		<div ng-message="required">Current is required.</div>
- 					 		<div ng-message="minlength">Current must have 6 characters.</div>
- 					 		<div ng-message="maxlength">Current shouldn't exceed 20 characters.</div>
- 					 		</div>
- 					 	</md-input-container>
- 					 	<md-input-container class="md-block">
- 					 		<label> New Password</label>
- 					 		<input ng-model="user.verfiypassword" type="password" name="password" minlength="6" maxlength="20" required="required"/>
- 					 		<div ng-messages="reset.password.$error">
- 					 		<div ng-message="required">Password is required.</div>
- 					 		<div ng-message="minlength">Password must have 6 characters.</div>
- 					 		<div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
- 					 		</div>
-						  </md-input-container>
+ 					<form name="resetPasswordForm" layout-margin="layout-margin" layout-padding novalidate="novalidate">
+						<md-input-container class="md-block" ng-if="!typeReset">
+							<label> Current Password </label>
+							<input ng-model="resetPwdObj.password" type="password" name="password" minlength="6" maxlength="20" required="required" />
+							<div ng-messages="resetPasswordForm.password.$error">
+								<div ng-message="required">Password is required.</div>
+								<div ng-message="minlength">Password must have 6 characters.</div>
+								<div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+								<div ng-message="pattern">Please enter a strong password.</div>
+							</div>
+						</md-input-container>
+						<input type="hidden" ng-model="resetPwdObj.code" ng-if="typeReset" />
 						<md-input-container class="md-block">
- 					 		<label> Conform Password</label>
- 					 		<input ng-model="user.verfiypassword" type="password" name="password" minlength="6" maxlength="20" required="required"/>
- 					 		<div ng-messages="reset.password.$error">
- 					 		<div ng-message="required">Password is required.</div>
- 					 		<div ng-message="minlength">Password must have 6 characters.</div>
- 					 		<div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
- 					 		</div>
- 					 	</md-input-container>
- 					 	<div layout="row">
+							<label>New Password </label>
+							<input ng-model="resetPwdObj.newPassword" type="password" name="password" minlength="6" maxlength="20" required="required" />
+							<div ng-messages="resetPasswordForm.password.$error">
+								<div ng-message="required">Password is required.</div>
+								<div ng-message="minlength">Password must have 6 characters.</div>
+								<div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+								<div ng-message="pattern">Please enter a strong password.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block">
+							<label>Confirm Password </label>
+							<input ng-model="resetPwdObj.confirmNewPassword" type="password" name="confirm_password" minlength="6" maxlength="20" required="required" />
+							<div ng-messages="resetPasswordForm.confirm_password.$error">
+								<div ng-message="required">Password is required.</div>
+								<div ng-message="minlength">Password must have 6 characters.</div>
+								<div ng-message="maxlength">Password shouldn't exede 20 characters.</div>
+								<div ng-message="pattern">Please enter a strong password.</div>
+							</div>
+						</md-input-container>
+						<div layout="row" layout-align="center center">
 							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
- 					 			<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Submit</md-button>
+ 					 			<md-button ng-click="resetPassword()" type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Submit</md-button>
 							</md-input-container>
 							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
- 					 			<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Cancle</md-button>
+ 					 			<md-button ng-click="clearData()" type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn">Cancle</md-button>
  					 		</md-input-container>
-									 
+							
 						</div>
- 					 	
- 					 </form>
+					</form>
  					</md-content>
  				</md-whiteframe>
  			</div>

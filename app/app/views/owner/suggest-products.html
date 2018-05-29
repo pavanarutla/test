@@ -95,7 +95,8 @@
                             ng-model="suggestedProduct.start_date" 
                             is-open="opened.start" 
                             ng-click="opened.start = !opened.start" 
-                            max-date='model.end_date'
+                            min-date='start_date_p'
+                            max-date='(suggestedProduct.end_date)?suggestedProduct.end_date:end_date_p'
                             ng-readonly='true' placeholder="start date" />
                           <span class="input-group-addon" for='start' 
                               ng-click="opened.start = !opened.start; $event.stopPropagation()">
@@ -110,7 +111,8 @@
                           ng-model="suggestedProduct.end_date" 
                           is-open="opened.end" 
                           ng-click="opened.end = !opened.end"
-                          min-date='suggestedProduct.start_date' 
+                          min-date='(suggestedProduct.start_date)?suggestedProduct.start_date:start_date_p' 
+                          max-date='end_date_p' 
                           ng-readonly='true' placeholder="end date" />
                         <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
                           <span class="glyphicon glyphicon-calendar"></span>

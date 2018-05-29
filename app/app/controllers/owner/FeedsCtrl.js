@@ -1,23 +1,28 @@
-app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr) {
+app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr, OwnerCampaignService) {
   
     $scope.msg = {};
     $scope.limit = 3;
     $scope.pageNo = 1;
+    var currentUser = JSON.parse(localStorage.OwnerloggedInUser);
 
     $scope.productList = [];
     $scope.loadProductList = function(){
-      ProductService.getProductForPage($scope.pageNo).then(function(result){
-        if(localStorage.campaignForSuggestion){
-          var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
-          if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
+      ProductService.ListofProductOwner({pageNo:$scope.pageNo}).then(function(result){
+        if(localStorage.ownerCampaignForSuggestion){
+          var ownerCampaignForSuggestion = JSON.parse(localStorage.ownerCampaignForSuggestion);
+          if(ownerCampaignForSuggestion.products && ownerCampaignForSuggestion.products.length > 0){
             _.map(result, function(p){
-              if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){
+              if(_.find(JSON.parse(localStorage.ownerCampaignForSuggestion).products, {id: p.id}) !== undefined){
                 p.alreadyAdded = true;
                 return p;
               } 
             });  
           } 
         }
+        $scope.start_date_p = ownerCampaignForSuggestion.start_date;
+        $scope.end_date_p = ownerCampaignForSuggestion.end_date;
+        console.log(ownerCampaignForSuggestion);
+        console.log($scope.start_date_p);
         $scope.pageNo += 1;
         $scope.productList = $scope.productList.concat(result);
       });
@@ -27,8 +32,9 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     /*
     ======== Campaign requests =======
     */
-    AdminCampaignService.getAllCampaignRequests().then(function(result){
+    OwnerCampaignService.ownerCamapignsRequest().then(function(result){
       $scope.requestList = result;
+      
       // $scope.groupedRequests = _.groupBy(requestList, function(request){
       //   return request.status;
       // });
@@ -68,18 +74,18 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     // }
 
     $scope.suggestProductsForCampaign = function(){
-      localStorage.campaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
-      $location.path('/admin/suggest-products');
+      localStorage.ownerCampaignForSuggestion = JSON.stringify($scope.selectedRequestDetails);
+      $location.path('/owner/'+currentUser.username+'/suggestproducts');
     }
 
     // adds a product in the campaign
     $scope.suggestProductForCampaign = function(suggestedProduct){
-      if(!localStorage.campaignForSuggestion){
+      if(!localStorage.ownerCampaignForSuggestion){
         toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
       }
       else{
         var postObj = {
-          campaign_id: JSON.parse(localStorage.campaignForSuggestion).id,
+          campaign_id: JSON.parse(localStorage.ownerCampaignForSuggestion).id,
           product:{
             id: suggestedProduct.id,
             from_date: suggestedProduct.start_date,
@@ -89,8 +95,8 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
         };
         AdminCampaignService.proposeProductForCampaign(postObj).then(function(result){
           if(result.status == 1){
-            AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.campaignForSuggestion).id).then(function(updatedCampaignData){
-              localStorage.campaignForSuggestion = JSON.stringify(updatedCampaignData);
+            AdminCampaignService.getCampaignWithProducts(JSON.parse(localStorage.ownerCampaignForSuggestion).id).then(function(updatedCampaignData){
+              localStorage.ownerCampaignForSuggestion = JSON.stringify(updatedCampaignData);
               _.map($scope.productList, function(product){
                 if(product.id == suggestedProduct.id){
                   product.alreadyAdded = true;             
@@ -148,5 +154,10 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     $scope.shareProducts = function() {
         $mdSidenav('shareProductOwner').toggle();
     };
+    // close popup
+    
+    $scope.closepopup = function(){
+      $mdDialog.hide();
+    }
   });
  
