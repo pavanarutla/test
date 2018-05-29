@@ -50,6 +50,16 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
+    .state('index.pricing', {
+      url: 'pricing',
+      templateUrl: 'views/pricing.html',
+      controller: 'PricingCtrl'
+    })
+    .state('index.whyoutdoor', {
+      url: 'whyoutdoor',
+      templateUrl: 'views/whyoutdoor.html',
+      controller: 'PricingCtrl'
+    })
     // .state('index.suggest_campaign', {
     //   url: 'suggest-campaign',
     //   templateUrl: 'views/suggest-a-campaign.html',
@@ -76,7 +86,7 @@ var app = angular.module('bbManager', [
         url: '/advertisingobjects',
         templateUrl: 'views/suggest-campaign-three.html'
     })
-      // url will be suggest-Advertising-Detail
+    // url will be suggest-Advertising-Detail
     .state('index.suggest.otherinfo', {
         url: '/otherinfo',
         templateUrl: 'views/suggest-campaign-four.html'
