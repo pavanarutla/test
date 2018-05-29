@@ -9,14 +9,14 @@
 				<img ng-src="{{serverUrl + userProfile.user.profile_pic}}" alt="team" style="width:150px;margin: 50px 0 0 0;">
 			</div>
 			<div ng-if="!userProfile.user.profile_pic">
-				<img src="assets/images/product/user_avatar.png" alt="team" style="width:150px;margin: 50px 0 0 0;">
+				<img src="assets/images/product/user_avatar.png" alt="team" class="md-avatar" style="width:120px;height:120px;border-radius:50%;margin-top:15px;">
 			</div>
 			<div style="position:relative">
-					<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required>
-						<md-icon style="position:absolute;top:-40px;left:50px;cursor:pointer;">
-							<i class="material-icons" style="color:#fff;">mode_edit</i>
-						</md-icon>
-					</div>
+				<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required>
+					<md-icon style="position:absolute;top:-40px;left:0px;cursor:pointer;">
+						<i class="material-icons" style="color:#fff;">mode_edit</i>
+					</md-icon>
+				</div>
 			</div>
 			<div>{{userProfile.user.name}}</div>
 			<div>{{userProfile.user.email}}</div>
