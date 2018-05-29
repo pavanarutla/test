@@ -50,10 +50,36 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .state('index.suggest_campaign', {
-      url: 'suggest-campaign',
-      templateUrl: 'views/suggest-a-campaign.html',
-      controller: 'CampaignCtrl'
+    // .state('index.suggest_campaign', {
+    //   url: 'suggest-campaign',
+    //   templateUrl: 'views/suggest-a-campaign.html',
+    //   controller: 'CampaignCtrl'
+    // })
+    $stateProvider.state('index.suggest', {
+      url: 'suggest',
+      templateUrl: 'views/suggest-a-campaign.html'
+    })   
+    // nested states 
+    // each of these sections will have their own view
+    // url will be suggest-Product-Detail
+    .state('index.suggest.productdetail', {
+        url: '/productdetail',
+        templateUrl: 'views/suggest-campaign-one.html'
+    })
+    // url will be suggest-market-Detail
+    .state('index.suggest.marketingobjects', {
+        url: '/marketingobjects',
+        templateUrl: 'views/suggest-campaign-two.html'
+    })
+    // url will be suggest-Advertising-Detail
+    .state('index.suggest.advertisingobjects', {
+        url: '/advertisingobjects',
+        templateUrl: 'views/suggest-campaign-three.html'
+    })
+      // url will be suggest-Advertising-Detail
+    .state('index.suggest.otherinfo', {
+        url: '/otherinfo',
+        templateUrl: 'views/suggest-campaign-four.html'
     })
     .state('index.location', {
       url: 'location',
