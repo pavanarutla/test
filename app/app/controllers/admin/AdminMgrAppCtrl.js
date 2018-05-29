@@ -1,5 +1,19 @@
 app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
 
+  /*========================
+  | Notification types
+  |==================
+  
+  'campaign-suggestion-requested'   =>    0,
+  'campaign-quote-requested'        =>    1,
+  'campaign-quote-provided'         =>    2,
+  'campaign-launch-requested'       =>    3,
+  'campaign-launched'               =>    4,
+  'campaign-suspended'              =>    5,
+  'campaign-closed'                 =>    6 
+  
+  =========================*/
+
   $rootScope.serverUrl = config.serverUrl;
 
   if(localStorage.isAuthenticated && localStorage.loggedInUser){
@@ -62,8 +76,8 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   /*===============================
   |   Notification navigation 
   ===============================*/
-  $scope.showCampaignDetails = function(notificationId){
-    AdminNotificationService.updateNotifRead(notificationId).then(function(result){
+  $scope.showCampaignDetails = function(notification){
+    AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){
         getAdminNotifs();
       }
@@ -72,7 +86,16 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       }
     });
     $mdSidenav('right').toggle();
-    $location.path('/admin/home');
+    if(notification.type == 0){
+      $scope.showCampaignSuggestionRequestPopup($event, notification);
+    }
+    if(notification.type > 0 && notification.type < 7){
+      $location.path('#/admin/campaign-proposal-summary/' + notification.data.campaign_id);
+    }
   }
+
+  /*===============================
+  |   Notification navigation ends
+  ===============================*/
 
 });
