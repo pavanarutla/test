@@ -801,7 +801,7 @@ app.controller('GmapCtrl',
       $scope.plannedUserCampaigns = [];
       $scope.loadPlannedUserCampaigns = function () {
         CampaignService.getPlannedCampaigns().then(function (result) {
-          $scope.plannedUserCampaigns = result;
+          $scope.plannedUserCampaigns = result.reverse();
         });
       }
       $scope.loadPlannedUserCampaigns();
