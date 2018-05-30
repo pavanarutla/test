@@ -208,6 +208,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.requested-hoarding', {
+      url: '/requested-hoarding',
+      templateUrl: 'views/admin/requested-hoarding.html',
+      controller: 'ProductCtrl'
+    })
     .state('owner', {
       abstract: true,
       url: '/owner',

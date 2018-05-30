@@ -51,9 +51,20 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/products-by-status/'+ status).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			},ListofProductOwner: function (data) {
+			},
+			PendingProducts: function (status) {
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/owner-pending-product').success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			ListofProductOwner: function (data) {
 				var dfd = $q.defer();
 				$http.post(config.apiPath + '/list-of-owner-products',data).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			approveProduct: function (productId,data) {
+				var dfd = $q.defer();
+				$http.put(config.apiPath + '/approve-product/'+productId,data).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
 			

@@ -264,4 +264,55 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     //   vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
     // };
   // tables code end
+
+  /******************* Get Pending products **********************/
+
+  $scope.PendingProducts = function(product){
+    ProductService.PendingProducts().then(function(result){
+      $scope.pendingproducts = result;
+    });
+  }
+  $scope.PendingProducts();
+
+  $scope.diablesomefields=false;
+  $scope.addOtherProductDetails = function(product){
+    $scope.diablesomefields=true;
+    console.log(product);
+    product.country = null;
+    product.state = null;
+    product.city = null;
+    product.area = null;
+    // product.company = null;
+    $scope.product = product;
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-product-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
+  $scope.approveProduct = function(product){
+    if(product.lat ==''&& product.lng==''){
+      toastr.error("Please add all details of product");
+    }else{
+       ProductService.approveProduct(product.id,product).then(function(result){
+            if(result.status == 1){      
+              toastr.success(result.message);
+              $scope.PendingProducts();
+              $mdDialog.hide();
+            }
+            else if(result.status == 0){
+              toastr.error(result.message);
+            }
+       },function(result){
+           toastr.error("somthing went wrong please try again later");
+       });
+    }
+   
+  }
+
+
+
 }]);
