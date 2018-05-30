@@ -432,11 +432,11 @@
 						<md-input-container class="md-block">
 							<label> Email</label>
 							<!-- <input ng-model="query.email" required="required"  /> -->
-							<input id="query_email" ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							<input id="query_email" ng-model="query.email" name="queryemail" type="email" maxlength="80" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
 							/>
 							<div ng-messages="forms.sendQueryForm.queryemail.$error">
 							  <div class="alret alert-danger" ng-message="required">Email is required.</div>
-							  <div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
+							  <div ng-message="maxlength">Email shouldn't exceed 80 characters. </div>
 							  <div ng-message="pattern">Enter a valid email</div>
 							</div>
 						</md-input-container>
