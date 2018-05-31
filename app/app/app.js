@@ -291,15 +291,15 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback',
       params: { username: null}
-    })
-    .state('OwnersignIn', {
+    });
+    /*.state('OwnersignIn', {
       url: '/owner/signIn',
       templateUrl: 'views/owner/signin.html',
       controller:'ownerSigninCtrl'
-    });
-    if(localStorage.OwnerloggedInUser){
-      console.log(JSON.parse(localStorage.OwnerloggedInUser));
-      var ownerUsername = JSON.parse(localStorage.OwnerloggedInUser).username;
+    });*/
+    if(localStorage.loggedInUser){
+      console.log(JSON.parse(localStorage.loggedInUser));
+      var ownerUsername = JSON.parse(localStorage.loggedInUser).username;
     }else{
       var ownerUsername = '';
     }

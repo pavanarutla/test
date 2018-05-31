@@ -4,7 +4,7 @@ app.controller('OwnerHoardingCtrl', function ($scope, $mdDialog, $http,$mdSidena
     $scope.pageNo = 1;
     $scope.productList = [];
     $scope.productLength = 0;
-    var currentUserId = JSON.parse(localStorage.OwnerloggedInUser).id;
+    var currentUserId = JSON.parse(localStorage.loggedInUser).id;
     $scope.serverUrl = config.serverUrl;
     /*
     ======== Loads product of LoggedIn Owner =======

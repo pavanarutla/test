@@ -53,6 +53,9 @@
             <md-menu-item ng-if="loggedInUser.roles[0].name == 'admin'">
               <md-button aria-label="campagins" ng-href="#/admin">Switch View</md-button>
             </md-menu-item>
+            <md-menu-item ng-if="loggedInUser.roles[0].name == 'owner'">
+              <md-button aria-label="campagins" ng-href="#/owner/{{loggedInUser.username}}/home">Switch View</md-button>
+            </md-menu-item>
             <md-menu-item>
               <md-button ng-href="#/reset_password">Reset Password</md-button>
             </md-menu-item>

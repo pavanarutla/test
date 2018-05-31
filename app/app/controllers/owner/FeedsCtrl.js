@@ -3,7 +3,7 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
     $scope.msg = {};
     $scope.limit = 3;
     $scope.pageNo = 1;
-    var currentUser = JSON.parse(localStorage.OwnerloggedInUser);
+    var currentUser = JSON.parse(localStorage.loggedInUser);
 
     $scope.productList = [];
     $scope.loadProductList = function(){

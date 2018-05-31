@@ -1,7 +1,7 @@
 app.controller('OwnerCampaignProposalCtrl', function ($scope, $mdDialog, $stateParams,$mdSidenav, $location, CampaignService, AdminCampaignService, config, toastr,OwnerCampaignService) {
  
 
-  var currentUser = JSON.parse(localStorage.OwnerloggedInUser);
+  var currentUser = JSON.parse(localStorage.loggedInUser);
 
   function loadCampaignData(campaignId){    
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){

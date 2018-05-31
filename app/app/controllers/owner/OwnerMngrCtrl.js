@@ -141,9 +141,9 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
   };
 //console.log(config.serverUrl);
   /********************* user data*************************/
-  if(localStorage.OwnerloggedInUser){
-    $rootScope.owner_detail = JSON.parse(localStorage.OwnerloggedInUser);
-    console.log(localStorage.OwnerloggedInUser);
+  if(localStorage.loggedInUser){
+    $rootScope.owner_detail = JSON.parse(localStorage.loggedInUser);
+    console.log(localStorage.loggedInUser);
   }
 
   $scope.logout = function(){
@@ -156,7 +156,7 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
   }
 
   $scope.resetvalues = function(){
-    $scope.owner_detail = JSON.parse(localStorage.OwnerloggedInUser);
+    $scope.owner_detail = JSON.parse(localStorage.loggedInUser);
     $scope.filepreview = undefined;
   }
 
@@ -165,7 +165,7 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
      uploadService.updateUserData(userDetails).then(function(res){  
       console.log(res);
       if(res.status == 200){
-         localStorage.OwnerloggedInUser = JSON.stringify(res.data.data);
+         localStorage.loggedInUser = JSON.stringify(res.data.data);
          $rootScope.owner_detail = res.data.data;
          toastr.success('Data updated.');
       }else{
