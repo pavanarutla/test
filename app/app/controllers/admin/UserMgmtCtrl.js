@@ -1,4 +1,4 @@
-app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, toastr, AdminUserService) {
+app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, $stateParams, toastr, AdminUserService, AdminUserMgmtService) {
 
   $scope.msg = {};
 
@@ -180,6 +180,99 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   /* 
   ======== Adding New Agency ends========
   */
+
+
+  /**
+   * Get Users
+   */
+  var getAllUsers = function(){
+    AdminUserMgmtService.getAllUsers().then(function(result){
+      $scope.allUsers = result;
+    });
+  }
+  getAllUsers();
+
+  /**
+   * Get Users
+   */
+  var getAllClients = function(){
+    AdminUserMgmtService.getAllClients().then(function(result){
+      $scope.allClients = result;
+    });
+  }
+  getAllClients();
+
+  /*===================
+  | Roles Section
+  ===================*/
+
+  $scope.selectedRoles = [];
+
+  /**
+   * Get Roles
+   */
+  var getAllRoles = function(){
+    AdminUserMgmtService.getAllRoles().then(function(result){
+      $scope.allRoles = result;
+    });
+  }
+  getAllRoles();
+
+  $scope.toggleRoleSelection = function(roleId){
+    if($scope.selectedRoles.indexOf(roleId) == -1){
+      $scope.selectedRoles.push(roleId);
+    }
+    else{
+      $scope.selectedRoles.pop(roleId);
+    }
+  }
+
+  var getRoleDetails = function(roleId){
+    AdminUserMgmtService.getRoleDetails(roleId).then(function(result){
+      console.log(result);
+      $scope.roleDetails = result;
+    });
+  }
+
+  // if role id is set, get the role details to 
+  // show on the role details page.
+  if($stateParams.roleId){
+    getRoleDetails($stateParams.roleId);
+  }
+
+  /*===================
+  | Roles Section Ends
+  ===================*/
+
+
+  /*==========================
+  | Permissions Section
+  ==========================*/
+
+  $scope.selectedPermissions = [];
+
+  /**
+   * Get Permissions
+   */
+  var getAllPermissions = function(){
+    AdminUserMgmtService.getAllPermissions().then(function(result){
+      $scope.allPermissions = result;
+    });
+  }
+  getAllPermissions();
+
+  $scope.togglePermissionSelection = function(permissionId){
+    if($scope.selectedPermissions.indexOf(permissionId) == -1){
+      $scope.selectedPermissions.push(permissionId);
+    }
+    else{
+      $scope.selectedPermissions.pop(permissionId);
+    }
+  }
+
+  /*==========================
+  | Permissions Section Ends
+  ==========================*/
 
   $scope.cancel = function () {
     $mdDialog.cancel();

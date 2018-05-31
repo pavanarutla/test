@@ -9,7 +9,6 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
 				var loggedInUser = {};
-				console.log($auth.getPayload());
 				var userData = $auth.getPayload().user;
 				var userMongoData = $auth.getPayload().userMongo;
 				loggedInUser.clientId = userData.client_id;
@@ -18,6 +17,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				loggedInUser.lastName = userMongoData.last_name;
 				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
+				$rootScope.loggedInUser = loggedInUser;
 				localStorage.loggedInUser = JSON.stringify(loggedInUser);
 				toastr.success('You have successfully signed in!');
 				$mdDialog.hide();

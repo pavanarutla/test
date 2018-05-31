@@ -216,11 +216,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
-    .state('admin.user-management', {
-      url: '/user-management',
-      templateUrl: 'views/admin/user-management.html',
-      controller: 'UserManagementCtrl'
-    })
+    // .state('admin.user-management', {
+    //   url: '/user-management',
+    //   templateUrl: 'views/admin/user-management.html',
+    //   controller: 'UserManagementCtrl'
+    // })
     .state('admin.role-details', {
       url: '/role-details/:roleId',
       templateUrl: 'views/admin/role-details.html',

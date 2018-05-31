@@ -1,4 +1,4 @@
-app.service('AdminUserManagementService', 
+app.service('AdminUserMgmtService', 
   ['$http', '$q', 'config', 
     function($http, $q, config){
       return {
@@ -21,7 +21,12 @@ app.service('AdminUserManagementService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/role-details/' + roleId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        getAllClients: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/all-clients').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
       }
     }
   ]

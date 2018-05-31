@@ -43,16 +43,16 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	* ============ Company Registration ============
 	*/
 
-	function getCompanyTypes(){
-		CompanyService.getCompanyTypes().then(function(result){
-			$scope.companyTypes = result;
+	function getClientTypes(){
+		CompanyService.getClientTypes().then(function(result){
+			$scope.clientTypes = result;
 		});
 	}
-	getCompanyTypes();
+	getClientTypes();
 
-	$scope.company = {};
-	$scope.registerNewCompany = function () {
-		CompanyService.registerCompany($scope.company).then(function(result){
+	$scope.client = {};
+	$scope.registerClient = function () {
+		CompanyService.registerClient($scope.client).then(function(result){
 			if(result.status == 1){
 				toastr.success(result.message);
 			}

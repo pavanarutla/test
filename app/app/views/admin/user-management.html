@@ -75,6 +75,50 @@
 
 <div class="row" style="padding:20px">
   <div class="col-md-12">
+    <!-- owners table -->
+    <h3 style="padding-left:30px;">Companies</h3>
+    <div class="table-responsive">    
+      <table class="table table-striped table-bordered ">
+        <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>Company Type</th>
+              <th>Super Admin Details</th>
+              <th>Activated</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="client in allClients">
+            <td>{{client.company_name}}</td>
+            <td>{{client.company_type_name}}</td>
+            <td>
+              <a href="#/admin/user-details/{{client.super_admin}}">
+                View User
+              </a>
+            </td>
+            <td>{{client.activated | boolToYesNo}}</td>
+            <td>{{client.email}}</td>
+            <td>{{client.phone}}</td>
+            <td>{{client.address}}</td>
+            <td>
+              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
+              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
+              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+            </td>
+          </tr>      
+        </tbody>
+      </table>
+    </div>
+    <!-- owners table ends -->
+  </div>
+</div>
+
+<div class="row" style="padding:20px">
+  <div class="col-md-12">
     <!-- users table -->
     <h3 style="padding-left:30px;">Users</h3>
     <div class="table-responsive">    
