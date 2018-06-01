@@ -98,10 +98,10 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Contact Name</label>
-							<input ng-model="client.user_name" name="clientUserName" type="text" maxlength="30" required="required" />
-							<div ng-messages="registerClientForm.clientname.$error">
-								<div class="alret alert-danger" ng-message="required">Client is required.</div>
-								<div ng-message="maxlength">Client shouldn't exede 30 characters. </div>
+							<input ng-model="client.contact_name" name="clientContactName" type="text" maxlength="30" required="required" />
+							<div ng-messages="registerClientForm.clientContactName.$error">
+								<div class="alret alert-danger" ng-message="required">Contact name is required.</div>
+								<div ng-message="maxlength">Contact name shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
 						<md-input-container class="md-block">
@@ -109,7 +109,7 @@
 							<md-select ng-model="client.type" class="select-value" required="required" name="clientType">
 								<md-option ng-repeat="type in clientTypes" ng-value="type.id">{{type.type}}</md-option>
 							</md-select>
-							<div ng-messages="registerClientForm.username.$error">
+							<div ng-messages="registerClientForm.clientType.$error">
 								<div class="alret alert-danger" ng-message="required">user name is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">user name must have 6 characters.</div>
 								<div ng-message="maxlength">username shouldn't exceed 30 characters. </div>

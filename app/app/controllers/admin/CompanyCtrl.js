@@ -145,7 +145,6 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   // };
 
   CompanyService.getHoardingCompanies().then(function (response) {
-    $scope.gridHoardingCompany.data = response;
     $scope.hoardingCompany = response;
   });
 
@@ -159,9 +158,6 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   $scope.addClient = function(){
     CompanyService.saveClient($scope.client).then(function(result){
       if(result.status == 1){
-        CompanyService.getHoardingCompanies().then(function (response) {    
-          $scope.gridHoardingCompany.data = response;
-        });
         toastr.success(result.message);
         $mdDialog.hide();
       }

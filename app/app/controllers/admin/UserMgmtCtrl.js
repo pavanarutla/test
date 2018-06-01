@@ -218,26 +218,34 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   }
   getAllRoles();
 
+  $scope.selectedRole = 0;
   $scope.toggleRoleSelection = function(roleId){
-    if($scope.selectedRoles.indexOf(roleId) == -1){
-      $scope.selectedRoles.push(roleId);
+    if($scope.selectedRole == roleId){      
+      $scope.selectedRole = 0;
+      $scope.selectedPermissions = [];
     }
     else{
-      $scope.selectedRoles.pop(roleId);
+      $scope.selectedRole = roleId;
+      getRoleDetails($scope.selectedRole);
     }
   }
 
   var getRoleDetails = function(roleId){
+    $scope.selectedPermissions = [];
     AdminUserMgmtService.getRoleDetails(roleId).then(function(result){
-      console.log(result);
-      $scope.roleDetails = result;
+      // $scope.roleDetails = result;
+      _.each(result.permissions, function(permission){
+        $scope.selectedPermissions.push(permission.id);
+      });
     });
   }
 
-  // if role id is set, get the role details to 
-  // show on the role details page.
-  if($stateParams.roleId){
-    getRoleDetails($stateParams.roleId);
+  $scope.updatePermissionsForRole = function(){
+    var permObj = {
+      role_id : $scope.selectedRole,
+      permissions : $scope.selectedPermissions
+    };
+    console.log(permObj);
   }
 
   /*===================
