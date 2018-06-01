@@ -444,7 +444,7 @@
           <md-input-container class="md-block">
             <label>Name</label>
             <input ng-model="shareShortlisted.name" name="name" required="required" />
-            <div ng-messages="shareShortlistedForm.name.$error">
+            <div ng-messages="shareShortlistedForm.name.$invalid">
               <div ng-message="required">Name is required.</div>
               <div ng-message="pattern">Enter a valid Name.</div>
             </div>
@@ -453,7 +453,7 @@
             <label>Email</label>
             <input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
             />
-            <div ng-messages="shareShortlistedForm.email.$error">
+            <div ng-messages="shareShortlistedForm.email.$invalid">
               <div ng-message="required">Email is required.</div>
               <div ng-message="pattern">Enter a valid Email Id.</div>
             </div>
@@ -564,14 +564,6 @@
           <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
           <div class="md-display-1">Congratulations!</div>
           <div class="md-headline">Campaign Saved Succcessfully</div>
-        </div>
-        <div layout="column" layout-margin>
-          <div>
-            <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
-          </div>
-          <div>
-            <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
-          </div>
         </div>
       </md-content>
     </div>
@@ -1326,9 +1318,12 @@
             </div>
             <md-divider></md-divider>
             <div layout="row">
-              <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
-              <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
-              <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
+                <div ng-if="shortListedProducts.length < 1">
+                    <span style="color:red;padding:2em">please add products</span>
+                  </div>
+              <md-button class="md-raised " ng-click="toggleViewAllShortlisted()" ng-if="shortListedProducts.length >= 1">VIEW ALL</md-button>
+              <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()" ng-if="shortListedProducts.length >= 1">SAVE </md-button>
+              <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()" ng-if="shortListedProducts.length >= 1">SHARE</md-button>
             </div>
           </div>
         </div>

@@ -807,6 +807,7 @@ app.controller('GmapCtrl',
       $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
+        alert("Are you sure")
         CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
             $scope.loadPlannedUserCampaigns();
@@ -894,6 +895,7 @@ app.controller('GmapCtrl',
         CampaignService.shareShortListedProducts(sendObj).then(function (result) {
           if (result.status == 1) {
             toastr.success(result.message);
+            $scope.shareShortlisted = null;
             $mdSidenav('shortlistSharingSidenav').close()
           }
           else {
