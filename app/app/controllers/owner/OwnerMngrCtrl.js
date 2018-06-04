@@ -1,4 +1,12 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope) {
+
+  if($stateParams.client_slug){
+    $rootScope.clientSlug = $stateParams.client_slug;
+  }
+
+  if(localStorage.loggedInUser){
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
 
   console.log($stateParams);
   // $scope.toggleLeft = buildToggler('left');

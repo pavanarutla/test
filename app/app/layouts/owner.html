@@ -35,20 +35,23 @@
                 <md-icon md-svg-icon="assets/images/notification_24px.svg" ></md-icon>
             </md-button>
 
-            <md-menu  class="profile-menu mrng-top">
-                <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-                    <img ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+            <md-menu md-offset="0 50">
+                <md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
+                    <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+                    <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
                 </md-button>
-                <md-menu-content width="3" style="z-index:99;top:17.5% !important;">
+                <md-menu-content width="3" style="z-index:99">
                     <md-menu-item>
-                        <md-button ng-href="#/owner/profile">Srikanth B</md-button>
+                    <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
                     </md-menu-item>
                     <md-menu-item>
-                        <md-button aria-label="edit profile" ng-click="editProfieSidenav()">Edit Profile</md-button>
-                    </md-menu-item> 
-                    
+                    <md-button ng-href="#/location">Switch View</md-button>
+                    </md-menu-item>
                     <md-menu-item>
-                        <md-button ng-click="logout()">Sign Out</md-button>
+                    <md-button ng-href="#/reset_password">Reset Password</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                    <md-button ng-click="logout()">Sign Out</md-button>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
@@ -66,32 +69,32 @@
                     <div style="width: 100% !important;">
                         <md-list class="owners-menu">
                             <md-menu-item class="nv-nav-item" >
-                                <md-button ng-href="#/owner/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
+                                <md-button ng-href="#/owner/{{clientSlug}}/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
                                     <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
                                     Home
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/ownerCampaign" ng-class="{'active-link': currStateName == 'owner.ownerCampaign'}">
+                                <md-button ng-href="#/owner/{{clientSlug}}/ownerCampaign" ng-class="{'active-link': currStateName == 'owner.ownerCampaign'}">
                                     <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
                                     Campaigns
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/requestHoarding" ng-class="{'active-link': currStateName == 'owner.requestHoarding'}" ng-click="changeRequest()" >
+                                <md-button ng-href="#/owner/{{clientSlug}}/requestHoarding" ng-class="{'active-link': currStateName == 'owner.requestHoarding'}" ng-click="changeRequest()" >
                                     <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
                                     Requested Hoardings
                                 </md-button>
                             </md-menu-item>
                             
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/hoardinglist" ng-class="{'active-link': currStateName == 'owner.hoardinglist'}" ng-click="changeHoardingList()">
+                                <md-button ng-href="#/owner/{{clientSlug}}/hoardinglist" ng-class="{'active-link': currStateName == 'owner.hoardinglist'}" ng-click="changeHoardingList()">
                                     <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
                                     Hoardings List
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
+                                <md-button ng-href="#/owner/{{clientSlug}}/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
                                     <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
                                     Outsourcing Agents
                                 </md-button>
@@ -103,13 +106,13 @@
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+                                <md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
                                     <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
                                     Team
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item class="nv-nav-item">
-                                <md-button ng-href="#/owner/dashboard" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
+                                <md-button ng-href="#/owner/{{clientSlug}}/dashboard" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
                                     <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
                                     Feeds
                                 </md-button>

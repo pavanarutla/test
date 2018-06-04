@@ -455,7 +455,7 @@ app.controller('bbMngrCtrl',
         $location.path("/admin");
       }
       else if(payload.user_type == "owner"){
-        $location.path("/owner/" + payload.client_slug + "/dashboard");
+        $location.path("/owner/" + payload.client_slug + "/home");
       }
     }
 

@@ -2,8 +2,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
 
   $rootScope.serverUrl = config.serverUrl;
 
-  if(localStorage.isAuthenticated && localStorage.loggedInUser){
-    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+  if(localStorage.loggedInUser){
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
