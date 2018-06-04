@@ -4,7 +4,7 @@ app.controller('bbMngrCtrl',
 
     $scope.forms = {};
 
-    if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    if(localStorage.loggedInUser){
       $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
     }
@@ -455,7 +455,7 @@ app.controller('bbMngrCtrl',
         $location.path("/admin");
       }
       else if(payload.user_type == "owner"){
-        $location.path("/" + payload.client_name + "/dashboard")
+        $location.path("/owner/" + payload.client_slug + "/dashboard");
       }
     }
 

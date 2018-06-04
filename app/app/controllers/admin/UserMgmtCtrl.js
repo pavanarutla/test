@@ -1,6 +1,7 @@
 app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, $stateParams, toastr, AdminUserService, AdminUserMgmtService) {
 
   $scope.msg = {};
+  $scope.forms = {};
 
   /*===================
   | Pagination
@@ -145,7 +146,8 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   $scope.toggleActivation = function(userMId){
     AdminUserService.toggleActivationUser(userMId).then(function(result){
       if(result.status == 1){
-        $scope.getUsers();
+        $scope.selectedUser.user_details.activated = !$scope.selectedUser.user_details.activated;
+        getAllUsers();
         toastr.success(result.message);
       }
       else{
@@ -193,7 +195,7 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   getAllUsers();
 
   /**
-   * Get Users
+   * Get Client
    */
   var getAllClients = function(){
     AdminUserMgmtService.getAllClients().then(function(result){
@@ -201,6 +203,25 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     });
   }
   getAllClients();
+
+  $scope.showUserDetailsPopup = function(userMId){
+    AdminUserMgmtService.getUserDetailsWithRoles(userMId).then(function(result){
+      if(result.status == 0){
+        toastr.error(result.message);
+      }
+      else{
+        $scope.selectedUser = result;
+        $scope.selectedRolesForUser = _.pluck(result.user_roles, 'id');
+        $mdDialog.show({
+          templateUrl: 'views/admin/user-details-popup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true,
+          preserveScope: true,
+          scope: $scope
+        });
+      }
+    });
+  }
 
   /*===================
   | Roles Section
@@ -230,6 +251,17 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     }
   }
 
+  $scope.toggleRoleSelectionForUser = function(roleId){
+    if($scope.selectedRolesForUser.indexOf(roleId) > -1){
+      var i = $scope.selectedRolesForUser.indexOf(roleId);
+      $scope.selectedRolesForUser.splice(i, 1);
+    }
+    else{
+      $scope.selectedRolesForUser.push(roleId);
+    }
+    console.log($scope.selectedRolesForUser);
+  }
+
   var getRoleDetails = function(roleId){
     $scope.selectedPermissions = [];
     AdminUserMgmtService.getRoleDetails(roleId).then(function(result){
@@ -240,12 +272,38 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     });
   }
 
+  $scope.showAddRolePopup = function(){
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-role-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
   $scope.updatePermissionsForRole = function(){
     var permObj = {
       role_id : $scope.selectedRole,
       permissions : $scope.selectedPermissions
     };
     console.log(permObj);
+  }
+
+  $scope.addRole = function(){
+    $scope.addRoleErrors = [];
+    AdminUserMgmtService.addRole($scope.role).then(function(result){
+      if(result.status == 1){
+        $scope.role = {};
+        $scope.forms.addRoleForm.$setPristine();
+        $scope.forms.addRoleForm.$setUntouched();
+        getAllRoles();
+        toastr.success(result.message);
+      }
+      else{
+        $scope.addRoleErrors = result.message;
+      }
+    })
   }
 
   /*===================

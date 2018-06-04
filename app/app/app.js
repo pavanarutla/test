@@ -221,19 +221,19 @@ var app = angular.module('bbManager', [
     //   templateUrl: 'views/admin/user-management.html',
     //   controller: 'UserManagementCtrl'
     // })
-    .state('admin.role-details', {
-      url: '/role-details/:roleId',
-      templateUrl: 'views/admin/role-details.html',
-      controller: 'UserManagementCtrl'
-    })    
+    // .state('admin.user-details', {
+    //   url: '/user-details/:userMId',
+    //   templateUrl: 'views/admin/user-details.html',
+    //   controller: 'UserManagementCtrl'
+    // })
     .state('owner', {
       abstract: true,
-      url: '/owner',
+      url: '/owner/:client_slug',
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
     .state('owner.dashboard', {
-      url: '/:ownerId/dashboard',
+      url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
       
@@ -300,7 +300,7 @@ var app = angular.module('bbManager', [
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/login');
+    $urlRouterProvider.when('/owner', '/owner/:client_slug/dashboard');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;

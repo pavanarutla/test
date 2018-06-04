@@ -32,6 +32,16 @@ app.service('AdminUserMgmtService',
           $http.get(config.apiPath + '/all-clients').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        addRole: function(role){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/role', role).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getUserDetailsWithRoles: function(userMId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/user-details-with-roles/' + userMId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
       }
     }
   ]
