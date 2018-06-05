@@ -203,8 +203,13 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.updateProposedProduct = function(product){
           AdminCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
             if(result.status == 1){
+              for(var i=0; i<ctrlScope.campaignProducts.length; i++){
+                if($scope.product.id == ctrlScope.campaignProducts[i].id){
+                  ctrlScope.campaignProducts[i].price =product.price;
+                }    
+              }
               // update succeeded. update the grid now.
-              CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+              CampaignService.getCampaignWithProducts(campaignId).then(function(result){  
                 ctrlScope.campaignDetails = result;
                 ctrlScope.gridCampaignProducts.data = result.products;
                 $mdDialog.hide();
