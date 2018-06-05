@@ -807,7 +807,6 @@ app.controller('GmapCtrl',
       $scope.loadPlannedUserCampaigns();
 
       $scope.deletePlannedCampaign = function (campaignId) {
-        alert("Are you sure")
         CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
             $scope.loadPlannedUserCampaigns();
