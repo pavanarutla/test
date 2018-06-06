@@ -72,29 +72,38 @@
 				</div> -->
 				<!-- ========new code for tables html start ========= -->
 				<div style="margin-top: 1em;">
-					<div class="table-responsive">    
+					<div class="table-responsive">
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr>
-									<th>Campagin Name</th>
-									<th>Owner Name</th>>
-									<th>Email id</th>
-									<th>Phone</th>
-									<th>List Of Hoardings</th>
+									<th>Company Name</th>
+									<th>Company Type</th>>
+									<th>Super Admin</th>
+									<th>Activated</th>
+									<th>Contact Email</th>
+									<th>Contact Phone</th>
+									<th>Address</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="company in hoardingCompany | limitTo:limit">
-								<td>{{company.name}}</td>
-								<td>{{company.owner}}</td>
-								<td>{{company.email}}</td>
-								<td>{{company.phone }}</td>
-								<td>{{company.hoardinglist }}</td>
-								
+								<tr ng-repeat="client in allClients | limitTo:limit">
+								<td>{{client.company_name}}</td>
+								<td>{{client.company_type_name}}</td>
 								<td>
-									<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
-									
+									<span ng-if="!client.company_super_admin">
+										No
+									</span>
+									<span ng-if="client.company_super_admin">
+										Yes
+									</span>
+								</td>
+								<td>{{client.activated | boolToYesNo}}</td>
+								<td>{{client.contact_email}}</td>
+								<td>{{client.phone}}</td>
+            		<td>{{client.address}}</td>
+								<td>
+									<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>	
 								</td>
 								</tr>      
 							</tbody>

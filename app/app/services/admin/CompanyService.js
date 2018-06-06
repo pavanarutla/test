@@ -12,9 +12,9 @@ app.service('CompanyService',
         $http.get(config.apiPath + '/companies').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },      
-      getHoardingCompanies: function(){
+      getAllClients: function(){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/hoarding-companies').success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/all-clients').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       saveCompany: function(company){

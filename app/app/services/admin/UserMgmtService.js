@@ -41,6 +41,11 @@ app.service('AdminUserMgmtService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/user-details-with-roles/' + userMId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        assignSuperAdminToClient: function(obj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/set-su-for-client', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

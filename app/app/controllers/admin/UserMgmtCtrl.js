@@ -223,6 +223,36 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     });
   }
 
+  $scope.superAdminToAssign = {};
+  $scope.showAssignSuperAdminPopup = function(clientId){
+    $scope.selectedClientId = clientId;
+    $mdDialog.show({
+      templateUrl: 'views/admin/assign-super-admin-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+
+  $scope.setSuperAdminForClient = function(){
+    var obj = {
+      'client_id': $scope.selectedClientId,
+      'super_admin_email': $scope.superAdminToAssign.email
+    };
+    AdminUserMgmtService.assignSuperAdminToClient(obj).then(function(result){
+      if(result.status == 0){
+        toastr.error(result.message);
+      }
+      else{
+        $scope.selectedClientId = null;
+        $scope.superAdminToAssign = {};
+        getAllClients();
+        $mdDialog.cancel();
+        toastr.success(result.message);
+      }
+    });
+  }
   /*===================
   | Roles Section
   ===================*/

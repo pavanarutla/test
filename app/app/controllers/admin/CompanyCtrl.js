@@ -144,9 +144,12 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   //   });
   // };
 
-  CompanyService.getHoardingCompanies().then(function (response) {
-    $scope.hoardingCompany = response;
-  });
+  function getAllClients(){
+    CompanyService.getAllClients().then(function (response) {
+      $scope.allClients = response;
+    });
+  }
+  getAllClients();
 
   function getClientTypes(){
 		CompanyService.getClientTypes().then(function(result){
@@ -169,18 +172,18 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     });
   }
   $scope.deleteHoardingCompany = function(row){
-     // CompanyService.deleteHoardingCompanies(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
-  //   if(response == 200){
-  //     toastr.success("deleted successpully");
-  //   }else{
-  //     toastr.error("not completed")
-  //   }
-  //   getFormatList();
-  // });
+    // CompanyService.deleteHoardingCompanies(JSON.parse(localStorage.loggedInUser).id, row).then(function (response) {
+    //   if(response == 200){
+    //     toastr.success("deleted successpully");
+    //   }else{
+    //     toastr.error("not completed")
+    //   }
+    //   getFormatList();
+    // });
     // console.log("row deleted");
-    var index = $scope.gridHoardingCompany.data.indexOf(row);
-    $scope.gridHoardingCompany.data.splice(index, 1);
-    toastr.success("HoardingCompanies deleted successfully");
+    // var index = $scope.gridHoardingCompany.data.indexOf(row);
+    // $scope.gridHoardingCompany.data.splice(index, 1);
+    // toastr.success("HoardingCompanies deleted successfully");
   }
   /*
   ======== Hoarding Companies ========

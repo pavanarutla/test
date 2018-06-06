@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $window, OwnerProductService) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $window, OwnerProductService, OwnerLocationService) {
 
   /*==============
   | Sidenavs
@@ -19,6 +19,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
   }
   getFormatList();
 
+  var getCountryList = function(){
+    OwnerLocationService.getCountries().then(function(result){
+      $scope.countryList = result;
+    });
+  }
+  getCountryList();
 
   /*=====================
   | Product Section
@@ -27,27 +33,27 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
  
   $scope.files = {};
   $scope.requestAddProduct = function () {
-    console.log($scope.files);
-    console.log($scope.product);
-    // Upload.upload({
-    //   url: config.apiPath + '/product',
-    //   data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
-    // }).then(function (result) {
-    //   if(result.data.status == "1"){
-    //     $scope.getProductList();
-    //     toastr.success(result.data.message);
-    //     $mdDialog.hide();
-    //   }
-    //   else if(result.data.status == 0){
-    //     $scope.addProductErrors = result.data.message;
-    //   }
-    // }, function (resp) {
-    //   toastr.error("somthing went wrong try again later");
-    //   // console.log('Error status: ', resp);
-    // }, function (evt) {
-    //   var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    //   //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
-    // });
+    // console.log($scope.files);
+    // console.log($scope.product);
+    Upload.upload({
+      url: config.apiPath + '/product',
+      data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
+    }).then(function (result) {
+      if(result.data.status == "1"){
+        $scope.getProductList();
+        toastr.success(result.data.message);
+        $mdDialog.hide();
+      }
+      else if(result.data.status == 0){
+        $scope.addProductErrors = result.data.message;
+      }
+    }, function (resp) {
+      toastr.error("somthing went wrong try again later");
+      // console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
   };
 
   /*=====================

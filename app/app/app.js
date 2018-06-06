@@ -105,6 +105,14 @@ var app = angular.module('bbManager', [
         }
       }
     })
+    .state('index.complete_registration', {
+      url: 'complete_registration/:code',
+      templateUrl: 'views/complete_registration.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
     .state('index.generate_password', {
       url: 'generate_password/:code',
       templateUrl: 'views/reset-password.html',
