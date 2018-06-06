@@ -248,10 +248,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/editcampaign.html',
       controller: 'OwnerCampaignCtrl'
     })
-    .state('owner.requestHoarding', {
-      url: '/requestHoarding',
-      templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'requestHoarding'
+    .state('owner.request-hoarding', {
+      url: '/request-hoarding',
+      templateUrl: 'views/owner/request-hoarding.html',
+      controller: 'OwnerProductCtrl'
     })
     .state('owner.suggestproducts', {
       url: '/suggestproducts',
@@ -391,6 +391,7 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
+          'owner.home'
         ];
         var requiresLogin = [
           'index.location',

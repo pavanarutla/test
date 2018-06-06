@@ -8,7 +8,6 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
-  console.log($stateParams);
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
