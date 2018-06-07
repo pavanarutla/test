@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $window, OwnerProductService, OwnerLocationService) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $window, $rootScope, OwnerProductService, OwnerLocationService, Upload, toastr) {
 
   /*==============
   | Sidenavs
@@ -58,14 +58,43 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
   }
   getCountryList();
 
-  var getProductList = function(){
+  var getApprovedProductList = function(){
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       createPageLinks();
     });
   }
-  getProductList();
+  if($rootScope.currStateName == 'owner.hoarding-list'){
+    getApprovedProductList();
+  }
+
+  var getRequestedProductList = function(){
+    OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
+      $scope.requestedProductList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      createPageLinks();
+    });
+  }
+  if($rootScope.currStateName == 'owner.requested-hoardings'){
+    getRequestedProductList();
+  }
+
+  $scope.getStateList = function(product){
+    OwnerLocationService.getStates($scope.product.country).then(function(result){
+      $scope.stateList = result;
+    });
+  }
+  $scope.getCityList = function(){
+    OwnerLocationService.getCities($scope.product.state).then(function(result){
+      $scope.cityList = result;
+    });
+  }
+  $scope.getAreaList = function(){
+    OwnerLocationService.getAreas($scope.product.city).then(function(result){
+      $scope.areaList = result;
+    });
+  }
 
   /*=====================
   | Product Section
@@ -74,23 +103,20 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
  
   $scope.files = {};
   $scope.requestAddProduct = function () {
-    // console.log($scope.files);
-    // console.log($scope.product);
     Upload.upload({
-      url: config.apiPath + '/product',
-      data: { image: $scope.files.image, symbol: $scope.files.symbol, product: $scope.product }
+      url: config.apiPath + '/request-owner-product-addition',
+      data: { image: $scope.files.image, product: $scope.product }
     }).then(function (result) {
       if(result.data.status == "1"){
-        $scope.getProductList();
+        getRequestedProductList();
         toastr.success(result.data.message);
-        $mdDialog.hide();
+        $scope.toggleRequestHoardingFormSidenav();
       }
       else if(result.data.status == 0){
-        $scope.addProductErrors = result.data.message;
+        $scope.requestProductErrors = result.data.errors;
       }
     }, function (resp) {
-      toastr.error("somthing went wrong try again later");
-      // console.log('Error status: ', resp);
+      console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);

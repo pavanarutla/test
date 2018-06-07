@@ -46,6 +46,15 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/search-products/' + word).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			getRequestedHoardings: function(pageNo, pageSize){
+				var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/requested-hoardings' + pageData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}

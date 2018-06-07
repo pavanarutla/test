@@ -46,7 +46,16 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/search-products/' + word).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+			},
+			getRequestedProductList: function (pageNo, pageSize) {
+				var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/requested-hoardings-for-owner' + pageData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
 		}
 	}
 ]);

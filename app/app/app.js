@@ -179,6 +179,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
     })
+    .state('admin.requested-hoardings', {
+      url: '/requested-hoardings',
+      templateUrl: 'views/admin/requested-hoardings.html',
+      controller: 'ProductCtrl'
+    })
     .state('admin.locations', {
       url: '/locations',
       templateUrl: 'views/admin/locations.html',
@@ -256,9 +261,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/editcampaign.html',
       controller: 'OwnerCampaignCtrl'
     })
-    .state('owner.request-hoarding', {
-      url: '/request-hoarding',
-      templateUrl: 'views/owner/request-hoarding.html',
+    .state('owner.requested-hoardings', {
+      url: '/requested-hoardings',
+      templateUrl: 'views/owner/requested-hoardings.html',
       controller: 'OwnerProductCtrl'
     })
     .state('owner.suggestproducts', {

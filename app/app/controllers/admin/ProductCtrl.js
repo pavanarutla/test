@@ -1,4 +1,4 @@
-app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
+app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, $rootScope, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
   var vm = this;
   $scope.msg = {};
@@ -145,6 +145,18 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   ======== Products section ========
   */
 
+  var getRequestedHoardings = function(){
+    ProductService.getRequestedHoardings($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
+      $scope.requestedProductList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      createPageLinks();
+    });
+  }
+
+  if($rootScope.currStateName == 'admin.requested-hoardings'){
+    getRequestedHoardings();
+  }
+
   // Opens the product form popup
   $scope.showProductForm = function (ev) {
     $scope.product = {};
@@ -179,6 +191,9 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     }).then(function (result) {
       if(result.data.status == "1"){
         $scope.getProductList();
+        if($rootScope.currStateName == 'admin.requested-hoardings'){
+          getRequestedHoardings();
+        }
         toastr.success(result.data.message);
         $mdDialog.hide();
       }
@@ -195,12 +210,13 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   };
 
   $scope.editProduct = function(product){
-    console.log(product);
-    product.country = null;
-    product.state = null;
-    product.city = null;
-    product.area = null;
-    // product.company = null;
+    if(product.status != 0){
+      product.country = null;
+      product.state = null;
+      product.city = null;
+      product.area = null;
+      // product.company = null;
+    }
     $scope.product = product;
     $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
