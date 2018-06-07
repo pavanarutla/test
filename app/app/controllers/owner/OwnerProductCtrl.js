@@ -12,6 +12,38 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
   | Sidenavs ends
   ===============*/
 
+  /*===================
+  | Pagination
+  ===================*/
+  $scope.pagination = {};
+  $scope.pagination.pageNo = 1;
+  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageCount = 0;
+  var pageLinks = 20;
+  var lowest = 1;
+  var highest = lowest + pageLinks - 1;
+  function createPageLinks(){
+    var mid = Math.ceil(pageLinks/2);
+    if($scope.pagination.pageCount < $scope.pagination.pageSize){
+      lowest = 1;
+    }
+    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+      lowest = $scope.pagination.pageCount - pageLinks;
+    }
+    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
+      lowest = 1;
+    }
+    else{
+      lowest = $scope.pagination.pageNo - mid + 1;
+    }
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    $scope.pagination.pageArray = _.range(lowest, highest);
+  }
+
+  /*===================
+  | Pagination Ends
+  ===================*/
+
   var getFormatList = function(){
     OwnerProductService.getFormatList().then(function(result){
       $scope.formatList = result;
@@ -25,6 +57,15 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
     });
   }
   getCountryList();
+
+  var getProductList = function(){
+    OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
+      $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      createPageLinks();
+    });
+  }
+  getProductList();
 
   /*=====================
   | Product Section

@@ -1,4 +1,6 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, config) {
+
+  $rootScope.config = config;
 
   if($stateParams.client_slug){
     $rootScope.clientSlug = $stateParams.client_slug;

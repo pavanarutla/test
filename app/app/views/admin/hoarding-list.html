@@ -13,7 +13,6 @@
 		</div>
 	</div>
 	<div layout="column">
-
 		<div id="customSsearchInput" style="margin:8px;" layout-align="center end" layout="row">
 			<div flex="60">
 				<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
@@ -46,7 +45,7 @@
 						<tr>
 							<th>Site No</th>
 							<th>Site type</th>
-							<th>Company</th>
+							<th>Ad Space Owner</th>
 							<th>Address</th>
 							<th>Impression</th>
 							<th>Area</th>
@@ -62,7 +61,7 @@
 						<tr ng-repeat="product in productList">
 							<td>{{product.siteNo}}</td>
 							<td>{{product.format_name}}</td>
-							<td>{{product.company_name}}</td>
+							<td>{{product.client_name}}</td>
 							<td>{{product.address}}</td>
 							<td>{{product.impressions}}</td>
 							<td>{{product.area_name }}</td>

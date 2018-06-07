@@ -121,8 +121,8 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   AdminLocationService.getCountries().then(function(result){
     $scope.countryList = result;
   });
-  CompanyService.getHoardingCompanies().then(function(result){
-    $scope.hoardingCompaniesList = result;
+  CompanyService.getAllClients().then(function(result){
+    $scope.allClients = result;
   });
 
   $scope.getStateList = function(product){

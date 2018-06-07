@@ -269,7 +269,7 @@ var app = angular.module('bbManager', [
     .state('owner.hoarding-list', {
       url: '/hoarding-list',
       templateUrl: 'views/owner/hoarding-list.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerProductCtrl'
     })
     .state('owner.settings', {
       url: '/settings',

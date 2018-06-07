@@ -43,13 +43,13 @@
 								</select>
 							</td>
 							<td flex="33">
-								<input ng-model="product.price" placeholder="Hoarding Cost" type="text" name="hoardingcost" />
+								<input ng-model="product.default_price" placeholder="Default Price" type="text" name="hoardingcost" />
 							</td>
 						</tr>
 						<tr >
 							<td flex="33">
-								<select ng-model="product.company" class="select-value" ng-options ="hoardingCompany.id as hoardingCompany.name for hoardingCompany in hoardingCompaniesList">
-									<option value="" disabled selected>Company Name</option>
+								<select ng-model="product.client" class="select-value" ng-options ="cl.id as cl.name for cl in allClients">
+									<option value="" disabled selected>Select Owner</option>
 								</select>
 							</td>
 							<td flex="33">

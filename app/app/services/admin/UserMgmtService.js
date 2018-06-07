@@ -46,6 +46,16 @@ app.service('AdminUserMgmtService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/set-su-for-client', obj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        setRolePermissions: function(obj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/set-permissions-for-role', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        setRolesForUser: function(obj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/set-roles-for-user', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

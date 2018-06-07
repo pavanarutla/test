@@ -289,7 +289,6 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     else{
       $scope.selectedRolesForUser.push(roleId);
     }
-    console.log($scope.selectedRolesForUser);
   }
 
   var getRoleDetails = function(roleId){
@@ -317,7 +316,14 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
       role_id : $scope.selectedRole,
       permissions : $scope.selectedPermissions
     };
-    console.log(permObj);
+    AdminUserMgmtService.setRolePermissions(permObj).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
   }
 
   $scope.addRole = function(){
@@ -334,6 +340,21 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
         $scope.addRoleErrors = result.message;
       }
     })
+  }
+
+  $scope.updateRolesForUser = function(){
+    var obj = {
+      user_id: $scope.selectedUser.user_details.id,
+      roles: $scope.selectedRolesForUser
+    }
+    AdminUserMgmtService.setRolesForUser(obj).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
   }
 
   /*===================
