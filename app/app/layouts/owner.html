@@ -1,10 +1,8 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" /> 
-
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-
-    <div layout="column" flex>
-      <md-toolbar>
+<div layout="column" flex>
+    <md-toolbar>
         <div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
             <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="ownerSidenav()">
                 <md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
@@ -14,24 +12,14 @@
             </md-button> 
             
             <span flex></span>
-            <!-- <div class=" main__page__search ">
-                <input type="text" ng-model="siteNoSearch" class=" input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
-                <span class="">
-                   
-                    <a><i class="material-icons">search</i></a>
-                    
-                </span>
-            </div>
-            <md-button aria-label="notifications" class="md-icon-button"ng-click="openHelpScreen(ev)" >
-                <img src= "assets/images/owner/Question.png" />
-            </md-button> -->
+
             <md-button aria-label="notifications" class="md-icon-button" ng-href="#/owner/settings">
                 <img src= "assets/images/owner/setting.png" />
             </md-button>
             <md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
                 <md-icon md-svg-icon="assets/images/notification_24px.svg" ></md-icon>
             </md-button>
-            <md-button class="md-raised md-primary">
+            <md-button class="md-raised md-primary" ng-href="#/owner/createCampaign">
                 Create Campagin
             </md-button>
             <!-- <md-menu  class="profile-menu mrng-top">
@@ -52,30 +40,118 @@
                 </md-menu-content>
             </md-menu> -->
         </div>
-      </md-toolbar><!--toolbar end -->
-      <!-- sidenav start -->
-      <div layout="row">
+    </md-toolbar>
+    <!--toolbar end -->
+    <!-- sidenav start -->
+    <div layout="row">
         <!-- Menu Sidenav start-->
-        <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeft" md-is-locked-open="$mdMedia('gt-sm')" style="width:250px">
-             <!-- <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
+        <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeft" md-is-locked-open="$mdMedia('gt-sm')">
+            <!-- <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
                 <img class="png-icon" src="assets/images/billboards.png">
-            </md-toolbar>  -->
+            </md-toolbar> -->
             <!-- <md-divider></md-divider> -->
-            <md-content  class="sidenav-content">
+            <md-content  class="sidenav-content scrollbar__style">
                 <div style="width: 100% !important;">
                     <md-list class="owners-menu">
-                        <!-- <md-menu-item class="nv-nav-item" >
-                            <md-button ng-href="#/owner/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
-                                <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
-                                Home
+                        <!-- user menu-->
+                        <md-list-item class="md-2-line" ng-click="userMenu()">
+                            <img ng-src="assets/images/team.png" class="md-avatar" />
+                            <div class="md-list-item-text">
+                                <h3 class="md-body-1">Srikanth</h3>
+                                <p class="md-capation">Marketing Manager</p>
+                            </div>
+                            <span flex></span>
+                            <span>
+                            <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="userMenuItems"></md-icon>
+                            <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="userMenuItems"></md-icon>
+                            </span>
+                        </md-list-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                            <md-button ng-href="#">
+                            <div layout="row">
+                                <span flex="5"></span>
+                                <span>
+                                <md-icon>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </md-icon>
+                                </span>Add Product</div>
                             </md-button>
-                        </md-menu-item> -->
-                        <!-- billboards-->
-                        <md-menu-item flex layout="column">
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                            <md-button ng-href="#">
+                            <div layout="row">
+                                <span flex="5"></span>
+                                <span>
+                                <md-icon>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </md-icon>
+                                </span>Delete Product</div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                                <md-button ng-href="#/owner/addPaymentDetails" ng-class="{'active-link': currStateName == 'owner.addPaymentDetails'}">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Add Payment Details</div>
+                                </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                                <md-button ng-href="#/owner/createUser" ng-class="{'active-link': currStateName == 'owner.createUser'}">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Create User</div>
+                                </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                            <md-button ng-href="#">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Team Members
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                            <md-button ng-href="#">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>My Details
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="userMenuItems">
+                            <md-button ng-href="#/owner/settings" ng-class="{'active-link': currStateName == 'owner.settings'}">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Change Password
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <!-- Campagin Menu Start-->
+                        <md-menu-item class="nv-nav-item">
                             <md-button aria-expanded="flase" ng-click="toogelMenu()" class="md-button-toggle">
                             <div layout="row">
-                                <md-icon md-svg-icon="assets/images/menu/hoarding.svg"></md-icon>
-                                <span style="color:#fff">Billboard</span>
+                                <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
+                                <span style="color:#fff">Campaigns</span>
                                 <span flex></span>
                                 <span>
                                 <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showFormats"></md-icon>
@@ -84,55 +160,71 @@
                             </div>
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item flex layout="column" ng-show="showFormats">
-                            <md-button ng-href="#admin/hoarding-list" ng-click="changeRequest()">
-                            <div layout="row">
-                                <span flex="15"></span>
-                                <span>
-                                <md-icon>
-                                    <i class="material-icons">keyboard_arrow_right</i>
-                                </md-icon>
-                                </span>Hoarding List</div>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item flex layout="column" ng-show="showFormats">
-                            <md-button ng-href="#admin/formats">
-                            <div layout="row">
-                                <span flex="15"></span>
-                                <span>
-                                <md-icon>
-                                    <i class="material-icons">keyboard_arrow_right</i>
-                                </md-icon>
-                                </span>Formats</div>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item class="nv-nav-item">
+                        <md-menu-item class="nv-nav-item" ng-show="showFormats">
                             <md-button ng-href="#/owner/ownerCampaign" ng-class="{'active-link': currStateName == 'owner.ownerCampaign'}">
-                                <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
-                                Campaigns
+                            <div layout="row">
+                                <span flex="5"></span>
+                                <span>
+                                <md-icon>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </md-icon>
+                                </span>Proposals</div>
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item class="nv-nav-item">
-                            <md-button ng-href="#/owner/requestHoarding" ng-class="{'active-link': currStateName == 'owner.requestHoarding'}" ng-click="changeRequest()" >
-                                <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
-                                Requested Hoardings
+                        <md-menu-item class="nv-nav-item" ng-show="showFormats">
+                            <md-button ng-href="#/owner/runningCampaign" ng-class="{'active-link': currStateName == 'owner.runningCampaign'}">
+                            <div layout="row">
+                                <span flex="5"></span>
+                                <span>
+                                <md-icon>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </md-icon>
+                                </span>Running Campaigns</div>
                             </md-button>
                         </md-menu-item>
-                        
+                        <md-menu-item class="nv-nav-item" ng-show="showFormats">
+                                <md-button ng-href="#/owner/sheduledCampaigns" ng-class="{'active-link': currStateName == 'owner.sheduledCampaigns'}">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Sheduled Campaigns</div>
+                                </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item" ng-show="showFormats">
+                                <md-button ng-href="#/owner/closedCampaignsList" ng-class="{'active-link': currStateName == 'owner.closedCampaignsList'}">
+                                <div layout="row">
+                                    <span flex="5"></span>
+                                    <span>
+                                    <md-icon>
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-icon>
+                                    </span>Closed Campaigns</div>
+                                </md-button>
+                        </md-menu-item>
+                        <!-- Campagin Menu End-->
                         <md-menu-item class="nv-nav-item">
-                            <md-button ng-href="#/owner/hoardinglist" ng-class="{'active-link': currStateName == 'owner.hoardinglist'}" ng-click="changeHoardingList()">
+                            <md-button ng-href="#/owner/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoardinglist'}">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
-                                Hoardings List
+                                Inventory
                             </md-button>
                         </md-menu-item>
                         <md-menu-item class="nv-nav-item">
+                            <md-button ng-href="#/owner/requestHoarding" ng-class="{'active-link': currStateName == 'owner.requestHoarding'}">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
+                                Add New Inventory
+                            </md-button>
+                        </md-menu-item>
+                        <!-- <md-menu-item class="nv-nav-item">
                             <md-button ng-href="#/owner/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
                                 Outsourcing Agents
                             </md-button>
-                        </md-menu-item>
+                        </md-menu-item> -->
                         <md-menu-item class="nv-nav-item">
-                            <md-button ng-href="#" ng-click="" ng-class="{'active-link': currStateName == 'owner.payments'}">
+                            <md-button ng-href="#owner/allCampaignPayment" ng-class="{'active-link': currStateName == 'owner.allCampaignPayment'}">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
                                 Payments
                             </md-button>
@@ -144,19 +236,36 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item class="nv-nav-item">
+                            <md-button ng-href="#/owner/cliect-list" ng-class="{'active-link': currStateName == 'owner.cliect-list'}">
+                                <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+                                Client list
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item class="nv-nav-item">
+                            <md-button ng-href="#" >
+                                <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+                                BBI Support
+                            </md-button>
+                        </md-menu-item>
+                        <!-- <md-menu-item class="nv-nav-item">
                             <md-button ng-href="#/owner/dashboard" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
                                 <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
                                 Feeds
                             </md-button>
-                        </md-menu-item>
-                        
-                        
-                        <!-- <md-menu-item class="nv-nav-item">
-                            <md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
-                                <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
-                                Help
-                            </md-button>
                         </md-menu-item> -->
+                        <md-menu-item class="nv-nav-item">
+                                
+                                <md-button ng-click="logout()" style="color:#fff">
+                                        <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
+                                    Sign Out
+                                </md-button>
+                        </md-menu-item>
+                        <!-- <md-menu-item class="nv-nav-item">
+                        <md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
+                            <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
+                            Help
+                        </md-button>
+                    </md-menu-item> -->
                     </md-list>
                 </div>
             </md-content>
@@ -254,14 +363,13 @@
             </md-content> 
         </md-sidenav> -->
         <!--Edit Profile  Sidenav End-->
-        
         <ui-view flex ></ui-view>
 
-      </div>
-      <!-- sidenav end -->
-      
-      <div layout="column" layout-align="center center" style="background: #CCC">
-        <div style="padding: 5px 0;">Powered By Billboards India</div>
-      </div>
     </div>
+    <!-- sidenav end -->
+    
+    <div layout="column" layout-align="center center" style="background: #CCC">
+    <div style="padding: 5px 0;">Powered By Billboards India</div>
+    </div>
+</div>
 

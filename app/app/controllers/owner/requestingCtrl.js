@@ -1,12 +1,12 @@
 app.controller('requestHoarding', function ($scope,$mdDialog,$mdSidenav,$window) {
     
-    $scope.openScreen = function(ev) {
-        $mdDialog.show({
-          templateUrl:'views/owner/requesthoardingadd.html',
-          clickOutsideToClose:true,
+    // $scope.openScreen = function(ev) {
+    //     $mdDialog.show({
+    //       templateUrl:'views/owner/requesthoardingadd.html',
+    //       clickOutsideToClose:true,
    
-        });
-    };
+    //     });
+    // };
 
     $scope.viewImage = function () { 
         $mdDialog.show({

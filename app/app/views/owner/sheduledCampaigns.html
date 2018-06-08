@@ -1,0 +1,44 @@
+<div ng-cloak  flex="100" flex-xs="100" flex-sm="100" flex-md="100">
+        <div layout="row" layout-margin flex>
+            <h2 class="md-title text_color" flex> Sheduled Campaigns</h2>
+            <!-- <md-button class="md-fab md-mini md-primary md-hue-1" aria-label="Use Share">
+                <md-icon style="color: #fff;">
+                        <i class="fa fa-share-alt"></i>
+                </md-icon>
+            </md-button> -->
+        </div>
+    <div class="table-responsive">
+            <table class="table table-hover table-striped" style="width: 100%;height:100%">
+                <thead class="contbg">
+                    <tr>
+                        <th>C.ID</th>
+                        <th>Campaign Name</th>
+                        <th hide-sm>Contact Name</th>
+                        <th hide-sm hide-md>Contact No</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th hide-sm hide-md>No.Of<br> Product</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>BB01</td>
+                        <td>{{item.campaignname}}</td>
+                        <td hide-sm>{{item.clientname}}</td>
+                        <td hide-sm hide-md>{{item.clientcontent}}</td>
+                        <td>{{item.startdate}} </td>
+                        <td>{{item.enddate}}</td>
+                        <td hide-sm hide-md>10</td>
+                        <td>{{item.price}}</td>
+                        <td style="padding: 0px;">
+                            <md-button class="btn btn-default btn-primary" ng-href="#/owner/sheduledCampaignsDetails">
+                                Details
+                            </md-button>
+                        </td>   
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

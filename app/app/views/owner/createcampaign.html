@@ -1,0 +1,287 @@
+<div layout="column"  flex="100" flex-xs="100" flex-sm="100" flex-md="100" style="background: #eee"> 
+    <div layout="column" layout-margin flex>
+		<h2 class="md-title text_color"> Create Campaign</h2>
+    </div>
+    <div layout="row" layout-margin>
+        <div class="create__camapgin contbg"  layout="column" flex="50" layout-padding>
+            <div class="camapgin__detalis"> 
+                <p class="md-capation">Created on: 14-4-2018 at 11.pm   |   By James </p>
+                <form  action="">
+                    <div layout="row">
+                        <div class="form-group mrg__right" flex="50">
+                            <label for="cname">Campagin Name*:</label>
+                            <input type="text" class="form-control" id="cname">
+                        </div>
+                        <div class="form-group" flex="50">
+                            <label for="contactperson">Contact Person*:</label>
+                            <input type="text" class="form-control" id="contactperson">
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="form-group mrg__right" flex="50">
+                            <label for="email">Email address*:</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group" flex="50">
+                            <label for="contactperson">Contact No *:</label>
+                            <input type="text" class="form-control" id="contactperson">
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="form-group mrg__right" flex="50">
+                            <label for="city">City:</label>
+                            <input type="text" class="form-control" id="city">
+                        </div>
+                        <div class="form-group" flex="50">
+                            <label for="contactperson">Address *:</label>
+                            <input type="text" class="form-control" id="address">
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="form-group mrg__right" flex="50">
+                            <label for="sdate">Start Date*:</label>
+                            <input type="date" class="form-control" id="sdate">
+                        </div>
+                        <div class="form-group" flex="50">
+                            <label for="edate">End date *:</label>
+                            <input type="date" class="form-control" id="edate">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="camapgin__products" style="background: #EEE">
+                <div class="products__search">
+                    <div layout="row">
+                        
+                        <p class=""> Search Products</p>
+                        
+                        <div flex>
+                            <md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+                                <md-item-template>
+                                    <span class="item-title">
+                                        <span> {{item.siteNo}} </span>
+                                    </span>
+                                    <span class="item-metadata">
+                                        <span>
+                                            <strong>{{item.company_name}}</strong>
+                                        </span>
+                                        <span>
+                                            <strong>{{item.address}}</strong>
+                                        </span>
+                                    </span>
+                                </md-item-template>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                    <div class="campagin__inventry__list" layout="row" >
+                        <div class="camapgin_pro_list" flex="50">
+                            <h3 class="md-body-1">Select Products</h3>
+                            <ul class="scrollbar__style">
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+                               <li>
+                                    <input type="checkbox" class="" value="">
+                                    BBI 27 - Ameer Pet - 40ft x 40 ft
+                               </li>
+
+                            </ul>
+                        </div>
+                        <div class="camapgin_pro_shortlist" flex="50">
+                                <h3 class="md-body-1">Shortlist Products</h3>
+                            <ul class="scrollbar__style">
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+                                <li>
+                                        <input type="checkbox" class="" value="">
+                                        BBI 27 - Ameer Pet - 40ft x 40 ft
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="User_details">
+                <md-list-item class="md-2-line">
+                <img ng-src="assets/images/team.png" class="md-avatar" />
+                <div class="md-list-item-text">
+                    <h3 class="md-body-1">Srikanth</h3>
+                    <p class="md-body-1">On 14-5-2018, 11.30 AM</p>
+                </div>
+                </md-list-item>
+                <md-button class="md-raised md-warn">Create CAMPAIGN</md-button>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">By clicking, proposal accepted by both parties
+                        T&C apply.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div flex="50" layout="column">
+            <div class="invntry_list product__list scrollbar__style">
+                <div class="row margin_left_0 margin_right_0 ">
+                
+                    <div class="col-md-6" style="padding: 0 4px;margin-bottom: 8px">
+                            <div class="product__list__inner">
+                                <div class="card">
+                                    <div class="card-header" layout="row">
+                                        <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                        <span flex></span>
+                                        <p>40*40</p>
+                                    </div>
+                                    <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                                    
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 4px;margin-bottom: 8px">
+                        <div class="product__list__inner">
+                            <div class="card">
+                                <div class="card-header" layout="row">
+                                    <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                    <span flex></span>
+                                    <p>40*40</p>
+                                </div>
+                                <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 4px; margin-bottom: 8px">
+                        <div class="product__list__inner">
+                            <div class="card">
+                                <div class="card-header" layout="row">
+                                    <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                    <span flex></span>
+                                    <p>40*40</p>
+                                </div>
+                                <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 4px; margin-bottom: 8px">
+                            <div class="product__list__inner">
+                                <div class="card">
+                                    <div class="card-header" layout="row">
+                                        <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                        <span flex></span>
+                                        <p>40*40</p>
+                                    </div>
+                                    <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                                    
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 4px; margin-bottom: 8px">
+                        <div class="product__list__inner">
+                            <div class="card">
+                                <div class="card-header" layout="row">
+                                    <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                    <span flex></span>
+                                    <p>40*40</p>
+                                </div>
+                                <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 4px; margin-bottom: 8px">
+                        <div class="product__list__inner">
+                            <div class="card">
+                                <div class="card-header" layout="row">
+                                    <h5 class="text_color" style="font-size:12px">ID: BBA 27 - Airport Road</h5>
+                                    <span flex></span>
+                                    <p>40*40</p>
+                                </div>
+                                <img class="card-img-top" src="assets/images/hoarding.png" alt="Card image" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
