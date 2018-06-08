@@ -139,6 +139,15 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
       clickOutsideToClose:true,
     });
   };
+  $scope.showFormats = false;
+  $scope.toogelMenu = function () {
+    $scope.showFormats = !$scope.showFormats;
+  }
+  //profile menu items
+  $scope.userMenuItems = false;
+  $scope.userMenu = function () {
+    $scope.userMenuItems = !$scope.userMenuItems;
+  }
 
 }).value('googleChartApiConfig', {
   version: '1.1',

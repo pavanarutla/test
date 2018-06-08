@@ -1,30 +1,49 @@
  <div layout="column"  layout-margin="layout-margin" layout-fill="layout-fill">
     <!-- <md-divider></md-divider> -->
-    <div class="row">
+    <div class="row margin_left_0 margin_right_0">
         <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="member in teammembers" >
-            <div class="inner-content">
-                <div layout="column" layout-align="center center">
+            <div class="inner-content contbg">
+                <div layout="column" layout-align="center center" layout-padding>
                     <img src="assets/images/{{member.image}}.png" alt="team" class="temimg">
                 </div>
-
-                <div layout="column" layout-align="center center" layout-margin="layout-margin">
-                    <div class="md-title">{{member.name}}</div>
-                    <div class="md-body-1">Designation:{{member.designation}}</div>
-                    <div class="md-body-1">Mobile:{{member.phone}}</div>
-                    <div class="md-body-1">Email:{{member.email}}</div>
+                <md-divider></md-divider>
+                <div layout="column" laout-padding layout-margin="layout-margin">
+                    <!-- <h3 class="md-title">{{member.name}}</h3>
+                    <h3 class="md-body-2">Designation:{{member.designation}}</h3>
+                    <h3 class="md-body-2">Mobile:{{member.phone}}</h3>
+                    <h3 class="md-body-2">Email:{{member.email}}</h3> -->
+                    <table>
+                        <tbody>
+                            <tr class="md-title">
+                                <td>Name:</td>
+                                <td>{{member.name}}</td>
+                            </tr>
+                            <tr class="md-body-2">
+                                <td>Designation:</td>
+                                <td>{{member.designation}}</td>
+                            </tr>
+                            <tr class="md-body-2">
+                                <td>Mobile:</td>
+                                <td>{{member.phone}}</td>
+                            </tr>
+                            <tr class="md-body-2">
+                                <td>Email:</td>
+                                <td>{{member.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div layout="column"   layout-align="center center">
-                    <!-- <a class="md-titile" h ng-click="ownerTeamprofile($event)">Task</a> -->
+                <!-- <div layout="column"   layout-align="center center">
                     <md-button aria-label="Facebook" class="md-button md-raised" ng-click="ownerTeamprofile($event)">
                         Task
                     </md-button>
-                </div>
+                </div> -->
             </div>
             
         </div>
     </div>
 
-     <md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right popup-btn" >
+     <!-- <md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right popup-btn" >
         <md-fab-trigger>
             <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini md-warn">
                 <md-icon aria-label="Google Hangout"><i class="material-icons">favorite</i></md-icon>
@@ -43,7 +62,7 @@
             </md-button>
 
         </md-fab-actions>
-    </md-fab-speed-dial> 
+    </md-fab-speed-dial>  -->
 	
 </div> 
 

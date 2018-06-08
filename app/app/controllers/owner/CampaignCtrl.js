@@ -115,7 +115,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       "status": "Draft",
       "price": "50000",
       "products": "0"
-    }
+    } 
   ]
   $scope.hoardinglist =[
       {

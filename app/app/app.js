@@ -218,16 +218,70 @@ var app = angular.module('bbManager', [
       url: '/dashboard',
       templateUrl: 'views/owner/dashboard.html',
       controller: 'OwnerFeedsCtrl',
-      
+    })
+    .state('owner.signIn', {
+      url: '/signIn',
+      templateUrl: 'views/owner/signin.html',
+      controller:'ownerSigninCtrl'
+    })
+    .state('owner.createUser', {
+      url: '/createUser',
+      templateUrl: 'views/owner/createuser.html',
+      controller:'ownerSigninCtrl'
+    })
+    .state('owner.addPaymentDetails', {
+      url: '/addPaymentDetails',
+      templateUrl: 'views/owner/addpaymentdetails.html',
+      controller:'ownerSigninCtrl'
+    })
+    .state('owner.createCampaign', {
+      url: '/createCampaign',
+      templateUrl: 'views/owner/createcampaign.html',
+      controller:  'OwnerCampaignCtrl'
     })
     .state('owner.ownerCampaign', {
       url: '/ownerCampaign',
       templateUrl: 'views/owner/campaign.html',
       controller:  'OwnerCampaignCtrl'
     })
-    .state('owner.editCampaign', {
-      url: '/editCampaign',
-      templateUrl: 'views/owner/editcampaign.html',
+    .state('owner.proposalProducts', {
+      url: '/proposalProducts',
+      templateUrl: 'views/owner/proposalproducts.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.runningCampaign', {
+      url: '/runningCampaign',
+      templateUrl: 'views/owner/runningcampaignlist.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.runningCampaignview', {
+      url: '/runningCampaignview',
+      templateUrl: 'views/owner/runningCampaignview.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.productView', {
+      url: '/productView',
+      templateUrl: 'views/owner/productView.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.sheduledCampaigns', {
+      url: '/sheduledCampaigns',
+      templateUrl: 'views/owner/sheduledCampaigns.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.sheduledCampaignsDetails', {
+      url: '/sheduledCampaignsDetails',
+      templateUrl: 'views/owner/sheduledCampaign-details.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.closedCampaignsList', {
+      url: '/closedCampaignsList',
+      templateUrl: 'views/owner/closedcampaigns-list.html',
+      controller: 'OwnerCampaignCtrl'
+    })
+    .state('owner.closdeCampaigns-details', {
+      url: '/closdeCampaigns-details',
+      templateUrl: 'views/owner/closdeCampaigns-details.html',
       controller: 'OwnerCampaignCtrl'
     })
     .state('owner.requestHoarding', {
@@ -245,25 +299,30 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerFeedsCtrl'
     })
+    .state('owner.cliect-list', {
+      url: '/cliect-list',
+      templateUrl: 'views/owner/cliect-list.html',
+      controller: 'clientCtrl'
+    })
     .state('owner.settings', {
       url: '/settings',
       templateUrl: 'views/owner/accountsetting.html',
       controller: ''
     })
-    .state('owner.profile', {
-      url: '/profile',
-      templateUrl: 'views/owner/user-profile.html',
-    })
-    .state('owner.home', {
-      url: '/home',
-      templateUrl: 'views/owner/home.html',
+    // .state('owner.profile', {
+    //   url: '/profile',
+    //   templateUrl: 'views/owner/user-profile.html',
+    // })
+    .state('owner.allCampaignPayment', {
+      url: '/allCampaignPayment',
+      templateUrl: 'views/owner/allcampaignpayment.html',
       controller: 'OwnerHomeController'
     })
-    .state('owner.outsourcingagent', {
-      url: '/outsourcingagent',
-      templateUrl: 'views/owner/outsourcingagent.html',
-      controller:'outSourcing'
-    })
+    // .state('owner.outsourcingagent', {
+    //   url: '/outsourcingagent',
+    //   templateUrl: 'views/owner/outsourcingagent.html',
+    //   controller:'outSourcing'
+    // })
     .state('owner.teamPage', {
       url: '/teamPage',
       templateUrl: 'views/owner/team.html',
@@ -273,16 +332,11 @@ var app = angular.module('bbManager', [
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
-    })
-    .state('owner.signIn', {
-      url: '/signIn',
-      templateUrl: 'views/owner/signin.html',
-      controller:'ownerSigninCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/ownerCampaign');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
