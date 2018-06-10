@@ -1,5 +1,4 @@
-
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, OwnerCampaignService, $window) {
 
   $scope.CAMPAIGN_STATUS = [
     "",                 // index 0
@@ -204,18 +203,21 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   }, 7200, 0, true);
 
   // get all Campaigns by a user to show it in campaign management page
-  $scope.getUserCampaigns = function () {
-    CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
+  $scope.getUserCampaignsForOwner = function () {
+    OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
+      console.log(result);
+      $scope.plannedCampaigns = _.filter(result, function(c){
+        return c.status < 6;
+      });
       $scope.runningCampaigns = _.where(result, { status: 3 });
       $scope.closedCampaigns = _.where(result, { status: 5 });
     });
   }
-  $scope.getUserCampaigns();
+  $scope.getUserCampaignsForOwner();
   // get all Campaigns by a user to show it in campaign management page ends
 
   $scope.getCampaignDetails = function(campaignId){
-    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+    OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function(result){
       $scope.campaignDetails = result;
     });
   }

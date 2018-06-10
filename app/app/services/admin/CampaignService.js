@@ -1,7 +1,6 @@
 app.service('AdminCampaignService', 
 ['$http', '$q', 'config', 
   function($http, $q, config){
-    
     return {
       getAllCampaigns: function(){
         var dfd = $q.defer();

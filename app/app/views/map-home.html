@@ -215,9 +215,7 @@
   <!-- shortlisted  moblie  end-->
 
   <!-- saved campagin start -->
-  <md-sidenav class="md-sidenav-left" md-component-id="savedCamapgin" style="position:absolute;margin-left:8px;top: 22%;
-    background: none;" hide-xs hide-lg hide-gt-lg>
-
+  <md-sidenav class="md-sidenav-left" md-component-id="savedCamapgin" style="position:absolute;margin-left:8px;top: 22%; background: none;" hide-xs hide-lg hide-gt-lg>
     <div class=" md-padding main-part" layout="column">
       <div layout="row">
         <div class="main-icon">
@@ -229,14 +227,14 @@
     </div>
     <div class="saved-campagin">
       <div id="savecamp-style">
-        <div layout="column" ng-repeat="plannedUserCampaign in plannedUserCampaigns">
+        <div layout="column" ng-repeat="activeUserCampaign in activeUserCampaigns">
           <div layout="row" layout-padding>
             <!-- <div class="md-body-1">{{plannedUserCampaign.org_name}}</div> -->
-            <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{plannedUserCampaign.name}}</div>
+            <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{activeUserCampaign.name}}</div>
             <!-- <div flex></div> -->
             <div class="saved-date" flex="45" style="padding:0px">
-              <span class="saved-border md-caption ">{{plannedUserCampaign.start_date | date:'dd-MM-yy'}}</span>
-              <span class="saved-border md-caption ">{{plannedUserCampaign.end_date | date:'dd-MM-yy'}}</span>
+              <span class="saved-border md-caption ">{{activeUserCampaign.start_date | date:'dd-MM-yy'}}</span>
+              <span class="saved-border md-caption ">{{activeUserCampaign.end_date | date:'dd-MM-yy'}}</span>
             </div>
             <div flex-xs="5" flex-sm="5" style="padding:0px">
               <md-menu md-position-mode="target-right target">
@@ -247,18 +245,18 @@
                 </md-button>
                 <md-menu-content>
                   <md-menu-item>
-                    <md-button ng-click="toggleShareCampaignSidenav(plannedUserCampaign)">Share</md-button>
+                    <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                   </md-menu-item>
                   <md-menu-item>
-                    <md-button ng-if="plannedUserCampaign.status <= 3" ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
+                    <md-button ng-if="activeUserCampaign.status <= 3" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
             </div>
           </div>
           <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
-            <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(plannedUserCampaign.id)"> VIEW</md-button>
-            <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign(plannedUserCampaign.id)">Request Proposal</md-button>
+            <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
+            <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign(activeUserCampaign.id)">Request Proposal</md-button>
           </div>
           <md-divider></md-divider>
         </div>
@@ -268,7 +266,7 @@
         <md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
       </div>
     </div>
-    <div style="background:#F1FBFD" ng-if="plannedUserCampaigns.length == 0 && savedcampaign">
+    <div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
       <div layout="column" layout-margin layout-align="center center">
         <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
       </div>
@@ -817,7 +815,7 @@
         <md-input-container style="z-index:999;width:100%">
           <label>Select Campaign</label>
           <md-select ng-model="existingCampaign.id" required="required">
-            <md-option ng-value="campaign.id" ng-repeat="campaign in plannedUserCampaigns">{{campaign.name}}</md-option>
+            <md-option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</md-option>
           </md-select>
         </md-input-container>
       </div>
@@ -1352,16 +1350,16 @@
               </div>
             </div>
           </md-content>
-          <div class="saved-campagin" ng-if="plannedUserCampaigns.length > 0 && savedcampaign">
+          <div class="saved-campagin" ng-if="activeUserCampaigns.length > 0 && savedcampaign">
             <div class="savescrollbar" id="savecamp-style">
-              <div layout="column" ng-repeat="plannedUserCampaign in plannedUserCampaigns">
+              <div layout="column" ng-repeat="activeUserCampaign in activeUserCampaigns">
                 <div layout="row" layout-padding>
-                  <!-- <div class="md-body-1">{{plannedUserCampaign.org_name}}</div> -->
-                  <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{plannedUserCampaign.name}}</div>
+                  <!-- <div class="md-body-1">{{activeUserCampaign.org_name}}</div> -->
+                  <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{activeUserCampaign.name}}</div>
                   <!-- <div flex></div> -->
                   <div class="saved-date" flex="55" style="padding:0px">
-                    <span class="saved-border md-caption ">{{plannedUserCampaign.start_date | date:'dd-MM-yy'}}</span>
-                    <span class="saved-border md-caption ">{{plannedUserCampaign.end_date | date:'dd-MM-yy'}}</span>
+                    <span class="saved-border md-caption ">{{activeUserCampaign.start_date | date:'dd-MM-yy'}}</span>
+                    <span class="saved-border md-caption ">{{activeUserCampaign.end_date | date:'dd-MM-yy'}}</span>
                   </div>
                   <div flex-xs="5" flex-sm="5" style="padding:0px">
                     <md-menu md-position-mode="target-right target">
@@ -1372,20 +1370,20 @@
                       </md-button>
                       <md-menu-content>
                         <md-menu-item>
-                          <md-button ng-click="toggleShareCampaignSidenav(plannedUserCampaign)">Share</md-button>
+                          <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                          <md-button ng-if="plannedUserCampaign.status <= 3" ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
+                          <md-button ng-if="activeUserCampaign.status <= 3" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                         </md-menu-item>
                       </md-menu-content>
                     </md-menu>
                   </div>
                 </div>
                 <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
-                  <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(plannedUserCampaign.id)"> VIEW</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 3" ng-disabled="true">Propsal Requested</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 4" ng-disabled="true">Quote Received</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status != 3 && plannedUserCampaign.status != 4" ng-click="requestProposalForCampaign(plannedUserCampaign.id, $event)">Request Proposal</md-button>
+                  <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Propsal Requested</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 4" ng-disabled="true">Quote Received</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status != 3 && activeUserCampaign.status != 4" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
                 </div>
                 <md-divider></md-divider>
               </div>
@@ -1395,7 +1393,7 @@
               <md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
             </div>
           </div>
-          <div style="background:#F1FBFD" ng-if="plannedUserCampaigns.length == 0 && savedcampaign">
+          <div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
             <div layout="column" layout-margin layout-align="center center">
               <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
             </div>

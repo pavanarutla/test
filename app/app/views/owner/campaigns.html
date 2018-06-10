@@ -1,0 +1,196 @@
+<div layout="column" layout-fill="layout-fill">
+    <md-tabs md-dynamic-height>
+      <md-tab label="Proposals">
+         <!-- <div ui-grid="gridPreLaunch" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+          ui-grid-auto-resize class="grid"></div>  -->
+        <div layout="colmun">
+          <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
+            <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+              md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
+              md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+              <md-item-template>
+                <span class="item-title">
+                  <span> {{campaign.name}} </span>
+                </span>
+                <span class="item-metadata">
+                  <span>
+                    <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
+                  </span>
+                  <span>
+                    <strong>{{campaign.email}}</strong>
+                  </span>
+                  <span>
+                    <strong>{{campaign.phone}}</strong>
+                  </span>
+                </span>
+              </md-item-template>
+              <md-not-found>
+                No matches found.
+              </md-not-found>
+            </md-autocomplete>
+          </div>
+          <span flex></span>
+          <md-button class="md-raised md-warn" ng-click="showAddCampaignPopup()">
+            Add New Campaign
+            <span>
+              <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+            </span>
+          </md-button>
+        </div>
+        <div style="margin-top: 1em;">
+          <div class="table-responsive">    
+            <table class="table table-striped table-bordered ">
+              <thead>
+                  <tr>
+                    <!-- <th>Created</th> -->
+                    <th>Campaign Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
+                  <!-- <td>{{campaign.created_by}}</td> -->
+                  <td>{{campaign.name}}</td>
+                  <td>{{campaign.start_date | date }}</td>
+                  <td>{{campaign.end_date | date }}</td>
+                  <td>{{campaign.status | stringifyCampaignStatus }}</td>
+                  <td>
+                    <span><a ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+                    <!-- <span><a style="cursor:pointer;" ng-click="deleteCampaign(campaign.id)" ng-if="campaign.status < 3"><md-icon><i class="material-icons">delete</i></md-icon></a></span> -->
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+          <!-- <div layout="colmun" layout-align="end center" layout-margin>
+            <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+          </div> -->
+        </div>
+      </md-tab>
+  
+      <md-tab label="Running">
+        <!-- <div ui-grid="gridRunning" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+          ui-grid-auto-resize class="grid"></div> -->
+        <div style="margin-top: 1em;">
+            <div class="table-responsive">    
+              <table class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                      <!-- <th>Created</th> -->
+                      <th>Campagin Name</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="campaign in runningCampaigns | limitTo:limit">
+                    <!-- <td>{{campaign.created_by}}</td> -->
+                    <td>{{campaign.name}}</td>
+                    <td>{{campaign.start_date | date }}</td>
+                    <td>{{campaign.end_date | date }}</td>
+                    <td>{{campaign.status | stringifyCampaignStatus }}</td>
+                    <td>
+                      <span><a ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                      <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
+                      <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+                    </td>
+                  </tr>      
+                </tbody>
+              </table>
+            </div>
+            <!-- <div layout="colmun" layout-align="end center" layout-margin>
+              <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+            </div> -->
+        </div>
+      </md-tab>
+  
+      <md-tab label="Closed">
+        <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+          ui-grid-auto-resize class="grid"></div> -->
+        <div style="margin-top: 1em;">
+          <div class="table-responsive">    
+            <table class="table table-striped table-bordered ">
+              <thead>
+                  <tr>
+                    <!-- <th>Created</th> -->
+                    <th>Campagin Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="campaign in closedCampaigns | limitTo:limit">
+                  <!-- <td>{{campaign.created_by}}</td> -->
+                  <td>{{campaign.name}}</td>
+                  <td>{{campaign.start_date | date }}</td>
+                  <td>{{campaign.end_date | date }}</td>
+                  <td>{{campaign.status | stringifyCampaignStatus }}</td>
+                  <td>
+                    <span><a ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+          <!-- <div layout="colmun" layout-align="end center" layout-margin>
+            <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+          </div> -->
+        </div>
+      </md-tab>
+      <md-tab label="Your Campaigns">
+        <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+          ui-grid-auto-resize class="grid"></div> -->
+        <div style="margin-top: 1em;">
+          <div class="table-responsive">    
+            <table class="table table-striped table-bordered ">
+              <thead>
+                  <tr>
+                    <!-- <th>Created</th> -->
+                    <th>Campagin Name</th>
+                    <th>Client Name</th>
+                    <th>Client contact</th>
+                    <th>Client email</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="campaign in ownerCampaigns | limitTo:limit">
+                  <!-- <td>{{campaign.created_by}}</td> -->
+                  <td>{{campaign.name}}</td>
+                  <td>{{campaign.first_name}} {{campaign.last_name}}</td>
+                  <td>{{campaign.phone}}</td>
+                  <td>{{campaign.user_email}}</td>
+                  <td>{{campaign.start_date | date }}</td>
+                  <td>{{campaign.end_date | date }}</td>
+                  <td>{{campaign.status | stringifyCampaignStatus }}</td>
+                  <td>
+                    <span><a ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
+                    <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
+                    <span><a style="cursor:pointer;" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+          <!-- <div layout="colmun" layout-align="end center" layout-margin>
+            <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+          </div> -->
+        </div>
+      </md-tab>
+    </md-tabs>
+  </div>

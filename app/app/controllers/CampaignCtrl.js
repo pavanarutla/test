@@ -77,7 +77,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
-    CampaignService.getCampaigns().then(function (result) {
+    CampaignService.getUserCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function(c){
         return c.status < 6;
       });
