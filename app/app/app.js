@@ -433,7 +433,7 @@ app.run(
             });
             return false;
           }
-          else if ($auth.getPayload().user_type != "bbi") {
+          else if ($auth.getPayload().userMongo.user_type != "bbi") {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -447,7 +447,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if ($auth.getPayload().user_type != "owner") {
+          else if ($auth.getPayload().userMongo.user_type != "owner") {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

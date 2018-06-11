@@ -11,7 +11,12 @@ app.service('OwnerCampaignService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/campaign-for-owner/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        updateProposedProduct: function(campaignId, obj){
+          var dfd = $q.defer();
+          $http.put(config.apiPath + '/proposed-product-for-campaign/' + campaignId, obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
       }
     }
   ]

@@ -56,6 +56,11 @@ app.service('AdminUserMgmtService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/set-roles-for-user', obj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        resendOwnerInviteEmail: function(obj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/resend-owner-invite', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

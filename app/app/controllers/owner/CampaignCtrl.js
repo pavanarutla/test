@@ -1,13 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, OwnerCampaignService, $window) {
-
-  $scope.CAMPAIGN_STATUS = [
-    "",                 // index 0
-    "Draft",            // index 1
-    "Launch Requested", // index 2
-    "Running",          // index 3
-    "Suspended",        // index 4
-    "Stopped"           // index 5
-  ];
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, OwnerCampaignService, toastr) {
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -63,149 +54,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     }
   };
 
-  //view in location pages
-  $scope.viewlocation = function(){
-    $window.open('#/location', '_blank');
-  }
-
-  $scope.campaignDetails = {};
-
-  ///Delete the Products
-  $scope.deleteProducts = function(item){
-    var index = $scope.campaignDetails.indexOf(item);
-    $scope.campaignDetails.splice(index, 1);   
-  }
-
-  $scope.limit = 3;
-
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
-  $scope.items = [
-    {
-      "campaignname": "Flipkart",
-      "clientcomapanyname": "Neon",
-      "clientname": "Chanikya",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "25000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Amezon",
-      "clientcomapanyname": "Amezon",
-      "clientname": "shiva",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "30000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Paytm",
-      "clientcomapanyname": "Paytm",
-      "clientname": "srikanth",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "50000",
-      "products": "0"
-    }
-  ]
-  $scope.hoardinglist =[
-      {
-        "id":"AD_001",
-        "type":"Billboard",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"No",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_002",
-        "type":"Unipole",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_003",
-        "type":"Digital",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      }
-    ]
-    $scope.viewImage = function () { 
-    $mdDialog.show({
-      templateUrl: 'views/owner/view-image.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
-    })
-  };
-
-  //slider
-  var self = this, j = 0, counter = 0;
-
-  self.mode = 'query';
-  self.activated = true;
-  self.determinateValue = 30;
-  self.determinateValue2 = 30;
-
-  self.showList = [];
-
-  /**
-   * Turn off or on the 5 themed loaders
-   */
-  self.toggleActivation = function () {
-    if (!self.activated) self.showList = [];
-    if (self.activated) {
-      j = counter = 0;
-      self.determinateValue = 30;
-      self.determinateValue2 = 30;
-    }
-  };
-
-  $interval(function () {
-    self.determinateValue += 1;
-    self.determinateValue2 += 1.5;
-
-    if (self.determinateValue > 100) self.determinateValue = 30;
-    if (self.determinateValue2 > 100) self.determinateValue2 = 30;
-
-    // Incrementally start animation the five (5) Indeterminate,
-    // themed progress circular bars
-
-    if ((j < 2) && !self.showList[j] && self.activated) {
-      self.showList[j] = true;
-    }
-    if (counter++ % 4 === 0) j++;
-
-    // Show the indicator in the "Used within Containers" after 200ms delay
-    if (j == 2) self.contained = "indeterminate";
-
-  }, 100, 0, true);
-
-  $interval(function () {
-    self.mode = (self.mode == 'query' ? 'determinate' : 'query');
-  }, 7200, 0, true);
-
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
     OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
-      console.log(result);
       $scope.plannedCampaigns = _.filter(result, function(c){
         return c.status < 6;
       });
@@ -213,8 +64,21 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       $scope.closedCampaigns = _.where(result, { status: 5 });
     });
   }
-  $scope.getUserCampaignsForOwner();
+  if($rootScope.currStateName == "owner.campaigns"){
+    $scope.getUserCampaignsForOwner();
+  }
   // get all Campaigns by a user to show it in campaign management page ends
+
+
+
+
+
+
+  /* ============================
+  | Campaign details section
+  ============================= */
+  
+  $scope.campaignDetails = {};
 
   $scope.getCampaignDetails = function(campaignId){
     OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function(result){
@@ -224,5 +88,56 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   if($stateParams.campaignId){
     $scope.getCampaignDetails($stateParams.campaignId);
   }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
+  $scope.editProposedProduct = function(productId, from_date, to_date, price){
+    var productObj = {
+      id: productId,
+      from_date: from_date,
+      to_date: to_date,
+      price: price
+    };
+    $mdDialog.show({
+      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/owner/edit-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
+        $scope.product = productObj;
+        $scope.updateProposedProduct = function(product){
+          OwnerCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              ctrlScope.getCampaignDetails(campaignId);
+              $mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
+
+  /* ==============================
+  | Campaign details section ends
+  =============================== */
 
 });

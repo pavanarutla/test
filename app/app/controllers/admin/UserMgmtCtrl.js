@@ -72,13 +72,13 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   ======== Users Grid ========
   */
 
-  $scope.getUsers = function(){
-    AdminUserService.getUsers($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (response) {
-      $scope.userList = response.users;
-      $scope.pagination.pageCount = response.page_count;
-    });
-  }
-  $scope.getUsers();
+  // $scope.getUsers = function(){
+  //   AdminUserService.getUsers($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (response) {
+  //     $scope.userList = response.users;
+  //     $scope.pagination.pageCount = response.page_count;
+  //   });
+  // }
+  // $scope.getUsers();
 
   /* 
   ======== Users Grid ends ========
@@ -189,6 +189,7 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
    */
   var getAllUsers = function(){
     AdminUserMgmtService.getAllUsers().then(function(result){
+      console.log(result);
       $scope.allUsers = result;
     });
   }
@@ -204,7 +205,8 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   }
   getAllClients();
 
-  $scope.showUserDetailsPopup = function(userMId){
+  $scope.showUserDetailsPopup = function(clientId, userMId){
+    $scope.selectedClientId = clientId;
     AdminUserMgmtService.getUserDetailsWithRoles(userMId).then(function(result){
       if(result.status == 0){
         toastr.error(result.message);
@@ -249,6 +251,21 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
         $scope.superAdminToAssign = {};
         getAllClients();
         $mdDialog.cancel();
+        toastr.success(result.message);
+      }
+    });
+  }
+
+  $scope.resendOwnerInviteEmail = function(){
+    var obj = {
+      'client_id': $scope.selectedClientId,
+      'super_admin_email': $scope.selectedUser.user_details.email
+    };
+    AdminUserMgmtService.resendOwnerInviteEmail(obj).then(function(result){
+      if(result.status == 0){
+        toastr.error(result.message);
+      }
+      else{
         toastr.success(result.message);
       }
     });

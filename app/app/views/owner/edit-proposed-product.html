@@ -1,0 +1,62 @@
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="column" layout-align="center center">
+				<!-- <div class="md-title">
+					<h3>Enter Formats Details</h3>
+				</div> -->
+			</div>
+			<form name="editProposedProductForm" novalidate="novalidate">
+				<input type="hidden" ng-model="product.id" />
+				<div layout="column" flex="60" flex-offset-gt-sm="20" layout-padding>
+          <div class="form-group">
+            <div class='input-group' style="width:130px">
+              <label>From date:</label>
+              <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
+              <input type='text' class="form-control" 
+                datepicker-popup
+                ng-model="product.from_date" 
+                is-open="opened.start" 
+                ng-click="opened.start = !opened.start" 
+                max-date='product.to_date'
+                ng-model-options="{timezone: 'utc'}"
+                ng-readonly='true' placeholder="start date" />
+              <span class="input-group-addon" for='start' 
+                  ng-click="opened.start = !opened.start; $event.stopPropagation()">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class='input-group' style="width:130px">
+              <label>To date:</label>
+              <input type='text' class="form-control" 
+                datepicker-popup 
+                ng-model="product.to_date" 
+                is-open="opened.end" 
+                ng-click="opened.end = !opened.end"
+                min-date='product.from_date' 
+                ng-model-options="{timezone: 'utc'}"
+                ng-readonly='true' placeholder="end date" />
+              <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+              <!-- <input ng-model="product.to_date" type="text" name="to_date" required="required" /> -->
+            </div>
+          </div>
+          <md-input-container class="md-block margin-input">
+						<label>Price:</label>
+						<input ng-model="product.price" type="text" name="price" only-numeric required="required" />
+						<div ng-messages="editProposedProductForm.price.$error">
+							<div ng-message="required">Format Name is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary" ng-click="updateProposedProduct(product)">SAVE</md-button>
+					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

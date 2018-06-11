@@ -450,19 +450,19 @@ app.controller('bbMngrCtrl',
     |   Switching between views
     ===============================*/
     $scope.switchView = function(){
-      var payload = $auth.getPayload();
-      if(payload.user_type == "bbi"){
+      var userMongo = $auth.getPayload().userMongo;
+      if(userMongo.user_type == "bbi"){
         $location.path("/admin");
       }
-      else if(payload.user_type == "owner"){
-        $location.path("/owner/" + payload.client_slug + "/home");
+      else if(userMongo.user_type == "owner"){
+        $location.path("/owner/" + userMongo.client_slug + "/home");
       }
     }
 
     $scope.isUserBasic = function(){
       if($auth.getPayload()){
-        var payload = $auth.getPayload();
-        return payload.user_type == "basic";
+        var userMongo = $auth.getPayload().userMongo;
+        return userMongo.user_type == "basic";
       }
       else{
         return false;
