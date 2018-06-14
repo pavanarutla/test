@@ -49,7 +49,7 @@ app.service('AdminCampaignService',
       },
       getCampaignWithProducts: function(campaignId){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       updateProposedProduct: function(campaignId, obj){
