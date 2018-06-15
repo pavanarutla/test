@@ -84,7 +84,7 @@
 							<div flex="50">Status:</div>
 							<div flex="50">
 								<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-								<span layout-align="center center" ng-if="campaignDetails.status == 5">
+								<span layout-align="center center" ng-if="campaignDetails.status == 4">
 									<i class="material-icons">info_outline</i>
 								</span>
 							</div>
@@ -93,7 +93,7 @@
 				</div>
 			</div>
 			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
-			 ng-if="campaignDetails.status >= 7">
+			 ng-if="campaignDetails.status >= 6">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
@@ -158,28 +158,28 @@
 			<div flex="70" layout="row" layout-align="end center">
 
 				<div>
-					<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 7 && campaignDetails.status != 8)"
+					<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 6 && campaignDetails.status != 7)"
 					 ng-click="closeCampaign(campaignDetails.id, $event)">
 						Close Campaign
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)"
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 3 && campaignDetails.status != 4)"
 					 ng-click="finalizeCampaign()">
 						Finalize
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5"
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 3 && campaignDetails.status != 4"
 					 ng-click="addNewProductToCampaign()">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 6" ng-if="campaignDetails && campaignDetails.status <= 7"
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 5" ng-if="campaignDetails && campaignDetails.status <= 6"
 					 ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
 						<span>
@@ -230,14 +230,14 @@
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
-								 ng-if="campaignDetails.status < 4 || campaignDetails.status == 5">
+								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>

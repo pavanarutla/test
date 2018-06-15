@@ -1,5 +1,7 @@
 app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, OwnerCampaignService, toastr) {
 
+  $scope.forms = [];
+
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
       templateUrl: 'views/updatepaymentDailog.html',
@@ -14,15 +16,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //     clickOutsideToClose: true
   //   })
   // };
-  $scope.addCamapginSidenav = function () {
-    $mdSidenav('ownerAddcmapgin').toggle();
+  $scope.toggleAddCamapginSidenav = function () {
+    $mdSidenav('ownerAddCmapginSidenav').toggle();
   };
   $scope.cancel = function () {
     $mdDialog.hide();
   };
   $scope.sharePerson = false;
   $scope.shareCampaign = function () {
-        $scope.sharePerson = !$scope.sharePerson;
+    $scope.sharePerson = !$scope.sharePerson;
   }
 
   ////data for image uploading 
@@ -64,15 +66,31 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       $scope.closedCampaigns = _.where(result, { status: 5 });
     });
   }
+  var loadOwnerCampaigns = function(){
+    OwnerCampaignService.getOwnerCampaigns().then(function(result){
+      $scope.ownerCampaigns = result;
+    });
+  }
   if($rootScope.currStateName == "owner.campaigns"){
     $scope.getUserCampaignsForOwner();
+    loadOwnerCampaigns();
   }
-  // get all Campaigns by a user to show it in campaign management page ends
+  // get all Campaigns by a user to show it in campaign management page ends  
 
-
-
-
-
+  $scope.saveOwnerCampaign = function(){
+    OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function(result){
+      if(result.status == 1){
+        $scope.ownerCampaign = {};
+        $scope.forms.ownerCampaignForm.$setPristine();
+        $scope.forms.ownerCampaignForm.$setUntouched();
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });  
+  }
 
   /* ============================
   | Campaign details section
@@ -80,13 +98,23 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   
   $scope.campaignDetails = {};
 
-  $scope.getCampaignDetails = function(campaignId){
+  $scope.getUserCampaignDetails = function(campaignId){
     OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function(result){
       $scope.campaignDetails = result;
     });
   }
-  if($stateParams.campaignId){
-    $scope.getCampaignDetails($stateParams.campaignId);
+  $scope.getOwnerCampaignDetails = function(campaignId){
+    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function(result){
+      $scope.campaignDetails = result;
+    });
+  }
+  if(typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined'){
+    if($stateParams.campaignType == 2){
+      $scope.getOwnerCampaignDetails($stateParams.campaignId);
+    }
+    else{
+      $scope.getCampaignDetails($stateParams.campaignId);
+    }
   }
 
   $scope.viewProductImage = function(image){
@@ -98,6 +126,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       clickOutsideToClose:true,
       controller:function($scope, src){
         $scope.img_src = src;
+      }
+    });
+  }
+
+  $scope.finalizeCampaign = function(){
+    OwnerCampaignService.finalizeCampaignByOwner($scope.campaignDetails.id).then(function(result){
+      if(result.status == 1){
+        toastr.success("Campaign Finalized!");
+      }
+      else{
+        toastr.error(result.message);
       }
     });
   }

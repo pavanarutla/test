@@ -257,7 +257,7 @@ var app = angular.module('bbManager', [
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.campaign-details', {
-      url: '/campaign-details/:campaignId',
+      url: '/campaign-details/:campaignId/:campaignType',
       templateUrl: 'views/owner/campaign-details.html',
       controller: 'OwnerCampaignCtrl'
     })

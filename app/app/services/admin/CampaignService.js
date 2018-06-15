@@ -22,9 +22,9 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/all-campaigns/planned').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      saveCampaign: function(campaign){
+      saveUserCampaign: function(campaign){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/campaign', campaign).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/user-campaign', campaign).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       sendSuggestionRequest: function(suggestionRequest){

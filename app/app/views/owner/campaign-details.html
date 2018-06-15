@@ -46,17 +46,17 @@
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Client Name:</div>
-							<div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.user_full_name}}</div>
+							<div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_name}}</div>
 							<div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Contact:</div>
-              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.phone || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_phone || "N/A"}}</div>
               <div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Email:</div>
-              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.email || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_email || "N/A"}}</div>
               <div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 					</div>
@@ -102,13 +102,13 @@
 			</div>
 			<div flex="70" layout="row" layout-align="end center">
 				<div>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)"
+					<!-- <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)"
 					 ng-click="finalizeCampaign()">
 						Finalize
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
-					</md-button>
+					</md-button> -->
 					<!-- <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5"
 					 ng-click="addNewProductToCampaign()">
 						Add New Product
@@ -160,14 +160,14 @@
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
-								 ng-if="campaignDetails.status < 4 || campaignDetails.status == 5">
+								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>
