@@ -179,9 +179,14 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 5" ng-if="campaignDetails && campaignDetails.status <= 6"
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 4" ng-if="campaignDetails && campaignDetails.status <= 6"
 					 ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
+					<md-button class="md-raised md-primary" disabled="true" ng-if=" campaignDetails.status == 6">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
