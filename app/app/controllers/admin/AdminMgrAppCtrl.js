@@ -46,13 +46,13 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
     }
     AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
-      $scope.adminReadNotifCount = _.chain(result).filter(function(notif){
+      $scope.adminNotifs = result.concat($scope.adminNotifs);
+      $scope.adminReadNotifCount = _.chain($scope.adminNotifs).filter(function(notif){
         return notif.status == 1;
       }).value().length;
-      $scope.adminUnreadNotifCount = _.chain(result).filter(function(notif){
+      $scope.adminUnreadNotifCount = _.chain($scope.adminNotifs).filter(function(notif){
         return notif.status == 0;
       }).value().length;
-      $scope.adminNotifs = _.union($scope.adminNotifs, result);
       $timeout(getAdminNotifs, 1000);
     });
   }
