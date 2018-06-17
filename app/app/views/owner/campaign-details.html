@@ -109,13 +109,18 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button> -->
-					<!-- <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5"
-					 ng-click="addNewProductToCampaign()">
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5" ng-click="addNewProductToCampaign()" ng-if="campaignDetails.type == 2">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
-					</md-button> -->
+					</md-button>
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)" ng-click="launchOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
+						Launch
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
 				</div>
 			</div>
 		</div>
@@ -159,8 +164,7 @@
 						<td>{{campaignProduct.price}}</td>
 						<td>
 							<span>
-								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
-								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
+								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>

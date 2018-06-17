@@ -177,8 +177,9 @@
                   <!-- <th>Created</th> -->
                   <th>Campagin Name</th>
                   <th>Client Name</th>
-                  <th>Client contact</th>
-                  <th>Client email</th>
+                  <th>Contact Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Status</th>
@@ -190,9 +191,10 @@
               <tr ng-repeat="campaign in adminCampaigns | limitTo:limit">
                 <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
-                <td>{{campaign.user_full_name}} </td>
-                <td>{{campaign.user_phone}}</td>
-                <td>{{campaign.user_email}}</td>
+                <td>{{campaign.org_name}} </td>
+                <td>{{campaign.org_contact_name}} </td>
+                <td>{{campaign.org_contact_phone}}</td>
+                <td>{{campaign.org_contact_email}}</td>
                 <td>{{campaign.start_date | date }}</td>
                 <td>{{campaign.end_date | date }}</td>
                 <td>{{campaign.status | stringifyCampaignStatus }}</td>

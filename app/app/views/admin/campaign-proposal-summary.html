@@ -166,7 +166,7 @@
 						</span>
 					</md-button>
 					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 3 && campaignDetails.status != 4)"
-					 ng-click="finalizeCampaign()">
+					 ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
 						Finalize
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -179,7 +179,7 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status < 4" ng-if="campaignDetails && campaignDetails.status <= 6"
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.type == 0 && (campaignDetails.status < 4)" ng-if="campaignDetails && campaignDetails.status < 6"
 					 ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
 						<span>

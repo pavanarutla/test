@@ -266,10 +266,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/requested-hoardings.html',
       controller: 'OwnerProductCtrl'
     })
-    .state('owner.suggestproducts', {
-      url: '/suggestproducts',
+    .state('owner.suggest-products', {
+      url: '/suggest-products',
       templateUrl: 'views/owner/suggest-products.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.hoarding-list', {
       url: '/hoarding-list',

@@ -89,7 +89,7 @@ app.service('AdminCampaignService',
       },
       saveCampaignByAdmin: function(campaign){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/campaign-by-admin', campaign).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/non-user-campaign', campaign).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       getSuggestionRequestDetails: function(campaignId){
