@@ -189,7 +189,6 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
    */
   var getAllUsers = function(){
     AdminUserMgmtService.getAllUsers().then(function(result){
-      console.log(result);
       $scope.allUsers = result;
     });
   }

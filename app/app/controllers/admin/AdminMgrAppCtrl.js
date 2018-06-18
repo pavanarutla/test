@@ -47,12 +47,6 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     }
     AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
       $scope.adminNotifs = result.concat($scope.adminNotifs);
-      $scope.adminReadNotifCount = _.chain($scope.adminNotifs).filter(function(notif){
-        return notif.status == 1;
-      }).value().length;
-      $scope.adminUnreadNotifCount = _.chain($scope.adminNotifs).filter(function(notif){
-        return notif.status == 0;
-      }).value().length;
       $timeout(getAdminNotifs, 1000);
     });
   }
@@ -63,17 +57,21 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   /*===============================
   |   Notification navigation 
   ===============================*/
-  $scope.showCampaignDetails = function(notificationId){
-    AdminNotificationService.updateNotifRead(notificationId).then(function(result){
-      if(result.status == 1){
-        getAdminNotifs();
-      }
-      else{
-        toastr.error(result.message);
-      }
-    });
+  $scope.viewNotification = function(notification){
+    if(notification.type == 8){
+      console.log('admin/requested-hoardings/' + notification.data.product_id);
+      $location.path('admin/requested-hoardings/' + notification.data.product_id)
+    }
+    // AdminNotificationService.updateNotifRead(notification).then(function(result){
+    //   if(result.status == 1){
+    //     // remove notif from list
+    //     $scope.adminNotifs = _.filter($scope.adminNotifs, function(notif){ return notif.id != notification.id; })
+    //   }
+    //   else{
+    //     toastr.error(result.message);
+    //   }
+    // });
     $mdSidenav('right').toggle();
-    $location.path('/admin/home');
   }
 
 });

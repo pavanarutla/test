@@ -183,7 +183,7 @@
     <md-content>
       <div ng-repeat="notif in adminNotifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
       ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-        <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
+        <a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
           <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
           <p>{{ notif.message }}</p>
         </a>
@@ -206,7 +206,7 @@
             <md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
           </md-button>
           <p style="background:#fac306">
-            <span style="line-height: 26px;">{{adminUnreadNotifCount || 0}}</span>
+            <span style="line-height: 26px;">{{adminNotifs.length || 0}}</span>
           </p>
         </div>
         <!-- <div class="message">

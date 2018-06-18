@@ -74,7 +74,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+			<div class="container" style="margin-top:20px;" ng-if="requestedProductList.length > pageSize && pagination.pageCount > 1">
 					<ul class="pagination">
 							<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
 									<a ng-click="pagination.pageNo = i; getProductList();" 

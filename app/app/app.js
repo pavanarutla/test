@@ -180,9 +180,12 @@ var app = angular.module('bbManager', [
       controller: 'ProductCtrl'
     })
     .state('admin.requested-hoardings', {
-      url: '/requested-hoardings',
+      url: '/requested-hoardings/:productId',
       templateUrl: 'views/admin/requested-hoardings.html',
-      controller: 'ProductCtrl'
+      controller: 'ProductCtrl',
+      params: {
+        productId: {squash: true, value: null}
+      }
     })
     .state('admin.locations', {
       url: '/locations',
