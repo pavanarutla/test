@@ -136,10 +136,13 @@ var app = angular.module('bbManager', [
       controller: 'AdminMgrAppCtrl'
     })
     .state('admin.home', {
-      url: '/home',
+      url: '/home/:campSuggReqId',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminFeedsCtrl',
-      title: 'Feeds'
+      title: 'Feeds',
+      params:{
+        campSuggReqId: {squash: true, value: null}
+      }
     })
     .state('admin.suggest-products', {
       url: '/suggest-products',

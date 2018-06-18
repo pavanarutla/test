@@ -1,16 +1,18 @@
-app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav, $location, AdminCampaignService, ProductService, toastr) {
+app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav, $location, $rootScope, $stateParams, AdminCampaignService, ProductService, toastr) {
 
   /*
   ======== Campaign requests =======
   */
   $scope.requestList = {};
   function getAllFeeds(){
-    AdminCampaignService.getAllCampaignRequests().then(function(result){
-      $scope.requestList.campaignSuggestionRequests = result.requested_campaign_suggestions;
-      $scope.requestList.otherCampaignFeeds = result.other_campaign_feeds;
+    return new Promise((resolve, reject) => {
+      AdminCampaignService.getAllCampaignRequests().then(function(result){
+        $scope.requestList.campaignSuggestionRequests = result.requested_campaign_suggestions;
+        $scope.requestList.otherCampaignFeeds = result.other_campaign_feeds;
+        resolve(result.requested_campaign_suggestions);
+      });
     });
   }
-  getAllFeeds();
   /*
   ======== Campaign requests ends =======
   */
@@ -116,6 +118,20 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
   /* close modal */
   $scope.close = function(){
     $mdDialog.hide();
+  }
+
+  if($rootScope.currStateName == 'admin.home'){
+    if($stateParams.campSuggReqId){
+      getAllFeeds().then((suggRequests) => {
+        var suggReq = _.filter(suggRequests, function(sr){          
+          return sr.id == $stateParams.campSuggReqId;
+        });
+        (typeof suggReq != 'undefined') && $scope.showCampaignSuggestionRequestPopup(null, suggReq[0]);
+      });
+    }
+    else{
+      getAllFeeds();
+    }
   }
 
 });

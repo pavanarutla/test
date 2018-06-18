@@ -59,18 +59,23 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   ===============================*/
   $scope.viewNotification = function(notification){
     if(notification.type == 8){
-      console.log('admin/requested-hoardings/' + notification.data.product_id);
-      $location.path('admin/requested-hoardings/' + notification.data.product_id)
+      $location.path('admin/requested-hoardings/' + notification.data.product_id);
     }
-    // AdminNotificationService.updateNotifRead(notification).then(function(result){
-    //   if(result.status == 1){
-    //     // remove notif from list
-    //     $scope.adminNotifs = _.filter($scope.adminNotifs, function(notif){ return notif.id != notification.id; })
-    //   }
-    //   else{
-    //     toastr.error(result.message);
-    //   }
-    // });
+    else if(notification.type == 0){
+      $location.path('admin/home/' + notification.data.campaign_sugg_req_id);
+    }
+    else if(notification.type > 0 && notification.type < 8){
+      $location.path('admin/campaign-proposal-summary/' + notification.data.campaign_id);
+    }
+    AdminNotificationService.updateNotifRead(notification.id).then(function(result){
+      if(result.status == 1){
+        // remove notif from list
+        $scope.adminNotifs = _.filter($scope.adminNotifs, function(notif){ return notif.id != notification.id; })
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
     $mdSidenav('right').toggle();
   }
 
