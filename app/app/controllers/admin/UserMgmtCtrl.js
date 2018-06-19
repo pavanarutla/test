@@ -141,9 +141,27 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   */
 
   /* 
-  ======== Activating New User ========
+  ======== Toggling user activation ========
   */
-  $scope.toggleActivation = function(userMId){
+  $scope.toggleUserActivation = function(userMId){
+    AdminUserService.toggleActivationUser(userMId).then(function(result){
+      if(result.status == 1){
+        getAllUsers();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+  /* 
+  ======== Toggling user activation ends ========
+  */
+
+  /* 
+  ======== Activating New Super Admin ========
+  */
+  $scope.toggleSuperAdminActivation = function(userMId){
     AdminUserService.toggleActivationUser(userMId).then(function(result){
       if(result.status == 1){
         $scope.selectedUser.user_details.activated = !$scope.selectedUser.user_details.activated;
@@ -156,7 +174,7 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
     });
   }
   /* 
-  ======== Activating New User ends ========
+  ======== Activating New Super Admin ends ========
   */
 
   /* 

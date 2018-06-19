@@ -31,9 +31,14 @@
 				<md-button aria-label="notifications" class="md-icon-button" ng-href="#/owner/settings">
 					<img src="assets/images/owner/setting.png" />
 				</md-button>
-				<md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
-					<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
-				</md-button>
+				<div class="message">
+					<md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
+						<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
+					</md-button>
+					<p style="background:#fac306">
+						<span style="line-height: 26px;">{{ownerNotifs.length || 0}}</span>
+					</p>
+				</div>
 				<md-menu md-offset="0 50">
 					<md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
 						<img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
@@ -145,17 +150,14 @@
 						</md-button>
 					</div>
 				</md-toolbar>
-				<md-content layout-padding="">
-					<md-list-item class="md-3-line md-long-text">
-						<img ng-src="assets/images/man.png" class="md-avatar" alt="images" />
-						<div class="md-list-item-text">
-							<h3>Campaigns Created</h3>
-							<p>
-								Secondary line text Lorem ipsum dolor sit amet,
-							</p>
-						</div>
-						<md-divider></md-divider>
-					</md-list-item>
+				<md-content>
+					<div ng-repeat="notif in ownerNotifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
+					ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+						<a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
+							<h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
+							<p>{{ notif.message }}</p>
+						</a>
+					</div>
 				</md-content>
 			</md-sidenav>
 			<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownereditProfile">

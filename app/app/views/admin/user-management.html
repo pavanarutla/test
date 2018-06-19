@@ -69,7 +69,11 @@
             <td>{{user.phone || "N/A"}}</td>
             <td>{{user.company_type}}</td>
             <td>{{user.company_name}}</td>
-            <td>{{user.activated | boolToYesNo}}</td>
+            <td>
+              <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                {{user.activated | boolToYesNo}}
+              </a>
+            </td>
             <td>
               <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
               <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
