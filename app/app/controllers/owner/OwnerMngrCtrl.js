@@ -10,6 +10,16 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
+  $scope.logout = function(){
+    $auth.logout().then(function(result){
+      // console.log(result);
+      $rootScope.isAuthenticated = false;
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');        
+    });
+  }
+
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {

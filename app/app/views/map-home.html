@@ -1,5 +1,5 @@
 <div layout="column" style="position:relative">
-  <!-- filters sidenav start-->
+  <!-- filters options start-->
   <md-sidenav class="md-sidenav-left" md-component-id="filtersMobile" style="position:absolute;margin-left:8px;top:20%;background: none;"
     hide-xs hide-lg hide-gt-lg>
     <div layout="column">
@@ -120,7 +120,7 @@
       </div>
     </div>
   </md-sidenav>
-  <!-- filters sidenav end-->
+  <!-- filters options end-->
 
   <!-- map icon filters start-->
   <md-sidenav class="md-sidenav-left" md-component-id="filtersMap" style="position:absolute;margin-left:8px;top: 36%;
@@ -221,7 +221,7 @@
         <div class="main-icon">
           <img src="assets/images/icons/savedcampagin.png">
         </div>
-        <div class="md-caption theme-txt txt-mrng">SAVE CAMPAIGNS</div>
+        <div class="md-caption theme-txt txt-mrng">SAVED CAMPAIGNS</div>
         <div flex></div>
       </div>
     </div>
@@ -1258,7 +1258,7 @@
         </div>
         <!-- formats html end-->
         <!--SHORTLIST html start -->
-        <div layout="column" layout-padding class="side-navpadding">
+        <div layout="column" layout-padding class="side-navpadding" ng-if="isUserBasic()">
           <md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()">
             <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
             <div layout="row">
@@ -1332,13 +1332,13 @@
         </div>
         <!--SHORTLIST html end -->
         <!--saved campagin html start -->
-        <div layout="column" layout-padding class="side-navpadding">
+        <div layout="column" layout-padding class="side-navpadding" ng-if="isUserBasic()">
           <md-content class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()">
             <div layout="row">
               <div class="main-icon">
                 <img src="assets/images/icons/savedcampagin.png">
               </div>
-              <div class="md-caption theme-txt txt-mrng">SAVE CAMPAIGNS</div>
+              <div class="md-caption theme-txt txt-mrng">SAVED CAMPAIGNS</div>
               <div flex></div>
               <div>
                 <md-icon ng-hide="savedcampaign">
