@@ -1,4 +1,4 @@
-app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $rootScope, UserService, toastr) {
+app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $rootScope, $location, UserService, toastr) {
   
   $scope.forms = [];
 
@@ -67,6 +67,10 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $r
       }
       else{
         $scope.completeRegistrationErrors = result.message;
+        $scope.forms.registerUserForm.$setInvalid();
+        setTimeout(()=>{
+          $location.path('/');
+        }, 2000);
       }
     }, function(result){
       toastr.error(result);
