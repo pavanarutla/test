@@ -213,13 +213,23 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
 
   $scope.editProduct = function(product){
     if(product.status != 0){
-      product.country = null;
+     /* product.country = null;
       product.state = null;
       product.city = null;
-      product.area = null;
+      product.area = null;*/
       // product.company = null;
     }
+    console.log(product);
     $scope.product = product;
+    $scope.stateList = $scope.getStateList(product);
+    $scope.cityList = $scope.getCityList(product);
+    $scope.areaList = $scope.getAreaList(product);
+    $scope.product.client = product.client_mongo_id;
+    $scope.product.country = product.country;
+    $scope.product.state = product.state;
+    $scope.product.city = product.city;
+    $scope.product.area = product.area;
+
     $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
       fullscreen: $scope.customFullscreen,

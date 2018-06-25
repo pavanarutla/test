@@ -48,19 +48,22 @@
 						</tr>
 						<tr >
 							<td flex="33">
-								<select ng-model="product.client" class="select-value" ng-options ="cl.id as cl.name for cl in allClients" ng-disabled="product.status == 0">
-									<option value="" disabled selected>Select Owner</option>
+								<select ng-model="product.client"  class="select-value"  ng-disabled="product.status == 0" ng-options ="cl.id as cl.name for cl in allClients">
+									<option value="" disabled >Select Owner</option>
+									<!--<option ng-repeat=" cl in allClients" ng-value="{{cl.id}}" ng-selected="cl.id == product.client_mongo_id">{{cl.name}}
+									</option>-->
+									
 								</select>
 							</td>
 							<td flex="33">
 								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList()" ng-options ="country.id as country.name for country in countryList" ng-if="product.status != 0">									
-									<option value="" disabled selected>Select Country</option>
+									<option value="" disabled >Select Country</option>
 								</select required>
 								<input ng-model="product.country_name" placeholder="Country Name" type="text" name="country_name" ng-if="product.status == 0" ng-disabled="true"/>
 							</td>
 							<td flex="33">
 								<select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()" ng-options ="state.id as state.name for state in stateList" ng-if="product.status != 0">
-									<option value="" disabled selected>Selected State</option>
+									<option value="" disabled >Selected State</option>
 								</select required>
 								<input ng-model="product.state_name" placeholder="State Name" type="text" name="state_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
@@ -68,13 +71,13 @@
 						<tr>
 							<td flex="33">
 								<select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"	data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()" ng-options ="city.id as city.name for city in cityList" ng-if="product.status != 0">
-									<option value="" disabled selected>Select City</option>
+									<option value="" disabled >Select City</option>
 								</select>
 								<input ng-model="product.city_name" placeholder="City Name" type="text" name="city_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 							<td flex="33">
 								<select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"	data-md-container-class="selectdemoSelectHeader" ng-options ="area.id as area.name for area in areaList" ng-if="product.status != 0">
-									<option value="" disabled selected>Select Area</option>
+									<option value="" disabled >Select Area</option>
 								</select>
 								<input ng-model="product.area_name" placeholder="Area Name" type="text" name="area_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>

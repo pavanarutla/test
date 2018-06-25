@@ -768,7 +768,7 @@ app.controller('GmapCtrl',
       $scope.emptyCampaign = {};
       $scope.createEmptyCampaign = function () {
         $scope.campaign.products = [];
-        CampaignService.saveCampaign($scope.emptyCampaign).then(function (response) {
+        CampaignService.saveUserCampaign($scope.emptyCampaign).then(function (response) {
           $scope.emptyCampaignSaved = true;
           $scope.emptyCampaign = {};
           $timeout(function () {
@@ -870,6 +870,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
+        console.log(productId);
         var productToCampaign = {
           product_id: productId,
           campaign_id: existingCampaignId
@@ -937,6 +938,7 @@ app.controller('GmapCtrl',
         $scope.product.direction = product.direction;
         $scope.product.lighting = product.lighting;
         $scope.product.availableDates = product.availableDates;
+        $scope.product.id = product.id;
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
       }
