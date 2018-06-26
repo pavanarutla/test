@@ -200,18 +200,6 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   /* 
   ======== Adding New Agency ends========
   */
-
-
-  /**
-   * Get Users
-   */
-  var getAllUsers = function(){
-    AdminUserMgmtService.getAllUsers().then(function(result){
-      $scope.allUsers = result;
-    });
-  }
-  getAllUsers();
-
   /**
    * Get Client
    */
@@ -287,6 +275,80 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
       }
     });
   }
+
+
+  /*===================
+  | User Section
+  ===================*/
+  
+  /**
+   * Get Users
+   */
+  var getAllUsers = function(){
+    AdminUserMgmtService.getAllUsers().then(function(result){
+      $scope.allUsers = result;
+    });
+  }
+  getAllUsers();
+
+  $scope.showAddUserPopup = function(){
+    $mdDialog.show({
+      templateUrl: 'add-bbi-user-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
+  }
+  
+  $scope.newBBIUser = {};
+  $scope.sendInviteToBBIUser = function(){
+    AdminUserMgmtService.sendInviteToBBIUser($scope.newBBIUser).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.viewUserRoles = function(userMId){
+    AdminUserMgmtService.getUserDetailsWithRoles(userMId).then(function(result){
+      if(result.status == 0){
+        toastr.error(result.message);
+      }
+      else{
+        $scope.selectedUser = result;
+        $scope.selectedRolesForUser = _.pluck(result.user_roles, 'id');
+        $mdDialog.show({
+          templateUrl: 'views/admin/user-details-popup.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true,
+          preserveScope: true,
+          scope: $scope
+        });
+      }
+    });
+  }
+
+  $scope.resendUserInviteEmail = function(){
+    $scope.newBBIUser.email = $scope.selectedUser.user_details.email;
+    AdminUserMgmtService.sendInviteToBBIUser($scope.newBBIUser).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  /*===================
+  | User Section ends
+  ===================*/
+
+
   /*===================
   | Roles Section
   ===================*/

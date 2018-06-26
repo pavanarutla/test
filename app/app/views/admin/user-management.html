@@ -48,7 +48,12 @@
 <div class="row" style="padding:20px">
   <div class="col-md-12">
     <!-- users table -->
-    <h3 style="padding-left:30px;">Users</h3>
+    <div style="float:left;">
+      <h3 style="padding-left:30px;">Users</h3>
+    </div>
+    <div style="float:right; margin-right:10px;">
+      <a ng-click="showAddUserPopup()" style="cursor:pointer; color:blue;">Add new user</a>
+    </div>
     <div class="table-responsive">    
       <table class="table table-striped table-bordered ">
         <thead>
@@ -59,7 +64,7 @@
               <th>User Type</th>
               <th>Company</th>
               <th>Activated</th>
-              <th>Actions</th>
+              <th></th>
             </tr>
         </thead>
         <tbody>
@@ -75,9 +80,9 @@
               </a>
             </td>
             <td>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+              <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                View details
+              </a>
             </td>
           </tr>      
         </tbody>
@@ -172,3 +177,25 @@
     <!-- permissions table ends -->
   </div>
 </div>
+
+<!-- Templates -->
+
+<script type="text/ng-template" id="add-bbi-user-popup.html">
+  <md-content class="md-padding">
+    <form name="addBBIUserForm" novalidate="novalidate">
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input ng-model="newBBIUser.email" name="newBBIUserEmail" type="email" maxlength="100" required="required"/>
+        <div ng-messages="anewBBIUserForm.newBBIUserEmail.$error">
+          <div class="alret alert-danger" ng-message="required">Email is required.</div>
+          <div ng-message="maxlength">email shouldn't exceed 100 characters. </div>
+        </div>
+      </md-input-container>
+      <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+        <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="assignSuperAdminForm.$invalid" ng-click="sendInviteToBBIUser()">Send invite</md-button>
+      </md-input-container>
+    </form>
+  </md-content>
+</script>
+
+<!-- Templates end-->

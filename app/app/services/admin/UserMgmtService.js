@@ -61,6 +61,11 @@ app.service('AdminUserMgmtService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/resend-owner-invite', obj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        sendInviteToBBIUser: function(obj){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/invite-bbi-user', obj).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }
