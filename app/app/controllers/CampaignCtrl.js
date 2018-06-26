@@ -172,7 +172,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-  $scope.sendSuggestionRequest = function (ev) {
+  $scope.sendSuggestionRequest = function (ev) {    
     CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
       if (result.status == 1) {
         $scope.suggestMeRequestSent = true;
