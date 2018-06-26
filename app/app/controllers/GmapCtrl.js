@@ -887,6 +887,8 @@ app.controller('GmapCtrl',
       }
 
       $scope.shareShortlistedProducts = function (shareShortlisted) {
+        //alert("Hiiiii");
+       // console.log(shareShortlisted);
         var sendObj = {
           email: shareShortlisted.email,
           receiver_name: shareShortlisted.name

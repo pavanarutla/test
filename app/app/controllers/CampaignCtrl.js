@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'suggestion-requested',  //    0
@@ -198,7 +198,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   $scope.deleteCampaign = function (campaignId) {
-    CampaignService.deleteCampaign(campaignId).then(function (result) {
+    CampaignService.deleteUserCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
         $scope.getUserCampaigns();
         toastr.success(result.message);
@@ -212,5 +212,53 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     $mdSidenav('shortlistSharingSidenav').toggle();
   };
 
+
+  $scope.shareCampaign = function (ev, shareCampaign,campaignID,campaignType) {
+        var campaignToEmail = {
+          campaign_id: campaignID,
+          email: shareCampaign.email,
+          receiver_name: shareCampaign.receiver_name,
+          campaign_type: campaignType
+        };
+        CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+          if (result.status == 1) {
+            $mdSidenav('shareCampaign').close();
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                // .textContent('You can specify some description text in here.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+          else {
+            toastr.error(result.message);
+          }
+        });
+  }
+
+  $scope.requestProposalForCampaign = function (campaignId, ev) {
+        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+          if (result.status == 1) {
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title('We will get back to you!!!!')
+                .textContent(result.message)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+          else {
+            toastr.error(result.message);
+          }
+          $scope.getCampaignDetails($stateParams.campaignId);
+        });
+      }
 
 });

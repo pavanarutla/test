@@ -150,12 +150,27 @@
 					</md-list-item>
 					<md-list-item>
 						<div>
-							<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 0" ng-href="#/location">
+
+
+
+							<!--<md-button class="md-grid-item-content" ng-disabled="campaignDetails.status != 0" ng-href="#/location">
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
 								</span>
 								<div class="md-caption"> Request Proposal</div>
-							</md-button>
+							</md-button>-->
+							<md-button class="md-primary saved-btn" ng-if="campaignDetails.status == 2" ng-disabled="true"><span>
+									<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
+								</span>
+								<div class="md-caption"> Proposal Requested</div></md-button>
+                			<md-button class="md-primary saved-btn" ng-if="campaignDetails.status == 3" ng-disabled="true"><span>
+									<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
+								</span>
+								<div class="md-caption">Quote Received</div></md-button>
+                 			<md-button class="md-grid-item-content" ng-if="campaignDetails.status < 2" ng-click="requestProposalForCampaign(campaignDetails.id, $event)"><span>
+									<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
+								</span>
+								<div class="md-caption"> Request Proposal</div></md-button>
 						</div>
 					</md-list-item>
 					<md-list-item>
@@ -184,7 +199,7 @@
 								<span>
 									<md-icon md-svg-icon="assets/images/icons/thumb-down.svg"></md-icon>
 								</span>
-								<div class="md-caption" ng-click="openRequestChangeQuoteForm(campaignDetails.id)"> Request Change </div>
+								<div class="md-caption" > Request Change </div>
 							</md-button>
 						</div>
 					</md-list-item>
@@ -193,7 +208,7 @@
 		</div>
 		<div class="campagintable">
 			<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
-				<md-list-item>
+																																																																																																																																													<md-list-item>
 					<div flex="10" flex-gt-sm="10"></div>
 					<div flex="10" flex-gt-sm="10">Type</div>
 					<div flex="10" flex-gt-sm="10">Area</div>
@@ -336,29 +351,30 @@
 		  </div>
 		</div>
 		<md-content layout-align="center center" layout-margin layout-padding>
-		  <h3 class="md-headline">Share Shortlisted Products</h3>
-		  <form name="shareShortlistedForm">
-			<div layout="column">
-			  <md-input-container class="md-block">
-				<label>Name</label>
-				<input ng-model="shareShortlisted.name" name="name" required="required"/>
-				<div ng-messages="shareShortlistedForm.name.$error">
-				  <div ng-message="required">Name is required.</div>
-				  <div ng-message="pattern">Enter a valid Name.</div>
-				</div>
-			  </md-input-container>
-			  <md-input-container class="md-block">
-				<label>Email</label>
-				<input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-				<div ng-messages="shareShortlistedForm.email.$error">
-				  <div ng-message="required">Email is required.</div>
-				  <div ng-message="pattern">Enter a valid Email Id.</div>
-				</div>
-			  </md-input-container>
-			  <md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProducts(shareShortlisted)">SHARE PRODUCT LIST</md-button>
-			</div>
-		  </form>
-		</md-content>
+      <h3 class="md-headline">Share Campaign Details</h3>
+      <form name="shareCampaignForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Recipient Name</label>
+            <input ng-model="shareCampaign.receiver_name" type="text" name="name" required="required"/>
+            <div ng-messages="shareCampaignForm.name.$error">
+              <div ng-message="required">Recipient Name is required.</div>
+              <div ng-message="pattern">Recipient Name should contain only Characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+            />
+            <div ng-messages="shareCampaignForm.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valied Email Id.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-button type="submit" class="md-raised md-warn" ng-click="shareCampaign($event, shareCampaign,campaignDetails.id,campaignDetails.type)" layout-fill>SHARE CAMPAIGN</md-button>
+      </form>
+    </md-content>
 	  </md-sidenav>
 	  <!-- List of shortlisted products' share details to client end-->
 </div>
