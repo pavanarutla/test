@@ -749,7 +749,7 @@ app.controller('GmapCtrl',
           _.each($scope.shortListedProducts, function (v, i) {
             $scope.campaign.products.push(v.id);
           });
-          CampaignService.saveCampaign($scope.campaign).then(function (response) {
+          CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
             $scope.campaignSavedSuccessfully = true;
             $scope.campaign = {};
             $timeout(function () {
@@ -757,7 +757,7 @@ app.controller('GmapCtrl',
               $mdSidenav('shortlistAndSaveSidenav').close();
               $scope.campaignSavedSuccessfully = false;
             }, 3000);
-            $scope.loadPlannedUserCampaigns();
+            $scope.loadActiveUserCampaigns();
             getShortListedProducts();
           });
         }
@@ -776,7 +776,7 @@ app.controller('GmapCtrl',
             $mdSidenav('createEmptyCampaignSidenav').close();
             $scope.emptyCampaignSaved = false;
           }, 3000);
-          $scope.loadPlannedUserCampaigns();
+          $scope.loadActiveUserCampaigns();
           getShortListedProducts();
         });
       }
@@ -798,18 +798,18 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.plannedUserCampaigns = [];
-      $scope.loadPlannedUserCampaigns = function () {
-        CampaignService.getPlannedCampaigns().then(function (result) {
-          $scope.plannedUserCampaigns = result;
+      $scope.activeUserCampaigns = [];
+      $scope.loadActiveUserCampaigns = function () {
+        CampaignService.getActiveUserCampaigns().then(function (result) {
+          $scope.activeUserCampaigns = result;
         });
       }
-      $scope.loadPlannedUserCampaigns();
+      $scope.loadActiveUserCampaigns();
 
-      $scope.deletePlannedCampaign = function (campaignId) {
-        CampaignService.deleteCampaign(campaignId).then(function (result) {
+      $scope.deleteUserCampaign = function (campaignId) {
+        CampaignService.deleteUserCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
-            $scope.loadPlannedUserCampaigns();
+            $scope.loadActiveUserCampaigns();
             toastr.success(result.message);
           }
           else {
@@ -906,7 +906,8 @@ app.controller('GmapCtrl',
         var campaignToEmail = {
           campaign_id: $scope.campaignToShare.id,
           email: shareCampaign.email,
-          receiver_name: shareCampaign.receiver_name
+          receiver_name: shareCampaign.receiver_name,
+          campaign_type: $scope.campaignToShare.type
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
           if (result.status == 1) {
@@ -942,7 +943,7 @@ app.controller('GmapCtrl',
       }
 
       $scope.deleteProductFromCampaign = function (productId, campaignId) {
-        CampaignService.deleteProductFromCampaign(campaignId, productId).then(function (result) {
+        CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function (result) {
           if (result.status == 1) {
             toastr.success(result.message);
             updateCampaignDetailSidenav(campaignId);
@@ -984,7 +985,7 @@ app.controller('GmapCtrl',
           else {
             toastr.error(result.message);
           }
-          $scope.loadPlannedUserCampaigns()
+          $scope.loadActiveUserCampaigns()
         });
       }
 

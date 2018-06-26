@@ -1,4 +1,4 @@
-app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toastr) {
+app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, CompanyService, toastr) {
 
 	/*
 	* ========== Switching registration forms between User and Agency ===========
@@ -40,14 +40,29 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, toa
 
 
 	/*
-	* ============ Agency Registration ============
+	* ============ Company Registration ============
 	*/
-	$scope.agency = {};
-	$scope.registerNewAgency = function () {
-		// console.log($scope.agency);
+
+	function getClientTypes(){
+		CompanyService.getClientTypes().then(function(result){
+			$scope.clientTypes = result;
+		});
+	}
+	getClientTypes();
+
+	$scope.client = {};
+	$scope.registerClient = function () {
+		CompanyService.registerClient($scope.client).then(function(result){
+			if(result.status == 1){
+				toastr.success(result.message);
+			}
+			else{
+				toastr.error(result.message);
+			}
+		});
 	}
 	/*
-	* ============ Agency Registration Ends ============
+	* ============ Company Registration Ends ============
 	*/
 
 	$scope.close = function () {

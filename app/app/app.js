@@ -131,6 +131,22 @@ var app = angular.module('bbManager', [
         }
       }
     })
+    .state('index.complete_registration', {
+      url: 'complete_registration/:code',
+      templateUrl: 'views/complete_registration.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
+    .state('index.generate_password', {
+      url: 'generate_password/:code',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
     .state('index.reset-password', {
       url: 'reset_password/:code',
       templateUrl: 'views/reset-password.html',
@@ -146,10 +162,13 @@ var app = angular.module('bbManager', [
       controller: 'AdminMgrAppCtrl'
     })
     .state('admin.home', {
-      url: '/home',
+      url: '/home/:campSuggReqId',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminFeedsCtrl',
-      title: 'Feeds'
+      title: 'Feeds',
+      params:{
+        campSuggReqId: {squash: true, value: null}
+      }
     })
     .state('admin.suggest-products', {
       url: '/suggest-products',
@@ -188,6 +207,14 @@ var app = angular.module('bbManager', [
       url: '/formats',
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
+    })
+    .state('admin.requested-hoardings', {
+      url: '/requested-hoardings/:productId',
+      templateUrl: 'views/admin/requested-hoardings.html',
+      controller: 'ProductCtrl',
+      params: {
+        productId: {squash: true, value: null}
+      }
     })
     .state('admin.locations', {
       url: '/locations',
@@ -234,9 +261,19 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
+    // .state('admin.user-management', {
+    //   url: '/user-management',
+    //   templateUrl: 'views/admin/user-management.html',
+    //   controller: 'UserManagementCtrl'
+    // })
+    // .state('admin.user-details', {
+    //   url: '/user-details/:userMId',
+    //   templateUrl: 'views/admin/user-details.html',
+    //   controller: 'UserManagementCtrl'
+    // })
     .state('owner', {
       abstract: true,
-      url: '/owner',
+      url: '/owner/:client_slug',
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
@@ -246,30 +283,30 @@ var app = angular.module('bbManager', [
       controller: 'OwnerFeedsCtrl',
       
     })
-    .state('owner.ownerCampaign', {
-      url: '/ownerCampaign',
-      templateUrl: 'views/owner/campaign.html',
+    .state('owner.campaigns', {
+      url: '/campaigns',
+      templateUrl: 'views/owner/campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
-    .state('owner.editCampaign', {
-      url: '/editCampaign',
-      templateUrl: 'views/owner/editcampaign.html',
+    .state('owner.campaign-details', {
+      url: '/campaign-details/:campaignId/:campaignType',
+      templateUrl: 'views/owner/campaign-details.html',
       controller: 'OwnerCampaignCtrl'
     })
-    .state('owner.requestHoarding', {
-      url: '/requestHoarding',
-      templateUrl: 'views/owner/requesthoarding.html',
-      controller: 'requestHoarding'
+    .state('owner.requested-hoardings', {
+      url: '/requested-hoardings',
+      templateUrl: 'views/owner/requested-hoardings.html',
+      controller: 'OwnerProductCtrl'
     })
-    .state('owner.suggestproducts', {
-      url: '/suggestproducts',
+    .state('owner.suggest-products', {
+      url: '/suggest-products',
       templateUrl: 'views/owner/suggest-products.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.hoarding-list', {
       url: '/hoarding-list',
       templateUrl: 'views/owner/hoarding-list.html',
-      controller: 'OwnerFeedsCtrl'
+      controller: 'OwnerProductCtrl'
     })
     .state('owner.settings', {
       url: '/settings',
@@ -308,13 +345,14 @@ var app = angular.module('bbManager', [
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/:client_slug/dashboard');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
     $authProvider.loginUrl = '/login';
     $authProvider.logoutUrl = '/logout'
     $authProvider.signupUrl = '/signup';
+    $authProvider.storageType = 'localStorage';
     // $authProvider.unlinkUrl = '/auth/unlink/';
 
     $mdAriaProvider.disableWarnings();
@@ -398,6 +436,7 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
+          'owner.home'
         ];
         var requiresLogin = [
           'index.location',
@@ -426,10 +465,7 @@ app.run(
             });
             return false;
           }
-          else if (
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
-          ) {
+          else if ($auth.getPayload().userMongo.user_type != "bbi") {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -443,7 +479,7 @@ app.run(
               fullscreen: true
             });
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1) {
+          else if ($auth.getPayload().userMongo.user_type != "owner") {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }

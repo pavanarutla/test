@@ -1,13 +1,13 @@
-app.factory('ProductService', ['$http', '$q', 'config',
+app.factory('OwnerProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getProductList: function (pageNo, pageSize) {
+			getApprovedProductList: function (pageNo, pageSize) {
 				var pageData = "";
 				if(pageNo && pageSize){
 					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
 				}
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/products' + pageData).success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/approved-owner-products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
 			getSearchProductList: function (pageNo, pageSize, search) {
@@ -47,15 +47,15 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				$http.get(config.apiPath + '/search-products/' + word).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
-			getRequestedHoardings: function(pageNo, pageSize){
+			getRequestedProductList: function (pageNo, pageSize) {
 				var pageData = "";
 				if(pageNo && pageSize){
 					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
 				}
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/requested-hoardings' + pageData).success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/requested-hoardings-for-owner' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+			},
 		}
 	}
 ]);

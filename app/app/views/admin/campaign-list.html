@@ -14,13 +14,13 @@
               </span>
               <span class="item-metadata">
                 <span>
-                  <strong>{{campaign.user_full_name}}</strong>
+                  <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
                 </span>
                 <span>
-                  <strong>{{campaign.user_email}}</strong>
+                  <strong>{{campaign.email}}</strong>
                 </span>
                 <span>
-                  <strong>{{campaign.user_phone}}</strong>
+                  <strong>{{campaign.phone}}</strong>
                 </span>
               </span>
             </md-item-template>
@@ -49,7 +49,6 @@
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Status</th>
-                  <th>No.of<br> Product</th>
                   <th>Estimated <br>Budget</th>
                   <th>Actions</th>
                 </tr>
@@ -58,18 +57,17 @@
               <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
                 <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
-                <td>{{campaign.user_full_name}}</td>
-                <td>{{campaign.user_phone}}</td>
+                <td>{{campaign.first_name}} {{campaign.last_name}}</td>
+                <td>{{campaign.phone}}</td>
                 <td>{{campaign.start_date | date }}</td>
                 <td>{{campaign.end_date | date }}</td>
                 <td>{{campaign.status | stringifyCampaignStatus }}</td>
-                <td>{{campaign.products.length}}</td>
                 <td>{{campaign.est_budget}}</td>
                 <td>
-                  <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                  <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click=""><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
                   <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
                   <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
-                  <span><a style="cursor:pointer;" ng-click="deleteCampaign(campaign.id)" ng-if="campaign.status < 3"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+                  <!-- <span><a style="cursor:pointer;" ng-click="deleteCampaign(campaign.id)" ng-if="campaign.status < 3"><md-icon><i class="material-icons">delete</i></md-icon></a></span> -->
                 </td>
               </tr>      
             </tbody>
@@ -96,7 +94,6 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Status</th>
-                    <th>No.of<br> Product</th>
                     <th>Estimated <br>Budget</th>
                     <th>Actions</th>
                   </tr>
@@ -105,12 +102,11 @@
                 <tr ng-repeat="campaign in runningCampaigns | limitTo:limit">
                   <!-- <td>{{campaign.created_by}}</td> -->
                   <td>{{campaign.name}}</td>
-                  <td>{{campaign.user_full_name}}</td>
-                  <td>{{campaign.user_phone}}</td>
+                  <td>{{campaign.first_name}} {{campaign.last_name}}</td>
+                  <td>{{campaign.phone}}</td>
                   <td>{{campaign.start_date | date }}</td>
                   <td>{{campaign.end_date | date }}</td>
                   <td>{{campaign.status | stringifyCampaignStatus }}</td>
-                  <td>{{campaign.products.length}}</td>
                   <td>{{campaign.est_budget}}</td>
                   <td>
                     <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
@@ -142,7 +138,6 @@
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Status</th>
-                  <th>No.of<br> Product</th>
                   <th>Estimated <br>Budget</th>
                   <th>Actions</th>
                 </tr>
@@ -151,12 +146,11 @@
               <tr ng-repeat="campaign in closedCampaigns | limitTo:limit">
                 <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
-                <td>{{campaign.user_full_name}}</td>
-                <td>{{campaign.user_phone}}</td>
+                <td>{{campaign.first_name}} {{campaign.last_name}}</td>
+                <td>{{campaign.phone}}</td>
                 <td>{{campaign.start_date | date }}</td>
                 <td>{{campaign.end_date | date }}</td>
                 <td>{{campaign.status | stringifyCampaignStatus }}</td>
-                <td>{{campaign.products.length}}</td>
                 <td>{{campaign.est_budget}}</td>
                 <td>
                   <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
@@ -183,12 +177,12 @@
                   <!-- <th>Created</th> -->
                   <th>Campagin Name</th>
                   <th>Client Name</th>
-                  <th>Client contact</th>
-                  <th>Client email</th>
+                  <th>Contact Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Status</th>
-                  <th>No.of<br> Product</th>
                   <th>Estimated <br>Budget</th>
                   <th>Actions</th>
                 </tr>
@@ -197,16 +191,16 @@
               <tr ng-repeat="campaign in adminCampaigns | limitTo:limit">
                 <!-- <td>{{campaign.created_by}}</td> -->
                 <td>{{campaign.name}}</td>
-                <td>{{campaign.user_full_name}}</td>
-                <td>{{campaign.user_phone}}</td>
-                <td>{{campaign.user_email}}</td>
+                <td>{{campaign.org_name}} </td>
+                <td>{{campaign.org_contact_name}} </td>
+                <td>{{campaign.org_contact_phone}}</td>
+                <td>{{campaign.org_contact_email}}</td>
                 <td>{{campaign.start_date | date }}</td>
                 <td>{{campaign.end_date | date }}</td>
                 <td>{{campaign.status | stringifyCampaignStatus }}</td>
-                <td>{{campaign.products.length}}</td>
                 <td>{{campaign.est_budget}}</td>
                 <td>
-                  <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click="" ng-if="campaign.status != 0"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                  <span><a ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}" ng-click="" ><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
                   <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span> -->
                   <!-- <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span> -->
                   <span><a style="cursor:pointer;" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>

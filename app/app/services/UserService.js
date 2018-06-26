@@ -41,6 +41,11 @@ app.service('UserService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/change-password', resetPwdObj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        completeRegistration: function(userData){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/complete-registration', userData).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

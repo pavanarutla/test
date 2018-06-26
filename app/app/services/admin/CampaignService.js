@@ -1,7 +1,6 @@
 app.service('AdminCampaignService', 
 ['$http', '$q', 'config', 
   function($http, $q, config){
-    
     return {
       getAllCampaigns: function(){
         var dfd = $q.defer();
@@ -23,9 +22,9 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/all-campaigns/planned').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      saveCampaign: function(campaign){
+      saveUserCampaign: function(campaign){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/campaign', campaign).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/user-campaign', campaign).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       sendSuggestionRequest: function(suggestionRequest){
@@ -50,7 +49,7 @@ app.service('AdminCampaignService',
       },
       getCampaignWithProducts: function(campaignId){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       updateProposedProduct: function(campaignId, obj){
@@ -90,7 +89,7 @@ app.service('AdminCampaignService',
       },
       saveCampaignByAdmin: function(campaign){
         var dfd = $q.defer();
-        $http.post(config.apiPath + '/campaign-by-admin', campaign).success(dfd.resolve).error(dfd.reject);
+        $http.post(config.apiPath + '/non-user-campaign', campaign).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       getSuggestionRequestDetails: function(campaignId){

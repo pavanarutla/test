@@ -16,8 +16,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
 
   $rootScope.serverUrl = config.serverUrl;
 
-  if(localStorage.isAuthenticated && localStorage.loggedInUser){
-    $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
+  if(localStorage.loggedInUser){
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
@@ -61,37 +60,37 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
     }
     AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
-      $scope.adminReadNotifCount = _.chain(result).filter(function(notif){
-        return notif.status == 1;
-      }).value().length;
-      $scope.adminUnreadNotifCount = _.chain(result).filter(function(notif){
-        return notif.status == 0;
-      }).value().length;
-      $scope.adminNotifs = _.union($scope.adminNotifs, result);
+      $scope.adminNotifs = result.concat($scope.adminNotifs);
       $timeout(getAdminNotifs, 1000);
     });
   }
+  // getAdminNotifs();
+  // $interval(getAdminNotifs, 10000);
   getAdminNotifs();
 
   /*===============================
   |   Notification navigation 
   ===============================*/
-  $scope.showCampaignDetails = function(notification){
+  $scope.viewNotification = function(notification){
+    if(notification.type == 8){
+      $location.path('admin/requested-hoardings/' + notification.data.product_id);
+    }
+    else if(notification.type == 0){
+      $location.path('admin/home/' + notification.data.campaign_sugg_req_id);
+    }
+    else if(notification.type > 0 && notification.type < 8){
+      $location.path('admin/campaign-proposal-summary/' + notification.data.campaign_id);
+    }
     AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){
-        getAdminNotifs();
+        // remove notif from list
+        $scope.adminNotifs = _.filter($scope.adminNotifs, function(notif){ return notif.id != notification.id; })
       }
       else{
         toastr.error(result.message);
       }
     });
     $mdSidenav('right').toggle();
-    if(notification.type == 0){
-      $scope.showCampaignSuggestionRequestPopup($event, notification);
-    }
-    if(notification.type > 0 && notification.type < 7){
-      $location.path('#/admin/campaign-proposal-summary/' + notification.data.campaign_id);
-    }
   }
 
   /*===============================

@@ -1,0 +1,369 @@
+<!-- ============ add hoarding list side nav start ============ -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="request-hoarding-sidenav" style="width:400px !important">
+	<md-toolbar layout="row">
+		<div class="md-toolbar-tools bg_main_color">
+			<h2>
+				<span>Add Product</span>
+			</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="cancel()">
+				<md-tooltip>Close Side Panel</md-tooltip>
+				<md-icon class="md-default-theme">
+					<i class="material-icons">close</i>
+				</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding="">
+		<form role="form">
+			<div class="form-group row">
+				<label for="productId" class="col-sm-4 col-form-label">Product ID</label>
+				<div class="col-sm-8">
+					<input type="hidden" ng-model="product.id" />
+					<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+					 class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="productType" class="col-sm-4 col-form-label">Product Type</label>
+				<div class="col-sm-8">
+					<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type" class="form-control"
+					 data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
+						<option value="" disabled selected>Site Type</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="defaultProductCost" class="col-sm-4 col-form-label">Default Product Cost</label>
+				<div class="col-sm-8">
+					<input ng-model="product.default_price" placeholder="Default Product Cost" type="text" name="product-cost" class="form-control"
+					/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="country" class="col-sm-4 col-form-label">Country</label>
+				<div class="col-sm-8">
+					<select name="country" class="form-control" id="country" ng-model="product.country" ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+						<option value="" disabled selected>Select Country</option>
+					</select required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="state" class="col-sm-4 col-form-label">State</label>
+				<div class="col-sm-8">
+					<select name="state" class="form-control" id="state" ng-model="product.state" ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
+						<option value="" disabled selected>Select State</option>
+					</select required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="city" class="col-sm-4 col-form-label">City</label>
+				<div class="col-sm-8">
+					<select name="city" class="form-control" id="city" ng-model="product.city" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
+						<option value="" disabled selected>Select City</option>
+					</select required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="area" class="col-sm-4 col-form-label">Area</label>
+				<div class="col-sm-8">
+					<select name="area" class="form-control" id="area" ng-model="product.area" ng-options="area.id as area.name for area in areaList">
+						<option value="" disabled selected>Select Area</option>
+					</select required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="hoardingLight" class="col-sm-4 col-form-label">Light</label>
+				<div class="col-sm-8">
+					<select ng-model="product.lighting" class="form-control" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+					 ng-init="product.lighting = product.lighting || ''">
+						<option value="" disabled>Has lighting?</option>
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="PanelSize" class="col-sm-4 col-form-label">Panel Size</label>
+				<div class="col-sm-8">
+					<input ng-model="product.panelSize" class="form-control" placeholder="Panel Size" type="text" name="panel-size" required="required"
+					/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="" class="col-sm-4 col-form-label">Upload Image</label>
+				<div class="col-sm-8">
+					<span class="input-group-btn">
+						<span class="btn btn-default btn-file">
+							<input type="file" class="form-control" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB"></input>
+						</span>
+					</span>
+				</div>
+			</div>
+			<div class="serverErrors" ng-if="requestProductErrors && requestProductErrors.length > 0">
+				<ul>
+					<li ng-repeat="error in requestProductErrors">
+						{{error}}
+					</li>
+				</ul>
+			</div>
+			<div class="form-group" style="margin:10px 0">
+				<label class="col-md-3 control-label"></label>
+				<input class="btn btn-primary" value="Save" type="button" ng-click="requestAddProduct()">
+				<span></span>
+				<input class="btn btn-default" value="Cancel" type="reset">
+			</div>
+		</form>
+	</md-content>
+</md-sidenav>
+<!-- ============ add hoarding list side nav end ============ -->
+
+<!-- =======================================================
+	list of requested hoardings which aren't approved yet 
+==========================================================-->
+<div class="owner__request__hoarding" layout="column" layout-margin="layout-margin" layout-fill="layout-fill">
+	<div layout="row" layout-margin="layout-margin" class="req_hrdg_title">
+		<h3>Request Hoardings</h3>
+		<div flex></div>
+		<div id="customSsearchInput">
+			<div class="input-group ">
+				<input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search.." on-enter="searchBySiteNo()"
+				/>
+				<span class="input-group-btn">
+					<button class="btn btn-info btn-lg" type="button">
+						<i class="material-icons">search</i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<!-- <div layout="column" layout-align="center end" flex="50">
+      <md-button aria-label="add" class=" md-fab md-mini" ng-click="openScreen($event)">
+          <md-icon><i class="material-icons">&#xE145;</i></md-icon>
+      </md-button>
+    </div>   -->
+	</div>
+	<div class="hrndg__action" layout="row" layout-align="end	 end">
+		<a ng-click="toggleRequestHoardingFormSidenav()">
+			<img src="assets/images/owner/add.png" />
+		</a>
+		<!-- <a ng-click="shareCampaign()"><img src="assets/images/owner/share.png"/></a>
+		<a href="#"><img src="assets/images/owner/edit.png"/></a> -->
+		<!-- <a href="#">
+			<img src="assets/images/owner/delete.png" />
+		</a> -->
+	</div>
+	<!-- <div class="hoarding__table">
+		<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+			<md-list-item>
+				<div flex="10" flex-gt-sm="10">
+					<!-- <span><input type="checkbox"></span><span>ID</span> --
+					<label class="owner_container">ID
+						<input type="checkbox">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				<div flex="10" flex-gt-sm="10">Type</div>
+				<div flex="10" flex-gt-sm="10">Area</div>
+				<div flex="10" flex-gt-sm="10">Size</div>
+				<div flex="10" flex-gt-sm="10">illumination</div>
+				<div flex="15" flex-gt-sm="15">Start Date</div>
+				<div flex="15" flex-gt-sm="15">End Date</div>
+				<div flex="10" flex-gt-sm="10">Price</div>
+				<div flex="10" flex-gt-sm="10">Apporval</div>
+			</md-list-item>
+		</div>
+		<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="hoarding in hoardinglist"
+		 class="contbg md-whiteframe-3dp">
+			<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c1.png" alt="c1">
+					</div>
+					<div flex-xs="80" flex-sm="85">
+						<div class="md-body-1">
+							<!-- <span hide-xs hide-sm>
+								<input type="checkbox"></span>{{hoarding.id}} --
+							<label class="owner_container">{{hoarding.id}}
+								<input type="checkbox" hide-xs hide-sm>
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+						<md-menu>
+							<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+								<md-icon>
+									<i class="material-icons">more_vert</i>
+								</md-icon>
+							</md-button>
+							<md-menu-content>
+								<md-menu-item>
+									<md-button ng-href="#">View Image</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button>Delete</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
+				 hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+					<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+						<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+							<div>
+								<img src="assets/images/c2.png" alt="c3">
+							</div>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{hoarding.type}}</div>
+						</div>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c3.png" alt="c3">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.area}}</div>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c4.png" alt="c4">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.size}}</div>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c5.png" alt="c5">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.light}}</div>
+					</div>
+				</div>
+				<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c6.png" alt="c6">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.sdate}}</div>
+					</div>
+				</div>
+				<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row" hide-xs hide-sm show-md show-lg>
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c6.png" alt="c6">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.edate}}</div>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-md show-xs show-sm>
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c6.png" alt="c1">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">From{{hoarding.sdate}}To{{hoarding.edate}}</div>
+					</div>
+				</div>
+				<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c6.png" alt="c6">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">{{hoarding.price}}</div>
+					</div>
+				</div>
+				<div flex="10" hide-xs hide-sm layout-xs="row" layout-sm="row" layout="row">
+					<!-- <div layout="row">
+							<md-button class="md-icon-button" ng-click="viewImage()">
+								<md-icon>
+									<i class="material-icons">remove_red_eye</i>
+								</md-icon>
+							</md-button>
+							<md-button class="md-icon-button">
+								<md-icon>
+									<i class="material-icons">delete</i>
+								</md-icon>
+							</md-button>
+						</div> --
+					<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+						<img src="assets/images/c6.png" alt="c6">
+					</div>
+					<div flex-xs="80" flex-gt-xs="85">
+						<div class="md-body-1">pending</div>
+					</div>
+					<div flex-gt-sm="15" hide-xs hide-sm>
+						<a class="md-icon-button" ng-click="viewImage()">
+							<img src="assets/images/owner/eye.png">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div layout="column" layout-align="center end" class="loadmore">
+			<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+		</div>
+	</div>
+</div> -->
+<div style="margin-top: 1em;">
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered ">
+			<thead>
+				<tr>
+					<th>Site No</th>
+					<th>Site type</th>
+					<th>Ad Space Owner</th>
+					<th>Area</th>
+					<th>Panel Size</th>
+					<th>lighting</th>
+					<th>Image</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in requestedProductList">
+					<td>{{product.siteNo}}</td>
+					<td>{{product.format_name}}</td>
+					<td>{{product.client_name}}</td>
+					<td>{{product.area_name}}</td>
+					<td>{{product.panelSize}}</td>
+					<td>{{product.lighting | boolToYesNo}}</td>
+					<td>{{image}}</td>
+					<td>
+						<span>
+							<a style="cursor:pointer;" ng-click="editProduct(product)">
+								<md-icon>
+									<i class="material-icons">mode_edit</i>
+								</md-icon>
+							</a>
+						</span>
+						<!-- <span>
+							<a style="cursor:pointer;" ng-click="deleteProduct(product)">
+								<md-icon>
+									<i class="material-icons">delete</i>
+								</md-icon>
+							</a>
+						</span> -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="container" style="margin-top:20px;" ng-if="requestedProductList.length > pageSize && pagination.pageCount > 1">
+			<ul class="pagination">
+					<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+							<a ng-click="pagination.pageNo = i; getProductList();" 
+									ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+									style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+									{{i}}
+							</a>
+					</li>
+			</ul>
+	</div>
+</div>
+<!-- ==========================================================
+	list of requested hoardings which aren't approved yet ends
+============================================================ -->

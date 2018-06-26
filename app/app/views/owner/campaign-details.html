@@ -46,15 +46,18 @@
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Client Name:</div>
-							<div flex="50">{{campaignDetails.first_name}} {{campaignDetails.last_name}}</div>
+							<div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_name}}</div>
+							<div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Contact:</div>
-							<div flex="50">{{campaignDetails.phone || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_phone || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 						<div layout="row" layout-align="center center">
 							<div flex="50">Email:</div>
-							<div flex="50">{{campaignDetails.email || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type == 2">{{campaignDetails.org_contact_email || "N/A"}}</div>
+              <div flex="50" ng-if="campaignDetails.type != 2">N/A</div>
 						</div>
 					</div>
 					<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
@@ -84,70 +87,12 @@
 							<div flex="50">Status:</div>
 							<div flex="50">
 								<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-								<span layout-align="center center" ng-if="campaignDetails.status == 4">
+								<span layout-align="center center" ng-if="campaignDetails.status == 5">
 									<i class="material-icons">info_outline</i>
 								</span>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
-			 ng-if="campaignDetails.status >= 6">
-				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-					<div layout="column" layout-align="center center">
-						<!-- <div><span><md-icon md-svg-icon="assets/images/icons/wallet.svg"></md-icon></span></div> -->
-						<h3>Payment Details</h2>
-					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">Total amount:</div>
-						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignDetails.act_budget || 0 }}</div>
-					</div>
-					<div layout="row">
-						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
-						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
-					</div>
-					<div layout="row">
-						<div flex="100" layout="column" layout-align="center center">
-							<md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
-								Update Payment
-							</md-button>
-						</div>
-					</div>
-				</div>
-				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
-				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-					<div layout="column" layout-align="center center">
-						<!-- <div><span><md-icon md-svg-icon="assets/images/icons/credit-card.svg"></md-icon></span></div> -->
-						<h3>Recently Updated Payments</h2>
-					</div>
-					<div layout="column" layout-margin style="height:150px; overflow:auto;">
-						<div layout="row">
-							<div flex="20" layout="column" layout-align="center center">Date</div>
-							<div flex="20" layout="column" layout-align="center center">Amount</div>
-							<div flex="20" layout="column" layout-align="center center">Txn Type</div>
-							<div flex="20" layout="column" layout-align="center center">Ref. No.</div>
-							<div flex="20" layout="column" layout-align="center center">Accepted by</div>
-						</div>
-						<div layout="row" ng-if="!campaignPayments">
-							<div flex="20" layout="column" layout-align="center center">N/A</div>
-							<div flex="20" layout="column" layout-align="center center">Rs. 0</div>
-							<div flex="20" layout="column" layout-align="center center">N/A</div>
-							<div flex="20" layout="column" layout-align="center center">N/A</div>
-							<div flex="20" layout="column" layout-align="center center">N/A</div>
-						</div>
-						<div layout="row" ng-repeat="payment in campaignPayments.all_payments">
-							<div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
-							<div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
-							<div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
-							<div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
-							<div flex="20" layout="column" layout-align="center center">{{payment.updated_by_admin_name }}</div>
-						</div>
-					</div>
-					<!-- <div layout="row" layout-align="center center"> 
-								<md-button class="md-button md-primary md-raised" ng-click="showPaymentdailog()">UPDATE PAYMENT</md-button>
-						</div> -->
 				</div>
 			</div>
 		</div>
@@ -156,37 +101,22 @@
 				<div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
 			</div>
 			<div flex="70" layout="row" layout-align="end center">
-
 				<div>
-					<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 6 && campaignDetails.status != 7)"
-					 ng-click="closeCampaign(campaignDetails.id, $event)">
-						Close Campaign
-						<span>
-							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
-					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 3 && campaignDetails.status != 4)"
-					 ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
+					<!-- <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)"
+					 ng-click="finalizeCampaign()">
 						Finalize
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
-					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 3 && campaignDetails.status != 4"
-					 ng-click="addNewProductToCampaign()">
+					</md-button> -->
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5" ng-click="addNewProductToCampaign()" ng-if="campaignDetails.type == 2">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.type == 0 && (campaignDetails.status < 4)" ng-if="campaignDetails && campaignDetails.status < 6"
-					 ng-click="launchCampaign(campaignDetails.id, $event)">
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)" ng-click="launchOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
 						Launch
-						<span>
-							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
-					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if=" campaignDetails.status == 6">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
@@ -216,7 +146,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="campaignProduct in campaignProducts | limitTo:limit">
+					<tr ng-repeat="campaignProduct in campaignDetails.products | limitTo:limit">
 						<td>{{campaignProduct.siteNo}}</td>
 						<td>{{campaignProduct.format_name}}</td>
 						<td>{{campaignProduct.area_name}}</td>
@@ -234,8 +164,7 @@
 						<td>{{campaignProduct.price}}</td>
 						<td>
 							<span>
-								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
-								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
+								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>
@@ -254,8 +183,8 @@
 			</table>
 		</div>
 		<!-- <div layout="colmun" layout-align="end center" layout-margin>
-						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-					</div> -->
+      <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+    </div> -->
 	</div>
 	<!-- table grid end -->
 </div>

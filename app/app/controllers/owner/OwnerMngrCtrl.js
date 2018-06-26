@@ -1,4 +1,25 @@
-app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $state) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, toastr) {
+
+  $rootScope.config = config;
+
+  if($stateParams.client_slug){
+    $rootScope.clientSlug = $stateParams.client_slug;
+  }
+
+  if(localStorage.loggedInUser){
+    $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
+
+  $scope.logout = function(){
+    $auth.logout().then(function(result){
+      // console.log(result);
+      $rootScope.isAuthenticated = false;
+      $location.path('/');
+      localStorage.clear();
+      toastr.warning('You have successfully signed out!');        
+    });
+  }
+
   // $scope.toggleLeft = buildToggler('left');
   
   // function buildToggler(navID) {
@@ -140,10 +161,51 @@ app.controller('OwnerMngrCtrl', function ($scope,$mdSidenav,$log,$mdDialog, $sta
     });
   };
 
-}).value('googleChartApiConfig', {
-  version: '1.1',
-  optionalSettings: {
-    packages: ['bar'],
-    language: 'en'
+
+  /*================================
+  === Long polling notifications ===
+  ================================*/
+  $scope.ownerNotifs = [];
+  var getOwnerNotifs = function(){
+    var last_notif = 0;
+    if($scope.ownerNotifs && $scope.ownerNotifs.length > 0){
+      last_notif = moment.utc($scope.ownerNotifs[0].updated_at).valueOf();
+    }
+    OwnerNotificationService.getAllOwnerNotifications(last_notif).then(function(result){
+      $scope.ownerNotifs = result.concat($scope.ownerNotifs);
+      $timeout(getOwnerNotifs, 1000);
+    });
   }
-});
+  getOwnerNotifs();
+
+  /*===============================
+  |   Notification navigation 
+  ===============================*/
+  $scope.viewNotification = function(notification){
+    if(notification.type == 8){
+      $location.path('owner/' + $rootScope.clientSlug + '/requested-hoardings/' + notification.data.product_id);
+    }
+    else if(notification.type > 0 && notification.type < 8){
+      $location.path('owner/' + $rootScope.clientSlug + '/campaign-details/' + notification.data.campaign_id + "/0");
+    }
+    OwnerNotificationService.updateNotifRead(notification.id).then(function(result){
+      if(result.status == 1){
+        // remove notif from list
+        $scope.ownerNotifs = _.filter($scope.ownerNotifs, function(notif){ return notif.id != notification.id; })
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+    $mdSidenav('ownerRight').toggle();
+  }
+
+})
+
+// .value('googleChartApiConfig', {
+//   version: '1.1',
+//   optionalSettings: {
+//     packages: ['bar'],
+//     language: 'en'
+//   }
+// });

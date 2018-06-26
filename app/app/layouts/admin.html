@@ -1,6 +1,4 @@
 <link rel="stylesheet" type="text/css" href="assets/css/admin-main.css" />
-
-
 <div layout="row" flex>
   <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
     <header layout="column" layout-padding>
@@ -116,6 +114,17 @@
             </span>Formats</div>
         </md-button>
       </md-menu-item>
+      <md-menu-item flex layout="column" ng-show="showFormats">
+        <md-button ng-href="#admin/requested-hoardings">
+          <div layout="row">
+            <span flex="15"></span>
+            <span>
+              <md-icon>
+                <i class="material-icons">keyboard_arrow_right</i>
+              </md-icon>
+            </span>Requested Hoardings</div>
+        </md-button>
+      </md-menu-item>
       <!-- <md-menu-item>
           <md-button ng-href="#/admin/hoarding-list" ng-click="changeRequest()" >
               <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
@@ -174,7 +183,7 @@
     <md-content>
       <div ng-repeat="notif in adminNotifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
       ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-        <a ng-click="showCampaignDetails(notif)" style="cursor:pointer;text-decoration:none;">
+        <a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
           <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
           <p>{{ notif.message }}</p>
         </a>
@@ -197,7 +206,7 @@
             <md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
           </md-button>
           <p style="background:#fac306">
-            <span style="line-height: 26px;">{{adminUnreadNotifCount || 0}}</span>
+            <span style="line-height: 26px;">{{adminNotifs.length || 0}}</span>
           </p>
         </div>
         <!-- <div class="message">
@@ -225,6 +234,9 @@
               <md-button href="#" ng-click="$mdMenu.hide()">Account</md-button>
             </md-menu-item>
             <md-menu-item>
+              <md-button ng-href="#/home">Switch View</md-button>
+            </md-menu-item>
+            <md-menu-item>
               <md-button href="#" ng-click="$mdMenu.hide()">Signout</md-button>
             </md-menu-item>
           </md-menu-content>
@@ -237,7 +249,7 @@
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
-              <md-button ng-href="#/profile">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</md-button>
+              <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-href="#/location">Switch View</md-button>

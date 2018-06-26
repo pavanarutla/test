@@ -1,11 +1,19 @@
-app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, UserService, toastr) {
+app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $rootScope, $location, UserService, toastr) {
   
+  $scope.forms = [];
+
   if($stateParams.code){
     $scope.typeReset = true;
   }
 
-  $scope.resetPwdObj = {};
-  $scope.resetPwdObj.code = $stateParams.code;
+  if($rootScope.currStateName == 'index.complete_registration'){
+    $scope.userData = {};
+    $scope.userData.code = $stateParams.code;
+  }
+  else{
+    $scope.resetPwdObj = {};
+    $scope.resetPwdObj.code = $stateParams.code;
+  }
 
   
   $scope.resetPassword = function(){
@@ -50,5 +58,22 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, Us
     else {
       toastr.error(result.message);
     }
+  }
+
+  $scope.completeUserRegistration = function(){
+    UserService.completeRegistration($scope.userData).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        $scope.completeRegistrationErrors = result.message;
+        $scope.forms.registerUserForm.$setInvalid();
+        setTimeout(()=>{
+          $location.path('/');
+        }, 2000);
+      }
+    }, function(result){
+      toastr.error(result);
+    });
   }
 });

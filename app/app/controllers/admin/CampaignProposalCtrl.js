@@ -79,7 +79,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
        $scope.loadProductList();
   };
 
-  function loadCampaignData(campaignId){    
+  function loadCampaignData(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.campaignProducts = result.products;

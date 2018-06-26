@@ -4,7 +4,7 @@ app.controller('bbMngrCtrl',
 
     $scope.forms = {};
 
-    if(localStorage.isAuthenticated && localStorage.loggedInUser){
+    if(localStorage.loggedInUser){
       $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
     }
@@ -413,13 +413,7 @@ app.controller('bbMngrCtrl',
         last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
       }
       NotificationService.getAllNotifications(last_notif).then(function(result){
-        $scope.readNotifCount = _.chain(result).filter(function(notif){
-          return notif.status == 1;
-        }).value().length;
-        $scope.unreadNotifCount = _.chain(result).filter(function(notif){
-          return notif.status == 0;
-        }).value().length;
-        $scope.notifs = _.union($scope.notifs, result);
+        $scope.notifs = result.concat($scope.notifs);
         $timeout(getUserNotifs, 1000);
       });
     }
@@ -430,25 +424,42 @@ app.controller('bbMngrCtrl',
     /*===============================
     |   Notification navigation 
     ===============================*/
-    $scope.showCampaignDetails = function(notificationId){
-      NotificationService.updateNotifRead(notificationId).then(function(result){
+    $scope.viewNotification = function(notification){
+      $location.path('view-campaign/' + notification.data.campaign_id);
+      NotificationService.updateNotifRead(notification.id).then(function(result){
         if(result.status == 1){
-          getUserNotifs();
-          var preStoredNotif = _.find($scope.notifs, function(notif){
-            notif.id = notificationId;
-          });
-          if(preStoredNotif){
-            preStoredNotif.status = 1;
-          }
+          $scope.notifs = _.filter($scope.notifs, function(notif){ return notif.id != notification.id; })
         }
         else{
           toastr.error(result.message);
         }
       });
       $mdSidenav('right').toggle();
-      $location.path('/campaigns');
     }
 
+    /*===============================
+    |   Switching between views
+    ===============================*/
+    $scope.switchView = function(){
+      var userMongo = $auth.getPayload().userMongo;
+      if(userMongo.user_type == "bbi"){
+        $location.path("/admin");
+      }
+      else if(userMongo.user_type == "owner"){
+        $location.path("/owner/" + userMongo.client_slug + "/home");
+      }
+    }
+
+    $scope.isUserBasic = function(){
+      if($auth.getPayload()){
+        var userMongo = $auth.getPayload().userMongo;
+        return userMongo.user_type == "basic";
+      }
+      else{
+        return false;
+      }
+    }
+    
     // Setting up selected format for format page
     $scope.setSelectedFormat = function(index){
       $rootScope.formatSelected = index;

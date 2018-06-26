@@ -1,5 +1,281 @@
 <div layout="column" style="position:relative">
+  <!-- filters options start-->
+  <md-sidenav class="md-sidenav-left" md-component-id="filtersMobile" style="position:absolute;margin-left:8px;top:20%;background: none;"
+    hide-xs hide-lg hide-gt-lg>
+    <div layout="column">
+      <div class="md-padding main-part" layout="row">
+        <div class="main-icon">
+          <img src="assets/images/icons/filter.png">
+        </div>
+        <div class="md-caption theme-txt txt-mrng">FILTERS</div>
+        <div flex></div>
+      </div>
+      <div layout="column" class="filters">
+        <div id="filterscrollbar-style">
+          <!-- dateselection html end-->
+          <div layout="column" layout-padding>
+            <!-- <div class="md-subhead">Area</div> -->
+            <!-- pincode,area,tab id section start-->
+            <form class="filter-form">
+              <md-autocomplete md-input-minlength="2" md-selected-item="selectedArea" md-selected-item-change="selectedAreaChanged(item)"
+                md-search-text="searchText" md-items="item in autoCompleteArea(searchText)" md-item-text="item.name" md-floating-label="area search">
+                <md-item-template>
+                  <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
+                </md-item-template>
+              </md-autocomplete>
+              <!-- <md-input-container class="pstcde" style="width:100%">
+                  <label for="testInput">Postcode,Area Name,Tab ID</label>
+                  <input vs-google-autocomplete type="text" id="testInput" md-autofocus ng-model="address.name" vs-place="address.place" vs-place-id="address.components.placeId"
+                    vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city"
+                    vs-state="address.components.state" vs-country-short="address.components.countryCode" vs-country="address.components.country"
+                    vs-post-code="address.components.postCode" vs-district="address.components.district" vs-latitude="address.components.location.lat"
+                    vs-longitude="address.components.location.lng" type="text" name="address" aria-label="google-autocomplete"
+                    ng-change="setNewAddress()">    
+                </md-input-container> -->
+            </form>
+            <!-- pincode,area,tab id section end-->
+            <!--slider html start -->
+            <!-- <div layout="row" class="">
+                <div class="range md-body-1" flex="20">Range</div>
+                <div flex class="slider-range">
+                  <md-slider md-discrete ng-model="circleRadius" min="0" max="500" step="1" aria-label="rating" id="red-slider" ng-change="updateCircle()" ng-disabled="!selectedArea"></md-slider>
+                </div>
+                <div class="rnge md-body-1" flex="20">KMS</div>
+              </div> -->
+            <!--slider html end -->
+            <div>
+              <md-divider></md-divider>
+              <div layout="column" layout-margin>
+                <div class="md-body-1">Select Multiple Locations</div>
+              </div>
+              <md-divider></md-divider>
+              <div layout="row" layout-margin>
+                <div flex="50" class="armrgn">
+                  <md-input-container>
+                    <label>Select Country </label>
+                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()">
+                      <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                      </md-select-header>
+                      <md-option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    </md-select required>
+                  </md-input-container>
+                </div>
+                <div flex="50" class="armrgn">
+                  <md-input-container>
+                    <label> Select State</label>
+                    <md-select ng-model="selectedStates" class="select-value" ng-disabled="!selectedCountry" md-on-close="clearSearchTerm()"
+                      data-md-container-class="selectdemoSelectHeader" ng-change="setStates()" multiple>
+                      <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a state.." class="demo-header-searchbox md-text">
+                      </md-select-header>
+                      <md-optgroup label="states">
+                        <md-option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</md-option>
+                      </md-optgroup>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+              <md-divider></md-divider>
+              <div layout="row" layout-margin>
+                <div flex="50" class="armrgn">
+                  <md-input-container style="width:100%">
+                    <label>Select City</label>
+                    <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
+                      data-md-container-class="selectdemoSelectHeader" multiple>
+                      <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
+                      </md-select-header>
+                      <md-optgroup label="citys">
+                        <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
+                      </md-optgroup>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div flex="50" class="armrgn">
+                  <md-input-container style="width:100%">
+                    <label>Select Areas</label>
+                    <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                      multiple>
+                      <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
+                      </md-select-header>
+                      <md-optgroup label="areas">
+                        <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
+                      </md-optgroup>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <md-divider></md-divider>
+        <div layout="row">
+          <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
+          <md-button class="md-warn " type="reset" value="Reset">
+            <span class="md-body-1" ng-click="resetFilters()">Reset Fields</span>
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </md-sidenav>
+  <!-- filters options end-->
 
+  <!-- map icon filters start-->
+  <md-sidenav class="md-sidenav-left" md-component-id="filtersMap" style="position:absolute;margin-left:8px;top: 36%;
+        background: none;" hide-xs hide-lg hide-gt-lg>
+    <div class=" md-padding main-part" layout="column">
+      <div layout="row">
+        <div class="main-icon">
+          <img src="assets/images/icons/formats.png">
+        </div>
+        <div class="md-caption theme-txt txt-mrng">FORMATS</div>
+        <div flex></div>
+      </div>
+    </div>
+    <div layout="column" class="formats-types">
+      <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+        <div layout="row" layout-align="space-around center">
+          <div ng-repeat="format in formatGroup track by $index" class="formatgridpart">
+            <div layout="column" class="digital-board">
+              <div ng-cloak style="border-right:1px solid #ccc">
+                <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+                  ng-if="format">
+                  <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
+                  <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                  <div class="md-caption">{{format.name}}</div>
+                </md-button>
+                <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
+              </div>
+            </div>
+            <md-divider hide-xs></md-divider>
+          </div>
+        </div>
+        <md-divider></md-divider>
+      </div>
+    </div>
+  </md-sidenav>
+  <!-- map icon filters end-->
+
+  <!-- shortlisted  moblie start -->
+  <md-sidenav class="md-sidenav-left" md-component-id="shortlistedList" style="position:absolute;margin-left:8px;top: 36%;
+        background: none;" hide-xs hide-lg hide-gt-lg>
+    <div class=" md-padding main-part" layout="column">
+      <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
+      <div layout="row">
+        <div class="main-icon">
+          <img src="assets/images/icons/shortlist.png">
+        </div>
+        <div class="md-caption theme-txt txt-mrng">SHORTLIST</div>
+        <div flex></div>
+      </div>
+    </div>
+    <div class="short-list">
+      <div class="shortlistscrollbar" id="shortlistscrollbar-style">
+
+        <div layout="column" ng-repeat="shortlisted in shortListedProducts">
+          <div layout="row" flex>
+            <md-list flex style="padding:0px">
+              <md-list-item class="md-3-line list-img">
+                <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
+                <div class="list-name">
+                  <span class="md-title">{{shortlisted.format_name | PickFirstLetter}}</span>
+                </div>
+                <div class="md-list-item-text list-item-text" layout="column" flex>
+                  <p>{{shortlisted.siteNo}}</p>
+                  <h3 class="md-body-1">{{shortlisted.area_name}}</h3>
+                  <!-- <p class="md-caption">{{shortlisted.address}}</p> -->
+                </div>
+              </md-list-item>
+            </md-list>
+            <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
+              <!-- <md-checkbox class="md-secondary list-checkbox" 
+            ng-checked="existsShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" 
+            ng-click="toggleSelectedShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" aria-lebel ="random label" aria-labelledby="delete">
+          </md-checkbox> -->
+              <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
+                <md-icon>
+                  <i class="material-icons ">delete</i>
+                </md-icon>
+              </md-button>
+            </div>
+          </div>
+          <md-divider></md-divider>
+        </div>
+      </div>
+      <md-divider></md-divider>
+      <div layout="row">
+        <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
+        <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
+        <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
+      </div>
+    </div>
+  </md-sidenav>
+  <!-- shortlisted  moblie  end-->
+
+  <!-- saved campagin start -->
+  <md-sidenav class="md-sidenav-left" md-component-id="savedCamapgin" style="position:absolute;margin-left:8px;top: 22%; background: none;" hide-xs hide-lg hide-gt-lg>
+    <div class=" md-padding main-part" layout="column">
+      <div layout="row">
+        <div class="main-icon">
+          <img src="assets/images/icons/savedcampagin.png">
+        </div>
+        <div class="md-caption theme-txt txt-mrng">SAVED CAMPAIGNS</div>
+        <div flex></div>
+      </div>
+    </div>
+    <div class="saved-campagin">
+      <div id="savecamp-style">
+        <div layout="column" ng-repeat="activeUserCampaign in activeUserCampaigns">
+          <div layout="row" layout-padding>
+            <!-- <div class="md-body-1">{{plannedUserCampaign.org_name}}</div> -->
+            <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{activeUserCampaign.name}}</div>
+            <!-- <div flex></div> -->
+            <div class="saved-date" flex="45" style="padding:0px">
+              <span class="saved-border md-caption ">{{activeUserCampaign.start_date | date:'dd-MM-yy'}}</span>
+              <span class="saved-border md-caption ">{{activeUserCampaign.end_date | date:'dd-MM-yy'}}</span>
+            </div>
+            <div flex-xs="5" flex-sm="5" style="padding:0px">
+              <md-menu md-position-mode="target-right target">
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                  <md-icon>
+                    <i class="material-icons">more_vert</i>
+                  </md-icon>
+                </md-button>
+                <md-menu-content>
+                  <md-menu-item>
+                    <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ng-if="activeUserCampaign.status <= 1" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+          </div>
+          <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
+            <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
+            <md-button class="md-primary saved-btn" ng-click="requestProposalForCampaign(activeUserCampaign.id)" ng-disabled="activeUserCampaign.status >= 2">Request Proposal</md-button>
+          </div>
+          <md-divider></md-divider>
+        </div>
+      </div>
+      <md-divider></md-divider>
+      <div layout="column" layout-align="center center">
+        <md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
+      </div>
+    </div>
+    <div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
+      <div layout="column" layout-margin layout-align="center center">
+        <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
+      </div>
+      <div layout="column" layout-align="center center" layout-margin>
+        <md-button class="md-raised md-warn" ng-click="toggleCreateEmptyCampaignSidenav()">CREATE CAMPAIGN</md-button>
+      </div>
+    </div>
+  </md-sidenav>
+  <!-- saved campagin  end-->
 
   <!-- Campaign Detail Sidenav -->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="campaignDetailSidenav" id="divExport">
@@ -64,7 +340,7 @@
           <p style="width:70%; margin:auto;">This campaign is empty. Please add some prducts into it to move forward!</p>
         </div>
         <div>
-          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
+          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
         </div>
         <div>
           <md-button class="md-raised " ng-if="campaignDetails.products.length > 0" layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
@@ -289,7 +565,7 @@
         </div>
         <div layout="column" layout-margin>
           <div>
-            <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
+            <md-button class="md-raised md-warn" layout-fill ng-if="campaign.status < 2">REQUEST PROPOSAL</md-button>
           </div>
           <div>
             <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
@@ -450,7 +726,7 @@
         </div>
         <div layout="column" layout-margin>
           <div>
-            <md-button class="md-raised md-warn" layout-fill>REQUEST PROPOSAL</md-button>
+            <md-button class="md-raised md-warn" layout-fill ng-if="emptyCampaign.status < 2">REQUEST PROPOSAL</md-button>
           </div>
           <div>
             <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
@@ -539,7 +815,7 @@
         <md-input-container style="z-index:999;width:100%">
           <label>Select Campaign</label>
           <md-select ng-model="existingCampaign.id" required="required">
-            <md-option ng-value="campaign.id" ng-repeat="campaign in plannedUserCampaigns">{{campaign.name}}</md-option>
+            <md-option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</md-option>
           </md-select>
         </md-input-container>
       </div>
@@ -954,8 +1230,8 @@
         </div>
         <!-- formats html end-->
         <!--SHORTLIST html start -->
-        <div layout="column" layout-padding class="side-navpadding">
-          <div class=" md-padding main-part" layout="column" ng-click="shortlistDiv()" style="cursor:pointer">
+        <div layout="column" layout-padding class="side-navpadding" ng-if="isUserBasic()">
+          <md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()">
             <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
             <div layout="row">
               <div class="main-icon"><img src="assets/images/icons/shortlist.png"></div>
@@ -1020,27 +1296,30 @@
         </div>
         <!--SHORTLIST html end -->
         <!--saved campagin html start -->
-        <div layout="column" layout-padding class="side-navpadding">
-          <div class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()" style="cursor:pointer">
+        <div layout="column" layout-padding class="side-navpadding" ng-if="isUserBasic()">
+          <md-content class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()">
             <div layout="row">
-              <div class="main-icon"><img src="assets/images/icons/savedcampagin.png"></div>
-              <div class="md-caption theme-txt txt-mrng">SAVE CAMPAIGNS</div>
+              <div class="main-icon">
+                <img src="assets/images/icons/savedcampagin.png">
+              </div>
+              <div class="md-caption theme-txt txt-mrng">SAVED CAMPAIGNS</div>
               <div flex></div>
               <div>
                 <md-icon ng-hide="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_down</i></md-icon>
                 <md-icon ng-show="savedcampaign"><i class="material-icons theme-txt">keyboard_arrow_up</i></md-icon>
               </div>
             </div>
-          </div>
-          <div class="saved-campagin" ng-if="plannedUserCampaigns.length > 0 && savedcampaign">
+          </md-content>
+          <div class="saved-campagin" ng-if="activeUserCampaigns.length > 0 && savedcampaign">
             <div class="savescrollbar" id="savecamp-style">
-              <div layout="column" ng-repeat="plannedUserCampaign in plannedUserCampaigns">
+              <div layout="column" ng-repeat="activeUserCampaign in activeUserCampaigns">
                 <div layout="row" layout-padding>
-                  <!-- <div class="md-body-1">{{plannedUserCampaign.org_name}}</div> -->
-                  <div class="md-caption campagin-name" flex="30" style="margin-top:10px;padding:0px">{{plannedUserCampaign.name}}</div>
+                  <!-- <div class="md-body-1">{{activeUserCampaign.org_name}}</div> -->
+                  <div class="md-caption campagin-name" flex="40" style="margin-top:10px;padding:0px">{{activeUserCampaign.name}}</div>
                   <!-- <div flex></div> -->
-                  <div class="saved-date" flex="65" style="padding:0px">
-                    <span class="saved-border md-caption ">{{plannedUserCampaign.start_date | date:'dd-MM-yy'}}</span><span class="saved-border md-caption ">{{plannedUserCampaign.end_date | date:'dd-MM-yy'}}</span>
+                  <div class="saved-date" flex="55" style="padding:0px">
+                    <span class="saved-border md-caption ">{{activeUserCampaign.start_date | date:'dd-MM-yy'}}</span>
+                    <span class="saved-border md-caption ">{{activeUserCampaign.end_date | date:'dd-MM-yy'}}</span>
                   </div>
                   <div flex-xs="5" flex-sm="5" style="padding:0px">
                     <md-menu md-position-mode="target-right target">
@@ -1049,20 +1328,20 @@
                       </md-button>
                       <md-menu-content>
                         <md-menu-item>
-                          <md-button ng-click="toggleShareCampaignSidenav(plannedUserCampaign)">Share</md-button>
+                          <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                          <md-button ng-if="plannedUserCampaign.status <= 3" ng-click="deletePlannedCampaign(plannedUserCampaign.id)">Delete</md-button>
+                          <md-button ng-if="activeUserCampaign.status <= 1" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                         </md-menu-item>
                       </md-menu-content>
                     </md-menu>
                   </div>
                 </div>
                 <div class="" layout="row" layout-align="space-between center" flex style="margin-top:-10px">
-                  <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(plannedUserCampaign.id)"> VIEW</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 3" ng-disabled="true">Propsal Requested</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status == 4" ng-disabled="true">Quote Received</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="plannedUserCampaign.status != 3 && plannedUserCampaign.status != 4" ng-click="requestProposalForCampaign(plannedUserCampaign.id, $event)">Request Proposal</md-button>
+                  <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2" ng-disabled="true">Proposal Requested</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status < 2" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
                 </div>
                 <md-divider></md-divider>
               </div>
@@ -1072,7 +1351,7 @@
               <md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
             </div>
           </div>
-          <div style="background:#F1FBFD" ng-if="plannedUserCampaigns.length == 0 && savedcampaign">
+          <div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
             <div layout="column" layout-margin layout-align="center center">
               <img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
             </div>

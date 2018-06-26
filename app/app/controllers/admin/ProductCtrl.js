@@ -1,4 +1,4 @@
-app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
+app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$stateParams', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, $rootScope, $stateParams, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
 
   var vm = this;
   $scope.msg = {};
@@ -120,10 +120,9 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
 
   AdminLocationService.getCountries().then(function(result){
     $scope.countryList = result;
-
   });
-  CompanyService.getHoardingCompanies().then(function(result){
-    $scope.hoardingCompaniesList = result;
+  CompanyService.getAllClients().then(function(result){
+    $scope.allClients = result;
   });
 
   $scope.getStateList = function(product){
@@ -145,6 +144,20 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   /*
   ======== Products section ========
   */
+
+  var getRequestedHoardings = function(){
+    return new Promise((resolve, reject) => {
+      ProductService.getRequestedHoardings($scope.pagination.pageNo, $scope.pagination.pageSize).then((result) => {
+        $scope.requestedProductList = result.products;
+        $scope.pagination.pageCount = result.page_count;
+        createPageLinks();
+        resolve(result);
+      },
+      (result) => {
+        reject();
+      });
+    });
+  }
 
   // Opens the product form popup
   $scope.showProductForm = function (ev) {
@@ -180,6 +193,9 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     }).then(function (result) {
       if(result.data.status == "1"){
         $scope.getProductList();
+        if($rootScope.currStateName == 'admin.requested-hoardings'){
+          getRequestedHoardings();
+        }
         toastr.success(result.data.message);
         $mdDialog.hide();
       }
@@ -196,12 +212,13 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
   };
 
   $scope.editProduct = function(product){
-    console.log(product);
-    product.country = null;
-    product.state = null;
-    product.city = null;
-    product.area = null;
-    // product.company = null;
+    if(product.status != 0){
+      product.country = null;
+      product.state = null;
+      product.city = null;
+      product.area = null;
+      // product.company = null;
+    }
     $scope.product = product;
     $mdDialog.show({
       templateUrl: 'views/admin/add-product-popup.html',
@@ -264,4 +281,28 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', 'ProductService',
     //   vm.limit = increamented > $scope.hoardinglistdata.length ? $scope.hoardinglistdata.length : increamented;
     // };
   // tables code end
+
+  // var callAndWait = function(fn){
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(function(){
+  //       fn();
+  //       resolve();
+  //     });
+  //   });    
+  // }
+
+  if($rootScope.currStateName == 'admin.requested-hoardings'){
+    if($stateParams.productId){
+      getRequestedHoardings().then((requestedProducts) => {
+        var product = _.filter(requestedProducts.products, function(prod){          
+          return prod.id == $stateParams.productId;
+        });
+        (typeof product != 'undefined') && $scope.editProduct(product[0]);
+      });
+    }
+    else{
+      getRequestedHoardings();
+    }
+  }
+
 }]);

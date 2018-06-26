@@ -34,48 +34,49 @@
 						<tr >
 							<td flex="33">
 								<input type="hidden" ng-model="product.id" />
-								<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+								<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" ng-disabled="product.status == 0"
 								/>
 							</td>
 							<td flex="33">
-								<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type" class="select-value" data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
+								<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type" class="select-value" data-md-container-class="selectdemoSelectHeader" required="required" name="productType" ng-disabled="product.status == 0">
 									<option value="" disabled selected>Site Type</option>
 								</select>
 							</td>
 							<td flex="33">
-								<input ng-model="product.price" placeholder="Hoarding Cost" type="text" name="hoardingcost" />
+								<input ng-model="product.default_price" placeholder="Default Price" type="text" name="hoardingcost" ng-disabled="product.status == 0" />
 							</td>
 						</tr>
 						<tr >
 							<td flex="33">
-								<select ng-model="product.company" class="select-value" ng-options ="hoardingCompany.id as hoardingCompany.name for hoardingCompany in hoardingCompaniesList">
-									<option value="" disabled selected>Company Name</option>
+								<select ng-model="product.client" class="select-value" ng-options ="cl.id as cl.name for cl in allClients" ng-disabled="product.status == 0">
+									<option value="" disabled selected>Select Owner</option>
 								</select>
 							</td>
 							<td flex="33">
-								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList()" ng-options ="country.id as country.name for country in countryList">									
+								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList()" ng-options ="country.id as country.name for country in countryList" ng-if="product.status != 0">									
 									<option value="" disabled selected>Select Country</option>
 								</select required>
+								<input ng-model="product.country_name" placeholder="Country Name" type="text" name="country_name" ng-if="product.status == 0" ng-disabled="true"/>
 							</td>
 							<td flex="33">
-								<select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()"
-										data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()" ng-options ="state.id as state.name for state in stateList">
+								<select ng-model="product.state" class="select-value" ng-disabled="!product.country" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()" ng-options ="state.id as state.name for state in stateList" ng-if="product.status != 0">
 									<option value="" disabled selected>Selected State</option>
 								</select required>
+								<input ng-model="product.state_name" placeholder="State Name" type="text" name="state_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 						</tr>
 						<tr>
 							<td flex="33">
-								<select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"
-												data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()" ng-options ="city.id as city.name for city in cityList ">
+								<select ng-model="product.city" class="select-value" ng-disabled="!product.state" md-on-close="clearSearchTerm()"	data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()" ng-options ="city.id as city.name for city in cityList" ng-if="product.status != 0">
 									<option value="" disabled selected>Select City</option>
 								</select>
+								<input ng-model="product.city_name" placeholder="City Name" type="text" name="city_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 							<td flex="33">
-								<select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"
-										data-md-container-class="selectdemoSelectHeader" ng-options ="area.id as area.name for area in areaList">
+								<select ng-model="product.area" class="select-value" ng-disabled="!product.city" md-on-close="clearSearchTerm()"	data-md-container-class="selectdemoSelectHeader" ng-options ="area.id as area.name for area in areaList" ng-if="product.status != 0">
 									<option value="" disabled selected>Select Area</option>
 								</select>
+								<input ng-model="product.area_name" placeholder="Area Name" type="text" name="area_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 							<td>
 								<textarea  class="table-address" placeholder="Address" rows="3" ng-model="product.address"></textarea>
@@ -86,11 +87,11 @@
 								<input ng-model="product.impressions" placeholder="impressions" type="text" name="impressions" required="required" />
 							</td>
 							<td flex="33">
-								<input ng-model="product.panelSize"  placeholder="Panel Size" type="text" name="panelSize" required="required" />
+								<input ng-model="product.panelSize"  placeholder="Panel Size" type="text" name="panelSize" required="required" ng-disabled="product.status == 0" />
 							</td>
 							<td flex="33">
 								<select ng-model="product.lighting" class="select-value" md-on-close="clearSearchTerm()"
-								data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''">
+								data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''" ng-disabled="product.status == 0">
 									<option value="" disabled>Has lighting?</option>
 									<option value="1">Yes</option>
 									<option value="0">No</option>
@@ -115,7 +116,7 @@
 							</td>
 							<td flex="33">
 								<label for="files.image">Image</label>
-								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id"></input>
+								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id" ng-disabled="product.status == 0"></input>
 							</td>
 							<td flex="33">
 								<textarea ng-model="product.adStrength" placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ></textarea>

@@ -1,14 +1,43 @@
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, OwnerCampaignService, OwnerProductService, toastr) {
 
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, CampaignService, $window) {
+  $scope.forms = [];
 
-  $scope.CAMPAIGN_STATUS = [
-    "",                 // index 0
-    "Draft",            // index 1
-    "Launch Requested", // index 2
-    "Running",          // index 3
-    "Suspended",        // index 4
-    "Stopped"           // index 5
-  ];
+  /*===================
+  | Pagination
+  ===================*/
+  $scope.pagination = {};
+  $scope.pagination.pageNo = 1;
+  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageCount = 0;
+  var pageLinks = 20;
+  var lowest = 1;
+  var highest = lowest + pageLinks - 1;
+  function createPageLinks(){
+    var mid = Math.ceil(pageLinks/2);
+    if($scope.pagination.pageCount < $scope.pagination.pageSize){
+      lowest = 1;
+    }
+    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+      lowest = $scope.pagination.pageCount - pageLinks;
+    }
+    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
+      lowest = 1;
+    }
+    else{
+      lowest = $scope.pagination.pageNo - mid + 1;
+    }
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    $scope.pagination.pageArray = _.range(lowest, highest);
+  }
+
+  /*===================
+  | Pagination Ends
+  ===================*/
+
+
+  /*=======================
+  | MdDialogs and sidenavs
+  =======================*/
 
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
@@ -24,203 +53,290 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //     clickOutsideToClose: true
   //   })
   // };
-  $scope.addCamapginSidenav = function () {
-    $mdSidenav('ownerAddcmapgin').toggle();
+  $scope.toggleAddCamapginSidenav = function () {
+    $mdSidenav('ownerAddCmapginSidenav').toggle();
   };
   $scope.cancel = function () {
     $mdDialog.hide();
   };
   $scope.sharePerson = false;
   $scope.shareCampaign = function () {
-        $scope.sharePerson = !$scope.sharePerson;
+    $scope.sharePerson = !$scope.sharePerson;
   }
+
+  /*===========================
+  | MdDialogs and sidenavs end
+  ===========================*/
 
   ////data for image uploading 
 
-  $scope.data = {};
-  $scope.uploadFile = function (input) {
-    $scope.data.fileName = input.files[0].name;
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        //Sets the Old Image to new New Image
-        $('#photo-id').attr('src', e.target.result);
-        //Create a canvas and draw image on Client Side to get the byte[] equivalent
-        var canvas = document.createElement("canvas");
-        var imageElement = document.createElement("img");
-        imageElement.setAttribute('src', e.target.result);
-        canvas.width = imageElement.width;
-        canvas.height = imageElement.height;
-        var context = canvas.getContext("2d");
-        context.drawImage(imageElement, 0, 0);
-        var base64Image = canvas.toDataURL("image/jpeg");
-        //Removes the Data Type Prefix 
-        //And set the view model to the new value
-        $scope.data.uploadedPhoto = e.target.result.replace(/data:image\/jpeg;base64,/g, '');
-        // console.log($scope.data.uploadedPhoto);
-      }
-      //Renders Image on Page
-      reader.readAsDataURL(input.files[0]);
-    }
-  };
-
-  //view in location pages
-  $scope.viewlocation = function(){
-    $window.open('#/location', '_blank');
-  }
-
-  $scope.campaignDetails = {};
-
-  ///Delete the Products
-  $scope.deleteProducts = function(item){
-    var index = $scope.campaignDetails.indexOf(item);
-    $scope.campaignDetails.splice(index, 1);   
-  }
-
-  $scope.limit = 3;
-
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
-  $scope.items = [
-    {
-      "campaignname": "Flipkart",
-      "clientcomapanyname": "Neon",
-      "clientname": "Chanikya",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "25000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Amezon",
-      "clientcomapanyname": "Amezon",
-      "clientname": "shiva",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "30000",
-      "products": "0"
-    },
-    {
-      "campaignname": "Paytm",
-      "clientcomapanyname": "Paytm",
-      "clientname": "srikanth",
-      "clientcontent": "9966016136",
-      "startdate": "12-Fed-2017",
-      "enddate": "28-Feb-2017",
-      "status": "Draft",
-      "price": "50000",
-      "products": "0"
-    }
-  ]
-  $scope.hoardinglist =[
-      {
-        "id":"AD_001",
-        "type":"Billboard",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"No",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_002",
-        "type":"Unipole",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      },
-      {
-        "id":"AD_003",
-        "type":"Digital",
-        "area":"Amreepet",
-        "size":"20*30",
-        "light":"Yes",
-        "sdate":"28-Feb-2017",
-        "edate":"28-April-2017",
-        "price":"30,000"
-      }
-    ]
-    $scope.viewImage = function () { 
-    $mdDialog.show({
-      templateUrl: 'views/owner/view-image.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
-    })
-  };
-
-  //slider
-  var self = this, j = 0, counter = 0;
-
-  self.mode = 'query';
-  self.activated = true;
-  self.determinateValue = 30;
-  self.determinateValue2 = 30;
-
-  self.showList = [];
-
-  /**
-   * Turn off or on the 5 themed loaders
-   */
-  self.toggleActivation = function () {
-    if (!self.activated) self.showList = [];
-    if (self.activated) {
-      j = counter = 0;
-      self.determinateValue = 30;
-      self.determinateValue2 = 30;
-    }
-  };
-
-  $interval(function () {
-    self.determinateValue += 1;
-    self.determinateValue2 += 1.5;
-
-    if (self.determinateValue > 100) self.determinateValue = 30;
-    if (self.determinateValue2 > 100) self.determinateValue2 = 30;
-
-    // Incrementally start animation the five (5) Indeterminate,
-    // themed progress circular bars
-
-    if ((j < 2) && !self.showList[j] && self.activated) {
-      self.showList[j] = true;
-    }
-    if (counter++ % 4 === 0) j++;
-
-    // Show the indicator in the "Used within Containers" after 200ms delay
-    if (j == 2) self.contained = "indeterminate";
-
-  }, 100, 0, true);
-
-  $interval(function () {
-    self.mode = (self.mode == 'query' ? 'determinate' : 'query');
-  }, 7200, 0, true);
+  // $scope.data = {};
+  // $scope.uploadFile = function (input) {
+  //   $scope.data.fileName = input.files[0].name;
+  //   if (input.files && input.files[0]) {
+  //     var reader = new FileReader();
+  //     reader.onload = function (e) {
+  //       //Sets the Old Image to new New Image
+  //       $('#photo-id').attr('src', e.target.result);
+  //       //Create a canvas and draw image on Client Side to get the byte[] equivalent
+  //       var canvas = document.createElement("canvas");
+  //       var imageElement = document.createElement("img");
+  //       imageElement.setAttribute('src', e.target.result);
+  //       canvas.width = imageElement.width;
+  //       canvas.height = imageElement.height;
+  //       var context = canvas.getContext("2d");
+  //       context.drawImage(imageElement, 0, 0);
+  //       var base64Image = canvas.toDataURL("image/jpeg");
+  //       //Removes the Data Type Prefix 
+  //       //And set the view model to the new value
+  //       $scope.data.uploadedPhoto = e.target.result.replace(/data:image\/jpeg;base64,/g, '');
+  //       // console.log($scope.data.uploadedPhoto);
+  //     }
+  //     //Renders Image on Page
+  //     reader.readAsDataURL(input.files[0]);
+  //   }
+  // };
 
   // get all Campaigns by a user to show it in campaign management page
-  $scope.getUserCampaigns = function () {
-    CampaignService.getCampaigns().then(function (result) {
-      $scope.plannedCampaigns = _.where(result, { status: 1 });
+  $scope.getUserCampaignsForOwner = function () {
+    OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
+      $scope.plannedCampaigns = _.filter(result, function(c){
+        return c.status < 6;
+      });
       $scope.runningCampaigns = _.where(result, { status: 3 });
       $scope.closedCampaigns = _.where(result, { status: 5 });
     });
   }
-  $scope.getUserCampaigns();
-  // get all Campaigns by a user to show it in campaign management page ends
+  var loadOwnerCampaigns = function(){
+    OwnerCampaignService.getOwnerCampaigns().then(function(result){
+      $scope.ownerCampaigns = result;
+    });
+  }
+  var loadOwnerProductList = function(){
+    OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
+      if(localStorage.selectedOwnerCampaign){
+        var selectedOwnerCampaign = JSON.parse(localStorage.selectedOwnerCampaign);
+        $scope.campaignStartDate = selectedOwnerCampaign.start_date;
+        $scope.campaignEndDate = selectedOwnerCampaign.end_date;
+        $scope.campaignEstBudget = selectedOwnerCampaign.est_budget;
+        $scope.campaignActBudget = selectedOwnerCampaign.act_budget;
+        if(selectedOwnerCampaign.products && selectedOwnerCampaign.products.length > 0){
+          _.map(result.products, function(p){
+            console.log(p);
+            if(_.find(JSON.parse(localStorage.selectedOwnerCampaign).products, {id: p.id}) !== undefined){
+              p.alreadyAdded = true;
+              return p;
+            }
+          });
+        }
+      }
+      $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      createPageLinks();
+    });
+  }
+  // get all Campaigns by a user to show it in campaign management page ends  
 
-  $scope.getCampaignDetails = function(campaignId){
-    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+  $scope.saveOwnerCampaign = function(){
+    OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function(result){
+      if(result.status == 1){
+        $scope.ownerCampaign = {};
+        $scope.forms.ownerCampaignForm.$setPristine();
+        $scope.forms.ownerCampaignForm.$setUntouched();
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });  
+  }
+
+  $scope.suggestProductForCampaign = function(suggestedProduct){
+    if(!localStorage.selectedOwnerCampaign){
+      toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
+    }
+    else{
+      var postObj = {
+        campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
+        product:{
+          id: suggestedProduct.id,
+          from_date: suggestedProduct.start_date,
+          to_date:  suggestedProduct.end_date,
+          price: suggestedProduct.price
+        }
+      };
+      OwnerCampaignService.proposeProductForCampaign(postObj).then(function(result){
+        if(result.status == 1){
+          OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function(updatedCampaignData){
+            localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
+            $scope.campaignActBudget = updatedCampaignData.act_budget;
+            _.map($scope.productList, function(product){
+              if(product.id == suggestedProduct.id){
+                product.alreadyAdded = true;             
+              }
+              return product;
+            });
+          });
+          toastr.success(result.message);
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+    }
+  }
+
+  /* ============================
+  | Campaign details section
+  ============================= */
+  
+  $scope.campaignDetails = {};
+
+  $scope.getUserCampaignDetails = function(campaignId){
+    OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function(result){
       $scope.campaignDetails = result;
     });
   }
-  if($stateParams.campaignId){
-    $scope.getCampaignDetails($stateParams.campaignId);
+  $scope.getOwnerCampaignDetails = function(campaignId){
+    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function(result){
+      $scope.campaignDetails = result;
+    });
+  }  
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
   }
+
+  $scope.finalizeCampaign = function(){
+    OwnerCampaignService.finalizeCampaignByOwner($scope.campaignDetails.id).then(function(result){
+      if(result.status == 1){
+        toastr.success("Campaign Finalized!");
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.editProposedProduct = function(productId, from_date, to_date, price){
+    var productObj = {
+      id: productId,
+      from_date: from_date,
+      to_date: to_date,
+      price: price
+    };
+    $mdDialog.show({
+      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/owner/edit-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, ctrlScope, campaignId, productObj){
+        $scope.product = productObj;
+        $scope.updateProposedProduct = function(product){
+          OwnerCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              ctrlScope.getCampaignDetails(campaignId);
+              $mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
+
+  $scope.addNewProductToCampaign = function(){
+    localStorage.selectedOwnerCampaign = JSON.stringify($scope.campaignDetails);
+    $location.path('/owner/' + $rootScope.clientSlug + '/suggest-products');
+  }
+
+  $scope.removeProductFromCampaignSuggestion = function(productId){
+    var campaignId = JSON.parse(localStorage.selectedOwnerCampaign).id;
+    OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+      if(result.status == 1){
+        OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function(updatedCampaignData){
+          localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
+          $scope.campaignActBudget = updatedCampaignData.act_budget;
+          _.map($scope.productList, function(product){
+            if(product.id == suggestedProduct.id){
+              product.alreadyAdded = false;             
+            }
+            return product;
+          });
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.launchOwnerCampaign = function(campaignId, ev){
+    OwnerCampaignService.launchCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Congrats!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        $scope.getOwnerCampaignDetails(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  /* ==============================
+  | Campaign details section ends
+  =============================== */
+
+
+  /*=========================
+  | Page based initial loads
+  =========================*/
+
+  if($rootScope.currStateName == "owner.campaigns"){
+    $scope.getUserCampaignsForOwner();
+    loadOwnerCampaigns();
+  }
+  if($rootScope.currStateName == "owner.suggest-products"){
+    loadOwnerProductList();
+  }
+  if(typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined'){
+    if($stateParams.campaignType == 2){
+      $scope.getOwnerCampaignDetails($stateParams.campaignId);
+    }
+    else{
+      $scope.getUserCampaignDetails($stateParams.campaignId);
+    }
+  }
+
+  /*=============================
+  | Page based initial loads ends
+  =============================*/
 
 });
