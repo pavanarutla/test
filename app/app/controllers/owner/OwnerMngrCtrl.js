@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, config, OwnerNotificationService) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, toastr) {
 
   $rootScope.config = config;
 
