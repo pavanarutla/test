@@ -132,7 +132,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
-    CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         CampaignService.getCampaignWithProducts(campaignId).then(function(result){
           $scope.campaignDetails = result;
@@ -222,7 +222,10 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
           if (result.status == 1) {
-            $mdSidenav('shareCampaign').close();
+            $mdSidenav('shortlistSharingSidenav').close();
+            $scope.shareCampaign = {};
+            $scope.shareCampaignForm.$setPristine();
+            $scope.shareCampaignForm.$setUntouched();
             $mdDialog.show(
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('body')))
