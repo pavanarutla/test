@@ -39,7 +39,7 @@ app.controller('subscriberCtrl', function ($scope, $http, $templateCache, $windo
  
   AdminContactService.subscribe().then(function (response) {    
     $scope.gridSubscribers.data = response.data;
-    console.log(response);
+    // console.log(response);
   });
    
   $scope.export = function(){
@@ -63,7 +63,7 @@ app.controller('subscriberCtrl', function ($scope, $http, $templateCache, $windo
     response.softdelete = 'true';
     AdminContactService.updateCustomerData(value.id, response).then(function(result){
       if(result.status == 1){
-        console.log(result);
+        // console.log(result);
         var index = $scope.gridSubscribers.data.indexOf(value);
         $scope.gridSubscribers.data.splice(index, 1);
         toastr.success("CallCenterInfo Unsubscribed successfully");      
