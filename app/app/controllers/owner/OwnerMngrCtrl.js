@@ -182,7 +182,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   |   Notification navigation 
   ===============================*/
   $scope.viewNotification = function(notification){
-    if(notification.type == 8){
+    if(notification.type == 9){
       $location.path('owner/' + $rootScope.clientSlug + '/requested-hoardings/' + notification.data.product_id);
     }
     else if(notification.type > 0 && notification.type < 8){
