@@ -47,6 +47,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     }
     AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
       $scope.adminNotifs = result.concat($scope.adminNotifs);
+      console.log($scope.adminNotifs);
       $timeout(getAdminNotifs, 1000);
     });
   }
