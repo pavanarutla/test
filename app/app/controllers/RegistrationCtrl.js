@@ -61,6 +61,8 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 			}
 		});
 	}
+
+	
 	/*
 	* ============ Company Registration Ends ============
 	*/
