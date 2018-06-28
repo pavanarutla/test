@@ -206,13 +206,10 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   var getAllClients = function(){
     AdminUserMgmtService.getAllClients().then(function(result){
       $scope.allClients = result;
-      console.log(result);
       if ($stateParams.clientID) {
-        var client = result.find((item) => item.client_id == $stateParams.clientID)
+        var client = result.find((item) => item.id == $stateParams.clientID)
         if (client) {
-          setTimeout(function(){
-            $scope.showUserDetailsPopup(client.client_id,client.super_admin_m_id)
-          },500)
+          $scope.showUserDetailsPopup(client.client_id,client.super_admin_m_id)
         }
       }
     });
@@ -220,7 +217,6 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   getAllClients();
 
   $scope.showUserDetailsPopup = function(clientId, userMId){
-    console.log(userMId);
     $scope.selectedClientId = clientId;
     AdminUserMgmtService.getUserDetailsWithRoles(userMId).then(function(result){
       if(result.status == 0){
