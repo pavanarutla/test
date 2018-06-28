@@ -311,6 +311,16 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
     })
+    .state('owner.payments', {
+      url: '/payments',
+      templateUrl: 'views/owner/campaign-payments.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.update-payments', {
+      url: '/update-payments',
+      templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
+    })
     .state('owner.signIn', {
       url: '/signIn',
       templateUrl: 'views/owner/signin.html',
