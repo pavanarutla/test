@@ -310,11 +310,6 @@ var app = angular.module('bbManager', [
       url: '/feedBack',
       templateUrl: 'views/owner/feedback.html',
       controller:'feedback'
-    })
-    .state('owner.signIn', {
-      url: '/signIn',
-      templateUrl: 'views/owner/signin.html',
-      controller:'ownerSigninCtrl'
     });
 
     $urlRouterProvider.when('/', '/home');
@@ -410,12 +405,36 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
-          'owner.home'
-        ];
+           'owner.dashboard','owner.campaigns','owner.campaign-details', 'owner.requested-hoardings', 
+           'owner.suggest-products','owner.hoarding-list', 'owner.settings' ,'owner.profile','owner.home', 
+           'owner.outsourcingagent', 'owner.teamPage', 'owner.feedBack','owner.signIn'        ];
         var requiresLogin = [
           'index.location',
           'index.suggest_campaign'
         ];
+
+        var pageaccessibleUser = [
+           'index.campaign','index.campaigns','index.campaign'
+        ];
+
+        if (_.indexOf(pageaccessibleUser, transition.to().name) != -1) {
+           if ($auth.getPayload().userMongo.user_type != "User") {
+              $location.path('/');           
+              return false;
+          }
+        }
+
+        if (_.indexOf(requiresLogin, transition.to().name) != -1) {
+          if (!$auth.isAuthenticated()) {
+            $rootScope.postLoginState = transition.to().name;
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true
+            });
+            return false;
+          }
+        }
 
         // routes for authenticated Users
         if (_.indexOf(requiresLogin, transition.to().name) != -1) {
