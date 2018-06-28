@@ -108,7 +108,7 @@
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
 						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
 					</div>
-					<div layout="row">
+					<div layout="row" ng-if="campaignDetails.status < 8 || campaignPayments.total_paid < campaignDetails.act_budget">
 						<div flex="100" layout="column" layout-align="center center">
 							<md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
 								Update Payment

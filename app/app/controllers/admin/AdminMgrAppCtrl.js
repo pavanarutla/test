@@ -70,10 +70,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       // campaign state changed
       $location.path('admin/campaign-proposal-summary/' + notification.data.campaign_id);
     }
-    // else if(notification.type == 8){
-    //   // a new compnay joined. set up the super admin
-      
-    // }
+    else if(notification.type == 8){
+      // a new compnay joined. set up the super admin
+      // console.log(notification);
+    }
     AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){
         // remove notif from list
