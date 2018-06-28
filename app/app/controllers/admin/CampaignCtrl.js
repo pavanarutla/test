@@ -1,16 +1,15 @@
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
 
   $scope.CAMPAIGN_STATUS = [
-    'suggestion-requested',  //    0
-    'campaign-preparing',    //    1
-    'campaign-created',      //    2
-    'quote-requested',       //    3
-    'quote-given',           //    4
-    'change-requested',      //    5 
-    'launch-requested',      //    6
-    'running',               //    7
-    'suspended',             //    8
-    'stopped'                //    9
+    'campaign-preparing',    //    0
+    'campaign-created',      //    1
+    'quote-requested',       //    2
+    'quote-given',           //    3
+    'change-requested',      //    4 
+    'launch-requested',      //    5
+    'running',               //    6
+    'suspended',             //    7
+    'stopped'                //    8
   ];
 
   var getAllCampaigns = function(){
