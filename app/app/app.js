@@ -341,6 +341,16 @@ var app = angular.module('bbManager', [
       url: '/signIn',
       templateUrl: 'views/owner/signin.html',
       controller:'ownerSigninCtrl'
+    })
+    .state('owner.payments', {
+      url: '/payments',
+      templateUrl: 'views/owner/allcampaignpayment.html',
+      controller:'OwnerHomeController'
+    })
+    .state('owner.updatepayments', {
+      url: '/updatepayments',
+      templateUrl: 'views/owner/addpaymentdetails.html',
+      controller:'OwnerHomeController'
     });
 
     $urlRouterProvider.when('/', '/home');
