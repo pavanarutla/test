@@ -67,6 +67,9 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     else if(notification.type > 0 && notification.type < 8){
       $location.path('admin/campaign-proposal-summary/' + notification.data.campaign_id);
     }
+    else if(notification.type == 9){
+      $location.path('admin/user-management/');
+    }
     AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){
         // remove notif from list

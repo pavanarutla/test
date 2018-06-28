@@ -162,9 +162,12 @@ var app = angular.module('bbManager', [
       controller: 'CampaignProposalCtrl',
     })
     .state('admin.user-management', {
-      url: '/user-management',
+      url: '/user-management/:clientID',
       templateUrl: 'views/admin/user-management.html',
       controller: 'UserMgmtCtrl',
+      params: {
+        clientID: {squash: true, value: null}
+      },
       title: "User Management"
     })
     .state('admin.companies', {
