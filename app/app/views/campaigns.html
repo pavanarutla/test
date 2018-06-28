@@ -1,478 +1,407 @@
-<div ng-cloak flex-offset-gt-sm="5" flex="90" flex-xs="100" flex-sm="100">
-	<md-content layout="column" layout-sm="column" layout-xs="column">
-		<md-tabs md-dynamic-height md-border-bottom class="profile-campagin">
-			<!-- planed tab start-->
-			<md-tab label="Planned">
-				<div class="inputDiv">
-					<md-icon>
-						<i class="material-icons">search</i>
-					</md-icon>
-					<input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
-				</div>
-				<div>
-					<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
-						<md-list-item>
-							<div flex="20">Campaign Name</div>
-							<!-- <div flex="15">Client Contact</div> -->
-							<div flex="20">Start Date</div>
-							<div flex="20">End Date</div>
-							<div flex="15">Status</div>
-							<div flex="15">Price</div>
-							<div flex="10">Actions</div>
-						</md-list-item>
-					</div>
-					<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="pCampaign in plannedCampaigns"
-					 class="contbg md-whiteframe-3dp">
-						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
-							<div flex="20" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-sm="85">
-									<div class="md-body-1">{{pCampaign.name}}</div>
-								</div>
-								<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
-									<md-menu>
-										<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
-											<md-icon>
-												<i class="material-icons">settings</i>
-											</md-icon>
-										</md-button>
-										<md-menu-content>
-											<md-menu-item>
-												<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
-											</md-menu-item>
-											<md-menu-item>
-												<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
-											</md-menu-item>
-											<md-menu-item>
-												<md-button>Delete</md-button>
-											</md-menu-item>
-										</md-menu-content>
-									</md-menu>
-								</div>
-							</div>
-							<!-- <div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{pCampaign.clientcomapanyname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c3.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{pCampaign.clientname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c4.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{pCampaign.clientcontent}}</div>
-									</div>
-								</div>
-							</div> -->
-							<!-- hide in lg -->
-							<!-- <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{pCampaign.clientcomapanyname}}</div>
-								</div>
-							</div>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{pCampaign.clientname}}</div>
-								</div>
-							</div>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{pCampaign.clientcontent}}</div>
-								</div>
-							</div> -->
-							<div flex="20" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c5.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-									<div class="md-body-1">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} To {{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-								</div>
-								<div hide-xs hide-sm class="md-body-1">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div>
-							<div flex="20" hide-xs hide-sm>
-								<div class="md-body-1">{{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<!-- <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<md-progress-linear class="md-warn" md-mode="determinate" value="{{campaiginController.determinateValue}}"></md-progress-linear>
-								</div> -->
-								<div class="md-body-1">{{pCampaign.status | stringifyCampaignStatus}}</div>
-							</div>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{pCampaign.act_budget || "N/A"}}</div>
+<div layout="column"  flex="100" flex-xs="100" flex-sm="100">
+
+	<md-tabs md-dynamic-height md-border-bottom class="profile-campagin">
+		<!-- planed tab start-->
+		<md-tab label="Planned">
+		
+			<div class="table-responsive">    
+				<table class="table table-striped table-bordered " style="widows: 100%;">
+					<thead>
+						<tr>
+						<th>Campagin Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+						<th>Budget</th>
+						<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="pCampaign in plannedCampaigns | limitTo:limit">
+			
+						<td>{{pCampaign.name}}</td>
+						<td>{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
+						<td>{{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{pCampaign.status | stringifyCampaignStatus}}</td>
+						<td>{{pCampaign.act_budget || "N/A"}}</td>
+						
+						<td>
+						<md-menu>
+							<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+								<md-icon>
+									<i class="material-icons">settings</i>
+								</md-icon>
+							</md-button>
+							<md-menu-content>
+								<md-menu-item>
+									<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button ng-disabled="pCampaign.status > 3" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+						</td>
+					</tr>      
+					</tbody>
+				</table>
+			</div>
+			<div layout="column" layout-align="center end" class="loadmore">
+				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+			</div>
+
+		</md-tab>
+		<!-- running campaign start-->
+		<md-tab label="Running Campaigns">
+			
+			<!-- <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+				<md-list-item>
+					<div flex="15">Campaign Name</div>
+					<div flex="15">Client Contact</div>
+					<div flex="15">Start Date</div>
+					<div flex="15">EndDate</div>
+					<div flex="10">Status</div>
+					<div flex="10">Price</div>
+					<div flex="10">products</div>
+					<div flex="10">Actions</div>
+				</md-list-item>
+			</div>
+			<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="rCampaign in runningCampaigns"
+				class="contbg md-whiteframe-3dp">
+				<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c1.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-sm="85">
+							<div class="md-body-1">{{rCampaign.name}}</div>
+						</div>
+						<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+							<md-menu>
+								<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+									<md-icon>
+										<i class="material-icons">more_vert</i>
+									</md-icon>
+								</md-button>
+								<md-menu-content>
+									<md-menu-item>
+										<md-button ng-href="#">view</md-button>
+									</md-menu-item>
+								</md-menu-content>
+							</md-menu>
+						</div>
+					</div ng-click>
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
+						hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c2.svg"></md-icon>
 								</div>
 							</div>
-							<!-- <div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{rCampaign.clientcomapanyname}}</div>
+							</div>
+						</div>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c3.svg"></md-icon>
 								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{pCampaign.no_of_products}}</div>
+							</div>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{rCampaign.clientname}}</div>
+							</div>
+						</div>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c4.svg"></md-icon>
 								</div>
-							</div> -->
-							<div flex="10" hide-xs hide-sm>
-								<md-menu>
-									<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
-										<md-icon>
-											<i class="material-icons">settings</i>
-										</md-icon>
-									</md-button>
-									<md-menu-content>
-										<md-menu-item>
-											<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
-										</md-menu-item>
-										<md-menu-item>
-											<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
-										</md-menu-item>
-										<md-menu-item>
-											<md-button ng-disabled="pCampaign.status > 3" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
-										</md-menu-item>
-									</md-menu-content>
-								</md-menu>
+							</div>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{rCampaign.clientcontent}}</div>
 							</div>
 						</div>
 					</div>
-					<div layout="column" layout-align="center end" class="loadmore">
-						<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+					
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.clientcomapanyname}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.clientname}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.clientcontent}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c5.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+							<div class="md-body-1">{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}} To {{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+						</div>
+						<div hide-xs hide-sm class="md-body-1">{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
+					</div hide-xs hide-sm>
+					<div flex="15" hide-xs hide-sm>
+						<div class="md-body-1">{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.status | stringifyCampaignStatus}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.act_budget || "N/A"}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.products.length}}</div>
+						</div>
+					</div>
+					<div flex="10" hide-xs hide-sm>
+						<md-button class="md-primary">VIEW</md-button>
 					</div>
 				</div>
-			</md-tab>
-			<!-- running campaign start-->
-			<md-tab label="Running Campaigns">
-				<div class="inputDiv">
-					<md-icon>
-						<i class="material-icons">search</i>
-					</md-icon>
-					<input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
-				</div>
-				<div>
-					<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
-						<md-list-item>
-							<div flex="15">Campaign Name</div>
-							<div flex="15">Client Contact</div>
-							<div flex="15">Start Date</div>
-							<div flex="15">EndDate</div>
-							<div flex="10">Status</div>
-							<div flex="10">Price</div>
-							<div flex="10">products</div>
-							<div flex="10">Actions</div>
-						</md-list-item>
-					</div>
-					<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="rCampaign in runningCampaigns"
-					 class="contbg md-whiteframe-3dp">
-						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-sm="85">
-									<div class="md-body-1">{{rCampaign.name}}</div>
-								</div>
-								<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
-									<md-menu>
-										<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
-											<md-icon>
-												<i class="material-icons">more_vert</i>
-											</md-icon>
-										</md-button>
-										<md-menu-content>
-											<md-menu-item>
-												<md-button ng-href="#">view</md-button>
-											</md-menu-item>
-										</md-menu-content>
-									</md-menu>
-								</div>
-							</div ng-click>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
-							 hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{rCampaign.clientcomapanyname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c3.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{rCampaign.clientname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c4.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{rCampaign.clientcontent}}</div>
-									</div>
-								</div>
-							</div>
-							<!-- hide in lg -->
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.clientcomapanyname}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.clientname}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.clientcontent}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c5.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-									<div class="md-body-1">{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}} To {{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-								</div>
-								<div hide-xs hide-sm class="md-body-1">{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div hide-xs hide-sm>
-							<div flex="15" hide-xs hide-sm>
-								<div class="md-body-1">{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.status | stringifyCampaignStatus}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.act_budget || "N/A"}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.products.length}}</div>
+			</div> -->
+			<div class="table-responsive">    
+				<table class="table table-striped table-bordered " style="widows: 100%;">
+					<thead>
+						<tr>
+						<th>Campagin Name</th>
+						<th>Client Contact</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+						<th>Price</th>
+						<th>Products</th>
+						<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="rCampaign in runningCampaigns">
+			
+						<td>{{rCampaign.name}}</td>
+						<td>{{rCampaign.clientcontent}}</td>
+						<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
+						<td>{{rCampaign.act_budget || "N/A"}}</td>
+						<td>{{rCampaign.products.length}}</td>
+						<td><md-button class="md-primary">VIEW</md-button></td>
+						
+					</tr>      
+					</tbody>
+				</table>
+			</div>
+			<div layout="column" layout-align="center end" class="loadmore">
+				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+			</div>
+		
+		</md-tab>
+		<!--closed campagin start -->
+		<md-tab label="Closed">
+			
+		
+			<!-- <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
+				<md-list-item>
+					<div flex="15">Campaign Name</div>
+					<div flex="15">Client Contact</div>
+					<div flex="15">Start Date</div>
+					<div flex="15">EndDate</div>
+					<div flex="10">Status</div>
+					<div flex="10">Price</div>
+					<div flex="10">products</div>
+					<div flex="10">Actions</div>
+				</md-list-item>
+			</div>
+			<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="cCampaign in closedCampaigns"
+				class="contbg md-whiteframe-3dp">
+				<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c1.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-sm="85">
+							<div class="md-body-1">{{cCampaign.name}}</div>
+						</div>
+						<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+							<md-menu>
+								<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+									<md-icon>
+										<i class="material-icons">more_vert</i>
+									</md-icon>
+								</md-button>
+								<md-menu-content>
+									<md-menu-item>
+										<md-button ng-href="#">view</md-button>
+									</md-menu-item>
+								</md-menu-content>
+							</md-menu>
+						</div>
+					</div ng-click>
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
+						hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c2.svg"></md-icon>
 								</div>
 							</div>
-							<div flex="10" hide-xs hide-sm>
-								<md-button class="md-primary">VIEW</md-button>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{cCampaign.clientcomapanyname}}</div>
+							</div>
+						</div>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c3.svg"></md-icon>
+								</div>
+							</div>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{cCampaign.clientname}}</div>
+							</div>
+						</div>
+						<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
+							<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
+								<div>
+									<md-icon md-svg-icon="images/c4.svg"></md-icon>
+								</div>
+							</div>
+							<div flex-xs="80" flex-gt-xs="85">
+								<div class="md-body-1">{{cCampaign.clientcontent}}</div>
 							</div>
 						</div>
 					</div>
-					<div layout="column" layout-align="center end" class="loadmore">
-						<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
-					</div>
-				</div>
-			</md-tab>
-			<!--closed campagin start -->
-			<md-tab label="Closed">
-				<div class="inputDiv">
-					<md-icon>
-						<i class="material-icons">search</i>
-					</md-icon>
-					<input ng-model="user.Search" class="search" type="text" placeholder="Search Campaning Name/Date">
-				</div>
-				<div>
-					<div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md>
-						<md-list-item>
-							<div flex="15">Campaign Name</div>
-							<div flex="15">Client Contact</div>
-							<div flex="15">Start Date</div>
-							<div flex="15">EndDate</div>
-							<div flex="10">Status</div>
-							<div flex="10">Price</div>
-							<div flex="10">products</div>
-							<div flex="10">Actions</div>
-						</md-list-item>
-					</div>
-					<div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="cCampaign in closedCampaigns"
-					 class="contbg md-whiteframe-3dp">
-						<div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c1.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-sm="85">
-									<div class="md-body-1">{{cCampaign.name}}</div>
-								</div>
-								<div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
-									<md-menu>
-										<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
-											<md-icon>
-												<i class="material-icons">more_vert</i>
-											</md-icon>
-										</md-button>
-										<md-menu-content>
-											<md-menu-item>
-												<md-button ng-href="#">view</md-button>
-											</md-menu-item>
-										</md-menu-content>
-									</md-menu>
-								</div>
-							</div ng-click>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="column" layout-sm="column" hide-xs hide-gt-xs hide-sm
-							 hide-gt-sm show-md show-gt-md show-lg show-gt-lg>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c2.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{cCampaign.clientcomapanyname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c3.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{cCampaign.clientname}}</div>
-									</div>
-								</div>
-								<div layout-align-xs="start center" layout-xs="row" flex-xs="100" layout-align-sm="start center" layout-gt-xs="row">
-									<div flex-xs="10" flex-gt-xs="10" layout="column" hide-md hide-lg>
-										<div>
-											<md-icon md-svg-icon="images/c4.svg"></md-icon>
-										</div>
-									</div>
-									<div flex-xs="80" flex-gt-xs="85">
-										<div class="md-body-1">{{cCampaign.clientcontent}}</div>
-									</div>
-								</div>
-							</div>
-							<!-- hide in lg -->
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{cCampaign.clientcomapanyname}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{cCampaign.clientname}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{cCampaign.clientcontent}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c5.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
-									<div class="md-body-1">{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}} To {{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-								</div>
-								<div hide-xs hide-sm class="md-body-1">{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div hide-xs hide-sm>
-							<div flex="15" hide-xs hide-sm>
-								<div class="md-body-1">{{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{cCampaign.status | stringifyCampaignStatus}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{rCampaign.act_budget || "N/A"}}</div>
-								</div>
-							</div hide-xs hide-sm>
-							<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
-								<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
-									<md-icon md-svg-icon="images/c6.svg"></md-icon>
-								</div>
-								<div flex-xs="80" flex-gt-xs="85">
-									<div class="md-body-1">{{cCampaign.products.length}}</div>
-								</div>
-							</div>
-							<div flex="10" hide-xs hide-sm>
-								<md-button class="md-primary">VIEW</md-button>
-							</div>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{cCampaign.clientcomapanyname}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{cCampaign.clientname}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row" hide-lg hide-gt-lg hide-md hide-gt-md>
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{cCampaign.clientcontent}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="15" flex-xs="100" flex-sm="100" flex-gt-sm="15" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c5.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85" hide-gt-sm show-xs>
+							<div class="md-body-1">{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}} To {{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+						</div>
+						<div hide-xs hide-sm class="md-body-1">{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</div>
+					</div hide-xs hide-sm>
+					<div flex="15" hide-xs hide-sm>
+						<div class="md-body-1">{{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{cCampaign.status | stringifyCampaignStatus}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{rCampaign.act_budget || "N/A"}}</div>
+						</div>
+					</div hide-xs hide-sm>
+					<div flex="10" flex-xs="100" flex-sm="100" flex-gt-sm="10" layout-xs="row" layout-sm="row">
+						<div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+							<md-icon md-svg-icon="images/c6.svg"></md-icon>
+						</div>
+						<div flex-xs="80" flex-gt-xs="85">
+							<div class="md-body-1">{{cCampaign.products.length}}</div>
 						</div>
 					</div>
-					<div layout="column" layout-align="center end" class="loadmore">
-						<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+					<div flex="10" hide-xs hide-sm>
+						<md-button class="md-primary">VIEW</md-button>
 					</div>
 				</div>
-			</md-tab>
-		</md-tabs>
-	</md-content>
+			</div> -->
+			<div class="table-responsive">    
+				<table class="table table-striped table-bordered " style="widows: 100%;">
+					<thead>
+						<tr>
+						<th>Campagin Name</th>
+						<th>Client Contact</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+						<th>Price</th>
+						<th>Products</th>
+						<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="rCampaign in runningCampaigns">
+			
+						<td>{{rCampaign.name}}</td>
+						<td>{{rCampaign.clientcontent}}</td>
+						<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
+						<td>{{rCampaign.act_budget || "N/A"}}</td>
+						<td>{{cCampaign.products.length}}</td>
+						<td><md-button class="md-primary">VIEW</md-button></td>
+						
+					</tr>      
+					</tbody>
+				</table>
+			</div>
+			<div layout="column" layout-align="center end" class="loadmore">
+				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+			</div>
+			
+		</md-tab>
+	</md-tabs>
+
 </div>
