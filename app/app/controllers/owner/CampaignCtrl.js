@@ -267,6 +267,23 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     $location.path('/owner/' + $rootScope.clientSlug + '/suggest-products');
   }
 
+  $scope.deleteCampaign = function(campaignId){
+    OwnerCampaignService.deleteOwnerCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        $scope.getUserCampaignsForOwner();
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if(result.status == 0){
+        toastr.error(result.message);
+      }
+    },function(result){
+        toastr.error("somthing went wrong please try again after some time!");
+    });
+  }
+
+
   $scope.removeProductFromCampaignSuggestion = function(productId){
     var campaignId = JSON.parse(localStorage.selectedOwnerCampaign).id;
     OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
