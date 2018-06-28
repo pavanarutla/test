@@ -90,7 +90,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   function loadCampaignPayments(campaignId){
-    if($scope.campaignDetails.status >= 7 ){
+    if($scope.campaignDetails.status >= 6 ){
       AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
         $scope.campaignPayments = result;
       });
