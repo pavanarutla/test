@@ -64,6 +64,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     $scope.sharePerson = !$scope.sharePerson;
   }
 
+  $scope.showCampaignPaymentSidenav = function() {
+    $mdSidenav('campaignPaymentDetailsSidenav').toggle();
+  };
+
   /*===========================
   | MdDialogs and sidenavs end
   ===========================*/
@@ -103,8 +107,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       $scope.plannedCampaigns = _.filter(result, function(c){
         return c.status < 6;
       });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
+      $scope.runningCampaigns = _.where(result, { status: 6 });
+      $scope.closedCampaigns = _.filter(result, function(c){
+        return c.status > 6 && c.status <= 8;
+      });
     });
   }
   var loadOwnerCampaigns = function(){
@@ -315,6 +321,32 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   =============================== */
 
 
+  /* ==============================
+  | Campaign payment section
+  =============================== */
+  function getCampaignWithPayments(){
+    OwnerCampaignService.getCampaignWithPayments().then(function(result){
+      $scope.campaignsWithPayments = result;
+    });
+  }
+
+  $scope.getCampaignPaymentDetails = function(campaignId){
+    OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
+      $scope.showCampaignPaymentSidenav();
+      $scope.campaignPaymentDetails = result;
+      var campaignPayments = $scope.campaignPaymentDetails.payment_details;
+      $scope.paid = 0;
+      _.each(campaignPayments, function(p){
+        $scope.paid += p.amount;
+      });
+      $scope.unpaid = $scope.campaignPaymentDetails.act_budget - $scope.paid; 
+    });
+  }
+  /* ==============================
+  | Campaign payment section ends
+  =============================== */
+
+
   /*=========================
   | Page based initial loads
   =========================*/
@@ -338,5 +370,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   /*=============================
   | Page based initial loads ends
   =============================*/
+
+  if($rootScope.currStateName == 'owner.payments'){
+    getCampaignWithPayments();
+  }
 
 });

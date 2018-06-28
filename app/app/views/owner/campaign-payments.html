@@ -1,227 +1,188 @@
-<!-- ============ payments list side nav start ============ -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="upadtePaymentDetails" style="width:600px !important;max-width: 600px !important;">
+<!-- ============ payments details side nav start ============ -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="campaignPaymentDetailsSidenav" style="width:600px !important;max-width: 600px !important;">
+	<div layout="row">
+		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="showCampaignPaymentSidenav()">
+			<md-tooltip>Close Side Panel</md-tooltip>
+			<md-icon class="md-default-theme">
+				<i class="material-icons">close</i>
+			</md-icon>
+		</md-button>
+	</div>
+	<md-content layout-padding="">
 		<div layout="row">
-				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="addPaymentDetalis()">
-						<md-tooltip>Close Side Panel</md-tooltip>
-						<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-				</md-button>
-        </div> 
-		<md-content layout-padding="">
-            <div layout="row">
-                <div flex="60">
-                    <div class="table-responsive">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr class="md-body-2">
-                                    <td >Campign Name </td>
-                                    <td>:Uber Cabs</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>No of Products</td>
-                                    <td>:9 Products</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>Start Date</td>
-                                    <td>:9-02-2018</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>End Date</td>
-                                    <td>:9-02-2018</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>Contact Name</td>
-                                    <td>:UBER</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>Contact No</td>
-                                    <td>:9966016152</td>
-                                </tr>
-                                <tr class="md-body-2">
-                                    <td>Email</td>
-                                    <td>:xyz@gmail.com</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div flex="40">
-                    <div class="payment_detalis_view md-padding" style="background: #eee">
-                        
-                        <p>Received</p>
-                        <h3 class="md-headline">Rs.11,85,855</h3>
-                        <p>Pending</p>
-                        <h3 class="md-headline">Rs.11,85,855</h3>
-                        <p class="red-text">Total Budget</p>
-                        <h3 class="red-text md-headline">Rs.11,85,855</h3>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table style="width:100%">
-                    <thead class="red-text" style="background: #eee;">
-                        <th>Date</th>
-                        <th>Mode</th>
-                        <th>Amount</th>
-                        <th>Received By</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>15-08-2018</th>
-                            <th>By IMPS</th>
-                            <th>1,50,000</th>
-                            <th>James</th>
-                        </tr>
-                        <tr>
-                            <th>15-08-2018</th>
-                            <th>By IMPS</th>
-                            <th>1,50,000</th>
-                            <th>James</th>
-                        </tr>
-                        <tr>
-                            <th>15-08-2018</th>
-                            <th>By IMPS</th>
-                            <th>1,50,000</th>
-                            <th>James</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div layout="column">
-                <p class="red-text md-body-2">Comments:</p>
-                <table>
-                    <thead>
-                        <th class="red-text md-body-2">Date</th>
-                        <th class="red-text md-body-2">Notes</th>
-                    </thead>
-                    <tbody>
-                        <td>15-05-2018</td>
-                        <td>BBI transferred 1,50000 to bank account</td>
-                    </tbody>
-                </table>
-            </div>
-		</md-content> 
+			<div flex="60">
+				<div class="table-responsive">
+					<table style="width:100%">
+						<tbody>
+							<tr class="md-body-2">
+								<td>Campign Name </td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.name}}</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>No of Products</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.product_count}} Product(s)</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>Start Date</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.start_date | dateify | date: "dd-MMM-yyyy"}}</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>End Date</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.end_date | dateify | date: "dd-MMM-yyyy"}}</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>Contact Name</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.org_contact_name}}</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>Contact No</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.org_contact_phone}}</td>
+							</tr>
+							<tr class="md-body-2">
+								<td>Email</td>
+								<td>:&nbsp;&nbsp;{{campaignPaymentDetails.org_contact_email}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div flex="40">
+				<div class="payment_detalis_view md-padding" style="background: #eee">
+					<p>Received</p>
+					<h3 class="md-headline">Rs.{{paid}}</h3>
+					<p>Pending</p>
+					<h3 class="md-headline">Rs.{{unpaid}}</h3>
+					<p class="red-text">Total Budget</p>
+					<h3 class="red-text md-headline">Rs.{{campaignPaymentDetails.act_budget}}</h3>
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table style="width:100%">
+				<thead class="red-text" style="background: #eee;">
+					<th>Date</th>
+					<th>Mode</th>
+					<th>Amount</th>
+					<th>Received By</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="payment in campaignPaymentDetails.payment_details">
+						<th>{{payment.updated_at}}</th>
+						<th>{{payment.type}}</th>
+						<th>{{payment.amount}}</th>
+						<th>{{payment.received_by}}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- <div layout="column">
+			<p class="red-text md-body-2">Comments:</p>
+			<table>
+				<thead>
+					<th class="red-text md-body-2">Date</th>
+					<th class="red-text md-body-2">Notes</th>
+				</thead>
+				<tbody>
+					<td>15-05-2018</td>
+					<td>BBI transferred 1,50000 to bank account</td>
+				</tbody>
+			</table>
+		</div> -->
+	</md-content>
 </md-sidenav>
-<!-- ============ payments list side nav end ============ -->
+<!-- ============ payments details side nav end ============ -->
 
 <div layout="column">
-    <div layout="column" layout-padding>
-        <h3 class="md-title red-text">Payments</h3>
-    </div>
-    <!-- status of hoarding list html start-->
-    <div layout-xs="column" layout-gt-xs="row" flex-gt-xs="100" flex-xs="100"  style="text-align: center;">
-        <div layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
-            <div flex-xs="50" flex-gt-xs="50" >
-                <md-card class="md-whiteframe-5dp">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <div class="md-body-2">Total (238) campaigns </div>
-                            <div class="md-headline red-text">Rs.2,14,85,855</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </md-card>
-            </div>
-            <div flex-xs="50" flex-gt-xs="50" >
-                <md-card class="md-whiteframe-5dp">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <div class="md-body-2">Running Campaigns</div>
-                            <div class="md-headline red-text">Rs.2,14,85,855</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </md-card>
-            </div>
-        </div>
-        <div layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
-            <div flex-xs="50" flex-gt-xs="50">
-                <md-card class="md-whiteframe-5dp">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <div class="md-body-2">Received Payments</div>
-                                <div class="md-headline red-text">Rs.2,14,85,855</div>
-                                
-                        </md-card-title-text>
-                    </md-card-title>
-                </md-card>
-            </div>
-            <div flex-xs="50" flex-gt-xs="50">
-                <md-card class="md-whiteframe-5dp">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <div class="md-body-2">Pending Payments</div>
-                                <div class="md-headline red-text">Rs.2,14,85,855</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </md-card >
-            </div>
-            
-        </div>
-    </div>
-    <!-- status of hoarding list html start-->
-    <div layout="column" layout-margin flex>
-            <div class="table-responsive">
-                    <table class="table table-hover table-striped" style="width: 100%;">
-                        <thead class="contbg">
-                            <tr class="red-text">
-                                <th>C.ID</th>
-                                <th>Campaign Name</th>
-                                <th hide-sm>Contact Name</th>
-                                <th hide-sm hide-md>Contact No</th>
-                                <th> Date</th>
-                                <th hide-sm hide-md>Total Budget</th>
-                                <th>Received</th>
-                                <th>Pending</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BB01</td>
-                                <td>Ford</td>
-                                <td hide-sm>Jhon</td>
-                                <td hide-sm hide-md>9966991111</td>
-                                <td>12/02/2018 </td>
-                                <td>2,00,000</td>
-                                <td>1,00,000</td>
-                                <td>1,00,000</td>
-                                <td style="padding: 0px;">
-                                    <md-button class="btn btn-default btn-primary" ng-click="addPaymentDetalis()">
-                                        Details
-                                    </md-button>
-                                </td>   
-                            </tr>
-                            <tr>
-                                <td>BB01</td>
-                                <td>Ford</td>
-                                <td hide-sm>Jhon</td>
-                                <td hide-sm hide-md>9966991111</td>
-                                <td>12/02/2018 </td>
-                                <td>2,00,000</td>
-                                <td>1,00,000</td>
-                                <td>1,00,000</td>
-                                <td style="padding: 0px;">
-                                    <md-button class="btn btn-default btn-primary" ng-click="addPaymentDetalis()">
-                                        Details
-                                    </md-button>
-                                </td>   
-                            </tr>
-                            <tr>
-                                <td>BB01</td>
-                                <td>Ford</td>
-                                <td hide-sm>Jhon</td>
-                                <td hide-sm hide-md>9966991111</td>
-                                <td>12/02/2018 </td>
-                                <td>2,00,000</td>
-                                <td>1,00,000</td>
-                                <td>1,00,000</td>
-                                <td style="padding: 0px;">
-                                    <md-button class="btn btn-default btn-primary" ng-click="addPaymentDetalis()">
-                                        Details
-                                    </md-button>
-                                </td>   
-                            </tr>
-                        </tbody>
-                    </table>
-            </div>
-    </div>
+	<div layout="row" layout-align="space-between center">
+		<div layout="column" layout-padding>
+			<h3 style="padding-left:30px;">Payments</h3>
+		</div>
+		<div layout="column" layout-padding>
+			<a ng-href="#/owner/{{clientSlug}}/update-payments" style="cursor:pointer; color:blue;">Add new payment</a>
+		</div>
+	</div>
+	<!-- status of hoarding list html start-->
+	<div layout-xs="column" layout-gt-xs="row" flex-gt-xs="100" flex-xs="100" style="text-align: center;">
+		<div layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
+			<div flex-xs="50" flex-gt-xs="50">
+				<md-card class="md-whiteframe-5dp">
+					<md-card-title>
+						<md-card-title-text>
+							<div class="md-body-2">Total (238) campaigns </div>
+							<div class="md-headline red-text">Rs.2,14,85,855</div>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div flex-xs="50" flex-gt-xs="50">
+				<md-card class="md-whiteframe-5dp">
+					<md-card-title>
+						<md-card-title-text>
+							<div class="md-body-2">Running Campaigns</div>
+							<div class="md-headline red-text">Rs.2,14,85,855</div>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+		</div>
+		<div layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
+			<div flex-xs="50" flex-gt-xs="50">
+				<md-card class="md-whiteframe-5dp">
+					<md-card-title>
+						<md-card-title-text>
+							<div class="md-body-2">Received Payments</div>
+							<div class="md-headline red-text">Rs.2,14,85,855</div>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div flex-xs="50" flex-gt-xs="50">
+				<md-card class="md-whiteframe-5dp">
+					<md-card-title>
+						<md-card-title-text>
+							<div class="md-body-2">Pending Payments</div>
+							<div class="md-headline red-text">Rs.2,14,85,855</div>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+		</div>
+	</div>
+	<!-- status of hoarding list html start-->
+	<div layout="column" layout-margin flex>
+		<div class="table-responsive">
+			<table class="table table-hover table-striped" style="width: 100%;">
+				<thead class="contbg">
+					<tr class="red-text">
+						<th>Campaign Name</th>
+						<!-- <th hide-sm>Contact Name</th>
+						<th hide-sm hide-md>Contact No</th> -->
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Total Budget</th>
+						<th>Received</th>
+						<th>Pending</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="campaign in campaignsWithPayments">
+						<td>{{campaign.name}}</td>
+						<!-- <td hide-sm>Jhon</td>
+						<td hide-sm hide-md>9966991111</td> -->
+						<td>{{campaign.start_date | dateify | date: "dd-MMM-yyyy" }}</td>
+						<td>{{campaign.end_date | dateify | date: "dd-MMM-yyyy" }}</td>
+						<td>{{campaign.act_budget}}</td>
+						<td>{{campaign.paid}}</td>
+						<td>{{campaign.act_budget - campaign.paid}}</td>
+						<td style="padding: 0px;">
+							<md-button class="btn btn-default btn-primary" ng-click="getCampaignPaymentDetails(campaign.id)">
+								Details
+							</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
