@@ -231,8 +231,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.editProposedProduct = function(productId, from_date, to_date, price){
     var productObj = {
       id: productId,
-      from_date: from_date,
-      to_date: to_date,
+      from_date: $scope.campaignDetails.start_date,
+      to_date: $scope.campaignDetails.end_date,
       price: price
     };
     $mdDialog.show({

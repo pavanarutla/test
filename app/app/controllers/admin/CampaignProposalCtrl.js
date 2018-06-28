@@ -189,8 +189,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   $scope.editProposedProduct = function(productId, from_date, to_date, price){
     var productObj = {
       id: productId,
-      from_date: from_date,
-      to_date: to_date,
+      from_date: $scope.campaignDetails.start_date,
+      to_date: $scope.campaignDetails.end_date,
       price: price
     };
     $mdDialog.show({
@@ -206,7 +206,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
                 ctrlScope.campaignDetails = result;
-                ctrlScope.gridCampaignProducts.data = result.products;
+                // ctrlScope.gridCampaignProducts.data = result.products;
                 $mdDialog.hide();
               });
               toastr.success(result.message);
