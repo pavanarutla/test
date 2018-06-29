@@ -104,22 +104,26 @@
                     <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
                     />
                     <div class="form-group">
-                      <div class='input-group' style="width:130px">
+                      <!-- <div class='input-group' style="width:130px">
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
                           max-date='model.end_date' ng-readonly='true' placeholder="start date" />
                         <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
                           <i class="glyphicon glyphicon-calendar"></i>
                         </span>
-                      </div>
+                      </div> -->
+                      <label>Start date</label>
+                      <md-datepicker ng-model="suggestedProduct.start_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>                      
                     </div>
                     <div class="form-group">
-                      <div class='input-group' style="width:130px">
+                      <!-- <div class='input-group' style="width:130px">
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
                           min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="end date" />
                         <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                      </div>
+                      </div> -->
+                      <label>Start date</label>
+                      <md-datepicker ng-model="suggestedProduct.end_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
                     </div>
                   </div>
                   <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>

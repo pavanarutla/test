@@ -5,7 +5,7 @@
         <span>Create Campiagn</span>
       </h2>
       <span flex></span>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="cancel()">
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddCamapginSidenav()">
         <md-tooltip>Close Side Panel</md-tooltip>
         <md-icon class="md-default-theme">
           <i class="material-icons">close</i>
@@ -40,11 +40,11 @@
         <input ng-model="ownerCampaign.org_contact_phone" class="form-control" type="text">
       </div>
       <div class="form-group">
-        <label class="control-label">Start Date</label>
-        <br>
-        <div class='input-group' style="width:100%">
+        <!-- <label class="control-label">Start Date</label>
+        <br> -->
+        <!-- <div class='input-group' style="width:100%"> -->
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-          <input type='text' class="form-control" 
+          <!-- <input type='text' class="form-control" 
             datepicker-popup
             ng-model="ownerCampaign.start_date" 
             is-open="opened.start" 
@@ -56,14 +56,16 @@
               ng-click="opened.start = !opened.start; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
-        </div>
+        </div> -->        
+          <label>Start date</label>
+          <md-datepicker ng-model="ownerCampaign.start_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>          
       </div>
       <div class="form-group">
-        <label class="control-label">End Date</label>
+        <!-- <label class="control-label">End Date</label>
         <br>
-        <div class='input-group' style="width:100%">
+        <div class='input-group' style="width:100%"> -->
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-          <input type='text' class="form-control" 
+          <!-- <input type='text' class="form-control" 
             datepicker-popup
             ng-model="ownerCampaign.end_date" 
             is-open="opened.end" 
@@ -75,13 +77,17 @@
               ng-click="opened.end = !opened.end; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
-        </div>
+        </div> -->
+        <div flex-gt-xs="">
+          <label>End date</label>
+          <md-datepicker ng-model="ownerCampaign.end_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+          </div>
       </div>
       <div class="form-group" style="margin:10px 0">
         <label class="col-md-3 control-label"></label>
         <input class="btn btn-primary" ng-click="saveOwnerCampaign()" value="Save" type="button">
         <span></span>
-        <input class="btn btn-default" value="Cancel" type="reset">
+        <input class="btn btn-default" ng-click="toggleAddCamapginSidenav()" value="Cancel" type="reset">
       </div>
     </form>
   </md-content>

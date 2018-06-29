@@ -7,13 +7,13 @@
 				</div> -->
 			</div>
 			<form name="editProposedProductForm" novalidate="novalidate">
-				<input type="hidden" ng-model="format.id" />
+				<!-- <input type="hidden" ng-model="format.id" />
 				<div layout="column" flex="60" flex-offset-gt-sm="20" layout-padding>
           <div class="form-group">
             <div class='input-group' style="width:130px">
-              <label>From date:</label>
+              <label>From date:</label> -->
               <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-              <input type='text' class="form-control"  style="width: 20em;"
+              <!-- <input type='text' class="form-control"  style="width: 20em;"
                 datepicker-popup
                 ng-model="product.from_date" 
                 is-open="opened.start" 
@@ -40,23 +40,32 @@
                 ng-readonly='true' placeholder="end date" />
               <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
                 <span class="glyphicon glyphicon-calendar"></span>
-              </span>
+              </span> -->
               <!-- <input ng-model="product.to_date" type="text" name="to_date" required="required" /> -->
-            </div>
-          </div>
-          <md-input-container class="md-block margin-input">
-						<label>Price:</label>
-						<input ng-model="product.price" type="text" name="price" only-numeric required="required" />
-						<div ng-messages="editProposedProductForm.price.$error">
-							<div ng-message="required">Format Name is required.</div>
-						</div>
-					</md-input-container>
-				</div>
+            <!-- </div>
+          </div>         
+        </div> -->
+        <div layout-gt-xs="row">
+        <div flex-gt-xs="">
+          <h4>Start date</h4>
+          <md-datepicker ng-model="product.from_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+        </div>
+         <div flex-gt-xs="">
+          <h4>End Date</h4>
+          <md-datepicker ng-model="product.to_date"  md-placeholder="Enter date" md-min-date="toMinDate" md-max-date="toMaxDate"></md-datepicker>
+        </div>   
+      </div>
+      <md-input-container class="md-block margin-input">
+        <label>Price:</label>
+        <input ng-model="product.price" type="text" name="price" only-numeric required="required" />
+        <div ng-messages="editProposedProductForm.price.$error">
+          <div ng-message="required">Format Name is required.</div>
+        </div>
+      </md-input-container>
 				<div layout="row" layout-align="center center">
 					<md-button type="submit" Class="md-raised md-primary" ng-click="updateProposedProduct(product)">SAVE</md-button>
 					<md-button Class="md-raised" ng-click="cancel()">CANCEL</md-button>
 				</div>
-			</form>
-		</md-content>
+      </form>
 	</md-dialog-content>
 </md-dialog>

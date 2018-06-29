@@ -13,7 +13,7 @@
       <h4>Enter New Campagin Details</h4>
       <div flex></div>
       <md-button class="md-icon-button md-button" type="button" ng-transclude="">
-        <i class="material-icons">close</i>
+        <i class="material-icons" ng-click="close()">close</i>
         <div class="md-ripple-container"></div>
       </md-button>
     </div>
@@ -40,9 +40,13 @@
             </div>
           </md-input-container>
           <md-input-container>
-            <md-datepicker name="startDate" ng-model="campaign.start_date" md-placeholder="Start Date" required></md-datepicker>
+            <!-- <md-datepicker name="startDate" ng-model="campaign.start_date" md-placeholder="Start Date" required></md-datepicker>
             <div ng-messages="addEmptyCampaignForm.startDate.$error">
               <div ng-message="required">Start Date required.</div>
+            </div> -->
+            <div flex-gt-xs="">
+              <label>Start date</label>
+              <md-datepicker ng-model="campaign.start_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
             </div>
           </md-input-container>
           <md-input-container class="md-block">
@@ -78,9 +82,13 @@
             </div>
           </md-input-container>
           <md-input-container>
-            <md-datepicker name="endDate" ng-model="campaign.end_date" md-placeholder="End date" required></md-datepicker>
+            <!-- <md-datepicker name="endDate" ng-model="campaign.end_date" md-placeholder="End date" required></md-datepicker>
             <div ng-messages="addEmptyCampaignForm.endDate.$error">
               <div ng-message="required">End Date required.</div>
+            </div> -->
+            <div flex-gt-xs="">
+              <label>Start date</label>
+              <md-datepicker ng-model="campaign.end_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
             </div>
           </md-input-container>
           <md-input-container class="md-block">

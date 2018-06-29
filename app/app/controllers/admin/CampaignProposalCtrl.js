@@ -115,6 +115,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   // adds a product in the campaign
+  $scope.suggestedProduct = {};
   $scope.suggestProductForCampaign = function(suggestedProduct){
     if(!localStorage.campaignForSuggestion){
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
@@ -149,7 +150,20 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       });
     }
   }
-
+  
+  var startDate = new Date();
+  var productFromDate = new Date($scope.suggestedProduct.start_date);
+  var productToDate = new Date($scope.suggestedProduct.end_date);
+  $scope.fromMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate() + 1
+  );
+  $scope.toMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate()
+  );
   $scope.removeProductFromCampaignSuggestion = function(productId){
     var campaignId = JSON.parse(localStorage.campaignForSuggestion).id;
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
@@ -200,6 +214,24 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       clickOutsideToClose:true,
       controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
         $scope.product = productObj;
+        var startDate = new Date();
+        var productFromDate = new Date($scope.product.from_date);
+        var productToDate = new Date($scope.product.to_date);
+        $scope.fromMinDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate() + 1
+        );
+        $scope.toMinDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          productFromDate.getDate() + 1
+        );
+        $scope.toMaxDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          productToDate.getDate()
+        );
         $scope.updateProposedProduct = function(product){
           AdminCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
             if(result.status == 1){
