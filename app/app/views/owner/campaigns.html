@@ -14,30 +14,66 @@
     </div>
   </md-toolbar>
   <md-content layout-padding="">
-    <form name="forms.ownerCampaignForm" role="form">
+    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
       <div class="form-group">
         <label class="control-label">Campaign Name</label>
         <br>
-        <input ng-model="ownerCampaign.name" class="form-control" type="text">
+        <input ng-model="ownerCampaign.name" name="name" class="form-control" type="text"
+         minlength="3"
+         maxlength="60"
+         required="required" 
+         ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
+         <div ng-messages="forms.ownerCampaignForm.name.$error" style="color:red" ng-if="!forms.ownerCampaignForm.name.$pristine">
+            <div ng-message="required">Campaign Name is required.</div>
+            <div ng-message="minlength">Campaign Name must have 3 characters.</div>
+            <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
+            <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+          </div>
       </div>
       <div class="form-group">
         <label class="control-label">Organization Name</label>
         <br>
-        <input ng-model="ownerCampaign.org_name" class="form-control" type="text">
+        <input ng-model="ownerCampaign.org_name" name="org_name" class="form-control" type="text"
+        minlength="3"
+         maxlength="60"
+         required="required"
+         >
+         <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="!forms.ownerCampaignForm.org_name.$pristine">
+            <div ng-message="required">Organization Name is required.</div>
+            <div ng-message="minlength">Organization Name must have 3 characters.</div>
+            <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
+          </div>
       </div>
       <div class="form-group">
         <label class="control-label">Contact Name</label>
         <br>
-        <input ng-model="ownerCampaign.org_contact_name" class="form-control" type="text">
-      </div>
+        <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control" 
+        type="text"
+        required="required"
+        >
+        <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="!forms.ownerCampaignForm.contact_name.$pristine">
+            <div ng-message="required">Contact Name is required.</div>
+          </div>
+        
       <div class="form-group">
         <label class="control-label">Email:</label>
-        <input ng-model="ownerCampaign.org_contact_email" class="form-control" type="text">
+        <input ng-model="ownerCampaign.org_contact_email" name ="email" class="form-control" type="email"
+          required="required"
+          ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+          <div ng-messages="forms.ownerCampaignForm.email.$error" style="color:red" ng-if="!forms.ownerCampaignForm.email.$pristine">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valid EmailId.</div>
+            </div>
       </div>
       <div class="form-group">
         <label class="control-label">Phone Number</label>
         <br>
-        <input ng-model="ownerCampaign.org_contact_phone" only-numeric class="form-control" type="text">
+        <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control" type="text" required="required">
+        <div ng-messages="forms.ownerCampaignForm.phone.$error" style="color:red" ng-if="!forms.ownerCampaignForm.phone.$pristine">
+            <div ng-message="required">Phone No is required.</div>
+            <div ng-message="minlength">Phone No must have 10 characters.</div>
+          </div>
+      </div>
       </div>
       <div class="form-group">
         <label class="control-label">Start Date</label>
@@ -45,6 +81,8 @@
         <div class='input-group' style="width:100%">
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
           <input type='text' class="form-control" 
+          required -"required"
+            name="start_date"
             datepicker-popup
             ng-model="ownerCampaign.start_date" 
             is-open="opened.start" 
@@ -56,6 +94,9 @@
               ng-click="opened.start = !opened.start; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
+          <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+              <div ng-message="required">Start date is required.</div>
+            </div>
         </div>
       </div>
       <div class="form-group">
@@ -63,7 +104,9 @@
         <br>
         <div class='input-group' style="width:100%">
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-          <input type='text' class="form-control" 
+          <input type='text' class="form-control"
+          required -"required"
+            name="end_date" 
             datepicker-popup
             ng-model="ownerCampaign.end_date" 
             is-open="opened.end" 
@@ -75,6 +118,9 @@
               ng-click="opened.end = !opened.end; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
+          <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
+              <div ng-message="required">End date is required.</div>
+            </div>
         </div>
       </div>
       <div ng-repeat="campError in ownerCampaignErrors" ng-if="ownerCampaignErrors.length > 0" style="color:red">
@@ -83,7 +129,7 @@
         </div>
       <div class="form-group" style="margin:10px 0">
         <label class="col-md-3 control-label"></label>
-        <input class="btn btn-primary" ng-click="saveOwnerCampaign()" value="Save" type="button">
+        <input class="btn btn-primary" ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid" value="Save" type="button">
         <span></span>
         <input class="btn btn-default" value="Cancel" type="reset">
       </div>
