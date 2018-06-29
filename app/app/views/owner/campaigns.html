@@ -37,7 +37,7 @@
       <div class="form-group">
         <label class="control-label">Phone Number</label>
         <br>
-        <input ng-model="ownerCampaign.org_contact_phone" class="form-control" type="text">
+        <input ng-model="ownerCampaign.org_contact_phone" only-numeric class="form-control" type="text">
       </div>
       <div class="form-group">
         <label class="control-label">Start Date</label>
@@ -77,6 +77,10 @@
           </span>
         </div>
       </div>
+      <div ng-repeat="campError in ownerCampaignErrors" ng-if="ownerCampaignErrors.length > 0" style="color:red">
+        {{campError}}
+
+        </div>
       <div class="form-group" style="margin:10px 0">
         <label class="col-md-3 control-label"></label>
         <input class="btn btn-primary" ng-click="saveOwnerCampaign()" value="Save" type="button">

@@ -146,6 +146,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         loadOwnerCampaigns();
         toastr.success(result.message);
       }
+      if(result.status == 0){
+        $scope.ownerCampaignErrors = result.message;
+      }
       else{
         toastr.error(result.message);
       }
