@@ -374,5 +374,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   if($rootScope.currStateName == 'owner.payments'){
     getCampaignWithPayments();
   }
+  if($rootScope.currStateName == 'owner.payments'){
+    loadOwnerCampaigns();
+  }
 
 });
