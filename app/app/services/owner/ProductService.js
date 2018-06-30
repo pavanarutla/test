@@ -56,6 +56,11 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				$http.get(config.apiPath + '/requested-hoardings-for-owner' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
+			getOwnerProductReport: function(){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/owner-products-report').success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			}
 		}
 	}
 ]);

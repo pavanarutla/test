@@ -62,6 +62,11 @@ app.service('OwnerCampaignService',
           $http.get(config.apiPath + '/campaign-payment-details-owner/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        getOwnerFeeds: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/owner-feeds').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
       }
     }
   ]
