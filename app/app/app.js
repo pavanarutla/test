@@ -277,9 +277,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
-    .state('owner.dashboard', {
-      url: '/dashboard',
-      templateUrl: 'views/owner/dashboard.html',
+    .state('owner.feeds', {
+      url: '/feeds',
+      templateUrl: 'views/owner/feeds.html',
       controller: 'OwnerFeedsCtrl',
       
     })
@@ -320,22 +320,32 @@ var app = angular.module('bbManager', [
     .state('owner.home', {
       url: '/home',
       templateUrl: 'views/owner/home.html',
-      controller: 'OwnerHomeController'
+      controller: 'OwnerHomeCtrl'
     })
-    .state('owner.outsourcingagent', {
-      url: '/outsourcingagent',
-      templateUrl: 'views/owner/outsourcingagent.html',
-      controller:'outSourcing'
+    // .state('owner.outsourcingagent', {
+    //   url: '/outsourcingagent',
+    //   templateUrl: 'views/owner/outsourcingagent.html',
+    //   controller:'outSourcing'
+    // })
+    // .state('owner.teamPage', {
+    //   url: '/teamPage',
+    //   templateUrl: 'views/owner/team.html',
+    //   controller:'teamPage'
+    // })
+    // .state('owner.feedBack', {
+    //   url: '/feedBack',
+    //   templateUrl: 'views/owner/feedback.html',
+    //   controller:'feedback'
+    // })
+    .state('owner.payments', {
+      url: '/payments',
+      templateUrl: 'views/owner/campaign-payments.html',
+      controller:'OwnerCampaignCtrl'
     })
-    .state('owner.teamPage', {
-      url: '/teamPage',
-      templateUrl: 'views/owner/team.html',
-      controller:'teamPage'
-    })
-    .state('owner.feedBack', {
-      url: '/feedBack',
-      templateUrl: 'views/owner/feedback.html',
-      controller:'feedback'
+    .state('owner.update-payments', {
+      url: '/update-payments',
+      templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
     })
     .state('owner.signIn', {
       url: '/signIn',
@@ -355,7 +365,7 @@ var app = angular.module('bbManager', [
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/:client_slug/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/:client_slug/feeds');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
