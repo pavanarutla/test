@@ -446,7 +446,7 @@ app.controller('bbMngrCtrl',
         $location.path("/admin");
       }
       else if(userMongo.user_type == "owner"){
-        $location.path("/owner/" + userMongo.client_slug + "/home");
+        $location.path("/owner/" + userMongo.client_slug + "/feeds");
       }
     }
 

@@ -1,11 +1,10 @@
 app.controller('OwnerHomeCtrl', function ($scope, OwnerProductService) {
 
-  var getOwnerProductsReport = function(){
-    OwnerProductService.getOwnerProductReport().then(function(result){
-      console.log(result);
-    });
-  }
-  getOwnerProductsReport();
+  // var getOwnerProductsReport = function(){
+  //   OwnerProductService.getOwnerProductReport().then(function(result){
+  //   });
+  // }
+  // getOwnerProductsReport();
   
   var chart1 = {};
   chart1.type = "google.charts.Bar";

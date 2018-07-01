@@ -308,6 +308,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerProductCtrl'
     })
+    .state('owner.product-details', {
+      url: '/product-details/:productId',
+      templateUrl: 'views/owner/product-details.html',
+      controller: 'OwnerProductCtrl'
+    })
     .state('owner.settings', {
       url: '/settings',
       templateUrl: 'views/owner/accountsetting.html',
@@ -317,11 +322,11 @@ var app = angular.module('bbManager', [
       url: '/profile',
       templateUrl: 'views/owner/user-profile.html',
     })
-    .state('owner.home', {
-      url: '/home',
-      templateUrl: 'views/owner/home.html',
-      controller: 'OwnerHomeCtrl'
-    })
+    // .state('owner.home', {
+    //   url: '/home',
+    //   templateUrl: 'views/owner/home.html',
+    //   controller: 'OwnerHomeCtrl'
+    // })
     // .state('owner.outsourcingagent', {
     //   url: '/outsourcingagent',
     //   templateUrl: 'views/owner/outsourcingagent.html',

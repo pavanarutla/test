@@ -357,7 +357,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   ];
   $scope.files = {};  
   $scope.updateOwnerCampaignPayment = function () {
-    console.log($scope.campaignPayment);
     Upload.upload({
       url: config.apiPath + '/update-campaign-payment-owner',
       data: { image: $scope.files.image, campaign_payment: $scope.campaignPayment }
@@ -404,10 +403,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     }
   }
 
-  /*=============================
-  | Page based initial loads end
-  =============================*/
-
   if($rootScope.currStateName == 'owner.payments'){
     getCampaignWithPayments();
   }
@@ -420,5 +415,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       });
     })
   }
+  
+  /*=============================
+  | Page based initial loads end
+  =============================*/
 
 });

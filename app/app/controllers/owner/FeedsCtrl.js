@@ -30,7 +30,6 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
 
     var getAllOwnerFeeds = function(){
       OwnerCampaignService.getOwnerFeeds().then(function(result){
-        console.log(result);
         $scope.requestList = result;
       });
     }
@@ -38,7 +37,7 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
 
     $scope.showCampaignDetails = function($event, campaign){
       // console.log('#/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
-      $location.path('#/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
+      $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
     }
 
     /*
@@ -46,14 +45,15 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
     */
 
     $scope.showCampaignDetailsPopup = function (ev, campaignData) {
-      $scope.selectedRequestDetails = campaignData;
-      $mdDialog.show({
-        templateUrl: 'views/admin/campaign-details-popup.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true,
-        preserveScope: true,
-        scope: $scope
-      })
+      // console.log(campaignData);
+      // $scope.selectedRequestDetails = campaignData;
+      // $mdDialog.show({
+      //   templateUrl: 'views/admin/campaign-details-popup.html',
+      //   fullscreen: $scope.customFullscreen,
+      //   clickOutsideToClose: true,
+      //   preserveScope: true,
+      //   scope: $scope
+      // })
     };
 
     $scope.closeCampaignRequestDetails = function(){
