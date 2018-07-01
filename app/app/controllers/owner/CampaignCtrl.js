@@ -411,7 +411,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     loadOwnerCampaigns().then(function(result){
       $scope.getUserCampaignsForOwner().then(function(result2){        
         $scope.allCampaignsForOwner = result.concat(result2);
-        console.log($scope.allCampaignsForOwner);
       });
     })
   }
