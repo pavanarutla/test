@@ -47,6 +47,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.campaignEndDate = campaignForSuggestion.end_date;
         $scope.campaignEstBudget = campaignForSuggestion.est_budget;
         $scope.campaignActBudget = campaignForSuggestion.act_budget;
+        if(campaignForSuggestion.quote_change){
+          $scope.quote_change_req = campaignForSuggestion.quote_change.remark;
+        }
         if(campaignForSuggestion.products && campaignForSuggestion.products.length > 0){
           _.map(result.products, function(p){
             if(_.find(JSON.parse(localStorage.campaignForSuggestion).products, {id: p.id}) !== undefined){

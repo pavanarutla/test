@@ -21,11 +21,7 @@
     </md-toolbar>
     <md-content layout-padding>
       <div class="md-whiteframe-z2 md-body-1">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-        more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        {{quote_change_req}}
       </div>
     </md-content>
   </md-sidenav>
@@ -254,7 +250,7 @@
   <p>Actual Budget
     <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b>
   </p>
-  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="closeInputPanel()" style="margin:0px">
+  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="closeInputPanel()" style="margin:0px" ng-if="quote_change_req">
     <md-icon>!</md-icon>
   </md-button>
 </div>

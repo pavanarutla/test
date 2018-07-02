@@ -416,9 +416,9 @@ app.run(
         var pageaccessibleUser = [
            'index.campaign','index.campaigns','index.campaign'
         ];
-
+          console.log($auth.getPayload().userMongo.user_type);
         if (_.indexOf(pageaccessibleUser, transition.to().name) != -1) {
-           if ($auth.getPayload().userMongo.user_type != "User") {
+           if ($auth.getPayload().userMongo.user_type != "basic") {
               $location.path('/');           
               return false;
           }
