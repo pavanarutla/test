@@ -1,10 +1,6 @@
-<div layout="column" layout-sm="column" layout-xs="column" class="bbsco md-whiteframe-2dp" style="background: #fff;">
+<!-- <div layout="column" layout-sm="column" layout-xs="column" class="bbsco md-whiteframe-2dp" style="background: #fff;">
   <div layout="column" layout-sm="column" layout-xs="column" flex >
-    <!-- <div class="suggest-header" layout="column" layout-align="center center" style="background: #fff;">
-      <div class="suggest-logo">
-        <img ng-src="assets/images/product/billboards.png"  class="logo-img">
-      </div>      
-    </div> -->
+    
     <div flex>
       <div layout="colmun" layout-margin flex-offset-gt-md="10" flex="80" flex-xs="100" flex-sm="100"flex-md="100" >
         <div layout="row" layout-sm="column" layout-xs="column" class="name-suggest" flex>
@@ -51,11 +47,7 @@
           </div>
           <div flex="70" flex-sm="100" flex-xs="100">
             <div class="md-body-2" style="margin-bottom:15px">What is your goal to reach your market?</div>
-            <!-- <div>
-              <md-checkbox ng-model="suggestionRequest.goal_market_reach" aria-label="Checkbox 1">
-                What is your goal to reach your market
-              </md-checkbox>
-            </div> -->
+           
             <div>
               <md-checkbox ng-model="suggestionRequest.market_reach.solution_to_problem" aria-label="Checkbox 1">
                 Are you providing a solution for the current problem
@@ -221,13 +213,7 @@
                   </md-checkbox>
                 </div>
               </div>
-              <!-- <div layout="row">
-                <div flex="30">
-                  <md-checkbox ng-model="data1" aria-label="Checkbox 1">
-                    other (specify)
-                  </md-checkbox>
-                </div>
-              </div> -->
+             
             </div>
             <div class="Gender">
               <div class="md-body-2" style="margin-bottom:15px">
@@ -370,7 +356,7 @@
           </div>
         </div>
       </div>
-      <div layout="colmun" layout-margin flex-offset-gt-md="10" flex="80" flex-xs="100" flex-sm="100"flex-md="100" >
+      <div layout="colmun" layout-margin flex-offset-gt-md="10" flex="80" flex-xs="100" flex-sm="100"flex-md="100" style="margin-bottom:60px" >
         <div layout="row" layout-sm="column" layout-xs="column"  flex layout-align="center center">
           <md-button md-no-ink class="md-raised md-primary" ng-click="sendSuggestionRequest($event)">
             Submit
@@ -382,4 +368,23 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div id="form-container">
+  
+  <div class="page-header text-center">
+      <!-- <h2>Suggest Campaign</h2> -->
+      <div id="status-buttons" class="text-center">
+          <a ui-sref-active="active" ui-sref=".productdetail"><span>1</span> Product Detail</a>
+          <a ui-sref-active="active" ui-sref=".marketingobjects"><span>2</span> Marketing objective</a>
+          <a ui-sref-active="active" ui-sref=".advertisingobjects"><span>3</span> Advertising objective</a>
+          <a ui-sref-active="active" ui-sref=".otherinfo"><span>4</span> Other Info</a>
+      </div>
+  </div>
+  <!-- use ng-submit to catch the form submission and use our Angular function -->
+  <form id="signup-form" ng-submit="processForm()">
+      <!-- our nested state views will be injected here -->
+      <div id="suggest-views" ui-view></div>
+  </form>
+
 </div>

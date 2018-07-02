@@ -127,6 +127,13 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+			<div class="serverErrors" ng-show="addProductErrors">
+				<ul>
+					<li ng-repeat="error in addProductErrors">
+						{{error}}
+					</li>
+				</ul>
 			</div> 
 			<div layout="row" layout-align="center center">
 				<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()" ng-disabled="addProductForm.$invalid">SUBMIT</md-button>

@@ -201,7 +201,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   vm.limit = 10;
   $scope.loadMore = function() {
     var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
+    vm.limit = increamented > $scope.hoardingCompanies.length ? $scope.hoardingCompanies.length : increamented;
   };
 // tables code end
 });

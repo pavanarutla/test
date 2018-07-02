@@ -50,10 +50,36 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    .state('index.suggest_campaign', {
-      url: 'suggest-campaign',
-      templateUrl: 'views/suggest-a-campaign.html',
-      controller: 'CampaignCtrl'
+    // .state('index.suggest_campaign', {
+    //   url: 'suggest-campaign',
+    //   templateUrl: 'views/suggest-a-campaign.html',
+    //   controller: 'CampaignCtrl'
+    // })
+    $stateProvider.state('index.suggest', {
+      url: 'suggest',
+      templateUrl: 'views/suggest-a-campaign.html'
+    })   
+    // nested states 
+    // each of these sections will have their own view
+    // url will be suggest-Product-Detail
+    .state('index.suggest.productdetail', {
+        url: '/productdetail',
+        templateUrl: 'views/suggest-campaign-one.html'
+    })
+    // url will be suggest-market-Detail
+    .state('index.suggest.marketingobjects', {
+        url: '/marketingobjects',
+        templateUrl: 'views/suggest-campaign-two.html'
+    })
+    // url will be suggest-Advertising-Detail
+    .state('index.suggest.advertisingobjects', {
+        url: '/advertisingobjects',
+        templateUrl: 'views/suggest-campaign-three.html'
+    })
+      // url will be suggest-Advertising-Detail
+    .state('index.suggest.otherinfo', {
+        url: '/otherinfo',
+        templateUrl: 'views/suggest-campaign-four.html'
     })
     .state('index.location', {
       url: 'location',
@@ -251,9 +277,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
-    .state('owner.dashboard', {
-      url: '/dashboard',
-      templateUrl: 'views/owner/dashboard.html',
+    .state('owner.feeds', {
+      url: '/feeds',
+      templateUrl: 'views/owner/feeds.html',
       controller: 'OwnerFeedsCtrl',
       
     })
@@ -282,6 +308,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerProductCtrl'
     })
+    .state('owner.product-details', {
+      url: '/product-details/:productId',
+      templateUrl: 'views/owner/product-details.html',
+      controller: 'OwnerProductCtrl'
+    })
     .state('owner.settings', {
       url: '/settings',
       templateUrl: 'views/owner/accountsetting.html',
@@ -291,30 +322,41 @@ var app = angular.module('bbManager', [
       url: '/profile',
       templateUrl: 'views/owner/user-profile.html',
     })
-    .state('owner.home', {
-      url: '/home',
-      templateUrl: 'views/owner/home.html',
-      controller: 'OwnerHomeController'
+    // .state('owner.home', {
+    //   url: '/home',
+    //   templateUrl: 'views/owner/home.html',
+    //   controller: 'OwnerHomeCtrl'
+    // })
+    // .state('owner.outsourcingagent', {
+    //   url: '/outsourcingagent',
+    //   templateUrl: 'views/owner/outsourcingagent.html',
+    //   controller:'outSourcing'
+    // })
+    // .state('owner.teamPage', {
+    //   url: '/teamPage',
+    //   templateUrl: 'views/owner/team.html',
+    //   controller:'teamPage'
+    // })
+    // .state('owner.feedBack', {
+    //   url: '/feedBack',
+    //   templateUrl: 'views/owner/feedback.html',
+    //   controller:'feedback'
+    // })
+    .state('owner.payments', {
+      url: '/payments',
+      templateUrl: 'views/owner/campaign-payments.html',
+      controller:'OwnerCampaignCtrl'
     })
-    .state('owner.outsourcingagent', {
-      url: '/outsourcingagent',
-      templateUrl: 'views/owner/outsourcingagent.html',
-      controller:'outSourcing'
-    })
-    .state('owner.teamPage', {
-      url: '/teamPage',
-      templateUrl: 'views/owner/team.html',
-      controller:'teamPage'
-    })
-    .state('owner.feedBack', {
-      url: '/feedBack',
-      templateUrl: 'views/owner/feedback.html',
-      controller:'feedback'
+    .state('owner.update-payments', {
+      url: '/update-payments',
+      templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
+       
     });
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/:client_slug/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/:client_slug/feeds');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
@@ -416,7 +458,6 @@ app.run(
         var pageaccessibleUser = [
            'index.campaign','index.campaigns','index.campaign'
         ];
-          console.log($auth.getPayload().userMongo.user_type);
         if (_.indexOf(pageaccessibleUser, transition.to().name) != -1) {
            if ($auth.getPayload().userMongo.user_type != "basic") {
               $location.path('/');           

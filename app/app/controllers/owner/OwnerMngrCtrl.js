@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, OwnerProductService, toastr) {
 
   $rootScope.config = config;
 
@@ -198,6 +198,31 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       }
     });
     $mdSidenav('ownerRight').toggle();
+  }
+
+  /*=================================
+  | Product search
+  =================================*/
+  // $scope.simulateQuery = false;
+  $scope.isDisabled    = false;
+  // $scope.querySearch   = querySearch;
+  // $scope.selectedItemChange = selectedItemChange;
+  // $scope.searchTextChange   = searchTextChange;
+
+
+  $scope.ownerProductSearch = function(query) {
+    return OwnerProductService.searchOwnerProducts(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  $scope.viewSelectedProduct = function(product) {
+    if(typeof product !== 'undefined'){
+      $location.path('/owner/' + $rootScope.clientSlug + '/product-details/' + product.id);
+    }
+    else{
+      $location.path('/owner/' + $rootScope.clientSlug + '/hoarding-list');
+    }
   }
 
 })

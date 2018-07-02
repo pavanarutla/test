@@ -57,6 +57,22 @@ app.service('OwnerCampaignService',
           $http.delete(config.apiPath + '/owner-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+
+        getCampaignWithPayments: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/campaigns-with-payments-owner').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getCampaignPaymentDetails: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/campaign-payment-details-owner/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getOwnerFeeds: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/owner-feeds').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        }
       }
     }
   ]
