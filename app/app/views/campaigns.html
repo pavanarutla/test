@@ -49,9 +49,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div layout="column" layout-align="center end" class="loadmore">
-				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
-			</div>
+			
 
 		</md-tab>
 		<!-- running campaign start-->
@@ -198,12 +196,10 @@
 					<thead>
 						<tr>
 						<th>Campagin Name</th>
-						<th>Client Contact</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Status</th>
 						<th>Price</th>
-						<th>Products</th>
 						<th>Actions</th>
 						</tr>
 					</thead>
@@ -211,21 +207,17 @@
 					<tr ng-repeat="rCampaign in runningCampaigns">
 			
 						<td>{{rCampaign.name}}</td>
-						<td>{{rCampaign.clientcontent}}</td>
 						<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
 						<td>{{rCampaign.act_budget || "N/A"}}</td>
-						<td>{{rCampaign.products.length}}</td>
-						<td><md-button class="md-primary">VIEW</md-button></td>
+						<td><md-button class="md-primary" ng-href="#/view-campaign/{{rCampaign.id}}">VIEW</md-button></td>
 						
 					</tr>      
 					</tbody>
 				</table>
 			</div>
-			<div layout="column" layout-align="center end" class="loadmore">
-				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
-			</div>
+			
 		
 		</md-tab>
 		<!--closed campagin start -->
@@ -372,34 +364,28 @@
 					<thead>
 						<tr>
 						<th>Campagin Name</th>
-						<th>Client Contact</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Status</th>
-						<th>Price</th>
-						<th>Products</th>
+						<th>Price</th>						
 						<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
-					<tr ng-repeat="rCampaign in runningCampaigns">
+					<tr ng-repeat="rCampaign in closedCampaigns">
 			
-						<td>{{rCampaign.name}}</td>
-						<td>{{rCampaign.clientcontent}}</td>
-						<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
-						<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
-						<td>{{rCampaign.act_budget || "N/A"}}</td>
-						<td>{{cCampaign.products.length}}</td>
-						<td><md-button class="md-primary">VIEW</md-button></td>
+						<td>{{cCampaign.name}}</td>
+						<td>{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td>{{cCampaign.status | stringifyCampaignStatus}}</td>
+						<td>{{cCampaign.act_budget || "N/A"}}</td>
+						<td><md-button class="md-primary" ng-href="#/view-campaign/{{cCampaign.id}}">VIEW</md-button></td>
 						
 					</tr>      
 					</tbody>
 				</table>
 			</div>
-			<div layout="column" layout-align="center end" class="loadmore">
-				<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
-			</div>
+			
 			
 		</md-tab>
 	</md-tabs>

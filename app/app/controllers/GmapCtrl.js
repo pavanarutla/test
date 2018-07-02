@@ -750,15 +750,19 @@ app.controller('GmapCtrl',
             $scope.campaign.products.push(v.id);
           });
           CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
-            $scope.campaignSavedSuccessfully = true;
-            $scope.campaign = {};
-            $timeout(function () {
-              $mdSidenav('saveCampaignSidenav').close();
-              $mdSidenav('shortlistAndSaveSidenav').close();
-              $scope.campaignSavedSuccessfully = false;
-            }, 3000);
-            $scope.loadActiveUserCampaigns();
-            getShortListedProducts();
+            if(response.status == 1){
+              $scope.campaign = {};
+              $timeout(function () {
+                $mdSidenav('saveCampaignSidenav').close();
+                $mdSidenav('shortlistAndSaveSidenav').close();
+                $scope.campaignSavedSuccessfully = false;
+              }, 3000);
+              $scope.loadActiveUserCampaigns();
+              getShortListedProducts();
+            }
+            else{
+              $scope.saveUserCampaignErrors = response.message;
+            }
           });
         }
         else {

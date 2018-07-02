@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $location, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
