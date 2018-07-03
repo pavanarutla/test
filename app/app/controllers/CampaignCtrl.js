@@ -201,42 +201,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
      
     }
 
-    // $scope.checkActiveSuggestItems = function(){
-
-    //   switch($location.path()){
-    //     case '/suggest/productdetail' :
-    //      return true
-    //      break;
-    //      case "/suggest/marketingobjects" :
-    //      return true
-    //      break;
-    //      case '/suggest/advertisingobjects' :
-    //      return true
-    //      break; 
-    //      case '/suggest/otherinfo' :
-    //      return true
-    //      break; 
-    //      default:
-    //       return false
-        
-    //   }
-      
-      // if($location.path() == '/suggest/productdetail'){
-      //   return true
-      // }
-      // else if($location.path() == "/suggest/marketingobjects"){
-      //   return true
-      // }
-      // else if($location.path() == '/suggest/advertisingobjects'){
-      //   return true
-      // }
-      // else if($location.path() == '/suggest/otherinfo'){
-      //   return true
-      // } 
-      // else{
-      //   return false
-      // }
-    // }
   $scope.sendSuggestionRequest = function (ev) {
     if( $scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 13){
       CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);
