@@ -751,10 +751,13 @@ app.controller('GmapCtrl',
           });
           CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
             if(response.status == 1){
-              $scope.campaign = {};
+              $scope.campaignSavedSuccessfully = true;
               $timeout(function () {
                 $mdSidenav('saveCampaignSidenav').close();
                 $mdSidenav('shortlistAndSaveSidenav').close();
+                $scope.campaign = {};
+                $scope.forms.viewAndSaveCampaignForm.$setPristine();
+                $scope.forms.viewAndSaveCampaignForm.$setUntouched();
                 $scope.campaignSavedSuccessfully = false;
               }, 3000);
               $scope.loadActiveUserCampaigns();

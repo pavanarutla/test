@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0

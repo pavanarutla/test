@@ -292,12 +292,12 @@
           <div class="md-headline">We are excited to see your Campaign</div>
           <div class="md-headline">Let's Work Together!</div>
         </div>
-        <form name="viewAndSaveCampaignForm">
+        <form name="forms.viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input type="text" name="campname" ng-model="campaign.name" required="required">
-              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">Campaign name is required.</div>
               </div>
             </md-input-container>
@@ -306,7 +306,7 @@
             <div layout="column" flex="50">
               <md-input-container>
                 <md-datepicker ng-model="campaign.start_date" md-min-date="newDate" name="start_date" md-placeholder="Campaign Start" required="required"></md-datepicker>
-                <div ng-messages="viewAndSaveCampaignForm.start_date.$error">
+                <div ng-messages="forms.viewAndSaveCampaignForm.start_date.$error">
                   <div ng-message="required">Start date is required.</div>
                 </div>
               </md-input-container>
@@ -314,7 +314,7 @@
             <div layout="column" flex="50">
               <md-input-container>
                 <md-datepicker ng-model="campaign.end_date" name="end_date" md-min-date="endDate" md-placeholder="Campaign End" required="required"></md-datepicker>
-                <div ng-messages="viewAndSaveCampaignForm.end_date.$error">
+                <div ng-messages="forms.viewAndSaveCampaignForm.end_date.$error">
                   <div ng-message="required">End date is required.</div>
                 </div>
               </md-input-container>
@@ -324,7 +324,7 @@
             <md-input-container class="md-block" layout-fill>
               <label>Budget</label>
               <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" />
-              <div ng-messages="viewAndSaveCampaignForm.est_budget.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.est_budget.$error">
                 <div ng-message="required">Estimated budget required.</div>
               </div>
             </md-input-container>
@@ -338,7 +338,7 @@
           </div> 
           <div layout="column" layout-margin>
             <div>
-              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()" ng-disabled="viewAndSaveCampaignForm.$invalid">SAVE CAMPAIGN</md-button>
+              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()" ng-disabled="forms.viewAndSaveCampaignForm.$invalid">SAVE CAMPAIGN</md-button>
             </div>
             <div class="suggtn">
               <span class="suggtn-one">Need Suggestions?</span>
@@ -386,12 +386,12 @@
           <div class="md-subhead">We are excited to see your Campaign</div>
           <div class="md-subhead">Let's Work Together!</div>
         </div>
-        <form name="viewAndSaveCampaignForm">
+        <form name="forms.viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input required md-no-asterisk name="campname" ng-model="campaign.name">
-              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -413,7 +413,7 @@
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
               <input ng-model="campaign.budget" type="text" name="budget" required="required" />
-              <div ng-messages="viewAndSaveCampaignForm.budget.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
             </md-input-container>
