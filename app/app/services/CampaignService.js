@@ -2,6 +2,7 @@ app.service('CampaignService',
   ['$http', '$q', 'config', 
     function($http, $q, config){
       return {
+        suggestedData : {},
         getActiveUserCampaigns: function(){
           var dfd = $q.defer();
           $http.get(config.apiPath + '/active-user-campaigns').success(dfd.resolve).error(dfd.reject);
