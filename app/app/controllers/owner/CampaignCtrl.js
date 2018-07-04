@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr,CampaignService) {
 
   $scope.forms = [];
 
@@ -280,19 +280,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   }
 
   $scope.deleteCampaign = function(campaignId){
-    OwnerCampaignService.deleteOwnerCampaign(campaignId).then(function(result){
-      if(result.status == 1){
-        $scope.getUserCampaignsForOwner();
-        loadOwnerCampaigns();
-        toastr.success(result.message);
-        $mdDialog.hide();
-      }
-      else if(result.status == 0){
-        toastr.error(result.message);
-      }
-    },function(result){
-        toastr.error("somthing went wrong please try again after some time!");
-    });
+     if (confirm("Are you sure want to delete?")) {
+        CampaignService.deleteUserCampaign(campaignId).then(function(result){
+          if(result.status == 1){
+            $scope.getUserCampaignsForOwner();
+            loadOwnerCampaigns();
+            toastr.success(result.message);
+            $mdDialog.hide();
+          }
+          else if(result.status == 0){
+            toastr.error(result.message);
+          }
+        },function(result){
+            toastr.error("somthing went wrong please try again after some time!");
+        });
+    }
+    
   }
 
 

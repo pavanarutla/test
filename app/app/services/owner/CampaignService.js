@@ -52,12 +52,6 @@ app.service('OwnerCampaignService',
           $http.get(config.apiPath + '/launch-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        deleteOwnerCampaign : function(campaignId){
-          var dfd = $q.defer();
-          $http.delete(config.apiPath + '/owner-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
-          return dfd.promise;
-        },
-
         getCampaignWithPayments: function(){
           var dfd = $q.defer();
           $http.get(config.apiPath + '/campaigns-with-payments-owner').success(dfd.resolve).error(dfd.reject);
