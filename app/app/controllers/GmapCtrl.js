@@ -814,7 +814,7 @@ app.controller('GmapCtrl',
       $scope.loadActiveUserCampaigns();
 
       $scope.deleteUserCampaign = function (campaignId) {
-        CampaignService.deleteUserCampaign(campaignId).then(function (result) {
+        CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
             $scope.loadActiveUserCampaigns();
             toastr.success(result.message);
