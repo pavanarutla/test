@@ -69,14 +69,14 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   /****** Search ************/
    $scope.searchAll = "";
 
-   $scope.clearSearch = function () {
-      $scope.searchAll = "";
-      $scope.pageNo = 1;
-      $scope.loadProductList();
-   };
+  $scope.clearSearch = function () {
+    $scope.searchAll = "";
+    $scope.pageNo = 1;
+    $scope.loadProductList();
+  };
   $scope.searchHoardingData = function () {
-       $scope.pageNo = 1;
-       $scope.loadProductList();
+    $scope.pageNo = 1;
+    $scope.loadProductList();
   };
 
    $scope.loadCampaignData = function(campaignId){

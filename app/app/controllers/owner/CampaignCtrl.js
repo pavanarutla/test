@@ -1,5 +1,4 @@
 app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr) {
-
   $scope.forms = [];
 
   /*===================
@@ -381,6 +380,34 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   /* ==============================
   | Campaign payment section ends
   =============================== */
+
+
+  /*==============================
+  | Campaign Search
+  ==============================*/
+  // $scope.simulateQuery = false;
+  $scope.isDisabled    = false;
+  // $scope.querySearch   = querySearch;
+  // $scope.selectedItemChange = selectedItemChange;
+  // $scope.searchTextChange   = searchTextChange;
+
+
+  $scope.campaignSearch = function(query) {
+    return OwnerCampaignService.searchCampaigns(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  $scope.viewSelectedCampaign = function(campaign) {
+    $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
+  }
+
+  function selectedItemChange(item) {
+    //console.log('Item changed to ' + JSON.stringify(item));
+  }
+  /*==============================
+  | Campaign Search
+  ==============================*/
 
 
   /*=========================

@@ -43,9 +43,7 @@
             <md-icon ng-if="searchAll==''">
               <i class="material-icons" >search</i>
             </md-icon>
-            
           </form>
-          
         </md-input-container>
       </div>
     </div>
@@ -211,8 +209,7 @@
                     <div layout="row">
                       <md-input-container class="md-block margin-input">
                         <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
-                        />
+                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"  ng-init="suggestedProduct.price = product.default_price" />
                       </md-input-container>
                       <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
                     </div>
