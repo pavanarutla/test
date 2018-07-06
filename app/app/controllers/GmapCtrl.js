@@ -947,6 +947,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = product.availableDates;
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+        $scope.product.id = product.id;
       }
 
       $scope.deleteProductFromCampaign = function (productId, campaignId) {

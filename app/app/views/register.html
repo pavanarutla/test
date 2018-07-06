@@ -31,10 +31,10 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Email</label>
-							<input ng-model="user.email" name="email" type="email" maxlength="30" required="required"/>
+							<input ng-model="user.email" name="email" type="email" maxlength="50" required="required"/>
 							<div ng-messages="registerUser.email.$error">
 								<div class="alret alert-danger" ng-message="required">Email is required.</div>
-								<div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
+								<div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
 								<div ng-message="pattern">Enter a valid username</div>
 							</div>
 						</md-input-container>
@@ -59,11 +59,11 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Address </label>
-							<input ng-model="user.address" name="address" type="text" minlength="10" maxlength="50" />
+							<input ng-model="user.address" name="address" type="text" minlength="10" maxlength="150" />
 							<div ng-messages="registerUser.address.$error">
 								<div class="alret alert-danger" ng-message="required">address is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
-								<div ng-message="maxlength">address shouldn't exceed 130 characters. </div>
+								<div ng-message="maxlength">address shouldn't exceed 150 characters. </div>
 							</div>
 						</md-input-container>
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
@@ -117,7 +117,7 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Account Email</label>
-							<input ng-model="client.email" name="email" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							<input ng-model="client.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
 							/>
 							<div ng-messages="registerClientForm.email.$error">
 								<div class="alret alert-danger" ng-message="required">Email is required.</div>
@@ -137,11 +137,11 @@
 						</md-input-container>
 						<md-input-container class="md-block">
 							<label>Address </label>
-							<input ng-model="client.address" name="address" type="text" minlength="10" maxlength="130" required="required" />
+							<input ng-model="client.address" name="address" type="text" minlength="10" maxlength="150" required="required" />
 							<div ng-messages="registerClientForm.address.$error">
 								<div class="alret alert-danger" ng-message="required">address is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
-								<div ng-message="maxlength">username shouldn't exceed 130 characters. </div>
+								<div ng-message="maxlength">username shouldn't exceed 150 characters. </div>
 							</div>
 						</md-input-container>
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
