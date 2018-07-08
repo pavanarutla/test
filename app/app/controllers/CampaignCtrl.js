@@ -68,11 +68,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   
   $scope.campaignDetails = {};
 
-  $scope.limit = 3;
+  // $scope.limit = 3;
 
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
+  // $scope.loadMore = function () {
+  //   $scope.limit = $scope.items.length
+  // }
   
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {

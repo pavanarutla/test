@@ -333,10 +333,10 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         $scope.loadCampaignData(campaignId);
-        toastr.success("Product removed from campaign.");
+        toastr.success(result.message);
       }
       else{
-        toastr.error("There was a technical error removing the product from campaign.");
+        toastr.error(result.message);
       }
     });
   }
