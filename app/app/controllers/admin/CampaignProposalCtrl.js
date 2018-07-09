@@ -69,14 +69,14 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   /****** Search ************/
    $scope.searchAll = "";
 
-   $scope.clearSearch = function () {
-      $scope.searchAll = "";
-      $scope.pageNo = 1;
-      $scope.loadProductList();
-   };
+  $scope.clearSearch = function () {
+    $scope.searchAll = "";
+    $scope.pageNo = 1;
+    $scope.loadProductList();
+  };
   $scope.searchHoardingData = function () {
-       $scope.pageNo = 1;
-       $scope.loadProductList();
+    $scope.pageNo = 1;
+    $scope.loadProductList();
   };
 
    $scope.loadCampaignData = function(campaignId){
@@ -333,10 +333,10 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         $scope.loadCampaignData(campaignId);
-        toastr.success("Product removed from campaign.");
+        toastr.success(result.message);
       }
       else{
-        toastr.error("There was a technical error removing the product from campaign.");
+        toastr.error(result.message);
       }
     });
   }

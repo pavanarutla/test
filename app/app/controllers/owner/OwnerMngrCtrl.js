@@ -10,6 +10,21 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
+  $scope.getAvatar = function(){
+    var userMongo = $auth.getPayload().userMongo;
+    if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+      return {
+        present: true,
+        profile_pic: userMongo.profile_pic
+      }
+    }
+    else{
+      return {
+        present: false
+      }
+    }
+  }
+
   $scope.logout = function(){
     $auth.logout().then(function(result){
       // console.log(result);

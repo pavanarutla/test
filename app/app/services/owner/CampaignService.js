@@ -66,6 +66,11 @@ app.service('OwnerCampaignService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/owner-feeds').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        searchCampaigns: function(searchTerm){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/search-campaigns/' + searchTerm).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

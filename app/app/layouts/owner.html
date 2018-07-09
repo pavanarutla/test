@@ -55,8 +55,8 @@
 				</div>
 				<md-menu md-offset="0 50">
 					<md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-						<img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-						<img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
 					</md-button>
 					<md-menu-content width="3" style="z-index:99">
 						<md-menu-item>
