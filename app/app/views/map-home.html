@@ -115,7 +115,7 @@
           </div>
           <md-card-actions layout="row" layout-align="end center" style="margin:0px">
             <md-button style="margin:0px" ng-click="viewProduct(product)">View</md-button>
-            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">Delete</md-button>
+            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)" ng-if="campaignDetails.status <=1">Delete</md-button>
           </md-card-actions>
           <md-divider></md-divider>
         </div>
@@ -199,7 +199,7 @@
         <div class="suggtn">
           <span class="suggtn-one">Need Suggestions?</span>
           <span class="suggtn-two">
-            <md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button>
+            <md-butoon ui-sref="index.suggest.marketingobjects" class="md-primary" style="color: #ff5722;cursor:pointer">SUGGEST ME</md-button>
           </span>
         </div>
       </div>
@@ -323,7 +323,7 @@
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Budget</label>
-              <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" />
+              <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" only-numeric/>
               <div ng-messages="forms.viewAndSaveCampaignForm.est_budget.$error">
                 <div ng-message="required">Estimated budget required.</div>
               </div>
@@ -343,7 +343,7 @@
             <div class="suggtn">
               <span class="suggtn-one">Need Suggestions?</span>
               <span class="suggtn-two">
-                <md-button ng-href="#/suggest-campaign">SUGGEST ME</md-button>
+                <md-button ui-sref="index.suggest.productdetail">SUGGEST ME</md-button>
               </span>
             </div>
           </div>
@@ -503,7 +503,7 @@
             <div class="suggtn">
               <span class="suggtn-one">Need Suggestions?</span>
               <span class="suggtn-two">
-                <md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button>
+                <md-butoon ui-sref="index.suggest.marketingobjects" class="md-primary">SUGGEST ME</md-button>
               </span>
             </div>
           </div>
@@ -619,7 +619,7 @@
         <div class="suggtn">
           <span class="suggtn-one">Need Suggestions?</span>
           <span class="suggtn-two">
-            <a ng-href="#/suggest-campaign">SUGGEST ME</a>
+            <a ui-sref="index.suggest.marketingobjects">SUGGEST ME</a>
           </span>
         </div>
       </div>

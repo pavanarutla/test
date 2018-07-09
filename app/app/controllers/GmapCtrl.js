@@ -808,13 +808,13 @@ app.controller('GmapCtrl',
       $scope.activeUserCampaigns = [];
       $scope.loadActiveUserCampaigns = function () {
         CampaignService.getActiveUserCampaigns().then(function (result) {
-          $scope.activeUserCampaigns = result;
+          $scope.activeUserCampaigns = result.reverse();
         });
       }
       $scope.loadActiveUserCampaigns();
 
       $scope.deleteUserCampaign = function (campaignId) {
-        CampaignService.deleteUserCampaign(campaignId).then(function (result) {
+        CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
             $scope.loadActiveUserCampaigns();
             toastr.success(result.message);
@@ -947,6 +947,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = product.availableDates;
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+        $scope.product.id = product.id;
       }
 
       $scope.deleteProductFromCampaign = function (productId, campaignId) {
