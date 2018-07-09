@@ -808,7 +808,7 @@ app.controller('GmapCtrl',
       $scope.activeUserCampaigns = [];
       $scope.loadActiveUserCampaigns = function () {
         CampaignService.getActiveUserCampaigns().then(function (result) {
-          $scope.activeUserCampaigns = result;
+          $scope.activeUserCampaigns = result.reverse();
         });
       }
       $scope.loadActiveUserCampaigns();
