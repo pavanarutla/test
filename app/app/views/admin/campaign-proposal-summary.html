@@ -172,8 +172,7 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 3 && campaignDetails.status != 4"
-					 ng-click="addNewProductToCampaign()">
+					<md-button class="md-raised md-warn" ng-disabled="!(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))" ng-click="addNewProductToCampaign()">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -242,7 +241,7 @@
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>

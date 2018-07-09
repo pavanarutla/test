@@ -150,6 +150,19 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
   /*=====================
   | Product Section Ends
   =====================*/
