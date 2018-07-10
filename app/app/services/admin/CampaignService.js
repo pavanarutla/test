@@ -101,6 +101,11 @@ app.service('AdminCampaignService',
         var dfd = $q.defer();
         $http.get(config.apiPath + '/campaign-suggestion-request-details/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
+      },
+      getChangeRequestHistory: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/quote-change-request-history/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
       }
     }
   }

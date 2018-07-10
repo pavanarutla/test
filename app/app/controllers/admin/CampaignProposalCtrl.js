@@ -43,6 +43,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     ProductService.getSearchProductList($scope.pagination.pageNo, $scope.pagination.pageSize, search).then(function(result){
       if(localStorage.campaignForSuggestion){
         var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+        $scope.campaignId = campaignForSuggestion.id;
         $scope.campaignStartDate = campaignForSuggestion.start_date;
         $scope.campaignEndDate = campaignForSuggestion.end_date;
         $scope.campaignEstBudget = campaignForSuggestion.est_budget;
@@ -63,7 +64,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
     
   if($rootScope.currStateName == "admin.suggest-products"){
-    $scope.loadProductList();
+    if(!localStorage.campaignForSuggestion){
+      toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
+    }
+    else{
+      $scope.loadProductList();
+    }
   }
 
   /****** Search ************/
@@ -249,8 +255,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
   
   /*////popup////////*/
-  $scope.closeInputPanel = function() {
-    $mdSidenav('ClientRequest').toggle();
+  $scope.toggleQuoteChangeRequestDetailsSidenav = function() {
+    $mdSidenav('quoteChangeRequestDetailsSidenav').toggle();
   };
 
   $scope.launchCampaign = function(campaignId, ev){
@@ -339,6 +345,13 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         toastr.error(result.message);
       }
     });
+  }
+
+  $scope.getChangeRequestHistory = function(campaignId){
+    AdminCampaignService.getChangeRequestHistory(campaignId).then(function(result){
+      $scope.changeRequestHistory = result;
+      $scope.toggleQuoteChangeRequestDetailsSidenav();
+    })
   }
 
 });

@@ -156,6 +156,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         $scope.requestChangeInQuote = function(){          
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
+              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
               $mdDialog.hide();
               toastr.success(result.message);
             }
