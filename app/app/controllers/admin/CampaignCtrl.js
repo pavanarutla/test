@@ -15,7 +15,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   var getAllCampaigns = function(){
     AdminCampaignService.getAllCampaigns().then(function(result){
       $scope.plannedCampaigns = _.filter(result.user_campaigns, function(c){
-        return c.status < 6;
+        return c.status < 6 && typeof c.name !== "undefined" && typeof c.start_date !== "undefined" && typeof c.end_date !== "undefined";
       });
       $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
