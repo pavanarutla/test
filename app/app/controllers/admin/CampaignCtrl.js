@@ -80,8 +80,23 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
     });
   };
 
-  $scope.deleteCampaign = function(campaignId){
-    AdminCampaignService.deleteCampaign(campaignId).then(function(result){
+  $scope.deleteUserCampaign = function(campaignId){
+    AdminCampaignService.deleteUserCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if(result.status == 0){
+        toastr.error(result.message);
+      }
+    },function(result){
+        toastr.error("somthing went wrong please try again after some time!");
+    });
+  }
+
+  $scope.deleteNonUserCampaign = function(campaignId){
+    AdminCampaignService.deleteNonUserCampaign(campaignId).then(function(result){
       if(result.status == 1){
         getAllCampaigns();
         toastr.success(result.message);

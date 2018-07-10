@@ -33,7 +33,7 @@
                     <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                   </md-menu-item>
                   <md-menu-item>
-                    <md-button ng-if="activeUserCampaign.status <= 1" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
+                    <md-button ng-if="activeUserCampaign.status < 2" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
@@ -115,7 +115,7 @@
           </div>
           <md-card-actions layout="row" layout-align="end center" style="margin:0px">
             <md-button style="margin:0px" ng-click="viewProduct(product)">View</md-button>
-            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)" ng-if="campaignDetails.status <=1">Delete</md-button>
+            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)" ng-if="campaignDetails.status < 2">Delete</md-button>
           </md-card-actions>
           <md-divider></md-divider>
         </div>
@@ -125,7 +125,10 @@
           <p style="width:70%; margin:auto;">This campaign is empty. Please add some prducts into it to move forward!</p>
         </div>
         <div>
-          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
+          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill 
+          ng-click="requestProposalForCampaign(campaignDetails.id)">
+            REQUEST PROPOSAL
+          </md-button>
         </div>
         <div>
           <md-button class="md-raised " ng-if="campaignDetails.products.length > 0" layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
@@ -355,14 +358,14 @@
           <div class="md-display-1">Congratulations!</div>
           <div class="md-headline">Campaign Saved Succcessfully</div>
         </div>
-        <div layout="column" layout-margin>
+        <!-- <div layout="column" layout-margin>
           <div>
             <md-button class="md-raised md-warn" layout-fill ng-if="campaign.status < 2">REQUEST PROPOSAL</md-button>
           </div>
           <div>
             <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
           </div>
-        </div>
+        </div> -->
       </md-content>
     </div>
   </md-sidenav>
@@ -1123,7 +1126,7 @@
                         <md-menu-item>
                           <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="activeUserCampaign.status <= 1">
+                        <md-menu-item ng-if="activeUserCampaign.status < 2">
                           <md-button ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                         </md-menu-item>
                       </md-menu-content>

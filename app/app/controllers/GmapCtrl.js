@@ -339,7 +339,6 @@ app.controller('GmapCtrl',
       //  }
 
       function selectMarker(marker) {
-        console.log(marker);
         $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);

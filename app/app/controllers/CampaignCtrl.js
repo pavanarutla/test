@@ -207,8 +207,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  $scope.ShareShortlistedSidenav = function () {
-    $mdSidenav('shortlistSharingSidenav').toggle();
+  $scope.toggleShareCampaignSidenav = function () {
+    $mdSidenav('shareCampaignSidenav').toggle();
   };
 
   $scope.requestProposalForCampaign = function (campaignId, ev) {

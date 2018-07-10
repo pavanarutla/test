@@ -32,9 +32,14 @@ app.service('AdminCampaignService',
         $http.post(config.apiPath + '/suggestion-request', suggestionRequest).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      deleteCampaign : function(campaignId){
+      deleteUserCampaign : function(campaignId){
         var dfd = $q.defer();
         $http.delete(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      deleteNonUserCampaign : function(campaignId){
+        var dfd = $q.defer();
+        $http.delete(config.apiPath + '/non-user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       proposeProductForCampaign: function(obj){
