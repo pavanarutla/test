@@ -69,7 +69,7 @@
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
-						<div class = "serverErrors" ng-show="regNewUserErrors">
+						<div ng-if="regNewUserErrors.length >=0" style="color:red">
 								<ul>
 									<li ng-repeat="error in regNewUserErrors">
 										{{error}}
@@ -146,6 +146,9 @@
 						</md-input-container>
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+						</div>
+						<div  ng-if="clientErrorMessages.length >=0" style="color : red">				
+							{{clientErrorMessages}}
 						</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
 							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerClientForm.$invalid" ng-click="registerClient(client)">Register</md-button>
