@@ -110,7 +110,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
     });
   }
   /*
-  *========= campagin proposal(planned) grid =========
+  *========= campaign proposal(planned) grid =========
   */
   
   /*

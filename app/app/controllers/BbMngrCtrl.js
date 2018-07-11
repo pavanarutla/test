@@ -301,7 +301,7 @@ app.controller('bbMngrCtrl',
     $scope.existingCampaignSidenavVisible = false;
     //saved campaign
     $scope.toggleExistingCampaignSidenav = function () {
-      // save to existing campagin
+      // save to existing campaign
       $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
     };
 
