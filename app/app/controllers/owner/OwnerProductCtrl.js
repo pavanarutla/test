@@ -1,16 +1,31 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $window, $rootScope, OwnerProductService, OwnerLocationService, Upload, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, Upload, toastr) {
 
-  /*==============
-  | Sidenavs
-  ==============*/
+  /*===================
+  | Sidenavs and popups
+  ===================*/
 
   $scope.toggleRequestHoardingFormSidenav = function () {
     $mdSidenav('request-hoarding-sidenav').toggle();
   };
 
-  /*===============
-  | Sidenavs ends
-  ===============*/
+  $scope.openScreen = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/owner/requesthoardingadd.html',
+      clickOutsideToClose: true,
+    });
+  };
+
+  $scope.viewImage = function () {
+    $mdDialog.show({
+      templateUrl: 'views/owner/view-image.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true
+    })
+  };
+
+  /*========================
+  | Sidenavs and popups ends
+  ========================*/
 
   /*===================
   | Pagination
@@ -123,57 +138,51 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $win
     });
   };
 
+  var getOwnerProductDetails = function(productId){
+    OwnerProductService.getOwnerProductDetails(productId).then(function(result){
+      $scope.productDetails = result;
+      $scope.runningCampaignDetails = _.filter(result.campaigns, function(c){
+        return c.status == 6;
+      })[0];
+      $scope.nonRunningCampaigns = _.filter(result.campaigns, function(c){
+        return c.status != 6;
+      });
+    });
+  }
+
+  $scope.viewProductImage = function(image){
+    var imagePath = config.serverUrl + image;
+    $mdDialog.show({
+      locals:{ src: imagePath },
+      templateUrl: 'views/image-popup-large.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, src){
+        $scope.img_src = src;
+      }
+    });
+  }
+
   /*=====================
   | Product Section Ends
   =====================*/
 
-  $scope.openScreen = function (ev) {
-    $mdDialog.show({
-      templateUrl: 'views/owner/requesthoardingadd.html',
-      clickOutsideToClose: true,
-    });
-  };
 
-  $scope.viewImage = function () {
-    $mdDialog.show({
-      templateUrl: 'views/owner/view-image.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true
-    })
-  };
+  /*=========================
+  | Page based initial loads
+  =========================*/
 
-  $scope.hoardinglist = [
-    {
-      "id": "AD_001",
-      "type": "Billboard",
-      "area": "Amreepet",
-      "size": "20*30",
-      "light": "No",
-      "sdate": "28-Feb-2017",
-      "edate": "28-April-2017",
-      "price": "30,000"
-    },
-    {
-      "id": "AD_002",
-      "type": "Unipole",
-      "area": "Amreepet",
-      "size": "20*30",
-      "light": "Yes",
-      "sdate": "28-Feb-2017",
-      "edate": "28-April-2017",
-      "price": "30,000"
-    },
-    {
-      "id": "AD_003",
-      "type": "Digital",
-      "area": "Amreepet",
-      "size": "20*30",
-      "light": "Yes",
-      "sdate": "28-Feb-2017",
-      "edate": "28-April-2017",
-      "price": "30,000"
+  if($rootScope.currStateName == "owner.product-details"){
+    if(typeof $stateParams.productId !== 'undefined'){
+      getOwnerProductDetails($stateParams.productId); 
     }
-  ]
+    else{
+      toastr.error("Product not found.");
+    }
+  }
 
+  /*=============================
+  | Page based initial loads end
+  =============================*/
 
 });

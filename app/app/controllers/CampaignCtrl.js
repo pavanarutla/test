@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -68,11 +68,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   
   $scope.campaignDetails = {};
 
-  $scope.limit = 3;
+  // $scope.limit = 3;
 
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
+  // $scope.loadMore = function () {
+  //   $scope.limit = $scope.items.length
+  // }
   
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
@@ -82,6 +82,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       });
       $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      console.log($scope.closedCampaigns);
     });
   }
   $scope.getUserCampaigns();
@@ -156,6 +157,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         $scope.requestChangeInQuote = function(){          
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
+              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
               $mdDialog.hide();
               toastr.success(result.message);
             }
@@ -207,9 +209,57 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  $scope.ShareShortlistedSidenav = function () {
-    $mdSidenav('shortlistSharingSidenav').toggle();
+  $scope.toggleShareCampaignSidenav = function () {
+    $mdSidenav('shareCampaignSidenav').toggle();
   };
 
+  $scope.requestProposalForCampaign = function (campaignId, ev) {
+    CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+      if (result.status == 1) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('We will get back to you!!!!')
+            .textContent(result.message)
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+    $scope.campaignToShare = $scope.campaignDetails;
+    var campaignToEmail = {
+      campaign_id: $scope.campaignToShare.id,
+      email: shareCampaign.email,
+      receiver_name: shareCampaign.receiver_name,
+      campaign_type: $scope.campaignToShare.type
+    };
+    CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+      if (result.status == 1) {
+        $mdSidenav('shareCampaignSidenav').close();
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            // .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
 
 });

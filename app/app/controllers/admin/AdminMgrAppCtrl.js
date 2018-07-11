@@ -1,5 +1,19 @@
 app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
 
+  /*========================
+  | Notification types
+  |==================
+  
+  'campaign-suggestion-requested'   =>    0,
+  'campaign-quote-requested'        =>    1,
+  'campaign-quote-provided'         =>    2,
+  'campaign-launch-requested'       =>    3,
+  'campaign-launched'               =>    4,
+  'campaign-suspended'              =>    5,
+  'campaign-closed'                 =>    6 
+  
+  =========================*/
+
   $rootScope.serverUrl = config.serverUrl;
 
   if(localStorage.loggedInUser){
@@ -85,5 +99,9 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     });
     $mdSidenav('right').toggle();
   }
+
+  /*===============================
+  |   Notification navigation ends
+  ===============================*/
 
 });

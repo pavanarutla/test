@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, OwnerProductService, toastr) {
 
   $rootScope.config = config;
 
@@ -8,6 +8,21 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
 
   if(localStorage.loggedInUser){
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
+  }
+
+  $scope.getAvatar = function(){
+    var userMongo = $auth.getPayload().userMongo;
+    if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+      return {
+        present: true,
+        profile_pic: userMongo.profile_pic
+      }
+    }
+    else{
+      return {
+        present: false
+      }
+    }
   }
 
   $scope.logout = function(){
@@ -198,6 +213,31 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       }
     });
     $mdSidenav('ownerRight').toggle();
+  }
+
+  /*=================================
+  | Product search
+  =================================*/
+  // $scope.simulateQuery = false;
+  $scope.isDisabled    = false;
+  // $scope.querySearch   = querySearch;
+  // $scope.selectedItemChange = selectedItemChange;
+  // $scope.searchTextChange   = searchTextChange;
+
+
+  $scope.ownerProductSearch = function(query) {
+    return OwnerProductService.searchOwnerProducts(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  $scope.viewSelectedProduct = function(product) {
+    if(typeof product !== 'undefined'){
+      $location.path('/owner/' + $rootScope.clientSlug + '/product-details/' + product.id);
+    }
+    else{
+      $location.path('/owner/' + $rootScope.clientSlug + '/hoarding-list');
+    }
   }
 
 })

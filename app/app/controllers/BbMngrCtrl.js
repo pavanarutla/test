@@ -166,7 +166,7 @@ app.controller('bbMngrCtrl',
 
 
   $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 200) {
+    if ($(window).scrollTop() > 0) {
       $(".header").addClass("active");
       $(".toolbar-btn").addClass("active-one");
       $(".browse-btn").addClass("active-one");
@@ -242,14 +242,14 @@ app.controller('bbMngrCtrl',
     ContactService.subscribe($scope.subscriberData).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
-        $scope.subscriberData.email = null;
-        $scope.subscribeErrors = null
       }
       else  if(result.status == 0){
         $scope.subscribeErrors = result.message;
       }
     });
-    angular.element($('#subscriber-email')).val('');
+    $scope.subscriberData = {};
+    $scope.forms.sendSubscriberForm.$setPristine();
+    $scope.forms.sendSubscriberForm.$setUntouched();
   };
 
   $scope.showContact = function () {
@@ -274,6 +274,9 @@ app.controller('bbMngrCtrl',
         toastr.error(result.message);
       }
     });
+    $scope.callbackRequest = {};
+    $scope.forms.callbackRequest.$setPristine();
+    $scope.forms.callbackRequest.$setUntouched();
   }
 
   $scope.logout = function(){
@@ -443,7 +446,7 @@ app.controller('bbMngrCtrl',
         $location.path("/admin");
       }
       else if(userMongo.user_type == "owner"){
-        $location.path("/owner/" + userMongo.client_slug + "/home");
+        $location.path("/owner/" + userMongo.client_slug + "/feeds");
       }
     }
 
