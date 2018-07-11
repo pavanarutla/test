@@ -173,29 +173,63 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  $scope.suggestionRequest = CampaignService.suggestedData;
+  $scope.goToNextSuggestData = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 2){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+      $location.path('/suggest/marketing-objectives');
+    }else{
+      e.preventDefault();
+    }
+  }
+  $scope.goToAddAdvert = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 4){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+      $location.path('/suggest/advertising-objectives');
+    }else{
+      e.preventDefault();
+    }
+  }
+  $scope.goToOtherInfo = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 8){
+    CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+    $location.path('/suggest/other-info')
+    }else{
+      e.preventDefault();
+    }
+  }
+
   $scope.sendSuggestionRequest = function (ev) {
-    CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-      if (result.status == 1) {
-        $scope.suggestMeRequestSent = true;
-      }
-      $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('We will get back to you!!!!')
-          .textContent(result.message)
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
-      )
-      .finally(function(){
-        $location.path('#/home')
+    if( $scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 13){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);
+      CampaignService.sendSuggestionRequest(CampaignService.suggestedData).then(function (result) {
+        if (result.status == 1) {
+          CampaignService.suggestedData = null;
+          $scope.suggestMeRequestSent = true;
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('We will get back to you!!!!')
+              .textContent(result.message)
+              .ariaLabel('Alert Dialog Demo')
+              .ok('Got it!')
+              .targetEvent(ev)
+          )
+          .finally(function(){
+            $location.path('#/home')
+          });
+        }
+        if(result.status == 0){
+          $scope.suggestCampaignErrors = result.message    
+        }
       });
-    });
+    } 
   };
 
   $scope.resetSuggestionForm = function(){
-    $scope.suggestionRequest = {};
+    $scope.suggestionRequest = null;
+    CampaignService.suggestedData = null;
   }
 
   $scope.deleteCampaign = function (campaignId) {

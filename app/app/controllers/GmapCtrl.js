@@ -988,6 +988,7 @@ app.controller('GmapCtrl',
                 .ok('Got it!')
                 .targetEvent(ev)
             );
+            updateCampaignDetailSidenav(campaignId);
           }
           else {
             toastr.error(result.message);
