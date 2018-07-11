@@ -30,13 +30,13 @@
 							</md-button>
 							<md-menu-content>
 								<md-menu-item>
-									<md-button ng-disabled="pCampaign.status != 4" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
-								</md-menu-item>
-								<md-menu-item>
 									<md-button ng-href="#/view-campaign/{{pCampaign.id}}">View</md-button>
 								</md-menu-item>
 								<md-menu-item>
-									<md-button ng-disabled="pCampaign.status > 3" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
+									<md-button ng-disabled="pCampaign.status != 3" ng-click="requestLaunchCampaign($event, pCampaign.id)">Launch</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button ng-disabled="pCampaign.status >= 2" ng-click="deleteCampaign(pCampaign.id)">Delete</md-button>
 								</md-menu-item>
 							</md-menu-content>
 						</md-menu>
@@ -88,7 +88,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<tr ng-repeat="rCampaign in closedCampaigns">
+					<tr ng-repeat="cCampaign in closedCampaigns">
 						<td>{{cCampaign.name}}</td>
 						<td>{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td>{{cCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>

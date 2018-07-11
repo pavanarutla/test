@@ -53,7 +53,9 @@
 							<td>{{product.area_name}}</td>
 							<td>{{product.panelSize}}</td>
 							<td>{{product.lighting | boolToYesNo}}</td>
-							<td>{{image}}</td>
+							<td>
+								<img ng-src="{{serverUrl + product.image}}" style="width:60px; height:40px;" ng-click="viewProductImage(product.image)"/>
+							</td>
 							<td>
 								<span>
 									<a style="cursor:pointer;" ng-click="editProduct(product)">

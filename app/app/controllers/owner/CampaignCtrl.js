@@ -247,17 +247,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       price: price
     };
     $mdDialog.show({
-      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
       templateUrl: 'views/owner/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
-      controller:function($scope, $mdDialog, ctrlScope, campaignId, productObj){
+      controller:function($scope, $mdDialog, ctrlScope, campaign, productObj){
         $scope.product = productObj;
         $scope.updateProposedProduct = function(product){
-          OwnerCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
+          OwnerCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
             if(result.status == 1){
               // update succeeded. update the grid now.
-              ctrlScope.getCampaignDetails(campaignId);
+              if(campaign.type != "2"){
+                ctrlScope.getUserCampaignDetails(campaign.id);
+              }
+              else{
+                ctrlScope.getOwnerCampaignDetails(campaign.id);
+              }
               $mdDialog.hide();
               toastr.success(result.message);
             }
@@ -319,6 +324,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.error(result.message);
       }
     });
+  }
+
+  $scope.deleteOwnerCampaign = function(campaignId){
+    OwnerCampaignService.deleteOwnerCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    })
   }
 
   /* ==============================

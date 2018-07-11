@@ -15,7 +15,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   var getAllCampaigns = function(){
     AdminCampaignService.getAllCampaigns().then(function(result){
       $scope.plannedCampaigns = _.filter(result.user_campaigns, function(c){
-        return c.status < 6;
+        return c.status < 6 && typeof c.name !== "undefined" && typeof c.start_date !== "undefined" && typeof c.end_date !== "undefined";
       });
       $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
@@ -80,8 +80,23 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
     });
   };
 
-  $scope.deleteCampaign = function(campaignId){
-    AdminCampaignService.deleteCampaign(campaignId).then(function(result){
+  $scope.deleteUserCampaign = function(campaignId){
+    AdminCampaignService.deleteUserCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if(result.status == 0){
+        toastr.error(result.message);
+      }
+    },function(result){
+        toastr.error("somthing went wrong please try again after some time!");
+    });
+  }
+
+  $scope.deleteNonUserCampaign = function(campaignId){
+    AdminCampaignService.deleteNonUserCampaign(campaignId).then(function(result){
       if(result.status == 1){
         getAllCampaigns();
         toastr.success(result.message);
