@@ -171,35 +171,31 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-    $scope.suggestionRequest = CampaignService.suggestedData;
-    $scope.goToNextSuggestData = function(e){
-      if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 2){
+  $scope.suggestionRequest = CampaignService.suggestedData;
+  $scope.goToNextSuggestData = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 2){
       CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
-      $location.path('/suggest/marketingobjects')
-      }else{
-        e.preventDefault();
-      }
-     
+      $location.path('/suggest/marketing-objectives');
+    }else{
+      e.preventDefault();
     }
-    $scope.goToAddAdvert = function(e){
-      if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 4){
+  }
+  $scope.goToAddAdvert = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 4){
       CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
-      $location.path('/suggest/advertisingobjects')
-
-      }else{
-        e.preventDefault();
-      }
-     
+      $location.path('/suggest/advertising-objectives');
+    }else{
+      e.preventDefault();
     }
-    $scope.goToOtherInfo = function(e){
-      if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 8){
-      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
-      $location.path('/suggest/otherinfo')
-      }else{
-        e.preventDefault();
-      }
-     
+  }
+  $scope.goToOtherInfo = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 8){
+    CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+    $location.path('/suggest/other-info')
+    }else{
+      e.preventDefault();
     }
+  }
 
   $scope.sendSuggestionRequest = function (ev) {
     if( $scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 13){

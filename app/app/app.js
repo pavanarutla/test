@@ -63,26 +63,26 @@ var app = angular.module('bbManager', [
     // nested states 
     // each of these sections will have their own view
     // url will be suggest-Product-Detail
-    .state('index.suggest.productdetail', {
-        url: '/productdetail',
+    .state('index.suggest.product-detail', {
+        url: '/product-detail',
         templateUrl: 'views/suggest-campaign-one.html',
         controller: 'CampaignCtrl'
     })
     // url will be suggest-market-Detail
-    .state('index.suggest.marketingobjects', {
-        url: '/marketingobjects',
+    .state('index.suggest.marketing-objectives', {
+        url: '/marketing-objectives',
         templateUrl: 'views/suggest-campaign-two.html',
         controller: 'CampaignCtrl'
     })
     // url will be suggest-Advertising-Detail
-    .state('index.suggest.advertisingobjects', {
-        url: '/advertisingobjects',
+    .state('index.suggest.advertising-objectives', {
+        url: '/advertising-objectives',
         templateUrl: 'views/suggest-campaign-three.html',
         controller: 'CampaignCtrl'
     })
       // url will be suggest-Advertising-Detail
-    .state('index.suggest.otherinfo', {
-        url: '/otherinfo',
+    .state('index.suggest.other-info', {
+        url: '/other-info',
         templateUrl: 'views/suggest-campaign-four.html',
         controller: 'CampaignCtrl'
     })
