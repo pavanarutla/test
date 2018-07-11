@@ -454,7 +454,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     $scope.allCampaignsForOwner = [];
     loadOwnerCampaigns().then(function(result){
       $scope.getUserCampaignsForOwner().then(function(result2){        
-        $scope.allCampaignsForOwner = result.concat(result2);
+        $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c){
+          return c.status >= 6;
+        });
       });
     })
   }
