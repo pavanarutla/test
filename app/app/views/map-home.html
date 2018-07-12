@@ -1083,10 +1083,13 @@
               </div>
             </div>
             <md-divider></md-divider>
-            <div layout="row">
+            <div layout="row"  ng-if="shortListedProducts.length >=1">
               <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
               <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
               <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
+            </div>
+            <div layout="row" ng-if="!shortListedProducts.length >=1" style="color:rgb(116, 27, 27);padding-left:1em">
+              <p> please shortlist the products</p>
             </div>
           </div>
         </div>

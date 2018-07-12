@@ -15,13 +15,17 @@
 		</div>
 	</md-toolbar>
 	<md-content layout-padding="">
-		<form role="form">
+		<form role="form" name="addProductForm" novalidate>
 			<div class="form-group row">
-				<label for="productId" class="col-sm-4 col-form-label">Product ID</label>
+				<label for="productId" class="col-sm-4 col-form-label">Product Id</label>
 				<div class="col-sm-8">
 					<input type="hidden" ng-model="product.id" />
-					<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z0-9]+[A-Za-z0-9._-]*$/"
+					<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
 					 class="form-control" />
+					 <div ng-messages="addProductForm.siteNo.$error" ng-if="!addProductForm.siteNo.$pristine" style="color:red">
+						<div ng-message="required">Product Id is required.</div>
+						<div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -31,13 +35,19 @@
 					 data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
 						<option value="" disabled selected>Site Type</option>
 					</select>
+					<div ng-messages="addProductForm.productType.$error" ng-if="!addProductForm.productType.$pristine" style="color:red">
+						<div ng-message="required">Site type is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="defaultProductCost" class="col-sm-4 col-form-label">Default Product Cost</label>
 				<div class="col-sm-8">
-					<input ng-model="product.default_price" placeholder="Default Product Cost" type="text" name="product-cost" class="form-control"
+					<input only-numeric ng-model="product.default_price" placeholder="Default Product Cost" type="text" name="product-cost" class="form-control"
 					/>
+					<div ng-messages="addProductForm.product-cost.$error" ng-if="!addProductForm.product-cost.$pristine" style="color:red">
+						<div ng-message="required">Product cost is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -46,6 +56,9 @@
 					<select name="country" class="form-control" id="country" ng-model="product.country" ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
 						<option value="" disabled selected>Select Country</option>
 					</select required>
+					<div ng-messages="addProductForm.country.$error" ng-if="!addProductForm.country.$pristine" style="color:red">
+						<div ng-message="required">Country is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -54,6 +67,9 @@
 					<select name="state" class="form-control" id="state" ng-model="product.state" ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
 						<option value="" disabled selected>Select State</option>
 					</select required>
+					<div ng-messages="addProductForm.state.$error" ng-if="!addProductForm.state.$pristine" style="color:red">
+						<div ng-message="required">state is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -62,6 +78,9 @@
 					<select name="city" class="form-control" id="city" ng-model="product.city" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
 						<option value="" disabled selected>Select City</option>
 					</select required>
+					<div ng-messages="addProductForm.city.$error" ng-if="!addProductForm.city.$pristine" style="color:red">
+						<div ng-message="required">city is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -70,17 +89,24 @@
 					<select name="area" class="form-control" id="area" ng-model="product.area" ng-options="area.id as area.name for area in areaList">
 						<option value="" disabled selected>Select Area</option>
 					</select required>
+					<div ng-messages="addProductForm.area.$error" ng-if="!addProductForm.area.$pristine" style="color:red">
+						<div ng-message="required">Area is required.</div>
+					  </div>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="hoardingLight" class="col-sm-4 col-form-label">Light</label>
 				<div class="col-sm-8">
-					<select ng-model="product.lighting" class="form-control" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+					<select ng-model="product.lighting" name="light" class="form-control" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
 					 ng-init="product.lighting = product.lighting || ''">
 						<option value="" disabled>Has lighting?</option>
 						<option value="1">Yes</option>
 						<option value="0">No</option>
 					</select>
+					<div ng-messages="addProductForm.light.$error" ng-if="!addProductForm.light.$pristine" style="color:red">
+						<div ng-message="required">light is required.</div>
+					  </div>
+
 				</div>
 			</div>
 			<div class="form-group row">
@@ -89,6 +115,9 @@
 					<input ng-model="product.panelSize" class="form-control" placeholder="Panel Size" type="text" name="panel-size" required="required"
 					/>
 				</div>
+				<div ng-messages="addProductForm.panel-size.$error" ng-if="!addProductForm.panel-size.$pristine" style="color:red">
+					<div ng-message="required">Panel size is required.</div>
+				  </div>
 			</div>
 			<div class="form-group row">
 				<label for="" class="col-sm-4 col-form-label">Upload Image</label>
@@ -98,18 +127,21 @@
 							<input type="file" class="form-control" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB"></input>
 						</span>
 					</span>
+					<div ng-messages="addProductForm.files.image.$error" ng-if="!addProductForm.files_image.$pristine" style="color:red">
+						<div ng-message="required">Image is required.</div>
+					  </div>
 				</div>
-			</div>
-			<div class="serverErrors" ng-if="requestProductErrors && requestProductErrors.length > 0">
+			</div>	
+			<div ng-if="requestProductErrors && requestProductErrors.length > 0" style="color:red">
 				<ul>
 					<li ng-repeat="error in requestProductErrors">
 						{{error}}
 					</li>
 				</ul>
-			</div>
+			</div>	
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
-				<input class="btn btn-primary" value="Save" type="button" ng-click="requestAddProduct()">
+				<input class="btn btn-primary" value="Save" type="button" ng-click="requestAddProduct()" ng-disabled="addProductForm.$invalid">
 				<span></span>
 				<input class="btn btn-default" value="Cancel" type="reset">
 			</div>

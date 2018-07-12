@@ -12,7 +12,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     $mdDialog.show({
       templateUrl: 'views/owner/requesthoardingadd.html',
       clickOutsideToClose: true,
-    });
+    });               
   };
 
   $scope.viewImage = function () {
@@ -128,7 +128,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
         $scope.toggleRequestHoardingFormSidenav();
       }
       else if(result.data.status == 0){
-        $scope.requestProductErrors = result.data.errors;
+        $scope.requestProductErrors = result.data.message;
       }
     }, function (resp) {
       console.log('Error status: ', resp);
