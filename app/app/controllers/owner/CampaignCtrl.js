@@ -104,7 +104,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
-        $scope.plannedCampaigns = _.filter(result, function(c){
+        $scope.plannedCampaigns = _.filter(result.reverse(), function(c){
           return c.status < 6;
         });
         $scope.runningCampaigns = _.where(result, { status: 6 });
