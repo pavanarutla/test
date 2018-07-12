@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, Upload, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, Upload, toastr,config) {
 
   /*===================
   | Sidenavs and popups
