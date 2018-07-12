@@ -131,14 +131,14 @@
 						<div ng-message="required">Image is required.</div>
 					  </div>
 				</div>
-			</div>
-			<div class="serverErrors" ng-if="requestProductErrors && requestProductErrors.length > 0">
+			</div>	
+			<div ng-if="requestProductErrors && requestProductErrors.length > 0" style="color:red">
 				<ul>
 					<li ng-repeat="error in requestProductErrors">
 						{{error}}
 					</li>
 				</ul>
-			</div>
+			</div>	
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
 				<input class="btn btn-primary" value="Save" type="button" ng-click="requestAddProduct()" ng-disabled="addProductForm.$invalid">
