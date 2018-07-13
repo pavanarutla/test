@@ -13,15 +13,32 @@
 				</md-button>
 				<!-- <h2 class="" style="color:#000">{{firstname}}</h2> -->
 				<span flex></span>
-				<!-- <div class=" main__page__search ">
-					<input type="text" ng-model="siteNoSearch" class=" input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"
-					/>
+				<div class=" main__page__search ">
+					<!-- <input type="text" ng-model="siteNoSearch" class=" input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"	/> -->
+					<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in ownerProductSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+						<md-item-template>
+							<span class="item-title">
+								<span> {{item.siteNo}} </span>
+							</span>
+							<span class="item-metadata">
+								<span>
+									<strong>{{item.company_name}}</strong>
+								</span>
+								<span>
+									<strong>{{item.address}}</strong>
+								</span>
+							</span>
+						</md-item-template>
+					</md-autocomplete>
 					<span class="">
-						<a>
+						<!-- <button class="btn btn-info btn-lg" type="button">
 							<i class="material-icons">search</i>
-						</a>
+						</button> -->
+						<!-- <a>
+							<i class="material-icons">search</i>
+						</a> -->
 					</span>
-				</div> -->
+				</div>
 				<!-- <md-button aria-label="notifications" class="md-icon-button" ng-click="openHelpScreen(ev)">
 					<img src="assets/images/owner/Question.png" />
 				</md-button>
@@ -38,8 +55,8 @@
 				</div>
 				<md-menu md-offset="0 50">
 					<md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-						<img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-						<img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
 					</md-button>
 					<md-menu-content width="3" style="z-index:99">
 						<md-menu-item>
@@ -71,10 +88,16 @@
 					<div>
 						<div style="width: 100% !important;">
 							<md-list class="owners-menu">
-								<md-menu-item class="nv-nav-item">
+								<!-- <md-menu-item class="nv-nav-item">
 									<md-button ng-href="#/owner/{{clientSlug}}/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
 										<md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
 										Home
+									</md-button>
+								</md-menu-item> -->
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
+										<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
+										Feeds
 									</md-button>
 								</md-menu-item>
 								<md-menu-item class="nv-nav-item">
@@ -109,24 +132,12 @@
 										Payments
 									</md-button>
 								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/updatepayments" ng-click="" ng-class="{'active-link': currStateName == 'owner.updatepayments'}">
-										<md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
-										UpadatePayment
-									</md-button>
-								</md-menu-item>
 								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" >
+									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
 										<md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
 										Team
 									</md-button>
 								</md-menu-item> -->
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/dashboard" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
-										<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
-										Feeds
-									</md-button>
-								</md-menu-item>
 								<!-- <md-menu-item class="nv-nav-item">
 									<md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
 											<md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>

@@ -23,7 +23,6 @@ app.controller('callCenterCtrl', function ($scope, $http, toastr, AdminContactSe
   
   //deleteCallCenterInf
   $scope.deleteCallCenterInfo = function (row) {
-    console.log(row);
     var index = $scope.gridcallCenter.data.indexOf(row);
     $scope.gridcallCenter.data.splice(index, 1);
     toastr.success("CallCenterInfo deleted successfully");
@@ -50,7 +49,6 @@ app.controller('callCenterCtrl', function ($scope, $http, toastr, AdminContactSe
         $scope.savefeedback = function (response) {
           AdminContactService.updateCustomerData(dataId, response).then(function (result) {
             if (result.status == 1) {
-              console.log(result);
               toastr.success(result.message);
               $("#feedbackButton" + dataId).css('background-color', 'limegreen');
               $rootScope.updated_feedback = result.data.call_feedback;

@@ -1,4 +1,4 @@
-app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, $stateParams, toastr, AdminUserService, AdminUserMgmtService) {
+app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $auth, $stateParams, toastr, AdminUserService, AdminUserMgmtService, $stateParams) {
 
   $scope.msg = {};
   $scope.forms = {};
@@ -206,6 +206,12 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   var getAllClients = function(){
     AdminUserMgmtService.getAllClients().then(function(result){
       $scope.allClients = result;
+      if ($stateParams.clientID) {
+        var client = result.find((item) => item.id == $stateParams.clientID)
+        if (client) {
+          $scope.showUserDetailsPopup(client.client_id,client.super_admin_m_id)
+        }
+      }
     });
   }
   getAllClients();

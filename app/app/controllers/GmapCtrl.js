@@ -333,7 +333,6 @@ app.controller('GmapCtrl',
       //  }
 
       function selectMarker(marker) {
-        console.log(marker);
         $scope.$parent.alreadyShortlisted = false;
         $scope.mapObj.setCenter(marker.position);
         selectorMarker.setPosition(marker.position);
@@ -744,15 +743,22 @@ app.controller('GmapCtrl',
             $scope.campaign.products.push(v.id);
           });
           CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
-            $scope.campaignSavedSuccessfully = true;
-            $scope.campaign = {};
-            $timeout(function () {
-              $mdSidenav('saveCampaignSidenav').close();
-              $mdSidenav('shortlistAndSaveSidenav').close();
-              $scope.campaignSavedSuccessfully = false;
-            }, 3000);
-            $scope.loadActiveUserCampaigns();
-            getShortListedProducts();
+            if(response.status == 1){
+              $scope.campaignSavedSuccessfully = true;
+              $timeout(function () {
+                $mdSidenav('saveCampaignSidenav').close();
+                $mdSidenav('shortlistAndSaveSidenav').close();
+                $scope.campaign = {};
+                $scope.forms.viewAndSaveCampaignForm.$setPristine();
+                $scope.forms.viewAndSaveCampaignForm.$setUntouched();
+                $scope.campaignSavedSuccessfully = false;
+              }, 3000);
+              $scope.loadActiveUserCampaigns();
+              getShortListedProducts();
+            }
+            else{
+              $scope.saveUserCampaignErrors = response.message;
+            }
           });
         }
         else {
@@ -801,7 +807,7 @@ app.controller('GmapCtrl',
       $scope.loadActiveUserCampaigns();
 
       $scope.deleteUserCampaign = function (campaignId) {
-        CampaignService.deleteUserCampaign(campaignId).then(function (result) {
+        CampaignService.deleteCampaign(campaignId).then(function (result) {
           if (result.status == 1) {
             $scope.loadActiveUserCampaigns();
             toastr.success(result.message);
@@ -934,6 +940,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = product.availableDates;
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+        $scope.product.id = product.id;
       }
 
       $scope.deleteProductFromCampaign = function (productId, campaignId) {
@@ -975,6 +982,7 @@ app.controller('GmapCtrl',
                 .ok('Got it!')
                 .targetEvent(ev)
             );
+            updateCampaignDetailSidenav(campaignId);
           }
           else {
             toastr.error(result.message);

@@ -90,7 +90,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     }
     else if(notification.type == 8){
       // a new compnay joined. set up the super admin
-      // console.log(notification);
+      $location.path('admin/user-management/' + notification.data.client_m_id);
     }
     AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){

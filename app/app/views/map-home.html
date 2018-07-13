@@ -33,7 +33,7 @@
                     <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                   </md-menu-item>
                   <md-menu-item>
-                    <md-button ng-if="activeUserCampaign.status <= 1" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
+                    <md-button ng-if="activeUserCampaign.status < 2" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
@@ -115,7 +115,7 @@
           </div>
           <md-card-actions layout="row" layout-align="end center" style="margin:0px">
             <md-button style="margin:0px" ng-click="viewProduct(product)">View</md-button>
-            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">Delete</md-button>
+            <md-button style="margin:0px" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)" ng-if="campaignDetails.status < 2">Delete</md-button>
           </md-card-actions>
           <md-divider></md-divider>
         </div>
@@ -125,7 +125,10 @@
           <p style="width:70%; margin:auto;">This campaign is empty. Please add some prducts into it to move forward!</p>
         </div>
         <div>
-          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
+          <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill 
+          ng-click="requestProposalForCampaign(campaignDetails.id)">
+            REQUEST PROPOSAL
+          </md-button>
         </div>
         <div>
           <md-button class="md-raised " ng-if="campaignDetails.products.length > 0" layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
@@ -199,7 +202,7 @@
         <div class="suggtn">
           <span class="suggtn-one">Need Suggestions?</span>
           <span class="suggtn-two">
-            <md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button>
+            <md-butoon ui-sref="index.suggest.product-detail" class="md-primary" style="color: #ff5722;cursor:pointer">SUGGEST ME</md-button>
           </span>
         </div>
       </div>
@@ -292,14 +295,13 @@
           <div class="md-headline">We are excited to see your Campaign</div>
           <div class="md-headline">Let's Work Together!</div>
         </div>
-        <form name="viewAndSaveCampaignForm">
+        <form name="forms.viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input type="text" name="campname" ng-model="campaign.name" required="required">
-              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">Campaign name is required.</div>
-                <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
             </md-input-container>
           </div>
@@ -307,37 +309,44 @@
             <div layout="column" flex="50">
               <md-input-container>
                 <md-datepicker ng-model="campaign.start_date" md-min-date="newDate" name="start_date" md-placeholder="Campaign Start" required="required"></md-datepicker>
-                <div ng-messages="viewAndSaveCampaignForm.start_date.$error">
-                  <div ng-message="required">startDate is required.</div>
+                <div ng-messages="forms.viewAndSaveCampaignForm.start_date.$error">
+                  <div ng-message="required">Start date is required.</div>
                 </div>
               </md-input-container>
             </div>
             <div layout="column" flex="50">
               <md-input-container>
-                <md-datepicker ng-model="campaign.end_date" name="end_date" md-min-date="newDate" md-placeholder="Campaign End" required="required"></md-datepicker>
-                <div ng-messages="viewAndSaveCampaignForm.end_date.$error">
-                  <div ng-message="required">endDate is required.</div>
+                <md-datepicker ng-model="campaign.end_date" name="end_date" md-min-date="endDate" md-placeholder="Campaign End" required="required"></md-datepicker>
+                <div ng-messages="forms.viewAndSaveCampaignForm.end_date.$error">
+                  <div ng-message="required">End date is required.</div>
                 </div>
               </md-input-container>
             </div>
           </div>
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
-              <label> Budget</label>
-              <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" />
-              <div ng-messages="viewAndSaveCampaignForm.est_budget.$error">
-                <div ng-message="required">estimated budget required.</div>
+              <label>Budget</label>
+              <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" only-numeric/>
+              <div ng-messages="forms.viewAndSaveCampaignForm.est_budget.$error">
+                <div ng-message="required">Estimated budget required.</div>
               </div>
             </md-input-container>
           </div>
+          <div class="serverErrors" ng-show="saveUserCampaignErrors" style="padding-left:0 !important;">
+            <ul>
+              <li ng-repeat="error in saveUserCampaignErrors">
+                {{error}}
+              </li>
+            </ul>
+          </div> 
           <div layout="column" layout-margin>
             <div>
-              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()">SAVE CAMPAIGN</md-button>
+              <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()" ng-disabled="forms.viewAndSaveCampaignForm.$invalid">SAVE CAMPAIGN</md-button>
             </div>
             <div class="suggtn">
               <span class="suggtn-one">Need Suggestions?</span>
               <span class="suggtn-two">
-                <md-button ng-href="#/suggest-campaign">SUGGEST ME</md-button>
+                <md-button ui-sref="index.suggest.product-detail">SUGGEST ME</md-button>
               </span>
             </div>
           </div>
@@ -349,14 +358,14 @@
           <div class="md-display-1">Congratulations!</div>
           <div class="md-headline">Campaign Saved Succcessfully</div>
         </div>
-        <div layout="column" layout-margin>
+        <!-- <div layout="column" layout-margin>
           <div>
             <md-button class="md-raised md-warn" layout-fill ng-if="campaign.status < 2">REQUEST PROPOSAL</md-button>
           </div>
           <div>
             <md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
           </div>
-        </div>
+        </div> -->
       </md-content>
     </div>
   </md-sidenav>
@@ -380,12 +389,12 @@
           <div class="md-subhead">We are excited to see your Campaign</div>
           <div class="md-subhead">Let's Work Together!</div>
         </div>
-        <form name="viewAndSaveCampaignForm">
+        <form name="forms.viewAndSaveCampaignForm">
           <div layout="row" flex="100" layout-margin>
             <md-input-container class="md-block" layout-fill>
               <label>Campaign Name</label>
               <input required md-no-asterisk name="campname" ng-model="campaign.name">
-              <div ng-messages="viewAndSaveCampaignForm.campname.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.campname.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
               </div>
@@ -407,7 +416,7 @@
             <md-input-container class="md-block" layout-fill>
               <label> Budget</label>
               <input ng-model="campaign.budget" type="text" name="budget" required="required" />
-              <div ng-messages="viewAndSaveCampaignForm.budget.$error">
+              <div ng-messages="forms.viewAndSaveCampaignForm.budget.$error">
                 <div ng-message="required">estimated budget required.</div>
               </div>
             </md-input-container>
@@ -497,7 +506,7 @@
             <div class="suggtn">
               <span class="suggtn-one">Need Suggestions?</span>
               <span class="suggtn-two">
-                <md-butoon ng-href="#/suggest-campaign" class="md-primary">SUGGEST ME</md-button>
+                <md-butoon ui-sref="index.suggest.marketingobjects" class="md-primary">SUGGEST ME</md-button>
               </span>
             </div>
           </div>
@@ -613,7 +622,7 @@
         <div class="suggtn">
           <span class="suggtn-one">Need Suggestions?</span>
           <span class="suggtn-two">
-            <a ng-href="#/suggest-campaign">SUGGEST ME</a>
+            <a ui-sref="index.suggest.marketingobjects">SUGGEST ME</a>
           </span>
         </div>
       </div>
@@ -843,7 +852,7 @@
             <div class="input-group ">
                 <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
                 <span class="input-group-btn">
-                    <button class="btn btn-info btn-lg" type="button">
+                    <button class="btn btn-info btn-lg" type="button" ng-click="searchBySiteNo()">
                         <i class="material-icons">search</i>
                     </button>
                 </span>
@@ -1086,10 +1095,13 @@
               </div>
             </div>
             <md-divider></md-divider>
-            <div layout="row">
+            <div layout="row"  ng-if="shortListedProducts.length >=1">
               <md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
               <md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
               <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
+            </div>
+            <div layout="row" ng-if="!shortListedProducts.length >=1" style="color:rgb(116, 27, 27);padding-left:1em">
+              <p> please shortlist the products</p>
             </div>
           </div>
         </div>
@@ -1129,8 +1141,8 @@
                         <md-menu-item>
                           <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)">Share</md-button>
                         </md-menu-item>
-                        <md-menu-item>
-                          <md-button ng-if="activeUserCampaign.status <= 1" ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
+                        <md-menu-item ng-if="activeUserCampaign.status < 2">
+                          <md-button ng-click="deleteUserCampaign(activeUserCampaign.id)">Delete</md-button>
                         </md-menu-item>
                       </md-menu-content>
                     </md-menu>
@@ -1138,9 +1150,12 @@
                 </div>
                 <div layout="row" layout-align="space-around center" style="margin-top:-10px">
                   <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2" ng-disabled="true">Proposal Requested</md-button>
-                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
                   <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status < 2" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2 || activeUserCampaign.status == 4" ng-disabled="true">Waiting for Quote</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 5" ng-disabled="true">Waiting for Launch</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 6" ng-disabled="true">Running</md-button>
+                  <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 8" ng-disabled="true">Closed</md-button>
                 </div>
                 <md-divider></md-divider>
               </div>

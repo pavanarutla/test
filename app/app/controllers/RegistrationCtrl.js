@@ -24,7 +24,11 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	$scope.registerNewUser = function () {
 		UserService.registerUser($scope.user).then(function(result){
 			if(result.status == 1){
+				$mdDialog.hide();
 				toastr.success(result.message);
+				if($scope.regNewUserErrors){
+					$scope.regNewUserErrors.length = 0;
+				}
 			}
 			else if(result.status == 0){
 				$scope.regNewUserErrors = result.message;
@@ -55,12 +59,18 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 		CompanyService.registerClient($scope.client).then(function(result){
 			if(result.status == 1){
 				toastr.success(result.message);
+				if($scope.clientErrorMessages){
+					$scope.clientErrorMessages.length = 0;
+				}
+				$mdDialog.hide();
 			}
-			else{
-				toastr.error(result.message);
+			else if(result.status == 0){
+				$scope.clientErrorMessages = result.message;
 			}
 		});
 	}
+
+	
 	/*
 	* ============ Company Registration Ends ============
 	*/

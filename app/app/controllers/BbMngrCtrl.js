@@ -301,7 +301,7 @@ app.controller('bbMngrCtrl',
     $scope.existingCampaignSidenavVisible = false;
     //saved campaign
     $scope.toggleExistingCampaignSidenav = function () {
-      // save to existing campagin
+      // save to existing campaign
       $scope.existingCampaignSidenavVisible = !$scope.existingCampaignSidenavVisible;
     };
 
@@ -446,7 +446,7 @@ app.controller('bbMngrCtrl',
         $location.path("/admin");
       }
       else if(userMongo.user_type == "owner"){
-        $location.path("/owner/" + userMongo.client_slug + "/home");
+        $location.path("/owner/" + userMongo.client_slug + "/feeds");
       }
     }
 

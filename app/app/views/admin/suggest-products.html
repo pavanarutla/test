@@ -5,14 +5,14 @@
 </style>
 
 <div layout="column">
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
     <md-toolbar layout="row" style="    background: #48869c;">
       <div class="md-toolbar-tools">
         <h2>
           <span>Client Request</span>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleQuoteChangeRequestDetailsSidenav()">
           <md-icon>
             <i class="material-icons">clear</i>
           </md-icon>
@@ -20,12 +20,12 @@
       </div>
     </md-toolbar>
     <md-content layout-padding>
-      <div class="md-whiteframe-z2 md-body-1">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-        more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      <div class="md-whiteframe-z2 md-body-1" layout-margin ng-repeat="changeQuoteItem in changeRequestHistory">
+        <div>
+          {{changeQuoteItem.remark}}
+          <hr />
+          <div layout-align="end center" style="font-size:11px;">{{changeQuoteItem.updated_at | dateify | date: "dd-MMM-yyyy"}}</div>
+        </div>
       </div>
     </md-content>
   </md-sidenav>
@@ -43,9 +43,7 @@
             <md-icon ng-if="searchAll==''">
               <i class="material-icons" >search</i>
             </md-icon>
-            
           </form>
-          
         </md-input-container>
       </div>
     </div>
@@ -211,8 +209,7 @@
                     <div layout="row">
                       <md-input-container class="md-block margin-input">
                         <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
-                        />
+                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"  ng-init="suggestedProduct.price = product.default_price" />
                       </md-input-container>
                       <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
                     </div>
@@ -254,7 +251,7 @@
   <p>Actual Budget
     <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b>
   </p>
-  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="closeInputPanel()" style="margin:0px">
+  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="getChangeRequestHistory(campaignId)" style="margin:0px">
     <md-icon>!</md-icon>
   </md-button>
 </div>

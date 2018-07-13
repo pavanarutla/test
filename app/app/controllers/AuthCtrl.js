@@ -92,7 +92,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				toastr.success(result.message);
 			}
 			else{
-				toastr.error(result.error);
+				toastr.error(result.message);
 			}
 		});
 	}
