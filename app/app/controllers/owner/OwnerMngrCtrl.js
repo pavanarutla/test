@@ -1,5 +1,19 @@
 app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, OwnerProductService, toastr) {
 
+  /*=================================
+  | mdDilalog close function
+  =================================*/
+
+  if(typeof $rootScope.closeMdDialog !== 'function'){
+    $rootScope.closeMdDialog = function(){
+       $mdDialog.hide();
+     }
+   }
+
+  /*=================================
+  | mdDilalog close function
+  =================================*/
+
   $rootScope.config = config;
 
   if($stateParams.client_slug){

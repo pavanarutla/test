@@ -22,7 +22,7 @@
          minlength="3"
          maxlength="60"
          required="required" 
-         ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
+         ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/">
          <div ng-messages="forms.ownerCampaignForm.name.$error" style="color:red" ng-if="!forms.ownerCampaignForm.name.$pristine">
             <div ng-message="required">Campaign Name is required.</div>
             <div ng-message="minlength">Campaign Name must have 3 characters.</div>
@@ -68,10 +68,10 @@
       <div class="form-group">
         <label class="control-label">Phone Number</label>
         <br>
-        <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control" type="text" required="required">
+        <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control" type="text" maxlength="10" required="required">
         <div ng-messages="forms.ownerCampaignForm.phone.$error" style="color:red" ng-if="!forms.ownerCampaignForm.phone.$pristine">
             <div ng-message="required">Phone No is required.</div>
-            <div ng-message="minlength">Phone No must have 10 characters.</div>
+            <div ng-message="maxlength">Phone No must have 10 characters.</div>
           </div>
       </div>
       </div>

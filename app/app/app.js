@@ -421,16 +421,6 @@ app.run(
   ['$rootScope', '$location', '$http', '$auth', '$mdDialog', '$transitions', 'toastr',
     function ($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr) {
       $transitions.onStart({}, function (transition) {
-        // Get all URL parameter
-        $rootScope.currentTitle = transition.to().title;
-        $rootScope.currStateName = transition.to().name;
-        if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
-          $rootScope.footerhide = true;
-        }
-        else {
-          $rootScope.footerhide = false;
-        }
-
         /*===========================================
           Restricting routes to Authenticated Users
         ===========================================*/
@@ -459,11 +449,28 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
-          'owner.home'
+          'owner.home',
+          'owner.feeds',
+          'owner.campaigns',
+          'owner.campaign-details',
+          'owner.requested-hoardings',
+          'owner.suggest-products',
+          'owner.hoarding-list',
+          'owner.product-details',
+          'owner.settings',
+          'owner.profile',
+          'owner.payments',
+          'owner.update-payments'
         ];
         var requiresLogin = [
           'index.location',
-          'index.suggest_campaign'
+        ];
+        var userRoutes = [
+          'index.suggest',
+          'index.suggest.product-detail',
+          'index.suggest.marketing-objectives',
+          'index.suggest.advertising-objectives',
+          'index.suggest.other-info'
         ];
 
         // routes for authenticated Users
@@ -507,6 +514,31 @@ app.run(
             return false;
           }
         }
+        else if (_.indexOf(userRoutes, transition.to().name) != -1) {
+          if (!$auth.isAuthenticated()) {
+            $rootScope.postLoginState = transition.to().name;
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true
+            });
+          }
+          else if ($auth.getPayload().userMongo.user_type != "basic") {
+            toastr.error("You don't have the rights to access this page.", "Error");
+            return false;
+          }
+        }
+
+        // Get all URL parameter
+        $rootScope.currentTitle = transition.to().title;
+        $rootScope.currStateName = transition.to().name;
+        if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
+          $rootScope.footerhide = true;
+        }
+        else {
+          $rootScope.footerhide = false;
+        }
+
       });
     }
   ]

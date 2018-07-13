@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config, toastr) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -82,10 +82,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       });
       $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
-      console.log($scope.closedCampaigns);
     });
   }
-  $scope.getUserCampaigns();
   // get all Campaigns by a user to show it in campaign management page ends
 
   $scope.getCampaignDetails = function(campaignId){
@@ -295,5 +293,18 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
+
+
+  /*=========================
+  | Page based initial loads
+  =========================*/
+
+  if($rootScope.currStateName == "index.campaigns"){
+    $scope.getUserCampaigns();
+  }
+  
+  /*=============================
+  | Page based initial loads end
+  =============================*/
 
 });

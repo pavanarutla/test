@@ -1,6 +1,20 @@
-app.controller('bbMngrCtrl', 
-  function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+
+  /*=================================
+  | mdDilalog close function
+  =================================*/
+
+  if(typeof $rootScope.closeMdDialog !== 'function'){
+    $rootScope.closeMdDialog = function(){
+       $mdDialog.hide();
+     }
+   }
+
+  /*=================================
+  | mdDilalog close function ends
+  =================================*/
+      
 
     $scope.forms = {};
 

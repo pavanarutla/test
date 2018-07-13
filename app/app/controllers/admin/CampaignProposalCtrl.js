@@ -336,15 +336,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               loadCampaignPayments(campaignId);
               toastr.success(result.message);
-              $scope.cancel();
+              $rootScope.closeMdDialog();
             }
             else{
               toastr.error(result.message);
             }
           });
-        }
-        $scope.cancel = function(){
-          $mdDialog.hide();
         }
       }
     });

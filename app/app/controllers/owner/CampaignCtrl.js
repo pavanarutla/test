@@ -194,7 +194,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.success(result.message);
       }
       else if(result.status == 0){
-        $scope.ownerCampaignErrors = result.message;
+        $rootScope.closeMdDialog();
+        if(result.message.constructor == Array){
+          $scope.ownerCampaignErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
       }
       else{
         toastr.error(result.message);
