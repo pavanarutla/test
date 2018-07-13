@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, OwnerCampaignService, OwnerProductService, toastr) {
 
+=======
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr) {
+>>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
   $scope.forms = [];
 
   /*===================
@@ -83,6 +87,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     $scope.sharePerson = !$scope.sharePerson;
   }
 
+  $scope.showCampaignPaymentSidenav = function() {
+    $mdSidenav('campaignPaymentDetailsSidenav').toggle();
+  };
+
   /*===========================
   | MdDialogs and sidenavs end
   ===========================*/
@@ -118,17 +126,37 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
 
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
+<<<<<<< HEAD
     OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function (c) {
         return c.status < 6;
+=======
+    return new Promise((resolve, reject) => {
+      OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
+        $scope.plannedCampaigns = _.filter(result, function(c){
+          return c.status < 6;
+        });
+        $scope.runningCampaigns = _.where(result, { status: 6 });
+        $scope.closedCampaigns = _.filter(result, function(c){
+          return c.status > 6 && c.status <= 8;
+        });
+        resolve(result);
+>>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
       });
-      $scope.runningCampaigns = _.where(result, { status: 3 });
-      $scope.closedCampaigns = _.where(result, { status: 5 });
     });
   }
+<<<<<<< HEAD
   var loadOwnerCampaigns = function () {
     OwnerCampaignService.getOwnerCampaigns().then(function (result) {
       $scope.ownerCampaigns = result;
+=======
+  var loadOwnerCampaigns = function(){
+    return new Promise((resolve, reject) => {
+      OwnerCampaignService.getOwnerCampaigns().then(function(result){
+        $scope.ownerCampaigns = result;
+        resolve(result);
+      });
+>>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
     });
   }
   var loadOwnerProductList = function () {
@@ -164,6 +192,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $scope.forms.ownerCampaignForm.$setUntouched();
         loadOwnerCampaigns();
         toastr.success(result.message);
+      }
+      else if(result.status == 0){
+        $scope.ownerCampaignErrors = result.message;
       }
       else{
         toastr.error(result.message);
@@ -268,6 +299,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       price: price
     };
     $mdDialog.show({
+<<<<<<< HEAD
       locals: { campaignId: $scope.campaignDetails.id, productObj: productObj, ctrlScope: $scope },
       templateUrl: 'views/owner/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
@@ -295,8 +327,24 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $scope.updateProposedProduct = function (product) {
           OwnerCampaignService.updateProposedProduct(campaignId, $scope.product).then(function (result) {
             if (result.status == 1) {
+=======
+      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/owner/edit-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, ctrlScope, campaign, productObj){
+        $scope.product = productObj;
+        $scope.updateProposedProduct = function(product){
+          OwnerCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
+            if(result.status == 1){
+>>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
               // update succeeded. update the grid now.
-              ctrlScope.getCampaignDetails(campaignId);
+              if(campaign.type != "2"){
+                ctrlScope.getUserCampaignDetails(campaign.id);
+              }
+              else{
+                ctrlScope.getOwnerCampaignDetails(campaign.id);
+              }
               $mdDialog.hide();
               toastr.success(result.message);
             }
@@ -359,9 +407,105 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
 
+  $scope.deleteOwnerCampaign = function(campaignId){
+    OwnerCampaignService.deleteOwnerCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    })
+  }
+
   /* ==============================
   | Campaign details section ends
   =============================== */
+
+
+  /* ==============================
+  | Campaign payment section
+  =============================== */
+  function getCampaignWithPayments(){
+    OwnerCampaignService.getCampaignWithPayments().then(function(result){
+      $scope.campaignsWithPayments = result;
+    });
+  }
+
+  $scope.getCampaignPaymentDetails = function(campaignId){
+    OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
+      $scope.showCampaignPaymentSidenav();
+      $scope.campaignPaymentDetails = result;
+      var campaignPayments = $scope.campaignPaymentDetails.payment_details;
+      $scope.paid = 0;
+      _.each(campaignPayments, function(p){
+        $scope.paid += p.amount;
+      });
+      $scope.unpaid = $scope.campaignPaymentDetails.act_budget - $scope.paid; 
+    });
+  }
+
+  $scope.paymentTypes = [
+    {name: "Cash"},
+    {name: "Cheque"},
+    {name: "Online"},
+    {name: "Transfer"}
+  ];
+  $scope.files = {};  
+  $scope.updateOwnerCampaignPayment = function () {
+    Upload.upload({
+      url: config.apiPath + '/update-campaign-payment-owner',
+      data: { image: $scope.files.image, campaign_payment: $scope.campaignPayment }
+    }).then(function (result) {
+      if(result.data.status == "1"){
+        toastr.success(result.data.message);
+        $scope.campaignPayment = {};
+        $scope.files.image = "";
+      }
+      else if(result.data.status == 0){
+        $scope.addProductErrors = result.data.message;
+      }
+    }, function (resp) {
+      toastr.error("somthing went wrong try again later");
+      // console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
+  }
+
+  /* ==============================
+  | Campaign payment section ends
+  =============================== */
+
+
+  /*==============================
+  | Campaign Search
+  ==============================*/
+  // $scope.simulateQuery = false;
+  $scope.isDisabled    = false;
+  // $scope.querySearch   = querySearch;
+  // $scope.selectedItemChange = selectedItemChange;
+  // $scope.searchTextChange   = searchTextChange;
+
+
+  $scope.campaignSearch = function(query) {
+    return OwnerCampaignService.searchCampaigns(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  $scope.viewSelectedCampaign = function(campaign) {
+    $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
+  }
+
+  function selectedItemChange(item) {
+    //console.log('Item changed to ' + JSON.stringify(item));
+  }
+  /*==============================
+  | Campaign Search
+  ==============================*/
 
 
   /*=========================
@@ -384,8 +528,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     }
   }
 
+  if($rootScope.currStateName == 'owner.payments'){
+    getCampaignWithPayments();
+  }
+  if($rootScope.currStateName == 'owner.update-payments'){
+    $scope.allCampaignsForOwner = [];
+    loadOwnerCampaigns().then(function(result){
+      $scope.getUserCampaignsForOwner().then(function(result2){        
+        $scope.allCampaignsForOwner = _.filter(result.concat(result2), function(c){
+          return c.status >= 6;
+        });
+      });
+    })
+  }
+  
   /*=============================
-  | Page based initial loads ends
+  | Page based initial loads end
   =============================*/
 
 });

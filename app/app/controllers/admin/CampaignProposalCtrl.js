@@ -43,6 +43,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     ProductService.getSearchProductList($scope.pagination.pageNo, $scope.pagination.pageSize, search).then(function(result){
       if(localStorage.campaignForSuggestion){
         var campaignForSuggestion = JSON.parse(localStorage.campaignForSuggestion);
+        $scope.campaignId = campaignForSuggestion.id;
         $scope.campaignStartDate = campaignForSuggestion.start_date;
         $scope.campaignEndDate = campaignForSuggestion.end_date;
         $scope.campaignEstBudget = campaignForSuggestion.est_budget;
@@ -63,23 +64,28 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
     
   if($rootScope.currStateName == "admin.suggest-products"){
-    $scope.loadProductList();
+    if(!localStorage.campaignForSuggestion){
+      toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
+    }
+    else{
+      $scope.loadProductList();
+    }
   }
 
   /****** Search ************/
    $scope.searchAll = "";
 
-   $scope.clearSearch = function () {
-      $scope.searchAll = "";
-      $scope.pageNo = 1;
-      $scope.loadProductList();
-   };
+  $scope.clearSearch = function () {
+    $scope.searchAll = "";
+    $scope.pageNo = 1;
+    $scope.loadProductList();
+  };
   $scope.searchHoardingData = function () {
-       $scope.pageNo = 1;
-       $scope.loadProductList();
+    $scope.pageNo = 1;
+    $scope.loadProductList();
   };
 
-  function loadCampaignData(campaignId){
+   $scope.loadCampaignData = function(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.campaignProducts = result.products;
@@ -90,7 +96,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   function loadCampaignPayments(campaignId){
-    if($scope.campaignDetails.status >= 7 ){
+    if($scope.campaignDetails.status >= 6 ){
       AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
         $scope.campaignPayments = result;
       });
@@ -102,12 +108,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
   if($stateParams.campaignId){
     var campaignId = $stateParams.campaignId;
-    loadCampaignData(campaignId);
+    $scope.loadCampaignData(campaignId);
   }
-  // if(!localStorage.campaignForSuggestion){
-  //   toastr.error("Choose a campaign first.");
-  //   $location.path('/admin/campaign');
-  // }
 
   $scope.addNewProductToCampaign = function(){
     localStorage.campaignForSuggestion = JSON.stringify($scope.campaignDetails);
@@ -238,7 +240,11 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
                 ctrlScope.campaignDetails = result;
+<<<<<<< HEAD
                 // ctrlScope.gridCampaignProducts.data = result.products;
+=======
+                ctrlScope.campaignProducts = result.products;
+>>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
                 $mdDialog.hide();
               });
               toastr.success(result.message);
@@ -262,7 +268,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       if(budget_check){
         AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
           if(result.status == 1){
-            $scope.campaignDetails.status = 4;
+            $scope.campaignDetails.status = 3;
             toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
           }
           else{
@@ -274,7 +280,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     else{
       AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
         if(result.status == 1){
-          $scope.campaignDetails.status = 4;
+          $scope.campaignDetails.status = 3;
           toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
         }
         else{
@@ -285,8 +291,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
   
   /*////popup////////*/
-  $scope.closeInputPanel = function() {
-    $mdSidenav('ClientRequest').toggle();
+  $scope.toggleQuoteChangeRequestDetailsSidenav = function() {
+    $mdSidenav('quoteChangeRequestDetailsSidenav').toggle();
   };
 
   $scope.launchCampaign = function(campaignId, ev){
@@ -302,7 +308,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
           .ok('Got it!')
           .targetEvent(ev)
         );
-        loadCampaignData(campaignId);
+        $scope.loadCampaignData(campaignId);
       }
       else{
         toastr.error(result.message);
@@ -357,7 +363,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
           .ok('Got it!')
           .targetEvent(ev)
         );
-        loadCampaignData(campaignId);
+        $scope.loadCampaignData(campaignId);
       }
       else{
         toastr.error(result.message);
@@ -368,21 +374,20 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   $scope.deleteProductFromCampaign = function(campaignId, productId){
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
-        loadCampaignData(campaignId);
-        toastr.success("Product removed from campaign.");
+        $scope.loadCampaignData(campaignId);
+        toastr.success(result.message);
       }
       else{
-        toastr.error("There was a technical error removing the product from campaign.");
+        toastr.error(result.message);
       }
     });
   }
-  // tables code start
-  // var vm = $scope;
-  // vm.limit = 10;
-  // $scope.loadMore = function() {
-  //   var increamented = vm.limit + 5;
-  //   vm.limit = increamented > $scope.personalcampsdata.length ? $scope.personalcampsdata.length : increamented;
-  // };
-  // tables code end
+
+  $scope.getChangeRequestHistory = function(campaignId){
+    AdminCampaignService.getChangeRequestHistory(campaignId).then(function(result){
+      $scope.changeRequestHistory = result;
+      $scope.toggleQuoteChangeRequestDetailsSidenav();
+    })
+  }
 
 });

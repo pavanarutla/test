@@ -25,7 +25,7 @@
             Browse BillBoards</a>
         </md-button>
         <!--sugg -->
-        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest-campaign">
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated" ng-href="#/suggest/product-detail">
           suggest me
         </md-button>
          <!--search button -->
@@ -48,7 +48,7 @@
               <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
             </md-menu-item>
             <md-menu-item ng-if="isUserBasic()">
-              <md-button aria-label="campagins" ng-href="#/campaigns">Campaigns</md-button>
+              <md-button aria-label="campaigns" ng-href="#/campaigns">Campaigns</md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-href="#/reset_password">Reset Password</md-button>
@@ -93,16 +93,15 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right" md-disable-backdrop>
     <md-content>
       <ul style="padding:0px;margin:0px">
         <li>
           <div class="notification_header">
-            <h3>You have {{notifs.length}} new notification<span style="margin: 0 0 0 40px;">
-              <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+            <h3>You have {{notifs.length}} new notification<span style="margin: 5px 0 0 70px;">
+              <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()" style="margin: 0px;padding: 0px">
                 <md-icon class="md-default-theme" ><i class="material-icons" style="font-size:18px">close</i></md-icon>
             </md-button>
-            </span></h3>
             <div class="clearfix"></div>
           </div>
         </li>
@@ -132,11 +131,11 @@
   <!-- Content section-->
   <!-- <div ui-view ng-cloak></div> -->
   <ui-view>
-    
+
   </ui-view>
 
   <!-- Footer Section-->
-  <footer style="position:absolute; bottom: 0;width: 100%;">
+  <footer style="position:absolute; bottom: 0px;width: 100%;">
     <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="footer_social_icons">
         <div class="" style="margin-left:5%">

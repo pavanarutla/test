@@ -1,16 +1,15 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, CampaignService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
-    'suggestion-requested',  //    0
-    'campaign-preparing',    //    1
-    'campaign-created',      //    2
-    'quote-requested',       //    3
-    'quote-given',           //    4
-    'change-requested',      //    5 
-    'launch-requested',      //    6
-    'running',               //    7
-    'suspended',             //    8
-    'stopped'                //    9
+    'campaign-preparing',    //    0
+    'campaign-created',      //    1
+    'quote-requested',       //    2
+    'quote-given',           //    3
+    'change-requested',      //    4 
+    'launch-requested',      //    5
+    'running',               //    6
+    'suspended',             //    7
+    'stopped'                //    8
   ];
 
   $scope.showPaymentdailog = function () {
@@ -69,11 +68,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   
   $scope.campaignDetails = {};
 
-  $scope.limit = 3;
+  // $scope.limit = 3;
 
-  $scope.loadMore = function () {
-    $scope.limit = $scope.items.length
-  }
+  // $scope.loadMore = function () {
+  //   $scope.limit = $scope.items.length
+  // }
   
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
@@ -83,6 +82,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       });
       $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      console.log($scope.closedCampaigns);
     });
   }
   $scope.getUserCampaigns();
@@ -157,6 +157,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         $scope.requestChangeInQuote = function(){          
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
+              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
               $mdDialog.hide();
               toastr.success(result.message);
             }
@@ -172,29 +173,63 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  $scope.suggestionRequest = CampaignService.suggestedData;
+  $scope.goToNextSuggestData = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 2){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+      $location.path('/suggest/marketing-objectives');
+    }else{
+      e.preventDefault();
+    }
+  }
+  $scope.goToAddAdvert = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 4){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+      $location.path('/suggest/advertising-objectives');
+    }else{
+      e.preventDefault();
+    }
+  }
+  $scope.goToOtherInfo = function(e){
+    if($scope.suggestionRequest && Object.keys($scope.suggestionRequest).length > 8){
+    CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);        
+    $location.path('/suggest/other-info')
+    }else{
+      e.preventDefault();
+    }
+  }
+
   $scope.sendSuggestionRequest = function (ev) {
-    CampaignService.sendSuggestionRequest($scope.suggestionRequest).then(function (result) {
-      if (result.status == 1) {
-        $scope.suggestMeRequestSent = true;
-      }
-      $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('We will get back to you!!!!')
-          .textContent(result.message)
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
-      )
-      .finally(function(){
-        $location.path('#/home')
+    if( $scope.suggestionRequest && Object.keys($scope.suggestionRequest).length >= 13){
+      CampaignService.suggestedData = Object.assign($scope.suggestionRequest,CampaignService.suggestedData);
+      CampaignService.sendSuggestionRequest(CampaignService.suggestedData).then(function (result) {
+        if (result.status == 1) {
+          CampaignService.suggestedData = null;
+          $scope.suggestMeRequestSent = true;
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('We will get back to you!!!!')
+              .textContent(result.message)
+              .ariaLabel('Alert Dialog Demo')
+              .ok('Got it!')
+              .targetEvent(ev)
+          )
+          .finally(function(){
+            $location.path('#/home')
+          });
+        }
+        if(result.status == 0){
+          $scope.suggestCampaignErrors = result.message    
+        }
       });
-    });
+    } 
   };
 
   $scope.resetSuggestionForm = function(){
-    $scope.suggestionRequest = {};
+    $scope.suggestionRequest = null;
+    CampaignService.suggestedData = null;
   }
 
   $scope.deleteCampaign = function (campaignId) {
@@ -208,9 +243,57 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  $scope.ShareShortlistedSidenav = function () {
-    $mdSidenav('shortlistSharingSidenav').toggle();
+  $scope.toggleShareCampaignSidenav = function () {
+    $mdSidenav('shareCampaignSidenav').toggle();
   };
 
+  $scope.requestProposalForCampaign = function (campaignId, ev) {
+    CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+      if (result.status == 1) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('We will get back to you!!!!')
+            .textContent(result.message)
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+    $scope.campaignToShare = $scope.campaignDetails;
+    var campaignToEmail = {
+      campaign_id: $scope.campaignToShare.id,
+      email: shareCampaign.email,
+      receiver_name: shareCampaign.receiver_name,
+      campaign_type: $scope.campaignToShare.type
+    };
+    CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+      if (result.status == 1) {
+        $mdSidenav('shareCampaignSidenav').close();
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            // .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
 
 });

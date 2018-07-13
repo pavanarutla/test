@@ -58,7 +58,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
         emptyCampaign = _.extend(emptyCampaign, campaignPartial);
         $scope.campaignFromSuggestionRequest = emptyCampaign;
         $scope.campaignFromSuggestionRequest.id = emptyCampaign.campaign_id;
-        console.log($scope.campaignFromSuggestionRequest);
+        // console.log($scope.campaignFromSuggestionRequest);
         $scope.saveCampaign = function(){
           AdminCampaignService.saveUserCampaign($scope.campaignFromSuggestionRequest).then(function(result){
             if(result.status == 1){

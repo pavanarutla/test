@@ -1,13 +1,13 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
 	<div layout="column" layout-sm="column" layout-xs="column">
-		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
+		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
 			<md-toolbar layout="row" style="    background: #48869c;">
 				<div class="md-toolbar-tools">
 					<h2>
 						<span>Client Request</span>
 					</h2>
 					<span flex></span>
-					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
+					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleQuoteChangeRequestDetailsSidenav()">
 						<md-icon>
 							<i class="material-icons">clear</i>
 						</md-icon>
@@ -15,12 +15,12 @@
 				</div>
 			</md-toolbar>
 			<md-content layout-padding>
-				<div class="md-whiteframe-z2 md-body-1">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-					text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-					It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-					It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-					with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+				<div class="md-whiteframe-z2 md-body-1" layout-margin ng-repeat="changeQuoteItem in changeRequestHistory">
+					<div>
+						{{changeQuoteItem.remark}}
+						<hr />
+						<div layout-align="end center" style="font-size:11px;">{{changeQuoteItem.updated_at | dateify | date: "dd-MMM-yyyy"}}</div>
+					</div>
 				</div>
 			</md-content>
 		</md-sidenav>
@@ -66,7 +66,7 @@
 							<h3>Campaign Summary</h2>
 						</div>
 						<div layout="row">
-							<div flex="50">Staring:</div>
+							<div flex="50">Starting:</div>
 							<div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date:
 								"dd-MMM-yyyy" }}</div>
 						</div>
@@ -76,7 +76,7 @@
 								<span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
 						</div>
 						<div layout="row">
-							<div flex="50">Actul Budget:</div>
+							<div flex="50">Actual Budget:</div>
 							<div flex="50">
 								<span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
 						</div>
@@ -84,7 +84,7 @@
 							<div flex="50">Status:</div>
 							<div flex="50">
 								<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-								<span layout-align="center center" ng-if="campaignDetails.status == 4">
+								<span layout-align="center center" ng-if="campaignDetails.status == 4" style="cursor:pointer;" ng-click="getChangeRequestHistory(campaignDetails.id)">
 									<i class="material-icons">info_outline</i>
 								</span>
 							</div>
@@ -108,7 +108,7 @@
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
 						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
 					</div>
-					<div layout="row">
+					<div layout="row" ng-if="campaignDetails.status < 8 || campaignPayments.total_paid < campaignDetails.act_budget">
 						<div flex="100" layout="column" layout-align="center center">
 							<md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
 								Update Payment
@@ -172,14 +172,13 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 3 && campaignDetails.status != 4"
-					 ng-click="addNewProductToCampaign()">
+					<md-button class="md-raised md-warn" ng-disabled="!(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))" ng-click="addNewProductToCampaign()">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.type == 0 && (campaignDetails.status < 4)" ng-if="campaignDetails && campaignDetails.status < 6"
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.type == 0 && (campaignDetails.status < 5)" ng-if="campaignDetails && campaignDetails.status < 6"
 					 ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
 						<span>
@@ -242,7 +241,7 @@
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>

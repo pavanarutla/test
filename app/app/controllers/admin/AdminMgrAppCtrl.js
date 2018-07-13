@@ -1,5 +1,19 @@
 app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
 
+  /*========================
+  | Notification types
+  |==================
+  
+  'campaign-suggestion-requested'   =>    0,
+  'campaign-quote-requested'        =>    1,
+  'campaign-quote-provided'         =>    2,
+  'campaign-launch-requested'       =>    3,
+  'campaign-launched'               =>    4,
+  'campaign-suspended'              =>    5,
+  'campaign-closed'                 =>    6 
+  
+  =========================*/
+
   $rootScope.serverUrl = config.serverUrl;
 
   if(localStorage.loggedInUser){
@@ -58,14 +72,21 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   |   Notification navigation 
   ===============================*/
   $scope.viewNotification = function(notification){
-    if(notification.type == 8){
+    if(notification.type == 9){
+      // hoarding requested
       $location.path('admin/requested-hoardings/' + notification.data.product_id);
     }
     else if(notification.type == 0){
+      // campaign suggestion requested
       $location.path('admin/home/' + notification.data.campaign_sugg_req_id);
     }
     else if(notification.type > 0 && notification.type < 8){
+      // campaign state changed
       $location.path('admin/campaign-proposal-summary/' + notification.data.campaign_id);
+    }
+    else if(notification.type == 8){
+      // a new compnay joined. set up the super admin
+      $location.path('admin/user-management/' + notification.data.client_m_id);
     }
     AdminNotificationService.updateNotifRead(notification.id).then(function(result){
       if(result.status == 1){
@@ -78,5 +99,9 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     });
     $mdSidenav('right').toggle();
   }
+
+  /*===============================
+  |   Notification navigation ends
+  ===============================*/
 
 });

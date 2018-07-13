@@ -14,16 +14,16 @@
     <!-- user for start here -->
     <div ng-if="!forgotPasswordpage">
       <div layout="column" layout-align="center start" layout-margin="layout-margin" class="md-block">
-        <h5> Login to the campagin planner</h5>
+        <h5> Login to the campaign planner</h5>
       </div>
       <div layout="column"  layout-margin="layout-margin">
         <form name="userform" novalidate>
           <md-input-container class="md-block">
             <label>Email</label>
-            <input ng-model="user.email" name="useremail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <input ng-model="user.email" name="useremail" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
             <div ng-messages="userform.useremail.$error">
               <div class="alret alert-danger" ng-message="required">Email is required.</div>
-              <div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
+              <div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
               <div ng-message="pattern">Enter a valid email</div>
             </div>
           </md-input-container>
@@ -56,7 +56,7 @@
     <!-- Agency form start here -->
     <!-- <div ng-if="agencyForm">
       <div layout="column" layout-align="center start" layout-margin="layout-margin" class="md-block">
-        <h5> Login to the campagin planner</h5>
+        <h5> Login to the Campaign planner</h5>
       </div>
       <div layout="column"  layout-margin="layout-margin">
         <form name="agency" novalidate >

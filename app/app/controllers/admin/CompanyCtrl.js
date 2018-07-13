@@ -54,17 +54,17 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
     });
   };
 
-  CompanyService.getCompanies().then(function (response) {
-    $scope.gridCompany.data = response;
-    $scope.companyList = response;
-  });
+  var getCompanies = function(){
+    CompanyService.getCompanies().then(function (response) {    
+      $scope.companyList = response;
+    });
+  }
+  getCompanies();
 
   $scope.addCompany = function(){
     CompanyService.saveCompany($scope.company).then(function(result){
       if(result.status == 1){
-        CompanyService.getCompanies().then(function (response) {    
-          $scope.gridCompany.data = response;
-        });
+        getCompanies();
         toastr.success(result.message);
         $mdDialog.hide();
       }
@@ -78,8 +78,6 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
   $scope.editCompany = function(company){    
     $scope.company = company;
-    var index = $scope.gridCompany.data.indexOf(company);
-      $scope.gridCompany.data.splice(index, 1);
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',
       fullscreen: $scope.customFullscreen,
@@ -201,7 +199,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   vm.limit = 10;
   $scope.loadMore = function() {
     var increamented = vm.limit + 5;
-    vm.limit = increamented > $scope.hoardingCompany.length ? $scope.hoardingCompany.length : increamented;
+    vm.limit = increamented > $scope.hoardingCompanies.length ? $scope.hoardingCompanies.length : increamented;
   };
 // tables code end
 });

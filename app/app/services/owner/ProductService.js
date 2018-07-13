@@ -42,9 +42,9 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				$http.delete(config.apiPath + '/format/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
-			searchProducts: function(word){
+			searchOwnerProducts: function(word){
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/search-products/' + word).success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/search-owner-products/' + word).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
 			getRequestedProductList: function (pageNo, pageSize) {
@@ -56,6 +56,16 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				$http.get(config.apiPath + '/requested-hoardings-for-owner' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
+			getOwnerProductReport: function(){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/owner-products-report').success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			getOwnerProductDetails: function(productId){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/owner-product-details/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			}
 		}
 	}
 ]);
