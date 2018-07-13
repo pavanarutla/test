@@ -158,7 +158,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.success(result.message);
       }
       else if(result.status == 0){
-        $scope.cancel();
+        $rootScope.closeMdDialog();
         if(result.message.constructor == Array){
           $scope.ownerCampaignErrors = result.message;
         }
