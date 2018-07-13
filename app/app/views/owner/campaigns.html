@@ -80,13 +80,7 @@
         <br> -->
         <!-- <div class='input-group' style="width:100%"> -->
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-<<<<<<< HEAD
           <!-- <input type='text' class="form-control" 
-=======
-          <input type='text' class="form-control" 
-            required="required"
-            name="start_date"
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
             datepicker-popup
             ng-model="ownerCampaign.start_date" 
             is-open="opened.start" 
@@ -98,29 +92,20 @@
               ng-click="opened.start = !opened.start; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
-<<<<<<< HEAD
         </div> -->        
           <label>Start date</label>
-          <md-datepicker ng-model="ownerCampaign.start_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>          
-=======
+          <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>          
           <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
               <div ng-message="required">Start date is required.</div>
             </div>
         </div>
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
       </div>
       <div class="form-group">
         <!-- <label class="control-label">End Date</label>
         <br>
         <div class='input-group' style="width:100%"> -->
           <!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-<<<<<<< HEAD
           <!-- <input type='text' class="form-control" 
-=======
-          <input type='text' class="form-control"
-          required="required"
-            name="end_date" 
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
             datepicker-popup
             ng-model="ownerCampaign.end_date" 
             is-open="opened.end" 
@@ -132,18 +117,15 @@
               ng-click="opened.end = !opened.end; $event.stopPropagation()">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
-<<<<<<< HEAD
         </div> -->
         <div flex-gt-xs="">
           <label>End date</label>
-          <md-datepicker ng-model="ownerCampaign.end_date"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
           </div>
-=======
           <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
               <div ng-message="required">End date is required.</div>
             </div>
         </div>
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
       </div>
       <div ng-repeat="campError in ownerCampaignErrors" ng-if="ownerCampaignErrors.length > 0" style="color:red">
         {{campError}}

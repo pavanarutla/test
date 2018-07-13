@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, OwnerCampaignService, OwnerProductService, toastr) {
-
-=======
 app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr) {
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
   $scope.forms = [];
 
   /*===================
@@ -126,11 +121,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
 
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
-<<<<<<< HEAD
-    OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
-      $scope.plannedCampaigns = _.filter(result, function (c) {
-        return c.status < 6;
-=======
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
         $scope.plannedCampaigns = _.filter(result, function(c){
@@ -141,22 +131,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
           return c.status > 6 && c.status <= 8;
         });
         resolve(result);
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
       });
     });
   }
-<<<<<<< HEAD
-  var loadOwnerCampaigns = function () {
-    OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-      $scope.ownerCampaigns = result;
-=======
   var loadOwnerCampaigns = function(){
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getOwnerCampaigns().then(function(result){
         $scope.ownerCampaigns = result;
         resolve(result);
       });
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
     });
   }
   var loadOwnerProductList = function () {
@@ -305,35 +288,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       price: price
     };
     $mdDialog.show({
-<<<<<<< HEAD
-      locals: { campaignId: $scope.campaignDetails.id, productObj: productObj, ctrlScope: $scope },
-      templateUrl: 'views/owner/edit-proposed-product.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true,
-      controller: function ($scope, $mdDialog, ctrlScope, campaignId, productObj) {
-        $scope.product = productObj;
-        var startDate = new Date();
-        var productFromDate = new Date($scope.product.from_date);
-        var productToDate = new Date($scope.product.to_date);
-        $scope.fromMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate() + 1
-        );
-        $scope.toMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productFromDate.getDate() + 1
-        );
-        $scope.toMaxDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productToDate.getDate() + 1
-        );
-        $scope.updateProposedProduct = function (product) {
-          OwnerCampaignService.updateProposedProduct(campaignId, $scope.product).then(function (result) {
-            if (result.status == 1) {
-=======
       locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
       templateUrl: 'views/owner/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
@@ -343,7 +297,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         $scope.updateProposedProduct = function(product){
           OwnerCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
             if(result.status == 1){
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
               // update succeeded. update the grid now.
               if(campaign.type != "2"){
                 ctrlScope.getUserCampaignDetails(campaign.id);

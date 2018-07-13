@@ -240,11 +240,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
               // update succeeded. update the grid now.
               CampaignService.getCampaignWithProducts(campaignId).then(function(result){
                 ctrlScope.campaignDetails = result;
-<<<<<<< HEAD
-                // ctrlScope.gridCampaignProducts.data = result.products;
-=======
                 ctrlScope.campaignProducts = result.products;
->>>>>>> 312f370e6fa231a9075d9952ad5b4203c5c879d0
                 $mdDialog.hide();
               });
               toastr.success(result.message);
