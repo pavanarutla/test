@@ -86,6 +86,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.L&T', {
+      url: 'L&T',
+      templateUrl: 'views/L&T.html',
+      controller: 'GmapCtrl'
+    })
     .state('index.campaign', {
       url: 'campaign',
       templateUrl: 'views/campaign.html',
@@ -99,6 +104,11 @@ var app = angular.module('bbManager', [
     .state('index.view_campaign', {
       url: 'view-campaign/{campaignId}',
       templateUrl: 'views/campaign.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.viewlandt_campaign', {
+      url: 'viewlandt_campaign',
+      templateUrl: 'views/lntview-campaign.html',
       controller: 'CampaignCtrl'
     })
     .state('index.profile', {
@@ -182,6 +192,18 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
+    .state('admin.metrocampaign', {
+      url: '/metrocampaign',
+      templateUrl: 'views/admin/metro-campaign-list.html',
+      controller: 'AdminCampaignCtrl',
+      title: 'Campaign'
+    })
+    .state('admin.metrocampaignview', {
+      url: '/metrocampaignview',
+      templateUrl: 'views/admin/user-lnt-campaign.html',
+      controller: 'AdminCampaignCtrl',
+      title: 'Campaign'
+    })
     .state('admin.campaign-proposal-summary', {
       url: '/campaign-proposal-summary/{campaignId}',
       templateUrl: 'views/admin/campaign-proposal-summary.html',
@@ -206,6 +228,11 @@ var app = angular.module('bbManager', [
     .state('admin.formats', {
       url: '/formats',
       templateUrl: 'views/admin/formats.html',
+      controller: 'ProductCtrl'
+    })
+    .state('admin.metroformats', {
+      url: '/metroformats',
+      templateUrl: 'views/admin/metroformtas.html',
       controller: 'ProductCtrl'
     })
     .state('admin.requested-hoardings', {
