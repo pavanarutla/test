@@ -159,7 +159,12 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       }
       else if(result.status == 0){
         $scope.cancel();
-        $scope.ownerCampaignErrors = result.message;
+        if(result.message.constructor == Array){
+          $scope.ownerCampaignErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
       }
       else{
         toastr.error(result.message);
