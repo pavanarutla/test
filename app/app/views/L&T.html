@@ -462,11 +462,10 @@
     </md-sidenav>
     <!-- Share Campaign Sidenav ends -->
 
-    
-    
+
     <!-- map html start (left side controls) -->
-    <div layout="row" style="position:relative;height:100%;" id="map-container">
-        <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5" disable-default-u-i="true"
+    <div layout="column" style="position:relative;height:100%;" id="map-container">
+        <!-- <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5" disable-default-u-i="true"
         ng-if="mapContainerHeightSet" styles="[
         {
             elementType: 'geometry',
@@ -554,7 +553,8 @@
             elementType: 'labels.text.fill',
             stylers: [{color: '#9e9e9e'}]
         }]">
-        </ng-map>
+        </ng-map> -->
+        <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
         <md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
             <div class="sidenav__ineer scrollbar__style">
                 <!-- search html start-->
@@ -712,7 +712,7 @@
             </div>
         </md-sidenav>
         <!--  metro Sidenav -->
-        <md-sidenav class="md-sidenav-right  sidenav-width" md-disable-backdrop md-is-locked-open="$mdMedia('gt-xs')"  md-component-id="lntright">
+        <md-sidenav class="md-sidenav-right main__sidenav  sidenav-width" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright" style="    right: 0px !important;left:auto !important;">
             <md-content layout="column">
                 <div class="metro_wing">
                     <img ng-src="assets/images/product/hoarding.png" style="width:100%;height:200px;" />
@@ -732,20 +732,24 @@
                         <li>1.2Lakh People commute daily per corridor*</li>
                     </ul>
                 </div>
+                <div layout="column" layout-align="center end" class="logo_lnt" style="margin: 30px 0;"layout-padding>
+                    <p class="md-caption">We are oﬃcial  Partners to</p>
+                    <img src="assets/images/landt_logo.jpg" alt="landt_logo"/>
+                </div>
             </md-content>
         </md-sidenav>
         <!-- metro Sidenav ends -->
     </div>
     <!-- map html start (left side controls) ends -->
 </div>
-<!-- <div id="loader" ng-if="!(filteredMarkers.length > 1) ">products are loading please wait..</div> -->
-<script>
 
-$(document).ready(function () {
-    height = $(window).height();  //getting windows height
-    $('#map-container').css('height', height - 64 + 'px');   //and setting height of map container
-    if ($(window).width() < 600) {
-    $('#map-container').css('height', height - 100 + 'px');
-    }
-});
-</script>
+<!-- <script>
+
+    $(document).ready(function () {
+        height = $(window).height();  //getting windows height
+        $('#map-container').css('height', height - 64 + 'px');   //and setting height of map container
+        if ($(window).width() < 600) {
+        $('#map-container').css('height', height - 100 + 'px');
+        }
+    });
+</script> -->

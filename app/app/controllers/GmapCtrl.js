@@ -1018,12 +1018,14 @@ app.controller('GmapCtrl',
       productLoader();
       //L&T metro package popup
       $scope.selectPackage = function (ev) {
-      $mdDialog.show({
-        templateUrl: 'views/selectpack.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true
-      })
+        $mdDialog.show({
+          
+          templateUrl: 'views/selectpack.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true
+        })
       };
+      
     }
   ]
 );

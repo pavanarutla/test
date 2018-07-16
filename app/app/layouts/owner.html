@@ -49,14 +49,14 @@
 					<md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
 						<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
 					</md-button>
-					<p style="background:#fac306">
+					<p style="background:#fac306" ng-click="ownerRightSidenav()">
 						<span style="line-height: 26px;">{{ownerNotifs.length || 0}}</span>
 					</p>
 				</div>
 				<md-menu md-offset="0 50">
 					<md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;width:32px;height:32px;border-radius:50% ;">
+						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius:50% ">
 					</md-button>
 					<md-menu-content width="3" style="z-index:99">
 						<md-menu-item>
