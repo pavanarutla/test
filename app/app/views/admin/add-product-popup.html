@@ -51,7 +51,7 @@
 								<select ng-model="product.client" class="select-value" ng-options ="cl.id as cl.name for cl in allClients" ng-if="product.status != 0">
 									<option value="" disabled selected>Select Owner</option>
 								</select>
-								<input ng-model="product.country_name" placeholder="Country Name" type="text" name="country_name" ng-if="product.status == 0" ng-disabled="true"/>
+								<input ng-model="product.client_name" placeholder="Client Name" type="text" name="client_name" ng-if="product.status == 0" ng-disabled="true"/>
 							</td>
 							<td flex="33">
 								<select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="product.country" ng-change="getStateList()" ng-options ="country.id as country.name for country in countryList" ng-if="product.status != 0">									
