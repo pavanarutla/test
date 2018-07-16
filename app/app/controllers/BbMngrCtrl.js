@@ -7,9 +7,9 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
   if(typeof $rootScope.closeMdDialog !== 'function'){
     $rootScope.closeMdDialog = function(){
-       $mdDialog.hide();
-     }
-   }
+      $mdDialog.hide();
+    }
+  }
 
   /*=================================
   | mdDilalog close function ends
@@ -133,6 +133,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         templateUrl: 'views/sign-in.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
+        preserveScope: true,
+        scope: $scope, 
         controller: 'AuthCtrl'
       })
     };
