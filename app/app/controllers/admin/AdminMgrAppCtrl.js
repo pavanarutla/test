@@ -1,5 +1,19 @@
 app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
 
+  /*=================================
+  | mdDilalog close function
+  =================================*/
+
+  if(typeof $rootScope.closeMdDialog !== 'function'){
+    $rootScope.closeMdDialog = function(){
+       $mdDialog.hide();
+     }
+   }
+
+  /*=================================
+  | mdDilalog close function ends
+  =================================*/
+
   /*========================
   | Notification types
   |==================

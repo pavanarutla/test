@@ -1,6 +1,20 @@
-app.controller('bbMngrCtrl', 
-  function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
+app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+
+  /*=================================
+  | mdDilalog close function
+  =================================*/
+
+  if(typeof $rootScope.closeMdDialog !== 'function'){
+    $rootScope.closeMdDialog = function(){
+      $mdDialog.hide();
+    }
+  }
+
+  /*=================================
+  | mdDilalog close function ends
+  =================================*/
+      
 
     $scope.forms = {};
 
@@ -119,6 +133,8 @@ app.controller('bbMngrCtrl',
         templateUrl: 'views/sign-in.html',
         fullscreen: $scope.customFullscreen,
         clickOutsideToClose:true,
+        preserveScope: true,
+        scope: $scope, 
         controller: 'AuthCtrl'
       })
     };
@@ -222,13 +238,13 @@ app.controller('bbMngrCtrl',
       if(result.status == 1){
         toastr.success(result.message);
         $scope.sendQueryErrors = null;
+        $scope.query = {};
+        $scope.forms.sendQueryForm.$setPristine();
+        $scope.forms.sendQueryForm.$setUntouched();
       }
       else if(result.status == 0){
         $scope.sendQueryErrors = result.message;
       }
-      $scope.query = {};
-      $scope.forms.sendQueryForm.$setPristine();
-      $scope.forms.sendQueryForm.$setUntouched();
     },function(error){
       toastr.error("somthing went wrong please try agin later");
     });
@@ -242,14 +258,14 @@ app.controller('bbMngrCtrl',
     ContactService.subscribe($scope.subscriberData).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);
+        $scope.subscriberData = {};
+        $scope.forms.sendSubscriberForm.$setPristine();
+        $scope.forms.sendSubscriberForm.$setUntouched();
       }
       else  if(result.status == 0){
         $scope.subscribeErrors = result.message;
       }
     });
-    $scope.subscriberData = {};
-    $scope.forms.sendSubscriberForm.$setPristine();
-    $scope.forms.sendSubscriberForm.$setUntouched();
   };
 
   $scope.showContact = function () {
@@ -269,14 +285,14 @@ app.controller('bbMngrCtrl',
         toastr.success(result.message);
         $scope.callbackRequest.phoneNo = null;
         $mdDialog.hide();
+        $scope.callbackRequest = {};
+        $scope.forms.callbackRequest.$setPristine();
+        $scope.forms.callbackRequest.$setUntouched();
       }
       else{
         toastr.error(result.message);
       }
     });
-    $scope.callbackRequest = {};
-    $scope.forms.callbackRequest.$setPristine();
-    $scope.forms.callbackRequest.$setUntouched();
   }
 
   $scope.logout = function(){

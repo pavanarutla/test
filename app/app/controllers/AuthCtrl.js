@@ -1,4 +1,3 @@
-'user strict'
 app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
 
 	$scope.showSignin = true;
@@ -43,9 +42,9 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		});
 	}
 
-	$scope.close = function(){
-		$mdDialog.hide();		
-	}
+	// $scope.close = function(){
+	// 	$mdDialog.hide();		
+	// }
 	
 	///Agency Sign In functionolity
 
@@ -57,7 +56,10 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$mdDialog.show({
 			templateUrl: 'views/register.html',
 			fullscreen: $scope.customFullscreen,
-			clickOutsideToClose: true
+			clickOutsideToClose: true, 
+			preserveScope: true, 
+			scope: $scope,
+			controller: 'RegistrationCtrl'
 		})
 	};
 
@@ -97,8 +99,8 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		});
 	}
 
-	$scope.close = function () {
-		$mdDialog.hide();
-		$state.reload();
-	}
+	// $scope.close = function () {
+	// 	$mdDialog.hide();
+	// 	$state.reload();
+	// }
 })

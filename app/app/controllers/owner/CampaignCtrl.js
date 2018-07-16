@@ -26,7 +26,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       lowest = $scope.pagination.pageNo - mid + 1;
     }
     highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
-    $scope.pagination.pageArray = _.range(lowest, highest);
+    $scope.pagination.pageArray = _.range(lowest, highest + 1);
   }
 
   /*===================
@@ -158,8 +158,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.success(result.message);
       }
       else if(result.status == 0){
-        $scope.cancel();
-        $scope.ownerCampaignErrors = result.message;
+        $rootScope.closeMdDialog();
+        if(result.message.constructor == Array){
+          $scope.ownerCampaignErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
       }
       else{
         toastr.error(result.message);
