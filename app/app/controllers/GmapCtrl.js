@@ -787,20 +787,18 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.searchBySiteNo = function () {
-        MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          if (markerProperties.id) {
+      $scope.searchBySiteNo = function (item) {
+        MapService.searchBySiteNo(item.siteNo).then(function (markerProperties) {
+          var markerProp = markerProperties[0];
+          if (markerProp.id) {
             var marker = {};
             // marker.position = { lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) };
-            marker.properties = markerProperties;
+            marker.properties = markerProp;
             var bounds = new google.maps.LatLngBounds();
-            bounds.extend({ lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) });
+            bounds.extend({ lat: parseFloat(markerProp.lat), lng: parseFloat(markerProp.lng) });
             $scope.mapObj.fitBounds(bounds);
             selectMarker(marker);
-          }
-          else {
-            toastr.error('No product found with that tab id', 'error');
-          }
+          }  
         });
       }
 
@@ -965,6 +963,9 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
+      $scope.searchByTabId = function (query) {
+        return MapService.searchBySiteNo(query);
+      }
       $scope.selectedAreaChanged = function (area) {
         $scope.selectedArea = area;
         if (area) {

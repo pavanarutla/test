@@ -848,16 +848,22 @@
         <!-- search html start-->
         <div layout="row"  layout-padding  style="padding-right:0px">
           
-          <div id="custom-search-input">
-            <div class="input-group ">
-                <input type="text" ng-model="siteNoSearch" class="form-control input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-info btn-lg" type="button" ng-click="searchBySiteNo()">
-                        <i class="material-icons">search</i>
-                    </button>
-                </span>
-            </div>
-          </div>
+          <!-- <div id="custom-search-input"> -->
+              <!-- md-selected-item-change="selectedAreaChanged(item)" -->
+              <form class="filter-form">
+                <md-autocomplete                      
+                md-input-minlength="2"
+                md-selected-item = "selectedId"
+                md-selected-item-change="searchBySiteNo(items)"
+                md-search-text="searchId"
+                md-items="items in searchByTabId(searchId)"
+                md-item-text="items.siteNo"                          
+                md-floating-label="Search billboards by Tab id" style="color:red">
+                <md-item-template>
+                  <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
+                </md-item-template>                    
+              </md-autocomplete>
+            </form>
         </div>
         <!-- search html start-->
         <!-- filters html start-->
