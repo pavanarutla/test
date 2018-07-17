@@ -27,7 +27,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       lowest = $scope.pagination.pageNo - mid + 1;
     }
     highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
-    $scope.pagination.pageArray = _.range(lowest, highest);
+    $scope.pagination.pageArray = _.range(lowest, highest + 1);
   }
 
   /*===================
