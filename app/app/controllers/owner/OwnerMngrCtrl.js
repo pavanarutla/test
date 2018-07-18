@@ -173,12 +173,12 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   // Dummy chart data ends
 
 
-  $scope.ownerSidenav = function () {
-    $mdSidenav('ownerLeft').toggle();
+  $scope.toggleOwnerLeftSidenav = function () {
+    $mdSidenav('ownerLeftSidenav').toggle();
   };
 
-  $scope.ownerRightSidenav = function () {
-    $mdSidenav('ownerRight').toggle();
+  $scope.toggleOwnerRightSidenav = function () {
+    $mdSidenav('ownerRightSidenav').toggle();
   };
   $scope.editProfieSidenav = function () {
     $mdSidenav('ownereditProfile').toggle();
@@ -226,7 +226,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
         toastr.error(result.message);
       }
     });
-    $mdSidenav('ownerRight').toggle();
+    $mdSidenav('ownerRightSidenav').toggle();
   }
 
   /*=================================
