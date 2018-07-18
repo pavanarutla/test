@@ -5,7 +5,7 @@
 	<div layout="column" flex>
 		<md-toolbar>
 			<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
-				<md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="ownerSidenav()">
+				<md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="toggleOwnerLeftSidenav()">
 					<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 				</md-button>
 				<md-button aria-label="logo" class="md-icon">
@@ -46,7 +46,7 @@
 					<img src="assets/images/owner/setting.png" />
 				</md-button> -->
 				<div class="message">
-					<md-button aria-label="notifications" class="md-icon-button" ng-click="ownerRightSidenav()">
+					<md-button aria-label="notifications" class="md-icon-button" ng-click="toggleOwnerRightSidenav()">
 						<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
 					</md-button>
 					<p style="background:#fac306">
@@ -78,7 +78,7 @@
 		<!--toolbar end -->
 		<!-- sidenav start -->
 		<div layout="row">
-			<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeft" md-is-locked-open="$mdMedia('gt-sm')"
+			<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
 			 style="width:250px">
 				<!-- <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
                 <img class="png-icon" src="assets/images/billboards.png">
@@ -149,7 +149,7 @@
 					</div>
 				</md-content>
 			</md-sidenav>
-			<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerRight" ng-click="ownerRightSidenav()">
+			<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerRightSidenav" ng-click="toggleOwnerRightSidenav()">
 				<md-toolbar layout="row">
 					<div class="md-toolbar-tools bg_main_color">
 						<h2>
