@@ -114,6 +114,25 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   $scope.addNewProductToCampaign = function(){
     localStorage.campaignForSuggestion = JSON.stringify($scope.campaignDetails);
     $location.path('/admin/suggest-products');
+    $scope.campaignForSuggestion = {};
+    var campaignStartDate = new Date();
+    var productFromDate = new Date(campaignStartDate);
+    var productToDate = new Date(campaignEndDate);
+    $scope.fromMinDate = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate() + 1
+    );
+    $scope.toMinDate = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      productFromDate.getDate() + 1
+    );
+    $scope.toMaxDate = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      productToDate.getDate()
+    );
   }
 
   // adds a product in the campaign

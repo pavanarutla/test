@@ -231,7 +231,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.fromMinDate = new Date(
     startDate.getFullYear(),
     startDate.getMonth(),
-    startDate.getDate() + 1
+    startDate.getDate() + 6
   );
   $scope.toMinDate = new Date(
     startDate.getFullYear(),
