@@ -11,18 +11,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   var pageLinks = 20;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
-  function createPageLinks(){
-    var mid = Math.ceil(pageLinks/2);
-    if($scope.pagination.pageCount < $scope.pagination.pageSize){
+  function createPageLinks() {
+    var mid = Math.ceil(pageLinks / 2);
+    if ($scope.pagination.pageCount < $scope.pagination.pageSize) {
       lowest = 1;
     }
-    else if($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount){
+    else if ($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount) {
       lowest = $scope.pagination.pageCount - pageLinks;
     }
-    else if($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks/2){
+    else if ($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks / 2) {
       lowest = 1;
     }
-    else{
+    else {
       lowest = $scope.pagination.pageNo - mid + 1;
     }
     highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
@@ -52,9 +52,28 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //     clickOutsideToClose: true
   //   })
   // };
+  $scope.ownerCampaign = {};
   $scope.toggleAddCamapginSidenav = function () {
     $mdSidenav('ownerAddCmapginSidenav').toggle();
   };
+  var startDate = new Date();
+  var productFromDate = new Date($scope.ownerCampaign.start_date);
+  var productToDate = new Date($scope.ownerCampaign.end_date);
+  $scope.fromMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate() + 1
+  );
+  $scope.toMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    productFromDate.getDate() + 1
+  );
+  $scope.toMaxDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    productToDate.getDate()
+  );
   $scope.cancel = function () {
     $mdDialog.hide();
   };
@@ -123,18 +142,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       });
     });
   }
-  var loadOwnerProductList = function(){
-    OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      if(localStorage.selectedOwnerCampaign){
+  var loadOwnerProductList = function () {
+    OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (result) {
+      if (localStorage.selectedOwnerCampaign) {
         var selectedOwnerCampaign = JSON.parse(localStorage.selectedOwnerCampaign);
         $scope.campaignStartDate = selectedOwnerCampaign.start_date;
         $scope.campaignEndDate = selectedOwnerCampaign.end_date;
         $scope.campaignEstBudget = selectedOwnerCampaign.est_budget;
         $scope.campaignActBudget = selectedOwnerCampaign.act_budget;
-        if(selectedOwnerCampaign.products && selectedOwnerCampaign.products.length > 0){
-          _.map(result.products, function(p){
+        if (selectedOwnerCampaign.products && selectedOwnerCampaign.products.length > 0) {
+          _.map(result.products, function (p) {
             console.log(p);
-            if(_.find(JSON.parse(localStorage.selectedOwnerCampaign).products, {id: p.id}) !== undefined){
+            if (_.find(JSON.parse(localStorage.selectedOwnerCampaign).products, { id: p.id }) !== undefined) {
               p.alreadyAdded = true;
               return p;
             }
@@ -148,9 +167,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   }
   // get all Campaigns by a user to show it in campaign management page ends  
 
-  $scope.saveOwnerCampaign = function(){
-    OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function(result){
-      if(result.status == 1){
+  $scope.saveOwnerCampaign = function () {
+    OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
+      if (result.status == 1) {
         $scope.ownerCampaign = {};
         $scope.forms.ownerCampaignForm.$setPristine();
         $scope.forms.ownerCampaignForm.$setUntouched();
@@ -169,90 +188,103 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       else{
         toastr.error(result.message);
       }
-    });  
+    });
   }
-
-  $scope.suggestProductForCampaign = function(suggestedProduct){
-    if(!localStorage.selectedOwnerCampaign){
+  $scope.suggestedProduct = {};
+  $scope.suggestProductForCampaign = function (suggestedProduct) {
+    if (!localStorage.selectedOwnerCampaign) {
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
     }
-    else{
+    else {
       var postObj = {
         campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
-        product:{
+        product: {
           id: suggestedProduct.id,
           from_date: suggestedProduct.start_date,
-          to_date:  suggestedProduct.end_date,
+          to_date: suggestedProduct.end_date,
           price: suggestedProduct.price
         }
       };
-      OwnerCampaignService.proposeProductForCampaign(postObj).then(function(result){
-        if(result.status == 1){
-          OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function(updatedCampaignData){
+      OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+        if (result.status == 1) {
+          OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
             localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
             $scope.campaignActBudget = updatedCampaignData.act_budget;
-            _.map($scope.productList, function(product){
-              if(product.id == suggestedProduct.id){
-                product.alreadyAdded = true;             
+            _.map($scope.productList, function (product) {
+              if (product.id == suggestedProduct.id) {
+                product.alreadyAdded = true;
               }
               return product;
             });
           });
           toastr.success(result.message);
         }
-        else{
+        else {
           toastr.error(result.message);
         }
       });
     }
   }
+  var startDate = new Date();
+  var productFromDate = new Date($scope.suggestedProduct.start_date);
+  var productToDate = new Date($scope.suggestedProduct.end_date);
+  $scope.fromMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate() + 1
+  );
+  $scope.toMinDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate()
+  );
 
   /* ============================
   | Campaign details section
   ============================= */
-  
+
   $scope.campaignDetails = {};
 
-  $scope.getUserCampaignDetails = function(campaignId){
-    OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function(result){
+  $scope.getUserCampaignDetails = function (campaignId) {
+    OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function (result) {
       $scope.campaignDetails = result;
     });
   }
-  $scope.getOwnerCampaignDetails = function(campaignId){
-    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function(result){
+  $scope.getOwnerCampaignDetails = function (campaignId) {
+    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function (result) {
       $scope.campaignDetails = result;
     });
-  }  
+  }
 
-  $scope.viewProductImage = function(image){
+  $scope.viewProductImage = function (image) {
     var imagePath = config.serverUrl + image;
     $mdDialog.show({
-      locals:{ src: imagePath },
+      locals: { src: imagePath },
       templateUrl: 'views/image-popup-large.html',
       fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-      controller:function($scope, src){
+      clickOutsideToClose: true,
+      controller: function ($scope, src) {
         $scope.img_src = src;
       }
     });
   }
 
-  $scope.finalizeCampaign = function(){
-    OwnerCampaignService.finalizeCampaignByOwner($scope.campaignDetails.id).then(function(result){
-      if(result.status == 1){
+  $scope.finalizeCampaign = function () {
+    OwnerCampaignService.finalizeCampaignByOwner($scope.campaignDetails.id).then(function (result) {
+      if (result.status == 1) {
         toastr.success("Campaign Finalized!");
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
   }
 
-  $scope.editProposedProduct = function(productId, from_date, to_date, price){
+  $scope.editProposedProduct = function (productId, from_date, to_date, price) {
     var productObj = {
       id: productId,
-      from_date: from_date,
-      to_date: to_date,
+      from_date: $scope.campaignDetails.start_date,
+      to_date: $scope.campaignDetails.end_date,
       price: price
     };
     $mdDialog.show({
@@ -275,61 +307,60 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
               $mdDialog.hide();
               toastr.success(result.message);
             }
-            else{
+            else {
               toastr.error(result.message);
             }
           });
         }
-        $scope.cancel = function(){
+        $scope.cancel = function () {
           $mdDialog.hide();
         }
       }
     });
   }
-
-  $scope.addNewProductToCampaign = function(){
+  $scope.addNewProductToCampaign = function () {
     localStorage.selectedOwnerCampaign = JSON.stringify($scope.campaignDetails);
     $location.path('/owner/' + $rootScope.clientSlug + '/suggest-products');
   }
 
-  $scope.removeProductFromCampaignSuggestion = function(productId){
+  $scope.removeProductFromCampaignSuggestion = function (productId) {
     var campaignId = JSON.parse(localStorage.selectedOwnerCampaign).id;
-    OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
-      if(result.status == 1){
-        OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function(updatedCampaignData){
+    OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function (result) {
+      if (result.status == 1) {
+        OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
           localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
           $scope.campaignActBudget = updatedCampaignData.act_budget;
-          _.map($scope.productList, function(product){
-            if(product.id == suggestedProduct.id){
-              product.alreadyAdded = false;             
+          _.map($scope.productList, function (product) {
+            if (product.id == suggestedProduct.id) {
+              product.alreadyAdded = false;
             }
             return product;
           });
         });
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
   }
 
-  $scope.launchOwnerCampaign = function(campaignId, ev){
-    OwnerCampaignService.launchCampaign(campaignId).then(function(result){
-      if(result.status == 1){
+  $scope.launchOwnerCampaign = function (campaignId, ev) {
+    OwnerCampaignService.launchCampaign(campaignId).then(function (result) {
+      if (result.status == 1) {
         $mdDialog.show(
           $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title("Congrats!!")
-          .textContent(result.message)
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title("Congrats!!")
+            .textContent(result.message)
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
         );
         $scope.getOwnerCampaignDetails(campaignId);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
@@ -440,18 +471,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   | Page based initial loads
   =========================*/
 
-  if($rootScope.currStateName == "owner.campaigns"){
+  if ($rootScope.currStateName == "owner.campaigns") {
     $scope.getUserCampaignsForOwner();
     loadOwnerCampaigns();
   }
-  if($rootScope.currStateName == "owner.suggest-products"){
+  if ($rootScope.currStateName == "owner.suggest-products") {
     loadOwnerProductList();
   }
-  if(typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined'){
-    if($stateParams.campaignType == 2){
+  if (typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined') {
+    if ($stateParams.campaignType == 2) {
       $scope.getOwnerCampaignDetails($stateParams.campaignId);
     }
-    else{
+    else {
       $scope.getUserCampaignDetails($stateParams.campaignId);
     }
   }

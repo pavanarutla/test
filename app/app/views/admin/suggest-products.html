@@ -186,7 +186,7 @@
                       </md-button> -->
                     <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
                     />
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <div class='input-group' style="width:130px">
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
                           max-date='model.end_date' ng-readonly='true' placeholder="start date" />
@@ -203,6 +203,16 @@
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                       </div>
+                    </div> -->
+                    <div layout-gt-xs="row">
+                      <div flex-gt-xs="">
+                        <label>Start date</label>
+                        <md-datepicker ng-model="suggestedProduct.start_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+                      </div>
+                       <div flex-gt-xs="">
+                        <label>End Date</label>
+                        <md-datepicker ng-model="suggestedProduct.end_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="toMinDate" md-max-date="toMaxDate"></md-datepicker>
+                      </div>   
                     </div>
                   </div>
                   <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
