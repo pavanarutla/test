@@ -798,6 +798,8 @@ app.controller('GmapCtrl',
             bounds.extend({ lat: parseFloat(markerProp.lat), lng: parseFloat(markerProp.lng) });
             $scope.mapObj.fitBounds(bounds);
             selectMarker(marker);
+          }else{
+            toastr.error('No product found with that tab id', 'error');
           }  
         });
       }
