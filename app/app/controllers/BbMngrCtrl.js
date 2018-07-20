@@ -1,5 +1,5 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
-  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+  CampaignService, UserService, LocationService, NotificationService, PusherService, config, $window, $interval) {
 
   /*=================================
   | mdDilalog close function
@@ -437,6 +437,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       getUserNotifs();
     }
 
+    var channels = PusherService.allChannels();
+    console.log(channels);
     /*===============================
     |   Notification navigation 
     ===============================*/
