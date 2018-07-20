@@ -69,6 +69,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     }
     else{
       $scope.loadProductList();
+      setDatesForProductsToSuggest(JSON.parse(localStorage.campaignForSuggestion));
     }
   }
 
@@ -85,10 +86,24 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     $scope.loadProductList();
   };
 
-   $scope.loadCampaignData = function(campaignId){
+
+  function setDatesForProductsToSuggest(campaign){
+    $scope.suggestedProduct = {};
+    $scope.campaignStartDate  = new Date(campaign.start_date);
+    $scope.campaignEndDate  = new Date(campaign.end_date);
+    $scope.fromMinDate = moment(campaign.start_date).toDate();
+    $scope.fromMaxDate = moment(campaign.end_date).toDate();
+
+    $scope.toMinDate = moment($scope.suggestedProduct.start_date).toDate();
+    $scope.toMaxDate = moment(campaign.end_date).toDate();
+  }
+
+
+  $scope.loadCampaignData = function(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       $scope.campaignProducts = result.products;
+      setDatesForProductsToSuggest($scope.campaignDetails);
       if(result.status > 7){
         loadCampaignPayments(campaignId);
       }
@@ -112,27 +127,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   $scope.addNewProductToCampaign = function(){
+    $scope.campaignForSuggestion = {};
     localStorage.campaignForSuggestion = JSON.stringify($scope.campaignDetails);
     $location.path('/admin/suggest-products');
-    $scope.campaignForSuggestion = {};
-    var campaignStartDate = new Date();
-    var productFromDate = new Date(campaignStartDate);
-    var productToDate = new Date(campaignEndDate);
-    $scope.fromMinDate = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      startDate.getDate() + 1
-    );
-    $scope.toMinDate = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      productFromDate.getDate() + 1
-    );
-    $scope.toMaxDate = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      productToDate.getDate()
-    );
   }
 
   // adds a product in the campaign
@@ -172,19 +169,6 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     }
   }
   
-  var startDate = new Date();
-  var productFromDate = new Date($scope.suggestedProduct.start_date);
-  var productToDate = new Date($scope.suggestedProduct.end_date);
-  $scope.fromMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate() + 1
-  );
-  $scope.toMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate()
-  );
   $scope.removeProductFromCampaignSuggestion = function(productId){
     var campaignId = JSON.parse(localStorage.campaignForSuggestion).id;
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
@@ -221,6 +205,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+
   $scope.editProposedProduct = function(productId, from_date, to_date, price){
     var productObj = {
       id: productId,
@@ -229,37 +214,26 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       price: price
     };
     $mdDialog.show({
-      locals:{ campaignId: $scope.campaignDetails.id, productObj : productObj, ctrlScope : $scope },
+      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
       templateUrl: 'views/admin/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
-      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId, productObj){
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaign, productObj){
         $scope.product = productObj;
-        var startDate = new Date();
-        var productFromDate = new Date($scope.product.from_date);
-        var productToDate = new Date($scope.product.to_date);
-        $scope.fromMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate() + 1
-        );
-        $scope.toMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productFromDate.getDate() + 1
-        );
-        $scope.toMaxDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productToDate.getDate()
-        );
+        $scope.AdminProposalStartDate = new Date(campaign.start_date);
+        $scope.AdminProposalEndDate = new Date(campaign.end_date);
+        $scope.AdminProposalFromMinDate = moment(campaign.start_date).toDate();
+        $scope.AdminProposalFromMaxDate = moment(campaign.end_date).toDate();
+        $scope.AdminProposaltoMinDate = moment($scope.product.start_date).toDate();
+        $scope.AdminProposalToMaxDate = moment(campaign.end_date).toDate();
         $scope.updateProposedProduct = function(product){
-          AdminCampaignService.updateProposedProduct(campaignId, $scope.product).then(function(result){
+          AdminCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
             if(result.status == 1){
               // update succeeded. update the grid now.
-              CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+              CampaignService.getCampaignWithProducts(campaign.id).then(function(result){
                 ctrlScope.campaignDetails = result;
                 ctrlScope.campaignProducts = result.products;
+                setDatesForAdminProposalToSuggest($scope.campaignDetails);
                 $mdDialog.hide();
               });
               toastr.success(result.message);

@@ -56,24 +56,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.toggleAddCamapginSidenav = function () {
     $mdSidenav('ownerAddCmapginSidenav').toggle();
   };
-  var startDate = new Date();
-  var productFromDate = new Date($scope.ownerCampaign.start_date);
-  var productToDate = new Date($scope.ownerCampaign.end_date);
-  $scope.fromMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate() + 1
-  );
-  $scope.toMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    productFromDate.getDate() + 1
-  );
-  $scope.toMaxDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    productToDate.getDate()
-  );
+
+  function setDatesForOwnerProductsToSuggest(campaign){
+    $scope.suggestedProduct = {};
+    $scope.SuggestprodStartDate  = new Date(campaign.start_date);
+    $scope.SuggestprodEndDate  = new Date(campaign.end_date);
+    $scope.SuggestprodfromMinDate = moment(campaign.start_date).toDate();
+    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
+
+    $scope.toMinDate_ = moment($scope.suggestedProduct.start_date).toDate();
+    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
+  }
   $scope.cancel = function () {
     $mdDialog.hide();
   };
@@ -191,7 +184,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     });
   }
   $scope.suggestedProduct = {};
-  $scope.suggestProductForCampaign = function (suggestedProduct) {
+  $scope.suggestProductForOwnerCampaign = function (suggestedProduct) {
+    //console.log(suggestedProduct)
     if (!localStorage.selectedOwnerCampaign) {
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
     }
@@ -200,8 +194,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
         product: {
           id: suggestedProduct.id,
-          from_date: suggestedProduct.start_date,
-          to_date: suggestedProduct.end_date,
+          from_date: suggestedProduct.campaignStartDate,
+          to_date: suggestedProduct.campaignEndDate,
           price: suggestedProduct.price
         }
       };
@@ -248,6 +242,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.getUserCampaignDetails = function (campaignId) {
     OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function (result) {
       $scope.campaignDetails = result;
+      setDatesForOwnerProposalToSuggest($scope.campaignDetails);
     });
   }
   $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -294,6 +289,12 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       clickOutsideToClose:true,
       controller:function($scope, $mdDialog, ctrlScope, campaign, productObj){
         $scope.product = productObj;
+        $scope.OwnerProposalStartDate = new Date(campaign.start_date);
+        $scope.OwnerProposalEndDate = new Date(campaign.end_date);
+        $scope.OwnerProposalFromMinDate = moment(campaign.start_date).toDate();
+        $scope.OwnerProposalFromMaxDate = moment(campaign.end_date).toDate();
+        $scope.OwnerProposaltoMinDate = moment($scope.product.start_date).toDate();
+        $scope.OwnerProposalToMaxDate = moment(campaign.end_date).toDate();
         $scope.updateProposedProduct = function(product){
           OwnerCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
             if(result.status == 1){
@@ -477,6 +478,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   }
   if ($rootScope.currStateName == "owner.suggest-products") {
     loadOwnerProductList();
+    setDatesForOwnerProductsToSuggest(JSON.parse(localStorage.selectedOwnerCampaign));
   }
   if (typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined') {
     if ($stateParams.campaignType == 2) {

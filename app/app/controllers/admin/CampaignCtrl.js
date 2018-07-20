@@ -65,7 +65,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
         $scope.fromMinDate = new Date(
           startDate.getFullYear(),
           startDate.getMonth(),
-          startDate.getDate() + 1
+          startDate.getDate() + 5
         );
         $scope.toMinDate = new Date(
           startDate.getFullYear(),

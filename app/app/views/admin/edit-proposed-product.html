@@ -45,7 +45,7 @@
             <!-- </div>
           </div>         
         </div> -->
-        <div layout-gt-xs="row">
+        <!-- <div layout-gt-xs="row">
         <div flex-gt-xs="">
           <h4>Start date</h4>
           <md-datepicker ng-model="product.from_date"  onkeydown="return false"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
@@ -54,7 +54,17 @@
           <h4>End Date</h4>
           <md-datepicker ng-model="product.to_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="toMinDate" md-max-date="toMaxDate"></md-datepicker>
         </div>   
-      </div>
+      </div> -->
+        <div flex-gt-xs="">
+          <label>Start date</label>
+          <md-datepicker ng-model="product.from_date" ng-init="product.from_date = AdminProposalStartDate" onkeydown="return false"
+            md-placeholder="Enter date" md-min-date="AdminProposalFromMinDate" md-max-date="AdminProposalFromMaxDate"></md-datepicker>
+        </div>
+        <div flex-gt-xs="">
+          <label>End Date</label>
+          <md-datepicker ng-model="product.to_date" ng-init="product.to_date = AdminProposalEndDate" onkeydown="return false"
+            md-placeholder="Enter date" md-min-date="product.from_date" md-max-date="AdminProposalToMaxDate"></md-datepicker>
+        </div>
       <md-input-container class="md-block margin-input">
         <label>Price:</label>
         <input ng-model="product.price" type="text" name="price" only-numeric required="required" />
