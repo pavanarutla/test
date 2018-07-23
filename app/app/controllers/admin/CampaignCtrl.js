@@ -59,6 +59,24 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
       fullscreen: $scope.customFullscreen,
       controller: function($scope, $mdDialog, AdminCampaignService, toastr){
         $scope.campaign = {};
+        var startDate = new Date();
+        var productFromDate = new Date($scope.campaign.start_date);
+        var productToDate = new Date($scope.campaign.end_date);
+        $scope.fromMinDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate() + 5
+        );
+        $scope.toMinDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          productFromDate.getDate() + 1
+        );
+        $scope.toMaxDate = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          productToDate.getDate()
+        );
         $scope.saveCampaignByAdmin = function(){
           AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function(result){
             if(result.status == 1){

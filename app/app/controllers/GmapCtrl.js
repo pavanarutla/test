@@ -726,6 +726,19 @@ app.controller('GmapCtrl',
       }
 
       $scope.campaign = {};
+      var startDate = new Date();
+      var productFromDate = new Date($scope.campaign.start_date);
+      var productToDate = new Date($scope.campaign.end_date);
+      $scope.fromMinDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate() + 6
+      );
+      $scope.toMinDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate()
+      );
       $scope.saveCampaign = function () {
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){

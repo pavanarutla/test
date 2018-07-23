@@ -1,35 +1,36 @@
 app.controller('callCenterCtrl', function ($scope, $http, toastr, AdminContactService, $mdDialog, $rootScope) {
-  $scope.gridcallCenter = {
-    paginationPageSizes: [25, 50, 75],
-    paginationPageSize: 25,
-    enableCellEditOnFocus: false,
-    multiSelect: false,
-    enableFiltering: true,
-    enableSorting: true,
-    showColumnMenu: false,
-    enableGridMenu: true,
-    enableRowSelection: true,
-    enableRowHeaderSelection: false,
-  };
-  $scope.gridcallCenter.columnDefs = [
-    { name: 'id', displayName: 'Sr.no', enableCellEdit: false, enableFiltering: false, cellTemplate: '<span>{{rowRenderIndex+1}}</span>', },
-    { name: 'phoneNo', displayName: 'Phone Number', enableCellEdit: false },
-    {
-      name: 'Action', field: 'Action', enableCellEdit: false,
-      cellTemplate: '<div class="ui-grid-cell-contents"><button id="feedbackButton{{row.entity.id}}" ng-style="row.entity.call_feedback && {\'background-color\':\'limegreen\'} " class="btn btn-small" ng-click="grid.appScope.CallFeedback(row.entity)">Call Feedback</button></div>',
-      enableFiltering: false,
-    }
-  ];
+  // $scope.gridcallCenter = {
+  //   paginationPageSizes: [25, 50, 75],
+  //   paginationPageSize: 25,
+  //   enableCellEditOnFocus: false,
+  //   multiSelect: false,
+  //   enableFiltering: true,
+  //   enableSorting: true,
+  //   showColumnMenu: false,
+  //   enableGridMenu: true,
+  //   enableRowSelection: true,
+  //   enableRowHeaderSelection: false,
+  // };
+  // $scope.gridcallCenter.columnDefs = [
+  //   { name: 'id', displayName: 'Sr.no', enableCellEdit: false, enableFiltering: false, cellTemplate: '<span>{{rowRenderIndex+1}}</span>', },
+  //   { name: 'phoneNo', displayName: 'Phone Number', enableCellEdit: false },
+  //   {
+  //     name: 'Action', field: 'Action', enableCellEdit: false,
+  //     cellTemplate: '<div class="ui-grid-cell-contents"><button id="feedbackButton{{row.entity.id}}" ng-style="row.entity.call_feedback && {\'background-color\':\'limegreen\'} " class="btn btn-small" ng-click="grid.appScope.CallFeedback(row.entity)">Call Feedback</button></div>',
+  //     enableFiltering: false,
+  //   }
+  // ];
   
   //deleteCallCenterInf
   $scope.deleteCallCenterInfo = function (row) {
-    var index = $scope.gridcallCenter.data.indexOf(row);
-    $scope.gridcallCenter.data.splice(index, 1);
+    var index = $scope.callCenterData.data.indexOf(row);
+    $scope.callCenterData.data.splice(index, 1);
     toastr.success("CallCenterInfo deleted successfully");
   }
 
   AdminContactService.requestCallBack().then(function (response) {
-    $scope.gridcallCenter.data = response.data;
+    //$scope.gridcallCenter.data = response.data;
+    $scope.callCenterData = response.data;
   });
 
   $scope.CallFeedback = function (data) {

@@ -36,18 +36,18 @@
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
           <form ng-submit="searchHoardingData()">
-            <input ng-model="searchAll" placeholder="Search Billboards with ID, Areas, Directions or Locations" >
+            <input ng-model="searchAll" placeholder="Search Billboards with ID, Areas, Directions or Locations">
             <md-icon ng-if="searchAll!=''">
-              <i class="material-icons"  ng-click="clearSearch()">clear</i>
+              <i class="material-icons" ng-click="clearSearch()">clear</i>
             </md-icon>
             <md-icon ng-if="searchAll==''">
-              <i class="material-icons" >search</i>
+              <i class="material-icons">search</i>
             </md-icon>
           </form>
         </md-input-container>
       </div>
     </div>
-   <!-- <div flex="20">
+    <!-- <div flex="20">
       <div layout="row" layout-padding class="search-field">
         <md-input-container flex class="search-input">
           <label>&nbsp;</label>
@@ -186,7 +186,7 @@
                       </md-button> -->
                     <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
                     />
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <div class='input-group' style="width:130px">
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
                           max-date='model.end_date' ng-readonly='true' placeholder="start date" />
@@ -203,13 +203,26 @@
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                       </div>
+                    </div> -->
+                    <div layout-gt-xs="row">
+                      <div flex-gt-xs="">
+                        <label>Start date</label>
+                        <md-datepicker ng-model="suggestedProduct.start_date" ng-init="suggestedProduct.start_date = campaignStartDate" onkeydown="return false"
+                          md-placeholder="Enter date" md-min-date="fromMinDate" md-max-date="fromMaxDate"></md-datepicker>
+                      </div>
+                      <div flex-gt-xs="">
+                        <label>End Date</label>
+                        <md-datepicker ng-model="suggestedProduct.end_date" ng-init="suggestedProduct.end_date = campaignEndDate" onkeydown="return false"
+                          md-placeholder="Enter date" md-min-date="suggestedProduct.start_date" md-max-date="toMaxDate"></md-datepicker>
+                      </div>
                     </div>
                   </div>
                   <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
                     <div layout="row">
                       <md-input-container class="md-block margin-input">
                         <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"  ng-init="suggestedProduct.price = product.default_price" />
+                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+                          ng-init="suggestedProduct.price = product.default_price" />
                       </md-input-container>
                       <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
                     </div>
@@ -229,9 +242,7 @@
   <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
     <ul class="pagination">
       <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-        <a ng-click="pagination.pageNo = i; loadProductList();" 
-          ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
-          style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+        <a ng-click="pagination.pageNo = i; loadProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
           {{i}}
         </a>
       </li>
