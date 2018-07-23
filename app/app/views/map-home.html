@@ -846,24 +846,22 @@
     <md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
       <div class="sidenav__ineer scrollbar__style">
         <!-- search html start-->
-        <div layout="row"  layout-padding  style="padding-right:0px">
-          
+        <div layout="row" style="margin:8px 0 8px 8px;">
           <!-- <div id="custom-search-input"> -->
               <!-- md-selected-item-change="selectedAreaChanged(item)" -->
-              <form class="filter-form">
                 <md-autocomplete                      
-                md-input-minlength="2"
+                md-min-length="2"
                 md-selected-item = "selectedId"
                 md-selected-item-change="searchBySiteNo(items)"
                 md-search-text="searchId"
                 md-items="items in searchByTabId(searchId)"
                 md-item-text="items.siteNo"                          
-                md-floating-label="Search billboards by Tab id" style="color:red">
+                placeholder="Search By Tab id"
+                md-clear-button="true" style="min-width: 100% !important">
                 <md-item-template>
                   <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
                 </md-item-template>                    
               </md-autocomplete>
-            </form>
         </div>
         <!-- search html start-->
         <!-- filters html start-->
