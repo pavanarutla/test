@@ -423,8 +423,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         $scope.campaignPayment = {};
         $scope.files.image = "";
       }
-      else if(result.data.status == 0){
-        $scope.addProductErrors = result.data.message;
+      else{
+        $scope.updateCampaignPaymentErrors = result.data.message;
       }
     }, function (resp) {
       toastr.error("somthing went wrong try again later");

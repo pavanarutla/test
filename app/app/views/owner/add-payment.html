@@ -6,7 +6,7 @@
 		<div flex="50" class="md-whiteframe-2dp contbg" layout-padding style="height: 70vh;">
 			<form style="padding-top:50px">
 				<div class="form-group row">
-					<label for="paymentType" class="col-sm-4 col-form-label md-body-2">Made Of Payment :</label>
+					<label for="paymentType" class="col-sm-4 col-form-label md-body-2">Made Of Payment *:</label>
 					<div class="col-sm-7">
 						<select id="paymentType" ng-model="campaignPayment.type" class="form-control">
 							<!-- <option selected>Select Payment Type</option> -->
@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="amount" class="col-sm-4 col-form-label md-body-2">Amount:</label>
+					<label for="amount" class="col-sm-4 col-form-label md-body-2">Amount *:</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control" id="amount" ng-model="campaignPayment.amount">
 					</div>
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="campaignId" class="col-sm-4 col-form-label md-body-2">Campaign:</label>
+					<label for="campaignId" class="col-sm-4 col-form-label md-body-2">Campaign *:</label>
 					<div class="col-sm-7">
 						<select id="campaignId" ng-model="campaignPayment.campaign_id" class="form-control">
 							<!-- <option selected>Select campaign</option> -->
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="receivedBy" class="col-sm-4 col-form-label md-body-2">Received By:</label>
+					<label for="receivedBy" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control" id="receivedBy" ng-model="campaignPayment.received_by">
 					</div>
@@ -57,13 +57,19 @@
 						</span>
 					</div>
 				</div>
+				<div class="serverErrors" ng-show="updateCampaignPaymentErrors" style="padding:0px;">
+					<ul>
+						<li ng-repeat="error in updateCampaignPaymentErrors">
+							{{error}}
+						</li>
+					</ul>
+				</div> 
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class=" col-sm-7">
 						<md-button class="md-raised md-primary" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
 					</div>
 				</div>
-
 			</form>
 		</div>
 	</div>
