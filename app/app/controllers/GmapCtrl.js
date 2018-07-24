@@ -497,7 +497,7 @@ app.controller('GmapCtrl',
             marker.properties = markerData.product_details[i];
             marker.groupSize = markerData.product_details.length;
             google.maps.event.addListener(marker, 'spider_click', function (e) {
-              selectSpideredMarker(marker);
+              selectSpideredMarker(this);
             });
             markersOnMap.push(marker);
             oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
@@ -720,6 +720,19 @@ app.controller('GmapCtrl',
       }
 
       $scope.campaign = {};
+      var startDate = new Date();
+      var productFromDate = new Date($scope.campaign.start_date);
+      var productToDate = new Date($scope.campaign.end_date);
+      $scope.fromMinDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate() + 6
+      );
+      $scope.toMinDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate()
+      );
       $scope.saveCampaign = function () {
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){
@@ -781,20 +794,20 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.searchBySiteNo = function () {
-        MapService.searchBySiteNo($scope.siteNoSearch).then(function (markerProperties) {
-          if (markerProperties.id) {
+      $scope.searchBySiteNo = function (item) {
+        MapService.searchBySiteNo(item.siteNo).then(function (markerProperties) {
+          var markerProp = markerProperties[0];
+          if (markerProp.id) {
             var marker = {};
             // marker.position = { lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) };
-            marker.properties = markerProperties;
+            marker.properties = markerProp;
             var bounds = new google.maps.LatLngBounds();
-            bounds.extend({ lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) });
+            bounds.extend({ lat: parseFloat(markerProp.lat), lng: parseFloat(markerProp.lng) });
             $scope.mapObj.fitBounds(bounds);
             selectMarker(marker);
-          }
-          else {
+          }else{
             toastr.error('No product found with that tab id', 'error');
-          }
+          }  
         });
       }
 
@@ -959,6 +972,9 @@ app.controller('GmapCtrl',
         return LocationService.getAreasWithAutocomplete(query);
       }
 
+      $scope.searchByTabId = function (query) {
+        return MapService.searchBySiteNo(query);
+      }
       $scope.selectedAreaChanged = function (area) {
         $scope.selectedArea = area;
         if (area) {

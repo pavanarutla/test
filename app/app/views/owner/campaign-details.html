@@ -109,14 +109,21 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button> -->
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || campaignDetails.status >= 4 && campaignDetails.status != 5" ng-click="addNewProductToCampaign()" ng-if="campaignDetails.type == 2">
+					<md-button class="md-raised md-warn" ng-disabled="campaignDetails.status >= 6" ng-click="addNewProductToCampaign()" ng-if="campaignDetails.type == 2">
 						Add New Product
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)" ng-click="launchOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
+					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails.products || campaignDetails.status >= 6" ng-click="launchOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
 						Launch
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
+					<md-button class="md-raised" ng-disabled="campaignDetails.status < 6 || campaignDetails.status == 8"
+					 ng-click="closeCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
+						Close Campaign
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>

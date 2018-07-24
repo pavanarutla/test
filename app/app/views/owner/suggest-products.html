@@ -91,36 +91,35 @@
                     <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
                     />
                     <div class="form-group">
-                      <div class='input-group' style="width:130px">
-                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
-                          max-date='model.end_date' ng-readonly='true' placeholder="start date" />
-                        <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
-                          <i class="glyphicon glyphicon-calendar"></i>
-                        </span>
-                      </div>
+                      <!-- <label>Start date</label>
+                      <md-datepicker ng-model="campaignStartDate" onkeydown="return false" md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker> -->
+
+                      <label>Start date</label>
+                      <md-datepicker ng-model="suggestedProduct.campaignStartDate" ng-init="suggestedProduct.campaignStartDate = SuggestprodStartDate" 
+                      onkeydown="return false" md-placeholder="Enter date" md-min-date="SuggestprodfromMinDate" md-max-date="SuggestprodfromMaxDate">
+                      </md-datepicker>
+
                     </div>
-                    <div class="form-group">
-                      <div class='input-group' style="width:130px">
-                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
-                          min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="end date" />
-                        <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>
+                    <div class="form-group">                      
+                      <label>End Date</label>
+                      <md-datepicker ng-model="suggestedProduct.campaignEndDate" ng-init="suggestedProduct.campaignEndDate = SuggestprodEndDate" 
+                       onkeydown="return false" md-placeholder="Enter date" md-min-date="suggestedProduct.campaignStartDate" md-max-date="SuggestprodfromMaxDate">
+                      </md-datepicker>
                     </div>
                   </div>
                   <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
                     <div layout="row">
                       <md-input-container class="md-block margin-input">
                         <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = product.default_price" />
+                        <input ng-model="suggestedProduct.price" type="text" only-numeric name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+                          ng-init="suggestedProduct.price = product.default_price" />
                       </md-input-container>
                       <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
                     </div>
                     <div>Note:This Price Will not affected actual price</div>
                   </div>
                   <div layout="row" layout-align="center center">
-                    <md-button class="md-raised md-primary" ng-click="suggestProductForCampaign(suggestedProduct)">Add</md-button>
+                    <md-button class="md-raised md-primary" ng-click="suggestProductForOwnerCampaign(suggestedProduct)">Add</md-button>
                   </div>
                 </div>
               </md-content>
@@ -133,9 +132,7 @@
   <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
     <ul class="pagination">
       <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-        <a ng-click="pagination.pageNo = i; loadProductList();" 
-          ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
-          style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+        <a ng-click="pagination.pageNo = i; loadProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
           {{i}}
         </a>
       </li>
