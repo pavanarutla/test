@@ -142,7 +142,7 @@
     </ul>
   </div>
 </div>
-<div style="position:fixed;bottom:60px;right:60px;width:200px;height:129px;background:#fff;border-radius:5px;padding-left:10px;box-shadow:0px 0px 4px #888;">
+<div style="position:fixed;bottom:20px;left:40px;width:200px;height:200px;background:#fff;border-radius:20px;padding:15px;z-index:99;box-shadow:0px 0px 4px #888;">
   <p>From
     <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b>
   </p>
@@ -159,12 +159,9 @@
     <md-icon>!</md-icon>
   </md-button>
 </div>
-
-
 <div class="product_">
   <div class="row margin_right_0 margin_left_0">
-    <div class="col-md-4" ng-repeat="product in productList" ng-style="{'background': '#fff'}">
-
+    <div class="col-md-4" ng-repeat="product in productList" style="margin-top: 15px" ng-style="{'background': '#fff'}">
         <div layout="column" class="md-whiteframe-2dp">
           <div layout="column" class="admin-img">
             <img ng-src="{{serverUrl + product.image}}" style="width:100%;height:200px;">
@@ -219,16 +216,21 @@
                     </div>
                   </div>
                   <md-divider></md-divider>
-                  <div layout="row" layout-padding="layout-padding">
-                    <div flex="10">
-                      <span>
+                  <div layout="row" layout-padding="layout-padding" style="height: 74px;">
+                    <div flex="30">
+                      <div>
                         <md-icon md-svg-icon="assets/images/impression.svg"></md-icon>
-                      </span>
+                      </div>
+                      <div class="md-caption">{{product.impressions}}</div>
                     </div>
-                    <div flex="80">
-                      <span class="md-caption">{{product.impressions}}</div>
+                    <div flex="70" layout="row" flex ng-if="product.alreadyAdded">
+                      <div class="md-caption text-color" style="margin-top: 10px">Product Already Added</div>
+                      <button class="md-icon-button md-button md-ink-ripple" type="button"  ng-click="removeProductFromCampaignSuggestion(product.id)">
+                          <i class="material-icons">delete</i>
+                      </button>
+                    </div>
                   </div>
-                  <md-divider></md-divider>
+                  <!-- <md-divider></md-divider>
                   <div layout="column" layout-padding="layout-padding">
                    
                     <div layout="row" flex ng-if="product.alreadyAdded">
@@ -240,7 +242,7 @@
                         <md-button class="md-raised md-warn" ng-click="removeProductFromCampaignSuggestion(product.id)">Remove</md-button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </md-content>
             </md-tab>
@@ -256,7 +258,7 @@
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
                           max-date='model.end_date' ng-readonly='true' placeholder="start date" />
                         <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
-                          <i class="glyphicon glyphicon-calendar"></i>
+                            <i class="material-icons">calendar_today</i>
                         </span>
                       </div>
                     </div>
@@ -265,7 +267,7 @@
                         <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
                           min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="end date" />
                         <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
-                          <span class="glyphicon glyphicon-calendar"></span>
+                            <i class="material-icons">calendar_today</i>
                         </span>
                       </div>
                     </div>
@@ -289,8 +291,6 @@
             </md-tab>
           </md-tabs>
         </div>
-      
     </div>
-    
   </div>
 </div>
