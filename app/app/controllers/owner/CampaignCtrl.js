@@ -216,19 +216,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       });
     }
   }
-  var startDate = new Date();
-  var productFromDate = new Date($scope.suggestedProduct.start_date);
-  var productToDate = new Date($scope.suggestedProduct.end_date);
-  $scope.fromMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate() + 6
-  );
-  $scope.toMinDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate()
-  );
 
   /* ============================
   | Campaign details section
@@ -239,7 +226,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   $scope.getUserCampaignDetails = function (campaignId) {
     OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function (result) {
       $scope.campaignDetails = result;
-      setDatesForOwnerProposalToSuggest($scope.campaignDetails);
     });
   }
   $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -374,6 +360,27 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.error(result.message);
       }
     })
+  }
+
+  $scope.closeCampaign = function(campaignId, ev){
+    OwnerCampaignService.closeCampaign(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Success!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        $scope.getOwnerCampaignDetails(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
   }
 
   /* ==============================
