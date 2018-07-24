@@ -503,7 +503,7 @@ app.controller('GmapCtrl',
             marker.properties = markerData.product_details[i];
             marker.groupSize = markerData.product_details.length;
             google.maps.event.addListener(marker, 'spider_click', function (e) {
-              selectSpideredMarker(marker);
+              selectSpideredMarker(this);
             });
             markersOnMap.push(marker);
             oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
