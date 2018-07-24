@@ -58,13 +58,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   };
 
   function setDatesForOwnerProductsToSuggest(campaign){
-    $scope.suggestedProduct = {};
     $scope.SuggestprodStartDate  = new Date(campaign.start_date);
     $scope.SuggestprodEndDate  = new Date(campaign.end_date);
     $scope.SuggestprodfromMinDate = moment(campaign.start_date).toDate();
     $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
-
-    $scope.toMinDate_ = moment($scope.suggestedProduct.start_date).toDate();
     $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
   }
   $scope.cancel = function () {
@@ -183,7 +180,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
       }
     });
   }
-  $scope.suggestedProduct = {};
+  
   $scope.suggestProductForOwnerCampaign = function (suggestedProduct) {
     //console.log(suggestedProduct)
     if (!localStorage.selectedOwnerCampaign) {

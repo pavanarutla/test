@@ -88,13 +88,10 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
 
   function setDatesForProductsToSuggest(campaign){
-    $scope.suggestedProduct = {};
     $scope.campaignStartDate  = new Date(campaign.start_date);
     $scope.campaignEndDate  = new Date(campaign.end_date);
     $scope.fromMinDate = moment(campaign.start_date).toDate();
     $scope.fromMaxDate = moment(campaign.end_date).toDate();
-
-    $scope.toMinDate = moment($scope.suggestedProduct.start_date).toDate();
     $scope.toMaxDate = moment(campaign.end_date).toDate();
   }
 
@@ -133,7 +130,6 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
   // adds a product in the campaign
-  $scope.suggestedProduct = {};
   $scope.suggestProductForCampaign = function(suggestedProduct){
     if(!localStorage.campaignForSuggestion){
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
@@ -155,7 +151,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
             $scope.campaignActBudget = updatedCampaignData.act_budget;
             _.map($scope.productList, function(product){
               if(product.id == suggestedProduct.id){
-                product.alreadyAdded = true;             
+                product.alreadyAdded = true;
               }
               return product;
             });
