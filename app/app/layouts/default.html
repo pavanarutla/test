@@ -3,8 +3,9 @@
 <div  layout="column" style="position:relative;min-height:100%;">
   <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
     <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" show-sm hide-xs hide-gt-sm class="md-icon-button">
-        <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
+      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" class="md-icon-button">
+        <!-- <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon> -->
+        <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
       </md-button>
        <md-button aria-label="locations" href="#/" md-no-ink class="logo" style="margin-left:2.5%">
          <img ng-src="assets/images/product/billboards.png"  class="logo-img"> 
@@ -97,12 +98,12 @@
     <md-content>
       <ul style="padding:0px;margin:0px">
         <li>
-          <div class="notification_header">
-            <h3>You have {{notifs.length}} new notification<span style="margin: 5px 0 0 70px;">
-              <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()" style="margin: 0px;padding: 0px">
-                <md-icon class="md-default-theme" ><i class="material-icons" style="font-size:18px">close</i></md-icon>
+          <div class="notification_header" layout="row">
+            <h3>You have {{notifs.length}} new notification</h3>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()" style="margin: 0px;padding: 0px">
+              <md-icon class="md-default-theme" ><i class="material-icons" style="font-size:18px">close</i></md-icon>
             </md-button>
-            <div class="clearfix"></div>
           </div>
         </li>
         <li ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
@@ -140,7 +141,7 @@
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="footer_social_icons">
         <div class="" style="margin-left:5%">
           <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
-            <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon"></md-icon>
+            <md-icon md-svg-src="assets/images/icons/facebook.svg"></md-icon>
           </md-button>
 
           <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">

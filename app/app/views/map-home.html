@@ -899,9 +899,7 @@
           </div>
           <div layout="column" ng-show="filter" class="filters" style="padding:0px">
             <div class="filterscrollbar" id="filterscrollbar-style">
-              <!-- dateselection html end-->
-              <div layout="column" layout-padding>
-                <!-- <div class="md-subhead">Area</div> -->
+          
                 <!-- pincode,area,tab id section start-->
                 <form class="filter-form">
                   <md-autocomplete md-input-minlength="2" md-selected-item="selectedArea" md-selected-item-change="selectedAreaChanged(item)"
@@ -922,21 +920,22 @@
                 </form>
                 <!-- pincode,area,tab id section end-->
                 <!--slider html start -->
-                <div layout="row" class="">
-                  <div class="range md-body-1" flex="20">Range</div>
+                <div layout="row" class="" layout-padding>
+                  <div class="range md-body-1 text_color" flex="20">Range</div>
                   <div flex class="slider-range">
                     <md-slider md-discrete ng-model="circleRadius" min="0" max="500" step="20" aria-label="rating" id="red-slider" ng-change="updateCircle()"
                       ng-disabled="!selectedArea"></md-slider>
                   </div>
-                  <div class="rnge md-body-1" flex="20">KMS</div>
+                  <div class="rnge md-body-1 text_color" flex="20">KMS</div>
                 </div>
                 <!--slider html end -->
-                <div>
-                  <md-divider></md-divider>
-                  <div layout="column" layout-margin>
-                    <div class="md-body-1">Select Multiple Locations</div>
-                  </div>
-                  <md-divider></md-divider>
+              
+                <md-divider></md-divider>
+                <div layout="column"layout-padding>
+                  <div class="md-body-1 text_color">Select Multiple Locations</div>
+                </div>
+                <md-divider></md-divider>
+                <div class="conyry_sate" style="margin-top:10px;">
                   <div layout="row" layout-margin>
                     <div flex="50" class="armrgn">
                       <md-input-container>
@@ -949,6 +948,7 @@
                         </md-select required>
                       </md-input-container>
                     </div>
+
                     <div flex="50" class="armrgn">
                       <md-input-container>
                         <label> Select State</label>
@@ -964,42 +964,54 @@
                       </md-input-container>
                     </div>
                   </div>
-                  <md-divider></md-divider>
-                  <div layout="row" layout-margin>
-                    <div flex="50" class="armrgn">
-                      <md-input-container style="width:100%">
-                        <label>Select City</label>
-                        <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
-                          data-md-container-class="selectdemoSelectHeader" multiple>
-                          <md-select-header class="demo-select-header">
-                            <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
-                          </md-select-header>
-                          <md-optgroup label="citys">
-                            <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
-                          </md-optgroup>
-                        </md-select>
-                      </md-input-container>
-                    </div>
-                    <div flex="50" class="armrgn">
-                      <md-input-container style="width:100%">
-                        <label>Select Areas</label>
-                        <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
-                          multiple>
-                          <md-select-header class="demo-select-header">
-                            <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
-                          </md-select-header>
-                          <md-optgroup label="areas">
-                            <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
-                          </md-optgroup>
-                        </md-select>
-                      </md-input-container>
-                    </div>
+                  <!-- <div layout="row">
+                      <select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="selectedCountry" ng-change="setCountry()" label="Select Country">
+                          <option ng-repeat="country in countries | filter:searchTerm" value="{{country.id}}">{{country.name}}</option>
+                      </select>
+                      <select ng-model="selectedStates" class="select-value" ng-disabled="!selectedCountry" md-on-close="clearSearchTerm()">
+                       
+                            <option ng-value="state.id" ng-repeat="state in states | filter:searchTerm">{{state.name}}</option>
+                        
+                      </select>
+                  </div> -->
+                </div>
+                
+                <md-divider></md-divider>
+                <div layout="row" layout-margin>
+                  <div flex="50" class="armrgn">
+                    <md-input-container style="width:100%">
+                      <label>Select City</label>
+                      <md-select ng-model="selectedcitys" ng-disabled="!selectedStates" ng-change="setCities()" md-on-close="clearSearchTerm()"
+                        data-md-container-class="selectdemoSelectHeader" multiple>
+                        <md-select-header class="demo-select-header">
+                          <input ng-model="searchTerm" type="search" placeholder="Search for a city.." class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup label="citys">
+                          <md-option ng-value="city.id" ng-repeat="city in cities | filter:searchTerm">{{city.name}}</md-option>
+                        </md-optgroup>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <div flex="50" class="armrgn">
+                    <md-input-container style="width:100%">
+                      <label>Select Areas</label>
+                      <md-select ng-model="selectedAreas" ng-change="setareas()" ng-disabled="!selectedcitys" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                        multiple>
+                        <md-select-header class="demo-select-header">
+                          <input ng-model="searchTerm" type="search" placeholder="Search for a area.." class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup label="areas">
+                          <md-option ng-value="area.id" ng-repeat="area in areas | filter:searchTerm">{{area.name}}</md-option>
+                        </md-optgroup>
+                      </md-select>
+                    </md-input-container>
                   </div>
                 </div>
-              </div>
+                
+             
             </div>
             <md-divider></md-divider>
-            <div layout="row">
+            <div layout="row" layout-align="space-around center">
               <md-button class="md-raised md-primary" type="submit" ng-click="applyFilter()">APPLY</md-button>
               <md-button class="md-warn " type="reset" value="Reset">
                 <span class="md-body-1" ng-click="resetFilters()">Reset Fields</span>
@@ -1054,7 +1066,7 @@
         <!-- formats html end-->
         <!--SHORTLIST html start -->
         <div layout="column" layout-padding class="side-navpadding" ng-if="isUserBasic()">
-          <md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()">
+          <md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()" style="cursor:pointer">
             <!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
             <div layout="row">
               <div class="main-icon">
@@ -1071,50 +1083,38 @@
                 </md-icon>
               </div>
             </div>
-        </div>
-        <div ng-show="shortlist" class="short-list">
-          <div class="shortlistscrollbar" id="shortlistscrollbar-style">
-            <!-- <div layout="column" layout-margin>
-              <div layout="row" layout-align="space-around center">
-                <div class="shrtlst"><span class="shrt-pdng">03</span> <span>Billboars</span></div>
-                <div class="shrtlst"><span class="shrt-pdng">33</span><span>Unipole</span></div>
-                <div class="shrtlst"><span class="shrt-pdng">100</span> <span>Digital</span></div>
-              </div>
-              <div layout="row" layout-align="space-around center">
-                <div class="shrtlst"><span class="shrt-pdng">03</span> <span>Billboars</span></div>
-                <div class="shrtlst"><span class="shrt-pdng">33</span><span>Unipole</span></div>
-                <div class="shrtlst"><span class="shrt-pdng">100</span> <span>Digital</span></div>
-              </div>
-            </div>
-            <md-divider></md-divider> -->
-            <div layout="column" ng-repeat="shortlisted in shortListedProducts">
-              <div layout="row" flex>
-                <md-list flex style="padding:0px">
-                  <md-list-item class="md-3-line list-img">
-                    <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
-                    <div class="list-name">
-                      <span class="md-title">{{shortlisted.format_name | PickFirstLetter}}</span>
-                    </div>
-                    <div class="md-list-item-text list-item-text" layout="column" flex>
-                      <p>{{shortlisted.siteNo}}</p>
-                      <h3 class="md-body-1">{{shortlisted.area_name}}</h3>
-                      <!-- <p class="md-caption">{{shortlisted.address}}</P> -->
-                    </div>
-                  </md-list-item>
-                </md-list>
-                <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
-                  <!-- <md-checkbox class="md-secondary list-checkbox" 
-                  ng-checked="existsShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" 
-                  ng-click="toggleSelectedShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" aria-lebel ="random label" aria-labelledby="delete">
-                </md-checkbox> -->
-                  <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
-                    <md-icon>
-                      <i class="material-icons ">delete</i>
-                    </md-icon>
-                  </md-button>
+          </md-content>
+          <div ng-show="shortlist" class="short-list">
+            <div class="shortlistscrollbar" id="shortlistscrollbar-style">
+              <div layout="column" ng-repeat="shortlisted in shortListedProducts">
+                <div layout="row" flex>
+                  <md-list flex style="padding:0px">
+                    <md-list-item class="md-3-line list-img">
+                      <!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
+                      <div class="list-name">
+                        <span class="md-title">{{shortlisted.format_name | PickFirstLetter}}</span>
+                      </div>
+                      <div class="md-list-item-text list-item-text" layout="column" flex>
+                        <p>{{shortlisted.siteNo}}</p>
+                        <h3 class="md-body-1">{{shortlisted.area_name}}</h3>
+                        <!-- <p class="md-caption">{{shortlisted.address}}</P> -->
+                      </div>
+                    </md-list-item>
+                  </md-list>
+                  <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
+                    <!-- <md-checkbox class="md-secondary list-checkbox" 
+                    ng-checked="existsShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" 
+                    ng-click="toggleSelectedShortlistedForNewCampaign(shortlisted, selectedForNewCampaign)" aria-lebel ="random label" aria-labelledby="delete">
+                  </md-checkbox> -->
+                    <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
+                      <md-icon>
+                        <i class="material-icons ">delete</i>
+                      </md-icon>
+                    </md-button>
+                  </div>
                 </div>
+                <md-divider></md-divider>
               </div>
-              <md-divider></md-divider>
             </div>
           </div>
           <md-divider></md-divider>
