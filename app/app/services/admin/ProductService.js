@@ -27,9 +27,10 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				$http.get(config.apiPath + '/products/' + pageNo).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
-			getFormatList: function () {
+			getFormatList: function (obj = null) {
+				var filterData = obj != null ? "?type=" + obj.type : "?type=ooh";
 				var dfd = $q.defer();
-				$http.get(config.apiPath + '/formats').success(dfd.resolve).error(dfd.reject);
+				$http.get(config.apiPath + '/formats' + filterData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
 			deleteProduct: function(productId){
@@ -54,6 +55,11 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				}
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/requested-hoardings' + pageData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			getMetroPackages: function(){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/metro-packages').success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			}
 		}

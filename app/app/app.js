@@ -203,10 +203,10 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
-    .state('admin.packages', {
-      url: '/packages',
-      templateUrl: 'views/admin/packages.html',
-      controller: 'AdminLocationCtrl'
+    .state('admin.metro-packages', {
+      url: '/metro-packages',
+      templateUrl: 'views/admin/metro-packages.html',
+      controller: 'AdminMetroCtrl'
     })
     .state('admin.metrocampaignview', {
       url: '/metrocampaignview',
@@ -243,10 +243,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
     })
-    .state('admin.metroformats', {
-      url: '/metroformats',
-      templateUrl: 'views/admin/metroformtas.html',
-      controller: 'ProductCtrl'
+    .state('admin.metro-formats', {
+      url: '/metro-formats',
+      templateUrl: 'views/admin/metro-formtas.html',
+      controller: 'AdminMetroCtrl'
     })
     .state('admin.requested-hoardings', {
       url: '/requested-hoardings/:productId',
