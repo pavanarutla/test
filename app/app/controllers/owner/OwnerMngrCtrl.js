@@ -226,7 +226,6 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
         toastr.error(result.message);
       }
     });
-    $mdSidenav('ownerRightSidenav').toggle();
   }
 
   /*=================================
