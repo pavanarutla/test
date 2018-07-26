@@ -43,6 +43,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   var getFormatList = function(obj){
     ProductService.getFormatList(obj).then(function(result){
       $scope.formatList = result;
+      console.log(result);
     });
   }
 

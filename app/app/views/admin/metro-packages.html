@@ -10,7 +10,7 @@
 		<div class="form-group row">
 			<label for="productType" class="col-sm-2 col-form-label">Format Type</label>
 			<div class="col-sm-5">
-				<select name="format" class="form-control" id="format" ng-model="package.country" ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+				<select name="format" class="form-control" id="format" ng-model="package.format" ng-options="format.id as format.name for format in formatList">
 					<option value="" disabled selected>Select Format</option>
 				</select required>
 				<!-- <select class="form-control" required="required" name="productType">
@@ -23,11 +23,17 @@
 		<div class="form-group row">
 			<label for="area" class="col-sm-2 col-form-label">Select Corridor</label>
 			<div class="col-sm-5">
-				<select name="area" class="form-control">
-					<option value="" selected>Corridor-1</option>
-					<option value="">Corridor-2</option>
-					<option value="">Corridor-3</option>
+				<select name="area" class="form-control" model="package.corridor">
+					<option value="corridor1" selected>Corridor-1</option>
+					<option value="corridor2">Corridor-2</option>
+					<option value="corridor3">Corridor-3</option>
 				</select required>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="duration" class="col-sm-2 col-form-label">Duration</label>
+			<div class="col-sm-5">
+				<input ng-model="package.duration" type="text" name="price" placeholder="Duration" class="form-control" />
 			</div>
 		</div>
 		<div class="form-group row">
