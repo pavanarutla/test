@@ -94,7 +94,7 @@ var app = angular.module('bbManager', [
     .state('index.L&T', {
       url: 'L&T',
       templateUrl: 'views/L&T.html',
-      controller: 'GmapCtrl'
+      controller: 'MetroCtrl'
     })
     .state('index.campaign', {
       url: 'campaign',
@@ -202,6 +202,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/metro-campaign-list.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
+    })
+    .state('admin.metro-corridors', {
+      url: '/metro-corridors',
+      templateUrl: 'views/admin/metro-corridors.html',
+      controller: 'AdminMetroCtrl'
     })
     .state('admin.metro-packages', {
       url: '/metro-packages',

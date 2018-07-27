@@ -1,4 +1,4 @@
-app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, Upload, toastr){
+app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr){
 
   /*=============================
   | Global variables
@@ -33,6 +33,14 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
       scope: $scope
     });
   }
+
+  $scope.selectPackage = function (ev) {
+    $mdDialog.show({
+      templateUrl: 'views/selectpack.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true
+    })
+  };
   /*================================
   | Popup and Sidenav controls end
   ================================*/
@@ -43,7 +51,6 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   var getFormatList = function(obj){
     ProductService.getFormatList(obj).then(function(result){
       $scope.formatList = result;
-      console.log(result);
     });
   }
 
@@ -72,6 +79,80 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   | Formats section ends
   ===============================*/
 
+  /*==============================
+  | Corridors
+  ==============================*/
+  // $scope.selectedCorridorCity = {};
+  $scope.citySearch = function(query){
+    return AdminLocationService.searchCities(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  function getMetroCorridors(){
+    AdminMetroService.getMetroCorridors().then(function(result){
+      $scope.metroCorridorList = result;
+    });
+  }
+
+  $scope.saveCorridor = function(corridor){
+    corridor.city_id = $scope.selectedCorridorCity.id;
+    AdminMetroService.saveCorridor(corridor).then(function(result){
+      if(result.status == 1){
+        getMetroCorridors();
+        toastr.success(result.message);
+      }
+      else{
+        if(result.message.constructor === Array){
+          $scope.addCorridorErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
+      }
+    });
+  }
+  /*==============================
+  | Corridors end
+  ==============================*/
+
+  /*==============================
+  | Packages
+  ==============================*/
+  function getMetroPackages(){
+    AdminMetroService.getMetroPackages().then(function(result){
+      console.log(result);
+      $scope.metroPackageList = result;
+    });
+  }
+  $scope.savePackage = function(package){
+    AdminMetroService.savePackage(package).then(function(result){
+      if(result.status == 1){
+        getMetroPackages();
+        toastr.success(result.message);
+      }
+      else{
+        if(result.message.constructor === Array){
+          $scope.addPackageErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
+      }
+    });
+  }
+  $scope.editPackage = function (package) {
+    $scope.package = {};
+    $scope.package.id = package.id;
+    $scope.package.format_id = null;
+    $scope.package.corridor_id = null;
+    $scope.package.months = package.months;
+    $scope.package.days = package.days;
+    $scope.package.price = package.price;
+  }
+  /*==============================
+  | Packages end
+  ==============================*/
 
   /*================================
   | Page based initial loads
@@ -81,7 +162,8 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   }
   if($rootScope.currStateName == 'admin.metro-packages'){
     getFormatList({type: "metro"});
-    // getMetroPackages();
+    getMetroCorridors();
+    getMetroPackages();
   }
   /*================================
   | Page based initial loads end

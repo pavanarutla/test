@@ -7,50 +7,54 @@
 	</div>
 
 	<form role="form" style="margin: 1em">
+		<input type="hidden" ng-model="package.id" />
 		<div class="form-group row">
-			<label for="productType" class="col-sm-2 col-form-label">Format Type</label>
-			<div class="col-sm-5">
-				<select name="format" class="form-control" id="format" ng-model="package.format" ng-options="format.id as format.name for format in formatList">
-					<option value="" disabled selected>Select Format</option>
-				</select required>
-				<!-- <select class="form-control" required="required" name="productType">
-					<option value="" selected>Digital Signage - Inside Train</option>
-					<option value="">Train Wrap</option>
-					<option value="">Digital Signage Inside Station</option>
-				</select> -->
+				<label for="name" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-5">
+					<input ng-model="package.name" type="text" name="name" placeholder="name" class="form-control" />
+				</div>
 			</div>
-		</div>
 		<div class="form-group row">
 			<label for="area" class="col-sm-2 col-form-label">Select Corridor</label>
 			<div class="col-sm-5">
-				<select name="area" class="form-control" model="package.corridor">
-					<option value="corridor1" selected>Corridor-1</option>
-					<option value="corridor2">Corridor-2</option>
-					<option value="corridor3">Corridor-3</option>
-				</select required>
+					<select name="corridor" class="form-control" id="corridor" ng-model="package.corridor_id" ng-options="corr.id as corr.name for corr in metroCorridorList" required>
+						<option value="" disabled selected>Select Corridor</option>
+					</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="productType" class="col-sm-2 col-form-label">Format Type</label>
+			<div class="col-sm-5">
+				<select name="format" class="form-control" id="format" ng-model="package.format_id" ng-options="format.id as format.name for format in formatList" required>
+					<option value="" disabled selected>Select Format</option>
+				</select>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="duration" class="col-sm-2 col-form-label">Duration</label>
-			<div class="col-sm-5">
-				<input ng-model="package.duration" type="text" name="price" placeholder="Duration" class="form-control" />
+			<div class="col-sm-2">
+				<input ng-model="package.months" type="text" name="month" placeholder="Months" class="form-control" />
+			</div>
+			<div class="col-sm-3">
+				<input ng-model="package.days" type="text" name="day" placeholder="Days" class="form-control" />
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="duration" class="col-sm-2 col-form-label">Duration</label>
+			<label for="price" class="col-sm-2 col-form-label">Price</label>
 			<div class="col-sm-5">
-				<input ng-model="product.duration" type="text" name="price" placeholder="Duration" class="form-control" />
+				<input ng-model="package.price" type="text" name="price" placeholder="price" class="form-control" />
 			</div>
 		</div>
-		<div class="form-group row">
-			<label for="productId" class="col-sm-2 col-form-label">Price</label>
-			<div class="col-sm-5">
-				<input ng-model="product.price" type="text" name="price" placeholder="price" class="form-control" />
-			</div>
+		<div class="serverErrors" ng-show="stateErrors && !addPackageErrors.length == 0">
+			<ul>
+				<li ng-repeat="error in addPackageErrors">
+					{{error}}
+				</li>
+			</ul>
 		</div>
 		<div class="form-group" style="margin:10px 0">
 			<label class="col-md-3 control-label"></label>
-			<input class="btn btn-primary" value="Save" type="button">
+			<input class="btn btn-primary" ng-click="savePackage(package)" value="Save" type="button">
 			<span></span>
 			<input class="btn btn-default" value="Cancel" type="reset">
 		</div>
@@ -61,51 +65,31 @@
 			<table class="table table-striped table-bordered ">
 				<thead>
 					<tr>
-						<th>Formats</th>
-						<th>Caridor</th>
+						<th>Name</th>
+						<th>Corridor</th>
+						<th>Format</th>
 						<th>Duration</rth>
-							<th>Price</th>
-							<th>Actions</th>
+						<th>Price</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Digital Sign</td>
-						<td>Caridor-1</td>
-						<td>15-Days</td>
-						<td>12,000</td>
+					<tr ng-repeat="metroPackage in metroPackageList">
+						<td>{{metroPackage.name}}</td>
+						<td>{{metroPackage.corridor}}</td>
+						<td>{{metroPackage.format}}</td>
+						<td>{{metroPackage.months}} months, {{metroPackage.days}} days</rth>
+						<td>{{metroPackage.price}}</td>
 						<td>
 							<span>
-								<a style="cursor:pointer;" ng-click="editCity(city)">
+								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteCity(city)">
-									<md-icon>
-										<i class="material-icons">delete</i>
-									</md-icon>
-								</a>
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td>Train Wrap</td>
-						<td>Caridor-1</td>
-						<td>15-Days</td>
-						<td>12,000</td>
-						<td>
-							<span>
-								<a style="cursor:pointer;" ng-click="editCity(city)">
-									<md-icon>
-										<i class="material-icons">mode_edit</i>
-									</md-icon>
-								</a>
-							</span>
-							<span>
-								<a style="cursor:pointer;" ng-click="deleteCity(city)">
+								<a style="cursor:pointer;" ng-click="deletePackage(metroPackage)">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>

@@ -1031,17 +1031,7 @@ app.controller('GmapCtrl',
         }
         $scope.elipsis += ".";
       }
-      productLoader();
-      //L&T metro package popup
-      $scope.selectPackage = function (ev) {
-        $mdDialog.show({
-          
-          templateUrl: 'views/selectpack.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose: true
-        })
-      };
-      
+      productLoader();      
     }
   ]
 );
