@@ -45,6 +45,12 @@
 				<input ng-model="package.price" type="text" name="price" placeholder="price" class="form-control" />
 			</div>
 		</div>
+		<div class="form-group row">
+			<label for="max_trains" class="col-sm-2 col-form-label">Max. Trains</label>
+			<div class="col-sm-5">
+				<input ng-model="package.max_trains" type="text" name="max_trains" placeholder="Max no. of trains allowed" class="form-control" />
+			</div>
+		</div>
 		<div class="serverErrors" ng-show="stateErrors && !addPackageErrors.length == 0">
 			<ul>
 				<li ng-repeat="error in addPackageErrors">
@@ -70,6 +76,7 @@
 						<th>Format</th>
 						<th>Duration</rth>
 						<th>Price</th>
+						<th>Max. Trains</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -80,6 +87,7 @@
 						<td>{{metroPackage.format}}</td>
 						<td>{{metroPackage.months}} months, {{metroPackage.days}} days</rth>
 						<td>{{metroPackage.price}}</td>
+						<td>{{metroPackage.max_trains}}</td>
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">
