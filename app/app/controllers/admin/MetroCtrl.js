@@ -121,7 +121,6 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   ==============================*/
   function getMetroPackages(){
     AdminMetroService.getMetroPackages().then(function(result){
-      console.log(result);
       $scope.metroPackageList = result;
     });
   }
@@ -144,11 +143,13 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   $scope.editPackage = function (package) {
     $scope.package = {};
     $scope.package.id = package.id;
+    $scope.package.name = package.name;
     $scope.package.format_id = null;
     $scope.package.corridor_id = null;
     $scope.package.months = package.months;
     $scope.package.days = package.days;
     $scope.package.price = package.price;
+    $scope.package.max_trains = package.max_trains;
   }
   /*==============================
   | Packages end
