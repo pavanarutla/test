@@ -94,7 +94,7 @@
           </span>
         </div> -->        
           <label>Start date</label>
-          <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>          
+          <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="minStartDate" ng-init="ownerCampaign.start_date = defaultStartDate" ng-change="updateEndDateValidations()"></md-datepicker>          
           <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
               <div ng-message="required">Start date is required.</div>
             </div>
@@ -120,7 +120,7 @@
         </div> -->
         <div flex-gt-xs="">
           <label>End date</label>
-          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="minEndDate"></md-datepicker>
           </div>
           <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
               <div ng-message="required">End date is required.</div>
