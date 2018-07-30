@@ -51,6 +51,12 @@
 				<input ng-model="package.max_trains" type="text" name="max_trains" placeholder="Max no. of trains allowed" class="form-control" />
 			</div>
 		</div>
+		<div class="form-group row">
+			<label for="max_slots" class="col-sm-2 col-form-label">Max. Slots</label>
+			<div class="col-sm-5">
+				<input ng-model="package.max_slots" type="text" name="max_slots" placeholder="Max no. of slots allowed a day" class="form-control" />
+			</div>
+		</div>
 		<div class="serverErrors" ng-show="stateErrors && !addPackageErrors.length == 0">
 			<ul>
 				<li ng-repeat="error in addPackageErrors">
@@ -62,7 +68,7 @@
 			<label class="col-md-3 control-label"></label>
 			<input class="btn btn-primary" ng-click="savePackage(package)" value="Save" type="button">
 			<span></span>
-			<input class="btn btn-default" value="Cancel" type="reset">
+			<input class="btn btn-default" value="Cancel" type="reset" ng-click="package = {};">
 		</div>
 	</form>
 	<!-- tables grid html start-->
@@ -77,6 +83,7 @@
 						<th>Duration</rth>
 						<th>Price</th>
 						<th>Max. Trains</th>
+						<th>Slots/Day</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -88,6 +95,7 @@
 						<td>{{metroPackage.months}} months, {{metroPackage.days}} days</rth>
 						<td>{{metroPackage.price}}</td>
 						<td>{{metroPackage.max_trains}}</td>
+						<td>{{metroPackage.max_slots}}</td>
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">

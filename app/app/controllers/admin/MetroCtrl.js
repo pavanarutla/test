@@ -150,6 +150,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     $scope.package.days = package.days;
     $scope.package.price = package.price;
     $scope.package.max_trains = package.max_trains;
+    $scope.package.max_slots = package.max_slots;
   }
   /*==============================
   | Packages end

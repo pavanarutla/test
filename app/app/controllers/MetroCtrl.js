@@ -34,8 +34,39 @@ app.controller('MetroCtrl',
       }
       $scope.getMetroPackages = function(corridorId){
         MetroService.getMetroPackages(corridorId).then(function(result){
+          _.map(result, (res) => {
+            res.selected_trains = 1;
+            res.selected_slots = 1;
+            return res;
+          });
           $scope.metroPackages = result;
         });
+      }
+      
+      $scope.shortlistMetroPackage = function(pkg){
+        console.log(pkg);
+        // var alreadySelected = _.filter($scope.shortlistedPackages, function(package){
+        //   return package.corridor_id == pkg.corridor_id;
+        // });
+        // if(alreadySelected.constructor === Array && alreadySelected.length > 0){
+        //   alert("You can only add one package per corridor.");
+        // }
+        // else{
+        //   if(typeof pkg.start_date === 'undefined'){
+        //     alert("Start date for the package is required.");
+        //   }
+        //   else{
+        //     MetroService.shortlistPackage(pkg).then((result) => {
+        //       if(result.status == 1){
+        //         loadShortlistedPackages();
+        //         toastr.success(result.message);
+        //       }
+        //       else{
+        //         toastr.error(result.message);
+        //       }
+        //     });
+        //   }
+        // }
       }
       /*===============================
       | Campaign Management ends
