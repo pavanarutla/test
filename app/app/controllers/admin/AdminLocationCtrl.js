@@ -51,6 +51,11 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     AdminLocationService.saveCountry($scope.country).then(function (data) {
       if (data.status == 1) {
         getAllCountries();
+        $scope.country = null;
+        if($scope.countryForm){
+          $scope.countryForm.$setPristine()
+          $scope.countryForm.$setUntouched()  
+        }
         toastr.success('Country added to database successfully!');
       }
       else if(data.status == 0){
@@ -101,6 +106,11 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
       if (data.status == 1) {
         toastr.success('State added to database successfully!');
         getAllStates();
+        $scope.state = null;
+        if($scope.stateform){
+          $scope.stateform.$setPristine()
+          $scope.stateform.$setUntouched()
+        }
       }
       else if(data.status == 0) {
         $scope.stateErrors ={
@@ -157,6 +167,11 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         $scope.cityErrors = null;
         toastr.success('City added to database successfully!');
         getAllCities();
+        $scope.city = null;
+        if ($scope.cityform) {
+          $scope.cityform.$setPristine()
+          $scope.cityform.$setUntouched()
+        }
       }   
       else if(data.status == 0){
         $scope.cityErrors = data.message;
@@ -208,6 +223,12 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
         toastr.success('Area added to database successfully!');
         $scope.areaErrors = null;
         $scope.getAllAreas();
+        $scope.area = null;
+        if ($scope.areaform) {
+          $scope.areaform.$setPristine()
+          $scope.areaform.$setUntouched()
+        }
+
       }
       else if(data.status == 0){
         $scope.areaErrors = data.message;
