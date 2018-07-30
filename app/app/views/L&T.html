@@ -154,61 +154,22 @@
 		</div>
 		<md-content>
 			<div layout="column" layout-margin>
-				<!-- <div layout="row">
-            <div layout="column" layout-align="center start" flex="50">
-                <div class="md-body-2">{{shortlisted.siteNo}}</div>
-            </div>
-            <div layout="row" layout-align="end center" flex="50">
-                <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
-                <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
-                <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
-            </div>
-            </div>
-            <div layout="row" style="margin: 0 8px 0 8px;">
-            <div layout="column" flex="35" layout-align="center start" class="margin-con">
-                <div class="md-body-2">{{shortlisted.format_name}}</div>
-            </div>
-            <div layout="column" flex="35" layout-align="center start">
-                <div class="md-body-2">Facing</div>
-            </div>
-            <div layout="column" flex="30" layout-align="center end ">
-                <div class="md-body-2">No. of Views</div>
-            </div>
-            </div>
-            <div layout="row">
-            <div layout="column" flex="35" layout-align="center start" class="margin-con">
-                <div class="md-caption">{{shortlisted.address}}</div>
-                <div class="md-caption">500001</div>
-            </div>
-            <div layout="column" flex="35" layout-align=" start center">
-                <div class="md-caption">{{shortlisted.direction}}</div>
-            </div>
-            <div layout="column" flex="30" layout-align="start end ">
-                <div class="md-caption">{{shortlisted.impressions}}</div>
-                <div class="md-caption">week(Approx)</div>
-            </div>
-            </div>
-            <md-card-actions layout="row" layout-align="end center" style="margin:0px">
-            <md-button style="margin:0px" ng-click="viewProduct(shortlisted)">View</md-button>
-            <md-button style="margin:0px" ng-click="deleteShortlisted($event, shortlisted.id)">Delete</md-button>
-            </md-card-actions> -->
-				<div layout="row" layout-padding flex class="md-whiteframe-3dp">
+				<div layout="row" layout-padding flex class="md-whiteframe-3dp" ng-repeat="slPkg in shortlistedPackages">
 					<md-list flex style="padding:0px">
 						<md-list-item class="md-3-line list-img" style="padding:0px 5px">
 							<div class="md-list-item-text list-item-text" layout="column" flex>
-								<h3 class="md-body-2">Digital Sinage,corridor 1</h3>
-								<p class="md-caption">Budget For One Month 2Trains,2Slots</p>
-								<h3 class="md-title">Rs.1,02,000</h3>
+								<h3 class="md-body-2">{{slPkg.name}}</h3>
+								<p class="md-caption">Budget For {{slPkg.months}} month(s), {{slPkg.days}} day(s), {{slPkg.selected_trains}} Train(s), {{slPkg.selected_slots}} Slot(s)</p>
+								<br />
+								<h3 class="md-title">Rs.{{slPkg.price}}</h3>
 							</div>
+							<md-button class="md-icon-button" ng-click="deleteShortlistedMetroPackage(slPkg.package_id)">
+								<md-icon>
+									<i class="material-icons ">delete</i>
+								</md-icon>
+							</md-button>
 						</md-list-item>
 					</md-list>
-
-					<md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
-						<md-icon>
-							<i class="material-icons ">delete</i>
-						</md-icon>
-					</md-button>
-
 				</div>
 			</div>
 			<div layout="column" layout-margin>
@@ -582,7 +543,7 @@
 				<!-- caridoor html start-->
 				<div layout="column" layout-padding class="side-navpadding">
 					<div class="main-part" layout="column" style="cursor:pointer;padding: 0px;">
-						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="metroCampaign.selectedCorridor" ng-options="corr as corr.name for corr in metroCorridors" required>
+						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as corr.name for corr in metroCorridors" required>
 							<option value="" disabled selected>Select Corridor</option>
 						</select>
 						<!-- <select >
@@ -634,25 +595,25 @@
 							<div layout="column">
 								<div layout="row" flex>
 									<md-list flex style="padding:0px">
-										<md-list-item class="md-3-line list-img" style="padding:0px 5px">
+										<md-list-item class="md-3-line list-img" style="padding:0px 5px" ng-repeat="slPkg in shortlistedPackages">
 											<!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
 											<div class="c-name">
-												<span class="md-body-2">C1</span>
+												<span class="md-body-2">{{slPkg.name | MetroSlIcon}}</span>
 											</div>
 											<div class="md-list-item-text list-item-text" layout="column" flex>
-												<h3 class="md-body-2">Digital Sinage,corridor 1</h3>
-												<p class="md-caption">2Trains,2Slots</p>
+												<h3 class="md-body-2">{{slPkg.name}}</h3>
+												<p class="md-caption">{{slPkg.selected_trains}}Trains, {{slPkg.selected_slots}}Slots</p>
 												<!-- <p class="md-caption">{{shortlisted.address}}</P> -->
+											</div>
+											<div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
+												<md-button class="md-icon-button" ng-click="deleteShortlistedMetroPackage(slPkg.package_id)">
+													<md-icon>
+														<i class="material-icons ">delete</i>
+													</md-icon>
+												</md-button>
 											</div>
 										</md-list-item>
 									</md-list>
-									<div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
-										<md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
-											<md-icon>
-												<i class="material-icons ">delete</i>
-											</md-icon>
-										</md-button>
-									</div>
 								</div>
 								<md-divider></md-divider>
 							</div>
@@ -660,8 +621,9 @@
 						<md-divider></md-divider>
 						<div layout="row">
 							<md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
+							<div flex></div>
 							<md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
-							<md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button>
+							<!-- <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button> -->
 						</div>
 					</div>
 				</div>

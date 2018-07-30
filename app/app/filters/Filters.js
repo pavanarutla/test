@@ -104,3 +104,12 @@ app.filter('boolToYesNo', function(){
     }
   }
 });
+
+app.filter('MetroSlIcon', function(){
+  return function(input) {
+    input = input || '';
+    var corName = input.split(' - ')[0];
+    var pkgName = input.split(' - ')[1];
+    return corName.match(/\b(\w)/g).join('') + "-" + pkgName.split(' ')[0] + pkgName.split(' ')[1].substring(0, 1);
+  }
+});

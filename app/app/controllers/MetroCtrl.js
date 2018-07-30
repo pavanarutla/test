@@ -6,7 +6,7 @@ app.controller('MetroCtrl',
       | Popup and Sidenav controls
       ==============================*/  
       $scope.showPackagePopup = function (ev) {
-        if(typeof $scope.metroCampaign.selectedCorridor != "undefined"){
+        if(typeof $scope.selectedCorridor != "undefined"){
           $mdDialog.show({
             templateUrl: 'views/metro-packages-popup.html',
             fullscreen: $scope.customFullscreen,
@@ -14,7 +14,6 @@ app.controller('MetroCtrl',
             preserveScope : true,
             scope: $scope
           });
-          $scope.getMetroPackages($scope.metroCampaign.selectedCorridor.id);
         }
         else{
           alert("Please select a corridor first.");
@@ -42,31 +41,60 @@ app.controller('MetroCtrl',
           $scope.metroPackages = result;
         });
       }
-      
+      function loadShortlistedPackages(){
+        MetroService.getShortlistPackages().then((result) => {
+          console.log("shortlisted:", result);
+          $scope.shortlistedPackages = result;
+        });
+      }
+      loadShortlistedPackages();
       $scope.shortlistMetroPackage = function(pkg){
-        console.log(pkg);
-        // var alreadySelected = _.filter($scope.shortlistedPackages, function(package){
-        //   return package.corridor_id == pkg.corridor_id;
-        // });
-        // if(alreadySelected.constructor === Array && alreadySelected.length > 0){
-        //   alert("You can only add one package per corridor.");
-        // }
-        // else{
-        //   if(typeof pkg.start_date === 'undefined'){
-        //     alert("Start date for the package is required.");
-        //   }
-        //   else{
-        //     MetroService.shortlistPackage(pkg).then((result) => {
-        //       if(result.status == 1){
-        //         loadShortlistedPackages();
-        //         toastr.success(result.message);
-        //       }
-        //       else{
-        //         toastr.error(result.message);
-        //       }
-        //     });
-        //   }
-        // }
+        var alreadySelected = _.filter($scope.shortlistedPackages, function(package){
+          return package.id == pkg.id;
+        });
+        if(alreadySelected.constructor === Array && alreadySelected.length > 0){
+          toastr.error("This package is already added.");
+        }
+        else{
+          if(typeof pkg.start_date === 'undefined'){
+            toastr.error("Start date for the package is required.");
+          }
+          else{
+            MetroService.shortlistPackage(pkg).then((result) => {
+              if(result.status == 1){
+                loadShortlistedPackages();
+                toastr.success(result.message);
+              }
+              else{
+                toastr.error(result.message);
+              }
+            });
+          }
+        }
+      }
+      $scope.getEstBudgetForSelectedPackages = function(){
+        var estBudget = 0;
+        _.each($scope.shortlistedPackages, (package) => {
+          estBudget += package.price * (package.selected_trains + package.selected_slots - 1);
+        });
+        return estBudget;
+      }
+      $scope.isAlreadySelected = function(pkgId){
+        var pkg = _.find($scope.shortlistedPackages, (slPkg) => {
+          return slPkg.package_id == pkgId;
+        });
+        return pkg !== undefined;
+      }
+      $scope.deleteShortlistedMetroPackage = function(pkgId){
+        MetroService.deleteShortlistedMetroPackage(pkgId).then((result) => {
+          if(result.status == 1){
+            loadShortlistedPackages();
+            toastr.success(result.message);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
       }
       /*===============================
       | Campaign Management ends

@@ -1,6 +1,6 @@
 <md-dialog flex="50" flex-lg="60" flex-md="60" flex-sm="70" id="myDialog">
 	<div layout="row" layout-margin>
-		<h4 class="md-body-2">24" Digital Screen Packages - Inside Metro Train - Corridor 1
+		<h4 class="md-body-2">{{metroPackages[0].format}} - {{metroPackages[0].corridor}}
 		</h4>
 		<div flex></div>
 		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
@@ -18,7 +18,7 @@
 							<p class="md-caption">
 								{{metroPackage.name}} - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots
 							</p>
-							<h3>{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
+							<h3>Price: Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
 							<div class="form-group">
 								<div flex-gt-xs="">
 									<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date=""></md-datepicker>
@@ -38,27 +38,27 @@
 						</div>
 					</div>
 					<div layout="row">
-						<md-button class="md-raised md-primary slect_btn" ng-disabled="metroPackage.selected" ng-click="shortlistMetroPackage(metroPackage)">select this</md-button>						
+						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">select this</md-button>						
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- <div layout="row" layout-margin>
+		<div layout="row" layout-margin>
 			<div class="show_bug">
 				<p class="md-caption">
-					Estimated Budget:
+					Total Estimated Budget:
 				</p>
 				<h2 class="text_color">
-					Rs. 2,55,550
+					Rs. {{getEstBudgetForSelectedPackages()}}
 				</h2>
-				<md-button class="md-raised md-primary slect_btn">Shortlist Campaign</md-button>
+				<!-- <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
 			</div>
 			<div flex></div>
 			<div class="logo_lnt" style="    margin-top: 50px;">
 				<p class="md-caption">We are oﬃcial Partners to</p>
 				<img src="assets/images/landt_logo.jpg" alt="landt_logo" />
 			</div>
-		</div> -->
+		</div>
 	</md-dialog-content>
 	<!-- <md-dialog-actions layout="row" layout-align="center center">
     
