@@ -86,6 +86,21 @@ app.filter('stringifyCampaignStatus', function(){
       case 8:
         returnStatus = "Closed";
         break;
+      case 101:
+        returnStatus = "Created";
+        break;
+      case 121:
+        returnStatus = "Awaiting Payment Confirmation";
+        break;
+      case 131:
+        returnStatus = "Payment Confirmed";
+        break;
+      case 141:
+        returnStatus = "Running";
+        break;
+      case 151:
+        returnStatus = "Closed";
+        break;
       default:
         return status = "Unknown";
         break;

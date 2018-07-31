@@ -241,26 +241,26 @@
 			</div>
 			<md-content layout="column" style="overflow:hidden" ng-if="!campaignSavedSuccessfully">
 				<div layout="column" layout-margin>
-					<h3 class="md-title">Save Campaign</h3>
-					<h3 class="md-title">We are excited to see your Campaign</h3>
-					<h3 class="md-title">Let's Work Together!</h3>
+					<h3 class="md-title">Group your shortlisted packages under a campaign name</h3>
+					<!-- <h3 class="md-title">We are excited to see your Campaign</h3>
+					<h3 class="md-title">Let's Work Together!</h3> -->
 				</div>
 				<form name="forms.ownerCampaignForm" role="form">
 					<div class="form-group">
 						<label class="control-label">Campaign Name</label>
 						<br>
-						<input ng-model="ownerCampaign.name" class="form-control" type="text">
+						<input ng-model="campaign.name" class="form-control" type="text">
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label class="control-label">Budget</label>
 						<br>
 						<input ng-model="campaign.budget" class="form-control" type="text">
-					</div>
-					<div class="form-group">
+					</div> -->
+					<!-- <div class="form-group">
 						<label class="control-label">Start Date</label>
 						<br>
 						<div class='input-group' style="width:100%">
-							<!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
+							<!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> --
 							<input type='text' class="form-control" datepicker-popup ng-model="ownerCampaign.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
 							 max-date='ownerCampaign.end_date' ng-model-options="{timezone: 'utc'}" ng-readonly='true' placeholder="start date"
 							/>
@@ -268,10 +268,10 @@
 								<i class="glyphicon glyphicon-calendar"></i>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</form>
 				<div layout="column" layout-margin>
-					<md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()">SAVE CAMPAIGN</md-button>
+					<md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveMetroCampaign(campaign)">SAVE CAMPAIGN</md-button>
 				</div>
 				</form>
 			</md-content>
@@ -285,9 +285,9 @@
 					<div>
 						<md-button class="md-raised md-warn" layout-fill ng-if="campaign.status < 2">REQUEST PROPOSAL</md-button>
 					</div>
-					<div>
+					<!-- <div>
 						<md-button class="md-raised" layout-fill ng-click="toggleShareCampaignSidenav()">SHARE CAMPAIGN</md-button>
-					</div>
+					</div> -->
 				</div>
 			</md-content>
 		</div>
@@ -644,35 +644,36 @@
 							</div>
 						</div>
 					</md-content>
-					<div class="saved-campagin" ng-if=" savedcampaign">
-						<div class="savescrollbar" id="savecamp-style">
+					<div class="saved-campagin" ng-if="savedcampaign">
+						<div class="savescrollbar" id="savecamp-style" ng-repeat="metroCampaign in metroCampaigns">
 							<div layout="column">
 								<div layout="row" layout-padding>
-									<p class="md-caption " flex="35" style="">LG</p>
-									<div class="saved-date" flex="55" style="padding:0px">
+									<p class="md-caption " flex="35" style="">{{metroCampaign.name}}</p>
+									<!-- <div class="saved-date" flex="55" style="padding:0px">
 										<span class="saved-border md-caption ">01-02-18</span>
-									</div>
+									</div> -->
 									<div flex-xs="5" flex-sm="5" style="padding:0px">
-										<md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)" class="md-icon-button">
+										<!-- <md-button ng-click="toggleShareCampaignSidenav(activeUserCampaign)" class="md-icon-button">
 											<md-icon>
 												<i class="material-icons">share</i>
 											</md-icon>
-										</md-button>
+										</md-button> -->
 									</div>
 								</div>
 								<div layout="row" layout-align="space-around center" style="margin-top:-10px">
-									<md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
-									<md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2" ng-disabled="true">Proposal Requested</md-button>
-									<md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
-									<md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status < 2" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
+									<md-button class="md-primary saved-btn" ng-href="#/metro-campaign/{{metroCampaign.id}}"> VIEW</md-button>
+									<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 101" ng-click="checkoutMetroCampaign($event, metroCampaign.id)">Checkout</md-button>
+									<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 121" ng-disabled="true">Payment Confirmation Pending</md-button>
+									<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 131" ng-disabled="true">Campaign Ready</md-button>
+									<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 141" ng-disabled="true">Running</md-button>
 								</div>
 								<md-divider></md-divider>
 							</div>
 						</div>
 						<md-divider></md-divider>
-						<div layout="column" layout-align="center center">
+						<!-- <div layout="column" layout-align="center center">
 							<md-button class="md-primary md-raised" ng-click="exportAllCampaigns()">EXPORT ALL</md-button>
-						</div>
+						</div> -->
 					</div>
 					<div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
 						<div layout="column" layout-margin layout-align="center center">

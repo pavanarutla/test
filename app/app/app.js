@@ -111,10 +111,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
     })
-    .state('index.viewlandt_campaign', {
-      url: 'viewlandt_campaign',
-      templateUrl: 'views/lntview-campaign.html',
-      controller: 'CampaignCtrl'
+    .state('index.metro-campaign', {
+      url: 'metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/metro-campaign-details.html',
+      controller: 'MetroCtrl'
     })
     .state('index.profile', {
       url: 'profile',

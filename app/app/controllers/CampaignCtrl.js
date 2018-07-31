@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, config, toastr) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -297,6 +297,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  function getMetroCampaigns(){
+    MetroService.getMetroCampaigns().then((result) => {
+      $scope.metroCampaigns = result;
+    });
+  }
 
   /*=========================
   | Page based initial loads
@@ -304,6 +309,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
 
   if($rootScope.currStateName == "index.campaigns"){
     $scope.getUserCampaigns();
+    getMetroCampaigns();
   }
   
   /*=============================
