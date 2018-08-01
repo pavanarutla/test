@@ -125,7 +125,8 @@ app.filter('MetroSlIcon', function(){
     input = input || '';
     var corName = input.split(' - ')[0];
     var pkgName = input.split(' - ')[1];
-    return corName.match(/\b(\w)/g).join('') + "-" + pkgName.split(' ')[0] + pkgName.split(' ')[1].substring(0, 1);
+    var part2 = pkgName.split(' ').length > 1 ? pkgName.split(' ')[0] + pkgName.split(' ')[1].substring(0, 1) : pkgName.substring(0,1);
+    return corName.match(/\b(\w)/g).join('') + "-" + part2;
   }
 });
 

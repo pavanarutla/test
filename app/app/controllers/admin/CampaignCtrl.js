@@ -22,7 +22,13 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     $mdSidenav('add-metro-product-sidenav').toggle();
   };
   $scope.showConfirmMetroPaymentPopup = function(){
-
+    $mdDialog.show({
+      templateUrl: 'views/admin/confirm-metro-payment-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      scope: $scope
+    });
   }
   /*===================================
   | Popups and Sidenavs end
@@ -200,7 +206,6 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     $scope.selectedPackage = pkg;
   }
   $scope.getMetroPackages = function(corridorId){
-    console.log(corridorId);
     AdminMetroService.getMetroPackages(corridorId).then(function(result){
       _.map(result, (res) => {
         res.selected_trains = 1;
@@ -225,6 +230,21 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
       // console.log(result);
       $scope.metroCampaignDetails = result;
+    });
+  }
+  $scope.addPackageInMetroCampaign = function(){
+    $scope.selectedPackage.package_id = $scope.selectedPackage.id;
+    $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
+    $scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
+    AdminMetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
+      if(result.status == 1){
+        $scope.selectedPackage = {};
+        getMetroCampaignDetails($scope.metroCampaignDetails.id);
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
     });
   }
   /*====================================

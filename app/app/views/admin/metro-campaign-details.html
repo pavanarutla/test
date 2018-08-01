@@ -35,7 +35,7 @@
 			<div class="form-group row">
 				<label for="area" class="col-sm-4 col-form-label">Select Corridor</label>
 				<div class="col-sm-8">
-					<select name="corridor" class="form-control" id="corridor" ng-model="selectedCorridor" ng-options="corr.id as corr.name for corr in metroCorridorList" ng-change="getMetroPackages(corr.id)" required>
+					<select name="corridor" class="form-control" id="corridor" ng-model="selectedCorridor" ng-options="corr as corr.name for corr in metroCorridorList" ng-change="getMetroPackages(selectedCorridor.id)" required>
 						<option value="" disabled selected>Select Corridor</option>
 					</select>
 				</div>
@@ -43,7 +43,7 @@
 			<div class="form-group row">
 				<label for="pack" class="col-sm-4 col-form-label">Packages</label>
 				<div class="col-sm-8">
-						<select name="corridor" class="form-control" id="corridor" ng-model="packageToAdd.package_id" ng-options="pkg.id as (pkg | MetroNamePrice) for pkg in metroPackages" ng-change="selectPackage(pkg)"  required>
+						<select name="corridor" class="form-control" id="corridor" ng-model="selectedPackage" ng-options="pkg as (pkg | MetroNamePrice) for pkg in metroPackages" ng-change="selectPackage(selectedPackage)"  required>
 							<option value="" disabled selected>Select Package</option>
 						</select>
 				</div>
@@ -51,25 +51,31 @@
 			<div class="form-group row">
 				<label for="hoardingLight" class="col-sm-4 col-form-label">No. Of Trains</label>
 				<div class="col-sm-8">
-					<input class="form-control" type='number' ng-model="packageToAdd.selected_trains" max="selectedPackage.max_trains" min="1" />
+					<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}" min="1" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
 				<div class="col-sm-8">
-						<input type='number' class="form-control" ng-model="packageToAdd.selected_slots" max="selectedPackage.max_slots" min="1"/>
+						<input type='number' class="form-control" ng-model="selectedPackage.selected_slots" max="{{selectedPackage.max_slots}}" min="1"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
+				<div flex-gt-xs="">
+					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date=""></md-datepicker>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="productId" class="col-sm-4 col-form-label">Price</label>
 				<div class="col-sm-8">
-					<input ng-model="package.price" type="hidden" name="price" placeholder="price" class="form-control" />
-					<span>{{}}</span>
+					<input ng-model="campaign_price" type="hidden" name="price" placeholder="price" class="form-control" />
+					<div style="padding-top:6px;">{{selectedPackage.price * (selectedPackage.selected_trains + selectedPackage.selected_slots - 1) || "N/A"}}</div>
 				</div>
 			</div>
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
-				<input class="btn btn-primary" value="Save" type="button" ng-click="">
+				<input class="btn btn-primary" value="Save" type="button" ng-click="addPackageInMetroCampaign()">
 				<span></span>
 				<input class="btn btn-default" value="Cancel" type="reset">
 			</div>
@@ -215,7 +221,7 @@
 				<h3 class="text_color" style="margin: 30px 0 0 0;font-size: 20px;">Products({{metroCampaignDetails.packages.length || 0}})</h3>
 			</div>
 			<div flex="70" layout="row" layout-align="end center">
-				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 101" ng-click="toggleAddMetroProductSidenav()" ng-if="false">
+				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 101" ng-click="toggleAddMetroProductSidenav()"><!-- ng-if="false" -->
 					Add New Product
 				</md-button>
 				<md-button ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 121" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
@@ -248,7 +254,7 @@
 						<td>{{pkg.corridor_name}}</td>
 						<td>{{pkg.selected_trains}}</td>
 						<td>{{pkg.selected_slots}}</td>
-						<td>{{pkg.start_date}}</td>
+						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
 						<td>{{pkg.price}}</td>
 						<td>
 							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status >= 121" ng-click="deletePackageFromMetroCampaign(pkg.id, metroCampaignDetails.id)">

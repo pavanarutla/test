@@ -119,7 +119,7 @@ app.controller('MetroCtrl',
                 $scope.forms.viewAndSaveCampaignForm.$setUntouched();
                 $scope.campaignSavedSuccessfully = false;
               }, 3000);
-              $scope.loadMetroCampaigns();
+              getMetroCampaigns();
               loadShortlistedPackages();
             }
             else{
@@ -141,6 +141,7 @@ app.controller('MetroCtrl',
       $scope.checkoutMetroCampaign = function(ev, metroCampaignId){
         MetroService.checkoutMetroCampaign(metroCampaignId).then((result) => {
           if(result.status == 1){
+            getMetroCampDetails(metroCampaignId);
             getMetroCampaigns();
             $mdDialog.show(
               $mdDialog.alert()
@@ -161,7 +162,6 @@ app.controller('MetroCtrl',
 
       function getMetroCampDetails(mCampId){
         MetroService.getMetroCampDetails(mCampId).then((result) => {
-          console.log(result);
           $scope.metroCampDetails = result;
         });
       }
@@ -172,7 +172,7 @@ app.controller('MetroCtrl',
       /*================================
       | Page based initial loads
       ================================*/
-      if($rootScope.currStateName == 'index.L&T'){
+      if($rootScope.currStateName == 'index.metro'){
         getMetroCorridors();
         getMetroCampaigns();
       }
