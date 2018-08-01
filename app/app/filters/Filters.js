@@ -128,3 +128,9 @@ app.filter('MetroSlIcon', function(){
     return corName.match(/\b(\w)/g).join('') + "-" + pkgName.split(' ')[0] + pkgName.split(' ')[1].substring(0, 1);
   }
 });
+
+app.filter('MetroNamePrice', function(){
+  return function(obj){
+    return obj.name + " - " + obj.price;
+  }
+});

@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, Upload, toastr,  FileSaver, Blob) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -11,6 +11,22 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
     'suspended',             //    7
     'stopped'                //    8
   ];
+
+  /*===================================
+  | Popups and Sidenavs
+  ===================================*/
+  $scope.AddMetroCampaign = function () {
+    $mdSidenav('metroAddCmapginSidenav').toggle();
+  };
+  $scope.toggleAddMetroProductSidenav = function () {
+    $mdSidenav('add-metro-product-sidenav').toggle();
+  };
+  $scope.showConfirmMetroPaymentPopup = function(){
+
+  }
+  /*===================================
+  | Popups and Sidenavs end
+  ===================================*/
 
   var getAllCampaigns = function(){
     AdminCampaignService.getAllCampaigns().then(function(result){
@@ -166,6 +182,55 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   //////// Floating campaign section ends
   */
 
+  /*====================================
+  | Metro Campaigns
+  ====================================*/
+  var getFormatList = function(obj){
+    ProductService.getFormatList(obj).then(function(result){
+      $scope.formatList = result;
+    });
+  }
+  function getMetroCorridors(){
+    AdminMetroService.getMetroCorridors().then(function(result){
+      $scope.metroCorridorList = result;
+    });
+  }
+  $scope.selectPackage = function(pkg){
+    console.log(pkg);
+    $scope.selectedPackage = pkg;
+  }
+  $scope.getMetroPackages = function(corridorId){
+    console.log(corridorId);
+    AdminMetroService.getMetroPackages(corridorId).then(function(result){
+      _.map(result, (res) => {
+        res.selected_trains = 1;
+        res.selected_slots = 1;
+        return res;
+      });
+      $scope.metroPackages = result;
+    });
+  }
+  function getMetroCampaigns(){
+    AdminMetroService.getMetroCampaigns().then((result) => {
+      // console.log(result);
+      $scope.userMetroCampaigns = _.filter(result, (campaign) => {
+        return campaign.type == 0;
+      });
+      $scope.adminMetroCampaigns = _.filter(result, (campaign) => {
+        return campaign.type == 1;
+      });
+    });
+  }
+  function getMetroCampaignDetails(metroCampaignId){
+    AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
+      // console.log(result);
+      $scope.metroCampaignDetails = result;
+    });
+  }
+  /*====================================
+  | Metro Campaigns end
+  ====================================*/
+
   $scope.cancel = function(){
     $mdDialog.hide();
   };
@@ -173,7 +238,6 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
   /*=========================
   | Page based initial loads
   =========================*/
-
   if($rootScope.currStateName == "admin.campaign-proposal-summary"){
     if($stateParams.campaignId){
       var campaignId = $stateParams.campaignId;
@@ -182,7 +246,16 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $stateParams, $
       });
     }
   }
-    
+  if($rootScope.currStateName == "admin.metro-campaigns"){
+    getMetroCampaigns();
+  }
+  if($rootScope.currStateName == "admin.metro-campaign"){
+    if($stateParams.metroCampaignId){
+      getMetroCampaignDetails($stateParams.metroCampaignId);
+    }
+    getMetroCorridors();
+    getFormatList({type: "metro"});
+  }
   /*=============================
   | Page based initial loads end
   =============================*/

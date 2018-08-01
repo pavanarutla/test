@@ -122,14 +122,4 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   |   Notification navigation ends
   ===============================*/
 
-  /*===============================
-  | add new metro campagin         |
-  ********************************/
-  $scope.AddMetroCampaign = function () {
-    $mdSidenav('metroAddCmapginSidenav').toggle();
-  };
-  $scope.AddMetroProduct = function () {
-    $mdSidenav('metro-product').toggle();
-  };
-
 });

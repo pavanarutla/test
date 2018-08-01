@@ -17,9 +17,25 @@ app.factory('AdminMetroService',
           $http.post(config.apiPath + '/metro-package', package).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        getMetroPackages: function(){
+        getMetroPackages: function(corridorId){
+          if(!corridorId){
+            corrData = "";
+          }
+          else{
+            corrData = "?corridor_id=" + corridorId;
+          }
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/metro-packages').success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/metro-packages' + corrData).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getMetroCampaigns: function(){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/metro-campaigns').success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getMetroCampaignDetails: function(metroCampaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/metro-campaign/' + metroCampaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         }
       }

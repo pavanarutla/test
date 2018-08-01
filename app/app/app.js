@@ -91,9 +91,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .state('index.L&T', {
-      url: 'L&T',
-      templateUrl: 'views/L&T.html',
+    .state('index.metro', {
+      url: 'metro',
+      templateUrl: 'views/metro.html',
       controller: 'MetroCtrl'
     })
     .state('index.campaign', {
@@ -197,8 +197,8 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
-    .state('admin.metrocampaign', {
-      url: '/metrocampaign',
+    .state('admin.metro-campaigns', {
+      url: '/metro-campaigns',
       templateUrl: 'views/admin/metro-campaign-list.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
@@ -213,9 +213,9 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/metro-packages.html',
       controller: 'AdminMetroCtrl'
     })
-    .state('admin.metrocampaignview', {
-      url: '/metrocampaignview',
-      templateUrl: 'views/admin/user-lnt-campaign.html',
+    .state('admin.metro-campaign', {
+      url: '/metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/admin/metro-campaign-details.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
