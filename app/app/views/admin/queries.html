@@ -1,3 +1,8 @@
+<style>
+  .querieview{
+    color:limegreen;
+  }
+</style>
 <div layout="column" layout-fill="layout-fill">
     <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
         <divstyle="margin: 5px 0 0 15px;">Queries</div>
@@ -28,7 +33,8 @@
                 <td>{{Queries.email}}</td>
                 <td>{{Queries.companyName}}</td>
                 <td>{{Queries.message}}</td>
-                <td><span><a ng-click=""><md-icon style="cursor: pointer;"><i class="material-icons" ng-click="showConfirm(Queries)">remove_red_eye</i></md-icon></a></span></td>                
+                <td><span><a ng-click=""><md-icon style="cursor: pointer;">
+                  <i class="material-icons" ng-click="showConfirm(Queries)" ng-class="{querieview: Queries.viewed || qerieviewed}">remove_red_eye</i></md-icon></a></span></td>                
               </tr>
             </tbody>
           </table>

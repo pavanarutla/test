@@ -53,10 +53,10 @@ app.controller('customerQueriesCtrl', function ($scope, $http,AdminContactServic
     
        $mdDialog.show(confirm).then(function() {      
         response.viewed = 'true';
-        // console.log(response);
+         // console.log(response);
         AdminContactService.updateCustomerData(dataId,response).then(function(result){
-                if(result.status == 1){
-                  // console.log(result);
+                if(result.status == 1){                              
+                  $scope.qerieviewed = true;
                   toastr.success(result.message);
                   $("#feedbackButton"+dataId).css('color','limegreen');
                   $mdDialog.hide();
