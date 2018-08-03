@@ -34,7 +34,7 @@ app.controller('callCenterCtrl', function ($scope, $http, toastr, AdminContactSe
   });
 
   $scope.CallFeedback = function (data) {
-    var dataId = data.id;
+    var dataId = data;
     $mdDialog.show({
       templateUrl: 'templateId',
       clickOutsideToClose: false,
