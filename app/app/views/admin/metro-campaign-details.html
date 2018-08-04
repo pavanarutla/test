@@ -140,9 +140,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Actul Budget</td>
+								<td>Actual Budget</td>
 								<td>
-									<span ng-if="campaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}</td>
+									<span ng-if="metroCampaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}</td>
 							</tr>
 							<tr>
 								<td>Status</td>
@@ -152,69 +152,64 @@
 					</table>
 				</div>
 			</div>
-			<!-- <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" ng-if="campaignDetails.status > 6">
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
+			 ng-if="campaignMetroPayments">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
-						<div>
-							<span>
-								<md-icon md-svg-icon="assets/images/icons/wallet.svg"></md-icon>
-							</span>
-						</div>
-						<h3 class="text_color">Payment Details</h2>
+						<!-- <div><span><md-icon md-svg-icon="assets/images/icons/wallet.svg"></md-icon></span></div> -->
+						<h3>Payment Details</h2>
 					</div>
-					<table class="table table-striped table-bordered" style="width: 100%;">
-						<tbody>
-							<tr>
-								<td>Total amount</td>
-								<td>Rs. 2,30,000</td>
-							</tr>
-							<tr>
-								<td>Paid Amount</td>
-								<td>Rs. 2,30,000</td>
-							</tr>
-						</tbody>
-					</table>
-					<div layout="row" layout-align="center center">
-						<md-button class="md-button md-primary md-raised" ng-click="showPaymentdailog()">UPDATE PAYMENT</md-button>
+					<div layout="row">
+						<div flex="50" layout="column" layout-align="center center">Total amount:</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{metroCampaignDetails.act_budget || 0 }}</div>
+					</div>
+					<div layout="row">
+						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.total_paid || 0 }}</div>
+					</div>
+					<div layout="row" ng-if="campaignMetroPayments.total_paid < metroCampaignDetails.act_budget">
+						<div flex="100" layout="column" layout-align="center center">
+							<md-button Class="md-raised md-primary" type="submit" ng-click="showConfirmMetroPaymentPopup()">
+								Update Payment
+							</md-button>
+						</div>
 					</div>
 				</div>
 				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
-						<div>
-							<span>
-								<md-icon md-svg-icon="assets/images/icons/credit-card.svg"></md-icon>
-							</span>
-						</div>
-						<h3 class="text_color">Recently Updated Payments</h2>
+						<!-- <div><span><md-icon md-svg-icon="assets/images/icons/credit-card.svg"></md-icon></span></div> -->
+						<h3>Recently Updated Payments</h2>
 					</div>
-					<table class="table table-striped table-bordered" style="width: 100%;">
-						<thead>
-							<th>Date</th>
-							<th>Amount</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>23/07/17</td>
-								<td>Rs 50,000</td>
-							</tr>
-							<tr>
-								<td>23/07/17</td>
-								<td>Rs 50,000</td>
-							</tr>
-							<tr>
-								<td>23/07/17</td>
-								<td>Rs 50,000</td>
-							</tr>
-							<tr>
-								<td>23/07/17</td>
-								<td>Rs 50,000</td>
-							</tr>
-						</tbody>
-					</table>
+					<div layout="column" layout-margin style="height:150px; overflow:auto;">
+						<div layout="row">
+							<div flex="20" layout="column" layout-align="center center">Date</div>
+							<div flex="20" layout="column" layout-align="center center">Amount</div>
+							<div flex="20" layout="column" layout-align="center center">Txn Type</div>
+							<div flex="20" layout="column" layout-align="center center">Ref. No.</div>
+							<div flex="20" layout="column" layout-align="center center">Accepted by</div>
+						</div>
+						<div layout="row" ng-if="!campaignMetroPayments">
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">Rs. 0</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+						</div>
+						<div layout="row" ng-repeat="payment in campaignMetroPayments.all_payments">
+							<div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
+							<div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.updated_by_admin_name }}</div>
+						</div>
+					</div>
+					<!-- <div layout="row" layout-align="center center"> 
+								<md-button class="md-button md-primary md-raised" ng-click="showPaymentdailog()">UPDATE PAYMENT</md-button>
+						</div> -->
 				</div>
-			</div> -->
+			</div> 
 		</div>
 		<div layout="row" layout-margin>
 			<div flex="30">
@@ -224,10 +219,10 @@
 				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 101" ng-click="toggleAddMetroProductSidenav()"><!-- ng-if="false" -->
 					Add New Product
 				</md-button>
-				<md-button ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 121" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
+				<md-button ng-disabled="!metroCampaignDetails || campaignMetroPayments" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
 					Confirm Payment
 				</md-button>
-				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 131" class="md-raised md-primary" ng-click="launchMetroCampaign()">
+				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status == 141 || !campaignMetroPayments" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
 					Launch Campaign
 				</md-button>
 				<md-button class="md-raised" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 141" class="md-raised md-warn" ng-click="closeMetroCampaign()">

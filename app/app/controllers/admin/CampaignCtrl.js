@@ -21,15 +21,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   $scope.toggleAddMetroProductSidenav = function () {
     $mdSidenav('add-metro-product-sidenav').toggle();
   };
-  $scope.showConfirmMetroPaymentPopup = function(){
-    $mdDialog.show({
-      templateUrl: 'views/admin/confirm-metro-payment-popup.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true,
-      preserveScope: true,
-      scope: $scope
-    });
-  }
+
   /*===================================
   | Popups and Sidenavs end
   ===================================*/
@@ -279,5 +271,93 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*=============================
   | Page based initial loads end
   =============================*/
+
+
+
+    $scope.showConfirmMetroPaymentPopup = function(){
+    $mdDialog.show({
+      templateUrl: 'views/admin/confirm-metro-payment-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      locals:{ campaignId: $stateParams.metroCampaignId, ctrlScope : $scope },
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId){
+        $scope.paymentTypes = [
+          {name: "Cash"},
+          {name: "Cheque"},
+          {name: "Online"},
+          {name: "Transfer"}
+        ];
+        $scope.updateCampaignPayment = function(){
+          $scope.campaignPayment.campaign_id = campaignId;
+          AdminCampaignService.updateCampaignPayment($scope.campaignPayment).then(function(result){
+            if(result.status == 1){
+              $scope.campaignPaymentstatus  = {};
+                $scope.campaignPaymentstatus.campaign_id = $stateParams.metroCampaignId;
+                $scope.campaignPaymentstatus.status = 131;
+               AdminCampaignService.updateMetroCampaignStatus($scope.campaignPaymentstatus).then(function(result){
+                  // update succeeded. update the grid now.
+                  if(result.status == 1){
+                    loadCampaignPayments(campaignId);
+                    toastr.success(result.message);
+                    $rootScope.closeMdDialog();
+                  }
+              });
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        }
+      }
+    });
+  }
+
+
+
+   function loadCampaignPayments(campaignId){
+    //if($scope.campaignDetails.status >= 6 ){
+      AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
+        console.log("paymentTypes");
+        console.log(result);
+        if(result.status=="1"){
+          $scope.campaignMetroPayments = result;
+        }else{
+          toastr.error(result.message);
+        }
+        
+      });
+   // }
+    // else{
+    //   toastr.error('Payments are only available for running or stopped campaigns.');
+    // }
+  }
+  loadCampaignPayments($stateParams.metroCampaignId);
+
+
+
+  $scope.launchMetroCampaign = function(campaignId, ev){
+     $scope.camMetroDetails = {};
+    $scope.camMetroDetails.campaign_id = campaignId;
+    $scope.camMetroDetails.status = 141;
+    AdminCampaignService.updateMetroCampaignStatus($scope.camMetroDetails).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Congrats!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        getMetroCampaignDetails(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
 });
