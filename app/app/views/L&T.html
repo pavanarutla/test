@@ -62,11 +62,11 @@
     </md-sidenav>
     <!-- saved campagin  end-->
     <!-- Campaign Detail Sidenav -->
-    <md-sidenav class="md-sidenav-right  md-whiteframe-z2 sidenav-width" md-disable-backdrop md-component-id="campaignDetailSidenav" id="divExport">
+    <md-sidenav class="md-sidenav-right  md-whiteframe-z2 sidenav-width" md-disable-backdrop md-component-id="campaignDetailSidenav" id="divExport" style="padding:10px;z-index:99">
         <div layout="row">
         <div class="md-toolbar-tools">
-            <h2>
-            <span>{{campaignDetails.name}}</span>
+            <h2 class="text_color">
+            <span>Metro</span>
             </h2>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleCampaignDetailSidenav()">
@@ -77,7 +77,7 @@
         </div>
         </div>
         <md-content>
-        <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
+        <!-- <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
             <div ng-repeat="product in campaignDetails.products">
             <div layout="row">
                 <div layout="column" layout-align="center start" flex="50">
@@ -118,19 +118,35 @@
             </md-card-actions>
             <md-divider></md-divider>
             </div>
-        </div>
-        <div layout="column" layout-margin>
-            <div ng-if="!campaignDetails.products || campaignDetails.products.length == 0">
-            <p style="width:70%; margin:auto;">This campaign is empty. Please add some prducts into it to move forward!</p>
+        </div> -->
+            <div layout="row" layout-margin layout-padding flex class="md-whiteframe-3dp">
+                <md-list flex style="padding:0px">
+                <md-list-item class="md-3-line list-img" style="padding:0px 5px" >
+                    <div class="md-list-item-text list-item-text" layout="column" flex>
+                        <h3 class="md-body-2">Digital Sinage,corridor 1</h3>
+                        <p class="md-caption">Budget For One Month 2Trains,2Slots</p>
+                        <h3 class="md-title">Rs.1,02,000</h3>
+                    </div>
+                </md-list-item>
+                </md-list>
+                
+                <md-button class="md-icon-button" ng-click="deleteShortlisted($event, shortlisted.id)">
+                    <md-icon><i class="material-icons ">delete</i></md-icon>
+                </md-button>
+                
             </div>
-            <div>
-            <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
+            <div layout="column" layout-margin>
+                <div ng-if="!campaignDetails.products || campaignDetails.products.length == 0">
+                <p style="width:70%; margin:auto;">This campaign is empty. Please add some prducts into it to move forward!</p>
+                </div>
+                <div>
+                <md-button class="md-raised md-warn" ng-if="campaignDetails.products.length > 0 && campaignDetails.status < 2" layout-fill ng-click="requestProposalForCampaign(campaignDetails.id)"> REQUEST PROPOSAL</md-button>
+                </div>
+                <div>
+                <md-button class="md-raised " ng-if="campaignDetails.products.length > 0" layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
+                </div>
+        
             </div>
-            <div>
-            <md-button class="md-raised " ng-if="campaignDetails.products.length > 0" layout-fill ng-click="toggleShareCampaignSidenav(campaignDetails)">SHARE CAMPAIGN</md-button>
-            </div>
-    
-        </div>
         </md-content>
     </md-sidenav>
     <!-- Campaign Detail Sidenav ends -->
@@ -685,11 +701,11 @@
                                 </md-button>
                             </div>
                         </div>
-                        <div layout="row" layout-align="space-around center" style="margin-top:-10px">
-                        <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
-                        <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2" ng-disabled="true">Proposal Requested</md-button>
-                        <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
-                        <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status < 2" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
+                        <div layout="row" layout-align="start center" style="margin-top:-10px">
+                            <md-button class="md-primary saved-btn" ng-click="viewCampaignDetails(activeUserCampaign.id)"> VIEW</md-button>
+                            <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 2" ng-disabled="true">Proposal Requested</md-button>
+                            <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status == 3" ng-disabled="true">Quote Received</md-button>
+                            <md-button class="md-primary saved-btn" ng-if="activeUserCampaign.status < 2" ng-click="requestProposalForCampaign(activeUserCampaign.id, $event)">Request Proposal</md-button>
                         </div>
                         <md-divider></md-divider>
                     </div>

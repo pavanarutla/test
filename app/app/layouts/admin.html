@@ -1,13 +1,13 @@
 <link rel="stylesheet" type="text/css" href="assets/css/admin-main.css" />
 <div layout="row" flex>
-  <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6" md-is-locked-open="$mdMedia('gt-sm')">
-    <header layout="column" layout-padding>
+  <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6;height:100vh;position: fixed;" md-is-locked-open="$mdMedia('gt-sm')">
+    <header layout="column" layout-padding style="min-height:90px !important">
       <!-- <a ui-sref="/admin"><img ng-src="assets/images/logo.png" alt="logo"></a> -->
       <md-button aria-label="" href="#admin/home" md-no-ink style="background:transparent" class="logo">
         <img ng-src="assets/images/menu/orgnl.png" width="160">
       </md-button>
     </header>
-    <md-list>
+    <md-list style="overflow: auto;height: 100%;">
       <md-menu-item>
         <md-button ng-href="#/admin/home">
           <md-icon md-svg-icon="assets/images/menu/home.svg"></md-icon>Feeds</md-button>
@@ -174,7 +174,7 @@
         <md-button ng-href="#/admin/packages">
           <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Metro Packages</md-button>
       </md-menu-item>
-      <md-menu-item>
+      <!-- <md-menu-item>
         <md-button ng-href="#/admin/team">
           <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Payment</md-button>
       </md-menu-item> -->
@@ -234,7 +234,7 @@
     </md-content>
   </md-sidenav>
   <div layout="column" flex style="min-height:100%; position:relative;">
-    <md-toolbar class="md-whiteframe-z1 contbg">
+    <md-toolbar class="md-whiteframe-z1 contbg" style="position: fixed;">
       <div class="md-toolbar-tools">
         <md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="closeSidenav()">
           <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
@@ -309,7 +309,7 @@
     </md-toolbar>
     <!--toolbar end -->
     <!-- <md-content  ng-view  ng-cloak> -->
-    <ui-view style="margin-bottom:40px;"></ui-view>
+    <ui-view style="margin-bottom:40px;padding: 65px 0 0 250px;"></ui-view>
     <!-- </md-content> -->
     <div layout="column" layout-align="center center" style="background: #CCC;padding: 5px 0;position:absolute;bottom:0px;width:100%; margin-top:40px;">
       <div >Copyright  BILLBOARDS INDIA. All rights reserved </div>
