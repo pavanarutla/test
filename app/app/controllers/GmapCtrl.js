@@ -669,6 +669,7 @@ app.controller('GmapCtrl',
           );
           getShortListedProducts();
           $mdSidenav('productDetails').close();
+          $scope.searchId = null;
         });
       }
 

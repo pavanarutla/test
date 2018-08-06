@@ -230,8 +230,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
                 ctrlScope.campaignDetails = result;
                 ctrlScope.campaignProducts = result.products;
                 setDatesForAdminProposalToSuggest($scope.campaignDetails);
-                $mdDialog.hide();
               });
+              $mdDialog.hide();
               toastr.success(result.message);
             }
             else{
