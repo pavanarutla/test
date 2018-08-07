@@ -14,46 +14,34 @@
 		</div>
 	</md-toolbar>
 	<md-content layout-padding="">
-		<form name="forms.ownerCampaignForm" role="form">
+		<form name="metroCampaignForm" role="form">
 			<div class="form-group">
 				<label class="control-label">Campaign Name</label>
 				<br>
-				<input ng-model="ownerCampaign.name" class="form-control" type="text">
+				<input ng-model="metroCampaign.name" class="form-control" type="text">
 			</div>
 			<div class="form-group">
 				<label class="control-label">Organization Name</label>
 				<br>
-				<input ng-model="ownerCampaign.org_name" class="form-control" type="text">
+				<input ng-model="metroCampaign.org_name" class="form-control" type="text">
 			</div>
 			<div class="form-group">
 				<label class="control-label">Contact Name</label>
 				<br>
-				<input ng-model="ownerCampaign.org_contact_name" class="form-control" type="text">
+				<input ng-model="metroCampaign.org_contact_name" class="form-control" type="text">
 			</div>
 			<div class="form-group">
 				<label class="control-label">Email:</label>
-				<input ng-model="ownerCampaign.org_contact_email" class="form-control" type="text">
+				<input ng-model="metroCampaign.org_contact_email" class="form-control" type="text">
 			</div>
 			<div class="form-group">
 				<label class="control-label">Phone Number</label>
 				<br>
-				<input ng-model="ownerCampaign.org_contact_phone" class="form-control" type="text">
-			</div>
-			<div class="form-group">
-				<label class="control-label">Start Date</label>
-				<br>
-				<div class='input-group' style="width:100%">
-					<!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> -->
-					<input type='text' class="form-control" datepicker-popup ng-model="ownerCampaign.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
-					 max-date='ownerCampaign.end_date' ng-model-options="{timezone: 'utc'}" ng-readonly='true' placeholder="start date" />
-					<span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
-						<i class="glyphicon glyphicon-calendar"></i>
-					</span>
-				</div>
+				<input ng-model="metroCampaign.org_contact_phone" class="form-control" type="text">
 			</div>
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
-				<input class="btn btn-primary" ng-click="save()" value="Save" type="button">
+				<input class="btn btn-primary" ng-click="saveMetroCampaign(metroCampaign)" value="Save" type="button">
 				<span></span>
 				<input class="btn btn-default" value="Cancel" type="reset">
 			</div>

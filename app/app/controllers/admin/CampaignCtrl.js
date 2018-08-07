@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob, MetroService) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -314,7 +314,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   }
 
 
-
+   
    function loadCampaignPayments(campaignId){
     //if($scope.campaignDetails.status >= 6 ){
       AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
@@ -359,5 +359,28 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       }
     });
   }
+
+
+  
+  $scope.saveMetroCampaign = function (campaign) {
+         
+          MetroService.saveMetroCampaign(campaign).then(function (response) {
+            if(response.status == 1){
+              $scope.campaignSavedSuccessfully = true;
+                $scope.metroCampaign = {};
+                $scope.metroCampaignForm.$setPristine();
+                $scope.metroCampaignForm.$setUntouched();
+                $scope.campaignSavedSuccessfully = false;
+                toastr.success(response.message);
+                $mdSidenav('metroAddCmapginSidenav').close();
+                getMetroCampaigns();
+            }
+            else{
+              $scope.saveUserCampaignErrors = response.message;
+              toastr.error(response.message);
+            }
+          });
+        
+      }
 
 });
