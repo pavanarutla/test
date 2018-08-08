@@ -220,7 +220,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   }
   function getMetroCampaignDetails(metroCampaignId){
     AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
-      // console.log(result);
+      console.log("result111");
+       console.log(result);
       $scope.metroCampaignDetails = result;
     });
   }
