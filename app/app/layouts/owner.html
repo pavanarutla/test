@@ -1,15 +1,15 @@
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
 
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-<div layout="row" flex>
-	<div layout="column" flex>
+
+	<div layout="column" flex style="position:relative;min-height:100%;">
 		<md-toolbar>
 			<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
 				<md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="toggleOwnerLeftSidenav()">
 					<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 				</md-button>
 				<md-button aria-label="logo" class="md-icon">
-					<img class="png-icon" src="assets/images/owner/logo.png" alt="images">
+					<img class="png-icon" src="assets/images/product/billboards.png" width="160px" alt="images">
 				</md-button>
 				<!-- <h2 class="" style="color:#000">{{firstname}}</h2> -->
 				<span flex></span>
@@ -49,14 +49,14 @@
 					<md-button aria-label="notifications" class="md-icon-button" ng-click="toggleOwnerRightSidenav()">
 						<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
 					</md-button>
-					<p style="background:#fac306">
+					<p style="background:#fac306" ng-click="ownerRightSidenav()">
 						<span style="line-height: 26px;">{{ownerNotifs.length || 0}}</span>
 					</p>
 				</div>
 				<md-menu md-offset="0 50">
 					<md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+						<img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;width:32px;height:32px;border-radius:50% ;">
+						<img ng-if="getAvatar().present" ng-src="{{config.serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius:50% ">
 					</md-button>
 					<md-menu-content width="3" style="z-index:99">
 						<md-menu-item>
@@ -80,9 +80,9 @@
 		<div layout="row">
 			<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
 			 style="width:250px">
-				<!-- <md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
+				<md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
                 <img class="png-icon" src="assets/images/billboards.png">
-            </md-toolbar>  -->
+            </md-toolbar> 
 				<!-- <md-divider></md-divider> -->
 				<md-content class="sidenav-content">
 					<div>
@@ -95,7 +95,7 @@
 									</md-button>
 								</md-menu-item> -->
 								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.dashboard'}" ng-click="">
+									<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="">
 										<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
 										Feeds
 									</md-button>
@@ -156,7 +156,7 @@
 							<span>Notifications</span>
 						</h2>
 						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
+						<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="ownerRightSidenav()">
 							<md-tooltip>Close Side Panel</md-tooltip>
 							<md-icon class="md-default-theme">
 								<i class="material-icons">close</i>
@@ -241,7 +241,7 @@
 					</form>
 				</md-content>
 			</md-sidenav>
-			<ui-view flex></ui-view>
+			<ui-view flex style="margin-bottom: 40px"></ui-view>
 		</div>
 		<!-- sidenav end -->
 		<!-- <ui-view ></ui-view> -->
@@ -250,8 +250,8 @@
 					<img src="assets/images/tj_feedback.gif" alt="Support">
 			</md-button>
 		</div> -->
-		<div layout="column" layout-align="center center" style="background: #CCC">
+		<div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
 			<div style="padding: 5px 0;">Powered By Billboards India</div>
 		</div>
 	</div>
-</div>
+

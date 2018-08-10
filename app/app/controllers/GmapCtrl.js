@@ -171,22 +171,17 @@ app.controller('GmapCtrl',
         $scope.shortlist = false;
         $scope.savedcampaign = !$scope.savedcampaign;
       }
-
-
       $scope.RecommendedDiv = function () {
         $scope.Recommended = !$scope.Recommended;
         $scope.Popular = false;
       }
-
       $scope.PopularDiv = function () {
         $scope.Recommended = false;
         $scope.Popular = !$scope.Popular;
       }
-
       $scope.pointermap = function () {
         $scope.ispointer = !$scope.ispointer;
       };
-
       $scope.showProductImagePopup = function (ev, img_src) {
         $mdDialog.show({
           locals: { src: img_src },
@@ -198,7 +193,6 @@ app.controller('GmapCtrl',
           }
         });
       };
-
       $scope.selectedCountry = {};
       $scope.selectedStates = {};
       $scope.selectedcitys = {};
@@ -1038,7 +1032,16 @@ app.controller('GmapCtrl',
         $scope.elipsis += ".";
       }
       productLoader();
-
+      //L&T metro package popup
+      $scope.selectPackage = function (ev) {
+        $mdDialog.show({
+          
+          templateUrl: 'views/selectpack.html',
+          fullscreen: $scope.customFullscreen,
+          clickOutsideToClose: true
+        })
+      };
+      
     }
   ]
 );

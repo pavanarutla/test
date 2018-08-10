@@ -102,8 +102,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       templateUrl: 'views/image-popup-large.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
-      controller:function($scope, src){
+      controller:function($scope,$mdDialog, src){
         $scope.img_src = src;
+        $scope.close = function(){
+          $mdDialog.hide();
+        }
       }
     });
   }
