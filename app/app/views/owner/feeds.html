@@ -1,5 +1,5 @@
 <div layout="column" flex>
-  <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>Your Daily feed</div>
+  <div class="md-title text_color" style="padding: 10px" layout-padding>Your Feeds</div>
     <md-content layout="column" layout-sm="column" layout-xs="column" class="contbg">
       <div layout="column" layout-margin layout-padding ng-if="requestList.length == 0">
         <h3>No new feeds. Please check at a later time.</h3>
@@ -36,8 +36,8 @@
                 <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
               </div>
               <div layout="column" layout-align="center start" flex class="feed-hdng">
-                <h3 ng-show="request.status == 2">A user has asked for a quote for your products.</h3>
-                <h3 ng-show="request.status == 5">A campaign with your products has been requested to launch.</h3>
+                <h3 ng-show="request.status == 2" style="text-transform: capitalize">A user has asked for a quote for your products.</h3>
+                <h3 ng-show="request.status == 5" style="text-transform: capitalize">A campaign with your products has been requested to launch.</h3>
                 <!-- <h3 ng-show="request.status == 5">{{request.contact_name}} has requested for the launch of their campaign.</h3> -->
               </div>
             </div>

@@ -315,7 +315,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
           localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
           $scope.campaignActBudget = updatedCampaignData.act_budget;
           _.map($scope.productList, function (product) {
-            if (product.id == suggestedProduct.id) {
+            if (product.id == productId) {
               product.alreadyAdded = false;
             }
             return product;
