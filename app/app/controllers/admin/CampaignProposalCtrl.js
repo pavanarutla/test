@@ -372,36 +372,4 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     })
   }
 
-  $scope.toggleShareCampaignSidenav = function () {
-    $mdSidenav('shareCampaignSidenav').toggle();
-  };
-
-  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
-    $scope.campaignToShare = $scope.campaignDetails;
-    var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
-      email: shareCampaign.email,
-      receiver_name: shareCampaign.receiver_name,
-      campaign_type: $scope.campaignToShare.type
-    };
-    CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
-      if (result.status == 1) {
-        $mdSidenav('shareCampaignSidenav').close();
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title(result.message)
-            // .textContent('You can specify some description text in here.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
-      }
-      else {
-        toastr.error(result.message);
-      }
-    });
-  }
-
 });
