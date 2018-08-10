@@ -80,7 +80,7 @@
 								<input ng-model="product.area_name" placeholder="Area Name" type="text" name="area_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 							<td>
-								<textarea  class="table-address" placeholder="Address" rows="3" ng-model="product.address"></textarea>
+								<textarea  class="table-address" placeholder="Address" rows="3" ng-model="product.address" ng-disabled="product.status == 0"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -101,7 +101,7 @@
 						</tr>
 						<tr>
 							<td flex="33">
-								<input ng-model="product.direction" placeholder="Direction" type="text" name="direction" required="required" />
+								<input ng-model="product.direction" placeholder="Direction" type="text" name="direction" required="required" ng-disabled="product.status == 0"/>
 							</td>
 							<td flex="33">
 								<input ng-model="product.lat" placeholder="Latitude" type="text" name="lat" required="required" />
@@ -120,7 +120,7 @@
 								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id" ng-disabled="product.status == 0"></input>
 							</td>
 							<td flex="33">
-								<textarea ng-model="product.adStrength" placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ></textarea>
+								<textarea ng-model="product.adStrength" placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ng-disabled="product.status == 0"></textarea>
 							</td>
 						</tr>
 					</tbody>
