@@ -307,7 +307,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
             }
           });
         }
-        $scope.cancel = function () {
+        $scope.closeMdDialog = function(){
           $mdDialog.hide();
         }
       }
@@ -454,9 +454,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.success(result.data.message);
         $scope.campaignPayment = {};
         $scope.files.image = "";
+        $timeout(() => {
+          $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+        }, 2500);
       }
       else{
-        $scope.updateCampaignPaymentErrors = result.data.message;
+        if(result.data.message.constructor == Array){
+          $scope.updateCampaignPaymentErrors = result.data.message;
+        }
+        else{
+          toastr.error(result.data.message);
+        }
       }
     }, function (resp) {
       toastr.error("somthing went wrong try again later");

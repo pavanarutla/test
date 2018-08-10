@@ -117,7 +117,8 @@
 							</td>
 							<td flex="33">
 								<label for="files.image">Image</label>
-								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id" ng-disabled="product.status == 0"></input>
+								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" ng-required="!product.id" ng-if="product.status != 0"></input>
+								<img ng-src="{{serverUrl + product.image}}" style="width: 100px;height: 60px;" ng-if="product.image && product.status == 0"/>
 							</td>
 							<td flex="33">
 								<textarea ng-model="product.adStrength" placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ></textarea>

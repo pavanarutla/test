@@ -301,7 +301,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');        
+      toastr.warning('You have successfully signed out!');
     });
   }
 

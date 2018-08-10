@@ -46,9 +46,10 @@ app.filter('address', function () {
 });
 
 app.filter('dateify',function(){
-  return function(date){
+  return function(date, format){
+    format = format || 'DD-MM-YYYY';
     if(date){
-      return moment(date).local().format('DD-MM-YYYY');
+      return moment(date).local().format(format);
     }
     else{
       return "N/A";

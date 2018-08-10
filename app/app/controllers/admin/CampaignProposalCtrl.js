@@ -239,8 +239,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
             }
           });
         }
-
-        $scope.cancel = function(){
+        $scope.closeMdDialog = function(){
           $mdDialog.hide();
         }
       }
