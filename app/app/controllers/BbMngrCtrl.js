@@ -437,8 +437,14 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       getUserNotifs();
     }
 
-    var channels = PusherService.allChannels();
-    console.log(channels);
+    PusherService.subscribe('my-channel');
+    PusherService.bind('my-event',
+      function(data) {
+        // add comment into page
+        console.log(data);
+      }
+    );
+    
     /*===============================
     |   Notification navigation 
     ===============================*/
