@@ -60,7 +60,7 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 			if(result.status == 1){
 				toastr.success(result.message);
 				if($scope.clientErrorMessages){
-					$scope.clientErrorMessages.length = 0;
+					$scope.clientErrorMessages = null;
 				}
 				$mdDialog.hide();
 			}
