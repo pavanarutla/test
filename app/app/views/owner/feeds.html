@@ -7,7 +7,8 @@
     <div layout="column" layout-margin layout-padding ng-repeat="request in requestList">
       <div layout="row" layout-fill layout-margin style="background-color: #a3c4e8">
         <div layout="column" layout-align="center center" flex="10">
-          <img ng-src="assets/images/man.png" class="face">
+          <img ng-src="{{config.serverUrl + request.avatar}}"style="width:32px;height:32px;" class="md-avatar face" ng-if="request.avatar">
+          <img src="assets/images/man_new.png" style="width:32px;height:32px;" class="md-avatar face" ng-if="!request.avatar">
         </div>
         <div flex="70" layout="column" layout-align="center start" layout-margin>
           <div>

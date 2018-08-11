@@ -226,11 +226,11 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
           AdminCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
             if(result.status == 1){
               // update succeeded. update the grid now.
+              $mdDialog.hide();
               CampaignService.getCampaignWithProducts(campaign.id).then(function(result){
                 ctrlScope.campaignDetails = result;
                 ctrlScope.campaignProducts = result.products;
-                setDatesForAdminProposalToSuggest($scope.campaignDetails);
-                $mdDialog.hide();
+                // setDatesForAdminProposalToSuggest($scope.campaignDetails);
               });
               toastr.success(result.message);
             }
