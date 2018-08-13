@@ -23,6 +23,16 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     })
   };
 
+  /*==================
+  |shortlist products
+  =================== */
+  $scope.shortlistProduct = function () {
+    $mdSidenav('shortlistAndSaveOwnerSidenav').toggle();
+  };
+  $scope.shareProducts = function () {
+    $mdSidenav('shareProductOwner').toggle();
+  };
+
   /*========================
   | Sidenavs and popups ends
   ========================*/
@@ -155,12 +165,17 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     $mdDialog.show({
       locals:{ src: imagePath },
       templateUrl: 'views/image-popup-large.html',
+      preserveScope: true,
+      scope: $scope,
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
       controller:function($scope, src){
         $scope.img_src = src;
       }
     });
+  }
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
   }
 
   /*=====================

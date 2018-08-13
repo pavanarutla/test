@@ -4,7 +4,7 @@
     <div class="md-toolbar-tools bg_main_color" style="color:#fff">
       <div class="md-title">Shortlisted Products</div>
       <div flex></div>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleViewAllShortlisted()">
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shortlistProduct()">
         <md-tooltip>Close Side Panel</md-tooltip>
         <i class="material-icons">close</i>
       </md-button>
@@ -53,11 +53,11 @@
       <md-divider></md-divider>
     </div>
     <div layout="row" layout-margin>
-      <div>
+      <!-- <div>
         <md-button class="md-raised md-warn" ng-click="toggleSaveCampaignSidenav()">Save Campaign</md-button>
-      </div>
+      </div> -->
       <div>
-        <md-button class="md-raised md-primary">Share Campaign</md-button>
+        <md-button class="md-raised md-primary" ng-click="shareProducts()">Share Campaign</md-button>
       </div>
       <!-- <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div> -->
     </div>
@@ -174,12 +174,12 @@
 </md-sidenav>
 <!-- Add Product details sidenav html start-->
 <!-- Share Campaign Sidenav -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="shareProductOwner" id="popupContainer">
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:999" md-component-id="shareProductOwner" id="popupContainer">
   <div layout="row">
     <div class="md-toolbar-tools bg_main_color" style="color:#fff">
       <h3>Share Campaign Details</h3>
       <span flex></span>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareProducts()">
         <md-tooltip>Close Side Panel</md-tooltip>
         <i class="material-icons">close</i>
         </md-icon>
@@ -215,11 +215,11 @@
 <!-- Share Campaign Sidenav ends -->
 <div layout="column" class="owner_hoarding_list">
   <div layout="row" class="" layout-padding>
-    <div class="md-title text_color">Hoarding List</div>
+    <div class="md-title text_color">Inventory List</div>
     <div flex></div>
-    <!-- <div>
+    <div>
       <a class="shortlist__btn" ng-click="shortlistProduct()">Shortlisted Products</a>
-    </div> -->
+    </div>
   </div>
   
   <!-- Main Container -->
@@ -277,14 +277,14 @@
             </div>
           </div>
           <md-divider></md-divider>
-          <div layout="colmun">
-            <!-- <md-card-actions layout="row">
-              <md-card-icon-actions>
+          <div layout="row" layout-align="space-around center">
+              
+              
                 <md-button class="md-raised md-primary" style="background:#7b7b7d">Shortlist</md-button>
-                <md-button class="md-raised md-primary" style="background:#7b7b7d" ng-click="addProductOwner()">Add</md-button>
+                <!-- <md-button class="md-raised md-primary" style="background:#7b7b7d" ng-click="addProductOwner()">Add</md-button> -->
                 <md-button class="md-raised md-warn" style="background:#7b7b7d" ng-click="shareProducts()">Share</md-button>
-              </md-card-icon-actions>
-            </md-card-actions> -->
+              
+            
             <!-- <div layout="row" flex ng-if="product.alreadyAdded">
               <div flex="60">
                 <div class="md-caption">Product Already Added</div>
