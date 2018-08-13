@@ -33,7 +33,7 @@
                 <md-input-container class="md-block">
                     <label>Add City</label>
                     <input ng-model="city.name" type="text" name="city_name" required="required" />
-                    <div ng-messages="cityform.city_name.$error">
+                    <div ng-messages="cityform.city_name.$error && cityform.city_name.$dirty">
                         <div ng-message="required">City Name is required</div>
                     </div>
                 </md-input-container>

@@ -36,7 +36,12 @@ app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $r
 
   function showPwdChangeSuccessModal(result){
     if (result.status == 1) {
-      $scope.$parent.logout();
+      // logging out user(in case if he has localstorage set)
+      $auth.logout().then(function(result){
+        $rootScope.isAuthenticated = false;
+        $location.path('/');
+        localStorage.clear();
+      });
       $mdDialog.show({
         templateUrl: 'views/verification-success.html',
         fullscreen: $scope.customFullscreen,

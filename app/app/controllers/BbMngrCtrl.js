@@ -301,7 +301,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');        
+      toastr.warning('You have successfully signed out!');
     });
   }
 
@@ -476,6 +476,22 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       }
     }
     
+    $scope.getAvatar = function(){
+      var payload = $auth.getPayload();
+      var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
+      if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+        return {
+          present: true,
+          profile_pic: userMongo.profile_pic
+        }
+      }
+      else{
+        return {
+          present: false
+        }
+      }
+    }
+
     // Setting up selected format for format page
     $scope.setSelectedFormat = function(index){
       $rootScope.formatSelected = index;

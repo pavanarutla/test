@@ -23,7 +23,7 @@
                 <label>Add State</label>
                 <input type="hidden" name="state_id" ng-model="state.id" />
                 <input ng-model="state.name" type="text" name="name" required />
-                <div ng-messages="stateform.name.$error">
+                <div ng-messages="stateform.name.$error && stateform.name.$dirty">
                     <p ng-message="required">State Name is required</p>
                 </div>
             </md-input-container>

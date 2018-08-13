@@ -31,17 +31,17 @@
           </div>
           <div layout="row">
             <div flex="50">
-              <b>Hording Cost</b>
+              <b>Hoarding Cost</b>
             </div>
             <div flex="50">{{productDetails.default_price}}</div>
             <div flex="50">
               <b>Lighting</b>
             </div>
-            <div flex="50">{{productDetails.lighting}}</div>
+            <div flex="50">{{productDetails.lighting | boolToYesNo}}</div>
           </div>
           <div layout="row">
             <div flex="50">
-              <b>Hording Company Address</b>
+              <b>Hoarding Company Address</b>
             </div>
             <div flex="50">{{productDetails.address}}</div>
             <div flex="50">
@@ -115,7 +115,7 @@
         </div>
         <div flex="50">Rs. {{runningCampaignDetails.est_budget || "N/A"}}</div>
         <div flex="50">
-          <b>Actul Budget</b>
+          <b>Actual Budget</b>
         </div>
         <div flex="50">Rs. {{runningCampaignDetails.act_budget || "N/A"}}</div>
       </div>

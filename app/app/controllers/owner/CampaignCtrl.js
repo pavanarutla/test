@@ -57,13 +57,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     $mdSidenav('ownerAddCmapginSidenav').toggle();
   };
 
-  function setDatesForOwnerProductsToSuggest(campaign){
-    $scope.SuggestprodStartDate  = new Date(campaign.start_date);
-    $scope.SuggestprodEndDate  = new Date(campaign.end_date);
-    $scope.SuggestprodfromMinDate = moment(campaign.start_date).toDate();
-    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
-    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
-  }
   $scope.cancel = function () {
     $mdDialog.hide();
   };
@@ -109,6 +102,25 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   //   }
   // };
 
+  function setDatesForOwnerProductsToSuggest(campaign){
+    $scope.SuggestprodStartDate  = new Date(campaign.start_date);
+    $scope.SuggestprodEndDate  = new Date(campaign.end_date);
+    $scope.SuggestprodfromMinDate = moment(campaign.start_date).toDate();
+    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
+    $scope.SuggestprodfromMaxDate = moment(campaign.end_date).toDate();
+  }
+  function setMinMaxDatesForCamapign(){
+    $scope.minStartDate = new Date();
+    $scope.minEndDate = moment($scope.ownerCampaign.start_date).add(1, 'days').toDate();
+    $scope.ownerCampaign.end_date = $scope.minEndDate;
+    $scope.defaultStartDate = new Date();
+  }  
+  $scope.updateEndDateValidations = function(){
+    $scope.minEndDate = moment($scope.ownerCampaign.start_date).add(1, 'days').toDate();
+    if($scope.ownerCampaign.end_date <= $scope.ownerCampaign.start_date){
+      $scope.ownerCampaign.end_date = $scope.minEndDate;
+    }
+  }
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
@@ -141,8 +153,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         $scope.campaignEstBudget = selectedOwnerCampaign.est_budget;
         $scope.campaignActBudget = selectedOwnerCampaign.act_budget;
         if (selectedOwnerCampaign.products && selectedOwnerCampaign.products.length > 0) {
-          _.map(result.products, function (p) {
-            console.log(p);
+          _.map(result.products, function (p) {            
             if (_.find(JSON.parse(localStorage.selectedOwnerCampaign).products, { id: p.id }) !== undefined) {
               p.alreadyAdded = true;
               return p;
@@ -156,7 +167,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     });
   }
   // get all Campaigns by a user to show it in campaign management page ends  
-
+  
   $scope.saveOwnerCampaign = function () {
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
       if (result.status == 1) {
@@ -300,7 +311,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
             }
           });
         }
-        $scope.cancel = function () {
+        $scope.closeMdDialog = function(){
           $mdDialog.hide();
         }
       }
@@ -387,6 +398,23 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
     });
   }
 
+  $scope.deleteProductFromCampaign = function(campaignId, productId){
+    OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+      if(result.status == 1){
+        if ($stateParams.campaignType == 2) {
+          $scope.getOwnerCampaignDetails(campaignId);
+        }
+        else {
+          $scope.getUserCampaignDetails(campaignId);
+        }
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   /* ==============================
   | Campaign details section ends
   =============================== */
@@ -430,9 +458,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         toastr.success(result.data.message);
         $scope.campaignPayment = {};
         $scope.files.image = "";
+        $timeout(() => {
+          $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+        }, 2500);
       }
       else{
-        $scope.updateCampaignPaymentErrors = result.data.message;
+        if(result.data.message.constructor == Array){
+          $scope.updateCampaignPaymentErrors = result.data.message;
+        }
+        else{
+          toastr.error(result.data.message);
+        }
       }
     }, function (resp) {
       toastr.error("somthing went wrong try again later");
@@ -483,6 +519,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
   if ($rootScope.currStateName == "owner.campaigns") {
     $scope.getUserCampaignsForOwner();
     loadOwnerCampaigns();
+    setMinMaxDatesForCamapign();
   }
   if ($rootScope.currStateName == "owner.suggest-products") {
     loadOwnerProductList();

@@ -58,7 +58,18 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
         emptyCampaign = _.extend(emptyCampaign, campaignPartial);
         $scope.campaignFromSuggestionRequest = emptyCampaign;
         $scope.campaignFromSuggestionRequest.id = emptyCampaign.campaign_id;
-        // console.log($scope.campaignFromSuggestionRequest);
+        $scope.campaignFromSuggestionRequest.start_date = moment().add(5, 'days').toDate();
+        $scope.campaignFromSuggestionRequest.end_date = moment($scope.campaignFromSuggestionRequest.start_date).add(1, 'days').toDate();
+        $scope.dateLimits = {
+          minStartDate : moment().add(5, 'days').toDate(),
+          minEndDate : moment($scope.campaignFromSuggestionRequest.start_date).add(1, 'days').toDate()
+        };
+        $scope.updateEndDateValidations = function(){
+          $scope.dateLimits.minEndDate = moment($scope.campaignFromSuggestionRequest.start_date).add(1, 'days').toDate();
+          if($scope.campaignFromSuggestionRequest.end_date <= $scope.campaignFromSuggestionRequest.start_date){
+            $scope.campaignFromSuggestionRequest.end_date = $scope.dateLimits.minEndDate;
+          }
+        }
         $scope.saveCampaign = function(){
           AdminCampaignService.saveUserCampaign($scope.campaignFromSuggestionRequest).then(function(result){
             if(result.status == 1){

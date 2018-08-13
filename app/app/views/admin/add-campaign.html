@@ -31,13 +31,13 @@
             </div>
           </md-input-container>
           <md-input-container>
-            <md-datepicker name="startDate" ng-model="campaignFromSuggestionRequest.start_date" md-placeholder="Start Date" required layout-fill></md-datepicker>
+            <md-datepicker name="startDate" ng-model="campaignFromSuggestionRequest.start_date" ng-change="updateEndDateValidations()" onkeydown="return false" md-placeholder="Start Date" md-min-date="dateLimits.minStartDate" required layout-fill></md-datepicker>
             <div ng-messages="addEmptyCampaignForm.startDate.$error">
               <div ng-message="required">Start Date required.</div>
             </div>
           </md-input-container>
           <md-input-container>
-            <md-datepicker name="endDate" ng-model="campaignFromSuggestionRequest.end_date" md-placeholder="End date" required layout-fill></md-datepicker>
+            <md-datepicker name="endDate" ng-model="campaignFromSuggestionRequest.end_date" onkeydown="return false" md-placeholder="End date" md-min-date="campaignFromSuggestionRequest.start_date" required layout-fill></md-datepicker>
             <div ng-messages="addEmptyCampaignForm.endDate.$error">
               <div ng-message="required">End Date required.</div>
             </div>

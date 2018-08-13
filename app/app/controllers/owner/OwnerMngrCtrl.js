@@ -25,7 +25,8 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   }
 
   $scope.getAvatar = function(){
-    var userMongo = $auth.getPayload().userMongo;
+    var payload = $auth.getPayload();
+    var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
     if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
       return {
         present: true,
@@ -226,7 +227,6 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
         toastr.error(result.message);
       }
     });
-    $mdSidenav('ownerRightSidenav').toggle();
   }
 
   /*=================================

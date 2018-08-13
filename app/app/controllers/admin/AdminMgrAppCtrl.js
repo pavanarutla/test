@@ -131,5 +131,20 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.AddMetroProduct = function () {
     $mdSidenav('metro-product').toggle();
   };
+  $scope.getAvatar = function(){
+    var payload = $auth.getPayload();
+    var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
+    if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+      return {
+        present: true,
+        profile_pic: userMongo.profile_pic
+      }
+    }
+    else{
+      return {
+        present: false
+      }
+    }
+  }
 
 });
