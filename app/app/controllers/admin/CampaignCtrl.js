@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob, MetroService) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob, MetroService,$window) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -381,6 +381,31 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
               toastr.error(response.message);
             }
           });
+        
+      }
+
+
+      $scope.closeMetroCampaign = function (campaign) {
+
+        if ($window.confirm("Are you really want to close this campaign?")) {
+          AdminMetroService.closeMetroCampaign(campaign).then(function (response) {
+            if(response.status == 1){
+              $scope.campaignSavedSuccessfully = true;
+                $scope.metroCampaign = {};
+               
+                toastr.success(response.message);
+                getMetroCampaigns();
+            }
+            else{
+              //$scope.saveUserCampaignErrors = response.message;
+              toastr.error(response.message);
+            }
+          });
+        } else {
+            $scope.Message = "You clicked NO.";
+        }
+         
+         
         
       }
 

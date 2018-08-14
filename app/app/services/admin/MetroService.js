@@ -38,6 +38,11 @@ app.factory('AdminMetroService',
           $http.get(config.apiPath + '/metro-campaign/' + metroCampaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+          closeMetroCampaign: function(metroCampaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/close-metro-campaigns/' + metroCampaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
         addPackageInMetroCampaign: function(package){
           var dfd = $q.defer();
           $http.post(config.apiPath + '/package-to-metro-campaign', package).success(dfd.resolve).error(dfd.reject);

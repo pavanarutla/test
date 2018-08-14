@@ -9,14 +9,14 @@
 			</md-icon>
 		</md-button>
 	</div>
-	<md-dialog-content>
-		<div layout="row" layout-margin>
-			<div layout-margin flex="33" class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index">
+	<md-dialog-content flex="100" >
+		<div layout="row" layout-margin flex="100"  ng-repeat="gettingParentIndex in metroPackages" ng-if="$index<(metroPackages.length)/3+1">
+			<div layout-margin flex="33" class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index"  ng-if="$index>=3*$parent.$index && $index <= 3*($parent.$index+1)-1">
 				<div class="one_week metro_package_bg{{($index + 1) % 6}}">
 					<div layout="row">
 						<div class="left_side_pack">
 							<p class="md-caption">
-								{{metroPackage.name}} - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots
+								{{metroPackage.name}}<!-- - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots -->
 							</p>
 							<h3>Price: Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
 							<div class="form-group">
@@ -29,16 +29,16 @@
 						<div class="right_side_pack">
 							<div class="slect_train">
 								<p class="md-caption">select trains</p>
-								<input type="number" ng-model="metroPackage.selected_trains" min="1" max="{{metroPackage.max_trains}}">
+								<input type="number" ng-model="metroPackage.selected_trains" min="1" max="{{metroPackage.max_trains}}" class="trains_nbr">
 							</div>
 							<div class="slect_slot">
 								<p class="md-caption">select slots</p>
-								<input type="number" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}">
+								<input type="text" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}" readonly disabled="true" class="trains_nbr">
 							</div>
 						</div>
 					</div>
 					<div layout="row">
-						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">select this</md-button>						
+						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="select_package(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select this')}}</md-button>						
 					</div>
 				</div>
 			</div>
@@ -51,6 +51,7 @@
 				<h2 class="text_color">
 					Rs. {{getEstBudgetForSelectedPackages()}}
 				</h2>
+				<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>	
 				<!-- <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
 			</div>
 			<div flex></div>

@@ -29,6 +29,7 @@ app.controller('MetroCtrl',
       function getMetroCorridors(){
         MetroService.getMetroCorridors().then(function(result){          
           $scope.metroCorridors = result;
+          $scope.selectedCorridor = $scope.metroCorridors[0];
         });
       }
 
@@ -50,7 +51,10 @@ app.controller('MetroCtrl',
       }
       loadShortlistedPackages();
 
-      $scope.shortlistMetroPackage = function(pkg){
+      
+      $scope.select_package_var = [];
+       $scope.select_package = function(pkg){
+       
         var alreadySelected = _.filter($scope.shortlistedPackages, function(package){
           return package.id == pkg.id;
         });
@@ -62,7 +66,14 @@ app.controller('MetroCtrl',
             toastr.error("Start date for the package is required.");
           }
           else{
-            MetroService.shortlistPackage(pkg).then((result) => {
+            $scope.select_package_var.push(pkg);
+              console.log( $scope.select_package_var); 
+          }
+        }
+      } 
+      
+      $scope.shortlistMetroPackage = function(pkg){
+        MetroService.shortlistPackage(pkg).then((result) => {
               if(result.status == 1){
                 loadShortlistedPackages();
                 toastr.success(result.message);
@@ -71,8 +82,7 @@ app.controller('MetroCtrl',
                 toastr.error(result.message);
               }
             });
-          }
-        }
+        
       }
 
       $scope.getEstBudgetForSelectedPackages = function(){
@@ -84,10 +94,17 @@ app.controller('MetroCtrl',
       }
 
       $scope.isAlreadySelected = function(pkgId){
-        var pkg = _.find($scope.shortlistedPackages, (slPkg) => {
+        pkgIdarr = [];
+        pkgIdarr.push(pkgId);
+       /* var pkg = _.find($scope.select_package_var, (slPkg) => {
           return slPkg.package_id == pkgId;
         });
-        return pkg !== undefined;
+        return pkg !== undefined;*/
+        if(pkgIdarr.indexOf($scope.select_package_var) !== -1) {
+           return true;
+        }else{
+          return false;
+        }
       }
 
       $scope.deleteShortlistedMetroPackage = function(pkgId){
