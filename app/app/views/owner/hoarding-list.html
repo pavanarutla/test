@@ -1,129 +1,60 @@
-<!-- List of shortlisted products' details sidenav -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:99" md-component-id="shortlistAndSaveOwnerSidenav">
+<!-- Sidenav containing form to share shortlisted products -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareProductsSidenav" style="z-index:200;">
   <div layout="row">
-    <div class="md-toolbar-tools bg_main_color" style="color:#fff">
-      <div class="md-title">Shortlisted Products</div>
+    <div class="md-toolbar-tools">
+      <h3 class="md-headline">Share Shortlisted Products</h3>
       <div flex></div>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleViewAllShortlisted()">
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareProductsSidenav()">
         <md-tooltip>Close Side Panel</md-tooltip>
-        <i class="material-icons">close</i>
+        <md-icon class="md-default-theme">
+          <i class="material-icons">close</i>
+        </md-icon>
       </md-button>
     </div>
   </div>
-  <md-content>
-    <div layout="column" layout-margin style="margin: 0 8px 0 8px;">
-      <div layout="row">
-        <div layout="column" layout-align="center start" flex="50">
-          <div class="md-body-2">{{shortlisted.siteNo}}</div>
-        </div>
-        <div layout="row" layout-align="end center" flex="50">
-          <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
-          <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
-          <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
-        </div>
+  <md-content layout-align="center center" layout-margin layout-padding>
+    <form name="shareShortlistedByOwnerForm">
+      <div layout="column">
+        <md-input-container class="md-block">
+          <label>Name</label>
+          <input ng-model="shareShortlisted.receiver_name" name="name" required="required" />
+          <div ng-messages="shareShortlistedByOwnerForm.name.$error">
+            <div ng-message="required">Name is required.</div>
+            <div ng-message="pattern">Enter a valid Name.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+          />
+          <div ng-messages="shareShortlistedByOwnerForm.email.$error">
+            <div ng-message="required">Email is required.</div>
+            <div ng-message="pattern">Enter a valid Email Id.</div>
+          </div>
+        </md-input-container>
+        <md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProductsByOwner(shareShortlisted)">SHARE PRODUCT LIST</md-button>
       </div>
-      <div layout="row" style="margin: 0 8px 0 8px;">
-        <div layout="column" flex="35" layout-align="center start" class="margin-con">
-          <div class="md-body-2">{{shortlisted.format_name}}</div>
-        </div>
-        <div layout="column" flex="35" layout-align="center start">
-          <div class="md-body-2">Facing</div>
-        </div>
-        <div layout="column" flex="30" layout-align="center end ">
-          <div class="md-body-2">Impressions</div>
-        </div>
-      </div>
-      <div layout="row">
-        <div layout="column" flex="35" layout-align="center start" class="margin-con">
-          <div class="md-caption">{{shortlisted.address}}</div>
-          <div class="md-caption">500001</div>
-        </div>
-        <div layout="column" flex="35" layout-align=" start center">
-          <div class="md-caption">{{shortlisted.direction}}</div>
-        </div>
-        <div layout="column" flex="30" layout-align="start end ">
-          <div class="md-caption">{{shortlisted.impressions}}</div>
-          <div class="md-caption">week(Approx)</div>
-        </div>
-      </div>
-      <md-card-actions layout="row" layout-align="end center" style="margin:0px">
-        <md-button style="margin:0px" ng-click="viewProduct(shortlisted)">View</md-button>
-        <md-button style="margin:0px" ng-click="deleteShortlisted($event, shortlisted.id)">Delete</md-button>
-      </md-card-actions>
-      <md-divider></md-divider>
-    </div>
-    <div layout="row" layout-margin>
-      <div>
-        <md-button class="md-raised md-warn" ng-click="toggleSaveCampaignSidenav()">Save Campaign</md-button>
-      </div>
-      <div>
-        <md-button class="md-raised md-primary">Share Campaign</md-button>
-      </div>
-      <!-- <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div> -->
-    </div>
+    </form>
   </md-content>
 </md-sidenav>
-<!-- List of shortlisted products' details sidenav ends -->
-<!-- Add Product details sidenav html start-->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:99" md-component-id="addProductOwnerSidenav">
-  <div layout="row">
-    <div class="md-toolbar-tools bg_main_color" style="color:#fff">
-      <div class="">Add Product</div>
-      <div flex></div>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleViewAllShortlisted()">
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <i class="material-icons">close</i>
-      </md-button>
-    </div>
+<!-- Sidenav containing form to share shortlisted products ends -->
 
-  </div>
-  <div class="product__content">
 
-    <div layout-margin>
-      <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
-      />
-      <h5>Start Date </h5>
-      <div class="form-group">
-        <div class='input-group'>
-          <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
-            max-date='model.end_date' ng-readonly='true' placeholder="" />
-          <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
 
-            <img src="assets/images/owner/date.png" />
-          </span>
-        </div>
-      </div>
-      <h5>End Date </h5>
-      <div class="form-group">
-        <div class='input-group'>
-          <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
-            min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="" />
-          <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
-
-            <img src="assets/images/owner/date.png" />
-          </span>
-        </div>
+<!-- List of shortlisted products' details sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:99" md-component-id="shortlistedProductsSidenav" style="z-index:100;">
+    <div layout="row">
+      <div class="md-toolbar-tools bg_main_color" style="color:#fff">
+        <div class="md-title">Shortlisted Products</div>
+        <div flex></div>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShortlistProductsSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <i class="material-icons">close</i>
+        </md-button>
       </div>
     </div>
-    <md-divider></md-divider>
-    <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
-      <div layout="row">
-        <md-input-container class="md-block margin-input" style="margin:0px;height:30px">
-          <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
-          <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
-          />
-        </md-input-container>
-        <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice" style="font-size:11px">Change Price</md-button>
-      </div>
-      <div class="md-body-1">Note:This Price Will not affected actual price</div>
-    </div>
-    <md-divider></md-divider>
-    <div layout="row" layout-align="center center">
-      <md-button class="md-raised md-primary" ng-click="suggestProductForCampaign(suggestedProduct)">Add</md-button>
-    </div>
-  </div>
-  <!-- <md-content>
-      <div layout="column" layout-margin  style="margin: 0 8px 0 8px;">
+    <md-content>
+      <div layout="column" layout-margin style="margin: 0 8px 0 8px;" ng-repeat="shortlisted in shortlistedProducts">
         <div layout="row">
           <div layout="column" layout-align="center start" flex="50">
             <div class="md-body-2">{{shortlisted.siteNo}}</div>
@@ -148,7 +79,7 @@
         <div layout="row">
           <div layout="column" flex="35" layout-align="center start" class="margin-con">
             <div class="md-caption">{{shortlisted.address}}</div>
-            <div class="md-caption">500001</div>
+            <!-- <div class="md-caption">500001</div> -->
           </div>
           <div layout="column" flex="35" layout-align=" start center">
             <div class="md-caption">{{shortlisted.direction}}</div>
@@ -159,154 +90,250 @@
           </div>
         </div>
         <md-card-actions layout="row" layout-align="end center" style="margin:0px">
-          <md-button style="margin:0px" ng-click="viewProduct(shortlisted)">View</md-button>
-          <md-button style="margin:0px" ng-click="deleteShortlisted($event, shortlisted.id)">Delete</md-button>
+          <md-button style="margin:0px" ng-href="#/owner/{{clientSlug}}/product-details/{{shortlisted.id}}">View</md-button>
+          <md-button style="margin:0px" ng-click="deleteShortlistedByOwner(shortlisted.id)">Delete</md-button>
         </md-card-actions>
         <md-divider></md-divider>
       </div>
-      <div layout="column" layout-margin>
+      <div layout="row" layout-margin>
+        <!-- <div>
+          <md-button class="md-raised md-warn" ng-click="toggleSaveCampaignSidenav()">Save Campaign</md-button>
+        </div> -->
         <div>
-          <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenav()">SAVE TO CAMPAIGN</md-button>
+          <md-button class="md-raised md-primary" ng-click="toggleShareProductsSidenav()">Share Product List</md-button>
         </div>
-        <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
+        <!-- <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div> -->
       </div>
-    </md-content> -->
-</md-sidenav>
-<!-- Add Product details sidenav html start-->
-<!-- Share Campaign Sidenav -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="shareProductOwner" id="popupContainer">
-  <div layout="row">
-    <div class="md-toolbar-tools bg_main_color" style="color:#fff">
-      <h3>Share Campaign Details</h3>
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <i class="material-icons">close</i>
-        </md-icon>
-      </md-button>
+    </md-content>
+  </md-sidenav>
+  <!-- List of shortlisted products' details sidenav ends -->
+  <!-- Add Product details sidenav html start-->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:99" md-component-id="addProductOwnerSidenav">
+    <div layout="row">
+      <div class="md-toolbar-tools bg_main_color" style="color:#fff">
+        <div class="">Add Product</div>
+        <div flex></div>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleViewAllShortlisted()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <i class="material-icons">close</i>
+        </md-button>
+      </div>
     </div>
-  </div>
-  <md-content layout-align="center center" layout-margin>
-
-    <form name="shareCampaignForm">
-      <div layout="column">
-        <md-input-container class="md-block">
-          <label>Recipient Name</label>
-          <input ng-model="shareCampaign.receiver_name" type="text" name="name" required="required" />
-          <div ng-messages="shareCampaignForm.name.$error">
-            <div ng-message="required">Recipient Name is required.</div>
-            <div ng-message="pattern">Recipient Name should contain only Characters.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-          />
-          <div ng-messages="shareCampaignForm.email.$error">
-            <div ng-message="required">Email is required.</div>
-            <div ng-message="pattern">Enter a valid Email Id.</div>
-          </div>
-        </md-input-container>
-      </div>
-      <md-button type="submit" class="md-raised md-warn" ng-click="shareCampaign($event, shareCampaign)" layout-fill>SHARE CAMPAIGN</md-button>
-    </form>
-  </md-content>
-</md-sidenav>
-<!-- Share Campaign Sidenav ends -->
-<div layout="column" class="owner_hoarding_list">
-  <div layout="row" class="main__title">
-    <div class="md-title">Hoarding List</div>
-    <div flex></div>
-    <!-- <div>
-      <a class="shortlist__btn" ng-click="shortlistProduct()">Shortlisted Products</a>
-    </div> -->
-  </div>
+    <div class="product__content">
+      <div layout-margin>
+        <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id" />
+        <h5>Start Date </h5>
+        <div class="form-group">
+          <div class='input-group'>
+            <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
+              max-date='model.end_date' ng-readonly='true' placeholder="" />
+            <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
   
-  <!-- Main Container -->
-  <div class="row" style="margin-right:0px;margin-left:0px;">
-    <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="product in productList">
-      <md-card class="margin_right_0 margin_left_0 hoarding__card__owner">
-        <img ng-src="{{config.serverUrl + product.image}}" class="md-card-image card__img">
-        <md-card-title class="card-title">
-          <md-card-title-text>
-            <span class="md-subhead" style="padding-top:0px">{{product.siteNo}}({{product.format_name}})</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-content class="content_inner">
-          <div layout="row" layout-padding class="hoarding__location">
-            <div>
-              <md-icon md-svg-icon="assets/images/loaction.svg"></md-icon>
-            </div>
-            <div class="ellipsis">
-              <span>{{product.address}}
-                <br> Facing:
-                <span class="md-caption" style="color:red">{{product.direction}}</span>
-              </span>
-            </div>
+              <img src="assets/images/owner/date.png" />
+            </span>
           </div>
-          <md-divider></md-divider>
-          <div layout="row" style="margin:5px 0" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
-            <div layout="column" flex="25" layout-align="center center">
-              <div>
-                <img src="assets/images/owner/rupee.png">
-              </div>
-              <div>Price: {{product.default_price}}</div>
-            </div>
-            <div layout="column" flex="25" layout-align="center center">
-              <div>
-                <img src="assets/images/owner/light.png">
-              </div>
-              <div>
-                Lit:
-                <span ng-if="product.lighting">Yes</span>
-                <span ng-if="!product.lighting">No</span>
-              </div>
-            </div>
-            <div layout="column" flex="25" layout-align="center center">
-              <div>
-                <img src="assets/images/size.png">
-              </div>
-              <div>Size: {{product.panelSize}}</div>
-            </div>
-            <div layout="column" flex="25" layout-align="center center">
-              <div>
-                <img src="assets/images/owner/eye_black.png">
-              </div>
-              <div>Views: {{product.impressions}}</div>
-            </div>
+        </div>
+        <h5>End Date </h5>
+        <div class="form-group">
+          <div class='input-group'>
+            <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
+              min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="" />
+            <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
+  
+              <img src="assets/images/owner/date.png" />
+            </span>
           </div>
-          <md-divider></md-divider>
-          <div layout="colmun">
-            <!-- <md-card-actions layout="row">
-              <md-card-icon-actions>
-                <md-button class="md-raised md-primary" style="background:#7b7b7d">Shortlist</md-button>
-                <md-button class="md-raised md-primary" style="background:#7b7b7d" ng-click="addProductOwner()">Add</md-button>
-                <md-button class="md-raised md-warn" style="background:#7b7b7d" ng-click="shareProducts()">Share</md-button>
-              </md-card-icon-actions>
-            </md-card-actions> -->
-            <!-- <div layout="row" flex ng-if="product.alreadyAdded">
-              <div flex="60">
-                <div class="md-caption">Product Already Added</div>
-              </div>
-              <div flex="40">
-                <md-button class="md-raised md-warn" ng-click="removeProductFromCampaignSuggestion(product.id)">Remove</md-button>
-              </div>
-            </div> -->
-          </div>
-        </md-content>
-      </md-card>
+        </div>
+      </div>
+      <md-divider></md-divider>
+      <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
+        <div layout="row">
+          <md-input-container class="md-block margin-input" style="margin:0px;height:30px">
+            <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
+            <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+            />
+          </md-input-container>
+          <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice" style="font-size:11px">Change Price</md-button>
+        </div>
+        <div class="md-body-1">Note:This Price Will not affected actual price</div>
+      </div>
+      <md-divider></md-divider>
+      <div layout="row" layout-align="center center">
+        <md-button class="md-raised md-primary" ng-click="suggestProductForCampaign(suggestedProduct)">Add</md-button>
+      </div>
     </div>
-    <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
-      <ul class="pagination">
-        <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-          <a ng-click="pagination.pageNo = i; getProductList();" 
-            ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
-            style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
-            {{i}}
-          </a>
-        </li>
-      </ul>
+    <!-- <md-content>
+        <div layout="column" layout-margin  style="margin: 0 8px 0 8px;">
+          <div layout="row">
+            <div layout="column" layout-align="center start" flex="50">
+              <div class="md-body-2">{{shortlisted.siteNo}}</div>
+            </div>
+            <div layout="row" layout-align="end center" flex="50">
+              <img src="assets/images/maps/light-3030.jpg" ng-if="shortlisted.lighting == 0" />
+              <img src="assets/images/maps/light-color3030.jpg" ng-if="shortlisted.lighting == 1" />
+              <span class="md-subhead plane-size">{{shortlisted.panelSize}}</span>
+            </div>
+          </div>
+          <div layout="row" style="margin: 0 8px 0 8px;">
+            <div layout="column" flex="35" layout-align="center start" class="margin-con">
+              <div class="md-body-2">{{shortlisted.format_name}}</div>
+            </div>
+            <div layout="column" flex="35" layout-align="center start">
+              <div class="md-body-2">Facing</div>
+            </div>
+            <div layout="column" flex="30" layout-align="center end ">
+              <div class="md-body-2">Impressions</div>
+            </div>
+          </div>
+          <div layout="row">
+            <div layout="column" flex="35" layout-align="center start" class="margin-con">
+              <div class="md-caption">{{shortlisted.address}}</div>
+              <div class="md-caption">500001</div>
+            </div>
+            <div layout="column" flex="35" layout-align=" start center">
+              <div class="md-caption">{{shortlisted.direction}}</div>
+            </div>
+            <div layout="column" flex="30" layout-align="start end ">
+              <div class="md-caption">{{shortlisted.impressions}}</div>
+              <div class="md-caption">week(Approx)</div>
+            </div>
+          </div>
+          <md-card-actions layout="row" layout-align="end center" style="margin:0px">
+            <md-button style="margin:0px" ng-click="viewProduct(shortlisted)">View</md-button>
+            <md-button style="margin:0px" ng-click="deleteShortlisted($event, shortlisted.id)">Delete</md-button>
+          </md-card-actions>
+          <md-divider></md-divider>
+        </div>
+        <div layout="column" layout-margin>
+          <div>
+            <md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenav()">SAVE TO CAMPAIGN</md-button>
+          </div>
+          <div class="suggtn"><span class="suggtn-one">Need Suggestions?</span><span class="suggtn-two"><md-butoon ng-click="toggleSuggestMeSidenav()" class="md-primary">SUGGEST ME</md-button></span></div>
+        </div>
+      </md-content> -->
+  </md-sidenav>
+  <!-- Add Product details sidenav html start-->
+  <!-- Share Campaign Sidenav -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" style="z-index:999" md-component-id="shareProductOwner" id="popupContainer">
+    <div layout="row">
+      <div class="md-toolbar-tools bg_main_color" style="color:#fff">
+        <h3>Share Campaign Details</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="shareProducts()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <i class="material-icons">close</i>
+          </md-icon>
+        </md-button>
+      </div>
     </div>
+    <md-content layout-align="center center" layout-margin>
+      <form name="shareCampaignForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Recipient Name</label>
+            <input ng-model="shareCampaign.receiver_name" type="text" name="name" required="required" />
+            <div ng-messages="shareCampaignForm.name.$error">
+              <div ng-message="required">Recipient Name is required.</div>
+              <div ng-message="pattern">Recipient Name should contain only Characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <div ng-messages="shareCampaignForm.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valid Email Id.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-button type="submit" class="md-raised md-warn" ng-click="shareCampaign($event, shareCampaign)" layout-fill>SHARE CAMPAIGN</md-button>
+      </form>
+    </md-content>
+  </md-sidenav>
+  <!-- Share Campaign Sidenav ends -->
+  <div layout="column" class="owner_hoarding_list">
+    <div layout="row" class="" layout-padding>
+      <div class="md-title text_color">Inventory List</div>
+      <div flex></div>
+      <div>
+        <a class="shortlist__btn" ng-click="toggleShortlistProductsSidenav()">Shortlisted Products</a>
+      </div>
+    </div>
+    <!-- Main Container -->
+    <div class="row" style="margin-right:0px;margin-left:0px;">
+      <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="product in productList">
+        <md-card class="margin_right_0 margin_left_0 hoarding__card__owner">
+          <img ng-src="{{config.serverUrl + product.image}}" class="md-card-image card__img">
+          <md-card-title class="card-title">
+            <md-card-title-text>
+              <span class="md-subhead" style="padding-top:0px">{{product.siteNo}}({{product.format_name}})</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-content class="content_inner">
+            <div layout="row" layout-padding class="hoarding__location">
+              <div>
+                <md-icon md-svg-icon="assets/images/loaction.svg"></md-icon>
+              </div>
+              <div class="ellipsis">
+                <span>{{product.address}}
+                  <br> Facing:
+                  <span class="md-caption" style="color:red">{{product.direction}}</span>
+                </span>
+              </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" style="margin:5px 0" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100">
+              <div layout="column" flex="25" layout-align="center center">
+                <div>
+                  <img src="assets/images/owner/rupee.png">
+                </div>
+                <div> {{product.default_price}}</div>
+              </div>
+              <div layout="column" flex="25" layout-align="center center">
+                <div>
+                  <img src="assets/images/owner/light.png">
+                </div>
+                <div>
+                  
+                  <span ng-if="product.lighting">Yes</span>
+                  <span ng-if="!product.lighting">No</span>
+                </div>
+              </div>
+              <div layout="column" flex="25" layout-align="center center">
+                <div>
+                  <img src="assets/images/size.png">
+                </div>
+                <div> {{product.panelSize}}</div>
+              </div>
+              <div layout="column" flex="25" layout-align="center center">
+                <div class="text_color md-caption">
+                  <img src="assets/images/owner/eye_black.png">
+                  <!-- Views -->
+                </div>
+                <div>{{product.impressions}}</div>
+              </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" layout-align="space-around center">
+              <md-button class="md-raised md-primary" ng-if="!product.shortlisted" style="background:#7b7b7d" ng-click="shortlistProductByOwner(product.id)">Shortlist</md-button>
+              <md-button class="md-raised md-primary" ng-if="product.shortlisted" disabled style="background:#7b7b7d">Shortlisted</md-button>
+              <!-- <md-button class="md-raised md-primary" style="background:#7b7b7d" ng-click="addProductOwner()">Add</md-button> -->
+              <!-- <md-button class="md-raised md-warn" style="background:#7b7b7d" ng-click="toggleShareProductSidenav()">Share</md-button> -->
+            </div>
+          </md-content>
+        </md-card>
+      </div>
+      <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+        <ul class="pagination">
+          <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+            <a ng-click="pagination.pageNo = i; getProductList();" 
+              ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+              style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+              {{i}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Main container ends -->
   </div>
-  <!-- Main container ends -->
-</div>

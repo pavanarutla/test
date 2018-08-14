@@ -23,6 +23,17 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     })
   };
 
+  $scope.toggleShareProductSidenav = function () {
+    $mdSidenav('shareProductSidenav').toggle();
+  };
+
+  $scope.toggleShortlistProductsSidenav = function(){
+    $mdSidenav('shortlistedProductsSidenav').toggle();
+  }
+
+  $scope.toggleShareProductsSidenav = function(){
+    $mdSidenav('shareProductsSidenav').toggle();
+  }
   /*========================
   | Sidenavs and popups ends
   ========================*/
@@ -79,10 +90,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.pagination.pageCount = result.page_count;
       createPageLinks();
     });
-  }
-  if($rootScope.currStateName == 'owner.hoarding-list'){
-    getApprovedProductList();
-  }
+  }  
 
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
@@ -91,10 +99,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       createPageLinks();
     });
   }
-  if($rootScope.currStateName == 'owner.requested-hoardings'){
-    getRequestedProductList();
-  }
-
+  
   $scope.getStateList = function(product){
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
@@ -163,6 +168,59 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  function getShortlistedProductsByOwner(){
+    OwnerProductService.getShortlistedProductsByOwner().then(function(result){
+      $scope.shortlistedProducts = result;
+    });
+  }
+
+  $scope.shortlistProductByOwner = function(productId){
+    OwnerProductService.shortListProductByOwner(productId).then(function(result){
+      if(result.status == 1){
+        getShortlistedProductsByOwner();
+        _.map($scope.productList, (p) => {
+          if(p.id == productId){
+            p.shortlisted = true;
+            return p;
+          }
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.deleteShortlistedByOwner = function(productId){
+    OwnerProductService.deletedShortListedByOwner(productId).then(function(result){
+      if(result.status == 1){
+        getShortlistedProductsByOwner();
+        _.map($scope.productList, (p) => {
+          if(p.id == productId){
+            p.shortlisted = false;
+            return p;
+          }
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.shareShortlistedProductsByOwner = function(recipientObj){
+    OwnerProductService.shareShortlistedProductsByOwner(recipientObj).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   /*=====================
   | Product Section Ends
   =====================*/
@@ -179,6 +237,15 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     else{
       toastr.error("Product not found.");
     }
+  }
+
+  if($rootScope.currStateName == 'owner.hoarding-list'){
+    getApprovedProductList();
+    getShortlistedProductsByOwner();
+  }
+
+  if($rootScope.currStateName == 'owner.requested-hoardings'){
+    getRequestedProductList();
   }
 
   /*=============================

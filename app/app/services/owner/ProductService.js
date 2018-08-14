@@ -65,6 +65,26 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/owner-product-details/' + productId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			shortListProductByOwner: function (productId) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/shortlistProduct', { product_id: productId }).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			getShortlistedProductsByOwner: function(){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/shortlistedProducts').success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			deletedShortListedByOwner: function(productId){
+				var dfd = $q.defer();
+				$http.delete(config.apiPath + '/shortlistedProduct/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
+			shareShortlistedProductsByOwner: function(obj){
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/share-shortlisted', obj).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}
