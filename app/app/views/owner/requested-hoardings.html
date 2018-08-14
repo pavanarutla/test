@@ -98,7 +98,7 @@
 				<label for="hoardingLight" class="col-sm-4 col-form-label">Light</label>
 				<div class="col-sm-8">
 					<select ng-model="product.lighting" required="required" name="light" class="form-control" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
-					 ng-init="product.lighting = product.lighting || ''">
+					 ng-init="product.lighting = product.lighting || ''" placeholder="Has lighting?">
 						<option value="" disabled selected>Has lighting?</option>
 						<option value="1">Yes</option>
 						<option value="0">No</option>
@@ -111,30 +111,27 @@
 			<div class="form-group row">
 				<label for="direction" class="col-sm-4 col-form-label">Direction</label>
 				<div class="col-sm-8">
-					<input ng-model="product.direction" class="form-control" placeholder="direction" type="text" name="direction" required="required"
-					/>
+					<input ng-model="product.direction" class="form-control" placeholder="direction" type="text" name="direction" required="required"	/>
+					<div ng-messages="addProductForm.direction.$error" ng-if="addProductForm.direction.$touched" style="color:red">
+						<div ng-message="required">direction is required.</div>
+					</div>
 				</div>
-				<div ng-messages="addProductForm.direction.$error" ng-if="!addProductForm.direction.$pristine" style="color:red">
-					<div ng-message="required">direction is required.</div>
-				  </div>
 			</div>
 			<div class="form-group row">
 				<label for="PanelSize" class="col-sm-4 col-form-label">Address</label>
 				<div class="col-sm-8">
-					<input ng-model="product.address" class="form-control" placeholder="address" type="text" name="address" required="required"
-					/>
+					<input ng-model="product.address" class="form-control" placeholder="address" type="text" name="address" required="required"	/>
+					<div ng-messages="addProductForm.address.$error" ng-if="addProductForm.address.$touched" style="color:red">
+						<div ng-message="required">Address is required.</div>
+					</div>
 				</div>
-				<div ng-messages="addProductForm.address.$error" ng-if="!addProductForm.address.$pristine" style="color:red">
-					<div ng-message="required">Address is required.</div>
-				  </div>
 			</div>
 			<div class="form-group row">
 				<label for="adStrength" class="col-sm-4 col-form-label">Advertising Strengths</label>
 				<div class="col-sm-8">
-					<input ng-model="product.adStrength" class="form-control" placeholder="Advertising Strengths" type="text" name="adStrength" required="required"
-					/>
+					<input ng-model="product.adStrength" class="form-control" placeholder="Advertising Strengths" type="text" name="adStrength" required="required"	/>
 				</div>
-				<div ng-messages="addProductForm.adStrength.$error" ng-if="!addProductForm.adStrength.$pristine" style="color:red">
+				<div ng-messages="addProductForm.adStrength.$error" ng-if="addProductForm.adStrength.$touched" style="color:red">
 					<div ng-message="required">Advertising Strengths is required.</div>
 				  </div>
 			</div>

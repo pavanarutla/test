@@ -296,6 +296,12 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       }
       else{
         toastr.error(result.message);
+        _.map($scope.campaignProducts, (p) => {
+          if(_.contains(result.product_ids, p.product_id)){
+            p.unavailable = true;
+            console.log(p);
+          }
+        });
       }
     });
   }

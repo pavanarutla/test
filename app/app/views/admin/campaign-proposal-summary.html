@@ -220,7 +220,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="campaignProduct in campaignProducts | limitTo:limit">
+					<tr ng-repeat="campaignProduct in campaignProducts | limitTo:limit" ng-class="{'striked-out': campaignProduct.unavailable}">
 						<td>{{campaignProduct.siteNo}}</td>
 						<td>{{campaignProduct.format_name}}</td>
 						<td>{{campaignProduct.area_name}}</td>
