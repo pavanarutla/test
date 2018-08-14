@@ -800,21 +800,31 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.searchBySiteNo = function (item) {
-        MapService.searchBySiteNo(item.siteNo).then(function (markerProperties) {
-          var markerProp = markerProperties[0];
-          if (markerProp.id) {
-            var marker = {};
-            // marker.position = { lat: parseFloat(markerProperties.lat), lng: parseFloat(markerProperties.lng) };
-            marker.properties = markerProp;
-            var bounds = new google.maps.LatLngBounds();
-            bounds.extend({ lat: parseFloat(markerProp.lat), lng: parseFloat(markerProp.lng) });
-            $scope.mapObj.fitBounds(bounds);
-            selectMarker(marker);
-          }else{
-            toastr.error('No product found with that tab id', 'error');
-          }  
-        });
+      $scope.selectFromTabIdSearch = function (marker) {
+        if (marker.id) {
+          var refToMapMarker = _.find(markersOnMap, (m) => {
+            return m.properties.id == marker.id;
+          });
+          $scope.$parent.alreadyShortlisted = false;
+          $scope.mapObj.setCenter(refToMapMarker.position);
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend(refToMapMarker.position);
+          $scope.mapObj.fitBounds(bounds);
+          $scope.product.id = refToMapMarker.properties['id'];
+          $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
+          $scope.product.siteNo = refToMapMarker.properties['siteNo'];
+          $scope.product.panelSize = refToMapMarker.properties['panelSize'];
+          $scope.product.address = refToMapMarker.properties['address'];
+          $scope.product.impressions = refToMapMarker.properties['impressions'];
+          $scope.product.lighting = refToMapMarker.properties['lighting'];
+          $scope.product.direction = refToMapMarker.properties['direction'];
+          $scope.product.availableDates = refToMapMarker.properties['availableDates'];
+          $scope.hideSelectedMarkerDetail = false;
+          $mdSidenav('productDetails').toggle();
+          $scope.selectedProduct = refToMapMarker;
+        }else{
+          toastr.error('No product found with that tab id', 'error');
+        }  
       }
 
       $scope.activeUserCampaigns = [];
