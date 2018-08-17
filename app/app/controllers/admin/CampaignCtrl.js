@@ -1,5 +1,5 @@
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob, MetroService,$window) {
-
+ $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
     'campaign-created',      //    1
@@ -324,7 +324,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
         if(result.status=="1"){
           $scope.campaignMetroPayments = result;
         }else{
-          toastr.error(result.message);
+         // toastr.error(result.message);
         }
         
       });
@@ -407,6 +407,25 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
          
          
         
+      }
+
+      $scope.deleteProductFromCampaign = function(campaignId,productId){
+        if ($window.confirm("Are you really want to delete this package?")) {
+           MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function(result){
+            if(result.status == 1){
+              getMetroCampaignDetails(campaignId);
+
+               loadCampaignPayments($stateParams.metroCampaignId);
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        } else {
+            $scope.Message = "You clicked NO.";
+        }
+       
       }
 
 });

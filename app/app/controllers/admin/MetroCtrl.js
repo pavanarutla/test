@@ -1,4 +1,4 @@
-app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr){
+app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr,MetroService){
 
   /*=============================
   | Global variables
@@ -138,6 +138,8 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
       }
     });
   }
+   
+
   $scope.editPackage = function (package) {
     $scope.package = {};
     $scope.package.id = package.id;

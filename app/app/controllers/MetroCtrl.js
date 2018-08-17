@@ -2,6 +2,7 @@ app.controller('MetroCtrl',
   ['$scope', '$mdSidenav', '$mdDialog', '$rootScope', '$stateParams', '$timeout', 'CampaignService', 'MetroService', 'FileSaver', 'Blob', 'config', 'toastr',
     function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, CampaignService, MetroService, FileSaver, Blob, config, toastr) {
       $scope.metroCampaign = {};
+      $scope.newDate = new Date();
       /*==============================
       | Popup and Sidenav controls
       ==============================*/  
@@ -30,6 +31,7 @@ app.controller('MetroCtrl',
         MetroService.getMetroCorridors().then(function(result){          
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
+          $scope.getMetroPackages($scope.selectedCorridor.id);
         });
       }
 
@@ -72,8 +74,19 @@ app.controller('MetroCtrl',
         }
       } 
       
-      $scope.shortlistMetroPackage = function(pkg){
-        MetroService.shortlistPackage(pkg).then((result) => {
+       $scope.shortlistMetroPackage = function(pkg){
+        var alreadySelected = _.filter($scope.shortlistedPackages, function(package){
+          return package.id == pkg.id;
+        });
+        if(alreadySelected.constructor === Array && alreadySelected.length > 0){
+          toastr.error("This package is already added.");
+        }
+        else{
+          if(typeof pkg.start_date === 'undefined'){
+            toastr.error("Start date for the package is required.");
+          }
+          else{
+            MetroService.shortlistPackage(pkg).then((result) => {
               if(result.status == 1){
                 loadShortlistedPackages();
                 toastr.success(result.message);
@@ -82,8 +95,9 @@ app.controller('MetroCtrl',
                 toastr.error(result.message);
               }
             });
-        
-      }
+          }
+        }
+}
 
       $scope.getEstBudgetForSelectedPackages = function(){
         var estBudget = 0;
@@ -94,17 +108,11 @@ app.controller('MetroCtrl',
       }
 
       $scope.isAlreadySelected = function(pkgId){
-        pkgIdarr = [];
-        pkgIdarr.push(pkgId);
-       /* var pkg = _.find($scope.select_package_var, (slPkg) => {
+         var pkg = _.find($scope.select_package_var, (slPkg) => {
           return slPkg.package_id == pkgId;
         });
-        return pkg !== undefined;*/
-        if(pkgIdarr.indexOf($scope.select_package_var) !== -1) {
-           return true;
-        }else{
-          return false;
-        }
+        return pkg !== undefined;
+        
       }
 
       $scope.deleteShortlistedMetroPackage = function(pkgId){
@@ -119,6 +127,11 @@ app.controller('MetroCtrl',
         });
       }
 
+      $scope.toggleSaveCampaignSidenavMetro = function () {
+        $mdSidenav('saveCampaignSidenavCOngo').close();
+        $mdSidenav('saveCampaignSidenavForm').toggle();
+      };
+
       $scope.saveMetroCampaign = function (campaign) {
         if ($scope.shortlistedPackages.length > 0) {
           campaign.packages = [];
@@ -127,10 +140,9 @@ app.controller('MetroCtrl',
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
             if(response.status == 1){
-              $scope.campaignSavedSuccessfully = true;
+              $mdSidenav('saveCampaignSidenavCOngo').toggle();
               $timeout(function () {
-                $mdSidenav('saveCampaignSidenav').close();
-                $mdSidenav('shortlistAndSaveSidenav').close();
+                $mdSidenav('saveCampaignSidenavForm').close();
                 campaign = {};
                 $scope.forms.viewAndSaveCampaignForm.$setPristine();
                 $scope.forms.viewAndSaveCampaignForm.$setUntouched();
@@ -175,6 +187,23 @@ app.controller('MetroCtrl',
             toastr.error(result.message);
           }
         });
+      }
+       $scope.deleteProductFromCampaign = function(campaignId,productId){
+        if ($window.confirm("Are you really want to delete this package?")) {
+           MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function(result){
+            if(result.status == 1){
+               getMetroCampDetails($stateParams.metroCampaignId);
+              getMetroCampaigns();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        } else {
+            $scope.Message = "You clicked NO.";
+        }
+       
       }
 
       function getMetroCampDetails(mCampId){

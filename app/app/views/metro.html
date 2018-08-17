@@ -173,7 +173,7 @@
 				</div>
 			</div>
 			<div layout="column" layout-margin>
-				<md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenav()">SAVE TO CAMPAIGN</md-button>
+				<md-button class="md-raised md-warn" layout-fill ng-click="toggleSaveCampaignSidenavMetro()">SAVE TO CAMPAIGN</md-button>
 			</div>
 		</md-content>
 	</md-sidenav>
@@ -222,28 +222,22 @@
 	<!-- List of shortlisted products' share details to client ends -->
 	<!-- Save campaign sidenav -->
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-disable-backdrop style="padding:10px;z-index:99;"
-	 md-component-id="saveCampaignSidenav">
+	 md-component-id="saveCampaignSidenavForm">
 		<div lauout=" column">
 			<div layout="row">
 				<div class="md-toolbar-tools">
-					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
-						<md-icon class="md-default-theme">
-							<i class="material-icons">arrow_back</i>
-						</md-icon>
-					</md-button>
+					
 					<span flex></span>
-					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
+					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenavclose()">
 						<md-icon class="md-default-theme">
 							<i class="material-icons">close</i>
 						</md-icon>
 					</md-button>
 				</div>
 			</div>
-			<md-content layout="column" style="overflow:hidden" ng-if="!campaignSavedSuccessfully">
+			<md-content layout="column" style="overflow:hidden" >
 				<div layout="column" layout-margin>
 					<h3 class="md-title">Group your shortlisted packages under a campaign name</h3>
-					<!-- <h3 class="md-title">We are excited to see your Campaign</h3>
-					<h3 class="md-title">Let's Work Together!</h3> -->
 				</div>
 				<form name="forms.ownerCampaignForm" role="form">
 					<div class="form-group">
@@ -251,31 +245,31 @@
 						<br>
 						<input ng-model="campaign.name" class="form-control" type="text">
 					</div>
-					<!-- <div class="form-group">
-						<label class="control-label">Budget</label>
-						<br>
-						<input ng-model="campaign.budget" class="form-control" type="text">
-					</div> -->
-					<!-- <div class="form-group">
-						<label class="control-label">Start Date</label>
-						<br>
-						<div class='input-group' style="width:100%">
-							<!-- <input ng-model="product.from_date" type="text" name="from_date" required="required" /> --
-							<input type='text' class="form-control" datepicker-popup ng-model="ownerCampaign.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
-							 max-date='ownerCampaign.end_date' ng-model-options="{timezone: 'utc'}" ng-readonly='true' placeholder="start date"
-							/>
-							<span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
-								<i class="glyphicon glyphicon-calendar"></i>
-							</span>
-						</div>
-					</div> -->
+					
 				</form>
 				<div layout="column" layout-margin>
 					<md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveMetroCampaign(campaign)">SAVE CAMPAIGN</md-button>
 				</div>
 				</form>
 			</md-content>
-			<md-content layout="column" style="margin-top:20%" ng-if="campaignSavedSuccessfully">
+		</div>
+	</md-sidenav>
+
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-disable-backdrop style="padding:10px;z-index:99;"
+	 md-component-id="saveCampaignSidenavCOngo">
+		<div lauout=" column">
+			<div layout="row">
+				<div class="md-toolbar-tools">
+					
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenavclose()">
+						<md-icon class="md-default-theme">
+							<i class="material-icons">close</i>
+						</md-icon>
+					</md-button>
+				</div>
+			</div>
+			<md-content layout="column" style="margin-top:20%">
 				<div layout="column" layout-align="center center" layout-margin>
 					<img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
 					<div class="md-display-1">Congratulations!</div>
@@ -622,7 +616,7 @@
 						<div layout="row">
 							<md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
 							<div flex></div>
-							<md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenav()">SAVE </md-button>
+							<md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenavMetro()">SAVE </md-button>
 							<!-- <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button> -->
 						</div>
 					</div>

@@ -63,7 +63,7 @@
 			<div class="form-group row">
 				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
 				<div flex-gt-xs="">
-					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date=""></md-datepicker>
+					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -252,7 +252,7 @@
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
 						<td>{{pkg.price}}</td>
 						<td>
-							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status >= 121" ng-click="deletePackageFromMetroCampaign(pkg.id, metroCampaignDetails.id)">
+							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status != 101 || metroCampaignDetails.type ==0" ng-click="deleteProductFromCampaign(metroCampaignDetails.id, pkg.package_id)">
 								<md-icon>
 									<i class="material-icons">delete</i>
 								</md-icon>

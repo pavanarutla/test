@@ -52,7 +52,12 @@ app.factory('MetroService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/metro-campaign/' + metroCampaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        deleteMetroPackageFromCampaign: function(campaignId, productId){
+          var dfd = $q.defer();
+          $http.delete(config.apiPath + '/metro-campaign-product/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
       }
     }
   ]

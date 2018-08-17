@@ -21,7 +21,7 @@
 							<h3>Price: Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
 							<div class="form-group">
 								<div flex-gt-xs="">
-									<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date=""></md-datepicker>
+									<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
 								</div>
 							</div>
 						</div>
@@ -32,13 +32,13 @@
 								<input type="number" ng-model="metroPackage.selected_trains" min="1" max="{{metroPackage.max_trains}}" class="trains_nbr">
 							</div>
 							<div class="slect_slot">
-								<p class="md-caption">select slots</p>
-								<input type="text" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}" readonly disabled="true" class="trains_nbr">
+								<!--<p class="md-caption">select slots</p>-->
+								<input type="hidden" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}" readonly disabled="true" class="trains_nbr">
 							</div>
 						</div>
 					</div>
 					<div layout="row">
-						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="select_package(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select this')}}</md-button>						
+						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select this')}}</md-button>						
 					</div>
 				</div>
 			</div>
@@ -51,8 +51,8 @@
 				<h2 class="text_color">
 					Rs. {{getEstBudgetForSelectedPackages()}}
 				</h2>
-				<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>	
-				<!-- <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
+				<!--<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>	
+				 <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
 			</div>
 			<div flex></div>
 			<div class="logo_lnt" style="    margin-top: 50px;">
