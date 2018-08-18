@@ -97,14 +97,17 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
 
   $scope.loadCampaignData = function(campaignId){
-    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      $scope.campaignDetails = result;
-      $scope.campaignProducts = result.products;
-      setDatesForProductsToSuggest($scope.campaignDetails);
-      if(result.status > 7){
-        loadCampaignPayments(campaignId);
-      }
-    });
+    return new Promise(function(resolve, reject){
+      CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+        $scope.campaignDetails = result;
+        $scope.campaignProducts = result.products;
+        setDatesForProductsToSuggest($scope.campaignDetails);
+        if(result.status > 7){
+          loadCampaignPayments(campaignId);
+        }
+        resolve(result);
+      });
+    })
   }
 
   function loadCampaignPayments(campaignId){
@@ -295,11 +298,14 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.loadCampaignData(campaignId);
       }
       else{
-        toastr.error(result.message);
-        _.map($scope.campaignProducts, (p) => {
-          if(_.contains(result.product_ids, p.product_id)){
-            p.unavailable = true;
-            console.log(p);
+        $scope.loadCampaignData(campaignId).then(function(){
+          if(result.product_ids && result.product_ids.length > 0){
+            toastr.error(result.message);
+            _.map($scope.campaignProducts, (p) => {
+              if(_.contains(result.product_ids, p.product_id)){
+                p.unavailable = true;
+              }
+            });
           }
         });
       }

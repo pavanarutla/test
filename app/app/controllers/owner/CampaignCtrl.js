@@ -356,7 +356,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog,$mdSidenav, $int
         $scope.getOwnerCampaignDetails(campaignId);
       }
       else {
-        toastr.error(result.message);
+        if(result.product_ids && result.product_ids.length > 0){
+          toastr.error(result.message);
+          _.map($scope.campaignDetails.products, (p) => {
+            if(_.contains(result.product_ids, p.product_id)){
+              p.unavailable = true;
+            }
+          });
+        }
+        else{
+          toastr.error(result.message);
+        }
       }
     });
   }

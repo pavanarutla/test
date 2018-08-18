@@ -85,6 +85,15 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.post(config.apiPath + '/share-shortlisted', obj).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			getApprovedProductListByDates: function(startDate, endDate){
+				var pageData = "";
+				if(startDate && endDate){
+					var pageData = "?start_date=" + startDate + "&end_date=" + endDate;
+				}
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/approved-owner-products' + pageData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}
