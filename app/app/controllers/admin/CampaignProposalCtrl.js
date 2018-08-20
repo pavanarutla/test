@@ -284,6 +284,18 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+  $scope.notifyProductOwnersForQuote = function(){
+    AdminCampaignService.notifyProductOwnersForQuote($scope.campaignDetails.id).then(function(result){
+      if(result.status == 1){
+        $scope.campaignDetails.status = 2;
+        toastr.success("Owners notified!"); // now we wait for launch request from user.
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   $scope.finalizeCampaign = function(){
     if($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget){
       var budget_check = confirm("Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?");

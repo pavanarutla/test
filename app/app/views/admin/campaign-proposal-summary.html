@@ -213,6 +213,16 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
+					<md-button class="md-raised md-warn" ng-disabled="!(
+					campaignDetails.type != 0 && (campaignDetails.status < 6) || 
+					campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || 
+					campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)
+					) || !campaignDetails.products" ng-if="campaignDetails.type == 1" ng-click="notifyProductOwnersForQuote()">
+						Notify Owners
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
 					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 3 && campaignDetails.status != 4)"
 					 ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
 						Finalize
@@ -220,15 +230,13 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || 
-					campaignDetails.type == 0 && (campaignDetails.status != 5) || 
-					campaignDetails.type == 1 && (campaignDetails.status >= 6)"	ng-click="launchCampaign(campaignDetails.id, $event)">
+					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 5)" ng-if="campaignDetails.status < 6"	ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if=" campaignDetails.status == 6">	Launched
+					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 6">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
@@ -291,7 +299,7 @@
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.product_id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.product_id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)) || (campaignDetails.type == 1 && campaignDetails.status < 6)">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>
