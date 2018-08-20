@@ -312,6 +312,23 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     getMetroCampaigns();
   }
   
+
+  $scope.deleteMetroCampaigns = function(campaignId){
+        if ($window.confirm("Are you really want to delete this camapaign?")) {
+           CampaignService.deleteMetroCampaign(campaignId).then(function(result){
+            if(result.status == 1){
+              getMetroCampaigns();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        } else {
+            $scope.Message = "You clicked NO.";
+        }
+       
+  }
   /*=============================
   | Page based initial loads end
   =============================*/

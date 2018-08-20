@@ -116,6 +116,7 @@
 				<table class="table table-striped table-bordered " style="widows: 100%;">
 					<thead class="text_color" style="text-align: center">
 						<tr>
+							<th>S.No.</th>
 							<th>Campagin Name</th>
 							<!-- <th>Client Contact</th>
 							<th>Start Date</th> -->
@@ -126,7 +127,8 @@
 						</tr>
 					</thead>
 					<tbody style="text-align: center">
-						<tr ng-repeat="mCampaign in metroCampaigns">
+						<tr ng-repeat="mCampaign in metroCampaigns track by $index">
+							<td>{{$index+1}}</td>
 							<td>{{mCampaign.name}}</td>
 							<!-- <td>Uber</td>
 							<td>{{mCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td> -->
@@ -134,9 +136,12 @@
 							<!-- <td>{{mCampaign.act_budget || "N/A"}}</td>
 							<td >Digital Signage - Inside Train</td> -->
 							<td>
-								<a href="#/metro-campaign/{{mCampaign.id}}">
+								<a  href="#/metro-campaign/{{mCampaign.id}}">
 									<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 								</a>
+								<button   ng-click="deleteMetroCampaigns(mCampaign.id)"> 
+									<md-icon><i class="material-icons">delete </i></md-icon>
+								</button>
 							</td>
 						</tr>      
 					</tbody>
