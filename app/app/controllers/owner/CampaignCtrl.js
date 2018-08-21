@@ -469,7 +469,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         toastr.success(result.data.message);
         $scope.campaignPayment = {};
         $scope.files.image = "";
-        $timeout(() => {
+        setTimout(() => {
           $location.path('/owner/' + $rootScope.clientSlug + '/payments');
         }, 2500);
       }
