@@ -82,12 +82,13 @@
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
         </div> -->
-        <label>Start date</label>
-        <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
-        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
-          <div ng-message="required">Start date is required.</div>
+      
+          <label>Start date</label>
+          <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="minStartDate" ng-init="ownerCampaign.start_date = defaultStartDate" ng-change="updateEndDateValidations()"></md-datepicker>          
+          <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+              <div ng-message="required">Start date is required.</div>
+            </div>
         </div>
-      </div>
       </div>
       <div class="form-group">
         <!-- <label class="control-label">End Date</label>
@@ -107,12 +108,14 @@
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
         </div> -->
+        
         <div flex-gt-xs="">
           <label>End date</label>
-          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
-        </div>
-        <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
-          <div ng-message="required">End date is required.</div>
+          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="minEndDate"></md-datepicker>
+          </div>
+          <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
+              <div ng-message="required">End date is required.</div>
+            </div>
         </div>
       </div>
       </div>
@@ -133,8 +136,6 @@
 <div layout="column" layout-fill="layout-fill">
   <md-tabs md-dynamic-height>
     <md-tab label="Proposals">
-      <!-- <div ui-grid="gridPreLaunch" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-          ui-grid-auto-resize class="grid"></div>  -->
       <div layout="colmun">
         <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40" flex-sm="60" flex-md="60">
           <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
@@ -212,8 +213,40 @@
     </md-tab>
 
     <md-tab label="Running">
-      <!-- <div ui-grid="gridRunning" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-          ui-grid-auto-resize class="grid"></div> -->
+      <div layout="colmun">
+        <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
+          <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+            md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
+            md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+            <md-item-template>
+              <span class="item-title">
+                <span> {{campaign.name}} </span>
+              </span>
+              <span class="item-metadata">
+                <span>
+                  <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.email}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.phone}}</strong>
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <span flex></span>
+        <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
+          Add New Campaign
+          <span>
+            <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+          </span>
+        </md-button>
+      </div>
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-striped table-bordered ">
@@ -256,8 +289,40 @@
     </md-tab>
 
     <md-tab label="Closed">
-      <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-          ui-grid-auto-resize class="grid"></div> -->
+      <div layout="colmun">
+        <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
+          <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+            md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
+            md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+            <md-item-template>
+              <span class="item-title">
+                <span> {{campaign.name}} </span>
+              </span>
+              <span class="item-metadata">
+                <span>
+                  <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.email}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.phone}}</strong>
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <span flex></span>
+        <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
+          Add New Campaign
+          <span>
+            <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+          </span>
+        </md-button>
+      </div>
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-striped table-bordered ">
@@ -299,8 +364,40 @@
       </div>
     </md-tab>
     <md-tab label="Your Campaigns">
-      <!-- <div ui-grid="gridClosed" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-          ui-grid-auto-resize class="grid"></div> -->
+      <div layout="colmun">
+        <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
+          <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+            md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
+            md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+            <md-item-template>
+              <span class="item-title">
+                <span> {{campaign.name}} </span>
+              </span>
+              <span class="item-metadata">
+                <span>
+                  <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.email}}</strong>
+                </span>
+                <span>
+                  <strong>{{campaign.phone}}</strong>
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <span flex></span>
+        <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
+          Add New Campaign
+          <span>
+            <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+          </span>
+        </md-button>
+      </div>
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-striped table-bordered ">

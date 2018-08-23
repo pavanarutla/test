@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   /*===================
   | Sidenavs and popups
@@ -23,6 +23,21 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     })
   };
 
+  $scope.toggleShareProductSidenav = function () {
+    $mdSidenav('shareProductSidenav').toggle();
+  };
+
+  $scope.toggleShortlistProductsSidenav = function(){
+    $mdSidenav('shortlistedProductsSidenav').toggle();
+  }
+
+  $scope.toggleShareProductsSidenav = function(){
+    $mdSidenav('shareProductsSidenav').toggle();
+  }
+
+  $scope.toggleOwnerAddCampaignSidenav = function(){
+    $mdSidenav('ownerAddCampaignSidenav').toggle();
+  }
   /*========================
   | Sidenavs and popups ends
   ========================*/
@@ -73,15 +88,20 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   }
   getCountryList();
 
-  var getApprovedProductList = function(){
+  $scope.getApprovedProductList = function(){
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       createPageLinks();
     });
   }
-  if($rootScope.currStateName == 'owner.hoarding-list'){
-    getApprovedProductList();
+
+  $scope.filterOwnerProductsWithDates = function(dateFilter){
+    OwnerProductService.getApprovedProductListByDates(moment(dateFilter.start_date).toISOString(), moment(dateFilter.end_date).toISOString()).then(function(result){
+      $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      createPageLinks();
+    });
   }
 
   var getRequestedProductList = function(){
@@ -91,10 +111,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       createPageLinks();
     });
   }
-  if($rootScope.currStateName == 'owner.requested-hoardings'){
-    getRequestedProductList();
-  }
-
+  
   $scope.getStateList = function(product){
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
@@ -163,8 +180,108 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  function getShortlistedProductsByOwner(){
+    OwnerProductService.getShortlistedProductsByOwner().then(function(result){
+      $scope.shortlistedProducts = result;
+    });
+  }
+
+  $scope.shortlistProductByOwner = function(productId){
+    OwnerProductService.shortListProductByOwner(productId).then(function(result){
+      if(result.status == 1){
+        getShortlistedProductsByOwner();
+        _.map($scope.productList, (p) => {
+          if(p.id == productId){
+            p.shortlisted = true;
+            return p;
+          }
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.deleteShortlistedByOwner = function(productId){
+    OwnerProductService.deletedShortListedByOwner(productId).then(function(result){
+      if(result.status == 1){
+        getShortlistedProductsByOwner();
+        _.map($scope.productList, (p) => {
+          if(p.id == productId){
+            p.shortlisted = false;
+            return p;
+          }
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.shareShortlistedProductsByOwner = function(recipientObj){
+    OwnerProductService.shareShortlistedProductsByOwner(recipientObj).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   /*=====================
   | Product Section Ends
+  =====================*/
+
+  
+  /*=====================
+  | Campaign Section
+  =====================*/
+  $scope.ownerCampaign = {};
+  $scope.ownerCampaign.from_shortlisted = 1;
+  $scope.minStartDate = new Date();
+  $scope.minEndDate = moment($scope.minStartDate).add(1, 'days').toDate();
+  $scope.ownerCampaign.end_date = $scope.minEndDate;
+  $scope.defaultStartDate = new Date();
+
+  $scope.updateEndDateValidations = function(){
+    $scope.minEndDate = moment($scope.ownerCampaign.start_date).add(1, 'days').toDate();
+    if($scope.ownerCampaign.end_date <= $scope.ownerCampaign.start_date){
+      $scope.ownerCampaign.end_date = $scope.minEndDate;
+    }
+  }
+
+  $scope.saveOwnerCampaign = function () {
+    OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
+      if (result.status == 1) {
+        $scope.ownerCampaign = {};
+        $scope.forms.ownerCampaignForm.$setPristine();
+        $scope.forms.ownerCampaignForm.$setUntouched();
+        toastr.success(result.message);
+        setTimeout(function(){
+          window.location.reload();
+        }, 500);
+      }
+      else if(result.status == 0){
+        if(result.message.constructor == Array){
+          $scope.ownerCampaignErrors = result.message;
+        }
+        else{
+          toastr.error(result.message);
+        }
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  /*=====================
+  | Campaign Section
   =====================*/
 
 
@@ -179,6 +296,15 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     else{
       toastr.error("Product not found.");
     }
+  }
+
+  if($rootScope.currStateName == 'owner.hoarding-list'){
+    $scope.getApprovedProductList();
+    getShortlistedProductsByOwner();
+  }
+
+  if($rootScope.currStateName == 'owner.requested-hoardings'){
+    getRequestedProductList();
   }
 
   /*=============================

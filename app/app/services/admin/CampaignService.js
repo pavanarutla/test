@@ -107,9 +107,16 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/quote-change-request-history/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
+
       updateMetroCampaignStatus: function(obj){
         var dfd = $q.defer();
         $http.post(config.apiPath + '/update-metro-campaigns-status', obj).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+
+      notifyProductOwnersForQuote: function(campaignId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/notify-product-owners-for-quote/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       }
     }

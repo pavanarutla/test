@@ -1,3 +1,42 @@
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+	<div layout="row">
+		<div class="md-toolbar-tools">
+		<div flex></div>
+		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+			<md-tooltip>Close Side Panel</md-tooltip>
+			<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+		</md-button>
+		</div>
+	</div>
+	<md-content layout-align="center center" layout-margin layout-padding>
+		<h3 class="md-headline">Share Campaign</h3>
+		<form name="shareCampaignForm">
+		<div layout="column">
+			<md-input-container class="md-block">
+			<label>Name</label>
+			<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required"/>
+			<div ng-messages="shareCampaignForm.name.$error">
+				<div ng-message="required">Name is required.</div>
+				<div ng-message="pattern">Enter a valid Name.</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+			<label>Email</label>
+			<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+			<div ng-messages="shareCampaignForm.email.$error">
+				<div ng-message="required">Email is required.</div>
+				<div ng-message="pattern">Enter a valid Email Id.</div>
+			</div>
+			</md-input-container>
+			<md-button class="md-raised md-warn" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">SHARE CAMPAIGN</md-button>
+		</div>
+		</form>
+	</md-content>
+</md-sidenav>
+<!-- share campaign sidenav ends -->
+
+
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
 	<div layout="column" layout-sm="column" layout-xs="column">
 		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
@@ -158,12 +197,28 @@
 			<div flex="70" layout="row" layout-align="end center">
 
 				<div>
+					<md-button class="md-raised md-warn" ng-click="toggleShareCampaignSidenav()">
+						Share
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
 					<md-button class="md-raised md-warn" ng-disabled="!(
 					campaignDetails.type != 0 && (campaignDetails.status < 6) || 
 					campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || 
 					campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)
 					)" ng-click="addNewProductToCampaign()">
 						Add New Product
+						<span>
+							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+						</span>
+					</md-button>
+					<md-button class="md-raised md-warn" ng-disabled="!(
+					campaignDetails.type != 0 && (campaignDetails.status < 6) || 
+					campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || 
+					campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)
+					) || !campaignDetails.products" ng-if="campaignDetails.type == 1" ng-click="notifyProductOwnersForQuote()">
+						Notify Owners
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
@@ -175,15 +230,13 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || 
-					campaignDetails.type == 0 && (campaignDetails.status != 5) || 
-					campaignDetails.type == 1 && (campaignDetails.status >= 6)"	ng-click="launchCampaign(campaignDetails.id, $event)">
+					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 5)" ng-if="campaignDetails.status < 6"	ng-click="launchCampaign(campaignDetails.id, $event)">
 						Launch
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if=" campaignDetails.status == 6">	Launched
+					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 6">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
@@ -220,7 +273,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="campaignProduct in campaignProducts | limitTo:limit">
+					<tr ng-repeat="campaignProduct in campaignProducts | limitTo:limit" ng-class="{'striked-out': campaignProduct.unavailable}">
 						<td>{{campaignProduct.siteNo}}</td>
 						<td>{{campaignProduct.format_name}}</td>
 						<td>{{campaignProduct.area_name}}</td>
@@ -238,7 +291,7 @@
 						<td>{{campaignProduct.price}}</td>
 						<td>
 							<span>
-								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
+								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.product_id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
 								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
@@ -246,7 +299,7 @@
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4))">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.product_id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)) || (campaignDetails.type == 1 && campaignDetails.status < 6)">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>

@@ -1,5 +1,7 @@
 app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, CompanyService, toastr) {
 
+	$scope.forms = {};
+
 	/*
 	* ========== Switching registration forms between User and Agency ===========
 	*/
@@ -58,9 +60,11 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	$scope.registerClient = function () {
 		CompanyService.registerClient($scope.client).then(function(result){
 			if(result.status == 1){
+				$scope.forms.registerClientForm.$setUntouched();
+				$scope.forms.registerClientForm.$setPristine();
 				toastr.success(result.message);
 				if($scope.clientErrorMessages){
-					$scope.clientErrorMessages.length = 0;
+					$scope.clientErrorMessages = null;
 				}
 				$mdDialog.hide();
 			}
@@ -69,7 +73,6 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 			}
 		});
 	}
-
 	
 	/*
 	* ============ Company Registration Ends ============

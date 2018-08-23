@@ -3,8 +3,8 @@
 	   <md-dialog-content>
 		<md-content class="md-padding"  style="background:#fff">
 			<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Users</md-nav-item>
-				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Client</md-nav-item>
+				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Clients</md-nav-item>
+				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Ad Space Owners</md-nav-item>
 				<span flex></span>
 				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
 					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -12,11 +12,11 @@
 			</md-nav-bar>
 			<div ng-if="showUserForm"  >
 				<md-content class="md-padding" style="background:#fff">
-					<form name="registerUser" novalidate="novalidate">
+					<form name="forms.registerUser" novalidate="novalidate">
 						<md-input-container class="md-block">
 							<label>Name</label>
 							<input ng-model="user.name" name="name" type="text" maxlength="30" required="required" />
-							<div ng-messages="registerUser.name.$error">
+							<div ng-messages="forms.registerUser.name.$error">
 								<div class="alret alert-danger" ng-message="required">Name is required.</div>
 								<div ng-message="maxlength">Name shouldn't exceed 30 characters. </div>
 							</div>
@@ -24,7 +24,7 @@
 						<md-input-container class="md-block">
 							<label>Company Name</label>
 							<input ng-model="user.company_name" name="companyName" type="text" minlength="6" maxlength="30" />
-							<div ng-messages="registerUser.companyName.$error">
+							<div ng-messages="forms.registerUser.companyName.$error">
 								<div class="alret alert-warning" ng-message="minlength">company name must have 6 characters.</div>
 								<div ng-message="maxlength">company name shouldn't exceed 30 characters. </div>
 							</div>
@@ -32,7 +32,7 @@
 						<md-input-container class="md-block">
 							<label>Email</label>
 							<input ng-model="user.email" name="email" type="email" maxlength="50" required="required"/>
-							<div ng-messages="registerUser.email.$error">
+							<div ng-messages="forms.registerUser.email.$error">
 								<div class="alret alert-danger" ng-message="required">Email is required.</div>
 								<div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
 								<div ng-message="pattern">Enter a valid username</div>
@@ -41,7 +41,7 @@
 						<md-input-container class="md-block">
 								<label>Password</label>
 								<input ng-model="user.password" name="password" type="password" maxlength="30" required="required"/>
-								<div ng-messages="registerUser.password.$error">
+								<div ng-messages="forms.registerUser.password.$error">
 									<div class="alret alert-danger" ng-message="required">Password is required.</div>
 									<div ng-message="maxlength">Password shouldn't exceed 30 characters. </div>
 									<div ng-message="pattern">Enter a valid Password</div>
@@ -51,7 +51,7 @@
 							<label>Mobile number</label>
 							<input ng-model="user.phone" only-numeric name="phone" type="mobile" minlength="10" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 							/>
-							<div ng-messages="registerUser.phone.$error" role="alert" multiple>
+							<div ng-messages="forms.registerUser.phone.$error" role="alert" multiple>
 								<div ng-message="required" class="my-message">Mobile Number is required.</div>
 								<div ng-message="pattern">Enter a valid Mobile Number</div>
 								<div ng-message="minlength">Mobile Number must have 10 digites. </div>
@@ -60,7 +60,7 @@
 						<md-input-container class="md-block">
 							<label>Address </label>
 							<input ng-model="user.address" name="address" type="text" minlength="10" maxlength="150" />
-							<div ng-messages="registerUser.address.$error">
+							<div ng-messages="forms.registerUser.address.$error">
 								<div class="alret alert-danger" ng-message="required">address is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
 								<div ng-message="maxlength">address shouldn't exceed 150 characters. </div>
@@ -77,7 +77,7 @@
 								</ul>
 							</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forms.registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
 						</md-input-container>
 						<!-- <div layout="row" layout-xs="column">
 							<p>Verify the E-mail address to Sign In </p>
@@ -87,11 +87,11 @@
 			</div>
 			<div ng-if="!showUserForm" >
 				<md-content class="md-padding" style="background:#fff">
-					<form name="registerClientForm" novalidate="novalidate">
+					<form name="forms.registerClientForm" novalidate="novalidate">
 						<md-input-container class="md-block">
 							<label>Client Name</label>
 							<input ng-model="client.name" name="clientName" type="text" maxlength="200" required="required" />
-							<div ng-messages="registerClientForm.clientname.$error">
+							<div ng-messages="forms.registerClientForm.clientname.$error">
 								<div class="alret alert-danger" ng-message="required">Client is required.</div>
 								<div ng-message="maxlength">Client shouldn't exede 200 characters. </div>
 							</div>
@@ -99,27 +99,27 @@
 						<md-input-container class="md-block">
 							<label>Contact Name</label>
 							<input ng-model="client.contact_name" name="clientContactName" type="text" maxlength="30" required="required" />
-							<div ng-messages="registerClientForm.clientContactName.$error">
+							<div ng-messages="forms.registerClientForm.clientContactName.$error">
 								<div class="alret alert-danger" ng-message="required">Contact name is required.</div>
 								<div ng-message="maxlength">Contact name shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
-						<md-input-container class="md-block">
+						<!-- <md-input-container class="md-block">
 							<label>Client Type</label>
 							<md-select ng-model="client.type" class="select-value" required="required" name="clientType">
 								<md-option ng-repeat="type in clientTypes" ng-value="type.id">{{type.type}}</md-option>
 							</md-select>
-							<div ng-messages="registerClientForm.clientType.$error">
+							<div ng-messages="forms.registerClientForm.clientType.$error">
 								<div class="alret alert-danger" ng-message="required">user name is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">user name must have 6 characters.</div>
 								<div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
 							</div>
-						</md-input-container>
+						</md-input-container> -->
 						<md-input-container class="md-block">
 							<label>Account Email</label>
 							<input ng-model="client.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
 							/>
-							<div ng-messages="registerClientForm.email.$error">
+							<div ng-messages="forms.registerClientForm.email.$error">
 								<div class="alret alert-danger" ng-message="required">Email is required.</div>
 								<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
 								<div ng-message="pattern">Enter a valid Email</div>
@@ -129,7 +129,7 @@
 							<label>Mobile number</label>
 							<input ng-model="client.phone" only-numeric name="phone" type="phone" minlength="10" maxlength="10" required="required" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 							/>
-							<div ng-messages="registerClientForm.phone.$error" role="alert" multiple>
+							<div ng-messages="forms.registerClientForm.phone.$error" role="alert" multiple>
 								<div ng-message="required" class="my-message">Mobile Number is required.</div>
 								<div ng-message="pattern">Enter a valid Mobile Number</div>
 								<div ng-message="minlength">Mobile Number must have 10 digites.</div>
@@ -138,7 +138,7 @@
 						<md-input-container class="md-block">
 							<label>Address </label>
 							<input ng-model="client.address" name="address" type="text" minlength="10" maxlength="150" required="required" />
-							<div ng-messages="registerClientForm.address.$error">
+							<div ng-messages="forms.registerClientForm.address.$error">
 								<div class="alret alert-danger" ng-message="required">address is required.</div>
 								<div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
 								<div ng-message="maxlength">username shouldn't exceed 150 characters. </div>
@@ -147,11 +147,11 @@
 						<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
 							<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
 						</div>
-						<div  ng-if="clientErrorMessages.length >=0" style="color : red">				
+						<div  ng-if="clientErrorMessages.length >=0 && !forms.registerClientForm.$dirty" style="color : red">				
 							{{clientErrorMessages}}
 						</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="registerClientForm.$invalid" ng-click="registerClient(client)">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forms.registerClientForm.$invalid" ng-click="registerClient(client)">Register</md-button>
 						</md-input-container>
 						<!-- <div layout="row" layout-xs="column">
 							<p> Verify the E-mail address to Sign In </p>
