@@ -255,14 +255,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     $mdDialog.show({
       locals: { src: imagePath },
       templateUrl: 'views/image-popup-large.html',
-      fullscreen: $scope.customFullscreen,
+      preserveScope: true,
+      scope: $scope,
+      fullscreen: $scope.customFullscreen,      
       clickOutsideToClose: true,
       controller: function ($scope, src) {
         $scope.img_src = src;
       }
     });
   }
-
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
+  }
   $scope.finalizeCampaign = function () {
     OwnerCampaignService.finalizeCampaignByOwner($scope.campaignDetails.id).then(function (result) {
       if (result.status == 1) {

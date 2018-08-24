@@ -26,7 +26,7 @@
             <md-button class="md-raised md-primary" layout-fill ng-click='loadMore()'>Show More</md-button>
           </div> -->
       <div class="row" style="margin-left:0px;margin-right:0px;margin-top:10px">
-        <div class="col-sm-3" ng-repeat="request in requestList" style="margin-bottom:10px">
+        <div class="col-xs-6 col-sm-3 col-md-4 col-lg-3" ng-repeat="request in requestList" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg owner_feeds">
             <div layout="column" layout-fill layout-margin>
               <div layout="column" layout-align="center center" flex>
@@ -34,13 +34,13 @@
                 <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
               </div>
               <div layout="column" layout-align="center start" flex class="feed-hdng">
-                <h3 ng-show="request.status == 2">A user has asked for a quote for your products.</h3>
-                <h3 ng-show="request.status == 5">A campaign with your products has been requested to launch.</h3>
+                <h3 ng-show="request.status == 2" style="text-transform: capitalize">A user has asked for a quote for your products.</h3>
+                <h3 ng-show="request.status == 5" style="text-transform: capitalize">A campaign with your products has been requested to launch.</h3>
                 <!-- <h3 ng-show="request.status == 5">{{request.contact_name}} has requested for the launch of their campaign.</h3> -->
               </div>
             </div>
             <div layout="colmun" style="margin: 0 0 0 8px;">
-              <span class="text_color">Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+              <span class="text_color">Date:{{request.updated_at | date:'dd-MM-yyyy HH:mm:ss'}}</span>
             </div>
             <div layout="colmun" layout-align="center center">
               <md-button class="md-raised md-primary" ng-click="showCampaignDetails($event, request)">View Details</md-button>
