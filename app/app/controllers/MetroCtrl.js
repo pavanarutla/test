@@ -20,6 +20,12 @@ app.controller('MetroCtrl',
           alert("Please select a corridor first.");
         }
       };
+      $scope.closeCongSaveCampaignSidenav = function(){
+        $mdSidenav('saveCampaignSidenavCongo').close();
+      }
+      $scope.closeSaveCampaignSidenav = function(){
+        $mdSidenav('saveCampaignSidenavForm').close();
+      }
       /*================================
       | Popup and Sidenav controls end
       ================================*/
@@ -128,7 +134,7 @@ app.controller('MetroCtrl',
       }
 
       $scope.toggleSaveCampaignSidenavMetro = function () {
-        $mdSidenav('saveCampaignSidenavCOngo').close();
+        $mdSidenav('saveCampaignSidenavCongo').close();
         $mdSidenav('saveCampaignSidenavForm').toggle();
       };
 
@@ -140,9 +146,10 @@ app.controller('MetroCtrl',
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
             if(response.status == 1){
-              $mdSidenav('saveCampaignSidenavCOngo').toggle();
+              $mdSidenav('saveCampaignSidenavForm').close();
+              $mdSidenav('saveCampaignSidenavCongo').open();
               $timeout(function () {
-                $mdSidenav('saveCampaignSidenavForm').close();
+                $mdSidenav('saveCampaignSidenavCongo').close();
                 campaign = {};
                 $scope.forms.viewAndSaveCampaignForm.$setPristine();
                 $scope.forms.viewAndSaveCampaignForm.$setUntouched();
