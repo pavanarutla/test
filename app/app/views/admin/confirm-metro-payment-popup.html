@@ -35,6 +35,15 @@
               <div ng-message="maxlength">Cheque/Reference/Transaction shouldn't exceed 30 characters. </div>
             </div>
           </md-input-container>
+          <md-input-container class="md-block margin-input">
+            <label>Received By</label>
+            <input ng-model="campaignPayment.received_by" type="text" name="received_by" minlength="3" maxlength="60" required/>
+            <div ng-messages="updateCampaignPaymentForm.received_by.$error">
+              <div ng-message="required">Received By is required.</div>
+              <div ng-message="minlength">Received By must have 3 characters.</div>
+              <div ng-message="maxlength">Received By shouldn't exceed 60 characters. </div>
+            </div>
+          </md-input-container>
         </div>
         <div layout="row" layout-align="center center">
           <md-button Class="md-raised md-primary" type="submit" ng-click="updateCampaignPayment()">SUBMIT</md-button>

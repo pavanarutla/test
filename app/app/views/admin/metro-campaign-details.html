@@ -14,7 +14,7 @@
 				<span>Add Product</span>
 			</h2>
 			<span flex></span>
-			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleRequestHoardingFormSidenav()">
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()()">
 				<md-tooltip>Close Side Panel</md-tooltip>
 				<md-icon class="md-default-theme">
 					<i class="material-icons">close</i>
@@ -36,7 +36,6 @@
 				<label for="area" class="col-sm-4 col-form-label">Select Corridor</label>
 				<div class="col-sm-8">
 					<select name="corridor" class="form-control" id="corridor" ng-model="selectedCorridor" ng-options="corr as corr.name for corr in metroCorridorList" ng-change="getMetroPackages(selectedCorridor.id)" required>
-						<option value="" disabled selected>Select Corridor</option>
 					</select>
 				</div>
 			</div>
@@ -44,7 +43,6 @@
 				<label for="pack" class="col-sm-4 col-form-label">Packages</label>
 				<div class="col-sm-8">
 						<select name="corridor" class="form-control" id="corridor" ng-model="selectedPackage" ng-options="pkg as (pkg | MetroNamePrice) for pkg in metroPackages" ng-change="selectPackage(selectedPackage)"  required>
-							<option value="" disabled selected>Select Package</option>
 						</select>
 				</div>
 			</div>
@@ -77,7 +75,7 @@
 				<label class="col-md-3 control-label"></label>
 				<input class="btn btn-primary" value="Save" type="button" ng-click="addPackageInMetroCampaign()">
 				<span></span>
-				<input class="btn btn-default" value="Cancel" type="reset">
+				<input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()()">
 			</div>
 		</form>
 	</md-content>
@@ -220,9 +218,9 @@
 					Add New Product
 				</md-button>
 				<md-button ng-disabled="!metroCampaignDetails || campaignMetroPayments" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
-					Confirm Payment
+					Update Payment
 				</md-button>
-				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status == 141 || metroCampaignDetails.status ==151 ) || !campaignMetroPayments" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 131)" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
 					Launch Campaign
 				</md-button>
 				<md-button class="md-raised" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status == 151" class="md-raised md-warn" ng-click="closeMetroCampaign(metroCampaignDetails.id)">

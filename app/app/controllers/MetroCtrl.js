@@ -1,6 +1,6 @@
 app.controller('MetroCtrl',
-  ['$scope', '$mdSidenav', '$mdDialog', '$rootScope', '$stateParams', '$timeout', 'CampaignService', 'MetroService', 'FileSaver', 'Blob', 'config', 'toastr',
-    function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, CampaignService, MetroService, FileSaver, Blob, config, toastr) {
+  ['$scope', '$mdSidenav', '$mdDialog', '$rootScope', '$stateParams', '$timeout', '$window', 'CampaignService', 'MetroService', 'FileSaver', 'Blob', 'config', 'toastr',
+    function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, FileSaver, Blob, config, toastr) {
       $scope.metroCampaign = {};
       $scope.newDate = new Date();
       /*==============================
@@ -189,7 +189,7 @@ app.controller('MetroCtrl',
         });
       }
       $scope.deleteProductFromCampaign = function(campaignId,productId){
-        if ($window.confirm("Are you really want to delete this package?")) {
+        if ($window.confirm("Are you sure you want to delete this package?")) {
            MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function(result){
             if(result.status == 1){
                getMetroCampDetails($stateParams.metroCampaignId);

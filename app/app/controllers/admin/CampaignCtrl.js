@@ -1,5 +1,5 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr,  FileSaver, Blob, MetroService,$window) {
- $scope.newDate = new Date();
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr, FileSaver, Blob, MetroService, $window) {
+  $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
     'campaign-created',      //    1
@@ -26,9 +26,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   | Popups and Sidenavs end
   ===================================*/
 
-  var getAllCampaigns = function(){
-    AdminCampaignService.getAllCampaigns().then(function(result){
-      $scope.plannedCampaigns = _.filter(result.user_campaigns, function(c){
+  var getAllCampaigns = function () {
+    AdminCampaignService.getAllCampaigns().then(function (result) {
+      $scope.plannedCampaigns = _.filter(result.user_campaigns, function (c) {
         return c.status < 6 && typeof c.name !== "undefined" && typeof c.start_date !== "undefined" && typeof c.end_date !== "undefined";
       });
       $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
@@ -42,19 +42,19 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   | Filtering Campaigns
   =====================*/
   // $scope.simulateQuery = false;
-  $scope.isDisabled    = false;
+  $scope.isDisabled = false;
   // $scope.querySearch   = querySearch;
   // $scope.selectedItemChange = selectedItemChange;
   // $scope.searchTextChange   = searchTextChange;
 
 
-  $scope.campaignSearch = function(query) {
-    return AdminCampaignService.searchCampaigns(query.toLowerCase()).then(function(res){
+  $scope.campaignSearch = function (query) {
+    return AdminCampaignService.searchCampaigns(query.toLowerCase()).then(function (res) {
       return res;
     });
   }
 
-  $scope.viewSelectedCampaign = function(campaign) {
+  $scope.viewSelectedCampaign = function (campaign) {
     $location.path('/admin/campaign-proposal-summary/' + campaign.id);
   }
 
@@ -71,7 +71,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       templateUrl: 'views/admin/add-full-campaign.html',
       clickOutsideToClose: true,
       fullscreen: $scope.customFullscreen,
-      controller: function($scope, $mdDialog, AdminCampaignService, toastr){
+      controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
         $scope.campaign = {};
         var startDate = new Date();
         var productFromDate = new Date($scope.campaign.start_date);
@@ -91,81 +91,81 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
           startDate.getMonth(),
           productToDate.getDate()
         );
-        $scope.saveCampaignByAdmin = function(){
-          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function(result){
-            if(result.status == 1){
+        $scope.saveCampaignByAdmin = function () {
+          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
+            if (result.status == 1) {
               getAllCampaigns();
               toastr.success(result.message);
               $mdDialog.hide();
             }
-            else if(result.status == 0){
+            else if (result.status == 0) {
               $scope.campaignDetailsErrorEessages = result.message;
             }
-          },function(result){
-              $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+          }, function (result) {
+            $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
           });
         }
-        $scope.close = function(){
+        $scope.close = function () {
           $mdDialog.hide();
         }
       }
     });
   };
 
-  $scope.deleteUserCampaign = function(campaignId){
-    AdminCampaignService.deleteUserCampaign(campaignId).then(function(result){
-      if(result.status == 1){
+  $scope.deleteUserCampaign = function (campaignId) {
+    AdminCampaignService.deleteUserCampaign(campaignId).then(function (result) {
+      if (result.status == 1) {
         getAllCampaigns();
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else if(result.status == 0){
+      else if (result.status == 0) {
         toastr.error(result.message);
       }
-    },function(result){
-        toastr.error("somthing went wrong please try again after some time!");
+    }, function (result) {
+      toastr.error("somthing went wrong please try again after some time!");
     });
   }
 
-  $scope.deleteNonUserCampaign = function(campaignId){
-    AdminCampaignService.deleteNonUserCampaign(campaignId).then(function(result){
-      if(result.status == 1){
+  $scope.deleteNonUserCampaign = function (campaignId) {
+    AdminCampaignService.deleteNonUserCampaign(campaignId).then(function (result) {
+      if (result.status == 1) {
         getAllCampaigns();
         toastr.success(result.message);
         $mdDialog.hide();
       }
-      else if(result.status == 0){
+      else if (result.status == 0) {
         toastr.error(result.message);
       }
-    },function(result){
-        toastr.error("somthing went wrong please try again after some time!");
+    }, function (result) {
+      toastr.error("somthing went wrong please try again after some time!");
     });
   }
   /*
   *========= campaign proposal(planned) grid =========
   */
-  
+
   /*
   //////// Floating campaign section
   */
 
-  $scope.formRows = [{formId: '1', name: 'floatginCampaignForm1'}];
-  $scope.addNewFormRow = function() {
+  $scope.formRows = [{ formId: '1', name: 'floatginCampaignForm1' }];
+  $scope.addNewFormRow = function () {
     var newItemNo = $scope.formRows.length + 2;
-    $scope.formRows.push({'formId' : newItemNo, 'name' : 'floatingCampaignForm' + newItemNo});
+    $scope.formRows.push({ 'formId': newItemNo, 'name': 'floatingCampaignForm' + newItemNo });
   };
 
-  $scope.generateFloatingCampaignPdf = function(){
+  $scope.generateFloatingCampaignPdf = function () {
     Upload.upload({
       url: config.apiPath + '/floating-campaign-pdf',
       data: { product_arr: $scope.formRows },
       responseType: "arraybuffer"
     }).then(function (result) {
-      if(result.data){
+      if (result.data) {
         var campaignPdf = new Blob([result.data], { type: 'application/pdf;charset=utf-8' });
         FileSaver.saveAs(campaignPdf, 'Campaigns Proposal.pdf');
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     }, function (resp) {
@@ -174,7 +174,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
-  } 
+  }
 
   /*
   //////// Floating campaign section ends
@@ -183,31 +183,33 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*====================================
   | Metro Campaigns
   ====================================*/
-  var getFormatList = function(obj){
-    ProductService.getFormatList(obj).then(function(result){
+  var getFormatList = function (obj) {
+    ProductService.getFormatList(obj).then(function (result) {
       $scope.formatList = result;
     });
   }
-  function getMetroCorridors(){
-    AdminMetroService.getMetroCorridors().then(function(result){
+  function getMetroCorridors() {
+    AdminMetroService.getMetroCorridors().then(function (result) {
       $scope.metroCorridorList = result;
+      $scope.selectedCorridor = $scope.metroCorridorList[0];
+      $scope.getMetroPackages($scope.selectedCorridor.id);
     });
   }
-  $scope.selectPackage = function(pkg){
-    console.log(pkg);
+  $scope.selectPackage = function (pkg) {
     $scope.selectedPackage = pkg;
   }
-  $scope.getMetroPackages = function(corridorId){
-    AdminMetroService.getMetroPackages(corridorId).then(function(result){
+  $scope.getMetroPackages = function (corridorId) {
+    AdminMetroService.getMetroPackages(corridorId).then(function (result) {
       _.map(result, (res) => {
         res.selected_trains = 1;
         res.selected_slots = 1;
         return res;
       });
       $scope.metroPackages = result;
+      $scope.selectedPackage = result[0];
     });
   }
-  function getMetroCampaigns(){
+  function getMetroCampaigns() {
     AdminMetroService.getMetroCampaigns().then((result) => {
       // console.log(result);
       $scope.userMetroCampaigns = _.filter(result, (campaign) => {
@@ -218,56 +220,143 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       });
     });
   }
-  function getMetroCampaignDetails(metroCampaignId){
+  function getMetroCampaignDetails(metroCampaignId) {
     AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
-      console.log("result111");
-       console.log(result);
       $scope.metroCampaignDetails = result;
     });
   }
-  $scope.addPackageInMetroCampaign = function(){
+  $scope.addPackageInMetroCampaign = function () {
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
     $scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
     AdminMetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
-      if(result.status == 1){
+      if (result.status == 1) {
         $scope.selectedPackage = {};
         getMetroCampaignDetails($scope.metroCampaignDetails.id);
         toastr.success(result.message);
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
   }
+  $scope.launchMetroCampaign = function (campaignId, ev) {
+    AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
+      if (result.status == 1) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title("Congrats!!")
+            .textContent(result.message)
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        getMetroCampaignDetails(campaignId);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+  $scope.saveMetroCampaign = function (campaign) {
+    MetroService.saveMetroCampaign(campaign).then(function (response) {
+      if (response.status == 1) {
+        $scope.campaignSavedSuccessfully = true;
+        $scope.metroCampaign = {};
+        $scope.metroCampaignForm.$setPristine();
+        $scope.metroCampaignForm.$setUntouched();
+        $scope.campaignSavedSuccessfully = false;
+        toastr.success(response.message);
+        $mdSidenav('metroAddCmapginSidenav').close();
+        getMetroCampaigns();
+      }
+      else {
+        $scope.saveUserCampaignErrors = response.message;
+        toastr.error(response.message);
+      }
+    });
+  }
+  $scope.closeMetroCampaign = function (campaignId) {
+    if ($window.confirm("Are you really want to close this campaign?")) {
+      AdminMetroService.closeMetroCampaign(campaignId).then(function (response) {
+        if (response.status == 1) {
+          $scope.campaignSavedSuccessfully = true;
+          $scope.metroCampaign = {};
+          toastr.success(response.message);
+          getMetroCampaignDetails(campaignId);
+        }
+        else {
+          //$scope.saveUserCampaignErrors = response.message;
+          toastr.error(response.message);
+        }
+      });
+    } 
+    else {
+      $scope.Message = "You clicked NO.";
+    }
+  }
+  $scope.deleteProductFromCampaign = function (campaignId, productId) {
+    if ($window.confirm("Are you sure you want to delete this package?")) {
+      MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function (result) {
+        if (result.status == 1) {
+          getMetroCampaignDetails(campaignId);
+          loadCampaignPayments($stateParams.metroCampaignId);
+          toastr.success(result.message);
+        }
+        else {
+          toastr.error(result.message);
+        }
+      });
+    } else {
+      $scope.Message = "You clicked NO.";
+    }
+  }
+  $scope.deleteMetroCampaign = function (campaignId) {
+    if ($window.confirm("Are you really want to delete this camapaign?")) {
+      CampaignService.deleteMetroCampaign(campaignId).then(function (result) {
+        if (result.status == 1) {
+          getMetroCampaigns();
+          toastr.success(result.message);
+        }
+        else {
+          toastr.error(result.message);
+        }
+      });
+    } else {
+      $scope.Message = "You clicked NO.";
+    }
+  }
+
   /*====================================
   | Metro Campaigns end
   ====================================*/
 
-  $scope.cancel = function(){
+  $scope.cancel = function () {
     $mdDialog.hide();
   };
-  
+
   /*=========================
   | Page based initial loads
   =========================*/
-  if($rootScope.currStateName == "admin.campaign-proposal-summary"){
-    if($stateParams.campaignId){
+  if ($rootScope.currStateName == "admin.campaign-proposal-summary") {
+    if ($stateParams.campaignId) {
       var campaignId = $stateParams.campaignId;
-      CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-        
+      CampaignService.getCampaignWithProducts(campaignId).then(function (result) {
+
       });
     }
   }
-  if($rootScope.currStateName == "admin.metro-campaigns"){
+  if ($rootScope.currStateName == "admin.metro-campaigns") {
     getMetroCampaigns();
   }
-  if($rootScope.currStateName == "admin.metro-campaign"){
-    if($stateParams.metroCampaignId){
+  if ($rootScope.currStateName == "admin.metro-campaign") {
+    if ($stateParams.metroCampaignId) {
       getMetroCampaignDetails($stateParams.metroCampaignId);
     }
     getMetroCorridors();
-    getFormatList({type: "metro"});
+    getFormatList({ type: "metro" });
   }
   /*=============================
   | Page based initial loads end
@@ -275,37 +364,28 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
 
 
 
-    $scope.showConfirmMetroPaymentPopup = function(){
+  $scope.showConfirmMetroPaymentPopup = function () {
     $mdDialog.show({
       templateUrl: 'views/admin/confirm-metro-payment-popup.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
       preserveScope: true,
-      locals:{ campaignId: $stateParams.metroCampaignId, ctrlScope : $scope },
-      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaignId){
+      locals: { metroCampaignId: $stateParams.metroCampaignId, ctrlScope: $scope },
+      controller: function ($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, metroCampaignId) {
         $scope.paymentTypes = [
-          {name: "Cash"},
-          {name: "Cheque"},
-          {name: "Online"},
-          {name: "Transfer"}
+          { name: "Cash" },
+          { name: "Cheque" },
+          { name: "Online" },
+          { name: "Transfer" }
         ];
-        $scope.updateCampaignPayment = function(){
-          $scope.campaignPayment.campaign_id = campaignId;
-          AdminCampaignService.updateCampaignPayment($scope.campaignPayment).then(function(result){
-            if(result.status == 1){
-              $scope.campaignPaymentstatus  = {};
-                $scope.campaignPaymentstatus.campaign_id = $stateParams.metroCampaignId;
-                $scope.campaignPaymentstatus.status = 131;
-               AdminCampaignService.updateMetroCampaignStatus($scope.campaignPaymentstatus).then(function(result){
-                  // update succeeded. update the grid now.
-                  if(result.status == 1){
-                    loadCampaignPayments(campaignId);
-                    toastr.success(result.message);
-                    $rootScope.closeMdDialog();
-                  }
-              });
+        $scope.updateCampaignPayment = function () {
+          $scope.campaignPayment.metro_campaign_id = metroCampaignId;
+          AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
+            if (result.status == 1) {
+              getMetroCampaignDetails(metroCampaignId);
+              $mdDialog.hide();
             }
-            else{
+            else {
               toastr.error(result.message);
             }
           });
@@ -314,136 +394,21 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     });
   }
 
-
-   
-   function loadCampaignPayments(campaignId){
+  function loadCampaignPayments(campaignId) {
     //if($scope.campaignDetails.status >= 6 ){
-      AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result){
-        console.log("paymentTypes");
-        console.log(result);
-        if(result.status=="1"){
-          $scope.campaignMetroPayments = result;
-        }else{
-         // toastr.error(result.message);
-        }
-        
-      });
-   // }
+    AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
+      if (result.status == "1") {
+        $scope.campaignMetroPayments = result;
+      } else {
+        // toastr.error(result.message);
+      }
+
+    });
+    // }
     // else{
     //   toastr.error('Payments are only available for running or stopped campaigns.');
     // }
   }
   loadCampaignPayments($stateParams.metroCampaignId);
-
-
-
-  $scope.launchMetroCampaign = function(campaignId, ev){
-     $scope.camMetroDetails = {};
-    $scope.camMetroDetails.campaign_id = campaignId;
-    $scope.camMetroDetails.status = 141;
-    AdminCampaignService.updateMetroCampaignStatus($scope.camMetroDetails).then(function(result){
-      if(result.status == 1){
-        $mdDialog.show(
-          $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title("Congrats!!")
-          .textContent(result.message)
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
-        );
-        getMetroCampaignDetails(campaignId);
-      }
-      else{
-        toastr.error(result.message);
-      }
-    });
-  }
-
-
-  
-  $scope.saveMetroCampaign = function (campaign) {
-         
-          MetroService.saveMetroCampaign(campaign).then(function (response) {
-            if(response.status == 1){
-              $scope.campaignSavedSuccessfully = true;
-                $scope.metroCampaign = {};
-                $scope.metroCampaignForm.$setPristine();
-                $scope.metroCampaignForm.$setUntouched();
-                $scope.campaignSavedSuccessfully = false;
-                toastr.success(response.message);
-                $mdSidenav('metroAddCmapginSidenav').close();
-                getMetroCampaigns();
-            }
-            else{
-              $scope.saveUserCampaignErrors = response.message;
-              toastr.error(response.message);
-            }
-          });
-        
-      }
-
-
-      $scope.closeMetroCampaign = function (campaign) {
-
-        if ($window.confirm("Are you really want to close this campaign?")) {
-          AdminMetroService.closeMetroCampaign(campaign).then(function (response) {
-            if(response.status == 1){
-              $scope.campaignSavedSuccessfully = true;
-                $scope.metroCampaign = {};
-               
-                toastr.success(response.message);
-                getMetroCampaigns();
-            }
-            else{
-              //$scope.saveUserCampaignErrors = response.message;
-              toastr.error(response.message);
-            }
-          });
-        } else {
-            $scope.Message = "You clicked NO.";
-        }
-         
-         
-        
-      }
-
-      $scope.deleteProductFromCampaign = function(campaignId,productId){
-        if ($window.confirm("Are you really want to delete this package?")) {
-           MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function(result){
-            if(result.status == 1){
-              getMetroCampaignDetails(campaignId);
-
-               loadCampaignPayments($stateParams.metroCampaignId);
-              toastr.success(result.message);
-            }
-            else{
-              toastr.error(result.message);
-            }
-          });
-        } else {
-            $scope.Message = "You clicked NO.";
-        }
-       
-      }
-    
-
-    $scope.deleteMetroCampaign = function(campaignId){
-        if ($window.confirm("Are you really want to delete this camapaign?")) {
-           CampaignService.deleteMetroCampaign(campaignId).then(function(result){
-            if(result.status == 1){
-               getMetroCampaigns();
-              toastr.success(result.message);
-            }
-            else{
-              toastr.error(result.message);
-            }
-          });
-        } else {
-            $scope.Message = "You clicked NO.";
-        }
-       
-  }
 
 });
