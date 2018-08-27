@@ -73,9 +73,16 @@ app.controller('MetroCtrl',
           if(typeof pkg.start_date === 'undefined'){
             toastr.error("Start date for the package is required.");
           }
-          else{
-            $scope.select_package_var.push(pkg);
-              console.log( $scope.select_package_var); 
+         else{
+            MetroService.shortlistPackage(pkg).then((result) => {
+              if(result.status == 1){
+                loadShortlistedPackages();
+                toastr.success(result.message);
+              }
+              else{
+                toastr.error(result.message);
+              }
+            });
           }
         }
       } 
@@ -114,7 +121,7 @@ app.controller('MetroCtrl',
       }
 
       $scope.isAlreadySelected = function(pkgId){
-         var pkg = _.find($scope.select_package_var, (slPkg) => {
+         var pkg = _.find($scope.shortlistedPackages, (slPkg) => {
           return slPkg.package_id == pkgId;
         });
         return pkg !== undefined;

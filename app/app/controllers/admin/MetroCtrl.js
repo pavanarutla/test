@@ -179,11 +179,11 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
    
 
    $scope.package = {};
-   $scope.package.months = 1;
+   /*$scope.package.months = 1;
    $scope.package.days = 0;
    $scope.package.price = 1;
    $scope.package.max_trains =1;
-   $scope.package.max_slots =0;
+   $scope.package.max_slots =0;*/
    //$scope.package.format_id = $scope.formatList[0].id;
    // $scope.package.corridor_id = $scope.metroCorridorList[0].id;
 
