@@ -41,7 +41,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label">Email:</label>
-				<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control" type="text" required>
+				<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control" type="text" required ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
 				<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched" style="color:red">
 					<div ng-message="required">Email is required.</div>
 				</div>
@@ -49,7 +49,7 @@
 			<div class="form-group">
 				<label class="control-label">Phone Number</label>
 				<br>
-				<input ng-model="metroCampaign.org_contact_phone" name="org_contact_phone" class="form-control" type="text" minlength="10" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+				<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control" type="text" minlength="10" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
 				<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched" style="color:red">
 					<div ng-message="required">Phone number is required.</div>
 				</div>
