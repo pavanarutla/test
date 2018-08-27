@@ -167,6 +167,9 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     getMetroCorridors();
     getMetroPackages();
   }
+  if($rootScope.currStateName == 'admin.metro-corridors'){
+    getMetroCorridors();
+  }
   /*================================
   | Page based initial loads end
   ================================*/
