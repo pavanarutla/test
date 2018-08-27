@@ -19,7 +19,10 @@ app.controller('MetroCtrl',
         else{
           alert("Please select a corridor first.");
         }
-      };
+      }
+      $scope.closePackagePopup = function(){
+        $mdDialog.hide();
+      }
       $scope.closeCongSaveCampaignSidenav = function(){
         $mdSidenav('saveCampaignSidenavCongo').close();
       }
