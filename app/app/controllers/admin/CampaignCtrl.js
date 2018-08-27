@@ -279,7 +279,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     });
   }
   $scope.closeMetroCampaign = function (campaignId) {
-    if ($window.confirm("Are you really want to close this campaign?")) {
+    if ($window.confirm("Are you sure you want to close this campaign?")) {
       AdminMetroService.closeMetroCampaign(campaignId).then(function (response) {
         if (response.status == 1) {
           $scope.campaignSavedSuccessfully = true;
