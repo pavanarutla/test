@@ -44,6 +44,8 @@
 				<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control" type="text" required ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
 				<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched" style="color:red">
 					<div ng-message="required">Email is required.</div>
+					<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
+					<div ng-message="pattern">Enter a valid Email</div>
 				</div>
 			</div>
 			<div class="form-group">
