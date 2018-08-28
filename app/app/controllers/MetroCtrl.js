@@ -20,6 +20,12 @@ app.controller('MetroCtrl',
           alert("Please select a corridor first.");
         }
       };
+      $scope.closeCongSaveCampaignSidenav = function(){
+        $mdSidenav('saveCampaignSidenavCongo').close();
+      }
+      $scope.closeSaveCampaignSidenav = function(){
+        $mdSidenav('saveCampaignSidenavForm').close();
+      }
       /*================================
       | Popup and Sidenav controls end
       ================================*/
@@ -67,9 +73,16 @@ app.controller('MetroCtrl',
           if(typeof pkg.start_date === 'undefined'){
             toastr.error("Start date for the package is required.");
           }
-          else{
-            $scope.select_package_var.push(pkg);
-              console.log( $scope.select_package_var); 
+         else{
+            MetroService.shortlistPackage(pkg).then((result) => {
+              if(result.status == 1){
+                loadShortlistedPackages();
+                toastr.success(result.message);
+              }
+              else{
+                toastr.error(result.message);
+              }
+            });
           }
         }
       } 
@@ -108,7 +121,7 @@ app.controller('MetroCtrl',
       }
 
       $scope.isAlreadySelected = function(pkgId){
-         var pkg = _.find($scope.select_package_var, (slPkg) => {
+         var pkg = _.find($scope.shortlistedPackages, (slPkg) => {
           return slPkg.package_id == pkgId;
         });
         return pkg !== undefined;
@@ -128,7 +141,7 @@ app.controller('MetroCtrl',
       }
 
       $scope.toggleSaveCampaignSidenavMetro = function () {
-        $mdSidenav('saveCampaignSidenavCOngo').close();
+        $mdSidenav('saveCampaignSidenavCongo').close();
         $mdSidenav('saveCampaignSidenavForm').toggle();
       };
 
@@ -140,9 +153,10 @@ app.controller('MetroCtrl',
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
             if(response.status == 1){
-              $mdSidenav('saveCampaignSidenavCOngo').toggle();
+              $mdSidenav('saveCampaignSidenavForm').close();
+              $mdSidenav('saveCampaignSidenavCongo').open();
               $timeout(function () {
-                $mdSidenav('saveCampaignSidenavForm').close();
+                $mdSidenav('saveCampaignSidenavCongo').close();
                 campaign = {};
                 $scope.forms.viewAndSaveCampaignForm.$setPristine();
                 $scope.forms.viewAndSaveCampaignForm.$setUntouched();
