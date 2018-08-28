@@ -165,7 +165,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
             else{
               toastr.error(result.message);
             }
-          });          
+          });
         }
         $scope.close = function(){
           $mdDialog.hide();

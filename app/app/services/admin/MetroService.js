@@ -47,6 +47,16 @@ app.factory('AdminMetroService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/package-to-metro-campaign', package).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        deleteCorridor: function(coddidorID){
+          var dfd = $q.defer();
+          $http.delete(config.apiPath + '/metro-corridor/' + coddidorID).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        deletePackage: function(package_id){
+          var dfd = $q.defer();
+          $http.delete(config.apiPath + '/metro-package/' + package_id).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }
