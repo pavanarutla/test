@@ -132,15 +132,16 @@
 								<td>N/A</td>
 							</tr>
 							<tr>
-								<td>Estimated Budget</td>
+								<td>Actual Budget</td>
 								<td>
-									N/A
+									<span ng-if="metroCampaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}
 								</td>
 							</tr>
 							<tr>
-								<td>Actual Budget</td>
+								<td>Pending payment</td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}</td>
+									<span ng-if="metroCampaignDetails.pending_payment">Rs.</span>{{metroCampaignDetails.pending_payment || "N/A"}}
+								</td>
 							</tr>
 							<tr>
 								<td>Status</td>

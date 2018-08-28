@@ -441,7 +441,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     |   Notification navigation 
     ===============================*/
     $scope.viewNotification = function(notification){
-      $location.path('view-campaign/' + notification.data.campaign_id);
+      if(notification.type > 100 && notification.type < 200){
+        $location.path('metro-campaign/' + notification.data.campaign_id);  
+      }
+      else{
+        $location.path('view-campaign/' + notification.data.campaign_id);
+      }
       NotificationService.updateNotifRead(notification.id).then(function(result){
         if(result.status == 1){
           $scope.notifs = _.filter($scope.notifs, function(notif){ return notif.id != notification.id; })
