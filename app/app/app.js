@@ -91,10 +91,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
-    .state('index.L&T', {
-      url: 'L&T',
-      templateUrl: 'views/L&T.html',
-      controller: 'GmapCtrl'
+    .state('index.metro', {
+      url: 'metro',
+      templateUrl: 'views/metro.html',
+      controller: 'MetroCtrl'
     })
     .state('index.campaign', {
       url: 'campaign',
@@ -111,10 +111,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
     })
-    .state('index.viewlandt_campaign', {
-      url: 'viewlandt_campaign',
-      templateUrl: 'views/lntview-campaign.html',
-      controller: 'CampaignCtrl'
+    .state('index.metro-campaign', {
+      url: 'metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/metro-campaign-details.html',
+      controller: 'MetroCtrl'
     })
     .state('index.profile', {
       url: 'profile',
@@ -197,20 +197,25 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
-    .state('admin.metrocampaign', {
-      url: '/metrocampaign',
+    .state('admin.metro-campaigns', {
+      url: '/metro-campaigns',
       templateUrl: 'views/admin/metro-campaign-list.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
-    .state('admin.packages', {
-      url: '/packages',
-      templateUrl: 'views/admin/packages.html',
-      controller: 'AdminLocationCtrl'
+    .state('admin.metro-corridors', {
+      url: '/metro-corridors',
+      templateUrl: 'views/admin/metro-corridors.html',
+      controller: 'AdminMetroCtrl'
     })
-    .state('admin.metrocampaignview', {
-      url: '/metrocampaignview',
-      templateUrl: 'views/admin/user-lnt-campaign.html',
+    .state('admin.metro-packages', {
+      url: '/metro-packages',
+      templateUrl: 'views/admin/metro-packages.html',
+      controller: 'AdminMetroCtrl'
+    })
+    .state('admin.metro-campaign', {
+      url: '/metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/admin/metro-campaign-details.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
@@ -243,10 +248,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
     })
-    .state('admin.metroformats', {
-      url: '/metroformats',
-      templateUrl: 'views/admin/metroformtas.html',
-      controller: 'ProductCtrl'
+    .state('admin.metro-formats', {
+      url: '/metro-formats',
+      templateUrl: 'views/admin/metro-formtas.html',
+      controller: 'AdminMetroCtrl'
     })
     .state('admin.requested-hoardings', {
       url: '/requested-hoardings/:productId',

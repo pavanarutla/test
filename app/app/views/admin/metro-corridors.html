@@ -1,0 +1,87 @@
+<div layout="column" layout-fill="layout-fill">
+
+  <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+    <div class="md-title">
+      Add Corridor
+    </div>
+  </div>
+
+  <form name="addCorridorform" novalidate style="margin-top:20px">
+    <input ng-model="corridor.id" type="hidden" name="id"/>
+    <div layout="column">
+      <div layout="row" layout-margin layout-padding>
+        <div flex="50">
+          <md-autocomplete style="width:100%;margin-top:-8px;" ng-disabled="isDisabled" md-selected-item="selectedCorridorCity" md-search-text="searchText" md-items="item in citySearch(searchText)" md-item-text="item.name" md-min-length="3" placeholder="Search City..."  md-clear-button="true">
+            <md-item-template>
+              {{item.name}}, {{item.state_name}}, {{item.country_name}}
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <md-input-container class="md-block" flex="50">
+          <label>Corridor Name</label>          
+          <input ng-model="corridor.name" type="text" name="name" required />
+          <div ng-messages="addCorridorform.name.$error">
+            <p ng-message="required">Corridor Name is required</p>
+          </div>
+        </md-input-container>
+      </div>
+      <div class="serverErrors" ng-show="stateErrors && !addCorridorErrors.length == 0">
+        <ul>
+          <li ng-repeat="error in addCorridorErrors">
+            {{error}}
+          </li>
+        </ul>
+      </div>
+      <div layout="row" layout-align="center center">
+        <md-button Class="md-raised md-primary" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="stateform.$invalid">SUBMIT</md-button>        
+      </div>
+    </div>
+  </form>
+
+  <!-- ===== table new code start=======-->
+  <div style="margin-top: 1em;">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered add-countery">
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>City</th>
+            <th>Corridor Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="corr in metroCorridorList track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{corr.city_name}}</td>
+            <td>{{corr.name}}</td>
+            <td>
+              <span>
+                <a style="cursor:pointer;" ng-click="editcorridors(corr)">
+                  <md-icon>
+                    <i class="material-icons">mode_edit</i>
+                  </md-icon>
+                </a>
+              </span>
+              <span>
+                <a style="cursor:pointer;" ng-click="deleteState(corr)">
+                  <md-icon>
+                    <i class="material-icons" ng-click="deleteCorridors(corr.id)">delete</i>
+                  </md-icon>
+                </a>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div layout="colmun" layout-align="end center" layout-margin>
+          <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+      </div> -->
+  </div>
+</div>
+
+</div>

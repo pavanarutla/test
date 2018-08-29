@@ -3,8 +3,8 @@
 	   <md-dialog-content>
 		<md-content class="md-padding"  style="background:#fff">
 			<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Users</md-nav-item>
-				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Client</md-nav-item>
+				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Clients</md-nav-item>
+				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Ad Space Owners</md-nav-item>
 				<span flex></span>
 				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
 					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
@@ -104,7 +104,7 @@
 								<div ng-message="maxlength">Contact name shouldn't exede 30 characters. </div>
 							</div>
 						</md-input-container>
-						<md-input-container class="md-block">
+						<!-- <md-input-container class="md-block">
 							<label>Client Type</label>
 							<md-select ng-model="client.type" class="select-value" required="required" name="clientType">
 								<md-option ng-repeat="type in clientTypes" ng-value="type.id">{{type.type}}</md-option>
@@ -114,7 +114,7 @@
 								<div class="alret alert-warning" ng-message="minlength">user name must have 6 characters.</div>
 								<div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
 							</div>
-						</md-input-container>
+						</md-input-container> -->
 						<md-input-container class="md-block">
 							<label>Account Email</label>
 							<input ng-model="client.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"

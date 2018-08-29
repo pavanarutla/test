@@ -25,6 +25,9 @@
           <!-- <a  style="padding:10px 0px;text-decoration:none;"> -->
             Browse BillBoards</a>
         </md-button>
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/metro">
+          Metro
+        </md-button>
         <!--sugg -->
         <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/suggest/product-detail">
           suggest me
@@ -94,7 +97,7 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right" md-disable-backdrop>
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right" md-disable-backdrop style="z-index:65">
     <md-content>
       <ul style="padding:0px;margin:0px">
         <li>

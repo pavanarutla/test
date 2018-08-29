@@ -58,21 +58,20 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 
 	$scope.client = {};
 	$scope.registerClient = function () {
-		$scope.forms.registerClientForm.$setUntouched();
-		$scope.forms.registerClientForm.$setPristine();
-		$scope.clientErrorMessages = "The company is already registered";
-		// CompanyService.registerClient($scope.client).then(function(result){
-		// 	if(result.status == 1){
-		// 		toastr.success(result.message);
-		// 		if($scope.clientErrorMessages){
-		// 			$scope.clientErrorMessages.length = 0;
-		// 		}
-		// 		$mdDialog.hide();
-		// 	}
-		// 	else if(result.status == 0){
-		// 		$scope.clientErrorMessages = result.message;
-		// 	}
-		// });
+		CompanyService.registerClient($scope.client).then(function(result){
+			if(result.status == 1){
+				$scope.forms.registerClientForm.$setUntouched();
+				$scope.forms.registerClientForm.$setPristine();
+				toastr.success(result.message);
+				if($scope.clientErrorMessages){
+					$scope.clientErrorMessages = null;
+				}
+				$mdDialog.hide();
+			}
+			else if(result.status == 0){
+				$scope.clientErrorMessages = result.message;
+			}
+		});
 	}
 	
 	/*

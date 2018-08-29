@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, config, toastr) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr) {
 
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
@@ -165,7 +165,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
             else{
               toastr.error(result.message);
             }
-          });          
+          });
         }
         $scope.close = function(){
           $mdDialog.hide();
@@ -297,6 +297,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  function getMetroCampaigns(){
+    MetroService.getMetroCampaigns().then((result) => {
+      $scope.metroCampaigns = result;
+    });
+  }
 
   /*=========================
   | Page based initial loads
@@ -304,8 +309,26 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
 
   if($rootScope.currStateName == "index.campaigns"){
     $scope.getUserCampaigns();
+    getMetroCampaigns();
   }
   
+
+  $scope.deleteMetroCampaigns = function(campaignId){
+        if ($window.confirm("Are you really want to delete this camapaign?")) {
+           CampaignService.deleteMetroCampaign(campaignId).then(function(result){
+            if(result.status == 1){
+              getMetroCampaigns();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+        } else {
+            $scope.Message = "You clicked NO.";
+        }
+       
+  }
   /*=============================
   | Page based initial loads end
   =============================*/

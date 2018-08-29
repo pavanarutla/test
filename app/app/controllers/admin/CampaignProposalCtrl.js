@@ -34,6 +34,23 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   | Pagination Ends
   ===================*/
 
+
+  /*=======================
+  | MdDialogs and sidenavs
+  =======================*/
+
+  $scope.toggleQuoteChangeRequestDetailsSidenav = function() {
+    $mdSidenav('quoteChangeRequestDetailsSidenav').toggle();
+  };
+
+  $scope.toggleShareCampaignSidenav = function () {
+    $mdSidenav('shareCampaignSidenav').toggle();
+  };
+
+  /*===========================
+  | MdDialogs and sidenavs end
+  ===========================*/
+
   $scope.loadProductList = function(){
     if($scope.searchAll){
       var search = $scope.searchAll;
@@ -62,16 +79,6 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       createPageLinks();
     });
   }
-    
-  if($rootScope.currStateName == "admin.suggest-products"){
-    if(!localStorage.campaignForSuggestion){
-      toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
-    }
-    else{
-      $scope.loadProductList();
-      setDatesForProductsToSuggest(JSON.parse(localStorage.campaignForSuggestion));
-    }
-  }
 
   /****** Search ************/
    $scope.searchAll = "";
@@ -97,14 +104,17 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
 
   $scope.loadCampaignData = function(campaignId){
-    CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-      $scope.campaignDetails = result;
-      $scope.campaignProducts = result.products;
-      setDatesForProductsToSuggest($scope.campaignDetails);
-      if(result.status > 7){
-        loadCampaignPayments(campaignId);
-      }
-    });
+    return new Promise(function(resolve, reject){
+      CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+        $scope.campaignDetails = result;
+        $scope.campaignProducts = result.products;
+        setDatesForProductsToSuggest($scope.campaignDetails);
+        if(result.status > 7){
+          loadCampaignPayments(campaignId);
+        }
+        resolve(result);
+      });
+    })
   }
 
   function loadCampaignPayments(campaignId){
@@ -246,6 +256,46 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+    $scope.campaignToShare = $scope.campaignDetails;
+    var campaignToEmail = {
+      campaign_id: $scope.campaignToShare.id,
+      email: shareCampaign.email,
+      receiver_name: shareCampaign.receiver_name,
+      campaign_type: $scope.campaignToShare.type
+    };
+    CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+      if (result.status == 1) {
+        $mdSidenav('shareCampaignSidenav').close();
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title(result.message)
+            // .textContent('You can specify some description text in here.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.notifyProductOwnersForQuote = function(){
+    AdminCampaignService.notifyProductOwnersForQuote($scope.campaignDetails.id).then(function(result){
+      if(result.status == 1){
+        $scope.campaignDetails.status = 2;
+        toastr.success("Owners notified!"); // now we wait for launch request from user.
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   $scope.finalizeCampaign = function(){
     if($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget){
       var budget_check = confirm("Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?");
@@ -273,11 +323,6 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       });
     }
   }
-  
-  /*////popup////////*/
-  $scope.toggleQuoteChangeRequestDetailsSidenav = function() {
-    $mdSidenav('quoteChangeRequestDetailsSidenav').toggle();
-  };
 
   $scope.launchCampaign = function(campaignId, ev){
     AdminCampaignService.launchCampaign(campaignId).then(function(result){
@@ -295,7 +340,16 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.loadCampaignData(campaignId);
       }
       else{
-        toastr.error(result.message);
+        $scope.loadCampaignData(campaignId).then(function(){
+          if(result.product_ids && result.product_ids.length > 0){
+            toastr.error(result.message);
+            _.map($scope.campaignProducts, (p) => {
+              if(_.contains(result.product_ids, p.product_id)){
+                p.unavailable = true;
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -370,5 +424,24 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       $scope.toggleQuoteChangeRequestDetailsSidenav();
     })
   }
+
+
+  /*=========================
+  | Page based initial loads
+  =========================*/
+
+  if($rootScope.currStateName == "admin.suggest-products"){
+    if(!localStorage.campaignForSuggestion){
+      toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
+    }
+    else{
+      $scope.loadProductList();
+      setDatesForProductsToSuggest(JSON.parse(localStorage.campaignForSuggestion));
+    }
+  }
+
+  /*=============================
+  | Page based initial loads end
+  =============================*/
 
 });

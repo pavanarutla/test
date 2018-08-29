@@ -1,6 +1,7 @@
 app.controller('GmapCtrl',
   ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr',
     function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr) {
+      $scope.forms = {};
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
         name: 'People tech group hyderabad',
@@ -1041,17 +1042,7 @@ app.controller('GmapCtrl',
         }
         $scope.elipsis += ".";
       }
-      productLoader();
-      //L&T metro package popup
-      $scope.selectPackage = function (ev) {
-        $mdDialog.show({
-          
-          templateUrl: 'views/selectpack.html',
-          fullscreen: $scope.customFullscreen,
-          clickOutsideToClose: true
-        })
-      };
-      
+      productLoader();      
     }
   ]
 );
