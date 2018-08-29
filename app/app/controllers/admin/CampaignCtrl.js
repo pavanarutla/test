@@ -398,13 +398,14 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   }
 
   function loadCampaignPayments(campaignId) {
+    console.log("wqdnwk");
     //if($scope.campaignDetails.status >= 6 ){
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      if (result.status == "1") {
+      //if (result.status == "1") {
         $scope.campaignMetroPayments = result;
-      } else {
+     // } else {
         // toastr.error(result.message);
-      }
+     // }
 
     });
     // }
