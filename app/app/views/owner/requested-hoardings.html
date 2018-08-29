@@ -191,10 +191,10 @@
 				<tr>
 					<th>Site No</th>
 					<th>Site type</th>
-					<th>Ad Space Owner</th>
+					<th hide-xs>Ad Space Owner</th>
 					<th>Area</th>
 					<th>Panel Size</th>
-					<th>lighting</th>
+					<th hide-xs>lighting</th>
 					<th>Image</th>
 					<!-- <th>Actions</th> -->
 				</tr>
@@ -203,10 +203,10 @@
 				<tr ng-repeat="product in requestedProductList">
 					<td>{{product.siteNo}}</td>
 					<td>{{product.format_name}}</td>
-					<td>{{product.client_name}}</td>
+					<td hide-xs>{{product.client_name}}</td>
 					<td>{{product.area_name}}</td>
 					<td>{{product.panelSize}}</td>
-					<td>{{product.lighting | boolToYesNo}}</td>
+					<td hide-xs>{{product.lighting | boolToYesNo}}</td>
 					<td>
 						<img ng-src="{{config.serverUrl + product.image}}" style="width:60px; height:40px;" ng-click="viewProductImage(product.image)"/>
 					</td>

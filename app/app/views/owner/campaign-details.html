@@ -152,11 +152,11 @@
 				</div>
 			</div>
 		</div>
-		<div layout="row" layout-margin>
-			<div flex="30">
+		<div layout="row" layout-xs="column" layout-margin>
+			<div flex="30" flex-xs="100" layout="row">
 				<div style="margin: 30px 0 0 0;font-size: 20px;" class="text_color">Products({{campaignDetails.products.length || 0}})</div>
 			</div>
-			<div flex="70" layout="row" layout-align="end center">
+			<div flex="70" flex-xs="100" layout="row" layout-align="end center" layout-align-xs="end center">
 				<div>
 					<!-- <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 4 && campaignDetails.status != 5)"
 					 ng-click="finalizeCampaign()">
@@ -167,22 +167,22 @@
 					</md-button> -->
 					<md-button class="md-raised md-warn" ng-disabled="campaignDetails.status >= 6" ng-click="addNewProductToCampaign()" ng-if="campaignDetails.type == 2">
 						Add New Product
-						<span>
+						<!-- <span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
+						</span> -->
 					</md-button>
 					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails.products || campaignDetails.status >= 6" ng-click="launchOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
 						Launch
-						<span>
+						<!-- <span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
+						</span> -->
 					</md-button>
 					<md-button class="md-raised" ng-disabled="campaignDetails.status < 6 || campaignDetails.status == 8"
 					 ng-click="closeCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.type == 2">
-						Close Campaign
-						<span>
+						Close <span hide-xs hide-sm>Campaign</span>
+						<!-- <span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
+						</span> -->
 					</md-button>
 				</div>
 			</div>
@@ -197,11 +197,11 @@
 					<tr>
 						<th>Tab Id</th>
 						<th>Type</th>
-						<th>Area</th>
-						<th>Size</th>
-						<th>Lighting</th>
-						<th>Start Date</th>
-						<th>End Date</th>
+						<th hide-xs>Area</th>
+						<th hide-xs>Size</th>
+						<th hide-xs>Lighting</th>
+						<th hide-xs hide-sm>Start Date</th>
+						<th hide-xs hide-sm>End Date</th>
 						<th>Image</th>
 						<th>Price</th>
 						<th>Actions</th>
@@ -211,11 +211,11 @@
 					<tr ng-repeat="campaignProduct in campaignDetails.products | limitTo:limit">
 						<td>{{campaignProduct.siteNo}}</td>
 						<td>{{campaignProduct.format_name}}</td>
-						<td>{{campaignProduct.area_name}}</td>
-						<td>{{campaignProduct.panelSize}}</td>
-						<td>{{campaignProduct.lighting | boolToYesNo}}</td>
-						<td>{{campaignProduct.from_date | date }}</td>
-						<td>{{campaignProduct.to_date | date }}</td>
+						<td hide-xs>{{campaignProduct.area_name}}</td>
+						<td hide-xs>{{campaignProduct.panelSize}}</td>
+						<td hide-xs>{{campaignProduct.lighting | boolToYesNo}}</td>
+						<td hide-xs hide-sm>{{campaignProduct.from_date | date }}</td>
+						<td hide-xs hide-sm>{{campaignProduct.to_date | date }}</td>
 						<td>
 							<md-button ng-click="viewProductImage(campaignProduct.image)" class="md-icon-button">
 								<md-icon>

@@ -41,8 +41,8 @@
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-            <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-            <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+            <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
+            <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
