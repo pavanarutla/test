@@ -1,4 +1,4 @@
-app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr,MetroService){
+app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr,MetroService,$window){
 
   /*=============================
   | Global variables
@@ -49,6 +49,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   var getFormatList = function(obj){
     ProductService.getFormatList(obj).then(function(result){
       $scope.formatList = result;
+      $scope.package.format_id = result[0].id;
     });
   }
 
@@ -87,14 +88,29 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     });
   }
 
-  function getMetroCorridors(){
-    AdminMetroService.getMetroCorridors().then(function(result){
-      $scope.metroCorridorList = result;
+   $scope.citySearchforEdit = function(query){
+    return AdminLocationService.searchCities(query.toLowerCase()).then(function(res){
+      return res[0];
     });
   }
 
+  function getMetroCorridors(){
+    AdminMetroService.getMetroCorridors().then(function(result){
+      $scope.metroCorridorList = result;
+          $scope.package.corridor_id = $scope.metroCorridorList[0].id;
+
+    });
+  }
+  getMetroCorridors();
   $scope.saveCorridor = function(corridor){
-    corridor.city_id = $scope.selectedCorridorCity.id;
+    if(corridor.id){
+       if($scope.selectedCorridorCity){
+          corridor.city_id = $scope.selectedCorridorCity.id;
+       }
+    }else{
+      corridor.city_id = $scope.selectedCorridorCity.id;
+    }
+    
     AdminMetroService.saveCorridor(corridor).then(function(result){
       if(result.status == 1){
         getMetroCorridors();
@@ -109,6 +125,28 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
         }
       }
     });
+  }
+
+  $scope.editcorridors = function (corridor) {
+    $scope.corridor = {};
+    $scope.corridor.id = corridor.id;
+    $scope.corridor.name = corridor.name;  
+    $scope.corridor.city_id = corridor.city_id;
+    $scope.corridor.city_name = corridor.city_name;    
+  }
+
+  $scope.deleteCorridors = function (c_id) {
+    if ($window.confirm("Are you really want to delete this corridor?")) {
+      AdminMetroService.deleteCorridor(c_id).then(function (result) {
+        if (result.status == 1) {
+          getMetroCorridors();
+          toastr.success(result.message);
+        }
+        else {
+          toastr.error(result.message);
+        }
+      });
+    }
   }
   /*==============================
   | Corridors end
@@ -140,6 +178,16 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   }
    
 
+   $scope.package = {};
+   /*$scope.package.months = 1;
+   $scope.package.days = 0;
+   $scope.package.price = 1;
+   $scope.package.max_trains =1;
+   $scope.package.max_slots =0;*/
+   //$scope.package.format_id = $scope.formatList[0].id;
+   // $scope.package.corridor_id = $scope.metroCorridorList[0].id;
+
+
   $scope.editPackage = function (package) {
     $scope.package = {};
     $scope.package.id = package.id;
@@ -152,6 +200,24 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     $scope.package.max_trains = package.max_trains;
     $scope.package.max_slots = package.max_slots;
   }
+
+  
+
+   $scope.deletePackage = function (p_id) {
+    if ($window.confirm("Are you really want to delete this package?")) {
+      AdminMetroService.deletePackage(p_id).then(function (result) {
+        if (result.status == 1) {
+          getMetroPackages();
+          toastr.success(result.message);
+        }
+        else {
+          toastr.error(result.message);
+        }
+      });
+    }
+  }
+
+  
   /*==============================
   | Packages end
   ==============================*/

@@ -68,6 +68,9 @@
         <md-input-container ng-if="selectedRequestDetails.status == 5">
           <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="viewAndLaunchCampaign(selectedRequestDetails.id)">View and Launch Campaign</md-button>
         </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 121">
+          <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/metro-campaign/{{selectedRequestDetails.id}}">View Details</md-button>
+        </md-input-container>
       </div>
     </md-content>
   </md-dialog-content>

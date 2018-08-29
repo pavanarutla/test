@@ -390,6 +390,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
             }
           });
         }
+        $scope.closeMdDialog = function(){
+          $mdDialog.hide();
+        }
       }
     });
   }
