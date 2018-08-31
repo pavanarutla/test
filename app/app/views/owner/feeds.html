@@ -26,12 +26,12 @@
             <md-button class="md-raised md-primary" layout-fill ng-click='loadMore()'>Show More</md-button>
           </div> -->
       <div class="row" style="margin-left:0px;margin-right:0px;margin-top:10px">
-        <div class="col-xs-6 col-sm-3 col-md-4 col-lg-3" ng-repeat="request in requestList" style="margin-bottom:10px">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="request in requestList" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg owner_feeds">
             <div layout="column" layout-fill layout-margin>
               <div layout="column" layout-align="center center" flex>
-                <img ng-src="{{serverUrl + request.user_avatar}}"style="widows: 50px;px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
-                <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
+                <img ng-src="{{serverUrl + request.avatar}}"style="width:50px;height:50px;border-radius:50%;" class="md-avatar face" ng-if="request.avatar">
+                <img src="assets/images/man_new.png" style="width:50px;height:50px;border-radius:50%; " class="md-avatar face" ng-if="!request.avatar">
               </div>
               <div layout="column" layout-align="center start" flex class="feed-hdng">
                 <h3 ng-show="request.status == 2" style="text-transform: capitalize">A user has asked for a quote for your products.</h3>
