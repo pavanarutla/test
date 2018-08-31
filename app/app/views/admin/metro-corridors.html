@@ -29,15 +29,15 @@
         </md-input-container>
         <md-input-container class="md-block" flex="50">
             <label>From</label>          
-            <input ng-model="corridor.From" type="text" name="From" required />
+            <input ng-model="corridor.from" type="text" name="From" required />
             <div ng-messages="addCorridorform.From.$error">
               <p ng-message="required">From is required</p>
             </div>
           </md-input-container>
           <md-input-container class="md-block" flex="50">
               <label>To</label>          
-              <input ng-model="corridor.To" type="text" name="To" required />
-              <div ng-messages="addCorridorform.name.$error">
+              <input ng-model="corridor.to" type="text" name="To" required />
+              <div ng-messages="addCorridorform.To.$error">
                 <p ng-message="required">To is required</p>
               </div>
             </md-input-container>
@@ -74,8 +74,8 @@
             <td>{{$index + 1}}</td>
             <td>{{corr.city_name}}</td>
             <td>{{corr.name}}</td>
-            <td>{{corr.From || "N/A"}} </td>
-            <td>{{corr.To || "N/A"}} </td>
+            <td>{{corr.from || "N/A"}} </td>
+            <td>{{corr.to || "N/A"}} </td>
             <td>
               <span>
                 <a style="cursor:pointer;" ng-click="editcorridors(corr)">
