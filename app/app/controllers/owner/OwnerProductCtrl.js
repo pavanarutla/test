@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, OwnerProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   /*===================
   | Sidenavs and popups
@@ -69,7 +69,13 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
     $scope.pagination.pageArray = _.range(lowest, highest + 1);
   }
-
+  $scope.getRange = function(b, e){
+    $scope.pageRange = [];
+    for(i = b+1; i <= e; i++){
+      $scope.pageRange.push(i);
+    }
+    return $scope.pageRange;
+  }
   /*===================
   | Pagination Ends
   ===================*/
@@ -92,7 +98,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
-      createPageLinks();
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
     });
   }
 
@@ -100,7 +111,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     OwnerProductService.getApprovedProductListByDates(moment(dateFilter.start_date).toISOString(), moment(dateFilter.end_date).toISOString()).then(function(result){
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
-      createPageLinks();
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
     });
   }
 
@@ -108,7 +124,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.requestedProductList = result.products;
       $scope.pagination.pageCount = result.page_count;
-      createPageLinks();
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
     });
   }
   
