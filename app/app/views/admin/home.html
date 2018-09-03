@@ -10,6 +10,9 @@
       <br />
 
       <!-- Metro feeds -->
+      <div ng-if="requestList.metroCampaignFeeds.length < 1" > 
+        <h3>There is no Metro campaigns available</h3>
+      </div>
       <div class="row" style="margin-left:0px;margin-right:0px">
         <div class="col-sm-3" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
@@ -39,6 +42,9 @@
       <br />
 
       <!-- Campaign Proposals, Launch requests etc -->
+      <div ng-if="requestList.otherCampaignFeeds.length < 1" > 
+        <h3>There is no OOH campaigns available</h3>
+      </div>
       <div class="row" style="margin-left:0px;margin-right:0px">
         <div class="col-sm-3" ng-repeat="request in requestList.otherCampaignFeeds" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
@@ -64,7 +70,9 @@
       </div>
 
       <!-- Campaign Proposals, Launch requests etc end-->
-
+      <div ng-if="requestList.campaignSuggestionRequests.length < 1">
+        <h3>There is no suggest requests</h3>
+      </div>
       <div class="clearfix"></div>
       <hr ng-if="requestList.campaignSuggestionRequests.length > 0" /><br />
       <h4 class="text_color" layout-padding ng-if="requestList.campaignSuggestionRequests.length > 0">Suggestion Requests</h4>
