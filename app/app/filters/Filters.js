@@ -149,3 +149,8 @@ app.filter('MetroNamePrice', function(){
     return obj.name + " - " + obj.price;
   }
 });
+app.filter('metroCorridorsFromTo', function(){
+  return function(obj){
+    return obj.name + " (" + obj.from + " - " + obj.to + ")";
+  }
+});

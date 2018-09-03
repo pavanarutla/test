@@ -37,7 +37,7 @@ app.controller('MetroCtrl',
       | Campaign Management
       ===============================*/
       function getMetroCorridors(){
-        MetroService.getMetroCorridors().then(function(result){          
+        MetroService.getMetroCorridors().then(function(result){         
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
           $scope.getMetroPackages($scope.selectedCorridor.id);
