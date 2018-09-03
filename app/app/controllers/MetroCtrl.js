@@ -3,8 +3,6 @@ app.controller('MetroCtrl',
     function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, FileSaver, Blob, config, toastr) {
       $scope.metroCampaign = {};
       $scope.newDate = new Date();
-      $scope.footerhide = true;
-      console.log($scope.footerhide);
       /*==============================
       | Popup and Sidenav controls
       ==============================*/  
