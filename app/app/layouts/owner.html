@@ -25,27 +25,27 @@
 								   </md-button>
 							   </md-menu-item> -->
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="">
+							<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
 								Feeds
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}">
+							<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
 								Campaigns
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
 							<md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
-							 ng-click="changeRequest()">
+							 ng-click="changeRequest(); closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
 								Request Inventory
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
 							<md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
-							 ng-click="changeHoardingList()">
+							 ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
 								Inventory List
 							</md-button>
@@ -57,7 +57,7 @@
 								   </md-button>
 							   </md-menu-item> -->
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-click="" ng-class="{'active-link': currStateName == 'owner.payments'}">
+							<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
 								Payments
 							</md-button>

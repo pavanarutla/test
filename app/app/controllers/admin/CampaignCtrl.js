@@ -400,7 +400,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   function loadCampaignPayments(campaignId) {
     //if($scope.campaignDetails.status >= 6 ){
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      if (result.status == "1") {
+      if (result.all_payments.length >= 1) {
         $scope.campaignMetroPayments = result;
       } else {
         // toastr.error(result.message);
