@@ -10,7 +10,7 @@
 
       <!-- Metro feeds -->
       <div class="row" style="margin-left:0px;margin-right:0px">
-        <div class="col-sm-3" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
+        <div class="col-sm-3"  ng-if="requestList.metroCampaignFeeds.length > 0" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
             <div layout="column" layout-fill layout-margin>
               <div layout="column" layout-align="center center" flex>
@@ -29,12 +29,15 @@
             </div>
           </div>
         </div>
+        <div ng-if="requestList.metroCampaignFeeds.length <= 0">
+          No metro campaign feeds found.
+        </div>
       </div>
       <!-- Metro feeds end -->
 
       <div class="clearfix"></div>
-      <hr ng-if="requestList.otherCampaignFeeds.length > 0" /><br />
-      <h4 class="text_color" layout-padding ng-if="requestList.otherCampaignFeeds.length > 0">OOH Campaign Feeds</h4>
+      <hr /><br />
+      <h4 class="text_color" layout-padding>OOH Campaign Feeds</h4>
       <br />
 
       <!-- Campaign Proposals, Launch requests etc -->
