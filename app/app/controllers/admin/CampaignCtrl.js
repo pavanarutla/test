@@ -382,6 +382,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
           $scope.campaignPayment.metro_campaign_id = metroCampaignId;
           AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
             if (result.status == 1) {
+              toastr.success(result.message);
               getMetroCampaignDetails(metroCampaignId);
               $mdDialog.hide();
             }
@@ -400,7 +401,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   function loadCampaignPayments(campaignId) {
     //if($scope.campaignDetails.status >= 6 ){
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      if (result.all_payments.length >= 1) {
+      if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignMetroPayments = result;
       } else {
         // toastr.error(result.message);
