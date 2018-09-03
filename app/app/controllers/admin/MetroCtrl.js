@@ -136,7 +136,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     $scope.corridor.id = corridor.id;
     $scope.corridor.name = corridor.name;  
     $scope.corridor.city_id = corridor.city_id;
-    $scope.selectedCorridorCity = corridor.city_name;  
+    $scope.corridor.city_name = corridor.city_name;  
     $scope.corridor.from = corridor.from;
     $scope.corridor.to =   corridor.to;
   }
