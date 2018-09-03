@@ -140,7 +140,8 @@
 							<tr>
 								<td>Pending payment</td>
 								<td>
-									<span ng-if="metroCampaignDetails.pending_payment">Rs.</span>{{metroCampaignDetails.pending_payment || "N/A"}}
+									<span ng-if="metroCampaignDetails && metroCampaignDetails.pending_payment != 0">Rs.{{metroCampaignDetails.pending_payment}}</span>
+									<span ng-if="!metroCampaignDetails || metroCampaignDetails.pending_payment == null">N/A</span>
 								</td>
 							</tr>
 							<tr>
@@ -152,7 +153,7 @@
 				</div>
 			</div>
 			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
-			 ng-if="campaignMetroPayments">
+			 ng-if="metroCampaignDetails.pending_payment < metroCampaignDetails.act_budget">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
@@ -218,7 +219,7 @@
 				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 101" ng-click="toggleAddMetroProductSidenav()"><!-- ng-if="false" -->
 					Add New Product
 				</md-button>
-				<md-button ng-disabled="!metroCampaignDetails || campaignMetroPayments" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
+				<md-button ng-disabled="!metroCampaignDetails || campaignMetroPayments.total_paid < metroCampaignDetails.act_budget" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
 					Update Payment
 				</md-button>
 				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 131)" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">

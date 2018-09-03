@@ -57,6 +57,18 @@ app.filter('dateify',function(){
   }
 });
 
+app.filter('datetimeify',function(){
+  return function(date, format){
+    format = format || 'DD-MM-YYYY HH:mm:ss';
+    if(date){
+      return moment(date).local().format(format);
+    }
+    else{
+      return "N/A";
+    }
+  }
+});
+
 app.filter('stringifyCampaignStatus', function(){
   return function(status){
     switch (status) {
