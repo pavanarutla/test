@@ -159,6 +159,7 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   $scope.addClient = function(){
     CompanyService.saveClient($scope.client).then(function(result){
       if(result.status == 1){
+        getAllClients();
         toastr.success(result.message);
         $mdDialog.hide();
       }

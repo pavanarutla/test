@@ -1,0 +1,193 @@
+<style>
+	.md-button {
+		min-width: 64px !important;
+	}
+	md-list-item {
+		padding: 0 0px !important;
+	}
+</style>
+<div ng-cloak flex-xs="100" flex-sm="100" flex-md="100">
+	<md-content layout="column" layout-sm="column" layout-xs="column">
+		<!-- <div class="inputDiv">
+			<md-button ng-href="#/campaigns" class="md-icon-button">
+				<md-icon>
+					<i class="material-icons">keyboard_backspace</i>
+				</md-icon>
+			</md-button>
+		</div> -->
+		<div class="bg-part">
+			<div layout="row" flex-offset-gt-md="10" flex="80" flex-sm="100" flex-md="100" layout-xs="column" layout-sm="column" layout-gt-sm="row"
+			 layout-margin="layout-margin" class="client-summay">
+				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp client_info">
+					<div layout="column" layout-align="center center" layout-margin>
+						<div>
+							<img src="assets/images/client_details.png" width="70%">
+						</div>
+						<h3 class="text_color">Client Details</h2>
+					</div>
+					<table class="table table-striped table-bordered" style="width: 100%;">
+						<tbody>
+							<tr>
+								<td>Campaign Name</td>
+								<td>{{metroCampDetails.name}}</td>
+							</tr>
+							<tr>
+								<td>Client Name</td>
+								<td>{{metroCampDetails.user_details.first_name || "N/A"}} {{metroCampDetails.user_details.last_name}}</td>
+							</tr>
+							<tr>
+								<td>Contact</td>
+								<td>{{metroCampDetails.user_details.phone || "N/A"}}</td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>{{metroCampDetails.user_details.email || "N/A"}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp Campaign_summary">
+					<div layout="column" layout-align="center center" layout-margin>
+						<div>
+							<img src="assets/images/capaign_details.png" width="70%">
+						</div>
+						<h3 class="text_color">Campaign Summary</h2>
+					</div>
+					<table class="table table-striped table-bordered" style="width: 100%;">
+						<tbody>
+							<tr>
+								<td>Staring From</td>
+								<td>N/A</td>
+							</tr>
+							<tr>
+								<td>Actul Budget</td>
+								<td>
+									<span ng-if="metroCampDetails.act_budget">Rs.</span>{{metroCampDetails.act_budget || "N/A"}}
+								</td>
+							</tr>
+							<tr>
+								<td>Pending payment</td>
+								<td>
+									<span ng-if="metroCampDetails.pending_payment">Rs.</span>{{metroCampDetails.pending_payment || "N/A"}}
+								</td>
+							</tr>
+							<tr>
+								<td>Status</td>
+								<td>{{metroCampDetails.status | stringifyCampaignStatus }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- <div layout="row">
+				<div flex="50">
+					<div style="margin: 30px 0 0 0;font-size: 20px;">Products(15)</div>
+				</div>
+					<div flex="50">
+					<md-list flex layout="row" layout-align="end center">
+						<md-list-item>
+							<div>
+								<md-button class="md-grid-item-content">
+									<span><md-icon><i class="material-icons">cancel</i></md-icon></span>
+									<div class="md-caption"> close </div>
+								</md-button>
+							</div>
+						</md-list-item>
+					</md-list>
+				</div> 
+		</div> -->
+		<div layout="row" layout-sm="column" layout-padding>
+			<div flex="50" flex-sm="100">
+				<div class="text_color" style="margin: 30px 0 0 0;font-size: 20px;">Packages ({{metroCampDetails.packages.length}})</div>
+			</div>
+			<div flex="50" flex-sm="100" layout="row" layout-align="end center">
+				<md-list>
+					<md-list-item>
+						<div>
+							<md-button class="md-grid-item-content" ng-disabled="metroCampDetails.status != 101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
+								<span>
+									<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
+								</span>
+								<div class="md-caption">Checkout</div>
+							</md-button>
+						</div>
+					</md-list-item>
+				</md-list>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered" style="width: 100%; margin:5px 5px 50px;">
+				<thead class="text_color" style="text-align: center">
+					<tr>
+						<th>Product Type</th>
+						<th>Corridor</th>
+						<th>No.of Trains</th>
+						<th>No.of Slots</th>
+						<th>Start Date</th>
+						<th>Price</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody style="text-align: center">
+					<tr ng-repeat="pkg in metroCampDetails.packages">
+						<td>{{pkg.package_name}}</td>
+						<td>{{pkg.corridor_name}}</td>
+						<td>{{pkg.selected_trains}}</td>
+						<td>{{pkg.selected_slots}}</td>
+						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
+						<td>{{pkg.price}}</td>
+						<td>
+							<md-button class="md-icon-button" ng-disabled="metroCampDetails.status != 101" ng-click="deleteProductFromCampaign(metroCampDetails.id, pkg.package_id)">
+								<md-icon>
+									<i class="material-icons">delete</i>
+								</md-icon>
+							</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</md-content>
+	<!-- List of shortlisted products' share details to client -->
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shortlistSharingSidenav">
+		<div layout="row">
+			<div class="md-toolbar-tools">
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareShortlistedSidenav()">
+					<md-tooltip>Close Side Panel</md-tooltip>
+					<md-icon class="md-default-theme">
+						<i class="material-icons">close</i>
+					</md-icon>
+				</md-button>
+			</div>
+		</div>
+		<md-content layout-align="center center" layout-margin layout-padding>
+			<h3 class="md-headline">Share Shortlisted Products</h3>
+			<form name="shareShortlistedForm">
+				<div layout="column">
+					<md-input-container class="md-block">
+						<label>Name</label>
+						<input ng-model="shareShortlisted.name" name="name" required="required" />
+						<div ng-messages="shareShortlistedForm.name.$error">
+							<div ng-message="required">Name is required.</div>
+							<div ng-message="pattern">Enter a valid Name.</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>Email</label>
+						<input ng-model="shareShortlisted.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"	/>
+						<div ng-messages="shareShortlistedForm.email.$error">
+							<div ng-message="required">Email is required.</div>
+							<div ng-message="pattern">Enter a valid Email Id.</div>
+						</div>
+					</md-input-container>
+					<md-button class="md-raised md-warn" layout-fill ng-click="shareShortlistedProducts(shareShortlisted)">SHARE PRODUCT LIST</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-sidenav>
+	<!-- List of shortlisted products' share details to client end-->
+</div>

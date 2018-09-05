@@ -25,6 +25,9 @@
           <!-- <a  style="padding:10px 0px;text-decoration:none;"> -->
             Browse BillBoards</a>
         </md-button>
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/metro">
+          Metro
+        </md-button>
         <!--sugg -->
         <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/suggest/product-detail">
           suggest me
@@ -41,8 +44,8 @@
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
           <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-              <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-              <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+            <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
+            <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
@@ -94,7 +97,7 @@
       </md-menu-item> -->
 
   </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right" md-disable-backdrop>
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right" md-disable-backdrop style="z-index:65">
     <md-content>
       <ul style="padding:0px;margin:0px">
         <li>
@@ -141,19 +144,26 @@
       <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="footer_social_icons">
         <div class="" style="margin-left:5%">
           <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
-            <md-icon md-svg-src="assets/images/icons/facebook.svg"></md-icon>
+            <!-- <md-icon md-svg-src="assets/images/icons/facebook.svg"></md-icon> -->
+            <img src="assets/images/formats/fb.png" alt="fb"/>
           </md-button>
 
           <md-button class="md-icon-button  fabicon" aria-label="instagram" href="https://www.instagram.com/billboards_india/" target="_blank">
-            <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon>
+            <!-- <md-icon md-svg-src="assets/images/icons/instagram.svg"></md-icon> -->
+            <img src="assets/images/formats/inst.png" alt="inst"/>
+
           </md-button>
 
           <md-button class="md-icon-button  fabicon" aria-label="linkedin" href="https://www.linkedin.com/company/13259222/" target="_blank">
-            <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
+            <!-- <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon> -->
+            <img src="assets/images/formats/in.png" alt="in"/>
+
           </md-button>
 
           <md-button class="md-icon-button  fabicon" aria-label="twitter" href="https://twitter.com/billboardsindia" target="_blank">
-            <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon>
+            <!-- <md-icon md-svg-src="assets/images/icons/twitter-letter-logo.svg"></md-icon> -->
+            <img src="assets/images/formats/tw.png" alt="tw"/>
+
           </md-button>
         </div>
       </div>

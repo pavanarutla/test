@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="assets/css/admin-main.css" />
-<div layout="row" flex>
+<div layout="row" style="position:relative;min-height:100%;" flex>
   <md-sidenav md-component-id="left" id="admin-sidenav-menu" class="md-sidenav-left md-whiteframe-z2" style="width: 250px;background: #51b3d6;height:100vh;position: fixed;" md-is-locked-open="$mdMedia('gt-sm')">
     <header layout="column" layout-padding style="min-height:90px !important">
       <!-- <a ui-sref="/admin"><img ng-src="assets/images/logo.png" alt="logo"></a> -->
@@ -35,18 +35,18 @@
                 <md-icon>
                   <i class="material-icons">keyboard_arrow_right</i>
                 </md-icon>
-              </span>OOH Campagin</div>
+              </span>OOH Campaign</div>
           </md-button>
         </md-menu-item>
         <md-menu-item flex layout="column" ng-show="showCampagin">
-          <md-button ng-href="#/admin/metrocampaign">
+          <md-button ng-href="#/admin/metro-campaigns">
             <div layout="row">
               <span flex="15"></span>
               <span>
                 <md-icon>
                   <i class="material-icons">keyboard_arrow_right</i>
                 </md-icon>
-              </span>Metro Campagin</div>
+              </span>Metro Campaign</div>
           </md-button>
         </md-menu-item>
 
@@ -145,7 +145,7 @@
         </md-button>
       </md-menu-item>
       <md-menu-item flex layout="column" ng-show="showFormats">
-          <md-button ng-href="#admin/metroformats">
+          <md-button ng-href="#admin/metro-formats">
             <div layout="row">
               <span flex="15"></span>
               <span>
@@ -171,13 +171,13 @@
               <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Billboards</md-button>
       </md-menu-item> -->
       <md-menu-item>
-        <md-button ng-href="#/admin/packages">
+        <md-button ng-href="#/admin/metro-packages">
           <md-icon md-svg-icon="assets/images/menu/hoarding.svg"> </md-icon>Metro Packages</md-button>
       </md-menu-item>
-      <!-- <md-menu-item>
-        <md-button ng-href="#/admin/team">
-          <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Payment</md-button>
-      </md-menu-item> -->
+      <md-menu-item>
+        <md-button ng-href="#/admin/metro-corridors">
+          <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>Metro Corridors</md-button>
+      </md-menu-item>
       <md-menu-item>
         <md-button ng-href="#/admin/user-management">
           <md-icon md-svg-icon="assets/images/menu/profile.svg"> </md-icon>User Management</md-button>
@@ -287,8 +287,8 @@
 
         <md-menu md-offset="0 50">
           <md-button class="md-secondary md-mini md-button profile-img" type="button" aria-label="personimage" ng-click="$mdOpenMenu($event)">
-              <img ng-if="!loggedInUser.profile_pic" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
-              <img ng-if="loggedInUser.profile_pic" ng-src="{{serverUrl + loggedInUser.profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
+            <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0;">
+            <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;">
           </md-button>
           <md-menu-content width="3" style="z-index:99">
             <md-menu-item>
@@ -309,7 +309,7 @@
     </md-toolbar>
     <!--toolbar end -->
     <!-- <md-content  ng-view  ng-cloak> -->
-    <ui-view style="margin-bottom:40px;padding: 65px 0 0 250px;"></ui-view>
+    <ui-view style="margin-bottom:40px;padding: 65px 0 40px 250px;"></ui-view>
     <!-- </md-content> -->
     <div layout="column" layout-align="center center" style="background: #CCC;padding: 5px 0;position:absolute;bottom:0px;width:100%; margin-top:40px;">
       <div >Copyright  BILLBOARDS INDIA. All rights reserved </div>

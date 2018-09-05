@@ -21,6 +21,7 @@
 			</div> -->
 			<form name="addFormatForm" novalidate="novalidate">
 				<input type="hidden" ng-model="format.id" />
+				<input type="hidden" ng-model="format.type" ng-init="format.type = (formatPopupType ? formatPopupType : 'ooh')" />
 				<div layout="column" flex="80" flex-offset-gt-sm="10" layout-padding>
 					<md-input-container class="md-block  add-formatstype">
 						<label>Format</label>
@@ -45,7 +46,7 @@
 						</ul>
 					</div>
 				<div layout="row" layout-align="center center">
-					<md-button type="submit" Class="md-raised md-primary" ng-click="addFormat()">SUBMIT</md-button>
+					<md-button type="submit" Class="md-raised md-primary" ng-click="addFormat(format)">SUBMIT</md-button>
 					<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
 				</div>
 			</form>

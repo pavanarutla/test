@@ -1,5 +1,5 @@
 <!-- ============ payments details side nav start ============ -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="campaignPaymentDetailsSidenav" style="width:600px !important;max-width: 600px !important;">
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="campaignPaymentDetailsSidenav" id="paymentSidenav" style="height: 100vh;">
 	<div layout="row">
 		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="showCampaignPaymentSidenav()">
 			<md-tooltip>Close Side Panel</md-tooltip>
@@ -9,8 +9,8 @@
 		</md-button>
 	</div>
 	<md-content layout-padding="">
-		<div layout="row">
-			<div flex="60">
+		<div layout="row" layout-xs="column" layout-sm="column">
+			<div flex="60" flex-xs="100" flex-sm="100">
 				<div class="table-responsive">
 					<table style="width:100%">
 						<tbody>
@@ -46,7 +46,7 @@
 					</table>
 				</div>
 			</div>
-			<div flex="40">
+			<div flex="40" flex-xs="100" flex-sm="100">
 				<div class="payment_detalis_view md-padding" style="background: #eee">
 					<p>Received</p>
 					<h3 class="md-headline">Rs.{{paid}}</h3>
@@ -95,7 +95,7 @@
 <div layout="column">
 	<div layout="row" layout-align="space-between center">
 		<div layout="column" layout-padding>
-			<h3 style="padding-left:30px;">Payments</h3>
+			<h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
 		</div>
 		<div layout="column" layout-padding>
 			<a ng-href="#/owner/{{clientSlug}}/update-payments" class="add_paymt_btn">Add new payment</a>
@@ -149,16 +149,16 @@
 		</div>
 	</div> -->
 	<!-- status of hoarding list html start-->
-	<div layout="column" layout-margin flex>
+	<div layout="column"  flex>
 		<div class="table-responsive">
-			<table class="table table-hover table-striped" style="width: 100%;">
+			<table class="table table-hover table-striped table-bordered " style="width: 100%;">
 				<thead class="contbg">
-					<tr class="red-text">
+					<tr class="text_color text-center">
 						<th>Campaign Name</th>
 						<!-- <th hide-sm>Contact Name</th>
 						<th hide-sm hide-md>Contact No</th> -->
-						<th>Start Date</th>
-						<th>End Date</th>
+						<th hide-xs>Start Date</th>
+						<th hide-xs>End Date</th>
 						<th>Total Budget</th>
 						<th>Received</th>
 						<th>Pending</th>
@@ -166,19 +166,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="campaign in campaignsWithPayments">
+					<tr ng-repeat="campaign in campaignsWithPayments" class="text-center">
 						<td>{{campaign.name}}</td>
 						<!-- <td hide-sm>Jhon</td>
 						<td hide-sm hide-md>9966991111</td> -->
-						<td>{{campaign.start_date | dateify | date: "dd-MMM-yyyy" }}</td>
-						<td>{{campaign.end_date | dateify | date: "dd-MMM-yyyy" }}</td>
+						<td  hide-xs>{{campaign.start_date | dateify | date: "dd-MMM-yyyy" }}</td>
+						<td  hide-xs>{{campaign.end_date | dateify | date: "dd-MMM-yyyy" }}</td>
 						<td>{{campaign.act_budget}}</td>
 						<td>{{campaign.paid}}</td>
 						<td>{{campaign.act_budget - campaign.paid}}</td>
-						<td style="padding: 0px;">
-							<md-button class="btn btn-default btn-primary" ng-click="getCampaignPaymentDetails(campaign.id)">
+						<td>
+							<!-- <md-button class="btn btn-default btn-primary" ng-click="getCampaignPaymentDetails(campaign.id)">
 								Details
-							</md-button>
+							</md-button> -->
+							<a style="cursor:pointer;" ng-click="getCampaignPaymentDetails(campaign.id)">
+									<md-icon>
+										<i class="material-icons">remove_red_eye</i>
+									</md-icon>
+								</a>
 						</td>
 					</tr>
 				</tbody>

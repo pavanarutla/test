@@ -33,15 +33,16 @@
 							</tr>
 							<tr>
 								<td>Client Name</td>
-								<td>{{campaignDetails.user_phone || "N/A"}}</td>
+								<td ng-if="campaignDetails.first_name || campaignDetails.last_name">{{campaignDetails.first_name}} {{campaignDetails.last_name}}</td>
+								<td ng-if="!campaignDetails.first_name && !campaignDetails.last_name">N/A</td>
 							</tr>
 							<tr>
 								<td>Contact</td>
-								<td>{{campaignDetails.user_phone || "N/A"}}</td>
+								<td>{{campaignDetails.phone || "N/A"}}</td>
 							</tr>
 							<tr>
 								<td>Email</td>
-								<td>{{campaignDetails.user_email || "N/A"}}</td>
+								<td>{{campaignDetails.email || "N/A"}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -246,7 +247,7 @@
 							</md-button>
 						</td>
 						<td>
-							<md-button class="md-icon-button" ng-disabled="campaignDetails.status != 1 || campaignDetails.status != 5" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">
+							<md-button class="md-icon-button" ng-disabled="campaignDetails.status != 0" ng-click="deleteProductFromCampaign(product.id, campaignDetails.id)">
 								<md-icon>
 									<i class="material-icons">delete</i>
 								</md-icon>

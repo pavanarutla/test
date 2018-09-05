@@ -3,6 +3,9 @@
     <img ng-src="{{config.serverUrl + productDetails.image}}" class="img-rounded" style="width: 100%;" ng-if="productDetails">
   </div>
   <div class="contbg md-whiteframe-3dp" style="padding-left: 1em;padding-top: 2em;width: 100%;padding-bottom: 1em;">
+      <div flex>
+          <h2 class="md-title text_color">Product Details</h2>
+        </div>
     <form>
       <div layout="row">
         <div flex>
@@ -28,17 +31,17 @@
           </div>
           <div layout="row">
             <div flex="50">
-              <b>Hording Cost</b>
+              <b>Hoarding Cost</b>
             </div>
             <div flex="50">{{productDetails.default_price}}</div>
             <div flex="50">
               <b>Lighting</b>
             </div>
-            <div flex="50">{{productDetails.lighting}}</div>
+            <div flex="50">{{productDetails.lighting | boolToYesNo}}</div>
           </div>
           <div layout="row">
             <div flex="50">
-              <b>Hording Company Address</b>
+              <b>Hoarding Company Address</b>
             </div>
             <div flex="50">{{productDetails.address}}</div>
             <div flex="50">
@@ -84,7 +87,7 @@
   <div class="contbg md-whiteframe-3dp" style="margin-top: 20px;width: 100%;height: 12em; padding-left: 2em;padding-top: 1em;">
     <form>
       <div flex>
-        <h2>Running Campaign Details</h2>
+        <h2 class="md-title text_color">Running Campaign Details</h2>
       </div>
       <div layout="row">
         <div flex="50">
@@ -112,7 +115,7 @@
         </div>
         <div flex="50">Rs. {{runningCampaignDetails.est_budget || "N/A"}}</div>
         <div flex="50">
-          <b>Actul Budget</b>
+          <b>Actual Budget</b>
         </div>
         <div flex="50">Rs. {{runningCampaignDetails.act_budget || "N/A"}}</div>
       </div>
@@ -143,7 +146,7 @@
 
     <table class="table table-striped">
       <thead>
-        <tr>
+        <tr class="text_color text-center">
           <th>Campaign Name</th>
           <th>Client Name</th>
           <th>Start Date</th>
@@ -153,7 +156,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="campaign in nonRunningCampaigns | limitTo:limit | filter:search">
+        <tr class=" text-center" ng-repeat="campaign in nonRunningCampaigns | limitTo:limit | filter:search">
           <td>{{campaign.name}}</td>
           <td>{{campaign.user_full_name}}</td>
           <td>{{campaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>

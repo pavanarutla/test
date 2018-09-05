@@ -4,6 +4,50 @@
  
   <div class="feed-section" style="margin-top:8px">
     <div class="section-inner">
+      
+      <!-- <h4 class="text_color" layout-padding ng-if="requestList.metroCampaignFeeds.length > 0">Metro Feeds</h4> -->
+      <h4 class="text_color" layout-padding >Metro Feeds</h4>
+      <br />
+
+      <!-- Metro feeds -->
+      <div ng-if="requestList.metroCampaignFeeds.length < 1" > 
+        <h3>There is no Metro campaigns available</h3>
+      </div>
+      <div class="row" style="margin-left:0px;margin-right:0px">
+        <div class="col-sm-3"  ng-if="requestList.metroCampaignFeeds.length > 0" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
+          <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
+            <div layout="column" layout-fill layout-margin>
+              <div layout="column" layout-align="center center" flex>
+                <img ng-src="{{serverUrl + request.user_avatar}}"style="widows: 50px;px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
+                <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
+              </div>
+              <div layout="column" layout-align="center start" flex class="feed-hdng">
+                <h3 ng-show="request.status == 121">{{request.contact_name}} has checked out a metro campaign.</h3>
+              </div>
+            </div>
+            <div layout="colmun" style="margin: 0 0 0 8px;">
+              <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
+            </div>
+            <div layout="colmun" layout-align="center center">
+              <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)" style="font-size: 12px">View Details</md-button>
+            </div>
+          </div>
+        </div>
+        <div ng-if="requestList.metroCampaignFeeds.length <= 0">
+          No metro campaign feeds found.
+        </div>
+      </div>
+      <!-- Metro feeds end -->
+
+      <div class="clearfix"></div>
+      <hr /><br />
+      <h4 class="text_color" layout-padding>OOH Campaign Feeds</h4>
+      <br />
+
+      <!-- Campaign Proposals, Launch requests etc -->
+      <div ng-if="requestList.otherCampaignFeeds.length < 1" > 
+        <h3>There is no OOH campaigns available</h3>
+      </div>
       <div class="row" style="margin-left:0px;margin-right:0px">
         <div class="col-sm-3" ng-repeat="request in requestList.otherCampaignFeeds" style="margin-bottom:10px">
           <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
@@ -19,7 +63,7 @@
               </div>
             </div>
             <div layout="colmun" style="margin: 0 0 0 8px;">
-              <span class="text_color">Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+              <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
             </div>
             <div layout="colmun" layout-align="center center">
               <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)" style="font-size: 12px">View Details</md-button>
@@ -27,10 +71,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Campaign Proposals, Launch requests etc end-->
+      <div ng-if="requestList.campaignSuggestionRequests.length < 1">
+        <h3>There is no suggest requests</h3>
+      </div>
       <div class="clearfix"></div>
       <hr ng-if="requestList.campaignSuggestionRequests.length > 0" /><br />
       <h4 class="text_color" layout-padding ng-if="requestList.campaignSuggestionRequests.length > 0">Suggestion Requests</h4>
       <br />
+
+      <!-- Campaign suggestion requests -->
+
       <div class="row" style="margin-left:0px;margin-right:0px">
         <div class="col-sm-3" ng-repeat="request in requestList.campaignSuggestionRequests" style="margin-bottom:10px">
             <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
@@ -44,7 +96,7 @@
                 </div>
               </div>
               <div layout="colmun" style="margin: 0 0 0 8px;">
-                <span class="text_color">Date:{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+                <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
               </div>
               <div layout="colmun" layout-margin layout-align="center center">
                 <md-button class="md-raised md-primary" ng-click="showCampaignSuggestionRequestPopup($event, request)" style="font-size: 12px">View Details</md-button>
@@ -52,6 +104,10 @@
             </div>
           </div>
       </div>
+
+      <!-- Campaign suggestion requests end -->
+
+
     </div>
   </div>
 </div>

@@ -301,7 +301,7 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');        
+      toastr.warning('You have successfully signed out!');
     });
   }
 
@@ -441,7 +441,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     |   Notification navigation 
     ===============================*/
     $scope.viewNotification = function(notification){
-      $location.path('view-campaign/' + notification.data.campaign_id);
+      if(notification.type > 100 && notification.type < 200){
+        $location.path('metro-campaign/' + notification.data.campaign_id);  
+      }
+      else{
+        $location.path('view-campaign/' + notification.data.campaign_id);
+      }
       NotificationService.updateNotifRead(notification.id).then(function(result){
         if(result.status == 1){
           $scope.notifs = _.filter($scope.notifs, function(notif){ return notif.id != notification.id; })
@@ -476,6 +481,22 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       }
     }
     
+    $scope.getAvatar = function(){
+      var payload = $auth.getPayload();
+      var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
+      if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+        return {
+          present: true,
+          profile_pic: userMongo.profile_pic
+        }
+      }
+      else{
+        return {
+          present: false
+        }
+      }
+    }
+
     // Setting up selected format for format page
     $scope.setSelectedFormat = function(index){
       $rootScope.formatSelected = index;

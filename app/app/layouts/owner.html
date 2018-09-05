@@ -2,20 +2,193 @@
 
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
 
-	<div layout="column" flex style="position:relative;min-height:100%;">
-		<md-toolbar>
+<div layout="row" flex style="position:relative;min-height:100%;">
+	<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
+	 style="width: 250px;background: #414143 !important;height:100vh;position: fixed;">
+		<!-- <md-toolbar  style="min-height: 65px !important;">
+			   		<img class="png-icon" src="assets/images/billboards.png">
+				</md-toolbar>  -->
+		<header layout="column" layout-padding style="min-height:90px !important">
+			<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
+				<img ng-src="assets/images/product/logo.png" width="160" alt="owner logo">
+			</md-button>
+		</header>
+		<!-- <md-divider></md-divider> -->
+		<md-content class="sidenav-content" style="background: #414143 !important">
+			<div>
+				<div style="width: 100% !important;">
+					<md-list class="owners-menu">
+						<!-- <md-menu-item class="nv-nav-item">
+								   <md-button ng-href="#/owner/{{clientSlug}}/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
+									   <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
+									   Home
+								   </md-button>
+							   </md-menu-item> -->
+						<md-menu-item class="nv-nav-item">
+							<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
+								<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
+								Feeds
+							</md-button>
+						</md-menu-item>
+						<md-menu-item class="nv-nav-item">
+							<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
+								<md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
+								Campaigns
+							</md-button>
+						</md-menu-item>
+						<md-menu-item class="nv-nav-item">
+							<md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
+							 ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+								<md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
+								Request Inventory
+							</md-button>
+						</md-menu-item>
+						<md-menu-item class="nv-nav-item">
+							<md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
+							 ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
+								<md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
+								Inventory List
+							</md-button>
+						</md-menu-item>
+						<!-- <md-menu-item class="nv-nav-item">
+								   <md-button ng-href="#/owner/{{clientSlug}}/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
+									   <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
+									   Outsourcing Agents
+								   </md-button>
+							   </md-menu-item> -->
+						<md-menu-item class="nv-nav-item">
+							<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
+								<md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
+								Payments
+							</md-button>
+						</md-menu-item>
+						<!-- <md-menu-item class="nv-nav-item">
+								   <md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+									   <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+									   Team
+								   </md-button>
+							   </md-menu-item> -->
+						<!-- <md-menu-item class="nv-nav-item">
+								   <md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
+										   <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
+										   Help
+								   </md-button>
+							   </md-menu-item> -->
+					</md-list>
+				</div>
+			</div>
+		</md-content>
+	</md-sidenav>
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerRightSidenav" ng-click="toggleOwnerRightSidenav()">
+		<md-toolbar layout="row">
+			<div class="md-toolbar-tools bg_main_color">
+				<h2>
+					<span>Notifications</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="ownerRightSidenav()">
+					<md-tooltip>Close Side Panel</md-tooltip>
+					<md-icon class="md-default-theme">
+						<i class="material-icons">close</i>
+					</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-content>
+			<div ng-repeat="notif in ownerNotifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
+				<a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
+					<h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
+					<p>{{ notif.message }}</p>
+					<p style="color:#1881a9;font-size:11px;">At: {{notif.updated_at | dateify:'DD-MM-YYYY hh:mm:ss a'}}</p>
+				</a>
+			</div>
+		</md-content>
+	</md-sidenav>
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownereditProfile">
+		<md-toolbar layout="row">
+			<div class="md-toolbar-tools bg_main_color">
+				<h2>
+					<span>Edit Profile</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
+					<md-tooltip>Close Side Panel</md-tooltip>
+					<md-icon class="md-default-theme">
+						<i class="material-icons">close</i>
+					</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-content layout-padding="">
+			<form role="form">
+				<div class="form-group">
+					<label class="control-label"> Name</label>
+					<br>
+					<input class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<label class="control-label"> Company Name</label>
+					<br>
+					<input class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<label class="control-label">Email:</label>
+					<input class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<label class="control-label"> Phone Number</label>
+					<br>
+					<input class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<label class="control-label"> Address</label>
+					<br>
+					<input class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<label class="control-label"> City</label>
+					<br>
+					<input class="form-control" type="text">
+				</div>
+				<!-- <div class="form-group">
+							   <label class="control-label"> City</label>
+							   <br>
+							   <input class="form-control" type="text">
+					   </div> -->
+				<div class="input-group">
+					<span class="input-group-btn">
+						<span class="btn btn-default btn-file">
+							<input type="file" id="imgInp">
+						</span>
+					</span>
+				</div>
+				<div class="form-group" style="margin:10px 0">
+					<label class="col-md-3 control-label"></label>
+					<input class="btn btn-primary" value="Save" type="button">
+					<span></span>
+					<input class="btn btn-default" value="Cancel" type="reset">
+				</div>
+			</form>
+		</md-content>
+	</md-sidenav>
+
+	<!--toolbar end -->
+	<!-- sidenav start -->
+	<div layout="column" flex style="min-height:100%; position:relative;">
+		<md-toolbar class="md-whiteframe-z1 contbg" style="position: fixed;">
 			<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
 				<md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="toggleOwnerLeftSidenav()">
 					<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 				</md-button>
-				<md-button aria-label="logo" class="md-icon">
-					<img class="png-icon" src="assets/images/product/billboards.png" width="160px" alt="images">
-				</md-button>
+				<!-- <md-button aria-label="logo" class="md-icon">
+								<img class="png-icon" src="assets/images/product/billboards.png" width="160px" alt="images">
+							</md-button> -->
 				<!-- <h2 class="" style="color:#000">{{firstname}}</h2> -->
 				<span flex></span>
 				<div class=" main__page__search ">
-					<!-- <input type="text" ng-model="siteNoSearch" class=" input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"	/> -->
-					<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in ownerProductSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+					<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+					 md-selected-item-change="viewSelectedProduct(item)" md-items="item in ownerProductSearch(searchText)" md-item-text="item.siteNo"
+					 md-min-length="4" placeholder="Search by Tab Id,Area Name..." md-clear-button="true">
 						<md-item-template>
 							<span class="item-title">
 								<span> {{item.siteNo}} </span>
@@ -30,21 +203,13 @@
 							</span>
 						</md-item-template>
 					</md-autocomplete>
-					<span class="">
-						<!-- <button class="btn btn-info btn-lg" type="button">
-							<i class="material-icons">search</i>
-						</button> -->
-						<!-- <a>
-							<i class="material-icons">search</i>
-						</a> -->
-					</span>
 				</div>
 				<!-- <md-button aria-label="notifications" class="md-icon-button" ng-click="openHelpScreen(ev)">
-					<img src="assets/images/owner/Question.png" />
-				</md-button>
-				<md-button aria-label="notifications" class="md-icon-button" ng-href="#/owner/settings">
-					<img src="assets/images/owner/setting.png" />
-				</md-button> -->
+								<img src="assets/images/owner/Question.png" />
+							</md-button>
+							<md-button aria-label="notifications" class="md-icon-button" ng-href="#/owner/settings">
+								<img src="assets/images/owner/setting.png" />
+							</md-button> -->
 				<div class="message">
 					<md-button aria-label="notifications" class="md-icon-button" ng-click="toggleOwnerRightSidenav()">
 						<md-icon md-svg-icon="assets/images/notification_24px.svg"></md-icon>
@@ -75,183 +240,17 @@
 				</md-menu>
 			</div>
 		</md-toolbar>
-		<!--toolbar end -->
-		<!-- sidenav start -->
-		<div layout="row">
-			<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
-			 style="width:250px">
-				<md-toolbar  style="background-color: #FFFFFF;min-height: 65px !important;" hide-gt-sm>
-                <img class="png-icon" src="assets/images/billboards.png">
-            </md-toolbar> 
-				<!-- <md-divider></md-divider> -->
-				<md-content class="sidenav-content">
-					<div>
-						<div style="width: 100% !important;">
-							<md-list class="owners-menu">
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
-										<md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
-										Home
-									</md-button>
-								</md-menu-item> -->
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="">
-										<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
-										Feeds
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}">
-										<md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
-										Campaigns
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
-									 ng-click="changeRequest()">
-										<md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
-										Requested Hoardings
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
-									 ng-click="changeHoardingList()">
-										<md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
-										Hoardings List
-									</md-button>
-								</md-menu-item>
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
-										<md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
-										Outsourcing Agents
-									</md-button>
-								</md-menu-item> -->
-								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-click="" ng-class="{'active-link': currStateName == 'owner.payments'}">
-										<md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
-										Payments
-									</md-button>
-								</md-menu-item>
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
-										<md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
-										Team
-									</md-button>
-								</md-menu-item> -->
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
-											<md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
-											Help
-									</md-button>
-								</md-menu-item> -->
-							</md-list>
-						</div>
-					</div>
-				</md-content>
-			</md-sidenav>
-			<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerRightSidenav" ng-click="toggleOwnerRightSidenav()">
-				<md-toolbar layout="row">
-					<div class="md-toolbar-tools bg_main_color">
-						<h2>
-							<span>Notifications</span>
-						</h2>
-						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="ownerRightSidenav()">
-							<md-tooltip>Close Side Panel</md-tooltip>
-							<md-icon class="md-default-theme">
-								<i class="material-icons">close</i>
-							</md-icon>
-						</md-button>
-					</div>
-				</md-toolbar>
-				<md-content>
-					<div ng-repeat="notif in ownerNotifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
-					ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-						<a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
-							<h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
-							<p>{{ notif.message }}</p>
-						</a>
-					</div>
-				</md-content>
-			</md-sidenav>
-			<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownereditProfile">
-				<md-toolbar layout="row">
-					<div class="md-toolbar-tools bg_main_color">
-						<h2>
-							<span>Edit Profile</span>
-						</h2>
-						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
-							<md-tooltip>Close Side Panel</md-tooltip>
-							<md-icon class="md-default-theme">
-								<i class="material-icons">close</i>
-							</md-icon>
-						</md-button>
-					</div>
-				</md-toolbar>
-				<md-content layout-padding="">
-					<form role="form">
-						<div class="form-group">
-							<label class="control-label"> Name</label>
-							<br>
-							<input class="form-control" type="text">
-						</div>
-						<div class="form-group">
-							<label class="control-label"> Company Name</label>
-							<br>
-							<input class="form-control" type="text">
-						</div>
-						<div class="form-group">
-							<label class="control-label">Email:</label>
-							<input class="form-control" type="text">
-						</div>
-						<div class="form-group">
-							<label class="control-label"> Phone Number</label>
-							<br>
-							<input class="form-control" type="text">
-						</div>
-						<div class="form-group">
-							<label class="control-label"> Address</label>
-							<br>
-							<input class="form-control" type="text">
-						</div>
-						<div class="form-group">
-							<label class="control-label"> City</label>
-							<br>
-							<input class="form-control" type="text">
-						</div>
-						<!-- <div class="form-group">
-								<label class="control-label"> City</label>
-								<br>
-								<input class="form-control" type="text">
-						</div> -->
-						<div class="input-group">
-							<span class="input-group-btn">
-								<span class="btn btn-default btn-file">
-									<input type="file" id="imgInp">
-								</span>
-							</span>
-						</div>
-						<div class="form-group" style="margin:10px 0">
-							<label class="col-md-3 control-label"></label>
-							<input class="btn btn-primary" value="Save" type="button">
-							<span></span>
-							<input class="btn btn-default" value="Cancel" type="reset">
-						</div>
-					</form>
-				</md-content>
-			</md-sidenav>
-			<ui-view flex style="margin-bottom: 40px"></ui-view>
-		</div>
-		<!-- sidenav end -->
-		<!-- <ui-view ></ui-view> -->
-		<!-- <div id="freshwidget-button" data-html2canvas-ignore="true" >
-			<md-button  class="freshwidget-customimage md-fab md-fab-bottom-right" ng-click="openScreen(ev)">
-					<img src="assets/images/tj_feedback.gif" alt="Support">
-			</md-button>
-		</div> -->
+		<ui-view  class="main_view"></ui-view>
 		<div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
 			<div style="padding: 5px 0;">Powered By Billboards India</div>
 		</div>
 	</div>
+	<!-- sidenav end -->
+	<!-- <ui-view ></ui-view> -->
+	<!-- <div id="freshwidget-button" data-html2canvas-ignore="true" >
+			<md-button  class="freshwidget-customimage md-fab md-fab-bottom-right" ng-click="openScreen(ev)">
+					<img src="assets/images/tj_feedback.gif" alt="Support">
+			</md-button>
+		</div> -->
 
+</div>

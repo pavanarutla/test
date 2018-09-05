@@ -48,6 +48,11 @@ app.service('CampaignService',
           $http.delete(config.apiPath + '/user-campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        deleteMetroCampaign: function(campaignId){
+          var dfd = $q.defer();
+          $http.delete(config.apiPath + '/metro-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
         exportCampaignsPdf: function(){
           var dfd = $q.defer();
           $http.get(config.apiPath + '/export-all-campaigns', { responseType: 'arraybuffer' }).success(dfd.resolve).error(dfd.reject);

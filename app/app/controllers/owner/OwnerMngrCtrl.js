@@ -1,56 +1,62 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, config, OwnerNotificationService, OwnerProductService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService, OwnerProductService, toastr) {
 
   /*=================================
   | mdDilalog close function
   =================================*/
 
-  if(typeof $rootScope.closeMdDialog !== 'function'){
-    $rootScope.closeMdDialog = function(){
-       $mdDialog.hide();
-     }
-   }
+  if (typeof $rootScope.closeMdDialog !== 'function') {
+    $rootScope.closeMdDialog = function () {
+      $mdDialog.hide();
+    }
+  }
 
+  $scope.closeMenuSidenavIfMobile = function(){
+    if($window.innerWidth <=420){
+      $mdSidenav('ownerLeftSidenav').close();
+    }
+  }
   /*=================================
   | mdDilalog close function
   =================================*/
 
   $rootScope.config = config;
 
-  if($stateParams.client_slug){
+  if ($stateParams.client_slug) {
     $rootScope.clientSlug = $stateParams.client_slug;
   }
 
-  if(localStorage.loggedInUser){
+  if (localStorage.loggedInUser) {
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
-  $scope.getAvatar = function(){
-    var userMongo = $auth.getPayload().userMongo;
-    if(typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != ''){
+  $scope.getAvatar = function () {
+    var payload = $auth.getPayload();
+    var userMongo = typeof payload !== 'undefined' ? payload.userMongo : undefined;
+    if (typeof userMongo !== 'undefined' && typeof userMongo.profile_pic !== 'undefined' && userMongo.profile_pic != '') {
       return {
         present: true,
         profile_pic: userMongo.profile_pic
       }
     }
-    else{
+    else {
       return {
         present: false
       }
     }
   }
 
-  $scope.logout = function(){
-    $auth.logout().then(function(result){
+  $scope.logout = function () {
+    $auth.logout().then(function (result) {
       // console.log(result);
       $rootScope.isAuthenticated = false;
       $location.path('/');
       localStorage.clear();
-      toastr.warning('You have successfully signed out!');        
+      toastr.warning('You have successfully signed out!');
     });
   }
 
   // $scope.toggleLeft = buildToggler('left');
-  
+
   // function buildToggler(navID) {
   //   return function() {
   //     // Component lookup should always be available since we are not using `ng-if`
@@ -64,7 +70,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
 
 
   // Dummy chart data
-  
+
   var chart1 = {};
   chart1.type = "google.charts.Bar";
   chart1.displayed = false;
@@ -102,7 +108,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
             f: "31 hoardings"
           }
         ]
-      }, 
+      },
       {
         c: [
           {
@@ -118,7 +124,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
             f: "32 hoardings"
           }
         ]
-      }, 
+      },
       {
         c: [
           {
@@ -134,7 +140,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
             f: "29 hoardings"
           }
         ]
-      }, 
+      },
       {
         c: [
           {
@@ -183,10 +189,10 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   $scope.editProfieSidenav = function () {
     $mdSidenav('ownereditProfile').toggle();
   };
-  $scope.openHelpScreen = function(ev) {
+  $scope.openHelpScreen = function (ev) {
     $mdDialog.show({
-      templateUrl:'views/owner/helpnsupport.html',
-      clickOutsideToClose:true,
+      templateUrl: 'views/owner/helpnsupport.html',
+      clickOutsideToClose: true,
     });
   };
 
@@ -195,12 +201,12 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   === Long polling notifications ===
   ================================*/
   $scope.ownerNotifs = [];
-  var getOwnerNotifs = function(){
+  var getOwnerNotifs = function () {
     var last_notif = 0;
-    if($scope.ownerNotifs && $scope.ownerNotifs.length > 0){
+    if ($scope.ownerNotifs && $scope.ownerNotifs.length > 0) {
       last_notif = moment.utc($scope.ownerNotifs[0].updated_at).valueOf();
     }
-    OwnerNotificationService.getAllOwnerNotifications(last_notif).then(function(result){
+    OwnerNotificationService.getAllOwnerNotifications(last_notif).then(function (result) {
       $scope.ownerNotifs = result.concat($scope.ownerNotifs);
       $timeout(getOwnerNotifs, 1000);
     });
@@ -210,19 +216,19 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   /*===============================
   |   Notification navigation 
   ===============================*/
-  $scope.viewNotification = function(notification){
-    if(notification.type == 9){
+  $scope.viewNotification = function (notification) {
+    if (notification.type == 9) {
       $location.path('owner/' + $rootScope.clientSlug + '/requested-hoardings/' + notification.data.product_id);
     }
-    else if(notification.type > 0 && notification.type < 8){
+    else if (notification.type > 0 && notification.type < 8) {
       $location.path('owner/' + $rootScope.clientSlug + '/campaign-details/' + notification.data.campaign_id + "/0");
     }
-    OwnerNotificationService.updateNotifRead(notification.id).then(function(result){
-      if(result.status == 1){
+    OwnerNotificationService.updateNotifRead(notification.id).then(function (result) {
+      if (result.status == 1) {
         // remove notif from list
-        $scope.ownerNotifs = _.filter($scope.ownerNotifs, function(notif){ return notif.id != notification.id; })
+        $scope.ownerNotifs = _.filter($scope.ownerNotifs, function (notif) { return notif.id != notification.id; })
       }
-      else{
+      else {
         toastr.error(result.message);
       }
     });
@@ -232,23 +238,23 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   | Product search
   =================================*/
   // $scope.simulateQuery = false;
-  $scope.isDisabled    = false;
+  $scope.isDisabled = false;
   // $scope.querySearch   = querySearch;
   // $scope.selectedItemChange = selectedItemChange;
   // $scope.searchTextChange   = searchTextChange;
 
 
-  $scope.ownerProductSearch = function(query) {
-    return OwnerProductService.searchOwnerProducts(query.toLowerCase()).then(function(res){
+  $scope.ownerProductSearch = function (query) {
+    return OwnerProductService.searchOwnerProducts(query.toLowerCase()).then(function (res) {
       return res;
     });
   }
 
-  $scope.viewSelectedProduct = function(product) {
-    if(typeof product !== 'undefined'){
+  $scope.viewSelectedProduct = function (product) {
+    if (typeof product !== 'undefined') {
       $location.path('/owner/' + $rootScope.clientSlug + '/product-details/' + product.id);
     }
-    else{
+    else {
       $location.path('/owner/' + $rootScope.clientSlug + '/hoarding-list');
     }
   }
