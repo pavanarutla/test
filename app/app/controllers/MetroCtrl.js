@@ -101,6 +101,9 @@ app.controller('MetroCtrl',
           if(typeof pkg.start_date === 'undefined'){
             toastr.error("Start date for the package is required.");
           }
+          else if(typeof pkg.selected_trains === 'undefined'){
+            toastr.error('Please select at least 1 train.');
+          }
           else{
             MetroService.shortlistPackage(pkg).then((result) => {
               if(result.status == 1){
