@@ -134,14 +134,15 @@
 							<tr>
 								<td>Actual Budget</td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}
+									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{metroCampaignDetails.act_budget || "N/A"}}
 								</td>
 							</tr>
 							<tr>
 								<td>Pending payment</td>
 								<td>
-									<span ng-if="metroCampaignDetails && metroCampaignDetails.pending_payment != 0">Rs.{{metroCampaignDetails.pending_payment}}</span>
-									<span ng-if="!metroCampaignDetails || metroCampaignDetails.pending_payment == null">N/A</span>
+									<span ng-if="!metroCampaignDetails">N/A</span>
+									<span ng-if="metroCampaignDetails && metroCampaignDetails.act_budget">Rs. {{metroCampaignDetails.pending_payment}}</span>
+									<span ng-if="metroCampaignDetails && !metroCampaignDetails.act_budget">N/A</span>
 								</td>
 							</tr>
 							<tr>
