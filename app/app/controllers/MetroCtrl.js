@@ -32,6 +32,9 @@ app.controller('MetroCtrl',
       $scope.toggleAddMetroProductSidenav = function(){
         $mdSidenav('add-metro-product-sidenav').toggle();
       }
+      $scope.toggleShareMetroCampaignSidenav = function () {
+        $mdSidenav('shareMetroCampaignSidenav').toggle();
+      };
       /*================================
       | Popup and Sidenav controls end
       ================================*/
@@ -146,7 +149,34 @@ app.controller('MetroCtrl',
       $scope.toggleSaveCampaignSidenavMetro = function () {
         $mdSidenav('saveCampaignSidenavCongo').close();
         $mdSidenav('saveCampaignSidenavForm').toggle();
-      };
+      }
+      $scope.shareMetroCampaignToEmail = function (ev, shareCampaign) {
+        $scope.campaignToShare = $scope.metroCampDetails;
+        var campaignToEmail = {
+          campaign_id: $scope.campaignToShare.id,
+          email: shareCampaign.email,
+          receiver_name: shareCampaign.receiver_name,
+          campaign_type: $scope.campaignToShare.type
+        };
+        CampaignService.shareMetroCampaignToEmail(campaignToEmail).then(function (result) {
+          if (result.status == 1) {
+            $mdSidenav('shareCampaignSidenav').close();
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                // .textContent('You can specify some description text in here.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+          }
+          else {
+            toastr.error(result.message);
+          }
+        });
+      }
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
         $scope.selectedPackage.campaign_id = $stateParams.metroCampaignId;

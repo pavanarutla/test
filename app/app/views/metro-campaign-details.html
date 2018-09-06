@@ -8,6 +8,46 @@
 	}
 </style>
 
+
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareMetroCampaignSidenav">
+	<div layout="row">
+		<div class="md-toolbar-tools">
+		<div flex></div>
+		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareMetroCampaignSidenav()">
+			<md-tooltip>Close Side Panel</md-tooltip>
+			<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+		</md-button>
+		</div>
+	</div>
+	<md-content layout-align="center center" layout-margin layout-padding>
+		<h3 class="md-headline">Share Campaign</h3>
+		<form name="shareCampaignForm">
+			<div layout="column">
+				<md-input-container class="md-block">
+				<label>Name</label>
+				<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required"/>
+				<div ng-messages="shareCampaignForm.name.$error">
+					<div ng-message="required">Name is required.</div>
+					<div ng-message="pattern">Enter a valid Name.</div>
+				</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+				<label>Email</label>
+				<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+				<div ng-messages="shareCampaignForm.email.$error">
+					<div ng-message="required">Email is required.</div>
+					<div ng-message="pattern">Enter a valid Email Id.</div>
+				</div>
+				</md-input-container>
+				<md-button class="md-raised md-warn" layout-fill ng-click="shareMetroCampaignToEmail($event, shareCampaign)">SHARE CAMPAIGN</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-sidenav>
+<!-- share campaign sidenav ends -->
+
+
 <!-- Add Product to metro campaign -->
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="add-metro-product-sidenav" style="width:400px !important">
 	<md-toolbar layout="row">
@@ -184,6 +224,12 @@
 				<div class="text_color" style="margin: 30px 0 0 0;font-size: 20px;">Packages ({{metroCampDetails.packages.length}})</div>
 			</div>
 			<div flex="50" flex-sm="100" layout="row" layout-align="end center">
+					<md-button class="md-grid-item-content" ng-click="toggleShareMetroCampaignSidenav()">
+						<span>
+							<md-icon md-svg-icon="assets/images/icons/share.svg"></md-icon>
+						</span>
+						<div class="md-caption">Share</div>
+					</md-button>
 				<md-button class="md-grid-item-content" ng-disabled="!metroCampDetails || metroCampDetails.status > 101" ng-click="toggleAddMetroProductSidenav()">
 					<span>
 						<md-icon md-svg-icon="assets/images/icons/add_circle_outline.svg"></md-icon>
