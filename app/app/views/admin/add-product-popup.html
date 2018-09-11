@@ -28,6 +28,7 @@
 			</div>
 			
 			<!--new form add product start -->
+			<form role="form" style="margin: 1em" name="addProducts">
 			<div table-responsive>
 				<table class="table table-striped table-bordered addproduct-table">
 					<tbody flex="100">
@@ -36,6 +37,9 @@
 								<input type="hidden" ng-model="product.id" />
 								<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" ng-disabled="product.status == 0"
 								/>
+								<div ng-messages="addProducts.siteNo.$error" ng-if="!addProducts.siteNo.$untouched" style="color: red">
+									<p ng-message="required"> site no is required</p>
+								</div>
 							</td>
 							<td flex="33">
 								<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type" class="select-value" data-md-container-class="selectdemoSelectHeader" required="required" name="productType" ng-disabled="product.status == 0">
@@ -43,7 +47,11 @@
 								</select>
 							</td>
 							<td flex="33">
-								<input ng-model="product.default_price" placeholder="Default Price" type="text" name="hoardingcost" ng-disabled="product.status == 0" />
+								<input ng-model="product.default_price" placeholder="Default Price" type="text" name="hoardingcost" required="required" ng-pattern="/^[0-9]/" ng-disabled="product.status == 0" />
+								<div ng-messages="addProducts.hoardingcost.$error" ng-if="!addProducts.hoardingcost.$untouched" style="color: red">
+									<p ng-message="required"> hoardingcost is required</p>
+									<p ng-message="pattern"> numbers required</p>
+								</div>
 							</td>
 						</tr>
 						<tr >
@@ -80,15 +88,24 @@
 								<input ng-model="product.area_name" placeholder="Area Name" type="text" name="area_name" ng-if="product.status == 0" ng-disabled="true" />
 							</td>
 							<td>
-								<textarea  class="table-address" placeholder="Address" rows="3" ng-model="product.address" ng-disabled="product.status == 0"></textarea>
+								<textarea  class="table-address" placeholder="Address" name="address" rows="3" required ng-model="product.address" ng-disabled="product.status == 0"></textarea>
+								<div ng-messages="addProducts.address.$error" ng-if="!addProducts.address.$untouched" style="color: red">
+									<p ng-message="required"> Address is required</p>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td flex="33">
 								<input ng-model="product.impressions" placeholder="impressions" type="text" name="impressions" required="required" />
+								<div ng-messages="addProducts.impressions.$error" ng-if="!addProducts.impressions.$untouched" style="color: red">
+									<p ng-message="required"> impressions is required</p>
+								</div>
 							</td>
 							<td flex="33">
 								<input ng-model="product.panelSize"  placeholder="Panel Size" type="text" name="panelSize" required="required" ng-disabled="product.status == 0" />
+								<div ng-messages="addProducts.panelSize.$error" ng-if="!addProducts.panelSize.$untouched" style="color: red">
+									<p ng-message="required"> panel size is required</p>
+								</div>
 							</td>
 							<td flex="33">
 								<select ng-model="product.lighting" class="select-value" md-on-close="clearSearchTerm()"
@@ -102,12 +119,21 @@
 						<tr>
 							<td flex="33">
 								<input ng-model="product.direction" placeholder="Direction" type="text" name="direction" required="required" ng-disabled="product.status == 0"/>
+								<div ng-messages="addProducts.direction.$error" ng-if="!addProducts.direction.$untouched" style="color: red">
+									<p ng-message="required"> Direction is required</p>
+								</div>
 							</td>
 							<td flex="33">
 								<input ng-model="product.lat" placeholder="Latitude" type="text" name="lat" required="required" />
+								<div ng-messages="addProducts.lat.$error" ng-if="!addProducts.lat.$untouched" style="color: red">
+									<p ng-message="required"> Latitude is required</p>
+								</div>
 							</td>
 							<td flex="33">
 								<input ng-model="product.lng" placeholder="Longitude" type="text" name="lng" required="required" />
+								<div ng-messages="addProducts.lng.$error" ng-if="!addProducts.lng.$untouched" style="color: red">
+									<p ng-message="required"> Longitude is required</p>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -122,6 +148,9 @@
 							</td>
 							<td flex="33">
 								<textarea ng-model="product.adStrength" placeholder="Advertising Strengths" type="text" name="adStrength" required="required" ng-disabled="product.status == 0"></textarea>
+								<div ng-messages="addProducts.adStrength.$error" ng-if="!addProducts.adStrength.$untouched" style="color: red">
+									<p ng-message="required"> Advertising Strengths is required</p>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -138,6 +167,7 @@
 				<md-button type="submit" Class="md-raised md-primary" ng-click="addProduct()" ng-disabled="addProductForm.$invalid">SUBMIT</md-button>
 				<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
 			</div>
+			</form>
 			<!--new form add product end -->
 		</md-content>
 	</md-dialog-content>
