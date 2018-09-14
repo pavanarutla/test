@@ -134,14 +134,15 @@
 							<tr>
 								<td>Actual Budget</td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs.</span>{{metroCampaignDetails.act_budget || "N/A"}}
+									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{metroCampaignDetails.act_budget || "N/A"}}
 								</td>
 							</tr>
 							<tr>
 								<td>Pending payment</td>
 								<td>
-									<span ng-if="metroCampaignDetails && metroCampaignDetails.pending_payment != 0">Rs.{{metroCampaignDetails.pending_payment}}</span>
-									<span ng-if="!metroCampaignDetails || metroCampaignDetails.pending_payment == null">N/A</span>
+									<span ng-if="!metroCampaignDetails">N/A</span>
+									<span ng-if="metroCampaignDetails && metroCampaignDetails.act_budget">Rs. {{metroCampaignDetails.pending_payment}}</span>
+									<span ng-if="metroCampaignDetails && !metroCampaignDetails.act_budget">N/A</span>
 								</td>
 							</tr>
 							<tr>
@@ -202,7 +203,7 @@
 							<div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
 							<div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
 							<div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
-							<div flex="20" layout="column" layout-align="center center">{{payment.updated_by_admin_name || "N/A" }}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.received_by || "N/A" }}</div>
 						</div>
 					</div>
 					<!-- <div layout="row" layout-align="center center"> 
