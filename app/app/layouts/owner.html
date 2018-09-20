@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
 
 <!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
-
 <div layout="column" flex style="position:relative;min-height:100%;">
 	<md-toolbar class="md-whiteframe-z1 contbg" style="position: fixed;">
 		<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
@@ -9,17 +8,17 @@
 				<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 			</md-button>
 			<md-button aria-label="logo" class="md-icon">
-				<img class="png-icon" src="assets/images/product/billboards.png" width="160px" alt="images">
+				<img class="png-icon" src="assets/images/owner/logo.png" width="160px" alt="images">
 			</md-button>
 			<span flex></span>
-			<button class="btn btn-default">Metro</button>
+			<button class="btn btn-default metro_btn">Metro Train</button>
 			<div class="profile_details_left"><!--notifications of menu start -->
 				<ul class="nofitications-dropdown">
 					<li class="dropdown head-dpdn"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu animated fadeInDown mt-5">
 						<li>
 						<div class="notification_header">
-							<h3>You have 3 new notification</h3>
+							<h3 class="text_color">You have 3 new notification</h3>
 						</div>
 						</li>
 						<li>
@@ -56,10 +55,10 @@
 					</li>
 					<li class="dropdown head-dpdn"> 
 						<a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Camapgin (5)</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu animated fadeInDown mt-5">
 						<li>
 							<div class="notification_header ">
-							<h3>You have 5 Campaigns</h3>
+							<h3 class="text_color">You have 5 Campaigns</h3>
 						</div>
 						</li>
 						<li><a href="#">
@@ -91,6 +90,7 @@
 					<li class="dropdown head-dpdn"> 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 							<img src="assets/images/man.png"/>
+							<i class="fa fa-ellipsis-v lnr"></i>
 						</a>
 						<ul class="dropdown-menu drp-mnu pl-4">
 							<li> <a ng-href="#/profile"> Srikanth Bijjala</a> </li>
@@ -133,83 +133,98 @@
 	<!-- sidenav start -->
 	<div layout="row" flex style=" position:relative;">
 		<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
-			style="width: 250px;background: #414143 !important;height:100vh;position: fixed;">
-			   <!-- <md-toolbar  style="min-height: 65px !important;">
-							  <img class="png-icon" src="assets/images/billboards.png">
-					   </md-toolbar>  -->
-			   <header layout="column" layout-padding style="min-height:90px !important">
-				   <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
-					   <img ng-src="assets/images/product/logo.png" width="160" alt="owner logo">
-				   </md-button>
-			   </header>
-			   <!-- <md-divider></md-divider> -->
-			   <md-content class="sidenav-content" style="background: #414143 !important">
-				   <div>
-					   <div style="width: 100% !important;">
-						   <md-list class="owners-menu">
-							   <!-- <md-menu-item class="nv-nav-item">
-										  <md-button ng-href="#/owner/{{clientSlug}}/home" class="home-btn" ng-class="{'active-link': currStateName == 'owner.home'}">
-											  <md-icon class="md-default-theme active" class="material-icons">&#xE88A;</md-icon>
-											  Home
-										  </md-button>
-									  </md-menu-item> -->
-							   <md-menu-item class="nv-nav-item">
-								   <md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
-									   <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
-									   Feeds
-								   </md-button>
-							   </md-menu-item>
-							   <md-menu-item class="nv-nav-item">
-								   <md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
-									   <md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
-									   Campaigns
-								   </md-button>
-							   </md-menu-item>
-							   <md-menu-item class="nv-nav-item">
-								   <md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
+			style="width: 210px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
+				<!-- <md-toolbar  style="min-height: 65px !important;">
+								<img class="png-icon" src="assets/images/billboards.png">
+						</md-toolbar>  -->
+				<header layout="column" layout-padding style="min-height:90px !important">
+					<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
+						<img ng-src="assets/images/owner/logo.png" width="160" alt="owner logo">
+					</md-button>
+				</header>
+				<!-- <md-divider></md-divider> -->
+				<md-content class="sidenav-content" style="background: #44596D !important">
+					<div>
+						<div style="width: 100% !important;">
+							<md-list class="owners-menu">
+						
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
+										To-Do List
+									</md-button>
+								</md-menu-item>
+								<!-- <md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
+										Campaigns
+									</md-button>
+								</md-menu-item> -->
+								<!-- campagin start -->
+								<md-menu-item flex layout="column">
+									<md-button aria-expanded="flase"  ng-click="toogelCampagin()" class="md-button-toggle">
+									<div layout="row">
+										<span style="color:#fff">Campaigns</span>
+										<span flex></span>
+										<span>
+										<md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showCampagin"></md-icon>
+										<md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showCampagin"></md-icon>
+										</span>
+									</div>
+									</md-button>
+								</md-menu-item>
+								<md-menu-item flex layout="column" ng-show="showCampagin">
+									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}" >
+										<div layout="row">
+										<span flex="15"></span>
+										</span>My Campaigns</div>
+									</md-button>
+								</md-menu-item>
+								<md-menu-item flex layout="column" ng-show="showCampagin">
+									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaign'}" >
+										<div layout="row">
+										<span flex="15"></span>
+										OOH Campaigns
+										</div>
+									</md-button>
+								</md-menu-item>
+								
+									<!--campagin end-->
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
 									ng-click="changeRequest(); closeMenuSidenavIfMobile()">
-									   <md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
-									   Request Inventory
-								   </md-button>
-							   </md-menu-item>
-							   <md-menu-item class="nv-nav-item">
-								   <md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
+										Request Inventory
+									</md-button>
+								</md-menu-item>
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
 									ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
-									   <md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
-									   Inventory List
-								   </md-button>
-							   </md-menu-item>
-							   <!-- <md-menu-item class="nv-nav-item">
-										  <md-button ng-href="#/owner/{{clientSlug}}/outsourcingagent" ng-click="changeAgent()" ng-class="{'active-link': currStateName == 'owner.outsourcingagent'}">
-											  <md-icon class="md-default-theme" class="material-icons">&#xE8D3;</md-icon>
-											  Outsourcing Agents
-										  </md-button>
-									  </md-menu-item> -->
-							   <md-menu-item class="nv-nav-item">
-								   <md-button ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
-									   <md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
-									   Payments
-								   </md-button>
-							   </md-menu-item>
-							   <!-- <md-menu-item class="nv-nav-item">
-										  <md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
-											  <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
-											  Team
-										  </md-button>
-									  </md-menu-item> -->
-							   <!-- <md-menu-item class="nv-nav-item">
-										  <md-button ng-href="#/owner/feedBack" ng-class="{'active-link': currStateName == 'owner.feedBack'}">
-												  <md-icon class="md-default-theme" class="material-icons">&#xE8B8;</md-icon>
-												  Help
-										  </md-button>
-									  </md-menu-item> -->
-						   </md-list>
-					   </div>
-				   </div>
-			   </md-content>
+										Inventory List
+									</md-button>
+								</md-menu-item>
+								
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
+										Payments
+									</md-button>
+								</md-menu-item>
+								<md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+										BBI Support
+									</md-button>
+								</md-menu-item>
+								<!-- <md-menu-item class="nv-nav-item">
+									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+										<md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+										Team
+									</md-button>
+								</md-menu-item> -->
+							
+							</md-list>
+						</div>
+					</div>
+				</md-content>
 		</md-sidenav>
 		
-		<ui-view  class="main_view"></ui-view>
+		<ui-view  class="main_view" flex></ui-view>
 		<div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
 			<div style="padding: 5px 0;">Powered By Billboards India</div>
 		</div>
