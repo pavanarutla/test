@@ -387,6 +387,16 @@ var app = angular.module('bbManager', [
     //   templateUrl: 'views/owner/feedback.html',
     //   controller:'feedback'
     // })
+    .state('owner.bbisupport', {
+      url: '/bbisupport',
+      templateUrl: 'views/owner/bbisupport.html',
+      controller:''
+    })
+    .state('owner.updatepayment', {
+      url: '/updatepayment',
+      templateUrl: 'views/owner/updatepayment.html',
+      controller:''
+    })
     .state('owner.payments', {
       url: '/payments',
       templateUrl: 'views/owner/campaign-payments.html',
