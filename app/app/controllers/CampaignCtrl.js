@@ -332,5 +332,4 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   /*=============================
   | Page based initial loads end
   =============================*/
-
 });
