@@ -1,5 +1,5 @@
 <!-- ============ add hoarding list side nav start ============ -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="request-hoarding-sidenav" style="width:400px !important;height: 100vh;">
+<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="request-hoarding-sidenav" style="width:400px !important;height: 100vh;">
 	<md-toolbar layout="row">
 		<div class="md-toolbar-tools bg_main_color">
 			<h2>
@@ -179,13 +179,13 @@
 			</div>
 		</form>
 	</md-content>
-</md-sidenav>
+</md-sidenav> -->
 <!-- ============ add hoarding list side nav end ============ -->
 
 <!-- =======================================================
 	list of requested hoardings which aren't approved yet 
 ==========================================================-->
-<div class="owner__request__hoarding" layout="column" layout-margin="layout-margin" layout-fill="layout-fill">
+<!-- <div class="owner__request__hoarding" layout="column" layout-margin="layout-margin" layout-fill="layout-fill">
 	<div layout="row" layout-margin="layout-margin" class="req_hrdg_title">
 		<h3 class="md-title text_color">Request Hoardings</h3>
 		<div flex></div>
@@ -233,7 +233,209 @@
 				</li>
 			</ul>
 		</div>
-	</div>
-	<!-- ==========================================================
+	</div> -->
+<!-- ==========================================================
 	list of requested hoardings which aren't approved yet ends
 ============================================================ -->
+
+<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+	<div flex></div>
+	<div class="dropdown">
+		<md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn">Add New Product</md-button>
+		<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
+			<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+				<div layout="colmun">
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+						<md-icon class="md-default-theme">
+							<i class="material-icons">close</i>
+						</md-icon>
+					</md-button>
+				</div>
+				<h3 class="md-body-2">Great, <span class="md-title">Let's add new product</span></h3>
+				<br>
+				<li>
+
+					<div class="col-md-12">
+						<form>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Product ID">
+								</div>
+								<div class="col-sm-6">
+									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+										<option value="" selected>Product Type</option>
+										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+										<option value="" selected>Country</option>
+										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+										<option value="" selected>City</option>
+										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+										<option value="" selected>Area</option>
+										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Address">
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Direction">
+								</div>
+								<div class="col-sm-3">
+									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+										<option value="" selected>Lit - Yes</option>
+										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Size">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Product Cost">
+								</div>
+								<div class="col-sm-6">
+									<input type="date" name="bday" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+									 placeholder="Product Calender">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<textarea class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount" placeholder="Product Strength"
+									 rows="3"></textarea>
+								</div>
+
+								<div class="col-sm-6">
+									<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+									<span class="input-group-btn">
+										<span class="">
+											<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
+											 name="imageFile" accept="image/*" ngf-max-size="10MB">
+										</span>
+									</span>
+									<div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+										<div ng-message="required">Image is required.</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div flex></div>
+								<div class="col-sm-6">
+									<md-button class="md-raised md-primary text-white pull-right" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</li>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="table-responsive" style="margin-bottom:115px !important">
+	<table class="table table-hover">
+		<thead class="text_color">
+			<tr>
+				<th>Product Details</th>
+				<th></th>
+				<th>Views</th>
+				<th>Lit</th>
+				<th>Price</th>
+				<th>Calender</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
+				</td>
+				<td>
+					<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
+						road, beside ICICI Bank</p>
+				</td>
+				<td class="table_vertical">1,48,000</td>
+				<td class="table_vertical">Yes</td>
+				<td class="table_vertical">58,000</td>
+				<td class="table_vertical"><i class="fa fa-calendar"></i></td>
+				<td class="table_vertical"></td>
+				<td class="text-center table_vertical">
+					<button type="button" class="btn btn-secondary">Edit Details</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
+				</td>
+				<td>
+					<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
+						road, beside ICICI Bank</p>
+				</td>
+				<td class="table_vertical">1,48,000</td>
+				<td class="table_vertical">Yes</td>
+				<td class="table_vertical">58,000</td>
+				<td class="table_vertical"><i class="fa fa-calendar"></i></td>
+				<td class="table_vertical"></td>
+				<td class="text-center table_vertical">
+					<button type="button" class="btn btn-secondary">Edit Details</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
+				</td>
+				<td>
+					<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
+						road, beside ICICI Bank</p>
+				</td>
+				<td class="table_vertical">1,48,000</td>
+				<td class="table_vertical">Yes</td>
+				<td class="table_vertical">58,000</td>
+				<td class="table_vertical"><i class="fa fa-calendar"></i></td>
+				<td class="table_vertical"></td>
+				<td class="text-center table_vertical">
+					<button type="button" class="btn btn-secondary">Edit Details</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+<script>
+	function addPayment() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+	function addPayments() {
+		document.getElementById("myDropdownView").classList.toggle("show");
+	}
+</script>
