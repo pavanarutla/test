@@ -593,5 +593,4 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*=============================
   | Page based initial loads end
   =============================*/
-
 });
