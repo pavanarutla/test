@@ -333,6 +333,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
+    .state('owner.saved-campaigns', {
+      url: '/saved-campaigns',
+      templateUrl: 'views/owner/saved-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
     .state('owner.campaign-details', {
       url: '/campaign-details/:campaignId/:campaignType',
       templateUrl: 'views/owner/campaign-details.html',
@@ -405,6 +410,11 @@ var app = angular.module('bbManager', [
     .state('owner.update-payments', {
       url: '/update-payments',
       templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.product-shortlist-campagin', {
+      url: '/product-shortlist-campagin',
+      templateUrl: 'views/owner/product-shortlist-campagin',
       controller:'OwnerCampaignCtrl'
     })
     .state('owner.signIn', {

@@ -1,4 +1,4 @@
-<div ng-cloak flex="100" flex-xs="100" flex-sm="100">
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
 	<div layout="column" layout-sm="column" layout-xs="column">
 		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
 			<md-toolbar layout="row" style="    background: #48869c;">
@@ -225,7 +225,6 @@
 		</md-content>
 	</md-sidenav>
 	<!-- share campaign sidenav ends -->
-
 	<!-- table grid start  -->
 	<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
 		<div class="ml-4" style="margin-top:28px;">
@@ -240,39 +239,42 @@
 			<p>No of Products</p>
 			<p class="md-body-2">5</p>
 		</div>
-		<div>
-			<md-list>
-				<md-list-item style="padding:5px">
-					<div>
-						<md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-							<span><i class="material-icons">
-									reply_all
-								</i></span>
-							<div class="md-body-2">Share Camapaign</div>
-						</md-button>
-					</div>
-				</md-list-item>
-			</md-list>
-		</div>
-		<div>
-			<md-list>
-				<md-list-item style="padding:5px">
-					<div>
-						<md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-							<span><i class="material-icons">
-									file_copy
-								</i></span>
-							<div class="md-body-2">Download Quotetation</div>
-						</md-button>
-					</div>
-				</md-list-item>
-			</md-list>
-		</div>
 		<div flex></div>
+		<div>
+			<md-button class="share_btn">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						reply_all
+					</i>
+				</md-icon>
+				Share Camapaign
+			</md-button>
+		</div>
+		<div>
+
+			<md-button class="share_btn">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						file_copy
+					</i>
+				</md-icon>
+				Download Quotetation
+			</md-button>
+		</div>
+		
 		<div style="margin-top:35px;">
-			<button type="button" class="btn" style="background:#44596D; color:#fff;"><span><i class="material-icons mt-2" style="">
+			<!-- <button type="button" class="btn" style="background:#44596D; color:#fff;"><span><i class="material-icons mt-2" style="">
 						cloud_upload
-					</i></span> Upload Art Work</button>
+					</i></span> Upload Art Work</button> -->
+			<md-button class="md-raised md-primary" style="background:#44596D;">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						cloud_upload
+					</i>
+				</md-icon>
+				Upload Art Work
+			</md-button>
+
 		</div>
 
 	</div>
@@ -287,8 +289,10 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
-					<th><button type="button" class="btn" style="background:#6888F3; color:#fff;">Add Another Product</button>
-						<md-list>
+					<th>
+						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/owner/{{clientSlug}}/hoarding-list">Add
+							Another Product</md-button>
+
 					</th>
 				</tr>
 			</thead>
@@ -316,7 +320,7 @@
 						<a href="#"><i class="material-icons">delete_foreve</i></a>
 					</td>
 					<td class="text-center table_vertical">
-						<p class="text_color md-caption">This Inventory<br> 
+						<p class="text_color md-caption">This Inventory<br>
 							Campaign Completed</p>
 					</td>
 
@@ -345,7 +349,7 @@
 					</td>
 					<td class="text-center table_vertical ">
 						<p class="text_color md-caption">This Inventory <br>
-								Campaign Sheduled</p>
+							Campaign Sheduled</p>
 					</td>
 				</tr>
 				<tr>
@@ -357,85 +361,29 @@
 							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
 								 class="fa fa-eye"></i>1,25,589</button></p>
 					</td>
-					<td  class="table_vertical">90*60</td>
-					<td  class="table_vertical">
+					<td class="table_vertical">90*60</td>
+					<td class="table_vertical">
 						<p>01-05-2018</p>
 						<p>15-08-2018</p>
 					</td>
-					<td  class="table_vertical">
+					<td class="table_vertical">
 						<p>01-06-2018</p>
 						<p>15-10-2018</p>
 					</td>
-					<td  class="table_vertical">58,000</td>
-					<td  class="table_vertical">
+					<td class="table_vertical">58,000</td>
+					<td class="table_vertical">
 						<a href="#"><i class="material-icons">delete_foreve</i></a>
 					</td>
 					<td class="text-center table_vertical">
 						<p class="text_color md-caption">This Inventory<br>
-								Campaign Running</p>
+							Campaign Running</p>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<!-- <div style="margin-top: 1em;">
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered ">
-				<thead class="text_color" style="text-align: center">
-					<tr>
-						<th>Tab Id</th>
-						<th>Type</th>
-						<th hide-xs>Area</th>
-						<th hide-xs>Size</th>
-						<th hide-xs>Lighting</th>
-						<th hide-xs hide-sm>Start Date</th>
-						<th hide-xs hide-sm>End Date</th>
-						<th>Image</th>
-						<th>Price</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="campaignProduct in campaignDetails.products | limitTo:limit" ng-class="{'striked-out': campaignProduct.unavailable}">
-						<td>{{campaignProduct.siteNo}}</td>
-						<td>{{campaignProduct.format_name}}</td>
-						<td hide-xs>{{campaignProduct.area_name}}</td>
-						<td hide-xs>{{campaignProduct.panelSize}}</td>
-						<td hide-xs>{{campaignProduct.lighting | boolToYesNo}}</td>
-						<td hide-xs hide-sm>{{campaignProduct.from_date | date }}</td>
-						<td hide-xs hide-sm>{{campaignProduct.to_date | date }}</td>
-						<td>
-							<md-button ng-click="viewProductImage(campaignProduct.image)" class="md-icon-button">
-								<md-icon>
-									<i class="material-icons">remove_red_eye</i>
-								</md-icon>
-							</md-button>
-						</td>
-						<td>{{campaignProduct.price}}</td>
-						<td>
-							<span>
-								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)" ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
-									<md-icon>
-										<i class="material-icons">mode_edit</i>
-									</md-icon>
-								</a>
-							</span>
-							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.id)" ng-if="campaignDetails.type == 2 && (campaignDetails.status < 3 || campaignDetails.status == 4)">
-									<md-icon>
-										<i class="material-icons">delete</i>
-									</md-icon>
-								</a>
-							</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		
-	</div> -->
 	<!-- table grid end -->
-	<div class="md-whiteframe-z2 campaign_payment" layout="row" layout-margin>
+	<div class="md-whiteframe-3dp campaign_payment" layout="row" layout-margin>
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
@@ -456,7 +404,4 @@
 			<md-button class="md-raised md-primary">Book Campaign</md-button>
 		</div>
 	</div>
-
-</div>
-</div>
 </div>
