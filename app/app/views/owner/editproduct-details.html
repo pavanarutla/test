@@ -121,29 +121,8 @@
 
     <div class="layout-margin col-md-5">
         <img src="assets/images/updatedetails.png" alt="Smiley face" height="" width="520px">
+        <label for="files" class="btn bottom-right">Change Image</label>
+        <input id="files" style="visibility:hidden;" type="file">
     </div>
 </div>
 
-<div>
-    <label for="files" class="btn">Change Image</label>
-    <input id="files" style="visibility:hidden;" type="file">
-</div>
-
-
-<input type='file' onchange="readURL(this);" />
-<img id="blah" class="img_1" src="http://placehold.it/180" alt="your image" />
-
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
