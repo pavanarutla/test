@@ -123,6 +123,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.requestedProductList = result.products;
+      //console.log(result.products);
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -149,13 +150,21 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+
+  $scope.requestedAddProduct = function(product){
+    console.log(product);
+  }
+
+
+
+
   /*=====================
   | Product Section
   =====================*/
   $scope.product = {};
  
   $scope.files = {};
-  $scope.requestAddProduct = function () {
+  $scope.requestAddProduct = function (product) {
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
       data: { image: $scope.files.image, product: $scope.product }
