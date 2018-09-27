@@ -333,9 +333,19 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
+    .state('owner.bbi-campaigns', {
+      url: '/bbi-campaigns',
+      templateUrl: 'views/owner/bbi-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
     .state('owner.saved-campaigns', {
       url: '/saved-campaigns',
       templateUrl: 'views/owner/saved-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
+    .state('owner.metro-campaign-details', {
+      url: '/metro-campaign-details',
+      templateUrl: 'views/owner/metro-campaign-details.html',
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.campaign-details', {
