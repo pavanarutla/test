@@ -417,6 +417,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/resetlogin.html',
       controller:''
     })
+    .state('owner.createaccount', {
+      url: '/createaccount',
+      templateUrl: 'views/owner/createaccount.html',
+      controller:''
+    })
     .state('owner.payments', {
       url: '/payments',
       templateUrl: 'views/owner/campaign-payments.html',
