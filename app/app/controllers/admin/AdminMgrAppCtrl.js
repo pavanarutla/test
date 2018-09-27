@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config, $pusher) {
 
   /*=================================
   | mdDilalog close function
@@ -71,6 +71,34 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   /*================================
   === Long polling notifications ===
   ================================*/
+
+
+
+
+
+  
+
+
+    var client = new Pusher("4e108549b1a209a6d211", {
+      cluster: "ap2"
+    });
+    var pusher = $pusher(client);
+    var my_channel = pusher.subscribe('launch-campaign');
+    my_channel.bind('LaunchCampaignEvent', function(data) {
+    // update with new price
+    console.log('admin board',data.message)
+    }
+    );
+
+
+
+
+
+
+
+
+
+
   $scope.adminNotifs = [];
   var getAdminNotifs = function(){
     var last_notif = 0;

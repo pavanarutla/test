@@ -1,5 +1,5 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
-  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval, $pusher) {
 
   /*=================================
   | mdDilalog close function
@@ -422,6 +422,34 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*================================
     === Long polling notifications ===
     ================================*/
+
+
+
+
+
+
+
+
+    var client = new Pusher("4e108549b1a209a6d211", {
+      cluster: "ap2"
+
+    });
+    var pusher = $pusher(client);
+    var my_channel = pusher.subscribe('my-channel');
+    my_channel.bind('new-price', function(data) {
+    // update with new price
+    console.log('user board',data.message)
+    }
+    );
+
+
+
+
+
+
+
+    
+
     $scope.notifs = [];
     var getUserNotifs = function(){
       var last_notif = 0;

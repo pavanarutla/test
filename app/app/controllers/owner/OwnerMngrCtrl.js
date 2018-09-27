@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService, OwnerProductService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService, OwnerProductService, toastr, $pusher) {
 
   /*=================================
   | mdDilalog close function
@@ -200,6 +200,34 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   /*================================
   === Long polling notifications ===
   ================================*/
+
+
+
+
+
+  
+
+
+
+  var client = new Pusher("4e108549b1a209a6d211", {
+    cluster: "ap2"
+
+  });
+  var pusher = $pusher(client);
+  var my_channel = pusher.subscribe('my-channel');
+  my_channel.bind('new-price', function(data) {
+  // update with new price
+  console.log('owner board',data.message)
+  }
+  ); 
+
+
+
+
+
+
+
+
   $scope.ownerNotifs = [];
   var getOwnerNotifs = function () {
     var last_notif = 0;
