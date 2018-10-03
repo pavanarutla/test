@@ -35,7 +35,10 @@
 
 
 <div class="table-responsive"> 
-  <table class="table table-hover">
+  <div ng-if="requestList.length < 0">
+    <h3>There is no campaigns available</h3>
+    </div>
+  <table class="table table-hover" ng-if="requestList.length > 0">
           <thead class="text_color">
             <tr>
               <th>CID</th>
@@ -45,12 +48,14 @@
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr  ng-repeat="request in requestList">
-              <td></td>
+          <tbody ng-repeat="request in requestList">
+            <tr>
+              <td>BB283</td>
               <td>{{request.name}}</td>
-              <td ng-show="request.status == 2">A user has asked for a quote for your products.</td>
-              <td ng-show="request.status == 5">A campaign with your products has been requested to launch.</td>
+              <td>
+                <p ng-show="request.status == 2" >A user has asked for a quote for your products.</p>
+                <p ng-show="request.status == 5" >A campaign with your products has been requested to launch.</p>
+              </td>
               <td>
                 <a style="cursor:pointer;" ng-click="">
                     <md-icon class="material-icons" role="img" ng-click="showCampaignDetails($event, request)" aria-label="remove_red_eye">

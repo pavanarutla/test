@@ -413,19 +413,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="product in requestedProductList">
+			<tr ng-repeat="product in productList">
 				<td>
-					<img ng-src="{{config.serverUrl + product.image}}" style="width: 14em;height: 8em;" ng-click="viewProductImage(product.image)" />
+					<img ng-src="{{config.serverUrl + product.image}}"  alt="Smiley face" height="100" width="150">
 				</td>
 				<td>
-					<p class="md-title mb-0"><span>{{product.siteNo}}</span> - <span>{{product.area_name}}</span> <span>({{product.panelSize}})</span></p>
-					<p class="mb-0"><span class="text_color">Type:</span>&nbsp;{{product.format_name}}</p>
-					<p class="mb-0">Kothaguda X Roads</p>
-					<p class="mb-0"> <span class="text_color">Facing:</span> From Kothaguda to Hitech</p>
+					<p  class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing: {{product.faacing || "N/A"}}</p>
 				</td>
-				<!-- <td class="table_vertical">{{product.panelSize}}</td>				 -->
-				<td class="table_vertical">-NA-</td>
-				<td class="table_vertical">{{product.lighting | boolToYesNo}}</td>
+				<td class="table_vertical">{{product.panelSize}}</td>
+				<td class="table_vertical">{{product.impressions}}</td>
+				<td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+				<td class="table_vertical" ng-if="product.lighting == 0">No</td>
 				<td class="table_vertical">{{product.default_price}}</td>
 				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
 				<td class="table_vertical"></td>

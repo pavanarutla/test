@@ -147,6 +147,18 @@
           </div>
           <h3 class="md-body-2">Great,</h3>
           <h3 class="md-title">Let's start Campaign</h3>
+          <div layout="row" layout-margin layout-align="center center">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">OOH Campaign
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Metro Campaign
+              </label>
+            </div>
+          </div>
           <li>
             <div class="form-group ">
 
@@ -401,13 +413,13 @@
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr>
+              <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==6">
                 <td>BB-01</td>
-                <td>Billboards</td>
-                <td>15-08-2018</td>
-                <td>10</td>
-                <td>10,1000</td>
-                <td>10,10001</td>
+                <td>{{campaign.name}}</td>
+                <td>{{campaign.start_date | date}}</td>
+                <td>{{campaign.no_products || "N/A"}}</td>
+                <td>{{campaign.npaid || "N/A"}}</td>
+                <td>{{campaign.Total_budget || "N/A"}}</td>
                 <td>
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -450,7 +462,7 @@
                   </md-menu>
                 </td>
                 <td>
-                  <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
             </tbody>
@@ -474,14 +486,14 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="text-cente" ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status == 8">
               <tr>
-                <td>BB-01</td>
-                <td>Billboards</td>
-                <td>15-08-2018</td>
-                <td>10</td>
-                <td>10,1000</td>
-                <td>10,10001</td>
+                  <td>{{campaign.cid || "N/A"}}</td>
+                  <td>{{campaign.name}}</td>
+                  <td>{{campaign.start_date | date}}</td>
+                  <td>{{campaign.no_products || "N/A"}}</td>
+                  <td>{{campaign.npaid || "N/A"}}</td>
+                  <td>{{campaign.Total_budget || "N/A"}}</td>
                 <td>
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -524,7 +536,7 @@
                   </md-menu>
                 </td>
                 <td>
-                  <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
             </tbody>
