@@ -563,6 +563,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     loadOwnerCampaigns();
     setMinMaxDatesForCamapign();
   }
+  if ($rootScope.currStateName == "owner.bbi-campaigns") {
+    $scope.getUserCampaignsForOwner();
+  }
   if ($rootScope.currStateName == "owner.suggest-products") {
     loadOwnerProductList();
     setDatesForOwnerProductsToSuggest(JSON.parse(localStorage.selectedOwnerCampaign));

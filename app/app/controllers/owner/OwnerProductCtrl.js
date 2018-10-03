@@ -331,6 +331,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
     getRequestedProductList();
+    $scope.getApprovedProductList()
   }
 
   /*=============================

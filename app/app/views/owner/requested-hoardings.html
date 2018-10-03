@@ -375,18 +375,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
+			<tr ng-repeat="product in productList">
 				<td>
-					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
+					<img ng-src="{{config.serverUrl + product.image}}"  alt="Smiley face" height="100" width="150">
 				</td>
 				<td>
-					<p  class="d-none d-sm-block"><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
-						road, beside ICICI Bank</p>
+					<p  class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing: {{product.faacing || "N/A"}}</p>
 				</td>
-				<td class="table_vertical">90*90</td>
-				<td class="table_vertical">1,48,000</td>
-				<td class="table_vertical">Yes</td>
-				<td class="table_vertical">58,000</td>
+				<td class="table_vertical">{{product.panelSize}}</td>
+				<td class="table_vertical">{{product.impressions}}</td>
+				<td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+				<td class="table_vertical" ng-if="product.lighting == 0">No</td>
+				<td class="table_vertical">{{product.default_price}}</td>
 				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
 				<td class="table_vertical"></td>
 				<td class="text-center table_vertical">
@@ -394,7 +394,7 @@
 				</td>
 			</tr>
 
-			<tr>
+			<!-- <tr>
 				<td>
 					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
 				</td>
@@ -430,7 +430,7 @@
 				<td class="text-center table_vertical">
 					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
 				</td>
-			</tr>
+			</tr> -->
 		</tbody>
 	</table>
 </div>
