@@ -368,6 +368,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/hoarding-list.html',
       controller: 'OwnerProductCtrl'
     })
+    .state('owner.add-campagin-product', {
+      url: '/add-campagin-product',
+      templateUrl: 'views/owner/add-campagin-product.html',
+      controller: 'OwnerProductCtrl'
+    })
     .state('owner.product-details', {
       url: '/product-details/:productId',
       templateUrl: 'views/owner/product-details.html',
@@ -392,16 +397,16 @@ var app = angular.module('bbManager', [
     //   templateUrl: 'views/owner/outsourcingagent.html',
     //   controller:'outSourcing'
     // })
-    // .state('owner.teamPage', {
-    //   url: '/teamPage',
-    //   templateUrl: 'views/owner/team.html',
-    //   controller:'teamPage'
-    // })
-    // .state('owner.feedBack', {
-    //   url: '/feedBack',
-    //   templateUrl: 'views/owner/feedback.html',
-    //   controller:'feedback'
-    // })
+    .state('owner.notifications', {
+      url: '/notifications',
+      templateUrl: 'views/owner/owne-notifications.html',
+      controller:'teamPage'
+    })
+    .state('owner.addmetropkg', {
+      url: '/addmetropkg',
+      templateUrl: 'views/owner/addmetro-packages.html',
+      controller:'feedback'
+    })
     .state('owner.bbisupport', {
       url: '/bbisupport',
       templateUrl: 'views/owner/bbisupport.html',

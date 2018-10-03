@@ -1,17 +1,123 @@
 <div layout="column" class="owner_hoarding_list">
-  <div layout="row" layout-margin class="md-whiteframe-3dp">
-    <p class="mb-0 mt-3">Campaign Name:<span class="text_color"> Uber Pvt Ltd</span></p>
-    <p class="mb-0 mt-2">Product Added:<span class="text_color md-title"> 3</span></p>
-    <p class="mb-0 mt-3">Estimated Budget : 158,000</p>
-    <p class="mb-0 mt-3 text_color"> Total Budget : 190,000</p>
-    <p class="mb-0 mt-3"><span class="text_color">Created On</span> :12-08-2018 - 11.30 am</p>
-    <span flex></span>
-    <md-button class="md-raised md-primary">VIEW CAMPAIGN</md-button>
-  </div>
+  
   <div layout="row"  layout-margin>
-    <p class="mt-3">Total Products<span class="text_color">: 2845</span></p>
+    <p class="mt-4">Total Products<span class="text_color">: 2845</span></p>
     <div flex></div>
-    <md-button class="md-raised md-primary">ADD NEW PRODUCT</md-button>
+    <div class="dropdown">
+        <md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
+        <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
+          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+            <div layout="colmun">
+              <span flex></span>
+              <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addnewProduct()">
+                <md-icon class="md-default-theme">
+                  <i class="material-icons">close</i>
+                </md-icon>
+              </md-button>
+            </div>
+            <h3 class="md-body-2">Great, <span class="md-title">Let's add new product</span></h3>
+            <br>
+            <li>
+    
+              <div class="col-md-12">
+                <form>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Product ID">
+                    </div>
+                    <div class="col-sm-6">
+                      <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <option value="" selected>Product Type</option>
+                        <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <option value="" selected>Country</option>
+                        <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <option value="" selected>City</option>
+                        <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <option value="" selected>Area</option>
+                        <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Direction">
+                    </div>
+                    <div class="col-sm-3">
+                      <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <option value="" selected>Lit - Yes</option>
+                        <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                      </select>
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Size">
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Product Cost">
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="date" name="bday" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+                       placeholder="Product Calender">
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <textarea class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount" placeholder="Product Strength"
+                       rows="3"></textarea>
+                    </div>
+    
+                    <div class="col-sm-6">
+                      <label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+                      <span class="input-group-btn">
+                        <span class="">
+                          <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
+                           name="imageFile" accept="image/*" ngf-max-size="10MB">
+                        </span>
+                      </span>
+                      <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+                        <div ng-message="required">Image is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div flex></div>
+                    <div class="col-sm-6">
+                      <md-button class="md-raised md-primary text-white pull-right" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+          </form>
+        </div>
+      </div>
   </div>
   <!-- filters-->
   <form class="form-inline camp_filters" action="">
@@ -84,17 +190,9 @@
             <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
           </td>
           <td class="table_vertical">
-            <!-- <input type="text"   style="width: 65px;"/> -->
-            <div class="input-group mb-3">
-
-              <input type="text" class="form-control" placeholder="Somete" style="width: 65px;" />
-              <div class="input-group-prepend">
-
-                <a href=""><i class="material-icons">
-                    edit
-                  </i></a>
-
-              </div>
+            <div class="input-group">
+              <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
+              <span href="#"> <i class="material-icons">edit</i></span>
             </div>
           </td>
           <td class="table_vertical">
@@ -119,3 +217,8 @@
     </table>
   </div>
 </div>
+<script>
+  function addnewProduct() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+</script>
