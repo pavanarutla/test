@@ -229,15 +229,15 @@
 	<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
 		<div class="ml-4" style="margin-top:28px;">
 			<p>Camapaign ID</p>
-			<p class="md-body-2">BB-001</p>
+			<p class="md-body-2">{{campaignDetails.campaign_id || "N/A"}}</p>
 		</div>
 		<div style="margin-top:28px;">
 			<p>Camapaign Name</p>
-			<p class="md-body-2">Uber Ptv Ltd</p>
+			<p class="md-body-2">{{campaignDetails.name}}</p>
 		</div>
 		<div style="margin-top:28px;">
-			<p>No of Products</p>
-			<p class="md-body-2">5</p>
+			<p>No ofProducts</p>
+			<p class="md-body-2">{{campaignDetails.products.length}}</p>
 		</div>
 		<div flex></div>
 		<div>
@@ -297,25 +297,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr ng-repeat="product in campaignDetails.products">
 					<td>
-						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+						<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="100">
 					</td>
 					<td>
-						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
-							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+						<p class=""><b>{{product.siteNo}} - {{product.area_name}} (40Ft X 40Ft)</b><br>Address: {{product.address || "N/A"}}<br>Views : {{product.views || "N/A"}},
+							 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
 								 class="fa fa-eye"></i>1,25,589</button></p>
 					</td>
-					<td class="table_vertical">90*60</td>
+					<td class="table_vertical">{{product.panelSize}}</td>
 					<td class="table_vertical">
-						<p>01-05-2018</p>
-						<p>15-08-2018</p>
+						<p>{{product.from_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<!-- <p></p> -->
 					</td>
 					<td class="table_vertical">
-						<p>01-06-2018</p>
-						<p>15-10-2018</p>
+						<p>{{product.to_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<!-- <p>15-10-2018</p> -->
 					</td>
-					<td class="table_vertical">58,000</td>
+					<td class="table_vertical">{{product.price}}</td>
 					<td class="table_vertical">
 						<a href="#"><i class="material-icons">delete_foreve</i></a>
 					</td>
@@ -325,60 +325,6 @@
 					</td>
 
 				</tr>
-				<tr>
-					<td>
-						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
-					</td>
-					<td>
-						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
-							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
-								 class="fa fa-eye"></i>1,25,589</button></p>
-					</td>
-					<td class="table_vertical">90*60</td>
-					<td class="table_vertical">
-						<p>01-05-2018</p>
-						<p>15-08-2018</p>
-					</td>
-					<td class="table_vertical">
-						<p>01-06-2018</p>
-						<p>15-10-2018</p>
-					</td>
-					<td class="table_vertical">58,000</td>
-					<td class="table_vertical">
-						<a href="#"><i class="material-icons">delete_foreve</i></a>
-					</td>
-					<td class="text-center table_vertical ">
-						<p class="text_color md-caption">This Inventory <br>
-							Campaign Sheduled</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
-					</td>
-					<td>
-						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
-							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
-								 class="fa fa-eye"></i>1,25,589</button></p>
-					</td>
-					<td class="table_vertical">90*60</td>
-					<td class="table_vertical">
-						<p>01-05-2018</p>
-						<p>15-08-2018</p>
-					</td>
-					<td class="table_vertical">
-						<p>01-06-2018</p>
-						<p>15-10-2018</p>
-					</td>
-					<td class="table_vertical">58,000</td>
-					<td class="table_vertical">
-						<a href="#"><i class="material-icons">delete_foreve</i></a>
-					</td>
-					<td class="text-center table_vertical">
-						<p class="text_color md-caption">This Inventory<br>
-							Campaign Running</p>
-					</td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
@@ -387,19 +333,19 @@
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
-				<div class="md-body-1">12,58,000</div>
+				<div class="md-body-1">{{"N/A"}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">18% GST :</div>
-				<div class="md-body-1"> 58,000</div>
+				<div class="md-body-1"> {{"N/A"}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">Sub Total :</div>
-				<div class="md-body-1">13,05,000</div>
+				<div class="md-body-1">{{"N/A"}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-title">Grand Total :</div>
-				<div class="md-title">13,05,000</div>
+				<div class="md-title">{{"N/A"}}</div>
 			</div>
 			<md-button class="md-raised md-primary">Book Campaign</md-button>
 		</div>
