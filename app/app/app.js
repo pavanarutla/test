@@ -400,7 +400,7 @@ var app = angular.module('bbManager', [
     .state('owner.notifications', {
       url: '/notifications',
       templateUrl: 'views/owner/owne-notifications.html',
-      controller:'teamPage'
+      controller:'OwnerMngrCtrl'
     })
     .state('owner.addmetropkg', {
       url: '/addmetropkg',
