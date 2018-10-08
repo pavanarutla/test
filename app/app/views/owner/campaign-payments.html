@@ -208,15 +208,15 @@
 				  </tr>
 				</thead>
 				<tbody>
-				  <tr>
-					<td>BB283</td>
-					<td>Uber Pvt Ltd</td>
-					<td>55,800</td>
-					<td>55,850</td>
-					<td>55,800</td>
+				  <tr ng-repeat="campaign in campaignsWithPayments">
+					<td>{{}}</td>
+					<td>{{campaign.name}}</td>
+					<td>{{campaign.paid}}</td>
+					<td>{{campaign.act_budget - campaign.paid}}</td>
+					<td>{{campaign.act_budget}}</td>
 					<td>
 					  <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
-						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+						  <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(campaign.id)" role="img" aria-label="remove_red_eye">
 							<i class="material-icons">remove_red_eye</i>
 						  </md-icon>
 						</a>
@@ -224,7 +224,7 @@
 					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
 					<td>21-09-2018, 9:00 Am</td>
 				  </tr>
-				  <tr>
+				  <!-- <tr>
 					<td>BB283</td>
 					<td>Uber Pvt Ltd</td>
 					<td>55,800</td>
@@ -271,7 +271,7 @@
 					</td>
 					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
 					<td>21-09-2018, 9:00 Am</td>
-				  </tr>
+				  </tr> -->
 				</tbody>
 			  </table>
 	  </div>

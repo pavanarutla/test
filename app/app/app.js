@@ -415,7 +415,7 @@ var app = angular.module('bbManager', [
     .state('owner.updatepayment', {
       url: '/updatepayment',
       templateUrl: 'views/owner/updatepayment.html',
-      controller:''
+      controller:'OwnerCampaignCtrl'
     })
     .state('owner.editproduct-details', {
       url: '/editproduct-details',
