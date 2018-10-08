@@ -79,7 +79,7 @@
 					<select name="city" class="form-control" id="city" ng-model="product.city" required="required" ng-change="getAreaList()"
 					 ng-options="city.id as city.name for city in cityList">
 						<option value="" disabled selected>Select City</option>
-					</select required>
+					</select required>    
 					<div ng-messages="addProductForm.city.$error" ng-if="addProductForm.city.$touched" style="color:red">
 						<div ng-message="required">city is required.</div>
 					</div>
@@ -90,7 +90,7 @@
 				<div class="col-sm-8">
 					<select name="area" class="form-control" id="area" ng-model="product.area" required="required" ng-options="area.id as area.name for area in areaList">
 						<option value="" disabled selected>Select Area</option>
-					</select required>
+					</select required> 
 					<div ng-messages="addProductForm.area.$error" ng-if="addProductForm.area.$touched" style="color:red">
 						<div ng-message="required">Area is required.</div>
 					</div>
