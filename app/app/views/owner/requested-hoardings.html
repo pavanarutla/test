@@ -244,7 +244,7 @@
 		<md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn">Add New Product</md-button>
 		<a ng-href="#/owner/{{clientSlug}}/loginpage"><button type="button" class="btn btn-secondary">login</button></a>
 		<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
-			<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+			<form name="addProductForm" role="form" novalidate="novalidate">
 				<div layout="colmun">
 					<span flex></span>
 					<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
@@ -258,126 +258,142 @@
 				<li>
 
 					<div class="col-md-12">
-						<form>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.siteNo"
-									 placeholder="Product ID">
-								</div>
-								<div class="col-sm-6">
-									<!-- <select id="paymentType" ng-model="product.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Product Type</option> -->
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									<!-- </select> -->
-									<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type" class="form-control"
-									data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
-										<option value="" disabled selected>Site Type</option>
-									</select>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Product ID" required="required"
+								 ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" class="form-control md-whiteframe-3dp" />
+								<div ng-messages="addProductForm.siteNo.$error" ng-if="addProductForm.siteNo.$touched" style="color:red">
+									<div ng-message="required">Product Id is required.</div>
+									<div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<!-- <select id="paymentType" ng-model="product.country" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Country</option>
-										<option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
-									</select> -->
-									<select name="country" class="form-control md-whiteframe-3dp" id="paymentType" required="required" ng-model="product.country" ng-change="getStateList()"
-										ng-options="country.id as country.name for country in countryList">
-											<option value="" disabled selected>Country</option>
-									</select required>
-								</div>
-								<div class="col-sm-6">
-									<!-- <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>City</option> -->
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									<!-- </select> -->
-									<select name="city" class="form-control md-whiteframe-3dp" id="paymentType" ng-model="product.city" required="required" ng-change="getAreaList()"
-									ng-options="city.id as city.name for city in cityList">
-										<option value="" disabled selected>Select City</option>
-									</select required>    
-									<div ng-messages="addProductForm.city.$error" ng-if="addProductForm.city.$touched" style="color:red">
-										<div ng-message="required">city is required.</div>
-									</div>
+							<div class="col-sm-6">
+								<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+								 class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
+								 name="productType">
+									<option value="" disabled selected>Site Type</option>
+								</select>
+								<div ng-messages="addProductForm.productType.$error" ng-if="addProductForm.productType.$touched" style="color:red">
+									<div ng-message="required">Site type is required.</div>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<!-- <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Area</option> -->
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									<!-- </select> -->
-									<select name="area" class="form-control md-whiteframe-3dp" id="paymentType" ng-model="product.area" required="required" ng-options="area.id as area.name for area in areaList">
-										<option value="" disabled selected>Select Area</option>
-									</select required>
-									<div ng-messages="addProductForm.area.$error" ng-if="addProductForm.area.$touched" style="color:red">
-										<div ng-message="required">Area is required.</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.address"
-									 placeholder="Address">
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+								 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+									<option value="" disabled selected>Select Country</option>
+								</select required>
+								<div ng-messages="addProductForm.country.$error" ng-if="addProductForm.country.$touched" style="color:red">
+									<div ng-message="required">Country is required.</div>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.direction"
-									 placeholder="Direction">
+							<div class="col-sm-6">
+								<select name="state" class="form-control md-whiteframe-3dp" id="state" ng-model="product.state" required="required"
+								 ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
+									<option value="" disabled selected>Select State</option>
+								</select required>
+								<div ng-messages="addProductForm.state.$error" ng-if="addProductForm.state.$touched" style="color:red">
+									<div ng-message="required">state is required.</div>
 								</div>
-								<div class="col-sm-3">
-									<!-- <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Lit - Yes</option> -->
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									<!-- </select> -->
-									<select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp" id="paymentType" md-on-close="clearSearchTerm()"
-										data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''" placeholder="Has lighting?">
-										<option value="" disabled selected>Has lighting?</option>
-										<option value="1">Yes</option>
-										<option value="0">No</option>
-									</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6"><select name="city" class="form-control md-whiteframe-3dp" id="city" ng-model="product.city"
+								 required="required" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
+									<option value="" disabled selected>Select City</option>
+								</select required>
+								<div ng-messages="addProductForm.city.$error" ng-if="addProductForm.city.$touched" style="color:red">
+									<div ng-message="required">city is required.</div>
 								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.panelSize"
-									 placeholder="Size">
+							</div>
+							<div class="col-sm-6">
+								<input ng-model="product.address" class="form-control  md-whiteframe-3dp" placeholder="address" type="text"
+								 name="address" required="required" />
+								<div ng-messages="addProductForm.address.$error" ng-if="addProductForm.address.$touched" style="color:red">
+									<div ng-message="required">Address is required.</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<!-- <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction" type="text"
+                       name="Direction"  />
+                      <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+                        <div ng-message="required">Direction is required.</div>
+                      </div> -->
+								<input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="direction"
+								 type="text" name="direction" required="required" />
+								<div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+									<div ng-message="required">direction is required.</div>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+								 md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
+								 placeholder="Has lighting?">
+									<option value="" disabled selected>Has light ?</option>
+									<option value="1">Yes</option>
+									<option value="0">No</option>
+								</select>
+								<div ng-messages="addProductForm.light.$error" ng-if="addProductForm.light.$touched" style="color:red">
+									<div ng-message="required">Light is required.</div>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<input ng-model="product.panelSize" class="form-control md-whiteframe-3dp" required="required" placeholder="Panel Size"
+								 type="text" name="panelSize" required="required" />
+								<div ng-messages="addProductForm.panelSize.$error" ng-if="addProductForm.panelSize.$touched" style="color:red">
+									<div ng-message="required">Panel size required.</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input ng-model="product.cost" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
+								 type="text" name="cost" required="required" />
+								<div ng-messages="addProductForm.cost.$error" ng-if="addProductForm.cost.$touched" style="color:red">
+									<div ng-message="required">Cost is required.</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<input ng-model="product.date" class="form-control md-whiteframe-3dp" required="required" placeholder="Product date"
+								 type="date" name="date" required="required" />
+								<div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
+									<div ng-message="required">Date is required.</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<textarea ng-model="product.strength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
+								 type="strength" name="strength" required="required" rows="3"></textarea>
+								<div ng-messages="addProductForm.strength.$error" ng-if="addProductForm.strength.$touched" style="color:red">
+									<div ng-message="required">strength is required.</div>
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.default_price"
-									 placeholder="Product Cost">
-								</div>
-								<div class="col-sm-6">
-									<input type="date" name="bday" class="form-control md-whiteframe-3dp" id="amount" ng-model="product.date"
-									 placeholder="Product Calender">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<textarea class="form-control md-whiteframe-3dp" id="amount" ng-model="product.adStrength" placeholder="Product Strength"
-									 rows="3"></textarea>
-								</div>
-
-								<div class="col-sm-6">
-									<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
-									<span class="input-group-btn">
-										<span class="btn btn-default btn-file">
-											<input type="file" class="form-control" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*"
-											 ngf-max-size="10MB"></input>
-										</span>
+							<div class="col-sm-6">
+								<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+								<span class="input-group-btn">
+									<span class="">
+										<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="product.files.image"
+										 name="imageFile" accept="image/*" ngf-max-size="10MB">
 									</span>
-									<div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
-										<div ng-message="required">Image is required.</div>
-									</div> 
+								</span>
+								<div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+									<div ng-message="required">Image is required.</div>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div flex></div>
-								<div class="col-sm-6">
-									<md-button class="md-raised md-primary text-white pull-right" ng-click="requestAddProduct()">Submit</md-button>
-								</div>
+						</div>
+						<div class="form-group row">
+							<div flex></div>
+							<div class="col-sm-6">
+								<md-button class="md-raised md-primary text-white pull-right" ng-click="requestAddProduct(product)">Submit</md-button>
 							</div>
-						</form>
+						</div>
 					</div>
 				</li>
 			</form>
@@ -392,7 +408,7 @@
 			<tr>
 				<th>Product Details</th>
 				<th></th>
-				<th>Size</th>
+				<!-- <th>Size</th> -->
 				<th>Views</th>
 				<th>Lit</th>
 				<th>Price</th>
@@ -404,10 +420,11 @@
 		<tbody>
 			<tr ng-repeat="product in productList">
 				<td>
-					<img ng-src="{{config.serverUrl + product.image}}"  alt="Smiley face" height="100" width="150">
+					<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="150">
 				</td>
 				<td>
-					<p  class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing: {{product.faacing || "N/A"}}</p>
+					<p class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+						{{product.direction || "N/A"}}</p>
 				</td>
 				<td class="table_vertical">{{product.panelSize}}</td>
 				<td class="table_vertical">{{product.impressions}}</td>
@@ -417,7 +434,8 @@
 				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
 				<td class="table_vertical"></td>
 				<td class="text-center table_vertical">
-					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
+					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit
+							Details</button></a>
 				</td>
 			</tr>
 
@@ -438,9 +456,9 @@
 				<td class="text-center table_vertical">
 					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
 				</td>
-			</tr>
+			</tr> -->
 
-			<tr>
+			<!-- <tr>
 				<td>
 					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
 				</td>
