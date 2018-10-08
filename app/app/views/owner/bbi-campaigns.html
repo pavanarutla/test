@@ -251,14 +251,14 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody class="text-center">
+                  <tbody class="text-center" ng-repeat="campaign in plannedCampaigns">
                     <tr>
-                      <td>BB-01</td>
-                      <td>Billboards</td>
-                      <td>15-08-2018</td>
-                      <td>10</td>
-                      <td>10,1000</td>
-                      <td>10,10001</td>
+                        <td>{{campaign.cid || "N/A"}}</td>
+                        <td>{{campaign.name}}</td>
+                        <td>{{campaign.start_date | date}}</td>
+                        <td>{{campaign.no_products || "N/A"}}</td>
+                        <td>{{campaign.npaid || "N/A"}}</td>
+                        <td>{{campaign.Total_budget || "N/A"}}</td>
                       <td>
                         <md-menu md-position-mode="target-right target">
                           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -285,7 +285,7 @@
                         </md-menu>
                       </td>
                       <td>
-                        <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                        <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -309,14 +309,14 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody class="text-center">
+                  <tbody class="text-center" ng-repeat="campaign in runningCampaigns">
                     <tr>
-                      <td>BB-01</td>
-                      <td>Billboards</td>
-                      <td>15-08-2018</td>
-                      <td>10</td>
-                      <td>10,1000</td>
-                      <td>10,10001</td>
+                        <td>{{campaign.cid || "N/A"}}</td>
+                        <td>{{campaign.name}}</td>
+                        <td>{{campaign.start_date | date}}</td>
+                        <td>{{campaign.no_products || "N/A"}}</td>
+                        <td>{{campaign.npaid || "N/A"}}</td>
+                        <td>{{campaign.Total_budget || "N/A"}}</td>
                       <td>
                         <md-menu md-position-mode="target-right target">
                           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -344,7 +344,7 @@
                         </md-menu>
                       </td>
                       <td>
-                        <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                        <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -368,14 +368,14 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody class="text-center">
+                  <tbody class="text-center" ng-repeat="campaign in closedCampaigns">
                     <tr>
-                      <td>BB-01</td>
-                      <td>Billboards</td>
-                      <td>15-08-2018</td>
-                      <td>10</td>
-                      <td>10,1000</td>
-                      <td>10,10001</td>
+                        <td>{{campaign.cid || "N/A"}}</td>
+                        <td>{{campaign.name}}</td>
+                        <td>{{campaign.start_date | date}}</td>
+                        <td>{{campaign.no_products || "N/A"}}</td>
+                        <td>{{campaign.npaid || "N/A"}}</td>
+                        <td>{{campaign.Total_budget || "N/A"}}</td>
                       <td>
                         <md-menu md-position-mode="target-right target">
                           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -402,7 +402,7 @@
                         </md-menu>
                       </td>
                       <td>
-                        <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                        <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                       </td>
                     </tr>
                   </tbody>

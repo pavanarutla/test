@@ -446,8 +446,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
 
   $scope.getCampaignPaymentDetails = function (campaignId) {
     OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      $scope.showCampaignPaymentSidenav();
+      // console.log("jhbhjbj", result)
+
+      //$scope.showCampaignPaymentSidenav();
       $scope.campaignPaymentDetails = result;
+      console.log($scope.campaignPaymentDetails)
       var campaignPayments = $scope.campaignPaymentDetails.payment_details;
       $scope.paid = 0;
       _.each(campaignPayments, function (p) {
@@ -563,6 +566,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     loadOwnerCampaigns();
     setMinMaxDatesForCamapign();
   }
+  if ($rootScope.currStateName == "owner.bbi-campaigns") {
+    $scope.getUserCampaignsForOwner();
+  }
   if ($rootScope.currStateName == "owner.suggest-products") {
     loadOwnerProductList();
     setDatesForOwnerProductsToSuggest(JSON.parse(localStorage.selectedOwnerCampaign));
@@ -579,6 +585,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   if ($rootScope.currStateName == 'owner.payments') {
     getCampaignWithPayments();
   }
+
+  // if($rootScope.currStateName == 'owner.updatepayment'){
+  //   $scope.getCampaignPaymentDetails ()
+  // }
   if ($rootScope.currStateName == 'owner.update-payments') {
     $scope.allCampaignsForOwner = [];
     loadOwnerCampaigns().then(function (result) {
