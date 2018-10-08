@@ -317,10 +317,15 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6">
-								<input ng-model="product.direction" class="form-control md-whiteframe-3dp" placeholder="direction" type="text"
-								 name="Direction" required="required" />
-								<div ng-messages="addProductForm.direction.$error" ng-if="addProductForm.direction.$touched" style="color:red">
-									<div ng-message="required">Direction is required.</div>
+								<!-- <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction" type="text"
+                       name="Direction"  />
+                      <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+                        <div ng-message="required">Direction is required.</div>
+                      </div> -->
+								<input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="direction"
+								 type="text" name="direction" required="required" />
+								<div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+									<div ng-message="required">direction is required.</div>
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -415,10 +420,11 @@
 		<tbody>
 			<tr ng-repeat="product in productList">
 				<td>
-					<img ng-src="{{config.serverUrl + product.image}}"  alt="Smiley face" height="100" width="150">
+					<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="150">
 				</td>
 				<td>
-					<p  class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing: {{product.faacing || "N/A"}}</p>
+					<p class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+						{{product.direction || "N/A"}}</p>
 				</td>
 				<td class="table_vertical">{{product.panelSize}}</td>
 				<td class="table_vertical">{{product.impressions}}</td>
