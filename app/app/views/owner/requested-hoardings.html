@@ -237,204 +237,200 @@
 <!-- ==========================================================
 	list of requested hoardings which aren't approved yet ends
 ============================================================ -->
+<div class="m-2">
+	<div class="contbg md-caption" layout="row" layout-margin>
+		<div flex></div>
+		<div class="dropdown">
+			<md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn">Add New Product</md-button>
+			<!-- <a ng-href="#/owner/{{clientSlug}}/loginpage"><button type="button" class="btn btn-secondary">login</button></a> -->
+			<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
+				<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+					<div layout="colmun">
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+							<md-icon class="md-default-theme">
+								<i class="material-icons">close</i>
+							</md-icon>
+						</md-button>
+					</div>
+					<h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add new product</span></h3>
+					<br>
+					<li>
 
-<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
-	<div flex></div>
-	<div class="dropdown">
-		<md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn">Add New Product</md-button>
-		<a ng-href="#/owner/{{clientSlug}}/loginpage"><button type="button" class="btn btn-secondary">login</button></a>
-		<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
-			<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
-				<div layout="colmun">
-					<span flex></span>
-					<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
-						<md-icon class="md-default-theme">
-							<i class="material-icons">close</i>
-						</md-icon>
-					</md-button>
-				</div>
-				<h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add new product</span></h3>
-				<br>
-				<li>
-
-					<div class="col-md-12">
-						<form>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Product ID">
-								</div>
-								<div class="col-sm-6">
-									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Product Type</option>
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									</select>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Country</option>
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									</select>
-								</div>
-								<div class="col-sm-6">
-									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>City</option>
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									</select>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Area</option>
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									</select>
-								</div>
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Address">
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Direction">
-								</div>
-								<div class="col-sm-3">
-									<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-										<option value="" selected>Lit - Yes</option>
-										<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-									</select>
-								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Size">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Product Cost">
-								</div>
-								<div class="col-sm-6">
-									<input type="date" name="bday" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-									 placeholder="Product Calender">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<div class="col-sm-6">
-									<textarea class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount" placeholder="Product Strength"
-									 rows="3"></textarea>
-								</div>
-
-								<div class="col-sm-6">
-									<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
-									<span class="input-group-btn">
-										<span class="">
-											<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
-											 name="imageFile" accept="image/*" ngf-max-size="10MB">
-										</span>
-									</span>
-									<div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
-										<div ng-message="required">Image is required.</div>
+						<div class="col-md-12">
+							<form>
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Product ID">
+									</div>
+									<div class="col-sm-6">
+										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+											<option value="" selected>Product Type</option>
+											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+										</select>
 									</div>
 								</div>
-							</div>
-							<div class="form-group row">
-								<div flex></div>
-								<div class="col-sm-6">
-									<md-button class="md-raised md-primary text-white pull-right" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+											<option value="" selected>Country</option>
+											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+										</select>
+									</div>
+									<div class="col-sm-6">
+										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+											<option value="" selected>City</option>
+											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+										</select>
+									</div>
 								</div>
-							</div>
-						</form>
-					</div>
-				</li>
-			</form>
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+											<option value="" selected>Area</option>
+											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+										</select>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Address">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Direction">
+									</div>
+									<div class="col-sm-3">
+										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+											<option value="" selected>Lit - Yes</option>
+											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Size">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Product Cost">
+									</div>
+									<div class="col-sm-6">
+										<input type="date" name="bday" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
+										 placeholder="Product Calender">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<textarea class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount" placeholder="Product Strength"
+										 rows="3"></textarea>
+									</div>
+
+									<div class="col-sm-6">
+										<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+										<span class="input-group-btn">
+											<span class="">
+												<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
+												 name="imageFile" accept="image/*" ngf-max-size="10MB">
+											</span>
+										</span>
+										<div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+											<div ng-message="required">Image is required.</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div flex></div>
+									<div class="col-sm-6">
+										<md-button class="md-raised md-primary text-white pull-right" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</li>
+				</form>
+			</div>
 		</div>
 	</div>
+
+
+	<div class="table-responsive" style="margin-bottom:115px !important">
+		<table class="table table-hover img_table">
+			<thead class="text_color">
+				<tr class=" ">
+					<th>Product Details</th>
+					<th></th>
+					<th>Size</th>
+					<th>Views</th>
+					<th>Lit</th>
+					<th>Price</th>
+					<th class="text-center">Calender</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in productList" class="border-right border-left">
+					<td>
+						<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="150">
+					</td>
+					<td>
+						<p class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+							{{product.faacing || "N/A"}}</p>
+					</td>
+					<td class="table_vertical">{{product.panelSize}}</td>
+					<td class="table_vertical">{{product.impressions}}</td>
+					<td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+					<td class="table_vertical" ng-if="product.lighting == 0">No</td>
+					<td class="table_vertical">{{product.default_price}}</td>
+					<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
+					<td class="table_vertical"></td>
+					<td class="text-center table_vertical">
+						<a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+							<button type="button" class="btn btn-secondary">Edit Details</button>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <div layout="row" layout-margin>
+
+		<div flex="10">Product Details</div>
+		<div flex="30"></div>
+		<div flex="10" class="text-center">Size</div>
+		<div flex="10" class="text-center">Views</div>
+		<div flex="5" class="text-center">Lit</div>
+		<div flex="10" class="text-center">Price</div>
+		<div flex="5" class="text-center">Calender</div>
+		<div flex="10" class="text-center"></div>
+		<div flex="10" class="text-center"></div>
+	</div>
+	<div layout="row" layout-margin ng-repeat="product in productList" class="md-whiteframe-2dp border-right border-left">
+		<div flex="10">
+			<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="130">
+		</div>
+		<div flex="30">
+			<p class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+				{{product.faacing || "N/A"}}</p>
+		</div>
+		<div flex="10" class="align-self-center text-center">{{product.panelSize}}</div>
+		<div flex="10" class="align-self-center text-center">{{product.impressions}}</div>
+		<div flex="5" class="align-self-center text-center">Yes</div>
+		<div flex="10" class="align-self-center text-center">{{product.default_price}}</div>
+		<div flex="5" class="align-self-center text-center"><a href="#"><i class="fa fa-calendar"></i></a></div>
+		<div flex="10" class="align-self-center text-center "></div>
+		<div flex="10" class="align-self-center text-center"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+			<button type="button" class="btn btn-secondary">Edit Details</button>
+		</a></div>
+	</div> -->
 </div>
-
-
-<div class="table-responsive" style="margin-bottom:115px !important">
-	<table class="table table-hover">
-		<thead class="text_color">
-			<tr>
-				<th>Product Details</th>
-				<th></th>
-				<th>Size</th>
-				<th>Views</th>
-				<th>Lit</th>
-				<th>Price</th>
-				<th class="text-center">Calender</th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="product in productList">
-				<td>
-					<img ng-src="{{config.serverUrl + product.image}}"  alt="Smiley face" height="100" width="150">
-				</td>
-				<td>
-					<p  class="d-none d-sm-block"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing: {{product.faacing || "N/A"}}</p>
-				</td>
-				<td class="table_vertical">{{product.panelSize}}</td>
-				<td class="table_vertical">{{product.impressions}}</td>
-				<td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
-				<td class="table_vertical" ng-if="product.lighting == 0">No</td>
-				<td class="table_vertical">{{product.default_price}}</td>
-				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
-				<td class="table_vertical"></td>
-				<td class="text-center table_vertical">
-					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
-				</td>
-			</tr>
-
-			<!-- <tr>
-				<td>
-					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
-				</td>
-				<td>
-					<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
-						road, beside ICICI Bank</p>
-				</td>
-				<td class="table_vertical">90*90</td>
-				<td class="table_vertical">1,48,000</td>
-				<td class="table_vertical">Yes</td>
-				<td class="table_vertical">58,000</td>
-				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
-				<td class="table_vertical"></td>
-				<td class="text-center table_vertical">
-					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
-				</td>
-				<td>
-					<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>Kothaguda X Roads<br>Facing: From Kothaguda to Hitech<br>city
-						road, beside ICICI Bank</p>
-				</td>
-				<td class="table_vertical">90*90</td>
-				<td class="table_vertical">1,48,000</td>
-				<td class="table_vertical">Yes</td>
-				<td class="table_vertical">58,000</td>
-				<td class="text-center table_vertical"><a href="#"><i class="fa fa-calendar"></i></a></td>
-				<td class="table_vertical"></td>
-				<td class="text-center table_vertical">
-					<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button type="button" class="btn btn-secondary">Edit Details</button></a>
-				</td>
-			</tr> -->
-		</tbody>
-	</table>
-</div>
-
 
 <script>
 	function addPayment() {
