@@ -272,6 +272,11 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Product Section Ends
   =====================*/
 
+
+  $scope.editRequestedhordings = function(product){
+    console.log(product);
+  };
+
   
   /*=====================
   | Campaign Section
