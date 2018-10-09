@@ -15,6 +15,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
   $scope.pagination.pageNo = 1;
   $scope.pagination.pageSize = 15;
   $scope.pagination.pageCount = 0;
+  $scope.visiblePages = 6;
   var pageLinks = 20;
   var lowest = 1;
   var highest = lowest + pageLinks - 1;
@@ -32,7 +33,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
     else{
       lowest = $scope.pagination.pageNo - mid + 1;
     }
-    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+    highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + (pageLinks-1);
     $scope.pagination.pageArray = _.range(lowest, highest + 1);
   }
 

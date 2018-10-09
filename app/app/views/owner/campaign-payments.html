@@ -208,15 +208,15 @@
 				  </tr>
 				</thead>
 				<tbody>
-				  <tr>
-					<td class="table_vertical">BB283</td>
-					<td class="table_vertical">Uber Pvt Ltd</td>
-					<td class="table_vertical">55,800</td>
-					<td class="table_vertical">55,850</td>
-					<td class="table_vertical">55,800</td>
-					<td class="table_vertical">
+				  <tr ng-repeat="campaign in campaignsWithPayments">
+					<td>{{}}</td>
+					<td>{{campaign.name}}</td>
+					<td>{{campaign.paid}}</td>
+					<td>{{campaign.act_budget - campaign.paid}}</td>
+					<td>{{campaign.act_budget}}</td>
+					<td>
 					  <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
-						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+						  <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(campaign.id)" role="img" aria-label="remove_red_eye">
 							<i class="material-icons">remove_red_eye</i>
 						  </md-icon>
 						</a>
@@ -224,7 +224,7 @@
 					<td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td>
 					<td class="table_vertical">21-09-2018, 9:00 Am</td>
 				  </tr>
-				  <tr>
+				  <!-- <tr>
 					<td class="table_vertical">BB283</td>
 					<td class="table_vertical">Uber Pvt Ltd</td>
 					<td class="table_vertical">55,800</td>
@@ -271,7 +271,7 @@
 					</td>
 					<td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td>
 					<td class="table_vertical">21-09-2018, 9:00 Am</td>
-				  </tr>
+				  </tr> -->
 				</tbody>
 			  </table>
 	  </div>

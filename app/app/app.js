@@ -400,7 +400,7 @@ var app = angular.module('bbManager', [
     .state('owner.notifications', {
       url: '/notifications',
       templateUrl: 'views/owner/owne-notifications.html',
-      controller:'teamPage'
+      controller:'OwnerMngrCtrl'
     })
     .state('owner.addmetropkg', {
       url: '/addmetropkg',
@@ -410,17 +410,17 @@ var app = angular.module('bbManager', [
     .state('owner.bbisupport', {
       url: '/bbisupport',
       templateUrl: 'views/owner/bbisupport.html',
-      controller:''
+      controller:'feedback'
     })
     .state('owner.updatepayment', {
       url: '/updatepayment',
       templateUrl: 'views/owner/updatepayment.html',
-      controller:''
+      controller:'OwnerCampaignCtrl'
     })
     .state('owner.editproduct-details', {
       url: '/editproduct-details',
       templateUrl: 'views/owner/editproduct-details.html',
-      controller:''
+      controller:'ProductCtrl'
     })
     .state('owner.loginpage', {
       url: '/loginpage',

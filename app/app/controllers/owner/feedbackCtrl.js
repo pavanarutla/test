@@ -22,4 +22,17 @@ app.controller('feedback', function($scope,$mdDialog,Upload) {
             });
         });
     }
+
+    // bbisuport page script
+    $scope.concernabouts = [
+        {"Name" : "Alfreds Futterkiste",
+        "Age": 24,
+        "Place": "Hyderabad"
+    },
+        
+    ]
+    $scope.bbisuportdata = function(bbisuport){
+        console.log(bbisuport);
+    }
+     // bbisuport page script Ends
 });

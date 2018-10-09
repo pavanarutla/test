@@ -5,11 +5,11 @@
   </div>
   <div class="update" style="margin-top:38px;">
     <p>Camapaign Name</p>
-    <p class="md-caption"><b>Uber Ptv Ltd</b></p>
+    <p class="md-caption"><b>{{campaignPaymentDetails.name}}</b></p>
   </div>
   <div class="update" style="margin-top:38px;">
     <p>No of Products</p>
-    <p class="md-caption"><b>5</b></p>
+    <p class="md-caption"><b>{{campaignPaymentDetails.product_count}}</b></p>
   </div>
   <div flex></div>
   <div>
@@ -172,18 +172,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>14-08-2018</td>
-        <td>through Left</td>
-        <td>1,15,000.00</td>
+      <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
+        <td>{{payment.updated_at | dateify | date: "dd-MMM-yyyy"}}</td>
+        <td>{{payment.type}}</td>
+        <td>{{payment.amount}}</td>
         <td>21-09-2018, 9:00 Am</td>
-      </tr>
-      <tr>
-        <td>14-08-2018</td>
-        <td>through Left</td>
-        <td>1,15,000.00</td>
-        <td>21-09-2018, 9:00 Am</td>
-      </tr>
+      </tr>      
     </tbody>
   </table>
 </div>
