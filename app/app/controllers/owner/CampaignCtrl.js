@@ -445,12 +445,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   }
 
   $scope.getCampaignPaymentDetails = function (campaignId) {
+    localStorage.campaignPaymentDetailsCampaignId= campaignId;
     OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      // console.log("jhbhjbj", result)
-
       //$scope.showCampaignPaymentSidenav();
-      $scope.campaignPaymentDetails = result;
-      console.log($scope.campaignPaymentDetails)
+      $scope.campaignPaymentDetails = result;     
       var campaignPayments = $scope.campaignPaymentDetails.payment_details;
       $scope.paid = 0;
       _.each(campaignPayments, function (p) {
@@ -586,9 +584,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     getCampaignWithPayments();
   }
 
-  // if($rootScope.currStateName == 'owner.updatepayment'){
-  //   $scope.getCampaignPaymentDetails ()
-  // }
+  if($rootScope.currStateName == 'owner.updatepayment'){
+    $scope.getCampaignPaymentDetails (localStorage.campaignPaymentDetailsCampaignId)
+  }
   if ($rootScope.currStateName == 'owner.update-payments') {
     $scope.allCampaignsForOwner = [];
     loadOwnerCampaigns().then(function (result) {
