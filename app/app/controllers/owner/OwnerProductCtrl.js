@@ -96,7 +96,6 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
   $scope.getApprovedProductList = function(){
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-     console.log(result)
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
@@ -366,7 +365,6 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   }
   if($rootScope.currStateName == 'owner.add-campagin-product'){
     $scope.getApprovedProductList();
-    // getShortlistedProductsByOwner();
   }
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
