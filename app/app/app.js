@@ -44,7 +44,8 @@ var app = angular.module('bbManager', [
     })
     .state('index.home', {
       url: 'home',
-      templateUrl: 'views/home.html'
+      templateUrl: 'views/home.html',
+	  controller: 'bbMngrCtrl'
     })
     .state('index.formats', {
       url: 'formats',

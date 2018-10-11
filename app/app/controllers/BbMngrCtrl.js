@@ -1,7 +1,7 @@
 app.controller('bbMngrCtrl', 
   function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
   CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
-
+console.log('home page');
     if(localStorage.isAuthenticated && localStorage.loggedInUser){
       $rootScope.isAuthenticated = localStorage.isAuthenticated || false;
       $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
