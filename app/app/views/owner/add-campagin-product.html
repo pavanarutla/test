@@ -61,27 +61,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr ng-repeat="product in productList">
                 <td>
-                  <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+                  <img ng-src="{{config.serverUrl +product.image}}" alt="Smiley face" height="100" width="100">
                 </td>
                 <td>
-                  <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b>
-                    <br> Kothaguda X Roads
-                    <br>Facing: From Kothaguda to Hitech
-                    city road,
-                    <br>beside ICICI Bank
+                  <p class=""><b>{{product.siteNo}} - {{product.area_name}} ({{product.panelSize}})</b>
+                    <br> {{product.address}}
+                    <br>Facing: {{product.direction}}
                 </td>
-                <td class="table_vertical">1,48,000</td>
+                <td class="table_vertical">{{product.views || "N/A"}}</td>
                 <td class="table_vertical">
-                  <span class="md-caption">Yes</span>
+                  <span class="md-caption" ng-if="product.lighting == 1">Yes</span>
+                  <span class="md-caption" ng-if="product.lighting == 0">No</span>
                 </td>
                 <td class="table_vertical">
                   <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
                 </td>
                 <td class="table_vertical">
                   <div class="input-group">
-                    <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
+                    <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" value="{{product.default_price}}" />
                     <span href="#"><i class="material-icons">edit</i></span>
                   </div>
                 </td>
