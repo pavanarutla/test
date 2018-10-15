@@ -271,7 +271,10 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   /*=====================
   | Product Section Ends
   =====================*/
-
+  $scope.updateeditProductdetails = function(product){
+    console.log(product);
+    }
+    
    /*=====================
   | Requested hordings
   =====================*/
