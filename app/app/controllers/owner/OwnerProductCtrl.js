@@ -363,6 +363,9 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     $scope.getApprovedProductList();
     getShortlistedProductsByOwner();
   }
+  if($rootScope.currStateName == 'owner.add-campagin-product'){
+    $scope.getApprovedProductList();
+  }
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
     getRequestedProductList();
