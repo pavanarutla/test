@@ -6,15 +6,9 @@
 		padding: 0 0px !important;
 	}
 </style>
-<div ng-cloak flex-xs="100" flex-sm="100" flex-md="100">
+<!-- <div ng-cloak flex-xs="100" flex-sm="100" flex-md="100">
 	<md-content layout="column" layout-sm="column" layout-xs="column">
-		<!-- <div class="inputDiv">
-			<md-button ng-href="#/campaigns" class="md-icon-button">
-				<md-icon>
-					<i class="material-icons">keyboard_backspace</i>
-				</md-icon>
-			</md-button>
-		</div> -->
+		
 		<div class="bg-part">
 			
 			<div layout="row" flex-offset-gt-md="10" flex="80" flex-sm="100" flex-md="100" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
@@ -135,23 +129,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div layout="row">
-			<div flex="50">
-				<div style="margin: 30px 0 0 0;font-size: 20px;">Products(15)</div>
-			</div>
-				<div flex="50">
-				<md-list flex layout="row" layout-align="end center">
-					<md-list-item>
-						<div>
-							<md-button class="md-grid-item-content">
-								<span><md-icon><i class="material-icons">cancel</i></md-icon></span>
-								<div class="md-caption"> close </div>
-							</md-button>
-						</div>
-					</md-list-item>
-				</md-list>
-			</div> 
-		</div> -->
+		
 
 		<div layout="row" layout-sm="column" layout-padding>
 			<div flex="50" flex-sm="100">
@@ -263,7 +241,6 @@
 			</table>
 		</div>
 	</md-content>
-	<!-- share campaign sidenav -->
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
 		<div layout="row">
 		  <div class="md-toolbar-tools">
@@ -299,5 +276,225 @@
 		  </form>
 		</md-content>
 	</md-sidenav>
+</div> -->
+
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+	
+	<!-- share campaign sidenav -->
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+		<div layout="row">
+			<div class="md-toolbar-tools">
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+					<md-tooltip>Close Side Panel</md-tooltip>
+					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+				</md-button>
+			</div>
+		</div>
+		<md-content layout-align="center center" layout-margin layout-padding>
+			<h3 class="md-headline">Share Campaign</h3>
+			<form name="shareCampaignForm">
+				<div layout="column">
+					<md-input-container class="md-block">
+						<label>Name</label>
+						<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+						<div ng-messages="shareCampaignForm.name.$error">
+							<div ng-message="required">Name is required.</div>
+							<div ng-message="pattern">Enter a valid Name.</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>Email</label>
+						<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+						<div ng-messages="shareCampaignForm.email.$error">
+							<div ng-message="required">Email is required.</div>
+							<div ng-message="pattern">Enter a valid Email Id.</div>
+						</div>
+					</md-input-container>
+					<md-button class="md-raised md-warn" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">SHARE
+						CAMPAIGN</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-sidenav>
 	<!-- share campaign sidenav ends -->
+	<!-- table grid start  -->
+	<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+		<div class="ml-4" style="margin-top:28px;">
+			<p>Camapaign ID</p>
+			<p class="md-body-2">BB-001</p>
+		</div>
+		<div style="margin-top:28px;">
+			<p>Camapaign Name</p>
+			<p class="md-body-2">Uber Ptv Ltd</p>
+		</div>
+		<div style="margin-top:28px;">
+			<p>No of Products</p>
+			<p class="md-body-2">5</p>
+		</div>
+		<div flex></div>
+		<div>
+			<md-button class="share_btn" ng-click="toggleShareCampaignSidenav()">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						reply_all
+					</i>
+				</md-icon>
+				Share Camapaign
+			</md-button>
+		</div>
+		<div>
+
+			<md-button class="share_btn">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						file_copy
+					</i>
+				</md-icon>
+				Download Quotetation
+			</md-button>
+		</div>
+		
+		<div style="margin-top:35px;">
+			<!-- <button type="button" class="btn" style="background:#44596D; color:#fff;"><span><i class="material-icons mt-2" style="">
+						cloud_upload
+					</i></span> Upload Art Work</button> -->
+			<md-button class="md-raised md-primary" style="background:#44596D;">
+				<md-icon style="width:1.5vw">
+					<i class="material-icons">
+						cloud_upload
+					</i>
+				</md-icon>
+				Upload Art Work
+			</md-button>
+
+		</div>
+
+	</div>
+	<div class="table-responsive" style="margin-bottom:115px !important">
+		<table class="table">
+			<thead class="text_color">
+				<tr>
+					<th>Product Details</th>
+					<th></th>
+					<th>Size</th>
+					<th>Booked From</th>
+					<th>Booked To</th>
+					<th>Price</th>
+					<th></th>
+					<th>
+						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/location">Add
+							Another Product
+						</md-button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+					</td>
+					<td>
+						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
+							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+								 class="fa fa-eye"></i>1,25,589</button></p>
+					</td>
+					<td class="table_vertical">90*60</td>
+					<td class="table_vertical">
+						<p>01-05-2018</p>
+						<p>15-08-2018</p>
+					</td>
+					<td class="table_vertical">
+						<p>01-06-2018</p>
+						<p>15-10-2018</p>
+					</td>
+					<td class="table_vertical">58,000</td>
+					<td class="table_vertical">
+						<a href="#"><i class="material-icons">delete_foreve</i></a>
+					</td>
+					<td class="text-center table_vertical">
+						<p class="text_color md-caption">This Inventory<br>
+							Campaign Completed</p>
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+					</td>
+					<td>
+						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
+							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+								 class="fa fa-eye"></i>1,25,589</button></p>
+					</td>
+					<td class="table_vertical">90*60</td>
+					<td class="table_vertical">
+						<p>01-05-2018</p>
+						<p>15-08-2018</p>
+					</td>
+					<td class="table_vertical">
+						<p>01-06-2018</p>
+						<p>15-10-2018</p>
+					</td>
+					<td class="table_vertical">58,000</td>
+					<td class="table_vertical">
+						<a href="#"><i class="material-icons">delete_foreve</i></a>
+					</td>
+					<td class="text-center table_vertical ">
+						<p class="text_color md-caption">This Inventory <br>
+							Campaign Sheduled</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+					</td>
+					<td>
+						<p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech city<br>Views : 1,
+							54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+								 class="fa fa-eye"></i>1,25,589</button></p>
+					</td>
+					<td class="table_vertical">90*60</td>
+					<td class="table_vertical">
+						<p>01-05-2018</p>
+						<p>15-08-2018</p>
+					</td>
+					<td class="table_vertical">
+						<p>01-06-2018</p>
+						<p>15-10-2018</p>
+					</td>
+					<td class="table_vertical">58,000</td>
+					<td class="table_vertical">
+						<a href="#"><i class="material-icons">delete_foreve</i></a>
+					</td>
+					<td class="text-center table_vertical">
+						<p class="text_color md-caption">This Inventory<br>
+							Campaign Running</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- table grid end -->
+	<div class="md-whiteframe-3dp campaign_payment" layout="row" layout-margin>
+		<div layout="column" class="payment_inner">
+			<div layout="row">
+				<div class="md-body-1">Total :</div>
+				<div class="md-body-1">12,58,000</div>
+			</div>
+			<div layout="row">
+				<div class="md-body-1">18% GST :</div>
+				<div class="md-body-1"> 58,000</div>
+			</div>
+			<div layout="row">
+				<div class="md-body-1">Sub Total :</div>
+				<div class="md-body-1">13,05,000</div>
+			</div>
+			<div layout="row">
+				<div class="md-title">Grand Total :</div>
+				<div class="md-title">13,05,000</div>
+			</div>
+			<md-button class="md-raised md-primary">Book Campaign</md-button>
+		</div>
+	</div>
 </div>

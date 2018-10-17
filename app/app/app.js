@@ -91,6 +91,16 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.product-list', {
+      url: 'product-list',
+      templateUrl: 'views/product-list.html',
+      controller: 'FormatsCtrl'
+    })
+    .state('index.shortlist-products', {
+      url: 'shortlist-products',
+      templateUrl: 'views/shortlist-products.html',
+      controller: 'FormatsCtrl'
+    })
     .state('index.metro', {
       url: 'metro',
       templateUrl: 'views/metro.html',
@@ -110,6 +120,16 @@ var app = angular.module('bbManager', [
       url: 'view-campaign/{campaignId}',
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
+    })
+    .state('index.user-payments', {
+      url: 'user-payments',
+      templateUrl: 'views/user-payments.html',
+      controller:''
+    })
+    .state('index.update-user-payments', {
+      url: 'update-user-payments',
+      templateUrl: 'views/update-user-payments.html',
+      controller:''
     })
     .state('index.metro-campaign', {
       url: 'metro-campaign/{metroCampaignId}',
