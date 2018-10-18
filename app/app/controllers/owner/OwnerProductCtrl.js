@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService,ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   /*===================
   | Sidenavs and popups
@@ -80,6 +80,48 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Pagination Ends
   ===================*/
 
+  /*================================
+  | Multi date range picker options
+  ================================*/
+  $scope.rqstHrdngsOpts = {
+    multipleDateRanges: true,
+    locale: {
+        applyClass: 'btn-green',
+        applyLabel: "Apply",
+        fromLabel: "From",
+        format: "DD-MMM-YY",
+        toLabel: "To",
+        cancelLabel: 'Cancel',
+        customRangeLabel: 'Custom range'
+    },
+    // isInvalidDate : function(dt){
+    //   for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+    //       return true;
+    //     }
+    //   }
+    // },
+    // isCustomDate: function(dt){
+    //   for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+    //       if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
+    //         return ['red-blocked', 'left-radius'];
+    //       }
+    //       else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
+    //         return ['red-blocked', 'right-radius'];
+    //       }
+    //       else{
+    //         return 'red-blocked';
+    //       }
+    //     }
+    //   }
+    // },
+  };
+  /*====================================
+  | Multi date range picker options end
+  ====================================*/
+
+
   var getFormatList = function(){
     OwnerProductService.getFormatList().then(function(result){
       $scope.formatList = result;
@@ -133,7 +175,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       }
     });
   }
-  
+ 
   $scope.getStateList = function(product){
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
@@ -150,13 +192,15 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.searchableAreas = function(query) {
+    return OwnerLocationService.searchAreas(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
 
   $scope.requestedAddProduct = function(product){
     console.log(product);
   }
-
-
-
 
   /*=====================
   | Product Section
@@ -165,6 +209,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
  
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
+    product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
       data: { image: $scope.files.image, product: $scope.product }

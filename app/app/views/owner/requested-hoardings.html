@@ -279,32 +279,43 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6">
-								<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
-								 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
-									<option value="" disabled selected>Select Country</option>
-								</select required>
-								<div ng-messages="addProductForm.country.$error" ng-if="addProductForm.country.$touched" style="color:red">
-									<div ng-message="required">Country is required.</div>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<select name="state" class="form-control md-whiteframe-3dp" id="state" ng-model="product.state" required="required"
-								 ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
-									<option value="" disabled selected>Select State</option>
-								</select required>
-								<div ng-messages="addProductForm.state.$error" ng-if="addProductForm.state.$touched" style="color:red">
-									<div ng-message="required">state is required.</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-6"><select name="city" class="form-control md-whiteframe-3dp" id="city" ng-model="product.city"
+								<!-- <select name="city" class="form-control md-whiteframe-3dp" id="city" ng-model="product.city"
 								 required="required" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
 									<option value="" disabled selected>Select City</option>
 								</select required>
 								<div ng-messages="addProductForm.city.$error" ng-if="addProductForm.city.$touched" style="color:red">
 									<div ng-message="required">city is required.</div>
-								</div>
+								</div> -->
+								<md-autocomplete                      
+                md-min-length="3"
+                md-selected-item = "areaObj"
+                md-selected-item-change = "selectSearchedArea(item)"
+                md-search-text = "searchedArea"
+                md-items = "item in searchableAreas(searchedArea)"
+                md-item-text = "item.name"
+                placeholder = "Search Areas"
+								md-clear-button = "true" style="min-width: 100% !important"
+								md-menu-class = "form-control md-whiteframe-3dp">
+									<md-item-template>
+										<span class="item-title">
+											<span> {{item.name}} </span>
+										</span>
+										<span class="item-metadata">
+											<span>
+												<strong>{{item.city_name}}</strong>
+											</span>
+											<span>
+												<strong>{{item.state_name}}</strong>
+											</span>
+											<span>
+												<strong>{{item.country_name}}</strong>
+											</span>
+										</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found.
+									</md-not-found>
+								</md-autocomplete>
 							</div>
 							<div class="col-sm-6">
 								<input ng-model="product.address" class="form-control  md-whiteframe-3dp" placeholder="address" type="text"
@@ -357,8 +368,8 @@
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<input ng-model="product.date" class="form-control md-whiteframe-3dp" required="required" placeholder="Product date"
-								 type="date" name="date" required="required" />
+								<input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+								 type="text" name="date" readonly options="rqstHrdngsOpts"/>
 								<div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
 									<div ng-message="required">Date is required.</div>
 								</div>
@@ -367,7 +378,7 @@
 
 						<div class="form-group row">
 							<div class="col-sm-6">
-								<textarea ng-model="product.strength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
+								<textarea ng-model="product.adStrength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
 								 type="strength" name="strength" required="required" rows="3"></textarea>
 								<div ng-messages="addProductForm.strength.$error" ng-if="addProductForm.strength.$touched" style="color:red">
 									<div ng-message="required">strength is required.</div>
@@ -378,7 +389,7 @@
 								<label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
 								<span class="input-group-btn">
 									<span class="">
-										<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="product.files.image"
+										<input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
 										 name="imageFile" accept="image/*" ngf-max-size="10MB">
 									</span>
 								</span>

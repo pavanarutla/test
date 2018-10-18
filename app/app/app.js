@@ -18,8 +18,8 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
-  'ui.grid.selection'
-  // 'angular-carousel'
+  'ui.grid.selection',
+  'daterangepicker'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
