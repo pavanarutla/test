@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config, $pusher) {
 
   /*=================================
   | mdDilalog close function
@@ -71,20 +71,100 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   /*================================
   === Long polling notifications ===
   ================================*/
-  $scope.adminNotifs = [];
-  var getAdminNotifs = function(){
-    var last_notif = 0;
-    if($scope.adminNotifs && $scope.adminNotifs.length > 0){
-      last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
-    }
-    AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
-      $scope.adminNotifs = result.concat($scope.adminNotifs);
-      $timeout(getAdminNotifs, 1000);
-    });
-  }
+  // $scope.adminNotifs = [];
+  // var getAdminNotifs = function(){
+  //   var last_notif = 0;
+  //   if($scope.adminNotifs && $scope.adminNotifs.length > 0){
+  //     last_notif = moment.utc($scope.adminNotifs[0].updated_at).valueOf();
+  //   }
+  //   AdminNotificationService.getAllAdminNotifications(last_notif).then(function(result){
+  //     $scope.adminNotifs = result.concat($scope.adminNotifs);
+  //     $timeout(getAdminNotifs, 1000);
+  //   });
+  // }
   // getAdminNotifs();
   // $interval(getAdminNotifs, 10000);
-  getAdminNotifs();
+  // getAdminNotifs();
+
+
+      /*================================
+  === Long polling notifications ===
+  ================================*/
+  $scope.ownerNotifs = [];
+  var client = new Pusher("4e108549b1a209a6d211", {
+    cluster: "ap2"
+   });
+  var pusher = $pusher(client);
+  var CampaignClosedChannel = pusher.subscribe('CampaignClosed-superAdmin');
+  var CampaignLaunchChannel = pusher.subscribe('CampaignLaunch-superAdmin' );
+  var CampaignSuspendedChannel = pusher.subscribe('CampaignSuspended-superAdmin');
+  var CampaignQuoteRevisionChannel = pusher.subscribe('CampaignQuoteRevision-superAdmin' );
+  var CampaignQuoteRequestedChannel = pusher.subscribe('CampaignQuoteRequested-superAdmin' );
+  var CampaignQuoteProvidedChannel = pusher.subscribe('CampaignQuoteProvided-superAdmin' );
+  var CampaignLaunchRequestedChannel = pusher.subscribe('CampaignLaunchRequested-superAdmin' );
+  var metroCampaignClosedChannel = pusher.subscribe('metroCampaignClosed-superAdmin');
+  var metroCampaignLaunchChannel = pusher.subscribe('metroCampaignLaunch-superAdmin' );
+  var metroCampignLockedChannel = pusher.subscribe('metroCampignLocked-superAdmin' );
+
+  CampaignClosedChannel.bind('CampaignClosedEvent', function(data) {
+    // $scope.ownerNotifs =
+  console.log('user board',data)
+  }
+  );
+
+  CampaignLaunchChannel.bind('CampaignLaunchEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  CampaignSuspendedChannel.bind('CampaignSuspendedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+    CampaignQuoteRevisionChannel.bind('CampaignQuoteRevisionEvent', function(data) {
+      // update with new price
+      console.log('user board',data)
+      }
+      );
+
+  CampaignQuoteRequestedChannel.bind('CampaignQuoteRequestedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  CampaignQuoteProvidedChannel.bind('CampaignQuoteProvidedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  CampaignLaunchRequestedChannel.bind('CampaignLaunchRequestedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }  );
+      
+
+  metroCampaignLaunchChannel.bind('metroCampaignLaunchEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    } );
+          
+
+  metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
+  // update with new price
+  console.log('user board',data)
+    });
+
 
   /*===============================
   |   Notification navigation 

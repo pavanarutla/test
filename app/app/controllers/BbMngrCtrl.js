@@ -1,5 +1,5 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService, 
-  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+  CampaignService, UserService, LocationService, NotificationService, config, $window, $interval, $pusher) {
 
   /*=================================
   | mdDilalog close function
@@ -422,20 +422,107 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*================================
     === Long polling notifications ===
     ================================*/
-    $scope.notifs = [];
-    var getUserNotifs = function(){
-      var last_notif = 0;
-      if($scope.notifs && $scope.notifs.length > 0){
-        last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
+    // $scope.notifs = [];
+    // var getUserNotifs = function(){
+    //   var last_notif = 0;
+    //   if($scope.notifs && $scope.notifs.length > 0){
+    //     last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
+    //   }
+    //   NotificationService.getAllNotifications(last_notif).then(function(result){
+    //     $scope.notifs = result.concat($scope.notifs);
+    //     $timeout(getUserNotifs, 1000);
+    //   });
+    // }
+    // if($rootScope.isAuthenticated){
+    //   getUserNotifs();
+    // }
+
+
+        /*================================
+  === Long polling notifications ===
+  ================================*/
+  if(!$rootScope.currStateNam == 'index.home'){
+    $scope.ownerNotifs = [];
+  var client = new Pusher("4e108549b1a209a6d211", {
+    cluster: "ap2"
+   });
+   var userId = $auth.getPayload().userMongo.id;
+  //  console.log(userId)
+  var pusher = $pusher(client);
+  var CampaignClosedChannel = pusher.subscribe('CampaignClosed-' + userId);
+  var CampaignLaunchChannel = pusher.subscribe('CampaignLaunch-' + userId);
+  var CampaignSuspendedChannel = pusher.subscribe('CampaignSuspended-' + userId);
+  var CampaignQuoteRevisionChannel = pusher.subscribe('CampaignQuoteRevision-' + userId);
+  var CampaignQuoteRequestedChannel = pusher.subscribe('CampaignQuoteRequested-' + userId);
+  var CampaignQuoteProvidedChannel = pusher.subscribe('CampaignQuoteProvided-' + userId);
+  var CampaignLaunchRequestedChannel = pusher.subscribe('CampaignLaunchRequested-' + userId);
+  var metroCampaignClosedChannel = pusher.subscribe('metroCampaignClosed-' + userId);
+  var metroCampaignLaunchChannel = pusher.subscribe('metroCampaignLaunch-' + userId);
+  var metroCampignLockedChannel = pusher.subscribe('metroCampignLocked-' + userId);
+
+  CampaignClosedChannel.bind('CampaignClosedEvent', function(data) {
+    // $scope.ownerNotifs =
+  console.log('user board',data)
+  }
+  );
+
+  CampaignLaunchChannel.bind('CampaignLaunchEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  CampaignSuspendedChannel.bind('CampaignSuspendedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+    CampaignQuoteRevisionChannel.bind('CampaignQuoteRevisionEvent', function(data) {
+      // update with new price
+      console.log('user board',data)
       }
-      NotificationService.getAllNotifications(last_notif).then(function(result){
-        $scope.notifs = result.concat($scope.notifs);
-        $timeout(getUserNotifs, 1000);
-      });
+      );
+
+  CampaignQuoteRequestedChannel.bind('CampaignQuoteRequestedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
     }
-    if($rootScope.isAuthenticated){
-      getUserNotifs();
+    );
+
+  CampaignQuoteProvidedChannel.bind('CampaignQuoteProvidedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
     }
+    );
+
+  CampaignLaunchRequestedChannel.bind('CampaignLaunchRequestedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }
+    );
+
+  metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    }  );
+      
+
+  metroCampaignLaunchChannel.bind('metroCampaignLaunchEvent', function(data) {
+    // update with new price
+    console.log('user board',data)
+    } );
+          
+
+  metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
+  // update with new price
+  console.log('user board',data)
+    });
+
+
+
+  }
+  
 
     /*===============================
     |   Notification navigation 
