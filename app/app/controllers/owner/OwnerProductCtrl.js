@@ -1,5 +1,8 @@
 app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
+  $scope.unavailalbeDateRanges = [];
+  $scope.loadCalendar = false;
+
   /*===================
   | Sidenavs and popups
   ===================*/
@@ -116,6 +119,41 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     //     }
     //   }
     // },
+  };
+  $scope.inventoryListOpts = {
+    multipleDateRanges: true,
+    opens: 'center',
+    locale: {
+        applyClass: 'btn-green',
+        applyLabel: "Apply",
+        fromLabel: "From",
+        format: "DD-MMM-YY",
+        toLabel: "To",
+        cancelLabel: 'Cancel',
+        customRangeLabel: 'Custom range'
+    },
+    isInvalidDate : function(dt){
+      for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= $scope.unavailalbeDateRanges[i].booked_to){
+          return true;
+        }
+      }
+    },
+    isCustomDate: function(dt){
+      for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+          if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')){
+            return ['red-blocked', 'left-radius'];
+          }
+          else if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')){
+            return ['red-blocked', 'right-radius'];
+          }
+          else{
+            return 'red-blocked';
+          }
+        }
+      }
+    },
   };
   /*====================================
   | Multi date range picker options end
@@ -313,6 +351,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.getProductUnavailableDates = function(productId){
+    OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.loadCalendar = true;
+      $scope.unavailalbeDateRanges = dateRanges;
+    });
+  }
   /*=====================
   | Product Section Ends
   =====================*/

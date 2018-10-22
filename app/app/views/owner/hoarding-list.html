@@ -258,9 +258,13 @@
             </div>
           </td>
           <td class="table_vertical">
-            <a href="#"><i class="material-icons">
+            <input ng-if="loadCalendar" date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+            type="text" name="date" readonly options="inventoryListOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
+            <a onclick="$(this).parent().find('input').click();" ng-click="getProductUnavailableDates(product.id);">
+              <i class="material-icons">
                 calendar_today
-              </i></a>
+              </i>
+            </a>
           </td>
           <td class=" table_vertical">
             <div class="form-group">

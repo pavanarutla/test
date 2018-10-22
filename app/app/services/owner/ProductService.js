@@ -94,6 +94,11 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/approved-owner-products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			getProductUnavailableDates: function(productId){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/product-unavailable-dates/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}
