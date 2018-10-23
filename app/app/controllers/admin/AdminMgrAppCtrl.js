@@ -92,7 +92,8 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   ================================*/
   $scope.ownerNotifs = [];
   var client = new Pusher("4e108549b1a209a6d211", {
-    cluster: "ap2"
+    cluster: "ap2",
+    forceTLS: true
    });
   var pusher = $pusher(client);
   var CampaignClosedChannel = pusher.subscribe('CampaignClosed-superAdmin');
@@ -107,66 +108,66 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   var metroCampignLockedChannel = pusher.subscribe('metroCampignLocked-superAdmin' );
 
   CampaignClosedChannel.bind('CampaignClosedEvent', function(data) {
-    // $scope.ownerNotifs =
-  console.log('user board',data)
+      // $scope.adminNotifs.push(data.message);
+      console.log('user board',data.message)
   }
   );
 
   CampaignLaunchChannel.bind('CampaignLaunchEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.messagedata)
     }
     );
 
   CampaignSuspendedChannel.bind('CampaignSuspendedEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     }
     );
 
     CampaignQuoteRevisionChannel.bind('CampaignQuoteRevisionEvent', function(data) {
       // update with new price
-      console.log('user board',data)
+      console.log('user board',data.message)
       }
       );
 
   CampaignQuoteRequestedChannel.bind('CampaignQuoteRequestedEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     }
     );
 
   CampaignQuoteProvidedChannel.bind('CampaignQuoteProvidedEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     }
     );
 
   CampaignLaunchRequestedChannel.bind('CampaignLaunchRequestedEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     }
     );
 
   metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     }  );
       
 
   metroCampaignLaunchChannel.bind('metroCampaignLaunchEvent', function(data) {
     // update with new price
-    console.log('user board',data)
+    console.log('user board',data.message)
     } );
           
 
   metroCampaignClosedChannel.bind('metroCampaignClosedEvent', function(data) {
   // update with new price
-  console.log('user board',data)
+  console.log('user board',data.message)
     });
 
 
-  /*===============================
+  /*=============================== 
   |   Notification navigation 
   ===============================*/
   $scope.viewNotification = function(notification){
