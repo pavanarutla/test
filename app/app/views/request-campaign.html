@@ -1,6 +1,77 @@
-<div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
+<style>
+    .md-button{
+        min-width: 64px!important;
+    }
+    md-list-item{
+        padding: 0 0px !important;
+    }
+</style>
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg ">
 
-    <div class="table-responsive contbg">
+    <!-- share campaign sidenav -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+        <div layout="row">
+            <div class="md-toolbar-tools">
+                <div flex></div>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                    <md-tooltip>Close Side Panel</md-tooltip>
+                    <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-content layout-align="center center" layout-margin layout-padding>
+            <h3 class="md-headline">Share Campaign</h3>
+            <form name="shareCampaignForm">
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                        <div ng-messages="shareCampaignForm.name.$error">
+                            <div ng-message="required">Name is required.</div>
+                            <div ng-message="pattern">Enter a valid Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                        <div ng-messages="shareCampaignForm.email.$error">
+                            <div ng-message="required">Email is required.</div>
+                            <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                    </md-input-container>
+                    <md-button class="md-raised md-warn" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">SHARE
+                        CAMPAIGN</md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-sidenav>
+    <!-- share campaign sidenav ends -->
+    <!-- table grid start  -->
+    <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+        <div class="ml-4" style="margin-top:28px;">
+            <p>Camapaign ID</p>
+            <p class="md-body-2">BB-001</p>
+        </div>
+        <div style="margin-top:28px;">
+            <p>Camapaign Name</p>
+            <p class="md-body-2">Uber Ptv Ltd</p>
+        </div>
+        <div style="margin-top:28px;">
+            <p>No of Products</p>
+            <p class="md-body-2">5</p>
+        </div>
+        <div flex></div>
+
+        <md-button class="share_btn" ng-click="toggleShareCampaignSidenav()">
+            <md-icon style="width:1.5vw">
+                <i class="material-icons">
+                    reply_all
+                </i>
+            </md-icon>
+            Share Camapaign
+        </md-button>
+    </div>
+    <div class="table-responsive">
         <table class="table">
             <thead class="text_color">
                 <tr>
@@ -12,7 +83,7 @@
                     <th>Price</th>
                     <th></th>
                     <th>
-                        <md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#">Add
+                        <md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/location">Add
                             Another Product
                         </md-button>
                     </th>
@@ -24,13 +95,10 @@
                         <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
                     </td>
                     <td>
-                        <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>
-                            From Kothaguda X Roads towards Hitech city<br>
-                            Views : 1,54000 Per week<br>
-                            Live Traffic:
-                            <button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
-                                <i class="fa fa-eye"></i>1,25,589</button>
-                        </p>
+                        <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech
+                            city<br>Views : 1,
+                            54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+                                    class="fa fa-eye"></i>1,25,589</button></p>
                     </td>
                     <td class="table_vertical">90*60</td>
                     <td class="table_vertical">
@@ -111,16 +179,18 @@
         </table>
     </div>
     <!-- table grid end -->
-    <div class="campaign_payment_inner mb-2">
 
-        <!-- <div class="row mr-0 ml-0 pt-2">
-            <div class="col-md-6 chat_box pb-5">
+    <div class="d-flex bg-light mb-5" style="min-height:100px">
+        <div class="p-2 col-md-6">
+            <div class=" chat_box ">
                 <ul class="p-0">
                     <li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
-                        please revision BB238 - Kothaguda hoarding price </li>
-                    <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
-                        is revised as requested</li>
-
+                        please
+                        revision
+                        BB238 - Kothaguda hoarding price </li>
+                    <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price is
+                        revised as
+                        requested</li>
                 </ul>
                 <form action="/action_page.php">
                     <div class="form-group">
@@ -130,66 +200,13 @@
                     <button type="submit" class="btn btn-primary float-right">Submit</button>
                 </form>
             </div>
-            <div class="col-md-6 ">
-                <div class="d-flex justify-content-end pt-4">
-                    <md-button class="md-raised md-warn" ng-click="saveCampagin()">SAVE CAMPAIGN</md-button>
-                    <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button>
-                </div>
-            </div>
-        </div> -->
-        <div class="d-flex bg-light mb-5" style="min-height:100px">
-            <div class="p-2 col-md-6">
-                <div class=" chat_box ">
-                    <ul class="p-0">
-                        <li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
-                            please revision
-                            BB238 - Kothaguda hoarding price </li>
-                        <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
-                            is revised as
-                            requested</li>
-                    </ul>
-                    <form action="/action_page.php">
-                        <div class="form-group">
-                            <label for="text" class="text_color">Any questions, Please submit below</label>
-                            <textarea type="text" class="form-control" id="text" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>
-                    </form>
-                </div>
-            </div>
-            <div class="p-2  col-md-6 align-self-end">
-                <div class="d-flex justify-content-end pt-4 align-self-end">
-                    <div class="d-flex justify-content-end pt-4">
-                        <md-button class="md-raised md-warn" ng-click="saveCampagin()">SAVE CAMPAIGN</md-button>
-                        <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="p-2  col-md-6 align-self-end">
+            <div class="d-flex justify-content-end pt-4">
+                <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button>
 
-        </div>
-        <div class="prodct_save md-whiteframe-2dp animated fadeInUp float-right" ng-show="savecampagin" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
-            <div layout="row">
-                <div flex></div>
-                <a class="md-icon-button close-btn" ng-click="">
-                    <i class="material-icons">close</i>
-                </a>
-            </div>
-            <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
-            <div class="md-title  m-2">Let's work Together!</div>
-            <div class="form-group mt-3 mr-2 ml-2">
-                <input type="text" class="form-control" id="text" placeholder="Campaign Name ">
-            </div>
-            <p class="text-center md-body-2">(OR)</p>
-            <div class="form-group mr-2 ml-2">
-                <select class="form-control" ng-model="existingCampaign.id" required="required">
-                    <option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
-                </select>
-            </div>
-            <div layout="column" class="mr-2 ml-2 mb-3">
-                <md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
-                    add to existing or save Campaign
-                </md-button>
             </div>
         </div>
+
     </div>
 </div>

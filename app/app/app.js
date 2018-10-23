@@ -50,11 +50,14 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    // .state('index.suggest_campaign', {
-    //   url: 'suggest-campaign',
-    //   templateUrl: 'views/suggest-a-campaign.html',
-    //   controller: 'CampaignCtrl'
-    // })
+    .state('index.user-notifications', {
+      url: 'user-notifications',
+      templateUrl: 'views/user-notifications.html',
+    })
+    .state('index.user-saved-campaigns', {
+      url: 'user-saved-campaigns',
+      templateUrl: 'views/user-saved-campaigns.html',
+    })
     $stateProvider.state('index.suggest', {
       url: 'suggest',
       templateUrl: 'views/suggest-a-campaign.html',
@@ -119,6 +122,11 @@ var app = angular.module('bbManager', [
     .state('index.view_campaign', {
       url: 'view-campaign/{campaignId}',
       templateUrl: 'views/campaign.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.request-campaign', {
+      url: 'request-campaign',
+      templateUrl: 'views/request-campaign.html',
       controller: 'CampaignCtrl'
     })
     .state('index.user-payments', {
