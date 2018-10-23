@@ -1,0 +1,245 @@
+<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+  <div class="ml-4 update" style="margin-top:38px;">
+    <p class="first">Camapaign ID</p>
+    <p class="md-caption second"><b>BB-001</b></p>
+  </div>
+  <div class="update" style="margin-top:38px;">
+    <p>Camapaign Name</p>
+    <p class="md-caption"><b>{{campaignPaymentDetails.name}}</b></p>
+  </div>
+  <div class="update" style="margin-top:38px;">
+    <p>No of Products</p>
+    <p class="md-caption"><b>{{campaignPaymentDetails.product_count}}</b></p>
+  </div>
+  <div flex></div>
+  <div>
+    <md-list>
+      <md-list-item style="padding:5px">
+        <div>
+          <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+            <span><i class="material-icons">
+                reply_all
+              </i></span>
+            <div class="md-caption">Share Camapaign</div>
+          </md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div>
+    <md-list>
+      <md-list-item style="padding:5px">
+        <div>
+          <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+            <span><i class="material-icons">
+                file_copy
+              </i></span>
+            <div class="md-caption">Download Quotetation</div>
+          </md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div class="disabled">
+    <md-list>
+      <md-list-item style="padding:5px">
+        <div>
+          <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0"
+            ng-disabled="true">
+            <span><i class="material-icons">
+                account_balance_wallet
+              </i></span>
+            <div class="md-caption">Payment Details</div>
+          </md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  
+  <div class="dropdown">
+    <md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn" style="margin-top:2.2em;">
+        <md-icon style="width:1.5vw">
+            <i class="material-icons">
+              account_balance_wallet
+            </i></md-icon>Add Payment
+      </md-button>
+    <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
+      <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+        <div layout="colmun">
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+            <md-icon class="md-default-theme">
+              <i class="material-icons">close</i>
+            </md-icon>
+          </md-button>
+        </div>
+        <h3 class="md-title">Grand Total : Rs. 13,04,000</h3>
+        <li>
+          <div class="">
+
+            <div class="col-md-12">
+              <form>
+                <div class="form-group row">
+                  <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
+                  <div class="col-sm-8">
+                    <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                      <option value="" selected>Cash</option>
+                      <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="amount" class="col-sm-4 col-form-label md-body-2">Camapaign</label>
+                  <div class="col-sm-8">
+                    <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                      <option value="" selected>BBI248 - BBI Pvt Ltd</option>
+                      <!-- <option selected>Select Payment Type</option> -->
+                      <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                  <div class="col-sm-8">
+                    <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                    <div class="col-sm-8">
+                      <span class="input-group-btn">
+                        <span class="">
+                          <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*"
+                           ngf-max-size="10MB">
+                        </span>
+                      </span>
+                      <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+                        <div ng-message="required">Image is required.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                    <div flex></div>
+                    <div class="col-sm-4">
+                    <!-- <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
+                  </div>
+                  <div class="col-sm-4">
+                    <md-button class="md-raised md-primary pull-right text-white" ng-click="updateOwnerCampaignPayment()" >Submit</md-button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </li>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="text_color">
+      <tr>
+        <th>Date</th>
+        <th>MOde of Payment</th>
+        <th>Paid</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
+        <td>{{payment.updated_at | dateify | date: "dd-MMM-yyyy"}}</td>
+        <td>{{payment.type}}</td>
+        <td>{{payment.amount}}</td>
+        <td>21-09-2018, 9:00 Am</td>
+      </tr>      
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-right:20px;">
+  <div class="pull-right">
+    <p class="font-weight-light" style="text-indent: 48px;">Total: 12,58,000</p>
+    <p class="text_color" style="text-indent: 50px;">Paid: 11,10,850</p>
+    <h4>Balance: 1,47,150</h4>
+  </div>
+</div>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+  <div layout="row">
+    <div class="md-toolbar-tools">
+      <div flex></div>
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+        <md-tooltip>Close Side Panel</md-tooltip>
+        <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+      </md-button>
+    </div>
+  </div>
+  <md-content layout-align="center center" layout-margin layout-padding>
+    <h3 class="md-headline">Share Campaign</h3>
+    <form name="shareCampaignForm">
+      <div layout="column">
+        <md-input-container class="md-block">
+          <label>Name</label>
+          <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+          <div ng-messages="shareCampaignForm.name.$error">
+            <div ng-message="required">Name is required.</div>
+            <div ng-message="pattern">Enter a valid Name.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+          <div ng-messages="shareCampaignForm.email.$error">
+            <div ng-message="required">Email is required.</div>
+            <div ng-message="pattern">Enter a valid Email Id.</div>
+          </div>
+        </md-input-container>
+        <md-button class="md-raised md-warn" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">SHARE
+          CAMPAIGN</md-button>
+      </div>
+    </form>
+  </md-content>
+</md-sidenav>
+
+
+
+<script>
+  function addPayment() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function addPayments() {
+    document.getElementById("myDropdownView").classList.toggle("show");
+  }
+</script>
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
+

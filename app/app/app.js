@@ -19,8 +19,10 @@ var app = angular.module('bbManager', [
   'ngFileSaver',
   'googlechart',
   'ui.grid.selection',
-  'pusher-angular'
+  'pusher-angular',
   // 'angular-carousel'
+  'daterangepicker'
+
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
@@ -334,6 +336,21 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
+    .state('owner.bbi-campaigns', {
+      url: '/bbi-campaigns',
+      templateUrl: 'views/owner/bbi-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
+    .state('owner.saved-campaigns', {
+      url: '/saved-campaigns',
+      templateUrl: 'views/owner/saved-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
+    .state('owner.metro-campaign-details', {
+      url: '/metro-campaign-details',
+      templateUrl: 'views/owner/metro-campaign-details.html',
+      controller:  'OwnerCampaignCtrl'
+    })
     .state('owner.campaign-details', {
       url: '/campaign-details/:campaignId/:campaignType',
       templateUrl: 'views/owner/campaign-details.html',
@@ -352,6 +369,11 @@ var app = angular.module('bbManager', [
     .state('owner.hoarding-list', {
       url: '/hoarding-list',
       templateUrl: 'views/owner/hoarding-list.html',
+      controller: 'OwnerProductCtrl'
+    })
+    .state('owner.add-campagin-product', {
+      url: '/add-campagin-product',
+      templateUrl: 'views/owner/add-campagin-product.html',
       controller: 'OwnerProductCtrl'
     })
     .state('owner.product-details', {
@@ -378,16 +400,51 @@ var app = angular.module('bbManager', [
     //   templateUrl: 'views/owner/outsourcingagent.html',
     //   controller:'outSourcing'
     // })
-    // .state('owner.teamPage', {
-    //   url: '/teamPage',
-    //   templateUrl: 'views/owner/team.html',
-    //   controller:'teamPage'
-    // })
-    // .state('owner.feedBack', {
-    //   url: '/feedBack',
-    //   templateUrl: 'views/owner/feedback.html',
-    //   controller:'feedback'
-    // })
+    .state('owner.notifications', {
+      url: '/notifications',
+      templateUrl: 'views/owner/owne-notifications.html',
+      controller:'OwnerMngrCtrl'
+    })
+    .state('owner.addmetropkg', {
+      url: '/addmetropkg',
+      templateUrl: 'views/owner/addmetro-packages.html',
+      controller:'feedback'
+    })
+    .state('owner.bbisupport', {
+      url: '/bbisupport',
+      templateUrl: 'views/owner/bbisupport.html',
+      controller:'feedback'
+    })
+    .state('owner.updatepayment', {
+      url: '/updatepayment',
+      templateUrl: 'views/owner/updatepayment.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.editproduct-details', {
+      url: '/editproduct-details',
+      templateUrl: 'views/owner/editproduct-details.html',
+      controller:'OwnerProductCtrl'
+    })
+    .state('owner.loginpage', {
+      url: '/loginpage',
+      templateUrl: 'views/owner/loginpage.html',
+      controller:''
+    })
+    .state('owner.forgotpassword', {
+      url: '/forgotpassword',
+      templateUrl: 'views/owner/forgotpassword.html',
+      controller:''
+    })
+    .state('owner.resetlogin', {
+      url: '/resetlogin',
+      templateUrl: 'views/owner/resetlogin.html',
+      controller:''
+    })
+    .state('owner.createaccount', {
+      url: '/createaccount',
+      templateUrl: 'views/owner/createaccount.html',
+      controller:''
+    })
     .state('owner.payments', {
       url: '/payments',
       templateUrl: 'views/owner/campaign-payments.html',
@@ -396,6 +453,11 @@ var app = angular.module('bbManager', [
     .state('owner.update-payments', {
       url: '/update-payments',
       templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.product-shortlist-campagin', {
+      url: '/product-shortlist-campagin',
+      templateUrl: 'views/owner/product-shortlist-campagin',
       controller:'OwnerCampaignCtrl'
     })
     .state('owner.signIn', {

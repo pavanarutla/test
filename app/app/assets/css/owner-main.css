@@ -1,6 +1,3 @@
-/* body.md-default-theme, body, html.md-default-theme, html{
-    background-color: #fff !important;
-} */
 /*===========global css start====================*/
 html,body{
     font-family: 'Roboto',sans-serif;
@@ -9,12 +6,7 @@ html,body{
     margin: 0px;
     padding: 0px;
 }
-body a {
-	transition: 0.5s all ease;
-	-webkit-transition: 0.5s all ease;
-	-moz-transition: 0.5s all ease;
-	-o-transition: 0.5s all ease;
-	-ms-transition: 0.5s all ease;
+body a{
 	text-decoration:none;
 }
 body a:hover {
@@ -23,12 +15,15 @@ body a:hover {
 }
 .main_view{
     margin-bottom:40px;
-    padding: 65px 0 40px 250px;
+    padding: 65px 0 40px 180px;
 }
 .contbg{
-    background: #fff;
+    background: #fff !important;
 }
-.margin_left_0{
+.bg_color{
+    background: #BC2535 !important;
+}
+/* .margin_left_0{
     margin-left: 0px;
 }
 .margin_right_0{
@@ -42,7 +37,7 @@ padding_right_0{
 }
 pdding_zero{
     padding: 0px;
-}
+} */
 .bg_main_color{
     background:#414143 !important;
 }
@@ -53,10 +48,13 @@ pdding_zero{
     color: #DD1853;
 }
 .md-backdrop {
-     background-color: none !important; 
+    background-color: none !important; 
 }
 md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque{
     background: none !important;
+}
+table td.table_vertical{
+    vertical-align: middle !important;
 }
 /*scroll bar coustom css start */
 .scrollbar__style::-webkit-scrollbar
@@ -71,544 +69,376 @@ md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque{
     height: 200px;
 }
 /* scroll bar coustam css end*/
-/* ====================cehck box css start=========================*/
-.owner_container {
-    display: block;
-    position: relative;
-    padding-left: 20px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+
+/*===========global css end====================*/
+/*=========================================
+    header,footer and sidnav css start
+===========================================*/
+.owner_tool_bar {
+    background: #BC2535!important;
 }
-.owner_container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+/*--- User Panel---*/
+.profile_details_left {
+	float: left;
 }
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 15px;
+.dropdown-menu {
+	box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	-webkit-box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	-moz-box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	border-radius: 0;
+}
+li.dropdown.head-dpdn {
+	display: inline-block !important;
+	padding: 1em 0;
+}
+li.dropdown.head-dpdn a.dropdown-toggle {
+    padding: 1em 1em;
+    color: #000;
+}
+li.dropdown.head-dpdn a.saved_campaign {
+    background: #fff;
+    padding: 10px 1em !important;
+    font-size: 12px;
+    border-radius: 2px;
+}
+ul.dropdown-menu li {
+	margin-left: 0;
+	width: 100%;
+	padding: 0;
+	background: #fff;
+}
+.lnr {
+	color:#fff;
+}
+i.fa.fa-bell{
+	color:#fff;
+}
+
+.metro_btn{
+    background: #F9F9F9;
+    font-size: 12px;
+}
+ul.dropdown-menu {
+    padding: 0;
+    min-width: 215px;
+    top: 5% !important;
+}
+.notification_header {
+    background-color: #FAFAFA;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+}
+.notification_header h3{
+    margin-bottom: 0px;
+}
+.notification_bottom {
+    background-color: rgba(200, 129, 230, 0.14);
+    padding: 4px 0;
+    text-align: center;
+    margin-top: 5px;
+}
+.nofitications-dropdown{
+    margin: 0px;
+    padding: 0px;
+}
+.profile_details_left span.blue {
+    background-color: #e52435 !important;
+}
+.profile_details_left span.badge {
+    background: #f6bb42 none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block !important;
+    font-size: 11px;
+    font-weight: bold;
+    height: 16px;
+    line-height: 11px;
+    padding: 2px 0 0;
+    position: absolute !important;
+    text-align: center;
+    top: 27%;
     width: 15px;
-    background-color: #eee;
-    border: 1px solid #ccc; 
+    left: 52%;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    -o-border-radius: 2em;
+} 
+.notification_desc p {
+    color: #757575;
+    font-size: 13px;
+    padding: 2px 0;
+    margin-bottom: 0px;
 }
-.owner_container:hover input ~ .checkmark {
-    background-color: #ccc;
+.dropdown-menu > li > a {
+    /* padding: 3px 15px !important; */
+    font-size: 1em;
 }
-.owner_container input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-.checkmark:after {
-    content: "";
-    position: absolute;
+.dropdown-toggle::after{
     display: none;
 }
-.owner_container input:checked ~ .checkmark:after {
-    display: block;
+ul.dropdown-menu.drp-mnu i.fa {
+	margin-right: 0.5em;
 }
-.owner_container .checkmark:after {
-    left: 4px;
-    top: 0.5px;
-    width: 6px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+.profile_details ul li ul.dropdown-menu.drp-mnu {
+    min-width: 130px;
 }
-/*============== check box css stop =========================*/
-/*===========global css start====================*/
-
-
-/*======================= toolbar bar css start====================*/
-.owner_tool_bar{
-    background: #fff !important;
+ul.dropdown-menu.drp-mnu li {
+    padding: 4px 0;
 }
-/* .profile-menu{
-    margin-top: 12px;
-} */
- .owners-menu md-menu-item a{
+.owners-menu md-menu-item a {
     color: #fff;
-}  
-.active-link{
+}
+.active-link {
     border-left: 5px solid #547df9;
     color: #fff;
     background: #28282a;
-} 
-.active-link:hove{
-    color: #fff !important;
 }
-.owners-menu md-icon{
-    color: #fff;
-}
-.owner__sidenav{
-    width:250px !important;
-}
-.owner__sidenav .sidenav-content{
-    height: 90vh;
-    overflow-x: auto;
-    background: #414143 !important;
-    padding-top: 25px;
-}
-.main__page__search{
-    width: 50%;
-    /* border: 1px solid #ccc; */
-    /* height: 35px; */
-    border-radius: 20px;
-    /* padding: -1px 0; */
+/*=========================================
+    header,footer and sidnav css start
+===========================================*/
+
+
+/*======================
+    campagin css start
+========================*/
+.campagin_page {
     position: relative;
 }
-.main__page__search input{
-    font-size: 15px;
-    /* margin: 35px 20px 0 5px; */
-    width: 100%;
-    padding: 0 0 0 13px;
-    /* height: 30px; */
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 25px;
-}
-.main__page__search input:focus{
-    outline: none;
-}
-.main__page__search span{
-    float: right;
-    /* padding: 4px 13px 0 3px; */
-}
-.main__page__search a{
-    /* background: #fff; */
-    border: none;
-    color: #000 !important; 
-        position: absolute;
-    top: 6px;
-    /* right: 10px; */
-    margin: 0 0 0 -35px;
-     /* margin: 1px 0 0 0px;
-    padding: 0;  */
-}
-
-/*======================= toolbar bar css end====================*/
-/*==================== home page css start ======================*/
-.ava-hdng{
-    background: #4285f4;
-    /* opacity: .8; */
-    color: #fff;
-}
-.book-hdng{
-    background: #db4437;
-    color: #fff;
-}
-.tottal-hdng{
-    background: #f4b400;
-    color: #fff;
-}
-.proposal-hdng{
-    background: #413e40;
-    color: #fff;
-}
-.homepage__title{
-     color: #fff;
-    background: #547df9;
-    width: 100%;
-    height: 65px;
-}
-.homepage__title h3{
-    font-size: 20px;
-    text-align: left;
-    font-weight: bold;
-    margin-top: 8px;
-}
-.sales__report__inner,.hoarding__map,.to__do__inner,.activity__summary{
-    height: 400px;
-    overflow: auto;
-}
-.sales__report__hdng{
-        border-bottom: 1px solid #eee;
-}
-.sales__report__hdng h3{
-    font-size: 16px;
-    float: left;
-    margin: 5px 0 10px 0;
-}
-.sales__report__hdng .viewall__btn{
-    float: right;
-    border: 1px solid #007bff;
-    border-radius: 20px;
-    padding: 3px 10px;
-    font-size: 12px;
-    cursor: pointer;
-}
-.hoarding__map__hdng,.to__do__hdng,.activity__list__hdng{
-    border-bottom: 1px solid #eee;
-}
-.hoarding__map__hdng h3,.to__do__hdng h3,.activity__list__hdng h3{
-    font-size: 16px;
-    margin: 5px 0 10px 0;
-}
-.to__do__btn{
-    margin: 0 8px;
-}
-.activity__list h3{
-    font-size: 15px !important;
-    font-weight: 500;
-}
-.activity__list h3 span{
-    font-size: 14px;
-    color: #ccc;
-    font-weight: normal;
-}
-/*==================== home page css end ======================*/
-/*==================== campagin page css start ======================*/
-.campagin__summarys .proposal__hedng{
-    border-bottom: 1px solid #ccc;
-}
-.campagin__summarys .proposal__hedng h3{
-    margin: 15px 15px;
-    float: left;
-}
-.campagin__summarys .proposal__actions{
-    float: right;
-    margin: 15px 8px 15px 15px;
-    cursor: pointer;
-}
-.proposal__actions a{
-    margin: 8px;
-}
-.share__campaign{
-    width: 35%;
-    background: #fff;
+.campaign_search {
     position: absolute;
-    top: 93px;
-    z-index: 99;
-    right: 15px;
-    padding: 8px;
+    right: 0;
+    width: 45%;
+    z-index: 1 !important;
 }
-.share__campaign .share__person{
-    border-bottom: 1px solid #ccc;
-}
-.share__campaign .share__person h3{
-    font-size: 18px;
-    margin: 8px;
-}
-.share__campaign .share__details{
-    margin: 15px 0;
-}
-.share__campaign .share__details p{
-    font-size: 14px;
-    color: #000;
-    margin-left: 8px;
+#CampaignSsearchInput{
     margin-top: 5px;
 }
-.share__campaign .send__person {
-    padding: 0px 8px;
+#CampaignSsearchInput md-autocomplete-wrap{
+    height: 34px !important;
 }
-/* .table__heading .table_headig_title{
-    font-size: 16px;
-    font-family: roboto sans-serif;
-} */
-/*==================== campagin page css end ======================*/
-/*==================== hoarding list page css start ======================*/
-.owner_hoarding_list .main__title{
-    background: #547df9;
+md-autocomplete input:not(.md-input){
+    height: 34px !important;
+}
+.campaign_payment{
+    right: 0;
+    position: fixed;
+    bottom: 20px;
+    width: 24%;
+    padding:20px 0px 20px 0px;
+    border-radius: 0px 90px 0 90px;
+    background: #c62828 !important;
     color: #fff;
-    padding:15px;
+    margin-right: 0;
 }
-.owner_hoarding_list .main__title .shortlist__btn{
-    font-size: 15px;
-    border: 2px solid #fff;
-    padding: 5px 20px;
-    border-radius: 20px;
+.campaign_payment .payment_inner{
+    width: 65%;
+    margin: 0 auto;
 }
-.hoarding__card__owner .card__img{
+.camp_filters{
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+}
+.product_ .product_ineer{
+    padding: 30px 0 30px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.produt_img img{
     width:100%;
-    height:200px;
-    position:relative;
 }
-.hoarding__card__owner .card-title{
-      position: relative;
-    /* margin-top: 35%; */
-    background: #414143;
-    color: #fff;
-    margin: -35px 0 0 0;
-    padding: 5px 16px 6px;
-}
-.hoarding__card__owner .content_inner .hoarding__location{
-    padding:0px;
-    height:110px
-}
-/*sidenav css start*/
-.product__content{
-    padding-top: 25px;
-}
-/*==================== hoarding list page css end ======================*/
-/*==================== Request hoarding page css start ======================*/
-.owner__request__hoarding .req_hrdg_title{
-    margin-top: 20px;
-    /* border-bottom: 3px solid #547df9; */
-}
-.req_hrdg_title #customSsearchInput {
-    padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
-    background-color: #fff;
-    width: 320px;
-}
-.req_hrdg_title #customSsearchInput .input-group {
-    height: 30px;
-}
-.req_hrdg_title #customSsearchInput input {
-    border: 0;
-    box-shadow: none;
-}
-.req_hrdg_title #customSsearchInput  button {
-    margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 4px 8px 0 10px;
-    border-left: solid 1px #ccc;
-}
-.owner__request__hoarding .hrndg__action a {
-    margin: 0 10px;
-}
-/*==================== Request hoarding page css end ======================*/
-/*==================== signIN page css end ======================*/
-.sigin__bg{
-    background: url('/assets/images/owner/bg_1.jpg') no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-}
-/*==================== signIn page css end ======================*/
-
-
-.png-icon {
-    margin: 5px auto auto;
-    padding: 0;
-    display: inline-block;
-    background-repeat: no-repeat no-repeat;
-    pointer-events: none;
-}
-#similar {
-    float: right;
-    margin-top: 20px;
-    margin-right: 50px;
-}
-/* .profile-menu{
-     margin-top: 12px !important;
-} */
-/* .inputDiv {
-    background: #ccc;
-     padding: 13px; 
-} */
-
-/* .inputDiv .search {
-    background: rgb(204, 204, 204) none repeat scroll 0% 0%;
-    width: 25%;
-    height: 0px;
-    margin: 5px 0 5px 0;
-}
-.search {
-    height: 32px;
-    border-radius: 4px;
-    padding: 14px;
-} */
-/* .contbg{
-    background: #fff !important;
-}
-.bg-part {
-    position: relative;
-}
-.line-bar {
-    width: 100%;
-    height: 150px;
-    background: #488EDF;
-}
-.client-summay {
-    margin: -90px 0 0 0;
-} */
-.admin-img {
-    position: relative;
-}
-.adminimg-content {
-    position: absolute;
-    bottom: 0px;
-    color: #fff;
-    background: #51b3d6;
-    width: 100%;
-}
-.pricing-head {
-    background: #488EDF;
-    width: 100%;
-    height: 280px;
-}
-.profile-icons {
-    width: 100%;
-    padding-left: 9%;
-    background: #fff;
-    border-bottom: 5px solid #488edf;
-    margin: 0;
-}
-.temimg{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+.saved_search{
     margin-top: 10px;
+    margin-right: 14px;
+    width: 27%;
+    padding: 6px;
 }
-.popup-btn{
-    position: fixed !important;
-    right: 10px !important;
-    z-index: 99 !important;
-    bottom: 30% !important;
+.share_btn{
+    display: inline-grid !important;
+    font-size: 12px !important;
+    margin-top: 18px;
 }
-.inner-content{
-    background: #eee !important;
-    margin-bottom: 16px;
-    padding: 20px;
-}
-.temimg-inner{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-top: 10px;
-}
-/* .card-text{
-    position: relative;
-     margin-top: 35%; 
-    background: #447bde;
-    color: #fff;
-    margin: -35px 0 0 0;
-    padding: 5px 16px 6px;
-} */
-button.freshwidget-customimage.md-fab.md-fab-bottom-right.md-button.md-ink-ripple {
+.metro_btns{
     background: none;
-    box-shadow: none;
+    border: 0;
 }
-/* help page popup css start*/
-.help-page.layout-padding.layout-row {
-    background:#414143 !important;
-    color: #fff;
-}
-/* help page popup css end*/
-
-.freshwidget-customimage{
-    position: fixed !important;
-}
-.help-btn{
-     background:#404348 !important;
-}
-.nv-nav-item {
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: small;
-    color: #000000;
-}
- /* .nv-nav-item:active,.nv-nav-item:focus,.nv-nav-item:visited{
-    border-left: 2px solid #980000 !important;
-} */
-/* .nv-nav-item.active, .nv-nav-item.active a {
-    color: blue !important;
-    font-weight: 600 !important;
-    background: #FFFFFF !important;
-}  */
-/*feeds section*/
-.owner_feeds h3{
-    font-size: 14px;
-    line-height: 20px;
-    /* font-weight: 500; */
-    letter-spacing: 0.5px;
-    text-transform: lowercase;
-}
-md-autocomplete-wrap{
-border-radius: 25px !important;
-}
-
-.add_paymt_btn{
-    cursor: pointer;
-    color: #ffff;
-    background: #980000;
-    text-transform: capitalize;
-    border-radius: 20px;
-    padding: 10px 30px;
-}
-.add_paymt_btn:hover{
+.mtero_input_number{
+    background: #000;
     color: #fff !important;
-    text-decoration: underline;
+    border-radius: 15px !important;
 }
-.shortlist__btn{
-cursor: pointer;
-color: #fff !important;
-background: #980000;
-text-transform: capitalize;
-border-radius: 20px;
-padding: 10px 30px;
+.metro_package_bg0{
+    background: linear-gradient(to right, #8AFFB5  ,#00CC88);
+}
+.metro_package_bg1{
+    background: linear-gradient(to right,#479DFF  ,#35EEE1);
+} 
+.metro_package_bg2{
+    background: linear-gradient(to right, #479DFF  , #35EEE1);
+} 
+.metro_package_bg3{
+    background: linear-gradient(to right, #FEC180  ,#FF8993);
+}
+.metro_package_bg4{
+    background: linear-gradient(to right, #FF85F3  ,#887BFF);
+}
+.metro_package_bg5{
+    background: linear-gradient(to right, #FE80CC  ,#FF8993);
+}
+.slect_btn{
+    margin-left: 0px;
+    text-transform: capitalize;
+}
+.right_side_pack p{
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+.slect_slot{
+    margin-top: 20px;
+}
+.merto_pkg_details{
+    background: #FFFFFF;
+    border-radius:10px;
+}
+.metro_map{
+position: relative
+}
+.metro_packge{
+    position: absolute;
+    top: 28px;
+    width: 100%;
+}
+.left_side_pack {
+    padding: 20px;
+    border-radius: 5px;
+    color: #fff;
+}
+/* .dropdown{
+    display: inline-block;
+} */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 400px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 8px;
+    padding: 0 10px 10px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content li{
+list-style: none;
+} 
+.show {display: block;}
+
+/*=====================Start Editproduct-details====================*/
+.upper_head{
+    width:65%;
+    margin-bottom:0px;
+}
+.upper_line{
+    border-top: none !important;
+}
+.upper_img{
+    position: relative;
+}
+.bottom-right {
+    position: absolute;
+    bottom: 50px;
+    right: 40px;
+    padding: 7px 20px;
+    background: #c12a3a;
+    color: #fff;
 }
 
-#paymentSidenav{
-    width:50% !important;max-width: 50% !important;
+/*=====================End Editproduct-details====================*/
+
+/*=====================Start Loginpage====================*/
+.card-signin {
+    border: 0;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    margin-top: 140px !important;
+  }
+  
+  .card-signin .card-body {
+    padding: 2rem;
+  }
+  .form-signin .btn {
+    font-size: 80%;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+  }
+  .banner_img{
+      text-align: center;
+  }
+  .forgot{
+      float:right;
+  }
+
+/*=====================End Loginpage====================*/
+
+
+/*======================
+    campagin css start
+========================*/
+@media screen and (max-width:575px){
+ 
 }
-/*media qureys*/
-@media screen and (max-width: 959px) {
-    .pdding_zero{
-        padding: 8px;
-    }
-    .main_view{
+@media screen and (min-width:576px) and (max-width: 767px){
+    
+}
+@media screen and (min-width:768px) and (max-width:  991px){
+    
+}
+@media screen and (min-width:992px) and (max-width:  1199px){
+    
+}
+@media screen and (min-width:1200px){
+    
+}
+@media screen and (max-width: 959px){
+    .main_view {
         padding: 65px 0 40px 0px;
     }
-    #paymentSidenav{
-        width:70% !important;max-width: 70% !important;
-    }
-}
-@media screen and (max-width: 599px){
-    #paymentSidenav{
-        width:75% !important;max-width: 75% !important;
-    }
-}
-.serverErrors {
-    color : red;
-    padding-left: 14em;
-}
-.serverErrors div {
-    padding-left: 1em;
-    padding-bottom: 1em;
 }
 
-.serverErrors li  {
-    list-style-type: none;
-}
-.message {
-    position: relative;
-}
-.message p{
-    color: #fff;
-    position: absolute;
-    top: -5%;
-    right: 5%;
-    background: #b6c647;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    font-size: 14px;
-    text-align: center;
-}
-.red-text{
-    color: #DD1853;
-}
-.striked-out{
-    text-decoration: line-through;
-}
+
+/*====================================
+|   Date Range Picker custome classes
+====================================*/
+.red-blocked{
+    color:#fff !important;
+    text-decoration:none !important;
+    background:#f00 !important;
+    border-radius:0px !important;
+    margin: 1px 0px !important;
+  }
+  .left-radius{
+    border-radius:4px 0px 0px 4px !important;
+  }
+  .right-radius{
+    border-radius:0px 4px 4px 0px !important;
+  }
+  .green-blocked{
+    color:#fff !important;
+    text-decoration:none !important;
+    background:#0e860e !important;
+    border-radius:0px !important;
+    margin: 1px 0px !important;
+  }
+  /* .in-range{
+    color:#fff !important;
+    background: #357ebd !important;
+  } */
+/*========================================
+|   Date Range Picker custome classes End
+========================================*/

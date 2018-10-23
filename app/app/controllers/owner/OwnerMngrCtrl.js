@@ -15,6 +15,11 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       $mdSidenav('ownerLeftSidenav').close();
     }
   }
+
+  $scope.showCampagin = false;
+    $scope.toogelCampagin = function () {
+      $scope.showCampagin = !$scope.showCampagin;
+    }
   /*=================================
   | mdDilalog close function
   =================================*/

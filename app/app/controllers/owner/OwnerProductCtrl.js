@@ -1,4 +1,7 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+
+  $scope.unavailalbeDateRanges = [];
+  $scope.loadCalendar = false;
 
   /*===================
   | Sidenavs and popups
@@ -80,6 +83,83 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Pagination Ends
   ===================*/
 
+  /*================================
+  | Multi date range picker options
+  ================================*/
+  $scope.rqstHrdngsOpts = {
+    multipleDateRanges: true,
+    locale: {
+        applyClass: 'btn-green',
+        applyLabel: "Apply",
+        fromLabel: "From",
+        format: "DD-MMM-YY",
+        toLabel: "To",
+        cancelLabel: 'Cancel',
+        customRangeLabel: 'Custom range'
+    },
+    // isInvalidDate : function(dt){
+    //   for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+    //       return true;
+    //     }
+    //   }
+    // },
+    // isCustomDate: function(dt){
+    //   for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+    //       if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
+    //         return ['red-blocked', 'left-radius'];
+    //       }
+    //       else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
+    //         return ['red-blocked', 'right-radius'];
+    //       }
+    //       else{
+    //         return 'red-blocked';
+    //       }
+    //     }
+    //   }
+    // },
+  };
+  $scope.inventoryListOpts = {
+    multipleDateRanges: true,
+    opens: 'center',
+    locale: {
+        applyClass: 'btn-green',
+        applyLabel: "Apply",
+        fromLabel: "From",
+        format: "DD-MMM-YY",
+        toLabel: "To",
+        cancelLabel: 'Cancel',
+        customRangeLabel: 'Custom range'
+    },
+    isInvalidDate : function(dt){
+      for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= $scope.unavailalbeDateRanges[i].booked_to){
+          return true;
+        }
+      }
+    },
+    isCustomDate: function(dt){
+      for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+          if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')){
+            return ['red-blocked', 'left-radius'];
+          }
+          else if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')){
+            return ['red-blocked', 'right-radius'];
+          }
+          else{
+            return 'red-blocked';
+          }
+        }
+      }
+    },
+  };
+  /*====================================
+  | Multi date range picker options end
+  ====================================*/
+
+
   var getFormatList = function(){
     OwnerProductService.getFormatList().then(function(result){
       $scope.formatList = result;
@@ -123,6 +203,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.requestedProductList = result.products;
+      //console.log(result.products);
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -132,7 +213,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       }
     });
   }
-  
+ 
   $scope.getStateList = function(product){
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
@@ -149,13 +230,24 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.searchableAreas = function(query) {
+    return OwnerLocationService.searchAreas(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
+
+  $scope.requestedAddProduct = function(product){
+    console.log(product);
+  }
+
   /*=====================
   | Product Section
   =====================*/
   $scope.product = {};
  
   $scope.files = {};
-  $scope.requestAddProduct = function () {
+  $scope.requestAddProduct = function (product) {
+    product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
       data: { image: $scope.files.image, product: $scope.product }
@@ -259,11 +351,43 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.getProductUnavailableDates = function(productId){
+    OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.loadCalendar = true;
+      $scope.unavailalbeDateRanges = dateRanges;
+    });
+  }
   /*=====================
   | Product Section Ends
   =====================*/
 
+   /*=====================
+  | Requested hordings
+  =====================*/
+
+  $scope.editRequestedhordings = function(product){
+    console.log(product);
+  };
+
+    /*=====================
+  | Requested hordings Ends
+  =====================*/
   
+  // filter-code
+  $scope.viewSelectedProduct = function(product) {
+    $scope.pagination.pageCount = 1;
+    $scope.productList = [product];
+  }
+ $scope.productSearch = function(query) {
+    return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+      $scope.productList = res;
+      $scope.pagination.pageCount = 1;
+      return res;
+    });
+  }
+  // Filter-code ends
+
+
   /*=====================
   | Campaign Section
   =====================*/
@@ -331,6 +455,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
     getRequestedProductList();
+    $scope.getApprovedProductList()
   }
 
   /*=============================

@@ -97,8 +97,11 @@
 		<div layout="column" layout-padding>
 			<h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
 		</div>
-		<div layout="column" layout-padding>
+		<!-- <div layout="column" layout-padding>
 			<a ng-href="#/owner/{{clientSlug}}/update-payments" class="add_paymt_btn">Add new payment</a>
+		</div> -->
+		<div class="active-cyan-4 mr-2" style="width:20%;">
+			<input class="form-control" type="text" placeholder="Search" aria-label="Search">
 		</div>
 	</div>
 	<!-- status of hoarding list html start-->
@@ -149,15 +152,15 @@
 		</div>
 	</div> -->
 	<!-- status of hoarding list html start-->
-	<div layout="column"  flex>
+	<!-- <div layout="column"  flex>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered " style="width: 100%;">
 				<thead class="contbg">
 					<tr class="text_color text-center">
-						<th>Campaign Name</th>
+						<th>Campaign Name</th> -->
 						<!-- <th hide-sm>Contact Name</th>
 						<th hide-sm hide-md>Contact No</th> -->
-						<th hide-xs>Start Date</th>
+						<!-- <th hide-xs>Start Date</th>
 						<th hide-xs>End Date</th>
 						<th>Total Budget</th>
 						<th>Received</th>
@@ -167,19 +170,19 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="campaign in campaignsWithPayments" class="text-center">
-						<td>{{campaign.name}}</td>
+						<td>{{campaign.name}}</td> -->
 						<!-- <td hide-sm>Jhon</td>
 						<td hide-sm hide-md>9966991111</td> -->
-						<td  hide-xs>{{campaign.start_date | dateify | date: "dd-MMM-yyyy" }}</td>
+						<!-- <td  hide-xs>{{campaign.start_date | dateify | date: "dd-MMM-yyyy" }}</td>
 						<td  hide-xs>{{campaign.end_date | dateify | date: "dd-MMM-yyyy" }}</td>
 						<td>{{campaign.act_budget}}</td>
 						<td>{{campaign.paid}}</td>
 						<td>{{campaign.act_budget - campaign.paid}}</td>
-						<td>
+						<td> -->
 							<!-- <md-button class="btn btn-default btn-primary" ng-click="getCampaignPaymentDetails(campaign.id)">
 								Details
 							</md-button> -->
-							<a style="cursor:pointer;" ng-click="getCampaignPaymentDetails(campaign.id)">
+							<!-- <a style="cursor:pointer;" ng-click="getCampaignPaymentDetails(campaign.id)">
 									<md-icon>
 										<i class="material-icons">remove_red_eye</i>
 									</md-icon>
@@ -189,5 +192,87 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
+	</div> -->
+	<div class="table-responsive"> 
+		<table class="table table-hover">
+				<thead class="text_color">
+				  <tr>
+					<th>CID</th>
+					<th>Camapaign Name</th>
+					<th>Paid</th>
+					<th>Pending</th>
+					<th>Total</th>
+					<th>Action</th>
+					<th></th>
+					<th></th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr ng-repeat="campaign in campaignsWithPayments">
+					<td>{{}}</td>
+					<td>{{campaign.name}}</td>
+					<td>{{campaign.paid}}</td>
+					<td>{{campaign.act_budget - campaign.paid}}</td>
+					<td>{{campaign.act_budget}}</td>
+					<td>
+					  <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
+						  <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(campaign.id)" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr>
+				  <!-- <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr>
+				  <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr>
+				  <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr> -->
+				</tbody>
+			  </table>
+	  </div>
 </div>
