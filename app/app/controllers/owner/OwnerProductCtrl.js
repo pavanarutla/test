@@ -150,9 +150,21 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.productdetails = [{
+    id: 1,
+    price: '60000'
+  }]
 
   $scope.requestedAddProduct = function(product){
     console.log(product);
+  }
+
+  $scope.editUtterance = function(data) {
+    data.edit = true;
+    console.log(data.edit);
+  }
+  $scope.save = function(data) {
+    data.edit = false;
   }
 
 
