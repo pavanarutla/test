@@ -66,7 +66,7 @@
         <!-- profile button end-->
         <div class="profile_details_left" style="float:right"><!--notifications of menu start -->
           <ul class="nofitications-dropdown">
-            <li class="dropdown head-dpdn"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
+            <li class="dropdown head-dpdn" ng-if="isAuthenticated"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
             <ul class="dropdown-menu arrrow_box animated fadeInDown mt-5">
               <li>
               <div class="notification_header">
@@ -105,7 +105,7 @@
               </li>
             </ul>
             </li>
-            <li class="dropdown head-dpdn"> 
+            <li class="dropdown head-dpdn" ng-if="isAuthenticated"> 
               <a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Camapgin ({{activeUserCampaigns.length}})</a>
               <ul class="dropdown-menu animated fadeInDown mt-5" style="margin: 0 0 0 -45px;">
               <li>
@@ -125,7 +125,7 @@
                 </li>
             </ul>
             </li>
-            <li class="dropdown head-dpdn"> 
+            <li class="dropdown head-dpdn" ng-if="isAuthenticated"> 
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding:0px">
                 <!-- <img src="assets/images/man.png"/> -->
                 <i class="fa fa-ellipsis-v lnr"></i>
