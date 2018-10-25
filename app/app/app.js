@@ -50,11 +50,14 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/formats.html',
       controller: 'FormatsCtrl'
     })
-    // .state('index.suggest_campaign', {
-    //   url: 'suggest-campaign',
-    //   templateUrl: 'views/suggest-a-campaign.html',
-    //   controller: 'CampaignCtrl'
-    // })
+    .state('index.user-notifications', {
+      url: 'user-notifications',
+      templateUrl: 'views/user-notifications.html',
+    })
+    .state('index.user-saved-campaigns', {
+      url: 'user-saved-campaigns',
+      templateUrl: 'views/user-saved-campaigns.html',
+    })
     $stateProvider.state('index.suggest', {
       url: 'suggest',
       templateUrl: 'views/suggest-a-campaign.html',
@@ -91,6 +94,16 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.product-list', {
+      url: 'product-list',
+      templateUrl: 'views/product-list.html',
+      controller: 'FormatsCtrl'
+    })
+    .state('index.shortlist-products', {
+      url: 'shortlist-products',
+      templateUrl: 'views/shortlist-products.html',
+      controller: 'FormatsCtrl'
+    })
     .state('index.metro', {
       url: 'metro',
       templateUrl: 'views/metro.html',
@@ -110,6 +123,21 @@ var app = angular.module('bbManager', [
       url: 'view-campaign/{campaignId}',
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
+    })
+    .state('index.request-campaign', {
+      url: 'request-campaign',
+      templateUrl: 'views/request-campaign.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.user-payments', {
+      url: 'user-payments',
+      templateUrl: 'views/user-payments.html',
+      controller:''
+    })
+    .state('index.update-user-payments', {
+      url: 'update-user-payments',
+      templateUrl: 'views/update-user-payments.html',
+      controller:''
     })
     .state('index.metro-campaign', {
       url: 'metro-campaign/{metroCampaignId}',
