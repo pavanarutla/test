@@ -884,10 +884,10 @@ app.controller('GmapCtrl',
         CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
           $scope.$parent.alreadyShortlisted = true;
-          $scope.toggleCampaignDetailSidenav();
+          // $scope.toggleCampaignDetailSidenav();
         });
       }
-
+    
       var updateCampaignDetailSidenav = function (campaignId) {
         CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
@@ -1016,6 +1016,10 @@ app.controller('GmapCtrl',
           }
           $scope.loadActiveUserCampaigns()
         });
+      }
+
+      if ($rootScope.currStateName == 'index.request-campaign') {  
+        $scope.viewCampaignDetails(localStorage.activeUserCampaignId)
       }
 
       // sets the height of the div containing the map.

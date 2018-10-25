@@ -18,21 +18,21 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody ng-repeat="shortlisted in shortListedProducts">
                 <tr>
                     <td>
-                        <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
+                        <img ng-src="{{config.serverUrl +shortlisted.image}}" alt="Smiley face" height="100" width="100">
                     </td>
                     <td>
-                        <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>
-                            From Kothaguda X Roads towards Hitech city<br>
+                        <p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
+                           {{ shortlisted.address}}<br>
                             Views : 1,54000 Per week<br>
                             Live Traffic:
                             <button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
-                                <i class="fa fa-eye"></i>1,25,589</button>
+                                <i class="fa fa-eye"></i>{{shortlisted.impressions}}</button>
                         </p>
                     </td>
-                    <td class="table_vertical">90*60</td>
+                    <td class="table_vertical">{{shortlisted.panelSize}}</td>
                     <td class="table_vertical">
                         <p>01-05-2018</p>
                         <p>15-08-2018</p>
@@ -41,7 +41,7 @@
                         <p>01-06-2018</p>
                         <p>15-10-2018</p>
                     </td>
-                    <td class="table_vertical">58,000</td>
+                    <td class="table_vertical">{{shortlisted.default_price || "N/A"}}</td>
                     <td class="table_vertical">
                         <a href="#"><i class="material-icons">delete_foreve</i></a>
                     </td>
@@ -49,64 +49,6 @@
                         <p class="text_color md-caption">This Inventory<br>
                             Campaign Completed</p>
                     </td>
-
-                </tr>
-                <tr>
-                    <td>
-                        <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
-                    </td>
-                    <td>
-                        <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech
-                            city<br>Views : 1,
-                            54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
-                                    class="fa fa-eye"></i>1,25,589</button></p>
-                    </td>
-                    <td class="table_vertical">90*60</td>
-                    <td class="table_vertical">
-                        <p>01-05-2018</p>
-                        <p>15-08-2018</p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>01-06-2018</p>
-                        <p>15-10-2018</p>
-                    </td>
-                    <td class="table_vertical">58,000</td>
-                    <td class="table_vertical">
-                        <a href="#"><i class="material-icons">delete_foreve</i></a>
-                    </td>
-                    <td class="text-center table_vertical ">
-                        <p class="text_color md-caption">This Inventory <br>
-                            Campaign Sheduled</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
-                    </td>
-                    <td>
-                        <p class=""><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br>From Kothaguda X Roads towards Hitech
-                            city<br>Views : 1,
-                            54000 Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
-                                    class="fa fa-eye"></i>1,25,589</button></p>
-                    </td>
-                    <td class="table_vertical">90*60</td>
-                    <td class="table_vertical">
-                        <p>01-05-2018</p>
-                        <p>15-08-2018</p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>01-06-2018</p>
-                        <p>15-10-2018</p>
-                    </td>
-                    <td class="table_vertical">58,000</td>
-                    <td class="table_vertical">
-                        <a href="#"><i class="material-icons">delete_foreve</i></a>
-                    </td>
-                    <td class="text-center table_vertical">
-                        <p class="text_color md-caption">This Inventory<br>
-                            Campaign Running</p>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>

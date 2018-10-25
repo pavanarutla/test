@@ -136,13 +136,13 @@
                 </thead>
                 <tbody class="text-center contbg">
 
-                    <tr>
-                        <td>BB-01</td>
-                        <td>Billboards</td>
-                        <td>15-08-2018</td>
-                        <td>10</td>
+                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns">
+                        <td>{{activeUserCampaign.campId || "N/A"}}</td>
+                        <td>{{activeUserCampaign.name}}</td>
+                        <td>{{activeUserCampaign.start_date | dateify}}</td>
+                        <td>{{activeUserCampaign.Products || "N/A"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td>10,10001</td>
+                        <td>{{activeUserCampaign.est_budget}}</td>
                         <td>
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -151,7 +151,7 @@
                                 <md-menu-content width="2">
                                     <md-menu-item>
                                         <md-button ng-href="#/request-campaign">
-                                            <div layout="row">
+                                            <div layout="row" ng-click="viewCampaignDetails(activeUserCampaign.id)">
                                                 <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                                 <p style="margin:auto 10px auto 10px">View Details</p>
                                             </div>

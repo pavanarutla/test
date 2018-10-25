@@ -127,7 +127,7 @@ var app = angular.module('bbManager', [
     .state('index.request-campaign', {
       url: 'request-campaign',
       templateUrl: 'views/request-campaign.html',
-      controller: 'CampaignCtrl'
+      controller: 'FormatsCtrl'
     })
     .state('index.user-payments', {
       url: 'user-payments',

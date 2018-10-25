@@ -481,6 +481,19 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
       }
     }
     
+    $scope.viewCampaignDetails = function(campaignId){
+      localStorage.viewCampaignDetailsId = campaignId;
+    }
+//saved campaigns 
+
+$scope.activeUserCampaigns = [];
+      $scope.loadActiveUserCampaigns = function () {
+        CampaignService.getActiveUserCampaigns().then(function (result) {
+          $scope.activeUserCampaigns = result;
+        });
+      }
+      $scope.loadActiveUserCampaigns();
+
     $scope.getAvatar = function(){
       var payload = $auth.getPayload();
       var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
