@@ -8,11 +8,28 @@
     <span flex></span>
     <md-button class="md-raised md-primary">VIEW CAMPAIGN</md-button>
   </div>
-  
+
   <!-- filters-->
   <form class="form-inline camp_filters" action="">
 
-    <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id="">
+    <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id=""> -->
+    <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+      md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+      md-min-length="4" placeholder="Search..." md-clear-button="true">
+      <md-item-template>
+        <span class="item-title">
+          <span> {{item.siteNo}} </span>
+        </span>
+        <span class="item-metadata">
+          <!-- <span>
+            <strong>{{item.company_name}}</strong>
+          </span> -->
+          <span>
+            <strong>{{item.address}}</strong>
+          </span>
+        </span>
+      </md-item-template>
+    </md-autocomplete>
     <label for="pwd">Filter By:</label>
     <div class="form-group">
       <select class="form-control" id="sel1">
@@ -54,42 +71,45 @@
           <th>Shortlisted in</th>
           <th>Price</th>
           <th>Calender</th>
-          
+
           <th>
             <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="product in productList">
+        <tr ng-repeat="product in productdetails">
+          <!-- <tr ng-repeat="product in productList"> -->
           <td>
-            <img ng-src="{{config.serverUrl +product.image}}" alt="Smiley face" height="100" width="100">
+            <img src="assets/images/hoarding2.png" alt="Smiley face" height="100" width="100">
           </td>
           <td>
-            <p class=""><b>{{product.siteNo}} - {{product.area_name}} ({{product.panelSize}})</b>
-              <br> {{product.address}}
-              <br>Facing: {{product.direction}}
-          </td>
-          <td class="table_vertical">{{product.views || "N/A"}}</td>
-          <td class="table_vertical">
-            <span class="md-caption" ng-if="product.lighting == 1">Yes</span>
-            <span class="md-caption" ng-if="product.lighting == 0">No</span>
-          </td>
-          <td class="table_vertical">
-            <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
-          </td>
+              <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
+                <br> {{product.address}}
+                <br>Facing: {{product.direction || "N/A"}}
+                <br>Type: {{product.format_name}}
+            </td>
+            <td class="table_vertical">{{product.impressions}}</td>
+            <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+            <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+            <td class="table_vertical">
+              <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
+            </td>
           <td class="table_vertical">
             <div class="input-group">
-              <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" value="{{product.default_price}}" />
-              <span href="#"><i class="material-icons">edit</i></span>
-            </div>
+          <td>
+            <span ng-show="!product.edit">{{product.price}}</span>
+            <input ng-show="product.edit" type="text" ng-model="product.price" class="form-control" placeholder="Name" />
+            <i class="material-icons" style="cursor: pointer;" id="{{product.id}}" ng-click="editUtterance(product)">edit</i>
+            <i class="material-icons" style="cursor: pointer;" id="{{product.id}}" ng-click="save(product)">done</i>
+          </td>
           </td>
           <td class="table_vertical">
             <a href="#"><i class="material-icons">
                 calendar_today
               </i></a>
           </td>
-          
+
           <td class=" table_vertical">
             <md-button class="md-raised md-primary">Add to campaign</md-button>
           </td>
