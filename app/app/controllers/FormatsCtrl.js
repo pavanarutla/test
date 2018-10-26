@@ -1,4 +1,4 @@
-app.controller('FormatsCtrl', function ($scope,$rootScope,$mdSidenav,MapService,config,CampaignService) {
+app.controller('FormatsCtrl', function ($scope,$rootScope,$mdSidenav,$mdDialog,MapService,config,CampaignService) {
 
   if($rootScope.formatSelected){
     $scope.selectedFormatIndex = $rootScope.formatSelected;
@@ -21,6 +21,26 @@ app.controller('FormatsCtrl', function ($scope,$rootScope,$mdSidenav,MapService,
       $scope.shortListedProducts = response;
     });
   }
+
+  // Delete shortlisted-Product
+  $scope.deleteShortlisted = function (ev, productId) {
+    // console.log(productId);
+    MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function (response) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('ShortList Product')
+          .textContent(response.message)
+          .ariaLabel('delete-shortlisted')
+          .ok('Got it!')
+          .targetEvent(ev)
+      );
+      getShortListedProducts();
+    });
+  };
+  // Ends Delete
+
 
   //view campaign details
   $scope.viewCampaignDetails = function (campaignId) {

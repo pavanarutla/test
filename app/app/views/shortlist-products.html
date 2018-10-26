@@ -21,7 +21,7 @@
             <tbody ng-repeat="shortlisted in shortListedProducts">
                 <tr>
                     <td>
-                        <img ng-src="{{config.serverUrl +shortlisted.image}}" alt="Smiley face" height="100" width="100">
+                            <img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" height="100" width="150">
                     </td>
                     <td>
                         <p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
@@ -43,7 +43,7 @@
                     </td>
                     <td class="table_vertical">{{shortlisted.default_price || "N/A"}}</td>
                     <td class="table_vertical">
-                        <a href="#"><i class="material-icons">delete_foreve</i></a>
+                        <a><i class="material-icons" ng-click="deleteShortlisted($event, shortlisted.id)">delete_foreve</i></a>
                     </td>
                     <td class="text-center table_vertical">
                         <p class="text_color md-caption">This Inventory<br>
