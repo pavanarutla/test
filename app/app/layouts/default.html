@@ -46,6 +46,8 @@
             <md-menu-item>
               <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
             </md-menu-item>
+
+
             <md-menu-item ng-if="isUserBasic()">
               <md-button aria-label="campaigns" ng-href="#/campaigns">Campaigns</md-button>
             </md-menu-item>
@@ -116,7 +118,7 @@
               <li ng-repeat="activeUserCampaign in activeUserCampaigns.slice(0,3)"><a href="#">
               <div class="notification_desc pl-3">
                 <p>{{activeUserCampaign.name}}</p>
-                <p><span>1 hour ago</span></p>
+                <!-- <p><span>1 hour ago</span></p> -->
               </div>
               <div class="clearfix"></div>
               </a></li>
@@ -131,12 +133,12 @@
                 <i class="fa fa-ellipsis-v lnr"></i>
               </a>
               <ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s" style="margin: 0 0 0 -171px;">
-                <li> <a ng-href="#/profile"> Srikanth Bijjala</a> </li>
+                <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/shortlist-products"> Shortlisted Inventory  (10)</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/user-payments"> Payments</a> </li>
                 <li> <a ng-href="#/reset_password"> Change Password</a> </li>
-                <li> <a ng-href="#/location"> Switch to Map view</a> </li>
+                <li> <a ng-href="#/location" ng-if="!isUserBasic()"> Switch to Map view</a> </li>
                 <li> <a ng-href="#"> Team</a> </li>
                 <li> <a ng-click="logout()"> Logout</a> </li>
               </ul>
