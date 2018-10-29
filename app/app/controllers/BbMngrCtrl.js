@@ -492,7 +492,10 @@ $scope.activeUserCampaigns = [];
           $scope.activeUserCampaigns = result;
         });
       }
-      $scope.loadActiveUserCampaigns();
+      if($rootScope.currStateName ==  'index.location'){
+        $scope.shortListedProductsLength = localStorage.shortListedProducts
+        $scope.loadActiveUserCampaigns();
+      }
 
     $scope.getAvatar = function(){
       var payload = $auth.getPayload();

@@ -669,6 +669,7 @@ app.controller('GmapCtrl',
 
       function getShortListedProducts() {
         MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+          localStorage.shortListedProducts = response.length;
           $scope.shortListedProducts = response;
         });
       }
