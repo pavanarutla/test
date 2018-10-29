@@ -152,10 +152,18 @@
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
 
 	<div layout="colmun" layout-align="end center" class="campaign_search">
-		<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex>
-			<md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
-			 md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-			 md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+		<input type="text" ng-model="search" placeholder="Search by Campaign Name..." style="width:100%" />
+		<!-- <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex>
+			<md-autocomplete 
+			ng-disabled="isDisabled" 
+			md-selected-item="campaignSelectedItem" 
+			md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+			md-search-text="campaignSearchText" 
+			md-selected-item-change="viewSelectedCampaign(campaign)" 
+			md-items="campaign in campaignSearch(campaignSearchText)"
+			md-item-text="campaign.name" 
+			md-min-length="4" 
+			placeholder="Search..." style="width:100%" md-clear-button="true">
 				<md-item-template>
 					<span class="item-title">
 						<span> {{campaign.name}} </span>
@@ -176,7 +184,7 @@
 					No matches found.
 				</md-not-found>
 			</md-autocomplete>
-		</div>
+		</div> -->
 		<div class="dropdown">
 			<md-button class="md-raised md-primary" onclick="myFunction()" class="dropbtn">CREATE CAMPAIGN</md-button>
 			<div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
@@ -306,13 +314,13 @@
 							</tr>
 						</thead>
 						<tbody class="text-center contbg">
-							<tr>
+							<tr ng-repeat="pCampaign in plannedCampaigns | filter:search ">
 								<td>BB-01</td>
-								<td>Billboards</td>
-								<td>15-08-2018</td>
-								<td>10</td>
+								<td>{{pCampaign.name}}</td>
+								<td>{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
+								<td>{{pCampaign.no_products || "N/A"}}</td>
 								<!-- <td>10,1000</td> -->
-								<td>10,10001</td>
+								<td>{{pCampaign.act_budget || "N/A"}}</td>
 								<td>
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -455,13 +463,14 @@
 							</tr>
 						</thead>
 						<tbody class="text-center  contbg">
-							<tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==6">
+							<tr ng-repeat="rCampaign in runningCampaigns | filter:search" ng-if="rCampaign.status == 6">
+								<!-- ng-if="campaign.status==6" -->
 								<td>BB-01</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.start_date | date}}</td>
+								<td>{{rCampaign.name}}</td>
+								<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
 								<td>{{campaign.no_products || "N/A"}}</td>
 								<td>{{campaign.npaid || "N/A"}}</td>
-								<td>{{campaign.Total_budget || "N/A"}}</td>
+								<td>{{rCampaign.act_budget || "N/A"}}</td>
 								<td>
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -524,18 +533,16 @@
 								<th>No of Products </th>
 								<th>Paid</th>
 								<th>Total Budget</th>
-								<th></th>
-								<th></th>
 							</tr>
 						</thead>
-						<tbody class="text-cente  contbg" ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status == 8">
+						<tbody class="text-center contbg" ng-repeat="cCampaign in closedCampaigns | filter:search" ng-if="cCampaign.status == 8">
 							<tr>
-								<td>{{campaign.cid || "N/A"}}</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.start_date | date}}</td>
-								<td>{{campaign.no_products || "N/A"}}</td>
-								<td>{{campaign.npaid || "N/A"}}</td>
-								<td>{{campaign.Total_budget || "N/A"}}</td>
+								<td>BB-01</td>
+								<td>{{cCampaign.name}}</td>
+								<td>{{cCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+								<td>{{cCampaign.no_products || "N/A"}}</td>
+								<td>{{cCampaign.npaid || "N/A"}}</td>
+								<td>{{cCampaign.act_budget || "N/A"}}</td>
 								<td>
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
