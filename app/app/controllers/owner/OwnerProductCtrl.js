@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService,ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   /*===================
   | Sidenavs and popups
@@ -150,9 +150,21 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.productdetails = [{
+    id: 1,
+    price: '60000'
+  }]
 
   $scope.requestedAddProduct = function(product){
     console.log(product);
+  }
+
+  $scope.editUtterance = function(data) {
+    data.edit = true;
+    console.log(data.edit);
+  }
+  $scope.save = function(data) {
+    data.edit = false;
   }
 
 
@@ -271,8 +283,37 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   /*=====================
   | Product Section Ends
   =====================*/
+  $scope.updateeditProductdetails = function(product){
+    console.log(product);
+    }
+    
+   /*=====================
+  | Requested hordings
+  =====================*/
 
+  $scope.editRequestedhordings = function(product){
+    console.log(product);
+  };
+
+    /*=====================
+  | Requested hordings Ends
+  =====================*/
   
+  // filter-code
+  $scope.viewSelectedProduct = function(product) {
+    $scope.pagination.pageCount = 1;
+    $scope.productList = [product];
+  }
+ $scope.productSearch = function(query) {
+    return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+      $scope.productList = res;
+      $scope.pagination.pageCount = 1;
+      return res;
+    });
+  }
+  // Filter-code ends
+
+
   /*=====================
   | Campaign Section
   =====================*/

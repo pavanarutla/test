@@ -1,4 +1,4 @@
-app.controller('FormatsCtrl', function ($scope,$rootScope) {
+app.controller('FormatsCtrl', function ($scope,$rootScope,$mdSidenav,$mdDialog,MapService,config,CampaignService) {
 
   if($rootScope.formatSelected){
     $scope.selectedFormatIndex = $rootScope.formatSelected;
@@ -6,124 +6,77 @@ app.controller('FormatsCtrl', function ($scope,$rootScope) {
   else{
     $scope.selectedFormatIndex = 0;
   }
-  // $scope.showBillboardsData = true;
-  // $scope.showUnipoleData = false;
-  // $scope.showdigitalData = false;
-  // $scope.showretailData = false;
-  // $scope.showtransitData = false;
-  // $scope.showairportData = false;
-  // $scope.showbusData = false;
-  // $scope.showrailData = false; 
+  $scope.productview = function () {
+    $mdSidenav('productDetailsList').toggle();
+  };
 
 
-  // $scope.showBillboards = function(){
-  //   $scope.showBillboardsData = true;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
+  $scope.savecampagin = false;
+  $scope.saveCampagin = function () {
+      $scope.savecampagin = !$scope.savecampagin;
+  }
 
-  // $scope.unipole = function() {   
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = true;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
+  function getShortListedProducts() {
+    MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+      $scope.shortListedProducts = response;
+    });
+  }
 
-  // $scope.showdigital = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = true;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
-  // $scope.showretail = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = true;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
+  // Delete shortlisted-Product
+  $scope.deleteShortlisted = function (ev, productId) {
+    // console.log(productId);
+    MapService.deleteShortlistedProduct(JSON.parse(localStorage.loggedInUser).id, productId).then(function (response) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('ShortList Product')
+          .textContent(response.message)
+          .ariaLabel('delete-shortlisted')
+          .ok('Got it!')
+          .targetEvent(ev)
+      );
+      getShortListedProducts();
+    });
+  };
+  // Ends Delete
 
-  // $scope.showtransit = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = true;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
 
-  // $scope.showairport = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = true;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = false;
-  // }
-  // $scope.showbus = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = true;
-  //   $scope.showrailData = false;
-  // }
+  //view campaign details
+  $scope.viewCampaignDetails = function (campaignId) {
+        CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
+          $scope.campaignDetails = campaignDetails;
+          $scope.$parent.alreadyShortlisted = true;
+          // $scope.toggleCampaignDetailSidenav();
+        });
+      }
 
-  // $scope.showrail = function(){
-  //   $scope.showBillboardsData = false;
-  //   $scope.showUnipoleData = false;
-  //   $scope.showdigitalData = false;
-  //   $scope.showretailData = false;
-  //   $scope.showtransitData = false;
-  //   $scope.showairportData = false;
-  //   $scope.showbusData = false;
-  //   $scope.showrailData = true;
+  if($rootScope.currStateName == "index.request-campaign"){
+    $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
+  }
+
+  if($rootScope.currStateName == "index.shortlist-products"){
+    getShortListedProducts();
+  }
+  // if($rootScope.currStateName == "index.user-saved-campaigns"){
+  //   $scope.loadActiveUserCampaigns();
   // }
-  // $scope.billBoards = function(value){   
-  //   $scope.showBillboardsData = true;
-  // }
-  // $scope.digital = function(value)
-  // {
-  //   //$scope.digitalData = value;
-  //   if(value == 1){
-  //     $rootScope.showUnipoleData = true;
-  //     $scope.showBillboardsData = false;
-  //     $scope.showdigitalData = false;
-  //     $scope.showretailData = false;
-  //     $scope.showtransitData = false;
-  //     $scope.showairportData = false;
-  //     $scope.showbusData = false;
-  //     $scope.showrailData = false;
-  //   }else if(value == 2){
-  //       $scope.showBillboardsData = false;
-  //       $scope.showdigitalData = false;
-  //       $scope.showretailData = false;
-  //       $scope.showtransitData = false;
-  //       $scope.showairportData = false;
-  //       $scope.showbusData = false;
-  //       $scope.showrailData = false;
-  //   }
-  // }
+//   $scope.shortlistSelected = function (ev) {
+//     console.log(working)
+//     MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+//       $mdDialog.show(
+//         $mdDialog.alert()
+//           .parent(angular.element(document.querySelector('body')))
+//           .clickOutsideToClose(true)
+//           .title('Shortlist Product')
+//           .textContent(response.message)
+//           .ariaLabel('shortlist-success')
+//           .ok('Got it!')
+//           .targetEvent(ev),
+//         $mdSidenav('productDetails').close()
+//       );
+//       getShortListedProducts();
+//       $mdSidenav('productDetails').close();
+//     });
+//   }
 });
