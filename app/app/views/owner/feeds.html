@@ -45,7 +45,7 @@
               <th class="feeds_width">Camapaign Name</th>
               <th>Details</th>
               <th>Action</th>
-              <th></th>
+              <th class="hide-xs"></th>
             </tr>
           </thead>
           <tbody ng-repeat="request in requestList">
@@ -56,14 +56,14 @@
                 <span ng-show="request.status == 2" >A user has asked for a quote for your products.</span>
                 <span ng-show="request.status == 5" >A campaign with your products has been requested to launch.</span>
               </td>
-              <td>
+              <td class="table_vertical">
                 <a style="cursor:pointer;"ng-click="showCampaignDetails($event, request)">
                     <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                       <i class="material-icons">remove_red_eye</i>
                     </md-icon>
                   </a>
               </td>
-              <td class="table_vertical">{{request.updated_at | datetimeify}}</td>
+              <td class="table_vertical hide-xs">{{request.updated_at | datetimeify}}</td>
             </tr>
             <!-- <tr>
               <td>BB283</td>

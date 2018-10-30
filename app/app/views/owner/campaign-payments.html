@@ -200,11 +200,11 @@
 					<th>CID</th>
 					<th class="feeds_width">Camapaign Name</th>
 					<th>Paid</th>
-					<th>Pending</th>
-					<th>Total</th>
+					<th class="hide-xs">Pending</th>
+					<th class="hide-xs">Total</th>
 					<th>Action</th>
-					<th></th>
-					<th></th>
+					<th class="hide-xs"></th>
+					<th class="hide-xs"></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -212,8 +212,8 @@
 					<td>{{}}</td>
 					<td>{{campaign.name}}</td>
 					<td>{{campaign.paid}}</td>
-					<td>{{campaign.act_budget - campaign.paid}}</td>
-					<td>{{campaign.act_budget}}</td>
+					<td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+					<td class="hide-xs">{{campaign.act_budget}}</td>
 					<td>
 					  <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
 						  <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(campaign.id)" role="img" aria-label="remove_red_eye">
@@ -221,8 +221,8 @@
 						  </md-icon>
 						</a>
 					</td>
-					<td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td>
-					<td class="table_vertical">21-09-2018, 9:00 Am</td>
+					<td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td class="table_vertical hide-xs">21-09-2018, 9:00 Am</td>
 				  </tr>
 				  <!-- <tr>
 					<td class="table_vertical">BB283</td>

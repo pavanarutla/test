@@ -1,10 +1,8 @@
-
-<div class="m-4">
-	<div class="contbg md-caption" layout="row" layout-margin>
+<div class="m-3">
+	<div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
 		<div flex></div>
-		<div class="dropdown">
+		<!-- <div class="dropdown">
 			<md-button class="md-raised md-primary" onclick="addPayment()" class="dropbtn">Add New Product</md-button>
-			<!-- <a ng-href="#/owner/{{clientSlug}}/loginpage"><button type="button" class="btn btn-secondary">login</button></a> -->
 			<div id="myDropdown" class="dropdown-content contbg animated fadeInDown requested_popup">
 				<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
 					<div layout="colmun">
@@ -19,7 +17,7 @@
 					<br>
 					<li>
 
-						<div class="col-md-12">
+						<div class="col-md-12 col-sm-12">
 							<form>
 								<div class="form-group row">
 									<div class="col-sm-6 input_bottom">
@@ -29,7 +27,7 @@
 									<div class="col-sm-6">
 										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
 											<option value="" selected>Product Type</option>
-											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+											
 										</select>
 									</div>
 								</div>
@@ -37,13 +35,13 @@
 									<div class="col-sm-6">
 										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
 											<option value="" selected>Country</option>
-											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+											
 										</select>
 									</div>
 									<div class="col-sm-6">
 										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
 											<option value="" selected>City</option>
-											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+											
 										</select>
 									</div>
 								</div>
@@ -51,7 +49,7 @@
 									<div class="col-sm-6">
 										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
 											<option value="" selected>Area</option>
-											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+											
 										</select>
 									</div>
 									<div class="col-sm-6">
@@ -67,7 +65,7 @@
 									<div class="col-sm-3">
 										<select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
 											<option value="" selected>Lit - Yes</option>
-											<!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+											
 										</select>
 									</div>
 									<div class="col-sm-3">
@@ -117,10 +115,219 @@
 					</li>
 				</form>
 			</div>
+		</div> -->
+		<div class="dropdown hide-xs">
+			<md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
+			<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
+				<form name="hordinglistform" role="form" novalidate="novalidate">
+					<div layout="colmun">
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addnewProduct()">
+							<md-icon class="md-default-theme">
+								<i class="material-icons">close</i>
+							</md-icon>
+						</md-button>
+					</div>
+					<h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add new product</span></h3>
+					<br>
+					<li>
+
+						<div class="col-md-12">
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<!-- <input type="text" class="form-control md-whiteframe-3dp" name="siteNo" ng-model="product.siteNo"
+							   placeholder="Product ID" required="required" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"> -->
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Product ID">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+									 class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
+									 name="productType">
+										<option value="" disabled selected>Product Type</option>
+									</select>
+									<div ng-messages="hordinglistform.productType.$error" ng-if="hordinglistform.productType.$touched" style="color:red">
+										<div ng-message="required">Site type is required.</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+									 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+										<option value="" disabled selected>Area Eg: Kotha Guda</option>
+									</select required>
+									<div ng-messages="hordinglistform.country.$error" ng-if="hordinglistform.country.$touched" style="color:red">
+										<div ng-message="required">Country is required.</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<select name="state" class="form-control md-whiteframe-3dp" id="state" ng-model="product.state" required="required"
+									 ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
+										<option value="" disabled selected>Not found your type? Type here</option>
+									</select required>
+									<div ng-messages="hordinglistform.state.$error" ng-if="hordinglistform.state.$touched" style="color:red">
+										<div ng-message="required">state is required.</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Address">
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+									 md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
+									 placeholder="Has lighting?">
+										<option value="" disabled selected>Width</option>
+										<option value="1">Yes</option>
+										<option value="0">No</option>
+									</select>
+									<div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched" style="color:red">
+										<div ng-message="required">Light is required.</div>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+									 md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
+									 placeholder="Has lighting?">
+										<option value="" disabled selected>Height</option>
+										<option value="1">Yes</option>
+										<option value="0">No</option>
+									</select>
+									<div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched" style="color:red">
+										<div ng-message="required">Light is required.</div>
+									</div>
+								</div>
+
+								<div class="col-sm-2">
+									<select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+									 md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
+									 placeholder="Has lighting?">
+										<option value="" disabled selected>Lit-Yes</option>
+										<option value="1">Yes</option>
+										<option value="0">No</option>
+									</select>
+									<div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched" style="color:red">
+										<div ng-message="required">Light is required.</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Near Land Mark">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Estimated Product Cost">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Direction / Facing">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Upload Product Video if any">
+										<span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+									 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+										<option value="" disabled selected>City</option>
+									</select required>
+									<div ng-messages="hordinglistform.country.$error" ng-if="hordinglistform.country.$touched" style="color:red">
+										<div ng-message="required">Country is required.</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Upload Product Image">
+										<span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+									 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+										<option value="" disabled selected>Country</option>
+									</select required>
+									<div ng-messages="hordinglistform.country.$error" ng-if="hordinglistform.country.$touched" style="color:red">
+										<div ng-message="required">Country is required.</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Product Calender">
+										<span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
+
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Impressions Per Week">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+									 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+										<option value="" disabled selected>Visibility Score - 0-5 Good</option>
+									</select required>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<select name="country" class="form-control md-whiteframe-3dp" id="country" required="required" ng-model="product.country"
+									 ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
+										<option value="" disabled selected>Targeted Audience</option>
+									</select required>
+								</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input class="form-control md-whiteframe-3dp" type="text" placeholder="Targeted Audience">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-8" style="opacity:0.5;">
+									Note: You can change price / details any time you want.<br>
+									* Select only booked dates remaining dates consider as available
+								</div>
+								<div class="col-sm-4">
+									<md-button class="md-raised text-white pull-right" ng-click="requestAddProduct(product)" style="background-color: #858A8E;">Submit</md-button>
+								</div>
+							</div>
+						</div>
+					</li>
+				</form>
+			</div>
 		</div>
 	</div>
 
-<!-- <div class="" style="margin-bottom:115px !important">
+	<!-- <div class="" style="margin-bottom:115px !important">
 		<table class="table-hover requested_hoardings" style="width: 100%;border-collapse: collapse;">
 			<thead class="text_color">
 				<tr class="">
@@ -160,47 +367,168 @@
 			</tbody>
 		</table>
 	</div> -->
-	<div class="req_hording_grid">
+	<!-- <div class="req_hording_grid">
 		<div layout="row" layout-margin class="req_hording_inner">
 
-			<div class="w_10">Product Details</div>
-			<div class="w_25"></div>
-			<div  class="text-center w_10">Size</div>
-			<div  class="text-center w_10">Views</div>
+			<div class="w_1">Product Details</div>
+			<div class="w_2"></div>
+			<div  class="text-center w_3">Size</div>
+			<div  class="text-center w_4">Views</div>
 			<div class="text-center w_5">Lit</div>
-			<div class="text-center w_10">Price</div>
-			<div  class="text-center w_5">Calender</div>
-			<div  class="text-center w_15"></div>
-			<div  class="text-center w_10"></div>
+			<div class="text-center w_6">Price</div>
+			<div  class="text-center w_7">Calender</div>
+			<div  class="text-center w_8"></div>
+			<div  class="text-center w_9"></div>
 		</div>
 		<div layout="row" layout-margin ng-repeat="product in productList" class="md-whiteframe-2dp border-right border-left req_hording_inner">
-			<div class="w_10">
-				<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="130">
+			<div class="w_1">
+				<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requested_image" style="border-radius: 5px;">
 			</div>
-			<div class="w_25">
+			<div class="w_2">
 				<p class=""><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
 					{{product.faacing || "N/A"}}</p>
 			</div>
-			<div  class="align-self-center text-center w_10">{{product.panelSize}}</div>
-			<div class="align-self-center text-center w_10">{{product.impressions}}</div>
+			<div  class="align-self-center text-center w_3">{{product.panelSize}}</div>
+			<div class="align-self-center text-center w_4">{{product.impressions}}</div>
 			<div class="align-self-center text-center w_5">Yes</div>
-			<div  class="align-self-center text-center w_10">{{product.default_price}}</div>
-			<div  class="align-self-center text-center w_5"><a href="#"><i class="fa fa-calendar"></i></a></div>
-			<div  class="align-self-center text-center w_15"></div>
-			<div  class="align-self-center text-center w_10"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+			<div  class="align-self-center text-center w_6">{{product.default_price}}</div>
+			<div  class="align-self-center text-center w_7"><a href="#"><i class="fa fa-calendar"></i></a></div>
+			<div  class="align-self-center text-center w_8"></div>
+			<div  class="align-self-center text-center w_9"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
 				<button type="button" class="btn btn-secondary">Edit Details</button>
 			</a></div>
 		</div>
+	</div> -->
+
+	<!-- <div>
+		<div class="d-flex justify-content-around">
+			<div class="p-2">Product Details</div>
+			<div class="p-2"></div>
+			<div class="p-2">Size</div>
+			<div class="p-2">Views</div>
+			<div class="p-2">Lit</div>
+			<div class="p-2">Price</div>
+			<div class="p-2">Calender</div>
+			<div class="p-2"></div>
+			<div class="p-2"></div>
+		  </div>
+		  <div ng-repeat="product in productList" class="md-whiteframe-2dp d-flex justify-content-around">
+			<div class="p-2">
+				<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requested_image" style="border-radius: 5px;">
+			</div>
+			<div class="p-2"><p class=""><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+				{{product.faacing || "N/A"}}</p></div>
+			<div class="p-2">{{product.panelSize}}</div>
+			<div class="p-2">{{product.impressions}}</div>
+			<div class="p-2">Yes</div>
+			<div class="p-2">{{product.default_price}}</div>
+			<div class="p-2"><a href="#"><i class="fa fa-calendar"></i></a></div>
+			<div class="p-2"></div>
+			<div class="p-2"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+				<button type="button" class="btn btn-secondary">Edit Details</button>
+			</a></div>
+		  </div>
+	</div> -->
+	<!-- <div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-8" style="">Product Details</div>
+			<div class="col-xl-3 col-lg-3 col-md-2 col-sm-2 col-4" style=""></div>
+			<div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 text-center hide-xs" style="">Size</div>
+			<div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 text-center hide-xs" style="">Views</div>
+			<div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 text-center hide-xs" style="">Lit</div>
+			<div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-4 text-center hide-xs">Price</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-4 text-center hide-xs">Calender</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 hide-sm hide-xs text-center"></div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 text-center"></div>
+		</div>
+		<div class="row md-whiteframe-2dp mb-2"  ng-repeat="product in productList">
+			<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4 req_row"><img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requested_image" style="border-radius: 5px;"></div>
+			<div class="col-xl-3 col-lg-3 col-md-2 col-sm-2 col-8 req_row" style=""><p class=""><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+				{{product.faacing || "N/A"}}</p></div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 align-self-center text-center hide-xs">{{product.panelSize}}</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 align-self-center text-center hide-xs">{{product.impressions}}</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 align-self-center text-center hide-xs">Yes</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-6 align-self-center text-center">{{product.default_price}}</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-6 align-self-center text-center calendar_left"><a href="#"><i class="fa fa-calendar"></i></a></div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 hide-sm hide-xs"></div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-2 align-self-center text-center hide-xs"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+				<button type="button" class="btn btn-secondary">Edit Details</button>
+			</a></div>
+		</div> -->
+	<!-- <div ng-repeat="product in productList" class="row md-whiteframe-2dp mb-2 p-2">
+			<div class="align-self-center req_row">
+				<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requested_image" style="border-radius: 5px;">
+			</div>
+			<div class="align-self-center col col-sm-8 req_row">
+				<p class=""><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+					{{product.faacing || "N/A"}}</p>
+			</div>
+			<div  class="hide-xs align-self-center col req_row">{{product.panelSize}}</div>
+			<div class="hide-xs align-self-center col req_row">{{product.impressions}}</div>
+			<div class="hide-xs align-self-center col req_row">Yes</div>
+			<div  class="align-self-center col col-sm-6 req_row">{{product.default_price}}</div>
+			<div  class="align-self-center col col-sm-6 req_row"><a href="#"><i class="fa fa-calendar"></i></a></div>
+			<div  class="hide-xs align-self-center col req_row"><a ng-href="#/owner/{{clientSlug}}/editproduct-details">
+				<button type="button" class="btn btn-secondary">Edit Details</button>
+			</a></div>
+		</div> -->
+	<!-- </div> -->
+
+	<div class="table-responsive" style="margin-bottom:115px !important">
+		<table class="table table-hover">
+			<thead class="text_color">
+				<tr>
+					<th>Product Details</th>
+					<th></th>
+					<th class="hide-xs">Views</th>
+					<th class="hide-xs">Lit</th>
+					<th class="hide-xs">Price</th>
+					<th class="text-center hide-xs">Calender</th>
+					<th class="hide-xs"></th>
+					<th class="hide-xs"></th>
+					<th class="hide-xs"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in productList">
+					<td>
+						<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" height="100" width="150" style="border-radius: 5px;">
+					</td>
+					<td>
+						<p class=""><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+							{{product.direction || "N/A"}}</p>
+					</td>
+					<td class="table_vertical hide-xs">{{product.panelSize}}</td>
+					<td class="table_vertical hide-xs">{{product.impressions}}</td>
+					<td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
+					<td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
+					<td class="table_vertical hide-xs">{{product.default_price}}</td>
+					<td class="text-center table_vertical hide-xs"><a href="#"><i class="fa fa-calendar"></i></a></td>
+					<td class="table_vertical hide-xs"></td>
+					<td class="text-center table_vertical hide-xs">
+						<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button ng-click="editRequestedhordings(product)" type="button"
+							 class="btn btn-secondary">Edit
+								Details</button></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+
 
 
 </div>
 
-<script>
+<!-- <script>
 	function addPayment() {
 		document.getElementById("myDropdown").classList.toggle("show");
 	}
 	function addPayments() {
 		document.getElementById("myDropdownView").classList.toggle("show");
+	}
+</script> -->
+<script>
+	function addnewProduct() {
+		document.getElementById("myDropdown").classList.toggle("show");
 	}
 </script>

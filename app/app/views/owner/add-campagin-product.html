@@ -2,46 +2,47 @@
         <div layout="row" layout-margin class="md-whiteframe-3dp">
           <p class="mb-0 mt-3">Campaign Name:<span class="text_color"> Uber Pvt Ltd</span></p>
           <p class="mb-0 mt-2">Product Added:<span class="text_color md-title"> 3</span></p>
-          <p class="mb-0 mt-3">Estimated Budget : 158,000</p>
-          <p class="mb-0 mt-3 text_color"> Total Budget : 190,000</p>
-          <p class="mb-0 mt-3"><span class="text_color">Created On</span> :12-08-2018 - 11.30 am</p>
-          <span flex></span>
-          <md-button class="md-raised md-primary">VIEW CAMPAIGN</md-button>
+          <p class="mb-0 mt-3 hide-xs">Estimated Budget : 158,000</p>
+          <p class="mb-0 mt-3 text_color hide-xs"> Total Budget : 190,000</p>
+          <p class="mb-0 mt-3 hide-xs"><span class="text_color">Created On</span> :12-08-2018 - 11.30 am</p>
+          <span class="hide-md" flex></span>
+          <md-button class="md-raised md-primary hide-xs add_font">VIEW CAMPAIGN</md-button>
         </div>
         
         <!-- filters-->
-        <form class="form-inline camp_filters" action="">
-      
-          <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id="">
-          <label for="pwd">Filter By:</label>
-          <div class="form-group">
-            <select class="form-control" id="sel1">
-              <option selected>Format</option>
-              <option>Hoarding</option>
-              <option>Unipole</option>
-              <option>Airport</option>
-            </select>
-          </div>
-      
-          <div class="form-group">
-            <input type="date" class="form-control" placeholder=" Available From">
-          </div>
-          <div class="form-group">
-            <input type="date" class="form-control" placeholder=" Available To">
-          </div>
-          <div class="form-group">
-            <select class="form-control" id="sel1">
-              <option selected>Budget High to Low</option>
-              <option>Budget Low to High </option>
-            </select>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox"> Show Only Available
-            </label>
-          </div>
-          <md-button class="md-raised md-primary" style="background-color:#44596D">Apply Filters</md-button>
-        </form>
+        <div class="" >
+          <form class="form-inline camp_filters" action="" >
+            <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id="">
+            <label for="pwd">Filter By:</label>
+            <div class="form-group form_up">
+              <select class="form-control" id="sel1">
+                <option selected>Format</option>
+                <option>Hoarding</option>
+                <option>Unipole</option>
+                <option>Airport</option>
+              </select>
+            </div>
+        
+            <div class="form-group form_cal">
+              <input type="date" class="form-control" placeholder=" Available From">
+            </div>
+            <div class="form-group form_cal">
+              <input type="date" class="form-control" placeholder=" Available To">
+            </div>
+            <div class="form-group form_cal">
+              <select class="form-control" id="sel1">
+                <option selected>Budget High to Low</option>
+                <option>Budget Low to High </option>
+              </select>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox"> Show Only Available
+              </label>
+            </div>
+            <md-button class="md-raised md-primary" style="background-color:#44596D">Apply Filters</md-button>
+          </form>
+        </div>
         <!-- product list -->
         <div class="table-responsive" style="margin-bottom:115px !important">
           <table class="table">
@@ -50,12 +51,12 @@
                 <th>Product Details</th>
                 <th></th>
                 <th>Views</th>
-                <th>Lit</th>
-                <th>Shortlisted in</th>
-                <th>Price</th>
-                <th>Calender</th>
+                <th class="hide-xs">Lit</th>
+                <th class="hide-xs">Shortlisted in</th>
+                <th class="hide-xs">Price</th>
+                <th class="hide-xs">Calender</th>
                 
-                <th>
+                <th class="hide-xs">
                   <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
                 </th>
               </tr>
@@ -73,25 +74,25 @@
                     <br>beside ICICI Bank
                 </td>
                 <td class="table_vertical">1,48,000</td>
-                <td class="table_vertical">
+                <td class="table_vertical hide-xs">
                   <span class="md-caption">Yes</span>
                 </td>
-                <td class="table_vertical">
+                <td class="table_vertical hide-xs">
                   <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
                 </td>
-                <td class="table_vertical">
+                <td class="table_vertical hide-xs">
                   <div class="input-group">
                     <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
                     <span href="#"><i class="material-icons">edit</i></span>
                   </div>
                 </td>
-                <td class="table_vertical">
+                <td class="table_vertical hide-xs">
                   <a href="#"><i class="material-icons">
                       calendar_today
                     </i></a>
                 </td>
                 
-                <td class=" table_vertical">
+                <td class=" table_vertical hide-xs">
                   <md-button class="md-raised md-primary">Add to campaign</md-button>
                 </td>
       
