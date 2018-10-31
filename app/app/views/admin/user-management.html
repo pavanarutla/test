@@ -1,7 +1,13 @@
 <div class="row" style="padding:20px">
   <div class="col-md-12">
     <!-- owners table -->
-    <h3 style="padding-left:30px;">Companies</h3>
+    <div layout="row">
+      <div flex="50"> <h3 style="padding-left:30px;">Companies</h3></div>
+    <div flex="50" layout="column" layout-align="center end">
+    <input type="text" placeholder="search by company name..." ng-model="searchByCompanyName" style="width:400px;border-radius:10px;height:40px;float:right">
+      
+    </div>
+  </div> 
     <div class="table-responsive">    
       <table class="table table-striped table-bordered ">
         <thead>
@@ -17,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="client in allClients">
+          <tr ng-repeat="client in allClients | filter : searchByCompanyName">
             <td>{{client.company_name}}</td>
             <td>{{client.company_type_name}}</td>
             <td>
@@ -48,8 +54,13 @@
 <div class="row" style="padding:20px">
   <div class="col-md-12">
     <!-- users table -->
-    <div style="float:left;">
+    <div layout="row">
+      <div layout="column" flex="50">
       <h3 style="padding-left:30px;">Users</h3>
+    </div>
+    <div layout="column" flex="50" layout-align="center end">
+      <input type="text" placeholder="search by Email..." ng-model="searchByEmail" style="width:400px;border-radius:10px;height:40px">
+      </div>
     </div>
     <div style="float:right; margin-right:10px;">
       <a ng-click="showAddUserPopup()" style="cursor:pointer; color:blue;">Add new user</a>
@@ -68,7 +79,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in allUsers">
+          <tr ng-repeat="user in allUsers | filter : searchByEmail">
             <td>{{user.first_name}} {{user.last_name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.phone || "N/A"}}</td>

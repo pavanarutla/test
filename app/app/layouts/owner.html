@@ -14,7 +14,7 @@
 			</md-button>
 		</header>
 		<!-- <md-divider></md-divider> -->
-		<md-content class="sidenav-content">
+		<md-content class="sidenav-content" style="background: #414143 !important">
 			<div>
 				<div style="width: 100% !important;">
 					<md-list class="owners-menu">
@@ -25,27 +25,27 @@
 								   </md-button>
 							   </md-menu-item> -->
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="">
+							<md-button ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
 								Feeds
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}">
+							<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE050;</md-icon>
 								Campaigns
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
 							<md-button ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
-							 ng-click="changeRequest()">
+							 ng-click="changeRequest(); closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE896;</md-icon>
-								Requested Hoardings
+								Request Inventory
 							</md-button>
 						</md-menu-item>
 						<md-menu-item class="nv-nav-item">
 							<md-button ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
-							 ng-click="changeHoardingList()">
+							 ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE8D2;</md-icon>
 								Inventory List
 							</md-button>
@@ -57,7 +57,7 @@
 								   </md-button>
 							   </md-menu-item> -->
 						<md-menu-item class="nv-nav-item">
-							<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-click="" ng-class="{'active-link': currStateName == 'owner.payments'}">
+							<md-button ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
 								<md-icon class="md-default-theme" class="material-icons">&#xE850;</md-icon>
 								Payments
 							</md-button>
@@ -186,10 +186,9 @@
 				<!-- <h2 class="" style="color:#000">{{firstname}}</h2> -->
 				<span flex></span>
 				<div class=" main__page__search ">
-					<!-- <input type="text" ng-model="siteNoSearch" class=" input-lg" placeholder="Search billboards by Tab id" on-enter="searchBySiteNo()"	/> -->
 					<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
 					 md-selected-item-change="viewSelectedProduct(item)" md-items="item in ownerProductSearch(searchText)" md-item-text="item.siteNo"
-					 md-min-length="4" placeholder="Search..." md-clear-button="true">
+					 md-min-length="4" placeholder="Search by Tab Id,Area Name..." md-clear-button="true">
 						<md-item-template>
 							<span class="item-title">
 								<span> {{item.siteNo}} </span>
@@ -204,14 +203,6 @@
 							</span>
 						</md-item-template>
 					</md-autocomplete>
-					<span class="">
-						<!-- <button class="btn btn-info btn-lg" type="button">
-										<i class="material-icons">search</i>
-									</button> -->
-						<!-- <a>
-										<i class="material-icons">search</i>
-									</a> -->
-					</span>
 				</div>
 				<!-- <md-button aria-label="notifications" class="md-icon-button" ng-click="openHelpScreen(ev)">
 								<img src="assets/images/owner/Question.png" />

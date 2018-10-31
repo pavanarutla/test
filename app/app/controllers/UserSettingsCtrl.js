@@ -1,4 +1,4 @@
-app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $rootScope, $location, UserService, toastr) {
+app.controller("UserSettingsCtrl", function ($scope, $stateParams, $mdDialog, $rootScope, $location, $auth, UserService, toastr) {
   
   $scope.forms = [];
 

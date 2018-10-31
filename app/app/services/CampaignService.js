@@ -72,6 +72,11 @@ app.service('CampaignService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/request-quote-change', sendObj).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
+        },
+        shareMetroCampaignToEmail: function(campaignToEmail){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/share-metro-campaign', campaignToEmail).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
         }
       }
     }

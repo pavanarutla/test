@@ -11,19 +11,15 @@
 	</div>
 	<md-dialog-content flex="100" >
 		<div layout="row" layout-margin flex="100"  ng-repeat="gettingParentIndex in metroPackages" ng-if="$index<(metroPackages.length)/3+1">
-			<div layout-margin flex="33" class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index"  ng-if="$index>=3*$parent.$index && $index <= 3*($parent.$index+1)-1">
+			<div layout-margin flex="33" class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index" ng-if="$index>=3*$parent.$index && $index <= 3*($parent.$index+1)-1">
 				<div class="one_week metro_package_bg{{($index + 1) % 6}}">
 					<div layout="row">
 						<div class="left_side_pack">
 							<p class="md-caption">
 								{{metroPackage.name}}<!-- - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots -->
 							</p>
-							<h3>Price: Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
-							<div class="form-group">
-								<div flex-gt-xs="">
-									<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
-								</div>
-							</div>
+							<h3> Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
+							
 						</div>
 						<div flex></div>
 						<div class="right_side_pack">
@@ -35,6 +31,11 @@
 								<!--<p class="md-caption">select slots</p>-->
 								<input type="hidden" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}" readonly disabled="true" class="trains_nbr">
 							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div flex-gt-xs="">
+							<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
 						</div>
 					</div>
 					<div layout="row">

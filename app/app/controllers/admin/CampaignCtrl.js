@@ -240,6 +240,40 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       }
     });
   }
+  $scope.showConfirmMetroPaymentPopup = function () {
+    $mdDialog.show({
+      templateUrl: 'views/admin/confirm-metro-payment-popup.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose: true,
+      preserveScope: true,
+      locals: { metroCampaignId: $stateParams.metroCampaignId, ctrlScope: $scope },
+      controller: function ($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, metroCampaignId) {
+        $scope.paymentTypes = [
+          { name: "Cash" },
+          { name: "Cheque" },
+          { name: "Online" },
+          { name: "Transfer" }
+        ];
+        $scope.updateCampaignPayment = function () {
+          $scope.campaignPayment.metro_campaign_id = metroCampaignId;
+          AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
+            if (result.status == 1) {
+              toastr.success(result.message);
+              getMetroCampaignDetails(metroCampaignId);
+              loadCampaignPayments(metroCampaignId);
+              $mdDialog.hide();
+            }
+            else {
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.closeMdDialog = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
+  }
   $scope.launchMetroCampaign = function (campaignId, ev) {
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
@@ -362,46 +396,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   | Page based initial loads end
   =============================*/
 
-
-
-  $scope.showConfirmMetroPaymentPopup = function () {
-    $mdDialog.show({
-      templateUrl: 'views/admin/confirm-metro-payment-popup.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose: true,
-      preserveScope: true,
-      locals: { metroCampaignId: $stateParams.metroCampaignId, ctrlScope: $scope },
-      controller: function ($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, metroCampaignId) {
-        $scope.paymentTypes = [
-          { name: "Cash" },
-          { name: "Cheque" },
-          { name: "Online" },
-          { name: "Transfer" }
-        ];
-        $scope.updateCampaignPayment = function () {
-          $scope.campaignPayment.metro_campaign_id = metroCampaignId;
-          AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
-            if (result.status == 1) {
-              getMetroCampaignDetails(metroCampaignId);
-              $mdDialog.hide();
-            }
-            else {
-              toastr.error(result.message);
-            }
-          });
-        }
-        $scope.closeMdDialog = function(){
-          $mdDialog.hide();
-        }
-      }
-    });
-  }
-
   function loadCampaignPayments(campaignId) {
     console.log("wqdnwk");
     //if($scope.campaignDetails.status >= 6 ){
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-      //if (result.status == "1") {
+      if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignMetroPayments = result;
      // } else {
         // toastr.error(result.message);

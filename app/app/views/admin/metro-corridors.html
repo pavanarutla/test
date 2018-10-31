@@ -27,6 +27,20 @@
             <p ng-message="required">Corridor Name is required</p>
           </div>
         </md-input-container>
+        <md-input-container class="md-block" flex="50">
+            <label>From</label>          
+            <input ng-model="corridor.from" type="text" name="From" required />
+            <div ng-messages="addCorridorform.From.$error">
+              <p ng-message="required">From is required</p>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="50">
+              <label>To</label>          
+              <input ng-model="corridor.to" type="text" name="To" required />
+              <div ng-messages="addCorridorform.To.$error">
+                <p ng-message="required">To is required</p>
+              </div>
+            </md-input-container>
       </div>
       <div class="serverErrors" ng-show="stateErrors && !addCorridorErrors.length == 0">
         <ul>
@@ -36,7 +50,7 @@
         </ul>
       </div>
       <div layout="row" layout-align="center center">
-        <md-button Class="md-raised md-primary" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="stateform.$invalid">SUBMIT</md-button>        
+        <md-button Class="md-raised md-primary" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="addCorridorform.$invalid">SUBMIT</md-button>        
       </div>
     </div>
   </form>
@@ -44,12 +58,22 @@
   <!-- ===== table new code start=======-->
   <div style="margin-top: 1em;">
     <div class="table-responsive">
-      <table class="table table-striped table-bordered add-countery">
+      <table class="table table-striped table-bordered ">
         <thead>
-          <tr>
+          <!-- <tr>
             <th>Sr. No.</th>
             <th>City</th>
             <th>Corridor Name</th>
+            <th>From<th>
+            <th>To <th>
+            <th>Actions</th>
+          </tr> -->
+          <tr>
+            <th>Sr.No</th>
+            <th>City</th>
+            <th>Corridor Name</th>
+            <th>From</th>
+            <th>To</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -58,6 +82,8 @@
             <td>{{$index + 1}}</td>
             <td>{{corr.city_name}}</td>
             <td>{{corr.name}}</td>
+            <td>{{corr.from || "N/A"}} </td>
+            <td>{{corr.to || "N/A"}} </td>
             <td>
               <span>
                 <a style="cursor:pointer;" ng-click="editcorridors(corr)">

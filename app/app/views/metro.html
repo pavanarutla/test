@@ -272,8 +272,8 @@
 			<md-content layout="column" style="margin-top:20%">
 				<div layout="column" layout-align="center center" layout-margin>
 					<img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
-					<div class="md-display-1">Congratulations!</div>
-					<div class="md-headline">Campaign Saved Succcessfully</div>
+					<div class="md-display-1" style="text-align:center;">Congratulations!</div>
+					<div class="md-headline" style="text-align:center;">Campaign Saved Succcessfully</div>
 				</div>
 				<div layout="column" layout-margin>
 					<div>
@@ -416,7 +416,7 @@
 	<!-- Share Campaign Sidenav ends -->
 
 	<!-- map html start (left side controls) -->
-	<div layout="column" style="position:relative;height:100%;" id="map-container">
+	<div layout="column" style="position:relative;height:90vh;" id="map-container">
 		<!-- <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5" disable-default-u-i="true"
         ng-if="mapContainerHeightSet" styles="[
         {
@@ -506,7 +506,8 @@
             stylers: [{color: '#9e9e9e'}]
         }]">
         </ng-map> -->
-		<img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
+		<!-- <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map"> -->
+		<!-- <div class="metroBg"></div> -->
 		<md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
 			<div class="sidenav__ineer scrollbar__style">
 				<!-- search html start-->
@@ -537,7 +538,7 @@
 				<!-- caridoor html start-->
 				<div layout="column" layout-padding class="side-navpadding">
 					<div class="main-part" layout="column" style="cursor:pointer;padding: 0px;">
-						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as corr.name for corr in metroCorridors" required class="selectpicker">
+						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as (corr | metroCorridorsFromTo) for corr in metroCorridors" required class="selectpicker">
 							
 						</select>
 						<!-- <select >
@@ -713,8 +714,8 @@
 	</div>
 	<!-- map html start (left side controls) ends -->
 </div>
-
-<!-- <script>
+<!-- 
+<script>
 
     $(document).ready(function () {
         height = $(window).height();  //getting windows height
