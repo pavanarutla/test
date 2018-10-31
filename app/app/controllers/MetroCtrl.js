@@ -106,10 +106,11 @@ app.controller('MetroCtrl',
           if (typeof pkg.start_date === 'undefined') {
             toastr.error("Start date for the package is required.");
           }
-          else if (typeof pkg.selected_trains === 'undefined') {
-            toastr.error('Please select at least 1 train.');
+          else if (!pkg.days ) {
+            toastr.error('Please select days.');
           }
           else {
+            pkg.selected_trains = pkg.max_trains;
             MetroService.shortlistPackage(pkg).then((result) => {
               if (result.status == 1) {
                 loadShortlistedPackages();
@@ -125,7 +126,7 @@ app.controller('MetroCtrl',
       $scope.getEstBudgetForSelectedPackages = function () {
         var estBudget = 0;
         _.each($scope.shortlistedPackages, (package) => {
-          estBudget += package.price * (package.selected_trains + package.selected_slots - 1);
+          estBudget += package.price ;
         });
         return estBudget;
       }

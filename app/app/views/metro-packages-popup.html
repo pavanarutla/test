@@ -1,3 +1,6 @@
+<style>
+	.left_side_pack	md-datepicker {   white-space: unset;}
+</style>
 <md-dialog flex="50" flex-lg="60" flex-md="60" flex-sm="70" id="myDialog">
 	<div layout="row" layout-margin>
 		<h4 class="md-body-2">{{metroPackages[0].format}} - {{metroPackages[0].corridor}}
@@ -16,31 +19,38 @@
 					<div layout="row">
 						<div class="left_side_pack">
 							<p class="md-caption">
-								{{metroPackage.name}}<!-- - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots -->
+								{{metroPackage.max_trains}} Trains<!-- - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots -->
 							</p>
-							<h3> Rs.{{metroPackage.price * (metroPackage.selected_slots + metroPackage.selected_trains - 1)}}</h3>
+							
+							<select name="day"  ng-model="metroPackage.days"  required="required" placeholder="Select days" >
+									<option value = "" disabled>Days</option>
+									<option value = "7">7</option>
+									<option value = "14">14</option>
+									<option value = "28">28</option>
+									<option value = "60">60</option>
+									<option value = "90">90</option>
+							</select>
+							<div class="form-group">
+									<div flex-gt-xs="">
+										<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+									</div>
+							</div>
+						
 							
 						</div>
+
 						<div flex></div>
 						<div class="right_side_pack">
-							<div class="slect_train">
-								<p class="md-caption">select trains</p>
-								<input type="number" ng-model="metroPackage.selected_trains" min="1" max="{{metroPackage.max_trains}}" class="trains_nbr">
-							</div>
-							<div class="slect_slot">
-								<!--<p class="md-caption">select slots</p>-->
-								<input type="hidden" ng-model="metroPackage.selected_slots" min="1" max="{{metroPackage.max_slots}}" readonly disabled="true" class="trains_nbr">
+							<p>{{metroPackage.max_slots * ((metroPackage.days)?metroPackage.days:7) }} Spots</p>
+							<h3> Rs.{{metroPackage.price * ((metroPackage.days)?metroPackage.days:7) }}</h3>
+							
+							<div layout="row">
+									<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'shortlisted':'shortlist this')}}</md-button>						
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<div flex-gt-xs="">
-							<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
-						</div>
-					</div>
-					<div layout="row">
-						<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select this')}}</md-button>						
-					</div>
+					
+				
 				</div>
 			</div>
 		</div>
