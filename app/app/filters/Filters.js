@@ -145,7 +145,8 @@ app.filter('MetroSlIcon', function(){
 
 app.filter('MetroNamePrice', function(){
   return function(obj){
-    return obj.name + " - " + obj.price;
+   // return obj.name + " - " + obj.price;
+    return obj.name ;
   }
 });
 app.filter('metroCorridorsFromTo', function(){

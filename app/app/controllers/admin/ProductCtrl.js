@@ -7,6 +7,8 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
   $scope.cityList = [];
   $scope.areaList = [];
   $scope.hoardingCompaniesList = [];
+  $scope.EditState = 0;
+  $scope.EditCity = 0;
 
   /*===================
   | Pagination
@@ -130,15 +132,20 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
       $scope.stateList = result;
     });
   }
-  $scope.getCityList = function(){
+  $scope.getCityList = function(status){
     AdminLocationService.getCities($scope.product.state).then(function(result){
       $scope.cityList = result;
     });
+    if(status!='edit') $scope.EditState = 0;
+    else  $scope.EditState = 1;
+    
   }
-  $scope.getAreaList = function(){
+  $scope.getAreaList = function(state){
     AdminLocationService.getAreas($scope.product.city).then(function(result){
       $scope.areaList = result;
     });
+    if(status!='edit') $scope.EditCity = 0;
+    else  $scope.EditCity = 1;
   }
   
   /*
@@ -213,10 +220,16 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
 
   $scope.editProduct = function(product){
     if(product.status != 0){
-      product.country = null;
-      product.state = null;
-      product.city = null;
-      product.area = null;
+      console.log(product);
+      product.client = product.client_mongo_id;
+      $scope.product.country = product.country;
+      $scope.product.state = product.state;
+      $scope.product.city = product.city;
+      $scope.EditState = 1;
+      $scope.EditCity = 1;
+      $scope.getStateList('edit');
+      $scope.getCityList('edit');
+      $scope.getAreaList();
       // product.company = null;
     }
     $scope.product = product;

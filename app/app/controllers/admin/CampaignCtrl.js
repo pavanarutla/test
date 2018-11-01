@@ -207,6 +207,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       });
       $scope.metroPackages = result;
       $scope.selectedPackage = result[0];
+      $scope.selectedPackage.days = "7";
     });
   }
   function getMetroCampaigns() {
@@ -228,7 +229,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   $scope.addPackageInMetroCampaign = function () {
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
-    $scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
+    //$scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
     AdminMetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
       if (result.status == 1) {
         $scope.selectedPackage = {};
@@ -402,7 +403,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignMetroPayments = result;
-     // } else {
+      } 
+      //else {
         // toastr.error(result.message);
      // }
 
