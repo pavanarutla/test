@@ -22,8 +22,7 @@
 						<td>{{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td>{{pCampaign.status | stringifyCampaignStatus}}</td>
 						<td>{{pCampaign.act_budget || "N/A"}}</td>
-						<th>Created On</th>
-						<td>{{mCampaign.created_at | date:'medium'}}</td>
+						<td>{{pCampaign.created_at | date:'medium'}}</td>
 						<td>
 						<md-menu>
 							<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
@@ -74,7 +73,8 @@
 						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td >{{rCampaign.status | stringifyCampaignStatus}}</td>
 						<td>{{rCampaign.act_budget || "N/A"}}</td>
-						<td>{{mCampaign.created_at | date:'medium'}}</td>
+						<td hide-sm>{{rCampaign.products.length}}</td>
+						<td>{{rCampaign.created_at | date:'medium'}}</td>
 						<td><md-button class="md-primary" ng-href="#/view-campaign/{{rCampaign.id}}">VIEW</md-button></td>
 					</tr>      
 					</tbody>
@@ -99,15 +99,15 @@
 						</tr>
 					</thead>
 					<tbody style="text-align: center">
-						<tr ng-repeat="rCampaign in runningCampaigns">
+						<tr ng-repeat="rCampaign in closedCampaigns">
 							<td>{{rCampaign.name}}</td>
 							<td hide-sm>{{rCampaign.clientcontent}}</td>
 							<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
 							<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 							<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
 							<td>{{rCampaign.act_budget || "N/A"}}</td>
-							<td hide-sm>{{cCampaign.products.length}}</td>
-							<td>{{mCampaign.created_at | date:'medium'}}</td>
+							<td hide-sm>{{rCampaign.products.length}}</td>
+							<td>{{rCampaign.created_at | date:'medium'}}</td>
 							<td><md-button class="md-primary">VIEW</md-button></td>
 						</tr>      
 					</tbody>
