@@ -1,4 +1,4 @@
-<div class="md-whiteframe-2dp contbg md-caption mt-5" layout="row" layout-margin>
+<div class="md-whiteframe-2dp contbg md-caption mt-3" layout="row" layout-margin>
     <div class="table-responsive">
         <table class="table upper_head">
             <!-- <thead class="text_color">
@@ -20,20 +20,20 @@
                         <img src="assets/images/addnewproduct.png" alt="Smiley face" height="100" width="150">
                     </td>
                     <td class="upper_line">
-                        <p class="md-title mb-0"><span>{{product.siteNo}}</span> - <span>Kothaguda</span>
+                        <p class="md-title mb-0"><span>BB238</span> - <span>Kothaguda</span>
                             <span>(40Ft X 40Ft)</span></p>                        
                         <p class="mb-0">Kothaguda X Roads</p>
                         <p class="mb-0"> <span class="text_color">Facing:</span>From Kothaguda to
                             Hitech city road, beside ICICI Bank</p>
                     </td>
-                    <td class="table_vertical upper_line">
+                    <td class="table_vertical upper_line hide-xs">
                       <label><b>Views</b></label>
                         1,48,000
                     </td>
-                    <td class="table_vertical upper_line">
+                    <td class="table_vertical upper_line hide-xs">
                             <label><b>Lit</b></label>
                         Yes</td>
-                    <td class="table_vertical upper_line">
+                    <td class="table_vertical upper_line hide-xs">
                             <label><b>Price</b></label>
                         58,000</td>
                 </tr>
@@ -45,7 +45,7 @@
 <div class="contbg md-caption layout-row" layout="column">
     <div class="md-whiteframe-2dp layout-margin col-md-6">
         <div class="col-md-12">
-            <h4 class="mt-1" style="margin-left:-20px;">Update product details</h4><br>
+            <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
             <form role="form" name="updateProductForm" novalidate>
                 <div class="form-group row">
                     <div class="col-sm-6">
@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-sm-6">
                         <select id="productType" ng-options="format.id as format.name for format in formatList"
-                            ng-model="product.type" class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader"
+                            ng-model="product.type" class="form-control md-whiteframe-3dp form_editmargin" data-md-container-class="selectdemoSelectHeader"
                             required="required" name="productType">
                             <option value="" disabled selected>Site Type</option>
                         </select>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <select name="state" class="form-control md-whiteframe-3dp" id="state" ng-model="product.state"
+                        <select name="state" class="form-control md-whiteframe-3dp form_editmargin" id="state" ng-model="product.state"
                             required="required" ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
                             <option value="" disabled selected>Select State</option>
                         </select required>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <input ng-model="product.address" class="form-control  md-whiteframe-3dp" placeholder="address"
+                        <input ng-model="product.address" class="form-control md-whiteframe-3dp form_editmargin" placeholder="address"
                             type="text" name="address" required="required" />
                         <div ng-messages="updateProductForm.address.$error" ng-if="updateProductForm.address.$touched"
                             style="color:red">
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+                        <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp form_editmargin"
                             md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
                             placeholder="Has lighting?">
                             <option value="" disabled selected>Has lighting?</option>
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <input ng-model="product.panelSize" class="form-control md-whiteframe-3dp" required="required"
+                        <input ng-model="product.panelSize" class="form-control md-whiteframe-3dp form_editmargin" required="required"
                             placeholder="Panel Size" type="text" name="panelSize" required="required" />
                         <div ng-messages="updateProductForm.panelSize.$error" ng-if="updateProductForm.panelSize.$touched"
                             style="color:red">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <input ng-model="product.date" class="form-control md-whiteframe-3dp" required="required"
+                        <input ng-model="product.date" class="form-control md-whiteframe-3dp form_editmargin" required="required"
                             placeholder="Product date" type="date" name="date" required="required" />
                         <div ng-messages="updateProductForm.date.$error" ng-if="updateProductForm.date.$touched" style="color:red">
                             <div ng-message="required">Date is required.</div>
@@ -162,7 +162,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <textarea ng-model="product.strength" class="form-control md-whiteframe-3dp" required="required"
+                        <textarea ng-model="product.strength" class="form-control md-whiteframe-3dp form_editbottom" required="required"
                             placeholder="Product strength" type="strength" name="strength" required="required" rows="2"></textarea>
                         <div ng-messages="updateProductForm.strength.$error" ng-if="updateProductForm.strength.$touched"
                             style="color:red">
@@ -180,9 +180,9 @@
         </div>
     </div>
 
-    <div class="layout-margin col-md-5">
-        <img src="assets/images/updatedetails.png" alt="Smiley face">
+    <div class="layout-margin col-md-5 hide-xs">
+        <img src="assets/images/updatedetails.png" alt="Smiley face"  class="edit_detailsimg">
         <label for="files" class="btn bottom-right">Change Image</label>
-        <input id="files" style="visibility:hidden;" type="file">
+        <!-- <input id="files" style="visibility:hidden;" type="file"> -->
     </div>
 </div>
