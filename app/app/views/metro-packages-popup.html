@@ -1,5 +1,25 @@
 <style>
 	.left_side_pack	md-datepicker {   white-space: unset;}
+	.lnt_caln{
+	margin-top: 15px;}
+	md-datepicker-button .md-button.md-icon-button{
+display:none}
+.lnt_caln .md-datepicker-input-container {
+    border-bottom-color: rgb(255, 255, 255) !important;
+}
+.lnt_caln .md-datepicker-input-container ::placeholder {
+  color: #fff !important;
+}
+
+.md-icon-button+.md-datepicker-input-container {
+    margin-left:0px !important;
+}
+.lnt_caln .md-datepicker-button{
+display:none;
+}
+ .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+    border-top-color: #fff !important;
+}
 </style>
 <md-dialog flex="50" flex-lg="60" flex-md="60" flex-sm="70" id="myDialog">
 	<div layout="row" layout-margin>
@@ -12,7 +32,7 @@
 			</md-icon>
 		</md-button>
 	</div>
-	<md-dialog-content flex="100" >
+	<md-dialog-content >
 		<div layout="row" layout-margin flex="100"  ng-repeat="gettingParentIndex in metroPackages" ng-if="$index<(metroPackages.length)/3+1">
 			<div layout-margin flex="33" class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index" ng-if="$index>=3*$parent.$index && $index <= 3*($parent.$index+1)-1">
 				<div class="one_week metro_package_bg{{($index + 1) % 6}}">
@@ -31,7 +51,7 @@
 									<option value = "90">90 Days</option>
 							</select>
 							<div class="form-group">
-									<div flex-gt-xs="">
+									<div flex-gt-xs="" class="lnt_caln">
 										<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
 									</div>
 							</div>
