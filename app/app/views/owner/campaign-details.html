@@ -237,7 +237,7 @@
 		</div>
 		<div style="margin-top:28px;">
 			<p>No ofProducts</p>
-			<p class="md-body-2">{{campaignDetails.products.length}}</p>
+			<p class="md-body-2">{{campaignDetails.no_of_products}}</p>
 		</div>
 		<div flex></div>
 		<div>
@@ -290,8 +290,8 @@
 					<th>Price</th>
 					<th></th>
 					<th>
-						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/owner/{{clientSlug}}/add-campagin-product">Add
-							Another Product
+						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-click="addNewProductToCampaign()">
+							Add Another Product
 						</md-button>
 					</th>
 				</tr>
@@ -308,11 +308,11 @@
 					</td>
 					<td class="table_vertical">{{product.panelSize}}</td>
 					<td class="table_vertical">
-						<p>{{product.from_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<p>{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}</p>
 						<!-- <p></p> -->
 					</td>
 					<td class="table_vertical">
-						<p>{{product.to_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<p>{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}</p>
 						<!-- <p>15-10-2018</p> -->
 					</td>
 					<td class="table_vertical">{{product.price}}</td>
@@ -333,11 +333,11 @@
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
-				<div class="md-body-1">{{"N/A"}}</div>
+				<div class="md-body-1">{{campaignDetails.act_budget || "N/A"}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">18% GST :</div>
-				<div class="md-body-1"> {{"N/A"}}</div>
+				<div class="md-body-1"> {{campaignDetails.act_budget * 18 / 100 || "N/A"}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">Sub Total :</div>
@@ -345,9 +345,9 @@
 			</div>
 			<div layout="row">
 				<div class="md-title">Grand Total :</div>
-				<div class="md-title">{{"N/A"}}</div>
+				<div class="md-title">{{campaignDetails.act_budget + campaignDetails.act_budget * 18 / 100 || "N/A"}}</div>
 			</div>
-			<md-button class="md-raised md-primary">Book Campaign</md-button>
+			<md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id, $event)">Book Campaign</md-button>
 		</div>
 	</div>
 </div>

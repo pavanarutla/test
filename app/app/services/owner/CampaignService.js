@@ -47,9 +47,9 @@ app.service('OwnerCampaignService',
           $http.delete(config.apiPath + '/campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        launchCampaign: function(campaignId){
+        bookNonUserCampaign: function(campaignId){
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/launch-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/book-non-user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
         getCampaignWithPayments: function(){

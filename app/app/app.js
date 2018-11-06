@@ -371,7 +371,7 @@ var app = angular.module('bbManager', [
     .state('owner.add-campagin-product', {
       url: '/add-campagin-product',
       templateUrl: 'views/owner/add-campagin-product.html',
-      controller: 'OwnerProductCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.product-details', {
       url: '/product-details/:productId',

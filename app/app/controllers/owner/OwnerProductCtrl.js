@@ -1,7 +1,7 @@
 app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   $scope.unavailalbeDateRanges = [];
-  $scope.loadCalendar = false;
+  // $scope.loadCalendar = false;
 
   /*===================
   | Sidenavs and popups
@@ -134,7 +134,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     },
     isInvalidDate : function(dt){
       for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
-        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= $scope.unavailalbeDateRanges[i].booked_to){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
           return true;
         }
       }
@@ -203,7 +203,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
       $scope.requestedProductList = result.products;
-      //console.log(result.products);
+      // console.log(result.products);
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -351,10 +351,10 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
-  $scope.getProductUnavailableDates = function(productId){
+  $scope.getProductUnavailableDates = function(productId, ev){
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
-      $scope.loadCalendar = true;
       $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parent().parent().find('input').trigger('click');
     });
   }
   /*=====================

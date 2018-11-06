@@ -1,5 +1,6 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, config) {
   $scope.forms = [];
+  $scope.serverUrl = config.serverUrl;
 
   /*===================
   | Pagination
@@ -77,6 +78,48 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*===========================
   | MdDialogs and sidenavs end
   ===========================*/
+
+  /*================================
+  | Multi date range picker options
+  ================================*/
+  $scope.suggestProductOpts = {
+    multipleDateRanges: true,
+    opens: 'center',
+    locale: {
+        applyClass: 'btn-green',
+        applyLabel: "Apply",
+        fromLabel: "From",
+        format: "DD-MMM-YY",
+        toLabel: "To",
+        cancelLabel: 'Cancel',
+        customRangeLabel: 'Custom range'
+    },
+    isInvalidDate : function(dt){
+      for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+          return true;
+        }
+      }
+    },
+    isCustomDate: function(dt){
+      for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+          if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')){
+            return ['red-blocked', 'left-radius'];
+          }
+          else if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')){
+            return ['red-blocked', 'right-radius'];
+          }
+          else{
+            return 'red-blocked';
+          }
+        }
+      }
+    },
+  };
+  /*====================================
+  | Multi date range picker options end
+  ====================================*/
 
   ////data for image uploading 
 
@@ -198,7 +241,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   }
 
   $scope.suggestProductForOwnerCampaign = function (suggestedProduct) {
-    //console.log(suggestedProduct)
     if (!localStorage.selectedOwnerCampaign) {
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
     }
@@ -207,8 +249,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
         product: {
           id: suggestedProduct.id,
-          from_date: suggestedProduct.campaignStartDate,
-          to_date: suggestedProduct.campaignEndDate,
+          booking_dates: suggestedProduct.booking_dates,
           price: suggestedProduct.price
         }
       };
@@ -231,6 +272,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         }
       });
     }
+  }
+
+  $scope.getProductUnavailableDates = function(productId, ev){
+    OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parent().parent().find('input').trigger('click');
+    });
   }
 
   /* ============================
@@ -324,7 +372,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   }
   $scope.addNewProductToCampaign = function () {
     localStorage.selectedOwnerCampaign = JSON.stringify($scope.campaignDetails);
-    $location.path('/owner/' + $rootScope.clientSlug + '/suggest-products');
+    $location.path('/owner/' + $rootScope.clientSlug + '/add-campagin-product');
   }
 
   $scope.removeProductFromCampaignSuggestion = function (productId) {
@@ -349,8 +397,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
 
-  $scope.launchOwnerCampaign = function (campaignId, ev) {
-    OwnerCampaignService.launchCampaign(campaignId).then(function (result) {
+  $scope.bookOwnerCampaign = function (campaignId, ev) {
+    OwnerCampaignService.bookNonUserCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
         $mdDialog.show(
           $mdDialog.alert()
@@ -558,7 +606,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*=========================
   | Page based initial loads
   =========================*/
-
   if ($rootScope.currStateName == "owner.campaigns") {
     $scope.getUserCampaignsForOwner();
     loadOwnerCampaigns();
@@ -567,9 +614,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   if ($rootScope.currStateName == "owner.bbi-campaigns") {
     $scope.getUserCampaignsForOwner();
   }
-  if ($rootScope.currStateName == "owner.suggest-products") {
+  if ($rootScope.currStateName == "owner.add-campagin-product") {
     loadOwnerProductList();
-    setDatesForOwnerProductsToSuggest(JSON.parse(localStorage.selectedOwnerCampaign));
+    $scope.selectedOwnerCampaign = JSON.parse(localStorage.selectedOwnerCampaign);
   }
   if (typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined') {
     if ($stateParams.campaignType == 2) {

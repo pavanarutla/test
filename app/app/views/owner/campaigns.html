@@ -264,13 +264,13 @@
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr>
+              <tr ng-repeat="pCampaign in ownerCampaigns">
                 <td>BB-01</td>
-                <td>Billboards</td>
-                <td>15-08-2018</td>
-                <td>10</td>
-                <td>10,1000</td>
-                <td>10,10001</td>
+                <td>{{pCampaign.name}}</td>
+                <td>{{pCampaign.start_date || "N\A"}}</td>
+                <td>{{pCampaign.no_of_products || "0"}}</td>
+                <td>{{pCampaign.amount_paid || "N\A"}}</td>
+                <td>{{pCampaign.total_budget || "N\A"}}</td>
                 <td>
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -278,7 +278,7 @@
                     </md-button>
                     <md-menu-content width="2">
                       <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{pCampaign.id}}/{{pCampaign.type}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:auto 10px auto 10px">View Details</p>
@@ -286,7 +286,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{pCampaign.id}}/{{pCampaign.type}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">share</i></md-icon>
                             <p style="margin:auto 10px auto 10px">Share Campaign</p>
@@ -294,7 +294,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{pCampaign.id}}/{{pCampaign.type}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:auto 10px auto 10px">Pay Now</p>
@@ -302,7 +302,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{pCampaign.id}}/{{pCampaign.type}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:auto 10px auto 10px">Payment Details</p>
@@ -312,9 +312,9 @@
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td>
+                <!-- <td>
                   <span class="text_color md-caption">26-09-2018,09:10Am</span>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
