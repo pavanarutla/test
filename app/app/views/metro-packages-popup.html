@@ -1,3 +1,27 @@
+<style>
+.lnt_caln{
+	margin-top: 15px;}
+	md-datepicker-button .md-button.md-icon-button{
+display:none}
+.lnt_caln .md-datepicker-input-container {
+    border-bottom-color: rgb(255, 255, 255) !important;
+}
+.lnt_caln .md-datepicker-input-container ::placeholder {
+  color: #fff !important;
+}
+
+.md-icon-button+.md-datepicker-input-container {
+    margin-left:0px !important;
+}
+.lnt_caln .md-datepicker-button{
+display:none;
+}
+ .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+    border-top-color: #fff !important;
+}
+</style>
+
+
 <md-dialog flex="50" flex-lg="60" flex-md="60" flex-sm="70" id="myDialog">
 	<div layout="row" layout-margin>
 		<h4 class="md-body-2">{{metroPackages[0].format}} - {{metroPackages[0].corridor}}
@@ -34,7 +58,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div flex-gt-xs="">
+						<div flex-gt-xs="" class="lnt_caln">
 							<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
 						</div>
 					</div>
