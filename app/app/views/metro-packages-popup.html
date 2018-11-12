@@ -64,7 +64,11 @@ display:none;
 							<h3> Rs.{{metroPackage.price * ((metroPackage.days)?metroPackage.days:7) }}</h3>
 							
 							<div layout="row">
-									<md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'shortlisted':'shortlist this')}}</md-button>						
+								
+									
+									<md-button class="md-raised md-primary slect_btn" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">Shortlist This</md-button>	
+
+									<md-button class="md-raised md-primary slect_btn" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)">Deselect This</md-button>
 							</div>
 						</div>
 					</div>

@@ -52,7 +52,7 @@ app.controller('MetroCtrl',
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
           $scope.getMetroPackages($scope.selectedCorridor.id);
-		  $scope.showPackagePopup();
+		      // $scope.showPackagePopup();
           
         });
       }
