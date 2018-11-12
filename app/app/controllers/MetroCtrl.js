@@ -52,6 +52,7 @@ app.controller('MetroCtrl',
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
           $scope.getMetroPackages($scope.selectedCorridor.id);
+		  $scope.showPackagePopup();
           
         });
       }
@@ -64,7 +65,7 @@ app.controller('MetroCtrl',
           });
           $scope.metroPackages = result;
           $scope.selectedPackage = $scope.metroPackages[0];
-          $scope.selectedPackage.days = "7";
+          $scope.selectedPackage.days = 7;
         });
       }
       function loadShortlistedPackages() {
@@ -114,6 +115,7 @@ app.controller('MetroCtrl',
           }
           else {
             pkg.selected_trains = pkg.max_trains;
+			pkg.days = parseInt(pkg.days);
             MetroService.shortlistPackage(pkg).then((result) => {
               if (result.status == 1) {
                 loadShortlistedPackages();
@@ -127,9 +129,17 @@ app.controller('MetroCtrl',
         }
       }
       $scope.getEstBudgetForSelectedPackages = function () {
-        var estBudget = 0;
+        var estBudget = {};
+		estBudget.price = 0;
+		estBudget.selected_slots = 0;
+		estBudget.selected_trains = 0;
+		estBudget.days = 0;
+		
         _.each($scope.shortlistedPackages, (package) => {
-          estBudget += package.price ;
+          estBudget.price += package.price ;
+		  estBudget.selected_slots += package.selected_slots;
+		  estBudget.selected_trains += package.selected_trains ;
+		  estBudget.days += package.days;
         });
         return estBudget;
       }
