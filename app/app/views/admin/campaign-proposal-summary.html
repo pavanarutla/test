@@ -36,7 +36,6 @@
 </md-sidenav>
 <!-- share campaign sidenav ends -->
 
-
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
 	<div layout="column" layout-sm="column" layout-xs="column">
 		<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
@@ -123,7 +122,7 @@
 							<div flex="50">Status:</div>
 							<div flex="50">
 								<span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-								<span layout-align="center center" ng-if="campaignDetails.status == 4" style="cursor:pointer;" ng-click="getChangeRequestHistory(campaignDetails.id)">
+								<span layout-align="center center" ng-if="campaignDetails.status == 500" style="cursor:pointer;" ng-click="getChangeRequestHistory(campaignDetails.id)">
 									<i class="material-icons">info_outline</i>
 								</span>
 							</div>
@@ -132,7 +131,7 @@
 				</div>
 			</div>
 			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
-			 ng-if="campaignDetails.status >= 6">
+			 ng-if="campaignDetails.status >= 700">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
 					<div layout="column" layout-align="center center">
@@ -147,7 +146,7 @@
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
 						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
 					</div>
-					<div layout="row" ng-if="campaignDetails.status < 8 || campaignPayments.total_paid < campaignDetails.act_budget">
+					<div layout="row" ng-if="campaignPayments.total_paid < campaignDetails.act_budget">
 						<div flex="100" layout="column" layout-align="center center">
 							<md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
 								Update Payment
@@ -204,9 +203,9 @@
 						</span>
 					</md-button>
 					<md-button class="md-raised md-warn" ng-disabled="!(
-					campaignDetails.type != 0 && (campaignDetails.status < 6) || 
-					campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || 
-					campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)
+					campaignDetails.type != 0 && (campaignDetails.status < 700) || 
+					campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
+					campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
 					)" ng-click="addNewProductToCampaign()">
 						Add New Product
 						<span>
@@ -214,34 +213,34 @@
 						</span>
 					</md-button>
 					<md-button class="md-raised md-warn" ng-disabled="!(
-					campaignDetails.type != 0 && (campaignDetails.status < 6) || 
-					campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || 
-					campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)
+					campaignDetails.type != 0 && (campaignDetails.status < 700) || 
+					campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
+					campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
 					) || !campaignDetails.products" ng-if="campaignDetails.type == 1" ng-click="notifyProductOwnersForQuote()">
 						Notify Owners
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status >= 3 && campaignDetails.status != 4)"
+					<md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status > 300 && campaignDetails.status != 500)"
 					 ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
 						Finalize
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 5)" ng-if="campaignDetails.status < 6"	ng-click="launchCampaign(campaignDetails.id, $event)">
-						Launch
+					<md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 600)" ng-if="campaignDetails.status < 700"	ng-click="confirmCampaignBooking(campaignDetails.id, $event)">
+						Confirm Booking
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 6">	Launched
+					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 700">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 6 && campaignDetails.status != 7)"
+					<md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 700 && campaignDetails.status != 700)"
 					 ng-click="closeCampaign(campaignDetails.id, $event)">
 						Close Campaign
 						<span>
@@ -251,8 +250,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
-			 ui-grid-move-columns ui-grid-auto-resize class="grid"> -->
+		<!-- <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"> -->
 	</div>
 	<!-- table grid start  -->
 	<div style="margin-top: 1em;">
@@ -279,8 +277,8 @@
 						<td>{{campaignProduct.area_name}}</td>
 						<td>{{campaignProduct.panelSize}}</td>
 						<td>{{campaignProduct.lighting | boolToYesNo}}</td>
-						<td>{{campaignProduct.from_date | date }}</td>
-						<td>{{campaignProduct.to_date | date }}</td>
+						<td>{{campaignProduct.booked_from | date }}</td>
+						<td>{{campaignProduct.booked_to | date }}</td>
 						<td>
 							<md-button ng-click="viewProductImage(campaignProduct.image)" class="md-icon-button">
 								<md-icon>
@@ -291,15 +289,15 @@
 						<td>{{campaignProduct.price}}</td>
 						<td>
 							<span>
-								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.product_id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
-								 ng-if="campaignDetails.status < 3 || campaignDetails.status == 4">
+								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.price)"
+								 ng-if="campaignDetails.status <= 300 || campaignDetails.status == 500">
 									<md-icon>
 										<i class="material-icons">mode_edit</i>
 									</md-icon>
 								</a>
 							</span>
 							<span>
-								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.product_id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 3 || campaignDetails.status == 4) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 2 || campaignDetails.status == 4)) || (campaignDetails.type == 1 && campaignDetails.status < 6)">
+								<a style="cursor:pointer;" ng-click="deleteProductFromCampaign(campaignDetails.id, campaignProduct.product_id)" ng-if="(campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)) || (campaignDetails.type == 1 && campaignDetails.status < 700)">
 									<md-icon>
 										<i class="material-icons">delete</i>
 									</md-icon>
@@ -311,8 +309,8 @@
 			</table>
 		</div>
 		<!-- <div layout="colmun" layout-align="end center" layout-margin>
-						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-					</div> -->
+			<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
+		</div> -->
 	</div>
 	<!-- table grid end -->
 </div>

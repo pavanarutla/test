@@ -48,13 +48,16 @@ var app = angular.module('bbManager', [
     .state('index.formats', {
       url: 'formats',
       templateUrl: 'views/formats.html',
-      controller: 'FormatsCtrl'
+      controller: 'ProductCtrl'
     })
-    // .state('index.suggest_campaign', {
-    //   url: 'suggest-campaign',
-    //   templateUrl: 'views/suggest-a-campaign.html',
-    //   controller: 'CampaignCtrl'
-    // })
+    .state('index.user-notifications', {
+      url: 'user-notifications',
+      templateUrl: 'views/user-notifications.html',
+    })
+    .state('index.user-saved-campaigns', {
+      url: 'user-saved-campaigns',
+      templateUrl: 'views/user-saved-campaigns.html',
+    })
     $stateProvider.state('index.suggest', {
       url: 'suggest',
       templateUrl: 'views/suggest-a-campaign.html',
@@ -91,6 +94,16 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('index.product-list', {
+      url: 'product-list',
+      templateUrl: 'views/product-list.html',
+      controller: 'UserProductCtrl'
+    })
+    .state('index.shortlisted-products', {
+      url: 'shortlisted-products',
+      templateUrl: 'views/shortlisted-products.html',
+      controller: 'UserProductCtrl'
+    })
     .state('index.metro', {
       url: 'metro',
       templateUrl: 'views/metro.html',
@@ -110,6 +123,21 @@ var app = angular.module('bbManager', [
       url: 'view-campaign/{campaignId}',
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
+    })
+    .state('index.campaign-details', {
+      url: 'campaign-details',
+      templateUrl: 'views/campaign-details.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.user-payments', {
+      url: 'user-payments',
+      templateUrl: 'views/user-payments.html',
+      controller:''
+    })
+    .state('index.update-user-payments', {
+      url: 'update-user-payments',
+      templateUrl: 'views/update-user-payments.html',
+      controller:''
     })
     .state('index.metro-campaign', {
       url: 'metro-campaign/{metroCampaignId}',

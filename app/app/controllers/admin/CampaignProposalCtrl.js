@@ -212,28 +212,20 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   }
 
 
-  $scope.editProposedProduct = function(productId, from_date, to_date, price){
-    var productObj = {
-      id: productId,
-      from_date: $scope.campaignDetails.start_date,
-      to_date: $scope.campaignDetails.end_date,
+  $scope.editProposedProduct = function(bookingId, price){
+    var bookingObj = {
+      booking_id: bookingId,
       price: price
     };
     $mdDialog.show({
-      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
+      locals:{ campaign: $scope.campaignDetails, bookingObj : bookingObj, ctrlScope : $scope },
       templateUrl: 'views/admin/edit-proposed-product.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose:true,
-      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaign, productObj){
-        $scope.product = productObj;
-        $scope.AdminProposalStartDate = new Date(campaign.start_date);
-        $scope.AdminProposalEndDate = new Date(campaign.end_date);
-        $scope.AdminProposalFromMinDate = moment(campaign.start_date).toDate();
-        $scope.AdminProposalFromMaxDate = moment(campaign.end_date).toDate();
-        $scope.AdminProposaltoMinDate = moment($scope.product.start_date).toDate();
-        $scope.AdminProposalToMaxDate = moment(campaign.end_date).toDate();
-        $scope.updateProposedProduct = function(product){
-          AdminCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
+      controller:function($scope, $mdDialog, CampaignService, AdminCampaignService, ctrlScope, campaign, bookingObj){
+        $scope.booking = bookingObj;
+        $scope.updateProposedProduct = function(){
+          AdminCampaignService.updateProposedProduct(campaign.id, $scope.booking).then(function(result){
             if(result.status == 1){
               // update succeeded. update the grid now.
               $mdDialog.hide();
@@ -324,8 +316,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     }
   }
 
-  $scope.launchCampaign = function(campaignId, ev){
-    AdminCampaignService.launchCampaign(campaignId).then(function(result){
+  $scope.confirmCampaignBooking = function(campaignId, ev){
+    AdminCampaignService.confirmCampaignBooking(campaignId).then(function(result){
       if(result.status == 1){
         $mdDialog.show(
           $mdDialog.alert()

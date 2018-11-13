@@ -13,7 +13,24 @@
   <!-- filters-->
   <form class="form-inline camp_filters" action="">
 
-    <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id="">
+    <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id=""> -->
+    <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+      md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+      md-min-length="4" placeholder="Search..." md-clear-button="true">
+      <md-item-template>
+        <span class="item-title">
+          <span> {{item.siteNo}} </span>
+        </span>
+        <span class="item-metadata">
+          <!-- <span>
+            <strong>{{item.company_name}}</strong>
+          </span> -->
+          <span>
+            <strong>{{item.address}}</strong>
+          </span>
+        </span>
+      </md-item-template>
+    </md-autocomplete>
     <label for="pwd">Filter By:</label>
     <div class="form-group">
       <select class="form-control" id="sel1">

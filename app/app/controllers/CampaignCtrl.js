@@ -1,5 +1,7 @@
 app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr) {
 
+  $scope.config = config;
+
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    0
     'campaign-created',      //    1
@@ -89,6 +91,11 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   $scope.getCampaignDetails = function(campaignId){
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
+      if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
+        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+      }
     });
   }
   if($stateParams.campaignId){
@@ -111,8 +118,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-  $scope.requestLaunchCampaign = function(ev, campaignId){
-    CampaignService.requestLaunch(campaignId).then(function(result){
+  $scope.confirmCampaignBooking = function(ev, campaignId){
+    CampaignService.confirmCampaignBooking(campaignId).then(function(result){
       if(result.status == 1){
         $mdDialog.show(
           $mdDialog.alert()
@@ -311,7 +318,10 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     $scope.getUserCampaigns();
     getMetroCampaigns();
   }
-  
+
+  if ($rootScope.currStateName == "index.campaign-details") {
+    $scope.getCampaignDetails(localStorage.viewCampaignDetailsId)
+  }
 
   $scope.deleteMetroCampaigns = function(campaignId){
         if ($window.confirm("Are you really want to delete this camapaign?")) {

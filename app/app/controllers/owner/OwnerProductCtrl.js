@@ -235,10 +235,25 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       return res;
     });
   }
+  $scope.productdetails = [{
+    id: 1,
+    price: '60000'
+  }]
 
   $scope.requestedAddProduct = function(product){
     console.log(product);
   }
+
+  $scope.editUtterance = function(data) {
+    data.edit = true;
+    console.log(data.edit);
+  }
+  $scope.save = function(data) {
+    data.edit = false;
+  }
+
+
+
 
   /*=====================
   | Product Section
@@ -360,7 +375,10 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   /*=====================
   | Product Section Ends
   =====================*/
-
+  $scope.updateeditProductdetails = function(product){
+    console.log(product);
+    }
+    
    /*=====================
   | Requested hordings
   =====================*/

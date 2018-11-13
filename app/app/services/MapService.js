@@ -21,9 +21,9 @@ app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config)
       $http.get(config.apiPath + '/products').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-    shortListProduct: function (productId, userMongoId) {
+    shortListProduct: function (obj) {
       var dfd = $q.defer();
-      $http.post(config.apiPath + '/shortlistProduct', { user_mongo_id: userMongoId, product_id: productId }).success(dfd.resolve).error(dfd.reject);
+      $http.post(config.apiPath + '/shortlistProduct', obj).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     getshortListProduct: function (userMongoId) {
@@ -31,9 +31,9 @@ app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config)
       $http.get(config.apiPath + '/shortlistedProducts').success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
-    deleteShortlistedProduct: function (userMongoId, productId) {
+    deleteShortlistedProduct: function (shortlistId) {
       var dfd = $q.defer();
-      $http.delete(config.apiPath + '/shortlistedProduct/' + productId).success(dfd.resolve).error(dfd.reject);
+      $http.delete(config.apiPath + '/shortlistedProduct/' + shortlistId).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     },
     filterProducts: function (criteria) {
@@ -54,6 +54,11 @@ app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config)
     searchBySiteNo: function (siteNo) {
       var dfd = $q.defer();
       $http.get(config.apiPath + '/searchBySiteNo/' + siteNo).success(dfd.resolve).error(dfd.reject);
+      return dfd.promise;
+    },
+    getProductUnavailableDates: function(productId){
+      var dfd = $q.defer();
+      $http.get(config.apiPath + '/product-unavailable-dates/' + productId).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;
     }
   }

@@ -4,7 +4,7 @@
 			<div layout="column" layout-align="center center">
 			</div>
 			<form name="editProposedProductForm" novalidate="novalidate">
-        <div flex-gt-xs="">
+        <!-- <div flex-gt-xs="">
           <label>Start date</label>
           <md-datepicker ng-model="product.from_date" ng-init="product.from_date = AdminProposalStartDate" onkeydown="return false"
             md-placeholder="Enter date" md-min-date="AdminProposalFromMinDate" md-max-date="AdminProposalFromMaxDate"></md-datepicker>
@@ -13,16 +13,16 @@
           <label>End Date</label>
           <md-datepicker ng-model="product.to_date" ng-init="product.to_date = AdminProposalEndDate" onkeydown="return false"
             md-placeholder="Enter date" md-min-date="product.from_date" md-max-date="AdminProposalToMaxDate"></md-datepicker>
-        </div>
-      <md-input-container class="md-block margin-input">
-        <label>Price:</label>
-        <input ng-model="product.price" type="text" name="price" only-numeric required="required" />
-        <div ng-messages="editProposedProductForm.price.$error">
-          <div ng-message="required">Format Name is required.</div>
-        </div>
-      </md-input-container>
+        </div> -->
+        <md-input-container class="md-block margin-input">
+          <label>Price:</label>
+          <input ng-model="booking.price" type="text" name="price" only-numeric required="required" />
+          <div ng-messages="editProposedProductForm.price.$error">
+            <div ng-message="required">Format Name is required.</div>
+          </div>
+        </md-input-container>
 				<div layout="row" layout-align="center center">
-					<md-button type="submit" Class="md-raised md-primary" ng-click="updateProposedProduct(product)" ng-disabled="editProposedProductForm.$invalid">SAVE</md-button>
+					<md-button type="submit" Class="md-raised md-primary" ng-click="updateProposedProduct()" ng-disabled="editProposedProductForm.$invalid">SAVE</md-button>
 					<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
 				</div>
       </form>

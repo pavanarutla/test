@@ -1,15 +1,15 @@
 app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr, FileSaver, Blob, MetroService, $window) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
-    'campaign-preparing',    //    0
-    'campaign-created',      //    1
-    'quote-requested',       //    2
-    'quote-given',           //    3
-    'change-requested',      //    4 
-    'launch-requested',      //    5
-    'running',               //    6
-    'suspended',             //    7
-    'stopped'                //    8
+    'campaign-preparing',    //    100
+    'campaign-created',      //    200
+    'quote-requested',       //    300
+    'quote-given',           //    400
+    'change-requested',      //    500
+    'booking-requested',     //    600 
+    'booked',                //    700
+    'suspended',             //    800
+    'stopped'                //    900
   ];
 
   /*===================================
@@ -29,9 +29,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   var getAllCampaigns = function () {
     AdminCampaignService.getAllCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result.user_campaigns, function (c) {
-        return c.status < 6 && typeof c.name !== "undefined" && typeof c.start_date !== "undefined" && typeof c.end_date !== "undefined";
+        return c.status < 700 && typeof c.name !== "undefined";
       });
-      $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
+      $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'booked') });
       $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
       $scope.adminCampaigns = result.admin_campaigns;
     });

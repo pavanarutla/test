@@ -1,0 +1,140 @@
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
+
+	<div class="table-responsive contbg">
+		<table class="table">
+			<thead class="text_color">
+				<tr>
+					<th>Product Details</th>
+					<th></th>
+					<th>Size</th>
+					<th>Booked From</th>
+					<th>Booked To</th>
+					<th>Price</th>
+					<th></th>
+					<th>
+						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/location">Add
+							Another Product
+						</md-button>
+					</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="shortlisted in shortListedProducts">
+				<tr>
+					<td>
+						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" height="100" width="150">
+					</td>
+					<td>
+						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
+							{{ shortlisted.address}}<br>
+							Views : 1,54000 Per week<br>
+							Live Traffic:
+							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
+								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button>
+						</p>
+					</td>
+					<td class="table_vertical">{{shortlisted.panelSize}}</td>
+					<td class="table_vertical">
+						<p>{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}</p>
+					</td>
+					<td class="table_vertical">
+						<p>{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}</p>
+					</td>
+					<td class="table_vertical">{{shortlisted.default_price || "N/A"}}</td>
+					<td class="table_vertical">
+						<a><i class="material-icons" ng-click="deleteShortlisted($event, shortlisted.id)">delete_foreve</i></a>
+					</td>
+					<td class="text-center table_vertical">
+						<p class="text_color md-caption">This Inventory<br>
+							Campaign Completed</p>
+					</td>
+			</tbody>
+		</table>
+	</div>
+	<!-- table grid end -->
+	<div class="campaign_payment_inner mb-2">
+
+		<!-- <div class="row mr-0 ml-0 pt-2">
+            <div class="col-md-6 chat_box pb-5">
+                <ul class="p-0">
+                    <li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
+                        please revision BB238 - Kothaguda hoarding price </li>
+                    <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
+                        is revised as requested</li>
+
+                </ul>
+                <form action="/action_page.php">
+                    <div class="form-group">
+                        <label for="text" class="text_color">Any questions, Please submit below</label>
+                        <textarea type="text" class="form-control" id="text" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6 ">
+                <div class="d-flex justify-content-end pt-4">
+                    <md-button class="md-raised md-warn" ng-click="saveCampagin()">SAVE CAMPAIGN</md-button>
+                    <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button>
+                </div>
+            </div>
+        </div> -->
+		<!-- <div class="d-flex bg-light mb-5" style="min-height:100px">
+			<div class="p-2 col-md-6">
+				<div class=" chat_box ">
+					<ul class="p-0">
+						<li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
+							please revision
+							BB238 - Kothaguda hoarding price </li>
+						<li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
+							is revised as
+							requested</li>
+					</ul>
+					<form action="/action_page.php">
+						<div class="form-group">
+							<label for="text" class="text_color">Any questions, Please submit below</label>
+							<textarea type="text" class="form-control" id="text" rows="3"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary float-right">Submit</button>
+					</form>
+				</div>
+			</div> -->
+			<div class="p-2  col-md-6 align-self-end">
+				<div class="d-flex justify-content-end pt-4 align-self-end">
+					<div class="d-flex justify-content-end pt-4">
+						<md-button class="md-raised md-warn" ng-click="toggleSaveCampaignPopup()">SAVE CAMPAIGN</md-button>
+						<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="prodct_save md-whiteframe-2dp animated fadeInUp float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+			<div layout="row">
+				<div flex></div>
+				<a class="md-icon-button close-btn" ng-click="">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+			<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+			<div class="md-title  m-2">Let's work Together!</div>
+			<div class="form-group mt-3 mr-2 ml-2">
+				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+			</div>
+			<p class="text-center md-body-2">(OR)</p>
+			<div class="form-group mr-2 ml-2">
+				<select class="form-control" ng-model="existingCampaign.id" required="required">
+					<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+				</select>
+			</div>
+			<!-- <div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
+					add to existing or save Campaign
+				</md-button>
+			</div> -->
+			<div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised md-primary" layout-fill ng-click="saveCampaign()">
+					Save Campaign
+				</md-button>
+			</div>
+		</div>
+	</div>
+</div>

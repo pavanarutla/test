@@ -23,6 +23,48 @@ app.controller('GmapCtrl',
         }
       };
 
+      /*================================
+      | Multi date range picker options
+      ================================*/
+      $scope.mapProductOpts = {
+        multipleDateRanges: true,
+        opens: 'center',
+        locale: {
+            applyClass: 'btn-green',
+            applyLabel: "Apply",
+            fromLabel: "From",
+            format: "DD-MMM-YY",
+            toLabel: "To",
+            cancelLabel: 'Cancel',
+            customRangeLabel: 'Custom range'
+        },
+        isInvalidDate : function(dt){
+          for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+            if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+              return true;
+            }
+          }
+        },
+        isCustomDate: function(dt){
+          for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+            if(moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)){
+              if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')){
+                return ['red-blocked', 'left-radius'];
+              }
+              else if(moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')){
+                return ['red-blocked', 'right-radius'];
+              }
+              else{
+                return 'red-blocked';
+              }
+            }
+          }
+        },
+      };
+      /*====================================
+      | Multi date range picker options end
+      ====================================*/
+
       $scope.hidelocations = false;
       var setDefaultArea = function () {
         $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -649,8 +691,12 @@ app.controller('GmapCtrl',
         });
       }
 
-      $scope.shortlistSelected = function (ev) {
-        MapService.shortListProduct($scope.selectedProduct.properties.id, JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+      $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+        var sendObj = {
+          product_id: productId,
+          dates: selectedDateRanges
+        }
+        MapService.shortListProduct(sendObj).then(function (response) {
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('body')))
@@ -669,6 +715,7 @@ app.controller('GmapCtrl',
 
       function getShortListedProducts() {
         MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+          localStorage.shortListedProducts = response.length;
           $scope.shortListedProducts = response;
         });
       }
@@ -884,10 +931,10 @@ app.controller('GmapCtrl',
         CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
           $scope.$parent.alreadyShortlisted = true;
-          $scope.toggleCampaignDetailSidenav();
+          // $scope.toggleCampaignDetailSidenav();
         });
       }
-
+    
       var updateCampaignDetailSidenav = function (campaignId) {
         CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
           $scope.campaignDetails = campaignDetails;
@@ -1018,6 +1065,10 @@ app.controller('GmapCtrl',
         });
       }
 
+      if ($rootScope.currStateName == 'index.campaign-details') {  
+        $scope.viewCampaignDetails(localStorage.activeUserCampaignId)
+      }
+
       // sets the height of the div containing the map.
       function setMapContainerHeight() {
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
@@ -1043,6 +1094,16 @@ app.controller('GmapCtrl',
         $scope.elipsis += ".";
       }
       productLoader();      
+
+
+      $scope.getProductUnavailableDates = function(productId, ev){
+        MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+          $scope.unavailalbeDateRanges = dateRanges;
+          $(ev.target).parents().eq(3).find('input').trigger('click');
+        });
+      }
+
+    // controller ends  
     }
   ]
 );
