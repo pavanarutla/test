@@ -14,7 +14,7 @@
 				<span>Add Product</span>
 			</h2>
 			<span flex></span>
-			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()()">
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()">
 				<md-tooltip>Close Side Panel</md-tooltip>
 				<md-icon class="md-default-theme">
 					<i class="material-icons">close</i>
@@ -69,7 +69,9 @@
 				<div class="form-group row" >
 					<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
 					<div class="col-sm-8">
-							{{selectedPackage.max_slots * selectedPackage.days}}
+						
+							<input type="text" ng-model="admin_selected_slots" ng-value="selectedPackage.max_slots * selectedPackage.days">
+								<!--{{selectedPackage.max_slots * selectedPackage.days}}-->
 					</div>
 				</div>
 				<div class="form-group row">
@@ -81,15 +83,15 @@
 				<div class="form-group row">
 					<label for="productId" class="col-sm-4 col-form-label">Price</label>
 					<div class="col-sm-8">
-						
-						<div style="padding-top:6px;">{{selectedPackage.price * selectedPackage.days || "N/A"}}</div>
+						<input type="text" ng-model="admin_price" ng-value="selectedPackage.price * selectedPackage.days ||0">
+							<!--<div style="padding-top:6px;">{{selectedPackage.price * selectedPackage.days || "N/A"}}</div>-->
 					</div>
 				</div>
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
-				<input class="btn btn-primary" value="Save" type="button" ng-click="addPackageInMetroCampaign()">
+				<input class="btn btn-primary" value="Save" type="button" ng-click="addPackageInMetroCampaign(admin_selected_slots,admin_price)">
 				<span></span>
-				<input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()()">
+				<input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()">
 			</div>
 		</form>
 	</md-content>
@@ -142,8 +144,8 @@
 					<table class="table table-striped table-bordered" style="width: 97%;">
 						<tbody>
 							<tr>
-								<td>Staring From</td>
-								<td>N/A</td>
+								<td>Starting From</td>
+								<td>{{metroCampaignDetails.start_date | date: "dd-MM-yyyy" || "N/A"}}</td>
 							</tr>
 							<tr>
 								<td>Actual Budget</td>
@@ -267,8 +269,16 @@
 						<td>{{pkg.selected_slots}}</td>
 						<td>{{pkg.days}}</td>
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
-						<td>{{pkg.price}}</td>
+						<td> <md-input-container class="md-block margin-input">
+								<md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
+								<input ng-model="pkg.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+									 />
+							</md-input-container>
+							<md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
+							<md-button class="md-primary" ng-click="updatePackagePrice(pkg.price,pkg)" ng-show="enabledPrice">Update Price</md-button>
+						</td>
 						<td>
+							
 							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status != 101 || metroCampaignDetails.type ==0" ng-click="deleteProductFromCampaign(metroCampaignDetails.id, pkg.package_id)">
 								<md-icon>
 									<i class="material-icons">delete</i>

@@ -22,6 +22,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     $mdSidenav('add-metro-product-sidenav').toggle();
   };
 
+  
+
   /*===================================
   | Popups and Sidenavs end
   ===================================*/
@@ -226,11 +228,36 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       $scope.metroCampaignDetails = result;
     });
   }
-  $scope.addPackageInMetroCampaign = function () {
+  $scope.addPackageInMetroCampaign = function (slots,price) {
+    //console.log(slots);
+   // console.log(price);
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
+    if(slots){
+      $scope.selectedPackage.admin_slots = slots;
+    }
+    if(price){
+      $scope.selectedPackage.admin_price = price;
+    }
     //$scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
     AdminMetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
+      if (result.status == 1) {
+        $scope.selectedPackage = {};
+        getMetroCampaignDetails($scope.metroCampaignDetails.id);
+        toastr.success(result.message);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+
+  $scope.updatePackagePrice = function (price,package1) {
+    $scope.package_price = {};
+    $scope.package_price = package1;
+    $scope.package_price.price = price;
+    $scope.package_price.edit_id = package1._id;
+    AdminMetroService.addPackageInMetroCampaign($scope.package_price).then((result) => {
       if (result.status == 1) {
         $scope.selectedPackage = {};
         getMetroCampaignDetails($scope.metroCampaignDetails.id);
