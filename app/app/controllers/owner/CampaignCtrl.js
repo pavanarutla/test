@@ -261,7 +261,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       clickOutsideToClose: true,
       controller: function ($scope, src) {
         $scope.img_src = src;
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        }
       }
+      
     });
   }
   $scope.closeDialog = function() {

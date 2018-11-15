@@ -62,6 +62,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       clickOutsideToClose:true,
       controller:function($scope, src){
         $scope.img_src = src;
+        $scope.closeDialog = function(){
+          $mdDialog.hide();
+        }
       }
     });
   };
@@ -104,7 +107,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       clickOutsideToClose:true,
       controller:function($scope,$mdDialog, src){
         $scope.img_src = src;
-        $scope.close = function(){
+        $scope.closeDialog = function(){
           $mdDialog.hide();
         }
       }

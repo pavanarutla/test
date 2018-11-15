@@ -1,5 +1,7 @@
 app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr) {
-
+  $scope.closeDialog = function(){
+    $mdDialog.hide();
+  }
   $scope.productList = [];
   
   /*===================
@@ -207,6 +209,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       clickOutsideToClose:true,
       controller:function($scope, src){
         $scope.img_src = src;
+        $scope.closeDialog = function(){
+          $mdDialog.hide();
+        }
       }
     });
   }

@@ -191,6 +191,9 @@ app.controller('GmapCtrl',
           clickOutsideToClose: true,
           controller: function ($scope, src) {
             $scope.img_src = src;
+            $scope.closeDialog = function() {
+              $mdDialog.hide();
+            }
           }
         });
       };

@@ -12,6 +12,10 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
   /*==============================
   | Popup and Sidenav controls
   ==============================*/
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
+  }
+
   $scope.showFormatForm = function (ev) {
     $scope.formatPopupType = "metro";
     $mdDialog.show({
@@ -52,6 +56,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
       $scope.package.format_id = result[0].id;
     });
   }
+  
 
   $scope.addFormat = function(format){
     Upload.upload({

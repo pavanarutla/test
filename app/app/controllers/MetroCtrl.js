@@ -1,6 +1,6 @@
 app.controller('MetroCtrl',
-  ['$scope', '$mdSidenav', '$mdDialog', '$rootScope', '$stateParams', '$timeout', '$window', 'CampaignService', 'MetroService', 'ProductService', 'FileSaver', 'Blob', 'config', 'toastr',
-    function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, ProductService, FileSaver, Blob, config, toastr) {
+  ['$scope', '$mdSidenav', '$mdDialog', '$rootScope', '$stateParams', '$timeout', '$window', 'CampaignService', 'MetroService', 'ProductService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
+    function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, ProductService, FileSaver, Blob, config, toastrstate,$state) {
       $scope.metroCampaign = {};
       $scope.newDate = new Date();
       /*==============================
@@ -52,7 +52,11 @@ app.controller('MetroCtrl',
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
           $scope.getMetroPackages($scope.selectedCorridor.id);
-		      // $scope.showPackagePopup();
+          if($state.current.url=='metro'){
+            $scope.showPackagePopup();
+          }
+          
+          //console.log($state.current.url);
           
         });
       }
