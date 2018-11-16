@@ -149,7 +149,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       });
     });
   }
-  var loadOwnerProductList = function () {
+  $scope.loadOwnerProductList = function () {
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (result) {
       if (localStorage.selectedOwnerCampaign) {
         var selectedOwnerCampaign = JSON.parse(localStorage.selectedOwnerCampaign);
@@ -568,7 +568,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     setMinMaxDatesForCamapign();
   }
   if ($rootScope.currStateName == "owner.suggest-products") {
-    loadOwnerProductList();
+    $scope.loadOwnerProductList();
     setDatesForOwnerProductsToSuggest(JSON.parse(localStorage.selectedOwnerCampaign));
   }
   if (typeof $stateParams.campaignId !== 'undefined' && typeof $stateParams.campaignType !== 'undefined') {

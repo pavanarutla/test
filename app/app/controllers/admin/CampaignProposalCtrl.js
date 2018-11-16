@@ -386,6 +386,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
             }
           });
         }
+        $scope.closeDialog = function(){
+          $mdDialog.hide();
+        }
       }
     });
   }

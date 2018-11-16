@@ -255,7 +255,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     });
   }
 
-  $scope.updatePackagePrice = function (price,package1) {
+  /*$scope.updatePackagePrice = function (price,package1) {
     $scope.package_price = {};
     $scope.package_price = package1;
     $scope.package_price.price = price;
@@ -270,8 +270,60 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
         toastr.error(result.message);
       }
     });
+  }*/
+
+  $scope.updatePackagePrice = function(price,package1){
+    var productObj = {
+      id: $scope.metroCampaignDetails.id,
+      start_date: package1.start_date,
+      price: price,
+      edit_id: package1._id
+    };
+    $mdDialog.show({
+      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/admin/edit-metro-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminMetroService, ctrlScope,  productObj){
+        $scope.product = productObj;
+        $scope.AdminProposalFromMinDate = new Date();
+        $scope.AdminProposalStartDate = new Date($scope.product.start_date);
+        $scope.updateProposedProduct = function(product){
+         /* AdminCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              $mdDialog.hide();
+              CampaignService.getCampaignWithProducts(campaign.id).then(function(result){
+                ctrlScope.campaignDetails = result;
+                ctrlScope.campaignProducts = result.products;
+                // setDatesForAdminProposalToSuggest($scope.campaignDetails);
+              });
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });*/
+          AdminMetroService.addPackageInMetroCampaign(product).then((result) => {
+            if (result.status == 1) {
+              $scope.selectedPackage = {};
+              getMetroCampaignDetails(product.id);
+              toastr.success(result.message);
+            }
+            else {
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.closeMdDialog = function(){
+          $mdDialog.hide();
+        }
+      }
+    });
   }
+
   $scope.showConfirmMetroPaymentPopup = function () {
+    
     $mdDialog.show({
       templateUrl: 'views/admin/confirm-metro-payment-popup.html',
       fullscreen: $scope.customFullscreen,

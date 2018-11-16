@@ -268,17 +268,30 @@
 						<td>{{pkg.selected_slots}}</td>
 						<td>{{pkg.days}}</td>
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
-						<td> <md-input-container class="md-block margin-input">
+						<td>{{pkg.price}}</td>
+							 <!--<md-input-container class="md-block margin-input">
 								  <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
 							    <input ng-model="pkg.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" style="width: 30%"
 									 />
 									 <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice"><i class="material-icons">edit</i></md-button>
 							     <md-button class="md-primary" ng-click="updatePackagePrice(pkg.price,pkg)" ng-show="enabledPrice"><i class="material-icons">check</i></md-button>
-							</md-input-container>
+							</md-input-container>-->
 							
-						</td>
+						
 						<td>
-							
+							<!--<span>
+								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.product_id, campaignProduct.from_date, campaignProduct.to_date, campaignProduct.price)"
+								ng-disabled="metroCampaignDetails.status != 121 || metroCampaignDetails.type ==0">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>-->
+							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status != 101 || metroCampaignDetails.type ==0" ng-click="updatePackagePrice(pkg.price,pkg)">
+								<md-icon>
+									<i class="material-icons">mode_edit</i>
+								</md-icon>
+							</md-button>
 							<md-button class="md-icon-button" ng-disabled="metroCampaignDetails.status != 101 || metroCampaignDetails.type ==0" ng-click="deleteProductFromCampaign(metroCampaignDetails.id, pkg.package_id)">
 								<md-icon>
 									<i class="material-icons">delete</i>
