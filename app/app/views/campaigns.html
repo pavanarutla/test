@@ -108,7 +108,7 @@
 							<td>{{rCampaign.act_budget || "N/A"}}</td>
 							<td hide-sm>{{rCampaign.products.length}}</td>
 							<td>{{rCampaign.created_at | date:'medium'}}</td>
-							<td><md-button class="md-primary">VIEW</md-button></td>
+							<td><md-button ng-href="#/view-campaign/{{rCampaign.id}}" class="md-primary">VIEW</md-button></td>
 						</tr>      
 					</tbody>
 				</table>
@@ -148,9 +148,9 @@
 								<a  href="#/metro-campaign/{{mCampaign.id}}">
 									<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 								</a>
-								<button   ng-click="deleteMetroCampaigns(mCampaign.id)"> 
+								<md-button   ng-click="deleteMetroCampaigns(mCampaign.id)" ng-disabled="mCampaign.status != 101"> 
 									<md-icon><i class="material-icons">delete </i></md-icon>
-								</button>
+								</md-button>
 							</td>
 						</tr>      
 					</tbody>

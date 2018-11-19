@@ -211,8 +211,8 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       $scope.metroPackages = result;
       $scope.selectedPackage = result[0];
       $scope.selectedPackage.days = "7";
-      $scope.admin_selected_slots = ($scope.selectedPackage.max_slots * $scope.selectedPackage.days);
-      $scope.admin_price = ($scope.selectedPackage.price * $scope.selectedPackage.days);
+      /*$scope.admin_selected_slots = ($scope.selectedPackage.max_slots * $scope.selectedPackage.days);
+      $scope.admin_price = ($scope.selectedPackage.price * $scope.selectedPackage.days);*/
     });
   }
   function getMetroCampaigns() {
