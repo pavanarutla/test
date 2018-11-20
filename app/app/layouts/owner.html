@@ -6,11 +6,11 @@
 			<md-button aria-label="menu" class="md-icon-button menubtn" hide-gt-sm ng-click="toggleOwnerLeftSidenav()">
 				<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 			</md-button>
-			<md-button aria-label="logo" class="md-icon">
-				<img class="png-icon" src="assets/images/owner/logo.png" width="130px" alt="images">
+			<md-button aria-label="logo" class="md-icon bill_img">
+				<img class="png-icon logo_image" src="assets/images/owner/logo.png" alt="images">
 			</md-button>
 			<span flex></span>
-			<button class="btn btn-default metro_btn">Metro Train</button>
+			<button class="btn btn-default metro_btn hide-xs">Metro Train</button>
 			<div class="profile_details_left"><!--notifications of menu start -->
 				<ul class="nofitications-dropdown">
 					<li class="dropdown head-dpdn"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">{{ownerNotifs.length}}</span></a>
@@ -31,9 +31,9 @@
 						</li>
 					</ul>
 					</li>
-					<li class="dropdown head-dpdn"> 
+					<li class="dropdown head-dpdn hide-xs"> 
 						<a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Camapgin (5)</a>
-						<ul class="dropdown-menu animated fadeInDown mt-5">
+						<ul class="dropdown-menu animated fadeInDown mt-5 saved_cam">
 						<li>
 							<div class="notification_header ">
 							<h3 class="text_color">You have 5 Campaigns</h3>
@@ -67,7 +67,7 @@
 					</li>
 					<li class="dropdown head-dpdn"> 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<img src="assets/images/man.png"/>
+							<img src="assets/images/man.png" class="hide-xs"/>
 							<i class="fa fa-ellipsis-v lnr"></i>
 						</a>
 						<ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s">
@@ -86,6 +86,7 @@
 			</div>
 		</div>
 	</md-toolbar>
+	
 	<!--toolbar end -->
 	<!-- sidenav start -->
 	<div layout="row" flex style=" position:relative;">
@@ -94,7 +95,7 @@
 				<!-- <md-toolbar  style="min-height: 65px !important;">
 								<img class="png-icon" src="assets/images/billboards.png">
 						</md-toolbar>  -->
-				<header layout="column" layout-padding style="min-height:90px !important" class="contbg">
+				<header style="min-height:55px !important" class="contbg">
 					<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
 						<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 					</md-button>
@@ -129,14 +130,14 @@
 									</md-button>
 								</md-menu-item>
 								<md-menu-item flex layout="column" ng-show="showCampagin">
-									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}" >
+									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
 										<div layout="row">
 										<span flex="15"></span>
 										</span>My Campaigns</div>
 									</md-button>
 								</md-menu-item>
 								<md-menu-item flex layout="column" ng-show="showCampagin">
-									<md-button ng-href="#/owner/{{clientSlug}}/bbi-campaigns" ng-class="{'active-link': currStateName == 'owner.bbi-campaigns'}" >
+									<md-button ng-href="#/owner/{{clientSlug}}/bbi-campaigns" ng-class="{'active-link': currStateName == 'owner.bbi-campaigns'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
 										<div layout="row">
 										<span flex="15"></span>
 										BBI Campaigns
@@ -164,12 +165,12 @@
 									</md-button>
 								</md-menu-item>
 								<md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/bbisupport" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+									<md-button ng-href="#/owner/{{clientSlug}}/bbisupport" ng-class="{'active-link': currStateName == 'owner.bbisupport'}" ng-click="closeMenuSidenavIfMobile()">
 										BBI Support
 									</md-button>
 								</md-menu-item>
 								<md-menu-item class="nv-nav-item">
-										<md-button ng-href="#/owner/{{clientSlug}}/loginpage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+										<md-button ng-href="#/owner/{{clientSlug}}/loginpage" ng-class="{'active-link': currStateName == 'owner.loginpage'}" ng-click="closeMenuSidenavIfMobile()">
 											Login Pages
 										</md-button>
 									</md-menu-item>
