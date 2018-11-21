@@ -14,7 +14,7 @@
           <img ng-src="assets/images/menu/orgnl.png" width="160" >
         </md-button> -->
       <span flex class=""></span>
-      <md-menu-bar class="main-menu">
+      <md-menu-bar class="main-menu main_mob">
         <md-button aria-label="whyoutdoor" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">what we do</md-button>
         <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">our services</md-button>
         <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">why outdoor</md-button>
@@ -33,17 +33,17 @@
           suggest me
         </md-button>
          <!--search button -->
-        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-gt-xs>
+        <md-button hide-xs aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-gt-xs>
           <md-icon><i class="material-icons">search</i></md-icon>
         </md-button>
         <!--notification button -->
-        <md-button aria-label="notifications" class="md-icon-button notiftn-btn" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
+        <md-button aria-label="notifications" class="md-icon-button notiftn-btn noti_btn" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
           <md-icon><i class="material-icons">notifications</i></md-icon>
         </md-button>
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
-          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+          <md-button class="md-secondary md-mini md-button profile-img cir_img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
             <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
             <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
           </md-button>
