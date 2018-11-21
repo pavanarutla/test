@@ -26,6 +26,9 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
+				else if($auth.getPayload().userMongo.user_type == "bbi"){
+					$state.go("admin.home", null);
+				}
 				else{
 					$state.go("index.location", null);
 					// location.reload();
