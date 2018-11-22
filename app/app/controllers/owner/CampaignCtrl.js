@@ -488,6 +488,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   =============================== */
   function getCampaignWithPayments() {
     OwnerCampaignService.getCampaignWithPayments().then(function (result) {
+      $scope.requestList = result;
       $scope.campaignsWithPayments = result;
     });
   }

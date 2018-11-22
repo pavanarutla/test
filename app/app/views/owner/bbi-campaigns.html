@@ -99,7 +99,9 @@
   </md-content>
 </md-sidenav> -->
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
-
+    <div ng-if="!requestList|| requestList.length == 0">
+        <h3>There is no campaigns available</h3>
+        </div>
   <div layout="colmun" layout-align="end center" class="campaign_search hide-xs">
     <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex>
       <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
