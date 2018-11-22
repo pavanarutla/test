@@ -146,7 +146,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
   ======== Products section ========
   */
 
-  var getRequestedHoardings = function(){
+  $scope.getRequestedHoardings = function(){
     return new Promise((resolve, reject) => {
       ProductService.getRequestedHoardings($scope.pagination.pageNo, $scope.pagination.pageSize).then((result) => {
         $scope.requestedProductList = result.products;
@@ -195,7 +195,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
       if(result.data.status == "1"){
         $scope.getProductList();
         if($rootScope.currStateName == 'admin.requested-hoardings'){
-          getRequestedHoardings();
+          $scope.getRequestedHoardings();
         }
         toastr.success(result.data.message);
         $mdDialog.hide();
@@ -307,7 +307,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
 
   if($rootScope.currStateName == 'admin.requested-hoardings'){
     if($stateParams.productId){
-      getRequestedHoardings().then((requestedProducts) => {
+      $scope.getRequestedHoardings().then((requestedProducts) => {
         var product = _.filter(requestedProducts.products, function(prod){          
           return prod.id == $stateParams.productId;
         });
@@ -315,7 +315,7 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
       });
     }
     else{
-      getRequestedHoardings();
+      $scope.getRequestedHoardings();
     }
   }
 
