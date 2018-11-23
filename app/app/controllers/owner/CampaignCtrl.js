@@ -648,4 +648,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*=============================
   | Page based initial loads end
   =============================*/
+//page width
+  $scope.innerWidth = $window.innerWidth;
 });
