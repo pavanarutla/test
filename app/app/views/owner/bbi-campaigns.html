@@ -98,10 +98,7 @@
     </form>
   </md-content>
 </md-sidenav> -->
-<div layout="column" layout-fill="layout-fill" class="campagin_page">
-    <div ng-if="!requestList|| requestList.length == 0">
-        <h3>There is no campaigns available</h3>
-        </div>
+<div layout="column" layout-fill="layout-fill" class="campagin_page">    
   <div layout="colmun" layout-align="end center" class="campaign_search hide-xs">
     <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex>
       <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
@@ -239,7 +236,10 @@
     <md-tab label="Proposals">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
-          <table class="table table-hover">
+          <div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+              <h3>There are no Proposals</h3>
+          </div>
+          <table class="table table-hover" ng-if="plannedCampaigns.length > 0">
             <thead>
               <tr class="text_color text-center">
                 <th>CID</th>
@@ -252,8 +252,8 @@
                 <th class="hide-xs"></th>
               </tr>
             </thead>
-            <tbody class="text-center" ng-repeat="campaign in plannedCampaigns">
-              <tr>
+            <tbody class="text-center" ng-repeat="campaign in plannedCampaigns">                
+              <tr>               
                   <td class="table_vertical">{{campaign.cid || "N/A"}}</td>
                   <td class="text-left table_vertical">{{campaign.name}}</td>
                   <td class="table_vertical">{{campaign.start_date | date}}</td>
@@ -297,7 +297,10 @@
     <md-tab label="Running">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
-          <table class="table table-hover">
+            <div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+                <h3>There is no Ruuning-Campaigns available</h3>
+            </div>
+          <table class="table table-hover" ng-if="plannedCampaigns.length > 0">
             <thead>
               <tr class="text_color text-center">
                 <th>CID</th>
@@ -356,7 +359,10 @@
     <md-tab label="Closed">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
-          <table class="table table-hover">
+            <div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+                <h3>There is no Closed-Campaigns available</h3>
+            </div>
+          <table class="table table-hover" ng-if="plannedCampaigns.length > 0">
             <thead>
               <tr class="text_color text-center">
                 <th>CID</th>

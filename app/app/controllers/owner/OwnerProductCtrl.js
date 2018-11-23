@@ -176,7 +176,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
   $scope.getApprovedProductList = function(){
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      $scope.requestList = result;
+      //$scope.requestList = result;
       $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
@@ -203,7 +203,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      $scope.requestList = result;
+      //$scope.requestList = result;
       $scope.requestedProductList = result.products;
       // console.log(result.products);
       $scope.pagination.pageCount = result.page_count;

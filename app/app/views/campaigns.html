@@ -300,7 +300,10 @@
 		<md-tab label="Proposals">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
-					<table class="table table-hover">
+						<div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+								<h3>There is no Campaigns available</h3>
+							</div>
+					<table class="table table-hover" ng-if="plannedCampaigns.length > 0">
 						<thead>
 							<tr class="text_color text-center">
 								<th>CID</th>
@@ -374,7 +377,10 @@
 		<md-tab label="Sheduled ">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
-					<table class="table ">
+						<div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+								<h3>There is no Sheduled-Campaigns available</h3>
+							</div>
+					<table class="table " ng-if="plannedCampaigns.length > 0">
 						<thead>
 							<tr class="text_color text-center">
 								<th>CID</th>
@@ -449,7 +455,10 @@
 		<md-tab label="Running">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
-					<table class="table">
+						<div ng-if="!runningCampaigns|| runningCampaigns.length == 0">
+								<h3>There is no Running-Campaigns available</h3>
+							</div>
+					<table class="table" ng-if="runningCampaigns.length > 0">
 						<thead>
 							<tr class="text_color text-center">
 								<th>CID</th>
@@ -524,7 +533,10 @@
 		<md-tab label="Closed">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
-					<table class="table">
+						<div ng-if="!closedCampaigns|| closedCampaigns.length == 0">
+								<h3>There are no closed-Campaigns available</h3>
+							</div>
+					<table class="table" ng-if="closedCampaigns.length > 0">
 						<thead>
 							<tr class="text_color text-center">
 								<th>CID</th>
@@ -596,7 +608,10 @@
 		<md-tab label="Metro">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
-					<table class="table">
+						<div ng-if="!plannedCampaigns|| plannedCampaigns.length == 0">
+								<h3>There are no Metro-Campaigns available</h3>
+							</div>					
+					<table class="table" ng-if="plannedCampaigns.length > 0">
 						<thead>
 							<tr class="text_color text-center">
 								<th>CID</th>

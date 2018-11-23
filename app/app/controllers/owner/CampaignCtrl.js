@@ -172,13 +172,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
-      OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
+      OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {        
         $scope.plannedCampaigns = _.filter(result, function (c) {
-          return c.status < 6;
+          return c.status < 600;
         });
-        $scope.runningCampaigns = _.where(result, { status: 6 });
+        $scope.runningCampaigns = _.where(result, { status: 600 });
         $scope.closedCampaigns = _.filter(result, function (c) {
-          return c.status > 6 && c.status <= 8;
+          return c.status > 600 && c.status <= 800;
         });
         resolve(result);
       });
@@ -488,7 +488,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   =============================== */
   function getCampaignWithPayments() {
     OwnerCampaignService.getCampaignWithPayments().then(function (result) {
-      $scope.requestList = result;
+      //$scope.requestList = result;
       $scope.campaignsWithPayments = result;
     });
   }
@@ -506,13 +506,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       $scope.unpaid = $scope.campaignPaymentDetails.act_budget - $scope.paid;
     });
   }
-
-  $scope.paymentTypes = [
-    { name: "Cash" },
-    { name: "Cheque" },
-    { name: "Online" },
-    { name: "Transfer" }
-  ];
   $scope.files = {};
   $scope.updateOwnerCampaignPayment = function () {
     Upload.upload({
