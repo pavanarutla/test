@@ -492,7 +492,7 @@ $scope.activeUserCampaigns = [];
           $scope.activeUserCampaigns = result;
         });
       }
-      if($rootScope.currStateName ==  'index.location'){
+      if($rootScope.currStateName ==  'index' || 'index.location'){
         $scope.shortListedProductsLength = localStorage.shortListedProducts
         $scope.loadActiveUserCampaigns();
       }
