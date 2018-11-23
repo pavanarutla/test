@@ -650,6 +650,7 @@
 				<tr>
 					<th>Product Details</th>
 					<th></th>
+					<th class="hide-xs">Size</th>
 					<th class="">Views</th>
 					<th class="hide-xs">Lit</th>
 					<th class="hide-xs">Price</th>
@@ -668,8 +669,8 @@
 						<p class="td_font"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
 							{{product.direction || "N/A"}}</p>
 					</td>
-					<td class="table_vertical">{{product.panelSize}}</td>
-					<td class="table_vertical hide-xs">{{product.impressions}}</td>
+					<td class="table_vertical hide-xs">{{product.panelSize}}</td>
+					<td class="table_vertical">{{product.impressions}}</td>
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
 					<td class="table_vertical hide-xs">{{product.default_price}}</td>
@@ -677,7 +678,7 @@
 					<td class="table_vertical hide-xs"></td>
 					<td class="text-center table_vertical hide-xs">
 						<a ng-href="#/owner/{{clientSlug}}/editproduct-details"><button ng-click="editRequestedhordings(product)" type="button"
-							 class="btn btn-secondary">Edit
+							 class="btn" style="background-color:#858A8E;min-height: 24px;min-width: 85px;color:#fff;padding:0px;">Edit
 								Details</button></a>
 					</td>
 				</tr>
