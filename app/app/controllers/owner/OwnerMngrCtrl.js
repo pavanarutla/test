@@ -16,6 +16,12 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
     }
   }
 
+  $scope.closeMenuSidenavIfMobile = function(){
+    if($window.innerWidth <=768){
+      $mdSidenav('ownerLeftSidenav').close();
+    }
+  }
+
   $scope.showCampagin = false;
     $scope.toogelCampagin = function () {
       $scope.showCampagin = !$scope.showCampagin;
