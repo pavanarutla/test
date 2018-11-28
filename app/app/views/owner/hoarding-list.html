@@ -369,7 +369,7 @@
             <md-datepicker ng-model="dateFilter.end_date" name="end_date" md-min-date="dateFilter.start_date" md-placeholder="End date" required="required"></md-datepicker>
           </div>
           <div layout="column" flex="15">
-            <md-button class="md-raised md-primary datess" type="submit" ng-click="filterOwnerProductsWithDates(dateFilter)">APPLY</md-button>
+            <md-button class="md-raised md-primary" type="submit" ng-click="filterOwnerProductsWithDates(dateFilter)">APPLY</md-button>
           </div>
           <div layout="column" flex="15">
             <md-button class="md-raised md-warn datess" type="submit" ng-click="pagination.pageNo = 1; getApprovedProductList()">RESET</md-button>
@@ -451,10 +451,10 @@
         </li>
       </ul>
     </div>
-    <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+    <!--<div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
       Go to page: 
       <select ng-model="pagination.pageNo" ng-options="i as i for i in pageRange" ng-change="pagination.pageNo = i; getApprovedProductList();"  hide-md hide-lg></select>
     </div>
-  </div>
+  </div>-->
   <!-- Main container ends -->
 </div>

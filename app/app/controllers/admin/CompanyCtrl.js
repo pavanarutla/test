@@ -8,6 +8,10 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
   /*
   ======== Companies ========
   */
+ $scope.closeDialog = function() {
+    $mdDialog.hide();
+  }
+
   $scope.showAddCompanyPopup = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/admin/add-company-popup.html',

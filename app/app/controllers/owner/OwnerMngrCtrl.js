@@ -15,6 +15,11 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       $mdSidenav('ownerLeftSidenav').close();
     }
   }
+  $scope.closeMenuSidenavIfMobile = function(){
+    if($window.innerWidth <=768){
+      $mdSidenav('ownerLeftSidenav').close();
+    }
+  }
   /*=================================
   | mdDilalog close function
   =================================*/

@@ -37,7 +37,10 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
     highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
     $scope.pagination.pageArray = _.range(lowest, highest + 1);
   }
-
+   
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
+  }
   /*===================
   | Pagination Ends
   ===================*/
@@ -263,6 +266,9 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
       clickOutsideToClose:true,
       controller:function($scope, src){
         $scope.img_src = src;
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        }
       }
     });
   }

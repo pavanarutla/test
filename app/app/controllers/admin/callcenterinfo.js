@@ -22,12 +22,16 @@ app.controller('callCenterCtrl', function ($scope, $http, toastr, AdminContactSe
   // ];
   
   //deleteCallCenterInf
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
+  } 
+  
   $scope.deleteCallCenterInfo = function (row) {
     var index = $scope.callCenterData.data.indexOf(row);
     $scope.callCenterData.data.splice(index, 1);
     toastr.success("CallCenterInfo deleted successfully");
   }
-
+  
   AdminContactService.requestCallBack().then(function (response) {
     //$scope.gridcallCenter.data = response.data;
     $scope.callCenterData = response.data;

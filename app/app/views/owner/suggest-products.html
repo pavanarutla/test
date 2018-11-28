@@ -131,15 +131,7 @@
       </md-grid-tile>
     </md-grid-list>
   </div> -->
-  <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
-    <ul class="pagination">
-      <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-        <a ng-click="pagination.pageNo = i; loadProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
-          {{i}}
-        </a>
-      </li>
-    </ul>
-  </div>
+ 
 </div>
 <div style="position:fixed;bottom:20px;left:40px;width:200px;height:200px;background:#fff;border-radius:20px;padding:15px;z-index:99;box-shadow:0px 0px 4px #888;">
   <p>From
@@ -329,3 +321,12 @@
     </div>
   </div>
 </div>
+<div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
+    <ul class="pagination">
+      <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+        <a ng-click="pagination.pageNo = i; loadOwnerProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+          {{i}}
+        </a>
+      </li>
+    </ul>
+  </div>

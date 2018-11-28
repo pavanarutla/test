@@ -1,5 +1,9 @@
 app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav, $location, $rootScope, $stateParams, AdminCampaignService, ProductService, toastr) {
 
+
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
+  }
   /*
   ======== Campaign requests =======
   */
@@ -83,7 +87,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
             }
           });
         }
-        $scope.close = function(){
+        $scope.closeDialog = function(){
           $mdDialog.hide();
         }
       }
