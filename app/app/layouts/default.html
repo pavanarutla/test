@@ -33,7 +33,7 @@
           suggest me
         </md-button>
          <!--search button -->
-        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-xs>
+        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-xs hide-gt-xs>
           <md-icon><i class="material-icons">search</i></md-icon>
         </md-button>
         <!--notification button -->
@@ -43,7 +43,7 @@
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
-          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)"  style="min-width:45px">
             <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
             <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
           </md-button>
@@ -140,8 +140,8 @@
 
   <!-- Footer Section-->
   <footer style="position:absolute; bottom: 0px;width: 100%;">
-    <div  hide-xs show-gt-xs layout="row" layout-sm="column" align="center center" class="footmain" ng-if="!footerhide">
-      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="center center" layout-sm="row" class="footer_social_icons">
+    <div  hide-xs show-gt-xs layout="row" layout-sm="row" layout-align="center center" class="footmain" ng-if="!footerhide">
+      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100"   layout-align-sm="start center" layout-sm="row" class="footer_social_icons">
         <div class="" style="margin-left:5%">
           <md-button class="md-icon-button fabicon" aria-label="facebook" href="https://www.facebook.com/billboardsind/?fref=ts" target="_blank">
             <!-- <md-icon md-svg-src="assets/images/icons/facebook.svg"></md-icon> -->
@@ -167,8 +167,8 @@
           </md-button>
         </div>
       </div>
-      <div flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="center end" layout-xs="column"
-        layout="column">
+      <div  layout="column" flex="50" flex-md="50" flex-sm="100" flex-xs="100" layout-align-sm="center center" layout-align="center end" layout-xs="column"
+       >
         <p class="md-body-2 text">BBI Advertising pvt Ltd @Copyrights 2018. All rights reserved.</p>
       </div>
     </div> 
