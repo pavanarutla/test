@@ -33,7 +33,7 @@
           suggest me
         </md-button>
          <!--search button -->
-        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-xs>
+        <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-xs hide-gt-xs>
           <md-icon><i class="material-icons">search</i></md-icon>
         </md-button>
         <!--notification button -->
@@ -43,7 +43,7 @@
         <!-- profile button start-->
         <md-menu ng-show="isAuthenticated" class="profile-menu">
  
-          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" style="min-width:45px;">
             <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
             <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
           </md-button>

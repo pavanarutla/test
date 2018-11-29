@@ -8,7 +8,7 @@
 						<tr>
 						<th>Campaign Name</th>
 						<th>Start Date</th>
-						<th>End Date</th>
+						<th hide-xs hide-sm>End Date</th>
 						<th>Status</th>
 						<th>Budget</th>
 						<th>Created On</th>
@@ -19,7 +19,7 @@
 					<tr ng-repeat="pCampaign in plannedCampaigns | limitTo:limit">
 						<td>{{pCampaign.name}}</td>
 						<td>{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
-						<td>{{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td hide-xs hide-sm>{{pCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td>{{pCampaign.status | stringifyCampaignStatus}}</td>
 						<td>{{pCampaign.act_budget || "N/A"}}</td>
 						<td>{{pCampaign.created_at | date:'medium'}}</td>
@@ -49,7 +49,7 @@
 			</div>
 		</md-tab>
 		<!-- running campaign start-->
-		<md-tab label="Running Campaigns">
+		<md-tab label="Running ">
 			<div class="table-responsive">    
 				<table class="table table-striped table-bordered " style="widows: 100%;">
 					<thead class="text_color" style="text-align: center">
@@ -57,7 +57,7 @@
 						<th>Campaign Name</th>
 						<th hide-sm>Client Contact</th>
 						<th>Start Date</th>
-						<th>End Date</th>
+						<th hide-xs hide-sm>End Date</th>
 						<th >Status</th>
 						<th>Budget</th>
 						<th hide-sm>Products</th>
@@ -70,7 +70,7 @@
 						<td>{{rCampaign.name}}</td>
 						<td hide-sm>{{rCampaign.clientcontent}}</td>
 						<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-						<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+						<td hide-xs hide-sm>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 						<td >{{rCampaign.status | stringifyCampaignStatus}}</td>
 						<td>{{rCampaign.act_budget || "N/A"}}</td>
 						<td hide-sm>{{rCampaign.products.length}}</td>
@@ -90,7 +90,7 @@
 						<th>Campaign Name</th>
 						<th hide-sm>Client Contact</th>
 						<th>Start Date</th>
-						<th>End Date</th>
+						<th hide-xs hide-sm>End Date</th>
 						<th>Status</th>
 						<th>Budget</th>
 						<th hide-sm>Products</th>
@@ -103,7 +103,7 @@
 							<td>{{rCampaign.name}}</td>
 							<td hide-sm>{{rCampaign.clientcontent}}</td>
 							<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-							<td>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+							<td hide-xs hide-sm>{{rCampaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
 							<td>{{rCampaign.status | stringifyCampaignStatus}}</td>
 							<td>{{rCampaign.act_budget || "N/A"}}</td>
 							<td hide-sm>{{rCampaign.products.length}}</td>
