@@ -69,6 +69,23 @@ app.filter('datetimeify',function(){
   }
 });
 
+app.filter('stringifyProductStatus',function(){
+  return function(status) {
+    switch (status) {
+      case 100 : 
+        returnStatus = 'proposed'
+        break;
+      case 200 : 
+        returnStatus = 'scheduled'
+        break;
+      case 300 :
+        returnStatus = 'running'
+        break;
+    }
+    return returnStatus;
+  }
+})
+
 app.filter('stringifyCampaignStatus', function(){
   return function(status){
     switch (status) {
