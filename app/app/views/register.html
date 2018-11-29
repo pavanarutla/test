@@ -1,13 +1,13 @@
 <!-- Register pages-->
-<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+<md-dialog flex-xs="100" flex="30" flex-md="60" flex-sm="60" style="border-radius:0px;background:#BC2535">
 	   <md-dialog-content>
-		<md-content class="md-padding"  style="background:#fff">
+		<md-content class="md-padding m-5"  style="background:#fff">
 			<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-				<md-nav-item md-nav-click="showUserRegPanel()" name="users">Clients</md-nav-item>
-				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Ad Space Owners</md-nav-item>
+				<md-nav-item md-nav-click="showUserRegPanel()" name="users">User</md-nav-item>
+				<md-nav-item md-nav-click="showAgencyRegPanel()" name="company">Ad Space Owner</md-nav-item>
 				<span flex></span>
 				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
-					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+					<md-icon class="md-default-theme close_mb"><i class="material-icons">close</i></md-icon>
 				</md-button>
 			</md-nav-bar>
 			<div ng-if="showUserForm"  >
@@ -77,7 +77,7 @@
 								</ul>
 							</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forms.registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerUser.$invalid" ng-click="registerNewUser()">Register</md-button>
 						</md-input-container>
 						<!-- <div layout="row" layout-xs="column">
 							<p>Verify the E-mail address to Sign In </p>
@@ -151,7 +151,7 @@
 							{{clientErrorMessages}}
 						</div>
 						<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forms.registerClientForm.$invalid" ng-click="registerClient(client)">Register</md-button>
+							<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn register_btn" ng-disabled="forms.registerClientForm.$invalid" ng-click="registerClient(client)">Register</md-button>
 						</md-input-container>
 						<!-- <div layout="row" layout-xs="column">
 							<p> Verify the E-mail address to Sign In </p>

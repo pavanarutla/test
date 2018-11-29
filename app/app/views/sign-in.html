@@ -1,138 +1,124 @@
-<md-dialog flex-xs="100" flex="40" flex-md="40" flex-sm="60" style="border-radius:0px;background:#fff">
+<md-dialog flex-xs="100" flex="30" flex-md="40" flex-sm="60" style="border-radius:0px;background:#BC2535">
 
   <md-dialog-content>
-    <md-content class="">
-      <md-nav-bar md-selected-nav-item="currentNavItem" ng-if="userAgencyHeader" nav-bar-aria-label="navigation links">
-        <!-- <md-nav-item md-nav-click="users()" name="users">Users</md-nav-item>
-        <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item> -->
-        <span flex></span>
-        <md-button class="md-icon-button close_mob" aria-label="Close Side Panel" ng-click="closeMdDialog()">
-          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-        </md-button>
-      </md-nav-bar>
-    </md-content>
-    <!-- user for start here -->
-    <div ng-if="!forgotPasswordpage">
-      <div layout="column" layout-align="center start" layout-margin="layout-margin" class="md-block">
-        <h5> Login to the campaign planner</h5>
-      </div>
-      <div layout="column"  layout-margin="layout-margin">
-        <form name="userform" novalidate>
-          <md-input-container class="md-block">
-            <label>Email</label>
-            <input ng-model="user.email" name="useremail" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-            <div ng-messages="userform.useremail.$error">
-              <div class="alret alert-danger" ng-message="required">Email is required.</div>
-              <div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
-              <div ng-message="pattern">Enter a valid email</div>
-            </div>
-          </md-input-container>
 
-          <md-input-container class="md-block">
-            <label>Password</label>
-            <input ng-model="user.password" type="password" name="userpassword" minlength="6" maxlength="20" required="required" />
-            <div ng-messages="userform.userpassword.$error">
-              <div ng-message="required">Password is required.</div>
-              <div ng-message="minlength">Password must have 6 characters.</div>
-              <div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
-            </div>
-          </md-input-container>
-          <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-            <md-button type="submit"layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser()" ng-disabled="userform.$invalid" md-autofocus>SIGN IN</md-button>
-          </md-input-container>
-          <div layout="row" layout-xs="column" layout-margin>
-            <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
-              <p class="alrhvacc"> <a class="md-primary udrlin" style="cursor:pointer;" ng-click="showForgotPasswordDialog()">Forgot Password ?</a></p>
-            </div>
-            <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
-              <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" style="cursor:pointer; text-decoration:none;" ng-click="showRegisterDialog()">Register </a></P>
+    <div class="card card-signin m-5" ng-if="!forgotPasswordpage">
+      <div class="card-body">
+        <div class="mb-4 banner_img">
+          <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
+        </div>
+        <hr class="my-4">
+        <form class="form-signin mt-4" name="userform" novalidate>
+          <div class="form-group row">
+            <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">User Name</label>
+            <div class="col-sm-9">
+              <input ng-model="user.email" class="form-control form_border" name="useremail" type="email" maxlength="50"
+                required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+              <div ng-messages="userform.useremail.$error">
+                <div class="alret alert-danger" ng-message="required">Email is required.</div>
+                <div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
+                <div ng-message="pattern">Enter a valid email</div>
+              </div>
+
             </div>
           </div>
-        </form>
-      </div>
-    </div>    
-    <!-- user form ends here -->
-
-    <!-- Agency form start here -->
-    <!-- <div ng-if="agencyForm">
-      <div layout="column" layout-align="center start" layout-margin="layout-margin" class="md-block">
-        <h5> Login to the Campaign planner</h5>
-      </div>
-      <div layout="column"  layout-margin="layout-margin">
-        <form name="agency" novalidate >
-          <md-input-container class="md-block">
-            <label>Email</label>
-            <input ng-model="agency.email" name="agencyemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-            />
-            <div ng-messages="agency.agencyemail.$error">
-              <div class="alret alert-danger" ng-message="required">Email is required.</div>
-              <div ng-message="maxlength">username shouldn't exceed 30 characters. </div>
-              <div ng-message="pattern">Enter a valid email</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Password</label>
-            <input ng-model="agency.password" type="password" name="Agencypassword" minlength="6" maxlength="20" required="required"
-            />
-            <div ng-messages="agency.Agencypassword.$error">
-              <div ng-message="required">Password is required.</div>
-              <div ng-message="minlength">Password must have 6 characters.</div>
-              <div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
-            </div>
-          </md-input-container>
-          <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-            <md-button  layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="signInUser(user)" ng-disabled="agency.$invalid" md-autofocus>SIGN IN</md-button>
-          </md-input-container>
-          <div layout="row" layout-xs="column">
-            <div layout="column" layout-align="center start" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
-              <p class="alrhvacc"> <a class="md-primary udrlin" ng-click="showForgotPasswordDialog()">Forgot Password ?</a></p>
-            </div>
-            <div layout="column" layout-align="center end" layout-fill="layout-fill" flex="50" flex-xs="100" layout-align-xs="center center">
-              <P class="alrhvacc">Don't have an account ? <a ng-href="#" class="md-primary udrlin" ng-click="showRegisterDialog()">Register </a></P>
+          <div class="form-group row">
+            <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+            <div class="col-sm-9">
+              <input ng-model="user.password" class="form-control form_border" type="password" name="userpassword"
+                minlength="6" maxlength="20" required="required" />
+              <div ng-messages="userform.userpassword.$error">
+                <div ng-message="required">Password is required.</div>
+                <div ng-message="minlength">Password must have 6 characters.</div>
+                <div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
+              </div>
             </div>
           </div>
+
+          <!--<div class="custom-control custom-checkbox mb-3">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                      <label class="custom-control-label" for="customCheck1">Remember password</label>
+                  </div>-->
+
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+              <div class="col-sm-6 col-md-6 offset-lg-2 col-lg-4">
+                <button class="btn login_margin all_button" type="submit" ng-click="signInUser()"
+                  ng-disabled="userform.$invalid" layout-fill="layout-fill" md-autofocus>Login</button>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="forgot">
+                  
+                    <a class="md-primary udrlin alrhvacc" style="cursor:pointer; float:right;color: #000;" ng-click="showForgotPasswordDialog()">Forgot
+                      password ?</a><br>
+                  
+                    <a class="md-primary udrlin alrhvacc"
+                      style="cursor:pointer; text-decoration:none;color: #000;" ng-click="showRegisterDialog()">New User? Register
+                      Here</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <p class="text-center font-weight-light power_by">Powered By
+            Bill Boards India Pvt Ltd</p>
         </form>
       </div>
-    </div> -->
-  
-    <div ng-if="forgotPasswordpage">
-      <!-- <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-        <!-- <md-nav-item md-nav-click="users()" name="users">Users</md-nav-item>
-        <md-nav-item md-nav-click="agency()" name="agency">Agency</md-nav-item> --
-        <span flex><h4 layout-margin>Forgot Password</h4></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="showSignInDialog($event)">
-          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-        </md-button>
-      </md-nav-bar> -->
-      <md-content class="md-padding">
-        <form name="forgotPassword" novalidate="novalidate">
-          <!-- <md-input-container class="md-block">
-            <label>Email</label>
-            <input ng-model="agency.email" name="email" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-            />
-            <div ng-messages="agency.email.$error">
-              <div class="alret alert-danger" ng-message="required">Email is required.</div>
-              <div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
-              <div ng-message="pattern">Enter a valid Email Id.</div>
-            </div>
-          </md-input-container> -->
-          <md-input-container class="md-block">
-            <label>Email</label>
-            <input ng-model="forgotPwd.email" name="forgotpasswordemail" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-            <div ng-messages="forgotPassword.forgotpasswordemail.$error">
-              <div class="alret alert-danger" ng-message="required">Email is required.</div>
-              <div ng-message="maxlength">email shouldn't exceed 50 characters. </div>
-              <div ng-message="pattern">Enter a valid email Id</div>
-            </div>
-          </md-input-container>
-          <!-- <div ng-if="passwordEmailSentSuccess" class="success" style="margin-bottom:20px;padding-left:20px;">
-            An email with instructions to reset your password has been sent to your registered email id.
-          </div> -->
-          <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-            <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forgotPassword.$invalid" ng-click="requestResetPassword(forgotPwd)">Reset Password</md-button>
-          </md-input-container>
-        </form>
-      </md-content>
-    </div> 
-  </md-dialog-content>
+    </div>
+    <div class="card card-signin m-5" ng-if="forgotPasswordpage">
+        <div class="card-body">
+          <div class="mb-4 banner_img">
+            <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
+          </div>
+          <hr class="my-4">
+          <form class="form-signin mt-4" name="forgotPassword" novalidate="novalidate">
+              <h4 class="text-center mb-3" style="margin-bottom:0px;">Reset Password</h4>
+              <div class="form-group row">
+                  <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+                  <div class="col-sm-9">
+                      <input type="email" class="form-control form_border" id="" ng-model="campaignPayment.amount">
+                  </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="row">
+                      <div class="offset-lg-6 offset-md-6 col-sm-6 col-md-6 col-lg-6">
+                          <a ng-href="#/owner/{{clientSlug}}/resetlogin"><button class="btn reset_passowrd all_button"
+                                  type="submit">Reset Password</button></a>
+                      </div>
+                  </div>
+              </div>
+              <hr class="my-4">
+              <p class="text-center font-weight-light power_by">Powered By
+                  Bill Boards India Pvt Ltd</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="card card-signin my-5">
+          <div class="card-body">
+              <div class="mb-4 banner_img">
+                  <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
+              </div>
+              <hr class="my-4">
+              <form class="form-signin mt-4">
+                  <p class="text-center mb-3 md-title" style="margin-bottom:0px;">Congratulations!<br>
+                      Your account has been created.<br>
+                      Let's work together
+                  </p>
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="row">
+                          <div class="offset-lg-3 offset-md-3 col-sm-6 col-md-6 col-lg-6">
+                              <a ng-href="#/owner/{{clientSlug}}/loginpage"><button class="btn btn-lg btn-danger btn-block text-uppercase"
+                                      type="submit">Login</button></a>
+                          </div>
+                      </div>
+                  </div>
+                  <hr class="my-4">
+                  <p class="text-center font-weight-light power_by">Powered By
+                      Bill Boards India Pvt Ltd</p>
+              </form>
+          </div>
+      </div> -->
+
+    </md-dialog-content>
 </md-dialog>
