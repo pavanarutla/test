@@ -207,6 +207,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       });
       $scope.metroPackages = result;
       $scope.selectedPackage = result[0];
+      $scope.selectedPackage.days = "7";
+      /*$scope.admin_selected_slots = ($scope.selectedPackage.max_slots * $scope.selectedPackage.days);
+      $scope.admin_price = ($scope.selectedPackage.price * $scope.selectedPackage.days);*/
     });
   }
   function getMetroCampaigns() {
@@ -225,10 +228,18 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       $scope.metroCampaignDetails = result;
     });
   }
-  $scope.addPackageInMetroCampaign = function () {
+  $scope.addPackageInMetroCampaign = function (slots,price) {
+    //console.log(slots);
+   // console.log(price);
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
-    $scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
+    if(slots){
+      $scope.selectedPackage.admin_slots = slots;
+    }
+    if(price){
+      $scope.selectedPackage.admin_price = price;
+    }
+    //$scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
     AdminMetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
       if (result.status == 1) {
         $scope.selectedPackage = {};
@@ -237,6 +248,73 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       }
       else {
         toastr.error(result.message);
+      }
+    });
+  }
+
+  /*$scope.updatePackagePrice = function (price,package1) {
+    $scope.package_price = {};
+    $scope.package_price = package1;
+    $scope.package_price.price = price;
+    $scope.package_price.edit_id = package1._id;
+    AdminMetroService.addPackageInMetroCampaign($scope.package_price).then((result) => {
+      if (result.status == 1) {
+        $scope.selectedPackage = {};
+        getMetroCampaignDetails($scope.metroCampaignDetails.id);
+        toastr.success(result.message);
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }*/
+
+  $scope.updatePackagePrice = function(price,package1){
+    var productObj = {
+      id: $scope.metroCampaignDetails.id,
+      start_date: package1.start_date,
+      price: price,
+      edit_id: package1._id
+    };
+    $mdDialog.show({
+      locals:{ campaign: $scope.campaignDetails, productObj : productObj, ctrlScope : $scope },
+      templateUrl: 'views/admin/edit-metro-proposed-product.html',
+      fullscreen: $scope.customFullscreen,
+      clickOutsideToClose:true,
+      controller:function($scope, $mdDialog, CampaignService, AdminMetroService, ctrlScope,  productObj){
+        $scope.product = productObj;
+        $scope.AdminProposalFromMinDate = new Date();
+        $scope.AdminProposalStartDate = new Date($scope.product.start_date);
+        $scope.updateProposedProduct = function(product){
+         /* AdminCampaignService.updateProposedProduct(campaign.id, $scope.product).then(function(result){
+            if(result.status == 1){
+              // update succeeded. update the grid now.
+              $mdDialog.hide();
+              CampaignService.getCampaignWithProducts(campaign.id).then(function(result){
+                ctrlScope.campaignDetails = result;
+                ctrlScope.campaignProducts = result.products;
+                // setDatesForAdminProposalToSuggest($scope.campaignDetails);
+              });
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });*/
+          AdminMetroService.addPackageInMetroCampaign(product).then((result) => {
+            if (result.status == 1) {
+              $scope.selectedPackage = {};
+              getMetroCampaignDetails(product.id);
+              toastr.success(result.message);
+            }
+            else {
+              toastr.error(result.message);
+            }
+          });
+        }
+        $scope.closeMdDialog = function(){
+          $mdDialog.hide();
+        }
       }
     });
   }
