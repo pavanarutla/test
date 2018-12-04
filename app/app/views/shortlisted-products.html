@@ -121,6 +121,11 @@
 			<div class="form-group mt-3 mr-2 ml-2">
 				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
 			</div>
+			<div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
+					Save Campaign
+				</md-button>
+			</div>
 			<p class="text-center md-body-2">(OR)</p>
 			<div class="form-group mr-2 ml-2">
 				<select class="form-control" ng-model="existingCampaign.id" required="required">
@@ -131,10 +136,10 @@
 				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
 					add to existing or save Campaign
 				</md-button>
-			</div> -->
+			</div> -->			
 			<div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
-					Save Campaign
+				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id,campaign.id)">
+					add to existing or save Campaign
 				</md-button>
 			</div>
 		</div>

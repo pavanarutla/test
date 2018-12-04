@@ -450,11 +450,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/editproduct-details.html',
       controller:'OwnerProductCtrl'
     })
-    .state('owner.loginpage', {
-      url: '/loginpage',
-      templateUrl: 'views/owner/loginpage.html',
-      controller:''
-    })
+    // .state('owner.loginpage', {
+    //   url: '/loginpage',
+    //   templateUrl: 'views/owner/loginpage.html',
+    //   controller:''
+    // })
     .state('owner.forgotpassword', {
       url: '/forgotpassword',
       templateUrl: 'views/owner/forgotpassword.html',

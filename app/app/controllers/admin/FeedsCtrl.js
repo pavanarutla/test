@@ -6,7 +6,7 @@ app.controller('AdminFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
   $scope.requestList = {};
   function getAllFeeds(){
     return new Promise((resolve, reject) => {
-      AdminCampaignService.getAllCampaignRequests().then(function(result){
+      AdminCampaignService.getAllCampaignRequests().then(function(result){       
         $scope.requestList.metroCampaignFeeds = result.metro_campaign_feeds;
         $scope.requestList.campaignSuggestionRequests = result.requested_campaign_suggestions;
         $scope.requestList.otherCampaignFeeds = result.other_campaign_feeds;

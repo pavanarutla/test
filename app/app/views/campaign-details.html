@@ -49,7 +49,7 @@
 	<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
 		<div class="ml-4" style="margin-top:28px;">
 			<p>Camapaign ID</p>
-			<p class="md-body-2">{{campaignDetails.campaignId || "N/A"}}</p>
+			<p class="md-body-2">{{campaignDetails.cid || "N/A"}}</p>
 		</div>
 		<div style="margin-top:28px;">
 			<p>Camapaign Name</p>
@@ -95,9 +95,10 @@
 					</td>
 					<td>
 						<p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}} ({{campaignProduct.panelSize}})</b><br>{{campaignProduct.address}}
-							<br>Views : {{campaignProduct.views || "N/A"}},
-							<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>
-								{{campaignProduct.impressions}}</button></p>
+							<br>Views : {{campaignProduct.impressions || "N/A"}}
+							<!-- <br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>
+								{{campaignProduct.impressions}}</button> -->
+							</p>
 					</td>
 					<td class="table_vertical">{{campaignProduct.panelSize}}</td>
 					<td class="table_vertical">
@@ -108,7 +109,7 @@
 					</td>
 					<td class="table_vertical">{{campaignProduct.price}}</td>
 					<td class="table_vertical">
-						<a href="#"><i class="material-icons">delete_foreve</i></a>
+						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_foreve</i></a>
 					</td>
 					<td class="text-center table_vertical">
 						<p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>
