@@ -3,7 +3,7 @@
 <div layout="column" flex style="position:relative;min-height:100%;">
 	<md-toolbar class="md-whiteframe-z1 contbg" style="position: fixed;">
 		<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
-			<md-button aria-label="menu" class="md-icon-button menubtn" ng-click="toggleOwnerLeftSidenav()">
+			<md-button aria-label="menu" class="md-icon-button menubtn" ng-click="toggleOwnerLeftSidenav()" hide-gt-sm>
 				<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
 			</md-button>
 			<md-button aria-label="logo" class="md-icon bill_img">
@@ -87,10 +87,9 @@
 			</div>
 		</div>
 	</md-toolbar>
-	
 	<!--toolbar end -->
 	<!-- sidenav start -->
-	<div layout="row" flex style=" position:relative;">
+	<div layout="row" flex style="position:relative;">
 		<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
 			style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
 				<!-- <md-toolbar  style="min-height: 65px !important;">
@@ -186,12 +185,10 @@
 						</div>
 					</div>
 				</md-content>
-		</md-sidenav>
-		
+		</md-sidenav>		
 		<ui-view  class="main_view" flex></ui-view>
 		<div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
 			<div style="padding: 5px 0;">Powered By Billboards India</div>
 		</div>
-		
 	</div>
 </div>
