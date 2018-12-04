@@ -1,4 +1,4 @@
-app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdDialog, $timeout, MapService, config, CampaignService){
+app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdDialog, $timeout, MapService, config, CampaignService, toastr){
 
   $scope.config = config;
 
@@ -107,6 +107,23 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     else {
       toastr.error("Please shortlist some products first.");
     }
+  }
+  $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
+    console.log(productId)
+    var productToCampaign = {
+      product_id: productId,
+      campaign_id: existingCampaignId
+    };
+    CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
+      console.log(result);
+      if (result.status == 1) {
+        toastr.success(result.message);
+        $mdSidenav('productDetails').close();
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
   }
 
   //view campaign details

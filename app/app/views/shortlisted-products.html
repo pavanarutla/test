@@ -12,7 +12,7 @@
 					<th>Price</th>
 					<th></th>
 					<th>
-						<md-button class="md-raised md-primary" style="background:#6888F3;" ng-href="#/location">Add
+						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
 					</th>
@@ -41,9 +41,11 @@
 					</td>
 					<td class="table_vertical">{{shortlisted.default_price || "N/A"}}</td>
 					<td class="table_vertical">
-						<a><i class="material-icons" ng-click="deleteShortlisted($event, shortlisted.id)">delete_foreve</i></a>
+						<a><i class="material-icons" ng-click="deleteShortlisted($event, shortlisted.id)">delete_forever</i>
+							
+							</a>
 					</td>
-					<td class="text-center table_vertical">
+					<td class="table_vertical">
 						<p class="text_color md-caption">This Inventory<br>
 							Campaign Completed</p>
 					</td>
@@ -97,10 +99,10 @@
 					</form>
 				</div>
 			</div> -->
-			<div class="p-2  col-md-6 align-self-end">
+			<div class="p-2 align-self-end">
 				<div class="d-flex justify-content-end pt-4 align-self-end">
 					<div class="d-flex justify-content-end pt-4">
-						<md-button class="md-raised md-warn" ng-click="toggleSaveCampaignPopup()">SAVE CAMPAIGN</md-button>
+						<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>
 						<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
 					</div>
 				</div>
@@ -119,6 +121,11 @@
 			<div class="form-group mt-3 mr-2 ml-2">
 				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
 			</div>
+			<div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
+					Save Campaign
+				</md-button>
+			</div>
 			<p class="text-center md-body-2">(OR)</p>
 			<div class="form-group mr-2 ml-2">
 				<select class="form-control" ng-model="existingCampaign.id" required="required">
@@ -129,10 +136,10 @@
 				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
 					add to existing or save Campaign
 				</md-button>
-			</div> -->
+			</div> -->			
 			<div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised md-primary" layout-fill ng-click="saveCampaign()">
-					Save Campaign
+				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id,campaign.id)">
+					add to existing or save Campaign
 				</md-button>
 			</div>
 		</div>

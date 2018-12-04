@@ -80,7 +80,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   $scope.getUserCampaigns = function () {
     CampaignService.getActiveUserCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function(c){
-        return c.status < 6;
+        console.log(result);
+        return c.status < 600;
       });
       $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
       $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
@@ -140,7 +141,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
-    CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+    //console.log(productId,campaignId)
+    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         CampaignService.getCampaignWithProducts(campaignId).then(function(result){
           $scope.campaignDetails = result;
