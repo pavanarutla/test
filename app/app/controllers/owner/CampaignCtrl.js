@@ -188,8 +188,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   var loadOwnerCampaigns = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-        $scope.ownerCampaigns = result;
-        console.log(result);
+        $scope.ownerCampaigns = result;        
         resolve(result);
       });
     });
