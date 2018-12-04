@@ -141,7 +141,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
-    CampaignService.deleteProductFromCampaign(campaignId, productId).then(function(result){
+    //console.log(productId,campaignId)
+    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         CampaignService.getCampaignWithProducts(campaignId).then(function(result){
           $scope.campaignDetails = result;

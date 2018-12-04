@@ -354,7 +354,7 @@
             </thead>
             <tbody class="camp-text">
               <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==100">
-                <td class="table_vertical">BB-01</td>
+                <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | date}}</td>
                 <td class="text-center table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
@@ -428,7 +428,7 @@
             </thead>
             <tbody class="text-center">
               <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==700 || campaign.status==800">
-                <td class="table_vertical">BB-01</td>
+                <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | date}}</td>
                 <td class="table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
