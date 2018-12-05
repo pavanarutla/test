@@ -88,14 +88,15 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
         if(response.status == 1){
           $scope.campaignSavedSuccessfully = true;
-          $timeout(function () {
-            $mdSidenav('saveCampaignSidenav').close();
-            $mdSidenav('shortlistAndSaveSidenav').close();
-            $scope.campaign = {};
-            $scope.forms.viewAndSaveCampaignForm.$setPristine();
-            $scope.forms.viewAndSaveCampaignForm.$setUntouched();
-            $scope.campaignSavedSuccessfully = false;
-          }, 3000);
+          document.getElementById("savecampdropdown").classList.toggle("show");
+          // $timeout(function () {
+          //   $mdSidenav('saveCampaignSidenav').close();
+          //   $mdSidenav('shortlistAndSaveSidenav').close();
+          //   $scope.campaign = {};
+          //   $scope.forms.viewAndSaveCampaignForm.$setPristine();
+          //   $scope.forms.viewAndSaveCampaignForm.$setUntouched();
+          //   $scope.campaignSavedSuccessfully = false;
+          // }, 3000);
           $scope.loadActiveUserCampaigns();
           getShortListedProducts();
         }
