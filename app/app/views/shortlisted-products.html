@@ -11,7 +11,8 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
-					<th>
+					<th></th>
+					<th class="text-center">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
@@ -20,8 +21,8 @@
 			</thead>
 			<tbody ng-repeat="shortlisted in shortListedProducts">
 				<tr>
-					<td>
-						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" height="100" width="150">
+					<td class="image_tdwidth">
+						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
@@ -45,9 +46,9 @@
 							
 							</a>
 					</td>
-					<td class="table_vertical">
-						<p class="text_color md-caption">This Inventory<br>
-							Campaign Completed</p>
+					<th></th>
+					<td class="table_vertical text-center">
+						<p class="text_color md-caption">This Inventory Campaign Completed</p>
 					</td>
 			</tbody>
 		</table>
