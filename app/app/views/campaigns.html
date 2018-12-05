@@ -297,7 +297,7 @@
 		</div>
 	</div>
 	<md-tabs md-dynamic-height>
-		<md-tab label="Proposals">
+		<md-tab label="Proposals/Quote Requested">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
 					<table class="table table-hover">
@@ -314,10 +314,10 @@
 							</tr>
 						</thead>
 						<tbody class="text-center contbg">
-							<tr ng-repeat="pCampaign in plannedCampaigns | filter:search ">
-								<td>BB-01</td>
+							<tr ng-repeat="pCampaign in plannedCampaigns | filter:search " ng-if="pCampaign.status==100 || pCampaign.status==300">
+								<td>{{pCampaign.cid}}</td>
 								<td>{{pCampaign.name}}</td>
-								<td>{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
+								<td>{{pCampaign.created_at | dateify | date:'dd-MM-yyyy'}} </td>
 								<td>{{pCampaign.no_products || "N/A"}}</td>
 								<!-- <td>10,1000</td> -->
 								<td>{{pCampaign.act_budget || "N/A"}}</td>
@@ -371,7 +371,7 @@
 				</div>
 			</div>
 		</md-tab>
-		<md-tab label="Sheduled ">
+		<md-tab label="Sheduled/Booked ">
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
 					<table class="table ">
@@ -381,20 +381,20 @@
 								<th>Campaign Name</th>
 								<th>Start Date</th>
 								<th>No of Products </th>
-								<th>Paid</th>
+								<!-- <th>Paid</th> -->
 								<th>Total Budget</th>
 								<th></th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody class="text-center  contbg">
-							<tr>
-								<td>BB-01</td>
-								<td>Billboards</td>
-								<td>15-08-2018</td>
-								<td>10</td>
-								<td>10,1000</td>
-								<td>10,10001</td>
+							<tr ng-repeat="pCampaign in plannedCampaigns | filter:search " ng-if="pCampaign.status==700 || pCampaign.status==800">
+								<td>{{pCampaign.cid}}</td>
+								<td>{{pCampaign.name}}</td>
+								<td>{{pCampaign.created_at | dateify | date:'dd-MM-yyyy'}}</td>
+								<td>{{pCampaign.no_products || "N/A"}}</td>
+								<!-- <td>10,1000</td> -->
+								<td>{{pCampaign.act_budget || "N/A"}}</td>
 								<td>
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -463,9 +463,9 @@
 							</tr>
 						</thead>
 						<tbody class="text-center  contbg">
-							<tr ng-repeat="rCampaign in runningCampaigns | filter:search" ng-if="rCampaign.status == 6">
+							<tr ng-repeat="rCampaign in runningCampaigns | filter:search" ng-if="rCampaign.status == 1141">
 								<!-- ng-if="campaign.status==6" -->
-								<td>BB-01</td>
+								<td>{{rCampaign.cid}}</td>
 								<td>{{rCampaign.name}}</td>
 								<td>{{rCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
 								<td>{{campaign.no_products || "N/A"}}</td>
@@ -535,7 +535,7 @@
 								<th>Total Budget</th>
 							</tr>
 						</thead>
-						<tbody class="text-center contbg" ng-repeat="cCampaign in closedCampaigns | filter:search" ng-if="cCampaign.status == 8">
+						<tbody class="text-center contbg" ng-repeat="cCampaign in closedCampaigns | filter:search" ng-if="cCampaign.status == 1000 || cCampaign.status == 1151">
 							<tr>
 								<td>BB-01</td>
 								<td>{{cCampaign.name}}</td>

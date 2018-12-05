@@ -173,12 +173,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
+        console.log(result);
         $scope.plannedCampaigns = _.filter(result, function (c) {
-          return c.status < 6;
+          return c.status < 600;
         });
-        $scope.runningCampaigns = _.where(result, { status: 6 });
+        $scope.runningCampaigns = _.where(result, { status: 600 });
         $scope.closedCampaigns = _.filter(result, function (c) {
-          return c.status > 6 && c.status <= 8;
+          return c.status > 600 && c.status <= 800;
         });
         resolve(result);
       });
@@ -187,7 +188,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   var loadOwnerCampaigns = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-        $scope.ownerCampaigns = result;
+        $scope.ownerCampaigns = result;        
         resolve(result);
       });
     });
