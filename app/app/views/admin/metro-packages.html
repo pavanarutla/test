@@ -57,7 +57,8 @@
 		<div class="form-group row">
 			<label for="max_trains" class="col-sm-2 col-form-label">Max. Trains</label>
 			<div class="col-sm-5">
-					<select name="max_trains" class="form-control" id="day11" ng-model="package.max_trains"  required="required" placeholder="Select Trains" >
+				<input type="number" class="form-control" ng-model="package.max_trains"  required="required" placeholder="Select Trains" >
+				<!--	<select name="max_trains" class="form-control" id="day11" ng-model="package.max_trains"  required="required" placeholder="Select Trains" >
 							<option value = "" disabled>Select Trains</option>
 						 <option value = "5" ng-selected="package.max_trains==5">5</option>
 						 <option value = "10" ng-selected="package.max_trains==10">10</option>
@@ -66,7 +67,7 @@
 						 <option value = "25" ng-selected="package.max_trains==25">25</option>
 						 <option value = "30" ng-selected="package.max_trains==30">30</option>
 						 <option value = "35" ng-selected="package.max_trains==35">35</option>
-					</select>
+					</select>-->
 				<div ng-messages="metroPackage.max_trains.$error" ng-if="!metroPackage.max_trains.$untouched" style="color: red">
 					<p ng-message="required"> Max trains is required</p>
 				  </div>
@@ -116,7 +117,7 @@
 						<th>Format</th>
 						<th>Price</th>
 						<th>Max. Trains</th>
-						<th>Slots</th>
+						<!--<th>Slots</th>-->
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -127,7 +128,7 @@
 						<td>{{metroPackage.format}}</td>
 						<td>{{metroPackage.price}}</td>
 						<td>{{metroPackage.max_trains}}</td>
-						<td>{{metroPackage.max_slots}}</td>
+						<!--<td>{{metroPackage.max_slots}}</td>-->
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">
