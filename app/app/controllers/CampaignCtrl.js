@@ -99,9 +99,9 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  if($stateParams.campaignId){
-    $scope.getCampaignDetails($stateParams.campaignId);
-  }
+  // if($stateParams.campaignId){
+  //   $scope.getCampaignDetails($stateParams.campaignId);
+  // }
 
   $scope.viewProductImage = function(image){
     var imagePath = config.serverUrl + image;
@@ -141,7 +141,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
-    //console.log(productId,campaignId)
     CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         CampaignService.getCampaignWithProducts(campaignId).then(function(result){
@@ -322,7 +321,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   if ($rootScope.currStateName == "index.campaign-details") {
-    $scope.getCampaignDetails(localStorage.viewCampaignDetailsId)
+    $scope.getCampaignDetails($stateParams.campaignId)
   }
 
   $scope.deleteMetroCampaigns = function(campaignId){

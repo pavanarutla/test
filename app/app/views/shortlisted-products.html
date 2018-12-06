@@ -1,6 +1,6 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-
-	<div class="table-responsive contbg">
+	<div ng-if="shortListedProducts.length == 0" style="font-size: 20px">There is no products shortlisted please shortlist the products..</div>
+	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
 		<table class="table">
 			<thead class="text_color">
 				<tr>
@@ -100,7 +100,7 @@
 					</form>
 				</div>
 			</div> -->
-			<div class="p-2 align-self-end">
+			<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
 				<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
 					<div class="d-flex justify-content-end pt-4">
 						<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>

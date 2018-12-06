@@ -99,6 +99,8 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
           // }, 3000);
           $scope.loadActiveUserCampaigns();
           getShortListedProducts();
+        }else if(response.status == 0){
+          toastr.error(response.message);
         }
         else{
           $scope.saveUserCampaignErrors = response.message;
@@ -128,13 +130,13 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   }
 
   //view campaign details
-  $scope.viewCampaignDetails = function (campaignId) {
-    CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
-      $scope.campaignDetails = campaignDetails;
-      $scope.$parent.alreadyShortlisted = true;
-      // $scope.toggleCampaignDetailSidenav();
-    });
-  }
+  // $scope.viewCampaignDetails = function (campaignId) {
+  //   CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
+  //     $scope.campaignDetails = campaignDetails;
+  //     $scope.$parent.alreadyShortlisted = true;
+  //     // $scope.toggleCampaignDetailSidenav();
+  //   });
+  // }
   /*=================================
   | Campaign section ends
   =================================*/
@@ -143,9 +145,9 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   /*=======================================
   | Route based initial loads
   =======================================*/
-  if ($rootScope.currStateName == "index.campaign-details") {
-    $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
-  }
+  // if ($rootScope.currStateName == "index.campaign-details") {
+  //   $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
+  // }
 
   if ($rootScope.currStateName == "index.shortlisted-products") {
     getShortListedProducts();
