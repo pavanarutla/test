@@ -159,7 +159,7 @@
 						<md-list-item class="md-3-line list-img" style="padding:0px 5px">
 							<div class="md-list-item-text list-item-text" layout="column" flex>
 								<h3 class="md-body-2">{{slPkg.name}}</h3>
-								<p class="md-caption">Budget For {{slPkg.days}} day(s), {{slPkg.selected_trains}} Train(s), {{slPkg.selected_slots}} Slot(s)</p>
+								<p class="md-caption">Budget For {{slPkg.months}} month(s), {{slPkg.selected_trains}} Train(s)</p>
 								<br />
 								<h3 class="md-title">Rs.{{slPkg.price}}</h3>
 							</div>
@@ -536,24 +536,20 @@
 				</div>
 				<!-- L&T Metro-Digital Sinage html end-->
 				<!-- caridoor html start-->
-				<div layout="column" layout-padding class="side-navpadding">
+				<!--<div layout="column" layout-padding class="side-navpadding">
 					<div class="main-part" layout="column" style="cursor:pointer;padding: 0px;">
 						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as (corr | metroCorridorsFromTo) for corr in metroCorridors" required class="selectpicker">
 							
 						</select>
-						<!-- <select >
-							<option selected>Corrider-1</option>
-							<option>Corrider-2</option>
-							<option>Corrider-3</option>
-						</select> -->
+						
 					</div>
-				</div>
+				</div> -->
 				<!-- caridoor html end-->
 				<!-- packages html start-->
-				<div layout="column" layout-padding class="side-navpadding" >
-					<div class=" md-padding main-part" layout="column" ng-click="showPackagePopup()" style="cursor:pointer">
+				<!-- <div layout="column" layout-padding class="side-navpadding" >
+					<div class=" md-padding main-part" layout="column" ng-click="showPackagePopup()" style="cursor:pointer"> -->
 						<!-- <div layout="row" ng-init="formats = false" ng-click="formats = !formats"> -->
-						<div layout="row">
+						<!--<div layout="row">
 							<p class="md-caption theme-txt txt-mrng" style="margin-bottom: 0px">Packages</p>
 							<div flex></div>
 							<div>
@@ -566,7 +562,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- packageshtml end-->
 				<!--SHORTLIST html start -->
 				<div layout="column" layout-padding class="side-navpadding">
@@ -597,7 +593,7 @@
 											</div>
 											<div class="md-list-item-text list-item-text" layout="column" flex>
 												<h3 class="md-body-2">{{slPkg.name}}</h3>
-												<p class="md-caption">{{slPkg.selected_trains}}Trains, {{slPkg.selected_slots}}Slots</p>
+												<p class="md-caption">{{slPkg.selected_trains}} Trains, {{slPkg.months}} Months</p>
 												<!-- <p class="md-caption">{{shortlisted.address}}</P> -->
 											</div>
 											<div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>

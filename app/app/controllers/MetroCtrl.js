@@ -47,11 +47,16 @@ app.controller('MetroCtrl',
           $scope.formatList = result;
         });
       }
-      function getMetroCorridors() {
+      function getMetroCorridors($check_cid) {
         MetroService.getMetroCorridors().then(function (result) {
           $scope.metroCorridors = result;
           $scope.selectedCorridor = $scope.metroCorridors[0];
-          $scope.getMetroPackages($scope.selectedCorridor.id);
+          if($check_cid == 'y'){
+            $scope.getMetroPackages($scope.selectedCorridor.id);
+          }else{
+            $scope.getMetroPackages();
+          }
+          
           if($state.current.url=='metro'){
             $scope.showPackagePopup();
           }
@@ -64,12 +69,13 @@ app.controller('MetroCtrl',
         MetroService.getMetroPackages(corridorId).then(function (result) {
           _.map(result, (res) => {
             res.selected_trains = 1;
-            res.selected_slots = 1;
+            res.months = 1;
+           // res.selected_slots = 1;
             return res;
           });
           $scope.metroPackages = result;
           $scope.selectedPackage = $scope.metroPackages[0];
-          $scope.selectedPackage.days = 7;
+          //$scope.selectedPackage.months = 1;
         });
       }
       function loadShortlistedPackages() {
@@ -79,6 +85,7 @@ app.controller('MetroCtrl',
       }
       loadShortlistedPackages();
       $scope.select_package_var = [];
+
       $scope.select_package = function (pkg) {
         var alreadySelected = _.filter($scope.shortlistedPackages, function (package) {
           return package.id == pkg.id;
@@ -114,12 +121,13 @@ app.controller('MetroCtrl',
           if (typeof pkg.start_date === 'undefined') {
             toastr.error("Start date for the package is required.");
           }
-          else if (!pkg.days ) {
+          else if (!pkg.months ) {
             toastr.error('Please select days.');
           }
+          else if (!pkg.selected_trains ) {
+            toastr.error('Please select trains.');
+          }
           else {
-            pkg.selected_trains = pkg.max_trains;
-			pkg.days = parseInt(pkg.days);
             MetroService.shortlistPackage(pkg).then((result) => {
               if (result.status == 1) {
                 loadShortlistedPackages();
@@ -135,15 +143,15 @@ app.controller('MetroCtrl',
       $scope.getEstBudgetForSelectedPackages = function () {
         var estBudget = {};
 		estBudget.price = 0;
-		estBudget.selected_slots = 0;
+	//	estBudget.selected_slots = 0;
 		estBudget.selected_trains = 0;
-		estBudget.days = 0;
+		estBudget.months = 0;
 		
         _.each($scope.shortlistedPackages, (package) => {
           estBudget.price += package.price ;
-		  estBudget.selected_slots += package.selected_slots;
+		  //estBudget.selected_slots += package.selected_slots;
 		  estBudget.selected_trains += package.selected_trains ;
-		  estBudget.days += package.days;
+		  estBudget.months += package.months;
         });
         return estBudget;
       }
@@ -295,14 +303,14 @@ app.controller('MetroCtrl',
       | Page based initial loads
       ================================*/
       if ($rootScope.currStateName == 'index.metro') {
-        getMetroCorridors();
+        getMetroCorridors('n');
         getMetroCampaigns();
       }
       if ($rootScope.currStateName == 'index.metro-campaign') {
         if (typeof $stateParams.metroCampaignId !== undefined) {
           getMetroCampDetails($stateParams.metroCampaignId);
         }
-        getMetroCorridors();
+        getMetroCorridors('y');
         getFormatList({ type: "metro" });
       }
       /*================================

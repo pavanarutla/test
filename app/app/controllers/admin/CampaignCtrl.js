@@ -205,12 +205,13 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     AdminMetroService.getMetroPackages(corridorId).then(function (result) {
       _.map(result, (res) => {
         res.selected_trains = 1;
-        res.selected_slots = 1;
+       // res.selected_slots = 1;
+       res.months = 1;
         return res;
       });
       $scope.metroPackages = result;
       $scope.selectedPackage = result[0];
-      $scope.selectedPackage.days = "7";
+      //$scope.selectedPackage.days = "7";
       /*$scope.admin_selected_slots = ($scope.selectedPackage.max_slots * $scope.selectedPackage.days);
       $scope.admin_price = ($scope.selectedPackage.price * $scope.selectedPackage.days);*/
     });

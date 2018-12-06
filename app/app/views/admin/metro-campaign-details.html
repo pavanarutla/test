@@ -47,45 +47,45 @@
 					</div>
 				</div>
 				<div class="form-group row">
-						<label for="pack" class="col-sm-4 col-form-label">Days</label>
-						<div class="col-sm-8">
-								<select name="days" class="form-control"  ng-model="selectedPackage.days"   required>
-										<option value = "" disabled>Days</option>
-										<option value = "7" ng-selected="true">7 Days</option>
-										<option value = "14">14 Days</option>
-										<option value = "28">28 Days</option>
-										<option value = "60">60 Days</option>
-										<option value = "90">90 Days</option>
-								</select>
-						</div>
-					</div>
-				
-				<!--<div class="form-group row">
-					<label for="hoardingLight" class="col-sm-4 col-form-label">No. Of Trains</label>
+					<label for="pack" class="col-sm-4 col-form-label">Months</label>
 					<div class="col-sm-8">
-						<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}" min="1" />
-					</div>
-				</div>-->
-				<div class="form-group row" >
-					<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
-					<div class="col-sm-8">						
-							<!--<input type="number" ng-model="admin_selected_slots"  >-->
-								{{selectedPackage.max_slots * selectedPackage.days}}
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="" class="col-sm-4 col-form-label">Select Date</label>
-					<div flex-gt-xs="">
-						<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+						<!--	<select  class="form-control"  ng-model="selectedPackage.days"   required>
+									<option value = "" disabled>Days</option>
+									<option value = "7" ng-selected="true">7 Days</option>
+									<option value = "14">14 Days</option>
+									<option value = "28">28 Days</option>
+									<option value = "60">60 Days</option>
+									<option value = "90">90 Days</option>
+							</select>-->
+							<input type="number" ng-model="selectedPackage.months" value= "1" min ="1" max="12" required class="form-control">
 					</div>
 				</div>
-				<div class="form-group row">
-					<label for="productId" class="col-sm-4 col-form-label">Price</label>
-					<div class="col-sm-8">
-						<!--<input type="number" ng-model="admin_price" >-->
-							<div style="padding-top:6px;">{{selectedPackage.price * selectedPackage.days || "N/A"}}</div>
-					</div>
+			
+			<div class="form-group row">
+				<label for="hoardingLight" class="col-sm-4 col-form-label">No. Of Trains</label>
+				<div class="col-sm-8">
+					<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}" min="1" />
 				</div>
+			</div>
+		<!--	<div class="form-group row" >
+				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
+				<div class="col-sm-8">
+						{{selectedPackage.max_slots * selectedPackage.days}}
+				</div>
+			</div> --> 
+			<div class="form-group row">
+				<label for="" class="col-sm-4 col-form-label">Select Date</label>
+				<div flex-gt-xs="">
+					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="productId" class="col-sm-4 col-form-label">Price</label>
+				<div class="col-sm-8">
+					
+					<div style="padding-top:6px;">{{ selectedPackage.price_new = (selectedPackage.price * selectedPackage.months * selectedPackage.selected_trains) || "N/A"}}</div>
+				</div>
+			</div>
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
 				<input class="btn btn-primary" value="Save" type="button"  ng-click="addPackageInMetroCampaign(admin_selected_slots,admin_price)">
@@ -253,8 +253,8 @@
 						<th>Product Type</th>
 						<th>Corridor</th>
 						<th>No.of Trains</th>
-						<th>No.of Slots</th>
-						<th>No.of Days</th>
+						<!--<th>No.of Slots</th>-->
+						<th>No.of Months</th>
 						<th>Start Date</th>
 						<th>Price</th>
 						<th>Action</th>
@@ -265,8 +265,8 @@
 						<td>{{pkg.package_name}}</td>
 						<td>{{pkg.corridor_name}}</td>
 						<td>{{pkg.selected_trains}}</td>
-						<td>{{pkg.selected_slots}}</td>
-						<td>{{pkg.days}}</td>
+						<!--<td>{{pkg.selected_slots}}</td>-->
+						<td>{{pkg.months}}</td>
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
 						<td>{{pkg.price}}</td>
 							 <!--<md-input-container class="md-block margin-input">
