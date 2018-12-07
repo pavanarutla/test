@@ -206,7 +206,7 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, Product
     $scope.package.format_id = package.format_id;
     $scope.package.corridor_id = package.corridor_id ;
    // $scope.package.months = package.months;
-    //$scope.package.days = package.days;
+    $scope.package.description = package.description;
     $scope.package.price = package.price;
     $scope.package.max_trains = package.max_trains;
     $scope.package.max_slots = package.max_slots;

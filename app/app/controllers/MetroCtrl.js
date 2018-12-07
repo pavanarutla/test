@@ -3,6 +3,20 @@ app.controller('MetroCtrl',
     function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, ProductService, FileSaver, Blob, config, toastr,$state) {
       $scope.metroCampaign = {};
       $scope.newDate = new Date();
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+              dd='0'+dd
+          } 
+          if(mm<10){
+              mm='0'+mm
+          } 
+
+      $scope.today1 = yyyy+'-'+mm+'-'+dd;
+      $scope.colors = ['#FE0000','#0D7ECA'];
+      
       /*==============================
       | Popup and Sidenav controls
       ==============================*/

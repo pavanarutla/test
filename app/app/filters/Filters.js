@@ -154,3 +154,9 @@ app.filter('metroCorridorsFromTo', function(){
     return obj.name + " (" + obj.from + " - " + obj.to + ")";
   }
 });
+app.filter('customSplitString', function() {
+  return function(input) {
+    var arr = input.split(',');
+    return arr;
+  };
+});
