@@ -38,7 +38,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*=======================
   | MdDialogs and sidenavs
   =======================*/
-
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
       templateUrl: 'views/updatepaymentDailog.html',
@@ -215,7 +214,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
   // get all Campaigns by a user to show it in campaign management page ends  
-
   $scope.saveOwnerCampaign = function () {
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
       if (result.status == 1) {
