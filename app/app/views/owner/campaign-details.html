@@ -422,21 +422,21 @@
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
-				<div class="md-body-1">{{"N/A"}}</div>
+				<div class="md-body-1">{{campaignDetails.act_budget}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">18% GST :</div>
-				<div class="md-body-1"> {{"N/A"}}</div>
+				<div class="md-body-1"> {{campaignDetails.gst}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-body-1">Sub Total :</div>
-				<div class="md-body-1">{{"N/A"}}</div>
+				<div class="md-body-1">{{campaignDetails.subTotal}}</div>
 			</div>
 			<div layout="row">
 				<div class="md-title">Grand Total :</div>
-				<div class="md-title">{{"N/A"}}</div>
+				<div class="md-title">{{campaignDetails.grandTotal}}</div>
 			</div>
-			<md-button class="md-raised md-primary">Book Campaign</md-button>
+			<md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)">Book Campaign</md-button>
 		</div>
 	</div>
 </div>

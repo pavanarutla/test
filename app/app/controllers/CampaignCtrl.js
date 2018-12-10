@@ -80,11 +80,22 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   $scope.getUserCampaigns = function () {
     CampaignService.getActiveUserCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function(c){
-        console.log(result);
         return c.status < 600;
       });
-      $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
-      $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      $scope.SheduledCampaigns = _.filter(result, function(c){
+        return c.status == 700 || c.status == 800;
+      });
+      $scope.runningCampaigns = _.filter(result, function(c){
+        return c.status == 1141;
+      });
+      $scope.closedCampaigns = _.filter(result, function(c){
+        return c.status == 1151;
+      });
+      
+      // $scope.SheduledCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
+      // $scope.runningCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
+      // console.log('running camps',$scope.runningCampaigns)
+      // $scope.closedCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
     });
   }
   // get all Campaigns by a user to show it in campaign management page ends

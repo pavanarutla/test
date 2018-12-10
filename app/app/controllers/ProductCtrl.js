@@ -112,13 +112,15 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     }
   }
   $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
-    console.log(productId)
     var productToCampaign = {
-      product_id: productId,
       campaign_id: existingCampaignId
     };
+    if ($scope.shortListedProducts.length > 0) {
+      productToCampaign.shortlisted_products = [];
+      _.each($scope.shortListedProducts, function (v, i) {
+        productToCampaign.shortlisted_products.push(v.id);
+      });
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
-      console.log(result);
       if (result.status == 1) {
         toastr.success(result.message);
         $mdSidenav('productDetails').close();
@@ -128,6 +130,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       }
     });
   }
+}
 
   //view campaign details
   // $scope.viewCampaignDetails = function (campaignId) {

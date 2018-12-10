@@ -293,6 +293,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   $scope.getOwnerCampaignDetails = function (campaignId) {
     OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function (result) {     
       $scope.campaignDetails = result;
+      if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
+        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+      }
     });
   }
 
