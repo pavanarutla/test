@@ -23,6 +23,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				localStorage.loggedInUser = JSON.stringify(loggedInUser);
 				toastr.success('You have successfully signed in!');
 				$mdDialog.hide();
+				$rootScope.$emit("listeningActiveUserCampaigns")
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
