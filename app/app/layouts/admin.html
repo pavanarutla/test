@@ -545,16 +545,21 @@
                   Companies
                 </md-button>
               </md-menu-item>
-              <md-menu-item ng-if="showMenus || (manage_queries != -1)">
-                <md-button ng-href="#/admin/callcenterinfo" ng-click="callCenterInfo()" >
-                  Call Center info
-                </md-button>
-              </md-menu-item>
-              <md-menu-item ng-if="showMenus || (manage_queries != -1)">
+              <md-menu-item>
+                  <md-button ng-href="#/admin/callcenterinfo">
+                    Call Center info
+                  </md-button>
+                </md-menu-item>
+              <md-menu-item>
+                  <md-button ng-href="#/admin/subscribers">
+                    Subscribers
+                  </md-button>
+                </md-menu-item>
+              <!-- <md-menu-item ng-if="showMenus || (manage_queries != -1)">
                 <md-button ng-href="#/admin/subscribers" ng-click="">
                   Subscribers
                 </md-button>
-              </md-menu-item>
+              </md-menu-item> -->
               <md-menu-item>
                 <md-button ng-href="#/admin/floating-campaign">
                   Floating Campaign
@@ -574,14 +579,12 @@
 								</md-menu-item> -->
 
               <md-menu-item class="nv-nav-item">
-                <md-button class="side_navlist" ng-href="#/admin/payments" ng-class="{'active-link': currStateName == 'owner.payments'}"
-                  >
+                <md-button ng-href="#/admin/admin-payment">
                   Payments
                 </md-button>
               </md-menu-item>
               <md-menu-item class="nv-nav-item">
-                <md-button class="side_navlist" ng-href="#/admin/bbisupport" ng-class="{'active-link': currStateName == 'owner.bbisupport'}"
-                  ng-click="closeMenuSidenavIfMobile()">
+                <md-button ng-href="#/admin/admin-feeds">
                   Feeds
                 </md-button>
               </md-menu-item>

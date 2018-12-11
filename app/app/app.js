@@ -334,6 +334,26 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.admin-payment', {
+      url: '/admin-payment',
+      templateUrl: 'views/admin/admin-payment.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.paymentview-details', {
+      url: '/paymentview-details',
+      templateUrl: 'views/admin/paymentview-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.admin-feeds', {
+      url: '/admin-feeds',
+      templateUrl: 'views/admin/admin-feeds.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.feedback-view', {
+      url: '/feedback-view',
+      templateUrl: 'views/admin/feedback-view.html',
+      controller: 'AdminCampaignCtrl'
+    })
     // .state('admin.user-management', {
     //   url: '/user-management',
     //   templateUrl: 'views/admin/user-management.html',

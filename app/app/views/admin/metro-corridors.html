@@ -1,14 +1,7 @@
 <div layout="column" layout-fill="layout-fill">
-
-  <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
-    <div class="md-title">
-      Add Corridor
-    </div>
-  </div>
-
-  <form name="addCorridorform" novalidate style="margin-top:20px">
+  <form name="addCorridorform" novalidate >
     <input ng-model="corridor.id" type="hidden" name="id"/>
-    <div layout="column">
+    <div layout="column" class="hide-xs">
       <div layout="row" layout-margin layout-padding>
         <div flex="50">
           <md-autocomplete style="width:100%;margin-top:-8px;" ng-disabled="isDisabled" md-selected-item="selectedCorridorCity" md-search-text="searchText" md-items="item in citySearch(searchText)" md-item-text="item.name" md-min-length="3" placeholder="Search City..."  md-clear-button="true">
@@ -50,24 +43,16 @@
         </ul>
       </div>
       <div layout="row" layout-align="center center">
-        <md-button Class="md-raised md-primary" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="addCorridorform.$invalid">SUBMIT</md-button>        
+        <md-button Class="md-raised md-primary register_btn" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="addCorridorform.$invalid">Submit</md-button>        
       </div>
     </div>
   </form>
 
   <!-- ===== table new code start=======-->
   <div style="margin-top: 1em;">
-    <div class="table-responsive">
+    <!-- <div class="table-responsive">
       <table class="table table-striped table-bordered ">
         <thead>
-          <!-- <tr>
-            <th>Sr. No.</th>
-            <th>City</th>
-            <th>Corridor Name</th>
-            <th>From<th>
-            <th>To <th>
-            <th>Actions</th>
-          </tr> -->
           <tr>
             <th>Sr.No</th>
             <th>City</th>
@@ -103,7 +88,46 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
+    <div class="table-responsive">
+				<table class="table table-hover call_center">
+				  <thead>
+					<tr class="text_color camp-text">
+					  <th class="width_1 text-left">Sr.No</th>
+					  <th class="text-left">City</th>
+					  <th class="width_2 text-left">Corridor Name</th>
+					  <th class="hide-xs">From</th>
+					  <th class="hide-xs">To</th>
+					  <th class="hide-xs">Actions</th>
+					</tr>
+				  </thead>
+				  <tbody class="camp-text">
+              <tr ng-repeat="corr in metroCorridorList track by $index">
+                  <td class="text-left table_vertical">{{$index + 1}}</td>
+                  <td class="text-left table_vertical">{{corr.city_name}}</td>
+                  <td class="text-left table_vertical">{{corr.name}}</td>
+                  <td class="hide-xs table_vertical">{{corr.from || "N/A"}} </td>
+                  <td class="hide-xs table_vertical">{{corr.to || "N/A"}} </td>
+                  <td class="hide-xs table_vertical">
+                    <span>
+                      <a style="cursor:pointer;" ng-click="editcorridors(corr)">
+                        <md-icon>
+                          <i class="material-icons">mode_edit</i>
+                        </md-icon>
+                      </a>
+                    </span>
+                    <span>
+                      <a style="cursor:pointer;" ng-click="deleteState(corr)">
+                        <md-icon>
+                          <i class="material-icons" ng-click="deleteCorridors(corr.id)">delete</i>
+                        </md-icon>
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+				  </tbody>
+				</table>
+			  </div>
     <!-- <div layout="colmun" layout-align="end center" layout-margin>
           <button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
       </div> -->
