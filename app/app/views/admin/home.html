@@ -109,12 +109,13 @@
         </thead>
         <tbody>
           <tr  ng-repeat="request in requestList.otherCampaignFeeds">
-            <td class="table_vertical">N/A</td>
-            <td class="table_vertical">N/A</td>
+            <td class="table_vertical">{{request.cid}}</td>
+            <td class="table_vertical">{{request.name}}</td>
             <td class="table_vertical">
-              <span ng-show="request.status == 2">{{request.contact_name}} has requested for a campaign proposal.</span>
-              <span ng-show="request.status == 4">{{request.contact_name}} has requested for a change in provided quote.</span>
-              <span ng-show="request.status == 5">{{request.contact_name}} has requested for the launch of their campaign.</span>
+              <span ng-show="request.status == 200">{{request.contact_name}} has requested for a campaign proposal.</span>
+              <span ng-show="request.status == 300">{{request.contact_name}} has requested for Quote.</span>
+              <span ng-show="request.status == 400">{{request.contact_name}} has requested for a change in provided quote.</span>
+              <span ng-show="request.status == 500">{{request.contact_name}} has requested for the launch of their campaign.</span>
             </td>
             <td class="table_vertical">
               <a style="cursor:pointer;"  ng-click="showCampaignDetailsPopup($event, request)">
@@ -172,8 +173,8 @@
         </thead>
         <tbody>
           <tr  ng-repeat="request in requestList.campaignSuggestionRequests">
-            <td class="table_vertical">N/A</td>
-            <td class="table_vertical">N/A</td>
+            <td class="table_vertical">{{request.cid}}</td>
+            <td class="table_vertical">{{request.name}}</td>
             <td class="table_vertical">
               <span class="">{{request.user_full_name}} has requested for campaign suggestion.</span>
             </td>

@@ -88,16 +88,19 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
         if(response.status == 1){
           $scope.campaignSavedSuccessfully = true;
-          $timeout(function () {
-            $mdSidenav('saveCampaignSidenav').close();
-            $mdSidenav('shortlistAndSaveSidenav').close();
-            $scope.campaign = {};
-            $scope.forms.viewAndSaveCampaignForm.$setPristine();
-            $scope.forms.viewAndSaveCampaignForm.$setUntouched();
-            $scope.campaignSavedSuccessfully = false;
-          }, 3000);
+          document.getElementById("savecampdropdown").classList.toggle("show");
+          // $timeout(function () {
+          //   $mdSidenav('saveCampaignSidenav').close();
+          //   $mdSidenav('shortlistAndSaveSidenav').close();
+          //   $scope.campaign = {};
+          //   $scope.forms.viewAndSaveCampaignForm.$setPristine();
+          //   $scope.forms.viewAndSaveCampaignForm.$setUntouched();
+          //   $scope.campaignSavedSuccessfully = false;
+          // }, 3000);
           $scope.loadActiveUserCampaigns();
           getShortListedProducts();
+        }else if(response.status == 0){
+          toastr.error(response.message);
         }
         else{
           $scope.saveUserCampaignErrors = response.message;
@@ -109,13 +112,15 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     }
   }
   $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
-    console.log(productId)
     var productToCampaign = {
-      product_id: productId,
       campaign_id: existingCampaignId
     };
+    if ($scope.shortListedProducts.length > 0) {
+      productToCampaign.shortlisted_products = [];
+      _.each($scope.shortListedProducts, function (v, i) {
+        productToCampaign.shortlisted_products.push(v.id);
+      });
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
-      console.log(result);
       if (result.status == 1) {
         toastr.success(result.message);
         $mdSidenav('productDetails').close();
@@ -125,15 +130,16 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       }
     });
   }
+}
 
   //view campaign details
-  $scope.viewCampaignDetails = function (campaignId) {
-    CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
-      $scope.campaignDetails = campaignDetails;
-      $scope.$parent.alreadyShortlisted = true;
-      // $scope.toggleCampaignDetailSidenav();
-    });
-  }
+  // $scope.viewCampaignDetails = function (campaignId) {
+  //   CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
+  //     $scope.campaignDetails = campaignDetails;
+  //     $scope.$parent.alreadyShortlisted = true;
+  //     // $scope.toggleCampaignDetailSidenav();
+  //   });
+  // }
   /*=================================
   | Campaign section ends
   =================================*/
@@ -142,9 +148,9 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   /*=======================================
   | Route based initial loads
   =======================================*/
-  if ($rootScope.currStateName == "index.campaign-details") {
-    $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
-  }
+  // if ($rootScope.currStateName == "index.campaign-details") {
+  //   $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
+  // }
 
   if ($rootScope.currStateName == "index.shortlisted-products") {
     getShortListedProducts();

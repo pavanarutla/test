@@ -124,8 +124,13 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
     })
+    // .state('index.campaign-details', {
+    //   url: 'campaign-details',
+    //   templateUrl: 'views/campaign-details.html',
+    //   controller: 'CampaignCtrl'
+    // })
     .state('index.campaign-details', {
-      url: 'campaign-details',
+      url: 'campaign-details/{campaignId}',
       templateUrl: 'views/campaign-details.html',
       controller: 'CampaignCtrl'
     })

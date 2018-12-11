@@ -38,7 +38,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /*=======================
   | MdDialogs and sidenavs
   =======================*/
-
   $scope.showPaymentdailog = function () {
     $mdDialog.show({
       templateUrl: 'views/updatepaymentDailog.html',
@@ -172,8 +171,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
-      OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {
-        console.log(result);
+      OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {      
         $scope.plannedCampaigns = _.filter(result, function (c) {
           return c.status < 600;
         });
@@ -216,7 +214,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
   // get all Campaigns by a user to show it in campaign management page ends  
-
   $scope.saveOwnerCampaign = function () {
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
       if (result.status == 1) {
@@ -294,8 +291,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
   $scope.getOwnerCampaignDetails = function (campaignId) {
-    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function (result) {
+    OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function (result) {     
       $scope.campaignDetails = result;
+      if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
+        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+      }
     });
   }
 
