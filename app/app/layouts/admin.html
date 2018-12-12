@@ -379,224 +379,224 @@
     <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav"
       md-is-locked-open="$mdMedia('gt-sm')" style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
       <md-content class="sidenav-content" style="background: #44596D !important">
-          <div style="width: 100% !important;">
-            <md-list class="owners-menu">
-              <!-- <md-menu-item class="nv-nav-item">
+        <div style="width: 100% !important;">
+          <md-list class="owners-menu">
+            <!-- <md-menu-item class="nv-nav-item">
 									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
 										To-Do List
 									</md-button>
                 </md-menu-item> -->
-              <md-menu-item>
-                <md-button ng-href="#/admin/home">
-                  To-Do List
-                </md-button>
-              </md-menu-item>
-              <!-- <md-menu-item class="nv-nav-item">
+            <md-menu-item>
+              <md-button ng-href="#/admin/home">
+                To-Do List
+              </md-button>
+            </md-menu-item>
+            <!-- <md-menu-item class="nv-nav-item">
 									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
 										Campaigns
 									</md-button>
 								</md-menu-item> -->
-              <!-- campagin start -->
-              <md-menu-item flex layout="column">
-                <md-button aria-expanded="flase" ng-click="toogelCampagin()" class="md-button-toggle">
-                  <div layout="row">
-                    <span style="color:#fff">Campaigns</span>
-                    <!-- <span flex></span>
+            <!-- campagin start -->
+            <md-menu-item flex layout="column">
+              <md-button aria-expanded="flase" ng-click="toogelCampagin()" class="md-button-toggle">
+                <div layout="row">
+                  <span style="color:#fff">Campaigns</span>
+                  <!-- <span flex></span>
                     <span>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showLocation"></md-icon>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showLocation"></md-icon>
                     </span> -->
-                  </div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button ng-href="#/admin/campaigns">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    OOH Campaign</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button ng-href="#/admin/metro-campaigns">
-                  <div layout="row">
-                    <span flex="15"></span>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showCampagin">
+              <md-button ng-href="#/admin/campaigns">
+                <div layout="row">
+                  <span flex="15"></span>
+                  OOH Campaign</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showCampagin">
+              <md-button ng-href="#/admin/metro-campaigns">
+                <div layout="row">
+                  <span flex="15"></span>
 
-                    Metro Campaign</div>
-                </md-button>
-              </md-menu-item>
-              <!--campagin end-->
-              <!-- listed of locations-->
-              <md-menu-item flex layout="column">
-                <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle" ng-href="#admin/locations">
-                  <div layout="row">
-                    <span style="color:#fff">Location</span>
-                    <!-- <span flex></span>
+                  Metro Campaign</div>
+              </md-button>
+            </md-menu-item>
+            <!--campagin end-->
+            <!-- listed of locations-->
+            <md-menu-item flex layout="column">
+              <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle" ng-href="#admin/locations">
+                <div layout="row">
+                  <span style="color:#fff">Location</span>
+                  <!-- <span flex></span>
                     <span>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showLocation"></md-icon>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showLocation"></md-icon>
                     </span> -->
-                  </div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-country" ng-click="changeRequest()">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Country</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-state">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    State
-                  </div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-city">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    City</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-area">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Area
-                  </div>
-                </md-button>
-              </md-menu-item>
-              <!-- listed of location end-->
-              <!--inventory list -->
-              <md-menu-item flex layout="column">
-                <md-button aria-expanded="flase" ng-click="toogelMenu()" class="md-button-toggle">
-                  <div layout="row">
-                    <span style="color:#fff">Inventory</span>
-                    <!-- <span flex></span>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showArea">
+              <md-button ng-href="#admin/locations-country" ng-click="changeRequest()">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Country</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showArea">
+              <md-button ng-href="#admin/locations-state">
+                <div layout="row">
+                  <span flex="15"></span>
+                  State
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showArea">
+              <md-button ng-href="#admin/locations-city">
+                <div layout="row">
+                  <span flex="15"></span>
+                  City</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showArea">
+              <md-button ng-href="#admin/locations-area">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Area
+                </div>
+              </md-button>
+            </md-menu-item>
+            <!-- listed of location end-->
+            <!--inventory list -->
+            <md-menu-item flex layout="column">
+              <md-button aria-expanded="flase" ng-click="toogelMenu()" class="md-button-toggle">
+                <div layout="row">
+                  <span style="color:#fff">Inventory</span>
+                  <span flex></span>
                     <span>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showFormats"></md-icon>
                       <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showFormats"></md-icon>
-                    </span> -->
-                  </div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/hoarding-list" ng-click="changeRequest()">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Hoarding List</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/hoarding-list">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Metro</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/hoarding-list">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Airport</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/formats">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    OOH Formats</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/metro-formats">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Metro Formats</div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item flex layout="column" ng-show="showFormats">
-                <md-button ng-href="#admin/requested-hoardings">
-                  <div layout="row">
-                    <span flex="15"></span>
-                    Requested Hoardings</div>
-                </md-button>
-              </md-menu-item>
-              <!--inventory list end-->
-              <md-menu-item>
-                <md-button ng-href="#/admin/metro-packages">
-                 Metro Packages
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-href="#/admin/metro-corridors">
-                  Metro Corridors
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-href="#/admin/user-management">
-                  User Management
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-href="#/admin/companies">
-                  Companies
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                  <md-button ng-href="#/admin/callcenterinfo">
-                    Call Center info
-                  </md-button>
-                </md-menu-item>
-              <md-menu-item>
-                  <md-button ng-href="#/admin/subscribers">
-                    Subscribers
-                  </md-button>
-                </md-menu-item>
-              <!-- <md-menu-item ng-if="showMenus || (manage_queries != -1)">
-                <md-button ng-href="#/admin/subscribers" ng-click="">
-                  Subscribers
-                </md-button>
-              </md-menu-item> -->
-              <md-menu-item>
-                <md-button ng-href="#/admin/floating-campaign">
-                  Floating Campaign
-                </md-button>
-              </md-menu-item>
-              <!-- <md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
-									ng-click="changeRequest(); closeMenuSidenavIfMobile()">
-										Request Inventory
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
-									ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
-										Inventory List
-									</md-button>
-								</md-menu-item> -->
+                    </span>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <!-- <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button ng-href="#admin/hoarding-list" ng-click="changeRequest()">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Hoarding List</div>
+              </md-button>
+            </md-menu-item> -->
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button class="side_navlist" ng-href="#/admin/hoarding-list" ng-class="{'active-link': currStateName == 'admin.hoarding-list'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                <div layout="row">
+                <span flex="15"></span>
+                Hoarding List
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button ng-href="#admin/hoarding-list">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Metro</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button ng-href="#admin/hoarding-list">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Airport</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button ng-href="#admin/formats">
+                <div layout="row">
+                  <span flex="15"></span>
+                  OOH Formats</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button ng-href="#admin/metro-formats">
+                <div layout="row">
+                  <span flex="15"></span>
+                  Metro Formats</div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column" ng-show="showFormats">
+              <md-button class="side_navlist" ng-href="#/admin/requested-hoardings" ng-class="{'active-link': currStateName == 'admin.requested-hoardings'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                <div layout="row">
+                <span flex="15"></span>
+                Requested Hoardings
+                </div>
+              </md-button>
+            </md-menu-item>
+            <!--inventory list end-->
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/metro-packages" ng-class="{'active-link': currStateName == 'admin.metro-packages'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Metro Packages
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/metro-corridors" ng-class="{'active-link': currStateName == 'admin.metro-corridors'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Metro Corridors
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/user-management" ng-class="{'active-link': currStateName == 'admin.user-management'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                User Management
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/companies" ng-class="{'active-link': currStateName == 'admin.companies'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Companies
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/callcenterinfo" ng-class="{'active-link': currStateName == 'admin.callcenterinfo'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Call Center info
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/subscribers" ng-class="{'active-link': currStateName == 'admin.subscribers'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Subscribers
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/floating-campaign" ng-class="{'active-link': currStateName == 'admin.floating-campaign'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Floating Campaign
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/admin-payment" ng-class="{'active-link': currStateName == 'admin.admin-payment'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Payments
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/admin-feeds" ng-class="{'active-link': currStateName == 'admin.admin-feeds'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Feeds
+              </md-button>
+            </md-menu-item>
+            <md-menu-item class="nv-nav-item">
+              <md-button class="side_navlist" ng-href="#/admin/teamPage" ng-class="{'active-link': currStateName == 'admin.teamPage'}"
+                ng-click="closeMenuSidenavIfMobile()">
+                Team
+              </md-button>
+            </md-menu-item>
 
-              <md-menu-item class="nv-nav-item">
-                <md-button ng-href="#/admin/admin-payment">
-                  Payments
-                </md-button>
-              </md-menu-item>
-              <md-menu-item class="nv-nav-item">
-                <md-button ng-href="#/admin/admin-feeds">
-                  Feeds
-                </md-button>
-              </md-menu-item>
-
-              <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/admin/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
-										Team
-									</md-button>
-								</md-menu-item>
-
-            </md-list>
-          </div>
+          </md-list>
+        </div>
       </md-content>
     </md-sidenav>
     <ui-view class="main_view" flex></ui-view>
