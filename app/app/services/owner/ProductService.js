@@ -42,6 +42,11 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				$http.delete(config.apiPath + '/format/' + formatId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
+			getProductDetails: function(productId){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
 			searchOwnerProducts: function(word){
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/search-owner-products/' + word).success(dfd.resolve).error(dfd.reject);

@@ -20,22 +20,23 @@
                         <img src="assets/images/addnewproduct.png" alt="Smiley face" class="requ_size">
                     </td>
                     <td class="upper_line">
-                        <p class="md-title mb-0"><span>BB238</span> - <span>Kothaguda</span>
-                            <span>(40Ft X 40Ft)</span></p>                        
-                        <p class="mb-0">Kothaguda X Roads</p>
-                        <p class="mb-0"> <span class="text_color">Facing:</span>From Kothaguda to
-                            Hitech city road, beside ICICI Bank</p>
+                        <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
+                            <span>({{editRequestedhordings.panelSize}})</span></p>                        
+                        <p class="mb-0">{{editRequestedhordings.address}}</p>
+                        <p class="mb-0"> <span class="text_color">Facing:</span>{{editRequestedhordings.direction}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                       <label><b>Views</b></label>
-                        1,48,000
+                      <p>{{editRequestedhordings.impressions}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                             <label><b>Lit</b></label>
-                        Yes</td>
+                            <p ng-if="editRequestedhordings.lighting == 1">Yes</p>
+                            <p ng-if="editRequestedhordings.lighting == 0">No</p>
+                        </td>
                     <td class="table_vertical upper_line hide-xs">
                             <label><b>Price</b></label>
-                        58,000</td>
+                           <p> {{editRequestedhordings.default_price}}</p></td>
                 </tr>
             </tbody>
         </table>
@@ -45,144 +46,166 @@
 <div class="contbg md-caption layout-row" layout="column">
     <div class="md-whiteframe-2dp layout-margin col-md-6">
         <div class="col-md-12">
-            <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
-            <form role="form" name="updateProductForm" novalidate>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Product ID" required="required"
-                            ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
-                            class="form-control md-whiteframe-3dp" />
-                        <div ng-messages="updateProductForm.siteNo.$error" ng-if="updateProductForm.siteNo.$touched"
-                            style="color:red">
-                            <div ng-message="required">Product Id is required.</div>
-                            <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
+            <form name="addProductForm" role="form" novalidate="novalidate">
+                    <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
+                    <li>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Product ID" required="required"
+                                     ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" class="form-control md-whiteframe-3dp" />
+                                    <div ng-messages="addProductForm.siteNo.$error" ng-if="addProductForm.siteNo.$touched" style="color:red">
+                                        <div ng-message="required">Product Id is required.</div>
+                                        <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+                                     class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
+                                     name="productType">
+                                        <option value="" disabled selected>Site Type</option>
+                                    </select>
+                                    <div ng-messages="addProductForm.productType.$error" ng-if="addProductForm.productType.$touched" style="color:red">
+                                        <div ng-message="required">Site type is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <!-- <select name="city" class="form-control md-whiteframe-3dp" id="city" ng-model="product.city"
+                                     required="required" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
+                                        <option value="" disabled selected>Select City</option>
+                                    </select required>
+                                    <div ng-messages="addProductForm.city.$error" ng-if="addProductForm.city.$touched" style="color:red">
+                                        <div ng-message="required">city is required.</div>
+                                    </div> -->
+                                    <md-autocomplete                      
+                    md-min-length="3"
+                    md-selected-item = "areaObj"
+                    md-selected-item-change = "selectSearchedArea(item)"
+                    md-search-text = "searchedArea"
+                    md-items = "item in searchableAreas(searchedArea)"
+                    md-item-text = "item.name"
+                    placeholder = "Search Areas"
+                                    md-clear-button = "true" style="min-width: 100% !important"
+                                    md-menu-class = "form-control md-whiteframe-3dp">
+                                        <md-item-template>
+                                            <span class="item-title">
+                                                <span> {{item.name}} </span>
+                                            </span>
+                                            <span class="item-metadata">
+                                                <span>
+                                                    <strong>{{item.city_name}}</strong>
+                                                </span>
+                                                <span>
+                                                    <strong>{{item.state_name}}</strong>
+                                                </span>
+                                                <span>
+                                                    <strong>{{item.country_name}}</strong>
+                                                </span>
+                                            </span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No matches found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input ng-model="product.address" class="form-control  md-whiteframe-3dp" placeholder="address" type="text"
+                                     name="address" required="required" />
+                                    <div ng-messages="addProductForm.address.$error" ng-if="addProductForm.address.$touched" style="color:red">
+                                        <div ng-message="required">Address is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <!-- <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction" type="text"
+                           name="Direction"  />
+                          <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+                            <div ng-message="required">Direction is required.</div>
+                          </div> -->
+                                    <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="direction"
+                                     type="text" name="direction" required="required" />
+                                    <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
+                                        <div ng-message="required">direction is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+                                     md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
+                                     placeholder="Has lighting?">
+                                        <option value="" disabled selected>Has light ?</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                    <div ng-messages="addProductForm.light.$error" ng-if="addProductForm.light.$touched" style="color:red">
+                                        <div ng-message="required">Light is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input ng-model="product.panelSize" class="form-control md-whiteframe-3dp" required="required" placeholder="Panel Size"
+                                     type="text" name="panelSize" required="required" />
+                                    <div ng-messages="addProductForm.panelSize.$error" ng-if="addProductForm.panelSize.$touched" style="color:red">
+                                        <div ng-message="required">Panel size required.</div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input ng-model="product.cost" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
+                                     type="text" name="cost" required="required" />
+                                    <div ng-messages="addProductForm.cost.$error" ng-if="addProductForm.cost.$touched" style="color:red">
+                                        <div ng-message="required">Cost is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                     type="text" name="date" readonly options="rqstHrdngsOpts"/>
+                                    <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
+                                        <div ng-message="required">Date is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <textarea ng-model="product.adStrength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
+                                     type="strength" name="strength" required="required" rows="3"></textarea>
+                                    <div ng-messages="addProductForm.strength.$error" ng-if="addProductForm.strength.$touched" style="color:red">
+                                        <div ng-message="required">strength is required.</div>
+                                    </div>
+                                </div>
+    
+                                <div class="col-sm-6">
+                                    <label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+                                    <span class="input-group-btn">
+                                        <span class="">
+                                            <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
+                                             name="imageFile" accept="image/*" ngf-max-size="10MB">
+                                        </span>
+                                    </span>
+                                    <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched" style="color:red">
+                                        <div ng-message="required">Image is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div flex></div>
+                                <div class="col-sm-6">
+                                    <md-button class="md-raised all_button pull-right" ng-click="updateeditProductdetails(product)">Submit</md-button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <select id="productType" ng-options="format.id as format.name for format in formatList"
-                            ng-model="product.type" class="form-control md-whiteframe-3dp form_editmargin" data-md-container-class="selectdemoSelectHeader"
-                            required="required" name="productType">
-                            <option value="" disabled selected>Site Type</option>
-                        </select>
-                        <div ng-messages="updateProductForm.productType.$error" ng-if="updateProductForm.productType.$touched"
-                            style="color:red">
-                            <div ng-message="required">Site type is required.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <select name="country" class="form-control md-whiteframe-3dp" id="country" required="required"
-                            ng-model="product.country" ng-change="getStateList()" ng-options="country.id as country.name for country in countryList">
-                            <option value="" disabled selected>Select Country</option>
-                        </select required>
-                        <div ng-messages="updateProductForm.country.$error" ng-if="updateProductForm.country.$touched"
-                            style="color:red">
-                            <div ng-message="required">Country is required.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <select name="state" class="form-control md-whiteframe-3dp form_editmargin" id="state" ng-model="product.state"
-                            required="required" ng-change="getCityList()" ng-options="state.id as state.name for state in stateList">
-                            <option value="" disabled selected>Select State</option>
-                        </select required>
-                        <div ng-messages="updateProductForm.state.$error" ng-if="updateProductForm.state.$touched"
-                            style="color:red">
-                            <div ng-message="required">state is required.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <select name="city" class="form-control md-whiteframe-3dp" id="city" ng-model="product.city"
-                            required="required" ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList">
-                            <option value="" disabled selected>Select City</option>
-                        </select required>
-                        <div ng-messages="updateProductForm.city.$error" ng-if="updateProductForm.city.$touched" style="color:red">
-                            <div ng-message="required">city is required.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <input ng-model="product.address" class="form-control md-whiteframe-3dp form_editmargin" placeholder="address"
-                            type="text" name="address" required="required" />
-                        <div ng-messages="updateProductForm.address.$error" ng-if="updateProductForm.address.$touched"
-                            style="color:red">
-                            <div ng-message="required">Address is required.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input ng-model="product.direction" class="form-control md-whiteframe-3dp" placeholder="direction"
-                            type="text" name="direction" required="required" />
-                        <div ng-messages="updateProductForm.direction.$error" ng-if="updateProductForm.direction.$touched"
-                            style="color:red">
-                            <div ng-message="required">direction is required.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp form_editmargin"
-                            md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
-                            placeholder="Has lighting?">
-                            <option value="" disabled selected>Has lighting?</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                        <div ng-messages="updateProductForm.light.$error" ng-if="updateProductForm.light.$touched"
-                            style="color:red">
-                            <div ng-message="required">light is required.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <input ng-model="product.panelSize" class="form-control md-whiteframe-3dp form_editmargin" required="required"
-                            placeholder="Panel Size" type="text" name="panelSize" required="required" />
-                        <div ng-messages="updateProductForm.panelSize.$error" ng-if="updateProductForm.panelSize.$touched"
-                            style="color:red">
-                            <div ng-message="required">Panel size is required.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input ng-model="product.cost" class="form-control md-whiteframe-3dp" required="required"
-                            placeholder="Product Cost" type="text" name="cost" required="required" />
-                        <div ng-messages="updateProductForm.cost.$error" ng-if="updateProductForm.cost.$touched" style="color:red">
-                            <div ng-message="required">Cost is required.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <input ng-model="product.date" class="form-control md-whiteframe-3dp form_editmargin" required="required"
-                            placeholder="Product date" type="date" name="date" required="required" />
-                        <div ng-messages="updateProductForm.date.$error" ng-if="updateProductForm.date.$touched" style="color:red">
-                            <div ng-message="required">Date is required.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <textarea ng-model="product.strength" class="form-control md-whiteframe-3dp form_editbottom" required="required"
-                            placeholder="Product strength" type="strength" name="strength" required="required" rows="2"></textarea>
-                        <div ng-messages="updateProductForm.strength.$error" ng-if="updateProductForm.strength.$touched"
-                            style="color:red">
-                            <div ng-message="required">{{product.strength}}</div>
-                        </div>
-                    </div>
-                    <div flex></div>
-                    <div class="col-sm-6">
-                        <md-button class="md-raised save_changes btn-block" ng-click="updateeditProductdetails(product)" style=""
-                            ng-disabled="updateProductForm.$invalid">Save
-                            Changes</md-button>
-                    </div>
-                </div>
-            </form>
+                    </li>
+                </form>
         </div>
     </div>
 
     <div class="layout-margin col-md-5 hide-xs">
         <img src="assets/images/updatedetails.png" alt="Smiley face"  class="edit_detailsimg">
         <label for="files" class="btn bottom-right">Change Image</label>
-        <!-- <input id="files" style="visibility:hidden;" type="file"> -->
+        <input id="files" ng-model="files.image" style="visibility:hidden;" type="file">
     </div>
 </div>
