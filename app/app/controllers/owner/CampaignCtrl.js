@@ -172,6 +172,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   $scope.getUserCampaignsForOwner = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {      
+        $scope.userCampaignPayments = result;
         $scope.plannedCampaigns = _.filter(result, function (c) {
           return c.status < 600;
         });
@@ -491,12 +492,12 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   =============================== */
   function getCampaignWithPayments() {
     OwnerCampaignService.getCampaignWithPayments().then(function (result) {
-      $scope.campaignsWithPayments = result;
+      $scope.campaignsWithPayments = result;  
     });
   }
 
   $scope.getCampaignPaymentDetails = function (campaignId) {
-    localStorage.campaignPaymentDetailsCampaignId= campaignId;
+    // localStorage.campaignPaymentDetailsCampaignId= campaignId;
     OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       //$scope.showCampaignPaymentSidenav();
       $scope.campaignPaymentDetails = result;     
@@ -631,22 +632,25 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   }
 
   if ($rootScope.currStateName == 'owner.payments') {
-    getCampaignWithPayments();
+    $scope.getUserCampaignsForOwner();
+    loadOwnerCampaigns();
   }
 
   if($rootScope.currStateName == 'owner.updatepayment'){
-    $scope.getCampaignPaymentDetails (localStorage.campaignPaymentDetailsCampaignId)
-  }
-  if ($rootScope.currStateName == 'owner.update-payments') {
+    $scope.getCampaignPaymentDetails ($stateParams.id)
+    getCampaignWithPayments();
     $scope.allCampaignsForOwner = [];
     loadOwnerCampaigns().then(function (result) {
       $scope.getUserCampaignsForOwner().then(function (result2) {
         $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c) {
-          return c.status >= 6;
+          return c.status >= 600;
         });
       });
     })
   }
+  // if ($rootScope.currStateName == 'owner.update-payments') {
+   
+  // }
 
   /*=============================
   | Page based initial loads end
