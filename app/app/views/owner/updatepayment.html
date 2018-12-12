@@ -5,7 +5,7 @@
   <div class="row" style="margin-left:0px; margin-right:0px;">
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 payment_mng" style="margin-top:23px;">
       <p class="">Camapaign ID</p>
-      <p class="md-caption"><b>BB-001</b></p>
+      <p class="md-caption"><b>{{campaignPaymentDetails.cid || "N/A"}}</b></p>
     </div>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 payment_mng" style="margin-top:23px;">
       <p class="">Camapaign Name</p>
@@ -13,7 +13,7 @@
     </div>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 payment_nng" style="margin-top:23px;">
       <p class="">No of Products</p>
-      <p class="md-caption"><b>{{campaignPaymentDetails.product_count}}</b></p>
+      <p class="md-caption"><b>{{campaignPaymentDetails.product_count || "N/A"}}</b></p>
     </div>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 payment_nng hide-xs" style="margin-top:23px;">
       <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
@@ -201,8 +201,7 @@
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                       <div class="col-sm-8">
                         <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-                          <option value="" selected>Cash</option>
-                          <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
+                          <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
                         </select>
                       </div>
                     </div>
@@ -215,14 +214,15 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.reference_no">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Camapaign</label>
                       <div class="col-sm-8">
-                        <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-                          <option value="" selected>BBI248 - BBI Pvt Ltd</option>
+                          <!-- <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.name"> -->
+                        <select id="paymentType" ng-model="campaignPayment.campaign_id" class="form-control md-whiteframe-3dp">
+                          <option ng-repeat="campaignForOwner in allCampaignsForOwner" ng-value="campaignForOwner.id">{{campaignForOwner.name}}</option>
                           <!-- <option selected>Select Payment Type</option> -->
                           <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
                         </select>
@@ -231,13 +231,13 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.received_by">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
                       <div class="col-sm-8">
-                        <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
+                        <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage" ng-model="campaignPayment.comment"></textarea>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -245,8 +245,7 @@
                       <div class="col-sm-8">
                         <span class="input-group-btn">
                           <span class="">
-                            <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select
-                              ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="10MB">
+                              <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp" accept="image/*" ngf-max-size="1MB"></input>
                           </span>
                         </span>
                         <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
