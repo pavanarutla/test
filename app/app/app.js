@@ -359,6 +359,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/feedback-view.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.productfull-details', {
+      url: '/productfull-details',
+      templateUrl: 'views/admin/productfull-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
     // .state('admin.user-management', {
     //   url: '/user-management',
     //   templateUrl: 'views/admin/user-management.html',
