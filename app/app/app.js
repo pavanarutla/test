@@ -137,12 +137,12 @@ var app = angular.module('bbManager', [
     .state('index.user-payments', {
       url: 'user-payments',
       templateUrl: 'views/user-payments.html',
-      controller:''
+      controller:'UserPaymentCtrl'
     })
     .state('index.update-user-payments', {
-      url: 'update-user-payments',
+      url: 'update-user-payments/:id',
       templateUrl: 'views/update-user-payments.html',
-      controller:''
+      controller:'UserPaymentCtrl'
     })
     .state('index.metro-campaign', {
       url: 'metro-campaign/{metroCampaignId}',
