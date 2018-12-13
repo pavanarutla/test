@@ -400,7 +400,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       }
       else if(result.data.status == 0){
         $scope.requestProductErrors = result.data.message;
-        toastr.success(result.data.message);
+        toastr.error(result.data.message);
       }
       // document.getElementById("myDropdown").classList.toggle("show");
     }, function (resp) {

@@ -17,7 +17,7 @@
             <tbody>
                 <tr>
                     <td class="upper_line image_tdwidth">
-                        <img src="assets/images/addnewproduct.png" alt="Smiley face" class="requ_size">
+                        <img ng-src="{{config.serverUrl + editRequestedhordings.image}}" alt="Smiley face" class="requ_size">
                     </td>
                     <td class="upper_line">
                         <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
@@ -80,13 +80,13 @@
                                         <div ng-message="required">city is required.</div>
                                     </div> -->
                                     <md-autocomplete                      
-                    md-min-length="3"
-                    md-selected-item = "areaObj"
-                    md-selected-item-change = "selectSearchedArea(item)"
-                    md-search-text = "searchedArea"
-                    md-items = "item in searchableAreas(searchedArea)"
-                    md-item-text = "item.name"
-                    placeholder = "Search Areas"
+                                    md-min-length="3"
+                                    md-selected-item = "areaObj"
+                                    md-selected-item-change = "selectSearchedArea(item)"
+                                    md-search-text = "searchedArea"
+                                    md-items = "item in searchableAreas(searchedArea)"
+                                    md-item-text = "item.name"
+                                    placeholder = "Search Areas"
                                     md-clear-button = "true" style="min-width: 100% !important"
                                     md-menu-class = "form-control md-whiteframe-3dp">
                                         <md-item-template>
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                    <input date-range-picker ng-model="product.dates" ng-click="getProductUnavailableDatesEdit($event)" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                      type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                     <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
                                         <div ng-message="required">Date is required.</div>
@@ -179,7 +179,7 @@
                                 </div>
     
                                 <div class="col-sm-6">
-                                    <label for="paymentType" class="col-sm-6 md-body-2">Upload Image</label>
+                                    <label for="paymentType" class="col-sm-6 md-body-2">Edit Image</label>
                                     <span class="input-group-btn">
                                         <span class="">
                                             <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image"
@@ -204,8 +204,8 @@
     </div>
 
     <div class="layout-margin col-md-5 hide-xs">
-        <img src="assets/images/updatedetails.png" alt="Smiley face"  class="edit_detailsimg">
-        <label for="files" class="btn bottom-right">Change Image</label>
-        <input id="files" ng-model="files.image" style="visibility:hidden;" type="file">
+        <img ng-src="{{config.serverUrl + editRequestedhordings.image}}" alt="Smiley face"  class="edit_detailsimg">
+        <!-- <label for="files" class="btn bottom-right">Change Image</label>
+        <input id="files" ng-model="files.image" style="visibility:hidden;" type="file"> -->
     </div>
 </div>
