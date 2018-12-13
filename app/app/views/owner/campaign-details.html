@@ -418,7 +418,7 @@
 		</table>
 	</div>
 	<!-- table grid end -->
-	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin>
+	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0">
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
@@ -436,7 +436,8 @@
 				<div class="md-title">Grand Total :</div>
 				<div class="md-title">{{campaignDetails.grandTotal}}</div>
 			</div>
-			<md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)">Book Campaign</md-button>
+			<md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book Campaign</md-button>
+			<button class="" ng-if="campaignDetails.status == 700" style="cursor:none">Booked</button>
 		</div>
 	</div>
 </div>
