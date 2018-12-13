@@ -476,7 +476,7 @@ var app = angular.module('bbManager', [
       controller:'OwnerCampaignCtrl'
     })
     .state('owner.editproduct-details', {
-      url: '/editproduct-details',
+      url: '/editproduct-details/:id',
       templateUrl: 'views/owner/editproduct-details.html',
       controller:'OwnerProductCtrl'
     })

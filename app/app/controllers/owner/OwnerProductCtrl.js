@@ -367,6 +367,14 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
+  $scope.getProductUnavailableDatesEdit = function(ev){
+    var productId = $stateParams.id;
+    OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parent().parent().find('input').trigger('click');
+    });
+  }
+
   $scope.getProductUnavailableDates = function(productId, ev){
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
@@ -376,16 +384,42 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   /*=====================
   | Product Section Ends
   =====================*/
+
+  //updated edited product details
+
   $scope.updateeditProductdetails = function(product){
-    console.log(product);
+    product.area = $scope.areaObj.id;
+    product.id = $stateParams.id;
+    Upload.upload({
+      url: config.apiPath + '/request-owner-product-addition',
+      data: { image: $scope.files.image, product: $scope.product }
+    }).then(function (result) {
+      if(result.data.status == "1"){
+        getRequestedProductList();
+        toastr.success(result.data.message);        
+      }
+      else if(result.data.status == 0){
+        $scope.requestProductErrors = result.data.message;
+        toastr.error(result.data.message);
+      }
+      // document.getElementById("myDropdown").classList.toggle("show");
+    }, function (resp) {
+      console.log('Error status: ', resp);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+    });
     }
     
    /*=====================
   | Requested hordings
   =====================*/
 
-  $scope.editRequestedhordings = function(product){
-    console.log(product);
+  $scope.editRequestedhordings = function(id){
+     OwnerProductService.getProductDetails(id).then(function(res){
+      $scope.editRequestedhordings = res.product_details
+      return res.product_details;
+    })
   };
 
     /*=====================
@@ -475,6 +509,11 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   if($rootScope.currStateName == 'owner.requested-hoardings'){
     getRequestedProductList();
     $scope.getApprovedProductList()
+  }
+  
+  if($rootScope.currStateName == 'owner.editproduct-details'){
+    $scope.editRequestedhordings($stateParams.id)
+    console.log("request hoarding")
   }
 
   /*=============================
