@@ -287,9 +287,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
-        <td>{{payment.updated_at | dateify | date: "dd-MMM-yyyy"}}</td>
-        <td>{{payment.type}}</td>
-        <td>{{payment.amount}}</td>
+        <td>{{payment.updated_at | dateify | date: "dd-MMM-yyyy" || "N/A"}}</td>
+        <td>{{payment.type || "N/A"}}</td>
+        <td>{{payment.amount || "N/A"}}</td>
         <td>21-09-2018, 9:00 Am</td>
       </tr>
     </tbody>
@@ -298,9 +298,9 @@
 
 <div style="margin-right:20px;">
   <div class="pull-right">
-    <p class="font-weight-light" style="text-indent: 48px;">Total: 12,58,000</p>
-    <p class="text_color" style="text-indent: 50px;">Paid: 11,10,850</p>
-    <h4>Balance: 1,47,150</h4>
+    <p class="font-weight-light" style="text-indent: 48px;">Total: {{campaignPaymentDetails.act_budget}}</p>
+    <p class="text_color" style="text-indent: 50px;">Paid: {{paid}}</p>
+    <h4>Balance: {{unpaid}}</h4>
   </div>
 </div>
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
