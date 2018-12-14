@@ -111,14 +111,14 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       toastr.error("Please shortlist some products first.");
     }
   }
-  $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
+  $scope.addProductToExistingCampaign = function (existingCampaignId) {
     var productToCampaign = {
       campaign_id: existingCampaignId
     };
     if ($scope.shortListedProducts.length > 0) {
       productToCampaign.shortlisted_products = [];
       _.each($scope.shortListedProducts, function (v, i) {
-        productToCampaign.shortlisted_products.push(v.id);
+        productToCampaign.shortlisted_products.push(v.product_id);
       });
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
       if (result.status == 1) {
