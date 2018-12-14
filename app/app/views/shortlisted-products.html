@@ -1,6 +1,6 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-
-	<div class="table-responsive contbg">
+	<div ng-if="shortListedProducts.length == 0" style="font-size: 20px">There is no products shortlisted please shortlist the products..</div>
+	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
 		<table class="table">
 			<thead class="text_color">
 				<tr>
@@ -11,7 +11,8 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
-					<th>
+					<th></th>
+					<th class="text-center">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
@@ -20,8 +21,8 @@
 			</thead>
 			<tbody ng-repeat="shortlisted in shortListedProducts">
 				<tr>
-					<td>
-						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" height="100" width="150">
+					<td class="image_tdwidth">
+						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
@@ -45,9 +46,9 @@
 							
 							</a>
 					</td>
-					<td class="table_vertical">
-						<p class="text_color md-caption">This Inventory<br>
-							Campaign Completed</p>
+					<th></th>
+					<td class="table_vertical text-center">
+						<p class="text_color md-caption">This Inventory Campaign Completed</p>
 					</td>
 			</tbody>
 		</table>
@@ -99,8 +100,8 @@
 					</form>
 				</div>
 			</div> -->
-			<div class="p-2 align-self-end">
-				<div class="d-flex justify-content-end pt-4 align-self-end">
+			<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
+				<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
 					<div class="d-flex justify-content-end pt-4">
 						<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>
 						<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
@@ -109,10 +110,10 @@
 			</div>
 
 		</div>
-		<div class="prodct_save md-whiteframe-2dp animated fadeInUp float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+		<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
 			<div layout="row">
 				<div flex></div>
-				<a class="md-icon-button close-btn" ng-click="">
+				<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
 					<i class="material-icons">close</i>
 				</a>
 			</div>
@@ -120,6 +121,9 @@
 			<div class="md-title  m-2">Let's work Together!</div>
 			<div class="form-group mt-3 mr-2 ml-2">
 				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+			</div>
+			<div class="form-group mt-3 mr-2 ml-2">
+				<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
 			</div>
 			<div layout="column" class="mr-2 ml-2 mb-3">
 				<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
@@ -138,7 +142,7 @@
 				</md-button>
 			</div> -->			
 			<div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id,campaign.id)">
+				<md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id,campaign.id)">
 					add to existing or save Campaign
 				</md-button>
 			</div>

@@ -1,212 +1,192 @@
-<div class="row" style="padding:20px">
-  <div class="col-md-12">
-    <!-- owners table -->
-    <div layout="row">
-      <div flex="50"> <h3 style="padding-left:30px;">Companies</h3></div>
-    <div flex="50" layout="column" layout-align="center end">
-    <input type="text" placeholder="search by company name..." ng-model="searchByCompanyName" style="width:400px;border-radius:10px;height:40px;float:right">
-      
-    </div>
-  </div> 
-    <div class="table-responsive">    
-      <table class="table table-striped table-bordered ">
-        <thead>
-            <tr>
-              <th>Company Name</th>
-              <th>Company Type</th>
-              <th>Super Admin Details</th>
-              <th>Activated</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="client in allClients | filter : searchByCompanyName">
-            <td>{{client.company_name}}</td>
-            <td>{{client.company_type_name}}</td>
-            <td>
-              <a style="cursor:pointer; color:#00f;" ng-click="showUserDetailsPopup(client.client_id, client.company_super_admin)" ng-if="client.company_super_admin">
-                View User
-              </a>
-              <a style="cursor:pointer; color:#00f;" ng-click="showAssignSuperAdminPopup(client.id)" ng-if="!client.company_super_admin">
-                Assign Super Admin
-              </a>
-            </td>
-            <td>{{client.activated | boolToYesNo}}</td>
-            <td>{{client.contact_email}}</td>
-            <td>{{client.phone}}</td>
-            <td>{{client.address}}</td>
-            <td>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">done</i></md-icon></a></span>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">share</i></md-icon></a></span>
-              <span><a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a></span>
-            </td>
-          </tr>      
-        </tbody>
-      </table>
-    </div>
-    <!-- owners table ends -->
-  </div>
-</div>
-
-<div class="row" style="padding:20px">
-  <div class="col-md-12">
-    <!-- users table -->
-    <div layout="row">
-      <div layout="column" flex="50">
-      <h3 style="padding-left:30px;">Users</h3>
-    </div>
-    <div layout="column" flex="50" layout-align="center end">
-      <input type="text" placeholder="search by Email..." ng-model="searchByEmail" style="width:400px;border-radius:10px;height:40px">
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+  <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+    <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+  </md-button>
+  <md-tabs md-dynamic-height class="padding_cmp">
+    <md-tab label="Companies">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div flex="20">
+          <input class="hide-xs form-control md-whiteframe-z1" type="text" placeholder="Search by company name..." ng-model="searchByCompanyName"
+            style="width:317px;border-radius:0px;height:33px;float:right">
+        </div>
       </div>
-    </div>
-    <div style="float:right; margin-right:10px;">
-      <a ng-click="showAddUserPopup()" style="cursor:pointer; color:blue;">Add new user</a>
-    </div>
-    <div class="table-responsive">    
-      <table class="table table-striped table-bordered ">
-        <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>User Type</th>
-              <th>Company</th>
-              <th>Activated</th>
-              <th></th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="user in allUsers | filter : searchByEmail">
-            <td>{{user.first_name}} {{user.last_name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone || "N/A"}}</td>
-            <td>{{user.company_type}}</td>
-            <td>{{user.company_name}}</td>
-            <td>
-              <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
-                {{user.activated | boolToYesNo}}
-              </a>
-            </td>
-            <td>
-              <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
-                View details
-              </a>
-            </td>
-          </tr>      
-        </tbody>
-      </table>
-    </div>
-    <!-- users table ends -->
-  </div>
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color camp-text">
+                <th class="width_1 text-left">Company Name</th>
+                <th class="hide-xs">Company Type</th>
+                <th class="width_2 hide-xs">Super Admin Details</th>
+                <th class="hide-xs">Activated</th>
+                <th class="text-left">Email</th>
+                <th class="hide-xs">Phone</th>
+                <th class="hide-xs">Address</th>
+                <th class="hide-xs">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="camp-text">
+              <tr ng-repeat="client in allClients | filter : searchByCompanyName">
+                <td class="text-left table_vertical">{{client.company_name}}</td>
+                <td class="table_vertical hide-xs">{{client.company_type_name}}</td>
+                <td class="table_vertical hide-xs">
+                  <a style="cursor:pointer; color:#00f;" ng-click="showUserDetailsPopup(client.client_id, client.company_super_admin)"
+                    ng-if="client.company_super_admin">
+                    View User
+                  </a>
+                  <a style="cursor:pointer; color:#00f;" ng-click="showAssignSuperAdminPopup(client.id)" ng-if="!client.company_super_admin">
+                    Assign Super Admin
+                  </a>
+                </td>
+                <td class="table_vertical hide-xs">{{client.activated | boolToYesNo}}</td>
+                <td class="text-left table_vertical">{{client.contact_email}}</td>
+                <td class="table_vertical hide-xs">{{client.phone}}</td>
+                <td class="table_vertical hide-xs">{{client.address}}</td>
+                <td class="table_vertical hide-xs">
+                  <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">done</i></md-icon>
+                    </a></span>
+                  <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">share</i></md-icon>
+                    </a></span>
+                  <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">delete</i></md-icon>
+                    </a></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="Users">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div flex="20">
+          <input class="hide-xs form-control md-whiteframe-z1" type="text" placeholder="Search by Email..." ng-model="searchByEmail"
+            style="width:317px;border-radius:0px;height:33px;float:right">
+        </div>
+        <div class="hide-xs" layout="row">
+          <div flex></div>
+          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+            <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
+            <md-button class="md-raised all_button add_button" ng-click="showAddUserPopup()">Add New User</md-button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color camp-text">
+                <th class="text-left">Name</th>
+                <th class="text-left">Email</th>
+                <th class="hide-xs">Phone</th>
+                <th class="hide-xs">User Type</th>
+                <th class="hide-xs">Company</th>
+                <th class="hide-xs">Activated</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="camp-text">
+              <tr ng-repeat="user in allUsers | filter : searchByEmail">
+                <td class="text-left table_vertical">{{user.first_name}} {{user.last_name}}</td>
+                <td class="text-left table_vertical">{{user.email}}</td>
+                <td class="table_vertical hide-xs">{{user.phone || "N/A"}}</td>
+                <td class="table_vertical hide-xs">{{user.company_type}}</td>
+                <td class="table_vertical hide-xs">{{user.company_name}}</td>
+                <td class="table_vertical hide-xs">
+                  <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                    {{user.activated | boolToYesNo}}
+                  </a>
+                </td>
+                <td class="table_vertical">
+                  <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                    View details
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="System Roles">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div class="hide-xs" layout="row">
+          <div flex></div>
+          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+            <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
+            <md-button class="md-raised all_button" ng-click="showAddRolePopup()">Add Role</md-button>
+          </div>
+        </div>
+      </div>
+      <!-- <div style="float:right; margin-right:10px;">
+        <a ng-click="showAddRolePopup()" style="cursor:pointer; color:blue;">Add Role</a>
+      </div> -->
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color">
+                <th></th>
+                <th class="text-left">Name</th>
+                <th>Description</th>
+                <th class="hide-xs">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr ng-repeat="role in allRoles">
+                <td class="table_vertical">
+                  <input type="checkbox" ng-click="toggleRoleSelection(role.id)" ng-checked="selectedRole == role.id" />
+                </td>
+                <td class="table_vertical">{{role.display_name}}</td>
+                <td class="table_vertical">{{role.description}}</td>
+                <td class="table_vertical hide-xs">
+                  <span>
+                    <!-- view role -->
+                    <a ng-href="#/admin/role-details/{{role.id}}" ng-click="">
+                      <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                    </a>
+                  </span>
+                  <span>
+                    <!-- assign this role to user -->
+                    <a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">assignment_ind</i></md-icon>
+                    </a>
+                  </span>
+                  <span>
+                    <!-- delete this role -->
+                    <a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">delete</i></md-icon>
+                    </a>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+  </md-tabs>
 </div>
-
-
-<div class="row" style="padding:20px;">
-  <div class="col-md-6">
-    <!-- roles table -->
-    <div style="float:left;">
-      <h3 style="padding-left:30px;">System Roles</h3>
-    </div>
-    <div style="float:right; margin-right:10px;">
-      <a ng-click="showAddRolePopup()" style="cursor:pointer; color:blue;">Add Role</a>
-    </div>
-    <div class="table-responsive" style="height:400px; overflow:auto;">    
-      <table class="table table-striped table-bordered ">
-        <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="role in allRoles">
-            <td>
-              <input type="checkbox" ng-click="toggleRoleSelection(role.id)" ng-checked="selectedRole == role.id"/>
-            </td>
-            <td>{{role.display_name}}</td>
-            <td>{{role.description}}</td>
-            <td>
-              <span>
-                <!-- view role -->
-                <a ng-href="#/admin/role-details/{{role.id}}" ng-click=""><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
-              </span>
-              <span>
-                <!-- assign this role to user -->
-                <a ng-href="#" ng-click=""><md-icon><i class="material-icons">assignment_ind</i></md-icon></a>
-              </span>
-              <span>
-                <!-- delete this role -->
-                <a ng-href="#" ng-click=""><md-icon><i class="material-icons">delete</i></md-icon></a>
-              </span>
-            </td>
-          </tr>      
-        </tbody>
-      </table>
-    </div>
-    <!-- roles table ends -->
-  </div>
-  <div class="col-md-6" ng-if="selectedRole != 0">
-    <!-- permissions table, fills up when a role is selected -->
-    <div style="float:left;">
-      <h3 style="padding-left:30px;">Role Permissions</h3>
-    </div>
-    <div style="float:right; margin-right:10px;">
-      <a ng-click="updatePermissionsForRole()" style="cursor:pointer; color:blue;">update Permissions</a>
-    </div>
-    <div class="table-responsive" style="height:400px; overflow:auto;">
-      <table class="table table-striped table-bordered ">
-        <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Description</th>
-              <!-- <th>Actions</th> -->
-            </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="permission in allPermissions">
-            <td>
-              <input type="checkbox" ng-checked="selectedPermissions.indexOf(permission.id) > -1" ng-click="togglePermissionSelection(permission.id)" />
-            </td>
-            <td>{{permission.name}}</td>
-            <td>{{permission.description}}</td>
-            <!-- <td>
-              <span>
-                <!-- assign this permission to role --
-                <a ng-href="#" ng-click=""><md-icon><i class="material-icons">subdirectory_arrow_left</i></md-icon></a>
-              </span>
-            </td> -->
-          </tr>      
-        </tbody>
-      </table>
-    </div>
-    <!-- permissions table ends -->
-  </div>
-</div>
-
-<!-- Templates -->
 
 <script type="text/ng-template" id="add-bbi-user-popup.html">
-  <md-content class="md-padding">
-    <form name="addBBIUserForm" novalidate="novalidate">
-      <md-input-container class="md-block">
-        <label>Email</label>
-        <input ng-model="newBBIUser.email" name="newBBIUserEmail" type="email" maxlength="100" required="required"/>
-        <div ng-messages="anewBBIUserForm.newBBIUserEmail.$error">
-          <div class="alret alert-danger" ng-message="required">Email is required.</div>
-          <div ng-message="maxlength">email shouldn't exceed 100 characters. </div>
-        </div>
-      </md-input-container>
-      <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-        <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="assignSuperAdminForm.$invalid" ng-click="sendInviteToBBIUser()">Send invite</md-button>
-      </md-input-container>
-    </form>
-  </md-content>
-</script>
-
-<!-- Templates end-->
+    <md-content class="md-padding">
+      <form name="addBBIUserForm" novalidate="novalidate">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="newBBIUser.email" name="newBBIUserEmail" type="email" maxlength="100" required="required"/>
+          <div ng-messages="anewBBIUserForm.newBBIUserEmail.$error">
+            <div class="alret alert-danger" ng-message="required">Email is required.</div>
+            <div ng-message="maxlength">email shouldn't exceed 100 characters. </div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn all_button" ng-disabled="assignSuperAdminForm.$invalid" ng-click="sendInviteToBBIUser()">Send invite</md-button>
+        </md-input-container>
+      </form>
+    </md-content>
+  </script>

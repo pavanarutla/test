@@ -712,11 +712,11 @@ app.controller('GmapCtrl',
           $mdSidenav('productDetails').close();
         });
       }
-
       function getShortListedProducts() {
         MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
-          localStorage.shortListedProducts = response.length;
+           shortListedProductsLength = response.length;
           $scope.shortListedProducts = response;
+          $rootScope.$emit("shortListedProducts",shortListedProductsLength)
         });
       }
       getShortListedProducts();

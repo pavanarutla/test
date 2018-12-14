@@ -493,10 +493,19 @@ $scope.activeUserCampaigns = [];
         });
       }
       if($rootScope.currStateName ==  'index' || 'index.location'){
-        $scope.shortListedProductsLength = localStorage.shortListedProducts
+        // $scope.shortListedProductsLength = localStorage.shortListedProducts
         $scope.loadActiveUserCampaigns();
       }
 
+      $rootScope.$on("listeningActiveUserCampaigns",function(){
+        $scope.activeUserCampaigns = [];
+        $scope.loadActiveUserCampaigns();
+      })
+
+      $rootScope.$on("shortListedProducts",function(event,data){
+        console.log(data)
+        $scope.shortListedProductsLength = data
+      })
     $scope.getAvatar = function(){
       var payload = $auth.getPayload();
       var userMongo =  typeof payload !== 'undefined' ? payload.userMongo : undefined;
