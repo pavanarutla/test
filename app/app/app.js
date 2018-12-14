@@ -124,8 +124,13 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
     })
+    // .state('index.campaign-details', {
+    //   url: 'campaign-details',
+    //   templateUrl: 'views/campaign-details.html',
+    //   controller: 'CampaignCtrl'
+    // })
     .state('index.campaign-details', {
-      url: 'campaign-details',
+      url: 'campaign-details/{campaignId}',
       templateUrl: 'views/campaign-details.html',
       controller: 'CampaignCtrl'
     })
@@ -340,6 +345,30 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.admin-payment', {
+      url: '/admin-payment',
+      templateUrl: 'views/admin/admin-payment.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.paymentview-details', {
+      url: '/paymentview-details',
+      templateUrl: 'views/admin/paymentview-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.admin-feeds', {
+      url: '/admin-feeds',
+      templateUrl: 'views/admin/admin-feeds.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.feedback-view', {
+      url: '/feedback-view',
+      templateUrl: 'views/admin/feedback-view.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.productfull-details', {
+      url: '/productfull-details',
+      templateUrl: 'views/admin/productfull-details.html',
+      controller: 'AdminCampaignCtrl'
     .state('admin.add-campagin-product', {
       url: '/add-campagin-product',
       templateUrl: 'views/admin/add-campagin-product.html',
@@ -462,12 +491,12 @@ var app = angular.module('bbManager', [
       controller:'feedback'
     })
     .state('owner.updatepayment', {
-      url: '/updatepayment',
+      url: '/updatepayment/:id',
       templateUrl: 'views/owner/updatepayment.html',
       controller:'OwnerCampaignCtrl'
     })
     .state('owner.editproduct-details', {
-      url: '/editproduct-details',
+      url: '/editproduct-details/:id',
       templateUrl: 'views/owner/editproduct-details.html',
       controller:'OwnerProductCtrl'
     })
