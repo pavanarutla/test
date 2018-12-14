@@ -44,7 +44,7 @@
 			}
 		}
 		</style>
-		<md-dialog layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height">
+		<md-dialog layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height" hide-gt-xs>
 			<div layout="row" layout-margin>
 			
 				<div flex></div>
@@ -107,4 +107,17 @@
 			</md-dialog-actions> -->
 		</md-dialog>
 
-	
+		<script>
+				var count = 1;
+				 var countEl = document.getElementById("count");
+				 function plus(){
+						 count++;
+						 countEl.value = count;
+				 }
+				 function minus(){
+					 if (count > 1) {
+						 count--;
+						 countEl.value = count;
+					 }  
+				 }
+		 </script>

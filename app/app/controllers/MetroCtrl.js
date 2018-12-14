@@ -72,7 +72,7 @@ app.controller('MetroCtrl',
           }
           
           if($state.current.url=='metro'){
-            $scope.showPackagePopup();
+           // $scope.showPackagePopup();
           }
           
           //console.log($state.current.url);

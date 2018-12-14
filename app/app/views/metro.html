@@ -1,3 +1,66 @@
+<style>
+	.metro_pack{
+		background:#fff;
+		position: absolute;
+		width:50%;
+		top:10%;
+		left:24%;
+		padding: 20px 20px 0px 20px;
+	}
+	.lnt_caln{
+		margin-top: 15px;
+		}
+		md-datepicker-button .md-button.md-icon-button{display:none}
+	.lnt_caln .md-datepicker-input-container {
+		border-bottom-color: rgb(255, 255, 255) !important;
+	}
+	.lnt_caln .md-datepicker-input-container ::placeholder {
+		color: #fff !important;
+	}
+	.md-icon-button+.md-datepicker-input-container {
+		margin-left:0px !important;
+	}
+	.lnt_caln .md-datepicker-button{
+	display:none;
+	}
+	 .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+		border-top-color: #fff !important;
+	}
+	.left_side_pack	md-datepicker {   white-space: unset;}
+	.font_size {
+		font-size: 18px !important;
+	}
+.metro_page{
+	padding:0px;
+	padding-left:5px;
+}
+	@media screen and (min-width:768px) and (max-width:  991px){
+		h3 {
+			font-size: 1.50rem;
+		}
+		/* .pop_height{
+			height: 680px;
+			overflow: auto;
+		} */
+		.metro_pack {
+    background: #fff;
+    position: absolute;
+    width: 80%;
+    top: 17%;
+    left: 19%;
+		padding: 20px 20px 0px 20px;
+    z-index: 1111;
+}
+	}
+	@media screen and (max-width:575px){
+		/* md-dialog md-dialog-content{
+			border: 1px solid #fff;
+		} */
+		.img_logo{
+			width: 114%;
+		}
+	}
+	</style>
 <div layout="column" style="position:relative">
 	<!-- saved campagin start -->
 	<md-sidenav class="md-sidenav-left" md-disable-backdrop md-component-id="savedCamapgin" style="position:absolute;margin-left:8px;top: 22%; background: none;"
@@ -226,7 +289,7 @@
 		<div lauout=" column">
 			<div layout="row">
 				<div class="md-toolbar-tools">
-					
+
 					<span flex></span>
 					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSaveCampaignSidenav()">
 						<md-icon class="md-default-theme">
@@ -245,7 +308,7 @@
 						<br>
 						<input ng-model="campaign.name" class="form-control" type="text">
 					</div>
-					
+
 				</form>
 				<div layout="column" layout-margin>
 					<md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveMetroCampaign(campaign)">SAVE CAMPAIGN</md-button>
@@ -260,7 +323,7 @@
 		<div lauout=" column">
 			<div layout="row">
 				<div class="md-toolbar-tools">
-					
+
 					<span flex></span>
 					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSaveCampaignSidenavclose()">
 						<md-icon class="md-default-theme">
@@ -417,95 +480,7 @@
 
 	<!-- map html start (left side controls) -->
 	<div layout="column" style="position:relative;height:90vh;" id="map-container">
-		<!-- <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5" disable-default-u-i="true"
-        ng-if="mapContainerHeightSet" styles="[
-        {
-            elementType: 'geometry',
-            stylers: [{color: '#f5f5f5'}]
-        },
-        {
-            elementType: 'labels.icon',
-            stylers: [{visibility: 'off'}]
-        },
-        {
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#616161'}]
-        },
-        {
-            elementType: 'labels.text.stroke',
-            stylers: [{color: '#f5f5f5'}]
-        },
-        {
-            featureType: 'administrative.land_parcel',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#bdbdbd'}]
-        },
-        {
-            featureType: 'poi',
-            elementType: 'geometry',
-            stylers: [{color: '#eeeeee'}]
-        },
-        {
-            featureType: 'poi',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#757575'}]
-        },
-        {
-            featureType: 'poi.park',
-            elementType: 'geometry',
-            stylers: [{color: '#e5e5e5'}]
-        },
-        {
-            featureType: 'poi.park',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#9e9e9e'}]
-        },
-        {
-            featureType: 'road',
-            elementType: 'geometry',
-            stylers: [{color: '#ffffff'}]
-        },
-        {
-            featureType: 'road.arterial',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#757575'}]
-        },
-        {
-            featureType: 'road.highway',
-            elementType: 'geometry',
-            stylers: [{color: '#dadada'}]
-        },
-        {
-            featureType: 'road.highway',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#616161'}]
-        },
-        {
-            featureType: 'road.local',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#9e9e9e'}]
-        },
-        {
-            featureType: 'transit.line',
-            elementType: 'geometry',
-            stylers: [{color: '#e5e5e5'}]
-        },
-        {
-            featureType: 'transit.station',
-            elementType: 'geometry',
-            stylers: [{color: '#eeeeee'}]
-        },
-        {
-            featureType: 'water',
-            elementType: 'geometry',
-            stylers: [{color: '#c9c9c9'}]
-        },
-        {
-            featureType: 'water',
-            elementType: 'labels.text.fill',
-            stylers: [{color: '#9e9e9e'}]
-        }]">
-        </ng-map> -->
+
 		<!-- <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map"> -->
 		<!-- <div class="metroBg"></div> -->
 		<md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
@@ -539,9 +514,9 @@
 				<!--<div layout="column" layout-padding class="side-navpadding">
 					<div class="main-part" layout="column" style="cursor:pointer;padding: 0px;">
 						<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as (corr | metroCorridorsFromTo) for corr in metroCorridors" required class="selectpicker">
-							
+
 						</select>
-						
+
 					</div>
 				</div> -->
 				<!-- caridoor html end-->
@@ -680,7 +655,7 @@
 			</div>
 		</md-sidenav>
 		<!--  metro Sidenav -->
-		<md-sidenav class="md-sidenav-right main__sidenav  sidenav-width" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
+		<!-- <md-sidenav class="md-sidenav-right main__sidenav  sidenav-width" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
 		 style="right: 0px !important;left:auto !important;">
 			<md-content layout="column">
 				<div class="metro_wing">
@@ -704,12 +679,76 @@
 					<img src="assets/images/landt_logo.jpg" alt="landt_logo" />
 				</div>
 			</md-content>
-		</md-sidenav>
+		</md-sidenav> -->
 		<!-- metro Sidenav ends -->
+		<!-- <div layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height">
+			<div layout="row" layout-margin>
+
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closePackagePopup()">
+					<md-icon class="md-default-theme">
+						<i class="material-icons">close</i>
+					</md-icon>
+				</md-button>
+			</div> -->
+			<div class="metro_pack md-whiteframe-z2" style="">
+					<div class="row">
+							<div class="col-sm-9 col-md-6 col-lg-4" ng-repeat="metroPackage in metroPackages track by $index">
+								<div style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
+										<p class="text-white">{{metroPackage.corridor}}</p>
+										<h3 class="text-white">{{metroPackage.format}}</h3>
+										<hr style="padding:1px;background-color: #fff;">
+										<p class="text-white" ng-repeat="desc in (metroPackage.description | customSplitString)">
+											<i class="fa fa-check-square-o" aria-hidden="true" ></i>
+											{{desc}}
+										</p>
+
+										<hr style="padding:1px;background-color: #fff;">
+										<!-- <p class="text-white">No of Trains: <input class="train_text" type="number" min="0" style="margin-left: 40px;"></p> -->
+										<p class="text-white">No of Trains:
+												<span style="background:#ededed;padding:6px;margin-left: 40px;">
+													<input type="number" ng-model="metroPackage.selected_trains" style="width:47%" value="1" size="8" min="1" max="{{metroPackage.max_trains}}" id="count1">
+													</span></p>
+										<!-- <p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p> -->
+										<p class="text-white">No of Months:
+												<span style="background:#ededed;padding:6px;margin-left: 32px;">
+													<input type="number" ng-model="metroPackage.months" value="1" min="1" size="8" max="12" id="count2" style="width:47%">
+													</span></p>
+										<p class="text-white">Start Date: <input type="date" min="{{today1}}" ng-model="metroPackage.start_date" style="margin-left: 51.5px;width:52%;" ></p>
+										<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * metroPackage.months * metroPackage.selected_trains) }}</span></p>
+										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;">Shortlist This</p>
+										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;">Deselect This</p>
+								</div>
+							</div>
+					</div>
+				<div layout="row" layout-margin>
+					<div class="show_bug">
+						<p class="md-caption">
+							Estimated Budget for {{getEstBudgetForSelectedPackages().months}} Months, {{getEstBudgetForSelectedPackages().selected_trains}} Trains
+						</p>
+						<h2 class="text_color">
+							Rs. {{getEstBudgetForSelectedPackages().price}}
+						</h2>
+						<!--<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>
+						 <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
+					</div>
+					<div flex></div>
+					<div class="logo_lnt">
+						<p class="md-caption">We are oﬃcial Partners to</p>
+						<img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
+					</div>
+				</div>
+			</div>
+			<!-- <md-dialog-actions layout="row" layout-align="center center">
+
+			</md-dialog-actions> -->
+		<!-- </div> -->
+
 	</div>
 	<!-- map html start (left side controls) ends -->
+
 </div>
-<!-- 
+<!--
 <script>
 
     $(document).ready(function () {
