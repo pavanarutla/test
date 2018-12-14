@@ -53,11 +53,16 @@
           </thead>
           <tbody ng-repeat="request in requestList">
             <tr>
-              <td class="table_vertical">BB283</td>
+              <td class="table_vertical">{{request.cid}}</td>
               <td class="table_vertical">{{request.name}}</td>
               <td class="table_vertical">
-                <span ng-show="request.status == 2" >A user has asked for a quote for your products.</span>
-                <span ng-show="request.status == 5" >A campaign with your products has been requested to launch.</span>
+                  <!-- <span ng-show="request.status == 100" >Preparing</span> -->
+                <!-- <span ng-show="request.status == 200" >A user has asked for a quote for your products.</span> -->
+                <span ng-show="request.status == 300" >Quote Requested</span>                
+                <span ng-show="request.status == 400" >Quote Given</span>
+                <span ng-show="request.status == 500" >Change Requested</span>
+                <span ng-show="request.status == 600" >Booking Requested</span>
+                <span ng-show="request.status == 700" >Booked</span>
               </td>
               <td class="table_vertical">
                 <a style="cursor:pointer;"ng-click="showCampaignDetails($event, request)">
