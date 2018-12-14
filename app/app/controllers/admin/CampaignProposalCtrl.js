@@ -377,6 +377,28 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
+  $scope.launchCampaign = function(campaignId, ev){
+    AdminCampaignService.launchCampaign(campaignId).then(function(result){
+      console.log(result);
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title("Congrats!!")
+          .textContent(result.message)
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+        $scope.loadCampaignData(campaignId);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
+
   $scope.closeCampaign = function(campaignId, ev){
     AdminCampaignService.closeCampaign(campaignId).then(function(result){
       if(result.status == 1){

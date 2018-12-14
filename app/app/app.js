@@ -600,7 +600,10 @@ app.run(
           'index.suggest.product-detail',
           'index.suggest.marketing-objectives',
           'index.suggest.advertising-objectives',
-          'index.suggest.other-info'
+          'index.suggest.other-info',
+          'index.update-user-payments',
+          'index.user-payments'
+
         ];
 
         // routes for authenticated Users

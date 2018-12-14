@@ -8,6 +8,11 @@ app.service('CampaignService',
           $http.get(config.apiPath + '/active-user-campaigns').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        getPaymentForUserCampaigns: function(campaignId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/campaign-payments/' + campaignId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
         getCampaignWithProducts: function(campaignId){
           var dfd = $q.defer();
           $http.get(config.apiPath + '/user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);

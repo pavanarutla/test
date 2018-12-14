@@ -235,7 +235,7 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 700">	Launched
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 700" ng-if="campaignDetails.status == 700" ng-click="launchCampaign(campaignDetails.id, $event)">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
