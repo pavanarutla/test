@@ -341,7 +341,7 @@
     </div>
   </div>
   <md-tabs md-dynamic-height class="padding_cmp">
-    <md-tab label="Proposals">
+    <md-tab label="Proposals/Booked">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-hover">
@@ -358,7 +358,7 @@
               </tr>
             </thead>
             <tbody class="camp-text">
-              <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==100">
+              <tr ng-repeat="campaign in ownerCampaigns">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | date}}</td>
@@ -415,7 +415,7 @@
         </div>
       </div>
     </md-tab>
-    <md-tab label="Sheduled/Booked">
+    <md-tab label="Sheduled">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-hover">
@@ -432,7 +432,7 @@
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==700 || campaign.status==800">
+              <tr ng-repeat="campaign in scheduledCampaigns">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | date}}</td>
