@@ -405,7 +405,8 @@
 						<p>{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}</p>
 						<!-- <p>15-10-2018</p> -->
 					</td>
-					<td class="table_vertical hide-xs">{{product.default_price || "NA"}}</td>
+					<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
+					<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>
 					<td class="table_vertical hide-xs">
 						<a href="#"><i class="material-icons">delete_foreve</i></a>
 					</td>
@@ -418,7 +419,7 @@
 		</table>
 	</div>
 	<!-- table grid end -->
-	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0">
+	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0 && campaignDetails.type == 2">
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>
