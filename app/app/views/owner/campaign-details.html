@@ -279,7 +279,7 @@
 		<div class="row" style="margin-left:0px; margin-right:0px;">
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng" style="margin-top:14px;">
 				<p class="">Camapaign ID</p>
-				<p class="md-caption mob_span"><b>BB-001</b></p>
+				<p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng" style="margin-top:14px;">
 				<p class="">Camapaign Name</p>
@@ -398,27 +398,28 @@
 					</td>
 					<td class="table_vertical">{{product.panelSize}}</td>
 					<td class="table_vertical hide-xs">
-						<p>{{product.from_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<p>{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}</p>
 						<!-- <p></p> -->
 					</td>
 					<td class="table_vertical hide-xs">
-						<p>{{product.to_date | dateify | date: "dd-MMM-yyyy"}}</p>
+						<p>{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}</p>
 						<!-- <p>15-10-2018</p> -->
 					</td>
-					<td class="table_vertical hide-xs">{{product.price}}</td>
+					<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
+					<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>
 					<td class="table_vertical hide-xs">
 						<a href="#"><i class="material-icons">delete_foreve</i></a>
 					</td>
-					<td class="text-center table_vertical hide-xs addcampaign_details">
+					<!-- <td class="text-center table_vertical hide-xs addcampaign_details">
 						<p class="text_color md-caption">{{product.product_status | stringifyProductStatus}}</p>
-					</td>
+					</td> -->
 
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<!-- table grid end -->
-	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0">
+	<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0 && campaignDetails.type == 2">
 		<div layout="column" class="payment_inner">
 			<div layout="row">
 				<div class="md-body-1">Total :</div>

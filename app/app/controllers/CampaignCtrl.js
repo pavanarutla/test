@@ -80,10 +80,10 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   $scope.getUserCampaigns = function () {
     CampaignService.getActiveUserCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function(c){
-        return c.status < 600;
+        return c.status < 600 || c.status == 700;
       });
       $scope.SheduledCampaigns = _.filter(result, function(c){
-        return c.status == 700 || c.status == 800;
+        return c.status == 800;
       });
       $scope.runningCampaigns = _.filter(result, function(c){
         return c.status == 1141;

@@ -1,16 +1,17 @@
-<div layout="column">
+<div ng-if="message">{{message}}</div>
+<div layout="column" ng-if = "!message && UserPaymentDetails.length > 0">
   <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
     <div class="ml-4 update" style="margin-top:38px;">
       <p class="first">Camapaign ID</p>
-      <p class="md-caption second"><b>BB-001</b></p>
+      <p class="md-caption second"><b>{{campaignDetails.cid}}</b></p>
     </div>
     <div class="update" style="margin-top:38px;">
       <p>Camapaign Name</p>
-      <p class="md-caption"><b>Uber Ptv Ltd</b></p>
+      <p class="md-caption"><b>{{campaignDetails.name}}</b></p>
     </div>
     <div class="update" style="margin-top:38px;">
       <p>No of Products</p>
-      <p class="md-caption"><b>5</b></p>
+      <p class="md-caption"><b>{{campaignDetails.product_count}}</b></p>
     </div>
     <div flex></div>
     <div>
@@ -70,24 +71,24 @@
         </tr>
       </thead>
       <tbody class="contbg">
-        <tr>
+        <tr ng-repeat="Userpayment in campaignDetails.payment_details">
+          <td>{{Userpayment.created_at}}</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+        </tr>
+        <!-- <tr>
           <td>14-08-2018</td>
           <td>through Left</td>
           <td>1,15,000.00</td>
           <td>21-09-2018, 9:00 Am</td>
-        </tr>
-        <tr>
-          <td>14-08-2018</td>
-          <td>through Left</td>
-          <td>1,15,000.00</td>
-          <td>21-09-2018, 9:00 Am</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
   <div class="d-flex bg-light mb-5" style="min-height:100px">
     <div class="p-2 col-md-6">
-      <div class=" chat_box ">
+      <!-- <div class=" chat_box ">
         <ul class="p-0">
           <li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you please
             revision
@@ -102,9 +103,9 @@
           </div>
           <button type="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-      </div>
+      </div> -->
     </div>
-    <div class="p-2  col-md-6 align-self-end">
+    <div class="p-2  col-md-6 align-self-end" ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700">
       <div class="d-flex justify-content-end pt-4">
         <div layout="column" class="payment_inner">
           <div layout="row">
