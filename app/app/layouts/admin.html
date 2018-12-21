@@ -320,7 +320,7 @@
 <div layout="column" flex style="position:relative;min-height:100%;">
   <md-toolbar class="md-whiteframe-z1 contbg" style="position: fixed;">
     <div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
-      <md-button aria-label="menu" class="md-icon-button menubtn" ng-click="toggleOwnerLeftSidenav()" hide-gt-sm>
+      <md-button aria-label="menu" class="md-icon-button menubtn" ng-click="toggleAdminLeftSidenav()" hide-gt-md>
         <md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
       </md-button>
       <md-button aria-label="logo" class="md-icon bill_img">
@@ -376,7 +376,7 @@
   <!--toolbar end -->
   <!-- sidenav start -->
   <div layout="row" flex style="position:relative;">
-    <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav"
+    <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="adminLeftSidenav"
       md-is-locked-open="$mdMedia('gt-sm')" style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
       <md-content class="sidenav-content" style="background: #44596D !important">
         <div style="width: 100% !important;">
@@ -387,7 +387,7 @@
 									</md-button>
                 </md-menu-item> -->
               <md-menu-item flex layout="column">
-                <md-button ng-href="#/admin/home">
+                <md-button class="side_navlist" ng-href="#/admin/home">
                   To-Do List
                 </md-button>
               </md-menu-item>
@@ -405,21 +405,21 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button ng-href="#/admin/campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/campaigns">
                   <div layout="row">
                     <span flex="15"></span>
                     User OOH </div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button ng-href="#/admin/admin-campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/admin-campaigns">
                   <div layout="row">
                     <span flex="15"></span>
                     Admin OOH </div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button ng-href="#/admin/metro-campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/metro-campaigns">
                   <div layout="row">
                     <span flex="15"></span>
 
@@ -429,7 +429,7 @@
               <!--campagin end-->
               <!-- listed of locations-->
               <md-menu-item flex layout="column">
-                <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle" ng-href="#admin/locations">
+                <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle side_navlist" ng-href="#admin/locations">
                   <div layout="row">
                     <span >Location</span>
                     <span flex></span>
@@ -441,14 +441,14 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-country" ng-click="changeRequest()">
+                <md-button class="side_navlist" ng-href="#admin/locations-country" ng-click="changeRequest()">
                   <div layout="row">
                     <span flex="15"></span>
                     Country</div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-state">
+                <md-button class="side_navlist" ng-href="#admin/locations-state">
                   <div layout="row">
                     <span flex="15"></span>
                     State
@@ -456,14 +456,14 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-city">
+                <md-button class="side_navlist" ng-href="#admin/locations-city">
                   <div layout="row">
                     <span flex="15"></span>
                     City</div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showArea">
-                <md-button ng-href="#admin/locations-area">
+                <md-button class="side_navlist" ng-href="#admin/locations-area">
                   <div layout="row">
                     <span flex="15"></span>
                     Area
@@ -500,28 +500,28 @@
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button ng-href="#admin/hoarding-list">
+              <md-button class="side_navlist" ng-href="#admin/hoarding-list">
                 <div layout="row">
                   <span flex="15"></span>
                   Metro</div>
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button ng-href="#admin/hoarding-list">
+              <md-button class="side_navlist" ng-href="#admin/hoarding-list">
                 <div layout="row">
                   <span flex="15"></span>
                   Airport</div>
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button ng-href="#admin/formats">
+              <md-button class="side_navlist" ng-href="#admin/formats">
                 <div layout="row">
                   <span flex="15"></span>
                   OOH Formats</div>
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button ng-href="#admin/metro-formats">
+              <md-button class="side_navlist" ng-href="#admin/metro-formats">
                 <div layout="row">
                   <span flex="15"></span>
                   Metro Formats</div>
