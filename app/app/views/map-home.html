@@ -491,7 +491,7 @@
         <div class="md-body-2 text-left">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
-          <div class="input-group">
+          <div class="input-group" >
             <input type="text" readonly ng-value="'selected date ranges: ' + selectedDateRanges.length" class="form-control">
             <div class="input-group-addon">
               <a ng-click="getProductUnavailableDates(product.id, $event);">
@@ -507,8 +507,8 @@
         </div>
       </div>
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-        <md-button layout-fill class="md-raised md-warn" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
-        <md-button layout-fill class="md-raised md-primary" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
+        <md-button  class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
+        <md-button  class="md-raised all_button" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
       </div>
       </div>
       <div class="prodct_save md-whiteframe-2dp animated slideInDown" ng-if="existingCampaignSidenavVisible">
