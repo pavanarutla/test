@@ -89,7 +89,7 @@
                     <span flex></span>
                     <a href="#" class="md-caption float-right text_a"> Clear Filters</a>
                 </div>
-                <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
+                <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
                     <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
                         md-search-text="searchId" md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo"
                         placeholder="Search By Tab id" md-clear-button="true" style="min-width: 100% !important">
@@ -106,7 +106,37 @@
                             <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
                         </md-item-template>
                     </md-autocomplete>
-                </div>
+                </div> -->
+                <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
+                    <md-autocomplete                      
+                      md-min-length="2"
+                      md-selected-item = "selectedId"
+                      md-selected-item-change="selectFromTabIdSearch(items)"
+                      md-search-text="searchId"
+                      md-items="items in searchByTabId(searchId)"
+                      md-item-text="items.siteNo"                          
+                      placeholder="Search By Tab id"
+                      md-clear-button="true" style="min-width: 100% !important">
+                      <md-item-template>
+                        <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
+                      </md-item-template>                    
+                    </md-autocomplete> 
+                  </div>
+                  <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
+                    <md-autocomplete                      
+                    md-min-length="2"
+                    md-selected-item = "selectedArea"
+                    md-selected-item-change="selectedAreaChanged(item)"
+                    md-search-text="searchText"
+                    md-items="item in autoCompleteArea(searchText)"
+                    md-item-text="item.name"                      
+                    placeholder="Search By Area,Location"
+                    md-clear-button="true" style="min-width: 100% !important">
+                    <md-item-template>
+                      <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
+                    </md-item-template>                    
+                    </md-autocomplete>
+                  </div>
                 <!-- filters html start-->
                 <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
                     <div layout="row">
@@ -164,16 +194,16 @@
                 <!-- formats html end-->
                 <!--saved campagin html start -->
                 <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" >
-                    <a class=" main-part" layout="column"  href="#/shortlist-products" style="cursor:pointer;padding: 5px 10px;">
-                        <div layout="row">
+                    <a class=" main-part" layout="column"  href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
+                      <div layout="row">
                         <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
                         <div flex></div>
                         <div class="md-body-1 text-white">
-                            (4)
+                          ({{shortListedProducts.length}})
                         </div>
-                        </div>
+                      </div>
                     </a>
-                </div>
+                  </div>
                 <!--saved campagin html end -->
             </div>
         </div>

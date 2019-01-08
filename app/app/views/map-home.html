@@ -491,7 +491,7 @@
         <div class="md-body-2 text-left">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
-          <div class="input-group">
+          <div class="input-group"style="z-index: 0;">
             <input type="text" readonly ng-value="'selected date ranges: ' + selectedDateRanges.length" class="form-control">
             <div class="input-group-addon">
               <a ng-click="getProductUnavailableDates(product.id, $event);">
@@ -507,11 +507,51 @@
         </div>
       </div>
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-        <md-button layout-fill class="md-raised md-warn" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
-        <md-button layout-fill class="md-raised md-primary" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
+        <md-button class="md-raised Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
+        <md-button class="md-raised all_button" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
       </div>
       </div>
-      <div class="prodct_save md-whiteframe-2dp animated slideInDown" ng-if="existingCampaignSidenavVisible">
+      
+      <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+        <div layout="row">
+          <div flex></div>
+          <a class="md-icon-button close-btn" ng-click="toggleExistingCampaignSidenav()">
+            <i class="material-icons">close</i>
+          </a>
+        </div>
+        <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+        <div class="md-title  m-2">Let's work Together!</div>
+        <div class="form-group mt-3 mr-2 ml-2">
+          <input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+        </div>
+        <div class="form-group mt-3 mr-2 ml-2">
+          <input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
+        </div>
+        <div layout="column" class="mr-2 ml-2 mb-3">
+          <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
+            Save Campaign
+          </md-button>
+        </div>
+        <p class="text-center md-body-2">(OR)</p>
+        <div class="form-group mr-2 ml-2">
+          <select class="form-control" ng-model="existingCampaign.id" required="required">
+            <option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+          </select>
+        </div>
+        <!-- <div layout="column" class="mr-2 ml-2 mb-3">
+          <md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
+            add to existing or save Campaign
+          </md-button>
+        </div> -->			
+        <div layout="column" class="mr-2 ml-2 mb-3">
+          <md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
+            add to existing or save Campaign
+          </md-button>
+        </div>
+      </div>
+
+
+      <!-- <div class="prodct_save md-whiteframe-2dp animated slideInDown" ng-if="existingCampaignSidenavVisible">
         <div layout="row">
             <div flex></div>
             <a class="md-icon-button close-btn"  ng-click="">
@@ -534,7 +574,7 @@
               add to existing or save Campaign
             </md-button>
         </div>
-      </div>
+      </div> -->
     </md-content>
     
   </md-sidenav>
@@ -850,7 +890,7 @@
       </div>
       <!-- formats html end-->
       <!--Shortlisted Product html start -->
-      <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" >
+      <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
         <a class=" main-part" layout="column"  href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
           <div layout="row">
             <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>

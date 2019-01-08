@@ -1,10 +1,13 @@
 app.factory('OwnerProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getApprovedProductList: function (pageNo, pageSize) {
+			getApprovedProductList: function (pageNo, pageSize,format) {
 				var pageData = "";
 				if(pageNo && pageSize){
 					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
+				if(format){
+					pageData = pageData + "&format=" + format;
 				}
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/approved-owner-products' + pageData).success(dfd.resolve).error(dfd.reject);
