@@ -97,7 +97,7 @@ var app = angular.module('bbManager', [
     .state('index.product-list', {
       url: 'product-list',
       templateUrl: 'views/product-list.html',
-      controller: 'UserProductCtrl'
+      controller: 'GmapCtrl'
     })
     .state('index.shortlisted-products', {
       url: 'shortlisted-products',
@@ -579,7 +579,7 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
-          'owner.home',
+          // 'owner.home',
           'owner.feeds',
           'owner.campaigns',
           'owner.campaign-details',
