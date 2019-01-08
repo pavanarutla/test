@@ -30,6 +30,9 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				else if($auth.getPayload().userMongo.user_type == "bbi"){
 					$state.go("admin.home", null);
 				}
+				else if($auth.getPayload().userMongo.user_type == "owner"){
+					$location.path("/owner/" + payload.userMongo.client_slug + "/feeds");
+				}
 				else{
 					$state.go("index.location", null);
 					// location.reload();
