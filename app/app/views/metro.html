@@ -1,7 +1,6 @@
+<div layout="column" style="position:relative;height:90vh;">
 
-<div layout="column" style="position:relative;height:90vh;" id="mapContainer">
-	
-	<!-- <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map"> -->
+	<img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
 	<!-- <div class="metroBg"></div> -->
 	<!-- <md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
 		<div class="sidenav__ineer scrollbar__style">
@@ -143,81 +142,205 @@
 	</md-sidenav> -->
 	<!--  metro Sidenav -->
 
-	<div id="mydiv" class="map_filters">
+	<div id="mydiv" class="map_filters metro_new">
 		<div id="mydivheader">
-		  <span class="text_color md-caption pt-1">Switch to List View</span>
+			<span class="md-body-2 pt-1">L&T Metro</span>
 		</div>
 		<!-- formats html start-->
 		<div layout="column" class="formats_block md-whiteframe-2dp mt-2">
-		  <div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
-			<div layout="row">
-			  <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
-			  <div flex></div>
-			  
+			<div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
+				<div layout="row">
+					<div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
+					<div flex></div>
+
+				</div>
 			</div>
-		  </div>
-		  <div layout="column" class="formats-types">
-			<div  class="formatinnerpart">
-			  <div class="row" style="margin-left:0px;margin-right:0px">
-				<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" 
-				  class="formatgridpart">
-  
-				  <div ng-cloak style="border-right:1px solid #ccc">
-					<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-					   style="margin:0px;padding :0px;">
-					  <img ng-src="" class="img-size">
-					  <div class="md-caption">Digital Screen</div>
-					</md-button>
-					<md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
-				  </div>
-  
+			<div layout="column" class="formats-types">
+				<div class="formatinnerpart">
+					<div class="row" style="margin-left:0px;margin-right:0px">
+						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
+
+							<div ng-cloak style="border-right:1px solid #ccc">
+								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+								 style="margin:0px;padding :0px;">
+									<img ng-src="" class="img-size">
+									<div class="md-caption">Digital Screen</div>
+								</md-button>
+								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
+							</div>
+
+						</div>
+						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
+
+							<div ng-cloak style="border-right:1px solid #ccc">
+								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+								 style="margin:0px;padding :0px;">
+									<img ng-src="" class="img-size">
+									<div class="md-caption">Train warp </div>
+								</md-button>
+								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
+							</div>
+
+						</div>
+						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
+
+							<div ng-cloak style="border-right:1px solid #ccc">
+								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+								 style="margin:0px;padding :0px;">
+									<img ng-src="" class="img-size">
+									<div class="md-caption">Inside Static </div>
+								</md-button>
+								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
+							</div>
+
+						</div>
+					</div>
+					<md-divider></md-divider>
 				</div>
-				<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" 
-				  class="formatgridpart">
-  
-				  <div ng-cloak style="border-right:1px solid #ccc">
-					<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-					   style="margin:0px;padding :0px;">
-					  <img ng-src="" class="img-size">
-					  <div class="md-caption">Train warp </div>
-					</md-button>
-					<md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
-				  </div>
-  
-				</div>
-				<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" 
-				  class="formatgridpart">
-  
-				  <div ng-cloak style="border-right:1px solid #ccc">
-					<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-					   style="margin:0px;padding :0px;">
-					  <img ng-src="" class="img-size">
-					  <div class="md-caption">Inside Static </div>
-					</md-button>
-					<md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
-				  </div>
-  
-				</div>
-			  </div>
-			  <md-divider></md-divider>
 			</div>
-		  </div>
 		</div>
 		<!-- formats html end-->
 		<!--Shortlisted Product html start -->
-		<div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" >
-		  <a class=" main-part" layout="column"  href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
-			<div layout="row">
-			  <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
-			  <div flex></div>
-			  <div class="md-body-1 text-white">
-				({{shortListedProducts.length}})
-			  </div>
-			</div>
-		  </a>
+		<div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
+			<a class=" main-part" layout="column" href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
+				<div layout="row">
+					<div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
+					<div flex></div>
+					<div class="md-body-1 text-white">
+						({{shortListedProducts.length}})
+					</div>
+				</div>
+			</a>
 		</div>
 		<!--Shortlisted Product html end -->
-	</div>
-</div>
-	<!-- map html start (left side controls) ends -->
 
+	</div>
+	<div class="metro_pkgs">
+		<h3 class="ml-3 md-body-2">24" Digital Screen Packages-Inside Metro Train</h3>
+		<div class="row mr-0 ml-0 mt-2">
+			<div class="col-sm-9 col-md-7 col-lg-6 pr-0">
+				<div style="background:#FE0000;padding:10px;border-radius:10px;">
+					<p class="text-white mb-1">Corridor - I</p>
+					<h3 class="text-white">Miyapur to LB Nagar</h3>
+					<hr style="padding:1px;background-color: #fff;">
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Total Trains - 18</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Distance covered -
+						29km</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> No of Stations
+						covered - 27</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad duration - 30
+						sec</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> 12 screens per
+						train</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad spots per day /
+						per train 576</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Each train round
+						trips 13 times per day</p>
+					<hr style="padding:1px;background-color: #fff;">
+					<div class="row">
+						<div class="col">
+							<p class="text-white mt-2">No of Trains:</p>
+						</div>
+						<div class="col">
+							<div class="m_button_group">
+								<button id="mSubtract">-</button>
+								<input type="text">
+								<button id="mAdd">+</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p class="text-white mt-2">No of Months:</p>
+						</div>
+						<div class="col">
+							<div class="m_button_group">
+								<button id="mSubtract">-</button>
+								<input type="text">
+								<button id="mAdd">+</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p class="text-white mt-2">Start Date:</p>
+						</div>
+						<div class="col">
+							<input type="date" min="0">
+						</div>
+					</div>
+					<!-- <p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p> -->
+					<!-- <p class="text-white">Start Date: <input type="date" min="0" style="margin-left: 55px;"></p> -->
+					<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. 1,00,800</span></p>
+					<div class="text-center">
+						<a class=" metro_pkg_btn" href="#">Shortlist This</a>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-sm-9 col-md-7 col-lg-6">
+				<div style="background:#0D7ECA;padding:10px;border-radius:10px;">
+					<p class="text-white mb-1">Corridor - III</p>
+					<h3 class="text-white">Nagole to Shilparamam</h3>
+					<hr style="padding:1px;background-color: #fff;">
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Total Trains - 17</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Distance covered -
+						26.5km</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> No of Stations
+						covered - 23</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad duration - 30
+						sec</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> 12 screens per
+						train</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad spots per day /
+						per train 576</p>
+					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Each train round
+						trips 13 times per day</p>
+					<hr style="padding:1px;background-color: #fff;">
+					<div class="row">
+							<div class="col">
+								<p class="text-white mt-2">No of Trains:</p>
+							</div>
+							<div class="col">
+								<div class="m_button_group">
+									<button id="mSubtract">-</button>
+									<input type="text">
+									<button id="mAdd">+</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<p class="text-white mt-2">No of Months:</p>
+							</div>
+							<div class="col">
+								<div class="m_button_group">
+									<button id="mSubtract">-</button>
+									<input type="text">
+									<button id="mAdd">+</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<p class="text-white mt-2">Start Date:</p>
+							</div>
+							<div class="col">
+								<input type="date" min="0">
+							</div>
+						</div>
+					<!-- <p class="text-white">No of Trains: <input class="train_text" type="number" min="0" style="margin-left: 40px;"></p>
+					<p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p>
+					<p class="text-white">Start Date: <input type="date" min="0" style="margin-left: 55px;"></p> -->
+					<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. 1,00,800</span></p>
+					<!-- <p class="text-center" style="margin: 0px 50px 0px 50px;background: #fff;color: #0D7ECA;padding: 5px;border-radius: 5px;font-size: 30px;font-weight: 500;">Shortlist This</p> -->
+					<div class="text-center">
+						<a class="text-center metro_pkg_btn" href="#" style="color: #0D7ECA !important">Shortlist This</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- map html start (left side controls) ends -->
