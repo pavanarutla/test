@@ -12,9 +12,10 @@ app.controller('MetroCtrl',
           } 
           if(mm<10){
               mm='0'+mm
-          } 
-
-      $scope.today1 = yyyy+'-'+mm+'-'+dd;
+          }         
+          today.setDate(today.getDate() + 2); 
+          $scope.today1 = today;
+     // $scope.today1 = yyyy+'-'+mm+'-'+dd;
       $scope.colors = ['#FE0000','#0D7ECA'];
       
       /*==============================
