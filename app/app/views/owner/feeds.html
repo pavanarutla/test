@@ -41,34 +41,40 @@
     <div ng-if="!requestList || requestList.length == 0">
       <h3>There is no campaigns available</h3>
     </div>
-    <table class="table table-hover" ng-if="requestList.length > 0">
-      <thead class="text_color">
-        <tr>
-          <th>CID</th>
-          <th class="feeds_width">Camapaign Name</th>
-          <th>Details</th>
-          <th>Action</th>
-          <th class="hide-xs"></th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="request in requestList">
-        <tr>
-          <td class="table_vertical">BB283</td>
-          <td class="table_vertical">{{request.name}}</td>
-          <td class="table_vertical">
-            <span ng-show="request.status == 2">A user has asked for a quote for your products.</span>
-            <span ng-show="request.status == 5">A campaign with your products has been requested to launch.</span>
-          </td>
-          <td class="table_vertical">
-            <a style="cursor:pointer;" ng-click="showCampaignDetails($event, request)">
-              <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
-                <i class="material-icons">remove_red_eye</i>
-              </md-icon>
-            </a>
-          </td>
-          <td class="table_vertical hide-xs">{{request.updated_at | datetimeify}}</td>
-        </tr>
-        <!-- <tr>
+  <table class="table table-hover" ng-if="requestList.length > 0">
+          <thead class="text_color">
+            <tr>
+              <th>CID</th>
+              <th class="feeds_width">Camapaign Name</th>
+              <th>Details</th>
+              <th>Action</th>
+              <th class="hide-xs"></th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="request in requestList">
+            <tr>
+              <td class="table_vertical">{{request.cid}}</td>
+              <td class="table_vertical">{{request.name}}</td>
+              <td class="table_vertical">
+                  <!-- <span ng-show="request.status == 100" >Preparing</span> -->
+                <!-- <span ng-show="request.status == 200" >A user has asked for a quote for your products.</span> -->
+                <!-- <span ng-show="request.status == 300" >Quote Requested</span>                
+                <span ng-show="request.status == 400" >Quote Given</span>
+                <span ng-show="request.status == 500" >Change Requested</span>
+                <span ng-show="request.status == 600" >Booking Requested</span>
+                <span ng-show="request.status == 700" >Booked</span> -->
+                <span>{{request.status | stringifyCampaignStatus}}</span>
+              </td>
+              <td class="table_vertical">
+                <a style="cursor:pointer;"ng-click="showCampaignDetails($event, request)">
+                    <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                      <i class="material-icons">remove_red_eye</i>
+                    </md-icon>
+                  </a>
+              </td>
+              <td class="table_vertical hide-xs">{{request.updated_at | datetimeify}}</td>
+            </tr>
+            <!-- <tr>
               <td>BB283</td>
               <td>BBI Pvt Ltd</td>
               <td>Client requested to add one more productmore product more product more product</td>

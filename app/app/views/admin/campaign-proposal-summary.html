@@ -233,7 +233,7 @@
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
 					</md-button>
-					<md-button class="md-raised md-primary" disabled="true" ng-if="campaignDetails.status == 700">	Launched
+					<md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 700" ng-if="campaignDetails.status == 700" ng-click="launchCampaign(campaignDetails.id, $event)">	Launched
 						<span>
 							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
 						</span>
@@ -328,7 +328,7 @@
 								</md-icon>
 							</md-button>
 						</td>
-						<td>{{campaignProduct.price}}</td>
+						<td>{{campaignProduct.admin_price}}</td>
 						<td>
 							<span>
 								<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id, campaignProduct.price)" ng-if="campaignDetails.status <= 300 || campaignDetails.status == 500">

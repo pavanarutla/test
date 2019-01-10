@@ -83,6 +83,20 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Pagination Ends
   ===================*/
 
+
+$scope.getProductByFormat = function(format){
+  console.log(format);
+   OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
+    $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
+   });
+};
   /*================================
   | Multi date range picker options
   ================================*/

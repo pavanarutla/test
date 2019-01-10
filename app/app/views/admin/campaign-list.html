@@ -1,6 +1,6 @@
 <!-- <div layout="column" layout-fill="layout-fill">
   <md-tabs md-dynamic-height>
-    <md-tab label="Proposals">
+    <md-tab label="Proposals/Booked">
       <div layout="colmun">
         <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
           <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
@@ -118,7 +118,8 @@
                   </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="campaign in runningCampaigns | limitTo:limit">
+                <tr ng-repeat="campaign in scheduledCampaigns | limitTo:limit">
+                   <td>{{campaign.created_by}}</td> -->
                   <td>{{campaign.name}}</td>
                   <td>{{campaign.first_name}} {{campaign.last_name}}</td>
                   <td>{{campaign.phone}}</td>

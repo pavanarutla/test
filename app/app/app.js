@@ -97,7 +97,7 @@ var app = angular.module('bbManager', [
     .state('index.product-list', {
       url: 'product-list',
       templateUrl: 'views/product-list.html',
-      controller: 'UserProductCtrl'
+      controller: 'GmapCtrl'
     })
     .state('index.shortlisted-products', {
       url: 'shortlisted-products',
@@ -137,12 +137,12 @@ var app = angular.module('bbManager', [
     .state('index.user-payments', {
       url: 'user-payments',
       templateUrl: 'views/user-payments.html',
-      controller:''
+      controller:'UserPaymentCtrl'
     })
     .state('index.update-user-payments', {
-      url: 'update-user-payments',
+      url: 'update-user-payments/:id',
       templateUrl: 'views/update-user-payments.html',
-      controller:''
+      controller:'UserPaymentCtrl'
     })
     .state('index.metro-campaign', {
       url: 'metro-campaign/{metroCampaignId}',
@@ -625,7 +625,7 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
-          'owner.home',
+          // 'owner.home',
           'owner.feeds',
           'owner.campaigns',
           'owner.campaign-details',
@@ -646,7 +646,10 @@ app.run(
           'index.suggest.product-detail',
           'index.suggest.marketing-objectives',
           'index.suggest.advertising-objectives',
-          'index.suggest.other-info'
+          'index.suggest.other-info',
+          'index.update-user-payments',
+          'index.user-payments'
+
         ];
 
         // routes for authenticated Users
