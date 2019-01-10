@@ -225,6 +225,7 @@ app.controller('MetroCtrl',
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
         $scope.selectedPackage.campaign_id = $stateParams.metroCampaignId;
+        $scope.selectedPackage.months = $scope.selectedPackage.months.value;
         //$scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
         MetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
           if (result.status == 1) {

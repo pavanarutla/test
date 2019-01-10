@@ -239,6 +239,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
    // console.log(price);
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
+    $scope.selectedPackage.months = $scope.selectedPackage.months.value;
     if(slots){
       $scope.selectedPackage.admin_slots = slots;
     }
