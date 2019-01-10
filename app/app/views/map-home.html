@@ -1,4 +1,8 @@
-
+<style>
+  md-backdrop.md-sidenav-backdrop {
+    z-index: -1;
+}
+</style>
 <div layout="column" style="position:relative">
 
   <!-- saved campagin start -->
@@ -453,7 +457,7 @@
   <!-- Create campaign sidenav ends -->
 
   <!-- Selected product detail sidenav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails" style="z-index:1 !important">
     <md-content class="save_r_excited">
       <div class="inner">
       <div layout="row" class="">
@@ -865,7 +869,7 @@
     </div>
 </div>
 <!-- map html start (left side controls) ends -->
-<div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:170px">
+<div layout="column" style="top:auto;position:absolute;bottom:15px;right:3%;">
   <div layout="row" layout-align="end center" hide-xs>
     <md-button class="md-raised remm-btn all_button" ng-click="toggleTraffic()" id="traffic-toggle">
       <span ng-show="!trafficOn">Show</span>
