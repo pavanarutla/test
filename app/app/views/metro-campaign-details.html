@@ -89,17 +89,12 @@
 				</div>
 			</div>
 			<div class="form-group row">
-					<label for="pack" class="col-sm-4 col-form-label">Months</label>
+					<label for="pack" class="col-sm-4 col-form-label">Duration</label>
 					<div class="col-sm-8">
-						<!--	<select  class="form-control"  ng-model="selectedPackage.days"   required>
-									<option value = "" disabled>Days</option>
-									<option value = "7" ng-selected="true">7 Days</option>
-									<option value = "14">14 Days</option>
-									<option value = "28">28 Days</option>
-									<option value = "60">60 Days</option>
-									<option value = "90">90 Days</option>
-							</select>-->
-							<input type="number" ng-model="selectedPackage.months" value= "1" min ="1" max="12" required class="form-control">
+							<select  class="form-control"  ng-model="selectedPackage.months" ng-options="opt.label for opt in monthoptions"   required>
+								
+							</select>
+							<!--<input type="number" ng-model="selectedPackage.months" value= "1" min ="1" max="12" required class="form-control">-->
 					</div>
 				</div>
 			
@@ -124,8 +119,8 @@
 			<div class="form-group row">
 				<label for="productId" class="col-sm-4 col-form-label">Price</label>
 				<div class="col-sm-8">
-					
-					<div style="padding-top:6px;">{{ selectedPackage.price_new = (selectedPackage.price * selectedPackage.months * selectedPackage.selected_trains) || "N/A"}}</div>
+					 
+					<div style="padding-top:6px;">{{ selectedPackage.price_new = (selectedPackage.price * selectedPackage.months.value * selectedPackage.selected_trains) || "N/A"}} </div>
 				</div>
 			</div>
 			<div class="form-group" style="margin:10px 0">
@@ -267,7 +262,7 @@
 						<th>Corridor</th>
 						<th>No.of Trains</th>
 						<!--<th>No.of Slots</th>-->
-						<th>Months</th>
+						<th>Durations</th>
 						<th>Start Date</th>
 						<th>Price</th>
 						<th>Action</th>
@@ -279,7 +274,7 @@
 						<td>{{pkg.corridor_name}}</td>
 						<td>{{pkg.selected_trains}}</td>
 						<!--<td>{{pkg.selected_slots}}</td>-->
-						<td>{{pkg.months}} Months</td>
+						<td>{{((pkg.months == 0.5) ? '15 Days' : pkg.months+'Months')  }}</td>
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
 						<td>{{pkg.price}}</td>
 						<td>

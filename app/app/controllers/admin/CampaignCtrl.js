@@ -201,12 +201,14 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   $scope.selectPackage = function (pkg) {
     $scope.selectedPackage = pkg;
   }
+  $scope.monthoptions = [
+    {value: '.5', label: '15 Days'}, {value: '1', label: '1 Month'},{value: '2', label: '2 Months'},{value: '3', label: '3 Months'},{value: '4', label: '4 Months'},{value: '5', label: '5 Months'},{value: '6', label: '6 Months'},{value: '7', label: '7 Months'},{value: '8', label: '8 Months'}, {value: '9', label: '9 Months'},{value: '10', label: '10 Months'},{value: '11', label: '11 Months'},{value: '12', label: '12 Months'}];
   $scope.getMetroPackages = function (corridorId) {
     AdminMetroService.getMetroPackages(corridorId).then(function (result) {
       _.map(result, (res) => {
         res.selected_trains = 1;
        // res.selected_slots = 1;
-       res.months = 1;
+       res.months = $scope.monthoptions[0];
         return res;
       });
       $scope.metroPackages = result;

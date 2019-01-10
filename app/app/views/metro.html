@@ -1,11 +1,12 @@
 <style>
 	.metro_pack{
-		background:#fff;
+		background: rgba(255, 255, 255, 0.5);
 		position: absolute;
-		width:50%;
+		width:35%;
 		top:10%;
-		left:24%;
-		padding: 20px 20px 0px 20px;
+		left:31%;
+		padding: 10px 10px 0px 10px;
+		z-index: 99 !important;
 	}
 	.lnt_caln{
 		margin-top: 15px;
@@ -43,13 +44,13 @@
 			overflow: auto;
 		} */
 		.metro_pack {
-    background: #fff;
+			background: rgba(255, 255, 255, 0.5);
     position: absolute;
-    width: 80%;
+    width: 90%;
     top: 17%;
-    left: 19%;
-		padding: 20px 20px 0px 20px;
-    z-index: 1111;
+    left: 5%;
+    padding: 10px 10px 0px 10px;
+    /* z-index: 1111; */
 }
 	}
 	@media screen and (max-width:575px){
@@ -59,7 +60,48 @@
 		.img_logo{
 			width: 114%;
 		}
+		.metro_pack {
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    left: 1%;
+    padding: 10px 10px 0px 10px;
+}
+.back_red{
+	margin-bottom: 11px;
+}
 	}
+.date_slc .md-datepicker-button {
+display: none !important;
+	}
+	.md-datepicker-triangle-button .md-datepicker-expand-triangle {
+    border-top-color: #ededed00 !important;
+}
+.md-datepicker-triangle-button {
+    position: absolute;
+    width: 125px !important;
+    /* z-index: 99999999; */
+    bottom: -2.5px;
+    -webkit-transform: translateX(45%);
+    transform: translateX(45%);
+    left: -60px;
+		}
+		.md-datepicker-input {
+    min-width: 133px !important;
+		}
+		.md-datepicker-input{
+			text-align: center;
+		}
+		.md-button:not([disabled]).md-icon-button:hover {
+    background-color: transparent;
+}
+.md-button.md-icon-button {
+    border-radius: 0% !important;
+}
+md-datepicker[placeholder]{
+	color: blue;
+}
 	</style>
 <div layout="column" style="position:relative">
 	<!-- saved campagin start -->
@@ -655,31 +697,32 @@
 			</div>
 		</md-sidenav>
 		<!--  metro Sidenav -->
-		<!-- <md-sidenav class="md-sidenav-right main__sidenav  sidenav-width" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
+		<md-sidenav class="md-sidenav-right main__sidenav sidenav-width hide-sm" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
 		 style="right: 0px !important;left:auto !important;">
 			<md-content layout="column">
 				<div class="metro_wing">
+						<h6 class="md-title m-2">Digital Screens - Inside Metro Trains</h6>
 					<img ng-src="assets/images/metro.jpg" style="width:100%;height:200px;" />
 				</div>
-				<div layout="column" style="margin-top:10px;padding-left: 10px">
-					<h3 class="md-title">Ridership of 2 lakh people daily and increasing</h3>
+				<div layout="column" style="margin-top:10px;">
 					<ul style="list-style: disc;">
-						<li>Ad duration per spot is 30 seconds which will be played in 12 screens per train</li>
-						<li>Each package contains 24 minutes daily play time per train</li>
-						<li>Total train run time will be 16 hours per day</li>
-						<li>In each train there are 12 screens each 24’ inch LED display televisions, </li>
-						<li>One Ad spot will be played in all the screens of the train.</li>
-						<li>Video – TS Format (No Audio)</li>
-						<li>Slides – JPG, TGA, TIFF</li>
-						<li>Resolution – 24” Screen (1920 × 1200)</li>
+						<li>Corridor I: Miyapur to L B Nagar - 27 Stations</li>
+						<li>Corridor II: JBS to Falaknuma - 16 Stations</li>
+						<li>Corridor III:Nagole to Shilparamam - 23 Stations</li>
+						<li>3.5 Lakh commutators every day</li>
+						<li>Metro train run time 16 hours per day</li>
 					</ul>
 				</div>
-				<div layout="column" layout-align="center end" class="logo_lnt" style="margin: 30px 0;" layout-padding>
+				<!-- <div layout="column" layout-align="center end" class="logo_lnt" style="margin: 30px 0;" layout-padding>
 					<p class="md-caption">We are oﬃcial Partners to</p>
 					<img src="assets/images/landt_logo.jpg" alt="landt_logo" />
-				</div>
+				</div> -->
+				<div layout="column">
+						<h6 class="md-title m-2">Recent Ad Campaigns</h6>
+						<img layout-padding src="assets/images/metro.jpg" alt="landt_logo" />
+					</div>
 			</md-content>
-		</md-sidenav> -->
+		</md-sidenav>
 		<!-- metro Sidenav ends -->
 		<!-- <div layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height">
 			<div layout="row" layout-margin>
@@ -692,32 +735,52 @@
 				</md-button>
 			</div> -->
 			<div class="metro_pack md-whiteframe-z2" style="">
+				<!-- <h3 class="ml-3 md-body-2">24" Digital Screen Packages-Inside Metro Train</h3> -->
 					<div class="row">
-							<div class="col-sm-9 col-md-6 col-lg-4" ng-repeat="metroPackage in metroPackages track by $index">
-								<div style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
+							<div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
+								<div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
 										<p class="text-white">{{metroPackage.corridor}}</p>
 										<h3 class="text-white">{{metroPackage.format}}</h3>
 										<hr style="padding:1px;background-color: #fff;">
-										<p class="text-white" ng-repeat="desc in (metroPackage.description | customSplitString)">
+										<p class="text-white mb-0" ng-repeat="desc in (metroPackage.description | customSplitString)">
 											<i class="fa fa-check-square-o" aria-hidden="true" ></i>
 											{{desc}}
 										</p>
 
 										<hr style="padding:1px;background-color: #fff;">
 										<!-- <p class="text-white">No of Trains: <input class="train_text" type="number" min="0" style="margin-left: 40px;"></p> -->
-										<p class="text-white">No of Trains:
+										<!-- <p class="text-white">No of Trains:
 												<span style="background:#ededed;padding:6px;margin-left: 40px;">
 													<input type="number" ng-model="metroPackage.selected_trains" style="width:47%" value="1" size="8" min="1" max="{{metroPackage.max_trains}}" id="count1">
-													</span></p>
+													</span></p> -->
+													<p class="text-white">No of Trains: 
+															<span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" value="-"  ng-click="Trcount = (Trcount >1 ? ( Trcount - 1) : 1 );" ng-init="Trcount=1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+																<input type="text" size="10" readonly="" value="{{Trcount}} Trains"  ng.model="metroPackage.selected_trains" style="border: none;background:none;text-align:center;">
+																<input type="button" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
 										<!-- <p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p> -->
-										<p class="text-white">No of Months:
-												<span style="background:#ededed;padding:6px;margin-left: 32px;">
+										<!-- <p class="text-white">No of Months:
+												<span style="background:#ededed;padding:6px;margin-left: 32px;border-radius: 3px;">
 													<input type="number" ng-model="metroPackage.months" value="1" min="1" size="8" max="12" id="count2" style="width:47%">
-													</span></p>
-										<p class="text-white">Start Date: <input type="date" min="{{today1}}" ng-model="metroPackage.start_date" style="margin-left: 51.5px;width:52%;" ></p>
-										<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * metroPackage.months * metroPackage.selected_trains) }}</span></p>
-										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;">Shortlist This</p>
-										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;">Deselect This</p>
+													</span></p> -->
+													<p class="text-white">Durations: 
+															<span style="background:#ededed;padding:6px;margin-left: 45px;border-radius: 3px;">
+																<input type="button" value="-"  ng-click="(Mocount = (Mocount==1?.5:Mocount - 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" ng-init="Mocount= .5; Days='Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+																<input type="text" size="10" readonly="" value="{{(Mocount<1)?15:Mocount}} {{Days}}" id="count" style="border: none;background:none;text-align:center;">
+																<input type="button" value="+" ng-click="(Mocount = (Mocount==.5?Mocount + .5:Mocount + 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+										<!-- <p class="text-white">Start Date: <input type="date" min="{{today1}}" ng-model="metroPackage.start_date" style="margin-left: 51.5px;width:52%;" ></p> -->
+										<p class="text-white">Start Date: 
+												<span style="background:#ededed;padding:6px;margin-left:42px;border-radius: 3px;">
+														<!-- <input type="text" size="10" value="Start From" style="border: none;background:none;width:133px;text-align: center;"> -->
+														<md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
+													</span>
+													</p>
+										<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount) }}</span></p>
+										<div style="display:none;">
+											{{ metroPackage.selected_trains = Trcount }}
+											{{ metroPackage.months = Mocount }}
+										</div>
+										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Shortlist This</p>
+										<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Deselect This</p>
 								</div>
 							</div>
 					</div>
@@ -759,3 +822,22 @@
         }
     });
 </script> -->
+
+<script>
+		var count = 1;
+		 var countEl = document.getElementById("count");
+		 function plus(){
+				 count++;
+				 countEl.value = count;
+		 }
+		 function minus(){
+			 if (count > 1) {
+				 count--;
+				 countEl.value = count;
+			 }  
+		 }
+ </script>
+
+
+
+
