@@ -43,4 +43,5 @@ app.service('CompanyService',
         return dfd.promise;
       }
     }
+    
 }]);

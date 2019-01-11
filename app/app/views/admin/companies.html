@@ -1,110 +1,237 @@
-<div layout="column" layout-fill="layout-fill">
-	<div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
-
-		<h3>Companies</h3>
-
-		<!-- <div layout-align="center end" layout="column" flex="50">
-				<md-button class="md-raised md-warn" ng-click="companiesPopup()">
-							Add New Companies <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+	<md-tabs md-dynamic-height class="padding_cmp">
+		<md-tab label="Companies">
+			<!-- <div layout-align="center end" layout="column" flex="100">
+						<md-button class="md-raised md-warn all_button" ng-click="showAddCompanyPopup()">
+							Add New Company
+						</md-button>
+					</div> -->
+			<div class="hide-xs" layout="row">
+				<div flex></div>
+				<div class="dropdown">
+					<md-button class="md-raised all_button" onclick="addnewCompany()">Add New Company</md-button>
+					<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:300px;">
+						<md-content class="md-padding" style="background: #fff;">
+							<div layout="row" layout-margin>
+								<h4>Enter Company Details</h4>
+								<div flex></div>
+								<md-button class="md-icon-button md-button" type="button" ng-transclude="" onclick="addnewCompany()">
+									<i class="material-icons">close</i>
+									<div class="md-ripple-container"></div>
+								</md-button>
+							</div>
+							<form name="addCompanyForm" novalidate="novalidate">
+								<input type="hidden" ng-model="company.id" />
+								<div layout="column" layout-xs="column" flex="100">
+									<div class="form-group row">
+										<input ng-model="company.name" type="text" name="name" placeholder="Company Name" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+										 aria-invalid="true" />
+										<div ng-messages="addCompanyForm.name.$error" ng-if="addCompanyForm.name.$touched" style="color: red;" class="ng-scope ng-active"
+										 aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Company Name is required.</div>
+										</div>
+									</div>
+									<div class="form-group row">
+											<input ng-model="company.company_type" type="text" name="company_type" placeholder="Company Type" minlength="2" maxlength="60" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+											 aria-invalid="true" />
+											<div ng-messages="addCompanyForm.company_type.$error" ng-if="addCompanyForm.company_type.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Company Type is required.</div>
+											</div>
+										</div>
+									<div class="form-group row">
+											<input ng-model="company.contact_name" type="text" name="contact_name" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9_-\s]+$/" placeholder="Contact Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+											<div ng-messages="addCompanyForm.contact_name.$error" ng-if="addCompanyForm.contact_name.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Contact Name is required.</div>
+											</div>
+										</div>
+									<div class="form-group row">
+											<input  ng-model="company.contact_email" name="email" type="email" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/" placeholder="Email" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+											<div ng-messages="addCompanyForm.email.$error" ng-if="addCompanyForm.email.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Email is required.</div>
+											</div>
+										</div>
+									<div class="form-group row">
+											<input  ng-model="company.contact_phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" placeholder="Phone No" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+											<div ng-messages="addCompanyForm.phone.$error" ng-if="addCompanyForm.phone.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Phone No is required.</div>
+											</div>
+										</div>
+									<div class="form-group row">
+											<input  ng-model="company.address" type="text" name="address" required="required" placeholder="Address" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+											<div ng-messages="addCompanyForm.address.$error" ng-if="addCompanyForm.address.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Address is required.</div>
+											</div>
+										</div>
+									<div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
+										<ul>
+											<li ng-repeat="error in comapnyErrors">
+												{{error}}
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div layout="row" layout-align="center center">
+									<md-button Class="md-raised md-primary register_btn" type="submit" ng-click="addCompany()" ng-disabled="addCompanyForm.$invalid">Submit</md-button>
+									<md-button Class="md-raised register_btn" onclick="addnewCompany()">Cancle</md-button>
+								</div>
+							</form>
+						</md-content>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top: 1em;">
+				<div class="table-responsive">
+					<table class="table table-hover call_center">
+						<thead>
+							<tr class="text_color camp-text">
+								<th class="width_1 text-left">Company Name</th>
+								<th class="text-left hide-xs">Company Type</th>
+								<th class="width_2 hide-xs">Contact Name</th>
+								<th class="text-left">Email</th>
+								<th class="hide-xs">Phone</th>
+								<th class="hide-xs">Address</th>
+								<th class="hide-xs">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="camp-text">
+							<tr ng-repeat="company in companyList | limitTo:limit">
+								<td class="text-left table_vertical">{{company.name}}</td>
+								<td class="text-left table_vertical hide-xs">{{company.company_type}}</td>
+								<td class="table_vertical hide-xs">{{company.contact_name}}</td>
+								<td class="text-left table_vertical">{{company.contact_email}}</td>
+								<td class="table_vertical hide-xs">{{company.contact_phone }}</td>
+								<td class="table_vertical hide-xs">{{company.address }}</td>
+								<td class="table_vertical hide-xs">
+									<span>
+										<a style="cursor:pointer;" ng-click="editCompany(company)">
+											<md-icon>
+												<i class="material-icons">mode_edit</i>
+											</md-icon>
+										</a>
+									</span>
+									<!-- <span>
+										<a style="cursor:pointer;" ng-click="deleteCompany(company.id)">
+											<md-icon>
+												<i class="material-icons">delete</i>
+											</md-icon>
+										</a>
+									</span> -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</md-tab>
+		<md-tab label="Clients">
+			<!-- <div layout-align="center end" layout="column" flex="100">
+				<md-button class="md-raised md-warn all_button" ng-click="showAddClientPopup()">
+					Add New Client
 				</md-button>
-		</div> -->
-	</div>
-	<div layout="column">
-		<md-tabs md-dynamic-height class="contbg">
-			<md-tab label="Companies">
-
-				<div layout-align="center end" layout="column" flex="100">
-					<md-button class="md-raised md-warn" ng-click="showAddCompanyPopup()">
-						Add New Company
-						<span>
-							<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-						</span>
-					</md-button>
-				</div>
-
-				<!-- <div ui-grid="gridCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
-				 ui-grid-auto-resize class="grid">
-				</div> -->
-				
-				<!-- ========new code for tables html start ========= -->
-				<div style="margin-top: 1em;">
-					<div class="table-responsive">
-						<table class="table table-striped table-bordered ">
-							<thead>
-								<tr>
-									<th>Company Name</th>
-									<th>Company Type</th>
-									<th>Contact Name</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>Address</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="company in companyList | limitTo:limit">
-									<td>{{company.name}}</td>
-									<td>{{company.company_type}}</td>
-									<td>{{company.contact_name}}</td>
-									<td>{{company.contact_email}}</td>
-									<td>{{company.contact_phone }}</td>
-									<td>{{company.address }}</td>
-									<td>
-										<span>
-											<a style="cursor:pointer;" ng-click="editCompany(company)">
-												<md-icon>
-													<i class="material-icons">mode_edit</i>
-												</md-icon>
-											</a>
-										</span>
-										<!-- <span>
-											<a style="cursor:pointer;" ng-click="deleteCompany(company.id)">
-												<md-icon>
-													<i class="material-icons">delete</i>
-												</md-icon>
-											</a>
-										</span> -->
-									</td>
-								</tr>
-							</tbody>
-						</table>
+			</div> -->
+			<div class="hide-xs" layout="row">
+					<div flex></div>
+					<div class="dropdown">
+						<md-button class="md-raised all_button" onclick="addnewClient()">Add New Client</md-button>
+						<div id="myDropdownclient" class="dropdown-content contbg animated fadeInDown" style="width:300px;">
+							<md-content class="md-padding" style="background: #fff;">
+								<div layout="row" layout-margin>
+									<h4>Enter Client Details</h4>
+									<div flex></div>
+									<md-button class="md-icon-button md-button" type="button" ng-transclude="" onclick="addnewClient()">
+										<i class="material-icons">close</i>
+										<div class="md-ripple-container"></div>
+									</md-button>
+								</div>
+								<form name="addClientForm" novalidate="novalidate">
+									<input type="hidden" ng-model="company.id" />
+									<div layout="column" layout-xs="column" layout-padding flex="100">
+										<div class="form-group row">
+											<input ng-model="client.name" type="text" name="name" minlength="5" maxlength="60" required="required" placeholder="Client Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+											 aria-invalid="true" />
+											<div ng-messages="addClientForm.name.$error" ng-if="addClientForm.name.$touched" style="color: red;" class="ng-scope ng-active"
+											 aria-live="assertive">
+												<div ng-message="required" class="ng-scope">Client Name is required.</div>
+											</div>
+										</div>
+										<div class="form-group row">
+												<input ng-model="client.type" type="text" name="clientType" placeholder="Client Type" minlength="2" maxlength="60" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+												 aria-invalid="true" />
+												<div ng-messages="addClientForm.clientType.$error" ng-if="addClientForm.clientType.$touched" style="color: red;" class="ng-scope ng-active"
+												 aria-live="assertive">
+													<div ng-message="required" class="ng-scope">Client Type is required.</div>
+												</div>
+											</div>
+										<div class="form-group row">
+												<input ng-model="client.contact_name" type="text" name="contactName" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/" placeholder="Contact Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+												<div ng-messages="addClientForm.contactName.$error" ng-if="addClientForm.contactName.$touched" style="color: red;" class="ng-scope ng-active"
+												 aria-live="assertive">
+													<div ng-message="required" class="ng-scope">Contact Name is required.</div>
+												</div>
+											</div>
+										<div class="form-group row">
+												<input ng-model="client.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" placeholder="Phone No" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+												<div ng-messages="addClientForm.phone.$error" ng-if="addClientForm.phone.$touched" style="color: red;" class="ng-scope ng-active"
+												 aria-live="assertive">
+													<div ng-message="required" class="ng-scope">Phone No is required.</div>
+												</div>
+											</div>
+											<div class="form-group row">
+													<input  ng-model="client.contact_email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/" placeholder="Email" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+													<div ng-messages="addClientForm.email.$error" ng-if="addClientForm.email.$touched" style="color: red;" class="ng-scope ng-active"
+													 aria-live="assertive">
+														<div ng-message="required" class="ng-scope">Email is required.</div>
+													</div>
+												</div>
+										<div class="form-group row">
+												<input ng-model="client.address" type="text" name="address" required="required" placeholder="Address" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+												<div ng-messages="addClientForm.address.$error" ng-if="addClientForm.address.$touched" style="color: red;" class="ng-scope ng-active"
+												 aria-live="assertive">
+													<div ng-message="required" class="ng-scope">Address is required.</div>
+												</div>
+											</div>
+										<div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
+											<ul>
+												<li ng-repeat="error in comapnyErrors">
+													{{error}}
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div layout="row" layout-align="center center">
+											<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addClient()" ng-disabled="addClientForm.$invalid">Submit</md-button>
+											<md-button Class="md-raised register_btn" onclick="addnewClient()">Cancle</md-button>
+										</div>
+								</form>
+							</md-content>
+						</div>
 					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
-						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-					</div>
 				</div>
-				<!-- ========new code for tables html end ========= -->
-			</md-tab>
-			<md-tab label="Clients ">
-				<div layout-align="center end" layout="column" flex="100">
-					<md-button class="md-raised md-warn" ng-click="showAddClientPopup()">
-						Add New Client <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span>
-					</md-button>
-				</div>
-				<!-- <div ui-grid="gridHoardingCompany" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav
-				 ui-grid-move-columns ui-grid-auto-resize class="grid">
-				</div> -->
-				<!-- ========new code for tables html start ========= -->
-				<div style="margin-top: 1em;">
-					<div class="table-responsive">
-						<table class="table table-striped table-bordered ">
-							<thead>
-								<tr>
-									<th>Company Name</th>
-									<th>Company Type</th>
-									<th>Super Admin</th>
-									<th>Activated</th>
-									<th>Contact Email</th>
-									<th>Contact Phone</th>
-									<th>Address</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="client in allClients | limitTo:limit">
-								<td>{{client.company_name}}</td>
-								<td>{{client.company_type_name}}</td>
-								<td>
+			<div style="margin-top: 1em;">
+				<div class="table-responsive">
+					<table class="table table-hover call_center">
+						<thead>
+							<tr class="text_color camp-text">
+								<th class="text-left">Company Name</th>
+								<th class="hide-xs">Company Type</th>
+								<th class="hide-xs">Super Admin</th>
+								<th class="hide-xs">Activated</th>
+								<th class="text-left">Contact Email</th>
+								<th class="hide-xs">Contact Phone</th>
+								<th class="hide-xs">Address</th>
+								<th class="hide-xs">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="camp-text">
+							<tr ng-repeat="client in allClients | limitTo:limit">
+								<td class="text-left table_vertical">{{client.company_name}}</td>
+								<td class="table_vertical hide-xs">{{client.company_type_name}}</td>
+								<td class="table_vertical hide-xs">
 									<span ng-if="!client.company_super_admin">
 										No
 									</span>
@@ -112,23 +239,33 @@
 										Yes
 									</span>
 								</td>
-								<td>{{client.activated | boolToYesNo}}</td>
-								<td>{{client.contact_email}}</td>
-								<td>{{client.phone}}</td>
-            		<td>{{client.address}}</td>
-								<td>
-									<span><a ng-href="#"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>	
+								<td class="table_vertical hide-xs">{{client.activated | boolToYesNo}}</td>
+								<td class="text-left table_vertical">{{client.contact_email}}</td>
+								<td class="table_vertical hide-xs">{{client.phone}}</td>
+								<td class="table_vertical hide-xs">{{client.address}}</td>
+								<td class="table_vertical hide-xs">
+									<span><a ng-href="#">
+											<md-icon><i class="material-icons">mode_edit</i></md-icon>
+										</a></span>
 								</td>
-								</tr>      
-							</tbody>
-						</table>
-					</div>
-					<div layout="colmun" layout-align="end center" layout-margin>
-						<button style="width:120px;" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button>
-					</div>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<!-- ========new code for tables html end ========= -->
-			</md-tab>
-		</md-tabs>
-	</div>
+			</div>
+		</md-tab>
+	</md-tabs>
 </div>
+
+
+<script>
+	function addnewCompany() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+</script>
+
+<script>
+		function addnewClient() {
+			document.getElementById("myDropdownclient").classList.toggle("show");
+		}
+	</script>

@@ -1,4 +1,8 @@
-
+<style>
+  md-backdrop.md-sidenav-backdrop {
+    z-index: -1;
+}
+</style>
 <div layout="column" style="position:relative">
 
   <!-- saved campagin start -->
@@ -453,7 +457,7 @@
   <!-- Create campaign sidenav ends -->
 
   <!-- Selected product detail sidenav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails" style="z-index:1 !important">
     <md-content class="save_r_excited">
       <div class="inner">
       <div layout="row" class="">
@@ -803,7 +807,7 @@
           </i> -->
         <a href="#/product-list" class="text_color md-caption pt-1">Switch to List View</a>
         <span flex></span>
-        <a href="#" class="md-caption float-right pt-1 text_a">Clear Filters</a>
+        <a href="#/location" class="md-caption float-right pt-1 text_a">Clear Filters</a>
       </div>
       <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
         <md-autocomplete                      
@@ -905,7 +909,7 @@
     </div>
 </div>
 <!-- map html start (left side controls) ends -->
-<div layout="column" style="top:auto;z-index:1;position:absolute;bottom:15px;right:3%;width:170px">
+<div layout="column" style="top:auto;position:absolute;bottom:15px;right:3%;">
   <div layout="row" layout-align="end center" hide-xs>
     <md-button class="md-raised remm-btn all_button" ng-click="toggleTraffic()" id="traffic-toggle">
       <span ng-show="!trafficOn">Show</span>

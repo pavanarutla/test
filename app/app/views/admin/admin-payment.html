@@ -1,0 +1,158 @@
+ <!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+        <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+    </md-button> -->
+    <div class="">
+    <div layout="column">
+        <div layout="row" layout-align="space-between center">
+            <div layout="column" layout-padding>
+                <h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
+            </div>
+            <!-- <div layout="column" layout-padding>
+                <a ng-href="#/owner/{{clientSlug}}/update-payments" class="add_paymt_btn">Add new payment</a>
+            </div> -->
+            <div class="active-cyan-4 mr-2 search_width">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+        <!-- status of hoarding list html start-->
+        
+        <div class="table-responsive"> 
+            <table class="table table-hover">
+                    <thead class="text_color">
+                      <tr>
+                        <th>CID</th>
+                        <th class="feeds_width">Camapaign Name</th>
+                        <th>Paid</th>
+                        <th class="hide-xs">Pending</th>
+                        <th class="hide-xs">Total</th>
+                        <th>Action</th>
+                        <th class="hide-xs"></th>
+                        <th class="hide-xs"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <tr ng-repeat="campaign in campaignsWithPayments">
+                                <td class="table_vertical">{{campaign.cid || "N/A"}}</td>
+                        <td>{{campaign.name}}</td>
+                        <td>{{campaign.paid}}</td>
+                        <td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+                        <td class="hide-xs">{{campaign.act_budget}}</td>
+                        <td>
+                          <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
+                              <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(campaign.id)" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                              </md-icon>
+                            </a>
+                        </td>
+                        <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td>
+                        <td class="table_vertical hide-xs">21-09-2018, 9:00 Am</td>
+                      </tr> -->
+                      <tr>
+                        <td class="table_vertical">BB283</td>
+                        <td class="table_vertical">Uber Pvt Ltd</td>
+                        <td class="table_vertical">55,800</td>
+                        <td class="table_vertical">55,850</td>
+                        <td class="table_vertical">55,800</td>
+                        <td class="table_vertical">
+                                <md-menu md-position-mode="target-right target" id="width_popup">
+                                  <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                  </md-button>
+                                  <md-menu-content width="2">
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-href="#">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-href="#/admin/paymentview-details">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                                  </md-menu-content>
+                                </md-menu>
+                              </td>
+                        <!-- <td><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+                        <td class="table_vertical"></td>
+                        <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                      </tr>
+                      <tr>
+                        <td class="table_vertical">BB283</td>
+                        <td class="table_vertical">Uber Pvt Ltd</td>
+                        <td class="table_vertical">55,800</td>
+                        <td class="table_vertical">55,850</td>
+                        <td class="table_vertical">55,800</td>
+                        <td class="table_vertical ">
+                                <md-menu md-position-mode="target-right target" id="width_popup">
+                                  <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                  </md-button>
+                                  <md-menu-content width="2">
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-href="#">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-href="#/admin/paymentview-details">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                                  </md-menu-content>
+                                </md-menu>
+                              </td>
+                        <td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td>
+                        <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                      </tr>
+                      <tr>
+                            <td class="table_vertical">BB283</td>
+                            <td class="table_vertical">Uber Pvt Ltd</td>
+                            <td class="table_vertical">55,800</td>
+                            <td class="table_vertical">55,850</td>
+                            <td class="table_vertical">55,800</td>
+                            <td class="table_vertical">
+                                    <md-menu md-position-mode="target-right target" id="width_popup">
+                                      <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                        <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                      </md-button>
+                                      <md-menu-content width="2">
+                                        <md-menu-item>
+                                          <md-button class="pop_view" ng-href="#">
+                                            <div layout="row">
+                                              <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                              <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                            </div>
+                                          </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                          <md-button class="pop_view" ng-href="#/admin/paymentview-details">
+                                            <div layout="row">
+                                              <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                              <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                            </div>
+                                          </md-button>
+                                        </md-menu-item>
+                                      </md-menu-content>
+                                    </md-menu>
+                                  </td>
+                            <!-- <td><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+                            <td class="table_vertical"></td>
+                            <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                          </tr>
+                    </tbody>
+                  </table>
+          </div>
+    </div>
+    </div>
