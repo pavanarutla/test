@@ -97,7 +97,7 @@ var app = angular.module('bbManager', [
     .state('index.product-list', {
       url: 'product-list',
       templateUrl: 'views/product-list.html',
-      controller: 'GmapCtrl'
+      controller: 'ProductlistCtrl'
     })
     .state('index.shortlisted-products', {
       url: 'shortlisted-products',
