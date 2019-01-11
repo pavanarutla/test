@@ -35,8 +35,8 @@
 	padding:0px;
 	padding-left:5px;
 }
-	@media screen and (min-width:768px) and (max-width:  1024px){
-		h3 {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+	h3 {
 			font-size: 1.50rem;
 		}
 		/* .pop_height{
@@ -52,7 +52,32 @@
     padding: 10px 10px 0px 10px;
     /* z-index: 1111; */
 }
-	}
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
+      .metro_pack {
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 80%;
+    top: 20%;
+    left: 15%;
+    padding: 10px 10px 0px 10px;
+    /* z-index: 1111; */
+}
+    }
+
+	@media (min-width: 1024px) and (max-width: 1366px) {
+  	.metro_pack {
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 67%;
+    top: 12%;
+    left: 17%;
+    padding: 10px 10px 0px 10px;
+    z-index: 99 !important;
+}
+  
+}
 	@media screen and (max-width:575px){
 		/* md-dialog md-dialog-content{
 			border: 1px solid #fff;
@@ -99,9 +124,7 @@ display: none !important;
 .md-button.md-icon-button {
     border-radius: 0% !important;
 }
-md-datepicker[placeholder]{
-	color: blue;
-}
+
 	</style>
 <div layout="column" style="position:relative">
 	<!-- saved campagin start -->
@@ -525,7 +548,7 @@ md-datepicker[placeholder]{
 
 		<!-- <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map"> -->
 		<!-- <div class="metroBg"></div> -->
-		<md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
+		<md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')">
 			<div class="sidenav__ineer scrollbar__style">
 				<!-- search html start-->
 				<!-- <div layout="row" layout-padding style="padding-right:0px">
@@ -697,7 +720,7 @@ md-datepicker[placeholder]{
 			</div>
 		</md-sidenav>
 		<!--  metro Sidenav -->
-		<md-sidenav class="md-sidenav-right main__sidenav sidenav-width hide-sm" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
+		<!-- <md-sidenav class="md-sidenav-right main__sidenav sidenav-width hide-sm" md-is-locked-open="$mdMedia('gt-xs')" md-component-id="lntright"
 		 style="right: 0px !important;left:auto !important;">
 			<md-content layout="column">
 				<div class="metro_wing">
@@ -713,16 +736,12 @@ md-datepicker[placeholder]{
 						<li>Metro train run time 16 hours per day</li>
 					</ul>
 				</div>
-				<!-- <div layout="column" layout-align="center end" class="logo_lnt" style="margin: 30px 0;" layout-padding>
-					<p class="md-caption">We are oﬃcial Partners to</p>
-					<img src="assets/images/landt_logo.jpg" alt="landt_logo" />
-				</div> -->
 				<div layout="column">
 						<h6 class="md-title m-2">Recent Ad Campaigns</h6>
 						<img layout-padding src="assets/images/metro.jpg" alt="landt_logo" />
 					</div>
 			</md-content>
-		</md-sidenav>
+		</md-sidenav> -->
 		<!-- metro Sidenav ends -->
 		<!-- <div layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height">
 			<div layout="row" layout-margin>
