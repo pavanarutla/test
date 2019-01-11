@@ -318,7 +318,9 @@ app.controller('MetroCtrl',
       /*===============================
       | Campaign Management ends
       ===============================*/
-
+      $scope.toggleOwnerLeftSidenav = function () {
+        $mdSidenav('ownerLeftSidenav').toggle();
+      };
       /*================================
       | Page based initial loads
       ================================*/

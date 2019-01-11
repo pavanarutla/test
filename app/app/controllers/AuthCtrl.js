@@ -27,7 +27,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 					$state.go($rootScope.postLoginState, null);
 				}
 				else{
-					$state.go("index.location", null);
+					$state.go("index.metro", null);
 					// location.reload();
 				}
 			}
