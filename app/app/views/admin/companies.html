@@ -99,7 +99,8 @@
 							</tr>
 						</thead>
 						<tbody class="camp-text">
-							<tr ng-repeat="company in companyList | limitTo:limit">
+							<tr ng-repeat="company in companyList">
+									<!-- | limitTo:limit -->
 								<td class="text-left table_vertical">{{company.name}}</td>
 								<td class="text-left table_vertical hide-xs">{{company.company_type}}</td>
 								<td class="table_vertical hide-xs">{{company.contact_name}}</td>
@@ -204,7 +205,7 @@
 										</div>
 									</div>
 									<div layout="row" layout-align="center center">
-											<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addClient()" ng-disabled="addClientForm.$invalid">Submit</md-button>
+											<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addClient(client)" ng-disabled="addClientForm.$invalid">Submit</md-button>
 											<md-button Class="md-raised register_btn" onclick="addnewClient()">Cancle</md-button>
 										</div>
 								</form>
@@ -228,7 +229,8 @@
 							</tr>
 						</thead>
 						<tbody class="camp-text">
-							<tr ng-repeat="client in allClients | limitTo:limit">
+							<tr ng-repeat="client in allClients">
+									<!-- | limitTo:limit -->
 								<td class="text-left table_vertical">{{client.company_name}}</td>
 								<td class="table_vertical hide-xs">{{client.company_type_name}}</td>
 								<td class="table_vertical hide-xs">
@@ -244,9 +246,13 @@
 								<td class="table_vertical hide-xs">{{client.phone}}</td>
 								<td class="table_vertical hide-xs">{{client.address}}</td>
 								<td class="table_vertical hide-xs">
-									<span><a ng-href="#">
-											<md-icon><i class="material-icons">mode_edit</i></md-icon>
-										</a></span>
+									<span>
+										<a style="cursor:pointer;" ng-click="editClient(client)">
+											<md-icon>
+												<i class="material-icons">mode_edit</i>
+											</md-icon>
+										</a>
+									</span>
 								</td>
 							</tr>
 						</tbody>
