@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, config) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,ProductService, config) {
   $scope.forms = [];
   $scope.serverUrl = config.serverUrl;
 
@@ -499,7 +499,39 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /* ==============================
   | Campaign details section ends
   =============================== */
+ // filter-code
+ $scope.viewSelectedProduct = function(product) {
+  $scope.pagination.pageCount = 1;
+  $scope.productList = [product];
+}
+$scope.productSearch = function(query) {
+  return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+    $scope.productList = res;
+    $scope.pagination.pageCount = 1;
+    return res;
+  });
+}
 
+$scope.applymethod=function(product){
+  console.log(product);
+     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+    $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
+   });
+}
+var getFormatList = function(){
+  OwnerProductService.getFormatList().then(function(result){
+    $scope.formatList = result;
+  });
+}
+getFormatList();
+// Filter-code ends
 
   /* ==============================
   | Campaign payment section

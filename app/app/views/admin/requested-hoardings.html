@@ -1,91 +1,54 @@
 <div layout="column" layout-fill="layout-fill">
-	<div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-		<div flex="50">
-			<div class="md-title" style="margin: 10px 0 0 15px;">Requested Hoardings</div>
-		</div>
-	</div>
 	<div layout="column">
-		<!-- <div id="customSsearchInput" style="margin:8px;" layout-align="center end" layout="row">
-			<div flex="60">
-				<md-autocomplete style="width:100%" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
-					<md-item-template>
-						<span class="item-title">
-							<span> {{item.siteNo}} </span>
-						</span>
-						<span class="item-metadata">
-							<span>
-								<strong>{{item.company_name}}</strong>
-							</span>
-							<span>
-								<strong>{{item.address}}</strong>
-							</span>
-						</span>
-					</md-item-template>
-				</md-autocomplete>
-			</div>
-			<div flex="40">
-				<md-button class="md-raised" ng-click="getProductList()">
-					Cancel
-				</md-button>
-			</div>
-		</div> -->
-
 		<div style="margin-top: 1em;">
 			<div class="table-responsive">
-				<table class="table table-striped table-bordered ">
-					<thead>
-						<tr>
-							<th>Site No</th>
-							<th>Site type</th>
-							<th>Ad Space Owner</th>
-							<th>Area</th>
-							<th>Panel Size</th>
-							<th>lighting</th>
-							<th>Image</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="product in requestedProductList">
-							<td>{{product.siteNo}}</td>
-							<td>{{product.format_name}}</td>
-							<td>{{product.client_name}}</td>
-							<td>{{product.area_name}}</td>
-							<td>{{product.panelSize}}</td>
-							<td>{{product.lighting | boolToYesNo}}</td>
-							<td>
-								<img ng-src="{{serverUrl + product.image}}" style="width:60px; height:40px;" ng-click="viewProductImage(product.image)"/>
-							</td>
-							<td>
-								<span>
-									<a style="cursor:pointer;" ng-click="editProduct(product)">
-										<md-icon>
-											<i class="material-icons">mode_edit</i>
-										</md-icon>
-									</a>
-								</span>
-								<!-- <span>
-									<a style="cursor:pointer;" ng-click="deleteProduct(product)">
-										<md-icon>
-											<i class="material-icons">delete</i>
-										</md-icon>
-									</a>
-								</span> -->
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			  <table class="table table-hover call_center">
+				<thead>
+				  <tr class="text_color">
+						<th>Site No</th>
+						<th>Site type</th>
+						<th>Ad Space Owner</th>
+						<th>Area</th>
+						<th>Panel Size</th>
+						<th>Lighting</th>
+						<th>Image</th>
+						<th>Actions</th>
+				  </tr>
+				</thead>
+				<tbody class="">
+					<tr ng-repeat="product in requestedProductList">
+						<td class="table_vertical">{{product.siteNo}}</td>
+						<td class="table_vertical">{{product.format_name}}</td>
+						<td class="table_vertical">{{product.client_name}}</td>
+						<td class="table_vertical">{{product.area_name}}</td>
+						<td class="table_vertical">{{product.panelSize}}</td>
+						<td class="table_vertical">{{product.lighting | boolToYesNo}}</td>
+						<td class="table_vertical">
+							<img ng-src="{{serverUrl + product.image}}" style="width:60px; height:40px;" ng-click="viewProductImage(product.image)"/>
+						</td>
+						<td class="table_vertical">
+							<span>
+								<a style="cursor:pointer;" ng-click="editProduct(product)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			  </table>
 			</div>
 			<div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
-					<ul class="pagination">
-							<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-									<a ng-click="pagination.pageNo = i; getRequestedHoardings();" 
-											ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
-											style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
-											{{i}}
-									</a>
-							</li>
-					</ul>
-			</div>
+				<ul class="pagination">
+						<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+								<a ng-click="pagination.pageNo = i; getRequestedHoardings();" 
+										ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+										style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+										{{i}}
+								</a>
+						</li>
+				</ul>
 		</div>
+		  </div>
 	</div>

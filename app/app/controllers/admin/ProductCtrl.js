@@ -1,4 +1,4 @@
-app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$stateParams', 'ProductService', 'AdminLocationService', 'CompanyService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, $rootScope, $stateParams, ProductService, AdminLocationService, CompanyService, config, Upload, toastr) {
+app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$stateParams','$window', 'ProductService', 'AdminLocationService', 'CompanyService','OwnerProductService', 'config', 'Upload', 'toastr',function ($scope, $mdDialog, $http, $rootScope, $stateParams,$window, ProductService, AdminLocationService, CompanyService,OwnerProductService, config, Upload, toastr) {
 
   var vm = this;
   $scope.msg = {};
@@ -118,6 +118,26 @@ app.controller('ProductCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', '$s
   /*
   ======== Formats section ends ========
   */
+ var getFormatList = function(){
+  OwnerProductService.getFormatList().then(function(result){
+    console.log(result);
+    $scope.formatList = result;
+  });
+}
+getFormatList();
+ $scope.applyadminmethod=function(product){
+  console.log(product);
+     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+    $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
+   });
+}
 
   AdminLocationService.getCountries().then(function(result){
     $scope.countryList = result;

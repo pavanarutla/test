@@ -34,13 +34,17 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     $rootScope.loggedInUser = JSON.parse(localStorage.loggedInUser);
   }
 
-  $scope.closeSidenav = function () {
-    $mdSidenav('left').toggle();
+  // $scope.closeSidenav = function () {
+  //   $mdSidenav('left').toggle();
+  // };
+  // $scope.closeSideNavPanel = function () {
+  //   $mdSidenav('right').toggle();
+  // };
+  // toggle menu 
+  $scope.toggleAdminLeftSidenav = function () {
+    $mdSidenav('adminLeftSidenav').toggle();
   };
-  $scope.closeSideNavPanel = function () {
-    $mdSidenav('right').toggle();
-  };
-  
+
   $scope.logout = function(){
     $auth.logout().then(function(result){
       // console.log(result);
@@ -146,5 +150,5 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
       }
     }
   }
-
+  
 });

@@ -1,41 +1,14 @@
-<!-- <div layout="column" layout-fill="layout-fill">
-    <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
-        <div>
-            <h3>Subscribers</h3>
-        </div>
-    </div>
-    <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp"> -->
+<div layout="column" layout-fill="layout-fill">
+    <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp">
 
         <!-- <div><h3>List Of Subscribers</h3></div> -->
-        <!-- <form ng-submit="selected_rows()">
-            <select name="action">
-                <option value="">Action</option>
-                <option value="delete">Unsubscribe</option>
-            </select>
-            <button type="submit">Submit</button>
-        </form>
+
         <div>
-            <label>Which rows should we export?</label>
-            <select ng-model="export_row_type" </select>
-                <option value='all'>All</option>
-                <option value='visible'>Visible</option>
-                <option value='selected'>Selected</option>
-            </select>
-            <label>What format would you like?</label>
-            <select ng-model="export_format" </select>
-                <option value='csv'>CSV</option>
-                <option value='pdf'>PDF</option>
-            </select>
+            <label>Export Email Ids as  <input type="radio" name="gender" value="male"> pdf / <input type="radio" name="gender" value="male">csv</label>
             <button ng-click="export()">Export</button>
-            <div class="custom-csv-link-location">
-                <label>Your CSV will show below:</label>
-                <span class="ui-grid-exporter-csv-link">&nbsp</span>
-            </div>
-        </div> -->
-        <!-- <div layout-margin layout="column">
-            <div ui-grid="gridSubscribers" ui-grid-exporter  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-        </div> -->
-        <!-- <div style="margin-top: 1em;">
+        </div>
+    </div>
+    <!-- <div style="margin-top: 1em;">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered ">
                     <thead>
@@ -60,6 +33,40 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr class="text_color">
+                    <th>Email Id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr ng-repeat="Subscribers in Subscribersdata | limitTo:limit">
+                    <td>{{Subscribers.email}}</td>
+                    <!-- <td>
+                        <span>
+                            <a ng-click="ShowConfirm(Subscribers)">
+                                <md-icon style="cursor: pointer;">
+                                    <i class="material-icons">unsubscribe</i>
+                                </md-icon>
+                            </a>
+                        </span>
+                    </td> -->
+                    <td>
+                            <!-- <input type="radio" name="gender" value="male"> Subscribe / <input type="radio" name="gender" value="male">Unsubscribe</label> -->
+                            <div>
+                                    <input type="radio" id="huey" name="drone" value="Subscribe"
+                                           >
+                                    <label for="huey">Subscribe</label>
+                                    <input type="radio" id="huey" name="drone" value="Unsubscribe"
+                                           >
+                                    <label for="huey">Unsubscribe</label>
+                                  </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div> -->
+</div>
