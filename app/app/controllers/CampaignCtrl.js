@@ -80,16 +80,16 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   $scope.getUserCampaigns = function () {
     CampaignService.getActiveUserCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result, function(c){
-        return c.status < 600 || c.status == 700;
+       return 300<c.status < 600;
       });
       $scope.SheduledCampaigns = _.filter(result, function(c){
         return c.status == 800;
       });
       $scope.runningCampaigns = _.filter(result, function(c){
-        return c.status == 1141;
+        return c.status == 700;
       });
       $scope.closedCampaigns = _.filter(result, function(c){
-        return c.status == 1151;
+         return c.status == 1000 || c.status == 900;
       });
       
       // $scope.SheduledCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
