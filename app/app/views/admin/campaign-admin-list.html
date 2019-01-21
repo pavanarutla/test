@@ -152,9 +152,9 @@
               </thead>
               <tbody class="camp-text">
                 <tr ng-repeat="campaign in adminCampaigns | limitTo:limit">
-                  <td class="table_vertical">N/A</td>
+                  <td class="table_vertical">{{campaign.cid}}</td>
                   <td class="text-left table_vertical">{{campaign.name}}</td>
-                  <td class="table_vertical">{{campaign.start_date | date }}</td>
+                  <td class="table_vertical">{{campaign.created_at | dateify | date:'dd-MM-yyyy'}}</td>
                   <td class="text-center table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
                   <td class="text-center table_vertical hide-xs">{{campaign.npaid || "N/A"}}</td>
                   <td class="text-center table_vertical hide-xs">{{campaign.est_budget}}</td>
@@ -192,7 +192,7 @@
                     </md-menu>
                   </td>
                   <td class="table_vertical hide-xs">
-                    <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
+                    <span class="text_color md-caption">{{campaign.updated_at| timeify | date:'HH:mm a' || "N/A"}}</span>
                   </td>
                 </tr>
               </tbody>

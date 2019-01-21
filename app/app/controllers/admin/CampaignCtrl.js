@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService, AdminMetroService, ProductService, Upload, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, Upload, toastr, FileSaver, Blob, MetroService, $window) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -457,7 +457,14 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   $scope.cancel = function () {
     $mdDialog.hide();
   };
-
+  // query tab
+  AdminContactService.userQuery().then(function (response) {    
+    $scope.QueriesData = response.data;
+  });
+  // query tab end
+  AdminCampaignService.getAllCampaigns().then(function (response) {
+    $scope.adminpayments = response.admin_campaigns;
+  });
   /*=========================
   | Page based initial loads
   =========================*/
