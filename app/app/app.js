@@ -57,6 +57,7 @@ var app = angular.module('bbManager', [
     .state('index.user-saved-campaigns', {
       url: 'user-saved-campaigns',
       templateUrl: 'views/user-saved-campaigns.html',
+      controller:'CampaignCtrl'
     })
     $stateProvider.state('index.suggest', {
       url: 'suggest',
