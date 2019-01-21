@@ -222,129 +222,11 @@
 		<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 	</md-button>
 	<div layout="colmun" layout-align="end center" class="campaign_search">
-		<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
-			<md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
-			 md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-			 md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
-				<md-item-template>
-					<span class="item-title">
-						<span> {{campaign.name}} </span>
-					</span>
-					<span class="item-metadata">
-						<span>
-							<strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
-						</span>
-						<span>
-							<strong>{{campaign.email}}</strong>
-						</span>
-						<span>
-							<strong>{{campaign.phone}}</strong>
-						</span>
-					</span>
-				</md-item-template>
-				<md-not-found>
-					No matches found.
-				</md-not-found>
-			</md-autocomplete>
-		</div>
+		
 		<!-- <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
               CREATE CAMPAIGN
           </md-button> -->
-		<div class="dropdown hide-xs">
-			<md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
-			<div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
-				<form name="metroCampaignForm" role="form" novalidate="novalidate">
-					<div layout="colmun">
-						<span flex></span>
-						<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
-							<md-icon class="md-default-theme">
-								<i class="material-icons">close</i>
-							</md-icon>
-						</md-button>
-					</div>
-					<h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
-					<h3 class="md-title">Let's start Campaign</h3>
-					<div layout="row" layout-margin layout-align="center center" class="">
-						<div id="dvPassport" style="width:100%;">
-							<li>
-								<div class="form-group">
-									<input ng-model="metroCampaign.name" name="campaign_name" class="form-control md-whiteframe-3dp" type="text"
-									 required placeholder="Campaign name">
-									<div ng-messages="metroCampaignForm.campaign_name.$error" ng-if="metroCampaignForm.campaign_name.$touched"
-									 style="color:red">
-										<div ng-message="required">Campaign name is required.</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="form-group ">
-									<input ng-model="metroCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
-									 placeholder="Organization name" required>
-									<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red">
-										<div ng-message="required">Organization name is required.</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="form-group ">
-									<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control md-whiteframe-3dp"
-									 type="text" minlength="10" maxlength="10" placeholder="Phone number" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
-									<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched"
-									 style="color:red">
-										<div ng-message="required">Phone number is required.</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="form-group ">
-									<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
-									 type="text" required placeholder="Enter Your Mail Id" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
-									<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
-									 style="color:red">
-										<div ng-message="required">Email is required.</div>
-										<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
-										<div ng-message="pattern">Enter a valid Email</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="form-group ">
-									<input ng-model="ownerCampaign.org_contact_refered" name="refered" only-numeric class="form-control md-whiteframe-3dp"
-									 type="text" maxlength="10" required="required" placeholder="Refered By">
-									<div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
-										<div ng-message="required">Refered No is required.</div>
-										<div ng-message="maxlength">Refered No must have 10 characters.</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="form-group">
-									<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
-									 type="text" maxlength="10" required="required" placeholder="Estimated Budget">
-									<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
-										<div ng-message="required">Budget No is required.</div>
-										<div ng-message="maxlength">Phone No must have 10 characters.</div>
-									</div>
-								</div>
-							</li>
-							<!-- <li>
-								<div class="form-group">
-									<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
-									 type="text" maxlength="10" required="required" placeholder="Campaign Start Date">
-									<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
-										<div ng-message="required">Budget No is required.</div>
-										<div ng-message="maxlength">Phone No must have 10 characters.</div>
-									</div>
-								</div>
-							</li> -->
-						</div>
-					</div>
-					<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid">
-						Create Campaign
-					</md-button>
-				</form>
-			</div>
-		</div>
+		
 	</div>
 	<md-tabs md-dynamic-height class="padding_cmp">
 
@@ -368,8 +250,8 @@
 							<tr ng-repeat="uMetrCamp in userMetroCampaigns">
 								<td class="table_vertical">N/A</td>
 								<td class="text-left table_vertical">{{uMetrCamp.name}}</td>
-								<td class="table_vertical">N/A</td>
-								<td class="table_vertical hide-xs">N/A</td>
+								<td class="table_vertical">{{uMetrCamp.created_at | dateify | date:'dd-MM-yyyy'}}</td>
+								<td class="table_vertical hide-xs">{{uMetrCamp.no_products || "N/A"}}</td>
 								<td class="table_vertical hide-xs">N/A</td>
 								<td class="table_vertical hide-xs">N/A</td>
 								<td class="table_vertical">
@@ -414,7 +296,7 @@
 									</md-menu>
 								</td>
 								<td class="table_vertical hide-xs">
-									<span class="text_color md-caption">09:11 Am, 26-09-2018</span>
+									<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
 								</td>
 							</tr>
 						</tbody>
@@ -424,8 +306,138 @@
 			</div>
 		</md-tab>
 		<md-tab label="Admin Metro">
+				<div class="md-title" layout="row">
+						<div flex></div>
+						<div flex="20">
+								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
+										<md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+										 md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
+										 md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+											<md-item-template>
+												<span class="item-title">
+													<span> {{campaign.name}} </span>
+												</span>
+												<span class="item-metadata">
+													<span>
+														<strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
+													</span>
+													<span>
+														<strong>{{campaign.email}}</strong>
+													</span>
+													<span>
+														<strong>{{campaign.phone}}</strong>
+													</span>
+												</span>
+											</md-item-template>
+											<md-not-found>
+												No matches found.
+											</md-not-found>
+										</md-autocomplete>
+									</div>
+						</div>
+						<div class="hide-xs" layout="row">
+						  <div flex></div>
+						  <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+								<div class="dropdown hide-xs">
+										<md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
+										<div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
+											<form name="metroCampaignForm" role="form" novalidate="novalidate">
+												<div layout="colmun">
+													<span flex></span>
+													<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
+														<md-icon class="md-default-theme">
+															<i class="material-icons">close</i>
+														</md-icon>
+													</md-button>
+												</div>
+												<h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
+												<h3 class="md-title">Let's start Campaign</h3>
+												<div layout="row" layout-margin layout-align="center center" class="">
+													<div id="dvPassport" style="width:100%;">
+														<li>
+															<div class="form-group">
+																<input ng-model="metroCampaign.name" name="campaign_name" class="form-control md-whiteframe-3dp" type="text"
+																 placeholder="Campaign name">
+																<div ng-messages="metroCampaignForm.campaign_name.$error" ng-if="metroCampaignForm.campaign_name.$touched"
+																 style="color:red">
+																	<div ng-message="required">Campaign name is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
+																 placeholder="Organization name" >
+																<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red">
+																	<div ng-message="required">Organization name is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control md-whiteframe-3dp"
+																 type="text" minlength="10" maxlength="10" placeholder="Phone number"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+																<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched"
+																 style="color:red">
+																	<div ng-message="required">Phone number is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
+																 type="text" required placeholder="Enter Your Mail Id" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+																<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
+																 style="color:red">
+																	<div ng-message="required">Email is required.</div>
+																	<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
+																	<div ng-message="pattern">Enter a valid Email</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="ownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
+																 type="text" maxlength="10" required="required" placeholder="Refered By">
+																<div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
+																	<div ng-message="required">Refered No is required.</div>
+																	<div ng-message="maxlength">Refered No must have 10 characters.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group">
+																<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
+																 type="text" maxlength="10" required="required" placeholder="Estimated Budget">
+																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
+																	<div ng-message="required">Budget No is required.</div>
+																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
+																</div>
+															</div>
+														</li>
+														<!-- <li>
+															<div class="form-group">
+																<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
+																 type="text" maxlength="10" required="required" placeholder="Campaign Start Date">
+																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
+																	<div ng-message="required">Budget No is required.</div>
+																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
+																</div>
+															</div>
+														</li> -->
+													</div>
+												</div>
+												<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.ownerCampaignForm.$invalid">
+													Create Campaign
+												</md-button>
+											</form>
+										</div>
+									</div>
+						  </div>
+						</div>
+					  </div>
 			<div style="margin-top: 1em;">
-				<div class="table-responsive">
+				<div class="table-responsive" style="height:434px;">
 					<table class="table ">
 						<thead>
 							<tr class="text_color text-center">
@@ -443,7 +455,7 @@
 							<tr ng-repeat="aMetrCamp in adminMetroCampaigns">
 								<td class="table_vertical">N/A</td>
 								<td class="text-left table_vertical">{{aMetrCamp.name}}</td>
-								<td class="table_vertical">N/A</td>
+								<td class="table_vertical">{{aMetrCamp.created_at | dateify | date:'dd-MM-yyyy'}}</td>
 								<td class="table_vertical hide-xs">N/A</td>
 								<td class="table_vertical hide-xs">N/A</td>
 								<td class="table_vertical hide-xs">N/A</td>
@@ -489,7 +501,7 @@
 									</md-menu>
 								</td>
 								<td class="table_vertical hide-xs">
-									<span class="text_color md-caption">09:11 Am, 26-09-2018</span>
+									<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
 								</td>
 							</tr>
 						</tbody>

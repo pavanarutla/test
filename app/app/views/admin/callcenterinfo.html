@@ -18,33 +18,12 @@
                         </thead>
                         <tbody>
                           <tr ng-repeat="callinfo in callCenterData | limitTo:limit">
-                            <td class="table_vertical ">{{callinfo.created_at | date:'dd, MMMM yyyy'}}</td>
+                            <td class="table_vertical ">{{callinfo.created_at | dateify | date:'dd-MM-yyyy'}}</td>
                             <td class="table_vertical ">{{callinfo.phoneNo}}</td>
-                            <td class="table_vertical ">{{callinfo.call_feedback}}</td>
+                            <td class="table_vertical ">{{callinfo.call_feedback || "N/A"}}</td>
                             <td class="table_vertical ">Madhuri</td>
-                            <td class="table_vertical">{{callinfo.updated_at}}</td>
+                            <td class="table_vertical">{{callinfo.updated_at | timeify | date:'HH:mm a'}}</td>
                           </tr>
-                          <!-- <tr>
-                            <td class="table_vertical">04-01-2018</td>
-                            <td class="table_vertical">9876543210</td>
-                            <td class="table_vertical"></td>
-                            <td class="table_vertical">Madhuri</td>
-                            <td class="table_vertical">11:30 am</td>
-                          </tr>
-                          <tr>
-                            <td class="table_vertical">04-01-2018</td>
-                            <td class="table_vertical">9876543210</td>
-                            <td class="table_vertical"></td>
-                            <td class="table_vertical">Madhuri</td>
-                            <td class="table_vertical">11:30 am</td>
-                          </tr>
-                          <tr>
-                            <td class="table_vertical">04-01-2018</td>
-                            <td class="table_vertical">9876543210</td>
-                            <td class="table_vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                            <td class="table_vertical">Madhuri</td>
-                            <td class="table_vertical">11:30 am</td>
-                          </tr> -->
                         </tbody>
                       </table>
               </div>

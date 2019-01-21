@@ -1,11 +1,23 @@
 app.factory('ProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getProductList: function (pageNo, pageSize) {
+			getProductList: function (pageNo, pageSize,format,budget) {
 				var pageData = "";
-				if(pageNo && pageSize){
-					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				if(!format){
+					format = '';
 				}
+				if(!budget){
+					budget = '';
+				}
+				if(pageNo || pageSize || format || budget){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize + "&format=" + format +"&budget=" + budget;
+				}
+
+
+				// var pageData = "";
+				// if(pageNo && pageSize){
+				// 	var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				// }
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
