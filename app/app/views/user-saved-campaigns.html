@@ -136,13 +136,13 @@
                 </thead>
                 <tbody class="text-center contbg">
 
-                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : Campaigns">
+                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
                         <td>{{activeUserCampaign.cid || "N/A"}}</td>
                         <td>{{activeUserCampaign.name}}</td>
-                        <td>{{activeUserCampaign.start_date | dateify}}</td>
-                        <td>{{activeUserCampaign.Products || "N/A"}}</td>
+                        <td>{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
+                        <td>{{activeUserCampaign.no_products || "0"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td>{{activeUserCampaign.act_budget}}</td>
+                        <td>{{activeUserCampaign.est_budget || 'N/A'}}</td>
                         <td>
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -178,7 +178,7 @@
                             </md-menu>
                         </td>
                         <td>
-                            <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                            <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateify | date:'dd-MM-yyyy'}}</span>
                         </td>
                     </tr>
                 </tbody>
