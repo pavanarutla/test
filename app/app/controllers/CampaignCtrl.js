@@ -263,7 +263,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  $scope.toggleShareCampaignSidenav = function () {
+  $scope.toggleShareCampaignSidenav = function (activeUserCampaign) {
+    $scope.currentShareCampaign = activeUserCampaign;
     $mdSidenav('shareCampaignSidenav').toggle();
   };
 
@@ -288,13 +289,18 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+  $scope.shareCampaignToEmail = function (ev, shareCampaign,campaignID,campaign_type) {
+    console.log(campaignID);
     $scope.campaignToShare = $scope.campaignDetails;
     var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
+      // campaign_id: $scope.campaignToShare.id,
+      // email: shareCampaign.email,
+      // receiver_name: shareCampaign.receiver_name,
+      // campaign_type: $scope.campaignToShare.type
+      campaign_id: campaignID,
       email: shareCampaign.email,
       receiver_name: shareCampaign.receiver_name,
-      campaign_type: $scope.campaignToShare.type
+      campaign_type: campaign_type
     };
     CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
       if (result.status == 1) {
@@ -304,7 +310,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
             .parent(angular.element(document.querySelector('body')))
             .clickOutsideToClose(true)
             .title(result.message)
-            // .textContent('You can specify some description text in here.')
+            .textContent('You can specify some description text in here.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
             .targetEvent(ev)
