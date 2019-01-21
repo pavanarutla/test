@@ -56,6 +56,17 @@ app.filter('dateify',function(){
     }
   }
 });
+app.filter('timeify',function(){
+  return function(date, format){
+    format = format || 'HH:mm a';
+    if(date){
+      return moment(date).local().format(format);
+    }
+    else{
+      return "N/A";
+    }
+  }
+});
 
 app.filter('datetimeify',function(){
   return function(date, format){

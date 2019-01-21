@@ -29,10 +29,19 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   var getAllCampaigns = function () {
     AdminCampaignService.getAllCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result.user_campaigns, function (c) {
-        return c.status < 700 && typeof c.name !== "undefined";
+        return c.status < 800 && typeof c.name !== "undefined";
       });
-      $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'booked') });
-      $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
+      $scope.scheduledCampaigns = _.filter(result.user_campaigns, function (c) {
+        return c.status == 800 && typeof c.name !== "undefined";
+      });
+      $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
+        return c.status == 1141 && typeof c.name !== "undefined";
+      });
+      $scope.closedCampaigns = _.filter(result.user_campaigns, function (c) {
+        return c.status == 1151 && typeof c.name !== "undefined";
+      });
+      // $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'booked') });
+      // $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
       $scope.adminCampaigns = result.admin_campaigns;
     });
   }

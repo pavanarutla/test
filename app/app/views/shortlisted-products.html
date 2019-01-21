@@ -1,5 +1,7 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-	<div ng-if="shortListedProducts.length == 0" style="font-size: 20px">There is no products shortlisted please shortlist the products..</div>
+	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" >
+		<img src="assets/images/owner/Group 383.png"/>
+	</div>
 	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
 		<table class="table">
 			<thead class="text_color">
@@ -46,10 +48,11 @@
 							
 							</a>
 					</td>
-					<th></th>
-					<td class="table_vertical text-center">
+					<td></td>
+					<td></td>
+					<!-- <td class="table_vertical text-center">
 						<p class="text_color md-caption">This Inventory Campaign Completed</p>
-					</td>
+					</td> -->
 			</tbody>
 		</table>
 	</div>
@@ -100,52 +103,51 @@
 					</form>
 				</div>
 			</div> -->
-			<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
-				<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
-					<div class="d-flex justify-content-end pt-4">
-						<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>
-						<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
-					</div>
+		<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
+			<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
+				<div class="d-flex justify-content-end pt-4">
+					<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>
+					<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
 				</div>
 			</div>
-
 		</div>
-		<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
-			<div layout="row">
-				<div flex></div>
-				<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
-					<i class="material-icons">close</i>
-				</a>
-			</div>
-			<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
-			<div class="md-title  m-2">Let's work Together!</div>
-			<div class="form-group mt-3 mr-2 ml-2">
-				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
-			</div>
-			<div class="form-group mt-3 mr-2 ml-2">
-				<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
-			</div>
-			<div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
-					Save Campaign
-				</md-button>
-			</div>
-			<p class="text-center md-body-2">(OR)</p>
-			<div class="form-group mr-2 ml-2">
-				<select class="form-control" ng-model="existingCampaign.id" required="required">
-					<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
-				</select>
-			</div>
-			<!-- <div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
-					add to existing or save Campaign
-				</md-button>
-			</div> -->			
-			<div layout="column" class="mr-2 ml-2 mb-3">
-				<md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id)">
-					add to existing or save Campaign
-				</md-button>
-			</div>
+
+	</div>
+	<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+		<div layout="row">
+			<div flex></div>
+			<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
+				<i class="material-icons">close</i>
+			</a>
+		</div>
+		<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+		<div class="md-title  m-2">Let's work Together!</div>
+		<div class="form-group mt-3 mr-2 ml-2">
+			<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+		</div>
+		<div class="form-group mt-3 mr-2 ml-2">
+			<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
+		</div>
+		<div layout="column" class="mr-2 ml-2 mb-3">
+			<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
+				Save Campaign
+			</md-button>
+		</div>
+		<p class="text-center md-body-2">(OR)</p>
+		<div class="form-group mr-2 ml-2">
+			<select class="form-control" ng-model="existingCampaign.id" required="required">
+				<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+			</select>
+		</div>
+		<!-- <div layout="column" class="mr-2 ml-2 mb-3">
+			<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
+				add to existing or save Campaign
+			</md-button>
+		</div> -->			
+		<div layout="column" class="mr-2 ml-2 mb-3">
+			<md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id)">
+				add to existing or save Campaign
+			</md-button>
 		</div>
 	</div>
 </div>

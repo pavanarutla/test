@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, config) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,ProductService, config) {
   $scope.forms = [];
   $scope.serverUrl = config.serverUrl;
 
@@ -174,11 +174,14 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {      
         $scope.userCampaignPayments = result;
         $scope.plannedCampaigns = _.filter(result, function (c) {
-          return c.status < 600;
+          return c.status < 800 ;
+        });
+        $scope.scheduledCampaigns = _.filter(result, function (c) {
+          return c.status == 800 ;
         });
         $scope.runningCampaigns = _.where(result, { status: 600 });
         $scope.closedCampaigns = _.filter(result, function (c) {
-          return c.status > 600 && c.status <= 800;
+          return c.status > 800;
         });
         resolve(result);
       });
@@ -187,7 +190,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   var loadOwnerCampaigns = function () {
     return new Promise((resolve, reject) => {
       OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-        $scope.ownerCampaigns = result;        
+        //$scope.ownerCampaigns = result;        
+        $scope.ownerCampaigns = _.filter(result, function (c) {
+          return c.status < 800 ;
+        });
+        $scope.scheduledCampaigns = _.filter(result, function (c) {
+          return c.status == 800 ;
+        });
         resolve(result);
       });
     });
@@ -289,6 +298,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   $scope.getUserCampaignDetails = function (campaignId) {
     OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function (result) {
       $scope.campaignDetails = result;
+      if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
+        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+      }
     });
   }
   $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -485,7 +499,39 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   /* ==============================
   | Campaign details section ends
   =============================== */
+ // filter-code
+ $scope.viewSelectedProduct = function(product) {
+  $scope.pagination.pageCount = 1;
+  $scope.productList = [product];
+}
+$scope.productSearch = function(query) {
+  return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+    $scope.productList = res;
+    $scope.pagination.pageCount = 1;
+    return res;
+  });
+}
 
+$scope.applymethod=function(product){
+  console.log(product);
+     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+    $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
+   });
+}
+var getFormatList = function(){
+  OwnerProductService.getFormatList().then(function(result){
+    $scope.formatList = result;
+  });
+}
+getFormatList();
+// Filter-code ends
 
   /* ==============================
   | Campaign payment section

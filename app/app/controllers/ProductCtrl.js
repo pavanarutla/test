@@ -118,7 +118,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     if ($scope.shortListedProducts.length > 0) {
       productToCampaign.shortlisted_products = [];
       _.each($scope.shortListedProducts, function (v, i) {
-        productToCampaign.shortlisted_products.push(v.product_id);
+        productToCampaign.shortlisted_products.push(v.id);
       });
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
       if (result.status == 1) {

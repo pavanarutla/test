@@ -96,16 +96,17 @@ app.controller('CompanyCtrl', function ($scope, $mdDialog, $http, CompanyService
 
   /*
   ======== Clients ========
-  */
-  $scope.showAddClientPopup = function (ev) {
+  */  
+  $scope.editClient = function(client){    
+    $scope.client = client;
     $mdDialog.show({
       templateUrl: 'views/admin/add-client-popup.html',
       fullscreen: $scope.customFullscreen,
       clickOutsideToClose: true,
       preserveScope: true,
       scope: $scope
-    })
-  };
+    });     
+  }
 
   // $scope.gridHoardingCompany = {
   //   paginationPageSizes: [25, 50, 75],

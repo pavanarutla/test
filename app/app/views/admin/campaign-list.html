@@ -1,6 +1,6 @@
 <!-- <div layout="column" layout-fill="layout-fill">
   <md-tabs md-dynamic-height>
-    <md-tab label="Proposals">
+    <md-tab label="Proposals/Booked">
       <div layout="colmun">
         <div id="CampaignSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="40">
           <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
@@ -118,7 +118,8 @@
                   </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="campaign in runningCampaigns | limitTo:limit">
+                <tr ng-repeat="campaign in scheduledCampaigns | limitTo:limit">
+                   <td>{{campaign.created_by}}</td>
                   <td>{{campaign.name}}</td>
                   <td>{{campaign.first_name}} {{campaign.last_name}}</td>
                   <td>{{campaign.phone}}</td>
@@ -428,9 +429,9 @@
             </thead>
             <tbody class="camp-text">
               <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
-                <td class="table_vertical">N/A</td>
+                <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.start_date | date }}</td>
+                <td class="table_vertical">{{campaign.created_at | dateify | date:'dd-MM-yyyy' }}</td>
                 <td class="text-center table_vertical hide-xs">N/A</td>
                 <td class="text-center table_vertical hide-xs">N/A</td>
                 <td class="text-center table_vertical hide-xs">{{campaign.est_budget}}</td>
@@ -476,7 +477,7 @@
                   </md-menu>
                 </td>
                 <td class="table_vertical hide-xs">
-                  <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at |timeify | date:'HH:mm a'}}</span>
                 </td>
               </tr>
               

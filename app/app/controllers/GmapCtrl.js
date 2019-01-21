@@ -940,7 +940,9 @@ app.controller('GmapCtrl',
           $scope.campaignDetails = campaignDetails;
         });
       }
-
+      $scope.toggleExistingCampaignSidenav = function () {
+        $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+      }
       $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
         var productToCampaign = {
           product_id: productId,

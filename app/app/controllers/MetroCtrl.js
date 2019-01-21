@@ -53,7 +53,7 @@ app.controller('MetroCtrl',
           $scope.selectedCorridor = $scope.metroCorridors[0];
           $scope.getMetroPackages($scope.selectedCorridor.id);
           if($state.current.url=='metro'){
-            $scope.showPackagePopup();
+            //$scope.showPackagePopup();
           }
           
           //console.log($state.current.url);
