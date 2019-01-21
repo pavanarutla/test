@@ -664,7 +664,7 @@ display: none !important;
 											</div> -->
 											<div class="md-list-item-text list-item-text" layout="column" flex>
 												<h3 class="md-body-2">{{slPkg.name}}</h3>
-												<p class="md-caption">{{slPkg.selected_trains}} Trains, {{slPkg.months}} Months</p>
+												<p class="md-caption">{{slPkg.selected_trains}} Trains, {{slPkg.months =='0.5'? ' 15 Days ': slPkg.months+' Months'}} </p>
 												<!-- <p class="md-caption">{{shortlisted.address}}</P> -->
 											</div>
 											<div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
@@ -789,8 +789,8 @@ display: none !important;
 					<div class="row">
 							<div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
 								<div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
-										<p class="text-white">{{metroPackage.corridor}}</p>
-										<h3 class="text-white">{{metroPackage.format}}</h3>
+									<h3 class="text-white">{{metroPackage.corridor}}</h3>
+									<h5 class="text-white">{{metroPackage.format}}</h5>
 										<hr style="padding:1px;background-color: #fff;">
 										<p class="text-white mb-0" ng-repeat="desc in (metroPackage.description | customSplitString)">
 											<i class="fa fa-check-square-o" aria-hidden="true" ></i>
