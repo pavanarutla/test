@@ -136,13 +136,13 @@
                 </thead>
                 <tbody class="text-center contbg">
 
-                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : Campaigns">
+                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
                         <td>{{activeUserCampaign.cid || "N/A"}}</td>
                         <td>{{activeUserCampaign.name}}</td>
-                        <td>{{activeUserCampaign.start_date | dateify}}</td>
-                        <td>{{activeUserCampaign.Products || "N/A"}}</td>
+                        <td>{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
+                        <td>{{activeUserCampaign.no_products || "0"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td>{{activeUserCampaign.act_budget}}</td>
+                        <td>{{activeUserCampaign.est_budget || 'N/A'}}</td>
                         <td>
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -158,27 +158,27 @@
                                         </md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#">
+                                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(activeUserCampaign.id)">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">share</i></md-icon>
                                                 <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
                                             </div>
                                         </md-button>
                                     </md-menu-item>
-                                    <md-menu-item>
+                                    <!-- <md-menu-item>
                                         <md-button class="pop_view" ng-href="#">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                                 <p style="margin:0 4px;font-size:11px;">Pay & Launch</p>
                                             </div>
                                         </md-button>
-                                    </md-menu-item>
+                                    </md-menu-item> -->
 
                                 </md-menu-content>
                             </md-menu>
                         </td>
                         <td>
-                            <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                            <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateify | date:'dd-MM-yyyy'}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -186,7 +186,43 @@
         </div>
 
     </div>
-
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+    <div layout="row">
+        <div class="md-toolbar-tools">
+            <div flex></div>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <md-content layout-align="center center" layout-margin layout-padding>
+        <h3 class="md-headline">Share Campaign</h3>
+        <form name="shareCampaignForm">
+            <div layout="column">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                    <div ng-messages="shareCampaignForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="pattern">Enter a valid Name.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                    <div ng-messages="shareCampaignForm.email.$error">
+                        <div ng-message="required">Email is required.</div>
+                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                    </div>
+                </md-input-container>
+                <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentShareCampaign)">Share Campaign</md-button>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>
+<!-- share campaign sidenav ends -->
 </div>
 <script>
     function saveCampaign() {

@@ -79,17 +79,20 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   // get all Campaigns by a user to show it in campaign management page
   $scope.getUserCampaigns = function () {
     CampaignService.getActiveUserCampaigns().then(function (result) {
+           $scope.userSavedCampaigns = _.filter(result, function(c){
+       return c.status == 100 || c.status == 200; 
+      });
       $scope.plannedCampaigns = _.filter(result, function(c){
-        return c.status < 600 || c.status == 700;
+       return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
       });
       $scope.SheduledCampaigns = _.filter(result, function(c){
         return c.status == 800;
       });
       $scope.runningCampaigns = _.filter(result, function(c){
-        return c.status == 1141;
+        return c.status == 700;
       });
       $scope.closedCampaigns = _.filter(result, function(c){
-        return c.status == 1151;
+         return c.status == 1000 || c.status == 900;
       });
       
       // $scope.SheduledCampaigns = _.where(result, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'running') });
@@ -263,7 +266,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       }
     });
   }
-  $scope.toggleShareCampaignSidenav = function () {
+  $scope.toggleShareCampaignSidenav = function (activeUserCampaign) {
+    $scope.currentShareCampaign = activeUserCampaign;
     $mdSidenav('shareCampaignSidenav').toggle();
   };
 
@@ -288,13 +292,18 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+  $scope.shareCampaignToEmail = function (ev, shareCampaign,campaignID,campaign_type) {
+    console.log(campaignID);
     $scope.campaignToShare = $scope.campaignDetails;
     var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
+      // campaign_id: $scope.campaignToShare.id,
+      // email: shareCampaign.email,
+      // receiver_name: shareCampaign.receiver_name,
+      // campaign_type: $scope.campaignToShare.type
+      campaign_id: campaignID,
       email: shareCampaign.email,
       receiver_name: shareCampaign.receiver_name,
-      campaign_type: $scope.campaignToShare.type
+      campaign_type: campaign_type
     };
     CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
       if (result.status == 1) {
@@ -304,7 +313,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
             .parent(angular.element(document.querySelector('body')))
             .clickOutsideToClose(true)
             .title(result.message)
-            // .textContent('You can specify some description text in here.')
+            .textContent('You can specify some description text in here.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
             .targetEvent(ev)
