@@ -463,17 +463,38 @@
 		</div>
 	</div>
 
-	<div class="hoarding_list_filters">
-		<form class="form-inline camp_filters d-flex justify-content-between" action="">
-			<input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id="">
+	<!-- <div class="hoarding_list_filters">
+		<form class="form-inline camp_filters d-flex justify-content-between" action=""> -->
+			<!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id=""> -->
+			<!-- <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+					<md-item-template>
+						<span class="item-title">
+							<span> {{product.siteNo}} </span>
+						</span>
+						<span class="item-metadata">
+							<span>
+								<strong>{{product.company_name}}</strong>
+							</span>
+							<span>
+								<strong>{{product.address}}</strong>
+							</span>
+						</span>
+					</md-item-template>
+				</md-autocomplete>
 			<label class="filter_by" for="pwd">Filter By:</label>
-			<div class="form-group form_up form_select">
-				<select class="form-control form_format" id="sel1">
+			<div class="form-group form_up form_select"> -->
+				<!-- <select class="form-control form_format" id="sel1">
 					<option selected>Format</option>
 					<option>Hoarding</option>
 					<option>Unipole</option>
 					<option>Airport</option>
-				</select>
+				</select> -->
+				<!-- <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+						class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+						name="productType">
+						<option value="" disabled selected>Site Type</option>
+    		</select>
+
 			</div>
 			<div class="form-group form_cal">
 				<input type="date" class="form-control" placeholder=" Available From">
@@ -482,20 +503,101 @@
 				<input type="date" class="form-control" placeholder=" Available To">
 			</div>
 			<div class="form-group form_cal">
+					<select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+						<option selected value="1">Budget High to Low</option>
+						<option value="0">Budget Low to High </option>
+					</select>
+				</div> -->
+			<!-- <div class="form-group form_cal">
 				<select class="form-control" id="sel1">
 					<option selected>Budget High to Low</option>
 					<option>Budget Low to High </option>
 				</select>
-			</div>
-			<div class="form-check">
+			</div> -->
+			<!-- <div class="form-check">
 				<label class="form-check-label">
 					<input class="form-check-input" type="checkbox"> Show Only Available
 				</label>
 			</div>
-			<md-button class="md-raised apply_filter">Apply Filters</md-button>
+			<md-button class="md-raised apply_filter" ng-click="applymethod(product)">Apply Filters</md-button>
 		</form>
-	</div>
-
+	</div> -->
+	<div class="">
+			<form class="form-inline camp_filters d-flex justify-content-between" action="">
+				<!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id=""> -->
+				<md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+					<md-item-template>
+						<span class="item-title">
+							<span> {{product.siteNo}} </span>
+						</span>
+						<span class="item-metadata">
+							<span>
+								<strong>{{product.company_name}}</strong>
+							</span>
+							<span>
+								<strong>{{product.address}}</strong>
+							</span>
+						</span>
+					</md-item-template>
+				</md-autocomplete>
+				<label for="pwd">Filter By:</label>
+				<div class="form-group form_up">
+					<!-- <select class="form-control form_format" id="sel1">
+						<option selected>Format</option>
+						<option>Hoarding</option>
+						<option>Unipole</option>
+						<option>Airport</option>
+					</select> -->
+					<select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+					class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+					name="productType">
+					<option value="" disabled selected>Site Type</option>
+				</select>
+				</div>
+		
+				<!-- <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+				md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+				md-min-length="4" placeholder="Search..." md-clear-button="true">
+				<md-item-template>
+					<span class="item-title">
+						<span> {{item.siteNo}} </span>
+					</span>
+					<span class="item-metadata">
+						<span>
+							<strong>{{item.address}}</strong>
+						</span>
+					</span>
+				</md-item-template>
+			</md-autocomplete>
+			<label for="pwd">Filter By:</label>
+			<div class="form-group">
+				<select id="productType" ng-options="format.id as format.name for format in formatList" ng-change="someFunction()"
+					ng-model="product.type" class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader"
+					name="productType">
+					<option value="" disabled selected>Site Type</option>
+				</select>
+			</div> -->
+		
+				<div class="form-group form_cal">
+					<input type="date" class="form-control" placeholder=" Available From">
+				</div>
+				<div class="form-group form_cal">
+					<input type="date" class="form-control" placeholder=" Available To">
+				</div>
+				<div class="form-group form_cal">
+					<select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+						<option selected value="1">Budget High to Low</option>
+						<option value="0">Budget Low to High </option>
+					</select>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="checkbox"> Show Only Available
+					</label>
+				</div>
+				<md-button class="md-raised apply_filter" ng-click="applyFiltersmethod(product)">Apply Filters</md-button>
+			</form>
+		</div>
 	<div class="table-responsive" style="margin-bottom:50px !important">
 		<table class="table">
 			<thead class="text_color">

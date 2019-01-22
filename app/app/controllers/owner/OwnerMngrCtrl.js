@@ -1,4 +1,4 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService, OwnerProductService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService,CampaignService, OwnerProductService, toastr) {
 
   /*=================================
   | mdDilalog close function
@@ -9,7 +9,13 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       $mdDialog.hide();
     }
   }
-
+  $scope.activeUserCampaigns = [];
+  $scope.loadActiveUserCampaigns = function () {
+    CampaignService.getActiveUserCampaigns().then(function (result) {
+      $scope.activeUserCampaigns = result;
+    });
+  }
+  $scope.loadActiveUserCampaigns();
   $scope.closeMenuSidenavIfMobile = function(){
     if($window.innerWidth <=420){
       $mdSidenav('ownerLeftSidenav').close();

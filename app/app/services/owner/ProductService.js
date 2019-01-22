@@ -1,14 +1,18 @@
 app.factory('OwnerProductService', ['$http', '$q', 'config',
 	function ($http, $q, config) {
 		return {
-			getApprovedProductList: function (pageNo, pageSize,format) {
+			getApprovedProductList: function (pageNo, pageSize,format,budget) {
 				var pageData = "";
-				if(pageNo && pageSize){
-					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				if(!format){
+					format = '';
 				}
-				if(format){
-					pageData = pageData + "&format=" + format;
+				if(!budget){
+					budget = '';
 				}
+				if(pageNo || pageSize || format || budget){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize + "&format=" + format +"&budget=" + budget;
+				}
+				 
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/approved-owner-products' + pageData).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;

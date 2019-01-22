@@ -97,7 +97,7 @@ var app = angular.module('bbManager', [
     .state('index.product-list', {
       url: 'product-list',
       templateUrl: 'views/product-list.html',
-      controller: 'GmapCtrl'
+      controller: 'ProductlistCtrl'
     })
     .state('index.shortlisted-products', {
       url: 'shortlisted-products',
@@ -450,7 +450,7 @@ var app = angular.module('bbManager', [
     .state('owner.add-campagin-product', {
       url: '/add-campagin-product',
       templateUrl: 'views/owner/add-campagin-product.html',
-      // controller: 'OwnerCampaignCtrl'
+      controller: 'OwnerCampaignCtrl'
     })
     .state('owner.product-details', {
       url: '/product-details/:productId',
