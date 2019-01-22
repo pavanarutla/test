@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,ProductService, config) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,MetroService ,ProductService, config) {
   $scope.forms = [];
   $scope.serverUrl = config.serverUrl;
 
@@ -209,6 +209,16 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       });
     });
   }
+  var loadMetroCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      MetroService.getMetroCampaigns().then(function (result) {              
+        $scope.metrocampaign = _.filter(result, function (c) {
+          return c.status >= 1101 ;
+        });
+        resolve(result);
+      });
+    });
+  }
   var loadOwnerProductList = function () {
     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (result) {
       if (localStorage.selectedOwnerCampaign) {
@@ -236,8 +246,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
       if (result.status == 1) {
         $scope.ownerCampaign = {};
-        $scope.forms.ownerCampaignForm.$setPristine();
-        $scope.forms.ownerCampaignForm.$setUntouched();
+        // $scope.forms.ownerCampaignForm.$setPristine();
+        // $scope.forms.ownerCampaignForm.$setUntouched();
         loadOwnerCampaigns();
         toastr.success(result.message);
       }
@@ -245,6 +255,29 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $rootScope.closeMdDialog();
         if (result.message.constructor == Array) {
           $scope.ownerCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+  $scope.saveMetroCampaign = function (metroCampagin) {
+    MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
+      if (result.status == 1) {
+        $scope.metroCampagin = {};
+        // $scope.forms.MetroCampaign.$setPristine();
+        // $scope.forms.MetroCampaign.$setUntouched();
+        loadMetroCampaigns();
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.MetroCampaignErrors = result.message;
         }
         else {
           toastr.error(result.message);
@@ -321,6 +354,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
         $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
       }
+    });
+  }
+  function getMetroCampaignDetails() {
+    MetroService.getMetroCampaigns().then((result) => {
+      $scope.metrocampaign = result;
     });
   }
 
@@ -711,4 +749,6 @@ getFormatList();
   =============================*/
 //page width
   $scope.innerWidth = $window.innerWidth;
+  loadMetroCampaigns();
+  getMetroCampaignDetails();
 });

@@ -50,7 +50,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   ===================*/
   $scope.pagination = {};
   $scope.pagination.pageNo = 1;
-  $scope.pagination.pageSize = 15;
+  $scope.pagination.pageSize = 500;
   $scope.pagination.pageCount = 0;
   var pageLinks = 20;
   var lowest = 1;
@@ -429,12 +429,12 @@ $scope.applymethod=function(product){
 
   //updated edited product details
 
-  $scope.updateeditProductdetails = function(product){
-    product.area = $scope.areaObj.id;
-    product.id = $stateParams.id;
+  $scope.updateeditProductdetails = function(editRequestedhordings){
+    editRequestedhordings.area = $scope.areaObj.id;
+    editRequestedhordings.id = $stateParams.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
-      data: { image: $scope.files.image, product: $scope.product }
+      data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }
     }).then(function (result) {
       if(result.data.status == "1"){
         getRequestedProductList();
@@ -458,7 +458,7 @@ $scope.applymethod=function(product){
   =====================*/
 
   $scope.editRequestedhordings = function(id){
-     OwnerProductService.getProductDetails(id).then(function(res){
+     OwnerProductService.getProductDetails(id).then(function(res){       
       $scope.editRequestedhordings = res.product_details
       return res.product_details;
     })
@@ -550,7 +550,7 @@ $scope.applymethod=function(product){
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
     getRequestedProductList();
-    $scope.getApprovedProductList()
+    // $scope.getApprovedProductList()
   }
   
   if($rootScope.currStateName == 'owner.editproduct-details'){

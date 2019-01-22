@@ -48,11 +48,10 @@
         <div class="col-md-12">
             <form name="addProductForm" role="form" novalidate="novalidate">
                     <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
-                    <li>
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <input ng-model="product.siteNo" type="text" name="siteNo" placeholder="Product ID" required="required"
+                                    <input ng-model="editRequestedhordings.siteNo" type="text" name="siteNo" placeholder="Product ID" required="required"
                                      ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" class="form-control md-whiteframe-3dp" />
                                     <div ng-messages="addProductForm.siteNo.$error" ng-if="addProductForm.siteNo.$touched" style="color:red">
                                         <div ng-message="required">Product Id is required.</div>
@@ -60,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+                                    <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="editRequestedhordings.type"
                                      class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
                                      name="productType">
                                         <option value="" disabled selected>Site Type</option>
@@ -111,7 +110,7 @@
                                     </md-autocomplete>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input ng-model="product.address" class="form-control  md-whiteframe-3dp" placeholder="address" type="text"
+                                    <input ng-model="editRequestedhordings.address" class="form-control  md-whiteframe-3dp" placeholder="address" type="text"
                                      name="address" required="required" />
                                     <div ng-messages="addProductForm.address.$error" ng-if="addProductForm.address.$touched" style="color:red">
                                         <div ng-message="required">Address is required.</div>
@@ -125,14 +124,14 @@
                           <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
                             <div ng-message="required">Direction is required.</div>
                           </div> -->
-                                    <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="direction"
+                                    <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="direction"
                                      type="text" name="direction" required="required" />
                                     <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
                                         <div ng-message="required">direction is required.</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
+                                    <select ng-model="editRequestedhordings.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
                                      md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
                                      placeholder="Has lighting?">
                                         <option value="" disabled selected>Has light ?</option>
@@ -144,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input ng-model="product.panelSize" class="form-control md-whiteframe-3dp" required="required" placeholder="Panel Size"
+                                    <input ng-model="editRequestedhordings.panelSize" class="form-control md-whiteframe-3dp" required="required" placeholder="Panel Size"
                                      type="text" name="panelSize" required="required" />
                                     <div ng-messages="addProductForm.panelSize.$error" ng-if="addProductForm.panelSize.$touched" style="color:red">
                                         <div ng-message="required">Panel size required.</div>
@@ -154,14 +153,14 @@
     
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <input ng-model="product.cost" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
+                                    <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
                                      type="text" name="cost" required="required" />
                                     <div ng-messages="addProductForm.cost.$error" ng-if="addProductForm.cost.$touched" style="color:red">
                                         <div ng-message="required">Cost is required.</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input date-range-picker ng-model="product.dates" ng-click="getProductUnavailableDatesEdit($event)" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                    <input date-range-picker ng-model="editRequestedhordings.dates" ng-click="getProductUnavailableDatesEdit($event)" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                      type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                     <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
                                         <div ng-message="required">Date is required.</div>
@@ -171,7 +170,7 @@
     
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <textarea ng-model="product.adStrength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
+                                    <textarea ng-model="editRequestedhordings.adStrength" class="form-control md-whiteframe-3dp" required="required" placeholder="Product strength"
                                      type="strength" name="strength" required="required" rows="3"></textarea>
                                     <div ng-messages="addProductForm.strength.$error" ng-if="addProductForm.strength.$touched" style="color:red">
                                         <div ng-message="required">strength is required.</div>
@@ -194,11 +193,10 @@
                             <div class="form-group row">
                                 <div flex></div>
                                 <div class="col-sm-6">
-                                    <md-button class="md-raised all_button pull-right" ng-click="updateeditProductdetails(product)">Submit</md-button>
+                                    <md-button class="md-raised all_button pull-right" ng-click="updateeditProductdetails(editRequestedhordings)">Submit</md-button>
                                 </div>
                             </div>
                         </div>
-                    </li>
                 </form>
         </div>
     </div>
