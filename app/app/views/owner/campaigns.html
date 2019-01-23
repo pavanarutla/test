@@ -503,7 +503,7 @@
             </thead>
             <tbody class="text-center">
               <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==700">
-                <td class="table_vertical">BB-01</td>
+                <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
               <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
