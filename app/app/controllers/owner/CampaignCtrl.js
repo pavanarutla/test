@@ -244,12 +244,14 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   // get all Campaigns by a user to show it in campaign management page ends  
   $scope.saveOwnerCampaign = function () {
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
-      if (result.status == 1) {
-        $scope.ownerCampaign = {};
+      if (result.status == 1) {              
         // $scope.forms.ownerCampaignForm.$setPristine();
         // $scope.forms.ownerCampaignForm.$setUntouched();
         loadOwnerCampaigns();
+        $scope.ownerCampaign = {};
         toastr.success(result.message);
+        $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
+
       }
       else if (result.status == 0) {
         $rootScope.closeMdDialog();
@@ -263,7 +265,14 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       else {
         toastr.error(result.message);
       }
+      myFunction();    
     });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function myFunctions() {
+    document.getElementById("myDropdownView").classList.toggle("show");
   }
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
@@ -272,6 +281,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         // $scope.forms.MetroCampaign.$setPristine();
         // $scope.forms.MetroCampaign.$setUntouched();
         loadMetroCampaigns();
+        $window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/'+result.metro_camp_id;
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -286,6 +296,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       else {
         toastr.error(result.message);
       }
+      myFunction();
     });
   }
 
@@ -360,7 +371,14 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     MetroService.getMetroCampaigns().then((result) => {
       $scope.metrocampaign = result;
     });
+  }  
+  function getMetroCampDetails(metroCampaignId) {
+    console.log(metroCampaignId);
+    MetroService.getMetroCampDetails(metroCampaignId).then((result) =>{
+      $scope.metroCampaginDetails = result;
+    });
   }
+  
 
   $scope.viewProductImage = function (image) {
     var imagePath = config.serverUrl + image;
@@ -751,4 +769,5 @@ getFormatList();
   $scope.innerWidth = $window.innerWidth;
   loadMetroCampaigns();
   getMetroCampaignDetails();
+  getMetroCampDetails($stateParams.metroCampaignId);
 });
