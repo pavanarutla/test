@@ -106,6 +106,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
   $scope.loadCampaignData = function(campaignId){
     return new Promise(function(resolve, reject){
       CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+        console.log(result);
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);
@@ -293,6 +294,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       var budget_check = confirm("Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?");
       if(budget_check){
         AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
+          console.log(result);
           if(result.status == 1){
             $scope.campaignDetails.status = 3;
             toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
