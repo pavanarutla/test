@@ -22,6 +22,11 @@ app.controller('GmapCtrl',
           }
         }
       };
+        $scope.format = 'yyyy/MM/dd';
+        $scope.date = new Date();
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $scope.altInputFormats = ['M!/d!/yyyy'];
 
       /*================================
       | Multi date range picker options
@@ -840,7 +845,15 @@ app.controller('GmapCtrl',
           $scope.loadActiveUserCampaigns();
           getShortListedProducts();
         });
-      }
+      };
+     // Added this fn to clear the selected Results
+     $scope.clearFields=function(){
+         $scope.searchId='';
+         $scope.searchText='';
+         window.location.reload(true);
+         //$route.reload();
+
+     }
 
       $scope.selectFromTabIdSearch = function (marker) {
         if (marker.id) {
@@ -866,7 +879,7 @@ app.controller('GmapCtrl',
           $scope.selectedProduct = refToMapMarker;
         }else{
           toastr.error('No product found with that tab id', 'error');
-        }  
+        }
       }
 
       $scope.activeUserCampaigns = [];

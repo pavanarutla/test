@@ -1,5 +1,6 @@
 app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDialog,ProductService,CampaignService,$rootScope,toastr) {
         MapService.mapProducts().then(function (markers) {
+           $scope.actualDataCopy=markers;
           $scope.productmarkerslist = markers;
         })
         ProductService.getFormatList().then(function (formats) {
@@ -21,6 +22,16 @@ app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDial
               $scope.formatGrid.push(tempArr);
             }
           });
+         $scope.FormatData=function (selectedZone) {
+             $scope.productmarkerslist=$scope.actualDataCopy.filter(function (item) {
+                 return item.product_details[0].format_name===selectedZone;
+             });
+         };
+         $scope.resetData=function(){
+             $scope.productmarkerslist=$scope.actualDataCopy;
+             $scope.siteNo='';
+             $scope.area_name='';
+         };
           $scope.getproddata = function (proddetails) {            
             $scope.productListDetails = proddetails;    
             console.log(proddetails);        
