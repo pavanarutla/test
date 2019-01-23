@@ -578,7 +578,28 @@ $scope.productSearch = function(query) {
 
 $scope.applymethod=function(product){
   console.log(product);
-     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+  var data = {};
+          var pageNo = $scope.pagination.pageNo;
+          var pageSize= $scope.pagination.pageSize;
+          var format = product.type;
+          var budget = product.budgetprice;
+          var start_date = product.start_date;
+          var end_date = product.end_date;
+				if(!format){
+					format = '';
+				}
+				if(!budget){
+					budget = '';
+				}
+				if(pageNo || pageSize || format || budget || start_date || end_date){
+           data.page_no =pageNo;
+           data.page_size =pageSize;
+           data.format =format;
+           data.budget =budget;
+           data.start_date =start_date;
+           data.end_date =end_date;
+				}
+     OwnerProductService.getApprovedProductList(data).then(function(result){
     $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
