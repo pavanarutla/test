@@ -81,7 +81,7 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
-					<th>
+					<th style="text-align:center;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
@@ -90,8 +90,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="campaignProduct in campaignDetails.products">
-					<td>
-						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" height="100" width="100">
+					<td class="image_tdwidth">
+						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}} ({{campaignProduct.panelSize}})</b><br>{{campaignProduct.address}}
@@ -109,7 +109,7 @@
 					</td>
 					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>
 					<td class="table_vertical">
-						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_foreve</i></a>
+						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
 					<td class="text-center table_vertical">
 						<p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>

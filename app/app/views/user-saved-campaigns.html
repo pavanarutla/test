@@ -2,7 +2,7 @@
     <div layout="row" class="" layout-padding>
         <div class="md-title text_color">Saved Campaigns </div>
         <div flex></div>
-        <div class="form-group saved_search">
+        <div class="form-group saved_camp">
             <input type="search" class="form-control md-whiteframe-3dp" ng-model="Campaigns"  placeholder="search campagin">
         </div>
         <div class="dropdown">
@@ -198,7 +198,7 @@
             </div>
         </div>
     </div>
-    <div style="margin-top: 2em;">
+    <div>
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>
@@ -216,13 +216,13 @@
                 <tbody class="text-center contbg">
 
                     <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
-                        <td>{{activeUserCampaign.cid || "N/A"}}</td>
-                        <td>{{activeUserCampaign.name}}</td>
-                        <td>{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
-                        <td>{{activeUserCampaign.no_products || "0"}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.name}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.no_products || "0"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td>{{activeUserCampaign.est_budget || 'N/A'}}</td>
-                        <td>
+                        <td class="table_vertical">{{activeUserCampaign.est_budget || 'N/A'}}</td>
+                        <td class="table_vertical">
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -256,7 +256,7 @@
                                 </md-menu-content>
                             </md-menu>
                         </td>
-                        <td>
+                        <td class="table_vertical">
                             <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateify | date:'dd-MM-yyyy'}}</span>
                         </td>
                     </tr>

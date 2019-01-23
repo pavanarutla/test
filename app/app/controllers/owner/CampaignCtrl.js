@@ -174,14 +174,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {      
         $scope.userCampaignPayments = result;
         $scope.plannedCampaigns = _.filter(result, function (c) {
-          return c.status < 800 ;
+        //  return c.status < 800 ;
+          return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
         });
         $scope.scheduledCampaigns = _.filter(result, function (c) {
           return c.status == 800 ;
         });
-        $scope.runningCampaigns = _.where(result, { status: 600 });
+//        $scope.runningCampaigns = _.where(result, {
+//            status: 600
+//        });
+  $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
+    //    return c.status == 1141 && typeof c.name !== "undefined";
+      return c.status == 700;
+      });
         $scope.closedCampaigns = _.filter(result, function (c) {
-          return c.status > 800;
+          //return c.status > 800;
+             return c.status == 1000 || c.status == 900;
         });
         resolve(result);
       });

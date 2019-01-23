@@ -352,13 +352,13 @@
               </tr>
             </thead>
             <tbody class="camp-text">
-              <tr ng-repeat="campaign in ownerCampaigns">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.created_at | date}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.product_count || "N/A"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "N/A"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "N/A"}}</td>
+                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
                 <td class="table_vertical ">
                   <md-menu md-position-mode="target-right target" id="width_popup">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -426,13 +426,13 @@
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr ng-repeat="campaign in scheduledCampaigns">
+              <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status==800">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.created_at | date}}</td>
-                <td class="table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.npaid || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.Total_budget || "N/A"}}</td>
+                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
                 <td class="table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -501,13 +501,13 @@
               </tr>
             </thead>
             <tbody class="text-center">
-              <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==1141">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==700">
                 <td class="table_vertical">BB-01</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.start_date | date}}</td>
-                <td class="table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.npaid || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.Total_budget || "N/A"}}</td>
+                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+              <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
                 <td class="table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -574,14 +574,14 @@
                 <th class="hide-xs"></th>
               </tr>
             </thead>
-            <tbody class="text-center" ng-repeat="campaign in ownerCampaigns" >
+            <tbody class="text-center" ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==900 || campaign.status==1000" >
               <tr>
                 <td class="table_vertical">{{campaign.cid || "N/A"}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.start_date | date}}</td>
-                <td class="table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.npaid || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{campaign.Total_budget || "N/A"}}</td>
+                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+              <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
                 <td class="table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -652,7 +652,7 @@
               <tr ng-repeat="MCampaign in metrocampaign">
                 <td class="table_vertical">{{MCampaign.cid}}</td>
                 <td class="text-left table_vertical">{{MCampaign.name}}</td>
-                <td class="table_vertical">{{MCampaign.created_at |dateify | date: "dd-MMM-yyyy" || "N/A" }}</td>
+                <td class="table_vertical">{{MCampaign.created_at | dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                 <td class="table_vertical hide-xs">{{MCampaign.no_products || "N/A" }}</td>
                 <td class="table_vertical hide-xs">{{MCampaign.total_paid || "N/A" }}</td>
                 <td class="table_vertical hide-xs">{{MCampaign.act_budget || "N/A" }}</td>
