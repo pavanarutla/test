@@ -113,7 +113,28 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 // };
 $scope.applymethod=function(product){
   console.log(product);
-     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+  var data = {};
+          var pageNo = $scope.pagination.pageNo;
+          var pageSize= $scope.pagination.pageSize;
+          var format = product.type;
+          var budget = product.budgetprice;
+          var start_date = product.start_date;
+          var end_date = product.end_date;
+				if(!format){
+					format = '';
+				}
+				if(!budget){
+					budget = '';
+				}
+				if(pageNo || pageSize || format || budget || start_date || end_date){
+           data.page_no =pageNo;
+           data.page_size =pageSize;
+           data.format =format;
+           data.budget =budget;
+           data.start_date =start_date;
+           data.end_date =end_date;
+				}
+     OwnerProductService.getApprovedProductList(data).then(function(result){
     $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
@@ -475,8 +496,15 @@ $scope.applymethod=function(product){
     $scope.pagination.pageCount = 1;
     $scope.productList = [product];
   }
+  $scope.viewSearchText = function(text) {
+    
+    if(text==''){
+      console.log("text");
+      $scope.getApprovedProductList();
+    }
+  }
  $scope.productSearch = function(query) {
-    return ProductService.searchProducts(query.toLowerCase()).then(function(res){
+    return OwnerProductService.searchOwnerProducts(query.toLowerCase()).then(function(res){
       $scope.productList = res;
       $scope.pagination.pageCount = 1;
       return res;
@@ -559,7 +587,21 @@ $scope.applymethod=function(product){
     $scope.editRequestedhordings($stateParams.id)
     console.log("request hoarding")
   }
+  
+  $scope.changeProductPrice = function(data){
+    product = {};
+    product.id = data.id;
+    product.default_price = data.default_price;
+    OwnerProductService.changeProductPrice(product).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
 
+  }
   /*=============================
   | Page based initial loads end
   =============================*/
