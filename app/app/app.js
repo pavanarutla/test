@@ -569,14 +569,14 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
   slickCarouselConfig.autoplay = false;
 }]);
 
-app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+/*app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
   datepickerConfig.startingDay = "Today";
   datepickerConfig.showWeeks = false;
   datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
   // datepickerPopupConfig.currentText = "Now";
   // datepickerPopupConfig.clearText = "Erase";
   // datepickerPopupConfig.closeText = "Close";
-}]);
+}]);*/
 
 /*========================
   Toastr Config
