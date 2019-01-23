@@ -86,17 +86,17 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
 // $scope.getProductByFormat = function(format){
 //   $scope.format = format;
-  //console.log(format);
-  //  OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
-  //   $scope.productList = result.products;
-  //     $scope.pagination.pageCount = result.page_count;
-  //     if($window.innerWidth >= 420){
-  //       createPageLinks();
-  //     }
-  //     else{
-  //       $scope.getRange(0, result.page_count);
-  //     }
-  //  });
+//console.log(format);
+//  OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
+//   $scope.productList = result.products;
+//     $scope.pagination.pageCount = result.page_count;
+//     if($window.innerWidth >= 420){
+//       createPageLinks();
+//     }
+//     else{
+//       $scope.getRange(0, result.page_count);
+//     }
+//  });
 // };
 // $scope.getBudget = function(price){
   // $scope.price = price;
