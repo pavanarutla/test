@@ -379,10 +379,11 @@
 					</td>
 					<td>
 						<p class="td_font"><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}} {{campaignProduct.panelSize}}</b><br>Address:
-							From Kothaguda X Roads
-							towards Hitech city
-							<br>Views : 1, 54000 Per week,
-							Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button></p>
+							{{campaignProduct.address}}
+							<br>Views : {{"N/A"}}
+							Per week<br>
+							<!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
+						</p>
 					</td>
 					<!-- <td class="table_vertical">60*60</td> -->
 					<td class="table_vertical hide-xs">
@@ -392,14 +393,21 @@
 						<p>{{campaignProduct.booked_to | date }}</p>
 					</td>
 					<td class="table_vertical hide-xs">
-						<div class="input-group">
-							<input ng-model="suggestedProduct.price" type="text" only-numeric="" name="price" required="required" ng-pattern="/[0-9]+/"
+						<!-- <div class="input-group">
+							<input ng-model="suggestedProduct.default_price" type="text" only-numeric="" name="price" required="required" ng-pattern="/[0-9]+/"
 							 ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = ownerProduct.default_price" style="width: 70px;padding: 4px 5px;"
 							 class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required ng-valid-pattern" disabled="disabled"
 							 aria-invalid="false">
 							<span ng-click="enabledPrice = true;" ng-show="!enabledPrice" role="button" tabindex="0" aria-hidden="false"
 							 class=""><i class="material-icons">edit</i></span>
-						</div>
+						</div> -->
+						<span>							
+							<a style="cursor:pointer;" ng-click="editProposedProduct(campaignProduct.id,campaignProduct.price)" class="ng-scope">
+								<md-icon class="material-icons" role="img" aria-label="mode_edit">
+									<i class="material-icons">mode_edit</i>
+								</md-icon>
+							</a>
+						</span>
 					</td>
 					<td class="table_vertical hide-xs">
 						1,48,000
@@ -436,7 +444,35 @@
 				<div class="md-title">Grand Total :</div>
 				<div class="md-title">{{"N/A"}}</div>
 			</div>
-			<md-button class="md-raised md-primary">SEND QUOTE</md-button>
+			<!-- <md-button class="md-raised md-primary" ng-click="finalizeCampaign(campaignProduct)">SEND QUOTE</md-button> -->
+			<!-- <md-button class="md-raised md-warn" ng-click="finalizeCampaign()">
+				   Send Quote
+			   </md-button> -->
+			   <md-button class="md-raised md-warn"
+				ng-click="finalizeCampaign()" ng-if="campaignProducts.type == 0">
+				Send Quote
+				   <span>
+					   <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+				   </span>
+			   </md-button>
+			   <md-button class="md-raised md-primary"ng-if="campaignProducts.status = 700"	ng-click="confirmCampaignBooking(campaign.id, $event)">
+				   Confirm Booking
+				   <span>
+					   <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+				   </span>
+			   </md-button>
+			   <md-button class="md-raised md-primary" ng-if="campaignProducts.status = 800">	Launched
+				   <span>
+					   <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+				   </span>
+			   </md-button>
+			   <!-- <md-button class="md-raised" ng-disabled="!campaignProducts || (campaignProducts.status != 700 && campaignProducts.status != 700)"
+				ng-click="closeCampaign(campaignProducts.id, $event)">
+				   Close Campaign
+				   <span>
+					   <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+				   </span>
+			   </md-button> -->
 		</div>
 	</div>
 </div>
