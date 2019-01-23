@@ -424,7 +424,7 @@ var app = angular.module('bbManager', [
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.metro-campaign-details', {
-      url: '/metro-campaign-details',
+      url: '/metro-campaign-details/{metroCampaignId}',
       templateUrl: 'views/owner/metro-campaign-details.html',
       controller:  'OwnerCampaignCtrl'
     })

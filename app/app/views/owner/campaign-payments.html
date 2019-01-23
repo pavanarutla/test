@@ -287,10 +287,10 @@
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
   <div layout="colmun" layout-align="end center" class="campaign_search">
-    <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
+    <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md" style="margin-right: 5px;">
       <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
         md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-        md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+        md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%;" md-clear-button="true">
         <md-item-template>
           <span class="item-title">
             <span> {{campaign.name}} </span>
@@ -333,11 +333,11 @@
 							<tbody class="text-center">
 								<tr ng-repeat="campaign in ownerCampaigns">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget}}</td>
-								<td>
+								<td class="table_vertical">{{campaign.name}}</td>
+								<td class="table_vertical">{{campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget}}</td>
+								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
 										<i class="material-icons">remove_red_eye</i>
@@ -371,11 +371,11 @@
 							<tbody class="text-center">
 								<tr ng-repeat="campaign in userCampaignPayments">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget}}</td>
-								<td>
+								<td class="table_vertical">{{campaign.name}}</td>
+								<td class="table_vertical">{{campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget}}</td>
+								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
 										<i class="material-icons">remove_red_eye</i>

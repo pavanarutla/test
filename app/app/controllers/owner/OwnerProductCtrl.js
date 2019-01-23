@@ -211,6 +211,7 @@ $scope.applymethod=function(product){
 
   var getCountryList = function(){
     OwnerLocationService.getCountries().then(function(result){
+      console.log(result);
       $scope.countryList = result;
     });
   }
@@ -257,6 +258,7 @@ $scope.applymethod=function(product){
   }
  
   $scope.getStateList = function(product){
+    console.log(product);
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
     });

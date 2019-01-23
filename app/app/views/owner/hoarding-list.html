@@ -437,10 +437,13 @@
         <td class="table_vertical hide-xs">
           <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
         </td>
-        <td class="table_vertical hide-xs">
+        <td class="table_vertical">
           <div class="input-group">
-            <input type="text" class="" ng-model="product.default_price" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
-            <span href="#"> <i class="material-icons">edit</i></span>
+            <input ng-model="suggestedProduct.default_price" type="text" only-numeric name="price" required="required"
+              ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.default_price = product.default_price"
+              style="width: 70px;padding: 4px 5px;" />
+            <!-- <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" /> -->
+            <span ng-click="enabledPrice = true;" ng-show="!enabledPrice"><i class="material-icons">edit</i></span>
           </div>
         </td>
         <td class="table_vertical hide-xs">
@@ -457,7 +460,7 @@
           </div>
         </td>
         <td class="table_vertical hide-xs">
-          <md-button class="md-raised inv_details">Edit Details</md-button>
+          <md-button class="md-raised inv_details" ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
         </td>
 
       </tr>
