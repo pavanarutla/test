@@ -1,4 +1,4 @@
-<section class="product_list_view m-2">   
+<section class="product_list_view m-2" style="overflow: auto !important;">   
     <div class="wrapper">
         <div class="product_heading pl-0 pr-0">
             <div id="myProduct" class="map_filters mt-2">
@@ -43,10 +43,10 @@
                       </md-item-template>                    
                     </md-autocomplete> 
                   </div> -->
-                  <div class="form-group saved_search">
+                  <div class="form-group saved_search_user">
                     <input type="search" class="form-control md-whiteframe-3dp" ng-model="siteNo"  placeholder="Search By Tab id">
                 </div>
-                <div class="form-group saved_search">
+                <div class="form-group saved_search_user">
                     <input type="search" class="form-control md-whiteframe-3dp" ng-model="area_name"  placeholder="Search By Area,Location">
                 </div>
                   <!-- <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
@@ -215,27 +215,27 @@
 					<th>Image</th>
 					<th>Tab ID</th>
 					<th class="hide-xs">Product Details</th>
-					<th class="">Views</th>
+					<th class="" style="width: 6%;">Views</th>
 					<th class="hide-xs">Product Type</th>
 					<th class="hide-xs">Size</th>
 					<th class="text-center hide-xs">Lit</th>
-					<th class="hide-xs">Address</th>
+					<th class="hide-xs" style="width: 10%;">Address</th>
 					<th class="hide-xs"></th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="proddetail in productmarkerslist">
 				<tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
 					<td class="image_tdwidthproduct">
-                            <img src="{{proddetails.image}}" alt=" product image" width="77px" height="48px"/>
+                            <img src="{{config.serverUrl + proddetails.image}}" alt=" product image" width="77px" height="48px"/>
 					</td>
 					<td class="table_vertical">{{proddetails.siteNo}}
 					</td>
 					<td class="table_vertical hide-xs">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
-					<td class="table_vertical">{{proddetails.adStrength}}</td>
+					<td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td>
 					<td class="table_vertical hide-xs">{{proddetails.format_name}}</td>
 					<td class="table_vertical hide-xs">{{proddetails.panelSize}}</td>
                     <td class="table_vertical hide-xs">{{proddetails.lighting}}</td>
-                    <td class="table_vertical hide-xs">{{proddetails.direction}}</td>
+                    <td class="table_vertical hide-xs" style="width: 10%;">{{proddetails.direction}}</td>
 					<td class="text-center table_vertical hide-xs">
 						<a ng-click="getproddata(proddetails)"><button type="button"
 							 class="btn product_btnview">View Details</button></a>
