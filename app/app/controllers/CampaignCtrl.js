@@ -330,6 +330,67 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       $scope.metroCampaigns = result;
     });
   }
+  $scope.saveUserCampaign = function (ownerCampaign) {
+    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {
+      if (result.status == 1) {
+        $scope.ownerCampaign = {};
+        $scope.forms.ownerCampaignForm.$setPristine();
+        $scope.forms.ownerCampaignForm.$setUntouched();
+        loadOwnerCampaigns();
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.ownerCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+  $scope.saveMetroCampaign = function (metroCampagin) {
+    MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
+      if (result.status == 1) {
+        $scope.metroCampagin = {};
+        // $scope.forms.MetroCampaign.$setPristine();
+        // $scope.forms.MetroCampaign.$setUntouched();
+        loadMetroCampaigns();
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.MetroCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+    });
+  }
+  var loadMetroCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      MetroService.getMetroCampaigns().then(function (result) {              
+        $scope.metrocampaign = _.filter(result, function (c) {
+          return c.status >= 1101 ;
+        });
+        resolve(result);
+      });
+    });
+  }
+  function getMetroCampaignDetails() {
+    MetroService.getMetroCampaigns().then((result) => {
+      $scope.metrocampaign = result;
+    });
+  }
 
   /*=========================
   | Page based initial loads
@@ -363,4 +424,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   /*=============================
   | Page based initial loads end
   =============================*/
+  loadMetroCampaigns();
+  getMetroCampaignDetails();
 });
