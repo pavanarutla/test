@@ -4,7 +4,7 @@
   </md-button>
 <div class="">
   <div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
-      <p class="mt-4">Total Products<span class="text_color">: 2845</span></p>
+      <p class="mt-4">Total Products<span class="text_color">: {{productList.length}}</span></p>
     <div flex></div>
     <div class="dropdown hide-xs">
       <md-button class="md-raised all_button" onclick="addnewProduct()">Add New Product</md-button>
@@ -112,7 +112,7 @@
 
               <div class="form-group row">
                 <div class="col-sm-6">
-                  <input ng-model="product.cost" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
+                  <input ng-model="product.default_price" class="form-control md-whiteframe-3dp" required="required" placeholder="Product Cost"
                     type="text" name="cost" required="required" />
                   <div ng-messages="hordinglistform.cost.$error" ng-if="hordinglistform.cost.$touched" style="color:red">
                     <div ng-message="required">Cost is required.</div>
@@ -327,17 +327,17 @@
 <div class="">
   <form class="form-inline camp_filters d-flex justify-content-between" action="">
     <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id=""> -->
-    <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
+    <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-search-text-change="viewSearchText(searchText)"  md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="3" placeholder="Search..."  md-clear-button="true">
       <md-item-template>
         <span class="item-title">
-          <span> {{product.siteNo}} </span>
+          <span> {{item.siteNo}} </span>
         </span>
         <span class="item-metadata">
           <span>
-            <strong>{{product.company_name}}</strong>
+            <strong>{{item.company_name}}</strong>
           </span>
           <span>
-            <strong>{{product.address}}</strong>
+            <strong>{{item.address}}</strong>
           </span>
         </span>
       </md-item-template>
@@ -381,10 +381,10 @@
   </div> -->
 
     <div class="form-group form_cal">
-      <input type="date" class="form-control" placeholder=" Available From">
+      <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill></md-datepicker>
     </div>
     <div class="form-group form_cal">
-      <input type="date" class="form-control" placeholder=" Available To">
+      <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill></md-datepicker>
     </div>
     <div class="form-group form_cal">
       <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
@@ -439,8 +439,10 @@
         </td>
         <td class="table_vertical hide-xs">
           <div class="input-group">
-            <input type="text" class="" ng-model="product.default_price" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
-            <span href="#"> <i class="material-icons">edit</i></span>
+            {{(!myfield)?product.default_price:''}}
+            <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+            <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+            <span ng-click="myfield=false;changeProductPrice(product)"  ng-show="myfield"> <i class="material-icons">check</i></span>
           </div>
         </td>
         <td class="table_vertical hide-xs">
