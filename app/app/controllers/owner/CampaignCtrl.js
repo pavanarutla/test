@@ -617,6 +617,14 @@ var getFormatList = function(){
 }
 getFormatList();
 // Filter-code ends
+function getActiveUserCampaigns() {
+  CampaignService.getActiveUserCampaigns().then(function (result) {
+      $scope.ownerSaved = result;  
+      $scope.ownerSavedCampaigns = _.filter(result, function(c){
+        return c.status == 100 || c.status == 200; 
+       });
+    });
+  }
 
   /* ==============================
   | Campaign payment section
@@ -790,5 +798,6 @@ getFormatList();
   $scope.innerWidth = $window.innerWidth;
   loadMetroCampaigns();
   getMetroCampaignDetails();
+  getActiveUserCampaigns();
   getMetroCampDetails($stateParams.metroCampaignId);
 });
