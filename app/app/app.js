@@ -57,6 +57,7 @@ var app = angular.module('bbManager', [
     .state('index.user-saved-campaigns', {
       url: 'user-saved-campaigns',
       templateUrl: 'views/user-saved-campaigns.html',
+      controller:'CampaignCtrl'
     })
     $stateProvider.state('index.suggest', {
       url: 'suggest',
@@ -423,7 +424,7 @@ var app = angular.module('bbManager', [
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.metro-campaign-details', {
-      url: '/metro-campaign-details',
+      url: '/metro-campaign-details/{metroCampaignId}',
       templateUrl: 'views/owner/metro-campaign-details.html',
       controller:  'OwnerCampaignCtrl'
     })
@@ -568,14 +569,14 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
   slickCarouselConfig.autoplay = false;
 }]);
 
-app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+/*app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
   datepickerConfig.startingDay = "Today";
   datepickerConfig.showWeeks = false;
   datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
   // datepickerPopupConfig.currentText = "Now";
   // datepickerPopupConfig.clearText = "Erase";
   // datepickerPopupConfig.closeText = "Close";
-}]);
+}]);*/
 
 /*========================
   Toastr Config

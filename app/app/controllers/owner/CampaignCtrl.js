@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,ProductService, config) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService,MetroService ,ProductService, config) {
   $scope.forms = [];
   $scope.serverUrl = config.serverUrl;
 
@@ -174,14 +174,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       OwnerCampaignService.getUserCampaignsForOwner().then(function (result) {      
         $scope.userCampaignPayments = result;
         $scope.plannedCampaigns = _.filter(result, function (c) {
-          return c.status < 800 ;
+        //  return c.status < 800 ;
+          return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
         });
         $scope.scheduledCampaigns = _.filter(result, function (c) {
           return c.status == 800 ;
         });
-        $scope.runningCampaigns = _.where(result, { status: 600 });
+//        $scope.runningCampaigns = _.where(result, {
+//            status: 600
+//        });
+  $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
+    //    return c.status == 1141 && typeof c.name !== "undefined";
+      return c.status == 700;
+      });
         $scope.closedCampaigns = _.filter(result, function (c) {
-          return c.status > 800;
+          //return c.status > 800;
+             return c.status == 1000 || c.status == 900;
         });
         resolve(result);
       });
@@ -195,7 +203,17 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
           return c.status < 800 ;
         });
         $scope.scheduledCampaigns = _.filter(result, function (c) {
-          return c.status == 800 ;
+          return c.status >= 800 ;
+        });
+        resolve(result);
+      });
+    });
+  }
+  var loadMetroCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      MetroService.getMetroCampaigns().then(function (result) {              
+        $scope.metrocampaign = _.filter(result, function (c) {
+          return c.status >= 1101 ;
         });
         resolve(result);
       });
@@ -226,12 +244,16 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   // get all Campaigns by a user to show it in campaign management page ends  
   $scope.saveOwnerCampaign = function () {
     OwnerCampaignService.saveOwnerCampaign($scope.ownerCampaign).then(function (result) {
-      if (result.status == 1) {
-        $scope.ownerCampaign = {};
-        $scope.forms.ownerCampaignForm.$setPristine();
-        $scope.forms.ownerCampaignForm.$setUntouched();
+      if (result.status == 1) {              
+        // $scope.forms.ownerCampaignForm.$setPristine();
+        // $scope.forms.ownerCampaignForm.$setUntouched();
         loadOwnerCampaigns();
+        $scope.ownerCampaign = {};
         toastr.success(result.message);
+        //$scope.getUserCampaignDetails(result.camp_id);
+                //console.log($scope.campaignDetails);
+       $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
+
       }
       else if (result.status == 0) {
         $rootScope.closeMdDialog();
@@ -245,6 +267,38 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       else {
         toastr.error(result.message);
       }
+      myFunction();    
+    });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function myFunctions() {
+    document.getElementById("myDropdownView").classList.toggle("show");
+  }
+  $scope.saveMetroCampaign = function (metroCampagin) {
+    MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
+      if (result.status == 1) {
+        $scope.metroCampagin = {};
+        // $scope.forms.MetroCampaign.$setPristine();
+        // $scope.forms.MetroCampaign.$setUntouched();
+        loadMetroCampaigns();
+        $window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/'+result.metro_camp_id;
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.MetroCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+      myFunction();
     });
   }
 
@@ -315,6 +369,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       }
     });
   }
+  function getMetroCampaignDetails() {
+    MetroService.getMetroCampaigns().then((result) => {
+      $scope.metrocampaign = result;
+    });
+  }  
+  function getMetroCampDetails(metroCampaignId) {
+    console.log(metroCampaignId);
+    MetroService.getMetroCampDetails(metroCampaignId).then((result) =>{
+      $scope.metroCampaginDetails = result;
+    });
+  }
+  
 
   $scope.viewProductImage = function (image) {
     var imagePath = config.serverUrl + image;
@@ -514,7 +580,28 @@ $scope.productSearch = function(query) {
 
 $scope.applymethod=function(product){
   console.log(product);
-     OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,product.type,product.budgetprice).then(function(result){
+  var data = {};
+          var pageNo = $scope.pagination.pageNo;
+          var pageSize= $scope.pagination.pageSize;
+          var format = product.type;
+          var budget = product.budgetprice;
+          var start_date = product.start_date;
+          var end_date = product.end_date;
+				if(!format){
+					format = '';
+				}
+				if(!budget){
+					budget = '';
+				}
+				if(pageNo || pageSize || format || budget || start_date || end_date){
+           data.page_no =pageNo;
+           data.page_size =pageSize;
+           data.format =format;
+           data.budget =budget;
+           data.start_date =start_date;
+           data.end_date =end_date;
+				}
+     OwnerProductService.getApprovedProductList(data).then(function(result){
     $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
@@ -532,6 +619,14 @@ var getFormatList = function(){
 }
 getFormatList();
 // Filter-code ends
+function getActiveUserCampaigns() {
+  CampaignService.getActiveUserCampaigns().then(function (result) {
+      $scope.ownerSaved = result;  
+      $scope.ownerSavedCampaigns = _.filter(result, function(c){
+        return c.status == 100 || c.status == 200; 
+       });
+    });
+  }
 
   /* ==============================
   | Campaign payment section
@@ -703,4 +798,8 @@ getFormatList();
   =============================*/
 //page width
   $scope.innerWidth = $window.innerWidth;
+  loadMetroCampaigns();
+  getMetroCampaignDetails();
+  getActiveUserCampaigns();
+  getMetroCampDetails($stateParams.metroCampaignId);
 });

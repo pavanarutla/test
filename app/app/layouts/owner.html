@@ -79,105 +79,110 @@
 	<!--toolbar end -->
 	<!-- sidenav start -->
 	<div layout="row" flex style="position:relative;">
-		<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav" md-is-locked-open="$mdMedia('gt-sm')"
-			style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
-				<!-- <md-toolbar  style="min-height: 65px !important;">
+		<md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav"
+		 md-is-locked-open="$mdMedia('gt-sm')" style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
+			<!-- <md-toolbar  style="min-height: 65px !important;">
 								<img class="png-icon" src="assets/images/billboards.png">
 						</md-toolbar>  -->
-				<header style="min-height:55px !important" class="contbg">
-					<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
-						<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
-					</md-button>
-				</header>
-				<!-- <md-divider></md-divider> -->
-				<md-content class="sidenav-content" style="background: #44596D !important">
-					<div>
-						<div style="width: 100% !important;">
-							<md-list class="owners-menu">
-						
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}" ng-click="closeMenuSidenavIfMobile()">
-										To-Do List
-									</md-button>
-								</md-menu-item>
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
-										Campaigns
-									</md-button>
-								</md-menu-item> -->
-								<!-- campagin start -->
-								<md-menu-item flex layout="column">
-									<md-button aria-expanded="flase"  ng-click="toogelCampagin()" class="md-button-toggle">
-									<div layout="row">
-										<span style="color:#fff">Campaigns</span>
-										<span flex></span>
-										<span>
-										<md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showCampagin"></md-icon>
-										<md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showCampagin"></md-icon>
-										</span>
-									</div>
-									</md-button>
-								</md-menu-item>
-								<md-menu-item flex layout="column" ng-show="showCampagin">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
-										<div layout="row">
-										<span flex="15"></span>
-										</span>My Campaigns</div>
-									</md-button>
-								</md-menu-item>
-								<md-menu-item flex layout="column" ng-show="showCampagin">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/bbi-campaigns" ng-class="{'active-link': currStateName == 'owner.bbi-campaigns'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
-										<div layout="row">
-										<span flex="15"></span>
-										BBI Campaigns
-										</div>
-									</md-button>
-								</md-menu-item>
-								
-									<!--campagin end-->
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
-									ng-click="changeRequest(); closeMenuSidenavIfMobile()">
-										Request Inventory
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
-									ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
-										Inventory List
-									</md-button>
-								</md-menu-item>
-								
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}" ng-click="closeMenuSidenavIfMobile()">
-										Payments
-									</md-button>
-								</md-menu-item>
-								<md-menu-item class="nv-nav-item">
-									<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/bbisupport" ng-class="{'active-link': currStateName == 'owner.bbisupport'}" ng-click="closeMenuSidenavIfMobile()">
-										BBI Support
-									</md-button>
-								</md-menu-item>
-								<!-- <md-menu-item class="nv-nav-item">
-										<md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/loginpage" ng-class="{'active-link': currStateName == 'owner.loginpage'}" ng-click="closeMenuSidenavIfMobile()">
-											Login Pages
-										</md-button>
-									</md-menu-item> -->
-								<!-- <md-menu-item class="nv-nav-item">
-									<md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
-										<md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
-										Team
-									</md-button>
-								</md-menu-item> -->
-							
-							</md-list>
-						</div>
-					</div>
-				</md-content>
-		</md-sidenav>		
-		<ui-view  class="main_view" flex></ui-view>
-		<div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
-			<div style="padding: 5px 0;">Powered By Billboards India</div>
-		</div>
-	</div>
+			<header style="min-height:55px !important" class="contbg">
+				<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
+					<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+				</md-button>
+			</header>
+			<!-- <md-divider></md-divider> -->
+			<md-content class="sidenav-content" style="background: #44596D !important">
+				<div>
+					<div style="width: 100% !important;">
+						<md-list class="owners-menu">
+
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/feeds" ng-class="{'active-link': currStateName == 'owner.feeds'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    To-Do List
+                                </md-button>
+                            </md-menu-item>
+                            <!-- <md-menu-item class="nv-nav-item">
+                                            <md-button ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
+                                                    Campaigns
+                                            </md-button>
+                                    </md-menu-item> -->
+                            <!-- campagin start -->
+                            <md-menu-item flex layout="column">
+                                <md-button aria-expanded="flase" ng-click="toogelCampagin()" class="md-button-toggle">
+                                    <div layout="row">
+                                        <span style="color:#fff">Campaigns</span>
+                                        <span flex></span>
+                                        <span>
+                                            <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showCampagin"></md-icon>
+                                            <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showCampagin"></md-icon>
+                                        </span>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item flex layout="column" ng-show="showCampagin">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/campaigns" ng-class="{'active-link': currStateName == 'owner.campaigns'}"
+                                           ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                                    <div layout="row">
+                                        <span flex="15"></span>
+                                        </span>My Campaigns</div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item flex layout="column" ng-show="showCampagin">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/bbi-campaigns" ng-class="{'active-link': currStateName == 'owner.bbi-campaigns'}"
+                                           ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                                    <div layout="row">
+                                        <span flex="15"></span>
+                                        BBI Campaigns
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+
+                            <!--campagin end-->
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/requested-hoardings" ng-class="{'active-link': currStateName == 'owner.requested-hoardings'}"
+                                           ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                                    Request Inventory
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/hoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
+                                           ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
+                                    Inventory List
+                                </md-button>
+                            </md-menu-item>
+
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/payments" ng-class="{'active-link': currStateName == 'owner.payments'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    Payments
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/bbisupport" ng-class="{'active-link': currStateName == 'owner.bbisupport'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    BBI Support
+                                </md-button>
+                            </md-menu-item>
+                            <!-- <md-menu-item class="nv-nav-item">
+                                                    <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/loginpage" ng-class="{'active-link': currStateName == 'owner.loginpage'}" ng-click="closeMenuSidenavIfMobile()">
+                                                            Login Pages
+                                                    </md-button>
+                                            </md-menu-item> -->
+                            <!-- <md-menu-item class="nv-nav-item">
+                                            <md-button ng-href="#/owner/{{clientSlug}}/teamPage" ng-class="{'active-link': currStateName == 'owner.teamPage'}" ng-click="">
+                                                    <md-icon class="md-default-theme" class="material-icons">&#xE7FB;</md-icon>
+                                                    Team
+                                            </md-button>
+                                    </md-menu-item> -->
+
+                        </md-list>
+                    </div>
+                </div>
+            </md-content>
+        </md-sidenav>
+        <ui-view class="main_view" flex></ui-view>
+        <div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
+            <div style="padding: 5px 0;">Powered By Billboards India</div>
+        </div>
+    </div>
 </div>

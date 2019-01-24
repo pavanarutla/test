@@ -108,7 +108,7 @@
             </div>
         </div>
     </div>
-    <div style="margin-top: 2em;">
+    <div >
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>
@@ -125,11 +125,11 @@
                 </thead>
                 <tbody class="text-center">
 
-                    <tr>
-                        <td>BB-01</td>
-                        <td>Billboards</td>
-                        <td>15-08-2018</td>
-                        <td>10</td>
+                    <tr ng-repeat="ownerSave in ownerSaved|filter:search" ng-if="ownerSave.status==100 || ownerSave.status==200 ">
+                        <td>{{ownerSave.cid}}</td>
+                        <td>{{ownerSave.name}}</td>
+                        <td>{{ownerSave.created_at | dateify | date:'dd-MM-yyyy'|| "N/A"}}</td>
+                        <td>{{ownerSave.no_product || "N/A"}}</td>
                         <td>10,1000</td>
                         <td>10,10001</td>
                         <td>
@@ -139,7 +139,7 @@
                                 </md-button>
                                 <md-menu-content width="2">
                                     <md-menu-item>
-                                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{ownerSave.id}}/{{ownerSave.type}}">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                                 <p style="margin:auto 10px auto 10px">View Details</p>
@@ -154,14 +154,14 @@
                                             </div>
                                         </md-button>
                                     </md-menu-item>
-                                    <md-menu-item>
+                                    <!-- <md-menu-item>
                                         <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                                 <p style="margin:auto 10px auto 10px">Pay & Launch</p>
                                             </div>
                                         </md-button>
-                                    </md-menu-item>
+                                    </md-menu-item> -->
                                     
                                 </md-menu-content>
                             </md-menu>

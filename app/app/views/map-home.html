@@ -457,22 +457,22 @@
   <!-- Create campaign sidenav ends -->
 
   <!-- Selected product detail sidenav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails" style="z-index:1 !important">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails" style="z-index:1 !important">
     <md-content class="save_r_excited">
       <div class="inner">
       <div layout="row" class="">
-        <div class="md-body-2 ml-3">{{product.siteNo}}</div>
+        <div class="md-body-2 ml-3 mt-3">{{product.siteNo}}</div>
         <div flex></div>
         <a class="md-icon-button close-btn"  ng-click="toggleProductDetailSidenav()">
           <i class="material-icons">close</i>
         </a>
       </div>
       <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-        <img ng-src="{{product.image}}" style="width:100%;height:300px;" />
+        <img ng-src="{{product.image}}" style="width:100%;height:300px;padding: 0px 10px 0px 10px;" />
       </div>
       <div class="ml-3 mt-2" layout="column">
-        <div class="md-body-2">{{product.address}}</div>
-        <div class="md-caption">Facing:{{product.direction}}</div>
+        <div class="md-body-2"><b>{{product.address}}</b></div>
+        <div class="md-caption">Facing:&nbsp;{{product.direction}}</div>
       </div>
       <div layout="row" class="mt-2 mb-2">
         <div flex="33" class="border ml-3 p-1">
@@ -492,7 +492,7 @@
         </div>
       </div>
       <div layout="column" class=" mt-2" style="padding:8px">
-        <div class="md-body-2 text-left">Product Availability</div>
+        <div class="md-body-2 text-left mb-2">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
           <div class="input-group"style="z-index: 0;">
@@ -511,8 +511,8 @@
         </div>
       </div>
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-        <md-button layout-fill class="md-raised md-warn" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
-        <md-button layout-fill class="md-raised md-primary" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
+        <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
+        <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
       </div>
       </div>
       
@@ -797,7 +797,10 @@
         stylers: [{color: '#9e9e9e'}]
       }]">
     </ng-map>
-    <div id="mydiv" class="map_filters">
+    
+    <button class="slide-button-map-1 right-cls1" id="showLeftPush"></button>
+
+    <div id="mydiv" class="map_filters ">
       <div id="mydivheader">
         <a href="" class="menu__btn"><md-icon><i class="material-icons menu_move">
           apps
@@ -807,7 +810,7 @@
           </i> -->
         <a href="#/product-list" class="text_color md-caption pt-1">Switch to List View</a>
         <span flex></span>
-        <a href="#/location" class="md-caption float-right pt-1 text_a">Clear Filters</a>
+        <a ng-click="clearFields();" class="md-caption float-right pt-1 text_a">Clear Filters</a>
       </div>
       <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
         <md-autocomplete                      
@@ -844,13 +847,67 @@
           <div layout="row">
             <div class="md-caption text-left">Show products available between</div>
             <div flex></div>
-            <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span>
+            <!-- <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span> -->
           </div>
-          <form action="">
+         <!-- <form action="">
             <div class="form-group mb-0 mt-2">
               <input type="date" class="form-control" id="date" placeholder="select start date and end date">
             </div>
-          </form>
+          </form>-->
+          <div ng-controller="datePickerCtrl">
+              <div id="demoForm" name="demoForm" ng-form="demoForm" novalidate>
+                 <div class="row" >
+                <div class="col-6 mt-3">
+                  <!-- <label class="control-label">Start Date</label> -->
+                  <div class="input-form">
+                    <p class="input-group">
+                      <input type="text" placeholder="Start Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  />
+                      <span class="input-group-btn">
+                   <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></button>
+                 </span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-6 mt-3">
+                  <!-- <label class="control-label">End Date</label> -->
+                  <div class="input-form">
+                    <p class="input-group">
+                      <input type="text" placeholder="End Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                      <span class="input-group-btn">
+                   <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></button>
+                 </span>
+                    </p>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+        <!-- <div class="container">
+          <div id="demoForm" name="demoForm" ng-form="demoForm" novalidate>
+            <div class="col-md-4">
+              <label class="control-label">Start Date</label>
+              <div class="input-form">
+                <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                  <span class="input-group-btn">
+                     <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                   </span>
+              </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="control-label">End Date</label>
+              <div class="input-form">
+                <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                  <span class="input-group-btn">
+                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                   </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
       <!-- filters html end-->
       <!-- formats html start-->
@@ -872,7 +929,7 @@
         <div layout="column" class="formats-types">
           <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
             <div class="row" style="margin-left:0px;margin-right:0px">
-              <div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
+              <div class="col-sm-4 col-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
                 class="formatgridpart">
 
                 <div ng-cloak style="border-right:1px solid #ccc">
@@ -978,4 +1035,27 @@
       document.onmousemove = null;
     }
   }
+  </script>
+  
+  <script>
+  
+  $("#showLeftPush").click(function () {
+			if($("#showLeftPush").hasClass("right-cls1")){
+			$("#showLeftPush").removeClass("right-cls1");
+			$("#showLeftPush").addClass("left-cls1");			
+			}else{
+			$("#showLeftPush").removeClass("left-cls1");
+			$("#showLeftPush").addClass("right-cls1");
+			}		
+    });
+    $("#showLeftPush").click(function () {
+			if($("#mydiv").hasClass("active")){
+			$("#mydiv").removeClass("active");
+			$("#mydiv").addClass("active_open");			
+			}else{
+			$("#mydiv").removeClass("active_open");
+			$("#mydiv").addClass("active");
+			}		
+		});
+    
   </script>

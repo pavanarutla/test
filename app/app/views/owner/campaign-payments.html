@@ -286,11 +286,12 @@
   <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
-  <div layout="colmun" layout-align="end center" class="campaign_search">
-    <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
+  <div layout="colmun" layout-align="end center" class="campaign_search mt-3 mr-3">
+			<input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp" style="width:30%;padding: 4px;" />
+    <!-- <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
       <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
         md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-        md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
+        md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%;" md-clear-button="true">
         <md-item-template>
           <span class="item-title">
             <span> {{campaign.name}} </span>
@@ -311,13 +312,13 @@
           No matches found.
         </md-not-found>
       </md-autocomplete>
-    </div>
+    </div> -->
   </div>
   <md-tabs md-dynamic-height class="padding_cmp">
     <md-tab label="My Campaign Payments">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
-          <table class="table table-hover">
+          <table class="table">
             <thead>
 								<tr class="text_color text-center">
 								<th>CID</th>
@@ -333,11 +334,11 @@
 							<tbody class="text-center">
 								<tr ng-repeat="campaign in ownerCampaigns">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget}}</td>
-								<td>
+								<td class="table_vertical">{{campaign.name}}</td>
+								<td class="table_vertical">{{campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget}}</td>
+								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
 										<i class="material-icons">remove_red_eye</i>
@@ -371,11 +372,11 @@
 							<tbody class="text-center">
 								<tr ng-repeat="campaign in userCampaignPayments">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
-								<td>{{campaign.name}}</td>
-								<td>{{campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget - campaign.paid}}</td>
-								<td class="hide-xs">{{campaign.act_budget}}</td>
-								<td>
+								<td class="table_vertical">{{campaign.name}}</td>
+								<td class="table_vertical">{{campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget - campaign.paid}}</td>
+								<td class="table_vertical hide-xs">{{campaign.act_budget}}</td>
+								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
 										<i class="material-icons">remove_red_eye</i>

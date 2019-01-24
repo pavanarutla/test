@@ -1,4 +1,4 @@
-<section class="product_list_view m-2">   
+<section class="product_list_view m-2" style="overflow: auto !important;">   
     <div class="wrapper">
         <div class="product_heading pl-0 pr-0">
             <div id="myProduct" class="map_filters mt-2">
@@ -8,7 +8,7 @@
                     </a> -->
                     <a href="#/location" class="text_color md-caption"> Switch to map View</a>
                     <span flex></span>
-                    <a href="#/product-list" class="md-caption float-right text_a"> Clear Filters</a>
+                    <a ng-click="resetData()" class="md-caption float-right text_a"> Clear Filters</a>
                 </div>
                 <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
                     <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
@@ -43,10 +43,10 @@
                       </md-item-template>                    
                     </md-autocomplete> 
                   </div> -->
-                  <div class="form-group saved_search">
+                  <div class="form-group saved_search_user">
                     <input type="search" class="form-control md-whiteframe-3dp" ng-model="siteNo"  placeholder="Search By Tab id">
                 </div>
-                <div class="form-group saved_search">
+                <div class="form-group saved_search_user">
                     <input type="search" class="form-control md-whiteframe-3dp" ng-model="area_name"  placeholder="Search By Area,Location">
                 </div>
                   <!-- <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
@@ -69,14 +69,38 @@
                     <div layout="row">
                         <div class="md-caption text-left">Show products available between</div>
                         <div flex></div>
-                        <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span>
+                        <!-- <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span> -->
                     </div>
-                    <form action="">
-                        <div class="form-group mb-0 mt-2">
-                            <input type="date" class="form-control" id="date" placeholder="select start date and end date">
+                    <div ng-controller="datePickerCtrl">
+                      <div id="demoForm" name="demoForm" ng-form="demoForm" novalidate>
+                         <div class="row" >
+                        <div class="col-6 mt-3">
+                          <!-- <label class="control-label">Start Date</label> -->
+                          <div class="input-form">
+                            <p class="input-group">
+                              <input type="text" placeholder="Start Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  />
+                              <span class="input-group-btn">
+                           <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                         </span>
+                            </p>
+                          </div>
                         </div>
-                    </form>
+                        <div class="col-6 mt-3">
+                          <!-- <label class="control-label">End Date</label> -->
+                          <div class="input-form">
+                            <p class="input-group">
+                              <input type="text" placeholder="End Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                              <span class="input-group-btn">
+                           <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                         </span>
+                            </p>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
+              
                 <!-- filters html end-->
                 <!-- formats html start-->
                 <div layout="column" class="formats_block md-whiteframe-2dp mt-2">
@@ -100,7 +124,7 @@
                           <div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
                             class="formatgridpart">
             
-                            <div ng-cloak style="border-right:1px solid #ccc">
+                            <div ng-cloak style="border-right:1px solid #ccc" ng-click="FormatData(format.name)">
                               <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
                                 ng-if="format" style="margin:0px;padding :0px;">
                                 <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
@@ -215,27 +239,28 @@
 					<th>Image</th>
 					<th>Tab ID</th>
 					<th class="hide-xs">Product Details</th>
-					<th class="">Views</th>
+					<th class="" style="width: 6%;">Views</th>
 					<th class="hide-xs">Product Type</th>
 					<th class="hide-xs">Size</th>
 					<th class="text-center hide-xs">Lit</th>
-					<th class="hide-xs">Address</th>
+					<th class="hide-xs" style="width: 10%;">Address</th>
 					<th class="hide-xs"></th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="proddetail in productmarkerslist">
 				<tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
 					<td class="image_tdwidthproduct">
-                            <img src="{{proddetails.image}}" alt=" product image" width="77px" height="48px"/>
+             
+    <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px" style="border-radius: 2px;"/>
 					</td>
 					<td class="table_vertical">{{proddetails.siteNo}}
 					</td>
 					<td class="table_vertical hide-xs">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
-					<td class="table_vertical">{{proddetails.adStrength}}</td>
+					<td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td>
 					<td class="table_vertical hide-xs">{{proddetails.format_name}}</td>
 					<td class="table_vertical hide-xs">{{proddetails.panelSize}}</td>
                     <td class="table_vertical hide-xs">{{proddetails.lighting}}</td>
-                    <td class="table_vertical hide-xs">{{proddetails.direction}}</td>
+                    <td class="table_vertical hide-xs" style="width: 10%;">{{proddetails.direction}}</td>
 					<td class="text-center table_vertical hide-xs">
 						<a ng-click="getproddata(proddetails)"><button type="button"
 							 class="btn product_btnview">View Details</button></a>
@@ -248,18 +273,18 @@
         </div>
     </div>
     <!-- Selected product detail sidenav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_productlist" md-component-id="productDetails">
     <md-content class="save_r_excited">
       <div class="inner">
       <div layout="row" class="">
-        <div class="md-body-2 ml-3">{{productListDetails.siteNo}}</div>
+        <div class="md-body-2 ml-3 mt-3">{{productListDetails.siteNo}}</div>
         <div flex></div>
         <a class="md-icon-button close-btn"  ng-click="toggleProductDetailSidenav()">
           <i class="material-icons">close</i>
         </a>
       </div>
       <div class="mt-2" ng-click="showProductImagePopup($event, productListDetails.image)">
-        <img ng-src="{{productListDetails.image}}" style="width:100%;height:300px;" />
+        <img ng-src="{{serverUrl + productListDetails.image}}" style="padding: 0px 10px 0px 10px;width:100%;height:300px;border-radius: 2px;" />
       </div>
       <div class="ml-3 mt-2" layout="column">
         <div class="md-body-2">{{productListDetails.address}}</div>
@@ -283,7 +308,7 @@
         </div>
       </div>
       <div layout="column" class=" mt-2" style="padding:8px">
-        <div class="md-body-2 text-left">Product Availability</div>
+        <div class="md-body-2 text-left mb-2">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
           <div class="input-group"style="z-index: 0;">
@@ -302,8 +327,8 @@
         </div>
       </div>
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-        <md-button layout-fill class="md-raised md-warn" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
-        <md-button layout-fill class="md-raised md-primary" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
+        <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
+        <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
       </div>
       </div>
       

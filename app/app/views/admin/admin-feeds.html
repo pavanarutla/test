@@ -1,10 +1,5 @@
-<!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
-        <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
-    </md-button> -->
 <div class="">
     <div layout="column">
-        <!-- status of hoarding list html start-->
-
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="text_color">
@@ -17,131 +12,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="table_vertical">James</td>
-                        <td class="table_vertical">Jamesroy@gmail.com</td>
-                        <td class="table_vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td class="table_vertical">
-                            <md-menu md-position-mode="target-right target" id="width_popup">
-                                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                    <tr ng-repeat="Queries in QueriesData | limitTo:limit">
+                      <td>{{Queries.name}}</td>
+                      <td>{{Queries.email}}</td>
+                      <td>{{Queries.message}}</td>
+                      <!-- <md-menu md-position-mode="target-right target" id="width_popup">
+                        <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button class="pop_view" ng-href="#/admin/feedback-view/{{Queries.id}}">
+                                    <div layout="row">
+                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                    </div>
                                 </md-button>
-                                <md-menu-content width="2">
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/admin/feedback-view">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">Delete</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </td>
-                        <td class="table_vertical hide-xs">9:00 Am, 21-09-2018</td>
-                    </tr>
-                    <tr>
-                        <td class="table_vertical">James</td>
-                        <td class="table_vertical">Jamesroy@gmail.com</td>
-                        <td class="table_vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td class="table_vertical">
-                            <md-menu md-position-mode="target-right target" id="width_popup">
-                                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button class="pop_view" ng-href="#">
+                                    <div layout="row">
+                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                        <p style="margin:0 4px;font-size:11px;">Delete</p>
+                                    </div>
                                 </md-button>
-                                <md-menu-content width="2">
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">Delete</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </td>
-                        <td class="table_vertical hide-xs">9:00 Am, 21-09-2018</td>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu> -->
+                </td>
+                    <td class="table_vertical hide-xs">{{Queries.updated_at |timeify | date:'HH:mm a'}}</td>
                     </tr>
-                    <tr>
-                        <td class="table_vertical">James</td>
-                        <td class="table_vertical">Jamesroy@gmail.com</td>
-                        <td class="table_vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td class="table_vertical">
-                            <md-menu md-position-mode="target-right target" id="width_popup">
-                                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                </md-button>
-                                <md-menu-content width="2">
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">Delete</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </td>
-                        <td class="table_vertical hide-xs">9:00 Am, 21-09-2018</td>
-                    </tr>
-                    <tr>
-                        <td class="table_vertical">James</td>
-                        <td class="table_vertical">Jamesroy@gmail.com</td>
-                        <td class="table_vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td class="table_vertical">
-                            <md-menu md-position-mode="target-right target" id="width_popup">
-                                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                </md-button>
-                                <md-menu-content width="2">
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:0 4px;font-size:11px;">Delete</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </td>
-                        <td class="table_vertical hide-xs">9:00 Am, 21-09-2018</td>
-                    </tr>
-                </tbody>
+                  </tbody>
             </table>
         </div>
     </div>

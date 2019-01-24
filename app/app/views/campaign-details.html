@@ -46,7 +46,7 @@
 	</md-sidenav>
 	<!-- share campaign sidenav ends -->
 	<!-- table grid start  -->
-	<div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+	<!-- <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
 		<div class="ml-4" style="margin-top:28px;">
 			<p>Camapaign ID</p>
 			<p class="md-body-2">{{campaignDetails.cid || "N/A"}}</p>
@@ -69,6 +69,62 @@
 			</md-icon>
 			Share Camapaign
 		</md-button>
+	</div> -->
+	<div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+		<div class="row" style="margin-left:0px; margin-right:0px;">
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+			 style="margin-top:14px;">
+				<p class="">Campaign ID</p>
+				<p class="md-caption mob_span"><b>{{campaignDetails.cid || "N/A"}}</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+			 style="margin-top:14px;">
+				<p class="">Campaign Name</p>
+				<p class="md-caption mob_span"><b>{{campaignDetails.name}}</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+			 style="margin-top:14px;">
+				<p class="">No of Products</p>
+				<p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+			 style="margin-top:14px;">
+				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+					<p class="md-caption"><span><i class="material-icons i_icon">
+								reply_all
+							</i></span></p>
+					<p class="mob_spanicon share_icon">Share Campaign</p>
+				</div>
+			</div>
+			<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+			 style="margin-top:14px;">
+				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+					<p class="md-caption"><span><i class="material-icons i_icondown">
+								file_copy
+							</i></span></p>
+					<p class="mob_spanicon share_icon">Download Quotetation</p>
+				</div>
+			</div> -->
+			<!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6" style="margin-top:23px;">
+			  <p class="md-caption"><span><i class="material-icons">
+				  account_balance_wallet
+				</i></span></p>
+				<p class="">Payment Details</p>
+		  </div> -->
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
+			 style="margin-top:2em;text-align: end" ng-if="campaignDetails.products.length == 0">
+				<!-- <md-button class="md-raised Upload_font">
+					<md-icon>
+						<i class="material-icons material_iconscloud">
+							cloud_upload
+						</i>
+					</md-icon>
+					Upload Art Work
+				</md-button> -->
+				<md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
+				</md-button>
+			</div>
+		</div>
 	</div>
 	<div class="table-responsive">
 		<table class="table">
@@ -81,7 +137,7 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
-					<th>
+					<th style="text-align:end;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
@@ -90,28 +146,24 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="campaignProduct in campaignDetails.products">
-					<td>
-						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" height="100" width="100">
+					<td class="image_tdwidth">
+						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}} ({{campaignProduct.panelSize}})</b><br>{{campaignProduct.address}}
 							<br>Views : {{campaignProduct.impressions || "N/A"}}
-							<!-- <br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>
-								{{campaignProduct.impressions}}</button> -->
 							</p>
 					</td>
 					<td class="table_vertical">{{campaignProduct.panelSize}}</td>
-					<td class="table_vertical">
-						<p>{{campaignProduct.booked_from | dateify | date: "dd-MM-yyyy"}}</p>
+					<td class="table_vertical">{{campaignProduct.booked_from | dateify | date: "dd-MM-yyyy"}}
 					</td>		
-					<td class="table_vertical">
-						<p>{{campaignProduct.booked_to | dateify | date: "dd-MM-yyyy"}}</p>
+					<td class="table_vertical">{{campaignProduct.booked_to | dateify | date: "dd-MM-yyyy"}}
 					</td>
 					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>
 					<td class="table_vertical">
-						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_foreve</i></a>
+						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
-					<td class="text-center table_vertical">
+					<td class="table_vertical" style="text-align:end;">
 						<p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>
 					</td>
 				</tr>
@@ -137,7 +189,7 @@
 						<label for="text" class="text_color">Any questions, Please submit below</label>
 						<textarea type="text" class="form-control" id="text" rows="3"></textarea>
 					</div>
-					<button type="submit" class="btn btn-primary float-right">Submit</button>
+					<button type="submit" class="btn user_submit float-right">Submit</button>
 				</form>
 			</div>
 		</div>

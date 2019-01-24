@@ -644,8 +644,8 @@
 		</div> -->
 	<!-- </div> -->
 
-	<div class="table-responsive" style="">
-		<table class="table table-hover">
+	<div class="table-responsive">
+		<table class="table">
 			<thead class="text_color">
 				<tr>
 					<th>Product Details</th>
@@ -661,22 +661,32 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="product in productList">
+				<tr ng-repeat="product in requestedProductList">
 					<td class="image_tdwidth">
 						<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class="td_font"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
-							{{product.direction || "N/A"}}</p>
+							{{product.direction || "N/A"}}
+							<br>Type:
+							{{product.format_name || "N/A"}}
+						</p>
 					</td>
 					<td class="table_vertical hide-xs">{{product.panelSize}}</td>
 					<td class="table_vertical">{{product.impressions}}</td>
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
 					<td class="table_vertical hide-xs">{{product.default_price}}</td>
-					<td class="text-center table_vertical hide-xs"><a href="#"><i class="material-icons">
-						date_range
-						</i></a></td>
+					<td class="text-center table_vertical hide-xs">
+							<input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+							placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
+							style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+						<a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+							<i class="material-icons">
+								calendar_today
+							</i>
+						</a>
+					</td>
 					<td class="table_vertical hide-xs"></td>
 					<td class="text-center table_vertical hide-xs">
 						<a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button"

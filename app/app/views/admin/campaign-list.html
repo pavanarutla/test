@@ -429,9 +429,9 @@
             </thead>
             <tbody class="camp-text">
               <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
-                <td class="table_vertical">N/A</td>
+                <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
-                <td class="table_vertical">{{campaign.start_date | date }}</td>
+                <td class="table_vertical">{{campaign.created_at | dateify | date:'dd-MM-yyyy' }}</td>
                 <td class="text-center table_vertical hide-xs">N/A</td>
                 <td class="text-center table_vertical hide-xs">N/A</td>
                 <td class="text-center table_vertical hide-xs">{{campaign.est_budget}}</td>
@@ -477,7 +477,7 @@
                   </md-menu>
                 </td>
                 <td class="table_vertical hide-xs">
-                  <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at |timeify | date:'HH:mm a'}}</span>
                 </td>
               </tr>
               
@@ -503,8 +503,8 @@
                 <th class="hide-xs"></th>
               </tr>
             </thead>
-            <!-- <tbody class="text-center">
-              <tr ng-repeat="campaign in ownerCampaigns" ng-if="campaign.status==700 || campaign.status==800">
+            <tbody class="text-center">
+              <tr ng-repeat="campaign in scheduledCampaigns" >
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | date}}</td>
@@ -556,7 +556,7 @@
                   <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
-            </tbody> -->
+            </tbody> 
           </table>
         </div>
       </div>

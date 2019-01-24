@@ -1,6 +1,7 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" >
-		<img src="assets/images/owner/Group 383.png"/>
+	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" class="short_imagecenter" >
+		<!-- <img src="assets/images/owner/Group 383.png"/> -->
+		<img src="assets/images/owner/Group 383.png" class="rounded mx-auto d-block" alt="...">
 	</div>
 	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
 		<table class="table">
@@ -14,7 +15,7 @@
 					<th>Price</th>
 					<th></th>
 					<th></th>
-					<th class="text-center">
+					<th class="" style="text-align: end;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
@@ -36,11 +37,9 @@
 						</p>
 					</td>
 					<td class="table_vertical">{{shortlisted.panelSize}}</td>
-					<td class="table_vertical">
-						<p>{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}</p>
+					<td class="table_vertical">{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
-					<td class="table_vertical">
-						<p>{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}</p>
+					<td class="table_vertical">{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
 					<td class="table_vertical">{{shortlisted.default_price || "N/A"}}</td>
 					<td class="table_vertical">
