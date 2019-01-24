@@ -203,7 +203,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
           return c.status < 800 ;
         });
         $scope.scheduledCampaigns = _.filter(result, function (c) {
-          return c.status == 800 ;
+          return c.status >= 800 ;
         });
         resolve(result);
       });
