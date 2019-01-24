@@ -273,18 +273,18 @@
         </div>
     </div>
     <!-- Selected product detail sidenav-->
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="productDetails">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_productlist" md-component-id="productDetails">
     <md-content class="save_r_excited">
       <div class="inner">
       <div layout="row" class="">
-        <div class="md-body-2 ml-3">{{productListDetails.siteNo}}</div>
+        <div class="md-body-2 ml-3 mt-3">{{productListDetails.siteNo}}</div>
         <div flex></div>
         <a class="md-icon-button close-btn"  ng-click="toggleProductDetailSidenav()">
           <i class="material-icons">close</i>
         </a>
       </div>
       <div class="mt-2" ng-click="showProductImagePopup($event, productListDetails.image)">
-        <img ng-src="{{serverUrl + productListDetails.image}}" style="width:100%;height:300px;border-radius: 2px;" />
+        <img ng-src="{{serverUrl + productListDetails.image}}" style="padding: 0px 10px 0px 10px;width:100%;height:300px;border-radius: 2px;" />
       </div>
       <div class="ml-3 mt-2" layout="column">
         <div class="md-body-2">{{productListDetails.address}}</div>
@@ -308,7 +308,7 @@
         </div>
       </div>
       <div layout="column" class=" mt-2" style="padding:8px">
-        <div class="md-body-2 text-left">Product Availability</div>
+        <div class="md-body-2 text-left mb-2">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
           <div class="input-group"style="z-index: 0;">
@@ -327,8 +327,8 @@
         </div>
       </div>
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-        <md-button layout-fill class="md-raised md-warn" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
-        <md-button layout-fill class="md-raised md-primary" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
+        <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
+        <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
       </div>
       </div>
       
