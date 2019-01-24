@@ -203,7 +203,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
           return c.status < 800 ;
         });
         $scope.scheduledCampaigns = _.filter(result, function (c) {
-          return c.status == 800 ;
+          return c.status >= 800 ;
         });
         resolve(result);
       });
@@ -250,7 +250,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         loadOwnerCampaigns();
         $scope.ownerCampaign = {};
         toastr.success(result.message);
-        $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
+        //$scope.getUserCampaignDetails(result.camp_id);
+                //console.log($scope.campaignDetails);
+       $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
 
       }
       else if (result.status == 0) {
