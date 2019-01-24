@@ -226,16 +226,17 @@
       <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill></md-datepicker>
     </div>
     <div class="form-group form_cal">
-      <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+      <select class="form-control"  ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+          <option value="" disabled selected>Budget</option>
         <option selected value="1">Budget High to Low</option>
         <option value="0">Budget Low to High </option>
       </select>
     </div>
-    <div class="form-check">
+    <!--<div class="form-check">
       <label class="form-check-label" style="font-size:10px">
         <input class="form-check-input" type="checkbox"> Show Only Available
       </label>
-    </div>
+    </div>-->
     <md-button class="md-raised apply_filter" ng-click="applymethod(product)">Apply Filters</md-button>
   </form>
 </div>
@@ -278,11 +279,12 @@
         </td>
         <td class="table_vertical">
           <div class="input-group">
-            <input ng-model="suggestedProduct.default_price" type="text" only-numeric name="price" required="required"
-              ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.default_price = product.default_price"
-              style="width: 70px;padding: 4px 5px;" />
-            <!-- <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" /> -->
-            <span ng-click="enabledPrice = true;" ng-show="!enabledPrice"><i class="material-icons">edit</i></span>
+            
+            {{(!myfield)?product.default_price:''}}
+            <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+            <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+            <span ng-click="myfield=false;changeProductPrice(product)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+          
           </div>
         </td>
         <td class="table_vertical hide-xs">
