@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window,MapService , OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
 
   $scope.unavailalbeDateRanges = [];
   // $scope.loadCalendar = false;
@@ -160,28 +160,28 @@ $scope.applymethod=function(product){
         cancelLabel: 'Cancel',
         customRangeLabel: 'Custom range'
     },
-    // isInvalidDate : function(dt){
-    //   for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
-    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
-    //       return true;
-    //     }
-    //   }
-    // },
-    // isCustomDate: function(dt){
-    //   for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
-    //     if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
-    //       if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
-    //         return ['red-blocked', 'left-radius'];
-    //       }
-    //       else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
-    //         return ['red-blocked', 'right-radius'];
-    //       }
-    //       else{
-    //         return 'red-blocked';
-    //       }
-    //     }
-    //   }
-    // },
+    isInvalidDate : function(dt){
+      for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+          return true;
+        }
+      }
+    },
+    isCustomDate: function(dt){
+      for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+        if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+          if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
+            return ['red-blocked', 'left-radius'];
+          }
+          else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
+            return ['red-blocked', 'right-radius'];
+          }
+          else{
+            return 'red-blocked';
+          }
+        }
+      }
+    },
   };
   $scope.inventoryListOpts = {
     multipleDateRanges: true,
@@ -221,6 +221,48 @@ $scope.applymethod=function(product){
   /*====================================
   | Multi date range picker options end
   ====================================*/
+  // SHORT-LIST
+  $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+    var sendObj = {
+      product_id: productId,
+      dates: selectedDateRanges
+    }
+    MapService.shortListProduct(sendObj).then(function (response) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Shortlist Product')
+          .textContent(response.message)
+          .ariaLabel('shortlist-success')
+          .ok('Got it!')
+          .targetEvent(ev),
+        $mdSidenav('productDetails').close()
+      );
+      getShortListedProducts();
+      $mdSidenav('productDetails').close();
+    });
+  }
+  function getShortListedProducts() {
+    MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
+       shortListedProductsLength = response.length;
+      $scope.shortListedProducts = response;
+      $rootScope.$emit("shortListedProducts",shortListedProductsLength)
+    });
+  }
+  getShortListedProducts();
+  $scope.getProductUnavailableDates = function(productId, ev){
+    MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parents().eq(3).find('input').trigger('click');
+    });
+  }
+  // SHORT-LIST ENDs
+  // Save-camp
+  $scope.toggleExistingCampaignSidenav = function () {
+    $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+  }
+  // Save-camp-end
 
 
   var getFormatList = function(){
@@ -441,6 +483,7 @@ $scope.applymethod=function(product){
   }
 
   $scope.getProductUnavailableDates = function(productId, ev){
+    debugger;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');

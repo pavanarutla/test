@@ -288,9 +288,17 @@
           </div>
         </td>
         <td class="table_vertical hide-xs">
-          <a href="#"><i class="material-icons">
+          <!-- <a href="#"><i class="material-icons">
             date_range
-            </i></a>
+            </i></a> -->
+            <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+            placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
+            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+          <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+            <i class="material-icons">
+              calendar_today
+            </i>
+          </a>
         </td>
         <td class="table_vertical hide-xs">
           <div class="form-group form_yes">
