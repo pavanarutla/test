@@ -480,6 +480,16 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         return false;
       }
     }
+
+    $scope.isUserOwner = function(){
+      if($auth.getPayload()){
+        var userMongo = $auth.getPayload().userMongo;
+        return userMongo.user_type == "owner";
+      }
+      else{
+        return false;
+      }
+    }
     
     $scope.viewCampaignDetails = function(campaignId){
       localStorage.viewCampaignDetailsId = campaignId;
