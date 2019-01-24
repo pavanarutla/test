@@ -250,7 +250,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         loadOwnerCampaigns();
         $scope.ownerCampaign = {};
         toastr.success(result.message);
-        $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
+        //$scope.getUserCampaignDetails(result.camp_id);
+                //console.log($scope.campaignDetails);
+       $window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
 
       }
       else if (result.status == 0) {
