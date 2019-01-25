@@ -287,7 +287,7 @@
                                 <th class="hide-xs"></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center" ng-repeat="campaign in plannedCampaigns" ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
+                        <tbody class="text-center" ng-repeat="campaign in plannedCampaigns | filter:search" ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
@@ -308,6 +308,14 @@
                                             <p style="margin:auto 10px auto 10px">View Details</p>
                                         </div>
                                     </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                  <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                    <div layout="row">
+                                      <md-icon><i class="material-icons">share</i></md-icon>
+                                      <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                    </div>
+                                  </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
                                     <md-button ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
@@ -345,7 +353,7 @@
                                 <th class="hide-xs"></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns" ng-if="campaign.status==800">>
+                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns | filter:search" ng-if="campaign.status==800">>
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
@@ -366,6 +374,14 @@
                                             <p style="margin:auto 10px auto 10px">View Details</p>
                                         </div>
                                     </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                  <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                    <div layout="row">
+                                      <md-icon><i class="material-icons">share</i></md-icon>
+                                      <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                    </div>
+                                  </md-button>
                                 </md-menu-item>
 
                                 <md-menu-item>
@@ -404,7 +420,7 @@
                                 <th class="hide-xs"></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns" ng-if="campaign.status==700">
+                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns | filter:search" ng-if="campaign.status==700">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
@@ -426,7 +442,14 @@
                                         </div>
                                     </md-button>
                                 </md-menu-item>
-
+                                <md-menu-item>
+                                  <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                    <div layout="row">
+                                      <md-icon><i class="material-icons">share</i></md-icon>
+                                      <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                    </div>
+                                  </md-button>
+                                </md-menu-item>
                                 <md-menu-item>
                                     <md-button ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                                         <div layout="row">
@@ -463,7 +486,7 @@
                                 <th class="hide-xs"></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns" ng-if="campaign.status==900 || campaign.status==1000" >>
+                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns | filter:search" ng-if="campaign.status==900 || campaign.status==1000" >>
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
@@ -485,7 +508,14 @@
                                         </div>
                                     </md-button>
                                 </md-menu-item>
-
+                                <md-menu-item>
+                                  <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                    <div layout="row">
+                                      <md-icon><i class="material-icons">share</i></md-icon>
+                                      <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                    </div>
+                                  </md-button>
+                                </md-menu-item>
                                 <md-menu-item>
                                     <md-button ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                                         <div layout="row">
@@ -507,6 +537,43 @@
             </div>
         </md-tab>
     </md-tabs>
+    <!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+  <div layout="row">
+      <div class="md-toolbar-tools">
+          <div flex></div>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+              <md-tooltip>Close Side Panel</md-tooltip>
+              <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+          </md-button>
+      </div>
+  </div>
+  <md-content layout-align="center center" layout-margin layout-padding>
+      <h3 class="md-headline">Share Campaign</h3>
+      <form name="shareCampaignForm">
+          <div layout="column">
+              <md-input-container class="md-block">
+                  <label>Name</label>
+                  <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                  <div ng-messages="shareCampaignForm.name.$error">
+                      <div ng-message="required">Name is required.</div>
+                      <div ng-message="pattern">Enter a valid Name.</div>
+                  </div>
+              </md-input-container>
+              <md-input-container class="md-block">
+                  <label>Email</label>
+                  <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                  <div ng-messages="shareCampaignForm.email.$error">
+                      <div ng-message="required">Email is required.</div>
+                      <div ng-message="pattern">Enter a valid Email Id.</div>
+                  </div>
+              </md-input-container>
+              <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share Campaign</md-button>
+          </div>
+      </form>
+  </md-content>
+</md-sidenav>
+<!-- share campaign sidenav ends -->
 </div>
 
 <script>
