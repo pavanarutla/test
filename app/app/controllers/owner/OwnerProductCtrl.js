@@ -112,7 +112,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   //  });
 // };
 $scope.applymethod=function(product){
-  console.log(product);
+  //console.log(product);
   var data = {};
           var pageNo = $scope.pagination.pageNo;
           var pageSize= $scope.pagination.pageSize;
@@ -135,7 +135,7 @@ $scope.applymethod=function(product){
            data.end_date =end_date;
 				}
      OwnerProductService.getApprovedProductList(data).then(function(result){
-    $scope.productList = result.products;
+     $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -636,6 +636,20 @@ $scope.applymethod=function(product){
     product.id = data.id;
     product.default_price = data.default_price;
     OwnerProductService.changeProductPrice(product).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+
+  }
+
+  $scope.product_visibility = function(product_visibility,product_id){
+    visibility = {};
+    visibility.product_visibility =product_visibility ;
+    OwnerProductService.changeProductVisibility(product_id,visibility).then(function (result) {
       if(result.status == 1){
         toastr.success(result.message);        
       }
