@@ -103,8 +103,9 @@
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
   <div layout="colmun" layout-align="end center" class="campaign_search">
-    <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
-      <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+      <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp" style="width:30%;padding: 4px;" />
+    <!-- <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md"> -->
+      <!-- <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
         md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
         md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
         <md-item-template>
@@ -126,8 +127,8 @@
         <md-not-found>
           No matches found.
         </md-not-found>
-      </md-autocomplete>
-    </div>
+      </md-autocomplete> -->
+    <!-- </div> -->
     <!-- <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
             CREATE CAMPAIGN
         </md-button> -->
@@ -352,7 +353,7 @@
               </tr>
             </thead>
             <tbody class="camp-text">
-              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==100 || campaign.status==200 || campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
@@ -402,7 +403,7 @@
                   </md-menu>
                 </td>
                 <td class="table_vertical hide-xs">
-                  <span class="text_color md-caption">{{campaign.updated_at | timeify | date:'HH:mm a' || "N/A"}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
                 </td>
               </tr>
             </tbody>
@@ -672,23 +673,23 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button class="pop_view">
                           <div layout="row">
                             <md-icon><i class="material-icons">share</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
                           </div>
                         </md-button>
                       </md-menu-item>
-                      <md-menu-item>
-                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+<!--                      <md-menu-item>
+                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{MCampaign.id}}/{{campaign.type}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Pay Now</p>
                           </div>
                         </md-button>
-                      </md-menu-item>
+                      </md-menu-item>-->
                       <md-menu-item>
-                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/updatepayment/{{MCampaign.id}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Payment Details</p>
@@ -699,7 +700,7 @@
                   </md-menu>
                 </td>
                 <td class="table_vertical hide-xs">
-                  <span class="text_color md-caption">{{MCampaign.updated_at |timeify | date:'HH:mm a' || "N/A"  }}</span>
+                  <span class="text_color md-caption">{{MCampaign.updated_at || "N/A"  }}</span>
                 </td>
               </tr>
             </tbody>

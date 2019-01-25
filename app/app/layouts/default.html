@@ -13,11 +13,11 @@
 
       <span flex class=""></span>
       <md-menu-bar class="main-menu">
-        <md-button aria-label="about bbi" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">About
+        <md-button aria-label="about bbi" ng-click="whatwedo()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">About
           BBI</md-button>
-        <md-button aria-label="products" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Our
+        <md-button aria-label="products" ng-click="formate()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Our
           Products</md-button>
-        <md-button aria-label="Support" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
+        <md-button aria-label="Support" ng-click="whyOutdoor()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
         </md-button>
         <!-- browse-->
         <md-button  aria-label="location" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
@@ -74,14 +74,14 @@
           <!--notifications of menu start -->
           <ul class="nofitications-dropdown">
             <li class="dropdown head-dpdn" ng-if="isAuthenticated"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">4</span></a>
+                aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">0</span></a>
               <ul class="dropdown-menu dropdown-bell arrrow_box animated fadeInDown">
                 <li>
                   <div class="notification_header">
-                    <h3 class=""><b>Notification :</b></h3>
+                    <h3 class=""><b>You have 0 new notification</b></h3>
                   </div>
                 </li>
-                <li>
+                <!--<li>
                   <a href="#">
                     <div class="notification_desc md-whiteframe-2dp pl-3">
                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
@@ -104,7 +104,7 @@
                       <p class="text_color"><span>Created On 02-12-2018 - 12:00 am</span></p>
                     </div>
                   </a>
-                </li>
+                </li>-->
 
                 <li>
                   <div class="notification_bottom"> <a ng-href="#/user-notifications">See all notifications</a> </div>
@@ -129,7 +129,7 @@
                   </a>
                 </li>
                 <li>
-                  <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns">See all campaigns</a> </div>
+                  <div class="notification_bottom"> <a ng-href="#">See all campaigns</a> </div>
                 </li>
               </ul>
             </li>
@@ -139,7 +139,7 @@
                 <!-- <i class="fa fa-ellipsis-v lnr"></i> -->
 
               </a>
-              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout">
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="!isUserOwner">
                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/shortlisted-products"> Shortlisted Inventory
@@ -150,6 +150,16 @@
                 <!-- <li> <a ng-href="#"> Team</a> </li> -->
                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
               </ul>
+
+              <ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s" ng-if="isUserOwner">
+									<li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
+									<li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
+									<li> <a ng-href="#/payments"> Payments</a> </li>
+									<li> <a ng-href="#/reset_password"> Change Password</a> </li>
+									<li> <a ng-click="switchView()"> Switch to Map view</a> </li>
+									<li> <a ng-href="#"> Team</a> </li>
+									<li> <a ng-click="logout()"> Logout</a> </li>
+								</ul>
 
             </li>
           </ul>
