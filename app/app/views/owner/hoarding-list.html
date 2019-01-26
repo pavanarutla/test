@@ -301,10 +301,10 @@
           </a>
         </td>
         <td class="table_vertical hide-xs">
-          <div class="form-group form_yes">
-            <select class="form-control" style="width: 70px;">
-              <option selected>Yes</option>
-              <option>No</option>
+          <div class="form-group form_yes" ng-init="(product.product_visibility == 'undefined' || product.product_visibility == '') ? '1' : '0' ">
+            <select class="form-control" style="width: 70px;" ng-model="product.product_visibility" ng-change="product_visibility(product.product_visibility,product.id)" >
+              <option ng-selected="(product.product_visibility==1) ? true :false " value = "1">Yes</option>
+              <option ng-selected="(product.product_visibility==0) ? true :false " value = "0">No</option>
             </select>
           </div>
         </td>
