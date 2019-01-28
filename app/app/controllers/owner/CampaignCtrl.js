@@ -249,9 +249,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     localStorage.selectedOwnerCampaign = JSON.stringify(result);
                     $location.path('/owner/' + $rootScope.clientSlug + '/add-campagin-product');
                 });
-
-                //$window.location.href = '#/owner/{{clientSlug}}/campaign-details/'+result.camp_id+'/2'
-
             } else if (result.status == 0) {
                 $rootScope.closeMdDialog();
                 if (result.message.constructor == Array) {
