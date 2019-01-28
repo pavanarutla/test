@@ -105,6 +105,11 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/product-unavailable-dates/' + productId).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			}, 
+			changeProductVisibility: function (product_id,visibility) {
+				var dfd = $q.defer();
+				$http.put(config.apiPath + '/product-visibility/' + product_id,visibility).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}
