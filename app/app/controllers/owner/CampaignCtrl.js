@@ -302,7 +302,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     });
   }
 
-  $scope.suggestProductForOwnerCampaign = function (suggestedProduct) {
+  $scope.toggleShareCampaignSidenav = function (campaign) {
+    console.log(campaign);
+    $scope.currentOwnerShareCampaign = campaign;
+    $mdSidenav('shareCampaignSidenav').toggle();
+  };
+
+  
+  $scope.suggestProductForOwnerCampaign = function (ownerProduct) {
+    console.log(ownerProduct);
     if (!localStorage.selectedOwnerCampaign) {
       toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
     }
@@ -310,18 +318,19 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       var postObj = {
         campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
         product: {
-          id: suggestedProduct.id,
-          booking_dates: suggestedProduct.booking_dates,
-          price: suggestedProduct.price
+          id: ownerProduct.id,
+          booking_dates: ownerProduct.booking_dates,
+          price: ownerProduct.default_price
         }
       };
       OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+        console.log(result);
         if (result.status == 1) {
           OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
             localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
             $scope.campaignActBudget = updatedCampaignData.act_budget;
             _.map($scope.productList, function (product) {
-              if (product.id == suggestedProduct.id) {
+              if (product.id == ownerProduct.id) {
                 product.alreadyAdded = true;
               }
               return product;
@@ -712,10 +721,11 @@ function getActiveUserCampaigns() {
   $scope.viewSelectedCampaign = function (campaign) {
     $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
   }
-  $scope.shareCampaignToEmail = function (ev, shareCampaign) {
+  $scope.shareCampaignToEmail = function (ev,shareCampaign,campaignID) {
+    console.log(campaignID);
     $scope.campaignToShare = $scope.campaignDetails;
     var campaignToEmail = {
-      campaign_id: $scope.campaignToShare.id,
+      campaign_id: campaignID,
       email: shareCampaign.email,
       receiver_name: shareCampaign.receiver_name,
       campaign_type: $scope.campaignToShare.type
