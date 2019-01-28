@@ -45,6 +45,10 @@ var app = angular.module('bbManager', [
       url: 'home',
       templateUrl: 'views/home.html'
     })
+    .state('index.our_product', {
+      url: 'ourproduct',
+      templateUrl: 'views/our_product.html'
+    })
     .state('index.formats', {
       url: 'formats',
       templateUrl: 'views/formats.html',
