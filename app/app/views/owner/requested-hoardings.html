@@ -111,10 +111,10 @@
 									</div>
 									<div class="col-sm-6">
 											<div class="input-group">
-													<input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required"
-													placeholder="Near Land Mark" type="text" name="direction" required="required" />
-													<div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched" style="color:red">
-															<div ng-message="required">Direction is required.</div>
+													<input ng-model="product.facing" class="form-control md-whiteframe-3dp" required="required"
+													placeholder="Near Land Mark" type="text" name="facing" required="required" />
+													<div ng-messages="hordinglistform.facing.$error" ng-if="hordinglistform.facing.$touched" style="color:red">
+															<div ng-message="required">Facing is required.</div>
 														</div>
 											</div>											
 										</div>
@@ -131,7 +131,7 @@
 								</div>
 								<div class="col-sm-6">
 										<div class="input-group">
-											<input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image">
+											<input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>
 											<span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
 										</div>
 									</div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="input-group">
-                    <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Video if Any">
+                    <input class="form-control md-whiteframe-3dp" type="text" placeholder="Upload Product Video if Any">
                     <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
                   </div>
                 </div>
@@ -171,8 +171,11 @@
                 </div>
                 <div class="col-sm-6">
                   <select name="Visibility" class="form-control md-whiteframe-3dp" id="Visibility" required="required"
-                    ng-model="product.visibility" ng-options="country.id as country.name for visibility in visibilityList">
-                    <option value="" disabled selected>Visibility Score - 0-5 Good</option>
+										ng-model="product.visibility">
+										<option value="" disabled selected> Visibility Score</option>
+										<option>Score - 0-5 Good</option>
+										<option>Score - 5-8 Good</option>
+										<option>Score - 8-10 Good</option>
                   </select required>
                 </div>
               </div>
@@ -180,8 +183,11 @@
               <div class="form-group row">
                 <div class="col-sm-6">
                   <select name="Audience" class="form-control md-whiteframe-3dp" id="Audience" required="required"
-                    ng-model="product.audience" ng-options="country.id as country.name for audience in AudienceList">
-                    <option value="" disabled selected>Targeted Audience</option>
+                    ng-model="product.audience">
+										<option value="" disabled selected>Targeted Audience</option>
+										<option>College Students</option>
+										<option>ABC</option>
+										<option>XYZ</option>									
                   </select required>
                 </div>
                 <div class="col-sm-6">
