@@ -3,7 +3,7 @@
         <div class="md-title text_color">Saved Campaigns </div>
         <div flex></div>
         <div class="form-group saved_camp">
-            <input type="search" class="form-control md-whiteframe-3dp" ng-model="Campaigns"  placeholder="search campagin">
+            <input type="search" class="form-control md-whiteframe-3dp" ng-model="activeUserCampaign.name"  placeholder="search campagin">
         </div>
         <div class="dropdown">
             <md-button class="md-raised all_button" onclick="saveCampaign()">Create Campaign</md-button>
@@ -215,7 +215,7 @@
                 </thead>
                 <tbody class="text-center contbg">
 
-                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
+                    <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign.name" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
                         <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
                         <td class="table_vertical">{{activeUserCampaign.name}}</td>
                         <td class="table_vertical">{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>

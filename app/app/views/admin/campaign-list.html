@@ -384,7 +384,8 @@
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
   <div layout="colmun" layout-align="end center" class="campaign_search">
-    <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
+      <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp mt-3 mr-2" style="width:30%;padding: 4px;" />
+   <!--  <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
       <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
         md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
         md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
@@ -408,7 +409,7 @@
           No matches found.
         </md-not-found>
       </md-autocomplete>
-    </div>
+    </div> -->
   </div>
   <md-tabs md-dynamic-height class="padding_cmp">
     <md-tab label="Proposals">
@@ -428,7 +429,7 @@
               </tr>
             </thead>
             <tbody class="camp-text">
-              <tr ng-repeat="campaign in plannedCampaigns | limitTo:limit">
+              <tr ng-repeat="campaign in plannedCampaigns | filter: search | limitTo:limit">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="text-left table_vertical">{{campaign.name}}</td>
                 <td class="table_vertical">{{campaign.created_at | dateify | date:'dd-MM-yyyy' }}</td>
