@@ -8,7 +8,7 @@
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
             <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
-                <form name="hordinglistform" role="form" novalidate="novalidate">
+                <form name="hordinglistform" novalidate="novalidate">
                     <div layout="colmun">
                         <span flex></span>
                         <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addnewProduct()">
@@ -26,7 +26,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control md-whiteframe-3dp" name="siteNo" ng-model="product.siteNo"
-                                           placeholder="Product ID" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
+                                           placeholder="Product ID*" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
                                     <div ng-messages="hordinglistform.siteNo.$error" ng-if="hordinglistform.siteNo.$touched" style="color:red">
                                         <div ng-message="required">Product Id is required.</div>
                                         <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
@@ -36,7 +36,7 @@
                                     <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
                                             class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
                                             name="productType">
-                                        <option value="" disabled selected>Product Type</option>
+                                        <option value="" disabled selected>Product Type*</option>
                                     </select>
                                     <div ng-messages="hordinglistform.productType.$error" ng-if="hordinglistform.productType.$touched"
                                          style="color:red">
@@ -80,67 +80,76 @@
                                 <div class="col-sm-2">
                                     <select ng-model="product.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
                                             md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
-                                            placeholder="Has lighting?">
-                                        <option value="" disabled selected>Light</option>
+                                            placeholder="Has lighting?*">
+                                        <option value="" disabled selected>Light*</option>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                     </select>
                                     <div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched" style="color:red">
-                                        <div ng-message="required">*Required.</div>
+                                        <div ng-message="required">light*.</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control md-whiteframe-3dp" name="height" ng-model="product.height"
-                                           placeholder="Height" required="required">
+																					 placeholder="Height*" required="required">
+																					 <div ng-messages="hordinglistform.height.$error" ng-if="hordinglistform.height.$touched" style="color:red">
+																						<div ng-message="required">height*.</div>
+																				</div>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control md-whiteframe-3dp" name="width" ng-model="product.width"
-                                           placeholder="Width" required="required">
+																					 placeholder="Width*" required="required">
+																					<div ng-messages="hordinglistform.width.$error" ng-if="hordinglistform.width.$touched" style="color:red">
+																						<div ng-message="required">width*.</div>
+																				</div>
                                 </div>
                             </div> 
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <div class="input-group">
+                                    
                                         <input type="text" class="form-control md-whiteframe-3dp" name="Address" ng-model="product.address"
-                                               placeholder="Address" required="required">
+                                               placeholder="Address*" required="required">
                                         <div ng-messages="hordinglistform.Address.$error" ng-if="hordinglistform.Address.$touched" style="color:red">
                                             <div ng-message="required">Address is required.</div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="input-group">
+                                    
                                         <input ng-model="product.facing" class="form-control md-whiteframe-3dp" required="required"
-                                               placeholder="Near Land Mark" type="text" name="facing" required="required" />
+                                               placeholder="Near Land Mark*" type="text" name="facing" required="required" />
                                         <div ng-messages="hordinglistform.facing.$error" ng-if="hordinglistform.facing.$touched" style="color:red">
                                             <div ng-message="required">LandMark is required.</div>
                                         </div>
-                                    </div>											
+                                 											
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" ng-model="product.cost"  name="Productcost" type="text" placeholder="Estimated Product Cost" only-numeric>
+                                   
+                                        <input class="form-control md-whiteframe-3dp" ng-model="product.cost"  name="Productcost" type="text" placeholder="Estimated Product Cost*" only-numeric required="required">
                                         <div ng-messages="hordinglistform.Productcost.$error" ng-if="hordinglistform.Productcost.$touched" style="color:red">
                                             <div ng-message="required">Cost is required.</div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="input-group">
 <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
-                                        <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image"  multiple>
-                                        <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                        <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
+																				<span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+																				<div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
+																					<div ng-message="required">image is required.</div>
+																			</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction / Facing"
+                                    <input ng-model="product.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction / Facing*"
                                            type="text" name="cost" required="required" />
                                     <div ng-messages="hordinglistform.cost.$error" ng-if="hordinglistform.cost.$touched" style="color:red">
                                         <div ng-message="required">Direction is required.</div>
@@ -159,8 +168,9 @@
                                         <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                         <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                                            <div ng-message="required">Date is required.</div>
-                                        </div>                  </div>
+																						<div ng-message="required">Date is required.</div>
+																				</div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -169,7 +179,10 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="product.impressionsperweek" placeholder="Impressions Per Week">
+																				<input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="product.impressionsperweek" placeholder="Impressions Per Week*" only-numeric>
+																				<div ng-messages="hordinglistform.impressionsperweek.$error" ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
+																					<div ng-message="required">impression.</div>
+																			</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -205,8 +218,10 @@
                                     * Select only booked dates remaining dates consider as available
                                 </div>
                                 <div class="col-sm-4">
-                                    <md-button class="md-raised md-primary text-white pull-right" ng-click="requestAddProduct(product)"
-                                               style="background-color: #858A8E;">Submit</md-button>
+											<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="requestAddProduct(product)" ng-disabled="hordinglistform.$invalid">Submit</md-button>
+																	
+                                    <!-- <md-button class="md-raised md-primary all_button text-white pull-right" ng-click="requestAddProduct(product)" ng-disabled="hordinglistform.$invalid"
+                                               >Submit</md-button> -->
                                 </div>
                             </div>
                         </div>
