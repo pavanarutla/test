@@ -578,18 +578,19 @@
 				</select>
 			</div> -->
 		
-				<div class="form-group form_cal">
-					<input type="date" class="form-control" placeholder=" Available From">
+			<div class="form-group form_cal">
+					<md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill></md-datepicker>
 				</div>
 				<div class="form-group form_cal">
-					<input type="date" class="form-control" placeholder=" Available To">
+					<md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill></md-datepicker>
 				</div>
 				<div class="form-group form_cal">
-					<select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
-						<option selected value="1">Budget High to Low</option>
-						<option value="0">Budget Low to High </option>
-					</select>
-				</div>
+						<select class="form-control"  ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+								<option value="" disabled selected>Budget</option>
+							<option selected value="1">Budget High to Low</option>
+							<option value="0">Budget Low to High </option>
+						</select>
+					</div>
 				<div class="form-check">
 					<label class="form-check-label">
 						<input class="form-check-input" type="checkbox"> Show Only Available

@@ -94,7 +94,7 @@
 						<p class="md-caption"><span><i class="material-icons i_icon">
 									reply_all
 								</i></span></p>
-						<p class="mob_spanicon share_icon">Share Camapaign</p>
+						<p class="mob_spanicon share_icon">Share Campaign</p>
 					</div>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
@@ -142,8 +142,8 @@
 						<th class="hide-xs">Booked To</th>
 						<th class="hide-xs">Price</th>
 						<th class="hide-xs"></th>
-						<th class="hide-xs" style="text-align:end">
-							<md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Another Product
+                                                <th class="hide-xs" style="text-align:end" >
+                                    <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
 							</md-button>
 						</th>
 					</tr>
@@ -157,6 +157,7 @@
 							<p class="td_font"><b>{{product.siteNo}} - {{product.area_name}} (40Ft X 40Ft)</b><br>Address: {{product.address
 								||
 								"N/A"}}<br>Views : {{product.impressions || "N/A"}}
+								<br>Type:{{product.format_name || "N/A"}}
 								<!-- Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button></p> -->
 						</td>
 						<td class="table_vertical">{{product.panelSize}}</td>
@@ -170,9 +171,9 @@
 						</td>
 						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
 						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>
-						<td class="table_vertical">
-							<a><i class="material-icons" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
-						</td>
+						<td class="table_vertical"> 
+							<a><i class="material-icons" ng-if="campaignDetails.type!=0 && campaignDetails.status!=700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
+						</td> 
 						<td class="text-center table_vertical hide-xs ">
 						<!-- <p class="text_color md-caption">{{product.product_status | stringifyProductStatus}}</p> -->
 						</td>
