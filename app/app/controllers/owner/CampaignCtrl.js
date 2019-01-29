@@ -789,6 +789,21 @@ function getActiveUserCampaigns() {
       });
     })
   }
+
+  //call campaign count for hoarding list
+  $scope.getCampaignList = function(){
+    var productId = $stateParams.productId;
+    OwnerCampaignService.getCampaignsFromProducts(productId).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+  }
+  $scope.getCampaignList();
+
   // if ($rootScope.currStateName == 'owner.update-payments') {
    
   // }
