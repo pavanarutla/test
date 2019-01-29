@@ -45,7 +45,11 @@ var app = angular.module('bbManager', [
       url: 'home',
       templateUrl: 'views/home.html'
     })
-    .state('index.our_product', {
+    .state('index.aboutbbi', {
+      url: 'aboutbbi',
+      templateUrl: 'views/about_bbi.html'
+    })
+    .state('index.ourproduct', {
       url: 'ourproduct',
       templateUrl: 'views/our_product.html'
     })
