@@ -591,11 +591,11 @@
 							<option value="0">Budget Low to High </option>
 						</select>
 					</div>
-				<div class="form-check">
+				<!-- <div class="form-check">
 					<label class="form-check-label">
 						<input class="form-check-input" type="checkbox"> Show Only Available
 					</label>
-				</div>
+				</div> -->
 				<md-button class="md-raised apply_filter" ng-click="applyFiltersmethod(product)">Apply Filters</md-button>
 			</form>
 		</div>
@@ -617,7 +617,7 @@
 			<tbody class="contbg">
 				<tr ng-repeat="product in productList">
 					<td class="image_tdwidth">
-						<img src="assets/images/addnewproduct.png" alt="Smiley face" class="requ_size">
+						<img ng-src="{{serverUrl + product.image}}" alt="Smiley face" class="requ_size">
 					</td>
 					<td>
 						<p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
@@ -640,11 +640,16 @@
 						</div> -->
 						{{product.default_price}}
 					</td>
-					<td class="table_vertical hide-xs">
-						<a href="#"><i class="material-icons">
-								date_range
-							</i></a>
-					</td>
+					<td class="text-center table_vertical hide-xs">
+						<input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+									 placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
+									 style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+						<a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+								<i class="material-icons">
+										calendar_today
+								</i>
+						</a>
+				</td>
 					<td class="table_vertical hide-xs">
 						<md-button class="md-raised inv_details" ng-click="editProduct(product)">Edit Details</md-button>
 					</td>

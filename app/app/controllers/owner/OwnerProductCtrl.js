@@ -483,7 +483,6 @@ $scope.applymethod=function(product){
   }
 
   $scope.getProductUnavailableDates = function(productId, ev){
-    debugger;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');

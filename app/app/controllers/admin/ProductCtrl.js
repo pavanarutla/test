@@ -7,7 +7,8 @@ app.controller("ProductCtrl", [
   "$window",
   "ProductService",
   "AdminLocationService",
-  "CompanyService",  
+  "CompanyService",
+  "MapService",  
   "config",
   "Upload",
   "toastr",
@@ -229,6 +230,58 @@ app.controller("ProductCtrl", [
       });
     };
 
+    // Calenders code
+
+    $scope.rqstHrdngsOpts = {
+      multipleDateRanges: true,
+      locale: {
+          applyClass: 'btn-green',
+          applyLabel: "Apply",
+          fromLabel: "From",
+          format: "DD-MMM-YY",
+          toLabel: "To",
+          cancelLabel: 'Cancel',
+          customRangeLabel: 'Custom range'
+      },
+      isInvalidDate : function(dt){
+        for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
+          if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+            return true;
+          }
+        }
+      },
+      isCustomDate: function(dt){
+        for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
+          if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+            if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
+              return ['red-blocked', 'left-radius'];
+            }
+            else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
+              return ['red-blocked', 'right-radius'];
+            }
+            else{
+              return 'red-blocked';
+            }
+          }
+        }
+      },
+    };
+    $scope.getProductUnavailableDates = function(productId, ev){
+      MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parents().eq(3).find('input').trigger('click');
+      });
+    }
+    $scope.getProductUnavailableDates = function(productId, ev){
+      ProductService.getProductList(productId).then(function(dateRanges){
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }
+
+
+    // Calenders code ends
+
     // Get products list
 
     $scope.getProductList = function() {
@@ -248,7 +301,7 @@ app.controller("ProductCtrl", [
 
     $scope.files = {};
     $scope.addProduct = function() {
-      Upload.upload({
+      Upload.upload({        
         url: config.apiPath + "/product",
         data: {
           image: $scope.files.image,
