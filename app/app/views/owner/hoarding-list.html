@@ -628,72 +628,73 @@
 
 <!-- product list -->
 <div class="table-responsive" style="margin-bottom:115px !important">
-    <table class="table">
-        <thead class="text_color">
-            <tr>
-                <th>Product Details</th>
-                <th></th>
-                <th>Views</th>
-                <th class="hide-xs">Lit</th>
-                <th class="hide-xs">Shortlisted in</th>
-                <th class="hide-xs">Price</th>
-                <th class="hide-xs">Calender</th>
-                <th class="hide-xs">Visible on Map</th>
-                <th class="hide-xs">
-                    <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in productList">
-                <td class="image_tdwidth">
-                    <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
-                </td>
-                <td>
-                    <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
-                        <br> {{product.address}}
-                        <br>Facing: {{product.direction|| "N/A"}}
-                        <br>Type: {{product.format_name}}
-                </td>
-                <td class="table_vertical">{{product.impressions}}</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
-                <td class="table_vertical hide-xs">
-                    <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
-                </td>
-                <td class="table_vertical">
-                    <div class="input-group">
 
-                        {{(!myfield)?product.default_price:''}}
-                        <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
-                        <span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
-                        <span ng-click="myfield = false;changeProductPrice(product)"  ng-show="myfield"> <i class="material-icons">check</i></span>
-
-                    </div>
-                </td>
-                <td class="table_vertical hide-xs">
-                    <!-- <a href="#"><i class="material-icons">
-                      date_range
-                      </i></a> -->
-                    <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
-                           placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
-                           style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <a ng-click="getProductUnavailableDates(product.id, $event);">
-                        <i class="material-icons">
-                            calendar_today
-                        </i>
-                    </a>
-                </td>
-                <td class="table_vertical hide-xs">
-                    <div class="form-group form_yes" ng-init="(product.product_visibility == 'undefined' || product.product_visibility == '') ? '1' : '0'">
-                        <select class="form-control" style="width: 70px;" ng-model="product.product_visibility" ng-change="product_visibility(product.product_visibility, product.id)" >
-                            <option ng-selected="(product.product_visibility == 1) ? true : false" value = "1">Yes</option>
-                            <option ng-selected="(product.product_visibility == 0) ? true : false" value = "0">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="table_vertical hide-xs">
-        <md-button class="md-raised inv_details" ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
+  <table class="table">
+    <thead class="text_color">
+      <tr>
+        <th>Product Details</th>
+        <th></th>
+        <th>Views</th>
+        <th class="hide-xs">Lit</th>
+        <th class="hide-xs">Shortlisted in</th>
+        <th class="hide-xs">Price</th>
+        <th class="hide-xs">Calender</th>
+        <th class="hide-xs">Visible on Map</th>
+        <th class="hide-xs">
+          <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in productList">
+        <td class="image_tdwidth">
+          <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
+        </td>
+        <td>
+          <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
+            <br> {{product.address}}
+            <br>Facing: {{product.direction || "N/A"}}
+            <br>Type: {{product.format_name}}
+        </td>
+        <td class="table_vertical">{{product.impressions}}</td>
+        <td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
+        <td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
+        <td class="table_vertical hide-xs">
+          <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
+        </td>
+        <td class="table_vertical">
+          <div class="input-group">
+            
+            {{(!myfield)?product.default_price:''}}
+            <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+            <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+            <span ng-click="myfield=false;changeProductPrice(product)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+          
+          </div>
+        </td>
+        <td class="table_vertical hide-xs">
+          <!-- <a href="#"><i class="material-icons">
+            date_range
+            </i></a> -->
+            <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+            placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
+            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+          <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+            <i class="material-icons">
+              calendar_today
+            </i>
+          </a>
+        </td>
+        <td class="table_vertical hide-xs">
+          <div class="form-group form_yes" ng-init="(product.product_visibility == 'undefined' || product.product_visibility == '') ? '1' : '0' ">
+            <select class="form-control" style="width: 70px;" ng-model="product.product_visibility" ng-change="product_visibility(product.product_visibility,product.id)" >
+              <option ng-selected="(product.product_visibility==1) ? true :false " value = "1">Yes</option>
+              <option ng-selected="(product.product_visibility==0) ? true :false " value = "0">No</option>
+            </select>
+          </div>
+        </td>
+        <td class="table_vertical hide-xs">
+          <md-button class="md-raised inv_details" ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
         </td>
 
         </tr>

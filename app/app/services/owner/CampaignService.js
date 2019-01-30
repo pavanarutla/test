@@ -81,7 +81,12 @@ app.service('OwnerCampaignService',
           var dfd = $q.defer();
           $http.get(config.apiPath + '/close-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        getCampaignsFromProducts: function(productId){
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/campaigns-from-products/' + productId).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
       }
     }
   ]

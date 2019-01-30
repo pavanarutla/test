@@ -659,6 +659,8 @@ $scope.applymethod=function(product){
     });
 
   }
+  
+
   /*=============================
   | Page based initial loads end
   =============================*/
