@@ -754,30 +754,45 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         }
     }
 
-    if ($rootScope.currStateName == 'owner.payments') {
-        $scope.getUserCampaignsForOwner();
-        loadOwnerCampaigns();
-    }
+  if ($rootScope.currStateName == 'owner.payments') {
+    $scope.getUserCampaignsForOwner();
+    loadOwnerCampaigns();
+  }
 
-    if ($rootScope.currStateName == 'owner.updatepayment') {
-        $scope.getCampaignPaymentDetails($stateParams.id)
-        getCampaignWithPayments();
-        $scope.allCampaignsForOwner = [];
-        loadOwnerCampaigns().then(function (result) {
-            $scope.getUserCampaignsForOwner().then(function (result2) {
-                $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c) {
-                    return c.status >= 600;
-                });
-            });
-        })
-    }
-    // if ($rootScope.currStateName == 'owner.update-payments') {
+  if($rootScope.currStateName == 'owner.updatepayment'){
+    $scope.getCampaignPaymentDetails ($stateParams.id)
+    getCampaignWithPayments();
+    $scope.allCampaignsForOwner = [];
+    loadOwnerCampaigns().then(function (result) {
+      $scope.getUserCampaignsForOwner().then(function (result2) {
+        $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c) {
+          return c.status >= 600;
+        });
+      });
+    })
+  }
 
-    // }
+  //call campaign count for hoarding list
+  $scope.getCampaignList = function(){
+    var productId = $stateParams.productId;
+    OwnerCampaignService.getCampaignsFromProducts(productId).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+  }
+  $scope.getCampaignList();
 
-    /*=============================
-     | Page based initial loads end
-     =============================*/
+  // if ($rootScope.currStateName == 'owner.update-payments') {
+   
+  // }
+
+  /*=============================
+  | Page based initial loads end
+  =============================*/
 //page width
     $scope.innerWidth = $window.innerWidth;
     loadMetroCampaigns();
