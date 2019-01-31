@@ -776,8 +776,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
   $scope.getCampaignList = function(){
     var productId = $stateParams.productId;
     OwnerCampaignService.getCampaignsFromProducts(productId).then(function (result) {
-      if(result.status == 1){
-        toastr.success(result.message);        
+      if(result){
+          $scope.shortlistedproduct = result;
+        //toastr.success(result.message);        
       }
       else{
         toastr.error(result.data.message);
