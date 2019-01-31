@@ -5,7 +5,7 @@
             <tbody>
                 <tr>
                     <td class="upper_line image_tdwidth">
-                        <img ng-src="{{config.serverUrl + editRequestedhordings.image}}" alt="Smiley face" class="requ_size">
+                        <img ng-src="{{config.serverUrl + editRequestedhordings.image[0]}}" alt="Smiley face" class="requ_size">
                     </td>
                     <td class="upper_line">
                         <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
@@ -16,10 +16,10 @@
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                       <label><b>Views</b></label>
-                      <p>{{editRequestedhordings.impressions}}</p>
+                      <p>{{editRequestedhordings.impressionsperweek}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
-                            <label><b>Lit</b></label>
+                            <label><b>Light</b></label>
                             <p ng-if="editRequestedhordings.lighting == 1">Yes</p>
                             <p ng-if="editRequestedhordings.lighting == 0">No</p>
                         </td>
@@ -192,7 +192,7 @@
     </div>
 
     <div class="layout-margin col-md-5 hide-xs">
-        <img ng-src="{{config.serverUrl + editRequestedhordings.image}}" alt="Smiley face" width="100%"  class="edit_detailsimg">
+        <img ng-src="{{config.serverUrl + editRequestedhordings.image[0]}}" alt="Smiley face" width="100%"  class="edit_detailsimg">
         <!-- <label for="files" class="btn bottom-right">Change Image</label>
         <input id="files" ng-model="files.image" style="visibility:hidden;" type="file"> -->
     </div>
