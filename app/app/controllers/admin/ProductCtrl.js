@@ -22,6 +22,7 @@ app.controller("ProductCtrl", [
     ProductService,
     AdminLocationService,
     CompanyService,
+    MapService,
     config,
     Upload,
     toastr
