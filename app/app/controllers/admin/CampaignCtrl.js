@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location, $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, Upload, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -157,7 +157,43 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*
   *========= campaign proposal(planned) grid =========
   */
+// Share Campagin
+$scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
+  console.log(campaignID);
+  $scope.campaignToShare = $scope.campaignDetails;
+  console.log($scope.campaignDetails);
+  var campaignToEmail = {
+      campaign_id: campaignID,
+      email: shareCampaign.email,
+      receiver_name: shareCampaign.receiver_name,
+      //campaign_type: $scope.campaignToShare.type
+  };
+  CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+      if (result.status == 1) {
+          $mdSidenav('shareCampaignSidenav').close();
+          $mdDialog.show(
+                  $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('body')))
+                  .clickOutsideToClose(true)
+                  .title(result.message)
+                  // .textContent('You can specify some description text in here.')
+                  .ariaLabel('Alert Dialog Demo')
+                  .ok('Got it!')
+                  .targetEvent(ev)
+                  );
+      } else {
+          toastr.error(result.message);
+      }
+  });
+}
 
+$scope.toggleShareCampaignSidenav = function (campaign) {
+  console.log(campaign);
+  $scope.currentAdminShareCampaign = campaign;
+  $mdSidenav('shareCampaignSidenav').toggle();
+};
+
+// Share Campagin-ends
   /*
   //////// Floating campaign section
   */
@@ -232,6 +268,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
         return campaign.type == 0;
       });
       $scope.adminMetroCampaigns = _.filter(result, (campaign) => {
+        console.log(campaign);
         return campaign.type == 1;
       });
     });
