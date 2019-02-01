@@ -3,7 +3,7 @@
 
 <div layout="column" style="position:relative;min-height:100%;">
   <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
-    <div class="md-toolbar-tools">
+    <div class="md-toolbar-tools main_header">
       <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" class="md-icon-button">
         <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
       </md-button>
@@ -20,10 +20,10 @@
         <md-button aria-label="Support" ng-click="whyOutdoor()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
         </md-button>
         <!-- browse-->
-        <md-button  aria-label="location" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
+        <md-button  aria-label="location" class="main_h_btn" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
           Browse Inventory
         </md-button>
-        <md-button  aria-label="location" ng-if="isAuthenticated  && currStateName != 'index.metro'"
+        <md-button  aria-label="location" class="main_h_btn" ng-if="isAuthenticated  && currStateName != 'index.metro'"
           ng-href="#/metro">
           Metro
         </md-button>
