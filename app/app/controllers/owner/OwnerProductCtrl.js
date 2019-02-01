@@ -112,7 +112,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   //  });
 // };
 $scope.applymethod=function(product){
-  console.log(product);
+  //console.log(product);
   var data = {};
           var pageNo = $scope.pagination.pageNo;
           var pageSize= $scope.pagination.pageSize;
@@ -135,7 +135,7 @@ $scope.applymethod=function(product){
            data.end_date =end_date;
 				}
      OwnerProductService.getApprovedProductList(data).then(function(result){
-    $scope.productList = result.products;
+     $scope.productList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -274,7 +274,7 @@ $scope.applymethod=function(product){
 
   var getCountryList = function(){
     OwnerLocationService.getCountries().then(function(result){
-      console.log(result);
+      //console.log(result);
       $scope.countryList = result;
     });
   }
@@ -308,7 +308,7 @@ $scope.applymethod=function(product){
 
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      $scope.requestedProductList = result.products;
+      $scope.requestedProductList = result.products;      
       // console.log(result.products);
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
@@ -321,7 +321,7 @@ $scope.applymethod=function(product){
   }
  
   $scope.getStateList = function(product){
-    console.log(product);
+    //console.log(product);
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
     });
@@ -348,12 +348,12 @@ $scope.applymethod=function(product){
   }]
 
   $scope.requestedAddProduct = function(product){
-    console.log(product);
+    //console.log(product);
   }
 
   $scope.editUtterance = function(data) {
     data.edit = true;
-    console.log(data.edit);
+    //console.log(data.edit);
   }
   $scope.save = function(data) {
     data.edit = false;
@@ -384,7 +384,7 @@ $scope.applymethod=function(product){
       }
       document.getElementById("myDropdown").classList.toggle("show");
     }, function (resp) {
-      console.log('Error status: ', resp);
+      //console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
@@ -483,7 +483,6 @@ $scope.applymethod=function(product){
   }
 
   $scope.getProductUnavailableDates = function(productId, ev){
-    debugger;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');
@@ -495,7 +494,7 @@ $scope.applymethod=function(product){
 
   //updated edited product details
 
-  $scope.updateeditProductdetails = function(editRequestedhordings){
+  $scope.updateeditProductdetails = function(editRequestedhordings){    
     editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
     Upload.upload({
@@ -512,7 +511,7 @@ $scope.applymethod=function(product){
       }
       // document.getElementById("myDropdown").classList.toggle("show");
     }, function (resp) {
-      console.log('Error status: ', resp);
+      //console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
@@ -542,7 +541,7 @@ $scope.applymethod=function(product){
   $scope.viewSearchText = function(text) {
     
     if(text==''){
-      console.log("text");
+      //console.log("text");
       $scope.getApprovedProductList();
     }
   }
@@ -627,9 +626,8 @@ $scope.applymethod=function(product){
   }
   
   if($rootScope.currStateName == 'owner.editproduct-details'){
-    $scope.editRequestedhordings($stateParams.id)
-    console.log("request hoarding")
-  }
+    $scope.editRequestedhordings($stateParams.id)    
+    }
   
   $scope.changeProductPrice = function(data){
     product = {};
@@ -645,6 +643,22 @@ $scope.applymethod=function(product){
     });
 
   }
+
+  $scope.product_visibility = function(product_visibility,product_id){
+    visibility = {};
+    visibility.product_visibility =product_visibility ;
+    OwnerProductService.changeProductVisibility(product_id,visibility).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+
+  }
+  
+
   /*=============================
   | Page based initial loads end
   =============================*/

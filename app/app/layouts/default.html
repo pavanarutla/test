@@ -112,7 +112,7 @@
               </ul>
             </li>
             <li class="dropdown head-dpdn hide-xs" ng-if="isAuthenticated">
-              <a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved
+              <a  class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved
                 Camapgin ({{userSavedCampaigns.length}})</a>
               <ul class="dropdown-menu animated fadeInDown dropdown-saved">
                 <li>
@@ -129,7 +129,7 @@
                   </a>
                 </li>
                 <li>
-                  <div class="notification_bottom"> <a ng-href="#">See all campaigns</a> </div>
+                  <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns">See all campaigns</a> </div>
                 </li>
               </ul>
             </li>
@@ -139,7 +139,7 @@
                 <!-- <i class="fa fa-ellipsis-v lnr"></i> -->
 
               </a>
-              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="!isUserOwner">
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserBasic">
                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/shortlisted-products"> Shortlisted Inventory
@@ -151,14 +151,14 @@
                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
               </ul>
 
-              <ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s" ng-if="isUserOwner">
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserOwner">
 									<li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
 									<li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
 									<li> <a ng-href="#/payments"> Payments</a> </li>
 									<li> <a ng-href="#/reset_password"> Change Password</a> </li>
 									<li> <a ng-click="switchView()"> Switch to Map view</a> </li>
 									<li> <a ng-href="#"> Team</a> </li>
-									<li> <a ng-click="logout()"> Logout</a> </li>
+									<li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
 								</ul>
 
             </li>

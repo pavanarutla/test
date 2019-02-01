@@ -1,4 +1,4 @@
-app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope, ProductService, AdminLocationService, AdminMetroService, Upload, toastr,MetroService,$window){
+app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope,Upload, ProductService, AdminLocationService, AdminMetroService, toastr,MetroService,$window){
 
   /*=============================
   | Global variables
