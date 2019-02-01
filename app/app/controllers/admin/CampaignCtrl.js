@@ -188,7 +188,7 @@ $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
 }
 
 $scope.toggleShareCampaignSidenav = function (campaign) {
-  console.log(campaign);
+
   $scope.currentAdminShareCampaign = campaign;
   $mdSidenav('shareCampaignSidenav').toggle();
 };

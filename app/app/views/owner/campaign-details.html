@@ -64,7 +64,7 @@
 								<div ng-message="pattern">Enter a valid Email Id.</div>
 							</div>
 						</md-input-container>
-						<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">Share
+						<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
 							Campaign</md-button>
 					</div>
 				</form>
@@ -90,7 +90,7 @@
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
 				 style="margin-top:14px;cursor: pointer;">
-					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(campaignDetails.id)">
 						<p class="md-caption"><span><i class="material-icons i_icon">
 									reply_all
 								</i></span></p>
