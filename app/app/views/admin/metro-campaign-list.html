@@ -248,12 +248,12 @@
 						</thead>
 						<tbody class="text-center">
 							<tr ng-repeat="uMetrCamp in userMetroCampaigns">
-								<td class="table_vertical">N/A</td>
+								<td class="table_vertical">{{uMetrCamp.cid}}</td>
 								<td class="text-left table_vertical">{{uMetrCamp.name}}</td>
-								<td class="table_vertical">{{uMetrCamp.created_at | dateify | date:'dd-MM-yyyy'}}</td>
-								<td class="table_vertical hide-xs">{{uMetrCamp.no_products || "N/A"}}</td>
-								<td class="table_vertical hide-xs">N/A</td>
-								<td class="table_vertical hide-xs">N/A</td>
+								<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+								<td class="table_vertical hide-xs">{{uMetrCamp.product_count || "N/A"}}</td>
+								<td class="table_vertical hide-xs">{{uMetrCamp.campaign_paid}}</td>
+								<td class="table_vertical hide-xs">{{uMetrCamp.act_budget}}</td>
 								<td class="table_vertical">
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -407,7 +407,7 @@
 														</li>
 														<li>
 															<div class="form-group">
-																<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
+																<input ng-model="ownerCampaign.act_budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
 																 type="text" maxlength="10" required="required" placeholder="Estimated Budget">
 																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
 																	<div ng-message="required">Budget No is required.</div>
@@ -453,12 +453,12 @@
 						</thead>
 						<tbody class="text-center">
 							<tr ng-repeat="aMetrCamp in adminMetroCampaigns">
-								<td class="table_vertical">N/A</td>
+								<td class="table_vertical">{{aMetrCamp.cid}}</td>
 								<td class="text-left table_vertical">{{aMetrCamp.name}}</td>
-								<td class="table_vertical">{{aMetrCamp.created_at | dateify | date:'dd-MM-yyyy'}}</td>
-								<td class="table_vertical hide-xs">N/A</td>
-								<td class="table_vertical hide-xs">N/A</td>
-								<td class="table_vertical hide-xs">N/A</td>
+								<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+								<td class="table_vertical hide-xs">{{aMetrCamp.product_count}}</td>
+								<td class="table_vertical hide-xs">{{aMetrCamp.campaign_paid}}</td>
+								<td class="table_vertical hide-xs">{{aMetrCamp.act_budget}}</td>
 								<td class="table_vertical">
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
