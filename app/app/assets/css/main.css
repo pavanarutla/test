@@ -919,7 +919,7 @@ md-card.md-default-theme .md-card-image, md-card .md-card-image:first-child {
     transition: all .8s ease-in-out;
 }  
 .active-one{
-  color: #000!important;
+  color: #000;
 } 
 .active-two{
   background: #980000 !important;
@@ -2069,16 +2069,28 @@ cursor: move;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
-    min-height: 420px;
+    min-height: 562px;
+    position: relative;
+    top:0px;
+}
+.main-banner{
+    position: absolute;
+    top:120px;
+}
+.two-demo-button{
+    top:50px;
+}
+.owl-carousel .item{
+    background: none;
 }
 .main-banner h4 {
     color: #fff;
-    font-size: 2.5em;
-    font-weight: 600;
-    text-shadow: 2px -1px 4px #000;
+    font-size: 40px;
+    /* text-shadow: 6px 6px 5px rgba(0, 0, 0, 0.59); */
+    font-weight: bold;
+    letter-spacing: 2px;
 }
-.read-buttn a,
-.view-buttn a {
+.read-buttn a {
     color: #bc2535;
     text-decoration: none;
     text-transform: capitalize;
@@ -2294,10 +2306,10 @@ p.p5 {
     background:#e7eff1;
 }
 .button_about{
-    position:relative; 
+    /* position:relative; 
     margin: -20px -50px; 
     top:50%; 
-    left:50%;
+    left:50%; */
     background:#BC2535;
 }
 .button_faq {
@@ -2373,15 +2385,15 @@ p.p5 {
 }
 
 
-/* .toggle-2,
+.toggle-2,
 .toggle,
 [id^=drop] {
     display: none;
-} */
+}
 /*========================Home Page New End =======================*/
 
 /*========================Media Qu Home Page New  =======================*/
-/* @media all and (max-width : 736px) {
+@media all and (max-width : 736px) {
     .toggle+a,
     .home_menu {
         display: none;
@@ -2431,17 +2443,46 @@ p.p5 {
     }
     [id^=drop]:checked+md-menu-bar {
         display: block;
-        background: #fff;
+        background: #000;
         padding: 15px 0;
         text-align: center;
         width: 100%;
+        margin-top:260px;
     }
-} */
+}
 @media screen and (max-width:575px){
-    /* .toggle.toogle-2 {
+    .main-banner{
+        position: absolute;
+        top:20px;
+    }
+    .main-banner h4 {
+        font-size: 25px;
+    }
+    .suggest_borderright{
+        border-right: 0px solid #fff;
+    }
+    .left{
+        margin-left: 0px;
+        opacity: 1;
+    }  
+    .right{
+        margin-right: 0px;
+        opacity: 1;
+    } 
+    .recent-img img {
+        width: 76%;
+        margin-left: 69px;
+        margin-top: 15px;
+        padding: 0px 58px 0px 0px;
+        border-radius: 5px;
+    }
+    .advertise_lap {
+        min-height: 170px;
+    }
+    .toggle.toogle-2 {
         padding: 7px 8px;
         font-size: 13px;
-    } */
+    }
     .footersocial_icon{
         text-align: center;
         margin-top: 20px;
@@ -2467,6 +2508,14 @@ p.p5 {
 @media screen and (min-width:768px) and (max-width:  991px){
     md-menu-bar{
             padding: 0px 0px;
+    }
+    .img-thumbnail {
+        padding: .25rem;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+        max-width: 50%;
+        height: auto;
     }
 }
 /*========================Media Qu Home Page New End =======================*/
