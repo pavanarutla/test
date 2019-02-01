@@ -212,7 +212,19 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     });
   }
 
-
+  $scope.changeProductPrice = function(data){
+    product = {};
+    product.id = data.product_id;
+    product.default_price = data.default_price;
+    AdminCampaignService.changeProductPrice(product).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+  }
   $scope.editProposedProduct = function(bookingId, price){
     var bookingObj = {
       booking_id: bookingId,

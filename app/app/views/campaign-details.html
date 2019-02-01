@@ -39,7 +39,7 @@
 							<div ng-message="pattern">Enter a valid Email Id.</div>
 						</div>
 					</md-input-container>
-					<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">Share Campaign</md-button>
+					<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentShareCampaign)">Share Campaign</md-button>
 				</div>
 			</form>
 		</md-content>
@@ -89,7 +89,7 @@
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
 			 style="margin-top:14px;">
-				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(campaignDetails.id)">
 					<p class="md-caption"><span><i class="material-icons i_icon">
 								reply_all
 							</i></span></p>
@@ -176,10 +176,8 @@
 		<div class="p-2 col-md-6">
 			<div class=" chat_box ">
 				<ul class="p-2">
-					<li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
-						please
-						revision
-						BB238 - Kothaguda hoarding price </li>
+					<li class="mt-2"><span class="user_dec">U</span>My budget for this campain is <b>{{campaignDetails.est_budget}}</b> .</li>
+					<!-- Can you	please revision	{{campaignDetails.cid}} -->
 					<li class="mt-4"><span class="user_bi">BI</span>The product price is
 						revised as
 						requested</li>

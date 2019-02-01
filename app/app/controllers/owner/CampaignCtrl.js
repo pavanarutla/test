@@ -67,7 +67,8 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     };
 
     //campaign share
-    $scope.toggleShareCampaignSidenav = function () {
+    $scope.toggleShareCampaignSidenav = function (campaignDetails) {
+        $scope.OwnerShareCampaign = campaignDetails;
         $mdSidenav('shareCampaignSidenav').toggle();
     };
 
