@@ -2,70 +2,44 @@
 
 	<img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
 	<!-- <div class="metroBg"></div> -->
-	<!-- <md-sidenav class="main__sidenav md-sidenav-left" md-component-id="menusideNav" md-is-locked-open="$mdMedia('gt-xs')" hide-xs>
-		<div class="sidenav__ineer scrollbar__style">
-			
-			<div layout="column" layout-padding class="side-navpadding">
-				<div class="md-padding main-part" layout="column">
-					<p class="md-caption theme-txt txt-mrng" style="margin-bottom: 0px">
-						L&T Metro-Digital Sinage
-					</p>
-				</div>
-			</div>
-			
-			<div layout="column" layout-padding class="side-navpadding">
-				<div class="main-part" layout="column" style="cursor:pointer;padding: 0px;">
-					<select name="corridor" style="padding: 8px; background: #556472;border: none;color: #fff;font-size: 14px;" id="corridor" ng-model="selectedCorridor" ng-change="getMetroPackages(selectedCorridor.id)" ng-options="corr as (corr | metroCorridorsFromTo) for corr in metroCorridors" required class="selectpicker">
-						
-					</select>
-					
-				</div>
-			</div>
-			
-			<div layout="column" layout-padding class="side-navpadding">
-				<div class=" md-padding main-part" layout="column" ng-click="showPackagePopup()" style="cursor:pointer">
-					<div layout="row">
-						<p class="md-caption theme-txt txt-mrng" style="margin-bottom: 0px">Packages</p>
-						<div flex></div>
-						<div>
-							<md-icon ng-hide="format">
-								<i class="material-icons theme-txt">keyboard_arrow_right</i>
-							</md-icon>
-							<md-icon ng-show="format">
-								<i class="material-icons theme-txt">keyboard_arrow_down</i>
-							</md-icon>
+	
+
+	<div id="mydiv" class="map_filters metro_new">
+		<div id="mydivheader">
+			<h3 class="md-body-2 pt-1">L&T Metro</h3>
+			<h4>Digital Signage - Inside Train</h4>
+		</div>
+
+		
+	
+			<!--SHORTLIST html start -->
+			<div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
+					<!-- <div layout="row" ng-init="shortlist = false" ng-click="shortlist = !shortlist"> -->
+					<a class=" main-part" layout="column" style="cursor:pointer;padding: 5px 10px;" ng-click="shortlistDiv()">
+						<div layout="row">
+							<div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
+							<div flex></div>
+							<div class="md-body-1 text-white">
+								({{shortlistedPackages.length}})
+							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div layout="column" layout-padding class="side-navpadding">
-				<md-content class=" md-padding main-part" layout="column" ng-click="shortlistDiv()" style="cursor:pointer">
-					<div layout="row">
-						<div class="md-caption theme-txt txt-mrng">SHORTLIST</div>
-						<div flex></div>
-						<div>
-							<md-icon ng-hide="shortlist">
-								<i class="material-icons theme-txt">keyboard_arrow_down</i>
-							</md-icon>
-							<md-icon ng-show="shortlist">
-								<i class="material-icons theme-txt">keyboard_arrow_up</i>
-							</md-icon>
-						</div>
-					</div>
-				</md-content>
+					</a>
+				
 				<div ng-show="shortlist" class="short-list">
 					<div class="shortlistscrollbar" id="shortlistscrollbar-style">
 						<div layout="column">
 							<div layout="row" flex>
 								<md-list flex style="padding:0px">
-									<md-list-item class="md-3-line list-img" style="padding:0px 5px" ng-repeat="slPkg in shortlistedPackages">
-										<div class="c-name">
+									<md-list-item class="md-3-line list-img" style="" ng-repeat="slPkg in shortlistedPackages">
+										<!-- <img ng-src="assets/images/product/person.png" class="md-avatar" alt="aa" /> -->
+										<!-- <div class="c-name">
 											<span class="md-body-2">{{slPkg.name | MetroSlIcon}}</span>
-										</div>
+										</div> -->
 										<div class="md-list-item-text list-item-text" layout="column" flex>
 											<h3 class="md-body-2">{{slPkg.name}}</h3>
-											<p class="md-caption">{{slPkg.selected_trains}}Trains, {{slPkg.selected_slots}}Slots</p>
+											<p class="md-caption">Budget For {{slPkg.months =='0.5'? ' 15 Days ': slPkg.months+' Months'}}, {{slPkg.selected_trains}} Train(s)</p>
+							      	<h3 class="md-title">Rs.{{slPkg.price}}</h3>
+											<!-- <p class="md-caption">{{shortlisted.address}}</P> -->
 										</div>
 										<div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
 											<md-button class="md-icon-button" ng-click="deleteShortlistedMetroPackage(slPkg.package_id)">
@@ -74,7 +48,9 @@
 												</md-icon>
 											</md-button>
 										</div>
+										<md-divider></md-divider>
 									</md-list-item>
+									
 								</md-list>
 							</div>
 							<md-divider></md-divider>
@@ -82,265 +58,105 @@
 					</div>
 					<md-divider></md-divider>
 					<div layout="row">
-						<md-button class="md-raised " ng-click="toggleViewAllShortlisted()">VIEW ALL</md-button>
 						<div flex></div>
-						<md-button class="md-raised md-primary" ng-click="toggleSaveCampaignSidenavMetro()">SAVE </md-button>
+						<md-button class="md-raised md-primary" ng-click="showSaveCampaignPopup = true;">SAVE </md-button>
+						<!-- <md-button class="md-raised" ng-click="toggleShareShortlistedSidenav()">SHARE</md-button> -->
 					</div>
 				</div>
 			</div>
-
-			<div layout="column" layout-padding class="side-navpadding">
-				<md-content class=" md-padding main-part" layout="column" ng-click="savedcampaignDiv()" style="cursor:pointer">
-					<div layout="row">
-						<div class="md-caption theme-txt txt-mrng">SAVED CAMPAIGNS</div>
-						<div flex></div>
-						<div>
-							<md-icon ng-hide="savedcampaign">
-								<i class="material-icons theme-txt">keyboard_arrow_down</i>
-							</md-icon>
-							<md-icon ng-show="savedcampaign">
-								<i class="material-icons theme-txt">keyboard_arrow_up</i>
-							</md-icon>
-						</div>
-					</div>
-				</md-content>
-				<div class="saved-campagin" ng-if="savedcampaign">
-					<div class="savescrollbar" id="savecamp-style" ng-repeat="metroCampaign in metroCampaigns">
-						<div layout="column">
-							<div layout="row" layout-padding>
-								<p class="md-caption " flex="35" style="">{{metroCampaign.name}}</p>
-								
-								<div flex-xs="5" flex-sm="5" style="padding:0px">
-								
-								</div>
-							</div>
-							<div layout="row" layout-align="space-around center" style="margin-top:-10px">
-								<md-button class="md-primary saved-btn" ng-href="#/metro-campaign/{{metroCampaign.id}}"> VIEW</md-button>
-								<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 101" ng-click="checkoutMetroCampaign($event, metroCampaign.id)">Checkout</md-button>
-								<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 121" ng-disabled="true">Payment Confirmation Pending</md-button>
-								<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 131" ng-disabled="true">Campaign Ready</md-button>
-								<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 141" ng-disabled="true">Running</md-button>
-								<md-button class="md-primary saved-btn" ng-if="metroCampaign.status == 151" ng-disabled="true">Closed</md-button>
-							</div>
-							<md-divider></md-divider>
-						</div>
-					</div>
-					<md-divider></md-divider>
-				
-				</div>
-				<div style="background:#F1FBFD" ng-if="activeUserCampaigns.length == 0 && savedcampaign">
-					<div layout="column" layout-margin layout-align="center center">
-						<img src="assets/images/product/createcampagin.png" alt="image" width="214px;height:174px">
-					</div>
-					<div layout="column" layout-align="center center" layout-margin>
-						<md-button class="md-raised md-warn" ng-click="toggleCreateEmptyCampaignSidenav()">CREATE CAMPAIGN</md-button>
-					</div>
-				</div>
-			</div>
-			>
-		</div>
-	</md-sidenav> -->
-	<!--  metro Sidenav -->
-
-	<div id="mydiv" class="map_filters metro_new">
-		<div id="mydivheader">
-			<span class="md-body-2 pt-1">L&T Metro</span>
-		</div>
-		<!-- formats html start-->
-		<div layout="column" class="formats_block md-whiteframe-2dp mt-2">
-			<div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
-				<div layout="row">
-					<div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
-					<div flex></div>
-
-				</div>
-			</div>
-			<div layout="column" class="formats-types">
-				<div class="formatinnerpart">
-					<div class="row" style="margin-left:0px;margin-right:0px">
-						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
-
-							<div ng-cloak style="border-right:1px solid #ccc">
-								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-								 style="margin:0px;padding :0px;">
-									<img ng-src="" class="img-size">
-									<div class="md-caption">Digital Screen</div>
-								</md-button>
-								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
-							</div>
-
-						</div>
-						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
-
-							<div ng-cloak style="border-right:1px solid #ccc">
-								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-								 style="margin:0px;padding :0px;">
-									<img ng-src="" class="img-size">
-									<div class="md-caption">Train warp </div>
-								</md-button>
-								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
-							</div>
-
-						</div>
-						<div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" class="formatgridpart">
-
-							<div ng-cloak style="border-right:1px solid #ccc">
-								<md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-								 style="margin:0px;padding :0px;">
-									<img ng-src="" class="img-size">
-									<div class="md-caption">Inside Static </div>
-								</md-button>
-								<!-- <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format"> -->
-							</div>
-
-						</div>
-					</div>
-					<md-divider></md-divider>
-				</div>
-			</div>
-		</div>
-		<!-- formats html end-->
-		<!--Shortlisted Product html start -->
-		<div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
-			<a class=" main-part" layout="column" href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
-				<div layout="row">
-					<div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
-					<div flex></div>
-					<div class="md-body-1 text-white">
-						({{shortListedProducts.length}})
-					</div>
-				</div>
-			</a>
-		</div>
 		<!--Shortlisted Product html end -->
 
 	</div>
 	<div class="metro_pkgs">
-		<h3 class="ml-3 md-body-2">24" Digital Screen Packages-Inside Metro Train</h3>
-		<div class="row mr-0 ml-0 mt-2">
-			<div class="col-sm-9 col-md-7 col-lg-6 pr-0">
-				<div style="background:#FE0000;padding:10px;border-radius:10px;">
-					<p class="text-white mb-1">Corridor - I</p>
-					<h3 class="text-white">Miyapur to LB Nagar</h3>
-					<hr style="padding:1px;background-color: #fff;">
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Total Trains - 18</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Distance covered -
-						29km</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> No of Stations
-						covered - 27</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad duration - 30
-						sec</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> 12 screens per
-						train</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad spots per day /
-						per train 576</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Each train round
-						trips 13 times per day</p>
-					<hr style="padding:1px;background-color: #fff;">
-					<div class="row">
-						<div class="col">
-							<p class="text-white mt-2">No of Trains:</p>
-						</div>
-						<div class="col">
-							<div class="m_button_group">
-								<button id="mSubtract">-</button>
-								<input type="text">
-								<button id="mAdd">+</button>
+		<div class="metro_pack md-whiteframe-z2" style="">
+			<!-- <h3 class="ml-3 md-body-2">24" Digital Screen Packages-Inside Metro Train</h3> -->
+				<div class="row">
+						<div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
+							<div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
+								<h3 class="text-white">{{metroPackage.corridor}}</h3>
+								<h5 class="text-white">{{metroPackage.format}}</h5>
+									<hr style="padding:1px;background-color: #fff;">
+									<p class="text-white mb-0" ng-repeat="desc in (metroPackage.description | customSplitString)">
+										<i class="fa fa-check-square-o" aria-hidden="true" ></i>
+										{{desc}}
+									</p>
+
+									<hr style="padding:1px;background-color: #fff;">
+									<!-- <p class="text-white">No of Trains: <input class="train_text" type="number" min="0" style="margin-left: 40px;"></p> -->
+									<!-- <p class="text-white">No of Trains:
+											<span style="background:#ededed;padding:6px;margin-left: 40px;">
+												<input type="number" ng-model="metroPackage.selected_trains" style="width:47%" value="1" size="8" min="1" max="{{metroPackage.max_trains}}" id="count1">
+												</span></p> -->
+												<p class="text-white">No of Trains: 
+														<span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" value="-"  ng-click="Trcount = (Trcount >1 ? ( Trcount - 1) : 1 );" ng-init="Trcount=1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+															<input type="text" size="10" readonly="" value="{{Trcount}} Trains"  ng.model="metroPackage.selected_trains" style="border: none;background:none;text-align:center;">
+															<input type="button" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+									<!-- <p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p> -->
+									<!-- <p class="text-white">No of Months:
+											<span style="background:#ededed;padding:6px;margin-left: 32px;border-radius: 3px;">
+												<input type="number" ng-model="metroPackage.months" value="1" min="1" size="8" max="12" id="count2" style="width:47%">
+												</span></p> -->
+												<p class="text-white">Durations: 
+														<span style="background:#ededed;padding:6px;margin-left: 45px;border-radius: 3px;">
+															<input type="button" value="-"  ng-click="(Mocount = (Mocount==1?.5:Mocount - 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" ng-init="Mocount= .5; Days='Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+															<input type="text" size="10" readonly="" value="{{(Mocount<1)?15:Mocount}} {{Days}}" id="count" style="border: none;background:none;text-align:center;">
+															<input type="button" value="+" ng-click="(Mocount = (Mocount==.5?Mocount + .5:Mocount + 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+									<!-- <p class="text-white">Start Date: <input type="date" min="{{today1}}" ng-model="metroPackage.start_date" style="margin-left: 51.5px;width:52%;" ></p> -->
+									<p class="text-white">Start Date: 
+											<span style="background:#ededed;padding:6px;margin-left:42px;border-radius: 3px;">
+													<!-- <input type="text" size="10" value="Start From" style="border: none;background:none;width:133px;text-align: center;"> -->
+													<md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
+												</span>
+												</p>
+									<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount) }}</span></p>
+									<div style="display:none;">
+										{{ metroPackage.selected_trains = Trcount }}
+										{{ metroPackage.months = Mocount }}
+									</div>
+									<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Shortlist This</p>
+									<p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Deselect This</p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<p class="text-white mt-2">No of Months:</p>
-						</div>
-						<div class="col">
-							<div class="m_button_group">
-								<button id="mSubtract">-</button>
-								<input type="text">
-								<button id="mAdd">+</button>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<p class="text-white mt-2">Start Date:</p>
-						</div>
-						<div class="col">
-							<input type="date" min="0">
-						</div>
-					</div>
-					<!-- <p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p> -->
-					<!-- <p class="text-white">Start Date: <input type="date" min="0" style="margin-left: 55px;"></p> -->
-					<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. 1,00,800</span></p>
-					<div class="text-center">
-						<a class=" metro_pkg_btn" href="#">Shortlist This</a>
-					</div>
-					
 				</div>
-			</div>
-			<div class="col-sm-9 col-md-7 col-lg-6">
-				<div style="background:#0D7ECA;padding:10px;border-radius:10px;">
-					<p class="text-white mb-1">Corridor - III</p>
-					<h3 class="text-white">Nagole to Shilparamam</h3>
-					<hr style="padding:1px;background-color: #fff;">
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Total Trains - 17</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Distance covered -
-						26.5km</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> No of Stations
-						covered - 23</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad duration - 30
-						sec</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> 12 screens per
-						train</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Ad spots per day /
-						per train 576</p>
-					<p class="text-white mb-0"><i class="fa fa-check-square-o fa_font_size" aria-hidden="true"></i> Each train round
-						trips 13 times per day</p>
-					<hr style="padding:1px;background-color: #fff;">
-					<div class="row">
-							<div class="col">
-								<p class="text-white mt-2">No of Trains:</p>
-							</div>
-							<div class="col">
-								<div class="m_button_group">
-									<button id="mSubtract">-</button>
-									<input type="text">
-									<button id="mAdd">+</button>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<p class="text-white mt-2">No of Months:</p>
-							</div>
-							<div class="col">
-								<div class="m_button_group">
-									<button id="mSubtract">-</button>
-									<input type="text">
-									<button id="mAdd">+</button>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<p class="text-white mt-2">Start Date:</p>
-							</div>
-							<div class="col">
-								<input type="date" min="0">
-							</div>
-						</div>
-					<!-- <p class="text-white">No of Trains: <input class="train_text" type="number" min="0" style="margin-left: 40px;"></p>
-					<p class="text-white">No of Months: <input type="number" min="0" style="margin-left: 27px;"></p>
-					<p class="text-white">Start Date: <input type="date" min="0" style="margin-left: 55px;"></p> -->
-					<p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. 1,00,800</span></p>
-					<!-- <p class="text-center" style="margin: 0px 50px 0px 50px;background: #fff;color: #0D7ECA;padding: 5px;border-radius: 5px;font-size: 30px;font-weight: 500;">Shortlist This</p> -->
-					<div class="text-center">
-						<a class="text-center metro_pkg_btn" href="#" style="color: #0D7ECA !important">Shortlist This</a>
-					</div>
+			<div layout="row" layout-margin>
+				<div class="show_bug">
+					<p class="md-caption">
+						Estimated Budget for {{getEstBudgetForSelectedPackages().months =='0.5'? ' 15 Days ': slPkg.months+' Months'}}, {{getEstBudgetForSelectedPackages().selected_trains}} Trains
+					</p>
+					<h2 class="text_color">
+						Rs. {{getEstBudgetForSelectedPackages().price}}
+					</h2>
+					<!--<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>
+					 <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
+				</div>
+				<div flex></div>
+				<div class="logo_lnt">
+					<p class="md-caption">We are oﬃcial Partners to</p>
+					<img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+	<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+			<div layout="row">
+				<div flex></div>
+				<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+			<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+			<div class="md-title  m-2">Let's work Together!</div>
+			<div class="form-group mt-3 mr-2 ml-2">
+				<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+			</div>
+			<div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised all_button" layout-fill ng-click="saveMetroCampaign(campaign)">
+					Save Campaign
+				</md-button>
+			</div>
+		</div>
 
 </div>
 <!-- map html start (left side controls) ends -->
