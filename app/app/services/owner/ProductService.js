@@ -11,6 +11,11 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				$http.post(config.apiPath + '/change-product-price' ,data).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
 			},
+			changeCampaignProductPrice: function (data) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/change-campaign-product-price' ,data).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
 			getSearchProductList: function (pageNo, pageSize, search) {
 				var pageData = "";
 				if(pageNo && pageSize){

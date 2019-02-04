@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr,OwnerProductService) {
 
   $scope.productList = [];
   
@@ -453,6 +453,21 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     })
   }
 
+  $scope.changeCampaignProductPrice = function(campaign_id,admin_price,product_id){
+    product = {};
+    product.campaign_id = campaign_id;
+    product.admin_price = admin_price;
+    product.product_id = product_id;
+    OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+
+  }
 
   /*=========================
   | Page based initial loads

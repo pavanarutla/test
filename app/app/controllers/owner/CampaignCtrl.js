@@ -786,7 +786,27 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
       }
     });
   }
-  $scope.getCampaignList();
+  if($location.$$path.search("product-shortlist-campagin") !== -1){
+    $scope.getCampaignList();
+  }
+    
+
+  $scope.changeCampaignProductPrice = function(campaign_id,owner_price,product_id){
+    product = {};
+    product.campaign_id = campaign_id;
+    product.owner_price = owner_price;
+    product.product_id = product_id;
+    OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
+      if(result.status == 1){
+        toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+
+  }
+
 
   // if ($rootScope.currStateName == 'owner.update-payments') {
    
