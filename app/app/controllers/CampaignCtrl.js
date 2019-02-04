@@ -133,6 +133,34 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  // Send & get comment  
+  $scope.sendquerry = function (campID,message) {
+    var data = {id:campID,message:message}
+    CampaignService.sendComment(data).then(function (result) {
+        if (result.status == 1) {
+            //toastr.success(result.message);
+            alert("Success!!!!");
+            // $scope.sendquerryErrors = null;
+            // $scope.sendquerry = {};
+            // $scope.forms.sendquerryForm.$setPristine();
+            // $scope.forms.sendquerryForm.$setUntouched();
+        } else if (result.status == 0) {
+            // $scope.sendquerryErrors = result.message;
+            alert("Error!!!")
+        }
+    }, function (error) {
+        toastr.error("somthing went wrong please try agin later");
+    });
+}
+$scope.Getcomment = function (campaignID){  
+  var data = {id:campaignID}
+  CampaignService.getComment(data).then((result) => {
+    console.log(result);
+    $scope.comments = result;
+});
+}
+  // Send and Get comment Ends
+
   $scope.confirmCampaignBooking = function(ev, campaignId){
     CampaignService.confirmCampaignBooking(campaignId).then(function(result){
       if(result.status == 1){
@@ -425,5 +453,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   | Page based initial loads end
   =============================*/
   loadMetroCampaigns();
+  $scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });
