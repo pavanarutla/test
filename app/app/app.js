@@ -65,6 +65,14 @@ var app = angular.module('bbManager', [
       url: 'homemetro',
       templateUrl: 'views/homemetro.html'
     })
+    .state('index.ourteam', {
+      url: 'ourteam',
+      templateUrl: 'views/our_team.html'
+    })
+    .state('index.joincareers', {
+      url: 'joincareers',
+      templateUrl: 'views/join_careers.html'
+    })
     .state('index.formats', {
       url: 'formats',
       templateUrl: 'views/formats.html',
