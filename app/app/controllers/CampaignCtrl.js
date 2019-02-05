@@ -134,7 +134,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   // Send & get comment  
-  $scope.sendquerry = function (campID,message) {
+  /*$scope.sendquerry = function (campID,message) {
     var data = {id:campID,message:message}
     CampaignService.sendComment(data).then(function (result) {
         if (result.status == 1) {
@@ -158,7 +158,7 @@ $scope.Getcomment = function (campaignID){
     console.log(result);
     $scope.comments = result;
 });
-}
+}*/
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(ev, campaignId){
@@ -196,32 +196,21 @@ $scope.Getcomment = function (campaignID){
     });
   }
 
-  $scope.openRequestChangeQuoteForm = function(campaignId){
-    $mdDialog.show({
-      locals: {ctrlScope: $scope},
-      templateUrl: 'views/request-quote-change.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-      controller: function($scope, $mdDialog, ctrlScope, CampaignService, toastr){
+  $scope.changeQuoteRequest = function(campaignId,remark){
         $scope.changeRequest = {};
-        $scope.changeRequest.for_campaign_id = ctrlScope.campaignDetails.id;
-        $scope.requestChangeInQuote = function(){          
+        $scope.changeRequest.for_campaign_id = campaignId;
+        $scope.changeRequest.remark = remark;
+        $scope.changeRequest.type = 'user';
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
-              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
-              $mdDialog.hide();
+              $scope.getCampaignDetails(campaignId);
+              //$mdDialog.hide();
               toastr.success(result.message);
             }
             else{
               toastr.error(result.message);
             }
           });
-        }
-        $scope.close = function(){
-          $mdDialog.hide();
-        }
-      }
-    });
   }
 
   $scope.suggestionRequest = CampaignService.suggestedData;
@@ -453,6 +442,6 @@ $scope.Getcomment = function (campaignID){
   | Page based initial loads end
   =============================*/
   loadMetroCampaigns();
-  $scope.Getcomment($stateParams.campaignId);
+  //$scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });
