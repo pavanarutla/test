@@ -396,6 +396,8 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+		
+		$scope.getProductUnavailableDatesautoload(marker.properties['id']);
         $scope.selectedProduct = marker;
       }
 
@@ -414,6 +416,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+		$scope.getProductUnavailableDatesautoload(marker.properties['id']);
         $scope.selectedProduct = marker;
       }
 
@@ -1115,6 +1118,15 @@ app.controller('GmapCtrl',
         MapService.getProductUnavailableDates(productId).then(function(dateRanges){
           $scope.unavailalbeDateRanges = dateRanges;
           $(ev.target).parents().eq(3).find('input').trigger('click');
+        });
+      }
+
+  $scope.getProductUnavailableDatesautoload = function(productId){
+	  
+        MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+          $scope.unavailalbeDateRanges = dateRanges;
+		  console.log(dateRanges);
+          $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
         });
       }
 
