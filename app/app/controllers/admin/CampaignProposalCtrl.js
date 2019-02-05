@@ -469,6 +469,23 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
 
   }
 
+  $scope.changeQuoteRequest = function(campaignId,remark){
+    $scope.changeRequest = {};
+    $scope.changeRequest.for_campaign_id = campaignId;
+    $scope.changeRequest.remark = remark;
+    $scope.changeRequest.type = 'bbi';
+      CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
+        if(result.status == 1){
+          $scope.loadCampaignData(campaignId);
+          //$mdDialog.hide();
+          toastr.success(result.message);
+        }
+        else{
+          toastr.error(result.message);
+        }
+      });
+}
+
   /*=========================
   | Page based initial loads
   =========================*/
