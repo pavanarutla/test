@@ -137,6 +137,7 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
+					<th>Status</th>
 					<th style="text-align:end;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
@@ -163,9 +164,13 @@
 					<td class="table_vertical">
 						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
-					<td class="table_vertical" style="text-align:end;">
-						<p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>
+					<td class="table_vertical" >
+						<p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
+						<p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">{{campaignDetails.status | stringifyCampaignStatus}} </p>
+						<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>
+						<p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
 					</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -217,10 +222,10 @@
 						<div class="md-title">{{campaignDetails.grandTotal}}</div>
 					</div>
 					<div layout="row">
-						<input type="checkbox" />Request Executive to collect cash / cheque
+						<input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
 					</div>
 					<!--<md-button class="md-raised md-primary" ng-click="changeQuoteRequest(campaignDetails.id, $event)">Change Quote</md-button>-->
-					<md-button class="md-raised md-primary" ng-click="confirmCampaignBooking($event, campaignDetails.id)">PAY & LAUNCH CAMPAIGN</md-button>
+					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">PAY & LAUNCH CAMPAIGN</md-button>
 				</div>
 			</div>
 		</div>
