@@ -92,6 +92,7 @@ app.filter('stringifyProductStatus',function(){
       case 300 :
         returnStatus = 'running'
         break;
+
     }
     return returnStatus;
   }

@@ -453,13 +453,15 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
     })
   }
 
-  $scope.changeCampaignProductPrice = function(campaign_id,admin_price,product_id){
+  $scope.changeCampaignProductPrice = function(campaign_id,admin_price,product_id,product_n){
     product = {};
     product.campaign_id = campaign_id;
     product.admin_price = admin_price;
     product.product_id = product_id;
+    product.product = product_n;
     OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
       if(result.status == 1){
+        $scope.loadCampaignData(campaign_id);
         toastr.success(result.message);        
       }
       else{

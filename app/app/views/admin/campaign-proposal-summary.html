@@ -299,7 +299,7 @@
       >
         <p class="">No of Products</p>
         <p class="md-caption mob_span mob_5">
-          <b>{{ campaignDetails.no_products }}</b>
+          <b>{{ campaignDetails.products.length }}</b>
         </p>
       </div>
       <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
@@ -404,8 +404,8 @@
           <th class="hide-xs">Booked To</th>
           <th class="hide-xs">Price Given</th>
           <th class="hide-xs">Price Received</th>
+          <th class="hide-xs">Default Price</th>
           <th class="hide-xs">Inventory Owner</th>
-
           <th class="hide-xs">Inventory Status</th>
           <!-- <th class="hide-xs">
 								<md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
@@ -446,10 +446,13 @@
                 {{(!myfield)?campaignProduct.admin_price:''}}
                 <input type="number" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
                 <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
-                <span ng-click="myfield=false;changeCampaignProductPrice(campaignProduct.campaign_id,campaignProduct.admin_price,campaignProduct.product_id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+                <span ng-click="myfield=false;changeCampaignProductPrice(campaignProduct.campaign_id,campaignProduct.admin_price,campaignProduct.product_id, campaignProduct.siteNo)"  ng-show="myfield"> <i class="material-icons">check</i></span>
           </td>
           <td class="table_vertical hide-xs">
                    {{campaignProduct.owner_price}}                       
+          </td>
+          <td class="table_vertical hide-xs">
+                {{campaignProduct.default_price}}                       
           </td>
           <td class="table_vertical hide-xs">
             <p class=" md-caption">Uni Ads</p>
@@ -495,7 +498,7 @@
       <md-button
         class="md-raised md-warn"
         ng-click="finalizeCampaign()"
-        ng-if="campaignProducts.status = 300">
+        ng-if="campaignDetails.status == 300">
         Send Quote
         <span>
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -503,9 +506,8 @@
       </md-button>
       <md-button
         class="md-raised md-primary"
-        ng-if="campaignProducts.status >= 600"
-        ng-click="confirmCampaignBooking(campaign.id, $event)"
-      >
+        ng-if="campaignDetails.status == 600"
+        ng-click="confirmCampaignBooking(campaign.id, $event)">
         Confirm Booking
         <span>
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -513,8 +515,7 @@
       </md-button>
       <md-button
         class="md-raised md-primary"
-        ng-if="campaignProducts.status >= 700"
-      >
+        ng-if="campaignDetails.status >= 700" ng-disabled="true">
         Launched
         <span>
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
