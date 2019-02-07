@@ -326,7 +326,99 @@
           <p class="mob_spanicon share_icon">Download Quotetation</p>
         </div>
       </div>
-
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
+      style="margin-top:1em;">
+      <div class="dropdown">
+        <md-button class="md-raised md-primary update_mrg" onclick="addPayment()" class="dropbtn" style="">
+          <md-icon style="width:1.5vw">
+            <i class="material-icons update_accounticon">
+              account_balance_wallet
+            </i>
+          </md-icon>
+          Add Payment
+        </md-button>
+        <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
+          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+            <div layout="colmun">
+              <span flex></span>
+              <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+                <md-icon class="md-default-theme">
+                  <i class="material-icons">close</i>
+                </md-icon>
+              </md-button>
+            </div>
+            <h3 class="md-title" style="margin-top:-28px;">Grand Total : Rs. 13,04,000</h3><br>
+            <li>
+              <div class="">
+                <div class="col-md-12">
+                  <form>
+                    <div class="form-group row">
+                      <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
+                      <div class="col-sm-8">
+                        <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                          <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.reference_no">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.received_by">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                      <div class="col-sm-8">
+                        <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"
+                          ng-model="campaignPayment.comment"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                      <div class="col-sm-8">
+                        <span class="input-group-btn">
+                          <span class="">
+                            <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                              accept="image/*" ngf-max-size="1MB">
+                          </span>
+                        </span>
+                        <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                          style="color:red">
+                          <div ng-message="required">Image is required.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div flex></div>
+                      <div class="col-sm-4">
+                        <!-- <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+                                   <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
+                      </div>
+                      <div class="col-sm-4">
+                        <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </li>
+          </form>
+        </div>
+      </div>
+    </div>
       <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
                             style="margin-top:1em;">
                             
@@ -443,26 +535,26 @@
             <p>{{ campaignProduct.booked_to | date }}</p>
           </td>
           <td class="table_vertical hide-xs">
-                {{(!myfield)?campaignProduct.admin_price:''}}
+                {{(!myfield)?(campaignProduct.admin_price || 'N/A'):''}}
                 <input type="number" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
-                <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+                <span ng-click="myfield=true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
                 <span ng-click="myfield=false;changeCampaignProductPrice(campaignProduct.campaign_id,campaignProduct.admin_price,campaignProduct.product_id, campaignProduct.siteNo)"  ng-show="myfield"> <i class="material-icons">check</i></span>
           </td>
           <td class="table_vertical hide-xs">
-                   {{campaignProduct.owner_price}}                       
+                   {{campaignProduct.owner_price || 'N/A'}}                       
           </td>
           <td class="table_vertical hide-xs">
-                {{campaignProduct.default_price}}                       
+                {{campaignProduct.default_price  || 'N/A'}}                       
           </td>
           <td class="table_vertical hide-xs">
-            <p class=" md-caption">Uni Ads</p>
+            <p class=" md-caption">{{campaignProduct.client_name}}</p>
             <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
           </td>
           <td class="table_vertical hide-xs addcampaign_details">
-            <p class="text_color md-caption">
-              This Inventory<br />
-              Campaign Completed
-            </p>
+                <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
+                <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status | stringifyCampaignStatus}} </p>
+                <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
+                <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
           </td>
         </tr>
       </tbody>
@@ -498,7 +590,7 @@
       <md-button
         class="md-raised md-warn"
         ng-click="finalizeCampaign()"
-        ng-if="campaignDetails.status == 300">
+        ng-if="campaignDetails.status == 300 || campaignDetails.status == 400">
         Send Quote
         <span>
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -507,7 +599,7 @@
       <md-button
         class="md-raised md-primary"
         ng-if="campaignDetails.status == 600"
-        ng-click="confirmCampaignBooking(campaign.id, $event)">
+        ng-click="launchCampaign(campaignDetails.id, $event)">
         Confirm Booking
         <span>
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
@@ -569,3 +661,11 @@
 		</div>
 	</div>
 </div>
+<script>
+        function addPayment() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        function addPayments() {
+          document.getElementById("myDropdownView").classList.toggle("show");
+        }
+      </script>

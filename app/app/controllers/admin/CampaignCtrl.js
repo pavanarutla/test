@@ -34,11 +34,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       });
       $scope.scheduledCampaigns = _.filter(result.user_campaigns, function (c) {
        // return c.status == 800 && typeof c.name !== "undefined";
-          return c.status == 800;
+          return c.status == 700;
       });
       $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
     //    return c.status == 1141 && typeof c.name !== "undefined";
-      return c.status == 700;
+      return c.status == 800;
       });
       $scope.closedCampaigns = _.filter(result.user_campaigns, function (c) {
                   //  return c.status == 1151 && typeof c.name !== "undefined";

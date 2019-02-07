@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr,OwnerProductService) {
+app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr,OwnerProductService,Upload) {
 
   $scope.productList = [];
   
@@ -359,8 +359,43 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       }
     });
   }
+  $scope.paymentTypes = [
+    {name: "Cash"},
+    {name: "Cheque"},
+    {name: "Online"},
+    {name: "Transfer"}
+  ];
+  $scope.files = {};
+    $scope.updateCampaignPayment = function (cid) {
+      $scope.campaignPayment.campaign_id = cid;
+        Upload.upload({
+            url: config.apiPath + '/campaign-payment',
+            data: {image: $scope.files.image, campaign_payment: $scope.campaignPayment}
+        }).then(function (result) {
+            if (result.data.status == "1") {
+                toastr.success(result.data.message);
+                $scope.campaignPayment = {};
+                $scope.files.image = "";
+                /*setTimout(() => {
+                    $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+                }, 2500);*/
+            } else {
+                if (result.data.message.constructor == Array) {
+                    $scope.updateCampaignPaymentErrors = result.data.message;
+                } else {
+                    toastr.error(result.data.message);
+                }
+            }
+        }, function (resp) {
+            toastr.error("somthing went wrong try again later");
+            // console.log('Error status: ', resp);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+        });
+    }
 
-  $scope.showUpdatePaymentForm = function(){
+ /* $scope.showUpdatePaymentForm = function(){
     $mdDialog.show({
       locals:{ campaignId: $scope.campaignDetails.id, ctrlScope : $scope },
       templateUrl: 'views/admin/update-campaign-payment.html',
@@ -389,7 +424,7 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         }
       }
     });
-  }
+  }*/
 
   $scope.launchCampaign = function(campaignId, ev){
     AdminCampaignService.launchCampaign(campaignId).then(function(result){
