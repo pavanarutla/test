@@ -347,13 +347,13 @@ $scope.Getcomment = function (campaignID){
       $scope.metroCampaigns = result;
     });
   }
-  $scope.saveUserCampaign = function (ownerCampaign) {
-    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {
+  $scope.saveUserCampaign = function () {
+    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {      
       if (result.status == 1) {
         $scope.ownerCampaign = {};
-        $scope.forms.ownerCampaignForm.$setPristine();
-        $scope.forms.ownerCampaignForm.$setUntouched();
-        loadOwnerCampaigns();
+        // $scope.forms.ownerCampaignForm.$setPristine();
+        // $scope.forms.ownerCampaignForm.$setUntouched();   
+        loadOwnerCampaigns();     
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -368,8 +368,26 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
+      myFunction();
     });
   }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+  var loadOwnerCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      CampaignService.getCampaignWithProducts().then(function (result) {
+            //$scope.ownerCampaigns = result;        
+            $scope.ownerCampaigns = _.filter(result, function (c) {
+                return c.status < 800;
+            });
+            $scope.scheduledCampaigns = _.filter(result, function (c) {
+                return c.status >= 800;
+            });
+            resolve(result);
+        });
+    });
+}
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
       if (result.status == 1) {
