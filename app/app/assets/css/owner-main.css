@@ -26,7 +26,7 @@ body::-webkit-scrollbar-thumb {
 }
 .main_view{
     margin-bottom:40px;
-    padding: 65px 0 40px 0px;
+    padding: 65px 0 40px 180px;
 }
 .contbg{
     background: #fff !important;
@@ -111,7 +111,7 @@ md-menu-content {
     min-width: 100px !important;
     max-width: 180px !important;
     height: 100vh;
-    position: fixed;
+    position: fixed !important;
     margin-top: 65px;
     background: rgb(68, 89, 109) !important;
 }
@@ -605,9 +605,6 @@ position: relative
     border-radius: 5px;
     color: #fff;
 }
-/* .dropdown{
-    display: inline-block;
-} */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -632,6 +629,28 @@ list-style: none;
 .search_width{
     width: 20%;
 }
+/*========== hoarding-list =============*/
+.pric_edit{
+    width: 80px;
+    padding: 5px 10px;
+    position: relative;
+}
+.pric_edit .edit_btn{
+    position: absolute;
+    right: 0px;
+    bottom: 2px;
+}
+    
+/*========== //hoarding-list =============*/
+/*========== payment update =============*/
+.ow-update_payment{
+    position:relative;min-height:100%;
+}
+.ow-update_payment .pay__detailes{
+    position:absolute;right:0px; bottom: 0px;margin-right:20px;width:150px
+}
+/*========== //payment update =============*/
+
 
 /*=====================Start Editproduct-details====================*/
 .upper_head{
@@ -658,8 +677,6 @@ list-style: none;
 /*=====================Start Loginpage====================*/
 .card-signin {
     border: 0;
-    /* box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-    margin-top: 140px !important; */
   }
   .user_font{
       font-size: 12px;
@@ -707,35 +724,6 @@ list-style: none;
   
 /*=====================End Loginpage====================*/
 
-/* 
-.img_table td:nth-child(1){
-    width:10%;
-}
-.img_table td:nth-child(2){
-    width:30%;
-}
-.img_table td:nth-child(3){
-    width:10%;
-}
-.img_table td:nth-child(4){
-    width:10%;
-}
-.img_table td:nth-child(5){
-    width:5%;
-}
-.img_table td:nth-child(6){
-    width:10%;
-}
-.img_table td:nth-child(7){
-    width:5%;
-}
-.img_table td:nth-child(8){
-    width:10%;
-}
-.img_table td:nth-child(9){
-    width:10%;
-} */
-
 /*============== Requested Hoarding Start ==============*/
 .requested_popup{
     width:600px;
@@ -767,29 +755,9 @@ list-style: none;
 .w_9{
     width:10%;
 }
-
-/* .w_15{
-    width:15%;
-}
-.w_25{
-    width:25%;
-}
-.w_30{
-    width:30%;
-} */
-
-/* 
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-  }
-  td, th { 
-    padding: 6px;
-  } */
 .requested_image{
     width: 200px;
     height: 100px;
-    /* width:100%; */
 }
 .req_row{
     padding-left:7px;
@@ -874,50 +842,8 @@ table {
 }
 
 /*============== Admin callcenterinfo end==============*/
-/*======================
-    campagin css start
-========================*/
 
-
-/*==============Media Screen Requested Hoarding Start==============*/
-/* @media screen and (max-width:575px){
-    .req_hording_inner .w_25{
-        width: 33% !important;
-    }
-    .req_hording_inner .w_10{
-        flex: 0 0 41.6666666667%;
-    max-width: 41.6666666667%;
-    }
-    
-    
-    .requested_popup{
-        width:400px;
-    }
-    
-}
-@media screen and (min-width:576px) and (max-width: 767px){
-    .feeds_width{
-        width:25%;
-    }
-    .hide_tete { display: none; }
-    
-    
-}
-@media screen and (min-width:768px) and (max-width:  991px){
-    .feeds_width{
-        width:20%;
-    }
-    .w_1 {
-        width: 20%;
-    }
-}
-@media screen and (min-width:992px) and (max-width:  1199px){
-    
-}
-@media screen and (min-width:1200px){
-    
-} */
-/*==============Media Screen  Requested Hoarding End ==============*/
+/*==============Media Quires  ==============*/
 
 @media screen and (max-width:450px){
    
@@ -930,14 +856,14 @@ table {
     .logo_image {
         width: 110px !important;
     }
-    .owner_Left_sidenav{
+    /* .owner_Left_sidenav{
         margin-top: 50px !important;
-    }
+    } */
     .hide-xs{
-        display: none
+        display: none !important;
     }
     .hs-lg{
-        display: block;
+        display: block ;
     }
     .slider-details,.slider-images ,.slider-images-1  {
         flex: 0 0 33.333%;
@@ -1047,24 +973,11 @@ table {
     .form_hoarding{
         width:88%;
     }
-    /* .form_up{
-        width: 77%;
-        margin-bottom: 0px;
-    } */
-    /* .form_cal{
-        width:94%;
-        margin-bottom: 0px;
-    } */
-   
     .form-inline label {
         margin-left: 10px;
         margin-top: 12px;
     }
     .campaign_search {
-        /* position: relative;
-        right: 0px;
-        width: 45%;
-        z-index: 1 !important; */
         display: none;
     }
     .Upload_font{
@@ -1198,28 +1111,34 @@ table {
         padding-top: 7px;
     }
 }
+@media screen and (max-width:959px){
+    .owner_Left_sidenav{
+        margin-top: 50px !important;
+    }
+}
+@media screen and (max-width:991px){
+    .main_view {
+        padding: 50px 0 0px 0px;
+    }
+}
 @media screen and (min-width:992px){
     .hide-gt-md{
-        display: none;
+        display: none !important;
+    }
+    .show-gt-md{
+        display: block !important;
     }
 }
 @media screen and (min-width:992px) and (max-width:  1199px){
     .hide-lg{
-        display: none;
+        display: none !important;
     }
 }
 @media screen and (min-width:1200px){
     .hide-gt-lg{
-        display: none;
+        display: none !important;
     }
-}
-@media screen and (min-width:1200px){
     .hide-xl{
-        display: none;
-    }
-}
-@media screen and (max-width: 959px){
-    .main_view {
-        padding: 65px 0 40px 0px;
+        display: none !important;
     }
 }
