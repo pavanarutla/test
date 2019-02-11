@@ -309,7 +309,9 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
           console.log(result);
           if(result.status == 1){
             $scope.campaignDetails.status = 3;
-            toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+            $scope.loadCampaignData($scope.campaignDetails.id);
+            toastr.success("Quote Sent!"); // now we wait for launch request from user.
+
           }
           else{
             toastr.error(result.message);
@@ -321,7 +323,8 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
       AdminCampaignService.finalizeCampaignByAdmin($scope.campaignDetails.id).then(function(result){
         if(result.status == 1){
           $scope.campaignDetails.status = 3;
-          toastr.success("Campaign Finalized!"); // now we wait for launch request from user.
+          $scope.loadCampaignData($scope.campaignDetails.id);
+          toastr.success("Quote Sent!"); // now we wait for launch request from user.
         }
         else{
           toastr.error(result.message);

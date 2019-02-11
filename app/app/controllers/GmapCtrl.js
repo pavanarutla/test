@@ -810,7 +810,13 @@ app.controller('GmapCtrl',
           $scope.campaign.products = [];
           var sendObj = {
             product_id: product_id,
-            dates: selectedDateRanges
+          }
+
+          if(selectedDateRanges.length > 0){
+            sendObj.dates = selectedDateRanges;
+          }else{
+            toastr.error("Please select dates.");
+            return false;
           }
           $scope.campaign.products.push(sendObj);
           $form = $scope.forms.mySaveCampaignForm;
@@ -974,11 +980,17 @@ app.controller('GmapCtrl',
       $scope.toggleExistingCampaignSidenav = function () {
         $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
       }
-      $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
+      $scope.addProductToExistingCampaign = function (existingCampaignId, productId,selectedDateRanges) {
         var productToCampaign = {
           product_id: productId,
           campaign_id: existingCampaignId
         };
+        if(selectedDateRanges.length > 0){
+          productToCampaign.dates = selectedDateRanges;
+        }else{
+          toastr.error("Please select dates.");
+          return false;
+        }
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
           if (result.status == 1) {
             toastr.success(result.message);

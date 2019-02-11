@@ -326,10 +326,16 @@
           <p class="mob_spanicon share_icon">Download Quotetation</p>
         </div>
       </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
+        <p class="md-caption"><span><i class="material-icons i_icon">
+          account_balance_wallet
+        </i></span></p>
+        <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ><p class="mob_spanicon share_icon">Payment Details</p></a>
+      </div>
       <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
       style="margin-top:1em;">
       <div class="dropdown">
-        <md-button class="md-raised md-primary update_mrg" onclick="addPayment()" class="dropbtn" style="">
+        <md-button class="md-raised md-primary update_mrg" onclick="addPayment()" class="dropbtn" >
           <md-icon style="width:1.5vw">
             <i class="material-icons update_accounticon">
               account_balance_wallet
@@ -408,7 +414,7 @@
                                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                       </div>
                       <div class="col-sm-4">
-                        <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                        <md-button class="md-raised md-primary pull-right text-white" ng-disabled="campaignDetails.status != 700 && campaignDetails.status != 800" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                       </div>
                     </div>
                   </form>
