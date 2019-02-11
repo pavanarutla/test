@@ -39,7 +39,7 @@
 							<div ng-message="pattern">Enter a valid Email Id.</div>
 						</div>
 					</md-input-container>
-					<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">Share Campaign</md-button>
+					<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentShareCampaign)">Share Campaign</md-button>
 				</div>
 			</form>
 		</md-content>
@@ -89,7 +89,7 @@
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
 			 style="margin-top:14px;">
-				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(campaignDetails.id)">
 					<p class="md-caption"><span><i class="material-icons i_icon">
 								reply_all
 							</i></span></p>
@@ -137,6 +137,7 @@
 					<th>Booked To</th>
 					<th>Price</th>
 					<th></th>
+					<th>Status</th>
 					<th style="text-align:end;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
@@ -163,9 +164,13 @@
 					<td class="table_vertical">
 						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
-					<td class="table_vertical" style="text-align:end;">
-						<p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>
+					<td class="table_vertical" >
+						<p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
+						<p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status | stringifyCampaignStatus}} </p>
+						<!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
+						<p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
 					</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -174,30 +179,29 @@
 
 	<div class="d-flex bg-light mb-5" style="min-height:100px">
 		<div class="p-2 col-md-6">
-			<div class=" chat_box ">
-				<ul class="p-2">
-					<li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you
-						please
-						revision
-						BB238 - Kothaguda hoarding price </li>
-					<li class="mt-4"><span class="user_bi">BI</span>The product price is
-						revised as
-						requested</li>
-				</ul>
-				<form action="/action_page.php">
-					<div class="form-group">
-						<label for="text" class="text_color">Any questions, Please submit below</label>
-						<textarea type="text" class="form-control" id="text" rows="3"></textarea>
-					</div>
-					<button type="submit" class="btn user_submit float-right">Submit</button>
-				</form>
-			</div>
+				<form name="SendComment">
+						<div class=" chat_box ">
+							
+							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
+								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+								<li ng-if="quote_change.type == 'bbi'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+							</ul>
+							<div class="form-group">
+									<label for="text" class="text_color">Any questions, Please submit below</label>
+									<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
+								</div>
+								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+							
+						</div>
+					</form>
 		</div>
 		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status < 300">
 			<div class="d-flex justify-content-end pt-4">
 				<md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)">Request Proposal</md-button>
 			</div>
 		</div>
+
+		
 		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 400">
 			<div class="d-flex justify-content-end pt-4 align-self-end">
 				<div layout="column" class="payment_inner">
@@ -218,9 +222,10 @@
 						<div class="md-title">{{campaignDetails.grandTotal}}</div>
 					</div>
 					<div layout="row">
-						<input type="checkbox" />Request Executive to collect cash / cheque
+						<input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
 					</div>
-					<md-button class="md-raised md-primary" ng-click="confirmCampaignBooking($event, campaignDetails.id)">PAY & LAUNCH CAMPAIGN</md-button>
+					<!--<md-button class="md-raised md-primary" ng-click="changeQuoteRequest(campaignDetails.id, $event)">Change Quote</md-button>-->
+					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">PAY & LAUNCH CAMPAIGN</md-button>
 				</div>
 			</div>
 		</div>

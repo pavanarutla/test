@@ -12,6 +12,11 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/all-campaign-requests').success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
+      changeProductPrice: function (data) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/change-product-price' ,data).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
       getProposedCampaigns: function(){
         var dfd = $q.defer();
         $http.get(config.apiPath + '/all-campaigns/planning').success(dfd.resolve).error(dfd.reject);

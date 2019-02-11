@@ -133,6 +133,34 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
+  // Send & get comment  
+  /*$scope.sendquerry = function (campID,message) {
+    var data = {id:campID,message:message}
+    CampaignService.sendComment(data).then(function (result) {
+        if (result.status == 1) {
+            //toastr.success(result.message);
+            alert("Success!!!!");
+            // $scope.sendquerryErrors = null;
+            // $scope.sendquerry = {};
+            // $scope.forms.sendquerryForm.$setPristine();
+            // $scope.forms.sendquerryForm.$setUntouched();
+        } else if (result.status == 0) {
+            // $scope.sendquerryErrors = result.message;
+            alert("Error!!!")
+        }
+    }, function (error) {
+        toastr.error("somthing went wrong please try agin later");
+    });
+}
+$scope.Getcomment = function (campaignID){  
+  var data = {id:campaignID}
+  CampaignService.getComment(data).then((result) => {
+    console.log(result);
+    $scope.comments = result;
+});
+}*/
+  // Send and Get comment Ends
+
   $scope.confirmCampaignBooking = function(ev, campaignId){
     CampaignService.confirmCampaignBooking(campaignId).then(function(result){
       if(result.status == 1){
@@ -168,32 +196,21 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     });
   }
 
-  $scope.openRequestChangeQuoteForm = function(campaignId){
-    $mdDialog.show({
-      locals: {ctrlScope: $scope},
-      templateUrl: 'views/request-quote-change.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-      controller: function($scope, $mdDialog, ctrlScope, CampaignService, toastr){
+  $scope.changeQuoteRequest = function(campaignId,remark){
         $scope.changeRequest = {};
-        $scope.changeRequest.for_campaign_id = ctrlScope.campaignDetails.id;
-        $scope.requestChangeInQuote = function(){          
+        $scope.changeRequest.for_campaign_id = campaignId;
+        $scope.changeRequest.remark = remark;
+        $scope.changeRequest.type = 'user';
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
-              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
-              $mdDialog.hide();
+              $scope.getCampaignDetails(campaignId);
+              //$mdDialog.hide();
               toastr.success(result.message);
             }
             else{
               toastr.error(result.message);
             }
           });
-        }
-        $scope.close = function(){
-          $mdDialog.hide();
-        }
-      }
-    });
   }
 
   $scope.suggestionRequest = CampaignService.suggestedData;
@@ -330,13 +347,13 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       $scope.metroCampaigns = result;
     });
   }
-  $scope.saveUserCampaign = function (ownerCampaign) {
-    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {
+  $scope.saveUserCampaign = function () {
+    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {      
       if (result.status == 1) {
         $scope.ownerCampaign = {};
-        $scope.forms.ownerCampaignForm.$setPristine();
-        $scope.forms.ownerCampaignForm.$setUntouched();
-        loadOwnerCampaigns();
+        // $scope.forms.ownerCampaignForm.$setPristine();
+        // $scope.forms.ownerCampaignForm.$setUntouched();   
+        loadOwnerCampaigns();     
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -351,8 +368,26 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
       else {
         toastr.error(result.message);
       }
+      myFunction();
     });
   }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+  var loadOwnerCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      CampaignService.getCampaignWithProducts().then(function (result) {
+            //$scope.ownerCampaigns = result;        
+            $scope.ownerCampaigns = _.filter(result, function (c) {
+                return c.status < 800;
+            });
+            $scope.scheduledCampaigns = _.filter(result, function (c) {
+                return c.status >= 800;
+            });
+            resolve(result);
+        });
+    });
+}
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
       if (result.status == 1) {
@@ -425,5 +460,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   | Page based initial loads end
   =============================*/
   loadMetroCampaigns();
+  //$scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });

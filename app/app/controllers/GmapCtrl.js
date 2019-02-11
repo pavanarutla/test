@@ -396,6 +396,8 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+		
+		$scope.getProductUnavailableDatesautoload(marker.properties['id']);
         $scope.selectedProduct = marker;
       }
 
@@ -414,6 +416,7 @@ app.controller('GmapCtrl',
         $scope.product.availableDates = marker.properties['availableDates'];
         $scope.hideSelectedMarkerDetail = false;
         $mdSidenav('productDetails').toggle();
+		$scope.getProductUnavailableDatesautoload(marker.properties['id']);
         $scope.selectedProduct = marker;
       }
 
@@ -786,7 +789,7 @@ app.controller('GmapCtrl',
         startDate.getMonth(),
         startDate.getDate()
       );
-      $scope.saveCampaign = function () {
+      $scope.saveCampaign = function (product_id,selectedDateRanges) {
         // If we finally decide to use selecting products for a campaign
         // if($scope.selectedForNewCampaign.length == 0){
         //   // add all shortlisted products to campaign
@@ -803,21 +806,44 @@ app.controller('GmapCtrl',
         //   // });
         // }
         // campaign.products = $scope.selectedForNewCampaign;
-        if ($scope.shortListedProducts.length > 0) {
+        if(product_id){
           $scope.campaign.products = [];
-          _.each($scope.shortListedProducts, function (v, i) {
-            $scope.campaign.products.push(v.id);
-          });
+          var sendObj = {
+            product_id: product_id,
+          }
+
+          if(selectedDateRanges.length > 0){
+            sendObj.dates = selectedDateRanges;
+          }else{
+            toastr.error("Please select dates.");
+            return false;
+          }
+          $scope.campaign.products.push(sendObj);
+          $form = $scope.forms.mySaveCampaignForm;
+        }
+        else {
+          if($scope.shortListedProducts.length > 0) {
+            $scope.campaign.products = [];
+            _.each($scope.shortListedProducts, function (v, i) {
+              $scope.campaign.products.push(v.id);
+            });
+            $form = $scope.forms.viewAndSaveCampaignForm;
+          }
+          else {
+            toastr.error("Please shortlist some products first.");
+          }
+          
+        }
+        if($scope.campaign.products){
           CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
             if(response.status == 1){
-              $scope.campaignSavedSuccessfully = true;
+              //$scope.campaignSavedSuccessfully = true;
               $timeout(function () {
-                $mdSidenav('saveCampaignSidenav').close();
-                $mdSidenav('shortlistAndSaveSidenav').close();
                 $scope.campaign = {};
-                $scope.forms.viewAndSaveCampaignForm.$setPristine();
-                $scope.forms.viewAndSaveCampaignForm.$setUntouched();
-                $scope.campaignSavedSuccessfully = false;
+                $form.$setPristine();
+                $form.$setUntouched();
+                toastr.success(response.message);
+                //$scope.campaignSavedSuccessfully = false;
               }, 3000);
               $scope.loadActiveUserCampaigns();
               getShortListedProducts();
@@ -827,9 +853,7 @@ app.controller('GmapCtrl',
             }
           });
         }
-        else {
-          toastr.error("Please shortlist some products first.");
-        }
+        
       }
 
       $scope.emptyCampaign = {};
@@ -956,11 +980,17 @@ app.controller('GmapCtrl',
       $scope.toggleExistingCampaignSidenav = function () {
         $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
       }
-      $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
+      $scope.addProductToExistingCampaign = function (existingCampaignId, productId,selectedDateRanges) {
         var productToCampaign = {
           product_id: productId,
           campaign_id: existingCampaignId
         };
+        if(selectedDateRanges.length > 0){
+          productToCampaign.dates = selectedDateRanges;
+        }else{
+          toastr.error("Please select dates.");
+          return false;
+        }
         CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
           if (result.status == 1) {
             toastr.success(result.message);
@@ -1115,6 +1145,15 @@ app.controller('GmapCtrl',
         MapService.getProductUnavailableDates(productId).then(function(dateRanges){
           $scope.unavailalbeDateRanges = dateRanges;
           $(ev.target).parents().eq(3).find('input').trigger('click');
+        });
+      }
+
+  $scope.getProductUnavailableDatesautoload = function(productId){
+	  
+        MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+          $scope.unavailalbeDateRanges = dateRanges;
+		  console.log(dateRanges);
+          $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
         });
       }
 

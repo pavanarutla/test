@@ -92,6 +92,7 @@ app.filter('stringifyProductStatus',function(){
       case 300 :
         returnStatus = 'running'
         break;
+
     }
     return returnStatus;
   }
@@ -180,4 +181,10 @@ app.filter('metroCorridorsFromTo', function(){
   return function(obj){
     return obj.name + " (" + obj.from + " - " + obj.to + ")";
   }
+});
+app.filter('customSplitString', function() {
+  return function(input) {
+    var arr = input.split(',');
+    return arr;
+  };
 });

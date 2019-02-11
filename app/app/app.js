@@ -356,6 +356,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/paymentview-details.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.campaign-payment-details', {
+      url: '/campaign-payment-details/:campaign_id',
+      templateUrl: 'views/admin/campaign-payment-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
     .state('admin.admin-feeds', {
       url: '/admin-feeds',
       templateUrl: 'views/admin/admin-feeds.html',

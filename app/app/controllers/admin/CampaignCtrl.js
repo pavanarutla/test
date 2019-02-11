@@ -34,11 +34,11 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       });
       $scope.scheduledCampaigns = _.filter(result.user_campaigns, function (c) {
        // return c.status == 800 && typeof c.name !== "undefined";
-          return c.status == 800;
+          return c.status == 700;
       });
       $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
     //    return c.status == 1141 && typeof c.name !== "undefined";
-      return c.status == 700;
+      return c.status == 800;
       });
       $scope.closedCampaigns = _.filter(result.user_campaigns, function (c) {
                   //  return c.status == 1151 && typeof c.name !== "undefined";
@@ -188,7 +188,7 @@ $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
 }
 
 $scope.toggleShareCampaignSidenav = function (campaign) {
-  console.log(campaign);
+
   $scope.currentAdminShareCampaign = campaign;
   $mdSidenav('shareCampaignSidenav').toggle();
 };
@@ -247,16 +247,20 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   $scope.selectPackage = function (pkg) {
     $scope.selectedPackage = pkg;
   }
+  $scope.monthoptions = [
+    {value: '.5', label: '15 Days'}, {value: '1', label: '1 Month'},{value: '2', label: '2 Months'},{value: '3', label: '3 Months'},{value: '4', label: '4 Months'},{value: '5', label: '5 Months'},{value: '6', label: '6 Months'},{value: '7', label: '7 Months'},{value: '8', label: '8 Months'}, {value: '9', label: '9 Months'},{value: '10', label: '10 Months'},{value: '11', label: '11 Months'},{value: '12', label: '12 Months'}];
+
   $scope.getMetroPackages = function (corridorId) {
     AdminMetroService.getMetroPackages(corridorId).then(function (result) {
       _.map(result, (res) => {
         res.selected_trains = 1;
-        res.selected_slots = 1;
+       // res.selected_slots = 1;
+       res.months = $scope.monthoptions[0];
         return res;
       });
       $scope.metroPackages = result;
       $scope.selectedPackage = result[0];
-      $scope.selectedPackage.days = "7";
+      //$scope.selectedPackage.days = "7";
       /*$scope.admin_selected_slots = ($scope.selectedPackage.max_slots * $scope.selectedPackage.days);
       $scope.admin_price = ($scope.selectedPackage.price * $scope.selectedPackage.days);*/
     });
@@ -283,6 +287,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
    // console.log(price);
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
+    $scope.selectedPackage.months = $scope.selectedPackage.months.value;
     if(slots){
       $scope.selectedPackage.admin_slots = slots;
     }
@@ -547,5 +552,50 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     // }
   }
   loadCampaignPayments($stateParams.metroCampaignId);
-
+   /**********      Payments  */
+   if ($rootScope.currStateName == "admin.campaign-payment-details") {
+    CampaignService.getCampaignWithProducts($stateParams.campaign_id).then(function(result){
+      $scope.campaignDetails = result;
+    });
+    loadCampaignPayments($stateParams.campaign_id);
+    
+  }
+  
+  $scope.paymentTypes = [
+    {name: "Cash"},
+    {name: "Cheque"},
+    {name: "Online"},
+    {name: "Transfer"}
+  ];
+  $scope.files = {};
+  $scope.updateCampaignPayment = function (cid) {
+    $scope.campaignPayment.campaign_id = cid;
+      Upload.upload({
+          url: config.apiPath + '/campaign-payment',
+          data: {image: $scope.files.image, campaign_payment: $scope.campaignPayment}
+      }).then(function (result) {
+          if (result.data.status == "1") {
+              toastr.success(result.data.message);
+              $scope.campaignPayment = {};
+              $scope.files.image = "";
+              /*setTimout(() => {
+                  $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+              }, 2500);*/
+              loadCampaignPayments(cid);
+          } else {
+              if (result.data.message.constructor == Array) {
+                  $scope.updateCampaignPaymentErrors = result.data.message;
+              } else {
+                  toastr.error(result.data.message);
+              }
+          }
+      }, function (resp) {
+          toastr.error("somthing went wrong try again later");
+          // console.log('Error status: ', resp);
+      }, function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+      });
+  }
+  
 });

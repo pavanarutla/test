@@ -3,6 +3,20 @@ app.controller('MetroCtrl',
     function ($scope, $mdSidenav, $mdDialog, $rootScope, $stateParams, $timeout, $window, CampaignService, MetroService, ProductService, FileSaver, Blob, config, toastr,$state) {
       $scope.metroCampaign = {};
       $scope.newDate = new Date();
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+              dd='0'+dd
+          } 
+          if(mm<10){
+              mm='0'+mm
+          }         
+          today.setDate(today.getDate() + 2); 
+          $scope.today1 = today;
+     // $scope.today1 = yyyy+'-'+mm+'-'+dd;
+      $scope.colors = ['#FE0000','#0D7ECA'];
       /*==============================
       | Popup and Sidenav controls
       ==============================*/
@@ -114,12 +128,13 @@ app.controller('MetroCtrl',
           if (typeof pkg.start_date === 'undefined') {
             toastr.error("Start date for the package is required.");
           }
-          else if (!pkg.days ) {
+          else if (!pkg.months ) {
             toastr.error('Please select days.');
           }
+          else if (!pkg.selected_trains ) {
+            toastr.error('Please select trains.');
+          }
           else {
-            pkg.selected_trains = pkg.max_trains;
-			pkg.days = parseInt(pkg.days);
             MetroService.shortlistPackage(pkg).then((result) => {
               if (result.status == 1) {
                 loadShortlistedPackages();
@@ -198,6 +213,7 @@ app.controller('MetroCtrl',
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
         $scope.selectedPackage.campaign_id = $stateParams.metroCampaignId;
+        $scope.selectedPackage.months = $scope.selectedPackage.months.value;
         //$scope.selectedPackage.total_price = $scope.selectedPackage.price * ($scope.selectedPackage.selected_trains + $scope.selectedPackage.selected_slots - 1);
         MetroService.addPackageInMetroCampaign($scope.selectedPackage).then((result) => {
           if (result.status == 1) {

@@ -497,7 +497,7 @@
           <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
           <div class="input-group"style="z-index: 0;">
             <input type="text" readonly ng-value="'selected date ranges: ' + selectedDateRanges.length" class="form-control">
-            <div class="input-group-addon">
+            <div class="input-group-addon" id="calender-autolaod-div">
               <a ng-click="getProductUnavailableDates(product.id, $event);">
                 <i class="material-icons">
                   calendar_today
@@ -523,19 +523,21 @@
             <i class="material-icons">close</i>
           </a>
         </div>
-        <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
-        <div class="md-title  m-2">Let's work Together!</div>
-        <div class="form-group mt-3 mr-2 ml-2">
-          <input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
-        </div>
-        <div class="form-group mt-3 mr-2 ml-2">
-          <input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
-        </div>
-        <div layout="column" class="mr-2 ml-2 mb-3">
-          <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
-            Save Campaign
-          </md-button>
-        </div>
+        <form name="forms.mySaveCampaignForm">
+          <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+          <div class="md-title  m-2">Let's work Together!</div>
+          <div class="form-group mt-3 mr-2 ml-2">
+            <input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+          </div>
+          <div class="form-group mt-3 mr-2 ml-2">
+            <input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
+          </div>
+          <div layout="column" class="mr-2 ml-2 mb-3">
+            <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign(product.id, selectedDateRanges)">
+              Save Campaign
+            </md-button>
+          </div>
+        </form>
         <p class="text-center md-body-2">(OR)</p>
         <div class="form-group mr-2 ml-2">
           <select class="form-control" ng-model="existingCampaign.id" required="required">
@@ -548,7 +550,7 @@
           </md-button>
         </div> -->			
         <div layout="column" class="mr-2 ml-2 mb-3">
-          <md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
+          <md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,selectedDateRanges)">
             add to existing or save Campaign
           </md-button>
         </div>

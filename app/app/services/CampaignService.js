@@ -33,6 +33,16 @@ app.service('CampaignService',
           $http.post(config.apiPath + '/suggestion-request', suggestionRequest).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        sendComment: function(SendComment){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/post-campaign-comment',SendComment).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
+        getComment: function(id){
+          var dfd = $q.defer();
+          $http.post(config.apiPath + '/get-campaign-comment', id).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+        },
         deleteCampaign : function(campaignId){
           var dfd = $q.defer();
           $http.delete(config.apiPath + '/campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);

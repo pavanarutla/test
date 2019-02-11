@@ -1,4 +1,4 @@
-app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdDialog, $timeout, MapService, config, CampaignService, toastr){
+app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdDialog,$window , $timeout, MapService, config, CampaignService, toastr){
 
   $scope.config = config;
 
@@ -97,7 +97,8 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
           //   $scope.forms.viewAndSaveCampaignForm.$setUntouched();
           //   $scope.campaignSavedSuccessfully = false;
           // }, 3000);
-          $scope.loadActiveUserCampaigns();
+          $scope.loadActiveUserCampaigns();          
+          $window.location.href = '#/user-saved-campaigns';
           getShortListedProducts();
         }else if(response.status == 0){
           toastr.error(response.message);
@@ -105,11 +106,11 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
         else{
           $scope.saveUserCampaignErrors = response.message;
         }
-      });
+      });          
     }
     else {
       toastr.error("Please shortlist some products first.");
-    }
+    }        
   }
   $scope.addProductToExistingCampaign = function (existingCampaignId) {
     var productToCampaign = {
