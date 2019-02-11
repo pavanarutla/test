@@ -86,10 +86,10 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
        return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
       });
       $scope.SheduledCampaigns = _.filter(result, function(c){
-        return c.status == 800;
+        return c.status == 700;
       });
       $scope.runningCampaigns = _.filter(result, function(c){
-        return c.status == 700;
+        return c.status == 800;
       });
       $scope.closedCampaigns = _.filter(result, function(c){
          return c.status == 1000 || c.status == 900;
@@ -107,8 +107,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
-        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
-        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.gst = 0;
+        $scope.campaignDetails.subTotal = result.act_budget ;
         $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
       }
     });
@@ -134,7 +134,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   }
 
   // Send & get comment  
-  $scope.sendquerry = function (campID,message) {
+  /*$scope.sendquerry = function (campID,message) {
     var data = {id:campID,message:message}
     CampaignService.sendComment(data).then(function (result) {
         if (result.status == 1) {
@@ -158,29 +158,70 @@ $scope.Getcomment = function (campaignID){
     console.log(result);
     $scope.comments = result;
 });
-}
+}*/
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(ev, campaignId){
-    CampaignService.confirmCampaignBooking(campaignId).then(function(result){
-      if(result.status == 1){
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title(result.message)
-            .textContent('The Admin will soon launch your campaign and intimate you about it.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
-        $scope.getCampaignDetails(campaignId);
-      }
-      else{
-        toastr.error(result.message);
-      }
+    console.log($scope.campaignDetails.products);
+    $i = 0;
+    angular.forEach($scope.campaignDetails.products, function (value, key) {
+      if(value.admin_price) ++$i;
     });
+    //console.log($i);
+    if($i > 0){
+      if($i == $scope.campaignDetails.products.length){
+        CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                .textContent('The Admin will soon launch your campaign and intimate you about it.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+            $scope.getCampaignDetails(campaignId);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }else{
+        var confirm = $mdDialog.confirm()
+          .title('Campaign Confirm')
+          .textContent('Do you really want to confirm? Once you confirm your not deciced product will be deleted')
+          .targetEvent(ev)
+          .ok('Please do it!')
+          .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
+              CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+                if(result.status == 1){
+                  $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('body')))
+                      .clickOutsideToClose(true)
+                      .title(result.message)
+                      .textContent('The Admin will soon launch your campaign and intimate you about it.')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Got it!')
+                      .targetEvent(ev)
+                  );
+                  $scope.getCampaignDetails(campaignId);
+                }
+                else{
+                  toastr.error(result.message);
+                }
+              });
+            });
+      } 
+      
+    }
+    
   }
+
+  
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
     CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
@@ -196,32 +237,21 @@ $scope.Getcomment = function (campaignID){
     });
   }
 
-  $scope.openRequestChangeQuoteForm = function(campaignId){
-    $mdDialog.show({
-      locals: {ctrlScope: $scope},
-      templateUrl: 'views/request-quote-change.html',
-      fullscreen: $scope.customFullscreen,
-      clickOutsideToClose:true,
-      controller: function($scope, $mdDialog, ctrlScope, CampaignService, toastr){
+  $scope.changeQuoteRequest = function(campaignId,remark){
         $scope.changeRequest = {};
-        $scope.changeRequest.for_campaign_id = ctrlScope.campaignDetails.id;
-        $scope.requestChangeInQuote = function(){          
+        $scope.changeRequest.for_campaign_id = campaignId;
+        $scope.changeRequest.remark = remark;
+        $scope.changeRequest.type = 'user';
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
-              ctrlScope.getCampaignDetails(ctrlScope.campaignDetails.id);
-              $mdDialog.hide();
+              $scope.getCampaignDetails(campaignId);
+              //$mdDialog.hide();
               toastr.success(result.message);
             }
             else{
               toastr.error(result.message);
             }
           });
-        }
-        $scope.close = function(){
-          $mdDialog.hide();
-        }
-      }
-    });
   }
 
   $scope.suggestionRequest = CampaignService.suggestedData;
@@ -358,13 +388,13 @@ $scope.Getcomment = function (campaignID){
       $scope.metroCampaigns = result;
     });
   }
-  $scope.saveUserCampaign = function (ownerCampaign) {
-    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {
+  $scope.saveUserCampaign = function () {
+    CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {      
       if (result.status == 1) {
         $scope.ownerCampaign = {};
-        $scope.forms.ownerCampaignForm.$setPristine();
-        $scope.forms.ownerCampaignForm.$setUntouched();
-        loadOwnerCampaigns();
+        // $scope.forms.ownerCampaignForm.$setPristine();
+        // $scope.forms.ownerCampaignForm.$setUntouched();   
+        loadOwnerCampaigns();     
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -379,8 +409,26 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
+      myFunction();
     });
   }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+  var loadOwnerCampaigns = function () {
+    return new Promise((resolve, reject) => {
+      CampaignService.getCampaignWithProducts().then(function (result) {
+            //$scope.ownerCampaigns = result;        
+            $scope.ownerCampaigns = _.filter(result, function (c) {
+                return c.status < 800;
+            });
+            $scope.scheduledCampaigns = _.filter(result, function (c) {
+                return c.status >= 800;
+            });
+            resolve(result);
+        });
+    });
+}
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
       if (result.status == 1) {
@@ -453,6 +501,6 @@ $scope.Getcomment = function (campaignID){
   | Page based initial loads end
   =============================*/
   loadMetroCampaigns();
-  $scope.Getcomment($stateParams.campaignId);
+  //$scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });

@@ -1,72 +1,49 @@
 <div class="sign_bgcolor">
 <md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
-
   <md-dialog-content>
-
     <div class="card card-signin m-2" ng-if="!forgotPasswordpage">
       <div class="card-body">
         <div class="mb-4 banner_img">
           <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
         </div>
         <hr class="my-4">
-        <form class="form-signin mt-4" name="userform" novalidate>
+        <form class="form-signin mt-4" name="loginForm" novalidate>
           <div class="form-group row">
-            <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">User Name</label>
-            <div class="col-sm-9">
-              <input ng-model="user.email" class="form-control form_border" name="useremail" type="email" maxlength="50"
-                required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-              <!-- <div ng-messages="userform.useremail.$error">
-                <div class="alret alert-danger" ng-message="required">Email is required.</div>
-                <div ng-message="maxlength">username shouldn't exceed 50 characters. </div>
-                <div ng-message="pattern">Enter a valid email</div>
-              </div> -->
-
+            <label class="col-sm-3 col-form-label md-body-2 user_font">User Name</label>
+            <div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+              <input type="email" class="form-control form_border"  placeholder="Email"  name="email" ng-model="user.email" maxlength="50"
+                required/>
+                <p class="help-block" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
             </div>
           </div>
           <div class="form-group row">
-            <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
-            <div class="col-sm-9">
-              <input ng-model="user.password" class="form-control form_border" type="password" name="userpassword"
-                minlength="6" maxlength="20" required="required" />
-              <!-- <div ng-messages="userform.userpassword.$error">
-                <div ng-message="required">Password is required.</div>
-                <div ng-message="minlength">Password must have 6 characters.</div>
-                <div ng-message="maxlength">Password shouldn't exceed 20 characters.</div>
-              </div> -->
+            <label for="Password" class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+            <div class="col-sm-9" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+              <input  type="password" class="form-control form_border" placeholder="Password" name="password"  ng-model="user.password"  
+              maxlength="15" required/>
+              <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 15 characters</p>
             </div>
           </div>
-
-          <!--<div class="custom-control custom-checkbox mb-3">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1">
-                      <label class="custom-control-label" for="customCheck1">Remember password</label>
-                  </div>-->
-
           <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="row">
               <div class="col-sm-6 col-md-6 offset-lg-2 col-lg-4">
-                <button class="btn login_margin all_button" type="submit" ng-click="signInUser()"
-                  ng-disabled="userform.$invalid" layout-fill="layout-fill" md-autofocus>Login</button>
+                <button class="btn login_margin all_button" type="submit" ng-click="signInUser(loginForm)"
+                ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid" layout-fill="layout-fill" md-autofocus>Login</button>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="forgot">
-                  
-                    <a class="md-primary udrlin alrhvacc" style="cursor:pointer; float:right;color: #000;font-size: 11px;" ng-click="showForgotPasswordDialog()">Forgot
-                      password ?</a><br>
-                  
-                    <a class="md-primary udrlin alrhvacc"
-                      style="cursor:pointer; text-decoration:none;color: #000;font-size: 11px;" ng-click="showRegisterDialog()">New User? Register
-                      Here</a>
+                <div class="forgot">                  
+                    <a class="md-primary udrlin alrhvacc" style="cursor:pointer; float:right;color: #000;font-size: 11px;" ng-click="showForgotPasswordDialog()">Forgot password ?</a><br>                  
+                    <a class="md-primary udrlin alrhvacc" style="cursor:pointer; text-decoration:none;color: #000;font-size: 11px;" ng-click="showRegisterDialog()">New User? Register Here</a>
                 </div>
               </div>
             </div>
           </div>
           <hr class="my-4">
-          <p class="text-center font-weight-light power_by">Powered By
-            Bill Boards India Pvt Ltd</p>
+          <p class="text-center font-weight-light power_by">Powered By Bill Boards India Pvt Ltd</p>
         </form>
       </div>
     </div>
-    <div class="card card-signin m-2" ng-if="forgotPasswordpage">
+    <div class="card card-signin m-2" ng-if="forgotPasswordpage" ng-controller="AuthCtrl">
         <div class="card-body">
           <div class="mb-4 banner_img">
             <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
@@ -77,14 +54,14 @@
               <div class="form-group row">
                   <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
                   <div class="col-sm-9">
-                      <input type="email" class="form-control form_border" id="" ng-model="campaignPayment.amount">
+                      <input type="email" class="form-control form_border" id="" ng-model="forgotPwd.email">
                   </div>
               </div>
               <div class="col-sm-12 col-md-12 col-lg-12">
                   <div class="row">
                       <div class="offset-lg-6 offset-md-6 col-sm-6 col-md-6 col-lg-6">
-                          <a ng-href="#/owner/{{clientSlug}}/resetlogin"><button class="btn reset_passowrd all_button"
-                                  type="submit">Reset Password</button></a>
+                          <a><button class="btn reset_passowrd all_button"
+                                  type="submit" ng-click="requestResetPassword(forgotPwd)">Reset Password</button></a>
                       </div>
                   </div>
               </div>

@@ -75,12 +75,12 @@
 			<div class="row" style="margin-left:0px; margin-right:0px;">
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
 				 style="margin-top:14px;">
-					<p class="">Camapaign ID</p>
+					<p class="">Campaign ID</p>
 					<p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
 				 style="margin-top:14px;">
-					<p class="">Camapaign Name</p>
+					<p class="">Campaign Name</p>
 					<p class="md-caption mob_span"><b>{{campaignDetails.name}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
@@ -140,10 +140,10 @@
 						<th class="">Size</th>
 						<th class="hide-xs">Booked From</th>
 						<th class="hide-xs">Booked To</th>
-						<th class="hide-xs">Price</th>
+						<th class="hide-xs">Pric</th>
 						<th class="hide-xs"></th>
-                                                <th class="hide-xs" style="text-align:end" >
-                                    <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
+            <th class="hide-xs" style="text-align:end" >
+              <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
 							</md-button>
 						</th>
 					</tr>
@@ -169,8 +169,24 @@
 							<p>{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}</p>
 							<!-- <p>15-10-2018</p> -->
 						</td>
-						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
-						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>
+						<!--<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
+						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>-->
+						
+						<td ng-if="campaignDetails.status==300 && product.owner_price">
+								{{(!myfield && product.owner_price)?product.owner_price:''}}
+							<input type="text" class="" ng-model="product.owner_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+							<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+							<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.owner_price,product.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+						</td>
+						<td ng-if="campaignDetails.status==300 && !product.owner_price">
+							{{(!myfield && product.default_price)?product.default_price:''}}
+						<input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+						<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+						<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.default_price,product.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+					</td>
+					
+						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0 && campaignDetails.status!=300">{{product.default_price || "NA"}}</td>
+						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2 && campaignDetails.status!=300">{{product.price || "NA"}}</td>
 						<td class="table_vertical"> 
 							<a><i class="material-icons" ng-if="campaignDetails.type!=0 && campaignDetails.status!=700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
 						</td> 
