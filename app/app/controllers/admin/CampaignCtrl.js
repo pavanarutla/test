@@ -407,6 +407,46 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }
     });
   }
+  $scope.saveUserCampaign = function (AdminownerCampaign) {
+    AdminCampaignService.saveUserCampaign(AdminownerCampaign).then(function (result) {      
+      console.log(AdminownerCampaign);           
+      if (result.status == 1) {          
+        getAllCampaigns();      
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.adminCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+      myFunction();
+    });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+// var loadOwnerCampaigns = function () {
+//   return new Promise((resolve, reject) => {
+//     AdminCampaignService.getAllCampaigns().then(function (result) {
+//       console.log(result);
+//           $scope.ownerCampaigns = result;        
+//           $scope.ownerCampaigns = _.filter(result, function (c) {
+//               return c.status < 800;
+//           });
+//           $scope.scheduledCampaigns = _.filter(result, function (c) {
+//               return c.status >= 800;
+//           });
+//           resolve(result);
+//       });
+//   });
+// }
   $scope.launchMetroCampaign = function (campaignId, ev) {
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
