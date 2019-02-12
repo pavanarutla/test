@@ -408,7 +408,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.saveUserCampaign = function (AdminownerCampaign) {
-    AdminCampaignService.saveUserCampaign(AdminownerCampaign).then(function (result) {      
+    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {      
       console.log(AdminownerCampaign);           
       if (result.status == 1) {          
         getAllCampaigns();      
