@@ -69,6 +69,10 @@ var app = angular.module('bbManager', [
       url: 'ourteam',
       templateUrl: 'views/our_team.html'
     })
+    .state('index.fullservices', {
+      url: 'fullservices',
+      templateUrl: 'views/full_services.html'
+    })
     .state('index.joincareers', {
       url: 'joincareers',
       templateUrl: 'views/join_careers.html'
