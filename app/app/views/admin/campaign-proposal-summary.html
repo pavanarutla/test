@@ -1,3 +1,21 @@
+<style>
+.chat_box ul li{
+    list-style: none;
+}
+.user_dec{
+  background: #BC2535;
+    padding: 5px 11px;
+    color: #fff;
+    margin-right: 15px;
+}
+.user_bi{
+    
+    background: #000;
+    padding: 5px 10px;
+    color: #fff;
+    margin-right: 15px;
+}
+</style>
 <!-- share campaign sidenav -->
 <md-sidenav
   class="md-sidenav-right md-whiteframe-z2 sidenav-width"
@@ -344,7 +362,7 @@
           Add Payment
         </md-button>
         <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
-          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+          <form name="ownerCampaignForm" role="form" novalidate="novalidate">
             <div layout="colmun">
               <span flex></span>
               <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
@@ -369,21 +387,26 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric id="amount" ng-model="campaignPayment.amount">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.reference_no">
+                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric id="amount" ng-model="campaignPayment.reference_no">
                       </div>
                     </div>
                     
-                    <div class="form-group row">
+                    <div class="form-group row" ng-class="{'has-error': ownerCampaignForm.received_by.$invalid && ownerCampaignForm.received_by.$dirty, 'has-success': ownerCampaignForm.received_by.$valid }">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
-                      <div class="col-sm-8">
+                      <!-- <div class="col-sm-8">
                         <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.received_by">
-                      </div>
+                      </div> -->
+                      <div class="col-sm-8">
+                      <input type="received_by" class="form-control md-whiteframe-3dp"  placeholder="Received-by"  name="received_by" ng-model="campaignPayment.received_by" maxlength="15"
+                          required/>
+                          <p ng-if="ownerCampaignForm.received_by.$invalid && ownerCampaignForm.received_by.$dirty">Received By Name is required</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
@@ -414,7 +437,7 @@
                                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                       </div>
                       <div class="col-sm-4">
-                        <md-button class="md-raised md-primary pull-right text-white" ng-disabled="campaignDetails.status != 700 && campaignDetails.status != 800" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                        <md-button class="md-raised md-primary pull-right text-white" type="Submit" ng-disabled="campaignDetails.status != 700 && campaignDetails.status != 800" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                       </div>
                     </div>
                   </form>
@@ -425,12 +448,9 @@
         </div>
       </div>
     </div>
-      <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
-                            style="margin-top:1em;">
-                            
-                            <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
-                            </md-button>
-                    </div> -->
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs" style="margin-top:1em;">
+        <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button>
+      </div>
     </div>
   </div>
   <!-- table grid start  -->
@@ -567,32 +587,13 @@
     </table>
   </div>
   <!-- table grid end -->
-  <div
-    class="md-whiteframe-3dp campaign_payment hide-xs"
-    layout="row"
-    layout-margin
-  >
-    <div layout="column" class="payment_inner">
-      <div layout="row">
-        <div class="md-body-1">Total :</div>
-        <div class="md-body-1">{{ campaignDetails.act_budget}}</div>
-      </div>
-      <div layout="row">
-        <div class="md-body-1">18% GST :</div>
-        <div class="md-body-1">{{ campaignProduct.gst ||"N/A" }}</div>
-      </div>
-      <div layout="row">
-        <div class="md-body-1">Sub Total :</div>
-        <div class="md-body-1">{{ campaignProduct.subTotal ||"N/A" }}</div>
-      </div>
-      <div layout="row">
-        <div class="md-title">Grand Total :</div>
-        <div class="md-title">{{ campaignDetails.act_budget || "N/A" }}</div>
-      </div>
-      <!-- <md-button class="md-raised md-primary" ng-click="finalizeCampaign(campaignProduct)">SEND QUOTE</md-button> -->
-      <!-- <md-button class="md-raised md-warn" ng-click="finalizeCampaign()">
-                       Send Quote
-               </md-button> -->
+
+  <div style="margin-right:20px;">
+    <div class="pull-right">
+      <p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{ campaignDetails.act_budget}}</spam></p>
+      <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{ campaignProduct.gst ||"N/A" }}</spam></p>
+      <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{ campaignProduct.subTotal ||"N/A" }}</spam></p>
+      <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{ campaignDetails.act_budget || "N/A" }}</spam></p>
       <md-button
         class="md-raised md-warn"
         ng-click="finalizeCampaign()"
@@ -619,6 +620,37 @@
           <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
         </span>
       </md-button>
+    </div>    
+  </div>
+
+
+  <!-- <div
+    class="md-whiteframe-3dp campaign_payment hide-xs"
+    layout="row"
+    layout-margin
+  >
+    <div layout="column" class="payment_inner"> -->
+      <!-- <div layout="row">
+        <div class="md-body-1">Total :</div>
+        <div class="md-body-1 float-right">{{ campaignDetails.act_budget}}</div>
+      </div>
+      <div layout="row">
+        <div class="md-body-1">18% GST :</div>
+        <div class="md-body-1">{{ campaignProduct.gst ||"N/A" }}</div>
+      </div>
+      <div layout="row">
+        <div class="md-body-1">Sub Total :</div>
+        <div class="md-body-1">{{ campaignProduct.subTotal ||"N/A" }}</div>
+      </div>
+      <div layout="row">
+        <div class="md-title">Grand Total :</div>
+        <div class="md-title">{{ campaignDetails.act_budget || "N/A" }}</div>
+      </div> -->
+      <!-- <md-button class="md-raised md-primary" ng-click="finalizeCampaign(campaignProduct)">SEND QUOTE</md-button> -->
+      <!-- <md-button class="md-raised md-warn" ng-click="finalizeCampaign()">
+                       Send Quote
+               </md-button> -->
+      
       <!-- <md-button class="md-raised" ng-disabled="!campaignProducts || (campaignProducts.status != 700 && campaignProducts.status != 700)"
                  ng-click="closeCampaign(campaignProducts.id, $event)">
                     Close Campaign
@@ -626,17 +658,17 @@
                             <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
                     </span>
             </md-button> -->
-    </div>
-  </div>
+    <!-- </div>   
+  </div> -->
 
-  	<div class="d-flex bg-light mb-5" style="min-height:100px">
+  	<div class="d-flex mb-5" style="min-height:100px">
 		<div class="p-2 col-md-6">
 				<form name="SendComment">
 			<div class=" chat_box ">
 				
 				<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
 					<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
-					<li ng-if="quote_change.type == 'bbi'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+					<li ng-if="quote_change.type == 'bbi'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
 				</ul>
 				<div class="form-group">
 						<label for="text" class="text_color">Any questions, Please submit below</label>
@@ -644,7 +676,7 @@
 					</div>
 					<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
 				
-			</div>
+      </div>
 		</form>
 		</div>
 		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status < 300">

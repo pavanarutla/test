@@ -1,7 +1,7 @@
 <div layout="column">
         <div layout="row" class="" layout-padding>
     
-            <div class="md-caption text_color">This Product Shortlisted In - 14 Campaigns </div>
+            <div class="md-caption text_color">This Product Shortlisted In - {{adminprod.camapigns_count}} Campaigns </div>
             <div flex></div>
             <!-- <div>
                 <md-button class="md-raised md-primary">ADD NEW PRODUCT</md-button>
@@ -16,10 +16,10 @@
                 </div>
                 <div class="col-md-4 ">
                     <div class="product_detailes">
-                        <p class="mb-0 md-body-2">BB238 - Kothaguda (40Ft X 40Ft)</p>
-                        <p class="mb-0"> Kothaguda X Roads</p>
-                        <p class="mb-0">Facing: From Kothaguda to Hitech city road,</p>
-                        <p class="mb-0">beside ICICI Bank</p>
+                        <p class="mb-0 md-body-2">{{shortlistedproduct.product_detail.siteNo}} - {{shortlistedproduct.product_detail.area_name}} ({{shortlistedproduct.product_detail.panelSize}})</p>
+                        <p class="mb-0">{{shortlistedproduct.product_detail.address}}</p>
+                        <p class="mb-0">Facing:{{shortlistedproduct.product_detail.direction}}</p>
+                        <p class="mb-0">Type:{{shortlistedproduct.product_detail.format_name}}</p>
     
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                         </thead>
                         <tbody class="text-center">
                 
-                            <tr>
-                                <td>BB-01</td>
+                            <tr ng-repeat="product in shortlistedproduct.campaign_list">
+                                <td>{{product.cid}}</td>
                                 <td>Billboards</td>
                                 <td>15-08-2018</td>
                                 <td>10</td>

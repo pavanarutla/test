@@ -273,12 +273,12 @@ app.controller("ProductCtrl", [
         $(ev.target).parents().eq(3).find('input').trigger('click');
       });
     }
-    $scope.getProductUnavailableDates = function(productId, ev){
-      ProductService.getProductList(productId).then(function(dateRanges){
-        $scope.unavailalbeDateRanges = dateRanges;
-        $(ev.target).parent().parent().find('input').trigger('click');
-      });
-    }
+    // $scope.getProductUnavailableDates = function(productId, ev){
+    //   ProductService.getProductList(productId).then(function(dateRanges){
+    //     $scope.unavailalbeDateRanges = dateRanges;
+    //     $(ev.target).parent().parent().find('input').trigger('click');
+    //   });
+    // }
 
 
     // Calenders code ends

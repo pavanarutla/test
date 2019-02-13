@@ -565,7 +565,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         });
     }
 
-    $scope.applymethod = function (product) {
+    $scope.applymethod = function (product) {        
         console.log(product);
         var data = {};
         var pageNo = $scope.pagination.pageNo;
