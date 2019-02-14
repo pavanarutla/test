@@ -435,8 +435,8 @@
                         <tr ng-repeat="pCampaign in plannedCampaigns| filter:search ">
                             <td class="table_vertical">{{pCampaign.cid}}</td>
                             <td class="table_vertical">{{pCampaign.name}}</td>
-                            <td class="table_vertical">{{pCampaign.created_at| dateify | date:'dd-MM-yyyy'}} </td>
-                            <td class="table_vertical">{{pCampaign.no_products|| "N/A"}}</td>
+                            <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
+                            <td class="table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                             <!-- <td>10,1000</td> -->
                             <td class="table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
                             <td class="table_vertical">
@@ -488,8 +488,8 @@
                     </tbody>
                 </table>
             </div>
-        </md-tab>
-        <md-tab label="Scheduled ">
+    </md-tab>
+    <md-tab label="Scheduled ">
             <div style="margin-top: 1em;">
                 <div class="table-responsive">
                     <table class="table ">
@@ -509,8 +509,8 @@
                             <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
                                 <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
                                 <td class="table_vertical">{{pCampaign.name}}</td>
-                                <td class="table_vertical">{{pCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="table_vertical">{{pCampaign.no_products|| "N/A"}}</td>
+                                <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+                                <td class="table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
                                 <td class="table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
                                 <td>
@@ -563,8 +563,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-
     </md-tab>
     <md-tab label="Running">
         <div style="margin-top: 1em;">
@@ -588,8 +586,8 @@
                             <td class="table_vertical">{{rCampaign.cid}}</td>
                             <td class="table_vertical">{{rCampaign.name}}</td>
                             <td class="table_vertical">{{rCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                            <td class="table_vertical">{{campaign.no_products|| "N/A"}}</td>
-                            <td class="table_vertical">{{campaign.npaid|| "N/A"}}</td>
+                            <td class="table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
+                            <td class="table_vertical">{{rCampaign.paid|| "N/A"}}</td>
                             <td class="table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
                             <td>
                                 <md-menu md-position-mode="target-right target">
@@ -661,8 +659,8 @@
                             <td class="table_vertical">BB-01</td>
                             <td class="table_vertical">{{cCampaign.name}}</td>
                             <td class="table_vertical">{{cCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                            <td class="table_vertical">{{cCampaign.no_products|| "0"}}</td>
-                            <td class="table_vertical">{{cCampaign.npaid|| "N/A"}}</td>
+                            <td class="table_vertical">{{cCampaign.product_count|| "0"}}</td>
+                            <td class="table_vertical">{{cCampaign.paid|| "N/A"}}</td>
                             <td class="table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
                             <td>
                                 <md-menu md-position-mode="target-right target">
@@ -737,7 +735,7 @@
                                     <td>{{mCampaign.name}}</td>
                                     <td>{{mCampaign.start_date | date:'medium'}}</td>
                                     <td>{{mCampaign.product_count}}</td>
-                                    <td>{{mCampaign.campaign_paid}}</td>
+                                    <td>{{mCampaign.paid}}</td>
                                     <td>{{mCampaign.act_budget}}</td>
                                     <td>
                                             <md-menu md-position-mode="target-right target">

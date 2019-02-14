@@ -86,10 +86,10 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
        return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
       });
       $scope.SheduledCampaigns = _.filter(result, function(c){
-        return c.status == 800;
+        return c.status == 700;
       });
       $scope.runningCampaigns = _.filter(result, function(c){
-        return c.status == 700;
+        return c.status == 800;
       });
       $scope.closedCampaigns = _.filter(result, function(c){
          return c.status == 1000 || c.status == 900;
@@ -107,8 +107,8 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
     CampaignService.getCampaignWithProducts(campaignId).then(function(result){
       $scope.campaignDetails = result;
       if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
-        $scope.campaignDetails.gst = result.act_budget * 18 / 100;
-        $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+        $scope.campaignDetails.gst = 0;
+        $scope.campaignDetails.subTotal = result.act_budget ;
         $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
       }
     });
@@ -162,25 +162,66 @@ $scope.Getcomment = function (campaignID){
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(ev, campaignId){
-    CampaignService.confirmCampaignBooking(campaignId).then(function(result){
-      if(result.status == 1){
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title(result.message)
-            .textContent('The Admin will soon launch your campaign and intimate you about it.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
-        $scope.getCampaignDetails(campaignId);
-      }
-      else{
-        toastr.error(result.message);
-      }
+    console.log($scope.campaignDetails.products);
+    $i = 0;
+    angular.forEach($scope.campaignDetails.products, function (value, key) {
+      if(value.admin_price) ++$i;
     });
+    //console.log($i);
+    if($i > 0){
+      if($i == $scope.campaignDetails.products.length){
+        CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+          if(result.status == 1){
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('body')))
+                .clickOutsideToClose(true)
+                .title(result.message)
+                .textContent('The Admin will soon launch your campaign and intimate you about it.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Got it!')
+                .targetEvent(ev)
+            );
+            $scope.getCampaignDetails(campaignId);
+          }
+          else{
+            toastr.error(result.message);
+          }
+        });
+      }else{
+        var confirm = $mdDialog.confirm()
+          .title('Campaign Confirm')
+          .textContent('Do you really want to confirm? Once you confirm your not deciced product will be deleted')
+          .targetEvent(ev)
+          .ok('Please do it!')
+          .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
+              CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+                if(result.status == 1){
+                  $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('body')))
+                      .clickOutsideToClose(true)
+                      .title(result.message)
+                      .textContent('The Admin will soon launch your campaign and intimate you about it.')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Got it!')
+                      .targetEvent(ev)
+                  );
+                  $scope.getCampaignDetails(campaignId);
+                }
+                else{
+                  toastr.error(result.message);
+                }
+              });
+            });
+      } 
+      
+    }
+    
   }
+
+  
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
     CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){

@@ -234,14 +234,14 @@ app.controller('MetroCtrl',
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
             if (response.status == 1) {
-              $mdSidenav('saveCampaignSidenavForm').close();
-              $mdSidenav('saveCampaignSidenavCongo').open();
               $timeout(function () {
-                $mdSidenav('saveCampaignSidenavCongo').close();
+                $scope.showSaveCampaignPopup = false;
+                $scope.campaign = {};
                 campaign = {};
-                $scope.forms.viewAndSaveCampaignForm.$setPristine();
-                $scope.forms.viewAndSaveCampaignForm.$setUntouched();
+                $scope.metroCampaignForm.$setPristine();
+                $scope.metroCampaignForm.$setUntouched();
                 $scope.campaignSavedSuccessfully = false;
+                toastr.success(response.message);
               }, 3000);
               getMetroCampaigns();
               loadShortlistedPackages();

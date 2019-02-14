@@ -356,6 +356,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/paymentview-details.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.campaign-payment-details', {
+      url: '/campaign-payment-details/:campaign_id',
+      templateUrl: 'views/admin/campaign-payment-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
     .state('admin.admin-feeds', {
       url: '/admin-feeds',
       templateUrl: 'views/admin/admin-feeds.html',
@@ -372,9 +377,9 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.add-campagin-product', {
-      url: '/add-campagin-product',
+      url: '/add-campagin-product/{campaignId}',
       templateUrl: 'views/admin/add-campagin-product.html',
-      // controller: 'OwnerCampaignCtrl'
+       controller: 'AdminCampaignCtrl'
     })
     .state('admin.campaign-details', {
       url: '/campaign-details',
@@ -382,7 +387,7 @@ var app = angular.module('bbManager', [
       // controller: 'OwnerCampaignCtrl'
     })
     .state('admin.product-shortlist-campagin', {
-      url: '/product-shortlist-campagin',
+      url: '/product-shortlist-campagin/:productId',
       templateUrl: 'views/admin/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })

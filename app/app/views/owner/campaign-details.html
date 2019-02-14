@@ -140,7 +140,7 @@
 						<th class="">Size</th>
 						<th class="hide-xs">Booked From</th>
 						<th class="hide-xs">Booked To</th>
-						<th class="hide-xs">Pric</th>
+						<th class="hide-xs">Price</th>
 						<th class="hide-xs"></th>
             <th class="hide-xs" style="text-align:end" >
               <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
@@ -162,17 +162,16 @@
 						</td>
 						<td class="table_vertical">{{product.panelSize}}</td>
 						<td class="table_vertical hide-xs">
-							<p>{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}</p>
+							{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}
 							<!-- <p></p> -->
 						</td>
-						<td class="table_vertical hide-xs">
-							<p>{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}</p>
+						<td class="table_vertical hide-xs">{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}
 							<!-- <p>15-10-2018</p> -->
 						</td>
 						<!--<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
 						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>-->
 						
-						<td ng-if="campaignDetails.status==300 && product.owner_price">
+						<td class="table_vertical ng-if="campaignDetails.status==300 && product.owner_price">
 								{{(!myfield && product.owner_price)?product.owner_price:''}}
 							<input type="text" class="" ng-model="product.owner_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
 							<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
@@ -199,7 +198,7 @@
 			</table>
 		</div>
 		<!-- //table grid end -->
-		<div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0 && campaignDetails.type == 2">
+		<!-- <div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin ng-if="campaignDetails.products.length > 0 && campaignDetails.type == 2">
 			<div layout="column" class="payment_inner">
 				<div layout="row">
 					<div class="md-body-1">Total :</div>
@@ -221,6 +220,18 @@
 					Campaign</md-button>
 				<button class="" ng-if="campaignDetails.status == 700" style="cursor:none">Booked</button>
 			</div>
-		</div>
+		</div> -->
+		<div style="margin-right:20px;">
+			<div class="pull-right">
+			  <p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{campaignDetails.act_budget}}</spam></p>
+			  <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p>
+			  <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal}}</spam></p>
+			  <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal}}</spam></p>
+			  <md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book
+				Campaign</md-button>
+			<button class="booked_campdetails" ng-disabled="campaignDetails.status == 700" >Booked</button>
+			</div>
+			
+		  </div>
 	</div>
 </div>
