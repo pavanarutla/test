@@ -126,6 +126,22 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   $scope.getProductList = function(){
     ProductService.getProductList().then(function(result){
       $scope.AdminProduct = result.products;
+      CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(results){
+        _.map($scope.AdminProduct, function (product) {
+              /*if (product.id == (result.products)) {
+                  product.alreadyAdded = true;
+              }*/
+              //alert("FD1");
+              if (Object.values(results.products).indexOf(product.id) > -1) {
+                alert("FDg");
+                  product.alreadyAdded = true;
+             }
+              
+             
+              return product;
+          });
+      });
+      
     });
   }
 
@@ -736,6 +752,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         //   loadCampaignPayments(campaignId);
         // }
         resolve(result);
+      
       });
     })
   }
@@ -749,6 +766,40 @@ $scope.getProductUnavailableDates = function (productId, ev) {
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');
   });
+}
+
+$scope.suggestProductForAdminCampaign = function (adminProduct) {
+  console.log(adminProduct);
+  if($stateParams.campaignId) {
+      var postObj = {
+          campaign_id: $stateParams.campaignId,
+          product: {
+              id: adminProduct.id,
+              booking_dates: adminProduct.booking_dates,
+              price: adminProduct.default_price
+          }
+      }
+      AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+          console.log(result);
+          if (result.status == 1) {
+            CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+             // alert("dhajf");
+                  $scope.campaignDetails = result;
+                  _.map($scope.AdminProduct, function (product) {
+                      if (product.id == adminProduct.id) {
+                          product.alreadyAdded = true;
+                      }
+                     // console.log(product);
+                      return product;
+                  });
+                  //console.log($scope.AdminProduct)
+              });
+              toastr.success(result.message);
+          } else {
+              toastr.error(result.message);
+          }
+      });
+  }
 }
 /*================================
      | Multi date range picker options
@@ -792,5 +843,6 @@ $scope.getProductUnavailableDates = function (productId, ev) {
 // Date-Picker-END
 
   $scope.getProductList();
+  
   
 });
