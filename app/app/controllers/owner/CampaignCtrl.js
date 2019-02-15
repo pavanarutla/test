@@ -67,10 +67,10 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     };
 
     //campaign share
-    $scope.toggleShareCampaignSidenav = function (campaignDetails) {
-        $scope.OwnerShareCampaign = campaignDetails;
-        $mdSidenav('shareCampaignSidenav').toggle();
-    };
+    // $scope.toggleShareCampaignSidenav = function (campaignDetails) {
+    //     $scope.OwnerShareCampaign = campaignDetails;
+    //     $mdSidenav('shareCampaignSidenav').toggle();
+    // };
 
     /*===========================
      | MdDialogs and sidenavs end
@@ -84,7 +84,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         opens: 'center',
         locale: {
             applyClass: 'btn-green',
-            applyLabel: "Apply",
+            applyLabel: "Book Now",
             fromLabel: "From",
             format: "DD-MMM-YY",
             toLabel: "To",

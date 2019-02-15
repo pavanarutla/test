@@ -78,57 +78,75 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   | Filtering Campaigns Ends
   =========================*/
 
-  $scope.showAddCampaignPopup = function () {
-    $mdDialog.show({
-      templateUrl: 'views/admin/add-full-campaign.html',
-      clickOutsideToClose: true,
-      fullscreen: $scope.customFullscreen,
-      controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
-        $scope.campaign = {};
-        var startDate = new Date();
-        var productFromDate = new Date($scope.campaign.start_date);
-        var productToDate = new Date($scope.campaign.end_date);
-        $scope.fromMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate() + 5
-        );
-        $scope.toMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productFromDate.getDate() + 1
-        );
-        $scope.toMaxDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productToDate.getDate()
-        );
-        $scope.saveCampaignByAdmin = function () {
-          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
-            if (result.status == 1) {
-              getAllCampaigns();
-              toastr.success(result.message);
-              $mdDialog.hide();
-            }
-            else if (result.status == 0) {
-              $scope.campaignDetailsErrorEessages = result.message;
-            }
-          }, function (result) {
-            $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
-          });
-        }
-        $scope.close = function () {
-          $mdDialog.hide();
-        }
-      }
-    });
-  };
+  // $scope.showAddCampaignPopup = function () {
+  //   $mdDialog.show({
+  //     templateUrl: 'views/admin/add-full-campaign.html',
+  //     clickOutsideToClose: true,
+  //     fullscreen: $scope.customFullscreen,
+  //     controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
+  //       $scope.campaign = {};
+  //       var startDate = new Date();
+  //       var productFromDate = new Date($scope.campaign.start_date);
+  //       var productToDate = new Date($scope.campaign.end_date);
+  //       $scope.fromMinDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         startDate.getDate() + 5
+  //       );
+  //       $scope.toMinDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         productFromDate.getDate() + 1
+  //       );
+  //       $scope.toMaxDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         productToDate.getDate()
+  //       );
+  //       $scope.saveCampaignByAdmin = function () {
+  //         AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
+  //           if (result.status == 1) {
+  //             getAllCampaigns();
+  //             toastr.success(result.message);
+  //             $mdDialog.hide();
+  //           }
+  //           else if (result.status == 0) {
+  //             $scope.campaignDetailsErrorEessages = result.message;
+  //           }
+  //         }, function (result) {
+  //           $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+  //         });
+  //       }
+  //       $scope.close = function () {
+  //         $mdDialog.hide();
+  //       }
+  //     }
+  //   });
+  // };
   $scope.getProductList = function(){
     ProductService.getProductList().then(function(result){
       $scope.AdminProduct = result.products;
     });
   }
-
+  $scope.saveCampaignByAdmin = function (AdminownerCampaign) {
+    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {
+      console.log(result);
+      if (result.status == 1) {
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if (result.status == 0) {
+        $scope.campaignDetailsErrorEessages = result.message;
+      }
+      myFunction();
+    }, function (result) {
+      $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+    });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
   $scope.deleteUserCampaign = function (campaignId) {
     AdminCampaignService.deleteUserCampaign(campaignId).then(function (result) {
       if (result.status == 1) {

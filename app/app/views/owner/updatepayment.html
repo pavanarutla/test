@@ -1,3 +1,39 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+  <div layout="row">
+    <div class="md-toolbar-tools">
+      <div flex></div>
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+        <md-tooltip>Close Side Panel</md-tooltip>
+        <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+      </md-button>
+    </div>
+  </div>
+  <md-content layout-align="center center" layout-margin layout-padding>
+    <h3 class="md-headline">Share Campaign</h3>
+    <form name="shareCampaignForm">
+      <div layout="column">
+        <md-input-container class="md-block">
+          <label>Name</label>
+          <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+          <div ng-messages="shareCampaignForm.name.$error">
+            <div ng-message="required">Name is required.</div>
+            <div ng-message="pattern">Enter a valid Name.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+          <div ng-messages="shareCampaignForm.email.$error">
+            <div ng-message="required">Email is required.</div>
+            <div ng-message="pattern">Enter a valid Email Id.</div>
+          </div>
+        </md-input-container>
+        <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
+          Campaign</md-button>
+      </div>
+    </form>
+  </md-content>
+</md-sidenav>
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
   <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
@@ -20,7 +56,7 @@
     </div>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
       style="margin-top:14px;">
-      <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+      <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(campaignPaymentDetails.id)">
         <p class="md-caption"><span><i class="material-icons i_icon">
               reply_all
             </i></span></p>
@@ -39,7 +75,7 @@
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
       style="margin-top:1em;">
       <div class="dropdown">
-        <md-button class="md-raised md-primary update_mrg" onclick="addPayment()" class="dropbtn" style="">
+        <md-button class="md-raised md-primary update_mrg" onclick="addPayment()" class="dropbtn">
           <md-icon style="width:1.5vw">
             <i class="material-icons update_accounticon">
               account_balance_wallet
@@ -171,45 +207,6 @@
     <h4>Balance: {{unpaid}}</h4>
   </div>
 </div>
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
-  <div layout="row">
-    <div class="md-toolbar-tools">
-      <div flex></div>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-      </md-button>
-    </div>
-  </div>
-  <md-content layout-align="center center" layout-margin layout-padding>
-    <h3 class="md-headline">Share Campaign</h3>
-    <form name="shareCampaignForm">
-      <div layout="column">
-        <md-input-container class="md-block">
-          <label>Name</label>
-          <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
-          <div ng-messages="shareCampaignForm.name.$error">
-            <div ng-message="required">Name is required.</div>
-            <div ng-message="pattern">Enter a valid Name.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-          <div ng-messages="shareCampaignForm.email.$error">
-            <div ng-message="required">Email is required.</div>
-            <div ng-message="pattern">Enter a valid Email Id.</div>
-          </div>
-        </md-input-container>
-        <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">Share
-          Campaign</md-button>
-      </div>
-    </form>
-  </md-content>
-</md-sidenav>
-
-
-
 <script>
   function addPayment() {
     document.getElementById("myDropdown").classList.toggle("show");

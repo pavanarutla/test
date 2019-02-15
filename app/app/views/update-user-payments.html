@@ -1,5 +1,5 @@
-<div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div>
-<div layout="column" ng-if = "!message && UserPaymentDetails.length > 0">
+<!-- <div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div> -->
+<div layout="column">
   <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
     <div class="ml-4 update" style="margin-top:38px;">
       <p class="first">Campaign ID</p>
@@ -71,11 +71,10 @@
         </tr>
       </thead>
       <tbody class="contbg">
-        <tr ng-repeat="Userpayment in campaignDetails.payment_details">
+        <tr ng-repeat="Userpayment in UserPaymentDetails.all_payments">
           <td>{{Userpayment.created_at}}</td>
-          <td>NA</td>
-          <td>NA</td>
-          <td>NA</td>
+          <td>{{Userpayment.type}}</td>
+          <td>{{UserPaymentDetails.total_paid}}</td>
         </tr>
         <!-- <tr>
           <td>14-08-2018</td>
@@ -105,7 +104,8 @@
         </form>
       </div> -->
     </div>
-    <div class="p-2  col-md-6 align-self-end" ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700">
+    <div class="p-2  col-md-6 align-self-end">
+        <!-- ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700" -->
       <div class="d-flex justify-content-end pt-4">
         <div layout="column" class="payment_inner">
           <div layout="row">

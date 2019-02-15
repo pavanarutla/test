@@ -36,7 +36,7 @@ app.controller('GmapCtrl',
         opens: 'center',
         locale: {
             applyClass: 'btn-green',
-            applyLabel: "Apply",
+            applyLabel: "Book Now",
             fromLabel: "From",
             format: "DD-MMM-YY",
             toLabel: "To",
