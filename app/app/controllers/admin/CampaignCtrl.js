@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -129,8 +129,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     });
   }
   $scope.saveCampaignByAdmin = function (AdminownerCampaign) {
-    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {
-      console.log(result);
+    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {      
       if (result.status == 1) {
         getAllCampaigns();
         toastr.success(result.message);
@@ -193,7 +192,6 @@ $scope.productSearch = function (query) {
 }
 
 $scope.applymethod = function (product) {
-  console.log(product);
   var data = {};
   var pageNo = $scope.pagination.pageNo;
   var pageSize = $scope.pagination.pageSize;
@@ -670,21 +668,17 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   =============================*/
 
   function loadCampaignPayments(campaignId) {
-    //if($scope.campaignDetails.status >= 6 ){
+    console.log(campaignId);
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignMetroPayments = result;
       } else {
-        // toastr.error(result.message);
+        toastr.error(result.message);
       }
 
     });
-    // }
-    // else{
-    //   toastr.error('Payments are only available for running or stopped campaigns.');
-    // }
   }
-  loadCampaignPayments($stateParams.metroCampaignId);
+  //loadCampaignPayments($stateParams.metroCampaignId);
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
     CampaignService.getCampaignWithProducts($stateParams.campaign_id).then(function(result){

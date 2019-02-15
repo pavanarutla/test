@@ -57,7 +57,7 @@
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
 				<p class="">No of Products</p>
-				<p class="md-caption mob_span mob_5"><b>{{ campaignDetails.products.length }}</b></p>
+				<p class="md-caption mob_span mob_5"><b>{{ campaignDetails.campaign_details.no_of_products }}</b></p>
 			</div>
 			<!--<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-top:14px;">
 				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
@@ -91,7 +91,7 @@
 					Upload Art Work
 				</md-button>
             </div> -->
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
+            <div class="offset-xl-4 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
                 <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
                 <md-button class="md-raised all_button" onclick="addPayment()">Add Payment</md-button>
                 <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
@@ -165,7 +165,7 @@
                                              <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                                 </div>
                                 <div class="col-sm-4">
-                                  <md-button class="md-raised md-primary pull-right text-white" ng-disabled="campaignDetails.status != 700 && campaignDetails.status != 800" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                                  <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                                 </div>
                               </div>
                             </form>
@@ -190,7 +190,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="payment in campaignMetroPayments.all_payments">
+                <tr ng-repeat="payment in campaignAdminPayments.all_payments">
                     <td class="table_vertical">{{payment.type}}</td>
                     <td class="table_vertical">{{payment.amount}}</td>
                     <td class="table_vertical">{{payment.reference_no}}</td>
