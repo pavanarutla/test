@@ -49,48 +49,16 @@
 		<div class="row" style="margin-left:0px; margin-right:0px;">
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng" style="margin-top:14px;">
 				<p class="">Campaign ID</p>
-				<p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
+				<p class="md-caption mob_span"><b>{{campaignPayments.campaign_details.cid}}</b></p>
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng" style="margin-top:14px;">
 				<p class="">Campaign Name</p>
-				<p class="md-caption mob_span"><b>{{ campaignDetails.name }}</b></p>
+				<p class="md-caption mob_span"><b>{{ campaignPayments.campaign_details.name }}</b></p>
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
 				<p class="">No of Products</p>
-				<p class="md-caption mob_span mob_5"><b>{{ campaignDetails.campaign_details.no_of_products }}</b></p>
+				<p class="md-caption mob_span mob_5"><b>{{ campaignPayments.campaign_details.no_of_products }}</b></p>
 			</div>
-			<!--<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-top:14px;">
-				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
-					<p class="md-caption"><span><i class="material-icons i_icon">
-								reply_all
-							</i></span></p>
-					<p class="mob_spanicon share_icon">Share Camapaign</p>
-				</div>
-			</div>
-			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
-					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-					  <p class="md-caption"><span><i class="material-icons i_icondown">
-							file_copy
-						  </i></span></p>
-					  <p class="mob_spanicon share_icon">Download Quotetation</p>
-					</div>
-				  </div>
-			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
-				  <p class="md-caption"><span><i class="material-icons i_icon">
-					  account_balance_wallet
-					</i></span></p>
-					<p class="mob_spanicon share_icon">Payment Details</p>
-			  </div> -->
-			<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs" style="margin-top:1em;">
-				<md-button class="md-raised Upload_font">
-					<md-icon>
-						<i class="material-icons material_iconscloud">
-							cloud_upload
-						</i>
-					</md-icon>
-					Upload Art Work
-				</md-button>
-            </div> -->
             <div class="offset-xl-4 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
                 <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
                 <md-button class="md-raised all_button" onclick="addPayment()">Add Payment</md-button>
@@ -190,7 +158,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="payment in campaignAdminPayments.all_payments">
+                <tr ng-repeat="payment in campaignPayments.all_payments">
                     <td class="table_vertical">{{payment.type}}</td>
                     <td class="table_vertical">{{payment.amount}}</td>
                     <td class="table_vertical">{{payment.reference_no}}</td>
@@ -216,37 +184,18 @@
                 </form>
             </div>
         </div>
-        <!-- <div class="p-2  col-md-6 align-self-end">
-            <div class="d-flex justify-content-end pt-4">
-                <md-button class="md-raised all_button">Request Proposal</md-button>
-            </div>
-        </div> -->
         <div class="p-2 col-md-6" >
             <div class="d-flex justify-content-end pt-4 align-self-end">
                 <div layout="column" class="payment_inner">
                     <div class="">
-                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignDetails.act_budget}}</span></p>
-                    </div>
-                    <!-- <div layout="row">
-                        <div class="md-body-1">18% GST :</div>
-                        <div class="md-body-1"></div>
-                    </div> -->
-                    <!-- <div layout="row">
-                        <div class="md-body-1">Paid :</div>
-                        <div class="md-body-1">11,10,850</div>
-                    </div>
-                    <div layout="row">
-                        <div class="md-title">Balance :</div>
-                        <div class="md-title">1,47,150</div>
-                    </div> -->
-                    <div class="">
-                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignMetroPayments.total_paid}}</span></p>
+                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignPayments.campaign_details.total_amount}}</span></p>
                     </div>
                     <div class="">
-                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignDetails.act_budget - campaignMetroPayments.total_paid}}</span></p>
+                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignPayments.total_paid}}</span></p>
                     </div>
-                   
-                    
+                    <div class="">
+                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignPayments.campaign_details.total_amount - campaignPayments.total_paid}}</span></p>
+                    </div>
                 </div>
             </div>
         </div>

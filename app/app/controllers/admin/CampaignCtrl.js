@@ -133,11 +133,9 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
               }*/
               //alert("FD1");
               if (Object.values(results.products).indexOf(product.id) > -1) {
-                alert("FDg");
+                //alert("FDg");
                   product.alreadyAdded = true;
              }
-              
-             
               return product;
           });
       });
@@ -154,6 +152,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
       else if (result.status == 0) {
         $scope.campaignDetailsErrorEessages = result.message;
       }
+      $scope.AdminownerCampaign={};
       myFunction();
     }, function (result) {
       $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
@@ -687,11 +686,10 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     console.log(campaignId);
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
-        $scope.campaignMetroPayments = result;
+        $scope.campaignPayments = result;
       } else {
         toastr.error(result.message);
       }
-
     });
   }
   //loadCampaignPayments($stateParams.metroCampaignId);

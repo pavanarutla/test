@@ -110,10 +110,15 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);
+        $scope.GST = $scope.campaignDetails.act_budget/100 * 18;
+        $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST
+        // $scope.uncheck = function(){
+
+        // }
         if(result.status > 7){
           loadCampaignPayments(campaignId);
         }
-        resolve(result);
+        resolve(result);        
       });
     })
   }
