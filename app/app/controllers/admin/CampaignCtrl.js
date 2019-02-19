@@ -687,12 +687,13 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignPayments = result;
+        $scope.campaignMetroPayments = result;
       } else {
         toastr.error(result.message);
       }
     });
   }
-  //loadCampaignPayments($stateParams.metroCampaignId);
+  loadCampaignPayments($stateParams.metroCampaignId);
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
     CampaignService.getCampaignWithProducts($stateParams.campaign_id).then(function(result){
@@ -851,8 +852,5 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
    | Multi date range picker options end
    ====================================*/
 // Date-Picker-END
-
-  $scope.getProductList();
-  
-  
+  $scope.getProductList();  
 });
