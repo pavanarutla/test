@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window,$state) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -455,9 +455,9 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
           AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
             if (result.status == 1) {
               toastr.success(result.message);
-              getMetroCampaignDetails(metroCampaignId);
-              loadCampaignPayments(metroCampaignId);
-              $mdDialog.hide();              
+              getMetroCampaignDetails(metroCampaignId);              
+              $scope.closeMdDialog();
+              $state.reload();      
             }
             else {
               toastr.error(result.message);
@@ -655,12 +655,12 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
     $scope.loadCampaignPayments($stateParams.campaign_id);    
   }
-  if ($rootScope.currStateName == "admin.metro-campaign-list") {
-    AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result){
+  if ($rootScope.currStateName == "admin.metro-campaign-details") {
+    AdminCampaignService.getCampaignPaymentDetails($stateParams.metroCampaignId).then(function (result){
       $scope.campaignMetroPayments = result;
-    });
-    $scope.loadCampaignPayments($stateParams.metroCampaignId);   
+    });    
   }
+  $scope.loadCampaignPayments($stateParams.metroCampaignId);   
   
   $scope.paymentTypes = [
     {name: "Cash"},
