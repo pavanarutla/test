@@ -77,68 +77,22 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*=========================
   | Filtering Campaigns Ends
   =========================*/
-
-  // $scope.showAddCampaignPopup = function () {
-  //   $mdDialog.show({
-  //     templateUrl: 'views/admin/add-full-campaign.html',
-  //     clickOutsideToClose: true,
-  //     fullscreen: $scope.customFullscreen,
-  //     controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
-  //       $scope.campaign = {};
-  //       var startDate = new Date();
-  //       var productFromDate = new Date($scope.campaign.start_date);
-  //       var productToDate = new Date($scope.campaign.end_date);
-  //       $scope.fromMinDate = new Date(
-  //         startDate.getFullYear(),
-  //         startDate.getMonth(),
-  //         startDate.getDate() + 5
-  //       );
-  //       $scope.toMinDate = new Date(
-  //         startDate.getFullYear(),
-  //         startDate.getMonth(),
-  //         productFromDate.getDate() + 1
-  //       );
-  //       $scope.toMaxDate = new Date(
-  //         startDate.getFullYear(),
-  //         startDate.getMonth(),
-  //         productToDate.getDate()
-  //       );
-  //       $scope.saveCampaignByAdmin = function () {
-  //         AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
-  //           if (result.status == 1) {
-  //             getAllCampaigns();
-  //             toastr.success(result.message);
-  //             $mdDialog.hide();
-  //           }
-  //           else if (result.status == 0) {
-  //             $scope.campaignDetailsErrorEessages = result.message;
-  //           }
-  //         }, function (result) {
-  //           $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
-  //         });
-  //       }
-  //       $scope.close = function () {
-  //         $mdDialog.hide();
-  //       }
-  //     }
-  //   });
-  // };
   $scope.getProductList = function(){
     ProductService.getProductList().then(function(result){
       $scope.AdminProduct = result.products;
-      CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(results){
-        _.map($scope.AdminProduct, function (product) {
-              /*if (product.id == (result.products)) {
-                  product.alreadyAdded = true;
-              }*/
-              //alert("FD1");
-              if (Object.values(results.products).indexOf(product.id) > -1) {
-                //alert("FDg");
-                  product.alreadyAdded = true;
-             }
-              return product;
-          });
-      });
+      // CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(results){
+      //   _.map($scope.AdminProduct, function (product) {
+      //         /*if (product.id == (result.products)) {
+      //             product.alreadyAdded = true;
+      //         }*/
+      //         //alert("FD1");
+      //         if (Object.values(results.products).indexOf(product.id) > -1) {
+      //           //alert("FDg");
+      //             product.alreadyAdded = true;
+      //        }
+      //         return product;
+      //     });
+      // });
       
     });
   }
@@ -408,6 +362,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         $scope.selectedPackage = {};
         getMetroCampaignDetails($scope.metroCampaignDetails.id);
         toastr.success(result.message);
+        $scope.toggleAddMetroProductSidenav();
       }
       else {
         toastr.error(result.message);
@@ -502,7 +457,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               toastr.success(result.message);
               getMetroCampaignDetails(metroCampaignId);
               loadCampaignPayments(metroCampaignId);
-              $mdDialog.hide();
+              $mdDialog.hide();              
             }
             else {
               toastr.error(result.message);
@@ -682,8 +637,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   | Page based initial loads end
   =============================*/
 
-  function loadCampaignPayments(campaignId) {
-    console.log(campaignId);
+  $scope.loadCampaignPayments = function(campaignId) {
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignPayments = result;
@@ -693,14 +647,19 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }
     });
   }
-  loadCampaignPayments($stateParams.metroCampaignId);
+  
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
-    CampaignService.getCampaignWithProducts($stateParams.campaign_id).then(function(result){
-      $scope.campaignDetails = result;
+    AdminCampaignService.getCampaignPaymentDetails($stateParams.campaign_id).then(function(result){
+      $scope.campaignDetails = result.campaign_details;
     });
-    loadCampaignPayments($stateParams.campaign_id);
-    
+    $scope.loadCampaignPayments($stateParams.campaign_id);    
+  }
+  if ($rootScope.currStateName == "admin.metro-campaign-list") {
+    AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result){
+      $scope.campaignMetroPayments = result;
+    });
+    $scope.loadCampaignPayments($stateParams.metroCampaignId);   
   }
   
   $scope.paymentTypes = [
@@ -723,7 +682,8 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               /*setTimout(() => {
                   $location.path('/owner/' + $rootScope.clientSlug + '/payments');
               }, 2500);*/
-              loadCampaignPayments(cid);
+              addPayment();
+              $scope.loadCampaignPayments(cid);
           } else {
               if (result.data.message.constructor == Array) {
                   $scope.updateCampaignPaymentErrors = result.data.message;
@@ -736,6 +696,9 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }, function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
       });
+  }
+  function addPayment() {
+    document.getElementById("myDropdown").classList.toggle("show");
   }
   $scope.getCampaignList = function(){
     var productId = $stateParams.productId;
@@ -780,7 +743,7 @@ $scope.getProductUnavailableDates = function (productId, ev) {
 }
 
 $scope.suggestProductForAdminCampaign = function (adminProduct) {
-  console.log(adminProduct);
+ // console.log(adminProduct);
   if($stateParams.campaignId) {
       var postObj = {
           campaign_id: $stateParams.campaignId,
@@ -791,7 +754,7 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
           }
       }
       AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
-          console.log(result);
+          //console.log(result);
           if (result.status == 1) {
             CampaignService.getCampaignWithProducts(campaignId).then(function(result){
              // alert("dhajf");
