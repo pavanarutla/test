@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -78,57 +78,89 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   | Filtering Campaigns Ends
   =========================*/
 
-  $scope.showAddCampaignPopup = function () {
-    $mdDialog.show({
-      templateUrl: 'views/admin/add-full-campaign.html',
-      clickOutsideToClose: true,
-      fullscreen: $scope.customFullscreen,
-      controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
-        $scope.campaign = {};
-        var startDate = new Date();
-        var productFromDate = new Date($scope.campaign.start_date);
-        var productToDate = new Date($scope.campaign.end_date);
-        $scope.fromMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate() + 5
-        );
-        $scope.toMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productFromDate.getDate() + 1
-        );
-        $scope.toMaxDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productToDate.getDate()
-        );
-        $scope.saveCampaignByAdmin = function () {
-          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
-            if (result.status == 1) {
-              getAllCampaigns();
-              toastr.success(result.message);
-              $mdDialog.hide();
-            }
-            else if (result.status == 0) {
-              $scope.campaignDetailsErrorEessages = result.message;
-            }
-          }, function (result) {
-            $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
-          });
-        }
-        $scope.close = function () {
-          $mdDialog.hide();
-        }
-      }
-    });
-  };
+  // $scope.showAddCampaignPopup = function () {
+  //   $mdDialog.show({
+  //     templateUrl: 'views/admin/add-full-campaign.html',
+  //     clickOutsideToClose: true,
+  //     fullscreen: $scope.customFullscreen,
+  //     controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
+  //       $scope.campaign = {};
+  //       var startDate = new Date();
+  //       var productFromDate = new Date($scope.campaign.start_date);
+  //       var productToDate = new Date($scope.campaign.end_date);
+  //       $scope.fromMinDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         startDate.getDate() + 5
+  //       );
+  //       $scope.toMinDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         productFromDate.getDate() + 1
+  //       );
+  //       $scope.toMaxDate = new Date(
+  //         startDate.getFullYear(),
+  //         startDate.getMonth(),
+  //         productToDate.getDate()
+  //       );
+  //       $scope.saveCampaignByAdmin = function () {
+  //         AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
+  //           if (result.status == 1) {
+  //             getAllCampaigns();
+  //             toastr.success(result.message);
+  //             $mdDialog.hide();
+  //           }
+  //           else if (result.status == 0) {
+  //             $scope.campaignDetailsErrorEessages = result.message;
+  //           }
+  //         }, function (result) {
+  //           $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+  //         });
+  //       }
+  //       $scope.close = function () {
+  //         $mdDialog.hide();
+  //       }
+  //     }
+  //   });
+  // };
   $scope.getProductList = function(){
     ProductService.getProductList().then(function(result){
       $scope.AdminProduct = result.products;
+      CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(results){
+        _.map($scope.AdminProduct, function (product) {
+              /*if (product.id == (result.products)) {
+                  product.alreadyAdded = true;
+              }*/
+              //alert("FD1");
+              if (Object.values(results.products).indexOf(product.id) > -1) {
+                //alert("FDg");
+                  product.alreadyAdded = true;
+             }
+              return product;
+          });
+      });
+      
     });
   }
-
+  $scope.saveCampaignByAdmin = function (AdminownerCampaign) {
+    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {      
+      if (result.status == 1) {
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if (result.status == 0) {
+        $scope.campaignDetailsErrorEessages = result.message;
+      }
+      $scope.AdminownerCampaign={};
+      myFunction();
+    }, function (result) {
+      $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+    });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
   $scope.deleteUserCampaign = function (campaignId) {
     AdminCampaignService.deleteUserCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
@@ -175,7 +207,6 @@ $scope.productSearch = function (query) {
 }
 
 $scope.applymethod = function (product) {
-  console.log(product);
   var data = {};
   var pageNo = $scope.pagination.pageNo;
   var pageSize = $scope.pagination.pageSize;
@@ -652,19 +683,15 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   =============================*/
 
   function loadCampaignPayments(campaignId) {
-    //if($scope.campaignDetails.status >= 6 ){
+    console.log(campaignId);
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
+        $scope.campaignPayments = result;
         $scope.campaignMetroPayments = result;
       } else {
-        // toastr.error(result.message);
+        toastr.error(result.message);
       }
-
     });
-    // }
-    // else{
-    //   toastr.error('Payments are only available for running or stopped campaigns.');
-    // }
   }
   loadCampaignPayments($stateParams.metroCampaignId);
    /**********      Payments  */
@@ -736,6 +763,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         //   loadCampaignPayments(campaignId);
         // }
         resolve(result);
+      
       });
     })
   }
@@ -749,6 +777,40 @@ $scope.getProductUnavailableDates = function (productId, ev) {
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');
   });
+}
+
+$scope.suggestProductForAdminCampaign = function (adminProduct) {
+  console.log(adminProduct);
+  if($stateParams.campaignId) {
+      var postObj = {
+          campaign_id: $stateParams.campaignId,
+          product: {
+              id: adminProduct.id,
+              booking_dates: adminProduct.booking_dates,
+              price: adminProduct.default_price
+          }
+      }
+      AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+          console.log(result);
+          if (result.status == 1) {
+            CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+             // alert("dhajf");
+                  $scope.campaignDetails = result;
+                  _.map($scope.AdminProduct, function (product) {
+                      if (product.id == adminProduct.id) {
+                          product.alreadyAdded = true;
+                      }
+                     // console.log(product);
+                      return product;
+                  });
+                  //console.log($scope.AdminProduct)
+              });
+              toastr.success(result.message);
+          } else {
+              toastr.error(result.message);
+          }
+      });
+  }
 }
 /*================================
      | Multi date range picker options
@@ -790,7 +852,5 @@ $scope.getProductUnavailableDates = function (productId, ev) {
    | Multi date range picker options end
    ====================================*/
 // Date-Picker-END
-
-  $scope.getProductList();
-  
+  $scope.getProductList();  
 });

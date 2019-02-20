@@ -352,7 +352,7 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.paymentview-details', {
-      url: '/paymentview-details',
+      url: '/paymentview-details/:campaignId',
       templateUrl: 'views/admin/paymentview-details.html',
       controller: 'AdminCampaignCtrl'
     })
@@ -592,7 +592,7 @@ app.config(['toastrConfig', function (toastrConfig) {
     containerId: 'toast-container',
     maxOpened: 0,
     newestOnTop: true,
-    positionClass: 'toast-bottom-right',
+    positionClass: 'toast-center',
     preventDuplicates: false,
     preventOpenDuplicates: false,
     target: 'body'

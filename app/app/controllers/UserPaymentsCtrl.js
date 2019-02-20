@@ -1,4 +1,4 @@
-app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$stateParams) {  
+app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$stateParams,$mdSidenav,toastr,$mdDialog) {  
     $scope.getUserPayment = function(){
         CampaignService.getActiveUserCampaigns().then(function(result){
             console.log(result);
@@ -12,14 +12,45 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
           $scope.UserPaymentDetails = result;
           if(result.status == 0 ){
             $scope.message = result.message;
-          }
-          if(typeof result.act_budget === 'number' && result.act_budget % 1 == 0){
-            $scope.UserPaymentDetails.gst = result.act_budget * 18 / 100;
-            $scope.UserPaymentDetails.subTotal = result.act_budget + $scope.UserPaymentDetails.gst;
-            $scope.UserPaymentDetails.grandTotal = $scope.UserPaymentDetails.subTotal;
-          }
+          }   
+          $scope.balance = $scope.UserPaymentDetails.campaign_details.total_amount - $scope.UserPaymentDetails.total_paid;
         });
       }
+
+      //share Camp
+      $scope.toggleShareCampaignSidenav = function (campaign) {
+        console.log(campaign);
+        $scope.currentOwnerShareCampaign = campaign;
+        $mdSidenav('shareCampaignSidenav').toggle();
+    };
+    $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
+      console.log(campaignID);
+      $scope.campaignToShare = $scope.campaignDetails;
+      var campaignToEmail = {
+          campaign_id: campaignID,
+          email: shareCampaign.email,
+          receiver_name: shareCampaign.receiver_name,
+          //campaign_type: $scope.campaignToShare.type
+      };
+      CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+          if (result.status == 1) {
+              $mdSidenav('shareCampaignSidenav').close();
+              $mdDialog.show(
+                      $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('body')))
+                      .clickOutsideToClose(true)
+                      .title(result.message)
+                      // .textContent('You can specify some description text in here.')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Got it!')
+                      .targetEvent(ev)
+                      );
+          } else {
+              toastr.error(result.message);
+          }
+      });
+  }
+      //share Camp ends
         if ($rootScope.currStateName == "index.user-payments") {
             $scope.getUserPayment();
           }

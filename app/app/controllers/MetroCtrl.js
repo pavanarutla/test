@@ -74,16 +74,20 @@ app.controller('MetroCtrl',
           
         });
       }
+      $scope.monthoptions = [
+        {value: '.5', label: '15 Days'}, {value: '1', label: '1 Month'},{value: '2', label: '2 Months'},{value: '3', label: '3 Months'},{value: '4', label: '4 Months'},{value: '5', label: '5 Months'},{value: '6', label: '6 Months'},{value: '7', label: '7 Months'},{value: '8', label: '8 Months'}, {value: '9', label: '9 Months'},{value: '10', label: '10 Months'},{value: '11', label: '11 Months'},{value: '12', label: '12 Months'}];
+      //$scope.myvar = $scope.myoptions[1]; 
       $scope.getMetroPackages = function (corridorId) {
         MetroService.getMetroPackages(corridorId).then(function (result) {
           _.map(result, (res) => {
             res.selected_trains = 1;
-            res.selected_slots = 1;
+            res.months = $scope.monthoptions[0];
+           // res.selected_slots = 1;
             return res;
           });
           $scope.metroPackages = result;
           $scope.selectedPackage = $scope.metroPackages[0];
-          $scope.selectedPackage.days = 7;
+          //$scope.selectedPackage.months = 1;
         });
       }
       function loadShortlistedPackages() {
@@ -93,6 +97,7 @@ app.controller('MetroCtrl',
       }
       loadShortlistedPackages();
       $scope.select_package_var = [];
+
       $scope.select_package = function (pkg) {
         var alreadySelected = _.filter($scope.shortlistedPackages, function (package) {
           return package.id == pkg.id;
@@ -150,15 +155,15 @@ app.controller('MetroCtrl',
       $scope.getEstBudgetForSelectedPackages = function () {
         var estBudget = {};
 		estBudget.price = 0;
-		estBudget.selected_slots = 0;
+	//	estBudget.selected_slots = 0;
 		estBudget.selected_trains = 0;
-		estBudget.days = 0;
+		estBudget.months = 0;
 		
         _.each($scope.shortlistedPackages, (package) => {
           estBudget.price += package.price ;
-		  estBudget.selected_slots += package.selected_slots;
+		  //estBudget.selected_slots += package.selected_slots;
 		  estBudget.selected_trains += package.selected_trains ;
-		  estBudget.days += package.days;
+		  estBudget.months += package.months;
         });
         return estBudget;
       }
@@ -220,11 +225,12 @@ app.controller('MetroCtrl',
             $scope.selectedPackage = {};
             getMetroCampDetails($stateParams.metroCampaignId);
             toastr.success(result.message);
+            $scope.toggleAddMetroProductSidenav();
           }
           else {
             toastr.error(result.message);
           }
-        });
+        });    
       }
       $scope.saveMetroCampaign = function (campaign) {
         if ($scope.shortlistedPackages.length > 0) {

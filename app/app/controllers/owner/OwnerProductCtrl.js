@@ -153,7 +153,7 @@ $scope.applymethod=function(product){
     multipleDateRanges: true,
     locale: {
         applyClass: 'btn-green',
-        applyLabel: "Apply",
+        applyLabel: "Book Now",
         fromLabel: "From",
         format: "DD-MMM-YY",
         toLabel: "To",
@@ -188,7 +188,7 @@ $scope.applymethod=function(product){
     opens: 'center',
     locale: {
         applyClass: 'btn-green',
-        applyLabel: "Apply",
+        applyLabel: "Book Now",
         fromLabel: "From",
         format: "DD-MMM-YY",
         toLabel: "To",

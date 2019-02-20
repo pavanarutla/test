@@ -46,10 +46,10 @@
         </thead>
         <tbody>
           <tr ng-repeat="request in requestList.metroCampaignFeeds">
-            <td class="table_vertical">BB283</td>
-            <td class="table_vertical">N/A</td>
+            <td class="table_vertical">{{request.cid}}</td>
+            <td class="table_vertical">{{request.name}}</td>
             <td class="table_vertical">
-              <span ng-show="request.status == 121">{{request.contact_name}} has checked out a metro campaign.</span>
+              <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
             </td>
             <td class="table_vertical">
               <a style="cursor:pointer;" ng-click="showCampaignDetailsPopup($event, request)" >

@@ -32,11 +32,11 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="Adminpay in adminpayments">
-                                <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
+                        <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
                         <td>{{Adminpay.name}}</td>
-                        <td>{{Adminpay.paid}}</td>
-                        <td class="hide-xs">{{Adminpay.act_budget - Adminpay.paid}}</td>
-                        <td class="hide-xs">{{Adminpay.act_budget}}</td>
+                        <td>{{Adminpay.total_paid}}</td>
+                        <td class="hide-xs">{{pending}}</td>
+                        <td class="hide-xs">{{Adminpay.est_budget}}</td>
                         <!-- <td>
                           <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
                               <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(Adminpay.id)" role="img" aria-label="remove_red_eye">
@@ -59,7 +59,7 @@
                                 </md-button>
                               </md-menu-item> -->
                               <md-menu-item>
-                                <md-button class="pop_view" ng-href="#/admin/paymentview-details">
+                                <md-button class="pop_view" ng-href="#/admin/campaign-payment-details/{{Adminpay.id}}">
                                   <div layout="row">
                                     <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                     <p style="margin:0 4px;font-size:11px;">Payment Details</p>

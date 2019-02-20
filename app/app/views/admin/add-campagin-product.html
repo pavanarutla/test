@@ -268,8 +268,8 @@
               <th>Views</th>
               <th class="hide-xs">Lit</th>
               <th class="hide-xs">Shortlisted in</th>
-              <th class="hide-xs">Price Given</th>
-              <th class="hide-xs">Price Received</th>
+              <!--<th class="hide-xs">Price Given</th>
+              <th class="hide-xs">Price Received</th>-->
               <th class="hide-xs">Calender</th>
               
               <th class="hide-xs">
@@ -310,7 +310,8 @@
               </td>
     
               <td class=" table_vertical hide-xs">
-                <md-button class="md-raised all_button" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
+                <md-button class="md-raised all_button" ng-if="!adminprod.alreadyAdded" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
+                <md-button class="md-raised all_button" ng-if="adminprod.alreadyAdded" >Added</md-button>
               </td>
             </tr>
           </tbody>

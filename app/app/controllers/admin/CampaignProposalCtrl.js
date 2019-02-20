@@ -1,6 +1,7 @@
 app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams, $mdSidenav, $location, $rootScope, CampaignService, AdminCampaignService, ProductService, config, toastr,OwnerProductService,Upload) {
 
   $scope.productList = [];
+  //$scope.isChecked = true;
   
   /*===================
   | Pagination
@@ -110,10 +111,18 @@ app.controller('CampaignProposalCtrl', function ($scope, $mdDialog, $stateParams
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);
+         $scope.GST = $scope.campaignDetails.act_budget/100 * 18;
+         $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST
+        $scope.uncheck = function(){
+          if(isChecked=false){
+            $scope.GST = '0';
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST
+          }
+        }
         if(result.status > 7){
           loadCampaignPayments(campaignId);
         }
-        resolve(result);
+        resolve(result);        
       });
     })
   }
