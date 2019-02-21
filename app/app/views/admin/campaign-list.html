@@ -145,7 +145,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr ng-repeat="campaign in scheduledCampaigns" >
+                            <tr ng-repeat="campaign in scheduledCampaigns | filter: search" >
                                 <td class="table_vertical">{{campaign.cid}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
                                 <td class="table_vertical">{{campaign.start_date | date}}</td>
@@ -212,7 +212,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr ng-repeat="campaign in runningCampaigns| limitTo:limit" >
+                            <tr ng-repeat="campaign in runningCampaigns| limitTo:limit | filter: search" >
                                 <td class="table_vertical">{{campaign.cid}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
                                 <td class="table_vertical">{{campaign.start_date| date }}</td>
@@ -287,7 +287,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center" >
-                            <tr ng-repeat="campaign in closedCampaigns| limitTo:limit">
+                            <tr ng-repeat="campaign in closedCampaigns| limitTo:limit | filter: search">
                                 <td class="table_vertical">{{campaign.cid}}</td>
                                 <td class="text-left table_vertical">{{campaign.name}}</td>
                                 <td class="table_vertical">{{campaign.start_date| date }}</td>

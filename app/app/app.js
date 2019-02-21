@@ -237,6 +237,12 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
+    .state('admin.metro-campaign-payment', {
+      url: '/metro-campaign-payment',
+      templateUrl: 'views/admin/metro-campaign-payment.html'
+      //controller: 'AdminCampaignCtrl',
+      //title: 'Campaign'
+    })
     .state('admin.metro-campaigns', {
       url: '/metro-campaigns',
       templateUrl: 'views/admin/metro-campaign-list.html',

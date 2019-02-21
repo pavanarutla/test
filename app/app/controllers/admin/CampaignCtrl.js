@@ -660,7 +660,9 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       $scope.campaignMetroPayments = result;
     });    
   }
+  if($stateParams.metroCampaignId!==undefined){
   $scope.loadCampaignPayments($stateParams.metroCampaignId);   
+  }
   
   $scope.paymentTypes = [
     {name: "Cash"},
