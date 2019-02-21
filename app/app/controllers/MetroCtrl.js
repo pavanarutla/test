@@ -225,11 +225,12 @@ app.controller('MetroCtrl',
             $scope.selectedPackage = {};
             getMetroCampDetails($stateParams.metroCampaignId);
             toastr.success(result.message);
+            $scope.toggleAddMetroProductSidenav();
           }
           else {
             toastr.error(result.message);
           }
-        });
+        });    
       }
       $scope.saveMetroCampaign = function (campaign) {
         if ($scope.shortlistedPackages.length > 0) {

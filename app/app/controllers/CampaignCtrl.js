@@ -432,7 +432,7 @@ $scope.Getcomment = function (campaignID){
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
       if (result.status == 1) {
-        $scope.metroCampagin = {};
+        metroCampagin = {};
         // $scope.forms.MetroCampaign.$setPristine();
         // $scope.forms.MetroCampaign.$setUntouched();
         loadMetroCampaigns();
@@ -450,6 +450,7 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
+      myFunction();
     });
   }
   var loadMetroCampaigns = function () {

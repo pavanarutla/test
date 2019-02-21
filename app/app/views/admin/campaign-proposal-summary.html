@@ -590,10 +590,10 @@
 
   <div style="margin-right:20px;">
     <div class="pull-right">
-      <p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{ campaignDetails.act_budget}}</spam></p>
-      <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{ campaignProduct.gst ||"N/A" }}</spam></p>
-      <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{ campaignProduct.subTotal ||"N/A" }}</spam></p>
-      <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{ campaignDetails.act_budget || "N/A" }}</spam></p>
+      <p class="font-weight-light" style="text-indent: 53px;">Total : <span class="float-right">{{ campaignDetails.act_budget}}</span></p>
+      <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
+      <!-- <p class="" style="text-indent: 28px;">Sub Total : <span class="float-right">{{ campaignProduct.subTotal ||"N/A" }}</span></p> -->
+      <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
       <md-button
         class="md-raised md-warn"
         ng-click="finalizeCampaign()"
