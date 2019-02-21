@@ -36,6 +36,17 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope,Upload, 
       scope: $scope
     });
   }
+
+
+  /*$scope.addFormat = function(format){
+    $scope.format = format;
+    $mdDialog.show({
+      templateUrl: 'views/admin/add-format-popup.html',
+      fullscreen: $scope.customFullscreen,
+      preserveScope: true,
+      scope: $scope
+    });
+  }*/
   $scope.selectPackage = function (ev) {
     $mdDialog.show({
       templateUrl: 'views/selectpack.html',
@@ -124,6 +135,8 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope,Upload, 
         $scope.addCorridorform.$setPristine()
         $scope.addCorridorform.$setUntouched() 
         $scope.selectedCorridorCity = null;
+        $scope.editCorridor = null;
+        $scope.exitpayment = null;
       }
       else{
         if(result.message.constructor === Array){
