@@ -12,8 +12,6 @@
 
   <!-- filters-->
   <form class="form-inline camp_filters" action="">
-
-    <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control" id=""> -->
     <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
       md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
       md-min-length="4" placeholder="Search..." md-clear-button="true">
@@ -22,9 +20,6 @@
           <span> {{item.siteNo}} </span>
         </span>
         <span class="item-metadata">
-          <!-- <span>
-            <strong>{{item.company_name}}</strong>
-          </span> -->
           <span>
             <strong>{{item.address}}</strong>
           </span>
@@ -33,12 +28,6 @@
     </md-autocomplete>
     <label for="pwd">Filter By:</label>
     <div class="form-group">
-      <!-- <select class="form-control" id="sel1">
-        <option selected>Format</option>
-        <option>Hoarding</option>
-        <option>Unipole</option>
-        <option>Airport</option>
-      </select> -->
       <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
       class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
       name="productType">
@@ -58,11 +47,11 @@
         <option value="0">Budget Low to High </option>
       </select>
     </div>
-    <div class="form-check">
+    <!-- <div class="form-check">
       <label class="form-check-label">
         <input class="form-check-input" type="checkbox"> Show Only Available
       </label>
-    </div>
+    </div> -->
     <md-button class="md-raised md-primary" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
   </form>
   <!-- product list -->
@@ -77,10 +66,7 @@
           <th>Shortlisted in</th>
           <th>Price</th>
           <th>Calender</th>
-
-          <th>
-            <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
-          </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

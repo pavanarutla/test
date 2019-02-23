@@ -432,10 +432,9 @@ $scope.Getcomment = function (campaignID){
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
       if (result.status == 1) {
-        $scope.metroCampagin = {};
+        metroCampagin = {};
         // $scope.forms.MetroCampaign.$setPristine();
         // $scope.forms.MetroCampaign.$setUntouched();
-        loadMetroCampaigns();
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -450,6 +449,8 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
+      myFunction();      
+      getMetroCampaigns();
     });
   }
   var loadMetroCampaigns = function () {
@@ -500,7 +501,7 @@ $scope.Getcomment = function (campaignID){
   /*=============================
   | Page based initial loads end
   =============================*/
-  loadMetroCampaigns();
+  //loadMetroCampaigns();
   //$scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });

@@ -237,6 +237,12 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
+    .state('admin.metro-campaign-payment', {
+      url: '/metro-campaign-payment',
+      templateUrl: 'views/admin/metro-campaign-payment.html'
+      //controller: 'AdminCampaignCtrl',
+      //title: 'Campaign'
+    })
     .state('admin.metro-campaigns', {
       url: '/metro-campaigns',
       templateUrl: 'views/admin/metro-campaign-list.html',
@@ -352,7 +358,7 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.paymentview-details', {
-      url: '/paymentview-details',
+      url: '/paymentview-details/:campaignId',
       templateUrl: 'views/admin/paymentview-details.html',
       controller: 'AdminCampaignCtrl'
     })
@@ -377,9 +383,9 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.add-campagin-product', {
-      url: '/add-campagin-product',
+      url: '/add-campagin-product/{campaignId}',
       templateUrl: 'views/admin/add-campagin-product.html',
-      // controller: 'OwnerCampaignCtrl'
+       controller: 'AdminCampaignCtrl'
     })
     .state('admin.campaign-details', {
       url: '/campaign-details',
@@ -387,7 +393,7 @@ var app = angular.module('bbManager', [
       // controller: 'OwnerCampaignCtrl'
     })
     .state('admin.product-shortlist-campagin', {
-      url: '/product-shortlist-campagin',
+      url: '/product-shortlist-campagin/:productId',
       templateUrl: 'views/admin/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
@@ -592,7 +598,7 @@ app.config(['toastrConfig', function (toastrConfig) {
     containerId: 'toast-container',
     maxOpened: 0,
     newestOnTop: true,
-    positionClass: 'toast-bottom-right',
+    positionClass: 'toast-center',
     preventDuplicates: false,
     preventOpenDuplicates: false,
     target: 'body'

@@ -1,219 +1,243 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope"
-  itemtype="http://schema.org/Product" ng-app="bbManager">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-    <title>Billboards India | Outdoor advertising media specialists in Hyderabad</title>
-    
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <!-- animates css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Fonts icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"> -->
-    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css">
-    <!-- <link rel="stylesheet" href="assets/css/angular-carousel.css" type="text/css"> -->
-    <!-- Multi date range picker -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.min.css" /> -->
-    <link rel="stylesheet" href="assets/css/date-picker.css" />
-    
-    
+      itemtype="http://schema.org/Product" ng-app="bbManager">
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+                    <title>Billboards India | Outdoor advertising media specialists in Hyderabad</title>
 
-    <!-- Scripts required before document load -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj3Y032pqw8rM5JFxFO7WBVoqw8ZlRrzI&libraries=places"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <style>
-      .modal-overlay {
-        background: #000000;
-        opacity: 0.6;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-        filter: alpha(opacity=60);
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        z-index:1500;
-      }
-      md-progress-circular {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        z-index:1505;
-      }
-    </style>
+                    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
+                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+                                <!-- animates css -->
+                                <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+                                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+                                    <!-- Fonts icons-->
+                                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+                                        <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+                                        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"> -->
+                                        <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css">
+                                            <!-- <link rel="stylesheet" href="assets/css/angular-carousel.css" type="text/css"> -->
+                                            <!-- Multi date range picker -->
+                                            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.min.css" /> -->
+                                            <link rel="stylesheet" href="assets/css/date-picker.css" />
 
-    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
-      <div class="modal-overlay"></div>
-      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
 
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111515007-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-111515007-1');
-    </script>
+                                            <!-- Scripts required before document load -->
+                                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj3Y032pqw8rM5JFxFO7WBVoqw8ZlRrzI&libraries=places"></script>
+                                            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+                                            <style>
+                                                .modal-overlay {
+                                                    background: #000000;
+                                                    opacity: 0.6;
+                                                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+                                                    filter: alpha(opacity=60);
+                                                    position: fixed;
+                                                    top: 0;
+                                                    left: 0;
+                                                    height: 100%;
+                                                    width: 100%;
+                                                    z-index:1500;
+                                                }
+                                                md-progress-circular {
+                                                    position: fixed;
+                                                    top: 40%;
+                                                    left: 50%;
+                                                    z-index:1505;
+                                                }
+                                                .toast-center{
+                                                    top: 45%;
+                                                    margin-left:550px; 
+                                                }
+                                            </style>
 
-  </head>
-  <body>
+                                            <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+                                                <div class="modal-overlay"></div>
+                                                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                            </div>
 
-    <ui-view></ui-view>
+                                            <!-- Global site tag (gtag.js) - Google Analytics -->
+                                            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111515007-1"></script>
+                                            <script>
+                                                window.dataLayer = window.dataLayer || [];
+                                                function gtag() {
+                                                    dataLayer.push(arguments);
+                                                }
+                                                gtag('js', new Date());
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-    <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="assets/js/ng-map.min.js"></script>
-    <!-- <script src="assets/js/angular-touch.js"></script> -->
-    <!-- <script src="assets/js/angular-carousel.js"></script> -->
-    <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
-    <script type="text/javascript" src="assets/js/angular-slick.js"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script> -->
-    <script type="text/javascript" src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <script type="text/javascript" src="assets/js/ui-bootstrap-tpls.js"></script>
-    <script type="text/javascript" src="assets/js/ng-file-upload-shim.min.js"></script>
-    <script type="text/javascript" src="assets/js/ng-file-upload.min.js"></script>
-    <script type="text/javascript" src="assets/js/underscore-min.js"></script>
-    <script type="text/javascript" src="assets/js/moment.min.js"></script>
-    <script type="text/javascript" src="http://ui-grid.info/release/ui-grid.js"></script>
-    <script type="text/javascript" src="assets/js/FileSaver.js"></script>
-    <script type="text/javascript" src="assets/js/angular-file-saver.bundle.min.js"></script>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Chart js -->
-    <!-- <script type="text/javascript" src="assets/js/mainapp.js"></script> -->
-    <script type="text/javascript" src="assets/js/ng-google-chart.js"></script>
-    <!--hammer -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js"></script> -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
-    <script src="assets/js/daterangepicker.js"></script>
-    <script src="assets/js/angular-daterangepicker.js"></script>
-    
-    <!-- Main file -->
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="app-config.js"></script>
+                                                gtag('config', 'UA-111515007-1');
+                                            </script>
 
-    <!-- mobile redirect -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.1/mobile-detect.min.js"></script>
-    <script>
-      // var md = new MobileDetect(window.navigator.userAgent);
-      // if (md.mobile()) {
-      //     location.href = config.mobileUrl;
-      // }
-    </script>
-    <!-- ////////////
-      custom js 
-    //////////////-->
+                                            </head>
+                                            <body>
 
-    <!--===============
-    |  Default Section |
-    =================-->  
-    <!-- Controllers -->
-    <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
-    <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
-    <script type="text/javascript" src="controllers/ProductCtrl.js"></script>
-    <script type="text/javascript" src="controllers/GmapCtrl.js"></script>
-    <script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
-    <script type="text/javascript" src="controllers/AuthCtrl.js"></script>
-    <script type="text/javascript" src="controllers/RegistrationCtrl.js"></script>
-    <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
-    <script type="text/javascript" src="controllers/UserProfileCtrl.js"></script>
-    <script type="text/javascript" src="controllers/UserPaymentsCtrl.js"></script>
-    <script type="text/javascript" src="controllers/UserSettingsCtrl.js"></script>
-    <script type="text/javascript" src="controllers/ContactCtrl.js"></script>
-    <script type="text/javascript" src="controllers/MetroCtrl.js"></script>
-    <script type="text/javascript" src="controllers/datePickerCtrl.js"></script>
-    <script type="text/javascript" src="controllers/ProductlistCtrl.js"></script>
-    <!-- Services -->
-    <script type="text/javascript" src="services/MapService.js"></script>
-    <script type="text/javascript" src="services/LocationService.js"></script>
-    <script type="text/javascript" src="services/UserService.js"></script>
-    <script type="text/javascript" src="services/CampaignService.js"></script>
-    <script type="text/javascript" src="services/ContactService.js"></script>
-    <script type="text/javascript" src="services/NotificationService.js"></script>
-    <script type="text/javascript" src="services/MetroService.js"></script>
-    <!-- Filters -->
-    <script type="text/javascript" src="filters/Filters.js"></script>
-    <!-- Directives -->
-    <script type="text/javascript" src="directives/Directives.js"></script>
-    <!-- Interceptors -->
-    <script type="text/javascript" src="interceptors/LoadingInterceptor.js"></script>
+                                                <ui-view></ui-view>
 
-    <!--==============
-    |  Admin Section |
-    ================-->
-    <!-- Controllers -->
-    <script type="text/javascript" src="controllers/admin/AdminMgrAppCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/UserMgmtCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/AdminLocationCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/CampaignCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/CampaignProposalCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/CompanyCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/ProductCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/FeedsCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/callcenterinfo.js"></script>
-    <script type="text/javascript" src="controllers/admin/UserMgmtCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/customerQueriesCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/subscriberCtrl.js"></script>
-    <script type="text/javascript" src="controllers/admin/callcenterinfo.js"></script>
-    <script type="text/javascript" src="controllers/admin/MetroCtrl.js"></script>
-    <!-- Services -->
-    <script type="text/javascript" src="services/admin/AdminLocationService.js"></script>
-    <script type="text/javascript" src="services/admin/UserService.js"></script>
-    <script type="text/javascript" src="services/admin/CompanyService.js"></script>
-    <script type="text/javascript" src="services/admin/ProductService.js"></script>
-    <script type="text/javascript" src="services/admin/CampaignService.js"></script>
-    <script type="text/javascript" src="services/admin/NotificationService.js"></script>
-    <script type="text/javascript" src="services/admin/UserMgmtService.js"></script>
-    <script type="text/javascript" src="services/admin/AdminContactService.js"></script>
-    <script type="text/javascript" src="services/admin/MetroService.js"></script>
+                                                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                                                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+                                                <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
+                                                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+                                                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+                                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
+                                                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+                                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+                                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+                                                <script type="text/javascript" src="assets/js/ng-map.min.js"></script>
+                                                <!-- <script src="assets/js/angular-touch.js"></script> -->
+                                                <!-- <script src="assets/js/angular-carousel.js"></script> -->
+                                                <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
+                                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+                                                <script type="text/javascript" src="assets/js/angular-slick.js"></script>
+                                                <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script> -->
+                                                <script type="text/javascript" src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+                                                <script type="text/javascript" src="assets/js/ui-bootstrap-tpls.js"></script>
+                                                <script type="text/javascript" src="assets/js/ng-file-upload-shim.min.js"></script>
+                                                <script type="text/javascript" src="assets/js/ng-file-upload.min.js"></script>
+                                                <script type="text/javascript" src="assets/js/underscore-min.js"></script>
+                                                <script type="text/javascript" src="assets/js/moment.min.js"></script>
+                                                <script type="text/javascript" src="http://ui-grid.info/release/ui-grid.js"></script>
+                                                <script type="text/javascript" src="assets/js/FileSaver.js"></script>
+                                                <script type="text/javascript" src="assets/js/angular-file-saver.bundle.min.js"></script>
+                                                <!-- jQuery library -->
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                                <!-- Popper JS -->
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+                                                <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                                                <!-- Chart js -->
+                                                <!-- <script type="text/javascript" src="assets/js/mainapp.js"></script> -->
+                                                <script type="text/javascript" src="assets/js/ng-google-chart.js"></script>
+                                                <!--hammer -->
+                                                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script> -->
+                                                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+                                                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js"></script> -->
+                                                <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+                                                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
+                                                <script src="assets/js/daterangepicker.js"></script>
+                                                <script src="assets/js/angular-daterangepicker.js"></script>
 
-    <!--==============
-    |  Owner Section |
-    ================-->
-    <!-- Controllers -->
-    <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
-    <script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/HomeCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/FeedsCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/OwnerProductCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/CampaignCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/outsourcingCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/teampageCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/feedbackCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/siginInCtrl.js"></script>
-    <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
-    <script type="text/javascript" src="controllers/owner/OwnerMetroCtrl.js"></script>
+                                                <!-- Main file -->
+                                                <script type="text/javascript" src="app.js"></script>
+                                                <script type="text/javascript" src="app-config.js"></script>
 
-		<!-- Services -->
-		<script type="text/javascript" src="services/owner/CampaignService.js"></script>
-		<script type="text/javascript" src="services/owner/ProductService.js"></script>
-		<script type="text/javascript" src="services/owner/LocationService.js"></script>
-		<script type="text/javascript" src="services/owner/NotificationService.js"></script>
-		
-  </body>
+                                                <!-- mobile redirect -->
+                                                <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.1/mobile-detect.min.js"></script>
+                                                <script>
+                                                // var md = new MobileDetect(window.navigator.userAgent);
+                                                // if (md.mobile()) {
+                                                //     location.href = config.mobileUrl;
+                                                // }
+                                                </script>
+                                                <!-- ////////////
+                                                  custom js 
+                                                //////////////-->
 
-</html>
+                                                <!--===============
+                                                |  Default Section |
+                                                =================-->  
+                                                <!-- Controllers -->
+                                                <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/ProductCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/GmapCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/CampaignCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/AuthCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/RegistrationCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/campaignEditCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/UserProfileCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/UserPaymentsCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/UserSettingsCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/ContactCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/MetroCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/datePickerCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/ProductlistCtrl.js"></script>
+                                                <!-- Services -->
+                                                <script type="text/javascript" src="services/MapService.js"></script>
+                                                <script type="text/javascript" src="services/LocationService.js"></script>
+                                                <script type="text/javascript" src="services/UserService.js"></script>
+                                                <script type="text/javascript" src="services/CampaignService.js"></script>
+                                                <script type="text/javascript" src="services/ContactService.js"></script>
+                                                <script type="text/javascript" src="services/NotificationService.js"></script>
+                                                <script type="text/javascript" src="services/MetroService.js"></script>
+                                                <!-- Filters -->
+                                                <script type="text/javascript" src="filters/Filters.js"></script>
+                                                <!-- Directives -->
+                                                <script type="text/javascript" src="directives/Directives.js"></script>
+                                                <!-- Interceptors -->
+                                                <script type="text/javascript" src="interceptors/LoadingInterceptor.js"></script>
+
+                                                <!--==============
+                                                |  Admin Section |
+                                                ================-->
+                                                <!-- Controllers -->
+                                                <script type="text/javascript" src="controllers/admin/AdminMgrAppCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/UserMgmtCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/AdminLocationCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/CampaignCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/CampaignProposalCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/CompanyCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/ProductCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/FeedsCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/callcenterinfo.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/UserMgmtCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/customerQueriesCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/subscriberCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/callcenterinfo.js"></script>
+                                                <script type="text/javascript" src="controllers/admin/MetroCtrl.js"></script>
+                                                <!-- Services -->
+                                                <script type="text/javascript" src="services/admin/AdminLocationService.js"></script>
+                                                <script type="text/javascript" src="services/admin/UserService.js"></script>
+                                                <script type="text/javascript" src="services/admin/CompanyService.js"></script>
+                                                <script type="text/javascript" src="services/admin/ProductService.js"></script>
+                                                <script type="text/javascript" src="services/admin/CampaignService.js"></script>
+                                                <script type="text/javascript" src="services/admin/NotificationService.js"></script>
+                                                <script type="text/javascript" src="services/admin/UserMgmtService.js"></script>
+                                                <script type="text/javascript" src="services/admin/AdminContactService.js"></script>
+                                                <script type="text/javascript" src="services/admin/MetroService.js"></script>
+
+                                                <!--==============
+                                                |  Owner Section |
+                                                ================-->
+                                                <!-- Controllers -->
+                                                <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/HomeCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/FeedsCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/OwnerProductCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/CampaignCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/outsourcingCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/teampageCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/feedbackCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/siginInCtrl.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
+                                                <script type="text/javascript" src="controllers/owner/OwnerMetroCtrl.js"></script>
+
+                                                <!-- Services -->
+                                                <script type="text/javascript" src="services/owner/CampaignService.js"></script>
+                                                <script type="text/javascript" src="services/owner/ProductService.js"></script>
+                                                <script type="text/javascript" src="services/owner/LocationService.js"></script>
+                                                <script type="text/javascript" src="services/owner/NotificationService.js"></script>
+
+                                                <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+
+                                                <script>
+                                                var arrayText = [];
+                                                // Enable pusher logging - don't include this in production
+                                                Pusher.logToConsole = true;
+
+                                                var pusher = new Pusher('83e8ffcc55e67dd5625d', {
+                                                    cluster: 'ap2',
+                                                    forceTLS: true
+                                                });
+
+                                                var channel = pusher.subscribe('CampaignLaunch-5b274da7a7f95');
+                                                channel.bind('CampaignLaunchEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    alert(JSON.stringify(arrayText));
+                                                });
+                                                </script>
+                                            </body>
+
+                                            </html>
