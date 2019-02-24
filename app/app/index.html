@@ -223,6 +223,19 @@
                                                 <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
 
                                                 <script>
+                                                var user = localStorage.getItem("loggedInUser");
+                                                var parsedData = JSON.parse(user);
+                                                var user_type = parsedData.user_type;
+                                                console.log(user_type);
+                                                if (user_type == 'bbi') {
+                                                    var user_id = '-superAdmin';
+                                                } else if (user_type == 'basic') {
+                                                    var user_id = parsedData.user_id;
+                                                } else if (user_type == 'owner') {
+                                                    var user_id = '-' + parsedData.user_id;
+                                                }
+                                                var user_type = parsedData.user_type;
+
                                                 var arrayText = [];
                                                 // Enable pusher logging - don't include this in production
                                                 Pusher.logToConsole = true;
@@ -231,13 +244,90 @@
                                                     cluster: 'ap2',
                                                     forceTLS: true
                                                 });
+                                                var channel = pusher.subscribe('CampaignLaunch' + user_id);
+                                                var channel1 = pusher.subscribe('campaignClosed' + user_id);
+                                                var channel2 = pusher.subscribe('CampaignLaunchRequested' + user_id);
+                                                var channel3 = pusher.subscribe('CampaignQuoteProvided' + user_id);
+                                                var channel4 = pusher.subscribe('CampaignQuoteRequested' + user_id);
+                                                var channel5 = pusher.subscribe('CampaignQuoteRevision' + user_id);
+                                                var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
+                                                var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
+                                                var channel8 = pusher.subscribe('ProductApproved' + user_id);
+                                                var channel9 = pusher.subscribe('ProductRequested' + user_id);
+                                                var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
+                                                var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
+                                                var channel12 = pusher.subscribe('metroCampaignLocked' + user_id);
 
-                                                var channel = pusher.subscribe('CampaignLaunch-5b274da7a7f95');
                                                 channel.bind('CampaignLaunchEvent', function (data) {
                                                     arrayText.push(data);
-                                                    alert(JSON.stringify(arrayText));
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+
                                                 });
+                                                channel1.bind('campaignClosedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+
+                                                });
+                                                channel2.bind('CampaignLaunchRequestedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel3.bind('CampaignQuoteProvidedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel4.bind('CampaignQuoteRequestedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel5.bind('CampaignQuoteRevisionEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel6.bind('CampaignSuggestionRequestEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel7.bind('CampaignSuspendedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    alert(JSON.stringify(arrayText));
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel8.bind('ProductApprovedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    alert(JSON.stringify(arrayText));
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel9.bind('ProductRequestedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel10.bind('metroCampaignClosedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel11.bind('metroCampaignLaunchedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+                                                channel12.bind('metroCampaignLockedEvent', function (data) {
+                                                    arrayText.push(data);
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                });
+
                                                 </script>
                                             </body>
-
                                             </html>
