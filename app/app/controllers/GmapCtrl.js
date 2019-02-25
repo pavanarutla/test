@@ -67,6 +67,10 @@ app.controller('GmapCtrl',
                 /*====================================
                  | Multi date range picker options end
                  ====================================*/
+                //  $scope.FilterDates = function(){
+                //      alert("Hello");
+                //     console.log(DateFilterform);
+                //  };
 
                 $scope.hidelocations = false;
                 var setDefaultArea = function () {
