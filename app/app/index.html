@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope"
-  itemtype="http://schema.org/Product" ng-app="bbManager">
-  <head>
+    itemtype="http://schema.org/Product" ng-app="bbManager">
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <title>Billboards India | Outdoor advertising media specialists in Hyderabad</title>
-    
+
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900,300i,400i">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <!-- animates css -->
     <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
@@ -17,73 +19,91 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"> -->
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"> -->
     <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css">
     <!-- <link rel="stylesheet" href="assets/css/angular-carousel.css" type="text/css"> -->
     <!-- Multi date range picker -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.min.css" /> -->
     <link rel="stylesheet" href="assets/css/date-picker.css" />
-    
-    
+
+
 
     <!-- Scripts required before document load -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj3Y032pqw8rM5JFxFO7WBVoqw8ZlRrzI&libraries=places"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj3Y032pqw8rM5JFxFO7WBVoqw8ZlRrzI&libraries=places"></script>
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <style>
-      .modal-overlay {
-        background: #000000;
-        opacity: 0.6;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-        filter: alpha(opacity=60);
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        z-index:1500;
-      }
-      md-progress-circular {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        z-index:1505;
-      }
+        .modal-overlay {
+            background: #000000;
+            opacity: 0.6;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+            filter: alpha(opacity=60);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1500;
+        }
+
+        md-progress-circular {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            z-index: 1505;
+        }
+
+        .toast-center {
+            top: 45%;
+            margin-left: 550px;
+        }
     </style>
 
     <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
-      <div class="modal-overlay"></div>
-      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        <div class="modal-overlay"></div>
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
 
-     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111515007-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-      gtag('config', 'UA-111515007-1');
+        gtag('config', 'UA-111515007-1');
     </script>
 
-  </head>
-  <body>
+</head>
+
+<body>
 
     <ui-view></ui-view>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
     <script type="text/javascript" src="assets/js/satellizer.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
+    <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="assets/js/ng-map.min.js"></script>
     <!-- <script src="assets/js/angular-touch.js"></script> -->
     <!-- <script src="assets/js/angular-carousel.js"></script> -->
     <script type="text/javascript" src="assets/js/vs-google-autocomplete.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
     <script type="text/javascript" src="assets/js/angular-slick.js"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script> -->
     <script type="text/javascript" src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
@@ -109,9 +129,9 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js"></script> -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
-    <script src="assets/js/.js"></script>
+    <script src="assets/js/daterangepicker.js"></script>
     <script src="assets/js/angular-daterangepicker.js"></script>
-    
+
     <!-- Main file -->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app-config.js"></script>
@@ -119,18 +139,18 @@
     <!-- mobile redirect -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.1/mobile-detect.min.js"></script>
     <script>
-      // var md = new MobileDetect(window.navigator.userAgent);
-      // if (md.mobile()) {
-      //     location.href = config.mobileUrl;
-      // }
+                                                // var md = new MobileDetect(window.navigator.userAgent);
+                                                // if (md.mobile()) {
+                                                //     location.href = config.mobileUrl;
+                                                // }
     </script>
     <!-- ////////////
-      custom js 
-    //////////////-->
+                                                  custom js 
+                                                //////////////-->
 
     <!--===============
-    |  Default Section |
-    =================-->  
+                                                |  Default Section |
+                                                =================-->
     <!-- Controllers -->
     <script type="text/javascript" src="controllers/BbMngrCtrl.js"></script>
     <script type="text/javascript" src="controllers/PricingCtrl.js"></script>
@@ -163,8 +183,8 @@
     <script type="text/javascript" src="interceptors/LoadingInterceptor.js"></script>
 
     <!--==============
-    |  Admin Section |
-    ================-->
+                                                |  Admin Section |
+                                                ================-->
     <!-- Controllers -->
     <script type="text/javascript" src="controllers/admin/AdminMgrAppCtrl.js"></script>
     <script type="text/javascript" src="controllers/admin/UserMgmtCtrl.js"></script>
@@ -192,8 +212,8 @@
     <script type="text/javascript" src="services/admin/MetroService.js"></script>
 
     <!--==============
-    |  Owner Section |
-    ================-->
+                                                |  Owner Section |
+                                                ================-->
     <!-- Controllers -->
     <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
     <script type="text/javascript" src="controllers/owner/OwnerMngrCtrl.js"></script>
@@ -208,12 +228,121 @@
     <script type="text/javascript" src="controllers/owner/HomeController.js"></script>
     <script type="text/javascript" src="controllers/owner/OwnerMetroCtrl.js"></script>
 
-		<!-- Services -->
-		<script type="text/javascript" src="services/owner/CampaignService.js"></script>
-		<script type="text/javascript" src="services/owner/ProductService.js"></script>
-		<script type="text/javascript" src="services/owner/LocationService.js"></script>
-		<script type="text/javascript" src="services/owner/NotificationService.js"></script>
-		
-  </body>
+    <!-- Services -->
+    <script type="text/javascript" src="services/owner/CampaignService.js"></script>
+    <script type="text/javascript" src="services/owner/ProductService.js"></script>
+    <script type="text/javascript" src="services/owner/LocationService.js"></script>
+    <script type="text/javascript" src="services/owner/NotificationService.js"></script>
+
+    <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+
+    <script>
+        var user = localStorage.getItem("loggedInUser");
+        var parsedData = JSON.parse(user);
+        var user_type = parsedData.user_type;
+        console.log(user_type);
+        if (user_type == 'bbi') {
+            var user_id = '-superAdmin';
+        } else if (user_type == 'basic') {
+            var user_id = parsedData.user_id;
+        } else if (user_type == 'owner') {
+            var user_id = '-' + parsedData.user_id;
+        }
+        var user_type = parsedData.user_type;
+
+        var arrayText = [];
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('83e8ffcc55e67dd5625d', {
+            cluster: 'ap2',
+            forceTLS: true
+        });
+        var channel = pusher.subscribe('CampaignLaunch' + user_id);
+        var channel1 = pusher.subscribe('campaignClosed' + user_id);
+        var channel2 = pusher.subscribe('CampaignLaunchRequested' + user_id);
+        var channel3 = pusher.subscribe('CampaignQuoteProvided' + user_id);
+        var channel4 = pusher.subscribe('CampaignQuoteRequested' + user_id);
+        var channel5 = pusher.subscribe('CampaignQuoteRevision' + user_id);
+        var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
+        var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
+        var channel8 = pusher.subscribe('ProductApproved' + user_id);
+        var channel9 = pusher.subscribe('ProductRequested' + user_id);
+        var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
+        var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
+        var channel12 = pusher.subscribe('metroCampaignLocked' + user_id);
+
+        channel.bind('CampaignLaunchEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+
+        });
+        channel1.bind('campaignClosedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+
+        });
+        channel2.bind('CampaignLaunchRequestedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel3.bind('CampaignQuoteProvidedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel4.bind('CampaignQuoteRequestedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel5.bind('CampaignQuoteRevisionEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel6.bind('CampaignSuggestionRequestEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel7.bind('CampaignSuspendedEvent', function (data) {
+            arrayText.push(data);
+            alert(JSON.stringify(arrayText));
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel8.bind('ProductApprovedEvent', function (data) {
+            arrayText.push(data);
+            alert(JSON.stringify(arrayText));
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel9.bind('ProductRequestedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel10.bind('metroCampaignClosedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel11.bind('metroCampaignLaunchedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+        channel12.bind('metroCampaignLockedEvent', function (data) {
+            arrayText.push(data);
+            $('#notification-count').html(arrayText.length);
+            $('#notification1-count').html(arrayText.length);
+        });
+
+    </script>
+</body>
 
 </html>

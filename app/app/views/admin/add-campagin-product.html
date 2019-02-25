@@ -112,13 +112,14 @@
 <div class="">
     <div layout="column" class="owner_hoarding_list">
       <div layout="row" layout-margin class="md-whiteframe-3dp">
-        <p class="mb-0 mt-3">Campaign Name:<span class="text_color"> Uber Pvt Ltd</span></p>
-        <p class="mb-0 mt-3">Product Added:<span class="text_color md-title"> 3</span></p>
-        <p class="mb-0 mt-3 hide-xs">Estimated Budget : 158,000</p>
-        <p class="mb-0 mt-3 text_color hide-xs"> Total Budget : 190,000</p>
-        <p class="mb-0 mt-3 hide-xs"><span class="text_color">Created On</span> :12-08-2018 - 11.30 am</p>
+        <p class="mb-0 mt-3">Campaign Name:<span class="text_color">&nbsp;{{campaignDetails.name || "N/A"}}</span></p>
+        <p class="mb-0 mt-3">Product Added:<span class="text_color md-title"> &nbsp;{{campaignDetails.no_of_products ||
+          "0"}}</span></p>
+        <p class="mb-0 mt-3 hide-xs">Estimated Budget :&nbsp; {{campaignDetails.est_budget || "N/A"}}</p>
+        <p class="mb-0 mt-3 text_color hide-xs"> Total Budget :&nbsp;{{campaignDetails.total_budget || "N/A"}}</p>
+        <p class="mb-0 mt-3 hide-xs"><span class="text_color">Created On</span> :&nbsp;{{campaignDetails.created_at}}</p>
         <span class="hide-md" flex></span>
-        <md-button class="md-raised all_button hide-xs add_font">View Campaign</md-button>
+        <md-button class="md-raised all_button hide-xs add_font" ng-href="#/admin/campaign-proposal-summary/{{campaignDetails.id}}">View Campaign</md-button>
       </div>
       
       <!-- filters-->
@@ -156,9 +157,9 @@
         </form>
       </div> -->
     
-      <div class="">
-        <form class="form-inline camp_filters d-flex justify-content-between" action="">
-          <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id="">
+      <!-- <div class="">
+        <form class="form-inline camp_filters d-flex justify-content-between" action=""> -->
+          <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id="">
           <label for="pwd">Filter By:</label>
           <div class="form-group form_up">
             <select class="form-control form_format" id="sel1">
@@ -167,7 +168,7 @@
               <option>Unipole</option>
               <option>Airport</option>
             </select>
-          </div>
+          </div> -->
     
           <!-- <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
           md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
@@ -192,7 +193,7 @@
           </select>
         </div> -->
     
-          <div class="form-group form_cal">
+          <!-- <div class="form-group form_cal">
             <input type="date" class="form-control" placeholder=" Available From">
           </div>
           <div class="form-group form_cal">
@@ -211,7 +212,50 @@
           </div>
           <md-button class="md-raised apply_filter">Apply Filters</md-button>
         </form>
-      </div>
+      </div> -->
+      <form class="form-inline camp_filters" action="">
+        <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+          md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+          md-min-length="4" placeholder="Search..." md-clear-button="true">
+          <md-item-template>
+            <span class="item-title">
+              <span> {{item.siteNo}} </span>
+            </span>
+            <span class="item-metadata">
+              <span>
+                <strong>{{item.address}}</strong>
+              </span>
+            </span>
+          </md-item-template>
+        </md-autocomplete>
+        <label for="pwd">Filter By:</label>
+        <div class="form-group">
+          <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+          class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+          name="productType">
+          <option value="" disabled selected>Site Type</option>
+        </select>
+        </div>
+    
+        <div class="form-group form_cal">
+          <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill></md-datepicker>
+        </div>
+        <div class="form-group form_cal">
+          <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill></md-datepicker>
+        </div>
+        <div class="form-group form_cal">
+          <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+            <option selected value="1">Budget High to Low</option>
+            <option value="0">Budget Low to High </option>
+          </select>
+        </div>
+        <!-- <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> Show Only Available
+          </label>
+        </div> -->
+        <md-button class="md-raised md-primary" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+      </form>
     
     
       <!-- product list -->
@@ -224,8 +268,8 @@
               <th>Views</th>
               <th class="hide-xs">Lit</th>
               <th class="hide-xs">Shortlisted in</th>
-              <th class="hide-xs">Price Given</th>
-              <th class="hide-xs">Price Received</th>
+              <!--<th class="hide-xs">Price Given</th>
+              <th class="hide-xs">Price Received</th>-->
               <th class="hide-xs">Calender</th>
               
               <th class="hide-xs">
@@ -234,40 +278,40 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr ng-repeat="adminprod in AdminProduct">
                 <td class="image_tdwidth">
-                <img src="assets/images/hoarding2.png" alt="Smiley face" class="requ_size">
+                <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size">
               </td>
               <td>
-                <p class="td_font"><b>BB238 - Kothaguda (40Ft X 40Ft)</b>
-                  <br> Kothaguda X Roads
-                  <br>Facing: From Kothaguda to Hitech
-                  city road,
-                  <br>beside ICICI Bank
+                <p class="td_font"><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
+                  <br> {{adminprod.address}}
+                  <br>Facing:{{adminprod.direction}}
+                  <br>Type:{{adminprod.format_name}}
               </td>
-              <td class="table_vertical">1,48,000</td>
+              <td class="table_vertical">{{adminprod.impressions}}</td>
               <td class="table_vertical hide-xs">
-                <span class="md-caption">Yes</span>
-              </td>
-              <td class="table_vertical hide-xs">
-                <a ng-href="#/admin/product-shortlist-campagin">14 Campaigns</a>
+                <span class="md-caption">{{adminprod.lighting}}</span>
               </td>
               <td class="table_vertical hide-xs">
-                <div class="input-group">
-                      <input ng-model="suggestedProduct.price" type="text" only-numeric="" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = ownerProduct.default_price" style="width: 70px;padding: 4px 5px;" class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required ng-valid-pattern" disabled="disabled" aria-invalid="false">
-                      <span ng-click="enabledPrice = true;" ng-show="!enabledPrice" role="button" tabindex="0" aria-hidden="false" class=""><i class="material-icons">edit</i></span>
-                </div>
+                <a  ng-href="#/admin/product-shortlist-campagin/{{adminprod.id}}">{{adminprod.camapigns_count}} Campaigns</a>
               </td>
               <td class="table_vertical hide-xs">
-                  1,48,000
+                  {{adminprod.default_price}}
               </td>
-              <td class="table_vertical hide-xs">
-                <a href="#"><i class="material-icons">
-                  date_range
-                  </i></a>
+              <td class="table_vertical">
+                <input date-range-picker ng-model="adminprod.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+                  placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+                  style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                <a ng-click="getProductUnavailableDates(adminprod.id, $event);">
+                  <i class="material-icons">
+                    calendar_today
+                  </i>
+                </a>
               </td>
+    
               <td class=" table_vertical hide-xs">
-                <md-button class="md-raised all_button">Add to campaign</md-button>
+                <md-button class="md-raised all_button" ng-if="!adminprod.alreadyAdded" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
+                <md-button class="md-raised all_button" ng-if="adminprod.alreadyAdded" >Added</md-button>
               </td>
             </tr>
           </tbody>

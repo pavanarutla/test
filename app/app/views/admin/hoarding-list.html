@@ -456,7 +456,7 @@
 					</div>
 					<div layout="row" layout-align="center center">
 						<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addProduct()" ng-disabled="addProductForm.$invalid">Submit</md-button>
-						<md-button Class="md-raised register_btn" onclick="addnewProduct()">Cancle</md-button>
+						<md-button Class="md-raised register_btn" onclick="addnewProduct()">Cancel</md-button>
 					</div>
 				</form>
 			</div>
@@ -629,7 +629,8 @@
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
 					<td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
 					<td class="table_vertical hide-xs">
-						<a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a>
+						<!-- <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a> -->
+						<a ng-href="#/admin/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
 					</td>
 					<td class="table_vertical hide-xs">
 						<!-- <div class="input-group">

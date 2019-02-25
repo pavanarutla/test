@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window,$state) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -71,60 +71,50 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
     $location.path('/admin/campaign-proposal-summary/' + campaign.id);
   }
 
-  function selectedItemChange(item) {
-    //console.log('Item changed to ' + JSON.stringify(item));
+  function selectedItemChange(item) {    
   }
 
   /*=========================
   | Filtering Campaigns Ends
   =========================*/
-
-  $scope.showAddCampaignPopup = function () {
-    $mdDialog.show({
-      templateUrl: 'views/admin/add-full-campaign.html',
-      clickOutsideToClose: true,
-      fullscreen: $scope.customFullscreen,
-      controller: function ($scope, $mdDialog, AdminCampaignService, toastr) {
-        $scope.campaign = {};
-        var startDate = new Date();
-        var productFromDate = new Date($scope.campaign.start_date);
-        var productToDate = new Date($scope.campaign.end_date);
-        $scope.fromMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate() + 5
-        );
-        $scope.toMinDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productFromDate.getDate() + 1
-        );
-        $scope.toMaxDate = new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          productToDate.getDate()
-        );
-        $scope.saveCampaignByAdmin = function () {
-          AdminCampaignService.saveCampaignByAdmin($scope.campaign).then(function (result) {
-            if (result.status == 1) {
-              getAllCampaigns();
-              toastr.success(result.message);
-              $mdDialog.hide();
-            }
-            else if (result.status == 0) {
-              $scope.campaignDetailsErrorEessages = result.message;
-            }
-          }, function (result) {
-            $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
-          });
-        }
-        $scope.close = function () {
-          $mdDialog.hide();
-        }
-      }
+  $scope.getProductList = function(){
+    ProductService.getProductList().then(function(result){
+      $scope.AdminProduct = result.products;
+      // CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(results){
+      //   _.map($scope.AdminProduct, function (product) {
+      //         /*if (product.id == (result.products)) {
+      //             product.alreadyAdded = true;
+      //         }*/
+      //         //alert("FD1");
+      //         if (Object.values(results.products).indexOf(product.id) > -1) {
+      //           //alert("FDg");
+      //             product.alreadyAdded = true;
+      //        }
+      //         return product;
+      //     });
+      // });
+      
     });
-  };
-
+  }
+  $scope.saveCampaignByAdmin = function (AdminownerCampaign) {
+    AdminCampaignService.saveCampaignByAdmin(AdminownerCampaign).then(function (result) {      
+      if (result.status == 1) {
+        getAllCampaigns();
+        toastr.success(result.message);
+        $mdDialog.hide();
+      }
+      else if (result.status == 0) {
+        $scope.campaignDetailsErrorEessages = result.message;
+      }
+      $scope.AdminownerCampaign={};
+      myFunction();
+    }, function (result) {
+      $scope.campaignDetailsErrorEessages = "somthing went wrong please try again after some time!"
+    });
+  }
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
   $scope.deleteUserCampaign = function (campaignId) {
     AdminCampaignService.deleteUserCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
@@ -157,11 +147,89 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*
   *========= campaign proposal(planned) grid =========
   */
+ // filter-code
+ $scope.viewSelectedProduct = function (product) {
+  $scope.pagination.pageCount = 1;
+  $scope.productList = [product];
+}
+$scope.productSearch = function (query) {
+  return ProductService.searchProducts(query.toLowerCase()).then(function (res) {
+      $scope.productList = res;
+      $scope.pagination.pageCount = 1;
+      return res;
+  });
+}
+
+$scope.applymethod = function (product) {
+  var data = {};
+  var pageNo = $scope.pagination.pageNo;
+  var pageSize = $scope.pagination.pageSize;
+  var format = product.type;
+  var budget = product.budgetprice;
+  var start_date = product.start_date;
+  var end_date = product.end_date;
+  if (!format) {
+      format = '';
+  }
+  if (!budget) {
+      budget = '';
+  }
+  if (pageNo || pageSize || format || budget || start_date || end_date) {
+      data.page_no = pageNo;
+      data.page_size = pageSize;
+      data.format = format;
+      data.budget = budget;
+      data.start_date = start_date;
+      data.end_date = end_date;
+  }
+  AdminCampaignService.getApprovedProductList(data).then(function (result) {
+      $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if ($window.innerWidth >= 420) {
+          createPageLinks();
+      } else {
+          $scope.getRange(0, result.page_count);
+      }
+  });
+}
+var getFormatList = function () {
+  AdminCampaignService.getFormatList().then(function (result) {
+      $scope.formatList = result;
+  });
+}
+getFormatList();
+/*===================
+     | Pagination
+     ===================*/
+     $scope.pagination = {};
+     $scope.pagination.pageNo = 1;
+     $scope.pagination.pageSize = 15;
+     $scope.pagination.pageCount = 0;
+     var pageLinks = 20;
+     var lowest = 1;
+     var highest = lowest + pageLinks - 1;
+     function createPageLinks() {
+         var mid = Math.ceil(pageLinks / 2);
+         if ($scope.pagination.pageCount < $scope.pagination.pageSize) {
+             lowest = 1;
+         } else if ($scope.pagination.pageNo >= ($scope.pagination.pageCount - mid) && $scope.pagination.pageNo <= $scope.pagination.pageCount) {
+             lowest = $scope.pagination.pageCount - pageLinks;
+         } else if ($scope.pagination.pageNo > 0 && $scope.pagination.pageNo <= pageLinks / 2) {
+             lowest = 1;
+         } else {
+             lowest = $scope.pagination.pageNo - mid + 1;
+         }
+         highest = $scope.pagination.pageCount < $scope.pagination.pageSize ? $scope.pagination.pageCount : lowest + pageLinks;
+         $scope.pagination.pageArray = _.range(lowest, highest + 1);
+     }
+ 
+     /*===================
+      | Pagination Ends
+      ===================*/
+// Filter-code ends
 // Share Campagin
 $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
-  console.log(campaignID);
   $scope.campaignToShare = $scope.campaignDetails;
-  console.log($scope.campaignDetails);
   var campaignToEmail = {
       campaign_id: campaignID,
       email: shareCampaign.email,
@@ -218,10 +286,8 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         toastr.error(result.message);
       }
     }, function (resp) {
-      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   }
 
@@ -267,12 +333,10 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   }
   function getMetroCampaigns() {
     AdminMetroService.getMetroCampaigns().then((result) => {
-      // console.log(result);
       $scope.userMetroCampaigns = _.filter(result, (campaign) => {
         return campaign.type == 0;
       });
       $scope.adminMetroCampaigns = _.filter(result, (campaign) => {
-        console.log(campaign);
         return campaign.type == 1;
       });
     });
@@ -283,8 +347,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.addPackageInMetroCampaign = function (slots,price) {
-    //console.log(slots);
-   // console.log(price);
     $scope.selectedPackage.package_id = $scope.selectedPackage.id;
     $scope.selectedPackage.campaign_id = $scope.metroCampaignDetails.id;
     $scope.selectedPackage.months = $scope.selectedPackage.months.value;
@@ -300,6 +362,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         $scope.selectedPackage = {};
         getMetroCampaignDetails($scope.metroCampaignDetails.id);
         toastr.success(result.message);
+        $scope.toggleAddMetroProductSidenav();
       }
       else {
         toastr.error(result.message);
@@ -392,9 +455,9 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
           AdminCampaignService.updateMetroCampaignStatus($scope.campaignPayment).then(function (result) {
             if (result.status == 1) {
               toastr.success(result.message);
-              getMetroCampaignDetails(metroCampaignId);
-              loadCampaignPayments(metroCampaignId);
-              $mdDialog.hide();
+              getMetroCampaignDetails(metroCampaignId);              
+              $scope.closeMdDialog();
+              $state.reload();      
             }
             else {
               toastr.error(result.message);
@@ -407,6 +470,44 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }
     });
   }
+  $scope.saveUserCampaign = function (AdminownerCampaign) {
+    AdminCampaignService.saveUserCampaign(AdminownerCampaign).then(function (result) {     
+      if (result.status == 1) {          
+        getAllCampaigns();      
+        toastr.success(result.message);
+      }
+      else if (result.status == 0) {
+        $rootScope.closeMdDialog();
+        if (result.message.constructor == Array) {
+          $scope.adminCampaignErrors = result.message;
+        }
+        else {
+          toastr.error(result.message);
+        }
+      }
+      else {
+        toastr.error(result.message);
+      }
+      //myFunction();
+    });
+  }
+//   function myFunction() {
+//     document.getElementById("myDropdown").classList.toggle("show");
+// }
+// var loadOwnerCampaigns = function () {
+//   return new Promise((resolve, reject) => {
+//     AdminCampaignService.getAllCampaigns().then(function (result) {
+//           $scope.ownerCampaigns = result;        
+//           $scope.ownerCampaigns = _.filter(result, function (c) {
+//               return c.status < 800;
+//           });
+//           $scope.scheduledCampaigns = _.filter(result, function (c) {
+//               return c.status >= 800;
+//           });
+//           resolve(result);
+//       });
+//   });
+// }
   $scope.launchMetroCampaign = function (campaignId, ev) {
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
@@ -536,29 +637,31 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   | Page based initial loads end
   =============================*/
 
-  function loadCampaignPayments(campaignId) {
-    //if($scope.campaignDetails.status >= 6 ){
+  $scope.loadCampaignPayments = function(campaignId) {
     AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
       if (result.all_payments && result.all_payments.length >= 1) {
+        $scope.campaignPayments = result;
         $scope.campaignMetroPayments = result;
       } else {
-        // toastr.error(result.message);
+        toastr.error(result.message);
       }
-
     });
-    // }
-    // else{
-    //   toastr.error('Payments are only available for running or stopped campaigns.');
-    // }
   }
-  loadCampaignPayments($stateParams.metroCampaignId);
+  
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
-    CampaignService.getCampaignWithProducts($stateParams.campaign_id).then(function(result){
-      $scope.campaignDetails = result;
+    AdminCampaignService.getCampaignPaymentDetails($stateParams.campaign_id).then(function(result){
+      $scope.campaignDetails = result.campaign_details;
     });
-    loadCampaignPayments($stateParams.campaign_id);
-    
+    $scope.loadCampaignPayments($stateParams.campaign_id);    
+  }
+  if ($rootScope.currStateName == "admin.metro-campaign-details") {
+    AdminCampaignService.getCampaignPaymentDetails($stateParams.metroCampaignId).then(function (result){
+      $scope.campaignMetroPayments = result;
+    });    
+  }
+  if($stateParams.metroCampaignId!==undefined){
+  $scope.loadCampaignPayments($stateParams.metroCampaignId);   
   }
   
   $scope.paymentTypes = [
@@ -581,7 +684,8 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               /*setTimout(() => {
                   $location.path('/owner/' + $rootScope.clientSlug + '/payments');
               }, 2500);*/
-              loadCampaignPayments(cid);
+              addPayment();
+              $scope.loadCampaignPayments(cid);
           } else {
               if (result.data.message.constructor == Array) {
                   $scope.updateCampaignPaymentErrors = result.data.message;
@@ -591,11 +695,127 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
           }
       }, function (resp) {
           toastr.error("somthing went wrong try again later");
-          // console.log('Error status: ', resp);
       }, function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
       });
   }
-  
+  function addPayment() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  $scope.getCampaignList = function(){
+    var productId = $stateParams.productId;
+    AdminCampaignService.getCampaignsFromProducts(productId).then(function (result) {
+      if(result){
+          $scope.shortlistedproduct = result;
+        //toastr.success(result.message);        
+      }
+      else{
+        toastr.error(result.data.message);
+      }
+    });
+  }
+  if($location.$$path.search("product-shortlist-campagin") !== -1){
+    $scope.getCampaignList();
+  }
+
+  $scope.loadCampaignData = function(campaignId){
+    return new Promise(function(resolve, reject){
+      CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+        $scope.campaignDetails = result;
+        //$scope.campaignProducts = result.products;
+        // setDatesForProductsToSuggest($scope.campaignDetails);
+        // if(result.status > 7){
+        //   loadCampaignPayments(campaignId);
+        // }
+        resolve(result);
+      
+      });
+    })
+  }
+  if($stateParams.campaignId){
+    var campaignId = $stateParams.campaignId;
+    $scope.loadCampaignData(campaignId);
+  }
+// Date-Picker
+$scope.getProductUnavailableDates = function (productId, ev) {
+  AdminCampaignService.getProductUnavailableDates(productId).then(function (dateRanges) {
+      $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parent().parent().find('input').trigger('click');
+  });
+}
+
+$scope.suggestProductForAdminCampaign = function (adminProduct) {
+ // console.log(adminProduct);
+  if($stateParams.campaignId) {
+      var postObj = {
+          campaign_id: $stateParams.campaignId,
+          product: {
+              id: adminProduct.id,
+              booking_dates: adminProduct.booking_dates,
+              price: adminProduct.default_price
+          }
+      }
+      AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+          //console.log(result);
+          if (result.status == 1) {
+            CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+             // alert("dhajf");
+                  $scope.campaignDetails = result;
+                  _.map($scope.AdminProduct, function (product) {
+                      if (product.id == adminProduct.id) {
+                          product.alreadyAdded = true;
+                      }
+                     // console.log(product);
+                      return product;
+                  });
+                  //console.log($scope.AdminProduct)
+              });
+              toastr.success(result.message);
+          } else {
+              toastr.error(result.message);
+          }
+      });
+  }
+}
+/*================================
+     | Multi date range picker options
+     ================================*/
+     $scope.suggestProductOpts = {
+      multipleDateRanges: true,
+      opens: 'center',
+      locale: {
+          applyClass: 'btn-green',
+          applyLabel: "Book Now",
+          fromLabel: "From",
+          format: "DD-MMM-YY",
+          toLabel: "To",
+          cancelLabel: 'Cancel',
+          customRangeLabel: 'Custom range'
+      },
+      isInvalidDate: function (dt) {
+          for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+              if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                  return true;
+              }
+          }
+      },
+      isCustomDate: function (dt) {
+          for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+              if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                  if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                      return ['red-blocked', 'left-radius'];
+                  } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                      return ['red-blocked', 'right-radius'];
+                  } else {
+                      return 'red-blocked';
+                  }
+              }
+          }
+      },
+  };
+  /*====================================
+   | Multi date range picker options end
+   ====================================*/
+// Date-Picker-END
+  $scope.getProductList();  
 });

@@ -234,13 +234,13 @@
 				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
 					Add New Product
 				</md-button>
-				<md-button ng-disabled="!metroCampaignDetails || campaignMetroPayments.total_paid < metroCampaignDetails.act_budget" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
+				<md-button ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status = 1131)" class="md-raised md-warn" ng-click="showConfirmMetroPaymentPopup()">
 					Update Payment
 				</md-button>
-				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 131)" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131) || (!metroCampaignDetails <= 1141)" class="md-raised md-primary" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
 					Launch Campaign
 				</md-button>
-				<md-button class="md-raised" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 141" class="md-raised md-warn" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
+				<md-button class="md-raised md-warn" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status = 1141" class="md-raised md-warn" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
 					Close Campaign
 				</md-button>
 			</div>

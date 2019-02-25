@@ -1,30 +1,68 @@
-<div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div>
-<div layout="column" ng-if = "!message && UserPaymentDetails.length > 0">
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <div flex></div>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-align="center center" layout-margin layout-padding>
+      <h3 class="md-headline">Share Campaign</h3>
+      <form name="shareCampaignForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+            <div ng-messages="shareCampaignForm.name.$error">
+              <div ng-message="required">Name is required.</div>
+              <div ng-message="pattern">Enter a valid Name.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <div ng-messages="shareCampaignForm.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valid Email Id.</div>
+            </div>
+          </md-input-container>
+          <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
+            Campaign</md-button>
+        </div>
+      </form>
+    </md-content>
+  </md-sidenav>
+  <!-- share campaign sidenav ends -->
+<!-- <div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div> -->
+<div layout="column">
   <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
     <div class="ml-4 update" style="margin-top:38px;">
       <p class="first">Campaign ID</p>
-      <p class="md-caption second"><b>{{campaignDetails.cid}}</b></p>
+      <p class="md-caption second"><b>{{UserPaymentDetails.campaign_details.cid}}</b></p>
     </div>
     <div class="update" style="margin-top:38px;">
       <p>Campaign Name</p>
-      <p class="md-caption"><b>{{campaignDetails.name}}</b></p>
+      <p class="md-caption"><b>{{UserPaymentDetails.campaign_details.name}}</b></p>
     </div>
     <div class="update" style="margin-top:38px;">
       <p>No of Products</p>
-      <p class="md-caption"><b>{{campaignDetails.product_count}}</b></p>
+      <p class="md-caption"><b>{{UserPaymentDetails.campaign_details.no_of_products}}</b></p>
     </div>
     <div flex></div>
     <div>
       <md-list>
         <md-list-item style="padding:5px">
-          <div>
-            <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-              <span><i class="material-icons">
-                  reply_all
-                </i></span>
-              <div class="md-caption">Share Campaign</div>
-            </md-button>
-          </div>
+            <div style="margin-top:14px;cursor: pointer;">
+             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(UserPaymentDetails.campaign_details.id)">
+               <p class="md-caption"><span><i class="material-icons i_icon">
+                     reply_all
+                   </i></span></p>
+               <p class="mob_spanicon share_icon">Share Campaign</p>
+             </div>
+           </div>
         </md-list-item>
       </md-list>
     </div>
@@ -42,23 +80,6 @@
         </md-list-item>
       </md-list>
     </div>
-    <!-- <div class="disabled">
-      <md-list>
-        <md-list-item style="padding:5px">
-          <div>
-            <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0"
-              ng-disabled="true">
-              <span><i class="material-icons">
-                  account_balance_wallet
-                </i></span>
-              <div class="md-caption">Payment Details</div>
-            </md-button>
-          </div>
-        </md-list-item>
-      </md-list>
-    </div> -->
-
-
   </div>
   <div class="table-responsive">
     <table class="table ">
@@ -71,11 +92,10 @@
         </tr>
       </thead>
       <tbody class="contbg">
-        <tr ng-repeat="Userpayment in campaignDetails.payment_details">
+        <tr ng-repeat="Userpayment in UserPaymentDetails.all_payments">
           <td>{{Userpayment.created_at}}</td>
-          <td>NA</td>
-          <td>NA</td>
-          <td>NA</td>
+          <td>{{Userpayment.type}}</td>
+          <td>{{Userpayment.amount}}</td>
         </tr>
         <!-- <tr>
           <td>14-08-2018</td>
@@ -87,44 +107,29 @@
     </table>
   </div>
   <div class="d-flex bg-light mb-5" style="min-height:100px">
-    <div class="p-2 col-md-6">
-      <!-- <div class=" chat_box ">
-        <ul class="p-0">
-          <li class="mt-2"><span class="user_dec">U</span>My budget for this campain is 1,58,000. Can you please
-            revision
-            BB238 - Kothaguda hoarding price </li>
-          <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price is revised as
-            requested</li>
-        </ul>
-        <form action="/action_page.php">
-          <div class="form-group">
-            <label for="text" class="text_color">Any questions, Please submit below</label>
-            <textarea type="text" class="form-control" id="text" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-      </div> -->
+    <div class="p-2 col-md-6">      
     </div>
-    <div class="p-2  col-md-6 align-self-end" ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700">
+    <div class="p-2  col-md-6 align-self-end">
+        <!-- ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700" -->
       <div class="d-flex justify-content-end pt-4">
         <div layout="column" class="payment_inner">
           <div layout="row">
             <div class="md-body-1">Total :</div>
-            <div class="md-body-1">12,58,000</div>
+            <div class="md-body-1">{{UserPaymentDetails.campaign_details.total_amount}}</div>
           </div>
           <div layout="row">
             <div class="md-body-1">paid:</div>
-            <div class="md-body-1"> 58,000</div>
+            <div class="md-body-1"> &nbsp;&nbsp;{{UserPaymentDetails.total_paid}}</div>
           </div>
 
           <div layout="row">
             <div class="md-title">Balance :</div>
-            <div class="md-title">13,05,000</div>
+            <div class="md-title">{{balance}}</div>
           </div>
-          <div layout="row">
+          <!-- <div layout="row">
             <input type="checkbox" />Request Executive to collect cash / cheque
-          </div>
-          <md-button class="md-raised md-primary">PAY ONLINE</md-button>
+          </div> -->
+          <!-- <md-button class="md-raised md-primary">PAY ONLINE</md-button> -->
         </div>
       </div>
     </div>
@@ -136,4 +141,7 @@
     var image = document.getElementById('output');
     image.src = URL.createObjectURL(event.target.files[0]);
   };
+  function addPayment() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
 </script>

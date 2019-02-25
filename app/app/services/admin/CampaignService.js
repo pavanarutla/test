@@ -132,6 +132,27 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/launch-metro-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
+      getCampaignsFromProducts: function(productId){
+        var dfd = $q.defer();
+        $http.get(config.apiPath + '/campaigns-from-products/' + productId).success(dfd.resolve).error(dfd.reject);
+        return dfd.promise;
+      },
+      getProductUnavailableDates: function(productId){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/product-unavailable-dates/' + productId).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+      },
+      getApprovedProductList: function (data) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/approved-owner-products' ,data).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+      },
+      getFormatList: function (obj = null) {
+				var filterData = obj != null ? "?type=" + obj.type : "?type=ooh";
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/formats' + filterData).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
     }
   }
 ]

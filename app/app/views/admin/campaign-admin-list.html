@@ -173,12 +173,12 @@
                         <input ng-model="AdminownerCampaign.name" name="name" class="form-control md-whiteframe-3dp" type="text"
                           minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/"
                           placeholder="Campaign Name">
-                        <div ng-messages="forms.AdminownerCampaignForm.name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.name.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.name.$touched">
                           <div ng-message="required">Campaign Name is required.</div>
                           <div ng-message="minlength">Campaign Name must have 3 characters.</div>
                           <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
                           <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -186,11 +186,11 @@
           
                         <input ng-model="AdminownerCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
                           minlength="3" maxlength="60" required="required" placeholder="Company Name">
-                        <div ng-messages="forms.AdminownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.org_name.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.org_name.$touched">
                           <div ng-message="required">Company Name is required.</div>
                           <div ng-message="minlength">Company Name must have 3 characters.</div>
                           <div ng-message="maxlength">Company Name shouldn't exceed 30 characters. </div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -198,9 +198,9 @@
           
                         <input ng-model="AdminownerCampaign.org_contact_name" name="contact_name" class="form-control  md-whiteframe-3dp"
                           type="text" required="required" placeholder="Contact Name">
-                        <div ng-messages="forms.AdminownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.contact_name.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.contact_name.$touched">
                           <div ng-message="required">Contact Name is required.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -209,10 +209,10 @@
                         <input ng-model="AdminownerCampaign.org_contact_email" name="email" class="form-control md-whiteframe-3dp"
                           type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
                           placeholder="Email">
-                        <div ng-messages="forms.AdminownerCampaignForm.email.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.email.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.email.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.email.$touched">
                           <div ng-message="required">Email is required.</div>
                           <div ng-message="pattern">Enter a valid EmailId.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -220,10 +220,10 @@
           
                         <input ng-model="AdminownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control md-whiteframe-3dp"
                           type="text" maxlength="10" required="required" placeholder="Phone Number">
-                        <div ng-messages="forms.AdminownerCampaignForm.phone.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.phone.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.phone.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.phone.$touched">
                           <div ng-message="required">Phone No is required.</div>
                           <div ng-message="maxlength">Phone No must have 10 characters.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -231,23 +231,23 @@
           
                         <input ng-model="AdminownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
                           type="text" maxlength="10" required="required" placeholder="Refered By">
-                        <div ng-messages="forms.AdminownerCampaignForm.refered.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.refered.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.refered.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.refered.$touched">
                           <div ng-message="required">Refered No is required.</div>
                           <div ng-message="maxlength">Refered No must have 10 characters.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
                       <div class="form-group">
                         <input ng-model="AdminownerCampaign.est_budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
                           type="text" maxlength="10" required="required" placeholder="Estimated Budget">
-                        <div ng-messages="forms.AdminownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.Budget.$touched">
+                        <!-- <div ng-messages="forms.AdminownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.AdminownerCampaignForm.Budget.$touched">
                           <div ng-message="required">Budget No is required.</div>
                           <div ng-message="maxlength">Phone No must have 10 characters.</div>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
-                    <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveUserCampaign(AdminownerCampaign)">
+                    <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveCampaignByAdmin(AdminownerCampaign)">
                       Create Campaign
                     </md-button>
               </div>            
@@ -278,7 +278,7 @@
                   <td class="table_vertical">{{campaign.cid}}</td>
                   <td class="text-left table_vertical">{{campaign.name}}</td>
                   <td class="table_vertical">{{campaign.created_at | dateify | date:'dd-MM-yyyy'}}</td>
-                  <td class="text-center table_vertical hide-xs">{{campaign.no_products || "N/A"}}</td>
+                  <td class="text-center table_vertical hide-xs">{{campaign.product_count || "N/A"}}</td>
                   <td class="text-center table_vertical hide-xs">{{campaign.npaid || "N/A"}}</td>
                   <td class="text-center table_vertical hide-xs">{{campaign.est_budget}}</td>
                   <td class="table_vertical ">
@@ -304,13 +304,13 @@
                           </md-button>
                         </md-menu-item>
                         
-                          <md-button class="pop_view" ng-href="#">
+                          <!-- <md-button class="pop_view" ng-href="#">
                             <div layout="row">
                               <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                               <p style="margin:0 4px;font-size:11px;">Payment Details</p>
                             </div>
                           </md-button>
-                        </md-menu-item>
+                        </md-menu-item> -->
                       </md-menu-content>
                     </md-menu>
                   </td>
@@ -339,6 +339,52 @@
                   <th class="hide-xs"></th>
                 </tr>
               </thead>
+              <tbody class="text-center">
+                <tr ng-repeat="campaign in scheduledCampaigns | limitTo:limit" >
+                  <td class="table_vertical">{{campaign.cid}}</td>
+                  <td class="text-left table_vertical">{{campaign.name}}</td>
+                  <td class="table_vertical">{{campaign.start_date | date }}</td>
+                  <td class="table_vertical hide-xs">{{campaign.product_count || "N/A"}}</td>
+                  <td class="table_vertical hide-xs">N/A</td>
+                  <td class="table_vertical hide-xs">{{campaign.est_budget}}</td>
+                  <td class="table_vertical">
+                    <md-menu md-position-mode="target-right target">
+                      <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                        <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                      </md-button>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
+                            <div layout="row">
+                              <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                              <p style="margin: -6px 10px 0px 10px;">View Details</p>
+                            </div>
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="toggleShareCampaignSidenav(campaign.id)">
+                            <div layout="row">
+                              <md-icon><i class="material-icons">share</i></md-icon>
+                              <p style="margin:auto 10px auto 10px">Share Campaign</p>
+                            </div>
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <div layout="row">
+                                  <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                  <p style="margin:auto 10px auto 10px">Payment Details</p>
+                              </div>
+                          </md-button>
+                      </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </td>
+                  <td class="table_vertical hide-xs">
+                    <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
+                  </td>
+                </tr>
+              </tbody>
              
             </table>
           </div>
@@ -363,10 +409,10 @@
               </thead>
               <tbody class="text-center">
                 <tr ng-repeat="campaign in runningCampaigns | limitTo:limit" >
-                  <td class="table_vertical">N/A</td>
+                  <td class="table_vertical">{{campaign.cid}}</td>
                   <td class="text-left table_vertical">{{campaign.name}}</td>
                   <td class="table_vertical">{{campaign.start_date | date }}</td>
-                  <td class="table_vertical hide-xs">N/A</td>
+                  <td class="table_vertical hide-xs">{{campaign.product_count || "N/A"}}</td>
                   <td class="table_vertical hide-xs">N/A</td>
                   <td class="table_vertical hide-xs">{{campaign.est_budget}}</td>
                   <td class="table_vertical">
@@ -379,9 +425,26 @@
                           <md-button ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
                             <div layout="row">
                               <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                              <p style="margin:auto 10px auto 10px">View Details</p>
+                              <p style="margin: -6px 10px 0px 10px;">View Details</p>
                             </div>
                           </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="toggleShareCampaignSidenav(campaign.id)">
+                            <div layout="row">
+                              <md-icon><i class="material-icons">share</i></md-icon>
+                              <p style="margin:auto 10px auto 10px">Share Campaign</p>
+                            </div>
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <div layout="row">
+                                  <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                  <p style="margin:auto 10px auto 10px">Payment Details</p>
+                              </div>
+                          </md-button>
+                      </md-menu-item>
                         <!-- </md-menu-item>
                         <md-menu-item>
                           <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
@@ -438,10 +501,10 @@
               </thead>
               <tbody class="text-center" >
                 <tr ng-repeat="campaign in closedCampaigns | limitTo:limit">
-                  <td class="table_vertical">N/A</td>
+                  <td class="table_vertical">{{campaign.cid}}</td>
                   <td class="text-left table_vertical">{{campaign.name}}</td>
                   <td class="table_vertical">{{campaign.start_date | date }}</td>
-                  <td class="table_vertical hide-xs">N/A</td>
+                  <td class="table_vertical hide-xs">{{campaign.product_count || "N/A"}}</td>
                   <td class="table_vertical hide-xs">N/A</td>
                   <td class="table_vertical hide-xs">{{campaign.Total_budget || "N/A"}}</td>
                   <td class="table_vertical">
@@ -451,7 +514,7 @@
                       </md-button>
                       <md-menu-content width="2">
                         <md-menu-item>
-                          <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                          <md-button ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
                             <div layout="row">
                               <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                               <p style="margin:auto 10px auto 10px">View Details</p>
@@ -466,22 +529,22 @@
                             </div>
                           </md-button>
                         </md-menu-item>
-                        <md-menu-item>
+                        <!-- <md-menu-item>
                           <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                             <div layout="row">
                               <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                               <p style="margin:auto 10px auto 10px">Pay Now</p>
                             </div>
                           </md-button>
-                        </md-menu-item>
+                        </md-menu-item> -->
                         <md-menu-item>
-                          <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                            <div layout="row">
-                              <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                              <p style="margin:auto 10px auto 10px">Payment Details</p>
-                            </div>
+                          <md-button ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <div layout="row">
+                                  <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                  <p style="margin:auto 10px auto 10px">Payment Details</p>
+                              </div>
                           </md-button>
-                        </md-menu-item>
+                      </md-menu-item>
                       </md-menu-content>
                     </md-menu>
                   </td>
@@ -495,80 +558,6 @@
           </div>
         </div>
       </md-tab>
-       <!-- <md-tab label="Metro" >
-      <div style="margin-top: 1em;">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr class="text_color text-center">
-                <th>CID</th>
-                <th class="text-left">Campaign Name</th>
-                <th>Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
-                <th></th>
-                <th class="hide-xs"></th>
-              </tr>
-            </thead>
-            <tbody class="text-center">
-              <tr>
-                <td class="table_vertical">BB-01</td>
-                <td class="text-left table_vertical">Billboards</td>
-                <td class="table_vertical">15-08-2018</td>
-                <td class="table_vertical hide-xs">10</td>
-                <td class="table_vertical hide-xs">10,1000</td>
-                <td class="table_vertical hide-xs">10,10001</td>
-                <td class="table_vertical">
-                  <md-menu md-position-mode="target-right target">
-                    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
-                      <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                    </md-button>
-                    <md-menu-content width="2">
-                      <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/metro-campaign-details">
-                          <div layout="row">
-                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                            <p style="margin:auto 10px auto 10px">View Details</p>
-                          </div>
-                        </md-button>
-                      </md-menu-item>
-                      <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                          <div layout="row">
-                            <md-icon><i class="material-icons">share</i></md-icon>
-                            <p style="margin:auto 10px auto 10px">Share Campaign</p>
-                          </div>
-                        </md-button>
-                      </md-menu-item>
-                      <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                          <div layout="row">
-                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                            <p style="margin:auto 10px auto 10px">Pay Now</p>
-                          </div>
-                        </md-button>
-                      </md-menu-item>
-                      <md-menu-item>
-                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                          <div layout="row">
-                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                            <p style="margin:auto 10px auto 10px">Payment Details</p>
-                          </div>
-                        </md-button>
-                      </md-menu-item>
-                    </md-menu-content>
-                  </md-menu>
-                </td>
-                <td class="table_vertical hide-xs">
-                  <span class="text_color md-caption">09:11 Am, 26-09-2018</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </md-tab> -->
     </md-tabs>
   </div>
   
