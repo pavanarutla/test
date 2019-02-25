@@ -226,6 +226,7 @@
                                                 <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
 
                                                 <script>
+                                                var i = 1;
                                                 var user = localStorage.getItem("loggedInUser");
                                                 var parsedData = JSON.parse(user);
                                                 var user_type = parsedData.user_type;
@@ -237,8 +238,6 @@
                                                 } else if (user_type == 'owner') {
                                                     var user_id = '-' + parsedData.user_id;
                                                 }
-                                                var user_type = parsedData.user_type;
-
                                                 var arrayText = [];
                                                 // Enable pusher logging - don't include this in production
                                                 Pusher.logToConsole = true;
@@ -263,74 +262,69 @@
 
                                                 channel.bind('CampaignLaunchEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    /* $('#notification-count').html(arrayText.length);
+                                                     $('#notification1-count').html(arrayText.length);*/
+                                                    notificationText(arrayText);
 
                                                 });
                                                 channel1.bind('campaignClosedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
-
+                                                    notificationText(arrayText);
                                                 });
                                                 channel2.bind('CampaignLaunchRequestedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel3.bind('CampaignQuoteProvidedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel4.bind('CampaignQuoteRequestedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel5.bind('CampaignQuoteRevisionEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText)
                                                 });
                                                 channel6.bind('CampaignSuggestionRequestEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel7.bind('CampaignSuspendedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    alert(JSON.stringify(arrayText));
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel8.bind('ProductApprovedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    alert(JSON.stringify(arrayText));
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel9.bind('ProductRequestedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel10.bind('metroCampaignClosedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel11.bind('metroCampaignLaunchedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
                                                 channel12.bind('metroCampaignLockedEvent', function (data) {
                                                     arrayText.push(data);
-                                                    $('#notification-count').html(arrayText.length);
-                                                    $('#notification1-count').html(arrayText.length);
+                                                    notificationText(arrayText);
                                                 });
 
+                                                function notificationText(arrayText) {
+                                                    $('#notification-count').html(arrayText.length);
+                                                    $('#notification1-count').html(arrayText.length);
+                                                    arrayText.forEach(function (element) {
+                                                        var j = i % 3;
+                                                        $('#notification-id-' + j).html('<div class ="notification_desc md-whiteframe-2dp pl-3"><p>' + element.desc + '</p></div>');
+                                                        i++;
+                                                    });
+                                                }
                                                 </script>
                                             </body>
                                             </html>
