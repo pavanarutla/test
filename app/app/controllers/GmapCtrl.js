@@ -67,9 +67,11 @@ app.controller('GmapCtrl',
                 /*====================================
                  | Multi date range picker options end
                  ====================================*/
-                //  $scope.FilterDates = function(){
-                //      alert("Hello");
-                //     console.log(DateFilterform);
+                //  $scope.FilterDates = function(date1,date2){                                    
+                //     console.log(date1,date2);
+                //     MapService.filterProducts().then(function (result) {
+                //         console.log(result);                    
+                //     });
                 //  };
 
                 $scope.hidelocations = false;
