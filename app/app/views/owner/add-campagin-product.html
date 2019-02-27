@@ -1,13 +1,13 @@
 <div layout="column" class="owner_hoarding_list">
   <div layout="row" layout-margin class="md-whiteframe-3dp">
-    <p class="mb-0 mt-4">Campaign Name:<span class="text_color">{{selectedOwnerCampaign.name}}</span></p>
-    <p class="mb-0 mt-4">Product Added:<span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
+    <p class="mb-0 mt-4">Campaign Name : <span class="text_color">{{selectedOwnerCampaign.name}}</span></p>
+    <p class="mb-0 mt-4">Product Added : <span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
         "0"}}</span></p>
     <p class="mb-0 mt-4">Estimated Budget : {{selectedOwnerCampaign.est_budget || "N/A"}}</p>
     <p class="mb-0 mt-4 text_color"> Total Budget : {{selectedOwnerCampaign.total_budget || "N/A"}}</p>
-    <p class="mb-0 mt-4"><span class="text_color">Created On</span> :{{selectedOwnerCampaign.created_at || "N/A"}}</p>
+    <p class="mb-0 mt-4"><span class="text_color">Created On</span> : {{selectedOwnerCampaign.created_at || "N/A"}}</p>
     <span flex></span>    
-    <md-button class="md-raised md-primary" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+    <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
   </div>
 
   <!-- filters-->
@@ -52,7 +52,7 @@
         <input class="form-check-input" type="checkbox"> Show Only Available
       </label>
     </div> -->
-    <md-button class="md-raised md-primary" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+    <md-button class="md-raised md-primary register_btn" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
   </form>
   <!-- product list -->
   <div class="table-responsive" style="margin-bottom:115px !important">
@@ -61,11 +61,11 @@
         <tr>
           <th>Product Details</th>
           <th></th>
-          <th>Views</th>
+          <th class="text-center">Views</th>
           <th>Lit</th>
           <th>Shortlisted in</th>
           <th>Price</th>
-          <th>Calender</th>
+          <th class="text-center">Calender</th>
           <th></th>
         </tr>
       </thead>
@@ -75,13 +75,13 @@
             <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
             <img ng-src="{{serverUrl + ownerProduct.image}}" alt="Smiley face" class="requ_size">
           </td>
-          <td>
+          <td class="table_address">
             <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
               <br> {{ownerProduct.address}}
               <br>Facing: {{ownerProduct.direction}}
               <br>Type:{{ownerProduct.format_name}}
           </td>
-          <td class="table_vertical">{{ownerProduct.impressions}}</td>
+          <td class="table_vertical text-center">{{ownerProduct.impressions}}</td>
           <td class="table_vertical">
             <span class="md-caption">{{ownerProduct.lighting | boolToYesNo}}</span>
           </td>
@@ -89,7 +89,7 @@
             <!-- <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a> -->
             <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin/{{ownerProduct.id}}">{{ownerProduct.camapigns_count}} Campaigns</a>
           </td>
-          <td class="table_vertical">
+          <td class="table_vertical table_price">
             <!-- <div class="input-group">
               <input ng-model="suggestedProduct.price" type="text" only-numeric name="price" required="required"
                 ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = ownerProduct.default_price"
@@ -106,7 +106,7 @@
             
             </div>
           </td>
-          <td class="table_vertical">
+          <td class="table_vertical text-center">
             <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
@@ -117,8 +117,8 @@
             </a>
           </td>
 
-          <td class=" table_vertical">
-            <md-button class="md-raised md-primary" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+          <td class=" table_vertical text-right">
+            <md-button class="md-raised md-primary all_button" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
               campaign</md-button>
           </td>
 
