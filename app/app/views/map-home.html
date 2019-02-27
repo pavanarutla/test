@@ -857,17 +857,16 @@
             </div>
           </form>-->
 
-
-          <div class="row">
-              <div class="col-6 mt-3">
-                  <input id="startDate" />
+          <div class="row">            
+            <div flex-gt-xs>               
+                <md-datepicker ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
               </div>
-              <div class="col-6 mt-3">
-                  <input id="endDate" />
-              </div>
-              <div class="col-12 mt-3 text-right">
-                  <button type="button" class="btn btn-danger">Filter</button>
-              </div>
+              <div flex-gt-xs>                 
+                  <md-datepicker ng-model="booked_to" md-placeholder=""></md-datepicker>
+                </div>
+                <div class="col-12 mt-3 text-right">
+                    <button type="button" class="btn btn-danger" ng-click="FilterDates(booked_from,booked_to)">Filter</button>
+                </div>
           </div>
           
           <!-- <div ng-controller="datePickerCtrl">
@@ -1052,27 +1051,6 @@
     }
   }
   </script>
-  
-  
-<script>
-    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    $('#startDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        minDate: today,
-        maxDate: function () {
-            return $('#endDate').val();
-        }
-    });
-    $('#endDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        minDate: function () {
-            return $('#startDate').val();
-        }
-    });
-  </script>
-
 <script>
   
     $("#showLeftPush").click(function () {
