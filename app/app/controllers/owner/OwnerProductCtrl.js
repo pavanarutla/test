@@ -369,6 +369,7 @@ $scope.applymethod=function(product){
  
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
+    console.log(product);
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
@@ -381,9 +382,13 @@ $scope.applymethod=function(product){
       else if(result.data.status == 0){
         $scope.requestProductErrors = result.data.message;
         toastr.success(result.data.message);
-      }
-      $scope.product = "";
+      }      
       document.getElementById("myDropdown").classList.toggle("show");
+      $scope.product = [];
+      product.dates="";
+      $scope.hordinglistform.$setPristine();
+      $scope.hordinglistform.$setUntouched();
+      $scope.areaObj ="";
     }, function (resp) {
       //console.log('Error status: ', resp);
     }, function (evt) {
