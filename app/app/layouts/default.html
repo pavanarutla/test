@@ -2,54 +2,112 @@
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
 
 <div layout="column" style="position:relative;min-height:100%;">
-  <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
-    <div class="md-toolbar-tools">
-      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" class="md-icon-button">
-        <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
-      </md-button>
-      <md-button aria-label="locations" href="#/" md-no-ink class="logo" style="margin-left:2.5%">
-        <img class="png-icon" src="assets/images/logoamerica.png" width="130px" alt="images">
-      </md-button>
+    <md-toolbar class="md-menu-toolbar header md-whiteframe-2dp">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" class="md-icon-button">
+                <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
+            </md-button>
+            <md-button aria-label="locations" href="#/" md-no-ink class="logo" style="margin-left:2.5%">
+                <img class="png-icon" src="assets/images/owner/logo.png" width="130px" alt="images">
+            </md-button>
 
-      <span flex class=""></span>
-      <md-menu-bar class="main-menu">
-        <md-button aria-label="about bbi" ng-click="whatwedo()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">About
-          BBI</md-button>
-        <md-button aria-label="products" ng-click="formate()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Our
-          Products</md-button>
-        <md-button aria-label="Support" ng-click="whyOutdoor()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
-        </md-button>
-        <!-- browse-->
-        <md-button  aria-label="location" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
-          Browse Inventory
-        </md-button>
-        <!-- <md-button  aria-label="location" ng-if="isAuthenticated  && currStateName != 'index.metro'"
-          ng-href="#/metro">
-          Metro
-        </md-button> -->
-        <!--sugg -->
-        <md-button class="suggest__me" aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/suggest/product-detail">
-          suggest me
-        </md-button>
-        <!--search button -->
-        <!-- <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-gt-xs>
-          <md-icon><i class="material-icons">search</i></md-icon>
-        </md-button> -->
-        <!--notification button -->
-        <!-- <md-button aria-label="notifications" class="md-icon-button notiftn-btn" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
-          <md-icon><i class="material-icons">notifications</i></md-icon>
-        </md-button> -->
-        <!-- profile button start-->
-        <!-- <md-menu ng-show="isAuthenticated" class="profile-menu">
- 
-          <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
-            <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
-            <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
-          </md-button>
-          <md-menu-content width="3" style="z-index:99">
-            <md-menu-item>
-              <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
-            </md-menu-item>
+            <span flex class=""></span>
+            <md-menu-bar class="main-menu">
+                <md-button aria-label="about bbi" ng-click="whatwedo()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">About
+                    BBI</md-button>
+                <md-button aria-label="products" ng-click="formate()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Our
+                    Products</md-button>
+                <md-button aria-label="Support" ng-click="whyOutdoor()" ng-hide="isAuthenticated" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
+                </md-button>
+                <!-- browse-->
+                <md-button  aria-label="location" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
+                    Browse Inventory
+                </md-button>
+                <!-- <md-button  aria-label="location" ng-if="isAuthenticated && currStateName != 'index.metro'"
+                            ng-href="#/metro">
+                    Metro
+                </md-button> -->
+                <!--sugg -->
+                <md-button class="suggest__me" aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/suggest/product-detail">
+                    suggest me
+                </md-button>
+                <!--search button -->
+                <!-- <md-button aria-label="notifications" class="md-icon-button search-btn" ng-click="" ng-show="isAuthenticated" hide-gt-xs>
+                  <md-icon><i class="material-icons">search</i></md-icon>
+                </md-button> -->
+                <!--notification button -->
+                <!-- <md-button aria-label="notifications" class="md-icon-button notiftn-btn" ng-click="closeSideNavPanel()" ng-show="isAuthenticated">
+                  <md-icon><i class="material-icons">notifications</i></md-icon>
+                </md-button> -->
+                <!-- profile button start-->
+                <!-- <md-menu ng-show="isAuthenticated" class="profile-menu">
+         
+                  <md-button class="md-secondary md-mini md-button profile-img" type="button" ng-transclude="" aria-label="personimage" ng-click="$mdOpenMenu($event)" >
+                    <img ng-if="!getAvatar().present" ng-src="assets/images/man.png" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
+                    <img ng-if="getAvatar().present" ng-src="{{serverUrl + getAvatar().profile_pic}}" class="md-avatar ng-scope" style="margin: 4px 0 0 0; width:32px;height:32px;border-radius: 50%;">
+                  </md-button>
+                  <md-menu-content width="3" style="z-index:99">
+                    <md-menu-item>
+                      <md-button ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</md-button>
+                    </md-menu-item>
+        
+        
+                    <md-menu-item ng-if="isUserBasic()">
+                      <md-button aria-label="campaigns" ng-href="#/campaigns">Campaigns</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-if="isUserBasic()">
+                      <md-button ng-href="#/user-payments">payments</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-href="#/reset_password">Reset Password</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-if="!isUserBasic()">
+                      <md-button ng-click="switchView()">Switch View</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="logout()">Sign Out</md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu> -->
+                <!-- profile button end-->
+                <div class="profile_details_left" style="float:right">
+                    <!--notifications of menu start -->
+                    <ul class="nofitications-dropdown">
+                        <li class="dropdown head-dpdn" ng-if="isAuthenticated"> <a class="dropdown-toggle" data-toggle="dropdown"
+                                                                                   aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue" id="notification-count">0</span></a>
+                            <ul class="dropdown-menu dropdown-bell arrrow_box animated fadeInDown">
+                                <li>
+                                    <div class="notification_header">
+                                        <h3 class=""><b>You have <span id="notification1-count">0</span> new notification</b></h3>
+                                    </div>
+                                </li>
+                                <li id="notification-id-0"></li>
+                                <li id="notification-id-1"></li>
+                                <li id="notification-id-2"></li>
+                                <!--   <li>
+                                    <a href="#">
+                                      <div class="notification_desc md-whiteframe-2dp pl-3">
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                        <p class="text_color">Created On 02-12-2018 - 12:00 am</p>
+                                      </div>
+                                    </a>
+                                  </li>
+                              <li class="odd">
+                                  <a href="#">
+                                    <div class="notification_desc md-whiteframe-2dp pl-3">
+                                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                      <p class="text_color"><span>Created On 02-12-2018 - 12:00 am</span></p>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#">
+                                    <div class="notification_desc md-whiteframe-2dp pl-3">
+                                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                      <p class="text_color"><span>Created On 02-12-2018 - 12:00 am</span></p>
+                                    </div>
+                                  </a>
+                                </li>-->
 
                                 <li>
                                     <div class="notification_bottom"> <a ng-href="#/user-notifications">See all notifications</a> </div>
@@ -79,11 +137,7 @@
                             </ul>
                         </li>
                         <li class="dropdown head-dpdn" ng-if="isAuthenticated">
-                            <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A
-                                <!-- <img src="assets/images/man.png"/> -->
-                                <!-- <i class="fa fa-ellipsis-v lnr"></i> -->
-
-                            </a>
+                            <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A</a>
                             <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserBasic">
                                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                                 <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
@@ -95,7 +149,6 @@
                                 <!-- <li> <a ng-href="#"> Team</a> </li> -->
                                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
                             </ul>
-
                             <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserOwner">
                                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                                 <li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
@@ -136,10 +189,6 @@
             <md-menu-item flex layout="column">
                 <md-button ng-click="contactus()">CONTACT</md-button>
             </md-menu-item>
-            <!-- <md-menu-item flex layout="column">
-              <md-button href="#/pricing">PRICING</md-button>
-            </md-menu-item> -->
-
     </md-sidenav>
     <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right"
                 md-disable-backdrop style="z-index:65">
@@ -167,20 +216,9 @@
                     <div class="notification_bottom"> <a href="#">See all notifications</a> </div>
                 </li> -->
             </ul>
-            <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
-            ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-              <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
-                <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
-                <p>{{ notif.message }}</p>
-              </a>
-            </div> -->
         </md-content>
     </md-sidenav>
-
-    <!-- Content section-->
-    <!-- <div ui-view ng-cloak></div> -->
     <ui-view>
-
     </ui-view>
 
     <!-- Footer Section-->
