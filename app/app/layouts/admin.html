@@ -332,21 +332,25 @@
         <!--notifications of menu start -->
         <ul class="nofitications-dropdown">
           <li class="dropdown head-dpdn"> <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                class="fa fa-bell"></i><span class="badge blue">{{ownerNotifs.length}}</span></a>
-            <ul class="dropdown-menu arrrow_box animated fadeInDown mt-5">
+                class="fa fa-bell"></i><span class="badge blue"id="notification-count">0</span></a>
+            <ul class="dropdown-menu arrrow_box animated fadeInDown mt-5" style="margin-left: -150px;
+            margin-top: 67px !important;">
               <li>
                 <div class="notification_header">
-                  <h3 class="text_color">You have {{ownerNotifs.length}} new notification</h3>
+                  <h3 class="text_color">You have <span id="notification1-count">0</span> new notification</h3>
                 </div>
               </li>
-              <li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
+              <li id="notification-id-0"></li>
+              <li id="notification-id-1"></li>
+              <li id="notification-id-2"></li>
+             <!-- <li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
                 <div class="notification_desc pl-3">
                   <p>{{notif.message}}</p>
                   <p><span>{{notif.updated_at | dateify:'DD-MM-YYYY hh:mm:ss a'}}</span></p>
                 </div>
                 <div class="clearfix"></div>
-              </li>
-              <div class="notification_bottom"> <a ng-href="#/owner/{{clientSlug}}/notifications">See all notifications</a>
+              </li>-->
+              <div class="notification_bottom"> <a ng-href="#/admin/home">See all notifications</a>
               </div>
           </li>
         </ul>
@@ -598,7 +602,6 @@
                 Team
               </md-button>
             </md-menu-item> -->
-
           </md-list>
         </div>
       </md-content>

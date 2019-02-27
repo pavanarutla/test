@@ -224,7 +224,8 @@
 		<div style="margin-right:20px;">
 			<div class="pull-right">
 			  <p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{campaignDetails.act_budget}}</spam></p>
-			  <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p>
+			  <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
+			  <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
 			  <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal}}</spam></p>
 			  <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal}}</spam></p>
 			  <md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book

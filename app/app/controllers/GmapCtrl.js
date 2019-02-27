@@ -840,324 +840,379 @@ app.controller('GmapCtrl',
               //$scope.campaignSavedSuccessfully = true;
               $timeout(function () {
                 $scope.campaign = {};
-                $form.$setPristine();
-                $form.$setUntouched();
-                toastr.success(response.message);
-                //$scope.campaignSavedSuccessfully = false;
-              }, 3000);
-              $scope.loadActiveUserCampaigns();
-              getShortListedProducts();
+                var startDate = new Date();
+                var productFromDate = new Date($scope.campaign.start_date);
+                var productToDate = new Date($scope.campaign.end_date);
+                $scope.fromMinDate = new Date(
+                        startDate.getFullYear(),
+                        startDate.getMonth(),
+                        startDate.getDate() + 6
+                        );
+                $scope.toMinDate = new Date(
+                        startDate.getFullYear(),
+                        startDate.getMonth(),
+                        startDate.getDate()
+                        );
+                $scope.saveCampaign = function (product_id, selectedDateRanges) {
+                    // If we finally decide to use selecting products for a campaign
+                    // if($scope.selectedForNewCampaign.length == 0){
+                    //   // add all shortlisted products to campaign
+                    //   console.log($scope.shortListedProducts);
+                    //   // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
+                    //   //   $scope.campaignSavedSuccessfully = true;
+                    //   // });
+                    // }
+                    // else{
+                    //   // add all shortlisted products for new campaign
+                    //   console.log($scope.selectedForNewCampaign);
+                    //   // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
+                    //   //   $scope.campaignSavedSuccessfully = true;
+                    //   // });
+                    // }
+                    // campaign.products = $scope.selectedForNewCampaign;
+                    if (product_id) {
+                        $scope.campaign.products = [];
+                        var sendObj = {
+                            product_id: product_id,
+                        }
+
+                        if (selectedDateRanges.length > 0) {
+                            sendObj.dates = selectedDateRanges;
+                        } else {
+                            toastr.error("Please select dates.");
+                            return false;
+                        }
+                        $scope.campaign.products.push(sendObj);
+                        $form = $scope.forms.mySaveCampaignForm;
+                    } else {
+                        if ($scope.shortListedProducts.length > 0) {
+                            $scope.campaign.products = [];
+                            _.each($scope.shortListedProducts, function (v, i) {
+                                $scope.campaign.products.push(v.id);
+                            });
+                            $form = $scope.forms.viewAndSaveCampaignForm;
+                        } else {
+                            toastr.error("Please shortlist some products first.");
+                        }
+
+                    }
+                    if ($scope.campaign.products) {
+                        CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
+                            if (response.status == 1) {
+                                //$scope.campaignSavedSuccessfully = true;
+                                $timeout(function () {
+                                    $scope.campaign = {};
+                                    $form.$setPristine();
+                                    $form.$setUntouched();
+                                    toastr.success(response.message);
+                                    //$scope.campaignSavedSuccessfully = false;
+                                }, 3000);
+                                $scope.loadActiveUserCampaigns();
+                                getShortListedProducts();
+                            } else {
+                                $scope.saveUserCampaignErrors = response.message;
+                            }
+                        });
+                    }
+
+                }
+
+                $scope.emptyCampaign = {};
+                $scope.createEmptyCampaign = function () {
+                    $scope.campaign.products = [];
+                    CampaignService.saveCampaign($scope.emptyCampaign).then(function (response) {
+                        $scope.emptyCampaignSaved = true;
+                        $scope.emptyCampaign = {};
+                        $timeout(function () {
+                            $mdSidenav('createEmptyCampaignSidenav').close();
+                            $scope.emptyCampaignSaved = false;
+                        }, 3000);
+                        $scope.loadActiveUserCampaigns();
+                        getShortListedProducts();
+                    });
+                };
+                // Added this fn to clear the selected Results
+                $scope.clearFields = function () {
+                    $scope.searchId = '';
+                    $scope.searchText = '';
+                    window.location.reload(true);
+                    //$route.reload();
+
+                }
+
+                $scope.selectFromTabIdSearch = function (marker) {
+                    if (marker.id) {
+                        var refToMapMarker = _.find(markersOnMap, (m) => {
+                            return m.properties.id == marker.id;
+                        });
+                        $scope.$parent.alreadyShortlisted = false;
+                        $scope.mapObj.setCenter(refToMapMarker.position);
+                        var bounds = new google.maps.LatLngBounds();
+                        bounds.extend(refToMapMarker.position);
+                        $scope.mapObj.fitBounds(bounds);
+                        $scope.product.id = refToMapMarker.properties['id'];
+                        $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
+                        $scope.product.siteNo = refToMapMarker.properties['siteNo'];
+                        $scope.product.panelSize = refToMapMarker.properties['panelSize'];
+                        $scope.product.address = refToMapMarker.properties['address'];
+                        $scope.product.impressions = refToMapMarker.properties['impressions'];
+                        $scope.product.lighting = refToMapMarker.properties['lighting'];
+                        $scope.product.direction = refToMapMarker.properties['direction'];
+                        $scope.product.availableDates = refToMapMarker.properties['availableDates'];
+                        $scope.hideSelectedMarkerDetail = false;
+                        $mdSidenav('productDetails').toggle();
+                        $scope.selectedProduct = refToMapMarker;
+                    } else {
+                        toastr.error('No product found with that tab id', 'error');
+                    }
+                }
+
+                $scope.activeUserCampaigns = [];
+                $scope.loadActiveUserCampaigns = function () {
+                    CampaignService.getActiveUserCampaigns().then(function (result) {
+                        $scope.activeUserCampaigns = result;
+                    });
+                }
+                $scope.loadActiveUserCampaigns();
+
+                $scope.deleteUserCampaign = function (campaignId) {
+                    CampaignService.deleteCampaign(campaignId).then(function (result) {
+                        if (result.status == 1) {
+                            $scope.loadActiveUserCampaigns();
+                            toastr.success(result.message);
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    });
+                }
+
+                $scope.toggleFormatSelection = function (formatId) {
+                    if (_.contains($scope.selectedFormats, formatId)) {
+                        $scope.selectedFormats = _.reject($scope.selectedFormats, function (v) {
+                            return v == formatId
+                        });
+                        // console.log(_.reject($scope.selectedFormats, function(v){return v == formatId}));
+                    } else {
+                        $scope.selectedFormats.push(formatId);
+                    }
+                    $scope.applyFilter();
+                }
+
+                $scope.isFormatSelected = function (formatId) {
+                    return _.contains($scope.selectedFormats, formatId);
+                }
+
+                $scope.toggleTrafficLegends = function () {
+                    $scope.showTrafficLegend = !$scope.showTrafficLegend;
+                }
+
+                rangeCircle = new google.maps.Circle({
+                    strokeColor: "#ea3b37",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 1.5,
+                    // fillColor: "#0000ff",
+                    fillOpacity: 0.0,
+                });
+
+                $scope.range = {};
+                $scope.range.circleRadius = 0;
+                $scope.updateCircle = function () {
+                    rangeCircle.setMap(null);
+                    rangeCircle.setRadius(Math.sqrt($scope.circleRadius * 1000 / Math.PI));
+                    rangeCircle.setCenter({lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng)});
+                    rangeCircle.setMap($scope.mapObj);
+                    $scope.mapObj.fitBounds(rangeCircle.getBounds());
+                }
+                // Drawing a circle ends
+
+                $scope.viewCampaignDetails = function (campaignId) {
+                    CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
+                        $scope.campaignDetails = campaignDetails;
+                        $scope.$parent.alreadyShortlisted = true;
+                        // $scope.toggleCampaignDetailSidenav();
+                    });
+                }
+
+                var updateCampaignDetailSidenav = function (campaignId) {
+                    CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
+                        $scope.campaignDetails = campaignDetails;
+                    });
+                }
+                $scope.toggleExistingCampaignSidenav = function () {
+                    $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+                }
+                $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
+                    var productToCampaign = {
+                        product_id: productId,
+                        campaign_id: existingCampaignId
+                    };
+                    if (selectedDateRanges.length > 0) {
+                        productToCampaign.dates = selectedDateRanges;
+                    } else {
+                        toastr.error("Please select dates.");
+                        return false;
+                    }
+                    CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
+                        if (result.status == 1) {
+                            toastr.success(result.message);
+                            $mdSidenav('productDetails').close();
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    });
+                }
+
+                $scope.shareShortlistedProducts = function (shareShortlisted) {
+                    var sendObj = {
+                        email: shareShortlisted.email,
+                        receiver_name: shareShortlisted.name
+                    };
+                    CampaignService.shareShortListedProducts(sendObj).then(function (result) {
+                        if (result.status == 1) {
+                            toastr.success(result.message);
+                            $mdSidenav('shortlistSharingSidenav').close()
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    });
+                };
+
+                $scope.shareCampaign = function (ev, shareCampaign) {
+                    var campaignToEmail = {
+                        campaign_id: $scope.campaignToShare.id,
+                        email: shareCampaign.email,
+                        receiver_name: shareCampaign.receiver_name,
+                        campaign_type: $scope.campaignToShare.type
+                    };
+                    CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
+                        if (result.status == 1) {
+                            $mdSidenav('shareCampaign').close();
+                            $mdDialog.show(
+                                    $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('body')))
+                                    .clickOutsideToClose(true)
+                                    .title(result.message)
+                                    // .textContent('You can specify some description text in here.')
+                                    .ariaLabel('Alert Dialog Demo')
+                                    .ok('Got it!')
+                                    .targetEvent(ev)
+                                    );
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    });
+                }
+
+                $scope.viewProduct = function (product) {
+                    $scope.product.image = config.serverUrl + product.image;
+                    $scope.product.siteNo = product.siteNo;
+                    $scope.product.panelSize = product.panelSize;
+                    $scope.product.address = product.address;
+                    $scope.product.impressions = product.impressions;
+                    $scope.product.direction = product.direction;
+                    $scope.product.lighting = product.lighting;
+                    $scope.product.availableDates = product.availableDates;
+                    $scope.hideSelectedMarkerDetail = false;
+                    $mdSidenav('productDetails').toggle();
+                    $scope.product.id = product.id;
+                }
+
+                $scope.deleteProductFromCampaign = function (productId, campaignId) {
+                    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function (result) {
+                        if (result.status == 1) {
+                            toastr.success(result.message);
+                            updateCampaignDetailSidenav(campaignId);
+                        } else {
+                            toastr.error(result.message);
+                        }
+                    });
+                }
+
+                $scope.autoCompleteArea = function (query) {
+                    return LocationService.getAreasWithAutocomplete(query);
+                }
+
+                $scope.searchByTabId = function (query) {
+                    return MapService.searchBySiteNo(query);
+                }
+                $scope.selectedAreaChanged = function (area) {
+                    $scope.selectedArea = area;
+                    if (area) {
+                        $scope.mapObj.setCenter({lat: Number(area.lat), lng: Number(area.lng)});
+                        var bounds = new google.maps.LatLngBounds();
+                        bounds.extend({lat: Number(area.lat), lng: Number(area.lng)});
+                        $scope.mapObj.fitBounds(bounds);
+                    }
+                }
+
+                $scope.requestProposalForCampaign = function (campaignId, ev) {
+                    CampaignService.requestCampaignProposal(campaignId).then(function (result) {
+                        if (result.status == 1) {
+                            $mdDialog.show(
+                                    $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('body')))
+                                    .clickOutsideToClose(true)
+                                    .title('We will get back to you!!!!')
+                                    .textContent(result.message)
+                                    .ariaLabel('Alert Dialog Demo')
+                                    .ok('Got it!')
+                                    .targetEvent(ev)
+                                    );
+                            updateCampaignDetailSidenav(campaignId);
+                        } else {
+                            toastr.error(result.message);
+                        }
+                        $scope.loadActiveUserCampaigns()
+                    });
+                }
+
+                if ($rootScope.currStateName == 'index.campaign-details') {
+                    $scope.viewCampaignDetails(localStorage.activeUserCampaignId)
+                }
+
+                // sets the height of the div containing the map.
+                function setMapContainerHeight() {
+                    var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
+                    if (windowHeight < 600) {
+                        document.querySelector('#map-container').style['height'] = windowHeight - 100 + 'px';
+                        // $('#map-container').css('height', height-100+'px');
+                    } else {
+                        document.querySelector('#map-container').style['height'] = windowHeight - 64 + 'px';   //and setting height of map container
+                    }
+                    $scope.mapContainerHeightSet = true;
+                }
+                setMapContainerHeight();
+
+                $scope.elipsis = "";
+                var productLoader = function () {
+                    if (!$scope.filteredMarkers) {
+                        setTimeout(productLoader, 500);
+                    }
+                    if ($scope.elipsis == "...") {
+                        $scope.elipsis = "";
+                    }
+                    $scope.elipsis += ".";
+                }
+                productLoader();
+
+
+                $scope.getProductUnavailableDates = function (productId, ev) {
+                    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+                        $scope.unavailalbeDateRanges = dateRanges;
+                        $(ev.target).parents().eq(3).find('input').trigger('click');
+                    });
+                }
+
+                $scope.getProductUnavailableDatesautoload = function (productId) {
+
+                    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+                        $scope.unavailalbeDateRanges = dateRanges;
+                        //console.log(dateRanges);
+                        $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
+                    });
+                }
+
+                // controller ends  
             }
-            else{
-              $scope.saveUserCampaignErrors = response.message;
-            }
-          });
-        }
-        
-      }
-
-      $scope.emptyCampaign = {};
-      $scope.createEmptyCampaign = function () {
-        $scope.campaign.products = [];
-        CampaignService.saveCampaign($scope.emptyCampaign).then(function (response) {
-          $scope.emptyCampaignSaved = true;
-          $scope.emptyCampaign = {};
-          $timeout(function () {
-            $mdSidenav('createEmptyCampaignSidenav').close();
-            $scope.emptyCampaignSaved = false;
-          }, 3000);
-          $scope.loadActiveUserCampaigns();
-          getShortListedProducts();
-        });
-      };
-     // Added this fn to clear the selected Results
-     $scope.clearFields=function(){
-         $scope.searchId='';
-         $scope.searchText='';
-         window.location.reload(true);
-         //$route.reload();
-
-     }
-
-      $scope.selectFromTabIdSearch = function (marker) {
-        if (marker.id) {
-          var refToMapMarker = _.find(markersOnMap, (m) => {
-            return m.properties.id == marker.id;
-          });
-          $scope.$parent.alreadyShortlisted = false;
-          $scope.mapObj.setCenter(refToMapMarker.position);
-          var bounds = new google.maps.LatLngBounds();
-          bounds.extend(refToMapMarker.position);
-          $scope.mapObj.fitBounds(bounds);
-          $scope.product.id = refToMapMarker.properties['id'];
-          $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
-          $scope.product.siteNo = refToMapMarker.properties['siteNo'];
-          $scope.product.panelSize = refToMapMarker.properties['panelSize'];
-          $scope.product.address = refToMapMarker.properties['address'];
-          $scope.product.impressions = refToMapMarker.properties['impressions'];
-          $scope.product.lighting = refToMapMarker.properties['lighting'];
-          $scope.product.direction = refToMapMarker.properties['direction'];
-          $scope.product.availableDates = refToMapMarker.properties['availableDates'];
-          $scope.hideSelectedMarkerDetail = false;
-          $mdSidenav('productDetails').toggle();
-          $scope.selectedProduct = refToMapMarker;
-        }else{
-          toastr.error('No product found with that tab id', 'error');
-        }
-      }
-
-      $scope.activeUserCampaigns = [];
-      $scope.loadActiveUserCampaigns = function () {
-        CampaignService.getActiveUserCampaigns().then(function (result) {
-          $scope.activeUserCampaigns = result;
-        });
-      }
-      $scope.loadActiveUserCampaigns();
-
-      $scope.deleteUserCampaign = function (campaignId) {
-        CampaignService.deleteCampaign(campaignId).then(function (result) {
-          if (result.status == 1) {
-            $scope.loadActiveUserCampaigns();
-            toastr.success(result.message);
-          }
-          else {
-            toastr.error(result.message);
-          }
-        });
-      }
-
-      $scope.toggleFormatSelection = function (formatId) {
-        if (_.contains($scope.selectedFormats, formatId)) {
-          $scope.selectedFormats = _.reject($scope.selectedFormats, function (v) { return v == formatId });
-          // console.log(_.reject($scope.selectedFormats, function(v){return v == formatId}));
-        }
-        else {
-          $scope.selectedFormats.push(formatId);
-        }
-        $scope.applyFilter();
-      }
-
-      $scope.isFormatSelected = function (formatId) {
-        return _.contains($scope.selectedFormats, formatId);
-      }
-
-      $scope.toggleTrafficLegends = function () {
-        $scope.showTrafficLegend = !$scope.showTrafficLegend;
-      }
-
-      rangeCircle = new google.maps.Circle({
-        strokeColor: "#ea3b37",
-        strokeOpacity: 1.0,
-        strokeWeight: 1.5,
-        // fillColor: "#0000ff",
-        fillOpacity: 0.0,
-      });
-
-      $scope.range = {};
-      $scope.range.circleRadius = 0;
-      $scope.updateCircle = function () {
-        rangeCircle.setMap(null);
-        rangeCircle.setRadius(Math.sqrt($scope.circleRadius * 1000 / Math.PI));
-        rangeCircle.setCenter({ lat: Number($scope.selectedArea.lat), lng: Number($scope.selectedArea.lng) });
-        rangeCircle.setMap($scope.mapObj);
-        $scope.mapObj.fitBounds(rangeCircle.getBounds());
-      }
-      // Drawing a circle ends
-
-      $scope.viewCampaignDetails = function (campaignId) {
-        CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
-          $scope.campaignDetails = campaignDetails;
-          $scope.$parent.alreadyShortlisted = true;
-          // $scope.toggleCampaignDetailSidenav();
-        });
-      }
-    
-      var updateCampaignDetailSidenav = function (campaignId) {
-        CampaignService.getCampaignWithProducts(campaignId).then(function (campaignDetails) {
-          $scope.campaignDetails = campaignDetails;
-        });
-      }
-      $scope.toggleExistingCampaignSidenav = function () {
-        $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
-      }
-      $scope.addProductToExistingCampaign = function (existingCampaignId, productId,selectedDateRanges) {
-        var productToCampaign = {
-          product_id: productId,
-          campaign_id: existingCampaignId
-        };
-        if(selectedDateRanges.length > 0){
-          productToCampaign.dates = selectedDateRanges;
-        }else{
-          toastr.error("Please select dates.");
-          return false;
-        }
-        CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
-          if (result.status == 1) {
-            toastr.success(result.message);
-            $mdSidenav('productDetails').close();
-          }
-          else {
-            toastr.error(result.message);
-          }
-        });
-      }
-
-      $scope.shareShortlistedProducts = function (shareShortlisted) {
-        var sendObj = {
-          email: shareShortlisted.email,
-          receiver_name: shareShortlisted.name
-        };
-        CampaignService.shareShortListedProducts(sendObj).then(function (result) {
-          if (result.status == 1) {
-            toastr.success(result.message);
-            $mdSidenav('shortlistSharingSidenav').close()
-          }
-          else {
-            toastr.error(result.message);
-          }
-        });
-      };
-
-      $scope.shareCampaign = function (ev, shareCampaign) {
-        var campaignToEmail = {
-          campaign_id: $scope.campaignToShare.id,
-          email: shareCampaign.email,
-          receiver_name: shareCampaign.receiver_name,
-          campaign_type: $scope.campaignToShare.type
-        };
-        CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
-          if (result.status == 1) {
-            $mdSidenav('shareCampaign').close();
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.querySelector('body')))
-                .clickOutsideToClose(true)
-                .title(result.message)
-                // .textContent('You can specify some description text in here.')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-          }
-          else {
-            toastr.error(result.message);
-          }
-        });
-      }
-
-      $scope.viewProduct = function (product) {
-        $scope.product.image = config.serverUrl + product.image;
-        $scope.product.siteNo = product.siteNo;
-        $scope.product.panelSize = product.panelSize;
-        $scope.product.address = product.address;
-        $scope.product.impressions = product.impressions;
-        $scope.product.direction = product.direction;
-        $scope.product.lighting = product.lighting;
-        $scope.product.availableDates = product.availableDates;
-        $scope.hideSelectedMarkerDetail = false;
-        $mdSidenav('productDetails').toggle();
-        $scope.product.id = product.id;
-      }
-
-      $scope.deleteProductFromCampaign = function (productId, campaignId) {
-        CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function (result) {
-          if (result.status == 1) {
-            toastr.success(result.message);
-            updateCampaignDetailSidenav(campaignId);
-          }
-          else {
-            toastr.error(result.message);
-          }
-        });
-      }
-
-      $scope.autoCompleteArea = function (query) {
-        return LocationService.getAreasWithAutocomplete(query);
-      }
-
-      $scope.searchByTabId = function (query) {
-        return MapService.searchBySiteNo(query);
-      }
-      $scope.selectedAreaChanged = function (area) {
-        $scope.selectedArea = area;
-        if (area) {
-          $scope.mapObj.setCenter({ lat: Number(area.lat), lng: Number(area.lng) });
-          var bounds = new google.maps.LatLngBounds();
-          bounds.extend({ lat: Number(area.lat), lng: Number(area.lng) });
-          $scope.mapObj.fitBounds(bounds);
-        }
-      }
-
-      $scope.requestProposalForCampaign = function (campaignId, ev) {
-        CampaignService.requestCampaignProposal(campaignId).then(function (result) {
-          if (result.status == 1) {
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.querySelector('body')))
-                .clickOutsideToClose(true)
-                .title('We will get back to you!!!!')
-                .textContent(result.message)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-            updateCampaignDetailSidenav(campaignId);
-          }
-          else {
-            toastr.error(result.message);
-          }
-          $scope.loadActiveUserCampaigns()
-        });
-      }
-
-      if ($rootScope.currStateName == 'index.campaign-details') {  
-        $scope.viewCampaignDetails(localStorage.activeUserCampaignId)
-      }
-
-      // sets the height of the div containing the map.
-      function setMapContainerHeight() {
-        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight  //getting windows height
-        if (windowHeight < 600) {
-          document.querySelector('#map-container').style['height'] = windowHeight - 100 + 'px';
-          // $('#map-container').css('height', height-100+'px');
-        }
-        else {
-          document.querySelector('#map-container').style['height'] = windowHeight - 64 + 'px';   //and setting height of map container
-        }
-        $scope.mapContainerHeightSet = true;
-      }
-      setMapContainerHeight();
-
-      $scope.elipsis = "";
-      var productLoader = function(){
-        if(!$scope.filteredMarkers){
-          setTimeout(productLoader, 500);
-        }
-        if($scope.elipsis == "..."){
-          $scope.elipsis = "";
-        }
-        $scope.elipsis += ".";
-      }
-      productLoader();      
-
-
-      $scope.getProductUnavailableDates = function(productId, ev){
-        MapService.getProductUnavailableDates(productId).then(function(dateRanges){
-          $scope.unavailalbeDateRanges = dateRanges;
-          $(ev.target).parents().eq(3).find('input').trigger('click');
-        });
-      }
-
-  $scope.getProductUnavailableDatesautoload = function(productId){
-	  
-        MapService.getProductUnavailableDates(productId).then(function(dateRanges){
-          $scope.unavailalbeDateRanges = dateRanges;
-		  console.log(dateRanges);
-          $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
-        });
-      }
-
-    // controller ends  
-    }
-  ]
-);
+        ]
+        );

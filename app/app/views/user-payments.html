@@ -28,9 +28,9 @@
 					<tr	class="text-center" ng-repeat="payments in userPayments | filter:search"> 
 					<td class="table_vertical">{{payments.cid}}</td>
 					<td class="table_vertical">{{payments.name}}</td>
-					<td class="table_vertical">NA</td>
-					<td class="table_vertical">NA</td>
-					<td class="table_vertical">NA</td>
+					<td class="table_vertical">{{payments.paid}}</td>
+					<td class="table_vertical">{{payments.act_budget - payments.paid}}</td>
+					<td class="table_vertical">{{payments.act_budget}}</td>
 					<td class="table_vertical">
 					  <a style="cursor:pointer;" ng-href="#/update-user-payments/{{payments.id}}">
 						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">

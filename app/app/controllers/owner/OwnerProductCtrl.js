@@ -369,6 +369,7 @@ $scope.applymethod=function(product){
  
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
+    console.log(product);
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
@@ -376,13 +377,18 @@ $scope.applymethod=function(product){
     }).then(function (result) {
       if(result.data.status == "1"){
         getRequestedProductList();
-        toastr.success(result.data.message);        
+        toastr.success(result.data.message);              
       }
       else if(result.data.status == 0){
         $scope.requestProductErrors = result.data.message;
         toastr.success(result.data.message);
-      }
+      }      
       document.getElementById("myDropdown").classList.toggle("show");
+      $scope.product = [];
+      product.dates="";
+      $scope.hordinglistform.$setPristine();
+      $scope.hordinglistform.$setUntouched();
+      $scope.areaObj ="";
     }, function (resp) {
       //console.log('Error status: ', resp);
     }, function (evt) {
