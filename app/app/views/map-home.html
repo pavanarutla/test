@@ -856,11 +856,24 @@
               <input type="date" class="form-control" id="date" placeholder="select start date and end date">
             </div>
           </form>-->
-          <div ng-controller="datePickerCtrl">
+
+          <div class="row">            
+            <div flex-gt-xs>               
+                <md-datepicker ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
+              </div>
+              <div flex-gt-xs>                 
+                  <md-datepicker ng-model="booked_to" md-placeholder=""></md-datepicker>
+                </div>
+                <div class="col-12 mt-3 text-right">
+                    <button type="button" class="btn btn-danger" ng-click="FilterDates(booked_from,booked_to)">Filter</button>
+                </div>
+          </div>
+          
+          <!-- <div ng-controller="datePickerCtrl">
               <div id="demoForm" name="demoForm" ng-form="demoForm" novalidate>
                  <div class="row" >
                 <div class="col-6 mt-3">
-                  <!-- <label class="control-label">Start Date</label> -->
+                  <label class="control-label">Start Date</label>
                   <div class="input-form">
                     <p class="input-group">
                       <input type="text" placeholder="Start Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  />
@@ -871,7 +884,7 @@
                   </div>
                 </div>
                 <div class="col-6 mt-3">
-                  <!-- <label class="control-label">End Date</label> -->
+                  <label class="control-label">End Date</label>
                   <div class="input-form">
                     <p class="input-group">
                       <input type="text" placeholder="End Date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
@@ -883,7 +896,7 @@
                 </div>
                 </div>
               </div>
-            </div>
+            </div> -->
         <!-- <div class="container">
           <div id="demoForm" name="demoForm" ng-form="demoForm" novalidate>
             <div class="col-md-4">
@@ -1038,26 +1051,38 @@
     }
   }
   </script>
+<script>
   
-  <script>
-  
-  $("#showLeftPush").click(function () {
-			if($("#showLeftPush").hasClass("right-cls1")){
-			$("#showLeftPush").removeClass("right-cls1");
-			$("#showLeftPush").addClass("left-cls1");			
-			}else{
-			$("#showLeftPush").removeClass("left-cls1");
-			$("#showLeftPush").addClass("right-cls1");
-			}		
-    });
     $("#showLeftPush").click(function () {
-			if($("#mydiv").hasClass("active")){
-			$("#mydiv").removeClass("active");
-			$("#mydiv").addClass("active_open");			
-			}else{
-			$("#mydiv").removeClass("active_open");
-			$("#mydiv").addClass("active");
-			}		
-		});
-    
-  </script>
+        if($("#showLeftPush").hasClass("right-cls1")){
+        $("#showLeftPush").removeClass("right-cls1");
+        $("#showLeftPush").addClass("left-cls1");			
+        }else{
+        $("#showLeftPush").removeClass("left-cls1");
+        $("#showLeftPush").addClass("right-cls1");
+        }		
+      });
+      $("#showLeftPush").click(function () {
+        if($("#mydiv").hasClass("active")){
+        $("#mydiv").removeClass("active");
+        $("#mydiv").addClass("active_open");			
+        }else{
+        $("#mydiv").removeClass("active_open");
+        $("#mydiv").addClass("active");
+        }		
+      });
+      
+      /*
+      $.fn.daterangepicker = function (options, callback) {
+          var implementOptions = $.extend(true, {}, $.fn.daterangepicker.defaultOptions, options);
+          this.each(function () {
+              var el = $(this);
+              if (el.data('daterangepicker'))
+                  el.data('daterangepicker').remove();
+              el.data('daterangepicker', new DateRangePicker(el, implementOptions, callback));
+          });
+          return this;
+      };
+    */
+      
+    </script>
