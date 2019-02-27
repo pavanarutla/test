@@ -4,7 +4,7 @@ app.controller('GmapCtrl',
       $scope.forms = {};
       $scope.address = {
         // name: 'Hyderabad, Telangana, India',
-        name: 'People tech group hyderabad',
+        name: 'United States of America',
         place: '',
         components: {
           placeId: '',
@@ -17,8 +17,8 @@ app.controller('GmapCtrl',
           postCode: '',
           district: '',
           location: {
-            lat: 17.3850,
-            lng: 78.4867
+            lat: 40.254050,
+            lng: -100.726083
           }
         }
       };
