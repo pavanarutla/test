@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window,MapService , OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window,MapService , OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr,$state) {
 
   $scope.unavailalbeDateRanges = [];
   // $scope.loadCalendar = false;
@@ -384,6 +384,7 @@ $scope.applymethod=function(product){
         toastr.success(result.data.message);
       }      
       document.getElementById("myDropdown").classList.toggle("show");
+      $state.reload;
       $scope.product = [];
       product.dates="";
       $scope.hordinglistform.$setPristine();
