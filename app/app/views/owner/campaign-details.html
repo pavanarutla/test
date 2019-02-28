@@ -141,6 +141,7 @@
 						<th class="hide-xs">Booked From</th>
 						<th class="hide-xs">Booked To</th>
 						<th class="hide-xs">Price</th>
+						<th class="hide-xs">Default Price</th>
 						<th class="hide-xs"></th>
             <th class="hide-xs" style="text-align:end" >
               <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
@@ -171,21 +172,24 @@
 						<!--<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
 						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>-->
 						
-						<td class="table_vertical ng-if="campaignDetails.status==300 && product.owner_price">
+						<td class="table_vertical">
+								<!-- ng-if="campaignDetails.status==300 && product.owner_price" -->
 								{{(!myfield && product.owner_price)?product.owner_price:''}}
 							<input type="text" class="" ng-model="product.owner_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
 							<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
 							<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.owner_price,product.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
 						</td>
-						<td ng-if="campaignDetails.status==300 && !product.owner_price">
+						<!-- <td class="table_vertical" ng-if="campaignDetails.status==300 && !product.owner_price">
 							{{(!myfield && product.default_price)?product.default_price:''}}
-						<input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
-						<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
-						<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.default_price,product.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+						<input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield1" style="width: 70px;padding: 4px 5px;" />
+						<span ng-click="myfield1 = true;" ng-show="!myfield1"> <i class="material-icons">edit</i></span>
+						<span ng-click="myfield1 = false;changeCampaignProductPrice(campaignDetails.id,product.default_price,product.id)"  ng-show="myfield1"> <i class="material-icons">check</i></span>
 					</td>
-					
-						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0 && campaignDetails.status!=300">{{product.default_price || "NA"}}</td>
-						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2 && campaignDetails.status!=300">{{product.price || "NA"}}</td>
+					 -->
+						<td class="table_vertical hide-xs">
+								<!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
+							{{product.default_price || "NA"}}</td>
+						<!-- <td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2 && campaignDetails.status!=300">{{product.price || "NA"}}</td> -->
 						<td class="table_vertical"> 
 							<a><i class="material-icons" ng-if="campaignDetails.type!=0 && campaignDetails.status!=700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
 						</td> 
@@ -228,9 +232,9 @@
 			  <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
 			  <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal}}</spam></p>
 			  <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal}}</spam></p>
-			  <md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book
+			  <md-button class="md-raised md-primary" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status < 700">Book
 				Campaign</md-button>
-			<button class="booked_campdetails" ng-disabled="campaignDetails.status == 700" >Booked</button>
+			<button class="booked_campdetails" ng-if="campaignDetails.status >= 700" >Booked</button>
 			</div>
 			
 		  </div>

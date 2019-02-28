@@ -1,4 +1,4 @@
-app.controller('CampaignProposalCtrl', function(
+app.controller("CampaignProposalCtrl", function(
   $scope,
   $mdDialog,
   $stateParams,
@@ -156,10 +156,12 @@ app.controller('CampaignProposalCtrl', function(
   $scope.uncheck = function() {
     if (!$scope.checked) {
       $scope.GST = "0";
+      $scope.onchecked = false;
       $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-    }else{
+    } else {
       $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-        $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+      $scope.onchecked = true;
     }
   };
 
@@ -378,29 +380,18 @@ app.controller('CampaignProposalCtrl', function(
     });
   };
 
-  $scope.finalizeCampaign = function() {
-    if ($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget) {
-      var budget_check = confirm(
-        "Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?"
-      );
-      if (budget_check) {
-        AdminCampaignService.finalizeCampaignByAdmin(
-          $scope.campaignDetails.id
-        ).then(function(result) {
-          console.log(result);
-          if (result.status == 1) {
-            $scope.campaignDetails.status = 3;
-            $scope.loadCampaignData($scope.campaignDetails.id);
-            toastr.success("Quote Sent!"); // now we wait for launch request from user.
-          } else {
-            toastr.error(result.message);
-          }
-        });
-      }
-    } else {
+  $scope.finalizeCampaign = function() {   
+    if ($scope.onchecked === true) {
+      $scope.flag = 1;
+    } else if ($scope.onchecked === false) {
+      $scope.flag = 0;
+    } else{
+      $scope.flag = 1;
+    }    
       AdminCampaignService.finalizeCampaignByAdmin(
-        $scope.campaignDetails.id
+        $scope.campaignDetails.id,$scope.flag,$scope.GST
       ).then(function(result) {
+        console.log(result);
         if (result.status == 1) {
           $scope.campaignDetails.status = 3;
           $scope.loadCampaignData($scope.campaignDetails.id);
@@ -409,7 +400,25 @@ app.controller('CampaignProposalCtrl', function(
           toastr.error(result.message);
         }
       });
-    }
+      // if ($scope.campaignDetails.act_budget > $scope.campaignDetails.exp_budget) {
+      //   var budget_check = confirm(
+      //     "Actual budget is larger than Expected budget. Are you sure you want to finalize this campaign?"
+      //   );
+      //   if (budget_check) {
+      //     AdminCampaignService.finalizeCampaignByAdmin(
+      //       $scope.campaignDetails.id
+      //     ).then(function(result) {
+      //       console.log(result);
+      //       if (result.status == 1) {
+      //         $scope.campaignDetails.status = 3;
+      //         $scope.loadCampaignData($scope.campaignDetails.id);
+      //         toastr.success("Quote Sent!"); // now we wait for launch request from user.
+      //       } else {
+      //         toastr.error(result.message);
+      //       }
+      //     });
+      //   }
+      // } else {}
   };
 
   $scope.confirmCampaignBooking = function(campaignId, ev) {
