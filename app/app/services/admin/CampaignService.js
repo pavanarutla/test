@@ -72,9 +72,9 @@ app.service('AdminCampaignService',
         $http.get(config.apiPath + '/launch-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      finalizeCampaignByAdmin: function(campaignId){
+      finalizeCampaignByAdmin: function(campaignId , flag , GST){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/quote-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/quote-campaign/' + campaignId + flag + GST).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       confirmCampaignBooking: function(campaignId){

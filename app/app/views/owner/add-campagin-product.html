@@ -118,10 +118,10 @@
           </td>
 
           <td class=" table_vertical">
-            <md-button class="md-raised md-primary" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+            <md-button class="md-raised md-primary" ng-if="!ownerProduct.alreadyAdded" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
               campaign</md-button>
-          </td>
-
+              <md-button class="md-raised all_button" ng-if="ownerProduct.alreadyAdded" >Added</md-button>
+          </td>          
         </tr>
       </tbody>
     </table>

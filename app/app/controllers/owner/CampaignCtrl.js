@@ -353,7 +353,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.gst = result.act_budget * 18 / 100;
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
-            }         
+            }   
+            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;       
         });
     }
     $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -499,6 +501,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         .targetEvent(ev)
                         );
                 $scope.getOwnerCampaignDetails(campaignId);
+                $state.reload();
             } else {
                 if (result.product_ids && result.product_ids.length > 0) {
                     toastr.error(result.message);

@@ -390,6 +390,7 @@ $scope.applymethod=function(product){
       $scope.hordinglistform.$setPristine();
       $scope.hordinglistform.$setUntouched();
       $scope.areaObj ="";
+      $state.reload();
     }, function (resp) {
       //console.log('Error status: ', resp);
     }, function (evt) {
