@@ -10,7 +10,7 @@
 
         <!-- Add New Product -->
         <div class="dropdown hide-xs">
-            <md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
+            <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
             <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
                 <!-- <form name="hordinglistform" role="form" novalidate="novalidate">
                   <div layout="colmun">
@@ -651,7 +651,7 @@ style="background-color: #858A8E;">Submit</md-button>
                     <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
 
                 </td>
-                <td>
+                <td class="table_address">
                     <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
                         <br> {{product.address}}
                         <br>Facing: {{product.direction|| "N/A"}}
@@ -663,7 +663,7 @@ style="background-color: #858A8E;">Submit</md-button>
                 <td class="table_vertical hide-xs">
                     <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
                 </td>
-                <td class="table_vertical">
+                <td class="table_vertical table_price hide-xs">
                     <div class="input-group">
 
                         {{(!myfield)?product.default_price:''}}
@@ -673,7 +673,7 @@ style="background-color: #858A8E;">Submit</md-button>
 
                     </div>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical text-center hide-xs">
                     <!-- <a href="#"><i class="material-icons">
                       date_range
                       </i></a> -->
@@ -694,7 +694,7 @@ style="background-color: #858A8E;">Submit</md-button>
                         </select>
                     </div>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical text-right hide-xs">
         <md-button class="md-raised inv_details" ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
         </td>
 

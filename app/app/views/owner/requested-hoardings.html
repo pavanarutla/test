@@ -6,7 +6,7 @@
         <div flex></div>		
         <!-- Add New Product -->
         <div class="dropdown hide-xs">
-            <md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
+            <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
             <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
                 <form name="hordinglistform" novalidate="novalidate">
                     <div layout="colmun">
@@ -252,8 +252,8 @@
                 <td class="image_tdwidth">
                     <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size">
                 </td>
-                <td>
-                    <p class="td_font"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
+                <td class="table_address">
+                    <p><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
                         {{product.direction|| "N/A"}}
                         <br>Type:
                         {{product.format_name|| "N/A"}}
@@ -275,11 +275,10 @@
                     </a>
                 </td>
                 <td class="table_vertical hide-xs"></td>
-                <td class="text-center table_vertical hide-xs">
+                <td class="text-right table_vertical hide-xs">
                     <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button" class="btn edit_details">Edit
                             Details</button></a>
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>
