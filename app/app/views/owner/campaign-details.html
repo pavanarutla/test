@@ -71,27 +71,27 @@
 			</md-content>
 		</md-sidenav>
 		<!-- share campaign sidenav ends -->
-		<div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+		<div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
 			<div class="row" style="margin-left:0px; margin-right:0px;">
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
 				 style="margin-top:14px;">
-					<p class="">Campaign ID</p>
+					<p class="cmp_bottom">Campaign ID</p>
 					<p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
 				 style="margin-top:14px;">
-					<p class="">Campaign Name</p>
-					<p class="md-caption mob_span"><b>{{campaignDetails.name}}</b></p>
+					<p class="cmp_bottom">Campaign Name</p>
+					<p class="md-caption mob_span"><b>{{campaignDetails.name | capitalize}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
 				 style="margin-top:14px;">
-					<p class="">No of Products</p>
+					<p class="cmp_bottom">No of Products</p>
 					<p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
 				 style="margin-top:14px;cursor: pointer;">
 					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(campaignDetails.id)">
-						<p class="md-caption"><span><i class="material-icons i_icon">
+						<p class="cmp_bottom md-caption"><span><i class="material-icons i_icon">
 									reply_all
 								</i></span></p>
 						<p class="mob_spanicon share_icon">Share Campaign</p>
@@ -100,10 +100,11 @@
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
 				 style="margin-top:14px;cursor: pointer;">
 					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-						<a href="assets/images/owner/owner_logo.png" download ><p class="md-caption"><span><i class="material-icons i_icondown">
-									file_copy
-								</i></span></p>
-						<p class="mob_spanicon share_icon">Download Quotetation</p>
+						<a href="assets/images/owner/owner_logo.png" download>
+							<p class="cmp_bottom md-caption"><span><i class="material-icons i_icondown">
+										file_copy
+									</i></span></p>
+							<p class="mob_spanicon share_icon">Download Quotation</p>
 						</a>
 					</div>
 				</div>
@@ -136,22 +137,23 @@
 				</div>
 				<thead class="text_color" ng-if="campaignDetails.products.length != 0">
 					<tr>
-						<th>Product Details</th>
+						<th class="hide-xs">Product Details</th>
 						<th></th>
-						<th class="">Size</th>
-						<th class="hide-xs">Booked From</th>
-						<th class="hide-xs">Booked To</th>
+						<th class="hide-xs">Size</th>
+						<th class="">Booked From</th>
+						<th class="">Booked To</th>
 						<th class="">Price</th>
 						<th class="hide-xs">Default Price</th>
-            <th class="hide-xs" style="text-align:end" >
-              <md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add Another Product
+						<th class="hide-xs" style="text-align:end">
+							<md-button class="md-raised add_blue" ng-if="campaignDetails.type!=0" ng-click="addNewProductToCampaign()">Add
+								Another Product
 							</md-button>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="product in campaignDetails.products">
-						<td class="image_tdwidth">
+						<td class="hide-xs image_tdwidth">
 							<img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
 						</td>
 						<td class="table_address">
@@ -159,40 +161,29 @@
 								||
 								"N/A"}}<br>Views : {{product.impressions || "N/A"}}
 								<br>Type:{{product.format_name || "N/A"}}
-								<!-- Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button></p> -->
 						</td>
-						<td class="table_vertical">{{product.panelSize}}</td>
-						<td class="table_vertical hide-xs">
-							{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}
-							<!-- <p></p> -->
-						</td>
-						<td class="table_vertical hide-xs">{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}
-							<!-- <p>15-10-2018</p> -->
-						</td>
-						<!--<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 0">{{product.default_price || "NA"}}</td>
-						<td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2">{{product.price || "NA"}}</td>-->
-						
+						<td class="table_vertical hide-xs">{{product.panelSize}}</td>
 						<td class="table_vertical">
-								<!-- ng-if="campaignDetails.status==300 && product.owner_price" -->
-								{{(!myfield && product.owner_price)?product.owner_price:''}}
+							{{product.booked_from | dateify | date: "dd-MMM-yyyy"}}
+						</td>
+						<td class="table_vertical">{{product.booked_to | dateify | date: "dd-MMM-yyyy"}}
+						</td>
+
+						<td class="table_vertical table_price">
+							<!-- ng-if="campaignDetails.status==300 && product.owner_price" -->
+							{{(!myfield && product.owner_price)?product.owner_price:''}}
 							<input type="text" class="" ng-model="product.owner_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
 							<span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
-							<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.owner_price,product.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+							<span ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id,product.owner_price,product.id)"
+							 ng-show="myfield"> <i class="material-icons">check</i></span>
 						</td>
-						<!-- <td class="table_vertical" ng-if="campaignDetails.status==300 && !product.owner_price">
-							{{(!myfield && product.default_price)?product.default_price:''}}
-						<input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield1" style="width: 70px;padding: 4px 5px;" />
-						<span ng-click="myfield1 = true;" ng-show="!myfield1"> <i class="material-icons">edit</i></span>
-						<span ng-click="myfield1 = false;changeCampaignProductPrice(campaignDetails.id,product.default_price,product.id)"  ng-show="myfield1"> <i class="material-icons">check</i></span>
-					</td>
-					 -->
+						
 						<td class="table_vertical hide-xs">
-								<!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
+							<!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
 							{{product.default_price || "NA"}}</td>
-						<!-- <td class="table_vertical hide-xs" ng-if="campaignDetails.type == 2 && campaignDetails.status!=300">{{product.price || "NA"}}</td> -->
-						<td class="table_vertical"> 
+						<td class="table_vertical hide-xs">
 							<a><i class="material-icons" ng-if="campaignDetails.type!=0 && campaignDetails.status!=700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
-						</td> 
+						</td>
 
 					</tr>
 				</tbody>
@@ -224,16 +215,20 @@
 		</div> -->
 		<div style="margin-right:20px;">
 			<div class="pull-right">
-			  <p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{campaignDetails.act_budget}}</spam></p>
-			  <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
-			  <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
-			  <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal}}</spam></p>
-			  <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal}}</spam></p>
-			  <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book
-				Campaign</md-button>
-			<md-button class="md-raised md-primary booked_campdetails Upload_font" ng-disabled="campaignDetails.status == 700" >Booked</md-button>
+				<p class="font-weight-light" style="text-indent: 53px;">Total : <spam class="float-right">{{campaignDetails.act_budget}}</spam>
+				</p>
+				<!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
+				<p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked=true"
+					 ng-change="uncheck()" />18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
+				<p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal}}</spam>
+				</p>
+				<p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal}}</spam>
+				</p>
+				<md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id,$event)" ng-if="campaignDetails.status != 700">Book
+					Campaign</md-button>
+				<md-button class="md-raised md-primary booked_campdetails Upload_font" ng-disabled="campaignDetails.status == 700">Booked</md-button>
 			</div>
-			
-		  </div>
+
+		</div>
 	</div>
 </div>
