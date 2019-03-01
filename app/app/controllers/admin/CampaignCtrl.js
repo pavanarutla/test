@@ -642,9 +642,10 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       if (result.all_payments && result.all_payments.length >= 1) {
         $scope.campaignPayments = result;
         $scope.campaignMetroPayments = result;
-      } else {
-        toastr.error(result.message);
       }
+      //  else {
+      //   toastr.error(result.message);
+      // }
     });
   }
   
@@ -764,11 +765,9 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
                   _.map($scope.AdminProduct, function (product) {
                       if (product.id == adminProduct.id) {
                           product.alreadyAdded = true;
-                      }
-                     // console.log(product);
+                      }                     
                       return product;
                   });
-                  //console.log($scope.AdminProduct)
               });
               toastr.success(result.message);
           } else {
