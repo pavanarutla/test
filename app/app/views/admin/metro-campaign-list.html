@@ -235,33 +235,33 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr class="text_color text-center">
+							<tr class="text_color">
 								<th>CID</th>
 								<th class="text-left">Campaign Name</th>
 								<th>Start Date</th>
-								<th class="hide-xs">No of Products </th>
-								<th class="hide-xs">Paid</th>
-								<th class="hide-xs">Total Budget</th>
+								<th class="text-center hide-xs">No of Products </th>
+								<th class="text-center hide-xs">Paid</th>
+								<th class="text-center hide-xs">Total Budget</th>
 								<th></th>
 								<th class="hide-xs"></th>
 							</tr>
 						</thead>
-						<tbody class="text-center">
+						<tbody class="">
 							<tr ng-repeat="uMetrCamp in userMetroCampaigns">
 								<td class="table_vertical">{{uMetrCamp.cid}}</td>
-								<td class="text-left table_vertical">{{uMetrCamp.name}}</td>
+								<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
 								<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-								<td class="table_vertical hide-xs">{{uMetrCamp.product_count || "0"}}</td>
-								<td class="table_vertical hide-xs">{{uMetrCamp.campaign_paid}}</td>
-								<td class="table_vertical hide-xs">{{uMetrCamp.act_budget}}</td>
-								<td class="table_vertical">
+								<td class="text-center table_vertical hide-xs">{{uMetrCamp.product_count || "0"}}</td>
+								<td class="text-center table_vertical hide-xs">{{uMetrCamp.campaign_paid}}</td>
+								<td class="text-center table_vertical hide-xs">{{uMetrCamp.act_budget}}</td>
+								<td class="text-center table_vertical">
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
 											<md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
 										</md-button>
 										<md-menu-content width="2">
 											<md-menu-item>
-												<md-button ng-href="#/admin/metro-campaign/{{uMetrCamp.id}}">
+												<md-button class="pop_view" ng-href="#/admin/metro-campaign/{{uMetrCamp.id}}">
 													<div layout="row">
 														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 														<p style="margin:auto 10px auto 10px">View Details</p>
@@ -269,23 +269,15 @@
 												</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+												<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
 													<div layout="row">
 														<md-icon><i class="material-icons">share</i></md-icon>
 														<p style="margin:auto 10px auto 10px">Share Campaign</p>
 													</div>
 												</md-button>
 											</md-menu-item>
-											<!-- <md-menu-item>
-												<md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-													<div layout="row">
-														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-														<p style="margin:auto 10px auto 10px">Pay Now</p>
-													</div>
-												</md-button>
-											</md-menu-item> -->
 											<md-menu-item>
-												<md-button ng-href="#/admin/campaign-payment-details/{{uMetrCamp.id}}">
+												<md-button class="pop_view" ng-href="#/admin/campaign-payment-details/{{uMetrCamp.id}}">
 													<div layout="row">
 														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 														<p style="margin:auto 10px auto 10px">Payment Details</p>
@@ -295,7 +287,7 @@
 										</md-menu-content>
 									</md-menu>
 								</td>
-								<td class="table_vertical hide-xs">
+								<td class="text-center table_vertical hide-xs">
 									<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
 								</td>
 							</tr>
@@ -311,30 +303,6 @@
 						<div flex="20">
 								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
 										<input type="text" ng-model="search" placeholder="Search..." class="md-whiteframe-2dp mr-2"/>
-										<!-- <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
-										 md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-										 md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
-											<md-item-template>
-												<span class="item-title">
-													<span> {{campaign.name}} </span>
-												</span>
-												<span class="item-metadata">
-													<span>
-														<strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
-													</span>
-													<span>
-														<strong>{{campaign.email}}</strong>
-													</span>
-													<span>
-														<strong>{{campaign.phone}}</strong>
-													</span>
-												</span>
-											</md-item-template>
-											<md-not-found>
-												No matches found.
-											</md-not-found>
-										</md-autocomplete> -->
-
 									</div>
 						</div>
 						<div class="hide-xs" layout="row">
@@ -417,16 +385,6 @@
 																</div>
 															</div>
 														</li>
-														<!-- <li>
-															<div class="form-group">
-																<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
-																 type="text" maxlength="10" required="required" placeholder="Campaign Start Date">
-																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
-																	<div ng-message="required">Budget No is required.</div>
-																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
-																</div>
-															</div>
-														</li> -->
 													</div>
 												</div>
 												<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.ownerCampaignForm.$invalid">
@@ -442,33 +400,33 @@
 				<div class="table-responsive" style="height:434px;">
 					<table class="table ">
 						<thead>
-							<tr class="text_color text-center">
+							<tr class="text_color">
 								<th>CID</th>
 								<th class="text-left">Campaign Name</th>
 								<th>Start Date</th>
-								<th class="hide-xs">No of Products </th>
-								<th class="hide-xs">Paid</th>
-								<th class="hide-xs">Total Budget</th>
+								<th class="text-center hide-xs">No of Products </th>
+								<th class="text-center hide-xs">Paid</th>
+								<th class="text-center hide-xs">Total Budget</th>
 								<th></th>
 								<th class="hide-xs"></th>
 							</tr>
 						</thead>
-						<tbody class="text-center">
+						<tbody class="">
 							<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search">
 								<td class="table_vertical">{{aMetrCamp.cid}}</td>
-								<td class="text-left table_vertical">{{aMetrCamp.name}}</td>
+								<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
 								<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-								<td class="table_vertical hide-xs">{{aMetrCamp.product_count}}</td>
-								<td class="table_vertical hide-xs">{{aMetrCamp.campaign_paid}}</td>
-								<td class="table_vertical hide-xs">{{aMetrCamp.act_budget}}</td>
-								<td class="table_vertical">
+								<td class="text-center table_vertical hide-xs">{{aMetrCamp.product_count}}</td>
+								<td class="text-center table_vertical hide-xs">{{aMetrCamp.campaign_paid}}</td>
+								<td class="text-center table_vertical hide-xs">{{aMetrCamp.act_budget}}</td>
+								<td class="text-center table_vertical">
 									<md-menu md-position-mode="target-right target">
 										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
 											<md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
 										</md-button>
 										<md-menu-content width="2">
 											<md-menu-item>
-												<md-button ng-href="#/admin/metro-campaign/{{aMetrCamp.id}}">
+												<md-button class="pop_view" ng-href="#/admin/metro-campaign/{{aMetrCamp.id}}">
 													<div layout="row">
 														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 														<p style="margin:auto 10px auto 10px">View Details</p>
@@ -476,7 +434,7 @@
 												</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+												<md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
 													<div layout="row">
 														<md-icon><i class="material-icons">share</i></md-icon>
 														<p style="margin:auto 10px auto 10px">Share Campaign</p>
@@ -484,15 +442,15 @@
 												</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-click="deleteMetroCampaign(aMetrCamp.id)">
+												<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
 													<div layout="row">
-														<md-icon><i class="material-icons">delete</i></md-icon>
+														<md-icon><i class="material-icons" >delete_forever</i></md-icon>
 														<p style="margin:auto 10px auto 10px">Delete</p>
 													</div>
 												</md-button>
 											</md-menu-item>
 											<md-menu-item>
-												<md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+												<md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
 													<div layout="row">
 														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
 														<p style="margin:auto 10px auto 10px">Payment Details</p>
@@ -502,7 +460,7 @@
 										</md-menu-content>
 									</md-menu>
 								</td>
-								<td class="table_vertical hide-xs">
+								<td class="text-center table_vertical hide-xs">
 									<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
 								</td>
 							</tr>

@@ -295,27 +295,24 @@
     <div class="row" style="margin-left:0px; margin-right:0px;">
       <div
         class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
-        style="margin-top:14px;"
-      >
-        <p class="">Camapaign ID</p>
+        style="margin-top:14px;">
+        <p class="cmp_bottom">Campaign ID</p>
         <p class="md-caption mob_span">
           <b>{{ campaignDetails.cid }}</b>
         </p>
       </div>
       <div
         class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
-        style="margin-top:14px;"
-      >
-        <p class="">Camapaign Name</p>
+        style="margin-top:14px;">
+        <p class="cmp_bottom">Campaign Name</p>
         <p class="md-caption mob_span">
-          <b>{{ campaignDetails.name }}</b>
+          <b>{{ campaignDetails.name | capitalize}}</b>
         </p>
       </div>
       <div
         class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
-        style="margin-top:14px;"
-      >
-        <p class="">No of Products</p>
+        style="margin-top:14px;">
+        <p class="cmp_bottom">No of Products</p>
         <p class="md-caption mob_span mob_5">
           <b>{{ campaignDetails.products.length }}</b>
         </p>
@@ -330,22 +327,21 @@
                             </div>
                     </div> -->
       <div
-        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-        style="margin-top:14px;"
-      >
+        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+        style="margin-top:14px;">
         <div
           class="md-grid-item-content hoarding-btn"
           ng-class="{'red':selectedFormatIndex == 0}"
           ng-click="selectedFormatIndex = 0"
         >
-          <p class="md-caption">
+          <p class="cmp_bottom md-caption">
             <span><i class="material-icons i_icondown"> file_copy </i></span>
           </p>
-          <p class="mob_spanicon share_icon">Download Quotetation</p>
+          <p class="mob_spanicon share_icon">Download Quotation</p>
         </div>
       </div>
       <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
-        <p class="md-caption"><span><i class="material-icons i_icon">
+        <p class="cmp_bottom md-caption"><span><i class="material-icons i_icon">
           account_balance_wallet
         </i></span></p>
         <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ><p class="mob_spanicon share_icon">Payment Details</p></a>
@@ -448,9 +444,9 @@
         </div>
       </div>
     </div> -->
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs" ng-hide="campaignDetails.status >= 700" style="margin-top:1em;">
+      <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs" ng-hide="campaignDetails.status >= 700" style="margin-top:1em;">
         <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- table grid start  -->
@@ -528,7 +524,8 @@
           <!-- <th class="hide-xs">
 								<md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
 								</md-button>
-							</th> -->
+              </th> -->
+              <th class="hide-xs text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
         </tr>
       </thead>
       <tbody>
@@ -543,12 +540,10 @@
               class="requ_size"
             />
           </td>
-          <td>
+          <td class="table_address">
             <p class="">
-              <b
-                >{{ campaignProduct.siteNo }} - {{ campaignProduct.area_name }}
-                {{ campaignProduct.panelSize }}</b
-              ><br />Address: {{ campaignProduct.address }} <br />Views :
+              <b>{{ campaignProduct.siteNo }} - {{ campaignProduct.area_name }}
+                {{ campaignProduct.panelSize }}</b><br />Address: {{ campaignProduct.address }} <br />Views :
               {{ "N/A" }} Per week<br />
               <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
             </p>
@@ -560,7 +555,7 @@
           <td class="table_vertical hide-xs">
             <p>{{ campaignProduct.booked_to | date }}</p>
           </td>
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical hide-xs table_price">
                 {{(!myfield)?(campaignProduct.admin_price || 'N/A'):''}}
                 <input type="number" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
                 <span ng-click="myfield=true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
@@ -582,6 +577,7 @@
                 <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
                 <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
           </td>
+          <td class="hide-xs"></td>
         </tr>
       </tbody>
     </table>

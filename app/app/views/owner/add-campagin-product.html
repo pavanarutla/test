@@ -61,8 +61,8 @@
         </span>
       </md-item-template>
     </md-autocomplete>
-    <label for="pwd" class="add_filterby">Filter By:</label>
-    <div class="form-group">
+    <label for="pwd" class="add_filterby hide-xs">Filter By:</label>
+    <div class="form-group hide-xs">
       <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
       class="form-control md-whiteframe-3dp add_filtermobile" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
       name="productType">
@@ -70,19 +70,19 @@
     </select>
     </div>
 
-    <div class="form-group form_cal">
+    <div class="form-group form_cal hide-xs">
       <md-datepicker class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
     </div>
-    <div class="form-group form_cal">
+    <div class="form-group form_cal hide-xs">
       <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date" layout-fill style="border: none;"></md-datepicker>
     </div>
-    <div class="form-group form_cal">
+    <div class="form-group form_cal hide-xs">
       <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
         <option selected value="1">Budget High to Low</option>
         <option value="0">Budget Low to High </option>
       </select>
     </div>
-    <md-button class="md-raised md-primary register_btn" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+    <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
   </form>
   <!-- product list -->
   <div class="table-responsive" style="margin-bottom:115px !important">
