@@ -755,7 +755,7 @@ app.run(
         // Get all URL parameter
         $rootScope.currentTitle = transition.to().title;
         $rootScope.currStateName = transition.to().name;
-        if ((transition.to().name == "index.location" || transition.to().name == "index.metro")&& $auth.isAuthenticated()) {
+        if ((transition.to().name == "index.location" || transition.to().name == "index.metro" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
         else {

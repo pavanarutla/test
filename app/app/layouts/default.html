@@ -19,8 +19,14 @@
           Products</md-button>
         <md-button aria-label="products" ng-href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
         </md-button>
-        <md-button aria-label="products" ng-href="#/suggestme" ng-if="footerhide && isAuthenticated && isUserBasic()"
-          ng-href="#/suggest/product-detail" class="toolbar-btn suggest_borderright">suggest me</md-button>
+        <!-- <md-button aria-label="products" ng-href="#/suggestme" ng-if=" isAuthenticated && isUserBasic()"
+          ng-href="#/suggest/product-detail" class="toolbar-btn suggest_borderright">
+          suggest me
+        </md-button> -->
+        <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
+          ng-click="showSignInDialog($event)"> suggest me</md-button>
+        <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggest/product-detail"
+          ng-show="isAuthenticated && currStateName != 'index.suggest.product-detail'  " style="color:#000"> suggest me</md-button>
         <!-- browse-->
         <md-button aria-label="location" ng-href="#/location"
           ng-show="isAuthenticated && currStateName != 'index.location'">
@@ -28,7 +34,7 @@
         </md-button>
         <md-button class="md-raised login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000"
           ng-click="showSignInDialog($event)">Metro</md-button>
-        <md-button class="md-raised login_button book_now toolbar-btn" ng-href="#/metro"
+        <md-button class="  toolbar-btn" ng-href="#/metro"
           ng-show="isAuthenticated && currStateName != 'index.metro' " style="color:#000">Metro</md-button>
           <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
           ng-show="!isAuthenticated" style="color: #000000;">
