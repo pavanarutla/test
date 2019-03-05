@@ -190,6 +190,8 @@
 					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
 							<a href="assets/images/owner/owner_logo.png" download>
 					<md-button class="dropbtn drop_width">
+							<!-- ng-click="downloadPdf()" with service -->
+							<!-- ng-click="getConvas()"  with out service id="exportthis"-->
 							<p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
 									file_copy
 								</i></span></p>
@@ -270,7 +272,7 @@
 						
 						<td class="table_vertical">
 							<!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
-							{{product.default_price || "NA"}}</td>
+							{{product.price || "NA"}}</td>
 						<td class="table_vertical ">
 							<a><i class="material-icons" ng-if="campaignDetails.type!=0 && campaignDetails.status!=700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
 						</td>
@@ -339,4 +341,16 @@
 		function shareCampaigns() {
 		  document.getElementById("myDropdownView").classList.toggle("show");
 		}
+		// html2canvas(document.getElementById('exportthis'), {
+        //     onrendered: function (canvas) {
+        //         var data = canvas.toDataURL();
+        //         var docDefinition = {
+        //             content: [{
+        //                 image: data,
+        //                 width: 500,
+        //             }]
+        //         };
+        //         pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+        //     }
+        // });
 	  </script>
