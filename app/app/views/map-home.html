@@ -1,7 +1,21 @@
 <style>
   md-backdrop.md-sidenav-backdrop {
     z-index: -1;
-}
+  }
+  .daterangepicker option.disabled, .daterangepicker td.disabled {
+    color: #fff;
+    cursor: not-allowed;
+    background: #ddd;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    /* text-decoration: line-through; */
+  }
+  .gray-blocked{
+    background:#ddd;
+  }
+  .red-blocked{
+    background:#f00 !important;
+  }
 </style>
 <div layout="column" style="position:relative">
 
@@ -997,7 +1011,6 @@
 </div>
 
 <script>
-
   $(document).ready(function () {
     height = $(window).height();  //getting windows height
     $('#map-container').css('height', height - 64 + 'px');   //and setting height of map container
