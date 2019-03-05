@@ -278,7 +278,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="adminprod in AdminProduct">
+            <tr ng-repeat="adminprod in productList">
                 <td class="image_tdwidth">
                 <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size">
               </td>
@@ -316,6 +316,18 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>     
     </div>
+    <!-- <p>pagination</p> -->
+    </div>
+    <div class="container">
+      <ul class="pagination">
+          <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+              <a ng-click="pagination.pageNo = i; getProductList();" 
+                  ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+                  style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;" class="ng-binding">
+                  {{i}}
+              </a>
+          </li>
+      </ul>
     </div>

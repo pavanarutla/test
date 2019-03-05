@@ -43,11 +43,11 @@
                 
                             <tr ng-repeat="product in shortlistedproduct.campaign_list">
                                 <td>{{product.cid}}</td>
-                                <td>Billboards</td>
-                                <td>15-08-2018</td>
-                                <td>10</td>
-                                <td>10,1000</td>
-                                <td>10,10001</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.created_at}}</td>
+                                <td>{{product.no_products}}</td>
+                                <td>{{product.total_paid}}</td>
+                                <td>{{product.est_budget}}</td>
                                 <td>
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -90,7 +90,7 @@
                                     </md-menu>
                                 </td>
                                 <td>
-                                    <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                                    <span class="text_color md-caption">{{product.updated_at}}</span>
                                 </td>
                             </tr>
                         </tbody>

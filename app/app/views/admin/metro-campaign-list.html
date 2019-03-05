@@ -359,9 +359,9 @@
 														<li>
 															<div class="form-group">
 																<input ng-model="metroCampaign.name" name="campaign_name" class="form-control md-whiteframe-3dp" type="text"
-																 placeholder="Campaign name">
+																 placeholder="Campaign name" required="required">
 																<div ng-messages="metroCampaignForm.campaign_name.$error" ng-if="metroCampaignForm.campaign_name.$touched"
-																 style="color:red">
+																 style="color:red;font-size: 12px;">
 																	<div ng-message="required">Campaign name is required.</div>
 																</div>
 															</div>
@@ -369,8 +369,8 @@
 														<li>
 															<div class="form-group ">
 																<input ng-model="metroCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
-																 placeholder="Organization name" >
-																<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red">
+																 placeholder="Organization name" required="required">
+																<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red;font-size: 12px;">
 																	<div ng-message="required">Organization name is required.</div>
 																</div>
 															</div>
@@ -378,9 +378,9 @@
 														<li>
 															<div class="form-group ">
 																<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control md-whiteframe-3dp"
-																 type="text" minlength="10" maxlength="10" placeholder="Phone number"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+																 type="text" minlength="10" maxlength="10" placeholder="Phone number" required="required"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
 																<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched"
-																 style="color:red">
+																 style="color:red;font-size: 12px;">
 																	<div ng-message="required">Phone number is required.</div>
 																</div>
 															</div>
@@ -388,9 +388,9 @@
 														<li>
 															<div class="form-group ">
 																<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
-																 type="text" required placeholder="Enter Your Mail Id" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+																 type="text" required placeholder="Enter Your Mail Id" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
 																<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
-																 style="color:red">
+																 style="color:red;font-size: 12px;">
 																	<div ng-message="required">Email is required.</div>
 																	<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
 																	<div ng-message="pattern">Enter a valid Email</div>
@@ -399,11 +399,11 @@
 														</li>
 														<li>
 															<div class="form-group ">
-																<input ng-model="ownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
-																 type="text" maxlength="10" required="required" placeholder="Refered By">
-																<div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
-																	<div ng-message="required">Refered No is required.</div>
-																	<div ng-message="maxlength">Refered No must have 10 characters.</div>
+																<input ng-model="ownerCampaign.org_contact_refered" only-letters-input name="refered" class="form-control md-whiteframe-3dp"
+																 type="text" maxlength="10" placeholder="Refered By" required="required">
+																<div ng-messages="forms.metroCampaignForm.refered.$error" style="color:red;font-size: 12px;" ng-if="forms.metroCampaignForm.refered.$touched">
+																	<div ng-message="required">Refered By is required.</div>
+																	<div ng-message="maxlength">Refered By must have 10 characters.</div>
 																</div>
 															</div>
 														</li>
@@ -411,7 +411,7 @@
 															<div class="form-group">
 																<input ng-model="ownerCampaign.act_budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
 																 type="text" maxlength="10" required="required" placeholder="Estimated Budget">
-																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
+																<div ng-messages="forms.metroCampaignForm.Budget.$error" style="color:red;font-size: 12px;" ng-if="forms.metroCampaignForm.Budget.$touched">
 																	<div ng-message="required">Budget No is required.</div>
 																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
 																</div>
@@ -421,7 +421,7 @@
 															<div class="form-group">
 																<input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
 																 type="text" maxlength="10" required="required" placeholder="Campaign Start Date">
-																<div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
+																<div ng-messages="forms.metroCampaignForm.Budget.$error" style="color:red" ng-if="forms.metroCampaignForm.Budget.$touched">
 																	<div ng-message="required">Budget No is required.</div>
 																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
 																</div>
@@ -429,7 +429,7 @@
 														</li> -->
 													</div>
 												</div>
-												<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.ownerCampaignForm.$invalid">
+												<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.metroCampaignForm.$invalid">
 													Create Campaign
 												</md-button>
 											</form>
