@@ -533,5 +533,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.setSelectedFormat = function (index) {
         $rootScope.formatSelected = index;
     }
+    
+     function getUserNotifictaions() {
+    NotificationService.viewUserNotification().then((result) => {
+      $scope.getUserNotifictaions = result.notifications;
+    });
+  }
+  getUserNotifictaions();
 }
 );
