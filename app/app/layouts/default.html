@@ -12,7 +12,7 @@
         <img class="png-icon" src="assets/images/owner/logo.png" width="130px" alt="images">
       </md-button>
       <span flex class=""></span>
-      <md-menu-bar class="main-menu home_menu">
+      <md-menu-bar class="main-menu home_menu" style="padding:0px">
         <md-button aria-label="about bbi" ng-href="#/aboutbbi" ng-if="!footerhide" class="toolbar-btn what-we">About
           BBI</md-button>
         <md-button aria-label="products" ng-href="#/ourproduct" ng-if="!footerhide" class="toolbar-btn">Our
@@ -32,16 +32,16 @@
           ng-show="isAuthenticated && currStateName != 'index.location'">
           Browse Inventory
         </md-button>
-        <md-button class="md-raised login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000"
+        <md-button class="md-raised login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
           ng-click="showSignInDialog($event)">Metro</md-button>
         <md-button class="  toolbar-btn" ng-href="#/metro"
-          ng-show="isAuthenticated && currStateName != 'index.metro' " style="color:#000">Metro</md-button>
+          ng-show="isAuthenticated && currStateName != 'index.metro' ">Metro</md-button>
           <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
-          ng-show="!isAuthenticated" style="color: #000000;">
+          ng-show="!isAuthenticated" style="color: #000 !important;">
           Log in
         </md-button>
       </md-menu-bar>
-      <md-menu-bar>
+      <md-menu-bar style="padding:0px">
         <div class="profile_details_left" style="float:right">
           <ul class="nofitications-dropdown">
             <li class="dropdown head-dpdn hide-xs" ng-if="isAuthenticated">
