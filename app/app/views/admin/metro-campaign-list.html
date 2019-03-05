@@ -310,7 +310,8 @@
 						<div flex></div>
 						<div flex="20">
 								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
-										<md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
+										<input type="text" ng-model="search" placeholder="Search..." class="md-whiteframe-2dp mr-2"/>
+										<!-- <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
 										 md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
 										 md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:100%" md-clear-button="true">
 											<md-item-template>
@@ -332,7 +333,8 @@
 											<md-not-found>
 												No matches found.
 											</md-not-found>
-										</md-autocomplete>
+										</md-autocomplete> -->
+
 									</div>
 						</div>
 						<div class="hide-xs" layout="row">
@@ -452,7 +454,7 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-							<tr ng-repeat="aMetrCamp in adminMetroCampaigns">
+							<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search">
 								<td class="table_vertical">{{aMetrCamp.cid}}</td>
 								<td class="text-left table_vertical">{{aMetrCamp.name}}</td>
 								<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>

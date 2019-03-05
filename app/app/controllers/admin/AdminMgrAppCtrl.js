@@ -151,4 +151,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
     }
   }
   
+  function getAdminNotifictaions() {
+    AdminNotificationService.viewAdminNotification().then((result) => {
+      $scope.getAdminNotifictaions = result.notifications;
+    });
+  }
+  getAdminNotifictaions();
 });

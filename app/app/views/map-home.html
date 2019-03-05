@@ -1,7 +1,21 @@
 <style>
   md-backdrop.md-sidenav-backdrop {
     z-index: -1;
-}
+  }
+  .daterangepicker option.disabled, .daterangepicker td.disabled {
+    color: #fff;
+    cursor: not-allowed;
+    background: #ddd;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    /* text-decoration: line-through; */
+  }
+  .gray-blocked{
+    background:#ddd;
+  }
+  .red-blocked{
+    background:#f00 !important;
+  }
 </style>
 <div layout="column" style="position:relative">
 
@@ -800,7 +814,7 @@
       }]">
     </ng-map>
     
-    <button class="slide-button-map-1 right-cls1" id="showLeftPush"></button>
+    <!-- <button class="slide-button-map-1 right-cls1" id="showLeftPush"></button> -->
 
     <div id="mydiv" class="map_filters ">
       <div id="mydivheader">
@@ -857,17 +871,16 @@
             </div>
           </form>-->
 
-
-          <div class="row">
-              <div class="col-6 mt-3">
-                  <input id="startDate" />
+          <div class="row">            
+            <div flex-gt-xs>               
+                <md-datepicker ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
               </div>
-              <div class="col-6 mt-3">
-                  <input id="endDate" />
-              </div>
-              <div class="col-12 mt-3 text-right">
-                  <button type="button" class="btn btn-danger">Filter</button>
-              </div>
+              <div flex-gt-xs>                 
+                  <md-datepicker ng-model="booked_to" md-placeholder=""></md-datepicker>
+                </div>
+                <div class="col-12 mt-3 text-right">
+                    <button type="button" class="btn btn-danger" ng-click="FilterDates(booked_from,booked_to)">Filter</button>
+                </div>
           </div>
           
           <!-- <div ng-controller="datePickerCtrl">
@@ -1052,47 +1065,26 @@
     }
   }
   </script>
-  
-  
-<script>
-    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    $('#startDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        minDate: today,
-        maxDate: function () {
-            return $('#endDate').val();
-        }
-    });
-    $('#endDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        minDate: function () {
-            return $('#startDate').val();
-        }
-    });
-  </script>
-
 <script>
   
-    $("#showLeftPush").click(function () {
-        if($("#showLeftPush").hasClass("right-cls1")){
-        $("#showLeftPush").removeClass("right-cls1");
-        $("#showLeftPush").addClass("left-cls1");			
-        }else{
-        $("#showLeftPush").removeClass("left-cls1");
-        $("#showLeftPush").addClass("right-cls1");
-        }		
-      });
-      $("#showLeftPush").click(function () {
-        if($("#mydiv").hasClass("active")){
-        $("#mydiv").removeClass("active");
-        $("#mydiv").addClass("active_open");			
-        }else{
-        $("#mydiv").removeClass("active_open");
-        $("#mydiv").addClass("active");
-        }		
-      });
+    // $("#showLeftPush").click(function () {
+    //     if($("#showLeftPush").hasClass("right-cls1")){
+    //     $("#showLeftPush").removeClass("right-cls1");
+    //     $("#showLeftPush").addClass("left-cls1");			
+    //     }else{
+    //     $("#showLeftPush").removeClass("left-cls1");
+    //     $("#showLeftPush").addClass("right-cls1");
+    //     }		
+    //   });
+    //   $("#showLeftPush").click(function () {
+    //     if($("#mydiv").hasClass("active")){
+    //     $("#mydiv").removeClass("active");
+    //     $("#mydiv").addClass("active_open");			
+    //     }else{
+    //     $("#mydiv").removeClass("active_open");
+    //     $("#mydiv").addClass("active");
+    //     }		
+    //   });
       
       /*
       $.fn.daterangepicker = function (options, callback) {

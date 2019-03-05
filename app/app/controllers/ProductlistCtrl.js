@@ -83,7 +83,38 @@ app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDial
       };
       /*====================================
       | Multi date range picker options end
-      ====================================*/          
+      ====================================*/      
+      
+      $scope.FilterProductlist = function(booked_from,booked_to){
+        MapService.filterProducts(booked_from,booked_to).then(function (result) {
+         console.log(result);
+         productList = [];
+                    locArr = [];
+                    uniqueMarkers = [];
+                    concentricMarkers = {};
+                    var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
+                    $scope.plottingDone = false;
+                    MapService.filterProducts(filterObj).then(function (markers) {
+                        //console.log("filter products",marksers)
+                        _.each(markersOnMap, function (v, i) {
+                            v.setMap(null);
+                            $scope.Clusterer.removeMarker(v);
+                        });
+                        markersOnMap = Object.assign([]);
+                        $scope.filteredMarkers = markers;
+                        $scope.processMarkers();
+                        if (markers.length > 0) {
+                            var bounds = new google.maps.LatLngBounds();
+                            _.each(markersOnMap, function (v, i) {
+                                bounds.extend(v.getPosition());
+                            });
+                            // console.log('map object',$scope.mapObj)
+                        } else {
+                            toastr.error("no marker found for the criteria you selected");
+                        }
+                    });
+      });
+      }
           // SHORT-LIST
           $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
             var sendObj = {

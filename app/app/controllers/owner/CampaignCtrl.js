@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config,$state) {
     $scope.forms = [];
     $scope.serverUrl = config.serverUrl;
 
@@ -174,14 +174,14 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     return c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600;
                 });
                 $scope.scheduledCampaigns = _.filter(result, function (c) {
-                    return c.status == 800;
+                    return c.status >= 700;
                 });
 //        $scope.runningCampaigns = _.where(result, {
 //            status: 600
 //        });
                 $scope.runningCampaigns = _.filter(result.user_campaigns, function (c) {
                     //    return c.status == 1141 && typeof c.name !== "undefined";
-                    return c.status == 700;
+                    return c.status >= 800;
                 });
                 $scope.closedCampaigns = _.filter(result, function (c) {
                     //return c.status > 800;
@@ -194,7 +194,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     var loadOwnerCampaigns = function () {
         return new Promise((resolve, reject) => {
             OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-                //$scope.ownerCampaigns = result;        
+                $scope.ownerCampaigns = result;        
                 $scope.ownerCampaigns = _.filter(result, function (c) {
                     return c.status < 800;
                 });
@@ -353,7 +353,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.gst = result.act_budget * 18 / 100;
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
-            }
+            }   
+            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;       
         });
     }
     $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -364,8 +366,19 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
             }
+            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;            
         });
     }
+    $scope.uncheck = function() {
+        if (!$scope.checked) {
+          $scope.GST = "0";
+          $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+        }else{
+          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+        }
+      };
     function getMetroCampaignDetails() {
         MetroService.getMetroCampaigns().then((result) => {
             $scope.metrocampaign = result;
@@ -488,6 +501,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         .targetEvent(ev)
                         );
                 $scope.getOwnerCampaignDetails(campaignId);
+                $state.reload();
             } else {
                 if (result.product_ids && result.product_ids.length > 0) {
                     toastr.error(result.message);
@@ -653,9 +667,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 toastr.success(result.data.message);
                 $scope.campaignPayment = {};
                 $scope.files.image = "";
-                setTimout(() => {
-                    $location.path('/owner/' + $rootScope.clientSlug + '/payments');
-                }, 2500);
+                // setTimout(() => {
+                //     $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+                // }, 2500);
+                addPayment();
+                $state.reload();
             } else {
                 if (result.data.message.constructor == Array) {
                     $scope.updateCampaignPaymentErrors = result.data.message;
@@ -671,6 +687,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
         });
     }
+    function addPayment() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
 
     /* ==============================
      | Campaign payment section ends

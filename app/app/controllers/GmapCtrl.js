@@ -49,6 +49,9 @@ app.controller('GmapCtrl',
                                 return true;
                             }
                         }
+                        if(moment(dt) < moment()){
+                            return true;
+                        }
                     },
                     isCustomDate: function (dt) {
                         for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
@@ -62,15 +65,47 @@ app.controller('GmapCtrl',
                                 }
                             }
                         }
+                        if(moment(dt) < moment()){
+                            return 'gray-blocked';
+                        }
                     },
+                    eventHandlers: {
+                        'apply.daterangepicker': function(ev, picker) { 
+                            //selectedDateRanges = [];
+                            console.log(ev);
+                        }
+                    }
                 };
                 /*====================================
                  | Multi date range picker options end
                  ====================================*/
-                //  $scope.FilterDates = function(){
-                //      alert("Hello");
-                //     console.log(DateFilterform);
-                //  };
+                 $scope.FilterDates = function(booked_from,booked_to){    
+                    productList = [];
+                    locArr = [];
+                    uniqueMarkers = [];
+                    concentricMarkers = {};
+                    var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
+                    $scope.plottingDone = false;
+                    MapService.filterProducts(filterObj).then(function (markers) {
+                        //console.log("filter products",marksers)
+                        _.each(markersOnMap, function (v, i) {
+                            v.setMap(null);
+                            $scope.Clusterer.removeMarker(v);
+                        });
+                        markersOnMap = Object.assign([]);
+                        $scope.filteredMarkers = markers;
+                        $scope.processMarkers();
+                        if (markers.length > 0) {
+                            var bounds = new google.maps.LatLngBounds();
+                            _.each(markersOnMap, function (v, i) {
+                                bounds.extend(v.getPosition());
+                            });
+                            // console.log('map object',$scope.mapObj)
+                        } else {
+                            toastr.error("no marker found for the criteria you selected");
+                        }
+                    });
+                 };
 
                 $scope.hidelocations = false;
                 var setDefaultArea = function () {
@@ -654,6 +689,7 @@ app.controller('GmapCtrl',
                                 .targetEvent(ev),
                                 $mdSidenav('productDetails').close()
                                 );
+                                //selectedDateRanges = [];
                         getShortListedProducts();
                         $mdSidenav('productDetails').close();
                     });
@@ -875,6 +911,9 @@ app.controller('GmapCtrl',
                 $scope.isFormatSelected = function (formatId) {
                     return _.contains($scope.selectedFormats, formatId);
                 }
+                // $scope.isDateSelected = function (dates) {
+                //     return _.contains($scope.filterDates, dates);
+                // }
 
                 $scope.toggleTrafficLegends = function () {
                     $scope.showTrafficLegend = !$scope.showTrafficLegend;
