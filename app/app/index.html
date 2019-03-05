@@ -256,7 +256,7 @@
                                                 var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
                                                 var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
                                                 var channel8 = pusher.subscribe('ProductApproved' + user_id);
-                                                var channel9 = pusher.subscribe('productRequested' + user_id);
+                                                var channel9 = pusher.subscribe('ProductRequested' + user_id);
                                                 var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
                                                 var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
                                                 var channel12 = pusher.subscribe('metroCampaignLocked' + user_id);
@@ -300,7 +300,7 @@
                                                     arrayText.push(data);
                                                     notificationText(arrayText);
                                                 });
-                                                channel9.bind('productRequestedEvent', function (data) {
+                                                channel9.bind('ProductRequestedEvent', function (data) {
                                                     arrayText.push(data);
                                                     notificationText(arrayText);
                                                 });

@@ -41,7 +41,9 @@ app.controller('GmapCtrl',
                         format: "DD-MMM-YY",
                         toLabel: "To",
                         cancelLabel: 'Cancel',
-                        customRangeLabel: 'Custom range'
+                        customRangeLabel: 'Custom range',
+                        startDate: 0,
+                        endDate: 0
                     },
                     isInvalidDate: function (dt) {
                         for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
@@ -403,7 +405,7 @@ app.controller('GmapCtrl',
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                    //$scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $mdSidenav('productDetails').toggle();
                     $scope.selectedProduct = marker;
                 }
@@ -423,7 +425,7 @@ app.controller('GmapCtrl',
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').toggle();
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                    //$scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
                 }
 
@@ -1074,19 +1076,21 @@ app.controller('GmapCtrl',
 
                 $scope.getProductUnavailableDates = function (productId, ev) {
                     MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+                        $scope.selectedDateRanges = '';
                         $scope.unavailalbeDateRanges = dateRanges;
                         $(ev.target).parents().eq(3).find('input').trigger('click');
                     });
                 }
 
-                $scope.getProductUnavailableDatesautoload = function (productId) {
-
-                    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-                        $scope.unavailalbeDateRanges = dateRanges;
-                        //console.log(dateRanges);
-                        $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
-                    });
-                }
+//                $scope.getProductUnavailableDatesautoload = function (productId) {
+//
+//                    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+//                        $scope.selectedDateRanges = '';
+//                        $scope.unavailalbeDateRanges = dateRanges;
+//                        //console.log(dateRanges);
+//                        $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
+//                    });
+//                }
 
                 // controller ends  
             }
