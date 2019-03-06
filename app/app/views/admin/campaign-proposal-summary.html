@@ -512,20 +512,20 @@
       <thead class="text_color">
         <tr>
           <th>Product Details</th>
-          <th></th>
+          <th class="hide-xs"></th>
           <!-- <th class="">Size</th> -->
-          <th class="hide-xs">Booked From</th>
-          <th class="hide-xs">Booked To</th>
-          <th class="hide-xs">Price Given</th>
-          <th class="hide-xs">Price Received</th>
-          <th class="hide-xs">Default Price</th>
-          <th class="hide-xs">Inventory Owner</th>
-          <th class="hide-xs">Inventory Status</th>
+          <th class="">Booked From</th>
+          <th class="">Booked To</th>
+          <th class="">Price Given</th>
+          <th class="">Price Received</th>
+          <th class="">Default Price</th>
+          <th class="">Inventory Owner</th>
+          <th class="">Inventory Status</th>
           <!-- <th class="hide-xs">
 								<md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
 								</md-button>
               </th> -->
-              <th class="hide-xs text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
+              <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
         </tr>
       </thead>
       <tbody>
@@ -533,7 +533,7 @@
           ng-repeat="campaignProduct in campaignProducts | limitTo:limit"
           ng-class="{'striked-out': campaignProduct.unavailable}"
         >
-          <td class="image_tdwidth">
+          <td class="hide-xs image_tdwidth">
             <img
               ng-src="{{serverUrl + campaignProduct.image }}"
               alt="Smiley face"
@@ -549,35 +549,35 @@
             </p>
           </td>
           <!-- <td class="table_vertical">60*60</td> -->
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical">
             <p>{{ campaignProduct.booked_from | date }}</p>
           </td>
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical">
             <p>{{ campaignProduct.booked_to | date }}</p>
           </td>
-          <td class="table_vertical hide-xs table_price">
+          <td class="table_vertical table_price">
                 {{(!myfield)?(campaignProduct.admin_price || 'N/A'):''}}
                 <input type="number" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
                 <span ng-click="myfield=true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
                 <span ng-click="myfield=false;changeCampaignProductPrice(campaignProduct.campaign_id,campaignProduct.admin_price,campaignProduct.product_id, campaignProduct.siteNo)"  ng-show="myfield"> <i class="material-icons">check</i></span>
           </td>
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical">
                    {{campaignProduct.owner_price || 'N/A'}}                       
           </td>
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical">
                 {{campaignProduct.default_price  || 'N/A'}}                       
           </td>
-          <td class="table_vertical hide-xs">
+          <td class="table_vertical">
             <p class=" md-caption">{{campaignProduct.client_name}}</p>
             <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
           </td>
-          <td class="table_vertical hide-xs addcampaign_details">
+          <td class="table_vertical addcampaign_details">
                 <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
                 <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status | stringifyCampaignStatus}} </p>
                 <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
                 <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
           </td>
-          <td class="hide-xs"></td>
+          <td class=""></td>
         </tr>
       </tbody>
     </table>
