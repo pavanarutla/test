@@ -496,11 +496,15 @@ style="background-color: #858A8E;">Submit</md-button>
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                        <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                         <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
                                             <div ng-message="required">Date is required.</div>
-                                        </div>
+                                        </div> -->
+                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                        <a ng-click="getProductUnavailableDates(product.id,$event);">
+                                            <i class="material-icons"> calendar_today </i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -699,7 +703,7 @@ style="background-color: #858A8E;">Submit</md-button>
                     <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
                            placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
                            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+                    <a ng-click="getProductUnavailableDates(product.id, $event);">
                         <i class="material-icons">
                             calendar_today
                         </i>

@@ -1,3 +1,19 @@
+<style>
+.daterangepicker option.disabled, .daterangepicker td.disabled {
+    color: #fff;
+    cursor: not-allowed;
+    background: #ddd;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    /* text-decoration: line-through; */
+  }
+  .gray-blocked{
+    background:#ddd;
+  }
+  .red-blocked{
+    background:#f00 !important;
+  }
+</style>
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
@@ -169,10 +185,16 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                        <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                         <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                                        </div>
+                                        </div> -->
+                                        <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                        <a ng-click="getProductUnavailableDates(product.id,$event);">
+                                            <i class="material-icons">
+                                                calendar_today
+                                            </i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +292,7 @@
                     <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
                            placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
                            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+                    <a ng-click="getProductUnavailableDates(product.id,$event);">
                         <i class="material-icons">
                             calendar_today
                         </i>
