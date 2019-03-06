@@ -30,8 +30,31 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     /*===================
      | Pagination Ends
      ===================*/
+    //  With Service
+    //  $scope.downloadPdf = function () {
+    //     var fileName = "file_name.pdf";
+    //     var a = document.createElement("a");
+    //     document.body.appendChild(a);
+    //     OwnerCampaignService.downloadPdf().then(function (result) {
+    //         var file = new Blob([result.data], {type: 'application/pdf'});
+    //         var fileURL = window.URL.createObjectURL(file);
+    //         a.href = fileURL;
+    //         a.download = fileName;
+    //         a.click();
+    //     });
+    // };
+    
+    // With out Service
+    // $scope.getConvas=function()
+	// 		{
+	// 			html2canvas($("#barcodeHtml"), {
+	// 				onrendered: function(canvas) {
+	// 					document.body.appendChild(canvas);
 
-
+	// 				}
+	// 			});
+	// 		}
+   
     /*=======================
      | MdDialogs and sidenavs
      =======================*/

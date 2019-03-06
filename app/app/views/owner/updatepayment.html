@@ -145,38 +145,37 @@
                     <div class="form-group row">
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                       <div class="col-sm-8">
-                        <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                        <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
                           <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
                         </select>
+                        <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
+                        <input type="text" class="form-control md-whiteframe-3dp" name="amount" required="required" only-numeric id="amount" ng-model="campaignPayment.amount">
+                        <div ng-messages="forms.ownerCampaignForm.amount.$error" style="color:red" ng-if="forms.ownerCampaignForm.amount.$touched">
+                            <div ng-message="required">Amount is required.</div>
+                          </div>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.reference_no">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" required="required" ng-model="campaignPayment.reference_no">
+                        <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
+                            <div ng-message="required">Reference No is required.</div>
+                          </div>
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="amount" class="col-sm-4 col-form-label md-body-2">Campaign</label>
-                      <div class="col-sm-8">
-                        <!-- <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.name"> -->
-                        <select id="paymentType" ng-model="campaignPayment.campaign_id" class="form-control md-whiteframe-3dp">
-                          <option ng-repeat="campaignForOwner in allCampaignsForOwner" ng-value="campaignForOwner.id">{{campaignForOwner.name}}</option>
-                          <!-- <option selected>Select Payment Type</option> -->
-                          <!-- <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option> -->
-                        </select>
-                      </div>
-                    </div>
+                    </div>                    
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.received_by">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input name="recived" required="required" ng-model="campaignPayment.received_by">
+                        <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
+                            <div ng-message="required">Received By is required.</div>
+                          </div>
                       </div>
                     </div>
                     <div class="form-group row">
