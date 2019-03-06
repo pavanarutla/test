@@ -15,22 +15,22 @@
         <div class="table-responsive">
           <table class="table table-hover call_center">
             <thead>
-              <tr class="text_color camp-text">
-                <th class="width_1 text-left">Company Name</th>
-                <th class="hide-xs">Company Type</th>
-                <th class="width_2 hide-xs">Super Admin Details</th>
-                <th class="hide-xs">Activated</th>
-                <th class="text-left">Email</th>
-                <th class="hide-xs">Phone</th>
-                <th class="hide-xs">Address</th>
-                <th class="hide-xs">Actions</th>
+              <tr class="text_color">
+                <th class="">Company Name</th>
+                <th class="">Company Type</th>
+                <th class="">Super Admin Details</th>
+                <th class="text-center">Activated</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">Address</th>
+                <th class="">Actions</th>
               </tr>
             </thead>
-            <tbody class="camp-text">
+            <tbody class="">
               <tr ng-repeat="client in allClients | filter : searchByCompanyName">
-                <td class="text-left table_vertical">{{client.company_name}}</td>
-                <td class="table_vertical hide-xs">{{client.company_type_name}}</td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical">{{client.company_name}}</td>
+                <td class="table_vertical">{{client.company_type_name}}</td>
+                <td class="table_vertical">
                   <a style="cursor:pointer; color:#00f;" ng-click="showUserDetailsPopup(client.client_id, client.company_super_admin)"
                     ng-if="client.company_super_admin">
                     View User
@@ -39,11 +39,11 @@
                     Assign Super Admin
                   </a>
                 </td>
-                <td class="table_vertical hide-xs">{{client.activated | boolToYesNo}}</td>
-                <td class="text-left table_vertical">{{client.contact_email}}</td>
-                <td class="table_vertical hide-xs">{{client.phone}}</td>
-                <td class="table_vertical hide-xs">{{client.address}}</td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">{{client.activated | boolToYesNo}}</td>
+                <td class="text-center table_vertical">{{client.contact_email}}</td>
+                <td class="text-center table_vertical">{{client.phone}}</td>
+                <td class="text-center table_vertical">{{client.address}}</td>
+                <td class="table_vertical">
                   <span><a ng-href="#" ng-click="">
                       <md-icon><i class="material-icons">done</i></md-icon>
                     </a></span>
@@ -79,29 +79,29 @@
         <div class="table-responsive">
           <table class="table table-hover call_center">
             <thead>
-              <tr class="text_color camp-text">
-                <th class="text-left">Name</th>
-                <th class="text-left">Email</th>
-                <th class="hide-xs">Phone</th>
-                <th class="hide-xs">User Type</th>
-                <th class="hide-xs">Company</th>
-                <th class="hide-xs">Activated</th>
-                <th></th>
+              <tr class="text_color">
+                <th class="">Name</th>
+                <th class="">Email</th>
+                <th class="">Phone</th>
+                <th class="">User Type</th>
+                <th class="">Company</th>
+                <th class="">Activated</th>
+                <th class="hide-xs"></th>
               </tr>
             </thead>
-            <tbody class="camp-text">
+            <tbody class="">
               <tr ng-repeat="user in allUsers | filter : searchByEmail">
-                <td class="text-left table_vertical">{{user.first_name}} {{user.last_name}}</td>
-                <td class="text-left table_vertical">{{user.email}}</td>
-                <td class="table_vertical hide-xs">{{user.phone || "N/A"}}</td>
-                <td class="table_vertical hide-xs">{{user.company_type}}</td>
-                <td class="table_vertical hide-xs">{{user.company_name}}</td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical">{{user.first_name}} {{user.last_name}}</td>
+                <td class="table_vertical">{{user.email}}</td>
+                <td class="table_vertical">{{user.phone || "N/A"}}</td>
+                <td class="table_vertical">{{user.company_type}}</td>
+                <td class="table_vertical">{{user.company_name}}</td>
+                <td class="table_vertical">
                   <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
                     {{user.activated | boolToYesNo}}
                   </a>
                 </td>
-                <td class="table_vertical">
+                <td class="hide-xs table_vertical">
                   <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
                     View details
                   </a>
@@ -132,9 +132,9 @@
             <thead>
               <tr class="text_color">
                 <th></th>
-                <th class="text-left">Name</th>
+                <th class="">Name</th>
                 <th>Description</th>
-                <th class="hide-xs">Actions</th>
+                <th class="">Actions</th>
               </tr>
             </thead>
             <tbody class="">
@@ -144,7 +144,7 @@
                 </td>
                 <td class="table_vertical">{{role.display_name}}</td>
                 <td class="table_vertical">{{role.description}}</td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical">
                   <span>
                     <!-- view role -->
                     <a ng-href="#/admin/role-details/{{role.id}}" ng-click="">

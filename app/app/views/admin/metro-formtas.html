@@ -1,14 +1,8 @@
 <div layout="column" layout-fill="layout-fill">
-	<div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-		<div flex="50">
-			<div class="md-title" style="margin: 10px 0 0 15px;">Total List Of Metro Formats</div>
-		</div>
-		<div layout-align="center end" layout="column" flex="50">
-			<md-button class="md-raised md-warn" ng-click="showFormatForm()">
+	<div class="md-title" layout="row">
+		<div layout-align="center end" layout="column" flex="100">
+			<md-button class="md-raised md-warn all_button" ng-click="showFormatForm()">
 				Add New Metro Format
-				<span>
-					<md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-				</span>
 			</md-button>
 		</div>
 	</div>
@@ -16,8 +10,8 @@
 	</div>
 	<div style="margin-top: 1em;">
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered ">
-				<thead>
+			<table class="table">
+				<thead class="text_color">
 					<tr>
 						<th>Icon</th>
 						<th>Formats type</th>
@@ -26,9 +20,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="format in formatList">
-						<td><img ng-src="{{serverUrl + format.image}}" style="width:60px;height:60px;"/></td>
-						<td>{{format.name}}</td>
-						<td>
+						<td class="table_vertical"><img ng-src="{{serverUrl + format.image}}" style="width:60px;height:60px;"/></td>
+						<td class="table_vertical">{{format.name}}</td>
+						<td class="table_vertical">
 							<span>
 								<a style="cursor:pointer;" ng-click="editFormat(format)">
 									<md-icon>

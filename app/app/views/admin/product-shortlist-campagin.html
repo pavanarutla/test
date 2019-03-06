@@ -28,27 +28,27 @@
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead>
-                            <tr class="text_color text-center">
+                            <tr class="text_color">
                                 <th>CID</th>
                                 <th>Campaign Name</th>
                                 <th>Start Date</th>
                                 <th>No of Products </th>
-                                <th>Paid</th>
-                                <th>Total Budget</th>
+                                <th class="text-center">Paid</th>
+                                <th class="text-center">Total Budget</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody class="">
                 
                             <tr ng-repeat="product in shortlistedproduct.campaign_list">
-                                <td>{{product.cid}}</td>
-                                <td>{{product.name}}</td>
-                                <td>{{product.created_at}}</td>
-                                <td>{{product.no_products}}</td>
-                                <td>{{product.total_paid}}</td>
-                                <td>{{product.est_budget}}</td>
-                                <td>
+                                <td class="table_vertical">{{product.cid}}</td>
+                                <td class="table_vertical">{{product.name}}</td>
+                                <td class="table_vertical">{{product.created_at}}</td>
+                                <td class="table_vertical">{{product.no_products}}</td>
+                                <td class="text-center table_vertical">{{product.total_paid}}</td>
+                                <td class="text-center table_vertical">{{product.est_budget}}</td>
+                                <td class="table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                             <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -57,39 +57,19 @@
                                             <md-menu-item>
                                                 <md-button ng-href="#">
                                                     <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:auto 10px auto 10px">View Details</p>
+                                                        <i class="material-icons">remove_red_eye</i>
                                                     </div>
                                                 </md-button>
                                             </md-menu-item>
-                                            <!-- <md-menu-item>
-                                                <md-button ng-href="#">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">share</i></md-icon>
-                                                        <p style="margin:auto 10px auto 10px">Share Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button ng-href="#">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:auto 10px auto 10px">Pay Now</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:auto 10px auto 10px">Payment Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item> -->
                                         </md-menu-content>
                                     </md-menu>
                                 </td>
-                                <td>
+                                <td class="text-center table_vertical">
+                                    <a href="#/admin/campaign-proposal-summary/{{campaignId}}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                </td>
+                                <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{product.updated_at}}</span>
                                 </td>
                             </tr>
