@@ -5,14 +5,14 @@
   <!-- main nav section-->
   <md-toolbar class="md-menu-toolbar header">
     <div class="container md-toolbar-tools">
-      <!-- <md-button ng-click="closeSidenav()" aria-label="menu" class="md-icon-button">
+      <md-button ng-click="closeSidenav()" aria-label="menu" class="md-icon-button hide_gt_md menu_btn_mobile">
         <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
-      </md-button> -->
+      </md-button>
       <md-button aria-label="locations" href="#/" md-no-ink class="logo">
         <img class="png-icon" src="assets/images/owner/logo.png" width="130px" alt="images">
       </md-button>
       <span flex class=""></span>
-      <md-menu-bar class="main-menu home_menu" style="padding:0px">
+      <md-menu-bar class="main-menu  hide_xs hide_sm hide_md" style="padding:0px">
         <md-button aria-label="about bbi" ng-href="#/aboutbbi" ng-if="!footerhide" class="toolbar-btn what-we">About
           BBI</md-button>
         <md-button aria-label="products" ng-href="#/ourproduct" ng-if="!footerhide" class="toolbar-btn">Our
@@ -41,10 +41,19 @@
           Log in
         </md-button>
       </md-menu-bar>
+      <md-menu-bar class="hide_gt_md">
+          <md-button class="md-raised login_button book_now toolbar-btn hide_xs" ng-show="!isAuthenticated" style="color:#000 !important"
+          ng-click="showSignInDialog($event)">Metro</md-button>
+          <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
+          ng-show="!isAuthenticated" style="color: #000 !important;">
+          Log in
+        </md-button>
+        
+      </md-menu-bar>
       <md-menu-bar style="padding:0px">
         <div class="profile_details_left" style="float:right">
           <ul class="nofitications-dropdown">
-            <li class="dropdown head-dpdn hide-xs" ng-if="isAuthenticated">
+            <li class="dropdown head-dpdn hide_xs" ng-if="isAuthenticated">
                 <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved
                   Camapgin ({{userSavedCampaigns.length}})</a>
                 <ul class="dropdown-menu animated fadeInDown dropdown-saved">
@@ -104,7 +113,7 @@
                 <li ng-if="isUserBasic()"> <a ng-href="#/user-payments"> Payments</a> </li>
                 <li> <a ng-href="#/reset_password"> Change Password</a> </li>
                 <li> <a ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a> </li>
-                
+                <li class="hide_gt_xs"><a ng-href="#/user-saved-campaigns" >Saved Camapgin</a></li>
                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
               </ul>
 
@@ -125,68 +134,55 @@
       </md-menu-bar>
     </div>
   </md-toolbar>
-  <!--// main nav section-->
-
-  <md-sidenav md-component-id="left" class="md-sidenav-left" hide-gt-sm>
+  <md-sidenav md-component-id="left" class="md-sidenav-left" hide_gt_md>
+      <div layout="row" class="layout-row">
+         
+          <div flex="" class="flex"></div>
+          <a class="md-icon-button close-btn" ng-click="closeSidenav()">
+            <i class="material-icons">close</i>
+          </a>
+        </div>
     <header layout="column" layout-padding layout-margin>
       <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
     </header>
-    <md-content flex layout="column" role="navigation">
+    <div flex layout="column" role="navigation">
       <md-menu-item flex layout="column">
-        <md-button ng-click="whatwedo()">WHAT WE DO</md-button>
-      </md-menu-item>
-
-      <md-menu-item flex layout="column">
-        <md-button ng-click="formate()">FORMATS</md-button>
+          <md-button aria-label="about bbi" ng-href="#/aboutbbi"class="toolbar-btn what-we">About
+            BBI</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button ng-click="whyOutdoor()">WHY OUTDOOR</md-button>
+          <md-button aria-label="products" ng-href="#/ourproduct"  class="toolbar-btn">Our
+            Products</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button ng-click="contactus()">CONTACT</md-button>
+          <md-button aria-label="products" ng-href="#/faq"  class="toolbar-btn faq_width">FAQ'S
+          </md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+          <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
+          ng-click="showSignInDialog($event)"> suggest me</md-button>
+          <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggest/product-detail"
+          ng-show="isAuthenticated && currStateName != 'index.suggest.product-detail'  " style="color:#000"> suggest me</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+          <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
+          ng-click="showSignInDialog($event)">Metro</md-button>
+          <md-button class="  toolbar-btn" ng-href="#/metro"
+          ng-show="isAuthenticated ">Metro</md-button>
+      </md-menu-item>
+        
+      <md-menu-item flex layout="column">
+          <md-button aria-label="location" ng-href="#/location"
+          ng-show="isAuthenticated ">
+          Browse Inventory
+        </md-button>
       </md-menu-item>
       <!-- <md-menu-item flex layout="column">
         <md-button href="#/pricing">PRICING</md-button>
       </md-menu-item> -->
+    </div>
+  </md-sidenav>
 
-  </md-sidenav>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2 notofication-sidnav" id="Notification" md-component-id="right"
-    md-disable-backdrop style="z-index:65">
-    <md-content>
-      <ul style="padding:0px;margin:0px">
-        <li>
-          <div class="notification_header" layout="row">
-            <h3>You have {{notifs.length}} new notification</h3>
-            <span flex></span>
-            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()"
-              style="margin: 0px;padding: 0px">
-              <md-icon class="md-default-theme"><i class="material-icons" style="font-size:18px">close</i></md-icon>
-            </md-button>
-          </div>
-        </li>
-        <li ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;"
-          ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-          <a ng-click="viewNotification(notif)" style="cursor:pointer;text-decoration:none;">
-            <div class="notification_desc">
-              <p>{{ notif.desc }}</p>
-              <p><span>{{ notif.message }}</span></p>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <!-- <li style="    position: fixed;bottom: 0px;width: 100%;">
-            <div class="notification_bottom"> <a href="#">See all notifications</a> </div>
-        </li> -->
-      </ul>
-      <!-- <div ng-repeat="notif in notifs" style="border-bottom:1px solid #bbbbbb; padding-left:8px;" 
-      ng-class="{'unread-notif' : notif.status == 0, 'read-notif' : notif.status == 1}">
-        <a ng-click="showCampaignDetails(notif.id)" style="cursor:pointer;text-decoration:none;">
-          <h4 style="margin-top:0px;padding-top:15px;">{{ notif.desc }}</h4>
-          <p>{{ notif.message }}</p>
-        </a>
-      </div> -->
-    </md-content>
-  </md-sidenav>
 
   <!-- Content section-->
   <ui-view></ui-view>
