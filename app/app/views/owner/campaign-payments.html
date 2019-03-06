@@ -320,24 +320,24 @@
         <div class="table-responsive">
           <table class="table">
             <thead>
-								<tr class="text_color text-center">
+								<tr class="text_color">
 								<th>CID</th>
 								<th class="feeds_width">Campaign Name</th>
 								<th>Paid</th>
-								<th class="hide-xs">Pending</th>
-								<th class="hide-xs">Total</th>
+								<th class="">Pending</th>
+								<th class="">Total</th>
 								<th>Action</th>
-								<th class="hide-xs"></th>
-								<th class="hide-xs"></th>
+								<th class=""></th>
+								<th class=""></th>
 								</tr>
 							</thead>
-							<tbody class="text-center">
+							<tbody class="">
 								<tr ng-repeat="campaign in ownerCampaigns">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
 								<td class="table_vertical">{{campaign.name | capitalize}}</td>
 								<td class="table_vertical">{{campaign.total_paid}}</td>
-								<td class="table_vertical hide-xs">{{campaign.total_price - campaign.total_paid}}</td>
-								<td class="table_vertical hide-xs">{{campaign.total_price}}</td>
+								<td class="table_vertical">{{campaign.total_price - campaign.total_paid}}</td>
+								<td class="table_vertical">{{campaign.total_price}}</td>
 								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
@@ -345,15 +345,15 @@
 										</md-icon>
 									</a>
 								</td>
-								<td class="table_vertical hide-xs">
+								<td class="text-center table_vertical">
 										<md-button class="md-raised md-primary all_button" ng-if="campaign.total_paid == 0">Payment Alert</md-button>
-										<md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
-										<md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button>									
+										<!-- <md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
+										<md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button>									 -->
 									<!-- <button type="button" class="btn btn-danger" ng-if="campaign.total_paid == 0">Payment Alert</button>
 									<button type="button" class="btn btn-warning" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</button>									
 									<button type="button" class="btn btn-success" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</button> -->
 								</td>
-								<td class="table_vertical hide-xs">21-09-2018, 9:00 Am</td>
+								<td class="text-center table_vertical">21-09-2018, 9:00 Am</td>
 								</tr>
             </tbody>
           </table>
@@ -365,24 +365,24 @@
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-								<tr class="text_color text-center">
+								<tr class="text_color">
 								<th>CID</th>
 								<th class="feeds_width">Campaign Name</th>
 								<th>Paid</th>
-								<th class="hide-xs">Pending</th>
-								<th class="hide-xs">Total</th>
+								<th class="">Pending</th>
+								<th class="">Total</th>
 								<th>Action</th>
-								<th class="hide-xs"></th>
-								<th class="hide-xs"></th>
+								<th class=""></th>
+								<th class=""></th>
 								</tr>
 							</thead>
-							<tbody class="text-center">
+							<tbody class="">
 								<tr ng-repeat="campaign in userCampaignPayments">
 										<td class="table_vertical">{{campaign.cid || "N/A"}}</td>
 								<td class="table_vertical">{{campaign.name | capitalize}}</td>
 								<td class="table_vertical">{{campaign.total_paid}}</td>
-								<td class="table_vertical hide-xs">{{campaign.total_price - campaign.total_paid}}</td>
-								<td class="table_vertical hide-xs">{{campaign.total_price}}</td>
+								<td class="table_vertical ">{{campaign.total_price - campaign.total_paid}}</td>
+								<td class="table_vertical">{{campaign.total_price}}</td>
 								<td class="table_vertical">
 									<a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
 										<md-icon class="material-icons" role="img" aria-label="remove_red_eye">
@@ -390,15 +390,15 @@
 										</md-icon>
 									</a>
 								</td>
-								<td class="table_vertical hide-xs">									
+								<td class="text-center table_vertical">									
 									<md-button class="md-raised md-primary all_button" ng-if="campaign.total_paid == 0">Payment Alert</md-button>
-									<md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
-									<md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button>
+									<!-- <md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
+									<md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button> -->
 									<!-- <button type="button" class="btn btn-danger" ng-if="campaign.total_paid == 0">Payment Alert</button>
 										<button type="button" class="btn btn-warning" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</button>									
 										<button type="button" class="btn btn-success" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</button> -->
 									</td>
-								<td class="table_vertical hide-xs">21-09-2018, 9:00 Am</td>
+								<td class="text-center table_vertical">21-09-2018, 9:00 Am</td>
 								</tr>
             </tbody>
           </table>

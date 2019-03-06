@@ -447,14 +447,17 @@ style="background-color: #858A8E;">Submit</md-button>
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
+                                <div class="col-sm-6 row">
+                                        <div class="col-sm-5"><b>Product Images</b></div>
+                                        <div class="col-sm-7">
+                                    <div class="input-group" style="width: 173px;">
                                         <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
                                         <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
                                         <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                        <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
+                                        <!-- <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
                                             <div ng-message="required">image is required.</div>
-                                        </div>
+                                        </div> -->
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +553,7 @@ style="background-color: #858A8E;">Submit</md-button>
 <div class="product__filter">
     <form class="form-inline camp_filters d-flex"  action="">
         <!-- <input type="search" placeholder="Tab ID, Area, Location" class="form-control form_hoarding" id=""> -->
-        <md-autocomplete class="md-whiteframe-3dp" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-search-text-change="viewSearchText(searchText)"  md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="3" placeholder="Search..."  md-clear-button="true">
+        <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-search-text-change="viewSearchText(searchText)"  md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="3" placeholder="Search..."  md-clear-button="true">
             <md-item-template>
                 <span class="item-title">
                     <span> {{item.siteNo}} </span>
@@ -565,8 +568,8 @@ style="background-color: #858A8E;">Submit</md-button>
                 </span>
             </md-item-template>
         </md-autocomplete>
-        <label for="pwd">Filter By:</label>
-        <div class="form-group form_up">
+        <label for="pwd" class="hide-xs add_filterby">Filter By:</label>
+        <div class="form-group form_up hide-xs">
             <!-- <select class="form-control form_format" id="sel1">
               <option selected>Format</option>
               <option>Hoarding</option>
@@ -574,7 +577,7 @@ style="background-color: #858A8E;">Submit</md-button>
               <option>Airport</option>
             </select> -->
             <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
-                    class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+                    class="form-control md-whiteframe-3dp add_filtermobile" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
                     name="productType">
                 <option value="" disabled selected>Site Type</option>
             </select>
@@ -603,13 +606,13 @@ style="background-color: #858A8E;">Submit</md-button>
         </select>
       </div> -->
 
-        <div class="form-group form_cal">
+        <div class="form-group form_cal hide-xs">
             <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
         </div>
-        <div class="form-group form_cal">
+        <div class="form-group form_cal hide-xs">
             <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;"></md-datepicker>
         </div>
-        <div class="form-group form_cal">
+        <div class="form-group form_cal hide-xs">
             <select class="form-control"  ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
                 <option value="" disabled selected>Budget</option>
                 <option selected value="1">Budget High to Low</option>
@@ -621,7 +624,7 @@ style="background-color: #858A8E;">Submit</md-button>
             <input class="form-check-input" type="checkbox"> Show Only Available
           </label>
         </div>-->
-        <md-button class="md-raised apply_filter" ng-click="applymethod(product)">Apply Filters</md-button>
+        <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)">Apply Filters</md-button>
     </form>
 </div>
 
@@ -632,15 +635,15 @@ style="background-color: #858A8E;">Submit</md-button>
     <table class="table">
         <thead class="text_color">
             <tr>
-                <th class="hide-xs">Product Details</th>
-                <th></th>
-                <th class="hide-xs">Views</th>
-                <th class="hide-xs">Lit</th>
-                <th class="hide-xs">Shortlisted in</th>
+                <th>Product Details</th>
+                <th class="hide-xs"></th>
+                <th class="">Views</th>
+                <th class="">Lit</th>
+                <th class="text-center">Shortlisted in</th>
                 <th class="">Price</th>
-                <th class="">Calender</th>
-                <th class="hide-xs">Visible on Map</th>
-                <th class="hide-xs">
+                <th class="text-center">Calender</th>
+                <th class="">Visible on Map</th>
+                <th class="">
                     <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
                 </th>
             </tr>
@@ -657,13 +660,13 @@ style="background-color: #858A8E;">Submit</md-button>
                         <br>Facing: {{product.direction|| "N/A" | capitalize}}
                         <br>Type: {{product.format_name | capitalize}}
                 </td>
-                <td class="table_vertical hide-xs">{{product.impressionsperweek}}</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
-                <td class="table_vertical hide-xs">
+                <td class="table_vertical">{{product.impressionsperweek}}</td>
+                <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+                <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+                <td class="text-center table_vertical">
                     <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
                 </td>
-                <td class="table_vertical table_price">
+                <td class="text-center table_vertical table_price">
                     <div class="input-group">
 
                         {{(!myfield)?product.default_price:''}}
@@ -673,7 +676,7 @@ style="background-color: #858A8E;">Submit</md-button>
 
                     </div>
                 </td>
-                <td class="table_vertical text-center">
+                <td class="text-center table_vertical text-center">
                     <!-- <a href="#"><i class="material-icons">
                       date_range
                       </i></a> -->
@@ -686,7 +689,7 @@ style="background-color: #858A8E;">Submit</md-button>
                         </i>
                     </a>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                     <div class="form-group form_yes" ng-init="(product.product_visibility == 'undefined' || product.product_visibility == '') ? '1' : '0'">
                         <select class="form-control" style="width: 70px;" ng-model="product.product_visibility" ng-change="product_visibility(product.product_visibility, product.id)" >
                             <option ng-selected="(product.product_visibility == 1) ? true : false" value = "1">Yes</option>
@@ -694,7 +697,7 @@ style="background-color: #858A8E;">Submit</md-button>
                         </select>
                     </div>
                 </td>
-                <td class="table_vertical text-right hide-xs">
+                <td class="table_vertical text-right">
         <md-button class="md-raised inv_details" ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
         </td>
 
