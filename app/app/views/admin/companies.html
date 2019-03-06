@@ -88,26 +88,26 @@
 				<div class="table-responsive">
 					<table class="table table-hover call_center">
 						<thead>
-							<tr class="text_color camp-text">
-								<th class="width_1 text-left">Company Name</th>
-								<th class="text-left hide-xs">Company Type</th>
-								<th class="width_2 hide-xs">Contact Name</th>
-								<th class="text-left">Email</th>
-								<th class="hide-xs">Phone</th>
-								<th class="hide-xs">Address</th>
-								<th class="hide-xs">Actions</th>
+							<tr class="text_color">
+								<th class="">Company Name</th>
+								<th class="">Company Type</th>
+								<th class="">Contact Name</th>
+								<th class="">Email</th>
+								<th class="">Phone</th>
+								<th class="">Address</th>
+								<th class="">Actions</th>
 							</tr>
 						</thead>
-						<tbody class="camp-text">
+						<tbody class="">
 							<tr ng-repeat="company in companyList">
 									<!-- | limitTo:limit -->
-								<td class="text-left table_vertical">{{company.name}}</td>
-								<td class="text-left table_vertical hide-xs">{{company.company_type}}</td>
-								<td class="table_vertical hide-xs">{{company.contact_name}}</td>
-								<td class="text-left table_vertical">{{company.contact_email}}</td>
-								<td class="table_vertical hide-xs">{{company.contact_phone }}</td>
-								<td class="table_vertical hide-xs">{{company.address }}</td>
-								<td class="table_vertical hide-xs">
+								<td class="table_vertical">{{company.name}}</td>
+								<td class="table_vertical">{{company.company_type}}</td>
+								<td class="table_vertical">{{company.contact_name}}</td>
+								<td class="table_vertical">{{company.contact_email}}</td>
+								<td class="table_vertical">{{company.contact_phone }}</td>
+								<td class="table_vertical">{{company.address }}</td>
+								<td class="table_vertical">
 									<span>
 										<a style="cursor:pointer;" ng-click="editCompany(company)">
 											<md-icon>
@@ -217,23 +217,23 @@
 				<div class="table-responsive">
 					<table class="table table-hover call_center">
 						<thead>
-							<tr class="text_color camp-text">
-								<th class="text-left">Company Name</th>
-								<th class="hide-xs">Company Type</th>
-								<th class="hide-xs">Super Admin</th>
-								<th class="hide-xs">Activated</th>
-								<th class="text-left">Contact Email</th>
-								<th class="hide-xs">Contact Phone</th>
-								<th class="hide-xs">Address</th>
-								<th class="hide-xs">Actions</th>
+							<tr class="text_color">
+								<th class="">Company Name</th>
+								<th class="">Company Type</th>
+								<th class="">Super Admin</th>
+								<th class="">Activated</th>
+								<th class="">Contact Email</th>
+								<th class="">Contact Phone</th>
+								<th class="">Address</th>
+								<th class="">Actions</th>
 							</tr>
 						</thead>
-						<tbody class="camp-text">
+						<tbody class="">
 							<tr ng-repeat="client in allClients">
 									<!-- | limitTo:limit -->
-								<td class="text-left table_vertical">{{client.company_name}}</td>
-								<td class="table_vertical hide-xs">{{client.company_type_name}}</td>
-								<td class="table_vertical hide-xs">
+								<td class="table_vertical">{{client.company_name}}</td>
+								<td class="table_vertical">{{client.company_type_name}}</td>
+								<td class="table_vertical">
 									<span ng-if="!client.company_super_admin">
 										No
 									</span>
@@ -241,11 +241,11 @@
 										Yes
 									</span>
 								</td>
-								<td class="table_vertical hide-xs">{{client.activated | boolToYesNo}}</td>
-								<td class="text-left table_vertical">{{client.contact_email}}</td>
-								<td class="table_vertical hide-xs">{{client.phone}}</td>
-								<td class="table_vertical hide-xs">{{client.address}}</td>
-								<td class="table_vertical hide-xs">
+								<td class="table_vertical">{{client.activated | boolToYesNo}}</td>
+								<td class="table_vertical">{{client.contact_email}}</td>
+								<td class="table_vertical">{{client.phone}}</td>
+								<td class="table_vertical">{{client.address}}</td>
+								<td class="table_vertical">
 									<span>
 										<a style="cursor:pointer;" ng-click="editClient(client)">
 											<md-icon>
