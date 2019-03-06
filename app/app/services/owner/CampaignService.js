@@ -87,6 +87,11 @@ app.service('OwnerCampaignService',
           $http.get(config.apiPath + '/campaigns-from-products/' + productId).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
+        // downloadPdf: function () {
+        //   var dfd = $q.defer();
+        //    $http.get(config.apiPath + 'api/my-pdf', { responseType: 'arraybuffer' }).success(dfd.resolve).error(dfd.reject);
+        //    return dfd.promise;
+        //   },
       }
     }
   ]

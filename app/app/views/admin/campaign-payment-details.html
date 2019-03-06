@@ -63,7 +63,7 @@
                 <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
                 <md-button class="md-raised all_button" onclick="addPayment()">Add Payment</md-button>
                 <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
-                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                    <form name="forms.campPayment" role="form" novalidate="novalidate">
                       <div layout="colmun">
                         <span flex></span>
                         <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
@@ -76,32 +76,44 @@
                       <li>
                         <div class="">
                           <div class="col-md-12">
-                            <form>
+                            <!-- <form name="PaymentForm" role="form" novalidate="novalidate"> -->
                               <div class="form-group row">
                                 <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                                 <div class="col-sm-8">
-                                  <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
-                                    <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
+                                  <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
+                                    <option ng-repeat="paymentType in paymentTypes"  ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
                                   </select>
+                                  <span ng-show="forms.campPayment.mode.$error.required" style="color:red" ng-if="forms.campPayment.mode.$touched">
+                                    Mode Is required!!
+                                  </span>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
-                                </div>
+                                  <input type="text" class="form-control md-whiteframe-3dp" required="required" only-numeric name="amount" id="amount" ng-model="campaignPayment.amount">
+                                  <div ng-messages="forms.campPayment.amount.$error" style="color:red" ng-if="forms.campPayment.amount.$touched">
+                                    <div ng-message="required">Amount is required.</div>
+                                  </div>
+                                </div>                                
                               </div>
                               <div class="form-group row">
                                 <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.reference_no">
+                                  <input type="text" class="form-control md-whiteframe-3dp" name="reference" required="required" id="reference" ng-model="campaignPayment.reference_no">
+                                  <div ng-messages="forms.campPayment.reference.$error" style="color:red" ng-if="forms.campPayment.reference.$touched">
+                                    <div ng-message="required">Reference No is required.</div>
+                                  </div>
                                 </div>
                               </div>
                               
                               <div class="form-group row">
                                 <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.received_by">
+                                  <input type="text" class="form-control md-whiteframe-3dp" only-letters-input name="recived" id="recived" required="required" ng-model="campaignPayment.received_by">
+                                  <div ng-messages="forms.campPayment.recived.$error" style="color:red" ng-if="forms.campPayment.recived.$touched">
+                                    <div ng-message="required">Received By is required.</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -116,14 +128,17 @@
                                 <div class="col-sm-8">
                                   <span class="input-group-btn">
                                     <span class="">
-                                      <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                                      <input type="file" ngf-select ng-model="files.image" name="files.image" name="image" class="form-control md-whiteframe-3dp"
                                         accept="image/*" ngf-max-size="1MB">
+                                        <!-- <div ng-messages="forms.campPayment.image.$error" style="color:red" ng-if="forms.campPayment.image.$touched">
+                                          <div ng-message="required">Image is required.</div>
+                                        </div> -->
                                     </span>
                                   </span>
-                                  <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                                  <!-- <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
                                     style="color:red">
                                     <div ng-message="required">Image is required.</div>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -136,7 +151,7 @@
                                   <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                                 </div>
                               </div>
-                            </form>
+                            <!-- </form> -->
                           </div>
                         </div>
                       </li>
@@ -188,13 +203,13 @@
             <div class="d-flex justify-content-end pt-4 align-self-end">
                 <div layout="column" class="payment_inner">
                     <div class="">
-                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignPayments.campaign_details.total_amount}}</span></p>
+                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignPayments.campaign_details.est_budget}}</span></p>
                     </div>
                     <div class="">
                         <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignPayments.total_paid}}</span></p>
                     </div>
                     <div class="">
-                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignPayments.campaign_details.total_amount - campaignPayments.total_paid}}</span></p>
+                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignPayments.campaign_details.est_budget - campaignPayments.total_paid}}</span></p>
                     </div>
                 </div>
             </div>

@@ -111,7 +111,7 @@
 </div> -->
 <div class="">
     <div layout="column" class="owner_hoarding_list">
-      <div layout="row" layout-margin class="md-whiteframe-3dp">
+      <!-- <div layout="row" layout-margin class="md-whiteframe-3dp">
         <p class="mb-0 mt-3">Campaign Name:<span class="text_color">&nbsp;{{campaignDetails.name || "N/A"}}</span></p>
         <p class="mb-0 mt-3">Product Added:<span class="text_color md-title"> &nbsp;{{campaignDetails.no_of_products ||
           "0"}}</span></p>
@@ -120,7 +120,41 @@
         <p class="mb-0 mt-3 hide-xs"><span class="text_color">Created On</span> :&nbsp;{{campaignDetails.created_at}}</p>
         <span class="hide-md" flex></span>
         <md-button class="md-raised all_button hide-xs add_font" ng-href="#/admin/campaign-proposal-summary/{{campaignDetails.id}}">View Campaign</md-button>
-      </div>
+      </div> -->
+      <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
+          <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Campaign Name</p>
+              <p class="md-caption mob_span"><b><span class="text_color">{{campaignDetails.name || "N/A"}}</span></b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Product Added</p>
+              <p class="md-caption mob_span"><b><span class="text_color md-title">{{campaignDetails.no_of_products ||
+                  "0"}}</span></b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Estimated Budget</p>
+              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.est_budget || "N/A"}}</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Total Budget</p>
+              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.total_budget || "N/A"}}</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Created On</p>
+              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.created_at}}</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+             style="margin-top:2em;text-align: end" >
+             <md-button class="md-raised md-primary all_button" ng-href="#/admin/campaign-proposal-summary/{{campaignDetails.id}}">view campaign</md-button>
+            </div>
+          </div>
+        </div>
       
       <!-- filters-->
       <!-- <div class="" >
@@ -238,10 +272,10 @@
         </div>
     
         <div class="form-group form_cal">
-          <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill></md-datepicker>
+          <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
         </div>
         <div class="form-group form_cal">
-          <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill></md-datepicker>
+          <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;"></md-datepicker>
         </div>
         <div class="form-group form_cal">
           <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
@@ -254,7 +288,7 @@
             <input class="form-check-input" type="checkbox"> Show Only Available
           </label>
         </div> -->
-        <md-button class="md-raised md-primary" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+        <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
       </form>
     
     
@@ -270,20 +304,21 @@
               <th class="hide-xs">Shortlisted in</th>
               <!--<th class="hide-xs">Price Given</th>
               <th class="hide-xs">Price Received</th>-->
-              <th class="hide-xs">Calender</th>
+              <th class="hide-xs">Price</th>
               
-              <th class="hide-xs">
+              <th class="hide-xs">Calender
                 <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
               </th>
+              <th class="hide-xs"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="adminprod in AdminProduct">
+            <tr ng-repeat="adminprod in productList">
                 <td class="image_tdwidth">
                 <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size">
               </td>
-              <td>
-                <p class="td_font"><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
+              <td class="table_address">
+                <p class=""><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
                   <br> {{adminprod.address}}
                   <br>Facing:{{adminprod.direction}}
                   <br>Type:{{adminprod.format_name}}
@@ -309,13 +344,25 @@
                 </a>
               </td>
     
-              <td class=" table_vertical hide-xs">
+              <td class=" table_vertical hide-xs text-right">
                 <md-button class="md-raised all_button" ng-if="!adminprod.alreadyAdded" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
-                <md-button class="md-raised all_button" ng-if="adminprod.alreadyAdded" >Added</md-button>
+                <md-button class="md-raised Upload_font" ng-if="adminprod.alreadyAdded" >Added</md-button>
               </td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>     
     </div>
+    <!-- <p>pagination</p> -->
+    </div>
+    <div class="container">
+      <ul class="pagination">
+          <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+              <a ng-click="pagination.pageNo = i; getProductList();" 
+                  ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+                  style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;" class="ng-binding">
+                  {{i}}
+              </a>
+          </li>
+      </ul>
     </div>

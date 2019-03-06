@@ -135,16 +135,19 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
+                                <div class="col-sm-6 row">
+                                        <div class="col-sm-5"><b>Product Images</b></div>
+                                        <div class="col-sm-7">
+                                    <div class="input-group" style="width: 173px;">
 
                                         <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
                                         <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
                                         <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                        <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
-                                            <div ng-message="required">image is required.</div>
-                                        </div>
+                                        <!-- <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
+                                            <div ng-message="required">Image is required.</div>
+                                        </div> -->
                                     </div>
+                                </div>
                                 </div>
                             </div>
 
@@ -235,15 +238,14 @@
     <table class="table">
         <thead class="text_color">
             <tr>
-                <th class="hide-xs">Product Details</th>
-                <th></th>
-                <th class="hide-xs">Size</th>
-                <th class="hide-xs">Views</th>
-                <th class="hide-xs">Lit</th>
+                <th>Product Details</th>
+                <th class="hide-xs"></th>
+                <th class="">Size</th>
+                <th class="">Views</th>
+                <th class="">Lit</th>
                 <th class="">Price</th>
                 <th class="text-center">Calender</th>
-                <th class="hide-xs"></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
                 <th class=""></th>
             </tr>
         </thead>
@@ -259,10 +261,10 @@
                         {{product.format_name|| "N/A" | capitalize}}
                     </p>
                 </td>
-                <td class="table_vertical hide-xs">{{product.panelSize}}</td>
-                <td class="table_vertical hide-xs">{{product.impressionsperweek}}</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
+                <td class="table_vertical">{{product.panelSize}}</td>
+                <td class="table_vertical">{{product.impressionsperweek}}</td>
+                <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+                <td class="table_vertical" ng-if="product.lighting == 0">No</td>
                 <td class="table_vertical">{{product.default_price}}</td>
                 <td class="text-center table_vertical">
                     <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
@@ -274,7 +276,7 @@
                         </i>
                     </a>
                 </td>
-                <td class="table_vertical hide-xs"></td>
+                <td class="table_vertical"></td>
                 <td class="text-right table_vertical">
                     <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button" class="btn edit_details">Edit
                             Details</button></a>
