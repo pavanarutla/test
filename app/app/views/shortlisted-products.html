@@ -8,7 +8,7 @@
 			<thead class="text_color">
 				<tr>
 					<th>Product Details</th>
-					<th></th>
+					<th class="hide-xs"></th>
 					<th>Size</th>
 					<th>Booked From</th>
 					<th>Booked To</th>
@@ -24,16 +24,16 @@
 			</thead>
 			<tbody ng-repeat="shortlisted in shortListedProducts">
 				<tr>
-					<td class="image_tdwidth">
+					<td class="hide-xs image_tdwidth">
 						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" class="requ_size">
 					</td>
-					<td>
+					<td class="table_address">
 						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
 							{{ shortlisted.address}}<br>
 							Views : 1,54000 Per week<br>
-							Live Traffic:
+							<!-- Live Traffic:
 							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
-								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button>
+								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button> -->
 						</p>
 					</td>
 					<td class="table_vertical">{{shortlisted.panelSize}}</td>

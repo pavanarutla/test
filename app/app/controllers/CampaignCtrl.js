@@ -376,11 +376,17 @@ $scope.Getcomment = function (campaignID){
             .ok('Got it!')
             .targetEvent(ev)
         );
+        shareclose();
       }
       else {
         toastr.error(result.message);
       }
     });
+  }
+  function shareclose() {
+
+    angular.element(document.querySelector("#saveCampaign")).addClass("hide");
+    angular.element(document.querySelector("#saveCampaign")).removeClass("show");
   }
 
   function getMetroCampaigns(){
@@ -391,9 +397,7 @@ $scope.Getcomment = function (campaignID){
   $scope.saveUserCampaign = function () {
     CampaignService.saveUserCampaign($scope.ownerCampaign).then(function (result) {      
       if (result.status == 1) {
-        $scope.ownerCampaign = {};
-        // $scope.forms.ownerCampaignForm.$setPristine();
-        // $scope.forms.ownerCampaignForm.$setUntouched();   
+        $scope.ownerCampaign = {};        
         loadOwnerCampaigns();     
         toastr.success(result.message);
       }
@@ -409,12 +413,20 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
-      myFunction();
+      close();
     });
   }
-  function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+//   function myFunction() {
+//     document.getElementById("savedDropdown").classList.toggle("show");
+// }
+function close() {
+
+  angular.element(document.querySelector("#saveCampaign")).addClass("hide");
+  angular.element(document.querySelector("#saveCampaign")).removeClass("show");
 }
+// function saveCampaign() {
+//   document.getElementById("savedDropdown").classList.toggle("hide");
+// }
   var loadOwnerCampaigns = function () {
     return new Promise((resolve, reject) => {
       CampaignService.getCampaignWithProducts().then(function (result) {
@@ -431,8 +443,8 @@ $scope.Getcomment = function (campaignID){
 }
   $scope.saveMetroCampaign = function (metroCampagin) {
     MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
+      $scope.metrocampaign = result;
       if (result.status == 1) {
-        metroCampagin = {};
         // $scope.forms.MetroCampaign.$setPristine();
         // $scope.forms.MetroCampaign.$setUntouched();
         toastr.success(result.message);
@@ -449,9 +461,15 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
-      myFunction();      
+      $scope.metrocampaign = [];
+      metroclose();      
       getMetroCampaigns();
     });
+  }
+  function metroclose() {
+
+    angular.element(document.querySelector("#saveCampaign")).addClass("hide");
+    angular.element(document.querySelector("#saveCampaign")).removeClass("show");
   }
   var loadMetroCampaigns = function () {
     return new Promise((resolve, reject) => {
