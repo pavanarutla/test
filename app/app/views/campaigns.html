@@ -36,7 +36,7 @@
 </md-sidenav>
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
 
-<div layout="colmun" layout-align="end center" class="campaign_search">
+<div layout="colmun" layout-align="end center" class="hide-xs campaign_search">
     <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp" style="width:30%;padding: 4px;" />
     <div class="dropdown">
         <md-button class="md-raised all_button" onclick="myFunction()" class="dropbtn">Create Campaign</md-button>
@@ -232,31 +232,31 @@
     </div>
 </div>
 <md-tabs md-dynamic-height>
-    <md-tab label="Proposals/Booked">
+    <md-tab label="Proposals">
         <div style="margin-top: 1em;">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
-                        <tr class="text_color text-center">
+                        <tr class="text_color">
                             <th>CID</th>
                             <th>Campaign Name</th>
                             <th>Start Date</th>
-                            <th>No of Products </th>
+                            <th class="text-center">No of Products </th>
                             <!-- <th>Paid</th> -->
-                            <th>Total Budget</th>
+                            <th class="text-center">Total Budget</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center contbg">
+                    <tbody class="contbg">
                         <tr ng-repeat="pCampaign in plannedCampaigns| filter:search ">
                             <td class="table_vertical">{{pCampaign.cid}}</td>
                             <td class="table_vertical">{{pCampaign.name}}</td>
                             <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
-                            <td class="table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
+                            <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                             <!-- <td>10,1000</td> -->
-                            <td class="table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
-                            <td class="table_vertical">
+                            <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
+                            <td class="text-center table_vertical">
                                 <md-menu md-position-mode="target-right target">
                                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -297,7 +297,7 @@
                                     </md-menu-content>
                                 </md-menu>
                             </td>
-                            <td class="table_vertical">
+                            <td class="text-center table_vertical">
                                 <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
                                     date:'dd-MM-yyyy'}}</span>
                             </td>
@@ -311,26 +311,26 @@
                 <div class="table-responsive">
                     <table class="table ">
                         <thead>
-                            <tr class="text_color text-center">
+                            <tr class="text_color">
                                 <th>CID</th>
                                 <th>Campaign Name</th>
                                 <th>Start Date</th>
-                                <th>No of Products </th>
+                                <th class="text-center">No of Products </th>
                                 <!-- <th>Paid</th> -->
-                                <th>Total Budget</th>
+                                <th class="text-center">Total Budget</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center  contbg">
+                        <tbody class="contbg">
                             <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
                                 <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
                                 <td class="table_vertical">{{pCampaign.name}}</td>
                                 <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
+                                <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
-                                <td class="table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
-                                <td>
+                                <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
+                                <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                             <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -361,17 +361,17 @@
                                                 </md-button>
                                             </md-menu-item> -->
                                             <md-menu-item>
-                                                <md-button ng-href="#/update-user-payments/{{pCampaign.id}}">
+                                                <md-button class="pop_view" ng-href="#/update-user-payments/{{pCampaign.id}}">
                                                     <div layout="row">
                                                         <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:auto 10px auto 10px">Payment Details</p>
+                                                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
                                                     </div>
                                                 </md-button>
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
                                 </td>
-                                <td class="table_vertical">
+                                <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
                                         date:'dd-MM-yyyy'}}</span>
                                 </td>
@@ -386,27 +386,27 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr class="text_color text-center">
+                        <tr class="text_color">
                             <th>CID</th>
                             <th>Campaign Name</th>
                             <th>Start Date</th>
-                            <th>No of Products </th>
-                            <th>Paid</th>
-                            <th>Total Budget</th>
+                            <th class="text-center">No of Products </th>
+                            <th class="text-center">Paid</th>
+                            <th class="text-center">Total Budget</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center  contbg">
+                    <tbody class="contbg">
                         <tr ng-repeat="rCampaign in runningCampaigns| filter:search">
                             <!-- ng-if="campaign.status==6" -->
                             <td class="table_vertical">{{rCampaign.cid}}</td>
                             <td class="table_vertical">{{rCampaign.name}}</td>
                             <td class="table_vertical">{{rCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                            <td class="table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
-                            <td class="table_vertical">{{rCampaign.paid|| "N/A"}}</td>
-                            <td class="table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
-                            <td>
+                            <td class="text-center table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
+                            <td class="text-center table_vertical">{{rCampaign.paid|| "N/A"}}</td>
+                            <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
+                            <td class="text-center table_vertical">
                                 <md-menu md-position-mode="target-right target">
                                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -447,7 +447,7 @@
                                     </md-menu-content>
                                 </md-menu>
                             </td>
-                            <td class="table_vertical">
+                            <td class="text-center table_vertical">
                                 <span class="text_color md-caption">{{rCampaign.updated_at| dateify |
                                     date:'dd-MM-yyyy'}}</span>
                             </td>
@@ -462,24 +462,24 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr class="text_color text-center">
+                        <tr class="text_color">
                             <th>CID</th>
                             <th>Campaign Name</th>
                             <th>Start Date</th>
-                            <th>No of Products </th>
-                            <th>Paid</th>
-                            <th>Total Budget</th>
+                            <th class="text-center">No of Products </th>
+                            <th class="text-center">Paid</th>
+                            <th class="text-center">Total Budget</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center contbg" ng-repeat="cCampaign in closedCampaigns| filter:search" ng-if="cCampaign.status == 1000 || cCampaign.status == 1151">
+                    <tbody class="contbg" ng-repeat="cCampaign in closedCampaigns| filter:search" ng-if="cCampaign.status == 1000 || cCampaign.status == 1151">
                         <tr>
                             <td class="table_vertical">BB-01</td>
                             <td class="table_vertical">{{cCampaign.name}}</td>
                             <td class="table_vertical">{{cCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                            <td class="table_vertical">{{cCampaign.product_count|| "0"}}</td>
-                            <td class="table_vertical">{{cCampaign.paid|| "N/A"}}</td>
-                            <td class="table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
-                            <td>
+                            <td class="text-center table_vertical">{{cCampaign.product_count|| "0"}}</td>
+                            <td class="text-center table_vertical">{{cCampaign.paid|| "N/A"}}</td>
+                            <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
+                            <td class="text-center table_vertical">
                                 <md-menu md-position-mode="target-right target">
                                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -520,7 +520,7 @@
                                     </md-menu-content>
                                 </md-menu>
                             </td>
-                            <td class="table_vertical">
+                            <td class="text-center table_vertical">
                                 <span class="text_color md-caption">{{cCampaign.updated_at| dateify |
                                     date:'dd-MM-yyyy'}}</span>
                             </td>
@@ -535,26 +535,26 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr class="text_color text-center">
+                        <tr class="text_color">
                             <th>CID</th>
                             <th>Campaign Name</th>
                             <th>Start Date</th>
-                            <th>No of Products </th>
-                            <th>Paid</th>
-                            <th>Total Budget</th>
+                            <th class="text-center">No of Products </th>
+                            <th class="text-center">Paid</th>
+                            <th class="text-center">Total Budget</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center  contbg">
+                    <tbody class="contbg">
                             <tr ng-repeat="mCampaign in metroCampaigns| filter:search">
-                                    <td>{{mCampaign.cid}}</td>
-                                    <td>{{mCampaign.name}}</td>
-                                    <td>{{mCampaign.start_date | date:'medium'}}</td>
-                                    <td>{{mCampaign.product_count}}</td>
-                                    <td>{{mCampaign.campaign_paid}}</td>
-                                    <td>{{mCampaign.act_budget}}</td>
-                                    <td>
+                                    <td class="table_vertical">{{mCampaign.cid}}</td>
+                                    <td class="table_vertical">{{mCampaign.name}}</td>
+                                    <td class="table_vertical">{{mCampaign.start_date | date:'medium'}}</td>
+                                    <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
+                                    <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
+                                    <td class="text-center table_vertical">{{mCampaign.act_budget}}</td>
+                                    <td class="text-center table_vertical">
                                             <md-menu md-position-mode="target-right target">
                                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -611,7 +611,7 @@
                                                 </md-menu-content>
                                             </md-menu>                                            
                                         </td>
-                                        <td class="table_vertical">
+                                        <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{mCampaign.created_at}}</span>
                                         </td>
                                 </tr>      
