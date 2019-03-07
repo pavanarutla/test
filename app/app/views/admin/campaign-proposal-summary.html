@@ -318,16 +318,6 @@
         </p>
       </div>
       <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
-                            style="margin-top:14px;">
-                            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
-                                    <p class="md-caption"><span><i class="material-icons i_icon">
-                                                            reply_all
-                                                    </i></span></p>
-                                    <p class="mob_spanicon share_icon">Share Camapaign</p>
-                            </div>
-                    </div> -->
-      <div
-        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
         style="margin-top:14px;">
         <div
           class="md-grid-item-content hoarding-btn"
@@ -339,13 +329,41 @@
           </p>
           <p class="mob_spanicon share_icon">Download Quotation</p>
         </div>
-      </div>
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
+      </div> -->
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+      style="cursor: pointer;">			
+       <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+           <a ng-click="downloadAdminQuote(campaignDetails.id)" download>
+       <md-button class="dropbtn drop_width">
+           <!-- ng-click="downloadPdf()" with service -->
+           <!-- ng-click="getConvas()"  with out service id="exportthis"-->
+           <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+               file_copy
+             </i></span></p>
+         <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+       </md-button>
+     </a>
+     </div>
+     </div>
+      <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
         <p class="cmp_bottom md-caption"><span><i class="material-icons i_icon">
           account_balance_wallet
         </i></span></p>
         <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ><p class="mob_spanicon share_icon">Payment Details</p></a>
-      </div>
+      </div> -->
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+				 style="cursor: pointer;">			
+					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+							<a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
+					<md-button class="dropbtn drop_width">
+							<p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+                account_balance_wallet
+								</i></span></p>
+						<p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Payment Details</p>
+					</md-button>
+				</a>
+				</div>
+				</div>
       <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
       style="margin-top:1em;">
       <div class="dropdown">
