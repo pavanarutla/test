@@ -120,6 +120,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     return true;
                 }
             }
+            if(moment(dt) < moment()){
+                return true;
+            }
         },
         isCustomDate: function (dt) {
             for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
@@ -132,6 +135,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         return 'red-blocked';
                     }
                 }
+            }
+            if(moment(dt) < moment()){
+                return 'gray-blocked';
+            }
+        },
+        eventHandlers: {
+            'apply.daterangepicker': function(ev, picker) { 
+                //selectedDateRanges = [];
+                console.log(ev);
             }
         },
     };

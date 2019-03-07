@@ -498,12 +498,12 @@ $scope.applymethod=function(product){
     });
   }
 
-  // $scope.getProductUnavailableDates = function(productId , ev ){
-  //   OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
-  //     $scope.unavailalbeDateRanges = dateRanges;
-  //     $(ev.target).parent().parent().find('input').trigger('click');
-  //   });
-  // }
+  $scope.getProductUnavailableDates = function(productId , ev ){
+    OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
+      $scope.unavailalbeDateRanges = dateRanges;
+      $(ev.target).parent().parent().find('input').trigger('click');
+    });
+  }
   /*=====================
   | Product Section Ends
   =====================*/
