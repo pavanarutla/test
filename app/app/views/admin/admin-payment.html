@@ -11,7 +11,7 @@
                 <a ng-href="#/owner/{{clientSlug}}/update-payments" class="add_paymt_btn">Add new payment</a>
             </div> -->
             <div class="active-cyan-4 mr-2 search_width">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control" type="text" ng-model="search" placeholder="Search by CID" aria-label="Search">
             </div>
         </div>
         <!-- status of hoarding list html start-->
@@ -21,43 +21,27 @@
                     <thead class="text_color">
                       <tr>
                         <th>CID</th>
-                        <th class="feeds_width">Camapaign Name</th>
+                        <th class="">Camapaign Name</th>
                         <th>Paid</th>
-                        <th class="hide-xs">Pending</th>
-                        <th class="hide-xs">Total</th>
-                        <th>Action</th>
-                        <th class="hide-xs"></th>
-                        <th class="hide-xs"></th>
+                        <th class="text-center">Pending</th>
+                        <th class="text-center">Total</th>
+                        <th class="text-center">Action</th>
+                        <th class=""></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="Adminpay in adminpayments">
+                      <tr ng-repeat="Adminpay in adminpayments | filter : search">
                         <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
-                        <td>{{Adminpay.name}}</td>
+                        <td>{{Adminpay.name || "N/A"}}</td>
                         <td>{{Adminpay.total_paid}}</td>
-                        <td class="hide-xs">{{pending}}</td>
-                        <td class="hide-xs">{{Adminpay.est_budget}}</td>
-                        <!-- <td>
-                          <a style="cursor:pointer;" ng-href="#/owner/{{clientSlug}}/updatepayment">
-                              <md-icon class="material-icons" ng-click="getCampaignPaymentDetails(Adminpay.id)" role="img" aria-label="remove_red_eye">
-                                <i class="material-icons">remove_red_eye</i>
-                              </md-icon>
-                            </a>
-                        </td> -->
-                        <td class="table_vertical">
+                        <td class="text-center">{{Adminpay.est_budget - Adminpay.total_paid || "N/A"}}</td>
+                        <td class="text-center">{{Adminpay.est_budget || "N/A"}}</td>
+                        <td class="text-center table_vertical">
                           <md-menu md-position-mode="target-right target" id="width_popup">
                             <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                               <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                             </md-button>
                             <md-menu-content width="2">
-                              <!-- <md-menu-item>
-                                <md-button class="pop_view" ng-href="#">
-                                  <div layout="row">
-                                    <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                    <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                  </div>
-                                </md-button>
-                              </md-menu-item> -->
                               <md-menu-item>
                                 <md-button class="pop_view" ng-href="#/admin/campaign-payment-details/{{Adminpay.id}}">
                                   <div layout="row">
@@ -70,7 +54,7 @@
                           </md-menu>
                         </td>
                         <!-- <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
-                        <td class="table_vertical hide-xs">21-09-2018, 9:00 Am</td>
+                        <td class="text-center table_vertical">21-09-2018, 9:00 Am</td>
                       </tr>                     
                     </tbody>
                   </table>

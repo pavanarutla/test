@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr,FileSaver) {
 
   $scope.config = config;
 
@@ -435,7 +435,6 @@ $scope.Getcomment = function (campaignID){
         metroCampagin = {};
         // $scope.forms.MetroCampaign.$setPristine();
         // $scope.forms.MetroCampaign.$setUntouched();
-        loadMetroCampaigns();
         toastr.success(result.message);
       }
       else if (result.status == 0) {
@@ -450,7 +449,8 @@ $scope.Getcomment = function (campaignID){
       else {
         toastr.error(result.message);
       }
-      myFunction();
+      myFunction();      
+      getMetroCampaigns();
     });
   }
   var loadMetroCampaigns = function () {
@@ -498,10 +498,19 @@ $scope.Getcomment = function (campaignID){
         }
        
   }
+  $scope.downloadUserQuote = function (campaignId) {
+                    CampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                };
   /*=============================
   | Page based initial loads end
   =============================*/
-  loadMetroCampaigns();
+  //loadMetroCampaigns();
   //$scope.Getcomment($stateParams.campaignId);
   getMetroCampaignDetails();
 });

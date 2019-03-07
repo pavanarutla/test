@@ -28,9 +28,9 @@
 					<tr	class="text-center" ng-repeat="payments in userPayments | filter:search"> 
 					<td class="table_vertical">{{payments.cid}}</td>
 					<td class="table_vertical">{{payments.name}}</td>
-					<td class="table_vertical">NA</td>
-					<td class="table_vertical">NA</td>
-					<td class="table_vertical">NA</td>
+					<td class="table_vertical">{{payments.paid}}</td>
+					<td class="table_vertical">{{payments.act_budget - payments.paid}}</td>
+					<td class="table_vertical">{{payments.act_budget}}</td>
 					<td class="table_vertical">
 					  <a style="cursor:pointer;" ng-href="#/update-user-payments/{{payments.id}}">
 						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
@@ -38,7 +38,12 @@
 						  </md-icon>
 						</a>
 					</td>
-					<td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td class="table_vertical hide-xs">									
+						<button type="button" class="btn btn-danger" ng-if="payments.paid == 0">Payment Alert</button>
+						<button type="button" class="btn btn-warning" ng-if="(payments.act_budget - payments.paid) != payments.act_budget && (payments.act_budget - payments.paid)!=0">Partial Paid</button>									
+						<button type="button" class="btn btn-success" ng-if="(payments.act_budget - payments.paid) == 0 && payments.paid!=0">Amount Paid</button>
+					</td>
+					<!-- <td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
 					<td class="table_vertical">21-09-2018, 9:00 Am</td>
 				  </tr>
 				  <!-- <tr>

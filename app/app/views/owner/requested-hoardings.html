@@ -1,3 +1,19 @@
+<style>
+.daterangepicker option.disabled, .daterangepicker td.disabled {
+    color: #fff;
+    cursor: not-allowed;
+    background: #ddd;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    /* text-decoration: line-through; */
+  }
+  .gray-blocked{
+    background:#ddd;
+  }
+  .red-blocked{
+    background:#f00 !important;
+  }
+</style>
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
@@ -6,7 +22,7 @@
         <div flex></div>		
         <!-- Add New Product -->
         <div class="dropdown hide-xs">
-            <md-button class="md-raised md-primary" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
+            <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
             <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
                 <form name="hordinglistform" novalidate="novalidate">
                     <div layout="colmun">
@@ -90,15 +106,15 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control md-whiteframe-3dp" name="height" ng-model="product.height"
+                                    <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="height" ng-model="product.height"
                                            placeholder="Height*" required="required">
                                     <div ng-messages="hordinglistform.height.$error" ng-if="hordinglistform.height.$touched" style="color:red">
                                         <div ng-message="required">height*.</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control md-whiteframe-3dp" name="width" ng-model="product.width"
-                                           placeholder="Width*" required="required">
+                                    <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="width" ng-model="product.width"
+                                           placeholder="Width*" required="required" >
                                     <div ng-messages="hordinglistform.width.$error" ng-if="hordinglistform.width.$touched" style="color:red">
                                         <div ng-message="required">width*.</div>
                                     </div>
@@ -135,16 +151,19 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
+                                <div class="col-sm-6 row">
+                                        <div class="col-sm-5"><b>Product Images</b></div>
+                                        <div class="col-sm-7">
+                                    <div class="input-group" style="width: 173px;">
 
                                         <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
                                         <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
                                         <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                        <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
-                                            <div ng-message="required">image is required.</div>
-                                        </div>
+                                        <!-- <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
+                                            <div ng-message="required">Image is required.</div>
+                                        </div> -->
                                     </div>
+                                </div>
                                 </div>
                             </div>
 
@@ -166,10 +185,16 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                        <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                type="text" name="date" readonly options="rqstHrdngsOpts"/>
                                         <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                                        </div>
+                                        </div> -->
+                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                        <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
+                                            <i class="material-icons">
+                                                calendar_today
+                                            </i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -236,50 +261,48 @@
         <thead class="text_color">
             <tr>
                 <th>Product Details</th>
-                <th></th>
-                <th class="hide-xs">Size</th>
+                <th class="hide-xs"></th>
+                <th class="">Size</th>
                 <th class="">Views</th>
-                <th class="hide-xs">Lit</th>
-                <th class="hide-xs">Price</th>
-                <th class="text-center hide-xs">Calender</th>
-                <th class="hide-xs"></th>
-                <th class="hide-xs"></th>
-                <th class="hide-xs"></th>
+                <th class="">Lit</th>
+                <th class="">Price</th>
+                <th class="text-center">Calender</th>
+                <th class=""></th>
+                <th class=""></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="product in requestedProductList">
-                <td class="image_tdwidth">
+                <td class="image_tdwidth hide-xs">
                     <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size">
                 </td>
-                <td>
-                    <p class="td_font"><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address}}<br>Facing:
-                        {{product.direction|| "N/A"}}
+                <td class="table_address">
+                    <p><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing:
+                        {{product.direction|| "N/A" | capitalize}}
                         <br>Type:
-                        {{product.format_name|| "N/A"}}
+                        {{product.format_name|| "N/A" | capitalize}}
                     </p>
                 </td>
-                <td class="table_vertical hide-xs">{{product.panelSize}}</td>
+                <td class="table_vertical">{{product.panelSize}}</td>
                 <td class="table_vertical">{{product.impressionsperweek}}</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical hide-xs" ng-if="product.lighting == 0">No</td>
-                <td class="table_vertical hide-xs">{{product.default_price}}</td>
-                <td class="text-center table_vertical hide-xs">
-                    <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+                <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+                <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+                <td class="table_vertical">{{product.default_price}}</td>
+                <td class="text-center table_vertical">
+                    <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker"
                            placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
                            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+                    <a ng-click="getProductUnavailableDates(product.id,$event);">
                         <i class="material-icons">
                             calendar_today
                         </i>
                     </a>
                 </td>
-                <td class="table_vertical hide-xs"></td>
-                <td class="text-center table_vertical hide-xs">
+                <td class="table_vertical"></td>
+                <td class="text-right table_vertical">
                     <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button" class="btn edit_details">Edit
                             Details</button></a>
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>

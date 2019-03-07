@@ -275,7 +275,12 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       $location.path('/owner/' + $rootScope.clientSlug + '/hoarding-list');
     }
   }
-
+ function getOwnerNotifictaions() {
+    OwnerNotificationService.viewOwnerNotification().then((result) => {
+      $scope.getOwnerNotifictaions = result.notifications;
+    });
+  }
+  getOwnerNotifictaions();
 })
 
 // .value('googleChartApiConfig', {

@@ -53,6 +53,7 @@ var app = angular.module('bbManager', [
     .state('index.user-notifications', {
       url: 'user-notifications',
       templateUrl: 'views/user-notifications.html',
+      controller:"bbMngrCtrl"
     })
     .state('index.user-saved-campaigns', {
       url: 'user-saved-campaigns',
@@ -237,6 +238,12 @@ var app = angular.module('bbManager', [
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
+    .state('admin.metro-campaign-payment', {
+      url: '/metro-campaign-payment',
+      templateUrl: 'views/admin/metro-campaign-payment.html'
+      //controller: 'AdminCampaignCtrl',
+      //title: 'Campaign'
+    })
     .state('admin.metro-campaigns', {
       url: '/metro-campaigns',
       templateUrl: 'views/admin/metro-campaign-list.html',
@@ -391,6 +398,12 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
+    
+      .state('admin.admin-notifications', {
+      url: '/admin-notifications',
+      templateUrl: 'views/admin/admin-notifications.html',
+      controller: 'AdminMgrAppCtrl'
+    })
     // .state('admin.user-management', {
     //   url: '/user-management',
     //   templateUrl: 'views/admin/user-management.html',
@@ -407,11 +420,18 @@ var app = angular.module('bbManager', [
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
+    
+      .state('owner.owner-notifications', {
+      url: '/owner-notifications',
+       templateUrl: 'views/owner/owner-notifications.html',
+      controller: 'OwnerMngrCtrl'
+    })
+    
+      
     .state('owner.feeds', {
       url: '/feeds',
       templateUrl: 'views/owner/feeds.html',
       controller: 'OwnerFeedsCtrl',
-      
     })
     .state('owner.campaigns', {
       url: '/campaigns',

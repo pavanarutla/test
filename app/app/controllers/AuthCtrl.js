@@ -4,6 +4,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	$scope.forgotPasswordpage = false;
 
 	$scope.user = {};
+	
 	$scope.signInUser = function () {		
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
@@ -12,11 +13,12 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				var userData = payload.user;
 				var userMongoData = payload.userMongo;
 				loggedInUser.clientId = userData.client_id;
+				loggedInUser.user_id = userMongoData.id;
 				loggedInUser.client_slug = userData.client_slug;
 				loggedInUser.email = userData.email;
 				loggedInUser.firstName = userMongoData.first_name;
 				loggedInUser.lastName = userMongoData.last_name;
-				loggedInUser.user_type = payload.user_type;
+				loggedInUser.user_type = userMongoData.user_type;
 				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
 				$rootScope.loggedInUser = loggedInUser;

@@ -102,7 +102,7 @@
   <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
-  <div layout="colmun" layout-align="end center" class="campaign_search">
+  <div layout="colmun" layout-align="end center" class="hide-xs campaign_search">
       <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp" style="width:30%;padding: 4px;" />
     <!-- <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md"> -->
       <!-- <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
@@ -132,7 +132,7 @@
     <!-- <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
             CREATE CAMPAIGN
         </md-button> -->
-    <div class="dropdown hide-xs">
+    <div class="dropdown">
       <md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
       <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
         <form name="forms.CampaignForm" role="form" novalidate="novalidate">
@@ -232,11 +232,11 @@
                   <li>
                     <div class="form-group ">
         
-                      <input ng-model="ownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
+                      <input ng-model="ownerCampaign.org_contact_refered"  only-letters-input name="refered" class="form-control md-whiteframe-3dp"
                         type="text" maxlength="10" required="required" placeholder="Refered By">
                       <div ng-messages="forms.CampaignForm.refered.$error" style="color:red" ng-if="forms.CampaignForm.refered.$touched">
-                        <div ng-message="required">Refered No is required.</div>
-                        <div ng-message="maxlength">Refered No must have 10 characters.</div>
+                        <div ng-message="required">Refered By is required.</div>
+                        <div ng-message="maxlength">Refered By must have 10 characters.</div>
                       </div>
                     </div>
                   </li>
@@ -246,7 +246,6 @@
                         type="text" maxlength="10" required="required" placeholder="Estimated Budget">
                       <div ng-messages="forms.CampaignForm.Budget.$error" style="color:red" ng-if="forms.CampaignForm.Budget.$touched">
                         <div ng-message="required">Budget No is required.</div>
-                        <div ng-message="maxlength">Phone No must have 10 characters.</div>
                       </div>
                     </div>
                   </li>
@@ -276,9 +275,9 @@
                   <input ng-model="metroCampagin.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
                     minlength="3" maxlength="60" required="required" placeholder="Client Name">
                   <div ng-messages="forms.CampaignForm.org_name.$error" style="color:red" ng-if="forms.CampaignForm.org_name.$touched">
-                    <div ng-message="required">Organization Name is required.</div>
-                    <div ng-message="minlength">Organization Name must have 3 characters.</div>
-                    <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
+                    <div ng-message="required">Client Name is required.</div>
+                    <div ng-message="minlength">Client Name must have 3 characters.</div>
+                    <div ng-message="maxlength">Client Name shouldn't exceed 30 characters. </div>
                   </div>
                 </div>
               </li>
@@ -306,11 +305,11 @@
               </li>
               <li>
                 <div class="form-group ">
-                  <input ng-model="metroCampagin.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
+                  <input ng-model="metroCampagin.org_contact_refered" only-letters-input name="refered" class="form-control md-whiteframe-3dp"
                     type="text" maxlength="10" required="required" placeholder="Refered By">
                   <div ng-messages="forms.CampaignForm.refered.$error" style="color:red" ng-if="forms.CampaignForm.refered.$touched">
-                    <div ng-message="required">Refered No is required.</div>
-                    <div ng-message="maxlength">Refered No must have 10 characters.</div>
+                    <div ng-message="required">Refered By is required.</div>
+                    <div ng-message="maxlength">Refered By must have 10 characters.</div>
                   </div>
                 </div>
               </li>
@@ -320,12 +319,11 @@
                     type="text" maxlength="10" required="required" placeholder="Estimated Budget">
                   <div ng-messages="forms.CampaignForm.Budget.$error" style="color:red" ng-if="forms.CampaignForm.Budget.$touched">
                     <div ng-message="required">Budget No is required.</div>
-                    <div ng-message="maxlength">Phone No must have 10 characters.</div>
                   </div>
                 </div>
               </li>
-              <md-button class="md-raised md-primary cam_btn" layout-fill ng-click="saveMetroCampaign(metroCampagin)">
-                CREATE Metro CAMPAIGN
+              <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampagin)">
+                  Create Metro Campaigns
               </md-button>
             </div>            
           </div>          
@@ -336,32 +334,33 @@
     </div>
   </div>
   <md-tabs md-dynamic-height class="padding_cmp">
-    <md-tab label="Proposals/Booked">
+    <md-tab label="Proposals">
       <div style="margin-top: 1em;">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr class="text_color camp-text">
-                <th class="width_1">CID</th>
-                <th class="text-left">Campaign Name</th>
-                <th class="width_2">Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
+              <tr class="text_color">
+                <th class="">CID</th>
+                <th class="">Campaign Name</th>
+                <th class="">Start Date</th>
+                <th class="text-center">No of Products </th>
+                <th class="text-center">Paid</th>
+                <th class="text-center">Total Budget</th>
                 <th class=""></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
               </tr>
             </thead>
-            <tbody class="camp-text">
-              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600 ">
+            <tbody class="">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status <= 600">
+                  <!-- ng-if="campaign.status==300 || campaign.status==400 ||campaign.status==500 ||campaign.status==600  -->
                 <td class="table_vertical">{{campaign.cid}}</td>
-                <td class="text-left table_vertical">{{campaign.name}}</td>
+                <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
 
-                <td class="table_vertical ">
+                <td class="text-center table_vertical ">
                   <md-menu md-position-mode="target-right target" id="width_popup">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                       <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -375,6 +374,27 @@
                           </div>
                         </md-button>
                       </md-menu-item>
+                      
+                      <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                         
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div> -->
                       <md-menu-item>
                         <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
                           <div layout="row">
@@ -391,18 +411,18 @@
                           </div>
                         </md-button>
                       </md-menu-item> -->
-                      <md-menu-item>
+                      <!-- <md-menu-item>
                         <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                           <div layout="row">
                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Payment Details</p>
                           </div>
                         </md-button>
-                      </md-menu-item>
+                      </md-menu-item> -->
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                   <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
                 </td>
               </tr>
@@ -416,26 +436,27 @@
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr class="text_color text-center">
+              <tr class="text_color">
                 <th>CID</th>
-                <th class="text-left">Campaign Name</th>
+                <th class="">Campaign Name</th>
                 <th>Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
+                <th class="text-center">No of Products </th>
+                <th class="text-center">Paid</th>
+                <th class="text-center">Total Budget</th>
                 <th></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
               </tr>
             </thead>
-            <tbody class="text-center">
-              <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status==800">
+            <tbody class="">
+              <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status >= 700">
+                  <!-- ng-if="campaign.status==800" -->
                 <td class="table_vertical">{{campaign.cid}}</td>
-                <td class="text-left table_vertical">{{campaign.name}}</td>
+                <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
-                <td class="table_vertical">
+                <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                       <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -450,7 +471,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
                           <div layout="row">
                             <md-icon><i class="material-icons">share</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
@@ -476,7 +497,7 @@
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                   <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
@@ -491,26 +512,27 @@
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr class="text_color text-center">
+              <tr class="text_color">
                 <th>CID</th>
-                <th class="text-left">Campaign Name</th>
+                <th class="">Campaign Name</th>
                 <th>Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
+                <th class="text-center">No of Products </th>
+                <th class="text-center">Paid</th>
+                <th class="text-center">Total Budget</th>
                 <th></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
               </tr>
             </thead>
-            <tbody class="text-center">
-              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==700">
+            <tbody class="">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status >= 800">
+                  <!-- ng-if="campaign.status==700" -->
                 <td class="table_vertical">{{campaign.cid}}</td>
-                <td class="text-left table_vertical">{{campaign.name}}</td>
+                <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-              <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
-                <td class="table_vertical">
+              <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                       <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -551,7 +573,7 @@
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                   <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
@@ -565,26 +587,27 @@
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr class="text_color text-center">
+              <tr class="text_color">
                 <th>CID</th>
-                <th class="text-left">Campaign Name</th>
+                <th class="">Campaign Name</th>
                 <th>Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
+                <th class="text-center">No of Products </th>
+                <th class="text-center">Paid</th>
+                <th class="text-center">Total Budget</th>
                 <th></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
               </tr>
             </thead>
-            <tbody class="text-center" ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status==900 || campaign.status==1000" >
+            <tbody class="" ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status >=900">
+                <!-- ng-if="campaign.status==900 || campaign.status==1000" -->
               <tr>
                 <td class="table_vertical">{{campaign.cid || "N/A"}}</td>
-                <td class="text-left table_vertical">{{campaign.name}}</td>
+                <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-              <td class="text-center table_vertical hide-xs">{{campaign.product_count || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical hide-xs">{{campaign.est_budget || "0"}}</td>
-                <td class="table_vertical">
+              <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                       <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -625,7 +648,7 @@
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                   <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
                 </td>
               </tr>
@@ -639,26 +662,26 @@
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
-              <tr class="text_color text-center">
+              <tr class="text_color">
                 <th>CID</th>
-                <th class="text-left">Campaign Name</th>
+                <th class="">Campaign Name</th>
                 <th>Start Date</th>
-                <th class="hide-xs">No of Products </th>
-                <th class="hide-xs">Paid</th>
-                <th class="hide-xs">Total Budget</th>
+                <th class="text-center">No of Products </th>
+                <th class="text-center">Paid</th>
+                <th class="text-center">Total Budget</th>
                 <th></th>
-                <th class="hide-xs"></th>
+                <th class=""></th>
               </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="">
               <tr ng-repeat="MCampaign in metrocampaign| filter:search">
                 <td class="table_vertical">{{MCampaign.cid}}</td>
-                <td class="text-left table_vertical">{{MCampaign.name}}</td>
+                <td class="table_vertical">{{MCampaign.name | capitalize}}</td>
                 <td class="table_vertical">{{MCampaign.created_at | dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-                <td class="table_vertical hide-xs">{{MCampaign.no_products || "N/A" }}</td>
-                <td class="table_vertical hide-xs">{{MCampaign.total_paid || "N/A" }}</td>
-                <td class="table_vertical hide-xs">{{MCampaign.act_budget || "N/A" }}</td>
-                <td class="table_vertical">
+                <td class="text-center table_vertical">{{MCampaign.no_products || "N/A" }}</td>
+                <td class="text-center table_vertical">{{MCampaign.total_paid || "N/A" }}</td>
+                <td class="text-center table_vertical">{{MCampaign.act_budget || "N/A" }}</td>
+                <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                       <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -673,7 +696,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(MCampaign.id)"">
+                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(MCampaign.id)">
                           <div layout="row">
                             <md-icon><i class="material-icons">share</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
@@ -691,7 +714,7 @@
                     </md-menu-content>
                   </md-menu>
                 </td>
-                <td class="table_vertical hide-xs">
+                <td class="text-center table_vertical">
                   <span class="text_color md-caption">{{MCampaign.updated_at || "N/A"  }}</span>
                 </td>
               </tr>

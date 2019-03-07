@@ -14,27 +14,30 @@
             <!-- <button class="btn btn-default metro_btn hide-xs">Metro Train</button> -->
             <div class="profile_details_left"><!--notifications of menu start -->
                 <ul class="nofitications-dropdown">
-                    <li class="dropdown head-dpdn"> <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">{{ownerNotifs.length}}</span></a>
+                    <li class="dropdown head-dpdn"> <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue" id="notification-count">0</span></a>
                         <!-- <ul class="dropdown-menu arrrow_box animated fadeInDown mt-5"> -->
                         <ul class="dropdown-menu dropdown-bell arrrow_box animated fadeInDown">
                             <li>
                                 <div class="notification_header">
-                                    <h3 class="text_color">You have {{ownerNotifs.length}} new notification</h3>
+                                    <h3 class="text_color">You have <span id="notification1-count">0</span> new notification</h3>
                                 </div>
                             </li>
-                            <li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
-                                <div class="notification_desc pl-3">
-                                    <p>{{notif.message}}</p>
-                                    <p><span>{{notif.updated_at| dateify:'DD-MM-YYYY hh:mm:ss a'}}</span></p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <div class="notification_bottom"> <a ng-href="#/owner/{{clientSlug}}/notifications">See all notifications</a> </div>
+                            <li id="notification-id-0"></li>
+                            <li id="notification-id-1"></li>
+                            <li id="notification-id-2"></li>
+                            <!-- <li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
+                                 <div class="notification_desc pl-3">
+                                     <p>{{notif.message}}</p>
+                                     <p><span>{{notif.updated_at| dateify:'DD-MM-YYYY hh:mm:ss a'}}</span></p>
+                                 </div>
+                                 <div class="clearfix"></div>
+                             </li>-->
+                            <div class="notification_bottom"> <a ng-href="#/owner/{{clientSlug}}/owner-notifications">See all notifications</a> </div>
                     </li>
                 </ul>
                 </li>
                 <li class="dropdown head-dpdn hide-xs" > 
-                    <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Camapgin ({{ownerNotifs.length}})</a>
+                    <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Campaign ({{ownerNotifs.length}})</a>
                     <ul class="dropdown-menu animated fadeInDown dropdown-saved">
                         <li>
                             <div class="notification_header ">
@@ -59,7 +62,7 @@
                             <img src="assets/images/man.png" class="hide-xs"/>
                             <i class="fa fa-ellipsis-v lnr"></i>
                     </a> -->
-                    <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A		
+                    <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">{{loggedInUser.firstName.slice(0,1)}}		
                         <ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s">
                             <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                             <li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
