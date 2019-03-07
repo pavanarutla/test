@@ -436,7 +436,7 @@ app.controller('GmapCtrl',
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $mdSidenav('productDetails').toggle();
                     $scope.selectedProduct = marker;
                 }
@@ -456,7 +456,7 @@ app.controller('GmapCtrl',
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').toggle();
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
                 }
 
