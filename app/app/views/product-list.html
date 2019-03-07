@@ -71,17 +71,29 @@
                       <div flex></div>
                       <!-- <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span> -->
                   </div>
-                  <div class="row">            
+                  <!-- <div class="row">            
                     <div flex-gt-xs>               
-                        <md-datepicker ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
                       </div>
                       <div flex-gt-xs>                 
-                          <md-datepicker ng-model="booked_to" md-placeholder=""></md-datepicker>
+                          <md-datepicker class="form-control" ng-model="booked_to" md-placeholder=""></md-datepicker>
                         </div>
                         <div class="col-12 mt-3 text-right">
                             <button type="button" class="btn btn-danger" ng-click="FilterProductlist(booked_from,booked_to)">Filter</button>
                         </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-md-6 text-center mt-2">
+                    <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
+                    </div>
+                  <div class="col-md-6 text-center mt-2">
+                    <md-datepicker class="form-control" ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
                   </div>
+                  <div class="col-12 mt-2 text-right">
+                    <md-button class="md-raised md-primary all_button" ng-click="FilterProductlist(booked_from,booked_to)">Filter</md-button>
+                    <!-- <button type="button" class="btn all_button" ng-click="FilterDates(booked_from,booked_to)">Filter</button> -->
+                  </div>
+                </div>
               </div>
             
               <!-- filters html end-->
@@ -221,13 +233,13 @@
       <tr>
         <th>Image</th>
         <th>Tab ID</th>
-        <th class="hide-xs">Product Details</th>
+        <th class="">Product Details</th>
         <th class="" style="width: 6%;">Views</th>
-        <th class="hide-xs">Product Type</th>
-        <th class="hide-xs">Size</th>
-        <th class="text-center hide-xs">Lit</th>
-        <th class="hide-xs" style="width: 10%;">Address</th>
-        <th class="hide-xs"></th>
+        <th class="">Product Type</th>
+        <th class="">Size</th>
+        <th class="text-center">Lit</th>
+        <th class="" style="width: 10%;">Address</th>
+        <th class=""></th>
       </tr>
     </thead>
     <tbody ng-repeat="proddetail in productmarkerslist">
@@ -238,13 +250,13 @@
         </td>
         <td class="table_vertical">{{proddetails.siteNo}}
         </td>
-        <td class="table_vertical hide-xs">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
+        <td class="table_vertical">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
         <td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td>
-        <td class="table_vertical hide-xs">{{proddetails.format_name}}</td>
-        <td class="table_vertical hide-xs">{{proddetails.panelSize}}</td>
-                  <td class="table_vertical hide-xs">{{proddetails.lighting}}</td>
-                  <td class="table_vertical hide-xs" style="width: 10%;">{{proddetails.direction}}</td>
-        <td class="text-center table_vertical hide-xs">
+        <td class="table_vertical">{{proddetails.format_name}}</td>
+        <td class="table_vertical">{{proddetails.panelSize}}</td>
+                  <td class="table_vertical">{{proddetails.lighting}}</td>
+                  <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td>
+        <td class="text-center table_vertical">
           <a ng-click="getproddata(proddetails)"><button type="button"
              class="btn product_btnview">View Details</button></a>
         </td>

@@ -11,7 +11,8 @@ app.controller("CampaignProposalCtrl", function(
   config,
   toastr,
   OwnerProductService,
-  Upload
+  Upload,
+  FileSaver
 ) {
   $scope.productList = [];
   //$scope.isChecked = true;
@@ -164,7 +165,15 @@ app.controller("CampaignProposalCtrl", function(
       $scope.onchecked = true;
     }
   };
-
+  $scope.downloadAdminQuote = function (campaignId) {
+    AdminCampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                };
   function loadCampaignPayments(campaignId) {
     if ($scope.campaignDetails.status >= 6) {
       AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(

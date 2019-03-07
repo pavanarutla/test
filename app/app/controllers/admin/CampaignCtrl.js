@@ -785,7 +785,7 @@ $scope.getProductUnavailableDates = function (productId, ev) {
   });
 },
   $scope.downloadAdminQuote = function (campaignId) {
-                    CampaignService.downloadQuote(campaignId).then(function (result) {
+    AdminCampaignService.downloadQuote(campaignId).then(function (result) {
                         var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
                         FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
                         if (result.status) {
