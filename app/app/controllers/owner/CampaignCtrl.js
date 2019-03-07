@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config,$state) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config,$state,FileSaver) {
     $scope.forms = [];
     $scope.serverUrl = config.serverUrl;
 
@@ -120,6 +120,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     return true;
                 }
             }
+            if(moment(dt) < moment()){
+                return true;
+            }
         },
         isCustomDate: function (dt) {
             for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
@@ -132,6 +135,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         return 'red-blocked';
                     }
                 }
+            }
+            if(moment(dt) < moment()){
+                return 'gray-blocked';
+            }
+        },
+        eventHandlers: {
+            'apply.daterangepicker': function(ev, picker) { 
+                //selectedDateRanges = [];
+                console.log(ev);
             }
         },
     };
@@ -740,6 +752,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         document.getElementById("myDropdown").classList.toggle("hide");
       }
       function close() {
+
         angular.element(document.querySelector("#shareDropdown")).addClass("hide");
         angular.element(document.querySelector("#shareDropdown")).removeClass("show");
     }
@@ -861,7 +874,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
 
   }
 
-
+      $scope.downloadOwnerQuote = function (campaignId) {
+                    OwnerCampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                };
   // if ($rootScope.currStateName == 'owner.update-payments') {
    
   // }
