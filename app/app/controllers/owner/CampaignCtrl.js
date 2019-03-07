@@ -740,8 +740,9 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         document.getElementById("myDropdown").classList.toggle("hide");
       }
       function close() {
-        angular.element(document.querySelector("#myDropdown")).addClass("hide");
-        angular.element(document.querySelector("#myDropdown")).removeClass("show");
+
+        angular.element(document.querySelector("#shareDropdown")).addClass("hide");
+        angular.element(document.querySelector("#shareDropdown")).removeClass("show");
     }
     $scope.viewSelectedCampaign = function (campaign) {
         $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);

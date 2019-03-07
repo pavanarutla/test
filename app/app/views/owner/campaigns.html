@@ -342,7 +342,7 @@
               <tr class="text_color">
                 <th class="">CID</th>
                 <th class="">Campaign Name</th>
-                <th class="width_2">Start Date</th>
+                <th class="">Start Date</th>
                 <th class="text-center">No of Products </th>
                 <th class="text-center">Paid</th>
                 <th class="text-center">Total Budget</th>
@@ -374,6 +374,27 @@
                           </div>
                         </md-button>
                       </md-menu-item>
+                      
+                      <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                         
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div> -->
                       <md-menu-item>
                         <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
                           <div layout="row">
@@ -450,7 +471,7 @@
                         </md-button>
                       </md-menu-item>
                       <md-menu-item>
-                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
                           <div layout="row">
                             <md-icon><i class="material-icons">share</i></md-icon>
                             <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
