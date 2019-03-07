@@ -92,6 +92,11 @@ app.service('CampaignService',
                         var dfd = $q.defer();
                         $http.post(config.apiPath + '/share-metro-campaign', campaignToEmail).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
+                    },
+                    downloadQuote: function (campaignId) {
+                        var dfd = $q.defer();
+                        $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
                     }
                    
                 }

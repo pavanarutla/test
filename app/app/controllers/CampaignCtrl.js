@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr,FileSaver) {
 
   $scope.config = config;
 
@@ -516,6 +516,15 @@ function close() {
         }
        
   }
+  $scope.downloadUserQuote = function (campaignId) {
+                    CampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                };
   /*=============================
   | Page based initial loads end
   =============================*/

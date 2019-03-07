@@ -1,4 +1,4 @@
-app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window,$state) {
+app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $location,Upload,config  , $rootScope, CampaignService, AdminCampaignService,AdminContactService, AdminMetroService, ProductService,ContactService, toastr, FileSaver, Blob, MetroService, $window,$state,FileSaver) {
   $scope.newDate = new Date();
   $scope.CAMPAIGN_STATUS = [
     'campaign-preparing',    //    100
@@ -783,7 +783,16 @@ $scope.getProductUnavailableDates = function (productId, ev) {
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');
   });
-}
+},
+  $scope.downloadAdminQuote = function (campaignId) {
+                    CampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                },
 
 $scope.suggestProductForAdminCampaign = function (adminProduct) {
  // console.log(adminProduct);
@@ -851,6 +860,7 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
               }
           }
       },
+     
   };
   /*====================================
    | Multi date range picker options end
