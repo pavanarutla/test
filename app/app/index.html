@@ -251,13 +251,13 @@
         var user = localStorage.getItem("loggedInUser");
         var parsedData = JSON.parse(user);
         var user_type = parsedData.user_type;
-        console.log(user_type);
+        console.log(parsedData.user_id);
         if (user_type == 'bbi') {
             var user_id = '-superAdmin';
         } else if (user_type == 'basic') {
             var user_id = parsedData.user_id;
         } else if (user_type == 'owner') {
-            var user_id = '-' + parsedData.user_id;
+            var user_id = '-' + parsedData.mong_id;
         }
         var arrayText = [];
         // Enable pusher logging - don't include this in production
