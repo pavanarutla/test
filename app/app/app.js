@@ -45,6 +45,38 @@ var app = angular.module('bbManager', [
       url: 'home',
       templateUrl: 'views/home.html'
     })
+    .state('index.aboutbbi', {
+      url: 'aboutbbi',
+      templateUrl: 'views/about_bbi.html'
+    })
+    .state('index.ourproduct', {
+      url: 'ourproduct',
+      templateUrl: 'views/our_product.html'
+    })
+    .state('index.faq', {
+      url: 'faq',
+      templateUrl: 'views/faq_product.html'
+    })
+    .state('index.suggestme', {
+      url: 'suggestme',
+      templateUrl: 'views/suggest_me.html'
+    })
+    .state('index.homemetro', {
+      url: 'homemetro',
+      templateUrl: 'views/homemetro.html'
+    })
+    .state('index.ourteam', {
+      url: 'ourteam',
+      templateUrl: 'views/our_team.html'
+    })
+    .state('index.fullservices', {
+      url: 'fullservices',
+      templateUrl: 'views/full_services.html'
+    })
+    .state('index.joincareers', {
+      url: 'joincareers',
+      templateUrl: 'views/join_careers.html'
+    })
     .state('index.formats', {
       url: 'formats',
       templateUrl: 'views/formats.html',
@@ -737,7 +769,7 @@ app.run(
         // Get all URL parameter
         $rootScope.currentTitle = transition.to().title;
         $rootScope.currStateName = transition.to().name;
-        if ((transition.to().name == "index.location" || transition.to().name == "index.metro")&& $auth.isAuthenticated()) {
+        if ((transition.to().name == "index.location" || transition.to().name == "index.metro" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
         else {
