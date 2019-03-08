@@ -644,7 +644,7 @@ app.config(['toastrConfig', function (toastrConfig) {
     containerId: 'toast-container',
     maxOpened: 0,
     newestOnTop: true,
-    positionClass: 'toast-center',
+    positionClass: 'toast-top-right',
     preventDuplicates: false,
     preventOpenDuplicates: false,
     target: 'body'
