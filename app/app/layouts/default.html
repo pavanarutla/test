@@ -105,8 +105,8 @@
             </li>
 
             <li class="dropdown head-dpdn" ng-if="isAuthenticated">
-              <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A</a>
-              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserBasic">
+              <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">{{loggedInUser.firstName.slice(0,1)}}</a>
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="loggedInUser.user_type='basic'">
                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
                 <li ng-if="isUserBasic()"> <a ng-href="#/shortlisted-products"> Shortlisted Inventory
@@ -118,7 +118,7 @@
                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
               </ul>
 
-              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout" ng-if="isUserOwner">
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout"  ng-if="loggedInUser.user_type='owner'">
                 <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
                 <li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
                 <li> <a ng-href="#/payments"> Payments</a> </li>

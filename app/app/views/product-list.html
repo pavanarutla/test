@@ -19,85 +19,22 @@
       <div class="product_heading pl-0 pr-0">
           <div id="myProduct" class="map_filters mt-2">
               <div id="mydivheader">
-                  <!-- <a href="" class="menu__btn">
-                      <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
-                  </a> -->
                   <a href="#/location" class="text_color md-caption"> Switch to map View</a>
                   <span flex></span>
                   <a ng-click="resetData()" class="md-caption float-right text_a"> Clear Filters</a>
               </div>
-              <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
-                  <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
-                      md-search-text="searchId" md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo"
-                      placeholder="Search By Tab id" md-clear-button="true" style="min-width: 100% !important">
-                      <md-item-template>
-                          <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                      </md-item-template>
-                  </md-autocomplete>
-              </div>
-              <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
-                  <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
-                      md-search-text="searchId" md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo"
-                      placeholder="Search By Area,Location" md-clear-button="true" style="min-width: 100% !important">
-                      <md-item-template>
-                          <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                      </md-item-template>
-                  </md-autocomplete>
-              </div> -->
-              <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
-                  <md-autocomplete                      
-                    md-min-length="2"
-                    md-selected-item = "selectedId"
-                    md-selected-item-change="selectFromTabIdSearch(items)"
-                    md-search-text="searchId"
-                    md-items="items in searchByTabId(searchId)"
-                    md-item-text="items.siteNo"                          
-                    placeholder="Search By Tab id"
-                    md-clear-button="true" style="min-width: 100% !important">
-                    <md-item-template>
-                      <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                    </md-item-template>                    
-                  </md-autocomplete> 
-                </div> -->
                 <div class="form-group saved_search_user">
                   <input type="search" class="form-control md-whiteframe-3dp" ng-model="siteNo"  placeholder="Search By Tab id">
               </div>
               <div class="form-group saved_search_user">
                   <input type="search" class="form-control md-whiteframe-3dp" ng-model="area_name"  placeholder="Search By Area,Location">
               </div>
-                <!-- <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
-                  <md-autocomplete                      
-                  md-min-length="2"
-                  md-selected-item = "selectedArea"
-                  md-selected-item-change="selectedAreaChanged(item)"
-                  md-search-text="searchText"
-                  md-items="item in autoCompleteArea(searchText)"
-                  md-item-text="item.name"                      
-                  placeholder="Search By Area,Location"
-                  md-clear-button="true" style="min-width: 100% !important">
-                  <md-item-template>
-                    <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
-                  </md-item-template>                    
-                  </md-autocomplete>
-                </div> -->
               <!-- filters html start-->
               <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
                   <div layout="row">
                       <div class="md-caption text-left">Show products available between</div>
                       <div flex></div>
-                      <!-- <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span> -->
                   </div>
-                  <!-- <div class="row">            
-                    <div flex-gt-xs>               
-                        <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
-                      </div>
-                      <div flex-gt-xs>                 
-                          <md-datepicker class="form-control" ng-model="booked_to" md-placeholder=""></md-datepicker>
-                        </div>
-                        <div class="col-12 mt-3 text-right">
-                            <button type="button" class="btn btn-danger" ng-click="FilterProductlist(booked_from,booked_to)">Filter</button>
-                        </div>
-                  </div> -->
                   <div class="row">
                     <div class="col-md-12 text-center mt-2 mb-3">
                     <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
@@ -107,7 +44,6 @@
                   </div>
                   <div class="col-12 mt-2 text-right">
                     <md-button class="md-raised md-primary all_button" ng-click="FilterProductlist(booked_from,booked_to)">Filter</md-button>
-                    <!-- <button type="button" class="btn all_button" ng-click="FilterDates(booked_from,booked_to)">Filter</button> -->
                   </div>
                 </div>
               </div>
@@ -119,14 +55,6 @@
                     <div layout="row">
                       <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
                       <div flex></div>
-                      <div>
-                        <!-- <md-icon ng-hide="format">
-                          <i class="material-icons text-white">keyboard_arrow_down</i>
-                        </md-icon> -->
-                        <!-- <md-icon ng-show="format">
-                          <i class="material-icons text-white">keyboard_arrow_up</i>
-                        </md-icon> -->
-                      </div>
                     </div>
                   </div>
                   <div layout="column" class="formats-types">
@@ -138,14 +66,11 @@
                           <div ng-cloak style="border-right:1px solid #ccc" ng-click="FormatData(format.name)">
                             <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
                               ng-if="format" style="margin:0px;padding :0px;">
-                              <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                               <img ng-src="{{serverUrl + format.image}}" class="img-size">
                               <div class="md-caption">{{format.name}}</div>
                             </md-button>
                             <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
                           </div>
-          
-                          <!-- <md-divider hide-xs></md-divider> -->
                         </div>
                       </div>
                       <md-divider></md-divider>
@@ -169,80 +94,6 @@
           </div>
       </div>
       <div class="product_detalis pl-0 mt-2">
-          <!-- <div class="products_list mt-3">
-              <div class="row">
-                  <div class="col">Image</div>
-                  <div class="col">Tab ID</div>
-                  <div class="col-md-2">Product Details</div>
-                  <div class="col">Views</div>
-                  <div class="col">Product Type</div>
-                  <div class="col">Size</div>
-                  <div class="col">Lit</div>
-                  <div class="col-md-2">Address</div>
-                  <div class="col">Action</div>
-              </div>
-              <div  class="product_detls_inner contbg pt-2 pb-2">
-                  <div class="row ">
-                      <div class="col">
-                          <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px"/>
-                      </div>
-                      <div class="col">BB238</div>
-                      <div class="col-md-2">BB238 - Kothaguda</div>
-                      <div class="col">1,48,000</div>
-                      <div class="col">Hoarding</div>
-                      <div class="col">40ft X 40ft</div>
-                      <div class="col">Yes</div>
-                      <div class="col-md-2">From Kothaguda X Roads,
-                              towards Hitech city</div>
-                      <div class="col">
-                          <a href="#">View Details</a>
-                      </div>
-                  </div>
-              </div>
-          </div> -->
-          <!-- <div class="wrapper p-2 mb-3 text_color">
-              <div class="w-10">Image</div>
-              <div class="w-10">Tab ID</div>
-              <div class="w-15">Product Details</div>
-              <div class="w-10">Views</div>
-              <div class="w-10">Product Type</div>
-              <div class="w-10">Size</div>
-              <div class="w-5">Lit</div>
-              <div class="w-20">Address</div>
-              <div class="w-10"></div>
-          </div>
-          <div class="wrapper contbg p-2 md-whiteframe-2dp mt-1">
-              <div class="w-10">
-                  <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px" />
-              </div>
-              <div class="w-10 align-self-center">BB238</div>
-              <div class="w-15 align-self-center">BB238 - Kothaguda</div>
-              <div class="w-10 align-self-center">1,48,000</div>
-              <div class="w-10 align-self-center">Hoarding</div>
-              <div class="w-10 align-self-center">40ft X 40ft</div>
-              <div class="w-5 align-self-center">Yes</div>
-              <div class="w-20">From Kothaguda X Roads,
-                  towards Hitech city</div>
-              <div class="w-10 align-self-center product_btn">
-                  <a href="" ng-click="productview()">View Details</a>
-              </div>
-          </div>
-          <div class="wrapper contbg p-2 md-whiteframe-2dp mt-1">
-              <div class="w-10">
-                  <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px" />
-              </div>
-              <div class="w-10 align-self-center">BB238</div>
-              <div class="w-15 align-self-center">BB238 - Kothaguda</div>
-              <div class="w-10 align-self-center">1,48,000</div>
-              <div class="w-10 align-self-center">Hoarding</div>
-              <div class="w-10 align-self-center">40ft X 40ft</div>
-              <div class="w-5 align-self-center">Yes</div>
-              <div class="w-20">From Kothaguda X Roads,
-                  towards Hitech city</div>
-              <div class="w-10 align-self-center product_btn">
-                  <a href="" ng-click="productview()">View Details</a>
-              </div>
-          </div> -->
           <div class="table-responsive">
   <table class="table table-hover">
     <thead class="text_color">
