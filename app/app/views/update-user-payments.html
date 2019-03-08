@@ -1,5 +1,5 @@
 <!-- share campaign sidenav -->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
     <div layout="row">
       <div class="md-toolbar-tools">
         <div flex></div>
@@ -34,7 +34,7 @@
         </div>
       </form>
     </md-content>
-  </md-sidenav>
+  </md-sidenav> -->
   <!-- share campaign sidenav ends -->
 <!-- <div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div> -->
 <div layout="column">
@@ -134,7 +134,7 @@
 									</div>
 								</div>
 								<div class="offset-md-7 col-md-5" style="padding-right: 0px;">
-										<md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,campaignDetails.id)">Share
+										<md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,UserPaymentDetails.campaign_details.id)">Share
 												Campaign</md-button>
 								</div>
 							</div>
@@ -143,7 +143,7 @@
 					</div>
 				</div>
       </div>
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng">
+      <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng">
         <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
             <a href="assets/images/owner/owner_logo.png" download>
               <md-button class="dropbtn drop_width">
@@ -154,7 +154,22 @@
               </md-button>
             </a>
       </div>
-    </div>
+    </div> -->
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+    style="cursor: pointer;">			
+     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+         <a ng-click="downloadUserQuote(UserPaymentDetails.campaign_details.id)" download>
+     <md-button class="dropbtn drop_width">
+         <!-- ng-click="downloadPdf()" with service -->
+         <!-- ng-click="getConvas()"  with out service id="exportthis"-->
+         <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+             file_copy
+           </i></span></p>
+       <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+     </md-button>
+   </a>
+   </div>
+   </div>
 		</div>
 	</div>
   <div class="table-responsive">
