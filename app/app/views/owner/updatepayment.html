@@ -1,4 +1,4 @@
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
   <div layout="row">
     <div class="md-toolbar-tools">
       <div flex></div>
@@ -28,12 +28,12 @@
             <div ng-message="pattern">Enter a valid Email Id.</div>
           </div>
         </md-input-container>
-        <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
+        <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,campaignPaymentDetails.id)">Share
           Campaign</md-button>
       </div>
     </form>
   </md-content>
-</md-sidenav>
+</md-sidenav> -->
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
   <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
@@ -86,7 +86,7 @@
               <div layout="column" style="padding:10px;">
                 <div class="form-group">
                   <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name" required="required" />
-                  <div ng-messages="shareCampaignForm.name.$error">
+                  <div ng-messages="shareCampaignForm.receiver_name.$error">
                     <div ng-message="required">Name is required.</div>
                     <div ng-message="pattern">Enter a valid Name.</div>
                   </div>
@@ -99,7 +99,7 @@
                   </div>
                 </div>
                 <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
-                    <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
+                    <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,campaignPaymentDetails.id)">Share
                         Campaign</md-button>
                 </div>
                 
@@ -141,7 +141,6 @@
             <li>
               <div class="">
                 <div class="col-md-12">
-                  <form>
                     <div class="form-group row">
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                       <div class="col-sm-8">
@@ -149,6 +148,8 @@
                           <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
                         </select>
                         <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                          Mode Is required!!
+                        </span>                        
                       </div>
                     </div>
                     <div class="form-group row">
@@ -163,7 +164,7 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" required="required" ng-model="campaignPayment.reference_no">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" only-numeric required="required" ng-model="campaignPayment.reference_no">
                         <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
                             <div ng-message="required">Reference No is required.</div>
                           </div>
@@ -172,7 +173,7 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By *:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input name="recived" required="required" ng-model="campaignPayment.received_by">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input  name="recived" required="required" ng-model="campaignPayment.received_by">
                         <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
                             <div ng-message="required">Received By is required.</div>
                           </div>
@@ -207,10 +208,9 @@
                                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                       </div>
                       <div class="col-sm-4">
-                        <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="updateOwnerCampaignPayment()">Submit</md-button>
+                        <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="updateOwnerCampaignPayment(campaignPaymentDetails.id)">Submit</md-button>
                       </div>
                     </div>
-                  </form>
                 </div>
               </div>
             </li>

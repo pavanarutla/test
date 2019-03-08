@@ -160,28 +160,38 @@ $scope.applymethod=function(product){
         cancelLabel: 'Cancel',
         customRangeLabel: 'Custom range'
     },
-    isInvalidDate : function(dt){
-      for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
-        if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+    isInvalidDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+          if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+              return true;
+          }
+      }
+      if(moment(dt) < moment()){
           return true;
-        }
       }
-    },
-    isCustomDate: function(dt){
-      for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
-        if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
-          if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
-            return ['red-blocked', 'left-radius'];
+  },
+  isCustomDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+          if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+              if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                  return ['red-blocked', 'left-radius'];
+              } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                  return ['red-blocked', 'right-radius'];
+              } else {
+                  return 'red-blocked';
+              }
           }
-          else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
-            return ['red-blocked', 'right-radius'];
-          }
-          else{
-            return 'red-blocked';
-          }
-        }
       }
-    },
+      if(moment(dt) < moment()){
+          return 'gray-blocked';
+      }
+  },
+  eventHandlers: {
+      'apply.daterangepicker': function(ev, picker) { 
+          //selectedDateRanges = [];
+          console.log(ev);
+      }
+  }
   };
   $scope.inventoryListOpts = {
     multipleDateRanges: true,
@@ -308,8 +318,7 @@ $scope.applymethod=function(product){
 
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      $scope.requestedProductList = result.products;      
-      // console.log(result.products);
+      $scope.requestedProductList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -481,7 +490,7 @@ $scope.applymethod=function(product){
     });
   }
 
-  $scope.getProductUnavailableDatesEdit = function(ev){
+  $scope.getProductUnavailableDatesEdit = function(productId,ev){
     var productId = $stateParams.id;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
@@ -489,7 +498,7 @@ $scope.applymethod=function(product){
     });
   }
 
-  $scope.getProductUnavailableDates = function(productId, ev){
+  $scope.getProductUnavailableDates = function(productId , ev ){
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');

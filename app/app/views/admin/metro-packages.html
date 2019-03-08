@@ -1,11 +1,5 @@
 <div layout="column" layout-fill="layout-fill">
 
-	<div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
-		<div class="md-title">
-			Metro packages
-		</div>
-	</div>
-
 	<form role="form" style="margin: 1em"   name="metroPackage">
 		<input type="hidden" ng-model="package.id" />
 		<div class="form-group row">
@@ -119,9 +113,9 @@
 	<!-- tables grid html start-->
 	<div style="margin: 1em;">
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered ">
+			<table class="table table-hover call_center">
 				<thead>
-					<tr>
+					<tr class="text_color">
 						<th>Name</th>
 						<th>Corridor</th>
 						<th>Format</th>
@@ -133,13 +127,13 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="metroPackage in metroPackageList">
-						<td>{{metroPackage.name}}</td>
-						<td>{{metroPackage.corridor}}</td>
-						<td>{{metroPackage.format}}</td>
-						<td>{{metroPackage.price}}</td>
-						<td>{{metroPackage.max_trains}}</td>
-						<td>{{metroPackage.description}}</td>
-						<td>
+						<td class="table_vertical">{{metroPackage.name}}</td>
+						<td class="table_vertical">{{metroPackage.corridor}}</td>
+						<td class="table_vertical">{{metroPackage.format}}</td>
+						<td class="table_vertical">{{metroPackage.price}}</td>
+						<td class="table_vertical">{{metroPackage.max_trains}}</td>
+						<td class="table_vertical">{{metroPackage.description}}</td>
+						<td class="table_vertical">
 							<span>
 								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">
 									<md-icon>
