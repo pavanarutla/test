@@ -1,4 +1,4 @@
-app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$stateParams,$mdSidenav,toastr,$mdDialog) {  
+app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$stateParams,$mdSidenav,toastr,$mdDialog,FileSaver) {  
     $scope.getUserPayment = function(){
         CampaignService.getActiveUserCampaigns().then(function(result){
             console.log(result);
@@ -51,6 +51,15 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
       });
   }
       //share Camp ends
+      $scope.downloadUserQuote = function (campaignId) {
+        CampaignService.downloadQuote(campaignId).then(function (result) {
+            var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+            FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+            if (result.status) {
+                toastr.error(result.meesage);
+            }
+        });
+    };
         if ($rootScope.currStateName == "index.user-payments") {
             $scope.getUserPayment();
           }
