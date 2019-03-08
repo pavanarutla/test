@@ -109,7 +109,7 @@
           </div>
         </div>
         </div>
-    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng">
+    <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng">
         <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
             <a href="assets/images/owner/owner_logo.png" download>
               <md-button class="dropbtn drop_width">
@@ -120,7 +120,22 @@
               </md-button>
             </a>
       </div>
-    </div>
+    </div> -->
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+    style="cursor: pointer;">			
+     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+         <a ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
+     <md-button class="dropbtn drop_width">
+         <!-- ng-click="downloadPdf()" with service -->
+         <!-- ng-click="getConvas()"  with out service id="exportthis"-->
+         <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+             file_copy
+           </i></span></p>
+       <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+     </md-button>
+   </a>
+   </div>
+   </div>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
       style="margin-top:1em;">
       <div class="dropdown" style="float: right;">

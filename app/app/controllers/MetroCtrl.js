@@ -316,11 +316,11 @@ app.controller('MetroCtrl',
       /*================================
       | Page based initial loads
       ================================*/
-      if ($rootScope.currStateName == 'index.metro') {
+      if ($rootScope.currStateName == 'index.metro' || 'owner.metro-campaign-details') {
         getMetroCorridors();
         getMetroCampaigns();
       }
-      if ($rootScope.currStateName == 'index.metro-campaign') {
+      if ($rootScope.currStateName == 'index.metro-campaign' || 'owner.metro-campaign-details') {
         if (typeof $stateParams.metroCampaignId !== undefined) {
           getMetroCampDetails($stateParams.metroCampaignId);
         }

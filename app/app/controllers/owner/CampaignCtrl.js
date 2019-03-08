@@ -731,7 +731,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
      | Campaign payment section ends
      =============================== */
 
-
+    
     /*==============================
      | Campaign Search
      ==============================*/
