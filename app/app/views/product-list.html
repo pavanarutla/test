@@ -99,10 +99,10 @@
                         </div>
                   </div> -->
                   <div class="row">
-                    <div class="col-md-6 text-center mt-2">
+                    <div class="col-md-12 text-center mt-2 mb-3">
                     <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
                     </div>
-                  <div class="col-md-6 text-center mt-2">
+                  <div class="col-md-12 text-center">
                     <md-datepicker class="form-control" ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
                   </div>
                   <div class="col-12 mt-2 text-right">
@@ -132,7 +132,7 @@
                   <div layout="column" class="formats-types">
                     <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
                       <div class="row" style="margin-left:0px;margin-right:0px">
-                        <div class="col-sm-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
+                        <div class="col-sm-4 col-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
                           class="formatgridpart">
           
                           <div ng-cloak style="border-right:1px solid #ccc" ng-click="FormatData(format.name)">
@@ -247,7 +247,7 @@
   <table class="table table-hover">
     <thead class="text_color">
       <tr>
-        <th>Image</th>
+        <th class="hide-xs">Image</th>
         <th>Tab ID</th>
         <th class="">Product Details</th>
         <th class="" style="width: 6%;">Views</th>
@@ -260,7 +260,7 @@
     </thead>
     <tbody ng-repeat="proddetail in productmarkerslist">
       <tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
-        <td class="image_tdwidthproduct">
+        <td class="hide-xs image_tdwidthproduct">
            
   <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px" style="border-radius: 2px;"/>
         </td>
