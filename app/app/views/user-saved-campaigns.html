@@ -2,10 +2,10 @@
     <div layout="row" class="" layout-padding>
         <div class="md-title text_color">Saved Campaigns </div>
         <div flex></div>
-        <div class="form-group saved_camp">
+        <div class="form-group saved_camp hide-xs">
             <input type="search" class="form-control md-whiteframe-3dp" ng-model="activeUserCampaign.name"  placeholder="search campagin">
         </div>
-        <div class="dropdown">
+        <div class="dropdown hide-xs">
             <md-button class="md-raised all_button" onclick="saveCampaign()">Create Campaign</md-button>
             <div id="savedDropdown" class="dropdown-content contbg animated fadeInDown">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
@@ -202,27 +202,27 @@
         <div class="table-responsive">
             <table class="table mb-0">
                 <thead>
-                    <tr class="text_color text-center">
+                    <tr class="text_color">
                         <th>CID</th>
                         <th>Campaign Name</th>
                         <th>Start Date</th>
-                        <th>No of Products </th>
+                        <th class="text-center">No of Products </th>
                         <!-- <th>Paid</th> -->
-                        <th>Total Budget</th>
+                        <th class="text-center">Total Budget</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody class="text-center contbg">
+                <tbody class="contbg">
 
                     <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign.name" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
                         <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
                         <td class="table_vertical">{{activeUserCampaign.name}}</td>
                         <td class="table_vertical">{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
-                        <td class="table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
+                        <td class="text-center table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td class="table_vertical">{{activeUserCampaign.est_budget || 'N/A'}}</td>
-                        <td class="table_vertical">
+                        <td class="text-center table_vertical">{{activeUserCampaign.est_budget || 'N/A'}}</td>
+                        <td class="text-center table_vertical">
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -256,7 +256,7 @@
                                 </md-menu-content>
                             </md-menu>
                         </td>
-                        <td class="table_vertical">
+                        <td class="text-center table_vertical">
                             <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateify | date:'dd-MM-yyyy'}}</span>
                         </td>
                     </tr>
@@ -304,6 +304,9 @@
 <!-- share campaign sidenav ends -->
 </div>
 <script>
+    function saveCampaign() {
+        document.getElementById("savedDropdown").classList.toggle("show");
+    }
     function saveCampaign() {
         document.getElementById("savedDropdown").classList.toggle("show");
     }

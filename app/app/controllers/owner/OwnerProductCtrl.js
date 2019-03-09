@@ -318,8 +318,7 @@ $scope.applymethod=function(product){
 
   var getRequestedProductList = function(){
     OwnerProductService.getRequestedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function(result){
-      $scope.requestedProductList = result.products;      
-      // console.log(result.products);
+      $scope.requestedProductList = result.products;
       $scope.pagination.pageCount = result.page_count;
       if($window.innerWidth >= 420){
         createPageLinks();
@@ -491,7 +490,7 @@ $scope.applymethod=function(product){
     });
   }
 
-  $scope.getProductUnavailableDatesEdit = function(ev){
+  $scope.getProductUnavailableDatesEdit = function(productId,ev){
     var productId = $stateParams.id;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
@@ -499,7 +498,7 @@ $scope.applymethod=function(product){
     });
   }
 
-  $scope.getProductUnavailableDates = function(productId, ev){
+  $scope.getProductUnavailableDates = function(productId , ev ){
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parent().parent().find('input').trigger('click');

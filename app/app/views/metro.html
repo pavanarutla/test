@@ -1,13 +1,19 @@
 <style>
-	.metro_pack{
+	.metro_pack {
 		background: rgba(255, 255, 255, 0.5);
 		position: absolute;
-		width:50%;
-		top: 22%;
-		left:24%;
+		width: 35%;
+		top: 10%;
+		left: 31%;
 		padding: 10px 10px 0px 10px;
 		z-index: 99 !important;
 	}
+        .start_daterv{
+            background:#ededed;
+            padding:6px;
+            margin-left:42px;
+            border-radius: 3px;
+            }
 	.lnt_caln{
 		margin-top: 15px;
 		}
@@ -92,6 +98,17 @@
     padding: 10px 10px 0px 10px;
     z-index: 99 !important;
 }
+}
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+	.metro_pack {
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 40%;
+    left: 29%;
+    padding: 10px 10px 0px 10px;
+    z-index: 99 !important;
+}
+
 }
 	@media screen and (max-width:575px){
 	.img_logo{
@@ -280,7 +297,7 @@ display: none !important;
 													<input type="button" value="+" ng-click="(Mocount = (Mocount==.5?Mocount + .5:Mocount + 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
 							
 							<p class="text-white">Start Date: 
-									<span style="background:#ededed;padding:6px;margin-left:42px;border-radius: 3px;">
+									<span class="start_daterv" style="">
 											<md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
 										</span>
 										</p>

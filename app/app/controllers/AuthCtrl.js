@@ -14,6 +14,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				var userMongoData = payload.userMongo;
 				loggedInUser.clientId = userData.client_id;
 				loggedInUser.user_id = userMongoData.id;
+                                                                                          loggedInUser.mong_id = userMongoData.client_mongo_id;
 				loggedInUser.client_slug = userData.client_slug;
 				loggedInUser.email = userData.email;
 				loggedInUser.firstName = userMongoData.first_name;
