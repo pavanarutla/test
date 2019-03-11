@@ -95,7 +95,7 @@
                         <li>
                           <div class="form-group">
               
-                            <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control  md-whiteframe-3dp"
+                            <input ng-model="ownerCampaign.org_contact_name" name="contact_name" only-letters-input class="form-control  md-whiteframe-3dp"
                               type="text" required="required" placeholder="Contact Name">
                             <div ng-messages="forms.CampaignForm.org_name.$error" style="color:red" ng-if="forms.CampaignForm.contact_name.$touched">
                               <div ng-message="required">Contact Name is required.</div>
@@ -128,11 +128,11 @@
                         <li>
                           <div class="form-group ">
               
-                            <input ng-model="ownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
+                            <input ng-model="ownerCampaign.org_contact_refered" name="refered"  only-letters-input class="form-control md-whiteframe-3dp"
                               type="text" maxlength="10" required="required" placeholder="Refered By">
                             <div ng-messages="forms.CampaignForm.refered.$error" style="color:red" ng-if="forms.CampaignForm.refered.$touched">
-                              <div ng-message="required">Refered No is required.</div>
-                              <div ng-message="maxlength">Refered No must have 10 characters.</div>
+                              <div ng-message="required">Refered By is required.</div>
+                              <div ng-message="maxlength">Refered By must have 10 characters.</div>
                             </div>
                           </div>
                         </li>

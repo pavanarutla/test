@@ -133,12 +133,12 @@
             CREATE CAMPAIGN
         </md-button> -->
     <div class="dropdown">
-      <md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
-      <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
+      <md-button class="md-raised all_button" onclick="CreatecampFunction()">Create Campaign</md-button>
+      <div id="createcampDropdown" class="dropdown-content contbg animated fadeInDown">
         <form name="forms.CampaignForm" role="form" novalidate="novalidate">
           <div layout="colmun">
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
+            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="CreatecampFunction()">
               <md-icon class="md-default-theme">
                 <i class="material-icons">close</i>
               </md-icon>
@@ -146,18 +146,7 @@
           </div>
           <h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
           <h3 class="md-title">Let's start Campaign</h3>
-
-          <div layout="colmun" layout-margin layout-align="center center">
-            <!-- <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">OOH Campaign
-              </label>
-            </div> -->
-            <!-- <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">Metro Campaign
-              </label>
-            </div> -->
+          <div layout="colmun" layout-margin layout-align="center center">            
             <label for="chkYes">
               <input type="radio" ng-checked="true" id="chkYes" ng-model="twoforms" value="OOH" name="chkPassPort" onclick="ShowHideDiv()" />
               OOH Campaign
@@ -171,8 +160,7 @@
           <div layout="row" layout-margin layout-align="center center" class="" >
             <div id="dvPassport" style="width:100%;">
                 <li>
-                    <div class="form-group ">
-        
+                    <div class="form-group ">        
                       <input ng-model="ownerCampaign.name" name="name" class="form-control md-whiteframe-3dp" type="text"
                         minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/"
                         placeholder="Campaign Name">
@@ -764,11 +752,11 @@
 </div>
 
 <script>
-  function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+  function CreatecampFunction() {
+    document.getElementById("createcampDropdown").classList.toggle("show");
   }
-  function myFunctions() {
-    document.getElementById("myDropdownView").classList.toggle("show");
+  function CreatecampFunctions() {
+    document.getElementById("createcampDropdownView").classList.toggle("show");
   }
 </script>
 

@@ -209,12 +209,16 @@ app.controller('MetroCtrl',
                 .ok('Got it!')
                 .targetEvent(ev)
             );
+            sharemetroCampaign();
           }
           else {
             toastr.error(result.message);
           }
         });
       }
+      function sharemetroCampaign() {
+        document.getElementById("sharecampmetroDrop").classList.toggle("show");
+    }
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
         $scope.selectedPackage.campaign_id = $stateParams.metroCampaignId;
