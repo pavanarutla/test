@@ -1,346 +1,146 @@
 <style>
-.daterangepicker option.disabled, .daterangepicker td.disabled {
-    color: #fff;
-    cursor: not-allowed;
-    background: #ddd;
-    border: 1px solid #fff;
-    border-radius: 0px;
-    /* text-decoration: line-through; */
-  }
-  .gray-blocked{
-    background:#ddd;
-  }
-  .red-blocked{
-    background:#f00 !important;
-  }
-</style>
-<section class="product_list_view m-2" style="overflow: auto !important;">   
-  <div class="wrapper">
-      <div class="product_heading pl-0 pr-0">
-          <div id="myProduct" class="map_filters mt-2">
-              <div id="mydivheader">
-                  <!-- <a href="" class="menu__btn">
-                      <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
-                  </a> -->
-                  <a href="#/location" class="text_color md-caption"> Switch to map View</a>
-                  <span flex></span>
-                  <a ng-click="resetData()" class="md-caption float-right text_a"> Clear Filters</a>
-              </div>
-              <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
-                  <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
-                      md-search-text="searchId" md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo"
-                      placeholder="Search By Tab id" md-clear-button="true" style="min-width: 100% !important">
-                      <md-item-template>
-                          <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                      </md-item-template>
-                  </md-autocomplete>
-              </div>
-              <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
-                  <md-autocomplete md-min-length="2" md-selected-item="selectedId" md-selected-item-change="selectFromTabIdSearch(items)"
-                      md-search-text="searchId" md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo"
-                      placeholder="Search By Area,Location" md-clear-button="true" style="min-width: 100% !important">
-                      <md-item-template>
-                          <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                      </md-item-template>
-                  </md-autocomplete>
-              </div> -->
-              <!-- <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
-                  <md-autocomplete                      
-                    md-min-length="2"
-                    md-selected-item = "selectedId"
-                    md-selected-item-change="selectFromTabIdSearch(items)"
-                    md-search-text="searchId"
-                    md-items="items in searchByTabId(searchId)"
-                    md-item-text="items.siteNo"                          
-                    placeholder="Search By Tab id"
-                    md-clear-button="true" style="min-width: 100% !important">
-                    <md-item-template>
-                      <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
-                    </md-item-template>                    
-                  </md-autocomplete> 
-                </div> -->
-                <div class="form-group saved_search_user">
-                  <input type="search" class="form-control md-whiteframe-3dp" ng-model="siteNo"  placeholder="Search By Tab id">
-              </div>
-              <div class="form-group saved_search_user">
-                  <input type="search" class="form-control md-whiteframe-3dp" ng-model="area_name"  placeholder="Search By Area,Location">
-              </div>
-                <!-- <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
-                  <md-autocomplete                      
-                  md-min-length="2"
-                  md-selected-item = "selectedArea"
-                  md-selected-item-change="selectedAreaChanged(item)"
-                  md-search-text="searchText"
-                  md-items="item in autoCompleteArea(searchText)"
-                  md-item-text="item.name"                      
-                  placeholder="Search By Area,Location"
-                  md-clear-button="true" style="min-width: 100% !important">
-                  <md-item-template>
-                    <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
-                  </md-item-template>                    
-                  </md-autocomplete>
-                </div> -->
-              <!-- filters html start-->
-              <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
-                  <div layout="row">
-                      <div class="md-caption text-left">Show products available between</div>
-                      <div flex></div>
-                      <!-- <span> <a href="#" class="text_a"><i class="fa fa-times"></i></a></span> -->
+    .daterangepicker option.disabled, .daterangepicker td.disabled {
+        color: #fff;
+        cursor: not-allowed;
+        background: #ddd;
+        border: 1px solid #fff;
+        border-radius: 0px;
+        /* text-decoration: line-through; */
+      }
+      .gray-blocked{
+        background:#ddd;
+      }
+      .red-blocked{
+        background:#f00 !important;
+      }
+    </style>
+    <!-- <section class="m-2" style="overflow: auto !important;">    -->
+      <div class="row" style="margin-right: 0px !important;">
+          <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 pr-0">
+              <div id="myProduct" class="map_filters mt-2">
+                  <div id="mydivheader">
+                      <a href="#/location" class="text_color md-caption"> Switch to map View</a>
+                      <span flex></span>
+                      <a ng-click="resetData()" class="md-caption float-right text_a"> Clear Filters</a>
                   </div>
-                  <!-- <div class="row">            
-                    <div flex-gt-xs>               
-                        <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Enter date"></md-datepicker>
+                    <div class="form-group saved_search_user">
+                      <input type="search" class="form-control md-whiteframe-3dp" ng-model="siteNo"  placeholder="Search By Tab id">
+                  </div>
+                  <div class="form-group saved_search_user">
+                      <input type="search" class="form-control md-whiteframe-3dp" ng-model="area_name"  placeholder="Search By Area,Location">
+                  </div>
+                    
+                  <!-- filters html start-->
+                  <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
+                      <div layout="row">
+                          <div class="md-caption text-left">Show products available between</div>
+                          <div flex></div>
                       </div>
-                      <div flex-gt-xs>                 
-                          <md-datepicker class="form-control" ng-model="booked_to" md-placeholder=""></md-datepicker>
+                      <div class="row">
+                        <div class="col-md-12 text-center mt-2 mb-3">
+                        <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
                         </div>
-                        <div class="col-12 mt-3 text-right">
-                            <button type="button" class="btn btn-danger" ng-click="FilterProductlist(booked_from,booked_to)">Filter</button>
-                        </div>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-md-12 text-center mt-2 mb-3">
-                    <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
-                    </div>
-                  <div class="col-md-12 text-center">
-                    <md-datepicker class="form-control" ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
-                  </div>
-                  <div class="col-12 mt-2 text-right">
-                    <md-button class="md-raised md-primary all_button" ng-click="FilterProductlist(booked_from,booked_to)">Filter</md-button>
-                    <!-- <button type="button" class="btn all_button" ng-click="FilterDates(booked_from,booked_to)">Filter</button> -->
-                  </div>
-                </div>
-              </div>
-            
-              <!-- filters html end-->
-              <!-- formats html start-->
-              <div layout="column" class="formats_block md-whiteframe-2dp mt-2">
-                  <div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
-                    <div layout="row">
-                      <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
-                      <div flex></div>
-                      <div>
-                        <!-- <md-icon ng-hide="format">
-                          <i class="material-icons text-white">keyboard_arrow_down</i>
-                        </md-icon> -->
-                        <!-- <md-icon ng-show="format">
-                          <i class="material-icons text-white">keyboard_arrow_up</i>
-                        </md-icon> -->
+                      <div class="col-md-12 text-center">
+                        <md-datepicker class="form-control" ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
+                      </div>
+                      <div class="col-12 mt-2 text-right">
+                        <md-button class="md-raised md-primary all_button" ng-click="FilterProductlist(booked_from,booked_to)">Filter</md-button>
                       </div>
                     </div>
                   </div>
-                  <div layout="column" class="formats-types">
-                    <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
-                      <div class="row" style="margin-left:0px;margin-right:0px">
-                        <div class="col-sm-4 col-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
-                          class="formatgridpart">
-          
-                          <div ng-cloak style="border-right:1px solid #ccc" ng-click="FormatData(format.name)">
-                            <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
-                              ng-if="format" style="margin:0px;padding :0px;">
-                              <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
-                              <img ng-src="{{serverUrl + format.image}}" class="img-size">
-                              <div class="md-caption">{{format.name}}</div>
-                            </md-button>
-                            <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
+                
+                  <!-- filters html end-->
+    
+                  <!-- formats html start-->
+                  <div layout="column" class="formats_block md-whiteframe-2dp mt-2">
+                      <div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
+                        <div layout="row">
+                          <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
+                          <div flex></div>
+                          <div>
+                            <!-- <md-icon ng-hide="format">
+                              <i class="material-icons text-white">keyboard_arrow_down</i>
+                            </md-icon> -->
+                            <!-- <md-icon ng-show="format">
+                              <i class="material-icons text-white">keyboard_arrow_up</i>
+                            </md-icon> -->
                           </div>
-          
-                          <!-- <md-divider hide-xs></md-divider> -->
                         </div>
                       </div>
-                      <md-divider></md-divider>
-                    </div>
-                  </div>
-                </div>
-              <!-- formats html end-->
-              <!--saved campagin html start -->
-              <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" >
-                  <a class=" main-part" layout="column"  href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
-                    <div layout="row">
-                      <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
-                      <div flex></div>
-                      <div class="md-body-1 text-white">
-                        ({{shortListedProducts.length}})
+                      <div layout="column" class="formats-types">
+                        <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+                          <div class="row" style="margin-left:0px;margin-right:0px">
+                            <div class="col-sm-4 col-4" style="padding-right:0px;padding-left:0px;text-align:center" ng-repeat="format in formatGroup track by $index"
+                              class="formatgridpart">
+              
+                              <div ng-cloak style="border-right:1px solid #ccc" ng-click="FormatData(format.name)">
+                                <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)" ng-class="{'red' : isFormatSelected(format.id)}"
+                                  ng-if="format" style="margin:0px;padding :0px;">
+                                  <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                                  <div class="md-caption">{{format.name}}</div>
+                                </md-button>
+                                <md-button class="md-grid-item-content" style="padding:36px 0px;" disabled ng-if="!format">
+                              </div>
+                            </div>
+                          </div>
+                          <md-divider></md-divider>
+                        </div>
                       </div>
                     </div>
-                  </a>
-                </div>
-              <!--saved campagin html end -->
-          </div>
-      </div>
-      <div class="product_detalis pl-0 mt-2">
-          <!-- <div class="products_list mt-3">
-              <div class="row">
-                  <div class="col">Image</div>
-                  <div class="col">Tab ID</div>
-                  <div class="col-md-2">Product Details</div>
-                  <div class="col">Views</div>
-                  <div class="col">Product Type</div>
-                  <div class="col">Size</div>
-                  <div class="col">Lit</div>
-                  <div class="col-md-2">Address</div>
-                  <div class="col">Action</div>
-              </div>
-              <div  class="product_detls_inner contbg pt-2 pb-2">
-                  <div class="row ">
-                      <div class="col">
-                          <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px"/>
-                      </div>
-                      <div class="col">BB238</div>
-                      <div class="col-md-2">BB238 - Kothaguda</div>
-                      <div class="col">1,48,000</div>
-                      <div class="col">Hoarding</div>
-                      <div class="col">40ft X 40ft</div>
-                      <div class="col">Yes</div>
-                      <div class="col-md-2">From Kothaguda X Roads,
-                              towards Hitech city</div>
-                      <div class="col">
-                          <a href="#">View Details</a>
-                      </div>
-                  </div>
-              </div>
-          </div> -->
-          <!-- <div class="wrapper p-2 mb-3 text_color">
-              <div class="w-10">Image</div>
-              <div class="w-10">Tab ID</div>
-              <div class="w-15">Product Details</div>
-              <div class="w-10">Views</div>
-              <div class="w-10">Product Type</div>
-              <div class="w-10">Size</div>
-              <div class="w-5">Lit</div>
-              <div class="w-20">Address</div>
-              <div class="w-10"></div>
-          </div>
-          <div class="wrapper contbg p-2 md-whiteframe-2dp mt-1">
-              <div class="w-10">
-                  <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px" />
-              </div>
-              <div class="w-10 align-self-center">BB238</div>
-              <div class="w-15 align-self-center">BB238 - Kothaguda</div>
-              <div class="w-10 align-self-center">1,48,000</div>
-              <div class="w-10 align-self-center">Hoarding</div>
-              <div class="w-10 align-self-center">40ft X 40ft</div>
-              <div class="w-5 align-self-center">Yes</div>
-              <div class="w-20">From Kothaguda X Roads,
-                  towards Hitech city</div>
-              <div class="w-10 align-self-center product_btn">
-                  <a href="" ng-click="productview()">View Details</a>
+                  <!-- formats html end-->
+    
+                  <!--saved campagin html start -->
+                  <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" >
+                      <a class=" main-part" layout="column"  href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
+                        <div layout="row">
+                          <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
+                          <div flex></div>
+                          <div class="md-body-1 text-white">
+                            ({{shortListedProducts.length}})
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  <!--saved campagin html end -->
               </div>
           </div>
-          <div class="wrapper contbg p-2 md-whiteframe-2dp mt-1">
-              <div class="w-10">
-                  <img src="assets/images/product/hoarding.png" alt=" product image" width="77px" height="48px" />
-              </div>
-              <div class="w-10 align-self-center">BB238</div>
-              <div class="w-15 align-self-center">BB238 - Kothaguda</div>
-              <div class="w-10 align-self-center">1,48,000</div>
-              <div class="w-10 align-self-center">Hoarding</div>
-              <div class="w-10 align-self-center">40ft X 40ft</div>
-              <div class="w-5 align-self-center">Yes</div>
-              <div class="w-20">From Kothaguda X Roads,
-                  towards Hitech city</div>
-              <div class="w-10 align-self-center product_btn">
-                  <a href="" ng-click="productview()">View Details</a>
-              </div>
-          </div> -->
-          <div class="table-responsive">
-  <table class="table table-hover">
-    <thead class="text_color">
-      <tr>
-        <th class="hide-xs">Image</th>
-        <th>Tab ID</th>
-        <th class="">Product Details</th>
-        <th class="" style="width: 6%;">Views</th>
-        <th class="">Product Type</th>
-        <th class="">Size</th>
-        <th class="text-center">Lit</th>
-        <th class="" style="width: 10%;">Address</th>
-        <th class=""></th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="proddetail in productmarkerslist">
-      <tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
-        <td class="hide-xs image_tdwidthproduct">
-           
-  <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px" style="border-radius: 2px;"/>
-        </td>
-        <td class="table_vertical">{{proddetails.siteNo}}
-        </td>
-        <td class="table_vertical">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
-        <td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td>
-        <td class="table_vertical">{{proddetails.format_name}}</td>
-        <td class="table_vertical">{{proddetails.panelSize}}</td>
-                  <td class="table_vertical">{{proddetails.lighting}}</td>
-                  <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td>
-        <td class="text-center table_vertical">
-          <a ng-click="getproddata(proddetails)"><button type="button"
-             class="btn product_btnview">View Details</button></a>
-        </td>
-              </tr>
-    </tbody>
-  </table>
-</div>
-
-      </div>
-  </div>
-  <!-- Selected product detail sidenav-->
-<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_productlist" md-component-id="productDetails">
-  <md-content class="save_r_excited">
-    <div class="inner">
-    <div layout="row" class="">
-      <div class="md-body-2 ml-3 mt-3">{{productListDetails.siteNo}}</div>
-      <div flex></div>
-      <a class="md-icon-button close-btn"  ng-click="toggleProductDetailSidenav()">
-        <i class="material-icons">close</i>
-      </a>
-    </div>
-    <div class="mt-2" ng-click="showProductImagePopup($event, productListDetails.image)">
-      <img ng-src="{{serverUrl + productListDetails.image}}" style="padding: 0px 10px 0px 10px;width:100%;height:300px;border-radius: 2px;" />
-    </div>
-    <div class="ml-3 mt-2" layout="column">
-      <div class="md-body-2">{{productListDetails.address}}</div>
-      <div class="md-caption">Facing:&nbsp;{{productListDetails.direction}}</div>
-    </div>
-    <div layout="row" class="mt-2 mb-2">
-      <div flex="33" class="border ml-3 p-1">
-        <p class="md-caption mb-0">No. of Views</p>
-        <h3 class="md-body-2" >{{productListDetails.adStrength}}</h3>
-        <div class="md-caption">Per Month</div>
-      </div>
-      <div flex="33" class="border ml-3 mr-3 p-1 ">
-        <p class="md-caption mb-0">Lit</p>
-        <h3 class="md-body-2">{{productListDetails.lighting}}</h3>
-        <div class="md-caption">backlit</div>
-      </div>
-      <div flex="33" class="border mr-3 p-1">
-        <p class="md-caption mb-0">Size</p>
-        <h3 class="md-body-2">{{productListDetails.panelSize}}</h3>
-        <div class="md-caption"></div>
-      </div>
-    </div>
-    <div layout="column" class=" mt-2" style="padding:8px">
-      <div class="md-body-2 text-left mb-2">Product Availability</div>
-      <div class="form-group mb-2 mt-2">
-        <input date-range-picker ng-model="selectedDateRanges" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="mapProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;"/>
-        <div class="input-group"style="z-index: 0;">
-          <input type="text" readonly ng-value="'Please Select booking dates : ' + selectedDateRanges.length" class="form-control">
-          <div class="input-group-addon">
-            <a ng-click="getProductUnavailableDates(productListDetails.id, $event);">
-              <i class="material-icons">
-                calendar_today
-              </i>
-            </a>
-          </div>
-        </div>
-        <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-          <div ng-message="required">Date is required.</div>
-        </div>
-      </div>
-    </div>
-    <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-      <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
-      <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
-    </div>
+          <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 mt-2">
+              <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="text_color">
+          <tr>
+            <th class="hide-xs">Image</th>
+            <th>Tab ID</th>
+            <th class="">Product Details</th>
+            <th class="" style="width: 6%;">Views</th>
+            <th class="">Product Type</th>
+            <th class="">Size</th>
+            <th class="text-center">Lit</th>
+            <th class="" style="width: 10%;">Address</th>
+            <th class=""></th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="proddetail in productmarkerslist">
+          <tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
+            <td class="hide-xs image_tdwidthproduct">
+               
+      <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px" style="border-radius: 2px;"/>
+            </td>
+            <td class="table_vertical">{{proddetails.siteNo}}
+            </td>
+            <td class="table_vertical">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
+            <td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td>
+            <td class="table_vertical">{{proddetails.format_name}}</td>
+            <td class="table_vertical">{{proddetails.panelSize}}</td>
+                      <td class="table_vertical">{{proddetails.lighting}}</td>
+                      <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td>
+            <td class="text-center table_vertical">
+              <a ng-click="getproddata(proddetails)"><button type="button"
+                 class="btn product_btnview">View Details</button></a>
+            </td>
+                  </tr>
+        </tbody>
+      </table>
     </div>
     
     <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
@@ -421,47 +221,131 @@
         <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
             <div ng-message="required">Start date is required.</div>
         </div>
-        <div flex-gt-xs="">
-          <label>End date</label>
-          <md-datepicker ng-model="campaign.end_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+        <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
+          <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted" ng-click="shortlistSelected(productListDetails.id, selectedDateRanges, $event)">Shortlist</md-button>
+          <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
         </div>
-        <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
-          <div ng-message="required">End date is required.</div>
         </div>
-        <div layout="row" flex="100" layout-margin>
-          <md-input-container class="md-block" layout-fill>
-            <label>Budget</label>
-            <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" only-numeric/>
-            <div ng-messages="forms.viewAndSaveCampaignForm.est_budget.$error">
-              <div ng-message="required">Estimated budget required.</div>
+        
+        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+          <div layout="row">
+            <div flex></div>
+            <a class="md-icon-button close-btn" ng-click="toggleExistingCampaignSidenav()">
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+          <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+          <div class="md-title  m-2">Let's work Together!</div>
+          <div class="form-group mt-3 mr-2 ml-2">
+            <input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+          </div>
+          <div class="form-group mt-3 mr-2 ml-2">
+            <input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
+          </div>
+          <div layout="column" class="mr-2 ml-2 mb-3">
+            <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()">
+              Save Campaign
+            </md-button>
+          </div>
+          <p class="text-center md-body-2">(OR)</p>
+          <div class="form-group mr-2 ml-2">
+            <select class="form-control" ng-model="existingCampaign.id" required="required">
+              <option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+            </select>
+          </div>			
+          <div layout="column" class="mr-2 ml-2 mb-3">
+            <md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, productListDetails.id)">
+              add to existing or save Campaign
+            </md-button>
+          </div>
+        </div>
+      </md-content>
+      
+    </md-sidenav>
+    <!-- Selected product detail sidenav ends-->
+    
+    <!-- Save campaign sidenav -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" style="padding:10px;" md-component-id="saveCampaignSidenav">
+      <div lauout=" column">
+        <div layout="row">
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
+              <md-icon class="md-default-theme">
+                <i class="material-icons">arrow_back</i>
+              </md-icon>
+            </md-button>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleSaveCampaignSidenav()">
+              <md-icon class="md-default-theme">
+                <i class="material-icons">close</i>
+              </md-icon>
+            </md-button>
+          </div>
+        </div>
+        <md-content layout="column" style="overflow:hidden" ng-if="!campaignSavedSuccessfully">
+          <div layout="column" layout-margin>
+            <div class="md-headline">Save Campaign</div>
+            <div class="md-headline">We are excited to see your Campaign</div>
+            <div class="md-headline">Let's Work Together!</div>
+          </div>
+          <form name="forms.viewAndSaveCampaignForm">
+            <div layout="row" flex="100" layout-margin>
+              <md-input-container class="md-block" layout-fill>
+                <label>Campaign Name</label>
+                <input type="text" name="campname" ng-model="campaign.name" required="required">
+                <div ng-messages="forms.viewAndSaveCampaignForm.campname.$error">
+                  <div ng-message="required">Campaign name is required.</div>
+                </div>
+              </md-input-container>
             </div>
-          </md-input-container>
-        </div>
-        <div class="serverErrors" ng-show="saveUserCampaignErrors" style="padding-left:0 !important;">
-          <ul>
-            <li ng-repeat="error in saveUserCampaignErrors">
-              {{error}}
-            </li>
-          </ul>
-        </div>
-        <div layout="column" layout-margin>
-          <div>
-            <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()" ng-disabled="forms.viewAndSaveCampaignForm.$invalid">SAVE CAMPAIGN</md-button>
+            <label>Start date</label>
+            <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>          
+            <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                <div ng-message="required">Start date is required.</div>
+            </div>
+            <div flex-gt-xs="">
+              <label>End date</label>
+              <md-datepicker ng-model="campaign.end_date" onkeydown="return false" md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+            </div>
+            <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="!forms.ownerCampaignForm.end_date.$pristine">
+              <div ng-message="required">End date is required.</div>
+            </div>
+            <div layout="row" flex="100" layout-margin>
+              <md-input-container class="md-block" layout-fill>
+                <label>Budget</label>
+                <input ng-model="campaign.est_budget" type="text" name="est_budget" required="required" only-numeric/>
+                <div ng-messages="forms.viewAndSaveCampaignForm.est_budget.$error">
+                  <div ng-message="required">Estimated budget required.</div>
+                </div>
+              </md-input-container>
+            </div>
+            <div class="serverErrors" ng-show="saveUserCampaignErrors" style="padding-left:0 !important;">
+              <ul>
+                <li ng-repeat="error in saveUserCampaignErrors">
+                  {{error}}
+                </li>
+              </ul>
+            </div>
+            <div layout="column" layout-margin>
+              <div>
+                <md-button type="submit" class="md-raised md-warn" layout-fill ng-click="saveCampaign()" ng-disabled="forms.viewAndSaveCampaignForm.$invalid">SAVE CAMPAIGN</md-button>
+              </div>
+              <div class="suggtn">
+                <span class="suggtn-one">Need Suggestions?</span>
+                <span class="suggtn-two">
+                  <md-button ui-sref="index.suggest.product-detail">SUGGEST ME</md-button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </md-content>
+        <md-content layout="column" style="margin-top:20%" ng-if="campaignSavedSuccessfully">
+          <div layout="column" layout-align="center center" layout-margin>
+            <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
+            <div class="md-display-1">Congratulations!</div>
+            <div class="md-headline">Campaign Saved Succcessfully</div>
           </div>
-          <div class="suggtn">
-            <span class="suggtn-one">Need Suggestions?</span>
-            <span class="suggtn-two">
-              <md-button ui-sref="index.suggest.product-detail">SUGGEST ME</md-button>
-            </span>
-          </div>
-        </div>
-      </form>
-    </md-content>
-    <md-content layout="column" style="margin-top:20%" ng-if="campaignSavedSuccessfully">
-      <div layout="column" layout-align="center center" layout-margin>
-        <img src="assets/images/core/congrats-star.png" width="150px" height="150px" alt="Congrats Star">
-        <div class="md-display-1">Congratulations!</div>
-        <div class="md-headline">Campaign Saved Succcessfully</div>
+        </md-content>
       </div>
       
     </md-content>
@@ -469,4 +353,4 @@
 </md-sidenav>
 <!-- Save campaign sidenav ends -->
 
-</section>
+<!-- </section> -->
