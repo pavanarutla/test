@@ -275,7 +275,7 @@
         var channel9 = pusher.subscribe('ProductRequested' + user_id);
         var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
         var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
-        var channel12 = pusher.subscribe('metroCampaignLocked' + user_id);
+        var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
 
         channel.bind('CampaignLaunchEvent', function (data) {
             arrayText.push(data);
@@ -328,7 +328,7 @@
             arrayText.push(data);
             notificationText(arrayText);
         });
-        channel12.bind('metroCampaignLockedEvent', function (data) {
+        channel12.bind('metroCampignLockedEvent', function (data) {
             arrayText.push(data);
             notificationText(arrayText);
         });
