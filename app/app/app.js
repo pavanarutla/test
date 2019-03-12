@@ -766,10 +766,10 @@ app.run(
           }
         }
 
-        // Get all URL parameter
+        // Get all URL parameter reset_password
         $rootScope.currentTitle = transition.to().title;
         $rootScope.currStateName = transition.to().name;
-        if ((transition.to().name == "index.location" || transition.to().name == "index.metro" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
+        if ((transition.to().name == "index.location"|| transition.to().name == "index.reset_password" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
         else {
