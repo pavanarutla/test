@@ -350,7 +350,7 @@
                 </div>
                 <div class="clearfix"></div>
               </li>-->
-              <div class="notification_bottom"> <a ng-href="#/admin/home">See all notifications</a>
+              <div class="notification_bottom"> <a ng-href="#/admin/admin-notifications">See all notifications</a>
               </div>
           </li>
         </ul>
@@ -361,7 +361,7 @@
             <img src="assets/images/man.png" class="hide-xs" />
             <i class="fa fa-ellipsis-v lnr"></i>
           </a> -->
-          <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A
+          <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">{{loggedInUser.firstName.slice(0,1)}}
 
           <ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s" >
             <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
@@ -435,6 +435,11 @@
               <!--campagin end-->
               <!-- listed of locations-->
               <md-menu-item flex layout="column">
+                <md-button class="side_navlist" ng-href="#admin/locations">
+                  Location
+                </md-button>
+              </md-menu-item>
+              <!-- <md-menu-item flex layout="column">
                 <md-button aria-expanded="flase" ng-click="toogelLocation()" class="md-button-toggle side_navlist" ng-href="#admin/locations">
                   <div layout="row">
                     <span >Location</span>
@@ -475,7 +480,7 @@
                     Area
                   </div>
                 </md-button>
-              </md-menu-item>
+              </md-menu-item> -->
               <!-- listed of location end-->
               <!--inventory list -->
               <md-menu-item flex layout="column">

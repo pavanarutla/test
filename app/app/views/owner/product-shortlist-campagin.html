@@ -28,33 +28,33 @@
             <div class="table-responsive">
                 <table class="table mb-0">
                     <thead>
-                        <tr class="text_color text-center">
+                        <tr class="text_color">
                             <th>CID</th>
                             <th>Campaign Name</th>
                             <th>Start Date</th>
-                            <th>Paid</th>
-                            <th>Total Budget</th>
-                            <th>Status</th>
+                            <th class="text-center">Paid</th>
+                            <th class="text-center">Total Budget</th>
+                            <th class="text-center">Status</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="">
             
                         <tr ng-repeat="product in shortlistedproduct.campaign_list">
                             <td>{{product.cid}}</td>
                             <td>{{product.name}}</td>
                             <td>N/A</td>
-                            <td>{{product.total_paid}}</td>
-                            <td>{{product.est_budget}}</td>
-                            <th>{{product.status | stringifyCampaignStatus}}</th>
-                            <td>
+                            <td class="text-center table_vertical">{{product.total_paid}}</td>
+                            <td class="text-center table_vertical">{{product.est_budget}}</td>
+                            <th class="text-center table_vertical">{{product.status | stringifyCampaignStatus}}</th>
+                            <td class="text-center table_vertical">
                                     <a href="#/owner/{{clientSlug}}/campaign-details/{{product.id}}/{{product.type}}">
                                         <i class="material-icons">remove_red_eye</i>
                                     </a>
                                    
                             </td>
-                            <td>
+                            <td class="text-center table_vertical">
                                 <span class="text_color md-caption">{{product.created_at | date}}</span>
                             </td>
                         </tr>

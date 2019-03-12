@@ -10,10 +10,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                 <tr ng-repeat="notifictaion in getUserNotifictaions">
+                 <tr ng-repeat="notifictaion in getOwnerNotifictaions">
                         <td class="table_vertical">{{notifictaion.message }}</td>
                         <td class="table_vertical">
-                           <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" href="#/campaign-details/{{notifictaion.campaign_id}}">
+                          
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" href="#/owner/{{clientSlug}}/campaign-details/{{notifictaion.campaign_id}}/0">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" href="#/owner/{{clientSlug}}/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" href="#/owner/{{clientSlug}}/requested-hoardings">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>

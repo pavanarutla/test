@@ -45,16 +45,16 @@
       <thead class="text_color">
         <tr>
           <th>CID</th>
-          <th class="feeds_width">Campaign Name</th>
-          <th>Details</th>
+          <th class="">Campaign Name</th>
+          <th>Status</th>
           <th>Action</th>
-          <th class="hide-xs"></th>
+          <th class=""></th>
         </tr>
       </thead>
       <tbody ng-repeat="request in requestList">
         <tr>
           <td class="table_vertical">{{request.cid}}</td>
-          <td class="table_vertical">{{request.name}}</td>
+          <td class="table_vertical">{{request.name | capitalize}}</td>
           <td class="table_vertical">
             <!-- <span ng-show="request.status == 100" >Preparing</span> -->
             <!-- <span ng-show="request.status == 200" >A user has asked for a quote for your products.</span> -->
@@ -72,7 +72,7 @@
               </md-icon>
             </a>
           </td>
-          <td class="table_vertical hide-xs mr-5" style="text-align:end">{{request.updated_at | datetimeify}}</td>
+          <td class="table_vertical mr-5 feeds_paddingright" style="">{{request.updated_at | datetimeify}}</td>
         </tr> 
        
       </tbody>
