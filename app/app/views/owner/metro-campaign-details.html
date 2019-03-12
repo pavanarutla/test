@@ -137,7 +137,8 @@
         
     </div>
 </div> -->
-<style>
+
+<!-- <style>
 	.md-button {
 		min-width: 64px !important;
 	}
@@ -147,47 +148,6 @@
 	}
 </style>
 
-
-<!-- share campaign sidenav -->
-<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareMetroCampaignSidenav">
-	<div layout="row">
-		<div class="md-toolbar-tools">
-		<div flex></div>
-		<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareMetroCampaignSidenav()">
-			<md-tooltip>Close Side Panel</md-tooltip>
-			<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-		</md-button>
-		</div>
-	</div>
-	<md-content layout-align="center center" layout-margin layout-padding>
-		<h3 class="md-headline">Share Campaign</h3>
-		<form name="shareCampaignForm">
-			<div layout="column">
-				<md-input-container class="md-block">
-				<label>Name</label>
-				<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required"/>
-				<div ng-messages="shareCampaignForm.name.$error">
-					<div ng-message="required">Name is required.</div>
-					<div ng-message="pattern">Enter a valid Name.</div>
-				</div>
-				</md-input-container>
-				<md-input-container class="md-block">
-				<label>Email</label>
-				<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-				<div ng-messages="shareCampaignForm.email.$error">
-					<div ng-message="required">Email is required.</div>
-					<div ng-message="pattern">Enter a valid Email Id.</div>
-				</div>
-				</md-input-container>
-				<md-button class="md-raised md-warn" layout-fill ng-click="shareMetroCampaignToEmail($event, shareCampaign)">SHARE CAMPAIGN</md-button>
-			</div>
-		</form>
-	</md-content>
-</md-sidenav> -->
-<!-- share campaign sidenav ends -->
-
-
-<!-- Add Product to metro campaign -->
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="add-metro-product-sidenav" style="width:400px !important">
 	<md-toolbar layout="row">
 		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
@@ -209,7 +169,6 @@
 				<label for="productType" class="col-sm-4 col-form-label">Product Type</label>
 				<div class="col-sm-8">
 						<select name="package" class="form-control" id="package" ng-model="selectedFormat" ng-options="foramt as format.name for format in formatList" required>
-							<!-- <option value="" disabled selected>Select Format</option> -->
 						</select>
 				</div>
 			</div>
@@ -233,7 +192,6 @@
 							<select  class="form-control"  ng-model="selectedPackage.months" ng-options="opt.label for opt in monthoptions"   required>
 								
 							</select>
-							<!--<input type="number" ng-model="selectedPackage.months" value= "1" min ="1" max="12" required class="form-control">-->
 					</div>
 				</div>
 			
@@ -243,12 +201,6 @@
 					<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}" min="1" />
 				</div>
 			</div>
-		<!--	<div class="form-group row" >
-				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
-				<div class="col-sm-8">
-						{{selectedPackage.max_slots * selectedPackage.days}}
-				</div>
-			</div> --> 
 			<div class="form-group row">
 				<label for="" class="col-sm-4 col-form-label">Select Date</label>
 				<div flex-gt-xs="">
@@ -271,17 +223,10 @@
 		</form>
 	</md-content>
 </md-sidenav>
-<!-- Add Product to metro campaign ends -->
+
 
 <div ng-cloak flex-xs="100" flex-sm="100" flex-md="100">
 	<md-content layout="column" layout-sm="column" layout-xs="column">
-		<!-- <div class="inputDiv">
-			<md-button ng-href="#/campaigns" class="md-icon-button">
-				<md-icon>
-					<i class="material-icons">keyboard_backspace</i>
-				</md-icon>
-			</md-button>
-		</div> -->
 		<div class="bg-part">
 			<div layout="row" flex-offset-gt-md="10" flex="80" flex-sm="100" flex-md="100" layout-xs="column" layout-sm="column" layout-gt-sm="row"
 			 layout-margin="layout-margin" class="client-summay">
@@ -351,34 +296,11 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div layout="row">
-				<div flex="50">
-					<div style="margin: 30px 0 0 0;font-size: 20px;">Products(15)</div>
-				</div>
-					<div flex="50">
-					<md-list flex layout="row" layout-align="end center">
-						<md-list-item>
-							<div>
-								<md-button class="md-grid-item-content">
-									<span><md-icon><i class="material-icons">cancel</i></md-icon></span>
-									<div class="md-caption"> close </div>
-								</md-button>
-							</div>
-						</md-list-item>
-					</md-list>
-				</div> 
-		</div> -->
 		<div layout="row" layout-sm="column" layout-padding>
 			<div flex="50" flex-sm="100">
 				<div class="text_color" style="margin: 30px 0 0 0;font-size: 20px;">Packages ({{metroCampDetails.packages.length}})</div>
 			</div>
 			<div flex="50" flex-sm="100" layout="row" layout-align="end center">
-					<!-- <md-button class="md-grid-item-content" ng-click="toggleShareMetroCampaignSidenav()">
-						<span>
-							<md-icon md-svg-icon="assets/images/icons/share.svg"></md-icon>
-						</span>
-						<div class="md-caption">Share</div>
-					</md-button> -->
 					<div class="dropdown">
 						<md-button onclick="sharemetroCampaign()" class="dropbtn drop_width">
 							<p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
@@ -444,7 +366,6 @@
 						<th>Product Type</th>
 						<th>Corridor</th>
 						<th>No.of Trains</th>
-						<!--<th>No.of Slots</th>-->
 						<th>Durations</th>
 						<th>Start Date</th>
 						<th>Price</th>
@@ -456,7 +377,6 @@
 						<td>{{pkg.package_name}}</td>
 						<td>{{pkg.corridor_name}}</td>
 						<td>{{pkg.selected_trains}}</td>
-						<!--<td>{{pkg.selected_slots}}</td>-->
 						<td>{{((pkg.months == 0.5) ? '15 Days' : pkg.months+'Months')  }}</td>
 						<td>{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
 						<td>{{pkg.price}}</td>
@@ -472,7 +392,7 @@
 			</table>
 		</div>
 	</md-content>
-	<!-- List of shortlisted products' share details to client -->
+
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shortlistSharingSidenav">
 		<div layout="row">
 			<div class="md-toolbar-tools">
@@ -512,8 +432,162 @@
 			</form>
 		</md-content>
 	</md-sidenav>
-	<!-- List of shortlisted products' share details to client end-->
+</div> -->
+
+<div class="ow_campaign_details">
+    <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+        <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+    </md-button>
+    <div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+        <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
+            <div class="row" style="margin-left:0px; margin-right:0px;">
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                     style="margin-top:14px;">
+                    <p class="cmp_bottom">Campaign ID</p>
+                    <p class="md-caption mob_span"><b>{{metroCampDetails.cid}}</b></p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                     style="margin-top:14px;">
+                    <p class="cmp_bottom">Campaign Name</p>
+                    <p class="md-caption mob_span"><b>{{metroCampDetails.name| capitalize}}</b></p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+                     style="margin-top:14px;">
+                    <p class="cmp_bottom">Products</p>
+                    <p class="md-caption mob_span mob_5"><b>Metro Digital Screens</b></p>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
+                    <div class="dropdown">
+                        <md-button onclick="sharemetroCampaign()" class="dropbtn drop_width">
+                            <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
+                                        reply_all
+                                    </i></span></p>
+                            <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Share Campaign</p>
+                        </md-button>
+                        <div id="sharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+                            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                                <div layout="colmun">
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="sharemetroCampaign()">
+                                        <md-icon class="md-default-theme">
+                                            <i class="material-icons">close</i>
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                                <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+                                <form name="shareCampaignForm">
+                                    <div layout="column" style="padding:10px;">
+                                        <div class="form-group">
+                                            <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name" required="required" />
+                                            <div ng-messages="shareCampaignForm.name.$error">
+                                                <div ng-message="required">Name is required.</div>
+                                                <div ng-message="pattern">Enter a valid Name.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                            <div ng-messages="shareCampaignForm.email.$error">
+                                                <div ng-message="required">Email is required.</div>
+                                                <div ng-message="pattern">Enter a valid Email Id.</div>
+                                            </div>
+                                        </div>
+                                        <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                            <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign, metroCampDetails.id)">Share
+                                                Campaign</md-button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                     style="cursor: pointer;">			
+                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                        <a ng-click="downloadOwnerQuote(metroCampDetails.id)" download>
+                            <md-button class="dropbtn drop_width">
+                                <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+                                            file_copy
+                                        </i></span></p>
+                                <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+                            </md-button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
+                     style="margin-top:2em;text-align: end" ng-if="metroCampDetails.products.length == 0">
+                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <!-- table grid start -->
+        <div class="table-responsive">
+            <table class="table">
+                <div ng-if="metroCampDetails.products.length == 0" style="margin:0 auto;width: 50%;">
+                    <img src="assets/images/owner/Group 383.png" alt="short" />
+                </div>
+                <thead class="text_color" ng-if="metroCampDetails.products.length != 0">
+                    <tr>
+                        <th style="width:250px;">Product Details</th>
+                        <th class="hide-xs"></th>
+                        <th class="">Booked From</th>
+						<th class="">Booked To</th>
+						<th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="package in metroCampDetails.packages">
+                        <td class="hide-xs image_tdwidth">
+                            <img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size">
+                        </td>
+                        <td class="table_address">
+                            <p>Corridor Name: {{package.corridor_name || "N/A"}}<br>Duration : {{package.months|| "N/A"}}
+                                <br>No of Trains:{{package.selected_trains|| "N/A"}}
+                        </td>
+                        <td class="table_vertical">
+                            {{package.start_date| dateify | date: "dd-MMM-yyyy"}}
+                        </td>
+                        <td class="table_vertical">{{package.end_date| dateify | date: "dd-MMM-yyyy"}}
+                        </td>
+                        <td class="table_vertical ">
+                            <a><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>		
+        <div class="row" style="border-top: 1px solid #ddd; margin-right:0px;">
+            <div class="col-md-4">
+                <div class="mt-3 ml-2 form-group">
+                    <label for="text" class="text_color">Any questions, Please submit below</label>
+                    <textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+
+            </div>
+            <div class="col-md-8" ng-if="campaignDetails.type != 0" >
+                <div class="mt-3 pull-right" style="font-size: 13px;">
+                    <p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
+                    </p>
+                    <p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+                                                                            ng-change="uncheck()" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+                    <p class="" style="text-indent: 166px;">Sub Total : <span class="float-right">{{campaignDetails.subTotal| number : 2}}</span>
+                    </p>
+                    <p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{campaignDetails.grandTotal| number : 2}}</span>
+					</p>
+					<p><input type="checkbox" ng-model="request_execute"/><span>Request Executive to collect cash / cheque</span>
+
+					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign</md-button></p>
+                </div>
+            </div>
+            <style> .ng-cloak { display: none !important; } </style>
+        </div>
+    </div>
 </div>
+
 <script>
 function sharemetroCampaign() {
                 document.getElementById("sharecampmetroDrop").classList.toggle("show");
