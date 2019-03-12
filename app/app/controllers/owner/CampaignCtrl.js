@@ -330,6 +330,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $mdSidenav('shareCampaignSidenav').toggle();
     };
 
+    $scope.changeQuoteRequest = function(campaignId,remark){
+        $scope.changeRequest = {};
+        $scope.changeRequest.for_campaign_id = campaignId;
+        $scope.changeRequest.remark = remark;
+        $scope.changeRequest.type = 'user';
+        OwnerCampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
+            if(result.status == 1){
+              $scope.getUserCampaignDetails(campaignId);
+              //$mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+  }
 
     $scope.suggestProductForOwnerCampaign = function (ownerProduct) {        
         if (!localStorage.selectedOwnerCampaign) {
