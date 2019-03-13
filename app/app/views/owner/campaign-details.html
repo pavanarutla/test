@@ -164,18 +164,18 @@
                 <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
 
             </div> -->
-            <div class="p-2 col-md-6">
+            <div class="p-2 col-md-6" ng-hide="campaignDetails.type == 2">
 				<form name="SendComment">
 						<div class=" chat_box ">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">O</span>{{quote_change.remark}}</li>
 								<li ng-if="quote_change.type == 'bbi'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
 							</ul>
 							<div class="form-group">
 									<label for="text" class="text_color">Any questions, Please submit below</label>
 									<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
 								</div>
-								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message,'Owner')">Submit</button>
 							
 						</div>
 					</form>

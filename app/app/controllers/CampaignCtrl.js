@@ -237,11 +237,11 @@ $scope.Getcomment = function (campaignID){
     });
   }
 
-  $scope.changeQuoteRequest = function(campaignId,remark){
+  $scope.changeQuoteRequest = function(campaignId,remark,type){
         $scope.changeRequest = {};
         $scope.changeRequest.for_campaign_id = campaignId;
         $scope.changeRequest.remark = remark;
-        $scope.changeRequest.type = 'user';
+        $scope.changeRequest.type = type;
           CampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
               $scope.getCampaignDetails(campaignId);

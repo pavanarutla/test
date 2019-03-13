@@ -623,11 +623,11 @@ app.controller("CampaignProposalCtrl", function(
     });
   };
 
-  $scope.changeQuoteRequest = function(campaignId, remark) {
+  $scope.changeQuoteRequest = function(campaignId, remark,type) {
     $scope.changeRequest = {};
     $scope.changeRequest.for_campaign_id = campaignId;
     $scope.changeRequest.remark = remark;
-    $scope.changeRequest.type = "bbi";
+    $scope.changeRequest.type = type;
     CampaignService.requestChangeInQuote($scope.changeRequest).then(function(
       result
     ) {
