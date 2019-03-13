@@ -330,11 +330,11 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         $mdSidenav('shareCampaignSidenav').toggle();
     };
 
-    $scope.changeQuoteRequest = function(campaignId,remark){
+    $scope.changeQuoteRequest = function(campaignId,remark,type){
         $scope.changeRequest = {};
         $scope.changeRequest.for_campaign_id = campaignId;
         $scope.changeRequest.remark = remark;
-        $scope.changeRequest.type = 'user';
+        $scope.changeRequest.type = type;
         OwnerCampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
             if(result.status == 1){
               $scope.getUserCampaignDetails(campaignId);
