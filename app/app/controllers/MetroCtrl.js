@@ -52,7 +52,15 @@ app.controller('MetroCtrl',
       /*================================
       | Popup and Sidenav controls end
       ================================*/
-
+      // $scope.uncheck = function() {
+      //   if (!$scope.checked) {
+      //     $scope.GST = "0";
+      //     $scope.TOTAL = $scope.metroCampDetails.act_budget + parseInt($scope.GST);
+      //   }else{
+      //     $scope.GST = ($scope.metroCampDetails.act_budget / 100) * 18;
+      //       $scope.TOTAL = $scope.metroCampDetails.act_budget + $scope.GST;
+      //   }
+      // };
       /*===============================
       | Campaign Management
       ===============================*/
@@ -217,7 +225,7 @@ app.controller('MetroCtrl',
         });
       }
       function sharemetroCampaign() {
-        document.getElementById("sharecampmetroDrop").classList.toggle("show");
+        document.getElementById("sharemetroDrop").classList.toggle("show");
     }
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;

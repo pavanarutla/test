@@ -1,3 +1,19 @@
+<style>
+                .daterangepicker option.disabled, .daterangepicker td.disabled {
+                  color: #fff;
+                  cursor: not-allowed;
+                  background: #ddd;
+                  border: 1px solid #fff;
+                  border-radius: 0px;
+                  /* text-decoration: line-through; */
+                }
+                .gray-blocked{
+                  background:#ddd;
+                }
+                .red-blocked{
+                  background:#f00 !important;
+                }
+              </style>
 <!-- <div layout="column" layout-fill="layout-fill">
         <div class="md-title" layout="row">
                 <div flex></div>
@@ -644,8 +660,8 @@
 					<td class="text-center table_vertical">
 						<input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
 									 placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
-									 style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-						<a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+									 style="margin-bottom: -20px; width:2px; height:2px;" />
+						<a ng-click="getProductUnavailableDates(product.id, $event);">
 								<i class="material-icons">
 										calendar_today
 								</i>
@@ -672,7 +688,7 @@
         </ul>
     </div>
 </div>
-<div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+<!-- <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
 	<ul class="pagination">
 			<li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
 					<a ng-click="pagination.pageNo = i; getProductList();" 
@@ -682,7 +698,7 @@
 					</a>
 			</li>
 	</ul>
-</div>
+</div> -->
 <script>
             function addnewProduct() {
                 document.getElementById("myDropdown").classList.toggle("show");
