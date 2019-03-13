@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr',
-            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr) {
+        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
+            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state) {
                 $scope.forms = {};
                 $scope.address = {
                     // name: 'Hyderabad, Telangana, India',
@@ -436,7 +436,7 @@ app.controller('GmapCtrl',
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $mdSidenav('productDetails').toggle();
                     $scope.selectedProduct = marker;
                 }
@@ -456,7 +456,8 @@ app.controller('GmapCtrl',
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').toggle();
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
                 }
 
@@ -692,6 +693,7 @@ app.controller('GmapCtrl',
                                 //selectedDateRanges = [];
                         getShortListedProducts();
                         $mdSidenav('productDetails').close();
+                        $state.reload();
                     });
                 }
                 function getShortListedProducts() {

@@ -91,7 +91,12 @@ app.service('OwnerCampaignService',
                         var dfd = $q.defer();
                         $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
-                    }
+                    },
+                    requestChangeInQuote: function (sendObj) {
+                        var dfd = $q.defer();
+                        $http.post(config.apiPath + '/request-quote-change', sendObj).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                    },
                       
                     // downloadPdf: function () {
                     //   var dfd = $q.defer();

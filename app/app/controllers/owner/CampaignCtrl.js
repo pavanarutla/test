@@ -143,7 +143,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         eventHandlers: {
             'apply.daterangepicker': function(ev, picker) { 
                 //selectedDateRanges = [];
-                console.log(ev);
             }
         },
     };
@@ -173,7 +172,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     //       //Removes the Data Type Prefix 
     //       //And set the view model to the new value
     //       $scope.data.uploadedPhoto = e.target.result.replace(/data:image\/jpeg;base64,/g, '');
-    //       // console.log($scope.data.uploadedPhoto);
     //     }
     //     //Renders Image on Page
     //     reader.readAsDataURL(input.files[0]);
@@ -295,15 +293,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             } else {
                 toastr.error(result.message);
             }
-            myFunction();
+            CreatecampFunction();
         });
     }
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
+    function CreatecampFunction() {
+        document.getElementById("createcampDropdown").classList.toggle("show");
     }
-    function myFunctions() {
-        document.getElementById("myDropdownView").classList.toggle("show");
-    }
+    // function CreatecampFunctions() {
+    //     document.getElementById("myDropdownView").classList.toggle("show");
+    // }
     $scope.saveMetroCampaign = function (metroCampagin) {
         MetroService.saveMetroCampaign(metroCampagin).then(function (result) {
             if (result.status == 1) {
@@ -323,19 +321,33 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             } else {
                 toastr.error(result.message);
             }
-            myFunction();
+            CreatecampFunction();
         });
     }
 
-    $scope.toggleShareCampaignSidenav = function (campaign) {
-        console.log(campaign);
+    $scope.toggleShareCampaignSidenav = function (campaign) {       
         $scope.currentOwnerShareCampaign = campaign;
         $mdSidenav('shareCampaignSidenav').toggle();
     };
 
+    $scope.changeQuoteRequest = function(campaignId,remark){
+        $scope.changeRequest = {};
+        $scope.changeRequest.for_campaign_id = campaignId;
+        $scope.changeRequest.remark = remark;
+        $scope.changeRequest.type = 'user';
+        OwnerCampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
+            if(result.status == 1){
+              $scope.getUserCampaignDetails(campaignId);
+              //$mdDialog.hide();
+              toastr.success(result.message);
+            }
+            else{
+              toastr.error(result.message);
+            }
+          });
+  }
 
-    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {
-        console.log(ownerProduct);
+    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {        
         if (!localStorage.selectedOwnerCampaign) {
             toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
         } else {
@@ -347,8 +359,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
-                console.log(result);
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {                
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -420,7 +431,6 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         });
     }
     function getMetroCampDetails(metroCampaignId) {
-        console.log(metroCampaignId);
         MetroService.getMetroCampDetails(metroCampaignId).then((result) => {
             $scope.metroCampaginDetails = result;
         });
@@ -614,8 +624,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         });
     }
 
-    $scope.applymethod = function (product) {        
-        console.log(product);
+    $scope.applymethod = function (product) {
         var data = {};
         var pageNo = $scope.pagination.pageNo;
         var pageSize = $scope.pagination.pageSize;
@@ -717,21 +726,19 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             }
         }, function (resp) {
             toastr.error("somthing went wrong try again later");
-            // console.log('Error status: ', resp);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
         });
     }
     function addPayment() {
-        document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("addpaymentdrop").classList.toggle("show");
       }
 
     /* ==============================
      | Campaign payment section ends
      =============================== */
 
-
+    
     /*==============================
      | Campaign Search
      ==============================*/
@@ -748,21 +755,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         });
     }
 
-    function shareEmailCampaign() {
-        document.getElementById("myDropdown").classList.toggle("hide");
-      }
-      function close() {
-
-        angular.element(document.querySelector("#shareDropdown")).addClass("hide");
-        angular.element(document.querySelector("#shareDropdown")).removeClass("show");
-    }
+    // function shareEmailCampaign() {
+    //     document.getElementById("myDropdown").classList.toggle("hide");
+    //   }
+    //   function close() {
+    //     angular.element(document.querySelector("#shareDropdown")).addClass("hide");
+    //     angular.element(document.querySelector("#shareDropdown")).removeClass("show");
+    // }
     $scope.viewSelectedCampaign = function (campaign) {
         $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
     }
     $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
-        console.log(campaignID);
         $scope.campaignToShare = $scope.campaignDetails;
-        console.log($scope.campaignDetails);
         var campaignToEmail = {
             campaign_id: campaignID,
             email: shareCampaign.email,
@@ -782,22 +786,26 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         .ok('Got it!')
                         .targetEvent(ev)
                         );                              
-                         close();  
-                shareEmailCampaign();                           
+                         //close();  
+                         shareownerCampaign();                           
             } else {
                 toastr.error(result.message);
             }
             $scope.shareCampaign = '';
         });
-    }
+    }    
     //campaign share closed
     function selectedItemChange(item) {
-        //console.log('Item changed to ' + JSON.stringify(item));
     }
     /*==============================
      | Campaign Search
      ==============================*/
-
+     function shareownerCampaign() {
+        // document.getElementById("sharecampDrop").classList.toggle("show");
+        // document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
+        angular.element(document.querySelector("#sharecampDrop")).addClass("hide");
+        angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
+    }
 
     /*=========================
      | Page based initial loads

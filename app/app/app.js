@@ -483,7 +483,7 @@ var app = angular.module('bbManager', [
     .state('owner.metro-campaign-details', {
       url: '/metro-campaign-details/{metroCampaignId}',
       templateUrl: 'views/owner/metro-campaign-details.html',
-      controller:  'OwnerCampaignCtrl'
+      controller:  'MetroCtrl'
     })
     .state('owner.campaign-details', {
       url: '/campaign-details/:campaignId/:campaignType',
@@ -644,7 +644,7 @@ app.config(['toastrConfig', function (toastrConfig) {
     containerId: 'toast-container',
     maxOpened: 0,
     newestOnTop: true,
-    positionClass: 'toast-center',
+    positionClass: 'toast-top-right',
     preventDuplicates: false,
     preventOpenDuplicates: false,
     target: 'body'

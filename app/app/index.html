@@ -61,11 +61,7 @@
             left: 50%;
             z-index: 1505;
         }
-
-        .toast-center {
-            top: 45%;
-            margin-left: 550px;
-        }
+        
     </style>
 
     <div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
@@ -251,13 +247,13 @@
         var user = localStorage.getItem("loggedInUser");
         var parsedData = JSON.parse(user);
         var user_type = parsedData.user_type;
-        console.log(user_type);
+        console.log(parsedData.user_type);
         if (user_type == 'bbi') {
             var user_id = '-superAdmin';
         } else if (user_type == 'basic') {
             var user_id = parsedData.user_id;
         } else if (user_type == 'owner') {
-            var user_id = '-' + parsedData.user_id;
+            var user_id = '-' + parsedData.mong_id;
         }
         var arrayText = [];
         // Enable pusher logging - don't include this in production
@@ -279,7 +275,7 @@
         var channel9 = pusher.subscribe('ProductRequested' + user_id);
         var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
         var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
-        var channel12 = pusher.subscribe('metroCampaignLocked' + user_id);
+        var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
 
         channel.bind('CampaignLaunchEvent', function (data) {
             arrayText.push(data);
@@ -332,7 +328,7 @@
             arrayText.push(data);
             notificationText(arrayText);
         });
-        channel12.bind('metroCampaignLockedEvent', function (data) {
+        channel12.bind('metroCampignLockedEvent', function (data) {
             arrayText.push(data);
             notificationText(arrayText);
         });
