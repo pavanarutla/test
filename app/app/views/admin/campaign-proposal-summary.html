@@ -560,8 +560,13 @@
             <md-button
               class="md-raised md-warn all_button"  
               ng-click="finalizeCampaign(campaignProduct)"
-              ng-if="campaignDetails.status == 300 || campaignDetails.status == 400" style="float:right;">
+              ng-if="campaignDetails.status == 300" style="float:right;">
               Send Quote
+            </md-button>
+          <md-button
+              class="md-raised"  
+              ng-if="campaignDetails.status == 400" style="float:right;" disabled="disabled">
+              Quote Sent
             </md-button>
             <md-button
               class="md-raised md-primary all_button"

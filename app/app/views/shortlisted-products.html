@@ -135,7 +135,7 @@
 		<p class="text-center md-body-2">(OR)</p>
 		<div class="form-group mr-2 ml-2">
 			<select class="form-control" ng-model="existingCampaign.id" required="required">
-				<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+				<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns | filter : campaign.name" ng-if="campaign.status < 600" >{{campaign.name}}</option>
 			</select>
 		</div>
 		<!-- <div layout="column" class="mr-2 ml-2 mb-3">
