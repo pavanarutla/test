@@ -43,9 +43,9 @@ app.factory('MetroService',
           $http.get(config.apiPath + '/metro-campaigns').success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
-        checkoutMetroCampaign: function(metroCampaignId){
+        checkoutMetroCampaign: function(metroCampaignId, flag, GST){
           var dfd = $q.defer();
-          $http.get(config.apiPath + '/checkout-metro-campaign/' + metroCampaignId).success(dfd.resolve).error(dfd.reject);
+          $http.get(config.apiPath + '/checkout-metro-campaign/' + metroCampaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
         },
         getMetroCampDetails: function(metroCampaignId){
