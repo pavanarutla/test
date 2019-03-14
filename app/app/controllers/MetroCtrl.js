@@ -261,11 +261,11 @@ app.controller('MetroCtrl',
                 $scope.metroCampaignForm.$setUntouched();
                 $scope.campaignSavedSuccessfully = false;
                
-              }, 3000);
+              }, 1000);
               getMetroCampaigns();
               loadShortlistedPackages();
               toastr.success(response.message);
-              $window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/' + response.metro_camp_id;
+              //$window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/' + response.metro_camp_id;
             }
             else {
               $scope.saveUserCampaignErrors = response.message;
