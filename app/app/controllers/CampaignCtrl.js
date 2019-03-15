@@ -183,12 +183,12 @@ $scope.Getcomment = function (campaignID){
     } else{
       $scope.flag = 1;
     } 
-    console.log($scope.campaignDetails.products);
-    $i = 0;
+    //console.log($scope.campaignDetails.products);
+    $i = 1;
     angular.forEach($scope.campaignDetails.products, function (value, key) {
       if(value.admin_price) ++$i;
     });
-    //console.log($i);
+    console.log($i);
     if($i > 0){
       if($i == $scope.campaignDetails.products.length){
         CampaignService.confirmCampaignBooking(campaignId,$scope.flag,$scope.GST).then(function(result){
