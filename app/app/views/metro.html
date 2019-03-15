@@ -310,7 +310,7 @@ z-index: 0 !important;
 
                     <p class="text-white">Start Date: 
                         <span class="start_daterv" style="">
-                            <md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
+                            <md-datepicker  ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc" ng-disabled="isAlreadySelected(metroPackage.id)"></md-datepicker>
                         </span>
                     </p>
                     <p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount)}}</span></p>
