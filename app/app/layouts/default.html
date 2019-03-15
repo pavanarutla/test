@@ -145,38 +145,38 @@
     <md-sidenav md-component-id="left" class="md-sidenav-left" hide_gt_md>
         <div layout="row" class="layout-row">
 
-            <div flex="" class="flex"></div>
-            <a class="md-icon-button close-btn" ng-click="closeSidenav()">
-                <i class="material-icons">close</i>
-            </a>
-        </div>
-        <header layout="column" layout-padding layout-margin>
-            <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
-        </header>
-        <div flex layout="column" role="navigation">
-            <md-menu-item flex layout="column">
-                <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we">About
-                    BBI</md-button>
-            </md-menu-item>
-            <md-menu-item flex layout="column">
-                <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn">Our
-                    Products</md-button>
-            </md-menu-item>
-            <md-menu-item flex layout="column">
-                <md-button aria-label="products" ng-href="#/faq" class="toolbar-btn faq_width">FAQ'S
-                </md-button>
-            </md-menu-item>
-            <md-menu-item flex layout="column">
-                <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
-                           ng-click="showSignInDialog($event)"> suggest me</md-button>
-                <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggest/product-detail" ng-show="isAuthenticated"
-                           style="color:#000"> suggest me</md-button>
-            </md-menu-item>
-            <md-menu-item flex layout="column">
-                <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
-                           ng-click="showSignInDialog($event)">Metro</md-button>
-                <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated">Metro</md-button>
-            </md-menu-item>
+      <div flex="" class="flex"></div>
+      <a class="md-icon-button close-btn" ng-click="closeSidenav()">
+        <i class="material-icons">close</i>
+      </a>
+    </div>
+    <header layout="column" layout-padding layout-margin>
+      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
+    </header>
+    <div flex layout="column" role="navigation">
+      <md-menu-item flex layout="column">
+        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we">About
+          BBI</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn">Our
+          Products</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button aria-label="products" ng-href="#/faq" class="toolbar-btn faq_width">FAQ'S
+        </md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
+          ng-click="showSignInDialog($event)"> suggest me</md-button>
+        <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggestme" ng-show="isAuthenticated"
+          style="color:#000"> suggest me</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
+          ng-click="showSignInDialog($event)">Metro</md-button>
+        <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated ">Metro</md-button>
+      </md-menu-item>
 
             <md-menu-item flex layout="column">
                 <md-button aria-label="location" ng-href="#/location" ng-show="isAuthenticated">
@@ -191,53 +191,50 @@
     <ui-view></ui-view>
     <!-- //Content section-->
 
-    <!-- Footer Section-->
-    <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
-        <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
-            <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact Info</b></h3>
-                        <i class="fa fa-home gobalimg" aria-hidden="true"></i>
-                        <p class="font-weight-bold p3">BBI Advertising Pvt Ltd.</p>
-                        <p class="p4">People tech group building, Plot No.1, Whitefields<br>
-                            <span class="span_left">Hitech City Road, Kondapur, Hyderabad,Telangana 500084</span></p>
-                        <i class="fa fa-envelope-o email" aria-hidden="true"></i>
-                        <p class="font-weight-bold p3">MAIL US</p>
-                        <p class="p4">reach@billboardsindia.com</p>
-                        <i class="fa fa-mobile telephone" aria-hidden="true"></i>
-                        <p class="font-weight-bold p5">CALL India</p>
-                        <p class="p5">+ 91 9550224488</p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
-                        <div class="contact-block-left">
-                            <form action="#" method="post">
-                                <input type="text" placeholder="First Name" name="Name" required="">
-                                <input type="text" placeholder="Last Name" name="Name" required="">
-                                <input type="text" placeholder="Subject" name="Name" required="">
-                                <input type="email" class="email" placeholder="Email" name="Email" required="">
-                                <textarea placeholder="Message" name="message" required=""></textarea>
-                                <input type="submit" value="Send Message">
-                            </form>
-                        </div>
-                    </div>
-                </div>
+  <!-- Footer Section-->
+  <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
+    <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
+      <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact Info</b></h3>
+            <i class="fa fa-home gobalimg" aria-hidden="true"></i>
+            <p class="font-weight-bold p3">BBI Advertising Pvt Ltd.</p>
+            <p class="p4">People tech group building, Plot No.1, Whitefields<br>
+              <span class="span_left">Hitech City Road, Kondapur, Hyderabad,Telangana 500084</span></p>
+            <i class="fa fa-envelope-o email" aria-hidden="true"></i>
+            <p class="font-weight-bold p3">MAIL US</p>
+            <p class="p4">reach@billboardsindia.com</p>
+            <i class="fa fa-mobile telephone" aria-hidden="true"></i>
+            <p class="font-weight-bold p5">CALL India</p>
+            <p class="p5">+ 91 9550224488</p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
+            <div class="contact-block-left">
+              <form action="#" method="post">
+                <input type="text" placeholder="First Name" name="Name" required="">
+                <input type="text" placeholder="Last Name" name="Name" required="">
+                <input type="text" placeholder="Subject" name="Name" required="">
+                <input type="email" class="email" placeholder="Email" name="Email" required="">
+                <textarea placeholder="Message" name="message" required=""></textarea>
+                <input type="submit" value="Send Message">
+              </form>
             </div>
         </div>
-        <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
-            <a ng-href="#home" class="move-top text-center"></a>
-            <div class="row py-2 d-flex align-items-center">
-                <div class="col-md-9 col-lg-9 col-sm-9 col-12">
-                    <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Pravacy & Terms</b></span>BBI Advertising
-                        pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
-                    <a href="#"><i class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
+      <a ng-href="#home" class="move-top text-center"></a>
+      <div class="row py-2 d-flex align-items-center">
+        <div class="col-md-9 col-lg-9 col-sm-12 col-12">
+          <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Pravacy & Terms</b></span>BBI Advertising
+            pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
+          <a href="#"><i class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
         </div>
     </footer>
     <!-- //Footer Section-->

@@ -2,7 +2,6 @@
   md-backdrop.md-sidenav-backdrop {
     z-index: -1;
   }
-
   .daterangepicker option.disabled,
   .daterangepicker td.disabled {
     color: #fff;
@@ -12,28 +11,13 @@
     border-radius: 0px;
     /* text-decoration: line-through; */
   }
-
   .gray-blocked {
     background: #ddd;
   }
-
   .red-blocked {
     background: #f00 !important;
   }
-  .md-button.md-icon-button {
-    margin: 0px !important;
-    margin-left: -10px;
-    height: 40px;
-    min-width: 0;
-    line-height: 24px;
-    padding: 8px;
-    width: 40px;
-    border-radius: 50%;
-}
-.md-icon-button+.md-datepicker-input-container {
-    margin-left: 12px;
-    width: 190px;
-}
+  
 </style>
 <div layout="column" style="position:relative">
 
@@ -358,12 +342,12 @@
           <div flex></div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mt-2 mb-3">
-            <md-datepicker class="form-control" ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
+        <div class="row ml-0 mr-0">
+          <div class="col-md-6 text-center mt-2 map_cal">
+            <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
           </div>
-          <div class="col-md-12">
-            <md-datepicker class="form-control" ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
+          <div class="col-md-6 text-center mt-2 map_cal ">
+            <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
           </div>
           <div class="col-12 mt-2 text-right">
             <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)">Filter
