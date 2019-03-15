@@ -184,7 +184,7 @@ $scope.Getcomment = function (campaignID){
       $scope.flag = 1;
     } 
     //console.log($scope.campaignDetails.products);
-    $i = 1;
+    $i = 0;
     angular.forEach($scope.campaignDetails.products, function (value, key) {
       if(value.admin_price) ++$i;
     });
