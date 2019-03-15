@@ -110,13 +110,27 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         $scope.campaignDetails.gst = 0;
         $scope.campaignDetails.subTotal = result.act_budget ;
         $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+        $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+        $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
       }
     });
   }
   // if($stateParams.campaignId){
   //   $scope.getCampaignDetails($stateParams.campaignId);
   // }
-
+  $scope.gstuncheck = function(checked) {
+    if (!checked) {
+      $scope.GST = "0";
+      $scope.onchecked = false;
+      // $scope.checked = true;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+    } else {
+      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+      $scope.onchecked = true;
+      // $scope.checked = false;
+    }
+  };
   $scope.viewProductImage = function(image){
     var imagePath = config.serverUrl + image;
     $mdDialog.show({
@@ -162,6 +176,13 @@ $scope.Getcomment = function (campaignID){
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(ev, campaignId){
+    if ($scope.onchecked === true) {
+      $scope.flag = 1;
+    } else if ($scope.onchecked === false) {
+      $scope.flag = 0;
+    } else{
+      $scope.flag = 1;
+    } 
     console.log($scope.campaignDetails.products);
     $i = 0;
     angular.forEach($scope.campaignDetails.products, function (value, key) {
@@ -170,7 +191,7 @@ $scope.Getcomment = function (campaignID){
     //console.log($i);
     if($i > 0){
       if($i == $scope.campaignDetails.products.length){
-        CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+        CampaignService.confirmCampaignBooking(campaignId,$scope.flag,$scope.GST).then(function(result){
           if(result.status == 1){
             $mdDialog.show(
               $mdDialog.alert()
