@@ -162,16 +162,15 @@ app.controller('MetroCtrl',
       }
       $scope.getEstBudgetForSelectedPackages = function () {
         var estBudget = {};
-		estBudget.price = 0;
-	//	estBudget.selected_slots = 0;
-		estBudget.selected_trains = 0;
-		estBudget.months = 0;
-		
+        estBudget.price = 0;
+        //	estBudget.selected_slots = 0;
+        estBudget.selected_trains = 0;
+        estBudget.months = 0;
         _.each($scope.shortlistedPackages, (package) => {
           estBudget.price += package.price ;
-		  //estBudget.selected_slots += package.selected_slots;
-		  estBudget.selected_trains += package.selected_trains ;
-		  estBudget.months += package.months;
+		    //estBudget.selected_slots += package.selected_slots;
+        estBudget.selected_trains += package.selected_trains ;
+        estBudget.months += package.months;
         });
         return estBudget;
       }
@@ -226,6 +225,8 @@ app.controller('MetroCtrl',
       }
       function sharemetroCampaign() {
         document.getElementById("sharemetroDrop").classList.toggle("show");
+          //      document.getElementById("sharecampmetroDrop").classList.toggle("show");
+
     }
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
@@ -357,6 +358,11 @@ app.controller('MetroCtrl',
       /*================================
       | Page based initial loads end
       ================================*/
+
+      $scope.showSaveCampaignPopup = false;
+      $scope.toggleSaveCampaignPopup = function () {
+        $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+      }
     }
   ]
 );

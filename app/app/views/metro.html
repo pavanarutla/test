@@ -1,9 +1,9 @@
 <style>
     .metro_pack {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgb(255, 255, 255);
         position: absolute;
         width: 35%;
-        top: 10%;
+        top: 2%;
         left: 31%;
         padding: 10px 10px 0px 10px;
         z-index: 99 !important;
@@ -46,78 +46,53 @@
             font-size: 1.50rem;
         }
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
+
             width: 90%;
             top: 17%;
             left: 5%;
-            padding: 10px 10px 0px 10px;
+         
             z-index: 0 !important;
         }
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
+           
             width: 60%;
             top: 20%;
             left: 25%;
-            padding: 10px 10px 0px 10px;
+           
             z-index: 0 !important;
         }
     }
-    /* @media (min-width: 1024px) and (max-width: 1366px) {
-    .metro_pack {
-background: rgba(255, 255, 255, 0.5);
-position: absolute;
-width: 50%;
-top: 22%;
-left: 17%;
-padding: 10px 10px 0px 10px;
-z-index: 0 !important;
-} 
-}*/
+    
     @media only screen and (max-width: 768px) and (min-width: 560px)
     {
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
             width: 80%;
             top: 30%;
             left: 15%;
-            padding: 10px 10px 0px 10px;
             z-index: 0 !important;
         }
     }
 
     @media screen and (min-width: 1366px) and (max-width: 1439px){
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
             width: 50%;
-            /* top: 10%; */
             left: 24%;
-            padding: 10px 10px 0px 10px;
             z-index: 99 !important;
         }
     }
     @media screen and (min-width: 1440px) and (max-width: 1599px) {
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
             width: 55%;
             left: 29%;
-            padding: 10px 10px 0px 10px;
             z-index: 99 !important;
         }
     }
     @media screen and (min-width: 1600px) and (max-width: 1919px) {
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
             width: 40%;
             left: 29%;
-            padding: 10px 10px 0px 10px;
             z-index: 99 !important;
         }
 
@@ -127,12 +102,9 @@ z-index: 0 !important;
             width: 114%;
         }
         .metro_pack {
-            background: rgba(255, 255, 255, 0.5);
-            position: absolute;
             width: 100%;
             top: 30%;
             left: 1%;
-            padding: 10px 10px 0px 10px;
             z-index: 0 !important;
         }
         .back_red{
@@ -229,61 +201,7 @@ z-index: 0 !important;
         <!--Shortlisted Product html end -->
 
     </div>
-    <!-- <div class="metro_pkgs md-whiteframe-z2">
-            <div class="metro_pack">
-                            <div class="row">
-                                            <div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
-                                                    <div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
-                                                            <h3 class="text-white">{{metroPackage.corridor}}</h3>
-                                                            <h5 class="text-white">{{metroPackage.format}}</h5>
-                                                                    <hr style="padding:1px;background-color: #fff;">
-                                                                    <p class="text-white mb-0" ng-repeat="desc in (metroPackage.description | customSplitString)">
-                                                                            <i class="fa fa-check-square-o" aria-hidden="true" ></i>
-                                                                            {{desc}}
-                                                                    </p>
 
-                                                                    <hr style="padding:1px;background-color: #fff;">
-                                                                                            <p class="text-white">No of Trains: 
-                                                                                                            <span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" value="-"  ng-click="Trcount = (Trcount >1 ? ( Trcount - 1) : 1 );" ng-init="Trcount=1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
-                                                                                                                    <input type="text" size="10" readonly="" value="{{Trcount}} Trains"  ng.model="metroPackage.selected_trains" style="border: none;background:none;text-align:center;">
-                                                                                                                    <input type="button" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
-                                                                                            <p class="text-white">Durations: 
-                                                                                                            <span style="background:#ededed;padding:6px;margin-left: 45px;border-radius: 3px;">
-                                                                                                                    <input type="button" value="-"  ng-click="(Mocount = (Mocount==1?.5:Mocount - 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" ng-init="Mocount= .5; Days='Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
-                                                                                                                    <input type="text" size="10" readonly="" value="{{(Mocount<1)?15:Mocount}} {{Days}}" id="count" style="border: none;background:none;text-align:center;">
-                                                                                                                    <input type="button" value="+" ng-click="(Mocount = (Mocount==.5?Mocount + .5:Mocount + 1));(Days = (Mocount < 1 ? 'Days' : 'Months' ));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
-                                                                    <p class="text-white">Start Date: 
-                                                                                    <span style="background:#ededed;padding:6px;margin-left:42px;border-radius: 3px;">
-                                                                                                    <md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
-                                                                                            </span>
-                                                                                            </p>
-                                                                    <p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount) }}</span></p>
-                                                                    <div style="display:none;">
-                                                                            {{ metroPackage.selected_trains = Trcount }}
-                                                                            {{ metroPackage.months = Mocount }}
-                                                                    </div>
-                                                                    <p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Shortlist This</p>
-                                                                    <p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Deselect This</p>
-                                                    </div>
-                                            </div>
-                            </div>
-                    <div layout="row" layout-margin>
-                            <div class="show_bug">
-                                    <p class="md-caption">
-                                            Estimated Budget for {{getEstBudgetForSelectedPackages().months =='0.5'? ' 15 Days ': slPkg.months+' Months'}}, {{getEstBudgetForSelectedPackages().selected_trains}} Trains
-                                    </p>
-                                    <h2 class="text_color">
-                                            Rs. {{getEstBudgetForSelectedPackages().price}}
-                                    </h2>
-                            </div>
-                            <div flex></div>
-                            <div class="logo_lnt">
-                                    <p class="md-caption">We are oﬃcial Partners to</p>
-                                    <img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
-                            </div>
-                    </div>
-            </div>
-    </div> -->
     <div class="metro_pack md-whiteframe-z2">
         <div class="row">
             <div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
