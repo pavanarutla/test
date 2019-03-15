@@ -7,23 +7,23 @@
         <!-- share campaign sidenav ends -->
         <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
             <div class="row" style="margin-left:0px; margin-right:0px;">
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">Campaign ID</p>
                     <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">Campaign Name</p>
                     <p class="md-caption mob_span"><b>{{campaignDetails.name| capitalize}}</b></p>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">No of Products</p>
                     <p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
                 </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
                     <div class="dropdown">
                         <md-button onclick="shareownerCampaign()" class="dropbtn drop_width">
                             <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
                      style="cursor: pointer;">			
                     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                         <a ng-click="downloadOwnerQuote(campaignDetails.id)" download>
@@ -165,6 +165,7 @@
 
             </div> -->
 <!--            <div class="p-2 col-md-6">
+
 				<form name="SendComment" ng-hide="campaignDetails.type == 2">
 						<div class=" chat_box ">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
@@ -180,7 +181,8 @@
 						</div>
 					</form>
 		</div>-->
-            <div class="col-md-12" ng-if="campaignDetails.type != 0" >
+       
+            <div class="col-md-8" ng-if="campaignDetails.type != 0" >
                 <div class="mt-3 pull-right sub_total">
                     <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignDetails.act_budget}}</b></spam>
                     </p>
