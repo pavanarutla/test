@@ -25,7 +25,7 @@
 				  </tr>
 				</thead>
 				<tbody>
-					<tr	class="" ng-repeat="payments in userPayments | filter:search"> 
+					<tr	class="" ng-repeat="payments in userPayments | filter:search"  ng-if="payments.status > 500"> 
 					<td class="table_vertical">{{payments.cid}}</td>
 					<td class="table_vertical">{{payments.name}}</td>
 					<td class="text-center table_vertical">{{payments.paid}}</td>
