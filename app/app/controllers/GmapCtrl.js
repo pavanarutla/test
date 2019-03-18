@@ -314,7 +314,7 @@ app.controller('GmapCtrl',
                             .parent(angular.element(document.querySelector('body')))
                             .clickOutsideToClose(true)
                             .title('Your Campaign is successfully Saved!!!!')
-                            .textContent('You can specify some description text in here.')
+                            //.textContent('You can specify some description text in here.')
                             .ariaLabel('Alert Dialog Demo')
                             .ok('Got it!')
                             .targetEvent(ev)
