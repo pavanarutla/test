@@ -1,6 +1,5 @@
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
 	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" class="short_imagecenter" >
-		<!-- <img src="assets/images/owner/Group 383.png"/> -->
 		<img src="assets/images/owner/Group 383.png" class="rounded mx-auto d-block" alt="...">
 	</div>
 	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
@@ -57,56 +56,10 @@
 	</div>
 	<!-- table grid end -->
 	<div class="campaign_payment_inner mb-2">
-
-		<!-- <div class="row mr-0 ml-0 pt-2">
-            <div class="col-md-6 chat_box pb-5">
-                <ul class="p-0">
-                    <li class="mt-2"><span class="user_dec">U</span>My budget for this campaign is 1,58,000. Can you
-                        please revision BB238 - Kothaguda hoarding price </li>
-                    <li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
-                        is revised as requested</li>
-
-                </ul>
-                <form action="/action_page.php">
-                    <div class="form-group">
-                        <label for="text" class="text_color">Any questions, Please submit below</label>
-                        <textarea type="text" class="form-control" id="text" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-6 ">
-                <div class="d-flex justify-content-end pt-4">
-                    <md-button class="md-raised md-warn" ng-click="saveCampagin()">SAVE CAMPAIGN</md-button>
-                    <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button>
-                </div>
-            </div>
-        </div> -->
-		<!-- <div class="d-flex bg-light mb-5" style="min-height:100px">
-			<div class="p-2 col-md-6">
-				<div class=" chat_box ">
-					<ul class="p-0">
-						<li class="mt-2"><span class="user_dec">U</span>My budget for this campaign is 1,58,000. Can you
-							please revision
-							BB238 - Kothaguda hoarding price </li>
-						<li class="mt-2"><span class="user_dec" style="background:#980000">BI</span>The product price
-							is revised as
-							requested</li>
-					</ul>
-					<form action="/action_page.php">
-						<div class="form-group">
-							<label for="text" class="text_color">Any questions, Please submit below</label>
-							<textarea type="text" class="form-control" id="text" rows="3"></textarea>
-						</div>
-						<button type="submit" class="btn btn-primary float-right">Submit</button>
-					</form>
-				</div>
-			</div> -->
 		<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
 			<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
 				<div class="d-flex justify-content-end pt-4">
 					<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>
-					<!-- <md-button class="md-raised md-primary">REQUEST PROPOSAL</md-button> -->
 				</div>
 			</div>
 		</div>
@@ -138,11 +91,6 @@
 				<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
 			</select>
 		</div>
-		<!-- <div layout="column" class="mr-2 ml-2 mb-3">
-			<md-button class="md-raised md-primary" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)">
-				add to existing or save Campaign
-			</md-button>
-		</div> -->			
 		<div layout="column" class="mr-2 ml-2 mb-3">
 			<md-button class="md-raised all_button" layout-fill ng-click="addProductToExistingCampaign(existingCampaign.id)">
 				add to existing or save Campaign

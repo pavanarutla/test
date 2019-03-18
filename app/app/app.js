@@ -495,11 +495,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/requested-hoardings.html',
       controller: 'OwnerProductCtrl'
     })
-    .state('owner.suggest-products', {
-      url: '/suggest-products',
-      templateUrl: 'views/owner/suggest-products.html',
-      controller: 'OwnerCampaignCtrl'
-    })
+    // .state('owner.suggest-products', {
+    //   url: '/suggest-products',
+    //   templateUrl: 'views/owner/suggest-products.html',
+    //   controller: 'OwnerCampaignCtrl'
+    // })
     .state('owner.hoarding-list', {
       url: '/hoarding-list',
       templateUrl: 'views/owner/hoarding-list.html',
@@ -520,10 +520,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/accountsetting.html',
       controller: ''
     })
-    .state('owner.profile', {
-      url: '/profile',
-      templateUrl: 'views/owner/user-profile.html',
-    })
+    // .state('owner.profile', {
+    //   url: '/profile',
+    //   templateUrl: 'views/owner/user-profile.html',
+    // })
     // .state('owner.home', {
     //   url: '/home',
     //   templateUrl: 'views/owner/home.html',
@@ -574,11 +574,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/resetlogin.html',
       controller:''
     })
-    .state('owner.createaccount', {
-      url: '/createaccount',
-      templateUrl: 'views/owner/createaccount.html',
-      controller:''
-    })
+    // .state('owner.createaccount', {
+    //   url: '/createaccount',
+    //   templateUrl: 'views/owner/createaccount.html',
+    //   controller:''
+    // })
     .state('owner.payments', {
       url: '/payments',
       templateUrl: 'views/owner/campaign-payments.html',
@@ -594,11 +594,12 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
-    .state('owner.signIn', {
-      url: '/signIn',
-      templateUrl: 'views/owner/signin.html',
-      controller:'ownerSigninCtrl'
-    });
+    // .state('owner.signIn', {
+    //   url: '/signIn',
+    //   templateUrl: 'views/owner/signin.html',
+    //   controller:'ownerSigninCtrl'
+    // })
+    ;
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
@@ -688,7 +689,7 @@ app.run(
           'owner.campaigns',
           'owner.campaign-details',
           'owner.requested-hoardings',
-          'owner.suggest-products',
+          //'owner.suggest-products',
           'owner.hoarding-list',
           'owner.product-details',
           'owner.settings',
@@ -766,10 +767,10 @@ app.run(
           }
         }
 
-        // Get all URL parameter 
+        // Get all URL parameter index.user-notifications
         $rootScope.currentTitle = transition.to().title;
         $rootScope.currStateName = transition.to().name;
-        if ((transition.to().name == "index.location"|| transition.to().name == "index.reset-password" || transition.to().name == "index.product-list" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
+        if ((transition.to().name == "index.location"|| transition.to().name == "index.user-notifications" || transition.to().name == "index.reset-password" || transition.to().name == "index.product-list" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail")&& $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
         else {

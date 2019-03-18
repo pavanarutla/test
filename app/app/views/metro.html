@@ -1,12 +1,12 @@
 <style>
     .metro_pack {
         background: rgb(255, 255, 255);
-        position: absolute;
+        position: absolute !important;
         width: 35%;
-        top: 2%;
+        top: 2% !important;
         left: 31%;
         padding: 10px 10px 0px 10px;
-        z-index: 99 !important;
+        z-index: 99 ;
     }
     .start_daterv{
         background:#ededed;
@@ -17,7 +17,7 @@
     .lnt_caln{
         margin-top: 15px;
     }
-    md-datepicker-button .md-button.md-icon-button{display:none}
+    .lnt_caln md-datepicker-button .md-button.md-icon-button{display:none}
     .lnt_caln .md-datepicker-input-container {
         border-bottom-color: rgb(255, 255, 255) !important;
     }
@@ -46,30 +46,33 @@
             font-size: 1.50rem;
         }
         .metro_pack {
-
             width: 90%;
-            top: 17%;
+            top: 17% !important;
             left: 5%;
-         
             z-index: 0 !important;
         }
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
         .metro_pack {
-           
             width: 60%;
-            top: 20%;
+            top: 20% !important;
             left: 25%;
-           
             z-index: 0 !important;
         }
     }
     
-    @media only screen and (max-width: 768px) and (min-width: 560px)
-    {
+    @media only screen and (max-width: 768px) and (min-width: 560px){
+        .metro_pack {
+			width: 60%;
+			top: 30% !important;
+			left: 15%;
+			z-index: 0 !important;
+		}
+	}
+	@media only screen and (min-width: 576px) and (min-width: 767px){
         .metro_pack {
             width: 80%;
-            top: 30%;
+            top: 30% !important;
             left: 15%;
             z-index: 0 !important;
         }
@@ -77,9 +80,11 @@
 
     @media screen and (min-width: 1366px) and (max-width: 1439px){
         .metro_pack {
+			position: absolute !important;
+        	top: 2% !important;
             width: 50%;
             left: 24%;
-            z-index: 99 !important;
+            z-index: 99;
         }
     }
     @media screen and (min-width: 1440px) and (max-width: 1599px) {
@@ -103,9 +108,9 @@
         }
         .metro_pack {
             width: 100%;
-            top: 30%;
+            top: 30% !important;
             left: 1%;
-            z-index: 0 !important;
+           
         }
         .back_red{
             margin-bottom: 11px;
@@ -120,7 +125,6 @@
     .md-datepicker-triangle-button {
         position: absolute;
         width: 125px !important;
-        /* z-index: 99999999; */
         bottom: -2.5px;
         -webkit-transform: translateX(45%);
         transform: translateX(45%);
@@ -204,7 +208,7 @@
 
     <div class="metro_pack md-whiteframe-z2">
         <div class="row">
-            <div class="col-12 col-sm-9 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
                 <div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
                     <h3 class="text-white">{{metroPackage.corridor}}</h3>
                     <h5 class="text-white">{{metroPackage.format}}</h5>
@@ -227,7 +231,7 @@
                             <input type="button" value="+" ng-click="(Mocount = (Mocount == .5?Mocount + .5:Mocount + 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
 
                     <p class="text-white">Start Date: 
-                        <span class="start_daterv" style="">
+                        <span class="start_daterv">
                             <md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
                         </span>
                     </p>
@@ -241,8 +245,8 @@
                 </div>
             </div>
         </div>
-        <div layout="row" layout-margin>
-            <div class="show_bug">
+        <div class="row" >
+            <div class="col-12 col-sm-12 col-md-6 show_bug">
                 <p class="md-caption">
                     Estimated Budget for {{getEstBudgetForSelectedPackages().months == '0.5'? ' 15 Days ': getEstBudgetForSelectedPackages().months + ' Months'}}, {{getEstBudgetForSelectedPackages().selected_trains}} Trains
                 </p>
@@ -250,8 +254,7 @@
                     Rs. {{getEstBudgetForSelectedPackages().price}}
                 </h2>
             </div>
-            <div flex></div>
-            <div class="logo_lnt">
+            <div class="col-12 col-sm-12 col-md-6 logo_lnt">
                 <p class="md-caption">We are oﬃcial Partners to</p>
                 <img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
             </div>
