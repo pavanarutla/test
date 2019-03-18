@@ -340,7 +340,15 @@ app.controller('MetroCtrl',
       /*===============================
       | Campaign Management ends
       ===============================*/
-
+      $scope.downloadOwnerQuote = function (campaignId) {
+        MetroService.downloadQuote(campaignId).then(function (result) {
+            var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+            FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+            if (result.status) {
+                toastr.error(result.meesage);
+            }
+        });
+    };
       /*================================
       | Page based initial loads
       ================================*/
