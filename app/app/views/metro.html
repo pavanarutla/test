@@ -220,19 +220,19 @@
 
                     <hr style="padding:1px;background-color: #fff;">
                     <p class="text-white">No of Trains: 
-                        <span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" value="-"  ng-click="Trcount = (Trcount > 1 ? (Trcount - 1) : 1);" ng-init="Trcount = 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+                        <span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="-"  ng-click="Trcount = (Trcount > 1 ? (Trcount - 1) : 1);" ng-init="Trcount = 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
                             <input type="text" size="10" readonly="" value="{{Trcount}} Trains"  ng.model="metroPackage.selected_trains" style="border: none;background:none;text-align:center;">
-                            <input type="button" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
 
                     <p class="text-white">Durations: 
                         <span style="background:#ededed;padding:6px;margin-left: 45px;border-radius: 3px;">
-                            <input type="button" value="-"  ng-click="(Mocount = (Mocount<= 1?.5:Mocount - 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" ng-init="Mocount = .5; Days = 'Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="-"  ng-click="(Mocount = (Mocount<= 1?.5:Mocount - 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" ng-init="Mocount = .5; Days = 'Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
                             <input type="text" size="10" readonly="" value="{{(Mocount<1)?15:Mocount}} {{Days}}" id="count" style="border: none;background:none;text-align:center;">
-                            <input type="button" value="+" ng-click="(Mocount = (Mocount == .5?Mocount + .5:Mocount + 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="+" ng-click="(Mocount = (Mocount == .5?Mocount + .5:Mocount + 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
 
                     <p class="text-white">Start Date: 
-                        <span class="start_daterv">
-                            <md-datepicker ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc"></md-datepicker>
+                        <span class="start_daterv" style="">
+                            <md-datepicker  ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc" ng-disabled="isAlreadySelected(metroPackage.id)"></md-datepicker>
                         </span>
                     </p>
                     <p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount)}}</span></p>

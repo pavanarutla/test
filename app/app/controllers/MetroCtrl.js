@@ -52,7 +52,15 @@ app.controller('MetroCtrl',
       /*================================
       | Popup and Sidenav controls end
       ================================*/
-
+      $scope.uncheck = function() {
+        if (!$scope.checked) {
+          $scope.GST = "0";
+          $scope.TOTAL = $scope.metroCampDetails.act_budget + parseInt($scope.GST);
+        }else{
+          $scope.GST = ($scope.metroCampDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.metroCampDetails.act_budget + $scope.GST;
+        }
+      };
       /*===============================
       | Campaign Management
       ===============================*/
@@ -216,8 +224,10 @@ app.controller('MetroCtrl',
         });
       }
       function sharemetroCampaign() {
-        document.getElementById("sharecampmetroDrop").classList.toggle("show");
-      }
+        document.getElementById("sharemetroDrop").classList.toggle("show");
+          //      document.getElementById("sharecampmetroDrop").classList.toggle("show");
+
+    }
       $scope.addPackageInMetroCampaign = function () {
         $scope.selectedPackage.package_id = $scope.selectedPackage.id;
         $scope.selectedPackage.campaign_id = $stateParams.metroCampaignId;
@@ -242,6 +252,7 @@ app.controller('MetroCtrl',
             campaign.packages.push(v.package_id);
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
+            console.log(response);
             if (response.status == 1) {
               $timeout(function () {
                 $scope.showSaveCampaignPopup = false;
@@ -250,10 +261,12 @@ app.controller('MetroCtrl',
                 $scope.metroCampaignForm.$setPristine();
                 $scope.metroCampaignForm.$setUntouched();
                 $scope.campaignSavedSuccessfully = false;
-                toastr.success(response.message);
-              }, 3000);
+               
+              }, 1000);
               getMetroCampaigns();
               loadShortlistedPackages();
+              toastr.success(response.message);
+              //$window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/' + response.metro_camp_id;
             }
             else {
               $scope.saveUserCampaignErrors = response.message;
@@ -270,7 +283,17 @@ app.controller('MetroCtrl',
         });
       }
       $scope.checkoutMetroCampaign = function (ev, metroCampaignId) {
-        MetroService.checkoutMetroCampaign(metroCampaignId).then((result) => {
+        if ($scope.onchecked === true) {
+          $scope.flag = 1;
+        } else if ($scope.onchecked === false) {
+          $scope.flag = 0;
+        } else{
+          $scope.flag = 1;
+        }
+        debugger;
+        MetroService.checkoutMetroCampaign(metroCampaignId,$scope.flag,$scope.GST).then((result) => {
+          console.log(result);
+          debugger;
           if (result.status == 1) {
             getMetroCampDetails(metroCampaignId);
             getMetroCampaigns();
@@ -310,6 +333,8 @@ app.controller('MetroCtrl',
       function getMetroCampDetails(mCampId) {
         MetroService.getMetroCampDetails(mCampId).then((result) => {
           $scope.metroCampDetails = result;
+          $scope.GST = ($scope.metroCampDetails.act_budget / 100) * 18;
+          $scope.TOTAL = $scope.metroCampDetails.act_budget + $scope.GST;
         });
       }
       /*===============================

@@ -1,589 +1,607 @@
 <style>
-.chat_box ul li{
-    list-style: none;
-}
-.user_dec{
-  background: #BC2535;
-    padding: 5px 11px;
-    color: #fff;
-    margin-right: 15px;
-}
-.user_bi{
-    
-    background: #000;
-    padding: 5px 10px;
-    color: #fff;
-    margin-right: 15px;
-}
+    .chat_box ul li{
+        list-style: none;
+    }
+    .user_dec{
+        background: #BC2535;
+        padding: 5px 11px;
+        color: #fff;
+        margin-right: 15px;
+    }
+    .user_bi{
+
+        background: #000;
+        padding: 5px 10px;
+        color: #fff;
+        margin-right: 15px;
+    }
 </style>
 <!-- share campaign sidenav -->
 <md-sidenav
-  class="md-sidenav-right md-whiteframe-z2 sidenav-width"
-  md-component-id="shareCampaignSidenav"
->
-  <div layout="row">
-    <div class="md-toolbar-tools">
-      <div flex></div>
-      <md-button
-        class="md-icon-button"
-        aria-label="Close Side Panel"
-        ng-click="toggleShareCampaignSidenav()"
-      >
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <md-icon class="md-default-theme"
-          ><i class="material-icons">close</i></md-icon
-        >
-      </md-button>
+    class="md-sidenav-right md-whiteframe-z2 sidenav-width"
+    md-component-id="shareCampaignSidenav"
+    >
+    <div layout="row">
+        <div class="md-toolbar-tools">
+            <div flex></div>
+            <md-button
+                class="md-icon-button"
+                aria-label="Close Side Panel"
+                ng-click="toggleShareCampaignSidenav()"
+                >
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme"
+                         ><i class="material-icons">close</i></md-icon
+                >
+            </md-button>
+        </div>
     </div>
-  </div>
-  <md-content layout-align="center center" layout-margin layout-padding>
-    <h3 class="md-headline">Share Campaign</h3>
-    <form name="shareCampaignForm">
-      <div layout="column">
-        <md-input-container class="md-block">
-          <label>Name</label>
-          <input
-            ng-model="shareCampaign.receiver_name"
-            name="receiver_name"
-            required="required"
-          />
-          <div ng-messages="shareCampaignForm.name.$error">
-            <div ng-message="required">Name is required.</div>
-            <div ng-message="pattern">Enter a valid Name.</div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input
-            ng-model="shareCampaign.email"
-            name="email"
-            type="email"
-            required="required"
-            ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-          />
-          <div ng-messages="shareCampaignForm.email.$error">
-            <div ng-message="required">Email is required.</div>
-            <div ng-message="pattern">Enter a valid Email Id.</div>
-          </div>
-        </md-input-container>
-        <md-button
-          class="md-raised md-warn"
-          layout-fill
-          ng-click="shareCampaignToEmail($event, shareCampaign)"
-          >SHARE CAMPAIGN</md-button
-        >
-      </div>
-    </form>
-  </md-content>
+    <md-content layout-align="center center" layout-margin layout-padding>
+        <h3 class="md-headline">Share Campaign</h3>
+        <form name="shareCampaignForm">
+            <div layout="column">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input
+                        ng-model="shareCampaign.receiver_name"
+                        name="receiver_name"
+                        required="required"
+                        />
+                    <div ng-messages="shareCampaignForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="pattern">Enter a valid Name.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input
+                        ng-model="shareCampaign.email"
+                        name="email"
+                        type="email"
+                        required="required"
+                        ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                        />
+                    <div ng-messages="shareCampaignForm.email.$error">
+                        <div ng-message="required">Email is required.</div>
+                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                    </div>
+                </md-input-container>
+                <md-button
+                    class="md-raised md-warn"
+                    layout-fill
+                    ng-click="shareCampaignToEmail($event, shareCampaign)"
+                    >SHARE CAMPAIGN</md-button
+                >
+            </div>
+        </form>
+    </md-content>
 </md-sidenav>
 <!-- share campaign sidenav ends -->
 
 <div ng-cloak flex="100" flex-xs="100" flex-sm="100">
-  <div layout="column" layout-sm="column" layout-xs="column">
-    <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
-                <md-toolbar layout="row" style="    background: #48869c;">
-                        <div class="md-toolbar-tools">
-                                <h2>
-                                        <span>Client Request</span>
-                                </h2>
-                                <span flex></span>
-                                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleQuoteChangeRequestDetailsSidenav()">
-                                        <md-icon>
-                                                <i class="material-icons">clear</i>
-                                        </md-icon>
-                                </md-button>
-                        </div>
-                </md-toolbar>
-                <md-content layout-padding>
-                        <div class="md-whiteframe-z2 md-body-1" layout-margin ng-repeat="changeQuoteItem in changeRequestHistory">
-                                <div>
-                                        {{changeQuoteItem.remark}}
-                                        <hr />
-                                        <div layout-align="end center" style="font-size:11px;">{{changeQuoteItem.updated_at | dateify | date: "dd-MMM-yyyy"}}</div>
-                                </div>
-                        </div>
-                </md-content>
-        </md-sidenav> -->
-    <!-- <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>
-                Proposal
-        </div> -->
-    <!-- <div class="Planned">
-                <div class="bg-part">
-                        <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
-                                <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-                                 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-                                        <div layout="column" layout-align="center center">
-                                                <div>
-                                                        <span>
-                                                                <img src="assets/images/client_details.png">
-                                                        </span>
-                                                </div>
-                                                <h3>Client Details</h2>
-                                        </div>
-                                        <div layout="row" layout-align="center center">
-                                                <div flex="50">Campaign Name:</div>
-                                                <div flex="50">{{campaignDetails.name}}</div>
-                                        </div>
-                                        <div layout="row" layout-align="center center">
-                                                <div flex="50">Client Name:</div>
-                                                <div flex="50">{{campaignDetails.first_name}} {{campaignDetails.last_name}}</div>
-                                        </div>
-                                        <div layout="row" layout-align="center center">
-                                                <div flex="50">Contact:</div>
-                                                <div flex="50">{{campaignDetails.phone || "N/A"}}</div>
-                                        </div>
-                                        <div layout="row" layout-align="center center">
-                                                <div flex="50">Email:</div>
-                                                <div flex="50">{{campaignDetails.email || "N/A"}}</div>
-                                        </div>
-                                </div>
-                                <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
-                                 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-                                        <div layout="column" layout-align="center center">
-                                                <div>
-                                                        <img src="assets/images/capaign_details.png">
-                                                </div>
-                                                <h3>Campaign Summary</h2>
-                                        </div>
-                                        <div layout="row">
-                                                <div flex="50">Starting:</div>
-                                                <div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date:
-                                                        "dd-MMM-yyyy" }}</div>
-                                        </div>
-                                        <div layout="row">
-                                                <div flex="50">Estimated Budget:</div>
-                                                <div flex="50">
-                                                        <span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
-                                        </div>
-                                        <div layout="row">
-                                                <div flex="50">Actual Budget:</div>
-                                                <div flex="50">
-                                                        <span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
-                                        </div>
-                                        <div layout="row">
-                                                <div flex="50">Status:</div>
-                                                <div flex="50">
-                                                        <span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
-                                                        <span layout-align="center center" ng-if="campaignDetails.status == 500" style="cursor:pointer;" ng-click="getChangeRequestHistory(campaignDetails.id)">
-                                                                <i class="material-icons">info_outline</i>
-                                                        </span>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-                <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
-                 ng-if="campaignDetails.status >= 700">
-                        <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-                         layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-                                <div layout="column" layout-align="center center">
-                                        
-                                        <h3>Payment Details</h2>
-                                </div>
-                                <div layout="row">
-                                        <div flex="50" layout="column" layout-align="center center">Total amount:</div>
-                                        <div flex="50" layout="column" layout-align="center center">Rs. {{campaignDetails.act_budget || 0 }}</div>
-                                </div>
-                                <div layout="row">
-                                        <div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
-                                        <div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
-                                </div>
-                                <div layout="row" ng-if="campaignPayments.total_paid < campaignDetails.act_budget">
-                                        <div flex="100" layout="column" layout-align="center center">
-                                                <md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
-                                                        Update Payment
-                                                </md-button>
-                                        </div>
-                                </div>
-                        </div>
-                        <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
-                         layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-                                <div layout="column" layout-align="center center">
-                                        <h3>Recently Updated Payments</h2>
-                                </div>
-                                <div layout="column" layout-margin style="height:150px; overflow:auto;">
-                                        <div layout="row">
-                                                <div flex="20" layout="column" layout-align="center center">Date</div>
-                                                <div flex="20" layout="column" layout-align="center center">Amount</div>
-                                                <div flex="20" layout="column" layout-align="center center">Txn Type</div>
-                                                <div flex="20" layout="column" layout-align="center center">Ref. No.</div>
-                                                <div flex="20" layout="column" layout-align="center center">Accepted by</div>
-                                        </div>
-                                        <div layout="row" ng-if="!campaignPayments">
-                                                <div flex="20" layout="column" layout-align="center center">N/A</div>
-                                                <div flex="20" layout="column" layout-align="center center">Rs. 0</div>
-                                                <div flex="20" layout="column" layout-align="center center">N/A</div>
-                                                <div flex="20" layout="column" layout-align="center center">N/A</div>
-                                                <div flex="20" layout="column" layout-align="center center">N/A</div>
-                                        </div>
-                                        <div layout="row" ng-repeat="payment in campaignPayments.all_payments">
-                                                <div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
-                                                <div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
-                                                <div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
-                                                <div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
-                                                <div flex="20" layout="column" layout-align="center center">{{payment.updated_by_id_name }}</div>
-                                        </div>
-                                </div>
-                                
-                        </div>
-                </div>
-        </div> -->
-    <!-- <div layout="row" layout-margin>
-                <div flex="30">
-                        <div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
-                </div>
-                <div flex="70" layout="row" layout-align="end center">
-
-                        <div>
-                                <md-button class="md-raised md-warn" ng-click="toggleShareCampaignSidenav()">
-                                        Share
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised md-warn" ng-disabled="!(
-                                campaignDetails.type != 0 && (campaignDetails.status < 700) || 
-                                campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
-                                campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
-                                )" ng-click="addNewProductToCampaign()">
-                                        Add New Product
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised md-warn" ng-disabled="!(
-                                campaignDetails.type != 0 && (campaignDetails.status < 700) || 
-                                campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
-                                campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
-                                ) || !campaignDetails.products" ng-if="campaignDetails.type == 1" ng-click="notifyProductOwnersForQuote()">
-                                        Notify Owners
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status > 300 && campaignDetails.status != 500)"
-                                 ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
-                                        Finalize
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 600)" ng-if="campaignDetails.status < 700"	ng-click="confirmCampaignBooking(campaignDetails.id, $event)">
-                                        Confirm Booking
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 700" ng-if="campaignDetails.status == 700" ng-click="launchCampaign(campaignDetails.id, $event)">	Launched
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                                <md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 700 && campaignDetails.status != 700)"
-                                 ng-click="closeCampaign(campaignDetails.id, $event)">
-                                        Close Campaign
-                                        <span>
-                                                <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                                        </span>
-                                </md-button>
-                        </div>
-                </div>
-        </div> -->
-    <!-- <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"> -->
-  </div>
-  <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
-    <div class="row" style="margin-left:0px; margin-right:0px;">
-      <div
-        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
-        style="margin-top:14px;">
-        <p class="cmp_bottom">Campaign ID</p>
-        <p class="md-caption mob_span">
-          <b>{{ campaignDetails.cid }}</b>
-        </p>
-      </div>
-      <div
-        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
-        style="margin-top:14px;">
-        <p class="cmp_bottom">Campaign Name</p>
-        <p class="md-caption mob_span">
-          <b>{{ campaignDetails.name | capitalize}}</b>
-        </p>
-      </div>
-      <div
-        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
-        style="margin-top:14px;">
-        <p class="cmp_bottom">No of Products</p>
-        <p class="md-caption mob_span mob_5">
-          <b>{{ campaignDetails.products.length }}</b>
-        </p>
-      </div>
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-      style="cursor: pointer;">			
-       <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-           <a ng-click="downloadAdminQuote(campaignDetails.id)" download>
-       <md-button class="dropbtn drop_width">
-           <!-- ng-click="downloadPdf()" with service -->
-           <!-- ng-click="getConvas()"  with out service id="exportthis"-->
-           <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
-               file_copy
-             </i></span></p>
-         <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
-       </md-button>
-     </a>
-     </div>
-     </div>
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
-				 style="cursor: pointer;">			
-					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-							<a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
-					<md-button class="dropbtn drop_width">
-							<p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
-                account_balance_wallet
-								</i></span></p>
-						<p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Payment Details</p>
-					</md-button>
-				</a>
-				</div>
-				</div>
+    <div layout="column" layout-sm="column" layout-xs="column">
+        <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
+                    <md-toolbar layout="row" style="    background: #48869c;">
+                            <div class="md-toolbar-tools">
+                                    <h2>
+                                            <span>Client Request</span>
+                                    </h2>
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleQuoteChangeRequestDetailsSidenav()">
+                                            <md-icon>
+                                                    <i class="material-icons">clear</i>
+                                            </md-icon>
+                                    </md-button>
+                            </div>
+                    </md-toolbar>
+                    <md-content layout-padding>
+                            <div class="md-whiteframe-z2 md-body-1" layout-margin ng-repeat="changeQuoteItem in changeRequestHistory">
+                                    <div>
+                                            {{changeQuoteItem.remark}}
+                                            <hr />
+                                            <div layout-align="end center" style="font-size:11px;">{{changeQuoteItem.updated_at | dateify | date: "dd-MMM-yyyy"}}</div>
+                                    </div>
+                            </div>
+                    </md-content>
+            </md-sidenav> -->
+        <!-- <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>
+                    Proposal
+            </div> -->
+        <!-- <div class="Planned">
+                    <div class="bg-part">
+                            <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+                                    <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+                                     layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+                                            <div layout="column" layout-align="center center">
+                                                    <div>
+                                                            <span>
+                                                                    <img src="assets/images/client_details.png">
+                                                            </span>
+                                                    </div>
+                                                    <h3>Client Details</h2>
+                                            </div>
+                                            <div layout="row" layout-align="center center">
+                                                    <div flex="50">Campaign Name:</div>
+                                                    <div flex="50">{{campaignDetails.name}}</div>
+                                            </div>
+                                            <div layout="row" layout-align="center center">
+                                                    <div flex="50">Client Name:</div>
+                                                    <div flex="50">{{campaignDetails.first_name}} {{campaignDetails.last_name}}</div>
+                                            </div>
+                                            <div layout="row" layout-align="center center">
+                                                    <div flex="50">Contact:</div>
+                                                    <div flex="50">{{campaignDetails.phone || "N/A"}}</div>
+                                            </div>
+                                            <div layout="row" layout-align="center center">
+                                                    <div flex="50">Email:</div>
+                                                    <div flex="50">{{campaignDetails.email || "N/A"}}</div>
+                                            </div>
+                                    </div>
+                                    <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+                                     layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+                                            <div layout="column" layout-align="center center">
+                                                    <div>
+                                                            <img src="assets/images/capaign_details.png">
+                                                    </div>
+                                                    <h3>Campaign Summary</h2>
+                                            </div>
+                                            <div layout="row">
+                                                    <div flex="50">Starting:</div>
+                                                    <div flex="50">From {{ campaignDetails.start_date | dateify | date: "dd-MMM-yyyy" }} To {{ campaignDetails.end_date | dateify | date:
+                                                            "dd-MMM-yyyy" }}</div>
+                                            </div>
+                                            <div layout="row">
+                                                    <div flex="50">Estimated Budget:</div>
+                                                    <div flex="50">
+                                                            <span ng-if="campaignDetails.est_budget">Rs.</span>{{campaignDetails.est_budget || "N/A"}}</div>
+                                            </div>
+                                            <div layout="row">
+                                                    <div flex="50">Actual Budget:</div>
+                                                    <div flex="50">
+                                                            <span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.act_budget || "N/A"}}</div>
+                                            </div>
+                                            <div layout="row">
+                                                    <div flex="50">Status:</div>
+                                                    <div flex="50">
+                                                            <span layout-align="center center">{{campaignDetails.status | stringifyCampaignStatus }}</span>
+                                                            <span layout-align="center center" ng-if="campaignDetails.status == 500" style="cursor:pointer;" ng-click="getChangeRequestHistory(campaignDetails.id)">
+                                                                    <i class="material-icons">info_outline</i>
+                                                            </span>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>
+                    <div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay"
+                     ng-if="campaignDetails.status >= 700">
+                            <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+                             layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+                                    <div layout="column" layout-align="center center">
+                                            
+                                            <h3>Payment Details</h2>
+                                    </div>
+                                    <div layout="row">
+                                            <div flex="50" layout="column" layout-align="center center">Total amount:</div>
+                                            <div flex="50" layout="column" layout-align="center center">Rs. {{campaignDetails.act_budget || 0 }}</div>
+                                    </div>
+                                    <div layout="row">
+                                            <div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
+                                            <div flex="50" layout="column" layout-align="center center">Rs. {{campaignPayments.total_paid || 0 }}</div>
+                                    </div>
+                                    <div layout="row" ng-if="campaignPayments.total_paid < campaignDetails.act_budget">
+                                            <div flex="100" layout="column" layout-align="center center">
+                                                    <md-button Class="md-raised md-primary" type="submit" ng-click="showUpdatePaymentForm()">
+                                                            Update Payment
+                                                    </md-button>
+                                            </div>
+                                    </div>
+                            </div>
+                            <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+                             layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+                                    <div layout="column" layout-align="center center">
+                                            <h3>Recently Updated Payments</h2>
+                                    </div>
+                                    <div layout="column" layout-margin style="height:150px; overflow:auto;">
+                                            <div layout="row">
+                                                    <div flex="20" layout="column" layout-align="center center">Date</div>
+                                                    <div flex="20" layout="column" layout-align="center center">Amount</div>
+                                                    <div flex="20" layout="column" layout-align="center center">Txn Type</div>
+                                                    <div flex="20" layout="column" layout-align="center center">Ref. No.</div>
+                                                    <div flex="20" layout="column" layout-align="center center">Accepted by</div>
+                                            </div>
+                                            <div layout="row" ng-if="!campaignPayments">
+                                                    <div flex="20" layout="column" layout-align="center center">N/A</div>
+                                                    <div flex="20" layout="column" layout-align="center center">Rs. 0</div>
+                                                    <div flex="20" layout="column" layout-align="center center">N/A</div>
+                                                    <div flex="20" layout="column" layout-align="center center">N/A</div>
+                                                    <div flex="20" layout="column" layout-align="center center">N/A</div>
+                                            </div>
+                                            <div layout="row" ng-repeat="payment in campaignPayments.all_payments">
+                                                    <div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
+                                                    <div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
+                                                    <div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
+                                                    <div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
+                                                    <div flex="20" layout="column" layout-align="center center">{{payment.updated_by_id_name }}</div>
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+                    </div>
+            </div> -->
+        <!-- <div layout="row" layout-margin>
+                    <div flex="30">
+                            <div style="margin: 30px 0 0 0;font-size: 20px;">Products({{campaignDetails.products.length || 0}})</div>
+                    </div>
+                    <div flex="70" layout="row" layout-align="end center">
+    
+                            <div>
+                                    <md-button class="md-raised md-warn" ng-click="toggleShareCampaignSidenav()">
+                                            Share
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised md-warn" ng-disabled="!(
+                                    campaignDetails.type != 0 && (campaignDetails.status < 700) || 
+                                    campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
+                                    campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
+                                    )" ng-click="addNewProductToCampaign()">
+                                            Add New Product
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised md-warn" ng-disabled="!(
+                                    campaignDetails.type != 0 && (campaignDetails.status < 700) || 
+                                    campaignDetails.from_suggestion == true && (campaignDetails.status < 300 || campaignDetails.status == 500) || 
+                                    campaignDetails.from_suggestion == false && (campaignDetails.status <= 200 || campaignDetails.status == 500)
+                                    ) || !campaignDetails.products" ng-if="campaignDetails.type == 1" ng-click="notifyProductOwnersForQuote()">
+                                            Notify Owners
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised md-warn" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.status > 300 && campaignDetails.status != 500)"
+                                     ng-click="finalizeCampaign()" ng-if="campaignDetails.type == 0">
+                                            Finalize
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised md-primary" ng-disabled="!campaignDetails || !campaignDetails.products || (campaignDetails.type == 0 && campaignDetails.status != 600)" ng-if="campaignDetails.status < 700"	ng-click="confirmCampaignBooking(campaignDetails.id, $event)">
+                                            Confirm Booking
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised md-primary" ng-disabled="campaignDetails.status != 700" ng-if="campaignDetails.status == 700" ng-click="launchCampaign(campaignDetails.id, $event)">	Launched
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                                    <md-button class="md-raised" ng-disabled="!campaignDetails || (campaignDetails.status != 700 && campaignDetails.status != 700)"
+                                     ng-click="closeCampaign(campaignDetails.id, $event)">
+                                            Close Campaign
+                                            <span>
+                                                    <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                                            </span>
+                                    </md-button>
+                            </div>
+                    </div>
+            </div> -->
+        <!-- <div ui-grid="gridCampaignProducts" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"> -->
     </div>
-  </div>
-  <!-- table grid start  -->
-  <div class="table-responsive">
-    <table class="table">
-      <thead class="text_color">
-        <tr>
-          <th>Product Details</th>
-          <th class="hide-xs"></th>
-          <!-- <th class="">Size</th> -->
-          <th class="">Booked From</th>
-          <th class="">Booked To</th>
-          <th class="">Price Given</th>
-          <th class="">Price Received</th>
-          <th class="">Default Price</th>
-          <th class="">Inventory Owner</th>
-          <th class="">Inventory Status</th>
-          <!-- <th class="hide-xs">
-								<md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
-								</md-button>
-              </th> -->
-              <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          ng-repeat="campaignProduct in campaignProducts | limitTo:limit"
-          ng-class="{'striked-out': campaignProduct.unavailable}"
-        >
-          <td class="hide-xs image_tdwidth">
-            <img
-              ng-src="{{serverUrl + campaignProduct.image }}"
-              alt="Smiley face"
-              class="requ_size"
-            />
-          </td>
-          <td class="table_address">
-            <p class="">
-              <b>{{ campaignProduct.siteNo }} - {{ campaignProduct.area_name }}
-                {{ campaignProduct.panelSize }}</b><br />Address: {{ campaignProduct.address }} <br />Views :
-              {{ "N/A" }} Per week<br />
-              <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
-            </p>
-          </td>
-          <!-- <td class="table_vertical">60*60</td> -->
-          <td class="table_vertical">
-            <p>{{ campaignProduct.booked_from | date }}</p>
-          </td>
-          <td class="table_vertical">
-            <p>{{ campaignProduct.booked_to | date }}</p>
-          </td>
-          <td class="table_vertical table_price">
-                {{(!myfield)?(campaignProduct.admin_price || 'N/A'):''}}
-                <input type="number" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
-                <span ng-click="myfield=true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
-                <span ng-click="myfield=false;changeCampaignProductPrice(campaignProduct.campaign_id,campaignProduct.admin_price,campaignProduct.product_id, campaignProduct.siteNo)"  ng-show="myfield"> <i class="material-icons">check</i></span>
-          </td>
-          <td class="table_vertical">
-                   {{campaignProduct.owner_price || 'N/A'}}                       
-          </td>
-          <td class="table_vertical">
-                {{campaignProduct.default_price  || 'N/A'}}                       
-          </td>
-          <td class="table_vertical">
-            <p class=" md-caption">{{campaignProduct.client_name}}</p>
-            <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
-          </td>
-          <td class="table_vertical addcampaign_details">
-                <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
-                <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status | stringifyCampaignStatus}} </p>
-                <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
-                <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
-          </td>
-          <td class=""></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- table grid end -->
+    <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+        <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div
+                class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                style="margin-top:14px;">
+                <p class="cmp_bottom">Campaign ID</p>
+                <p class="md-caption mob_span">
+                    <b>{{ campaignDetails.cid}}</b>
+                </p>
+            </div>
+            <div
+                class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                style="margin-top:14px;">
+                <p class="cmp_bottom">Campaign Name</p>
+                <p class="md-caption mob_span">
+                    <b>{{ campaignDetails.name | capitalize}}</b>
+                </p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
+                <p class="cmp_bottom">No of Products</p>
+                <p class="md-caption mob_span mob_5">
+                    <b>{{ campaignDetails.products.length}}</b>
+                </p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                 style="cursor: pointer;">			
+                <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                    <a ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                        <md-button class="dropbtn drop_width">
+                            <!-- ng-click="downloadPdf()" with service -->
+                            <!-- ng-click="getConvas()"  with out service id="exportthis"-->
+                            <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+                                        file_copy
+                                    </i></span></p>
+                            <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+                        </md-button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+                 style="cursor: pointer;">			
+                <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                    <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
+                        <md-button class="dropbtn drop_width">
+                            <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+                                        account_balance_wallet
+                                    </i></span></p>
+                            <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Payment Details</p>
+                        </md-button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
+            </div>           
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
+                <p class="cmp_bottom">Client Name</p>
+                <p class="md-caption mob_span"><b>{{campaignDetails.first_name|| "N/A"}}</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
 
-  <!-- <div style="margin-right:20px;">
-    <div class="pull-right">
-      <p class="font-weight-light" style="text-indent: 53px;">Total : <span class="float-right">{{ campaignDetails.act_budget}}</span></p>
-      <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
-      <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-      <md-button
-        class="md-raised md-warn all_button"  
-        ng-click="finalizeCampaign(campaignProduct)"
-        ng-if="campaignDetails.status == 300 || campaignDetails.status == 400">
-        Send Quote
-      </md-button>
-      <md-button
-        class="md-raised md-primary all_button"
-        ng-if="campaignDetails.status == 600"
-        ng-click="launchCampaign(campaignDetails.id, $event)">
-        Confirm Booking
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-        ng-if="campaignDetails.status >= 700" ng-disabled="true">
-        Launched
-      </md-button>
-    </div>    
-  </div> -->
+                <p class="cmp_bottom">Contact</p>
+                <p class="md-caption mob_span"><b>{{campaignDetails.phone|| "N/A"}}</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
+                <p class="cmp_bottom">Email</p>
+                <p class="md-caption mob_span"><b>{{campaignDetails.email|| "N/A"}}</b></p>
+            </div>
+        </div>
+    </div>
+    <!-- table grid start  -->
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Product Details</th>
+                    <th class="hide-xs"></th>
+                    <!-- <th class="">Size</th> -->
+                    <th class="">Booked From</th>
+                    <th class="">Booked To</th>
+                    <th class="">Price Given</th>
+                    <th class="">Price Received</th>
+                    <th class="">Default Price</th>
+                    <th class="">Inventory Owner</th>
+                    <th class="">Inventory Status</th>
+                    <!-- <th class="hide-xs">
+                                                                          <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
+                                                                          </md-button>
+                        </th> -->
+                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr
+                    ng-repeat="campaignProduct in campaignProducts| limitTo:limit"
+                    ng-class="{'striked-out': campaignProduct.unavailable}"
+                    >
+                    <td class="hide-xs image_tdwidth">
+                        <img
+                            ng-src="{{serverUrl + campaignProduct.image}}"
+                            alt="Smiley face"
+                            class="requ_size"
+                            />
+                    </td>
+                    <td class="table_address">
+                        <p class="">
+                            <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.area_name}}
+                                {{ campaignProduct.panelSize}}</b><br />Address: {{ campaignProduct.address}} <br />Views :
+                            {{ "N/A"}} Per week<br />
+                            <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
+                        </p>
+                    </td>
+                    <!-- <td class="table_vertical">60*60</td> -->
+                    <td class="table_vertical">
+                        <p>{{ campaignProduct.booked_from | date }}</p>
+                    </td>
+                    <td class="table_vertical">
+                        <p>{{ campaignProduct.booked_to | date }}</p>
+                    </td>
+                    <td class="table_vertical table_price">
+                        {{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
+                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+                        <span ng-click="myfield = true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
+                        <span ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+                    </td>
+                    <td class="table_vertical">
+                        {{campaignProduct.owner_price|| 'N/A'}}                       
+                    </td>
+                    <td class="table_vertical">
+                        {{campaignProduct.default_price|| 'N/A'}}                       
+                    </td>
+                    <td class="table_vertical">
+                        <p class=" md-caption">{{campaignProduct.client_name}}</p>
+                        <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
+                    </td>
+                    <td class="table_vertical addcampaign_details">
+                        <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
+                        <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status| stringifyCampaignStatus}} </p>
+                        <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
+                        <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status| stringifyProductStatus}}</p>
+                    </td>
+                    <td class=""></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- table grid end -->
+
+    <!-- <div style="margin-right:20px;">
+      <div class="pull-right">
+        <p class="font-weight-light" style="text-indent: 53px;">Total : <span class="float-right">{{ campaignDetails.act_budget}}</span></p>
+        <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p>
+        <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
+        <md-button
+          class="md-raised md-warn all_button"  
+          ng-click="finalizeCampaign(campaignProduct)"
+          ng-if="campaignDetails.status == 300 || campaignDetails.status == 400">
+          Send Quote
+        </md-button>
+        <md-button
+          class="md-raised md-primary all_button"
+          ng-if="campaignDetails.status == 600"
+          ng-click="launchCampaign(campaignDetails.id, $event)">
+          Confirm Booking
+        </md-button>
+        <md-button
+          class="md-raised md-primary"
+          ng-if="campaignDetails.status >= 700" ng-disabled="true">
+          Launched
+        </md-button>
+      </div>    
+    </div> -->
 
 
-  <!-- <div
-    class="md-whiteframe-3dp campaign_payment hide-xs"
-    layout="row"
-    layout-margin
-  >
-    <div layout="column" class="payment_inner"> -->
-      <!-- <div layout="row">
-        <div class="md-body-1">Total :</div>
-        <div class="md-body-1 float-right">{{ campaignDetails.act_budget}}</div>
-      </div>
-      <div layout="row">
-        <div class="md-body-1">18% GST :</div>
-        <div class="md-body-1">{{ campaignProduct.gst ||"N/A" }}</div>
-      </div>
-      <div layout="row">
-        <div class="md-body-1">Sub Total :</div>
-        <div class="md-body-1">{{ campaignProduct.subTotal ||"N/A" }}</div>
-      </div>
-      <div layout="row">
-        <div class="md-title">Grand Total :</div>
-        <div class="md-title">{{ campaignDetails.act_budget || "N/A" }}</div>
-      </div> -->
-      <!-- <md-button class="md-raised md-primary" ng-click="finalizeCampaign(campaignProduct)">SEND QUOTE</md-button> -->
-      <!-- <md-button class="md-raised md-warn" ng-click="finalizeCampaign()">
-                       Send Quote
-               </md-button> -->
-      
-      <!-- <md-button class="md-raised" ng-disabled="!campaignProducts || (campaignProducts.status != 700 && campaignProducts.status != 700)"
-                 ng-click="closeCampaign(campaignProducts.id, $event)">
-                    Close Campaign
-                    <span>
-                            <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
-                    </span>
-            </md-button> -->
+    <!-- <div
+      class="md-whiteframe-3dp campaign_payment hide-xs"
+      layout="row"
+      layout-margin
+    >
+      <div layout="column" class="payment_inner"> -->
+    <!-- <div layout="row">
+      <div class="md-body-1">Total :</div>
+      <div class="md-body-1 float-right">{{ campaignDetails.act_budget}}</div>
+    </div>
+    <div layout="row">
+      <div class="md-body-1">18% GST :</div>
+      <div class="md-body-1">{{ campaignProduct.gst ||"N/A" }}</div>
+    </div>
+    <div layout="row">
+      <div class="md-body-1">Sub Total :</div>
+      <div class="md-body-1">{{ campaignProduct.subTotal ||"N/A" }}</div>
+    </div>
+    <div layout="row">
+      <div class="md-title">Grand Total :</div>
+      <div class="md-title">{{ campaignDetails.act_budget || "N/A" }}</div>
+    </div> -->
+    <!-- <md-button class="md-raised md-primary" ng-click="finalizeCampaign(campaignProduct)">SEND QUOTE</md-button> -->
+    <!-- <md-button class="md-raised md-warn" ng-click="finalizeCampaign()">
+                     Send Quote
+             </md-button> -->
+
+    <!-- <md-button class="md-raised" ng-disabled="!campaignProducts || (campaignProducts.status != 700 && campaignProducts.status != 700)"
+               ng-click="closeCampaign(campaignProducts.id, $event)">
+                  Close Campaign
+                  <span>
+                          <md-icon md-svg-icon="assets/images/finalise.svg"></md-icon>
+                  </span>
+          </md-button> -->
     <!-- </div>   
   </div> -->
 
-  	<!-- <div class="d-flex mb-5" style="min-height:100px">
-		<div class="p-2 col-md-6">
-				<form name="SendComment">
-			<div class=" chat_box ">
-				
-				<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-					<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
-					<li ng-if="quote_change.type == 'bbi'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
-				</ul>
-				<div class="form-group">
-						<label for="text" class="text_color">Any questions, Please submit below</label>
-						<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
-					</div>
-					<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
-				
-      </div>
-		</form>
-		</div>
-		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status < 300">
-			<div class="d-flex justify-content-end pt-4">
-				<md-button class="md-raised all_button" ng-if="campaignDetails.status == 400" ng-click="requestProposalForCampaign(campaignDetails.id, $event)">Request Proposal</md-button>
-			</div>
-		</div>
-
-		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 600">
-			<div class="d-flex justify-content-end pt-4 align-self-end">
-				<div layout="column" class="payment_inner">
-					<div layout="row">
-						<div class="md-body-1">We have received your request and working on blocking the products you have selected.</div>
-					</div>
-					<div layout="row">
-						<div class="md-body-1">You'll soon hear from us.</div>
-					</div>
-				</div>
-			</div>
-		</div>
-  </div> -->
-  
-  <div class="row" style="border-top: 1px solid #ddd; margin-right:20px;">
-    <div class="col-md-4 comment_mob">
-      <div class="mt-3 ml-2 form-group">
-          <form name="SendComment">
-              <div class=" chat_box ">
-                <ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-                  <li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
-                  <li ng-if="quote_change.type == 'bbi'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
-                </ul>
-                <div class="form-group">
-                    <label for="text" class="text_color">Any questions, Please submit below</label>
-                    <textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
-                  </div>
-                  <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
-              </div>
+    <!-- <div class="d-flex mb-5" style="min-height:100px">
+            <div class="p-2 col-md-6">
+                            <form name="SendComment">
+                    <div class=" chat_box ">
+                            
+                            <ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
+                                    <li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+                                    <li ng-if="quote_change.type == 'bbi'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+                            </ul>
+                            <div class="form-group">
+                                            <label for="text" class="text_color">Any questions, Please submit below</label>
+                                            <textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+                            
+  </div>
             </form>
-      </div>
+            </div>
+            <div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status < 300">
+                    <div class="d-flex justify-content-end pt-4">
+                            <md-button class="md-raised all_button" ng-if="campaignDetails.status == 400" ng-click="requestProposalForCampaign(campaignDetails.id, $event)">Request Proposal</md-button>
+                    </div>
+            </div>
+
+            <div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 600">
+                    <div class="d-flex justify-content-end pt-4 align-self-end">
+                            <div layout="column" class="payment_inner">
+                                    <div layout="row">
+                                            <div class="md-body-1">We have received your request and working on blocking the products you have selected.</div>
+                                    </div>
+                                    <div layout="row">
+                                            <div class="md-body-1">You'll soon hear from us.</div>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+</div> -->
+
+    <div class="row" style="border-top: 1px solid #ddd; margin-right:20px;">
+        <div class="col-md-4 comment_mob">
+            <div class="mt-3 ml-2 form-group">
+                <form name="SendComment">
+                    <div class=" chat_box ">
+                        <ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
+                            <li ng-if="quote_change.type == 'User'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+                            <li ng-if="quote_change.type == 'Admin'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+                        </ul>
+                        <div class="form-group">
+                            <label for="text" class="text_color">Any questions, Please submit below</label>
+                            <textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message, 'Admin')">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="mt-3 pull-right" style="font-size: 13px;">
+                <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
+                </p>
+                <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
+                <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+                                                                        ng-change="uncheck()" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+                <!-- <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p> -->
+                <!-- <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal | number : 2}}</spam>
+                </p> -->
+                <!-- <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal | number : 2}}</spam>
+                </p> -->
+                <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
+                <md-button
+                    class="md-raised md-warn all_button"  
+                    ng-click="finalizeCampaign(campaignProduct)"
+                    ng-if="campaignDetails.status == 300" style="float:right;">
+                    Send Quote
+                </md-button>
+                <md-button
+                    class="md-raised"  
+                    ng-if="campaignDetails.status == 400" style="float:right;" disabled="disabled">
+                    Quote Sent
+                </md-button>
+                <md-button
+                    class="md-raised md-primary all_button"
+                    ng-if="campaignDetails.status == 600"
+                    ng-click="launchCampaign(campaignDetails.id, $event)" style="float:right;">
+                    Confirm Booking
+                </md-button>
+                <md-button
+                    class="md-raised md-primary"
+                    ng-if="campaignDetails.status >= 700" ng-disabled="true" style="float:right;">
+                    Launched
+                </md-button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="mt-3 pull-right" style="font-size: 13px;">
-        <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
-        </p>
-        <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
-        <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked=true"
-           ng-change="uncheck()" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-           <!-- <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p> -->
-        <!-- <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal | number : 2}}</spam>
-        </p> -->
-        <!-- <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal | number : 2}}</spam>
-        </p> -->
-        <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-            <md-button
-              class="md-raised md-warn all_button"  
-              ng-click="finalizeCampaign(campaignProduct)"
-              ng-if="campaignDetails.status == 300 || campaignDetails.status == 400" style="float:right;">
-              Send Quote
-            </md-button>
-            <md-button
-              class="md-raised md-primary all_button"
-              ng-if="campaignDetails.status == 600"
-              ng-click="launchCampaign(campaignDetails.id, $event)" style="float:right;">
-              Confirm Booking
-            </md-button>
-            <md-button
-              class="md-raised md-primary"
-              ng-if="campaignDetails.status >= 700" ng-disabled="true" style="float:right;">
-              Launched
-            </md-button>
-      </div>
-    </div>
-</div>
 
 </div>
 <script>
-        function addPayment() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        function addPayments() {
-          document.getElementById("myDropdownView").classList.toggle("show");
-        }
-      </script>
+    function addPayment() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    function addPayments() {
+        document.getElementById("myDropdownView").classList.toggle("show");
+    }
+</script>

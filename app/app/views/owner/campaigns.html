@@ -237,7 +237,7 @@
                       </div>
                     </div>
                   </li>
-                  <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveOwnerCampaign(ownerCampaign)">
+                  <md-button class="md-raised md-primary all_button" layout-fill ng-click="saveOwnerCampaign(ownerCampaign)">
                     Create Campaign
                   </md-button>
             </div>            
@@ -310,7 +310,7 @@
                   </div>
                 </div>
               </li>
-              <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampagin)">
+              <md-button class="md-raised md-primary all_button" layout-fill ng-click="saveMetroCampaign(metroCampagin)">
                   Create Metro Campaigns
               </md-button>
             </div>            
@@ -666,8 +666,8 @@
                 <td class="table_vertical">{{MCampaign.cid}}</td>
                 <td class="table_vertical">{{MCampaign.name | capitalize}}</td>
                 <td class="table_vertical">{{MCampaign.created_at | dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
-                <td class="text-center table_vertical">{{MCampaign.no_products || "N/A" }}</td>
-                <td class="text-center table_vertical">{{MCampaign.total_paid || "N/A" }}</td>
+                <td class="text-center table_vertical">{{MCampaign.product_count || "N/A" }}</td>
+                <td class="text-center table_vertical">{{MCampaign.campaign_paid || "N/A" }}</td>
                 <td class="text-center table_vertical">{{MCampaign.act_budget || "N/A" }}</td>
                 <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">

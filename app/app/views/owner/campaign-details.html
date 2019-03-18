@@ -7,23 +7,23 @@
         <!-- share campaign sidenav ends -->
         <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
             <div class="row" style="margin-left:0px; margin-right:0px;">
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">Campaign ID</p>
                     <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">Campaign Name</p>
                     <p class="md-caption mob_span"><b>{{campaignDetails.name| capitalize}}</b></p>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
                      style="margin-top:14px;">
                     <p class="cmp_bottom">No of Products</p>
                     <p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
                 </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
                     <div class="dropdown">
                         <md-button onclick="shareownerCampaign()" class="dropbtn drop_width">
                             <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
                      style="cursor: pointer;">			
                     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                         <a ng-click="downloadOwnerQuote(campaignDetails.id)" download>
@@ -168,7 +168,7 @@
 									<label for="text" class="text_color">Any questions, Please submit below</label>
 									<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
 								</div>
-								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message,'Owner')">Submit</button>
 							
 						</div>
 					</form>
@@ -186,7 +186,7 @@
                     </p>
                     <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700">Book
                         Campaign</md-button>
-                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-disabled="campaignDetails.status == 700">Booked</md-button>
+                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700">Booked</md-button>
                 </div>
             </div>
             <style> .ng-cloak { display: none !important; } </style>

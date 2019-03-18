@@ -228,14 +228,14 @@
 				<form name="SendComment">
 						<div class=" chat_box ">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
-								<li ng-if="quote_change.type == 'bbi'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+								<li ng-if="quote_change.type == 'User'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+								<li ng-if="quote_change.type == 'Admin'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
 							</ul>
 							<div class="form-group">
 									<label for="text" class="text_color">Any questions, Please submit below</label>
 									<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
 								</div>
-								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message)">Submit</button>
+								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message,'User')">Submit</button>
 							
 						</div>
 					</form>
@@ -249,23 +249,13 @@
 		
 		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 400">
 			<div class="d-flex justify-content-end pt-4 align-self-end">
-				<div layout="column" class="payment_inner">
-					<div layout="row">
-						<div class="md-body-1">Total :</div>
-						<div class="md-body-1">{{campaignDetails.act_budget}}</div>
-					</div>
-					<div layout="row">
-						<div class="md-body-1">18% GST :</div>
-						<div class="md-body-1">{{campaignDetails.gst}}</div>
-					</div>
-					<div layout="row">
-						<div class="md-body-1">Sub Total :</div>
-						<div class="md-body-1">{{campaignDetails.subTotal}}</div>
-					</div>
-					<div layout="row">
-						<div class="md-title">Grand Total :</div>
-						<div class="md-title">{{campaignDetails.grandTotal}}</div>
-					</div>
+				<div layout="column" class="payment_inner">					
+					<p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignDetails.act_budget}}</b></spam>
+					</p>
+					<p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked=true"
+						ng-change="gstuncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>					
+					<p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{TOTAL| number : 2}}</spam>
+					</p>
 					<div layout="row">
 						<input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
 					</div>
