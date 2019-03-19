@@ -62,7 +62,12 @@ app.factory('MetroService',
           var dfd = $q.defer();
           $http.post(config.apiPath + '/package-to-metro-campaign', package).success(dfd.resolve).error(dfd.reject);
           return dfd.promise;
-        }
+        },
+        downloadQuote: function (campaignId) {
+          var dfd = $q.defer();
+          $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
+          return dfd.promise;
+      },
       }
     }
   ]
