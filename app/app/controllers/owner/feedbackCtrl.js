@@ -1,4 +1,4 @@
-app.controller('feedback', function($scope,$mdDialog,Upload) {
+app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Upload) {
 
       $scope.uploadFiles = function(files, errFiles) {
         $scope.files = files;
@@ -31,8 +31,17 @@ app.controller('feedback', function($scope,$mdDialog,Upload) {
     },
         
     ]
-    $scope.bbisuportdata = function(bbisuport){
-        console.log(bbisuport);
+    $scope.bbisuportdata = function(query){
+        debugger;
+        console.log(query);
+        ContactService.sendQuery(query).then(function(result){
+            console.log(result);
+            if(result.status == 1){
+                toastr.success(result.message)
+            }else{
+                toastr.error = result.message;
+            }
+        });
     }
      // bbisuport page script Ends
 });

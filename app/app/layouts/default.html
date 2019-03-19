@@ -240,14 +240,14 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
             <div class="contact-block-left">
-              <form action="#" method="post">
-                <input type="text" placeholder="First Name" name="Name" required="">
-                <input type="text" placeholder="Last Name" name="Name" required="">
-                <input type="text" placeholder="Subject" name="Name" required="">
-                <input type="email" class="email" placeholder="Email" name="Email" required="">
-                <textarea placeholder="Message" name="message" required=""></textarea>
-                <input type="submit" value="Send Message">
-              </form>
+              <form name="query">
+                <input type="text" placeholder="First Name" ng-model="query.fname">
+                <input type="text" placeholder="Last Name" ng-model="query.lname">
+                <input type="text" placeholder="Subject" ng-model="query.type">
+                <input type="email" class="email" placeholder="Email" ng-model="query.email">
+                <textarea placeholder="Message" ng-model="query.querymessage"></textarea>               
+                <md-button ng-click="sendquery(query)">Send Message</md-button>
+              </form>              
             </div>
         </div>
       </div>

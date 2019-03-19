@@ -232,22 +232,35 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         method: {}
     };
 
-    $scope.query = {};
-    $scope.sendQuery = function () {
-        ContactService.sendQuery($scope.query).then(function (result) {
-            if (result.status == 1) {
-                toastr.success(result.message);
-                $scope.sendQueryErrors = null;
-                $scope.query = {};
-                $scope.forms.sendQueryForm.$setPristine();
-                $scope.forms.sendQueryForm.$setUntouched();
-            } else if (result.status == 0) {
-                $scope.sendQueryErrors = result.message;
+    // $scope.query = {};
+    // $scope.sendQuery = function () {
+    //     debugger;
+    //     ContactService.sendQuery($scope.query).then(function (result) {
+    //         console.log(result);
+    //         if (result.status == 1) {
+    //             toastr.success(result.message);
+    //             $scope.sendQueryErrors = null;
+    //             $scope.query = {};
+    //             $scope.forms.sendQueryForm.$setPristine();
+    //             $scope.forms.sendQueryForm.$setUntouched();
+    //         } else if (result.status == 0) {
+    //             $scope.sendQueryErrors = result.message;
+    //         }
+    //     }, function (error) {
+    //         toastr.error("somthing went wrong please try agin later");
+    //     });
+    // }
+
+$scope.sendquery = function(query){
+        ContactService.sendQuery(query).then(function(result){
+            console.log(result);
+            if(result.status == 1){
+                toastr.success(result.message)
+            }else{
+                toastr.error = result.message;
             }
-        }, function (error) {
-            toastr.error("somthing went wrong please try agin later");
         });
-    }
+}
     // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
     //   $scope.feedBackData = response;
     // });
