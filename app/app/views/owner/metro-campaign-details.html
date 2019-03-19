@@ -398,7 +398,7 @@
 	<md-toolbar layout="row">
 		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
 			<h2>
-				<span>Add Product</span>
+				<span>Add Package</span>
 			</h2>
 			<span flex></span>
 			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()">
@@ -664,8 +664,8 @@
 					</div>
 					<div class="">
 						<div class="md-grid-item-content hoarding-btn">
-							<md-button class="md-grid-item-content add_blue" ng-disabled="!metroCampDetails || metroCampDetails.status > 1101"
-							 ng-click="toggleAddMetroProductSidenav()">
+							<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()">
+									<!-- ng-disabled="!metroCampDetails || metroCampDetails.status > 1101" -->
 								<!-- <span>
 									<md-icon md-svg-icon="assets/images/icons/add_circle_outline.svg"></md-icon>
 								</span>
@@ -838,11 +838,12 @@
 			</div>
 			<div class="col-md-8" ng-if="metroCampDetails.status < 1121">
 				<div class="mt-3">
-					<md-button class="md-grid-item-content pull-right" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
-						<span>
+					<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
+						<!-- <span>
 							<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
 						</span>
-						<div class="md-caption">Checkout</div>
+						<div class="md-caption">Checkout</div> -->
+						Checkout
 					</md-button>
 				</div>
 			</div>
