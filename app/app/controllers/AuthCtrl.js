@@ -8,6 +8,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	$scope.signInUser = function () {		
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
+                            localStorage.removeItem('loggedInUser');
 				var loggedInUser = {};
 				var payload = $auth.getPayload();
 				var userData = payload.user;
@@ -20,6 +21,7 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 				loggedInUser.firstName = userMongoData.first_name;
 				loggedInUser.lastName = userMongoData.last_name;
 				loggedInUser.user_type = userMongoData.user_type;
+                                                                                         loggedInUser.user_role = userMongoData.user_type;
 				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
 				$rootScope.loggedInUser = loggedInUser;
