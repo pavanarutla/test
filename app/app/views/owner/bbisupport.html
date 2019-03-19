@@ -65,48 +65,27 @@
         <p class="m-3 ml-4"><b>Please let me know how can we help you</b></p>
         <div class="row p-4" style="margin-right:0px;">
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7">
-                <form>
-                    <div class="form-group row">
-                        <!-- <label for="amount" class="col-sm-3 col-form-label md-body-2">Your Name</label>
-                        <div class="col-sm-8" style="margin-left: -1em !important;">
-                            <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
-                        </div> -->
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Your Name">
-                        </div>
-                    </div>
+                <form name="bbisuport">
                     <div class="form-group row">
                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="email" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Email ID">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="Number" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Phone">
-                        </div>
-                    </div>
-                    <!-- <div class="form-group row">
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                            <select id="paymentType" ng-model="bbisuport.relatedIssue" class="form-control md-whiteframe-3dp">
+                                <option value="" disabled selected>Query*</option>
                                 <option>Payment</option>
                                 <option>Requisted Inventory</option>
                                 <option>Campaign</option>
                                 <option>Other</option>
                             </select>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group row">
                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
+                            <textarea class="form-control md-whiteframe-3dp" ng-model="bbisuport.querymessage" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="amount" class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-form-label md-caption mt-2">We'll get back as soon as possible</label>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
-                                <md-button class="md-raised pull-right Upload_font" ng-click="updateOwnerCampaignPayment()" >Submit</md-button>
+                                <md-button class="md-raised pull-right Upload_font" ng-click="bbisuportdata(bbisuport)" >Submit</md-button>
                         </div>
                     </div>
                 </form>

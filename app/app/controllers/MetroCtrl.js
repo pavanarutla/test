@@ -344,9 +344,10 @@ app.controller('MetroCtrl',
           }
         });
       }
-      $scope.deleteProductFromCampaign = function (campaignId, productId) {
+      $scope.deleteProductFromCampaign = function (package, metroCampaignId) {
+
         if ($window.confirm("Are you sure you want to delete this package?")) {
-          MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function (result) {
+          MetroService.deleteMetroPackageFromCampaign(package, metroCampaignId).then(function (result) {
             if (result.status == 1) {
               getMetroCampDetails($stateParams.metroCampaignId);
               getMetroCampaigns();
