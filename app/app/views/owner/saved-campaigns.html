@@ -1,10 +1,47 @@
+ <!-- share campaign sidenav -->
+ <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+        <div layout="row">
+            <div class="md-toolbar-tools">
+                <div flex></div>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                    <md-tooltip>Close Side Panel</md-tooltip>
+                    <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-content layout-align="center center" layout-margin layout-padding>
+            <h3 class="md-headline">Share Campaign</h3>
+            <form name="shareCampaignForm">
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                        <div ng-messages="shareCampaignForm.name.$error">
+                            <div ng-message="required">Name is required.</div>
+                            <div ng-message="pattern">Enter a valid Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                        <div ng-messages="shareCampaignForm.email.$error">
+                            <div ng-message="required">Email is required.</div>
+                            <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                    </md-input-container>
+                    <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share Campaign</md-button>
+                </div>
+            </form>
+        </md-content>
+      </md-sidenav>
+      <!-- share campaign sidenav ends -->
 <div layout="column">
     <div layout="row" class="" layout-padding>
 
         <div class="md-caption text_color">Saved Campaigns </div>
         <div flex></div>
         <div class="form-group saved_search">
-                <input type="search" class="form-control md-whiteframe-3dp" placeholder="search campagin">
+                <input type="search" class="form-control md-whiteframe-2dp" style="width:30%;padding: 4px;"  ng-model="search" placeholder="search campagin">
               </div>
         <div class="dropdown">
             <md-button class="md-raised md-primary" onclick="saveCampaign()" class="dropbtn">CREATE CAMPAIGN</md-button>
@@ -83,11 +120,11 @@
                     <li>
                         <div class="form-group ">
 
-                            <input ng-model="ownerCampaign.org_contact_refered" name="refered" only-numeric class="form-control md-whiteframe-3dp"
+                            <input ng-model="ownerCampaign.org_contact_refered" name="refered"  only-letters-input class="form-control md-whiteframe-3dp"
                                 type="text" maxlength="10" required="required" placeholder="Refered By">
                             <div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
-                                <div ng-message="required">Refered No is required.</div>
-                                <div ng-message="maxlength">Refered No must have 10 characters.</div>
+                                <div ng-message="required">Refered By is required.</div>
+                                <div ng-message="maxlength">Refered By must have 10 characters.</div>
                             </div>
                         </div>
                     </li>
@@ -117,7 +154,7 @@
                         <th>Campaign Name</th>
                         <th>Start Date</th>
                         <th>No of Products </th>
-                        <th>Paid</th>
+                        <!-- <th>Paid</th> -->
                         <th>Total Budget</th>
                         <th></th>
                         <th></th>
@@ -129,9 +166,8 @@
                         <td>{{ownerSave.cid}}</td>
                         <td>{{ownerSave.name}}</td>
                         <td>{{ownerSave.created_at | dateify | date:'dd-MM-yyyy'|| "N/A"}}</td>
-                        <td>{{ownerSave.no_product || "N/A"}}</td>
-                        <td>10,1000</td>
-                        <td>10,10001</td>
+                        <td>{{ownerSave.product_count || "N/A"}}</td>                        
+                        <td>{{ownerSave.est_budget || "N/A"}}</td>
                         <td>
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -147,7 +183,7 @@
                                         </md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                                        <md-button ng-click="toggleShareCampaignSidenav(ownerSave.id)">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">share</i></md-icon>
                                                 <p style="margin:auto 10px auto 10px">Share Campaign</p>
