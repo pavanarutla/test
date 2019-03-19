@@ -873,6 +873,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
             if (result.status == 1) {
                 toastr.success(result.message);
+                $state.reload();
             } else {
                 toastr.error(result.data.message);
             }
