@@ -154,8 +154,8 @@ app.controller("CampaignProposalCtrl", function(
     });
   };
 
-  $scope.uncheck = function() {
-    if (!$scope.checked) {
+  $scope.uncheck = function(checked) {
+    if (!checked) {
       $scope.GST = "0";
       $scope.onchecked = false;
       $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);

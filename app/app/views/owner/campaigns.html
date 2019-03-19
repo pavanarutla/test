@@ -198,7 +198,7 @@
                     <div class="form-group ">
         
                       <input ng-model="ownerCampaign.org_contact_email" name="email" class="form-control md-whiteframe-3dp"
-                        type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                        type="email" required="required" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="150"
                         placeholder="Email">
                       <div ng-messages="forms.CampaignForm.email.$error" style="color:red" ng-if="forms.CampaignForm.email.$touched">
                         <div ng-message="required">Email is required.</div>
@@ -221,7 +221,7 @@
                     <div class="form-group ">
         
                       <input ng-model="ownerCampaign.org_contact_refered"  only-letters-input name="refered" class="form-control md-whiteframe-3dp"
-                        type="text" maxlength="10" required="required" placeholder="Refered By">
+                        type="text" maxlength="150" required="required" placeholder="Refered By">
                       <div ng-messages="forms.CampaignForm.refered.$error" style="color:red" ng-if="forms.CampaignForm.refered.$touched">
                         <div ng-message="required">Refered By is required.</div>
                         <div ng-message="maxlength">Refered By must have 10 characters.</div>
@@ -283,7 +283,7 @@
                  <div class="form-group ">
         
                       <input ng-model="metroCampagin.org_contact_email" name="email" class="form-control md-whiteframe-3dp"
-                        type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+                        type="email" required="required" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="150"
                         placeholder="Email">
                       <div ng-messages="forms.CampaignForm.email.$error" style="color:red" ng-if="forms.CampaignForm.email.$touched">
                         <div ng-message="required">Email is required.</div>
