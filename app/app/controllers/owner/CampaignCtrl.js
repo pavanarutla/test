@@ -415,12 +415,12 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
         });
     }
-    $scope.uncheck = function () {
-        if (!$scope.checked) {
-            $scope.GST = "0";
-            $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-        } else {
-            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+    $scope.uncheck = function(checked) {
+        if (!checked) {
+          $scope.GST = "0";
+          $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+        }else{
+          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
             $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
         }
     };
