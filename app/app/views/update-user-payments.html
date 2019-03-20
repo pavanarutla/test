@@ -207,7 +207,11 @@
             <div class="md-body-1">Total :</div>
             <div class="md-body-1">{{UserPaymentDetails.campaign_details.total_amount}}</div>
           </div>
-          <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</span></p>          
+               <div layout="row">
+            <div class="md-body-1 text_color">18% GST  :</div>
+            <div class="md-body-1 text_color">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</div>
+          </div>
+<!--          <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</span></p>          -->
           <div layout="row">
             <div class="md-body-1">paid:</div>
             <div class="md-body-1"> &nbsp;&nbsp;{{UserPaymentDetails.total_paid}}</div>

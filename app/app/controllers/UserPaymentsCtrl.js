@@ -13,7 +13,7 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
           if(result.status == 0 ){
             $scope.message = result.message;
           }   
-          $scope.TOTALpay = $scope.UserPaymentDetails.campaign_details.total_amount +serPaymentDetails.campaign_details.gst_price - $scope.UserPaymentDetails.total_paid;
+          $scope.TOTALpay = $scope.UserPaymentDetails.campaign_details.total_amount +parseInt($scope.UserPaymentDetails.campaign_details.gst_price) - $scope.UserPaymentDetails.total_paid;
         });
       }
 
