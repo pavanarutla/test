@@ -113,7 +113,7 @@
                         <th class="">Price</th>
                         <th class="">Default Price</th>
                         <th class=" text-right">
-                <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0" ng-click="addNewProductToCampaign()">Add
+                <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0" ng-hide="campaignDetails.status >= 700" ng-click="addNewProductToCampaign()">Add
                     Another Product
                 </md-button>
                 </th>
@@ -188,7 +188,7 @@
                     </p>
                     <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
                     <p class="text_color" style="text-indent: 17px;">
-                                            <input type="checkbox" ng-hide="onchecked==false" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" />
+                                            <input type="checkbox" ng-hide="campaignDetails.status >= 700" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" />
                             18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
                     
                     <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>

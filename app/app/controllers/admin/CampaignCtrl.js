@@ -227,7 +227,6 @@ $scope.applymethod = function(product) {
     }
   });
 };
-
 // $scope.applymethod = function (product) {
 //   var data = {};
 //   var pageNo = $scope.pagination.pageNo;
@@ -685,14 +684,33 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }
       //  else {
       //   toastr.error(result.message);
-      // }
+      // }  
     });
   }
+  // $scope.uncheck = function (checked) {
+  //   debugger;
+  //   if (!checked) {
+  //     $scope.onchecked = false;
+  //     $scope.GST = "0";
+  //     $scope.TOTAL = $scope.campaignDetails.total_amount + parseInt($scope.GST);
+  //   } else {
+  //     $scope.onchecked = false;
+  //     $scope.GST = ($scope.campaignDetails.total_amount / 100) * 18;
+  //     $scope.TOTAL = $scope.campaignDetails.total_amount + $scope.GST;
+  //   }
+  // };
   
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
     AdminCampaignService.getCampaignPaymentDetails($stateParams.campaign_id).then(function(result){
       $scope.campaignDetails = result.campaign_details;
+      if ($scope.campaignDetails.gst_price != "0") {
+        $scope.GST = ($scope.campaignDetails.total_amount / 100) * 18;
+        $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+      } else {
+        $scope.GST = "0";
+        $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+      } 
     });
     $scope.loadCampaignPayments($stateParams.campaign_id);    
   }
