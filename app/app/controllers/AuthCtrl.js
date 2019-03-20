@@ -39,8 +39,8 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 					$location.path("/owner/" + payload.userMongo.client_slug + "/feeds");
 				}
 				else{
-					$state.go("index.location", null);
-					// location.reload();
+                                
+					$state.go("index.location", null,{reload: true});
 				}
 			}
 			else if(res.data.status == 0){
