@@ -322,10 +322,8 @@ app.controller('MetroCtrl',
         } else {
           $scope.flag = 1;
         }
-        debugger;
         MetroService.checkoutMetroCampaign(metroCampaignId, $scope.flag, $scope.GST).then((result) => {
           console.log(result);
-          debugger;
           if (result.status == 1) {
             getMetroCampDetails(metroCampaignId);
             getMetroCampaigns();
