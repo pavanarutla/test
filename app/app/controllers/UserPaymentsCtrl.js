@@ -13,7 +13,7 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
           if(result.status == 0 ){
             $scope.message = result.message;
           }   
-          $scope.balance = $scope.UserPaymentDetails.campaign_details.total_amount - $scope.UserPaymentDetails.total_paid;
+          $scope.TOTALpay = $scope.UserPaymentDetails.campaign_details.total_amount +serPaymentDetails.campaign_details.gst_price - $scope.UserPaymentDetails.total_paid;
         });
       }
 
@@ -65,5 +65,13 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
           }
           if ($rootScope.currStateName == "index.update-user-payments") {
             $scope.getCampaignDetails($stateParams.id);
+            // if ($scope.campaignDetails.gst_price != "0") {
+            //   $scope.GST = ($scope.campaignDetails.total_amount / 100) * 18;
+            //   $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+            // } else {
+            //   $scope.GST = "0";
+            //   $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+            // } 
+            
           }
 })
