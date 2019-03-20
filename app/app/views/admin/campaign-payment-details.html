@@ -208,8 +208,10 @@
                         <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignDetails.total_amount}}</span></p>
                     </div>
                     <div class="">
-                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignDetails.total_paid}}</span></p>
+                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignPayments.total_paid}}</span></p>
                     </div>
+                    <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+                      ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ campaignDetails.gst_price |number : 2 ||"N/A" }}</span></p>
                     <div class="">
                         <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignDetails.total_amount - campaignDetails.total_paid}}</span></p>
                     </div>
