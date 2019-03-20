@@ -399,8 +399,15 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
             }
-            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            if ($scope.campaignDetails.gst_price != "0") {
+                $scope.onchecked = true;
+                $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
             $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+              } else {
+                $scope.onchecked = false;
+                $scope.GST = "0";
+                $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
+              }           
         });
     }
     $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -415,15 +422,27 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
             $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
         });
     }
-    $scope.uncheck = function(checked) {
-        if (!checked) {
-          $scope.GST = "0";
-          $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-        }else{
-          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-        }
-    };
+    // $scope.uncheck = function(checked) {
+    //     if (!checked) {
+    //       $scope.GST = "0";
+    //       $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+    //     }else{
+    //       $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+    //         $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+    //     }
+    // };
+    
+  $scope.uncheck = function(checked) {
+    if (!checked) {
+      $scope.GST = "0";
+      $scope.onchecked = false;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+    } else {
+      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+      $scope.onchecked = true;
+    }
+  };
     function getMetroCampaignDetails() {
         MetroService.getMetroCampaigns().then((result) => {
             $scope.metrocampaign = result;
@@ -532,7 +551,16 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     }
 
     $scope.bookOwnerCampaign = function (campaignId, ev) {
-        OwnerCampaignService.bookNonUserCampaign(campaignId).then(function (result) {
+        if ($scope.onchecked === true) {
+            $scope.flag = 1;
+            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+          } else if ($scope.onchecked === false) {
+            $scope.flag = 0;
+            $scope.GST = "0";
+          } else{
+            $scope.flag = 1;
+          }    
+        OwnerCampaignService.bookNonUserCampaign(campaignId,$scope.flag,$scope.GST).then(function (result) {
             if (result.status == 1) {
                 $mdDialog.show(
                         $mdDialog.alert()

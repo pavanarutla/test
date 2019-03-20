@@ -370,7 +370,7 @@ app.controller('MetroCtrl',
             $scope.TOTAL = $scope.metroCampDetails.act_budget + $scope.GST;
           } else {
             $scope.GST = "0";
-            $scope.TOTAL = $scope.metroCampDetails.act_budget + $scope.GST;
+            $scope.TOTAL = $scope.metroCampDetails.act_budget + parseInt($scope.GST);
           }
         });
       }
