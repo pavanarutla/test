@@ -203,7 +203,7 @@
 				<p class="paragraph">Billboards India have a plethora of advertising mediums to choose from to target your specific audience, engagement, and eyeball count. Save and Track your campaigns with customized options to shortlist, check availability and modify campaigns on-the-fly.</p>
 			</div>
 			<div class="text-center py-lg-5 py-md-4 py-sm-4 py-3">
-				<button type="button" class="btn  service_btn">CONTACT</button>
+				<button type="button" class="btn  service_btn"><a href="#bottom" style="color: #fff;">CONTACT</a></button>
 				<button type="button" class="btn  service_btn service_book" ng-click="showSignInDialog($event)"
 				ng-show="!isAuthenticated">BOOKING</button>
 			</div>
@@ -420,3 +420,10 @@
 	</div>
 	<!--// advertise-->
 </div>
+
+<script>
+	$("a[href='#bottom']").click(function() {
+	$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+	return false;
+	});
+</script>
