@@ -8,11 +8,9 @@
     border-radius: 0px;
     /* text-decoration: line-through; */
   }
-
   .gray-blocked {
     background: #ddd;
   }
-
   .red-blocked {
     background: #f00 !important;
   }
@@ -189,9 +187,9 @@
               placeholder="Product date" type="text" name="date" readonly options="mapProductOpts"
               id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
             <div class="input-group" style="z-index: 0;">
-              <input type="text" readonly ng-value="'Please Select booking dates : ' + selectedDateRanges.length"
+              <input type="text" readonly ng-value="'Please Select booking dates: ' + selectedDateRanges.length"
                 class="form-control">
-              <div class="input-group-addon">
+              <div class="input-group-addon" id="calender-autolaod-div">
                 <a ng-click="getProductUnavailableDates(productListDetails.id, $event);">
                   <i class="material-icons">
                     calendar_today
@@ -229,7 +227,7 @@
             placeholder="Estimated budget">
         </div>
         <div layout="column" class="mr-2 ml-2 mb-3">
-          <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()" ng-disabled="IsDisabled">
+          <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign(product.id, selectedDateRanges)" ng-disabled="IsDisabled">
             Save Campaign
           </md-button>
         </div>
@@ -241,7 +239,7 @@
         </div>
         <div layout="column" class="mr-2 ml-2 mb-3">
           <md-button class="md-raised all_button" layout-fill
-            ng-click="addProductToExistingCampaign(existingCampaign.id, productListDetails.id)" ng-disabled="!existingCampaign.id">
+            ng-click="addProductToExistingCampaign(existingCampaign.id, productListDetails.id , selectedDateRanges)" ng-disabled="!existingCampaign.id">
             add to existing or save Campaign
           </md-button>
         </div>

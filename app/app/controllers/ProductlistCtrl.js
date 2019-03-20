@@ -89,7 +89,7 @@ eventHandlers: {
         //selectedDateRanges = [];
         console.log(ev);
     }
-}
+} 
 };
 /*====================================
 | Multi date range picker options end
@@ -191,7 +191,7 @@ $scope.FilterProductlist = function(booked_from,booked_to){
     }
     // Save-camp-end
     // SAVE-CAMPPP
-    $scope.saveCampaign = function () {
+    $scope.saveCampaign = function (product_id, selectedDateRanges) {
       // If we finally decide to use selecting products for a campaign
       // if($scope.selectedForNewCampaign.length == 0){
       //   // add all shortlisted products to campaign
@@ -208,34 +208,51 @@ $scope.FilterProductlist = function(booked_from,booked_to){
       //   // });
       // }
       // campaign.products = $scope.selectedForNewCampaign;
-      if ($scope.shortListedProducts.length > 0) {
-        $scope.campaign.products = [];
-        _.each($scope.shortListedProducts, function (v, i) {
-          $scope.campaign.products.push(v.id);
-        });
-        CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
-          console.log(response);
-          if(response.status == 1){
-            $scope.campaignSavedSuccessfully = true;
-            $timeout(function () {
-              $mdSidenav('saveCampaignSidenav').close();
-              $mdSidenav('shortlistAndSaveSidenav').close();
-              $scope.campaign = {};
-              $scope.forms.viewAndSaveCampaignForm.$setPristine();
-              $scope.forms.viewAndSaveCampaignForm.$setUntouched();
-              $scope.campaignSavedSuccessfully = false;
-            }, 3000);
-            $scope.loadActiveUserCampaigns();
-            getShortListedProducts();
+      if (product_id) {
+          $scope.campaign.products = [];
+          var sendObj = {
+              product_id: product_id,
           }
-          else{
-            $scope.saveUserCampaignErrors = response.message;
+
+          if (selectedDateRanges.length > 0) {
+              sendObj.dates = selectedDateRanges;
+          } else {
+              toastr.error("Please select dates.");
+              return false;
           }
-        });
+          $scope.campaign.products.push(sendObj);
+          $form = $scope.forms.mySaveCampaignForm;
+      } else {
+          if ($scope.shortListedProducts.length > 0) {
+              $scope.campaign.products = [];
+              _.each($scope.shortListedProducts, function (v, i) {
+                  $scope.campaign.products.push(v.id);
+              });
+              $form = $scope.forms.viewAndSaveCampaignForm;
+          } else {
+              toastr.error("Please shortlist some products first.");
+          }
+
       }
-      else {
-        toastr.error("Please shortlist some products first.");
+      if ($scope.campaign.products) {
+          CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
+              if (response.status == 1) {
+                  //$scope.campaignSavedSuccessfully = true;
+                  $timeout(function () {
+                      $scope.campaign = {};
+                      $form.$setPristine();
+                      $form.$setUntouched();
+                      toastr.success(response.message);
+                      //$scope.campaignSavedSuccessfully = false;
+                  }, 3000);
+                  $scope.loadActiveUserCampaigns();
+                  getShortListedProducts();
+              } else {
+                  $scope.saveUserCampaignErrors = response.message;
+              }
+          });
       }
-    }
+
+  }
     // SAVE-CAMPPP END
 })
