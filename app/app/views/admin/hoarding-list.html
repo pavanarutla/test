@@ -16,123 +16,152 @@
 </style>
 
 <div class="hoarding_list">
-    <div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
-        <p class="mt-4">Total Products<span class="text_color">: 2845</span></p>
-        <div flex></div>
-        <div class="dropdown hide-xs">
-            <md-button class="md-raised all_button" onclick="addnewProduct()">Add New Product</md-button>
-            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
-                <form name="hordinglistform" role="form" novalidate="novalidate">
-                    <div layout="row" layout-margin>
-                        <h4>Enter Product Details</h4>
-                        <div flex></div>
-                        <md-button class="md-icon-button md-button" type="button" onclick="addnewProduct()">
-                            <i class="material-icons">close</i>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.siteNo" type="text" name="siteNo" placeholder="Site No"
-                                       required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/" ng-disabled="product.status == 0" />
-                            </div>
-                            <div class="col-sm-4">
-                                <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
-                                        class="form-control md-whiteframe-3dp select-value" data-md-container-class="selectdemoSelectHeader" required="required"
-                                        name="productType" ng-disabled="product.status == 0">
-                                    <option value="" disabled selected>Site Type</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.default_price" placeholder="Default Price" type="text"
-                                       name="hoardingcost" ng-disabled="product.status == 0" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <select ng-model="product.client" class="form-control md-whiteframe-3dp select-value" ng-options="cl.id as cl.name for cl in allClients"
-                                        ng-if="product.status != 0">
-                                    <option value="" disabled selected>Select Owner</option>
-                                </select>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.client_name" placeholder="Client Name" type="text"
-                                       name="client_name" ng-if="product.status == 0" ng-disabled="true" />
-                            </div>
-                            <div class="col-sm-4">
-                                <select name="repeatSelect" class="form-control md-whiteframe-3dp select-value" id="repeatSelect" ng-model="product.country"
-                                        ng-change="getStateList()" ng-options="country.id as country.name for country in countryList" ng-if="product.status != 0">
-                                    <option value="" disabled selected>Select Country</option>
-                                </select required>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.country_name" placeholder="Country Name" type="text"
-                                       name="country_name" ng-if="product.status == 0" ng-disabled="true" />
-                            </div>
-                            <div class="col-sm-4">
-                                <select ng-model="product.state" class="form-control md-whiteframe-3dp select-value" ng-disabled="!product.country"
-                                        md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="getCityList()"
-                                        ng-options="state.id as state.name for state in stateList" ng-if="product.status != 0">
-                                    <option value="" disabled selected>Selected State</option>
-                                </select required>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.state_name" placeholder="State Name" type="text"
-                                       name="state_name" ng-if="product.status == 0" ng-disabled="true" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <select ng-model="product.city" class="form-control md-whiteframe-3dp select-value" ng-disabled="!product.state"
-                                        md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-change="getAreaList()"
-                                        ng-options="city.id as city.name for city in cityList" ng-if="product.status != 0">
-                                    <option value="" disabled selected>Select City</option>
-                                </select>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.city_name" placeholder="City Name" type="text"
-                                       name="city_name" ng-if="product.status == 0" ng-disabled="true" />
-                            </div>
-                            <div class="col-sm-4">
-                                <select ng-model="product.area" class="form-control md-whiteframe-3dp select-value" ng-disabled="!product.city"
-                                        md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-options="area.id as area.name for area in areaList"
-                                        ng-if="product.status != 0">
-                                    <option value="" disabled selected>Select Area</option>
-                                </select>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.area_name" placeholder="Area Name" type="text"
-                                       name="area_name" ng-if="product.status == 0" ng-disabled="true" />
-                            </div>
-                            <div class="col-sm-4">
-                                <textarea class="form-control md-whiteframe-3dp table-address" placeholder="Address" rows="1" ng-model="product.address"
-                                          ng-disabled="product.status == 0"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.impressions" placeholder="Impressions" type="text"
-                                       name="impressions" required="required" />
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.panelSize" placeholder="Panel Size" type="text"
-                                       name="panelSize" required="required" ng-disabled="product.status == 0" />
-                            </div>
-                            <div class="col-sm-4">
-                                <select ng-model="product.lighting" class="form-control md-whiteframe-3dp select-value" md-on-close="clearSearchTerm()"
-                                        data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
-                                        ng-disabled="product.status == 0">
-                                    <option value="" disabled>Has lighting?</option>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.direction" placeholder="Direction" type="text"
-                                       name="direction" required="required" ng-disabled="product.status == 0" />
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.lat" placeholder="Latitude" type="text" name="lat"
-                                       required="required" />
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.lng" placeholder="Longitude" type="text" name="lng"
-                                       required="required" />
-                            </div>
-                        </div>
+        <div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
+                <p class="mt-4">Total Products<span class="text_color">: 2845</span></p>
+                <div flex></div>
+                <div class="dropdown hide-xs">
+                        <md-button class="md-raised all_button" onclick="addnewProduct()">Add New Product</md-button>
+                        <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:600px;">
+                                <form name="hordinglistform" role="form" novalidate="novalidate">
+                                        <div layout="row" layout-margin>
+                                                <h4>Enter Product Details</h4>
+                                                <div flex></div>
+                                                <md-button class="md-icon-button md-button" type="button" onclick="addnewProduct()">
+                                                        <i class="material-icons">close</i>
+                                                        <div class="md-ripple-container"></div>
+                                                </md-button>
+                                        </div>
+                                        <div class="col-md-12">
+                                                <div class="form-group row">
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.siteNo"
+                                                                        type="text" name="siteNo" placeholder="Site No"
+                                                                        required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+                                                                        ng-disabled="product.status == 0" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <select id="productType" ng-options="format.id as format.name for format in formatList"
+                                                                        ng-model="product.type" class="form-control md-whiteframe-3dp select-value"
+                                                                        data-md-container-class="selectdemoSelectHeader"
+                                                                        required="required" name="productType"
+                                                                        ng-disabled="product.status == 0">
+                                                                        <option value="" disabled selected>Site Type</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.default_price"
+                                                                        placeholder="Default Price" type="text" name="hoardingcost"
+                                                                        ng-disabled="product.status == 0" />
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-4">
+                                                                <select ng-model="product.client" class="form-control md-whiteframe-3dp select-value"
+                                                                        ng-options="cl.id as cl.name for cl in allClients"
+                                                                        ng-if="product.status != 0">
+                                                                        <option value="" disabled selected>Select Owner</option>
+                                                                </select>
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.client_name"
+                                                                        placeholder="Client Name" type="text" name="client_name"
+                                                                        ng-if="product.status == 0" ng-disabled="true" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <select name="repeatSelect" class="form-control md-whiteframe-3dp select-value"
+                                                                        id="repeatSelect" ng-model="product.country"
+                                                                        ng-change="getStateList()" ng-options="country.id as country.name for country in countryList"
+                                                                        ng-if="product.status != 0">
+                                                                        <option value="" disabled selected>Select
+                                                                                Country</option>
+                                                                </select required>
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.country_name"
+                                                                        placeholder="Country Name" type="text" name="country_name"
+                                                                        ng-if="product.status == 0" ng-disabled="true" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <select ng-model="product.state" class="form-control md-whiteframe-3dp select-value"
+                                                                        ng-disabled="!product.country" md-on-close="clearSearchTerm()"
+                                                                        data-md-container-class="selectdemoSelectHeader"
+                                                                        ng-change="getCityList()" ng-options="state.id as state.name for state in stateList"
+                                                                        ng-if="product.status != 0">
+                                                                        <option value="" disabled selected>Selected
+                                                                                State</option>
+                                                                </select required>
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.state_name"
+                                                                        placeholder="State Name" type="text" name="state_name"
+                                                                        ng-if="product.status == 0" ng-disabled="true" />
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-4">
+                                                                <select ng-model="product.city" class="form-control md-whiteframe-3dp select-value"
+                                                                        ng-disabled="!product.state" md-on-close="clearSearchTerm()"
+                                                                        data-md-container-class="selectdemoSelectHeader"
+                                                                        ng-change="getAreaList()" ng-options="city.id as city.name for city in cityList"
+                                                                        ng-if="product.status != 0">
+                                                                        <option value="" disabled selected>Select City</option>
+                                                                </select>
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.city_name"
+                                                                        placeholder="City Name" type="text" name="city_name"
+                                                                        ng-if="product.status == 0" ng-disabled="true" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <select ng-model="product.area" class="form-control md-whiteframe-3dp select-value"
+                                                                        ng-disabled="!product.city" md-on-close="clearSearchTerm()"
+                                                                        data-md-container-class="selectdemoSelectHeader"
+                                                                        ng-options="area.id as area.name for area in areaList"
+                                                                        ng-if="product.status != 0">
+                                                                        <option value="" disabled selected>Select Area</option>
+                                                                </select>
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.area_name"
+                                                                        placeholder="Area Name" type="text" name="area_name"
+                                                                        ng-if="product.status == 0" ng-disabled="true" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <textarea class="form-control md-whiteframe-3dp table-address"
+                                                                        placeholder="Address" rows="1" ng-model="product.address"
+                                                                        ng-disabled="product.status == 0"></textarea>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.impressions"
+                                                                        placeholder="Impressions" type="text" name="impressions"
+                                                                        required="required" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.panelSize"
+                                                                        placeholder="Panel Size" type="text" name="panelSize"
+                                                                        required="required" ng-disabled="product.status == 0" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <select ng-model="product.lighting" class="form-control md-whiteframe-3dp select-value"
+                                                                        md-on-close="clearSearchTerm()"
+                                                                        data-md-container-class="selectdemoSelectHeader"
+                                                                        ng-init="product.lighting = product.lighting || ''"
+                                                                        ng-disabled="product.status == 0">
+                                                                        <option value="" disabled>Has lighting?</option>
+                                                                        <option value="1">Yes</option>
+                                                                        <option value="0">No</option>
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.direction"
+                                                                        placeholder="Direction" type="text" name="direction"
+                                                                        required="required" ng-disabled="product.status == 0" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.lat"
+                                                                        placeholder="Latitude" type="text" name="lat"
+                                                                        required="required" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                                <input class="form-control md-whiteframe-3dp" ng-model="product.lng"
+                                                                        placeholder="Longitude" type="text" name="lng"
+                                                                        required="required" />
+                                                        </div>
+                                                </div>
 
                         <div class="form-group row">
                             <div class="col-sm-4">
@@ -165,10 +194,9 @@
                     </div>
                 </form>
             </div>
+                </div>
         </div>
-    </div>
-
-    <div class="">
+ 
         <form class="form-inline camp_filters d-flex" action="">
                 <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo" md-min-length="4" placeholder="Search..."  md-clear-button="true">
                         <md-item-template>
@@ -191,95 +219,106 @@
                         class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
                         name="productType">
                         <option value="" disabled selected>Site Type</option>
-                </select>
+                        </select>
                 </div>
 
-        <div class="form-group form_cal hide-xs">
+                <div class="form-group form_cal hide-xs">
                         <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
                 </div>
                 <div class="form-group form_cal hide-xs">
                         <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;"></md-datepicker>
                 </div>
                 <div class="form-group form_cal hide-xs">
-                                <select class="form-control"  ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
-                                                <option value="" disabled selected>Budget</option>
-                                        <option selected value="1">Budget High to Low</option>
-                                        <option value="0">Budget Low to High </option>
-                                </select>
-                        </div>
-                <md-button class="md-raised apply_filter hide-xs" ng-click="applyFiltersmethod(product)">Apply Filters</md-button>
+                        <select class="form-control"  ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+                                        <option value="" disabled selected>Budget</option>
+                                <option selected value="1">Budget High to Low</option>
+                                <option value="0">Budget Low to High </option>
+                        </select>
+                </div>
+
+                <md-button class="md-raised apply_filter hide-xs" ng-click="applyFiltersmethod(product)">Apply
+                                Filters</md-button>
         </form>
-    </div>
-    <div class="table-responsive" style="margin-bottom:50px !important">
-	<table class="table">
-           <thead class="text_color">
-                <tr>
-                <th>Product Details</th>
-                <th class="hide-xs"></th>
-                <th>Views</th>
-                <th class="">Lit</th>
-                <th class="">Shortlisted in</th>
-                <th class="">Price</th>
-                <th class="text-center">Calender</th>
-                <th class=""></th>
-                </tr>
-           </thead>
-	    <tbody class="contbg">
-	        <tr ng-repeat="product in productList">
-                <td class="image_tdwidth hide-xs">
-                        <img ng-src="{{serverUrl + product.image}}" alt="Smiley face" class="requ_size">
-                </td>
-                <td class="table_address">
-                        <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
-                                <br> {{product.address}}
-                                <br>Facing: {{product.direction || "N/A"}}
-                                <br>Type: {{product.format_name}}</p>
-                </td>
-                <td class="table_vertical">{{product.impressions}}</td>
-                <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical" ng-if="product.lighting == 0">No</td>
-                <td class="table_vertical">
-                        
-                        <a ng-href="#/admin/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
-                </td>
-                <td class="table_vertical">
-                        
-                        {{product.default_price}}
-                </td>
-                <td class="text-center table_vertical">
-                        <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
-                        placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
-                                                        style="margin-bottom: -20px; width:2px; height:2px;" />
-                        <a ng-click="getProductUnavailableDates(product.id, $event);">
-                                        <i class="material-icons">
-                                                        calendar_today
-                                        </i>
-                        </a>
-                </td>
-                <td class="text-center table_vertical">
-                        <md-button class="md-raised inv_details" ng-click="editProduct(product)">Edit Details</md-button>
-                </td>
+        </div>
+        <div class="table-responsive" style="margin-bottom:50px !important">
+                <table class="table">
+                        <thead class="text_color">
+                                <tr>
+                                        <th>Product Details</th>
+                                        <th class="hide-xs"></th>
+                                        <th>Views</th>
+                                        <th class="">Lit</th>
+                                        <th class="">Shortlisted in</th>
+                                        <th class="">Price</th>
+                                        <th class="text-center">Calender</th>
+                                        <th class="">
+                                        </th>
+                                </tr>
+                        </thead>
+                        <tbody class="contbg">
+                                <tr ng-repeat="product in productList">
+                                        <td class="image_tdwidth hide-xs">
+                                                <img ng-src="{{serverUrl + product.image}}" alt="Smiley face" class="requ_size">
+                                        </td>
+                                        <td class="table_address">
+                                                <p class=""><b>{{product.siteNo}} - {{product.area_name}}
+                                                                {{product.panelSize}}</b>
+                                                        <br> {{product.address}}
+                                                        <br>Facing: {{product.direction || "N/A"}}
+                                                        <br>Type: {{product.format_name}}</p>
+                                        </td>
+                                        <td class="table_vertical">{{product.impressions}}</td>
+                                        <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+                                        <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+                                        <td class="table_vertical">
+                                                <!-- <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a> -->
+                                                <a ng-href="#/admin/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}}
+                                                        Campaigns</a>
+                                        </td>
+                                        <td class="table_vertical">
+                                                <!-- <div class="input-group">
+							<input class="md-whiteframe-2dp" ng-model="suggestedProduct.price" type="text" only-numeric name="price"
+							 required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledLat" ng-init="suggestedProduct.price = ownerProduct.default_price"
+							 style="width:70px; padding: 4px 5px;" />
+							<span ng-click="enabledLat = true;" ng-show="!enabledLat"><i class="material-icons">edit</i></span>
+						</div> -->
+                                                {{product.default_price}}
+                                        </td>
+                                        <td class="text-center table_vertical">
+                                                <input date-range-picker ng-model="product.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+                                                        placeholder="Product date" type="text" name="date" readonly
+                                                        options="rqstHrdngsOpts" id="booking_dates_picker" style="display:none;margin-bottom: -20px; width:2px; height:2px;" />
+                                                <a ng-click="getProductUnavailableDates(product.id, $event);">
+                                                        <i class="material-icons">
+                                                                calendar_today
+                                                        </i>
+                                                </a>
+                                        </td>
+                                        <td class="text-center table_vertical">
+                                                <md-button class="md-raised inv_details" ng-click="editProduct(product)">Edit
+                                                        Details</md-button>
+                                        </td>
 
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
 
-    <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
-        <ul class="pagination">
-            <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
-                <a ng-click="pagination.pageNo = i; getProductList();" 
-                   ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
-                   style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;" class="ng-binding">
-                    {{i}}
-                </a>
-            </li>
-        </ul>
-    </div>
+        <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+                <ul class="pagination">
+                        <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+                                <a ng-click="pagination.pageNo = i; getProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}"
+                                        style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;"
+                                        class="ng-binding">
+                                        {{i}}
+                                </a>
+                        </li>
+                </ul>
+        </div>
 </div>
 
 <script>
-            function addnewProduct() {
+        function addnewProduct() {
                 document.getElementById("myDropdown").classList.toggle("show");
-            }
+        }
 </script>

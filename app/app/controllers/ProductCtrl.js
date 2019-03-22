@@ -58,7 +58,10 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   /*=================================
   | Product section ends
   =================================*/
-
+  $scope.IsDisabled = true;
+  $scope.EnableDisable = function () {
+    $scope.IsDisabled = $scope.campaign.name.length == 0;
+}
 
   /*=================================
   | Campaign section

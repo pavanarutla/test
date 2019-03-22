@@ -1,4 +1,4 @@
-app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config,$state,FileSaver) {
+app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $rootScope, $location, Upload, OwnerCampaignService, OwnerProductService, toastr, CampaignService, MetroService, ProductService, config, $state, FileSaver) {
     $scope.forms = [];
     $scope.serverUrl = config.serverUrl;
 
@@ -43,18 +43,18 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     //         a.click();
     //     });
     // };
-    
+
     // With out Service
     // $scope.getConvas=function()
-	// 		{
-	// 			html2canvas($("#barcodeHtml"), {
-	// 				onrendered: function(canvas) {
-	// 					document.body.appendChild(canvas);
+    // 		{
+    // 			html2canvas($("#barcodeHtml"), {
+    // 				onrendered: function(canvas) {
+    // 					document.body.appendChild(canvas);
 
-	// 				}
-	// 			});
-	// 		}
-   
+    // 				}
+    // 			});
+    // 		}
+
     /*=======================
      | MdDialogs and sidenavs
      =======================*/
@@ -120,7 +120,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     return true;
                 }
             }
-            if(moment(dt) < moment()){
+            if (moment(dt) < moment()) {
                 return true;
             }
         },
@@ -136,12 +136,12 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     }
                 }
             }
-            if(moment(dt) < moment()){
+            if (moment(dt) < moment()) {
                 return 'gray-blocked';
             }
         },
         eventHandlers: {
-            'apply.daterangepicker': function(ev, picker) { 
+            'apply.daterangepicker': function (ev, picker) {
                 //selectedDateRanges = [];
             }
         },
@@ -227,7 +227,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     var loadOwnerCampaigns = function () {
         return new Promise((resolve, reject) => {
             OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-                $scope.ownerCampaigns = result;        
+                $scope.ownerCampaigns = result;
                 $scope.ownerCampaigns = _.filter(result, function (c) {
                     return c.status < 800;
                 });
@@ -325,29 +325,28 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         });
     }
 
-    $scope.toggleShareCampaignSidenav = function (campaign) {       
+    $scope.toggleShareCampaignSidenav = function (campaign) {
         $scope.currentOwnerShareCampaign = campaign;
         $mdSidenav('shareCampaignSidenav').toggle();
     };
 
-    $scope.changeQuoteRequest = function(campaignId,remark,type){
+    $scope.changeQuoteRequest = function (campaignId, remark, type) {
         $scope.changeRequest = {};
         $scope.changeRequest.for_campaign_id = campaignId;
         $scope.changeRequest.remark = remark;
         $scope.changeRequest.type = type;
-        OwnerCampaignService.requestChangeInQuote($scope.changeRequest).then(function(result){
-            if(result.status == 1){
-              $scope.getUserCampaignDetails(campaignId);
-              //$mdDialog.hide();
-              toastr.success(result.message);
+        OwnerCampaignService.requestChangeInQuote($scope.changeRequest).then(function (result) {
+            if (result.status == 1) {
+                $scope.getUserCampaignDetails(campaignId);
+                //$mdDialog.hide();
+                toastr.success(result.message);
+            } else {
+                toastr.error(result.message);
             }
-            else{
-              toastr.error(result.message);
-            }
-          });
-  }
+        });
+    }
 
-    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {        
+    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {
         if (!localStorage.selectedOwnerCampaign) {
             toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
         } else {
@@ -359,7 +358,7 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {                
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -399,9 +398,16 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.gst = result.act_budget * 18 / 100;
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
-            }   
-            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;       
+            }
+            if ($scope.campaignDetails.gst_price != "0") {
+                $scope.onchecked = true;
+                $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+              } else {
+                $scope.onchecked = false;
+                $scope.GST = "0";
+                $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
+              }           
         });
     }
     $scope.getOwnerCampaignDetails = function (campaignId) {
@@ -412,19 +418,38 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
             }
-            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;            
+            if ($scope.campaignDetails.gst_price != "0") {
+                $scope.onchecked = true;
+                $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+              } else {
+                $scope.onchecked = false;
+                $scope.GST = "0";
+                $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
+              }
         });
     }
-    $scope.uncheck = function() {
-        if (!$scope.checked) {
-          $scope.GST = "0";
-          $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-        }else{
-          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-        }
-      };
+    // $scope.uncheck = function(checked) {
+    //     if (!checked) {
+    //       $scope.GST = "0";
+    //       $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+    //     }else{
+    //       $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+    //         $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+    //     }
+    // };
+    
+  $scope.uncheck = function(checked) {
+    if (!checked) {
+      $scope.GST = "0";
+      $scope.onchecked = false;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+    } else {
+      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+      $scope.onchecked = true;
+    }
+  };
     function getMetroCampaignDetails() {
         MetroService.getMetroCampaigns().then((result) => {
             $scope.metrocampaign = result;
@@ -533,7 +558,16 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     }
 
     $scope.bookOwnerCampaign = function (campaignId, ev) {
-        OwnerCampaignService.bookNonUserCampaign(campaignId).then(function (result) {
+        if ($scope.onchecked === true) {
+            $scope.flag = 1;
+            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+          } else if ($scope.onchecked === false) {
+            $scope.flag = 0;
+            $scope.GST = "0";
+          } else{
+            $scope.flag = 1;
+          }    
+        OwnerCampaignService.bookNonUserCampaign(campaignId,$scope.flag,$scope.GST).then(function (result) {
             if (result.status == 1) {
                 $mdDialog.show(
                         $mdDialog.alert()
@@ -732,13 +766,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     }
     function addPayment() {
         document.getElementById("addpaymentdrop").classList.toggle("show");
-      }
+    }
 
     /* ==============================
      | Campaign payment section ends
      =============================== */
 
-    
+
     /*==============================
      | Campaign Search
      ==============================*/
@@ -785,22 +819,22 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
                         .ariaLabel('Alert Dialog Demo')
                         .ok('Got it!')
                         .targetEvent(ev)
-                        );                              
-                         //close();  
-                         shareownerCampaign();                           
+                        );
+                //close();  
+                shareownerCampaign();
             } else {
                 toastr.error(result.message);
             }
             $scope.shareCampaign = '';
         });
-    }    
+    }
     //campaign share closed
     function selectedItemChange(item) {
     }
     /*==============================
      | Campaign Search
      ==============================*/
-     function shareownerCampaign() {
+    function shareownerCampaign() {
         // document.getElementById("sharecampDrop").classList.toggle("show");
         // document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
         angular.element(document.querySelector("#sharecampDrop")).addClass("hide");
@@ -830,74 +864,74 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
         }
     }
 
-  if ($rootScope.currStateName == 'owner.payments') {
-    $scope.getUserCampaignsForOwner();
-    loadOwnerCampaigns();
-  }
+    if ($rootScope.currStateName == 'owner.payments') {
+        $scope.getUserCampaignsForOwner();
+        loadOwnerCampaigns();
+    }
 
-  if($rootScope.currStateName == 'owner.updatepayment'){
-    $scope.getCampaignPaymentDetails ($stateParams.id)
-    getCampaignWithPayments();
-    $scope.allCampaignsForOwner = [];
-    loadOwnerCampaigns().then(function (result) {
-      $scope.getUserCampaignsForOwner().then(function (result2) {
-        $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c) {
-          return c.status >= 600;
+    if ($rootScope.currStateName == 'owner.updatepayment') {
+        $scope.getCampaignPaymentDetails($stateParams.id)
+        getCampaignWithPayments();
+        $scope.allCampaignsForOwner = [];
+        loadOwnerCampaigns().then(function (result) {
+            $scope.getUserCampaignsForOwner().then(function (result2) {
+                $scope.allCampaignsForOwner = _.filter(result.concat(result2), function (c) {
+                    return c.status >= 600;
+                });
+            });
+        })
+    }
+
+    //call campaign count for hoarding list
+    $scope.getCampaignList = function () {
+        var productId = $stateParams.productId;
+        OwnerCampaignService.getCampaignsFromProducts(productId).then(function (result) {
+            if (result) {
+                $scope.shortlistedproduct = result;
+                //toastr.success(result.message);        
+            } else {
+                toastr.error(result.data.message);
+            }
         });
-      });
-    })
-  }
+    }
+    if ($location.$$path.search("product-shortlist-campagin") !== -1) {
+        $scope.getCampaignList();
+    }
 
-  //call campaign count for hoarding list
-  $scope.getCampaignList = function(){
-    var productId = $stateParams.productId;
-    OwnerCampaignService.getCampaignsFromProducts(productId).then(function (result) {
-      if(result){
-          $scope.shortlistedproduct = result;
-        //toastr.success(result.message);        
-      }
-      else{
-        toastr.error(result.data.message);
-      }
-    });
-  }
-  if($location.$$path.search("product-shortlist-campagin") !== -1){
-    $scope.getCampaignList();
-  }
-    
 
-  $scope.changeCampaignProductPrice = function(campaign_id,owner_price,product_id){
-    product = {};
-    product.campaign_id = campaign_id;
-    product.owner_price = owner_price;
-    product.product_id = product_id;
-    OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
-      if(result.status == 1){
-        toastr.success(result.message);        
-      }
-      else{
-        toastr.error(result.data.message);
-      }
-    });
+    $scope.changeCampaignProductPrice = function (campaign_id, owner_price, id, product_id) {
+        product = {};
+        product.campaign_id = campaign_id;
+        product.owner_price = owner_price;
+        product.product_id = product_id;
+        product.product = id;
+        OwnerProductService.changeCampaignProductPrice(product).then(function (result) {
+            if (result.status == 1) {
+                toastr.success(result.message);
+                $state.reload();
+            } else {
+                toastr.error(result.data.message);
+            }
+        });
 
-  }
+    }
 
-      $scope.downloadOwnerQuote = function (campaignId) {
-                    OwnerCampaignService.downloadQuote(campaignId).then(function (result) {
-                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
-                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
-                        if (result.status) {
-                            toastr.error(result.meesage);
-                        }
-                    });
-                };
-  // if ($rootScope.currStateName == 'owner.update-payments') {
-   
-  // }
+    $scope.downloadOwnerQuote = function (campaignId) {
+        OwnerCampaignService.downloadQuote(campaignId).then(function (result) {
+            var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+            FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+            if (result.status) {
+                toastr.error(result.meesage);
+            }
+        });
+    };
+    // if ($rootScope.currStateName == 'owner.update-payments') {
 
-  /*=============================
-  | Page based initial loads end
-  =============================*/
+    // }
+
+    /*=============================
+     | Page based initial loads end
+     =============================*/
 //page width
     $scope.innerWidth = $window.innerWidth;
     loadMetroCampaigns();

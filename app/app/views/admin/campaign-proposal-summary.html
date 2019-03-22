@@ -375,11 +375,7 @@
                     <th class="">Default Price</th>
                     <th class="">Inventory Owner</th>
                     <th class="">Inventory Status</th>
-                    <!-- <th class="hide-xs">
-                                                                          <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product">Add Another Product
-                                                                          </md-button>
-                        </th> -->
-                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Another Product</md-button></th>
+                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status > 400">Add Another Product</md-button></th>
             </tr>
             </thead>
             <tbody>
@@ -559,17 +555,16 @@
         </div>
         <div class="col-md-8">
             <div class="mt-3 pull-right" style="font-size: 13px;">
+                <div>
                 <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
                 </p>
                 <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
-                <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
-                                                                        ng-change="uncheck()" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-                <!-- <p class="text_color" style="text-indent: 31px;"><input type="checkbox" ng-model="checked" ng-init="checked=true" ng-change="uncheck()"/>18% GST : <span class="float-right">{{ GST ||"N/A" }}</span></p> -->
-                <!-- <p class="" style="text-indent: 28px;">Sub Total : <spam class="float-right">{{campaignDetails.subTotal | number : 2}}</spam>
-                </p> -->
-                <!-- <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{campaignDetails.grandTotal | number : 2}}</spam>
-                </p> -->
+                <p class="text_color" style="text-indent: 17px;">
+                                        <input type="checkbox" ng-hide="onchecked==false || true" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" />
+                        18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+                
                 <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
+            </div>
                 <md-button
                     class="md-raised md-warn all_button"  
                     ng-click="finalizeCampaign(campaignProduct)"
