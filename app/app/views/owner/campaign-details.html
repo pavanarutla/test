@@ -3,27 +3,42 @@
         <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
     </md-button>
     <div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
-
-        <!-- share campaign sidenav ends -->
         <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
             <div class="row" style="margin-left:0px; margin-right:0px;">
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
-                     style="margin-top:14px;">
-                    <p class="cmp_bottom">Campaign ID</p>
-                    <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
+                <div class="row col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12">
+                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                        style="margin-top:14px;">
+                        <p class="cmp_bottom">Campaign ID</p>
+                        <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
+                    </div>
+					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
+					style="margin-top:14px;">
+						<p class="cmp_bottom">Client Name</p>
+						<p class="md-caption mob_span"><b>{{campaignDetails.client_name || "N/A"}}</b></p>
+					</div>
+                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                        style="margin-top:14px;">
+                        <p class="cmp_bottom">Campaign Name</p>
+                        <p class="md-caption mob_span"><b>{{campaignDetails.name| capitalize}}</b></p>
+                    </div>
+					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_mng"
+					 style="margin-top:14px;">
+						<p class="cmp_bottom">Contact</p>
+						<p class="md-caption mob_span"><b>{{campaignDetails.org_contact_phone}}</b></p>
+					</div>
+					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-12 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_mng"
+					 style="margin-top:14px;">
+						<p class="cmp_bottom">Email</p>
+						<p class="md-caption mob_span"><b>{{campaignDetails.org_contact_email}}</b></p>
+					</div>
+                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+                        style="margin-top:14px;">
+                        <p class="cmp_bottom">No of Products</p>
+                        <p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
+                    </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
-                     style="margin-top:14px;">
-                    <p class="cmp_bottom">Campaign Name</p>
-                    <p class="md-caption mob_span"><b>{{campaignDetails.name| capitalize}}</b></p>
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
-                     style="margin-top:14px;">
-                    <p class="cmp_bottom">No of Products</p>
-                    <p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
-                </div>
-
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
+                <div class="row col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12 metro_cmpnew">
+                <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
                     <div class="dropdown">
                         <md-button onclick="shareownerCampaign()" class="dropbtn drop_width">
                             <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
@@ -69,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
                      style="cursor: pointer;">			
                     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                         <a ng-click="downloadOwnerQuote(campaignDetails.id)" download>
@@ -82,7 +97,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
+                <div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
                      style="margin-top:2em;text-align: end" ng-if="campaignDetails.products.length == 0">
                     <!-- <md-button class="md-raised Upload_font">
                             <md-icon>
@@ -94,6 +109,7 @@
                     </md-button> -->
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
                     </md-button>
+                </div>
                 </div>
             </div>
         </div>
