@@ -252,6 +252,7 @@ app.controller('MetroCtrl',
           } else {
             toastr.error(result.message);
           }
+          $state.reload();
         });
       }
 
