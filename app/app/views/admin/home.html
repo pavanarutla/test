@@ -1,70 +1,45 @@
 <div class="contbg" layout="column" flex>
-
-
   <div class="feed-section" style="margin-top:8px">
     <div class="section-inner">
-      
       <!-- <h4 class="text_color" layout-padding ng-if="requestList.metroCampaignFeeds.length > 0">Metro Feeds</h4> -->
       <h4 class="text_color" layout-padding >Metro Feeds</h4>
       <br />
-
       <!-- Metro feeds -->
       <div ng-if="requestList.metroCampaignFeeds.length < 1" > 
         <h3 layout-padding>There is No Metro Campaigns Feeds Available</h3>
       </div>
-      <!-- <div class="row" style="margin-left:0px;margin-right:0px">
-        <div class="col-sm-3"  ng-if="requestList.metroCampaignFeeds.length > 0" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
-          <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
-            <div layout="column" layout-fill layout-margin>
-              <div layout="column" layout-align="center center" flex>
-                <img ng-src="{{serverUrl + request.user_avatar}}"style="widows: 50px;px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
-                <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
-              </div>
-              <div layout="column" layout-align="center start" flex class="feed-hdng">
-                <h3 ng-show="request.status == 121">{{request.contact_name}} has checked out a metro campaign.</h3>
-              </div>
-            </div>
-            <div layout="colmun" style="margin: 0 0 0 8px;">
-              <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
-            </div>
-            <div layout="colmun" layout-align="center center">
-              <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)" style="font-size: 12px">View Details</md-button>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div style="margin-top: 1em;">
           <div class="table-responsive">
-      <table class="table" ng-if="requestList.metroCampaignFeeds.length > 0">
-        <thead class="text_color">
-          <tr>
-            <th>CID</th>
-            <th class="">Campaign Name</th>
-            <th>Details</th>
-            <th>Action</th>
-            <th class=""></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="request in requestList.metroCampaignFeeds">
-            <td class="table_vertical">{{request.cid}}</td>
-            <td class="table_vertical">{{request.name}}</td>
-            <td class="table_vertical">
-              <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
-            </td>
-            <td class="table_vertical">
-              <a style="cursor:pointer;" ng-click="showCampaignDetailsPopup($event, request)" >
-                  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
-                    <i class="material-icons">remove_red_eye</i>
-                  </md-icon>
-                </a>
-            </td>
-            <td class="table_vertical">{{request.updated_at | datetimeify}}</td>
-          </tr>
-          
-        </tbody>
-      </table>
-      </div>
+              <table class="table" ng-if="requestList.metroCampaignFeeds.length > 0">
+                <thead class="text_color">
+                  <tr>
+                    <th>CID</th>
+                    <th class="">Campaign Name</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th class=""></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="request in requestList.metroCampaignFeeds">
+                    <td class="table_vertical">{{request.cid}}</td>
+                    <td class="table_vertical">{{request.name}}</td>
+                    <td class="table_vertical">
+                      <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
+                    </td>
+                    <td class="table_vertical">
+                      <a style="cursor:pointer;" ng-click="showCampaignDetailsPopup($event, request)" >
+                          <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                          </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical">{{request.updated_at | datetimeify}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+          </div>
       </div>
       <!-- Metro feeds end -->
 
@@ -77,29 +52,6 @@
       <div ng-if="requestList.otherCampaignFeeds.length < 1" > 
         <h3>There is no OOH campaigns available</h3>
       </div>
-      <!-- <div class="row" style="margin-left:0px;margin-right:0px">
-        <div class="col-sm-3" ng-repeat="request in requestList.otherCampaignFeeds" style="margin-bottom:10px">
-          <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
-            <div layout="column" layout-fill layout-margin>
-              <div layout="column" layout-align="center center" flex>
-                <img ng-src="{{serverUrl + request.user_avatar}}"style="widows: 50px;px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
-                <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
-              </div>
-              <div layout="column" layout-align="center start" flex class="feed-hdng">
-                <h3 ng-show="request.status == 2">{{request.contact_name}} has requested for a campaign proposal.</h3>
-                <h3 ng-show="request.status == 4">{{request.contact_name}} has requested for a change in provided quote.</h3>
-                <h3 ng-show="request.status == 5">{{request.contact_name}} has requested for the launch of their campaign.</h3>
-              </div>
-            </div>
-            <div layout="colmun" style="margin: 0 0 0 8px;">
-              <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
-            </div>
-            <div layout="colmun" layout-align="center center">
-              <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)" style="font-size: 12px">View Details</md-button>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div style="margin-top: 1em;">
           <div class="table-responsive">
        <table class="table">
@@ -147,27 +99,6 @@
 
       <!-- Campaign suggestion requests -->
 
-      <!-- <div class="row" style="margin-left:0px;margin-right:0px">
-        <div class="col-sm-3" ng-repeat="request in requestList.campaignSuggestionRequests" style="margin-bottom:10px">
-            <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
-              <div layout="column" layout-fill layout-margin>
-                <div layout="column" layout-align="center center" flex>
-                  <img ng-src="{{serverUrl + request.user_avatar}}" style="width:50px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
-                  <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
-                </div>
-                <div layout="column" layout-align="center start" flex class="feed-hdng">
-                  <h3 class="">{{request.user_full_name}} has requested for campaign suggestion.</h3>
-                </div>
-              </div>
-              <div layout="colmun" style="margin: 0 0 0 8px;">
-                <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
-              </div>
-              <div layout="colmun" layout-margin layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="showCampaignSuggestionRequestPopup($event, request)" style="font-size: 12px">View Details</md-button>
-              </div>
-            </div>
-          </div>
-      </div> -->
       <div style="margin-top: 1em;">
           <div class="table-responsive">
       <table class="table">
