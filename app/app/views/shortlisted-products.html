@@ -122,10 +122,10 @@
 		<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
 		<div class="md-title  m-2">Let's work Together!</div>
 		<div class="form-group mt-3 mr-2 ml-2">
-			<input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
+			<input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
 		</div>
 		<div class="form-group mt-3 mr-2 ml-2">
-			<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" placeholder="Estimated budget">
+			<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" ng-disabled="existingCampaign.id" placeholder="Estimated budget">
 		</div>
 		<div layout="column" class="mr-2 ml-2 mb-3">
 			<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign()" ng-disabled="IsDisabled">
@@ -134,7 +134,7 @@
 		</div>
 		<p class="text-center md-body-2">(OR)</p>
 		<div class="form-group mr-2 ml-2">
-			<select class="form-control" ng-model="existingCampaign.id" required="required">
+			<select class="form-control" ng-model="existingCampaign.id" required="required" ng-disabled="campaign.name">
 				<option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns" ng-if="campaign.status < 600" >{{campaign.name}}</option>
 			</select>
 		</div>

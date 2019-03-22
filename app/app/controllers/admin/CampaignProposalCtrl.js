@@ -15,7 +15,6 @@ app.controller("CampaignProposalCtrl", function(
   FileSaver
 ) {
   $scope.productList = [];
-  //$scope.isChecked = true;
 
   /*===================
   | Pagination
@@ -143,9 +142,15 @@ app.controller("CampaignProposalCtrl", function(
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);
-        $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-        $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-
+        if ($scope.campaignDetails.gst_price != "0") {
+          $scope.onchecked = true;
+          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+          $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+        } else {
+          $scope.onchecked = false;
+          $scope.GST = "0";
+          $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
+        }
         if (result.status > 7) {
           loadCampaignPayments(campaignId);
         }
@@ -392,8 +397,10 @@ app.controller("CampaignProposalCtrl", function(
   $scope.finalizeCampaign = function() {   
     if ($scope.onchecked === true) {
       $scope.flag = 1;
+      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
     } else if ($scope.onchecked === false) {
       $scope.flag = 0;
+      $scope.GST = "0";
     } else{
       $scope.flag = 1;
     }    
