@@ -67,7 +67,7 @@
         <div style="width: 100% !important;">
           <md-list class="owners-menu">
               <md-menu-item flex layout="column">
-                <md-button class="side_navlist" ng-href="#/admin/home">
+                <md-button class="side_navlist" ng-href="#/admin/home" ng-class="{'active-link': currStateName == 'admin.home'}" ng-click="closeMenuSidenavIfMobile()">
                   To-Do List
                 </md-button>
               </md-menu-item>
@@ -85,31 +85,30 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button class="side_navlist" ng-href="#/admin/campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/campaigns" ng-class="{'active-link': currStateName == 'admin.campaign'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
                   <div layout="row">
                     <span flex="15"></span>
                     User OOH </div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button class="side_navlist" ng-href="#/admin/admin-campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/admin-campaigns" ng-class="{'active-link': currStateName == 'admin.admincampaign'}" ng-click="closeMenuSidenavIfMobile()">
                   <div layout="row">
                     <span flex="15"></span>
                     Admin OOH </div>
                 </md-button>
               </md-menu-item>
               <md-menu-item flex layout="column" ng-show="showCampagin">
-                <md-button class="side_navlist" ng-href="#/admin/metro-campaigns">
+                <md-button class="side_navlist" ng-href="#/admin/metro-campaigns" ng-class="{'active-link': currStateName == 'admin.metro-campaigns'}" ng-click="closeMenuSidenavIfMobile()">
                   <div layout="row">
                     <span flex="15"></span>
-
                     Metro Campaign</div>
                 </md-button>
               </md-menu-item>
               <!--campagin end-->
               <!-- listed of locations-->
               <md-menu-item flex layout="column">
-                <md-button class="side_navlist" ng-href="#admin/locations">
+                <md-button class="side_navlist" ng-href="#admin/locations" ng-class="{'active-link': currStateName == 'admin.locations'}" ng-click="closeMenuSidenavIfMobile()">
                   Location
                 </md-button>
               </md-menu-item>
@@ -149,14 +148,14 @@
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button class="side_navlist" ng-href="#admin/formats">
+              <md-button class="side_navlist" ng-href="#admin/formats" ng-class="{'active-link': currStateName == 'admin.formats'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
                 <div layout="row">
                   <span flex="15"></span>
                   OOH Formats</div>
               </md-button>
             </md-menu-item>
             <md-menu-item flex layout="column" ng-show="showFormats">
-              <md-button class="side_navlist" ng-href="#admin/metro-formats">
+              <md-button class="side_navlist" ng-href="#admin/metro-formats" ng-class="{'active-link': currStateName == 'admin.metro-formats'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
                 <div layout="row">
                   <span flex="15"></span>
                   Metro Formats</div>

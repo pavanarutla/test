@@ -118,8 +118,8 @@
                     BBI</md-button>
                 <md-button aria-label="products" ng-href="#/ourproduct" ng-if="!footerhide" class="toolbar-btn">Our
                     Products</md-button>
-                <!-- <md-button aria-label="products" ng-href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
-                </md-button> -->
+                <md-button aria-label="products" href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
+                </md-button>
                 <!-- <md-button aria-label="products" ng-href="#/suggestme" ng-if=" isAuthenticated && isUserBasic()"
                   ng-href="#/suggest/product-detail" class="toolbar-btn suggest_borderright">
                   suggest me
@@ -283,26 +283,26 @@
     </header>
     <div flex layout="column" role="navigation">
       <md-menu-item flex layout="column">
-        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we">About
+        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we" ng-click="closeMenuSidenavIfMobile()">About
           BBI</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn">Our
+        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn" ng-click="closeMenuSidenavIfMobile()">Our
           Products</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button aria-label="products" ng-href="#/faq" class="toolbar-btn faq_width">FAQ'S
+        <md-button aria-label="products" href="#/faq" class="toolbar-btn faq_width" ng-click="closeMenuSidenavIfMobile()">FAQ'S
         </md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
         <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
-          ng-click="showSignInDialog($event)"> suggest me</md-button>
+          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()"> suggest me</md-button>
         <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggestme" ng-show="isAuthenticated"
           style="color:#000"> suggest me</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
         <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
-          ng-click="showSignInDialog($event)">Metro</md-button>
+          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()">Metro</md-button>
         <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated ">Metro</md-button>
       </md-menu-item>
 
@@ -337,8 +337,9 @@
             <p class="font-weight-bold p5">CALL</p>
             <p class="p5">+ 91 9550224488</p>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="col-lg-6 col-md-6 col-sm-12 leave_form">
             <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
+            <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
             <div class="contact-block-left">
               <form name="sendquery" novalidate>
                 <div class="form-group" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }" style="width: 49%;float: left;">
