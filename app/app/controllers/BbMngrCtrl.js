@@ -14,7 +14,11 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*=================================
      | mdDilalog close function ends
      =================================*/
-
+     $scope.closeMenuSidenavIfMobile = function(){
+        if($window.innerWidth <=420){
+          $mdSidenav('left').close();
+        }
+      }
 
     $scope.forms = {};
 

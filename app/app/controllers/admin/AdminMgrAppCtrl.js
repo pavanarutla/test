@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth, AdminNotificationService, toastr, config,$window) {
 
   /*=================================
   | mdDilalog close function
@@ -44,6 +44,12 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.toggleAdminLeftSidenav = function () {
     $mdSidenav('adminLeftSidenav').toggle();
   };
+
+  $scope.closeMenuSidenavIfMobile = function(){
+    if($window.innerWidth <=420){
+      $mdSidenav('adminLeftSidenav').close();
+    }
+  }
 
   $scope.logout = function(){
     $auth.logout().then(function(result){
