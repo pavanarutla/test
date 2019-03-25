@@ -12,6 +12,7 @@ app.controller("ProductCtrl", [
   "config",
   "Upload",
   "toastr",
+  "$state",
   function(
     $scope,
     $mdDialog,
@@ -25,7 +26,8 @@ app.controller("ProductCtrl", [
     MapService,
     config,
     Upload,
-    toastr
+    toastr,
+    $state
   ) {
     var vm = this;
     $scope.msg = {};
@@ -331,6 +333,8 @@ app.controller("ProductCtrl", [
           } else if (result.data.status == 0) {
             $scope.addProductErrors = result.data.message;
           }
+          // addnewProduct();
+          $state.reload();
         },
         function(resp) {
           toastr.error("somthing went wrong try again later");
@@ -342,7 +346,9 @@ app.controller("ProductCtrl", [
         }
       );
     };
-
+//     function addnewProduct() {
+//       document.getElementById("hoardingDrop").classList.toggle("show");
+// }
     $scope.editProduct = function(product) {
       if (product.status != 0) {
         product.country = null;
