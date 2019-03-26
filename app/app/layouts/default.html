@@ -103,7 +103,7 @@
     </script>
 <div layout="column" style="position:relative;min-height:100%;">
     <!-- main nav section-->
-    <a onclick="topFunction()" id="myBtn" class="move-top text-center"></a>
+    <a id="myBtn" class="move-top text-center"></a>
     <md-toolbar class="md-menu-toolbar header">
         <div class="container md-toolbar-tools">
             <md-button ng-click="closeSidenav()" aria-label="menu" class="md-icon-button hide_gt_md menu_btn_mobile">
@@ -118,8 +118,8 @@
                     BBI</md-button>
                 <md-button aria-label="products" ng-href="#/ourproduct" ng-if="!footerhide" class="toolbar-btn">Our
                     Products</md-button>
-                <!-- <md-button aria-label="products" ng-href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
-                </md-button> -->
+                <md-button aria-label="products" href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
+                </md-button>
                 <!-- <md-button aria-label="products" ng-href="#/suggestme" ng-if=" isAuthenticated && isUserBasic()"
                   ng-href="#/suggest/product-detail" class="toolbar-btn suggest_borderright">
                   suggest me
@@ -283,26 +283,26 @@
     </header>
     <div flex layout="column" role="navigation">
       <md-menu-item flex layout="column">
-        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we">About
+        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we" ng-click="closeMenuSidenavIfMobile()">About
           BBI</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn">Our
+        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn" ng-click="closeMenuSidenavIfMobile()">Our
           Products</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
-        <md-button aria-label="products" ng-href="#/faq" class="toolbar-btn faq_width">FAQ'S
+        <md-button aria-label="products" href="#/faq" class="toolbar-btn faq_width" ng-click="closeMenuSidenavIfMobile()">FAQ'S
         </md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
         <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
-          ng-click="showSignInDialog($event)"> suggest me</md-button>
+          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()"> suggest me</md-button>
         <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggestme" ng-show="isAuthenticated"
           style="color:#000"> suggest me</md-button>
       </md-menu-item>
       <md-menu-item flex layout="column">
         <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
-          ng-click="showSignInDialog($event)">Metro</md-button>
+          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()">Metro</md-button>
         <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated ">Metro</md-button>
       </md-menu-item>
 
@@ -337,19 +337,20 @@
             <p class="font-weight-bold p5">CALL</p>
             <p class="p5">+ 91 9550224488</p>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="col-lg-6 col-md-6 col-sm-12 leave_form">
             <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
+            <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
             <div class="contact-block-left">
               <form name="sendquery" novalidate>
-                <div class="form-group" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }" style="width: 49%;float: left;">
+                <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="text" name="name" placeholder="Name" class="form-control" ng-model="query.name" required>
-                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine" class="help-block">Your name is required.</p>
+                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine" class="help-block form_inputnameleft">Your name is required.</p>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }" style="width: 49%;float: right;">
+                <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="email" name="email" placeholder="Email" class="form-control" ng-model="query.email" required>
-                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine" class="help-block">Email Id is required.</p>
+                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine" class="help-block form_inputnameright">Email Id is required.</p>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }" style="width: 49%;float: left;">
+                <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <select ng-model="query.subject" name="Subject" class="form-control">
                         <option value="" disabled selected>Subject*</option>
                         <option>Payment</option>
@@ -357,11 +358,11 @@
                         <option>Campaign</option>
                         <option>Other</option>
                     </select>
-                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine" class="help-block">Subject is required.</p>
+                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine" class="help-block form_inputnameleft">Subject is required.</p>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }" style="width: 49%;float: right;">
+                <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="text" name="contact" placeholder="Contact No" class="form-control" ng-model="query.contactno" required>
-                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine" class="help-block">contact Id is required.</p>
+                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine" class="help-block form_inputnameright">contact Id is required.</p>
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" placeholder="Text Area" ng-model="query.message" required></textarea>
@@ -375,11 +376,11 @@
     <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
       <a ng-href="#home" class="move-top text-center"></a>
       <div class="row py-2 d-flex align-items-center">
-        <div class="col-md-9 col-lg-9 col-sm-12 col-12">
+        <div class="col-md-8 col-lg-9 col-sm-12 col-12">
           <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Pravacy & Terms</b></span>BBI Advertising
             pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
+        <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
           <a href="https://www.facebook.com/billboardsind/" target="_blank"><i class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
           <a href="https://www.instagram.com/billboards_india/" target="_blank"><i class="fa fa-instagram white-text mr-4" aria-hidden="true"></i></a>
           <a href="https://www.linkedin.com/company/billboards-india/?viewAsMember=true" target="_blank"><i class="fa fa-linkedin white-text mr-4" aria-hidden="true"></i></a>
@@ -392,8 +393,8 @@
 
 
 
-<script>
-	// When the user scrolls down 20px from the top of the document, show the button
+<!-- <script>
+	
 	window.onscroll = function() {scrollFunction()};
 
 	function scrollFunction() {
@@ -404,9 +405,27 @@
 	  }
 	}
 
-	// When the user clicks on the button, scroll to the top of the document
+	
 	function topFunction() {
 	  document.body.scrollTop = 0;
 	  document.documentElement.scrollTop = 0;
 	}
-	</script>
+    </script> -->
+    <script>
+        $(window).scroll(function() {
+            var height = $(window).scrollTop();
+            if (height > 20) {
+                $('#myBtn').fadeIn();
+            } else {
+                $('#myBtn').fadeOut();
+            }
+        });
+        $(document).ready(function() {
+            $("#myBtn").click(function(event) {
+                event.preventDefault();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return false;
+            });
+
+        });
+</script>
