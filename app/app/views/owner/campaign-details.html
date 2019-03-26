@@ -129,7 +129,7 @@
                         <th class="">Price</th>
                         <th class="">Default Price</th>
                         <th class=" text-right">
-                <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0" ng-hide="campaignDetails.status >= 700" ng-click="addNewProductToCampaign()">Add
+                <md-button class="md-raised add_blue" ng-if="campaignDetails.type == 0 && hidebutton()" ng-click="addNewProductToCampaign()">Add
                     Another Product
                 </md-button>
                 </th>
@@ -174,7 +174,7 @@
         <div class="row border_quest mr-0 ml-0 ">
             
             <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
-				<form name="SendComment">
+				<form name="SendComment" ng-if="campaignDetails.type == 0">
 						<div class=" chat_box ">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change">
 								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">O</span>{{quote_change.remark}}</li>
