@@ -131,12 +131,12 @@
                 </md-button>
                 <!-- browse-->
                 <md-button aria-label="location" ng-href="#/location"
-                           ng-show="isAuthenticated && currStateName != 'index.location'">
+                           ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
                    Roadside
                 </md-button>
                 <md-button class="md-raised login_button book_now toolbar-btn" ng-show="!isAuthenticated"
                            style="color:#000 !important" ng-click="showSignInDialog($event)">Metro</md-button>
-                <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated && currStateName != 'index.metro'">
+                <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'">
                     Metro</md-button>
                 <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
                            ng-show="!isAuthenticated" style="color: #000 !important;">
@@ -246,7 +246,7 @@
                                 <li ng-show="isAuthenticated && loggedInUser.user_role=='basic'" > <a ng-href="#/user-payments"> Payments</a> </li>
                                 <li ng-show="isAuthenticated && loggedInUser.user_role=='owner'" > <a ng-href="#/owner/{{clientSlug}}/payments"> Payments</a> </li>
                                 <li> <a ng-href="#/reset_password"> Change Password</a> </li>
-<!--                                <li> <a ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a> </li>-->
+                                <li> <a ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a> </li>
                                 <li class="hide_gt_xs"><a ng-href="#/user-saved-campaigns">Saved Camapgin</a></li>
                                 <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
                             </ul>

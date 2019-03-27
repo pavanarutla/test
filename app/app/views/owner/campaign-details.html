@@ -60,9 +60,9 @@
                                     <span ng-if="campaignDetails.pending_payment">Rs.</span>                                    
                                     {{campaignDetails.total_paid - campaignDetails.TOTAL}}
                                 </td>
-                                <td ng-hide="campaignDetails.status >= 700">
-                                    "N/A"
-                                </td>
+    <!--                                <td ng-hide="campaignDetails.status >= 700">
+                                        "N/A"
+                                    </td>-->
                             </tr>
                             <tr>
                                 <td><b>Status</b></td>
@@ -255,7 +255,7 @@
                         <th class="">Price</th>
                         <th class="">Default Price</th>
                         <th class=" text-right">
-                <md-button class="md-raised add_blue" ng-if="campaignDetails.type == 0 && hidebutton()" ng-click="addNewProductToCampaign()">Add
+                <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0 && hidebutton()" ng-click="addNewProductToCampaign()">Add
                     Another Product
                 </md-button>
                 </th>
@@ -289,7 +289,7 @@
 
                         <td class="table_vertical">
                             <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
-                            {{product.default_price|| product.price||'N/A'}}</td>
+                            {{product.default_price || product.price || 'N/A'}}</td>
                         <td class="table_vertical ">
                             <a><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
                         </td>
@@ -300,7 +300,7 @@
         <div class="row border_quest mr-0 ml-0 ">
             
             <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
-				<form name="SendComment" ng-if="campaignDetails.type == 0">
+<!--				<form name="SendComment" ng-if="campaignDetails.type == 0">
 						<div class=" chat_box ">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change">
 								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">O</span>{{quote_change.remark}}</li>
@@ -313,7 +313,7 @@
 								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message,'Owner')">Submit</button>
 							
 						</div>
-					</form>
+					</form>-->
 		    </div>
             <div class="col-12 col-sm-6  col-md-8 order-1 order-sm-2" ng-if="campaignDetails.type != 0" >
                 <div class="mt-3 pull-right sub_total">
