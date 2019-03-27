@@ -105,30 +105,30 @@
 			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp client_info">
-					<div layout="column" layout-align="center center" layout-margin>
+					<!-- <div layout="column" layout-align="center center" layout-margin>
 						<div>
 							<img src="assets/images/client_details.png" width="70%">
 						</div>
 						<h3 class="text_color">Client Details</h2>
-					</div>
+					</div> -->
 					<table class="table table-striped table-bordered" style="width: 97%;">
 						<tbody>
 							<tr>
-								<td>Campaign Name</td>
+								<td><b>Campaign Name</b></td>
 								<td>{{metroCampaignDetails.name}}</td>
 							</tr>
 							<tr>
-								<td>Client Name</td>
+								<td><b>Client Name</b></td>
 								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.first_name || "N/A"}} {{metroCampaignDetails.user_details.last_name}}</td>
 								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_name || "N/A"}}</td>
 							</tr>
 							<tr>
-								<td>Contact</td>
+								<td><b>Contact</b></td>
 								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.phone || "N/A"}}</td>
 								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_phone || "N/A"}}</td>
 							</tr>
 							<tr>
-								<td>Email</td>
+								<td><b>Email</b></td>
 								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.email || "N/A"}}</td>
 								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_email || "N/A"}}</td>
 							</tr>
@@ -137,26 +137,26 @@
 				</div>
 				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp Campaign_summary">
-					<div layout="column" layout-align="center center" layout-margin>
+					<!-- <div layout="column" layout-align="center center" layout-margin>
 						<div>
 							<img src="assets/images/capaign_details.png" width="70%">
 						</div>
 						<h3 class="text_color">Campaign Summary</h2>
-					</div>
+					</div> -->
 					<table class="table table-striped table-bordered" style="width: 97%;">
 						<tbody>
 							<tr>
-								<td>Staring From</td>
+								<td><b>Staring From</b></td>
 								<td>{{metroCampaignDetails.start_date | dateify | date:'dd-MM-yyyy' || "N/A"}}</td>
 							</tr>
 							<tr>
-								<td>Actual Budget</td>
+								<td><b>Actual Budget</b></td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{metroCampaignDetails.act_budget || "N/A"}}
+									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{Totalamount || "N/A"}}
 								</td>
 							</tr>
 							<tr>
-								<td>Pending payment</td>
+								<td><b>Pending payment</b></td>
 								<td>
 									<span ng-if="!metroCampaignDetails">N/A</span>
 									<span ng-if="metroCampaignDetails && metroCampaignDetails.act_budget">Rs. {{metroCampaignDetails.pending_payment}}</span>
@@ -164,7 +164,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Status</td>
+								<td><b>Status</b></td>
 								<td>{{metroCampaignDetails.status | stringifyCampaignStatus }}</td>
 							</tr>
 						</tbody>

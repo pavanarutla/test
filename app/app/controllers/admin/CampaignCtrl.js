@@ -745,6 +745,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               }, 2500);*/
               addPayment();
               $scope.loadCampaignPayments(cid);
+              $state.reload();
           } else {
               if (result.data.message.constructor == Array) {
                   $scope.updateCampaignPaymentErrors = result.data.message;
