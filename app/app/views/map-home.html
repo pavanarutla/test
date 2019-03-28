@@ -80,14 +80,13 @@
           </div>
         </div>
         <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
-          <md-button layout-fill class="md-raised md-warn Upload_font" ng-if="!alreadyShortlisted"
+          <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="selectedDateRanges.length == 0" ng-if="!alreadyShortlisted"
             ng-click="shortlistSelected(product.id, selectedDateRanges, $event)">Shortlist</md-button>
-          <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;"
+          <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="selectedDateRanges.length == 0"
             ng-click="toggleExistingCampaignSidenav()">Save Campaign</md-button>
         </div>
       </div>
-
-      <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
+            <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
         style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
         <div layout="row">
           <div flex></div>

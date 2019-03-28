@@ -346,7 +346,7 @@
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                 <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.Totalamount || "0"}}</td>
 
                 <td class="text-center table_vertical ">
                   <md-menu md-position-mode="target-right target" id="width_popup">
@@ -436,14 +436,14 @@
               </tr>
             </thead>
             <tbody class="">
-              <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status >= 700">
+              <tr ng-repeat="campaign in ownerCampaigns  | filter:search">
                   <!-- ng-if="campaign.status==800" -->
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                 <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical">{{ Totalamount || "0"}}</td>
+                <td class="text-center table_vertical">{{ campaign.Totalamount || "0"}}</td>
                 <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -512,14 +512,14 @@
               </tr>
             </thead>
             <tbody class="">
-              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status >= 800">
+              <tr ng-repeat="campaign in scheduledCampaigns | filter:search" ng-if="campaign.status == 800">
                   <!-- ng-if="campaign.status==700" -->
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
               <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.Totalamount || "0"}}</td>
                 <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -586,7 +586,7 @@
                 <th class=""></th>
               </tr>
             </thead>
-            <tbody class="" ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status >=900">
+            <tbody class="" ng-repeat="campaign in scheduledCampaigns | filter:search" ng-if="campaign.status >=900">
                 <!-- ng-if="campaign.status==900 || campaign.status==1000" -->
               <tr>
                 <td class="table_vertical">{{campaign.cid || "N/A"}}</td>
@@ -594,7 +594,7 @@
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
               <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
-                <td class="text-center table_vertical">{{campaign.total_price || "0"}}</td>
+                <td class="text-center table_vertical">{{campaign.Totalamount || "0"}}</td>
                 <td class="text-center table_vertical">
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
