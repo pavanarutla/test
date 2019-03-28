@@ -460,14 +460,17 @@
 							<tr>
 								<td><b>Actual Budget</b></td>
 								<td>
-									<span ng-if="metroCampDetails.act_budget">Rs.</span>{{Totalamount || "N/A"}}
+									<span ng-if="metroCampDetails.act_budget">Rs.</span>{{TOTAL || "N/A"}}
 								</td>
 							</tr>
 							<tr>
 								<td><b>Pending payment</b></td>
-								<td>
-									<span ng-if="metroCampDetails.pending_payment">Rs.</span>{{metroCampDetails.pending_payment || "N/A"}}
+								<td ng-if="metroCampDetails.status <= 1101">
+									<span ></span>"N/A"
 								</td>
+								<td ng-if="metroCampDetails.status >= 1121">
+										<span >Rs.</span>{{metroCampDetails.pending_payment || "0"}}
+									</td>
 							</tr>
 							<tr>
 								<td><b>Status</b></td>
@@ -686,7 +689,7 @@
 						<td class="table_vertical">{{package.price}}
 						</td>
 						<td class="table_vertical ">
-							<a><i class="material-icons" ng-click="deleteProductFromCampaign($event, product.id)">delete_forever</i></a>
+							<a><i class="material-icons" ng-click="deleteProductFromCampaign($event, product.id)" ng-if="metroCampDetails.status == 1101">delete_forever</i></a>
 							<!-- ng-if="metroCampDetails.type != 0 && metroCampDetails.status != 700" -->
 						</td>
 					</tr>
@@ -712,17 +715,16 @@
 					</md-button>
 				</div>
 			</div>
-			<div class="col-md-8" ng-if="metroCampDetails.status >= 1121">
+			<div class="col-md-8">
+					<!-- ng-if="metroCampDetails.status >= 1121" -->
 				<!-- ng-if="metroCampDetails.type != 0" -->
 				<div class="mt-3 pull-right" style="font-size: 13px;">
 					<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
 					</p>
-					<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+					<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
 						 ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
 					<!-- <p class="" style="text-indent: 166px;">Sub Total : <span class="float-right">{{metroCampDetails.subTotal| number : 2}}</span>
-					</p> -->
-					<p class="font-weight-light" style="text-indent: 172px;"><b>Pending : <span class="float-right">{{metroCampDetails.pending_payment}}</b></span>
-					</p>
+					</p> -->					
 					<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
 							TOTAL | number : 2}}</span>
 					</p>
