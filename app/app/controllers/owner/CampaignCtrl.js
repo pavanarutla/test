@@ -98,7 +98,13 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     /*===========================
      | MdDialogs and sidenavs end
      ===========================*/
-
+$scope.hidebutton = function(){
+    if($scope.campaignDetails.status >= 700){
+     return false;
+    } else{
+        return true;
+    }
+}
     /*================================
      | Multi date range picker options
      ================================*/
