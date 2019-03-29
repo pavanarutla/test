@@ -94,7 +94,7 @@
                     </tr>
                     <tr>
                         <td><b>Client Name</b></td>
-                        <td>{{campaignDetails.first_name|| "N/A"}}</td>
+                        <td>{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
                         <td><b>Contact</b></td>
@@ -102,7 +102,7 @@
                     </tr>
                     <tr>
                         <td><b>Email</b></td>
-                        <td>{{campaignDetails.email|| "N/A"}}</td>
+                        <td>{{campaignDetails.email|| "N/A" | capitalize}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -254,13 +254,13 @@
                         <img
                             ng-src="{{serverUrl + campaignProduct.image}}"
                             alt="Smiley face"
-                            class="requ_size"
+                            class="requ_size img-thumbnail"
                             />
                     </td>
                     <td class="table_address">
                         <p class="">
                             <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.area_name}}
-                                {{ campaignProduct.panelSize}}</b><br />Address: {{ campaignProduct.address}} <br />Views :
+                                {{ campaignProduct.panelSize}}</b><br />Address : {{ campaignProduct.address}} <br />Views :
                             {{ "N/A"}} Per week<br />
                             <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
                         </p>

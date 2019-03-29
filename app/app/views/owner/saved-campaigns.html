@@ -40,11 +40,11 @@
 
         <div class="md-caption text_color">Saved Campaigns </div>
         <div flex></div>
-        <div class="form-group saved_search">
-                <input type="search" class="form-control md-whiteframe-2dp" style="width:30%;padding: 4px;"  ng-model="search" placeholder="search campagin">
+        <div class="form-group">
+                <input type="search" class="form-control md-whiteframe-2dp" ng-model="search" placeholder="search campagin">
               </div>
         <div class="dropdown">
-            <md-button class="md-raised md-primary" onclick="saveCampaign()" class="dropbtn">CREATE CAMPAIGN</md-button>
+            <md-button class="md-raised md-primary all_button" onclick="saveCampaign()" class="dropbtn" style="margin-top: 0px;">Create Campaign</md-button>
             <div id="savedDropdown" class="dropdown-content contbg animated fadeInDown">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                     <div layout="colmun">
@@ -138,8 +138,8 @@
                             </div>
                         </div>
                     </li>
-                    <md-button class="md-raised md-primary" layout-fill ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid">
-                        CREATE CAMPAIGN
+                    <md-button class="md-raised md-primary all_button" layout-fill ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid">
+                        Create Campaign
                     </md-button>
                 </form>
             </div>
@@ -147,62 +147,53 @@
     </div>
     <div >
         <div class="table-responsive">
-            <table class="table mb-0">
+            <table class="table">
                 <thead>
-                    <tr class="text_color text-center">
+                    <tr class="text_color">
                         <th>CID</th>
                         <th>Campaign Name</th>
                         <th>Start Date</th>
-                        <th>No of Products </th>
+                        <th class="text-center">No of Products </th>
                         <!-- <th>Paid</th> -->
-                        <th>Total Budget</th>
+                        <th class="text-center">Total Budget</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody class="text-center">
+                <tbody class="">
 
                     <tr ng-repeat="ownerSave in ownerSaved|filter:search" ng-if="ownerSave.status==100 || ownerSave.status==200 ">
-                        <td>{{ownerSave.cid}}</td>
-                        <td>{{ownerSave.name}}</td>
-                        <td>{{ownerSave.created_at | dateify | date:'dd-MM-yyyy'|| "N/A"}}</td>
-                        <td>{{ownerSave.product_count || "N/A"}}</td>                        
-                        <td>{{ownerSave.est_budget || "N/A"}}</td>
-                        <td>
+                        <td class="table_vertical">{{ownerSave.cid}}</td>
+                        <td class="table_vertical">{{ownerSave.name | capitalize}}</td>
+                        <td class="table_vertical">{{ownerSave.created_at | dateify | date:'dd-MM-yyyy'|| "N/A"}}</td>
+                        <td class="text-center table_vertical">{{ownerSave.product_count || "N/A"}}</td>                        
+                        <td class="text-center table_vertical">{{ownerSave.est_budget || "N/A"}}</td>
+                        <td class="text-center table_vertical">
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                                 </md-button>
                                 <md-menu-content width="2">
                                     <md-menu-item>
-                                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{ownerSave.id}}/{{ownerSave.type}}">
+                                        <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{ownerSave.id}}/{{ownerSave.type}}">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:auto 10px auto 10px">View Details</p>
+                                                <p style="margin:0 4px;font-size:11px;">View Details</p>
                                             </div>
                                         </md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-click="toggleShareCampaignSidenav(ownerSave.id)">
+                                        <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(ownerSave.id)">
                                             <div layout="row">
                                                 <md-icon><i class="material-icons">share</i></md-icon>
-                                                <p style="margin:auto 10px auto 10px">Share Campaign</p>
+                                                <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
                                             </div>
                                         </md-button>
                                     </md-menu-item>
-                                    <!-- <md-menu-item>
-                                        <md-button ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
-                                            <div layout="row">
-                                                <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                <p style="margin:auto 10px auto 10px">Pay & Launch</p>
-                                            </div>
-                                        </md-button>
-                                    </md-menu-item> -->
-                                    
                                 </md-menu-content>
                             </md-menu>
                         </td>
-                        <td>
+                        <td class="text-center table_vertical">
                             <span class="text_color md-caption">26-09-2018,09:10Am</span>
                         </td>
                     </tr>

@@ -7,7 +7,7 @@
              layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
                 <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100"
                  flex-gt-sm="50" layout-margin="layout-margin" class="contbg md-whiteframe-3dp client_info">				
-                    <table class="table table-striped table-bordered" style="width: 98%;">
+                    <table class="table table-striped table-bordered camp_tablewidth">
                         <tbody>
                             <tr>
                                 <td><b>Campaign ID</b></td>
@@ -15,12 +15,12 @@
                             </tr>
                             <tr>
                                 <td><b>Campaign Name</b></td>
-                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name| capitalize}}</td>
+                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
                                 <td ng-hide="campaignDetails.type == 2">BillBoards India</td>
                             </tr>
                             <tr>
                                 <td><b>Client Name</b></td>
-                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
+                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A" | capitalize}}</td>
                                 <td ng-hide="campaignDetails.type == 2">BillBoards India</td>
                             </tr>
                             <tr>
@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td><b>Email</b></td>
-                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email}}</td>
+                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}</td>
                                 <td ng-hide="campaignDetails.type == 2">reach@billboardsindia.com</td>
                             </tr>
                         </tbody>
@@ -38,7 +38,7 @@
                 </div>
                 <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column"
                  layout-gt-sm="column" layout-margin="layout-margin" class="contbg md-whiteframe-3dp Campaign_summary">
-                    <table class="table table-striped table-bordered" style="width: 98%;">
+                    <table class="table table-striped table-bordered camp_tablewidth">
                         <tbody>
                             <tr>
                                 <td><b>No of Products</b></td>
@@ -71,7 +71,6 @@
                         </tbody>
                     </table>
                 </div>
-    
             </div>
             <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
              style="float: right;">
@@ -264,11 +263,11 @@
                 <tbody>
                     <tr ng-repeat="product in campaignDetails.products">
                         <td class="hide-xs image_tdwidth">
-                            <img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
+                            <img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size img-thumbnail">
                         </td>
                         <td class="table_address">
-                            <p><b>{{product.siteNo}} - {{product.area_name}} (40Ft X 40Ft)</b><br>Address: {{product.address || "N/A"}}<br>Views : {{product.impressions|| "N/A"}}
-                                <br>Type:{{product.format_name|| "N/A"}}
+                            <p><b>{{product.siteNo}} - {{product.area_name}} (40Ft X 40Ft)</b><br>Address : {{product.address || "N/A"}}<br>Views : {{product.impressions|| "N/A"}}
+                                <br>Type : {{product.format_name|| "N/A"}}
                         </td>
                         <td class="table_vertical ">{{product.panelSize}}</td>
                         <td class="table_vertical">
@@ -325,9 +324,9 @@
                             18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
                     
                     <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700">Book
+                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
                         Campaign</md-button>
-                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700">Booked</md-button>
+                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
                 </div>
             </div>
             <style> .ng-cloak { display: none !important; } </style>

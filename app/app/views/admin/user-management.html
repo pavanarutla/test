@@ -29,7 +29,7 @@
             <tbody class="">
               <tr ng-repeat="client in allClients | filter : searchByCompanyName">
                 <td class="table_vertical">{{client.company_name}}</td>
-                <td class="table_vertical">{{client.company_type_name}}</td>
+                <td class="table_vertical">{{client.company_type_name | capitalize}}</td>
                 <td class="table_vertical">
                   <a style="cursor:pointer; color:#00f;" ng-click="showUserDetailsPopup(client.client_id, client.company_super_admin)"
                     ng-if="client.company_super_admin">
@@ -40,7 +40,7 @@
                   </a>
                 </td>
                 <td class="text-center table_vertical">{{client.activated | boolToYesNo}}</td>
-                <td class="text-center table_vertical">{{client.contact_email}}</td>
+                <td class="text-center table_vertical">{{client.contact_email | capitalize}}</td>
                 <td class="text-center table_vertical">{{client.phone}}</td>
                 <td class="text-center table_vertical">{{client.address}}</td>
                 <td class="table_vertical">
@@ -91,11 +91,11 @@
             </thead>
             <tbody class="">
               <tr ng-repeat="user in allUsers | filter : searchByEmail">
-                <td class="table_vertical">{{user.first_name}} {{user.last_name}}</td>
-                <td class="table_vertical">{{user.email}}</td>
+                <td class="table_vertical">{{user.first_name | capitalize}} {{user.last_name}}</td>
+                <td class="table_vertical">{{user.email | capitalize}}</td>
                 <td class="table_vertical">{{user.phone || "N/A"}}</td>
                 <td class="table_vertical">{{user.company_type}}</td>
-                <td class="table_vertical">{{user.company_name}}</td>
+                <td class="table_vertical">{{user.company_name | capitalize}}</td>
                 <td class="table_vertical">
                   <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
                     {{user.activated | boolToYesNo}}
@@ -142,8 +142,8 @@
                 <td class="table_vertical">
                   <input type="checkbox" ng-click="toggleRoleSelection(role.id)" ng-checked="selectedRole == role.id" />
                 </td>
-                <td class="table_vertical">{{role.display_name}}</td>
-                <td class="table_vertical">{{role.description}}</td>
+                <td class="table_vertical">{{role.display_name | capitalize}}</td>
+                <td class="table_vertical">{{role.description | capitalize}}</td>
                 <td class="table_vertical">
                   <span>
                     <!-- view role -->

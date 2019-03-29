@@ -671,14 +671,14 @@ style="background-color: #858A8E;">Submit</md-button>
         <tbody>
             <tr ng-repeat="product in productList">
                 <td class="image_tdwidth hide-xs">
-                    <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
+                    <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size img-thumbnail">
 
                 </td>
                 <td class="table_address">
                     <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
                         <br> {{product.address | capitalize}}
-                        <br>Facing: {{product.direction|| "N/A" | capitalize}}
-                        <br>Type: {{product.format_name | capitalize}}
+                        <br>Facing : {{product.direction|| "N/A" | capitalize}}
+                        <br>Type : {{product.format_name | capitalize}}
                 </td>
                 <td class="table_vertical">{{product.impressionsperweek}}</td>
                 <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>

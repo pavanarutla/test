@@ -101,12 +101,12 @@
 						<tbody class="">
 							<tr ng-repeat="company in companyList">
 									<!-- | limitTo:limit -->
-								<td class="table_vertical">{{company.name}}</td>
-								<td class="table_vertical">{{company.company_type}}</td>
-								<td class="table_vertical">{{company.contact_name}}</td>
-								<td class="table_vertical">{{company.contact_email}}</td>
-								<td class="table_vertical">{{company.contact_phone }}</td>
-								<td class="table_vertical">{{company.address }}</td>
+								<td class="table_vertical">{{company.name | capitalize}}</td>
+								<td class="table_vertical">{{company.company_type | capitalize}}</td>
+								<td class="table_vertical">{{company.contact_name | capitalize}}</td>
+								<td class="table_vertical">{{company.contact_email | capitalize}}</td>
+								<td class="table_vertical">{{company.contact_phone}}</td>
+								<td class="table_vertical">{{company.address | capitalize}}</td>
 								<td class="table_vertical">
 									<span>
 										<a style="cursor:pointer;" ng-click="editCompany(company)">
@@ -231,8 +231,8 @@
 						<tbody class="">
 							<tr ng-repeat="client in allClients">
 									<!-- | limitTo:limit -->
-								<td class="table_vertical">{{client.company_name}}</td>
-								<td class="table_vertical">{{client.company_type_name}}</td>
+								<td class="table_vertical">{{client.company_name | capitalize}}</td>
+								<td class="table_vertical">{{client.company_type_name | capitalize}}</td>
 								<td class="table_vertical">
 									<span ng-if="!client.company_super_admin">
 										No
@@ -242,9 +242,9 @@
 									</span>
 								</td>
 								<td class="table_vertical">{{client.activated | boolToYesNo}}</td>
-								<td class="table_vertical">{{client.contact_email}}</td>
+								<td class="table_vertical">{{client.contact_email | capitalize}}</td>
 								<td class="table_vertical">{{client.phone}}</td>
-								<td class="table_vertical">{{client.address}}</td>
+								<td class="table_vertical">{{client.address | capitalize}}</td>
 								<td class="table_vertical">
 									<span>
 										<a style="cursor:pointer;" ng-click="editClient(client)">

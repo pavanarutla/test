@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="notifictaion in getAdminNotifictaions">
-                    <td class="table_vertical">{{notifictaion.message}}</td>
+                    <td class="table_vertical">{{notifictaion.message | capitalize}}</td>
                     <td class="table_vertical">
                         <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" href="#/admin/metro-campaign/{{notifictaion.campaign_id}}">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">

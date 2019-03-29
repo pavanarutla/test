@@ -23,7 +23,7 @@
                 <tbody>
                   <tr ng-repeat="request in requestList.metroCampaignFeeds">
                     <td class="table_vertical">{{request.cid}}</td>
-                    <td class="table_vertical">{{request.name}}</td>
+                    <td class="table_vertical">{{request.name | capitalize}}</td>
                     <td class="table_vertical">
                       <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
                     </td>
@@ -67,7 +67,7 @@
         <tbody>
           <tr  ng-repeat="request in requestList.otherCampaignFeeds">
             <td class="table_vertical">{{request.cid}}</td>
-            <td class="table_vertical">{{request.name}}</td>
+            <td class="table_vertical">{{request.name | capitalize}}</td>
             <td class="table_vertical">
               <span ng-show="request.status == 200">{{request.contact_name}} has requested for a campaign proposal.</span>
               <span ng-show="request.status == 300">{{request.contact_name}} has requested for Quote.</span>
