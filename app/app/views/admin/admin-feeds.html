@@ -14,10 +14,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="Queries in QueriesData | limitTo:limit">
-                      <td>{{Queries.name}}</td>
-                      <td>{{Queries.email}}</td>
-                      <td>{{Queries.subject}}</td>
-                      <td class="">{{Queries.message}}</td>
+                      <td>{{Queries.name | capitalize}}</td>
+                      <td>{{Queries.email | capitalize}}</td>
+                      <td>{{Queries.subject | capitalize}}</td>
+                      <td class="">{{Queries.message | capitalize}}</td>
                       <td>{{Queries.contactno}}</td>
                       <td class="table_vertical">{{Queries.updated_at |timeify | date:'HH:mm a'}}</td>
                     </tr>

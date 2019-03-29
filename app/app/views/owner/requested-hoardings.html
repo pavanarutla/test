@@ -312,14 +312,12 @@
             <tbody>
                 <tr ng-repeat="product in requestedProductList">
                     <td class="image_tdwidth hide-xs">
-                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size">
+                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
                         <p><b>{{product.siteNo}} -
-                                {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing:
-                            {{product.direction|| "N/A" | capitalize}}
-                            <br>Type:
-                            {{product.format_name|| "N/A" | capitalize}}
+                                {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing : {{product.direction|| "N/A" | capitalize}}
+                            <br>Type : {{product.format_name|| "N/A" | capitalize}}
                         </p>
                     </td>
                     <td class="table_vertical">{{product.panelSize}}</td>
