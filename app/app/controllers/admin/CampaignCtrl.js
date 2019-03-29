@@ -383,6 +383,13 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   function getMetroCampaignDetails(metroCampaignId) {
     AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
       $scope.metroCampaignDetails = result;
+      if ($scope.metroCampaignDetails.gst_price != "0") {
+        $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
+        $scope.TOTAL = $scope.metroCampaignDetails.act_budget + parseInt($scope.GST);
+      } else {
+        $scope.GST = "0";
+        $scope.TOTAL = $scope.metroCampaignDetails.act_budget + parseInt($scope.metroCampaignDetails.gst_price);
+      }
     });
   }
   $scope.addPackageInMetroCampaign = function (slots,price) {
@@ -667,7 +674,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   }
   if ($rootScope.currStateName == "admin.metro-campaign") {
     if ($stateParams.metroCampaignId) {
-      getMetroCampaignDetails($stateParams.metroCampaignId);
+      getMetroCampaignDetails($stateParams.metroCampaignId);      
     }
     getMetroCorridors();
     getFormatList({ type: "metro" });
@@ -745,6 +752,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               }, 2500);*/
               addPayment();
               $scope.loadCampaignPayments(cid);
+              $state.reload();
           } else {
               if (result.data.message.constructor == Array) {
                   $scope.updateCampaignPaymentErrors = result.data.message;

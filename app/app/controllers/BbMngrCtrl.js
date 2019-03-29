@@ -1,5 +1,5 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService,
-        CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+        CampaignService, UserService, LocationService, NotificationService, config, $window, $interval,$state) {
 
     /*=================================
      | mdDilalog close function
@@ -14,7 +14,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*=================================
      | mdDilalog close function ends
      =================================*/
-
+     $scope.closeMenuSidenavIfMobile = function(){
+        if($window.innerWidth >=320){
+          $mdSidenav('left').close();
+        }
+      }
+      
 
     $scope.forms = {};
 
@@ -250,8 +255,8 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     //         toastr.error("somthing went wrong please try agin later");
     //     });
     // }
-
-$scope.sendquery = function(query){
+    $scope.query = {};
+$scope.sendQuery = function(query){
         ContactService.sendQuery(query).then(function(result){
             console.log(result);
             if(result.status == 1){
@@ -260,6 +265,8 @@ $scope.sendquery = function(query){
                 toastr.error = result.message;
             }
         });
+        $scope.query = {};
+        $state.reload();
 }
     // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
     //   $scope.feedBackData = response;

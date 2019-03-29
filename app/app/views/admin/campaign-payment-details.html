@@ -101,7 +101,7 @@
                               <div class="form-group row">
                                 <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control md-whiteframe-3dp" name="reference" required="required" id="reference" ng-model="campaignPayment.reference_no">
+                                  <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference" required="required" id="reference" ng-model="campaignPayment.reference_no">
                                   <div ng-messages="forms.campPayment.reference.$error" style="color:red" ng-if="forms.campPayment.reference.$touched">
                                     <div ng-message="required">Reference No is required.</div>
                                   </div>
@@ -212,7 +212,7 @@
                         <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignDetails.total_paid}}</span></p>
                     </div>
                     <div class="">
-                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{TOTALpay}}</span></p>
+                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{TOTALpay || "0"}}</span></p>
                     </div>
                 </div>
             </div>
