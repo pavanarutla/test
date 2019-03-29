@@ -11,7 +11,7 @@
 	 layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
 		<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100"
 		 flex-gt-sm="50" layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-			<table class="table table-striped table-bordered" style="width: 98%;">
+			<table class="table table-striped table-bordered camp_tablewidth">
 				<tbody>
 					<tr>
 						<td><b>Campaign ID</b></td>
@@ -19,11 +19,11 @@
 					</tr>
 					<tr>
 						<td><b>Campaign Name</b></td>
-						<td>{{campaignDetails.name}}</td>
+						<td>{{campaignDetails.name | capitalize}}</td>
 					</tr>
 					<tr>
 						<td><b>Client Name</b></td>
-						<td>{{campaignDetails.first_name || "N/A"}}{{campaignDetails.last_name || "N/A"}}</td>
+						<td>{{campaignDetails.first_name || "N/A" | capitalize}}{{campaignDetails.last_name || "N/A" | capitalize}}</td>
 					</tr>
 					<tr>
 						<td><b>Contact</b></td>
@@ -31,14 +31,14 @@
 					</tr>
 					<tr>
 						<td><b>Email</b></td>
-						<td>{{campaignDetails.email}}</td>
+						<td>{{campaignDetails.email | capitalize}}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column"
 		 layout-gt-sm="column" layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
-			<table class="table table-striped table-bordered" style="width: 98%;">
+			<table class="table table-striped table-bordered camp_tablewidth">
 				<tbody>
 					<tr>
 						<td><b>No of Products</b></td>
@@ -57,7 +57,7 @@
 					<tr>
 						<td><b>Pending payment</b></td>
 						<td>
-							<span ng-if="campaignDetails.pending_payment">Rs.</span>{{Totalamount || "N/A"}}
+							<span ng-if="campaignDetails.pending_payment">Rs.</span>{{PendingPay || "N/A"}}
 						</td>
 					</tr>
 					<tr>
@@ -226,7 +226,7 @@
 					<th></th>
 					<th>Status</th>
 					<th style="text-align:end;">
-						<md-button class="md-raised add_blue" ng-hide="campaignDetails.status >= 700" ng-href="#/location">Add
+						<md-button class="md-raised add_blue" ng-hide="campaignDetails.status >= 400" ng-href="#/location">Add
 							Another Product
 						</md-button>
 					</th>
@@ -235,7 +235,7 @@
 			<tbody>
 				<tr ng-repeat="campaignProduct in campaignDetails.products">
 					<td class="hide-xs image_tdwidth">
-						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" class="requ_size">
+						<img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face" class="requ_size img-thumbnail">
 					</td>
 					<td class="table_address">
 						<p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}} ({{campaignProduct.panelSize}})</b><br>{{campaignProduct.address}}
@@ -249,7 +249,7 @@
 					</td>
 					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>
 					<td class="table_vertical">
-						<a><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
+						<a ng-hide="campaignDetails.status >= 400"><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
 					<td class="table_vertical" >
 						<p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
@@ -264,10 +264,10 @@
 	</div>
 	<!-- table grid end -->
 
-	<div class="d-flex bg-light mb-5" style="min-height:100px">
+	<div class="d-flex bg-light border_quest mb-5" style="min-height:100px">
 		<div class="p-2 col-md-6">
 				<form name="SendComment">
-						<div class=" chat_box ">
+						<div class="chat_box">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
 								<li ng-if="quote_change.type == 'User'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
 								<li ng-if="quote_change.type == 'Admin'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
@@ -301,7 +301,7 @@
 						<input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
 					</div>
 					<!--<md-button class="md-raised md-primary" ng-click="changeQuoteRequest(campaignDetails.id, $event)">Change Quote</md-button>-->
-					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">PAY & LAUNCH CAMPAIGN</md-button>
+					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign</md-button>
 				</div>
 			</div>
 		</div>

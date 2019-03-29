@@ -115,12 +115,12 @@
 						<tbody>
 							<tr>
 								<td><b>Campaign Name</b></td>
-								<td>{{metroCampaignDetails.name}}</td>
+								<td>{{metroCampaignDetails.name | capitalize}}</td>
 							</tr>
 							<tr>
 								<td><b>Client Name</b></td>
-								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.first_name || "N/A"}} {{metroCampaignDetails.user_details.last_name}}</td>
-								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_name || "N/A"}}</td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.first_name || "N/A" | capitalize}} {{metroCampaignDetails.user_details.last_name | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_name || "N/A" | capitalize}}</td>
 							</tr>
 							<tr>
 								<td><b>Contact</b></td>
@@ -129,8 +129,8 @@
 							</tr>
 							<tr>
 								<td><b>Email</b></td>
-								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.email || "N/A"}}</td>
-								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_email || "N/A"}}</td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.email || "N/A" | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_email || "N/A" | capitalize}}</td>
 							</tr>
 						</tbody>
 					</table>

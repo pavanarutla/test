@@ -95,25 +95,24 @@
                                 <li>
                                     <div class="form-group ">
             
-                                        <input ng-model="ownerCampaign.org_contact_refered" name="refered" class="form-control md-whiteframe-3dp"
+                                        <input ng-model="ownerCampaign.org_contact_refered" only-letters-input name="refered" class="form-control md-whiteframe-3dp"
                                             type="text" maxlength="10" required="required" placeholder="Refered By">
                                         <div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
-                                            <div ng-message="required">Refered No is required.</div>
-                                            <div ng-message="maxlength">Refered No must have 10 characters.</div>
+                                            <div ng-message="required">Refered By is required.</div>
+                                            <div ng-message="maxlength">Refered By must have 100 characters.</div>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group">
                                         <input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
-                                            type="text" maxlength="10" required="required" placeholder="Estimated Budget">
+                                            type="text" required="required" placeholder="Estimated Budget">
                                         <div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
-                                            <div ng-message="required">Budget No is required.</div>
-                                            <div ng-message="maxlength">Phone No must have 10 characters.</div>
+                                            <div ng-message="required">Budget is required.</div>
                                         </div>
                                     </div>
                                 </li>
-                                <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveUserCampaign(activeUserCampaigns.id)">
+                                <md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveUserCampaign(activeUserCampaigns.id)" ng-disabled="!ownerCampaign.name">
                                     Create Campaign
                                 </md-button>
                             </div>
@@ -217,7 +216,7 @@
 
                     <tr ng-repeat="activeUserCampaign in activeUserCampaigns | filter : activeUserCampaign.name" ng-if="activeUserCampaign.status == 100 || activeUserCampaign.status == 200">
                         <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
-                        <td class="table_vertical">{{activeUserCampaign.name}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.name | capitalize}}</td>
                         <td class="table_vertical">{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
                         <td class="text-center table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
                         <!-- <td>10,1000</td> -->

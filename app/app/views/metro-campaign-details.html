@@ -428,11 +428,11 @@
 							</tr>
 							<tr>
 								<td><b>Campaign Name</b></td>
-								<td>{{metroCampDetails.name| capitalize}}</td>
+								<td>{{metroCampDetails.name | capitalize}}</td>
 							</tr>
 							<tr>
 								<td><b>Client Name</b></td>
-								<td>{{metroCampDetails.user_details.first_name || "N/A"}}</td>
+								<td>{{metroCampDetails.user_details.first_name || "N/A" | capitalize}}</td>
 							</tr>
 							<tr>
 								<td><b>Contact</b></td>
@@ -440,7 +440,7 @@
 							</tr>
 							<tr>
 								<td><b>Email</b></td>
-								<td>{{metroCampDetails.user_details.email}}</td>
+								<td>{{metroCampDetails.user_details.email | capitalize}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -537,7 +537,7 @@
 				</div>
 				<div class="">
 					<div class="md-grid-item-content hoarding-btn">
-						<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status == 1121">
+						<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status >= 1121">
 							<!-- ng-disabled="!metroCampDetails || metroCampDetails.status > 1101" -->
 							Add Package
 						</md-button>
@@ -675,11 +675,11 @@
 				<tbody>
 					<tr ng-repeat="package in metroCampDetails.packages">
 						<td class="hide-xs image_tdwidth">
-							<img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size">
+							<img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size img-thumbnail">
 						</td>
-						<td class="table_vertical table_address">
-							<p>Corridor Name: {{package.corridor_name || "N/A"}}<br>Duration : {{package.months|| "N/A"}}
-								<br>No of Trains:{{package.selected_trains|| "N/A"}}
+						<td class="table_address">
+							<p><b>Corridor Name : {{package.corridor_name || "N/A"}}</b><br>Duration : {{package.months|| "N/A"}}
+								<br>No of Trains : {{package.selected_trains|| "N/A"}}
 						</td>
 						<td class="table_vertical">
 							{{package.start_date| dateify | date: "dd-MMM-yyyy"}}
@@ -696,42 +696,24 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row" style="border-top: 1px solid #ddd; margin-right:0px;">
-			<div class="col-md-4">
-<!--				<div class="mt-3 ml-2 form-group">
-					<label for="text" class="text_color">Any questions, Please submit below</label>
-					<textarea type="text" ng-model="metroCampDetails.message" class="form-control" id="text" rows="3"></textarea>
-				</div>
-				<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(metroCampDetails.id, metroCampDetails.message)">Submit</button>-->
-
-			</div>
-			<div class="col-md-8" ng-if="metroCampDetails.status < 1121">
-				<div class="mt-3">
-					<md-button class="md-grid-item-content pull-right" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
-						<span>
-							<md-icon md-svg-icon="assets/images/icons/RP.svg"></md-icon>
-						</span>
-						<div class="md-caption">Checkout</div>
-					</md-button>
-				</div>
-			</div>
-			<div class="col-md-8">
+		<div class="row border_quest mr-0 ml-0">
+			<div class="col-12 col-sm-6 col-md-12">
 					<!-- ng-if="metroCampDetails.status >= 1121" -->
 				<!-- ng-if="metroCampDetails.type != 0" -->
-				<div class="mt-3 pull-right" style="font-size: 13px;">
+				<div class="mt-3 pull-right sub_total">
 					<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
 					</p>
-					<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
-						 ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-					<!-- <p class="" style="text-indent: 166px;">Sub Total : <span class="float-right">{{metroCampDetails.subTotal| number : 2}}</span>
-					</p> -->					
+					<p class="text_color" style="text-indent: 173px;"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
+						 ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>					
 					<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
 							TOTAL | number : 2}}</span>
 					</p>
-					<!-- <p><input type="checkbox" ng-model="request_execute"/><span>Request Executive to collect cash / cheque</span> -->
-
-					<!-- <md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, metroCampDetails.id)">Pay & Launch Campaign</md-button></p> -->
 				</div>
+			</div>
+			<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status < 1121">
+				<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
+					<div class="md-caption">Checkout</div>
+				</md-button>
 			</div>
 			<style>
 				.ng-cloak {

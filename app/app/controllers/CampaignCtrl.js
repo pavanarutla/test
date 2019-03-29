@@ -112,6 +112,7 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
         $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
         $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+        $scope.PendingPay = $scope.campaignDetails.totalamount - $scope.campaignDetails.total_paid;
       }
     });
   }

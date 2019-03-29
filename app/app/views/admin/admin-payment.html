@@ -27,7 +27,7 @@
         <tbody>
           <tr ng-repeat="Adminpay in adminpayments | filter : search">
             <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
-            <td>{{Adminpay.name || "N/A"}}</td>
+            <td>{{Adminpay.name || "N/A" | capitalize}}</td>
             <td>{{Adminpay.total_paid}}</td>
             <td class="text-center">{{Adminpay.est_budget - Adminpay.total_paid || "N/A"}}</td>
             <td class="text-center">{{Adminpay.est_budget || "N/A"}}</td>
