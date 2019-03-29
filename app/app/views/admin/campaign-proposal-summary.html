@@ -120,15 +120,15 @@
                         <td>{{(campaignDetails.created_at | date: "dd-MM-yyyy") || "N/A"}}</td>
                     </tr>
                     <tr>
-                        <td><b>Actual Budget</b></td>
+                        <td><b>Total Amount</b></td>
                         <td>
                             <span ng-if="campaignDetails.act_budget">Rs.</span>{{TOTAL| number : 2 || "N/A"}}
                         </td>
                     </tr>
                     <tr>
-                        <td><b>Pending payment</b></td>
+                        <td><b>Pending Amount</b></td>
                         <td>
-                            <span ng-if="campaignDetails.pending_payment">Rs.</span>{{Totalamount || "N/A"}}
+                            <span>Rs.</span>{{PendingPay || "N/A"}}
                         </td>
                     </tr>
                     <tr>
@@ -242,7 +242,7 @@
                     <th class="">Default Price</th>
                     <th class="">Inventory Owner</th>
                     <th class="">Inventory Status</th>
-                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status > 400">Add Another Product</md-button></th>
+                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Another Product</md-button></th>
             </tr>
             </thead>
             <tbody>

@@ -16,22 +16,22 @@
                             <tr>
                                 <td><b>Campaign Name</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name| capitalize}}</td>
-                                <td ng-hide="campaignDetails.type == 2">BillBoards India</td>
+                                <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                             </tr>
                             <tr>
                                 <td><b>Client Name</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
-                                <td ng-hide="campaignDetails.type == 2">BillBoards India</td>
+                                <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                             </tr>
                             <tr>
                                 <td><b>Contact</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
-                                <td ng-hide="campaignDetails.type == 2">+ 91 9550224488</td>
+                                <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
                             </tr>
                             <tr>
                                 <td><b>Email</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email}}</td>
-                                <td ng-hide="campaignDetails.type == 2">reach@billboardsindia.com</td>
+                                <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">reach@billboardsindia.com</td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,13 +56,14 @@
                             </tr>
                             <tr>
                                 <td><b>Pending payment</b></td>
-                                <td ng-hide="campaignDetails.status <= 400">
+                                <td ng-if="campaignDetails.status >= 400">
                                     <span ng-if="campaignDetails.pending_payment">Rs.</span>                                    
-                                    {{campaignDetails.total_paid - campaignDetails.TOTAL}}
+                                    {{PendingPay}}
                                 </td>
-    <!--                                <td ng-hide="campaignDetails.status >= 700">
-                                        "N/A"
-                                    </td>-->
+                                <td ng-if="campaignDetails.status <= 100">
+                                    <span ng-if="campaignDetails.pending_payment">Rs.</span>                                    
+                                    N/A
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>Status</b></td>

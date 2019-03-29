@@ -79,6 +79,10 @@ app.controller('GmapCtrl',
                 /*====================================
                  | Multi date range picker options end
                  ====================================*/
+                 $scope.IsDisabled = true;
+  $scope.EnableDisable = function () {
+    $scope.IsDisabled = $scope.campaign.name.length == 0;
+}
                  $scope.FilterDates = function(booked_from,booked_to){    
                     productList = [];
                     locArr = [];

@@ -404,6 +404,7 @@ $scope.hidebutton = function(){
                 $scope.campaignDetails.gst = result.act_budget * 18 / 100;
                 $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+                $scope.PendingPay = $scope.campaignDetails.totalamount - $scope.campaignDetails.total_paid;
             }
             if ($scope.campaignDetails.gst_price != "0") {
                 $scope.onchecked = true;

@@ -181,10 +181,9 @@ app.controller("CampaignProposalCtrl", function(
                 };
   function loadCampaignPayments(campaignId) {
     if ($scope.campaignDetails.status >= 6) {
-      AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(
-        result
-      ) {
+      AdminCampaignService.getCampaignPaymentDetails(campaignId).then(function(result) {
         $scope.campaignPayments = result;
+        $scope.PendingPay = $scope.campaignPayments.campaign_details.totalamount - $scope.campaignPayments.campaign_details.total_paid;
       });
     } else {
       toastr.error(
