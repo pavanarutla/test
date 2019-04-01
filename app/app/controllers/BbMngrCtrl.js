@@ -258,7 +258,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     $scope.query = {};
 $scope.sendQuery = function(query){
         ContactService.sendQuery(query).then(function(result){
-            console.log(result);
             if(result.status == 1){
                 toastr.success(result.message)
             }else{
@@ -314,7 +313,6 @@ $scope.sendQuery = function(query){
 
     $scope.logout = function () {
         $auth.logout().then(function (result) {
-            // console.log(result);
             $rootScope.isAuthenticated = false;
             $location.path('/');
             localStorage.clear();
@@ -423,13 +421,6 @@ $scope.sendQuery = function(query){
     /*===============================================
      | Custom Filters associated with Angualr's filter
      ===============================================*/
-    // $scope.formatDate = function(format){
-    //   return function(date){
-    //     console.log(date);
-    //     console.log(moment(date).format(format));
-    //   }
-    // }
-
     $rootScope.serverUrl = config.serverUrl;
 
     $scope.close = function () {
@@ -531,7 +522,6 @@ $scope.sendQuery = function(query){
     })
 
     $rootScope.$on("shortListedProducts", function (event, data) {
-        console.log(data)
         $scope.shortListedProductsLength = data
     })
     $scope.getAvatar = function () {

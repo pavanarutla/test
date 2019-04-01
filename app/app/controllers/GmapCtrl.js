@@ -91,7 +91,6 @@ app.controller('GmapCtrl',
                     var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
                     $scope.plottingDone = false;
                     MapService.filterProducts(filterObj).then(function (markers) {
-                        //console.log("filter products",marksers)
                         _.each(markersOnMap, function (v, i) {
                             v.setMap(null);
                             $scope.Clusterer.removeMarker(v);
@@ -104,7 +103,6 @@ app.controller('GmapCtrl',
                             _.each(markersOnMap, function (v, i) {
                                 bounds.extend(v.getPosition());
                             });
-                            // console.log('map object',$scope.mapObj)
                         } else {
                             toastr.error("no marker found for the criteria you selected");
                         }
@@ -572,7 +570,6 @@ app.controller('GmapCtrl',
                     });
 
                     function addNewMarkers(markerData) {
-                        //console.log(markerData)
                         for (var i = 0; i < markerData.product_details.length; i++) {
                             var label = {};
                             label.text = " ";
@@ -603,7 +600,6 @@ app.controller('GmapCtrl',
                         }
                     }
                     function addUniqueMarker(markerData) {
-                        //console.log('markersdata',markerData.product_details[0].symbol)
                         uniqueMarkers.push(markerData.product_details);
                         var latLng = new google.maps.LatLng(markerData._id.lat, markerData._id.lng);
                         var marker = new google.maps.Marker({

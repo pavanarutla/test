@@ -48,7 +48,6 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
         //Removes the Data Type Prefix 
         //And set the view model to the new value
         $scope.data.uploadedPhoto = e.target.result.replace(/data:image\/jpeg;base64,/g, '');
-        // console.log($scope.data.uploadedPhoto);
       }
       //Renders Image on Page
       reader.readAsDataURL(input.files[0]);
@@ -184,12 +183,10 @@ $scope.Getcomment = function (campaignID){
     } else{
       $scope.flag = 1;
     } 
-    //console.log($scope.campaignDetails.products);
     $i = 0;
     angular.forEach($scope.campaignDetails.products, function (value, key) {
       if(value.admin_price) ++$i;
     });
-    console.log($i);
     if($i > 0){
       if($i == $scope.campaignDetails.products.length){
         CampaignService.confirmCampaignBooking(campaignId,$scope.flag,$scope.GST).then(function(result){
@@ -373,7 +370,6 @@ $scope.Getcomment = function (campaignID){
   }
 
   $scope.shareCampaignToEmail = function (ev, shareCampaign,campaignID,campaign_type) {
-    console.log(campaignID);
     $scope.campaignToShare = $scope.campaignDetails;
     var campaignToEmail = {
       // campaign_id: $scope.campaignToShare.id,
