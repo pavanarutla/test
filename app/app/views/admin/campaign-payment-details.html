@@ -149,7 +149,7 @@
                                              <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                                 </div>
                                 <div class="col-sm-4">
-                                  <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                                  <md-button class="md-raised all_button pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                                 </div>
                               </div>
                             <!-- </form> -->
@@ -188,9 +188,9 @@
         </table>
     </div>
     <!-- table grid end -->
-
+    <div class="border_quest mr-0 ml-0 ">
     <div class="d-flex bg-light mb-5" style="min-height:100px">
-        <div class="p-2 col-md-6">
+        <div class="p-2 col-md-4">
             <div class="chat_box">
                 <form action="/action_page.php">
                     <div class="form-group">
@@ -201,19 +201,13 @@
                 </form>
             </div>
         </div>
-        <div class="p-2 col-md-6" >
+        <div class="p-2 col-md-8" >
             <div class="d-flex justify-content-end pt-4 align-self-end">
                 <div layout="column" class="payment_inner">
-                    <div class="">
-                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignDetails.total_amount}}</span></p>
-                    </div>                   
-                    <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-                      <div class="">
-                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignDetails.total_paid}}</span></p>
-                    </div>
-                    <div class="">
-                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{TOTALpay || "0"}}</span></p>
-                    </div>
+                        <p class="font-weight-light" style="text-indent: 53px;">Total : <span class="float-right">{{campaignDetails.total_amount}}</span></p>                 
+                    <p class="text_color" style="text-indent: 6px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+                        <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid}}</span></p>
+                        <p class="" style="font-size: 15px;font-weight: 500;">Balance : <span class="float-right">{{TOTALpay || "0"}}</span></p>
                 </div>
             </div>
         </div>
@@ -230,6 +224,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <script>
