@@ -341,14 +341,14 @@
             <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
             <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
             <div class="contact-block-left">
-              <form name="sendquery" novalidate>
+              <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
                 <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="text" name="name" placeholder="Name" class="form-control" ng-model="query.name" required>
-                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine" class="help-block form_inputnameleft">Your name is required.</p>
+                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine" class="help-block form_inputnameleft" style="color: red;">Your name is required.</p>
                 </div>
                 <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="email" name="email" placeholder="Email" class="form-control" ng-model="query.email" required>
-                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine" class="help-block form_inputnameright">Email Id is required.</p>
+                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine" class="help-block form_inputnameright" style="color: red;">Email Id is required.</p>
                 </div>
                 <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <select ng-model="query.subject" name="Subject" class="form-control">
@@ -358,16 +358,16 @@
                         <option>Campaign</option>
                         <option>Other</option>
                     </select>
-                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine" class="help-block form_inputnameleft">Subject is required.</p>
+                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine" class="help-block form_inputnameleft" style="color: red;">Subject is required.</p>
                 </div>
                 <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
                     <input type="text" name="contact" placeholder="Contact No" class="form-control" ng-model="query.contactno" required>
-                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine" class="help-block form_inputnameright">contact Id is required.</p>
+                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine" class="help-block form_inputnameright" style="color: red;">Contact No. is required.</p>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Text Area" ng-model="query.message" required></textarea>
+                    <textarea class="form-control" placeholder="Text Area" ng-model="query.message"></textarea>
                 </div>
-                <md-button class="all_button"ng-click="sendQuery(query)">Send Message</md-button>
+                <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send Message</md-button>
               </form>
             </div>
         </div>

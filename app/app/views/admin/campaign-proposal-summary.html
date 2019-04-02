@@ -150,6 +150,50 @@
             </div>
         </div>
         <div class="">
+            <div class="dropdown">
+                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font">
+                    Share Campaign
+                </md-button>
+                <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+                    <form name="forms.adminCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="AdminshareCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
+                        </div>
+                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+                        <form name="shareCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name"
+                                     required="required" />
+                                    <div ng-messages="shareCampaignForm.name.$error">
+                                        <div ng-message="required">Name is required.</div>
+                                        <div ng-message="pattern">Enter a valid Name.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email"
+                                     required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                    <div ng-messages="shareCampaignForm.email.$error">
+                                        <div ng-message="required">Email is required.</div>
+                                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                                    </div>
+                                </div>
+                                <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                    <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">Share
+                                        Campaign</md-button>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="">
             <div class="md-grid-item-content hoarding-btn">
                     <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ng-click="downloadOwnerQuote(campaignDetails.id)" download><md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status == 1121">
                     Payment Details
@@ -274,9 +318,9 @@
                     </td>
                     <td class="table_vertical table_price">
                         {{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
-                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" ng-change="getdetails()"/>
                         <span ng-click="myfield = true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
-                        <span ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+                        <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield"> <i class="material-icons">check</i></button>
                     </td>
                     <td class="table_vertical">
                         {{campaignProduct.owner_price|| 'N/A'}}                       
@@ -359,10 +403,7 @@
 
 <!-- </div> -->
 <script>
-    function addPayment() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-    function addPayments() {
-        document.getElementById("myDropdownView").classList.toggle("show");
+    function AdminshareCampaign() {
+        document.getElementById("shareadmincampDrop").classList.toggle("show");
     }
 </script>
