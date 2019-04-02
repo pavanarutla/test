@@ -138,7 +138,6 @@ app.controller("CampaignProposalCtrl", function(
       CampaignService.getCampaignWithProducts(campaignId).then(function(
         result
       ) {
-        console.log(result);
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);

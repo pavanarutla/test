@@ -80,8 +80,6 @@ app.controller('MetroCtrl',
             //$scope.showPackagePopup();
           }
 
-          //console.log($state.current.url);
-
         });
       }
       $scope.monthoptions = [{
@@ -284,7 +282,6 @@ app.controller('MetroCtrl',
             campaign.packages.push(v.package_id);
           });
           MetroService.saveMetroCampaign(campaign).then(function (response) {
-            console.log(response);
             if (response.status == 1) {
               $timeout(function () {
                 $scope.showSaveCampaignPopup = false;
@@ -324,7 +321,6 @@ app.controller('MetroCtrl',
           $scope.flag = 1;
         }
         MetroService.checkoutMetroCampaign(metroCampaignId, $scope.flag, $scope.GST).then((result) => {
-          console.log(result);
           if (result.status == 1) {
             getMetroCampDetails(metroCampaignId);
             getMetroCampaigns();
