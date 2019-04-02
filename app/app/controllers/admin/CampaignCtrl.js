@@ -474,6 +474,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
             else {
               toastr.error(result.message);
             }
+            $scope.closeMdDialog();
           });
         }
         $scope.closeMdDialog = function(){

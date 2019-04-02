@@ -1,14 +1,11 @@
 app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$stateParams,$mdSidenav,toastr,$mdDialog,FileSaver) {  
     $scope.getUserPayment = function(){
         CampaignService.getActiveUserCampaigns().then(function(result){
-            console.log(result);
           $scope.userPayments = result;
         });
     }
     $scope.getCampaignDetails = function(campaignId){
-        console.log(campaignId);
         CampaignService.getPaymentForUserCampaigns(campaignId).then(function(result){
-            console.log(result);
           $scope.UserPaymentDetails = result;
           if(result.status == 0 ){
             $scope.message = result.message;
@@ -19,12 +16,10 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
 
       //share Camp
       $scope.toggleShareCampaignSidenav = function (campaign) {
-        console.log(campaign);
         $scope.currentOwnerShareCampaign = campaign;
         $mdSidenav('shareCampaignSidenav').toggle();
     };
     $scope.shareCampaignToEmail = function (ev, shareCampaign, campaignID) {
-      console.log(campaignID);
       $scope.campaignToShare = $scope.campaignDetails;
       var campaignToEmail = {
           campaign_id: campaignID,

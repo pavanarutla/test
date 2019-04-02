@@ -168,7 +168,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <md-button class="md-raised md-primary register_btn" layout-fill
+                                <md-button class="md-raised md-primary all_button" layout-fill
                                     ng-click="saveUserCampaign(ownerCampaign)">
                                     Create Campaign
                                 </md-button>
@@ -260,9 +260,9 @@
                                         </div>
                                     </div>
                                 </li>
-                                <md-button class="md-raised md-primary cam_btn" layout-fill
+                                <md-button class="md-raised md-primary all_button" layout-fill
                                     ng-click="saveMetroCampaign(metroCampagin)">
-                                    CREATE Metro CAMPAIGN
+                                    Create Metro Campaign
                                 </md-button>
                             </div>
                         </div>
@@ -292,7 +292,7 @@
                         <tbody class="contbg">
                             <tr ng-repeat="pCampaign in plannedCampaigns| filter:search ">
                                 <td class="table_vertical">{{pCampaign.cid}}</td>
-                                <td class="table_vertical">{{pCampaign.name}}</td>
+                                <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
@@ -353,7 +353,7 @@
                         <tbody class="contbg">
                             <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
                                 <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
-                                <td class="table_vertical">{{pCampaign.name}}</td>
+                                <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
@@ -425,7 +425,7 @@
                             <tr ng-repeat="rCampaign in runningCampaigns| filter:search">
                                 <!-- ng-if="campaign.status==6" -->
                                 <td class="table_vertical">{{rCampaign.cid}}</td>
-                                <td class="table_vertical">{{rCampaign.name}}</td>
+                                <td class="table_vertical">{{rCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{rCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
                                 <td class="text-center table_vertical">{{rCampaign.paid|| "N/A"}}</td>
@@ -497,7 +497,7 @@
                             ng-if="cCampaign.status == 1000 || cCampaign.status == 1151">
                             <tr>
                                 <td class="table_vertical">BB-01</td>
-                                <td class="table_vertical">{{cCampaign.name}}</td>
+                                <td class="table_vertical">{{cCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{cCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{cCampaign.product_count|| "0"}}</td>
                                 <td class="text-center table_vertical">{{cCampaign.paid|| "N/A"}}</td>
@@ -568,11 +568,11 @@
                         <tbody class="contbg">
                             <tr ng-repeat="mCampaign in metroCampaigns| filter:search">
                                 <td class="table_vertical">{{mCampaign.cid}}</td>
-                                <td class="table_vertical">{{mCampaign.name}}</td>
+                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{mCampaign.start_date | date:'medium'}}</td>
                                 <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
                                 <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                <td class="text-center table_vertical">{{mCampaign.act_budget}}</td>
+                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
                                 <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
@@ -592,7 +592,7 @@
                                                 <md-button class="pop_view"
                                                     ng-click="deleteMetroCampaigns(mCampaign.id)">
                                                     <div layout="row">
-                                                        <md-icon><i class="material-icons">delete</i></md-icon>
+                                                        <md-icon><i class="material-icons">delete_forever</i></md-icon>
                                                         <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
                                                     </div>
                                                 </md-button>

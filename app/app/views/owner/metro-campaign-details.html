@@ -104,11 +104,11 @@
 						</tr>
 						<tr>
 							<td><b>Campaign Name</b></td>
-							<td>{{metroCampDetails.name}}</td>
+							<td>{{metroCampDetails.name | capitalize}}</td>
 						</tr>
 						<tr>
 							<td><b>Client Name</b></td>
-							<td>{{metroCampDetails.user_details.first_name || "N/A"}} {{metroCampDetails.user_details.last_name}}</td>
+							<td>{{metroCampDetails.user_details.first_name || "N/A" | capitalize}} {{metroCampDetails.user_details.last_name | capitalize}}</td>
 						</tr>
 						<tr>
 							<td><b>Contact</b></td>
@@ -116,7 +116,7 @@
 						</tr>
 						<tr>
 							<td><b>Email</b></td>
-							<td>{{metroCampDetails.user_details.email || "N/A"}}</td>
+							<td>{{metroCampDetails.user_details.email || "N/A" | capitalize}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -244,10 +244,10 @@
 			<tbody>
 				<tr ng-repeat="package in metroCampDetails.packages">
 					<td class="hide-xs image_tdwidth">
-						<img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size">
+						<img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size img-thumbnail">
 					</td>
-					<td class="table_vertical table_address">
-						<p>Corridor Name: {{package.corridor_name || "N/A"}}<br>Duration : {{package.months|| "N/A"}}
+					<td class="table_address">
+						<p><b>Corridor Name: {{package.corridor_name || "N/A"}}</b><br>Duration : {{package.months|| "N/A"}}
 							<br>No of Trains:{{package.selected_trains|| "N/A"}}
 					</td>
 					<td class="table_vertical">
@@ -264,34 +264,26 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="row" style="border-top: 1px solid #ddd; margin-right:0px;">
-		<div class="col-md-4">
-			<!--				<div class="mt-3 ml-2 form-group">
-					<label for="text" class="text_color">Any questions, Please submit below</label>
-					<textarea type="text" ng-model="metroCampDetails.message" class="form-control" id="text" rows="3"></textarea>
-				</div>
-				<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(metroCampDetails.id, metroCampDetails.message)">Submit</button>-->
-
+	<div class="row border_quest mr-0 ml-0">
+		<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status < 1121">
+			<div class="mt-3 pull-right sub_total">
+				<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
+				</p>
+				<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+					ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+				<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+						TOTAL | number : 2}}</span>
+				</p>
+			</div>
 		</div>
-		<div ng-if="metroCampDetails.status < 1121">
-			<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
-			</p>
-			<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
-				 ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-			<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
-					TOTAL | number : 2}}</span>
-			</p>
-		</div>
-		<div class="col-md-8" ng-if="metroCampDetails.status < 1121">
-			<div class="mt-3">
+		<div class="col-md-12" ng-if="metroCampDetails.status < 1121">
 				<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101"
 				 ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">					
 					Checkout
 				</md-button>
-			</div>
 		</div>
-		<div class="col-md-8" ng-if="metroCampDetails.status >= 1121">
-			<div class="mt-3 pull-right" style="font-size: 13px;">
+		<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status >= 1121">
+			<div class="mt-3 pull-right sub_total">
 				<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
 				</p>
 				<p class="text_color" style="text-indent: 161px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>

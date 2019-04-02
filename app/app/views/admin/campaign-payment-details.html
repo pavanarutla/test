@@ -53,7 +53,7 @@
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng" style="margin-top:14px;">
 				<p class="">Campaign Name</p>
-				<p class="md-caption mob_span"><b>{{ campaignDetails.name }}</b></p>
+				<p class="md-caption mob_span"><b>{{ campaignDetails.name | capitalize}}</b></p>
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-top:14px;">
 				<p class="">No of Products</p>
@@ -62,7 +62,7 @@
       <div class="col-xl-6 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:1em;">
                 <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
                 <div class="dropdown" style="float: right;">
-                <md-button class="md-raised all_button" onclick="addPayment()">Add Payment</md-button>
+                <md-button class="md-raised all_button" onclick="addPayment()" ng-hide="campaignDetails.total_paid == campaignDetails.total_amount">Add Payment</md-button>
                 <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
                     <form name="forms.campPayment" role="form" novalidate="novalidate">
                       <div layout="colmun">
