@@ -121,8 +121,8 @@
 							</tr>
 							<tr>
 								<td><b>Client Name</b></td>
-								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.first_name || "N/A" | capitalize}} {{metroCampaignDetails.user_details.last_name | capitalize}}</td>
-								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_name || "N/A" | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.company_name || "N/A" | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_name || "N/A" | capitalize}}</td>
 							</tr>
 							<tr>
 								<td><b>Contact</b></td>
@@ -149,20 +149,20 @@
 						<tbody>
 							<tr>
 								<td><b>Starting From</b></td>
-								<td>{{metroCampaignDetails.start_date | dateify | date:'dd-MM-yyyy' || "N/A"}}</td>
+								<td>{{metroCampaignDetails.created_at | dateify | date:'dd-MM-yyyy' || "N/A"}}</td>
 							</tr>
 							<tr>
-								<td><b>Actual Budget</b></td>
+								<td><b>Total Budget</b></td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{TOTAL || "N/A"}}
+									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{TOTAL || "0"}}
 								</td>
 							</tr>
 							<tr>
 								<td><b>Pending payment</b></td>
 								<td>
-									<span ng-if="!metroCampaignDetails">N/A</span>
+									<span ng-if="!metroCampaignDetails">{{"0"}}</span>
 									<span ng-if="metroCampaignDetails && metroCampaignDetails.act_budget">Rs. {{metroCampaignDetails.pending_payment}}</span>
-									<span ng-if="metroCampaignDetails && !metroCampaignDetails.act_budget">N/A</span>
+									<span ng-if="metroCampaignDetails && !metroCampaignDetails.act_budget">{{"0"}}</span>
 								</td>
 							</tr>
 							<tr>
@@ -183,7 +183,7 @@
 					{{campaignMetroPayments.totalamount}}
 					<div layout="row">
 						<div flex="50" layout="column" layout-align="center center">Total amount:</div>
-						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.campaign_details.totalamount}}</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.campaign_details.totalamount || "0"}}</div>
 					</div>
 					<div layout="row">
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
@@ -323,10 +323,10 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row border_quest mr-0 ml-0 ">
+		<!-- <div class="row border_quest mr-0 ml-0 ">
 			<div class="col-md-12">
-					<!-- ng-if="metroCampDetails.status >= 1121" -->
-				<!-- ng-if="metroCampDetails.type != 0" -->
+					ng-if="metroCampDetails.status >= 1121"
+				ng-if="metroCampDetails.type != 0"
 				<div class="mt-3 pull-right" style="font-size: 13px;">
 					<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
 					</p>
@@ -336,6 +336,39 @@
 					</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<!-- ------------------------------------------------------------------------------- -->
+		<div class="row border_quest mr-0 ml-0">
+				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status < 1121">
+					<div class="mt-3 pull-right sub_total">
+						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
+						</p>
+						<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+							ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+								TOTAL | number : 2}}</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-12" ng-if="metroCampaignDetails.status < 1121">
+						<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampaignDetails.status != 1101"
+						 ng-click="checkoutMetroCampaign($event, metroCampaignDetails.id)">					
+							Checkout
+						</md-button>
+				</div>
+				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121">
+					<div class="mt-3 pull-right sub_total">
+						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
+						</p>
+						<p class="text_color" style="text-indent: 161px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+						<!-- <p class="font-weight-light" style="text-indent: 172px;"><b>Pending : <span class="float-right">{{metroCampaignDetails.pending_payment}}</b></span>
+						</p> -->
+						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+								TOTAL | number : 2}}</span>
+						</p>				
+					</div>
+				</div>
+			</div>
+		<!-- ------------------------------------------------------------------------------------- -->
 	</div>
 </div>
