@@ -1,3 +1,19 @@
+<style>
+    .daterangepicker option.disabled, .daterangepicker td.disabled {
+      color: #fff;
+      cursor: not-allowed;
+      background: #ddd;
+      border: 1px solid #fff;
+      border-radius: 0px;
+      /* text-decoration: line-through; */
+    }
+    .gray-blocked{
+      background:#ddd;
+    }
+    .red-blocked{
+      background:#f00 !important;
+    }
+  </style>
 <!-- <div layout="column" class="owner_hoarding_list">
   <div layout="row" layout-margin class="md-whiteframe-3dp">
     <p class="mb-0 mt-3">Campaign Name:<span class="text_color"> Uber Pvt Ltd</span></p>
@@ -315,13 +331,13 @@
           <tbody>
             <tr ng-repeat="adminprod in productList">
                 <td class="image_tdwidth">
-                <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size">
+                <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size img-thumbnail">
               </td>
               <td class="table_address">
                 <p class=""><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
                   <br> {{adminprod.address}}
-                  <br>Facing:{{adminprod.direction}}
-                  <br>Type:{{adminprod.format_name}}
+                  <br>Facing : {{adminprod.direction}}
+                  <br>Type : {{adminprod.format_name}}
               </td>
               <td class="table_vertical">{{adminprod.impressions}}</td>
               <td class="table_vertical hide-xs">

@@ -74,7 +74,7 @@ app.service('AdminCampaignService',
                     },
                     finalizeCampaignByAdmin: function (campaignId, flag, GST) {
                         var dfd = $q.defer();
-                        $http.get(config.apiPath + '/quote-campaign/' + campaignId + flag + GST).success(dfd.resolve).error(dfd.reject);
+                        $http.get(config.apiPath + '/quote-campaign/' + campaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);              
                         return dfd.promise;
                     },
                     confirmCampaignBooking: function (campaignId) {
@@ -157,7 +157,12 @@ app.service('AdminCampaignService',
                         var dfd = $q.defer();
                         $http.get(config.apiPath + '/download-quote/' + campaignId, {responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
-                    }
+                    },
+                    checkoutMetroCampaign: function(metroCampaignId, flag, GST){
+                        var dfd = $q.defer();
+                        $http.get(config.apiPath + '/checkout-metro-campaign/' + metroCampaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                      },
                 }
             }
         ]

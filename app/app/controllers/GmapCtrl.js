@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr',
-            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr) {
+        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
+            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state) {
                 $scope.forms = {};
                 $scope.address = {
                     // name: 'Hyderabad, Telangana, India',
@@ -79,6 +79,10 @@ app.controller('GmapCtrl',
                 /*====================================
                  | Multi date range picker options end
                  ====================================*/
+                 $scope.IsDisabled = true;
+  $scope.EnableDisable = function () {
+    $scope.IsDisabled = $scope.campaign.name.length == 0;
+}
                  $scope.FilterDates = function(booked_from,booked_to){    
                     productList = [];
                     locArr = [];
@@ -87,7 +91,6 @@ app.controller('GmapCtrl',
                     var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
                     $scope.plottingDone = false;
                     MapService.filterProducts(filterObj).then(function (markers) {
-                        //console.log("filter products",marksers)
                         _.each(markersOnMap, function (v, i) {
                             v.setMap(null);
                             $scope.Clusterer.removeMarker(v);
@@ -100,7 +103,6 @@ app.controller('GmapCtrl',
                             _.each(markersOnMap, function (v, i) {
                                 bounds.extend(v.getPosition());
                             });
-                            // console.log('map object',$scope.mapObj)
                         } else {
                             toastr.error("no marker found for the criteria you selected");
                         }
@@ -314,7 +316,7 @@ app.controller('GmapCtrl',
                             .parent(angular.element(document.querySelector('body')))
                             .clickOutsideToClose(true)
                             .title('Your Campaign is successfully Saved!!!!')
-                            .textContent('You can specify some description text in here.')
+                            //.textContent('You can specify some description text in here.')
                             .ariaLabel('Alert Dialog Demo')
                             .ok('Got it!')
                             .targetEvent(ev)
@@ -436,7 +438,7 @@ app.controller('GmapCtrl',
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $mdSidenav('productDetails').toggle();
                     $scope.selectedProduct = marker;
                 }
@@ -456,7 +458,8 @@ app.controller('GmapCtrl',
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').toggle();
-                    $scope.getProductUnavailableDatesautoload(marker.properties['id']);
+
+                   // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
                 }
 
@@ -567,7 +570,6 @@ app.controller('GmapCtrl',
                     });
 
                     function addNewMarkers(markerData) {
-                        //console.log(markerData)
                         for (var i = 0; i < markerData.product_details.length; i++) {
                             var label = {};
                             label.text = " ";
@@ -598,7 +600,6 @@ app.controller('GmapCtrl',
                         }
                     }
                     function addUniqueMarker(markerData) {
-                        //console.log('markersdata',markerData.product_details[0].symbol)
                         uniqueMarkers.push(markerData.product_details);
                         var latLng = new google.maps.LatLng(markerData._id.lat, markerData._id.lng);
                         var marker = new google.maps.Marker({
@@ -692,6 +693,7 @@ app.controller('GmapCtrl',
                                 //selectedDateRanges = [];
                         getShortListedProducts();
                         $mdSidenav('productDetails').close();
+                        $state.reload();
                     });
                 }
                 function getShortListedProducts() {

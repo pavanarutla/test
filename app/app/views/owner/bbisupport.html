@@ -1,62 +1,3 @@
-<!-- <div class="contbg md-whiteframe-2dp" layout="column" style="margin:10px;">
-    <p class="m-3 ml-4"><b>Please let me know how can we help you</b></p>
-    <div class="row p-4" style="margin-right:0px;">
-            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-7">
-            <form name="bbiSupportforms">
-                <div class="form-group row">
-                    <label for="amount" class="col-sm-3 col-form-label md-body-2">Your Name</label>
-                    <div class="col-sm-8" style="margin-left: -1em !important;">
-                        <input class="form-control md-whiteframe-3dp" ng-model="bbisuport.name" name="name" type="text"
-                            minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/">
-                        <div ng-messages="bbiSupportforms.name.$error" style="color:red" ng-if="bbiSupportforms.name.$touched">
-                            <div ng-message="required">Your Name is required.</div>
-                            <div ng-message="minlength">Your Name must have 3 characters.</div>
-                            <div ng-message="maxlength">Your Name shouldn't exceed 30 characters. </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="concernabout" class="col-sm-3 col-form-label md-body-2">Concern About</label>
-                    <div class="col-sm-8" style="margin-left: -1em !important;">
-                        <select id="concernabout" ng-model="bbisuport.type" required="required" name="dropdown" class="form-control md-whiteframe-3dp">
-                            <option ng-repeat="concernabout in concernabouts" ng-value="{{concernabout.Name}}">{{concernabout.Name}}</option>
-                        </select>
-                        <div ng-messages="bbiSupportforms.dropdown.$error" style="color:red" ng-if="bbiSupportforms.dropdown.$touched">
-                            <div ng-message="required">Please Select any one.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-11">
-                        <textarea class="form-control md-whiteframe-3dp" ng-model="bbisuport.message" rows="5" id="comment"
-                            name="text" placeholder="Type Your Massage"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="amount" class="col-sm-8 col-form-label md-body-2">We'll get back as soon as possible</label>
-                    <div class="col-sm-3">
-                        <md-button class="md-raised pull-right text-white" style="background: #44596c;" ng-click="bbisuportdata(bbisuport)"
-                            ng-disabled="bbiSupportforms.$invalid">Submit</md-button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="offset-md-2 col-md-4">
-            <label><b>Contact US</b></label>
-            <p>Billboards India Pvt Ltd<br>Plot No.1, Whitefields, Hitech City Road<br>Kondapur, Hitech City<br>Hyderabad,
-                Telangana 500084</p>
-            <br>
-            <p>Phone: 040 4123 9999<br>
-                Email for Support / Help : support@billboardsindia.com<br>
-                Email for Sales / Enquiry : reach@billboardsindia.com</p>
-        </div>
-    </div>
-    <div class="ml-5 mr-5">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15224.188419101552!2d78.371947!3d17.4574594!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1537526678384"
-            width="100%" height="297" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-</div> -->
-
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
@@ -65,32 +6,11 @@
         <p class="m-3 ml-4"><b>Please let me know how can we help you</b></p>
         <div class="row p-4" style="margin-right:0px;">
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7">
-                <form>
-                    <div class="form-group row">
-                        <!-- <label for="amount" class="col-sm-3 col-form-label md-body-2">Your Name</label>
-                        <div class="col-sm-8" style="margin-left: -1em !important;">
-                            <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount">
-                        </div> -->
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="text" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Your Name">
-                        </div>
-                    </div>
+                <form name="query">
                     <div class="form-group row">
                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="email" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Email ID">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <input type="Number" class="form-control md-whiteframe-3dp" id="amount" ng-model="campaignPayment.amount"
-                             placeholder="Phone">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <select id="paymentType" ng-model="campaignPayment.type" class="form-control md-whiteframe-3dp">
+                            <select id="paymentType" ng-model="query.type" class="form-control md-whiteframe-3dp">
+                                <option value="" disabled selected>Query*</option>
                                 <option>Payment</option>
                                 <option>Requisted Inventory</option>
                                 <option>Campaign</option>
@@ -100,13 +20,13 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
-                            <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
+                            <textarea class="form-control md-whiteframe-3dp" ng-model="query.querymessage" rows="5" id="comment" name="text" placeholder="Type Your Massage"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="amount" class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-form-label md-caption mt-2">We'll get back as soon as possible</label>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
-                                <md-button class="md-raised pull-right Upload_font" ng-click="updateOwnerCampaignPayment()" >Submit</md-button>
+                                <md-button class="md-raised pull-right Upload_font" ng-click="bbisuportdata(query)" >Submit</md-button>
                         </div>
                     </div>
                 </form>
@@ -125,5 +45,4 @@
         <div class="ml-5 mr-5">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15224.188419101552!2d78.371947!3d17.4574594!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1537526678384" width="100%" height="295" frameborder="0" style="border:0" allowfullscreen></iframe>        
         </div>
-    </div>
 </div>

@@ -227,7 +227,6 @@ $scope.applymethod = function(product) {
     }
   });
 };
-
 // $scope.applymethod = function (product) {
 //   var data = {};
 //   var pageNo = $scope.pagination.pageNo;
@@ -384,6 +383,13 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   function getMetroCampaignDetails(metroCampaignId) {
     AdminMetroService.getMetroCampaignDetails(metroCampaignId).then((result) => {
       $scope.metroCampaignDetails = result;
+      if ($scope.metroCampaignDetails.gst_price != "0") {
+        $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
+        $scope.TOTAL = $scope.metroCampaignDetails.act_budget + parseInt($scope.GST);
+      } else {
+        $scope.GST = "0";
+        $scope.TOTAL = $scope.metroCampaignDetails.act_budget + parseInt($scope.metroCampaignDetails.gst_price);
+      }
     });
   }
   $scope.addPackageInMetroCampaign = function (slots,price) {
@@ -468,6 +474,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
             else {
               toastr.error(result.message);
             }
+            $scope.closeMdDialog();
           });
         }
         $scope.closeMdDialog = function(){
@@ -549,6 +556,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
 //   });
 // }
   $scope.launchMetroCampaign = function (campaignId, ev) {
+    debugger;
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
         $mdDialog.show(
@@ -569,6 +577,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.saveMetroCampaign = function (campaign) {
+    debugger;
     MetroService.saveMetroCampaign(campaign).then(function (response) {
       if (response.status == 1) {
         $scope.campaignSavedSuccessfully = true;
@@ -576,8 +585,8 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         $scope.metroCampaignForm.$setPristine();
         $scope.metroCampaignForm.$setUntouched();
         $scope.campaignSavedSuccessfully = false;
-        toastr.success(response.message);
-        $mdSidenav('metroAddCmapginSidenav').close();
+        toastr.success(response.message);        
+        adminmetroCampaign();
         getMetroCampaigns();
       }
       else {
@@ -585,6 +594,9 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         toastr.error(response.message);
       }
     });
+  }
+  function adminmetroCampaign() {
+    document.getElementById("adminmetroDrop").classList.toggle("show");
   }
   $scope.closeMetroCampaign = function (campaignId) {
     if ($window.confirm("Are you sure you want to close this campaign?")) {
@@ -668,7 +680,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   }
   if ($rootScope.currStateName == "admin.metro-campaign") {
     if ($stateParams.metroCampaignId) {
-      getMetroCampaignDetails($stateParams.metroCampaignId);
+      getMetroCampaignDetails($stateParams.metroCampaignId);      
     }
     getMetroCorridors();
     getFormatList({ type: "metro" });
@@ -685,14 +697,73 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
       }
       //  else {
       //   toastr.error(result.message);
-      // }
+      // }  
     });
   }
-  
+  // $scope.uncheck = function (checked) {
+  //   debugger;
+  //   if (!checked) {
+  //     $scope.onchecked = false;
+  //     $scope.GST = "0";
+  //     $scope.TOTAL = $scope.campaignDetails.total_amount + parseInt($scope.GST);
+  //   } else {
+  //     $scope.onchecked = false;
+  //     $scope.GST = ($scope.campaignDetails.total_amount / 100) * 18;
+  //     $scope.TOTAL = $scope.campaignDetails.total_amount + $scope.GST;
+  //   }
+  // };
+  $scope.uncheck = function (checked) {
+    if (!checked) {
+      $scope.onchecked = false;
+      $scope.GST = "0";
+      $scope.TOTAL = $scope.metroCampaignDetails.act_budget + parseInt($scope.GST);
+    } else {
+      $scope.onchecked = false;
+      $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
+      $scope.TOTAL = $scope.metroCampaignDetails.act_budget + $scope.GST;
+    }
+  };
+  $scope.checkoutMetroCampaign = function (ev, metroCampaignId) {
+    debugger;
+    if ($scope.onchecked === true) {
+      $scope.flag = 1;
+      $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
+    } else if ($scope.onchecked === false) {
+      $scope.flag = 0;
+      $scope.GST = "0";
+    } else {
+      $scope.flag = 1;
+    }
+    AdminCampaignService.checkoutMetroCampaign(metroCampaignId, $scope.flag, $scope.GST).then((result) => {
+      if (result.status == 1) {
+        getMetroCampaignDetails(metroCampaignId);
+        // getMetroCampaigns();
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title(result.message)
+          //.textContent('You can specify some description text in here.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+        );
+      } else {
+        toastr.error(result.message);
+      }
+    });
+  }
    /**********      Payments  */
    if ($rootScope.currStateName == "admin.campaign-payment-details") {
     AdminCampaignService.getCampaignPaymentDetails($stateParams.campaign_id).then(function(result){
       $scope.campaignDetails = result.campaign_details;
+      if ($scope.campaignDetails.gst_price != "0") {
+        $scope.GST = ($scope.campaignDetails.total_amount / 100) * 18;
+        $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+      } else {
+        $scope.GST = "0";
+        $scope.TOTALpay = $scope.campaignDetails.total_amount + parseInt($scope.GST) - $scope.campaignDetails.total_paid;
+      } 
     });
     $scope.loadCampaignPayments($stateParams.campaign_id);    
   }
@@ -727,6 +798,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
               }, 2500);*/
               addPayment();
               $scope.loadCampaignPayments(cid);
+              $state.reload();
           } else {
               if (result.data.message.constructor == Array) {
                   $scope.updateCampaignPaymentErrors = result.data.message;
@@ -785,7 +857,7 @@ $scope.getProductUnavailableDates = function (productId, ev) {
   });
 },
   $scope.downloadAdminQuote = function (campaignId) {
-                    CampaignService.downloadQuote(campaignId).then(function (result) {
+    AdminCampaignService.downloadQuote(campaignId).then(function (result) {
                         var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
                         FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
                         if (result.status) {
@@ -841,25 +913,37 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
           customRangeLabel: 'Custom range'
       },
       isInvalidDate: function (dt) {
-          for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-              if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-                  return true;
-              }
-          }
-      },
-      isCustomDate: function (dt) {
-          for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-              if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-                  if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
-                      return ['red-blocked', 'left-radius'];
-                  } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
-                      return ['red-blocked', 'right-radius'];
-                  } else {
-                      return 'red-blocked';
-                  }
-              }
-          }
-      },
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                return true;
+            }
+        }
+        if(moment(dt) < moment()){
+            return true;
+        }
+    },
+    isCustomDate: function (dt) {
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                    return ['red-blocked', 'left-radius'];
+                } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                    return ['red-blocked', 'right-radius'];
+                } else {
+                    return 'red-blocked';
+                }
+            }
+        }
+        if(moment(dt) < moment()){
+            return 'gray-blocked';
+        }
+    },
+    eventHandlers: {
+        'apply.daterangepicker': function(ev, picker) { 
+            //selectedDateRanges = [];
+            console.log(ev);
+        }
+    }
      
   };
   /*====================================

@@ -1,5 +1,5 @@
 app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, $location, $rootScope, MapService, $auth, toastr, ContactService,
-        CampaignService, UserService, LocationService, NotificationService, config, $window, $interval) {
+        CampaignService, UserService, LocationService, NotificationService, config, $window, $interval,$state) {
 
     /*=================================
      | mdDilalog close function
@@ -14,7 +14,12 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*=================================
      | mdDilalog close function ends
      =================================*/
-
+     $scope.closeMenuSidenavIfMobile = function(){
+        if($window.innerWidth >=320){
+          $mdSidenav('left').close();
+        }
+      }
+      
 
     $scope.forms = {};
 
@@ -232,22 +237,36 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         method: {}
     };
 
+    // $scope.query = {};
+    // $scope.sendQuery = function () {
+    //     debugger;
+    //     ContactService.sendQuery($scope.query).then(function (result) {
+    //         console.log(result);
+    //         if (result.status == 1) {
+    //             toastr.success(result.message);
+    //             $scope.sendQueryErrors = null;
+    //             $scope.query = {};
+    //             $scope.forms.sendQueryForm.$setPristine();
+    //             $scope.forms.sendQueryForm.$setUntouched();
+    //         } else if (result.status == 0) {
+    //             $scope.sendQueryErrors = result.message;
+    //         }
+    //     }, function (error) {
+    //         toastr.error("somthing went wrong please try agin later");
+    //     });
+    // }
     $scope.query = {};
-    $scope.sendQuery = function () {
-        ContactService.sendQuery($scope.query).then(function (result) {
-            if (result.status == 1) {
-                toastr.success(result.message);
-                $scope.sendQueryErrors = null;
-                $scope.query = {};
-                $scope.forms.sendQueryForm.$setPristine();
-                $scope.forms.sendQueryForm.$setUntouched();
-            } else if (result.status == 0) {
-                $scope.sendQueryErrors = result.message;
+$scope.sendQuery = function(query){
+        ContactService.sendQuery(query).then(function(result){
+            if(result.status == 1){
+                toastr.success(result.message)
+            }else{
+                toastr.error = result.message;
             }
-        }, function (error) {
-            toastr.error("somthing went wrong please try agin later");
         });
-    }
+        $scope.query = {};
+        $state.reload();
+}
     // ContactService.getfeedBackData(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
     //   $scope.feedBackData = response;
     // });
@@ -294,7 +313,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
 
     $scope.logout = function () {
         $auth.logout().then(function (result) {
-            // console.log(result);
             $rootScope.isAuthenticated = false;
             $location.path('/');
             localStorage.clear();
@@ -403,13 +421,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*===============================================
      | Custom Filters associated with Angualr's filter
      ===============================================*/
-    // $scope.formatDate = function(format){
-    //   return function(date){
-    //     console.log(date);
-    //     console.log(moment(date).format(format));
-    //   }
-    // }
-
     $rootScope.serverUrl = config.serverUrl;
 
     $scope.close = function () {
@@ -511,7 +522,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     })
 
     $rootScope.$on("shortListedProducts", function (event, data) {
-        console.log(data)
         $scope.shortListedProductsLength = data
     })
     $scope.getAvatar = function () {
