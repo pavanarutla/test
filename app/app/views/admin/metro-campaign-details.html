@@ -253,7 +253,7 @@
 					</md-button>
 				</div>
 				<div class="col-xl-1 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2">
-					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
+					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
 						Update Payment 
 					</md-button>
 				</div>
@@ -356,7 +356,7 @@
 							Checkout
 						</md-button>
 				</div>
-				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121">
+				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121 ">
 					<div class="mt-3 pull-right sub_total">
 						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
 						</p>
