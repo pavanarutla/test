@@ -393,6 +393,7 @@ $scope.applymethod=function(product){
         toastr.success(result.data.message);
       }      
       document.getElementById("myDropdown").classList.toggle("show");
+      $state.reload;
       $scope.product = [];
       product.dates="";
       $scope.hordinglistform.$setPristine();

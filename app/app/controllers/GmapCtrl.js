@@ -4,24 +4,24 @@ app.controller('GmapCtrl',
                 $scope.forms = {};
                 $scope.address = {
                     // name: 'Hyderabad, Telangana, India',
-                    name: 'People tech group hyderabad',
+                    name: 'United States of America',
                     place: '',
                     components: {
-                        placeId: '',
-                        streetNumber: '',
-                        street: '',
-                        city: '',
-                        state: '',
-                        countryCode: '',
-                        country: '',
-                        postCode: '',
-                        district: '',
-                        location: {
-                            lat: 17.3850,
-                            lng: 78.4867
-                        }
+                      placeId: '',
+                      streetNumber: '',
+                      street: '',
+                      city: '',
+                      state: '',
+                      countryCode: '',
+                      country: '',
+                      postCode: '',
+                      district: '',
+                      location: {
+                        lat: 40.254050,
+                        lng: -100.726083
+                      }
                     }
-                };
+                  };
                 $scope.format = 'yyyy/MM/dd';
                 $scope.date = new Date();
                 $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
