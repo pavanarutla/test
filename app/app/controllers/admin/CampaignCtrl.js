@@ -577,6 +577,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.saveMetroCampaign = function (campaign) {
+    console.log(campaign);
     debugger;
     MetroService.saveMetroCampaign(campaign).then(function (response) {
       if (response.status == 1) {
@@ -588,6 +589,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         toastr.success(response.message);        
         adminmetroCampaign();
         getMetroCampaigns();
+        //$window.location.href = '#/{{clientSlug}}/metro-campaign/' + result.metro_camp_id;
       }
       else {
         $scope.saveUserCampaignErrors = response.message;
@@ -652,6 +654,18 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   /*====================================
   | Metro Campaigns end
   ====================================*/
+
+  $scope.downloadOwnerQuote = function (campaignId) {
+    AdminCampaignService.downloadQuote(campaignId).then(function (result) {
+      var campaignPdf = new Blob([result], {
+        type: 'application/pdf;charset=utf-8'
+      });
+      FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+      if (result.status) {
+        toastr.error(result.meesage);
+      }
+    });
+  };
 
   $scope.cancel = function () {
     $mdDialog.hide();
