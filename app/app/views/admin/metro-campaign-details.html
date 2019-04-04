@@ -5,13 +5,26 @@
 	md-list-item {
 		padding: 0 0px !important;
 	}
+	.ul_class{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	.ul_class li{
+		display: inline-block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
 </style>
 <!-- ============ add hoarding list side nav start ============ -->
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="add-metro-product-sidenav" style="width:400px !important">
 	<md-toolbar layout="row">
 		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
 			<h2>
-				<span>Add Product</span>
+				<span>Add Packages</span>
 			</h2>
 			<span flex></span>
 			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()()">
@@ -148,7 +161,7 @@
 					<table class="table table-striped table-bordered camp_tablewidth">
 						<tbody>
 							<tr>
-								<td><b>Starting From</b></td>
+								<td><b>Date</b></td>
 								<td>{{metroCampaignDetails.created_at | dateify | date:'dd-MM-yyyy' || "N/A"}}</td>
 							</tr>
 							<tr>
@@ -173,7 +186,7 @@
 					</table>
 				</div>
 			</div>
-			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay" ng-if="metroCampaignDetails.pending_payment < metroCampaignDetails.act_budget">
 					<!-- ng-if="metroCampaignDetails.pending_payment < metroCampaignDetails.act_budget" -->
 				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
 				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
@@ -247,13 +260,18 @@
 		</div> -->
 		<div class="row" style="margin-left:0px; margin-right:0px;">
 			<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12" style="float: right;">
-				<div class="offset-xl-8 col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1">
+				<div class="offset-xl-7 col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+					<md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampaignDetails.id)" download>					
+							Download Quotation
+					</md-button>
+				</div>
+				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1">
 					<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
-						Add New Product
+						Add Packages
 					</md-button>
 				</div>
 				<div class="col-xl-1 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2">
-					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
+					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 ) || (metroCampaignDetails.type ==1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
 						Update Payment 
 					</md-button>
 				</div>
@@ -268,6 +286,27 @@
 					</md-button>
 				</div>
 			</div>
+			<!-- <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
+					<div class="offset-xl-6">
+					<ul class="ul_class">
+							<li ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0"><md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampaignDetails.id)" download>					
+									Download Quotation
+							</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
+									Add Packages
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+									Launch Campaign
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+									Launch Campaign
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 1141" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
+									Close Campaign
+								</md-button></li>
+						  </ul>
+					</div>
+			</div> -->
 		</div>
 		<div layout="row">
 			<div flex="30">
