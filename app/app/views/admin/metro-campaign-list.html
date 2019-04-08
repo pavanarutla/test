@@ -75,20 +75,20 @@
 				<div class="md-title" layout="row">
 						<div flex></div>
 						<div flex="20">
-								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex class="hide-xs hide-md">
-										<input type="text" ng-model="search" placeholder="Search..." class="md-whiteframe-2dp mr-2"/>
+								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex >
+										<input type="text" ng-model="search" placeholder="Search..." class="hide-xs form-control md-whiteframe-z1" style="border-radius:0px;height:33px;float:right;margin-top: 4px;">
 									</div>
 						</div>
 						<div class="hide-xs" layout="row">
 						  <div flex></div>
 						  <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
 								<div class="dropdown hide-xs">
-										<md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
-										<div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
+										<md-button class="md-raised all_button" onclick="adminmetroCampaign()">Create Campaign</md-button>
+										<div id="adminmetroDrop" class="dropdown-content contbg animated fadeInDown">
 											<form name="metroCampaignForm" role="form" novalidate="novalidate">
 												<div layout="colmun">
 													<span flex></span>
-													<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
+													<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="adminmetroCampaign()">
 														<md-icon class="md-default-theme">
 															<i class="material-icons">close</i>
 														</md-icon>
@@ -130,7 +130,7 @@
 														<li>
 															<div class="form-group ">
 																<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
-																 type="text" required placeholder="Enter Your Mail Id" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
+																 type="text" required placeholder="Enter Your Mail Id" required="required" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)">
 																<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
 																 style="color:red;font-size: 12px;">
 																	<div ng-message="required">Email is required.</div>
@@ -149,7 +149,7 @@
 																</div>
 															</div>
 														</li>
-														<li>
+														<!-- <li>
 															<div class="form-group">
 																<input ng-model="ownerCampaign.act_budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
 																 type="text" maxlength="10" required="required" placeholder="Estimated Budget">
@@ -158,10 +158,10 @@
 																	<div ng-message="maxlength">Phone No must have 10 characters.</div>
 																</div>
 															</div>
-														</li>
+														</li> -->
 													</div>
 												</div>
-												<md-button class="md-raised md-primary register_btn" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.metroCampaignForm.$invalid">
+												<md-button class="md-raised all_button" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.metroCampaignForm.$invalid">
 													Create Campaign
 												</md-button>
 											</form>
@@ -171,7 +171,7 @@
 						</div>
 					  </div>
 			<div style="margin-top: 1em;">
-				<div class="table-responsive" style="height:434px;">
+				<div class="table-responsive">
 					<table class="table ">
 						<thead>
 							<tr class="text_color">
@@ -284,11 +284,16 @@
   <!-- share campaign sidenav ends -->
 </div>
 
-<script>
+<!-- <script>
 	function myFunction() {
 		document.getElementById("myDropdown").classList.toggle("show");
 	}
 	function myFunctions() {
 		document.getElementById("myDropdownView").classList.toggle("show");
 	}
-</script>
+</script> -->
+<script>
+		function adminmetroCampaign() {
+			document.getElementById("adminmetroDrop").classList.toggle("show");
+		}
+	</script>
