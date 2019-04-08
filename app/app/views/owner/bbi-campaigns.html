@@ -1,271 +1,6 @@
-<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerAddCmapginSidenav" style="height: 100vh;">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools" style="background:#414143 !important">
-      <h2>
-        <span>Create Campaign</span>
-      </h2>
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddCamapginSidenav()">
-        <md-tooltip>Close Side Panel</md-tooltip>
-        <md-icon class="md-default-theme">
-          <i class="material-icons">close</i>
-        </md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-content layout-padding="">
-    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
-      <div class="form-group">
-        <label class="control-label">Campaign Name</label>
-        <br>
-        <input ng-model="ownerCampaign.name" name="name" class="form-control" type="text" minlength="3" maxlength="60"
-          required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/">
-        <div ng-messages="forms.ownerCampaignForm.name.$error" style="color:red" ng-if="forms.ownerCampaignForm.name.$touched">
-          <div ng-message="required">Campaign Name is required.</div>
-          <div ng-message="minlength">Campaign Name must have 3 characters.</div>
-          <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
-          <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Organization Name</label>
-        <br>
-        <input ng-model="ownerCampaign.org_name" name="org_name" class="form-control" type="text" minlength="3"
-          maxlength="60" required="required">
-        <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.org_name.$touched">
-          <div ng-message="required">Organization Name is required.</div>
-          <div ng-message="minlength">Organization Name must have 3 characters.</div>
-          <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Contact Name</label>
-        <br>
-        <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control" type="text" required="required">
-        <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.contact_name.$touched">
-          <div ng-message="required">Contact Name is required.</div>
-        </div>
-        <div class="form-group">
-          <label class="control-label">Email:</label>
-          <input ng-model="ownerCampaign.org_contact_email" name="email" class="form-control" type="email" required="required"
-            ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/">
-          <div ng-messages="forms.ownerCampaignForm.email.$error" style="color:red" ng-if="forms.ownerCampaignForm.email.$touched">
-            <div ng-message="required">Email is required.</div>
-            <div ng-message="pattern">Enter a valid EmailId.</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label">Phone Number</label>
-          <br>
-          <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control" type="text"
-            maxlength="10" required="required">
-          <div ng-messages="forms.ownerCampaignForm.phone.$error" style="color:red" ng-if="forms.ownerCampaignForm.phone.$touched">
-            <div ng-message="required">Phone No is required.</div>
-            <div ng-message="maxlength">Phone No must have 10 characters.</div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Start date</label>
-        <md-datepicker ng-model="ownerCampaign.start_date" onkeydown="return false" md-placeholder="Enter date"
-          md-min-date="minStartDate" ng-init="ownerCampaign.start_date = defaultStartDate" ng-change="updateEndDateValidations()"></md-datepicker>
-        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="forms.ownerCampaignForm.start_date.$touched">
-          <div ng-message="required">Start date is required.</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div flex-gt-xs="">
-          <label>End date</label>
-          <md-datepicker ng-model="ownerCampaign.end_date" onkeydown="return false" md-placeholder="Enter date"
-            md-min-date="minEndDate"></md-datepicker>
-        </div>
-        <div ng-messages="forms.ownerCampaignForm.end_date.$error" ng-if="forms.ownerCampaignForm.end_date.$touched">
-          <div ng-message="required">End date is required.</div>
-        </div>
-      </div>
-      </div>
-      </div>
-      <div ng-repeat="campError in ownerCampaignErrors" ng-if="ownerCampaignErrors.length > 0" style="color:red">
-        {{campError}}
-      </div>
-      <div class="form-group" style="margin:10px 0">
-        <label class="col-md-3 control-label"></label>
-        <input class="btn btn-primary" ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid"
-          value="Save" type="button">
-        <span></span>
-        <input class="btn btn-default" ng-click="toggleAddCamapginSidenav()" value="Cancel" type="reset">
-      </div>
-    </form>
-  </md-content>
-</md-sidenav> -->
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
-
     <div layout="colmun" layout-align="end center" class="campaign_search hide-xs">
         <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp mt-3 mr-2" style="width:30%;padding: 4px;" />
-        <!-- <div id="CampaignSsearchInput" layout-align="center start" layout="column" flex>
-          <md-autocomplete ng-disabled="isDisabled" md-selected-item="campaignSelectedItem" md-search-text-change="campaignSearchTextChange(campaignSearchText)"
-            md-search-text="campaignSearchText" md-selected-item-change="viewSelectedCampaign(campaign)" md-items="campaign in campaignSearch(campaignSearchText)"
-            md-item-text="campaign.name" md-min-length="4" placeholder="Search..." style="width:98%; margin-top:5px;" md-clear-button="true">
-            <md-item-template>
-              <span class="item-title">
-                <span> {{campaign.name}} </span>
-              </span>
-              <span class="item-metadata">
-                <span>
-                  <strong>{{campaign.first_name}} {{campaign.last_name}}</strong>
-                </span>
-                <span>
-                  <strong>{{campaign.email}}</strong>
-                </span>
-                <span>
-                  <strong>{{campaign.phone}}</strong>
-                </span>
-              </span>
-            </md-item-template>
-            <md-not-found>
-              No matches found.
-            </md-not-found>
-          </md-autocomplete>
-        </div> -->
-        <!-- <md-button class="md-raised md-warn" ng-click="toggleAddCamapginSidenav()">
-                CREATE CAMPAIGN
-            </md-button> -->
-        <!-- <div class="dropdown">
-          <md-button class="md-raised md-primary" onclick="myFunction()" class="dropbtn">CREATE CAMPAIGN</md-button>
-          <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
-            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
-              <div layout="colmun">
-                <span flex></span>
-                <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
-                  <md-icon class="md-default-theme">
-                    <i class="material-icons">close</i>
-                  </md-icon>
-                </md-button>
-              </div>
-              <h3 class="md-body-2">Great,</h3>
-              <h3 class="md-title">Let's start Campaign</h3>
-              <li>
-                <div class="form-group ">
-    
-                  <input ng-model="ownerCampaign.name" name="name" class="form-control md-whiteframe-3dp" type="text"
-                    minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/"
-                    placeholder="Campaign Name">
-                  <div ng-messages="forms.ownerCampaignForm.name.$error" style="color:red" ng-if="forms.ownerCampaignForm.name.$touched">
-                    <div ng-message="required">Campaign Name is required.</div>
-                    <div ng-message="minlength">Campaign Name must have 3 characters.</div>
-                    <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
-                    <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="form-group ">
-    
-                  <input ng-model="ownerCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
-                    minlength="3" maxlength="60" required="required" placeholder="Organization Name">
-                  <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.org_name.$touched">
-                    <div ng-message="required">Organization Name is required.</div>
-                    <div ng-message="minlength">Organization Name must have 3 characters.</div>
-                    <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="form-group">
-    
-                  <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control  md-whiteframe-3dp"
-                    type="text" required="required" placeholder="Contact Name">
-                  <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.contact_name.$touched">
-                    <div ng-message="required">Contact Name is required.</div>
-                  </div>
-                  <h3 class="md-body-2">Great,</h3>
-                  <h3 class="md-title">Let's start Campaign</h3>
-                  <li>
-                    <div class="form-group ">
-        
-                      <input ng-model="ownerCampaign.name" name="name" class="form-control md-whiteframe-3dp" type="text"
-                        minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/"
-                        placeholder="Campaign Name">
-                      <div ng-messages="forms.ownerCampaignForm.name.$error" style="color:red" ng-if="forms.ownerCampaignForm.name.$touched">
-                        <div ng-message="required">Campaign Name is required.</div>
-                        <div ng-message="minlength">Campaign Name must have 3 characters.</div>
-                        <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
-                        <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group ">
-        
-                      <input ng-model="ownerCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
-                        minlength="3" maxlength="60" required="required" placeholder="Organization Name">
-                      <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.org_name.$touched">
-                        <div ng-message="required">Organization Name is required.</div>
-                        <div ng-message="minlength">Organization Name must have 3 characters.</div>
-                        <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group">
-        
-                      <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control  md-whiteframe-3dp"
-                        type="text" required="required" placeholder="Contact Name">
-                      <div ng-messages="forms.ownerCampaignForm.org_name.$error" style="color:red" ng-if="forms.ownerCampaignForm.contact_name.$touched">
-                        <div ng-message="required">Contact Name is required.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group ">
-        
-                      <input ng-model="ownerCampaign.org_contact_email" name="email" class="form-control md-whiteframe-3dp"
-                        type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-                        placeholder="Email">
-                      <div ng-messages="forms.ownerCampaignForm.email.$error" style="color:red" ng-if="forms.ownerCampaignForm.email.$touched">
-                        <div ng-message="required">Email is required.</div>
-                        <div ng-message="pattern">Enter a valid EmailId.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group ">
-        
-                      <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric class="form-control md-whiteframe-3dp"
-                        type="text" maxlength="10" required="required" placeholder="Phone Number">
-                      <div ng-messages="forms.ownerCampaignForm.phone.$error" style="color:red" ng-if="forms.ownerCampaignForm.phone.$touched">
-                        <div ng-message="required">Phone No is required.</div>
-                        <div ng-message="maxlength">Phone No must have 10 characters.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group ">
-        
-                      <input ng-model="ownerCampaign.org_contact_refered" name="refered" only-numeric class="form-control md-whiteframe-3dp"
-                        type="text" maxlength="10" required="required" placeholder="Refered By">
-                      <div ng-messages="forms.ownerCampaignForm.refered.$error" style="color:red" ng-if="forms.ownerCampaignForm.refered.$touched">
-                        <div ng-message="required">Refered No is required.</div>
-                        <div ng-message="maxlength">Refered No must have 10 characters.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-group">
-                      <input ng-model="ownerCampaign.org_contact_Budget" name="Budget" only-numeric class="form-control  md-whiteframe-3dp"
-                        type="text" maxlength="10" required="required" placeholder="Estimated Budget">
-                      <div ng-messages="forms.ownerCampaignForm.Budget.$error" style="color:red" ng-if="forms.ownerCampaignForm.Budget.$touched">
-                        <div ng-message="required">Budget No is required.</div>
-                        <div ng-message="maxlength">Phone No must have 10 characters.</div>
-                      </div>
-                    </div>
-                  </li>
-                  <md-button class="md-raised md-primary" layout-fill ng-click="saveOwnerCampaign()" ng-disabled="forms.ownerCampaignForm.$invalid">
-                    CREATE CAMPAIGN
-                  </md-button>
-                </form>
-              </div>
-            </div> -->
     </div>
     <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
         <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
@@ -290,8 +25,8 @@
                         <tbody class="" ng-repeat="campaign in plannedCampaigns| filter:search">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
-                                <td class="text-left table_vertical">{{campaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{campaign.created_at| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+                                <td class="text-left table_vertical">Billboards India</td>
+                                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                                 <td class="text-center table_vertical">{{campaign.no_products|| "0"}}</td>
                                 <!--<td class="table_vertical hide-xs">{{campaign.total_paid|| "0"}}</td>-->
                                 <!-- <td class="table_vertical hide-xs">{{campaign.est_budget|| "0"}}</td> -->
@@ -356,7 +91,7 @@
                         <tbody class="" ng-repeat="campaign in scheduledCampaigns| filter:search">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
-                                <td class="text-left table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="text-left table_vertical">Billboards India</td>
                                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                                 <td class="text-center table_vertical">{{campaign.no_products|| "0"}}</td>
                                 <td class="text-center table_vertical">{{campaign.total_paid|| "0"}}</td>
@@ -423,7 +158,7 @@
                         <tbody class="" ng-repeat="campaign in scheduledCampaigns| filter:search">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
-                                <td class="text-left table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="text-left table_vertical">Billboards India</td>
                                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                                 <td class="text-center table_vertical">{{campaign.no_products|| "0"}}</td>
                                 <td class="text-center table_vertical">{{campaign.total_paid|| "0"}}</td>
@@ -450,14 +185,14 @@
                                         </div>
                                     </md-button>
                                 </md-menu-item>
-                                <md-menu-item>
-                                    <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
+<!--                                <md-menu-item>
+                                   <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                             <p style="margin:auto 10px auto 10px">Payment Details</p>
                                         </div>
                                     </md-button>
-                                </md-menu-item>
+                                </md-menu-item>-->
                             </md-menu-content>
                         </md-menu>
                         </td>
@@ -489,7 +224,7 @@
                         <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns| filter:search" ng-if="campaign.status == 900 || campaign.status == 1000" >
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
-                                <td class="text-left table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="text-left table_vertical">Billboards India</td>
                                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
                                 <td class="text-center table_vertical">{{campaign.no_products|| "0"}}</td>
                                 <td class="text-center table_vertical">{{campaign.total_paid|| "0"}}</td>
@@ -516,14 +251,14 @@
                                         </div>
                                     </md-button>
                                 </md-menu-item>
-                                <md-menu-item>
+<!--                                <md-menu-item>
                                     <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                             <p style="margin:auto 10px auto 10px">Payment Details</p>
                                         </div>
                                     </md-button>
-                                </md-menu-item>
+                                </md-menu-item>-->
                             </md-menu-content>
                         </md-menu>
                         </td>
@@ -577,10 +312,10 @@
 </div>
 
 <script>
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-            function myFunctions() {
-                document.getElementById("myDropdownView").classList.toggle("show");
-            }
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    function myFunctions() {
+        document.getElementById("myDropdownView").classList.toggle("show");
+    }
 </script>

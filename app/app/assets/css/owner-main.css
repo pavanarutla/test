@@ -2,10 +2,18 @@
 html,body{
     font-family: 'Roboto',sans-serif;
     font-size: 12px;
-    height: 100%;
+    height: 100vh;
     margin: 0px;
     padding: 0px;
 }
+/* body{
+	-webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+} */
 body a{
 	text-decoration:none;
 }
@@ -144,8 +152,11 @@ md-menu-item>.md-button {
     -moz-osx-font-smoothing: grayscale;
 }
 .requ_size{
-    width: 158px;
+    /* width: 158px;
     height: 99px;
+    border-radius: 2px; */
+    width: 218px;
+    height: 109px;
     border-radius: 2px;
 }
 .md-button {
@@ -168,6 +179,11 @@ md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
     color: #BC2535;
     background: #BC2535;
 }
+/* Css to disable  */
+.md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled] {
+    cursor: not-allowed;
+}
+/* Css to disable  */
 /* scroll bar coustam css start*/
 
 .scrollbar__style::-webkit-scrollbar {
@@ -241,10 +257,9 @@ md-autocomplete input:not(.md-input) {
     height: 32px;
 }
 .sign_bgcolor {
-    background: #BC2535;
+   background: #bc2535c2;
+    height: 100vh;
     width: 100%;
-    height: 96vh;
-    margin-bottom: -97.5px;
 }
 .form_width{
     max-width: 470px !important;
@@ -256,11 +271,31 @@ md-autocomplete input:not(.md-input) {
     border-radius:0px;
     margin-top: 100px;
 }
+#myBtn {
+    display: none;
+    cursor: pointer;
+        width: 34px;
+      height: 34px;
+      background: url(/assets/images/move-top.png) no-repeat;
+      position: fixed;
+      bottom: 4%;
+      right: 2%;
+      z-index: 99;
+  }
+  .camp_tablewidth{
+    width: 98%;
+  }
 .all_button {
     min-height: 30px;
     line-height: 30px;
     border-radius: .25rem !important;
     background: #BC2535 !important;
+    color: #fff !important;
+}
+.all_gary {
+    min-height: 30px;
+    line-height: 30px;
+    border-radius: .25rem !important;
     color: #fff !important;
 }
 .payment_yellow{
@@ -321,7 +356,6 @@ md-autocomplete input:not(.md-input) {
     min-height: 30px;
     line-height: 30px;
     border-radius: .25rem !important;
-    margin:0px;
 }
 .edit_details{
     background-color:#858A8E !important;
@@ -359,6 +393,20 @@ ul.dropdown-menu li {
 	padding: 0;
 	background: #fff;
 }
+.border_quest{
+    border-top: 1px solid #ddd;
+    margin-right: 0px;
+}
+.sub_total{
+    font-size: 13px;
+    margin-right: 5px;
+}
+.booked_total{
+    margin-right: -2px;
+}
+.metro_cmpnew{
+    margin-top:30px;
+}
 .lnr {
 	color:#fff;
 }
@@ -366,10 +414,16 @@ i.fa.fa-bell{
 	color:#fff;
 }
 
-.metro_btn{
+/* .metro_btn{
     background: #F9F9F9;
     font-size: 12px;
     margin-top: 6px;
+} */
+.metro_btn {
+    /* background: #F9F9F9; */
+    font-size: 12px;
+    margin-top: 10px !important;
+    /* color: #000 !important; */
 }
 ul.dropdown-menu {
     padding: 7px;
@@ -825,6 +879,30 @@ table {
   }
 
 /*============== Requested Hoarding End ==============*/
+.chat_box ul li{
+    list-style: none;
+}
+.chat_box ul{
+    padding: 0px
+}
+.chat_box .chat__li{
+    margin-left: 20px;
+}
+.user_dec {
+    background: #980000;
+    padding: 5px;
+    margin-right: 5px;
+    color: #fff;
+    font-weight: 600;
+}
+.user_bi {
+    background: #44596d;
+    padding: 5px;
+    color: #fff;
+    font-weight: 600;
+    margin-right: 5px;
+    /* margin-left: 20px; */
+}
 
 /*======================
     Admin css start
@@ -954,8 +1032,45 @@ table {
         margin-bottom: 1rem;
         background-color: transparent;
     }
+    .table_user {
+        width: 100%;
+        max-width: 100%;
+    }
+    .cancel_mob{
+        margin-top: -50px;
+        margin-left: 1px;
+    }
+    .camp_tablewidth {
+        width: 95% !important;
+    }
+    .metro_cmpnew{
+        margin-top:0px !important;
+    }
+    .owner__sidenav{
+        margin-top: 56px !important;
+    }
     .product_detailes{
         margin-top:10px;
+    }
+    md-menu-bar.user_mob {
+        margin-right: -5px;
+    }
+    .md-button.md-icon-button.noti_btn {
+        margin: 0 -24px;
+    }
+    .user_logo{
+        margin-left:0% !important;
+    }
+    .user_menubar{
+        padding: 0 0px;
+    }
+    .main-menu .metro-btn {
+        margin-top: 20px;
+        padding: 0px;
+        min-width: 18px !important;
+    }
+    .comment_mob{
+        padding-right: 0px;
     }
     .hide-xs{
         display: none
@@ -1113,9 +1228,9 @@ table {
         width: 45%;
         z-index: 1 !important;
     }
-    .Upload_font{
+    /* .Upload_font{
         font-size: 9px;
-    }
+    } */
     .form_editmargin{
         margin-top:10px;
     }
@@ -1181,12 +1296,25 @@ table {
     }
     
 }
+@media screen and (min-width:320px) and (max-width: 407px){
+.hide-browse{
+    display: none ;
+    }
+}
+@media screen and (min-width:600px) and (max-width: 640px){
+    .hide-browse{
+        display: none ;
+        }
+    }
 @media screen and (min-width:576px) and (max-width: 767px){
     .hide-sm{
         display: none ;
     } 
     .hide-md{
         display: none;
+    }
+    .owner__sidenav{
+        margin-top: 56px !important;
     }
     /* .second-method p {
         float: left;
@@ -1202,19 +1330,28 @@ table {
     .md-tab {
         padding: 12px 11px;
     }
+    .contant_drop{
+        margin-right: -235px;
+    }
 }
-@media screen and (min-width:768px){
+/* @media screen and (min-width:768px){
     .hide-gt-sm{
         display: none;
     }
     
-}
+} */
 @media screen and (min-width:768px) and (max-width:  991px){
     .hide-md{
         display: none;
     }
+    .owner__sidenav{
+        margin-top: 56px !important;
+    }
     .add_font{
         font-size: 11px;
+    }
+    .contant_drop{
+        margin-right: -235px;
     }
     .requested_image {
         /* width: 200px; */
@@ -1250,7 +1387,7 @@ table {
         padding: 12px 24px;
     }
 }
-@media screen and (min-width:992px){
+@media screen and (min-width:960px){
     .hide-gt-md{
         display: none;
     }

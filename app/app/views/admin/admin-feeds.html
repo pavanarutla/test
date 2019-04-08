@@ -6,15 +6,19 @@
                     <tr>
                         <th>Name</th>
                         <th class="">Email ID</th>
+                        <th>Subject</th>
                         <th class="">Comments</th>
-                        <th class="">Action</th>
+                        <th>Contact No.</th>
+                        <th class="">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="Queries in QueriesData | limitTo:limit">
-                      <td>{{Queries.name}}</td>
-                      <td>{{Queries.email}}</td>
-                      <td class="">{{Queries.message}}</td>
+                      <td>{{Queries.name | capitalize}}</td>
+                      <td>{{Queries.email | capitalize}}</td>
+                      <td>{{Queries.subject | capitalize}}</td>
+                      <td class="">{{Queries.message | capitalize}}</td>
+                      <td>{{Queries.contactno}}</td>
                       <td class="table_vertical">{{Queries.updated_at |timeify | date:'HH:mm a'}}</td>
                     </tr>
                   </tbody>

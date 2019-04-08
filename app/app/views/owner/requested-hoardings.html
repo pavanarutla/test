@@ -1,18 +1,21 @@
 <style>
-.daterangepicker option.disabled, .daterangepicker td.disabled {
-    color: #fff;
-    cursor: not-allowed;
-    background: #ddd;
-    border: 1px solid #fff;
-    border-radius: 0px;
-    /* text-decoration: line-through; */
-  }
-  .gray-blocked{
-    background:#ddd;
-  }
-  .red-blocked{
-    background:#f00 !important;
-  }
+    .daterangepicker option.disabled,
+    .daterangepicker td.disabled {
+        color: #fff;
+        cursor: not-allowed;
+        background: #ddd;
+        border: 1px solid #fff;
+        border-radius: 0px;
+        /* text-decoration: line-through; */
+    }
+
+    .gray-blocked {
+        background: #ddd;
+    }
+
+    .red-blocked {
+        background: #f00 !important;
+    }
 </style>
 <div class="">
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
@@ -20,7 +23,7 @@
 </md-button>
 <div class="">
     <div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
-        <div flex></div>		
+        <div flex></div>
         <!-- Add New Product -->
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product</md-button>
@@ -34,7 +37,8 @@
                             </md-icon>
                         </md-button>
                     </div>
-                    <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add new
+                    <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add
+                            new
                             product</span></h3>
                     <br>
                     <li>
@@ -47,7 +51,8 @@
                                             required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
                                     <div ng-messages="hordinglistform.siteNo.$error" ng-if="hordinglistform.siteNo.$touched" style="color:red">
                                         <div ng-message="required">Product Id is required.</div>
-                                        <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
+                                        <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - .
+                                            symbols.</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -132,7 +137,7 @@
                                         <div ng-message="required">width*.</div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
@@ -263,7 +268,7 @@
                                         <option value="" disabled selected>Targeted Audience</option>
                                         <option>College Students</option>
                                         <option>ABC</option>
-                                        <option>XYZ</option>									
+                                        <option>XYZ</option>
                                     </select required>
                                 </div>
                                 <div class="col-sm-6">
@@ -280,7 +285,9 @@
                                     * Select only booked dates remaining dates consider as available
                                 </div>
                                 <div class="col-sm-4">
-                                    <md-button type="submit" Class="md-raised md-primary register_btn" ng-click="requestAddProduct(product)" ng-disabled="hordinglistform.$invalid">Submit</md-button>
+                                    <md-button type="submit" Class="md-raised md-primary register_btn"
+                                        ng-click="requestAddProduct(product)" ng-disabled="hordinglistform.$invalid">
+                                        Submit</md-button>
 
                                     <!-- <md-button class="md-raised md-primary all_button text-white pull-right" ng-click="requestAddProduct(product)" ng-disabled="hordinglistform.$invalid"
                                                >Submit</md-button> -->
@@ -290,76 +297,65 @@
                     </li>
                 </form>
             </div>
-        </div>	
+        </div>
         <!-- Add New Product End -->
     </div>
-</div>
-<div class="table-responsive">
-    <table class="table">
-        <thead class="text_color">
-            <tr>
-                <th>Product Details</th>
-                <th class="hide-xs"></th>
-                <th class="">Size</th>
-                <th class="">Views</th>
-                <th class="">Lit</th>
-                <th class="">Price</th>
-                <th class="text-center">Calender</th>
-                <th class=""></th>
-                <th class=""></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in requestedProductList">
-                <td class="image_tdwidth hide-xs">
-                    <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size">
-                </td>
-                <td class="table_address">
-                    <p><b>{{product.siteNo}} - {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing:
-                        {{product.direction|| "N/A" | capitalize}}
-                        <br>Type:
-                        {{product.format_name|| "N/A" | capitalize}}
-                    </p>
-                </td>
-                <td class="table_vertical">{{product.panelSize}}</td>
-                <td class="table_vertical">{{product.impressionsperweek}}</td>
-                <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
-                <td class="table_vertical" ng-if="product.lighting == 0">No</td>
-                <td class="table_vertical">{{product.default_price}}</td>
-                <td class="text-center table_vertical">
-                    <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker"
-                           placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
-                           style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <a ng-click="getProductUnavailableDates(product.id,$event);">
-                        <i class="material-icons">
-                            calendar_today
-                        </i>
-                    </a>
-                </td>
-                <td class="table_vertical"></td>
-                <td class="text-right table_vertical">
-                    <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button" class="btn edit_details">Edit
-                            Details</button></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-
-
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Product Details</th>
+                    <th class="hide-xs"></th>
+                    <th class="">Size</th>
+                    <th class="">Views</th>
+                    <th class="">Lit</th>
+                    <th class="">Price</th>
+                    <th class="text-center">Calender</th>
+                    <th class=""></th>
+                    <th class=""></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in requestedProductList">
+                    <td class="image_tdwidth hide-xs">
+                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+                    </td>
+                    <td class="table_address">
+                        <p><b>{{product.siteNo}} -
+                                {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing : {{product.direction|| "N/A" | capitalize}}
+                            <br>Type : {{product.format_name|| "N/A" | capitalize}}
+                        </p>
+                    </td>
+                    <td class="table_vertical">{{product.panelSize}}</td>
+                    <td class="table_vertical">{{product.impressionsperweek}}</td>
+                    <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
+                    <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+                    <td class="table_vertical">{{product.default_price}}</td>
+                    <td class="text-center table_vertical">
+                        <input date-range-picker ng-model="product.dates"
+                            class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text"
+                            name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
+                            style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                        <a ng-click="getProductUnavailableDates(product.id,$event);">
+                            <i class="material-icons">
+                                calendar_today
+                            </i>
+                        </a>
+                    </td>
+                    <td class="table_vertical"></td>
+                    <td class="text-right table_vertical">
+                        <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button"
+                                class="btn edit_details">Edit
+                                Details</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<!-- <script>
-        function addPayment() {
-                document.getElementById("myDropdown").classList.toggle("show");
-        }
-        function addPayments() {
-                document.getElementById("myDropdownView").classList.toggle("show");
-        }
-</script> -->
 <script>
-            function addnewProduct() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
+    function addnewProduct() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 </script>

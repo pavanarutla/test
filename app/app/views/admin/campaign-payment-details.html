@@ -53,15 +53,16 @@
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng" style="margin-top:14px;">
 				<p class="">Campaign Name</p>
-				<p class="md-caption mob_span"><b>{{ campaignDetails.name }}</b></p>
+				<p class="md-caption mob_span"><b>{{ campaignDetails.name | capitalize}}</b></p>
 			</div>
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-top:14px;">
 				<p class="">No of Products</p>
 				<p class="md-caption mob_span mob_5"><b>{{ campaignDetails.no_of_products }}</b></p>
 			</div>
-            <div class="offset-xl-4 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:1.2em;text-align: end">
+      <div class="col-xl-6 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:1em;">
                 <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
-                <md-button class="md-raised all_button" onclick="addPayment()">Add Payment</md-button>
+                <div class="dropdown" style="float: right;">
+                <md-button class="md-raised all_button" onclick="addPayment()" ng-hide="campaignDetails.total_paid == campaignDetails.total_amount">Add Payment</md-button>
                 <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
                     <form name="forms.campPayment" role="form" novalidate="novalidate">
                       <div layout="colmun">
@@ -100,7 +101,7 @@
                               <div class="form-group row">
                                 <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control md-whiteframe-3dp" name="reference" required="required" id="reference" ng-model="campaignPayment.reference_no">
+                                  <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference" required="required" id="reference" ng-model="campaignPayment.reference_no">
                                   <div ng-messages="forms.campPayment.reference.$error" style="color:red" ng-if="forms.campPayment.reference.$touched">
                                     <div ng-message="required">Reference No is required.</div>
                                   </div>
@@ -148,7 +149,7 @@
                                              <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
                                 </div>
                                 <div class="col-sm-4">
-                                  <md-button class="md-raised md-primary pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
+                                  <md-button class="md-raised all_button pull-right text-white" ng-click="updateCampaignPayment(campaignDetails.id)">Submit</md-button>
                                 </div>
                               </div>
                             <!-- </form> -->
@@ -156,6 +157,7 @@
                         </div>
                       </li>
                     </form>
+                  </div>
                   </div>
             </div>
 		</div>
@@ -186,9 +188,9 @@
         </table>
     </div>
     <!-- table grid end -->
-
+    <div class="border_quest mr-0 ml-0 ">
     <div class="d-flex bg-light mb-5" style="min-height:100px">
-        <div class="p-2 col-md-6">
+        <div class="p-2 col-md-4">
             <div class="chat_box">
                 <form action="/action_page.php">
                     <div class="form-group">
@@ -199,18 +201,13 @@
                 </form>
             </div>
         </div>
-        <div class="p-2 col-md-6" >
+        <div class="p-2 col-md-8" >
             <div class="d-flex justify-content-end pt-4 align-self-end">
                 <div layout="column" class="payment_inner">
-                    <div class="">
-                        <p class="md-body-1 pull-right">Total : <span class="payment_online">{{campaignDetails.total_amount}}</span></p>
-                    </div>
-                    <div class="">
-                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">{{campaignDetails.total_paid}}</span></p>
-                    </div>
-                    <div class="">
-                        <p class="md-title pull-right">Balance : <span class="payment_balance">{{campaignDetails.total_amount - campaignDetails.total_paid}}</span></p>
-                    </div>
+                        <p class="font-weight-light" style="text-indent: 53px;">Total : <span class="float-right">{{campaignDetails.total_amount}}</span></p>                 
+                    <p class="text_color" style="text-indent: 6px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+                        <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid}}</span></p>
+                        <p class="" style="font-size: 15px;font-weight: 500;">Balance : <span class="float-right">{{TOTALpay || "0"}}</span></p>
                 </div>
             </div>
         </div>
@@ -227,6 +224,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <script>

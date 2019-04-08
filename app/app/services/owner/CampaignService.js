@@ -47,9 +47,9 @@ app.service('OwnerCampaignService',
                         $http.delete(config.apiPath + '/campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
-                    bookNonUserCampaign: function (campaignId) {
+                    bookNonUserCampaign: function (campaignId, flag, GST) {
                         var dfd = $q.defer();
-                        $http.get(config.apiPath + '/book-non-user-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
+                        $http.get(config.apiPath + '/book-non-user-campaign/' + campaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
                     getCampaignWithPayments: function () {
@@ -91,7 +91,12 @@ app.service('OwnerCampaignService',
                         var dfd = $q.defer();
                         $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
-                    }
+                    },
+                    requestChangeInQuote: function (sendObj) {
+                        var dfd = $q.defer();
+                        $http.post(config.apiPath + '/request-quote-change', sendObj).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                    },
                       
                     // downloadPdf: function () {
                     //   var dfd = $q.defer();

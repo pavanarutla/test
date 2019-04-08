@@ -12,6 +12,7 @@ app.controller("ProductCtrl", [
   "config",
   "Upload",
   "toastr",
+  "$state",
   function(
     $scope,
     $mdDialog,
@@ -25,7 +26,8 @@ app.controller("ProductCtrl", [
     MapService,
     config,
     Upload,
-    toastr
+    toastr,
+    $state
   ) {
     var vm = this;
     $scope.msg = {};
@@ -244,28 +246,38 @@ app.controller("ProductCtrl", [
           cancelLabel: 'Cancel',
           customRangeLabel: 'Custom range'
       },
-      isInvalidDate : function(dt){
-        for(var i=0; i < $scope.unavailalbeDateRanges.length; i++){
-          if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
+      isInvalidDate: function (dt) {
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                return true;
+            }
+        }
+        if(moment(dt) < moment()){
             return true;
-          }
         }
-      },
-      isCustomDate: function(dt){
-        for(var i = 0; i < $scope.unavailalbeDateRanges.length; i++){
-          if(moment(dt) >= $scope.unavailalbeDateRanges[i].start && moment(dt) <= $scope.unavailalbeDateRanges[i].end){
-            if(moment(dt).isSame($scope.unavailalbeDateRanges[i].start, 'day')){
-              return ['red-blocked', 'left-radius'];
+    },
+    isCustomDate: function (dt) {
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                    return ['red-blocked', 'left-radius'];
+                } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                    return ['red-blocked', 'right-radius'];
+                } else {
+                    return 'red-blocked';
+                }
             }
-            else if(moment(dt).isSame($scope.unavailalbeDateRanges[i].end, 'day')){
-              return ['red-blocked', 'right-radius'];
-            }
-            else{
-              return 'red-blocked';
-            }
-          }
         }
-      },
+        if(moment(dt) < moment()){
+            return 'gray-blocked';
+        }
+    },
+    eventHandlers: {
+        'apply.daterangepicker': function(ev, picker) { 
+            //selectedDateRanges = [];
+            console.log(ev);
+        }
+    }
     };
     $scope.getProductUnavailableDates = function(productId, ev){
       MapService.getProductUnavailableDates(productId).then(function(dateRanges){
@@ -321,6 +333,8 @@ app.controller("ProductCtrl", [
           } else if (result.data.status == 0) {
             $scope.addProductErrors = result.data.message;
           }
+          // addnewProduct();
+          $state.reload();
         },
         function(resp) {
           toastr.error("somthing went wrong try again later");
@@ -332,7 +346,9 @@ app.controller("ProductCtrl", [
         }
       );
     };
-
+//     function addnewProduct() {
+//       document.getElementById("hoardingDrop").classList.toggle("show");
+// }
     $scope.editProduct = function(product) {
       if (product.status != 0) {
         product.country = null;

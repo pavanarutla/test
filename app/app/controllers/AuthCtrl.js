@@ -8,17 +8,20 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 	$scope.signInUser = function () {		
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
+                            localStorage.removeItem('loggedInUser');
 				var loggedInUser = {};
 				var payload = $auth.getPayload();
 				var userData = payload.user;
 				var userMongoData = payload.userMongo;
 				loggedInUser.clientId = userData.client_id;
 				loggedInUser.user_id = userMongoData.id;
+                                                                                          loggedInUser.mong_id = userMongoData.client_mongo_id;
 				loggedInUser.client_slug = userData.client_slug;
 				loggedInUser.email = userData.email;
 				loggedInUser.firstName = userMongoData.first_name;
 				loggedInUser.lastName = userMongoData.last_name;
 				loggedInUser.user_type = userMongoData.user_type;
+                                                                                         loggedInUser.user_role = userMongoData.user_type;
 				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
 				$rootScope.loggedInUser = loggedInUser;
@@ -36,8 +39,8 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 					$location.path("/owner/" + payload.userMongo.client_slug + "/feeds");
 				}
 				else{
-					$state.go("index.location", null);
-					// location.reload();
+                                
+					$state.go("index.location", null,{reload: true});
 				}
 			}
 			else if(res.data.status == 0){
