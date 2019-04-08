@@ -113,22 +113,22 @@
                 <tbody>
                     <tr>
                         <td><b>No of Products</b></td>
-                        <td>{{ campaignDetails.products.length}}</td>
+                        <td>{{ campaignDetails.products.length || 0}}</td>
                     </tr>
                     <tr>
-                        <td><b>Starting From</b></td>
-                        <td>{{(campaignDetails.created_at | date: "dd-MM-yyyy") || "N/A"}}</td>
+                        <td><b>Date</b></td>
+                        <td>{{(campaignDetails.created_at | dateify | date:'dd-MM-yyyy') || "N/A"}}</td>
                     </tr>
                     <tr>
                         <td><b>Total Amount</b></td>
                         <td>
-                            <span ng-if="campaignDetails.act_budget">Rs.</span>{{TOTAL| number : 2 || "N/A"}}
+                            <span>Rs.</span>{{TOTAL || "0"}}
                         </td>
                     </tr>
                     <tr>
                         <td><b>Pending Amount</b></td>
                         <td>
-                            <span>Rs.</span>{{PendingPay || "N/A"}}
+                            <span>Rs.</span>{{PendingPay || 0}}
                         </td>
                     </tr>
                     <tr>

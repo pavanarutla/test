@@ -240,12 +240,10 @@
             </div>
         </div> -->
         <!-- table grid start -->
-        <div class="table-responsive">
+        <div class="table-responsive" ng-if="campaignDetails.products.length != 0">
             <table class="table">
-                <div ng-if="campaignDetails.products.length == 0" style="margin:0 auto;width: 50%;">
-                    <img src="assets/images/owner/Group 383.png" alt="short" />
-                </div>
-                <thead class="text_color" ng-if="campaignDetails.products.length != 0">
+                
+                <thead class="text_color" >
                     <tr>
                         <th style="width:250px;">Product Details</th>
                         <th class="hide-xs"></th>
@@ -293,7 +291,7 @@
                 </tbody>
             </table>
         </div>		
-        <div class="row border_quest mr-0 ml-0 ">
+        <div class="row border_quest mr-0 ml-0 " ng-if="campaignDetails.products.length != 0">
             
             <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
 <!--				<form name="SendComment" ng-if="campaignDetails.type == 0">

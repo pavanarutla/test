@@ -881,7 +881,7 @@ $scope.getProductUnavailableDates = function (productId, ev) {
                 },
 
 $scope.suggestProductForAdminCampaign = function (adminProduct) {
- // console.log(adminProduct);
+  debugger;
   if($stateParams.campaignId) {
       var postObj = {
           campaign_id: $stateParams.campaignId,

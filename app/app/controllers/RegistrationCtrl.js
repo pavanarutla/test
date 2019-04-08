@@ -36,7 +36,6 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 				$scope.regNewUserErrors = result.message;
 			}
 		}, function(result){
-			// console.log(result);
 			toastr.error(result);
 		});
 	}
