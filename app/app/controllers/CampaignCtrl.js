@@ -410,6 +410,7 @@ $scope.Getcomment = function (campaignID){
   function getMetroCampaigns(){
     MetroService.getMetroCampaigns().then((result) => {
       $scope.metroCampaigns = result;
+      console.log(result);
     });
   }
   $scope.saveUserCampaign = function () {
@@ -496,9 +497,9 @@ $scope.Getcomment = function (campaignID){
   var loadMetroCampaigns = function () {
     return new Promise((resolve, reject) => {
       MetroService.getMetroCampaigns().then(function (result) {              
-        $scope.metrocampaign = _.filter(result, function (c) {
-          return c.status >= 1101 ;
-        });
+        // $scope.metrocampaign = _.filter(result, function (c) {
+        //   return c.status >= 1101 ;
+        // });
         resolve(result);
       });
     });
