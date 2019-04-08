@@ -33,8 +33,7 @@ app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDial
        $scope.area_name='';
    };
     $scope.getproddata = function (proddetails) {            
-      $scope.productListDetails = proddetails;    
-      console.log(proddetails);        
+      $scope.productListDetails = proddetails;      
       $mdSidenav('productDetails').toggle();
     }
     $scope.formats = function () {
@@ -87,7 +86,6 @@ isCustomDate: function (dt) {
 eventHandlers: {
     'apply.daterangepicker': function(ev, picker) { 
         //selectedDateRanges = [];
-        console.log(ev);
     }
 } 
 };
@@ -120,7 +118,6 @@ $scope.EnableDisable = function () {
 }
 $scope.FilterProductlist = function(booked_from,booked_to){
   MapService.filterProducts(booked_from,booked_to).then(function (result) {
-   console.log(result);
    productList = [];
               locArr = [];
               uniqueMarkers = [];
@@ -128,7 +125,6 @@ $scope.FilterProductlist = function(booked_from,booked_to){
               var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
               $scope.plottingDone = false;
               MapService.filterProducts(filterObj).then(function (markers) {
-                  //console.log("filter products",marksers)
                   _.each(markersOnMap, function (v, i) {
                       v.setMap(null);
                       $scope.Clusterer.removeMarker(v);
@@ -141,7 +137,6 @@ $scope.FilterProductlist = function(booked_from,booked_to){
                       _.each(markersOnMap, function (v, i) {
                           bounds.extend(v.getPosition());
                       });
-                      // console.log('map object',$scope.mapObj)
                   } else {
                       toastr.error("no marker found for the criteria you selected");
                   }

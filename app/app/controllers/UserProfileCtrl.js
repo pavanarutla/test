@@ -43,7 +43,6 @@ app.controller('UserProfileCtrl', function($scope, $stateParams, $window, UserSe
         $window.location.reload();   
       }
     }, function (resp) {
-      // console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     });

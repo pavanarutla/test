@@ -125,7 +125,6 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
     $scope.state.id = state.id;
     $scope.state.country_id = null;
     $scope.state.name = state.name;
-    // console.log(state);
   }
 
   $scope.deleteState = function (state) {
@@ -288,7 +287,6 @@ app.controller('AdminLocationCtrl', function ($scope, $http, AdminLocationServic
   }
 
   function selectedItemChange(item) {
-    //console.log('Item changed to ' + JSON.stringify(item));
   }
   /*
   * Filtering Areas ends
