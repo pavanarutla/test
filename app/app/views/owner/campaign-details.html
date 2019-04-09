@@ -45,13 +45,13 @@
                                 <td>{{campaignDetails.products.length}}</td>
                             </tr>
                             <tr>
-                                <td><b>Starting From</b></td>
-                                <td>{{campaignDetails.created_at}}</td>
+                                <td><b>Date</b></td>
+                                <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
                             </tr>
                             <tr>
                                 <td><b>Total Budget</b></td>
                                 <td>
-                                    <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || "N/A" }}
+                                    <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
                                 </td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                                 </td>
                                 <td ng-if="campaignDetails.status <= 100">
                                     <span ng-if="campaignDetails.pending_payment">Rs.</span>                                    
-                                    N/A
+                                    0
                                 </td>
                             </tr>
                             <tr>
@@ -134,6 +134,14 @@
                         </md-button>
                     </div>
                 </div>
+                <div class="">
+                        <div class="md-grid-item-content hoarding-btn">
+                                <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue" ng-disabled="campaignDetails.status <= 300">
+                                Payment Details
+                            </md-button>
+                            </a>
+                        </div>
+                    </div>
             </div>
         </div>
     <!-- <div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg"> -->
@@ -239,7 +247,7 @@
                 </div>
             </div>
         </div> -->
-        <!-- table grid start -->
+        <!-- table grid start -->        
         <div class="table-responsive" ng-if="campaignDetails.products.length != 0">
             <table class="table">
                 
@@ -273,9 +281,9 @@
                             {{product.booked_from| dateify | date: "dd-MMM-yyyy"}}
                         </td>
                         <td class="table_vertical">{{product.booked_to| dateify | date: "dd-MMM-yyyy"}}
-                        </td>
+                        </td>                        
                         <td class="table_vertical table_price">
-                            <p> {{(!myfield && product.owner_price)?product.owner_price:''}}
+                            <p> {{(!myfield && product.owner_price)?product.owner_price:'' || product.default_price || product.price }}
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
                             <span ng-click="myfield = true;"   ng-show="!myfield" ng-hide="campaignDetails.status >= 600"> <i class="material-icons">edit</i></span>
                             <button ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)" ng-disabled="(product.owner_price > 0 && product.owner_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
@@ -319,9 +327,9 @@
                             18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
                     
                     <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-                    <!-- <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
+                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
                         Campaign</md-button>
-                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button> -->
+                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
                 </div>
             </div>
             <style> .ng-cloak { display: none !important; } </style>

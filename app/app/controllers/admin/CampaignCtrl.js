@@ -892,7 +892,6 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
           }
       }
       AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
-          //console.log(result);
           if (result.status == 1) {
             CampaignService.getCampaignWithProducts(campaignId).then(function(result){
              // alert("dhajf");

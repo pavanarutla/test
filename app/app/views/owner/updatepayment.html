@@ -139,7 +139,7 @@
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
       style="margin-top:1em;">
       <div class="dropdown" style="float: right;">
-          <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-if="campaignPaymentDetails.type!=0">
+          <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-if="campaignPaymentDetails.type!=0" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
           Add Payment
         </md-button>
         <div id="addpaymentdrop" class="dropdown-content contbg animated fadeInDown">
@@ -152,7 +152,7 @@
                 </md-icon>
               </md-button>
             </div>
-            <h3 class="md-title" style="margin-top:-28px;">Grand Total : Rs. {{campaignPaymentDetails.act_budget}}</h3><br>
+            <h3 class="md-title" style="margin-top:-28px;">Grand Total : Rs. {{campaignPaymentDetails.totalamount}}</h3><br>
             <li>
               <div class="">
                 <div class="col-md-12">
@@ -273,7 +273,9 @@
               <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignPaymentDetails.act_budget}}</b></spam></p>
               <!-- <p class="text_color" style="text-indent: 57px;"><b>Paid : <spam class="float-right">{{paid}}</spam></b></p> -->
               <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ campaignPaymentDetails.gst_price |number : 2 ||"N/A" }}</span></p>
-              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Balance : <spam class="float-right">{{unpaid}}</spam>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{campaignPaymentDetails.totalamount}}</span>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Paid : <span class="float-right">{{campaignPaymentDetails.total_paid}}</span>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Balance : <spam class="float-right">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid}}</spam>
               </p>
             </div>
     </div>

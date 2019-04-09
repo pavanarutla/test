@@ -86,7 +86,7 @@
                 </md-button>
               </div>
               <h3 class="md-title" style="margin-top:-28px;">Grand Total : Rs.
-                {{campaignDetails.total_amount - campaignDetails.total_paid}}</h3><br>
+                {{campaignDetails.totalamount}}</h3><br>
               <li>
                 <div class="">
                   <div class="col-md-12">
@@ -231,9 +231,10 @@
                 class="float-right">{{campaignDetails.total_amount}}</span></p>
             <p class="text_color" style="text-indent: 6px;">18% GST : <span
                 class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-            <!-- <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid}}</span></p> -->
+                <p class="" style="text-indent: 30px;">Grand Total : <span class="float-right">{{campaignDetails.totalamount}}</span></p>
+            <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid || "0"}}</span></p>
             <p class="" style="font-size: 15px;font-weight: 500;">Balance : <span
-                class="float-right">{{TOTALpay || "0"}}</span></p>
+                class="float-right">{{campaignDetails.totalamount - campaignDetails.total_paid || "0"}}</span></p>
           </div>
         </div>
       </div>

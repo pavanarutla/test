@@ -45,11 +45,11 @@
 						<td>{{campaignDetails.products.length}}</td>
 					</tr>
 					<tr>
-						<td><b>Starting From</b></td>
-						<td>{{(campaignDetails.created_at | date: "dd-MM-yyyy") || "N/A"}}</td>
+						<td><b>Date</b></td>
+						<td>{{(campaignDetails.created_at | dateify | date: "dd-MM-yyyy") || "N/A"}}</td>
 					</tr>
 					<tr>
-						<td><b>Actual Budget</b></td>
+						<td><b>Total Budget</b></td>
 						<td>
 							<span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.totalamount| number : 2 || "N/A"}}
 						</td>
