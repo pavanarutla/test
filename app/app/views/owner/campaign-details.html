@@ -45,13 +45,13 @@
                                 <td>{{campaignDetails.products.length}}</td>
                             </tr>
                             <tr>
-                                <td><b>Starting From</b></td>
-                                <td>{{campaignDetails.created_at}}</td>
+                                <td><b>Date</b></td>
+                                <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
                             </tr>
                             <tr>
                                 <td><b>Total Budget</b></td>
                                 <td>
-                                    <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || "N/A" }}
+                                    <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
                                 </td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                                 </td>
                                 <td ng-if="campaignDetails.status <= 100">
                                     <span ng-if="campaignDetails.pending_payment">Rs.</span>                                    
-                                    N/A
+                                    0
                                 </td>
                             </tr>
                             <tr>
@@ -319,9 +319,9 @@
                             18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
                     
                     <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-                    <!-- <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
+                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
                         Campaign</md-button>
-                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button> -->
+                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
                 </div>
             </div>
             <style> .ng-cloak { display: none !important; } </style>
