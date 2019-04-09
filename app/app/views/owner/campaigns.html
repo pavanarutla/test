@@ -146,7 +146,7 @@
           </div>
           <h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
           <h3 class="md-title">Let's start Campaign</h3>
-          <div layout="colmun" layout-margin layout-align="center center">            
+          <!-- <div layout="colmun" layout-margin layout-align="center center">            
             <label for="chkYes">
               <input type="radio" ng-checked="true" id="chkYes" ng-model="twoforms" value="OOH" name="chkPassPort" onclick="ShowHideDiv()" />
               OOH Campaign
@@ -155,7 +155,7 @@
               <input type="radio" id="chkNo"  ng-model="twoforms" value="Metro" name="chkPassPort" onclick="ShowHideDiv()" />
               Metro Campaign
             </label>
-          </div>
+          </div> -->
           <div ng-switch="twoforms">
           <div layout="row" layout-margin layout-align="center center" class="" >
             <div id="dvPassport" style="width:100%;">
@@ -188,9 +188,9 @@
                     <div class="form-group">
         
                       <input ng-model="ownerCampaign.org_contact_name" name="contact_name" class="form-control  md-whiteframe-3dp"
-                        type="text" required="required" placeholder="Contact Name">
+                        type="text" required="required" placeholder="Contact Person">
                       <div ng-messages="forms.CampaignForm.org_name.$error" style="color:red" ng-if="forms.CampaignForm.contact_name.$touched">
-                        <div ng-message="required">Contact Name is required.</div>
+                        <div ng-message="required">Contact Person is required.</div>
                       </div>
                     </div>
                   </li>
@@ -199,7 +199,7 @@
         
                       <input ng-model="ownerCampaign.org_contact_email" name="email" class="form-control md-whiteframe-3dp"
                         type="email" required="required" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="150"
-                        placeholder="Email">
+                        placeholder="Email ID">
                       <div ng-messages="forms.CampaignForm.email.$error" style="color:red" ng-if="forms.CampaignForm.email.$touched">
                         <div ng-message="required">Email is required.</div>
                         <div ng-message="pattern">Enter a valid EmailId.</div>
@@ -217,7 +217,7 @@
                       </div>
                     </div>
                   </li>
-                  <li>
+                  <!-- <li>
                     <div class="form-group ">
         
                       <input ng-model="ownerCampaign.org_contact_refered"  only-letters-input name="refered" class="form-control md-whiteframe-3dp"
@@ -236,14 +236,14 @@
                         <div ng-message="required">Budget No is required.</div>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                   <md-button class="md-raised md-primary all_button" layout-fill ng-click="saveOwnerCampaign(ownerCampaign)">
                     Create Campaign
                   </md-button>
             </div>            
           </div>
           <!-- ***********Metro Campagin form********* -->
-          <div layout="row" layout-margin layout-align="center center" class="" ng-switch-when="Metro">
+          <!-- <div layout="row" layout-margin layout-align="center center" class="" ng-switch-when="Metro">
             <div id="dvPassport" style="width:100%;">
               <li>
                 <div class="form-group">
@@ -314,7 +314,7 @@
                   Create Metro Campaigns
               </md-button>
             </div>            
-          </div>          
+          </div>           -->
           <!-- ***********Metro Campagin form end ********* -->
         </div>
         </form>

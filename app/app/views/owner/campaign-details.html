@@ -24,12 +24,12 @@
                                 <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                             </tr>
                             <tr>
-                                <td><b>Contact</b></td>
+                                <td><b>Contact No</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
                                 <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
                             </tr>
                             <tr>
-                                <td><b>Email</b></td>
+                                <td><b>Email ID</b></td>
                                 <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email}}</td>
                                 <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">reach@billboardsindia.com</td>
                             </tr>
@@ -45,23 +45,23 @@
                                 <td>{{campaignDetails.products.length}}</td>
                             </tr>
                             <tr>
-                                <td><b>Starting From</b></td>
+                                <td><b>Booked From</b></td>
                                 <td>{{campaignDetails.created_at}}</td>
                             </tr>
                             <tr>
                                 <td><b>Total Budget</b></td>
                                 <td>
-                                    <span ng-if="campaignDetails.act_budget">$.</span>{{ TOTAL || "N/A" }}
+                                    <span ng-if="campaignDetails.act_budget">$</span> {{ TOTAL || "N/A" }}
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>Pending payment</b></td>
+                                <td><b>Pending Amount</b></td>
                                 <td ng-if="campaignDetails.status >= 400">
-                                    <span ng-if="campaignDetails.pending_payment">$.</span>                                    
+                                    <span ng-if="campaignDetails.pending_payment">$</span>                                    
                                     {{PendingPay}}
                                 </td>
                                 <td ng-if="campaignDetails.status <= 100">
-                                    <span ng-if="campaignDetails.pending_payment">$.</span>                                    
+                                    <span ng-if="campaignDetails.pending_payment">$</span>                                    
                                     N/A
                                 </td>
                             </tr>
@@ -103,7 +103,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email"
+                                            <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email ID" type="email"
                                              required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
                                             <div ng-messages="shareCampaignForm.email.$error">
                                                 <div ng-message="required">Email is required.</div>
