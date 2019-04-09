@@ -364,7 +364,7 @@ $scope.hidebutton = function(){
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {              
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -732,7 +732,7 @@ $scope.hidebutton = function(){
             _.each(campaignPayments, function (p) {
                 $scope.paid += p.amount;
             });
-            $scope.unpaid = $scope.campaignPaymentDetails.act_budget - $scope.paid;
+            //$scope.unpaid = $scope.campaignPaymentDetails.act_budget + parseInt($scope.campaignPaymentDetails.gst_price);
         });
     }
 
