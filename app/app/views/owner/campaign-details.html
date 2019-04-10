@@ -15,7 +15,7 @@
                             </tr>
                             <tr>
                                 <td><b>Campaign Name</b></td>
-                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name| capitalize}}</td>
+                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
                                 <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                             </tr>
                             <tr>
@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td><b>Email</b></td>
-                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email}}</td>
+                                <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}</td>
                                 <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">reach@billboardsindia.com</td>
                             </tr>
                         </tbody>
@@ -301,39 +301,42 @@
         </div>		
         <div class="row border_quest mr-0 ml-0 " ng-if="campaignDetails.products.length != 0">
             
-            <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
-<!--				<form name="SendComment" ng-if="campaignDetails.type == 0">
-						<div class=" chat_box ">
-							<ul ng-repeat="quote_change in campaignDetails.quote_change">
-								<li ng-if="quote_change.type == 'user'" class="mt-2"><span class="user_dec">O</span>{{quote_change.remark}}</li>
-								<li ng-if="quote_change.type == 'bbi'" class="mt-4 chat__li"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
-							</ul>
-							<div class="form-group">
-									<label for="text" class="text_color">Any questions, Please submit below</label>
-									<textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
-								</div>
-								<button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message,'Owner')">Submit</button>
-							
-						</div>
-					</form>-->
+            <!-- <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
 		    </div>
             <div class="col-12 col-sm-6  col-md-8 order-1 order-sm-2">
                 <div class="mt-3 pull-right sub_total">
                     <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
                     </p>
-                    <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
-                    <p class="text_color" style="text-indent: 17px;">
-                                            <!-- <input type="checkbox" ng-hide="campaignDetails.status >= 700" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" /> -->
-                            18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-                    
+                    <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
                     <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
                     <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
                         Campaign</md-button>
                     <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
                 </div>
             </div>
-            <style> .ng-cloak { display: none !important; } </style>
+            <style> .ng-cloak { display: none !important; } </style> -->
         </div>
+
+
+        <div class="small-wrapper mt0" ng-if="campaignDetails.products.length != 0">
+                <div class="smallContainer">
+                  <div class="payment-summary">
+                    <ul id="double">
+                      <li class="col1">Total :</li>
+                      <li class="col2">{{campaignDetails.act_budget}}</li>
+                      <li class="col1 text_color">18% GST :</li>
+                      <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                    </ul>
+                    <ul id="total">
+                      <li class="col1">Grand Total :</li>
+                      <li class="col2">{{ TOTAL || "N/A" }}</li>
+                    </ul>
+                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
+                            Campaign</md-button>
+                        <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
+                  </div>
+                </div>
+              </div>
     <!-- </div> -->
 </div>
 
