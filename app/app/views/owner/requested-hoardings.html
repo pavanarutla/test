@@ -330,6 +330,8 @@
                     <td class="table_vertical">{{product.impressionsperweek}}</td>
                     <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
                     <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+					 <td class="table_vertical" ng-if="product.lighting != 0 && product.lighting != 1">{{product.lighting}}</td>
+
                     <td class="table_vertical">{{product.default_price}}</td>
                     <td class="text-center table_vertical">
                         <input date-range-picker ng-model="product.dates"

@@ -724,6 +724,7 @@ style="background-color: #858A8E;">Submit</md-button>
                 <td class="table_vertical">{{product.impressionsperweek}}</td>
                 <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
                 <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+				 <td class="table_vertical" ng-if="product.lighting != 0 && product.lighting != 1">{{product.lighting}}</td>
                 <td class="text-center table_vertical">
                     <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}} Campaigns</a>
                 </td>
