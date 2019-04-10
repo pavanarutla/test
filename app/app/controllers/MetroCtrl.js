@@ -295,7 +295,12 @@ app.controller('MetroCtrl',
               getMetroCampaigns();
               loadShortlistedPackages();
               toastr.success(response.message);
-              //$window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/' + response.metro_camp_id;
+              if(response.user_type=='owner'){
+              $window.location.href = '#/owner/{{clientSlug}}/metro-campaign-details/' + response.metro_camp_id;
+          }
+          else if(response.user_type=='basic'){
+              $window.location.href = '#/metro-campaign/' + response.metro_camp_id;
+          }
             } else {
               $scope.saveUserCampaignErrors = response.message;
             }
