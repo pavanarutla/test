@@ -95,7 +95,8 @@
       </tbody>
     </table>
   </div>
-  <div class="d-flex bg-light mb-5" style="min-height:100px">
+
+  <!-- <div class="d-flex bg-light mb-5" style="min-height:100px">
     <div class="p-2 col-md-6">      
     </div>
     <div class="p-2  col-md-6 align-self-end">
@@ -109,7 +110,6 @@
             <div class="md-body-1 text_color">18% GST  :</div>
             <div class="md-body-1 text_color">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</div>
           </div>
-<!--          <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</span></p>          -->
           <div layout="row">
             <div class="md-body-1">paid:</div>
             <div class="md-body-1"> &nbsp;&nbsp;{{UserPaymentDetails.total_paid}}</div>
@@ -119,15 +119,35 @@
             <div class="md-title">Balance :</div>
             <div class="md-title">{{TOTALpay}}</div>
           </div>
-          <!-- <div layout="row">
-            <input type="checkbox" />Request Executive to collect cash / cheque
-          </div> -->
-          <!-- <md-button class="md-raised md-primary">PAY ONLINE</md-button> -->
         </div>
       </div>
     </div>
 
+  </div> -->
+
+  <div class="row border_quest">
+    <div class="col-md-12">
+      <div class="small-wrapper mt0">
+          <div class="smallContainer">
+            <div class="payment-summary">
+              <ul id="double">
+                <li class="col1">Total :</li>
+                <li class="col2">{{UserPaymentDetails.campaign_details.total_amount}}</li>
+                <li class="col1 text_color">18% GST :</li>
+                <li class="col2 text_color">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</li>
+                <li class="col1">Paid :</li>
+                <li class="col2">{{UserPaymentDetails.total_paid}}</li>
+              </ul>
+              <ul id="total">
+                <li class="col1">Balance :</li>
+                <li class="col2">{{TOTALpay}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
+
 </div>
 <script>
   var loadFile = function (event) {
