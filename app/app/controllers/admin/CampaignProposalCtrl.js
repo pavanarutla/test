@@ -643,6 +643,13 @@ app.controller("CampaignProposalCtrl", function (
       }
     });
   };
+  $scope.productAdminPrice=function(productPrice,productId ) {
+    $scope.campaignDetails.products.forEach(element => {
+        if(element.admin_price === undefined && element.product_id === productId){
+            element.admin_price = productPrice;
+        }
+    });
+}
 
   $scope.changeQuoteRequest = function (campaignId, remark, type) {
     $scope.changeRequest = {};

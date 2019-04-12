@@ -317,9 +317,9 @@
                         <p>{{ campaignProduct.booked_to | date }}</p>
                     </td>
                     <td class="table_vertical table_price">
-                        <p>{{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
-                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
-                        <span ng-click="myfield = true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
+                        <p>{{(!myfield) ? (campaignProduct.owner_price || 'N/A') : ''}}
+                        <input type="text" class="" ng-model="campaignProduct.owner_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
+                        <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
                         <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
                     </td>
                     <td class="table_vertical">
