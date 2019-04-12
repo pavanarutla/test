@@ -649,6 +649,13 @@ $scope.hidebutton = function(){
         });
     }
 
+    $scope.productOwnerPrice=function(productPrice,productId ) {
+        $scope.campaignDetails.products.forEach(element => {
+            if(element.owner_price === undefined && element.id === productId){
+                element.owner_price = productPrice;
+            }
+        });
+}
     /* ==============================
      | Campaign details section ends
      =============================== */
