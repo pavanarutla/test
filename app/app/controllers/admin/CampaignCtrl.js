@@ -556,7 +556,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
 //   });
 // }
   $scope.launchMetroCampaign = function (campaignId, ev) {
-    debugger;
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
         $mdDialog.show(
@@ -577,8 +576,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.saveMetroCampaign = function (campaign) {
-    console.log(campaign);
-    debugger;
     MetroService.saveMetroCampaign(campaign).then(function (response) {
       if (response.status == 1) {
         $scope.campaignSavedSuccessfully = true;
@@ -738,7 +735,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     }
   };
   $scope.checkoutMetroCampaign = function (ev, metroCampaignId) {
-    debugger;
     if ($scope.onchecked === true) {
       $scope.flag = 1;
       $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
@@ -881,7 +877,6 @@ $scope.getProductUnavailableDates = function (productId, ev) {
                 },
 
 $scope.suggestProductForAdminCampaign = function (adminProduct) {
-  debugger;
   if($stateParams.campaignId) {
       var postObj = {
           campaign_id: $stateParams.campaignId,
@@ -954,7 +949,6 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
     eventHandlers: {
         'apply.daterangepicker': function(ev, picker) { 
             //selectedDateRanges = [];
-            console.log(ev);
         }
     }
      

@@ -410,7 +410,6 @@ $scope.Getcomment = function (campaignID){
   function getMetroCampaigns(){
     MetroService.getMetroCampaigns().then((result) => {
       $scope.metroCampaigns = result;
-      console.log(result);
     });
   }
   $scope.saveUserCampaign = function () {

@@ -94,15 +94,18 @@
                     </tr>
                     <tr>
                         <td><b>Client Name</b></td>
-                        <td>{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_name|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
                         <td><b>Contact</b></td>
-                        <td>{{campaignDetails.phone|| "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.phone|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_phone|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
                         <td><b>Email</b></td>
-                        <td>{{campaignDetails.email|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.email|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_email|| "N/A" | capitalize}}</td>
                     </tr>
                 </tbody>
             </table>
