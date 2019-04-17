@@ -471,7 +471,7 @@ style="background-color: #858A8E;">Submit</md-button>
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label>Product Cost (PM)*</label>
+                                    <label>Product Cost per month*</label>
                                     <input class="form-control md-whiteframe-3dp" ng-model="product.default_price"  name="default_price" type="text" only-numeric required="required">
                                     <div ng-messages="hordinglistform.default_price.$error" ng-if="hordinglistform.default_price.$touched" style="color:red">
                                         <div ng-message="required">Cost is required.</div>
@@ -546,7 +546,7 @@ style="background-color: #858A8E;">Submit</md-button>
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                        <label>Impressions Per Week*</label>
+                                        <label>Average Impressions Per Week*</label>
                                     <div class="input-group">
                                         
                                         <input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="product.impressionsperweek"  only-numeric>
@@ -556,19 +556,19 @@ style="background-color: #858A8E;">Submit</md-button>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                        <label>Visibility Score</label>
+                                        <label>Read Direction</label>
                                     <select name="Visibility" class="form-control md-whiteframe-3dp" id="Visibility" required="required"
                                             ng-model="product.visibility">
-                                        <option value="" disabled selected> Visibility Score</option>
-                                        <option>Score - 0-5 Good</option>
-                                        <option>Score - 5-8 Good</option>
-                                        <option>Score - 8-10 Good</option>
+                                        <option value="" disabled selected>Read Direction</option>
+                                        <option>Right-Hand Read</option>
+                                        <option>Left-Hand Read</option>
+                                        <option>Other</option>
                                     </select required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <label>Targeted Audience</label>
                                     <select name="audience" class="form-control md-whiteframe-3dp" id="Audience" required="required"
                                             ng-model="product.audience">
@@ -577,13 +577,27 @@ style="background-color: #858A8E;">Submit</md-button>
                                         <option>ABC</option>
                                         <option>XYZ</option>
                                     </select required>
+                                </div> -->
+                                <div class="col-sm-3">
+                                    <label>Demographics</label>
+                                    <div class="input-group">
+                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
+                                            name="Age" ng-model="product.audience" only-numeric>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Eyes on Impression</label>
+                                    <div class="input-group">
+                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder="Eyes on Impression"
+                                            name="Eyes on Impression" ng-model="product.eyeimpression" only-numeric>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
-                                        <label>Targeted Audience</label>
-                                    <div class="input-group">
-                                       
-                                        <input class="form-control md-whiteframe-3dp" type="text" name="targetedaudience" ng-model="product.targetedaudience" placeholder="Targeted Audience">
-                                    </div>
+                                        <label>Demographics</label>
+                                        <div class="input-group">
+                                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Ethnicity"
+                                                name="Ethnicity" ng-model="product.targetedaudience" only-numeric>
+                                        </div>
                                 </div>
                             </div>
                             <div class="form-group row">

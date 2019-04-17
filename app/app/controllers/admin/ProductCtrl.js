@@ -154,6 +154,12 @@ app.controller("ProductCtrl", [
     /*
   ======== Formats section ends ========
   */
+ $scope.searchAreas = function(query) {
+   debugger;
+    return ProductService.searchAreas(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
     $scope.applyFiltersmethod = function(product) {      
       ProductService.getProductList(
         $scope.pagination.pageNo,
@@ -314,6 +320,7 @@ app.controller("ProductCtrl", [
 
     $scope.files = {};
     $scope.addProduct = function() {
+      debugger;
       Upload.upload({        
         url: config.apiPath + "/product",
         data: {
