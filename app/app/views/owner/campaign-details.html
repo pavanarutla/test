@@ -83,7 +83,7 @@
             </div>
         </div>
         <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" style="float: right;">
+            layout-margin="layout-margin" style="float: right;margin-right: 0px;">
 
             <div class="">
                 <div class="dropdown">
@@ -142,18 +142,17 @@
                     </md-button>
                 </div>
             </div>
-            <div class="">
-                <div class="md-grid-item-content hoarding-btn" ng-if="campaignDetails.products.length == 0">
+            <div class="" ng-if="campaignDetails.products.length == 0">
+                <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-grid-item-content add_blue" ng-click="addNewProductToCampaign()">
                         Add Products
                     </md-button>
                 </div>
             </div>
-            <div class="">
+            <div class=""  ng-hide="campaignDetails.status <= 300 || campaignDetails.type == 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
-                        <md-button class="md-grid-item-content add_blue"
-                            ng-hide="campaignDetails.status <= 300 && campaignDetails.type ==0">
+                        <md-button class="md-grid-item-content add_blue">
                             Payment Details
                         </md-button>
                     </a>
@@ -360,7 +359,7 @@
                     <li class="col2">{{ TOTAL || "N/A" }}</li>
                 </ul>
                 <md-button class="md-raised md-primary all_button"
-                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700"
+                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 "
                     style="float: right;">Book
                     Campaign</md-button>
                 <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total"
