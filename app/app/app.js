@@ -471,7 +471,7 @@ var app = angular.module('bbManager', [
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.bbi-campaigns', {
-      url: '/bbi-campaigns',
+      url: '/bba-campaigns',
       templateUrl: 'views/owner/bbi-campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })

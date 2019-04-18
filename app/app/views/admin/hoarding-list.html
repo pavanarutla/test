@@ -212,6 +212,16 @@
                                 </div>
 
                             </div>
+                            <div class="col-sm-12">
+                                <select ng-model="product.client" class="form-control md-whiteframe-3dp select-value"
+                                        ng-options="cl.id as cl.name for cl in allClients"
+                                        ng-if="product.status != 0">
+                                        <option value="" disabled selected>Select Owner</option>
+                                </select>
+                                <input class="form-control md-whiteframe-3dp" ng-model="product.client_name"
+                                        placeholder="Client Name" type="text" name="client_name"
+                                        ng-if="product.status == 0" ng-disabled="true" />
+                        </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
@@ -427,14 +437,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label>Demographics</label>
                                 <div class="input-group">
                                     <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
                                         name="Age" ng-model="product.audience" only-numeric>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <label>Eyes on Impression</label>
                                 <div class="input-group">
                                     <input class="form-control md-whiteframe-3dp" type="text" placeholder="Eyes on Impression"
