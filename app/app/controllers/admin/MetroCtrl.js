@@ -87,7 +87,6 @@ app.controller('AdminMetroCtrl', function($scope, $mdDialog, $rootScope,Upload, 
       toastr.error("somthing went wrong please try again later");
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   } 
   /*===============================

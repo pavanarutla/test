@@ -45,11 +45,11 @@
 						<td>{{campaignDetails.products.length}}</td>
 					</tr>
 					<tr>
-						<td><b>Starting From</b></td>
-						<td>{{(campaignDetails.created_at | date: "dd-MM-yyyy") || "N/A"}}</td>
+						<td><b>Date</b></td>
+						<td>{{(campaignDetails.created_at | dateify | date: "dd-MM-yyyy") || "N/A"}}</td>
 					</tr>
 					<tr>
-						<td><b>Actual Budget</b></td>
+						<td><b>Total Budget</b></td>
 						<td>
 							<span ng-if="campaignDetails.act_budget">$.</span>{{campaignDetails.totalamount| number : 2 || "N/A"}}
 						</td>
@@ -264,13 +264,14 @@
 	</div>
 	<!-- table grid end -->
 
-	<div class="d-flex bg-light border_quest mb-5" style="min-height:100px">
-		<div class="p-2 col-md-6">
+	<div class="row border_quest">
+		<div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
+				<div class="ml-2 form-group">
 				<form name="SendComment">
 						<div class="chat_box">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-								<li ng-if="quote_change.type == 'User'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
-								<li ng-if="quote_change.type == 'Admin'" class="mt-4"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
+								<li ng-if="quote_change.type == 'User'" class=""><span class="user_decuser">U</span>{{quote_change.remark | capitalize}}</li>
+								<li ng-if="quote_change.type == 'Admin'" class=""><span class="user_biuser">BI</span>{{quote_change.remark | capitalize}}</li>
 							</ul>
 							<div class="form-group">
 									<label for="text" class="text_color">Any questions, Please submit below</label>
@@ -280,16 +281,16 @@
 							
 						</div>
 					</form>
+				</div>
 		</div>
-		<div class="p-2 col-md-6 align-self-end" ng-if="campaignDetails.status < 300">
-			<div class="d-flex justify-content-end pt-4">
-				<md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)">Request Proposal</md-button>
-			</div>
+		<div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12 request_adminbutton" ng-if="campaignDetails.status < 300">
+				<md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)" style="float: right;">Request Proposal</md-button>
+			
 		</div>
 
 		
-		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 400">
-			<div class="d-flex justify-content-end pt-4 align-self-end">
+		<div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 400">
+			<!-- <div class="d-flex justify-content-end pt-4 align-self-end">
 				<div layout="column" class="payment_inner">					
 					<p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignDetails.act_budget}}</b></spam>
 					</p>
@@ -300,14 +301,32 @@
 					<div layout="row">
 						<input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
 					</div>
-					<!--<md-button class="md-raised md-primary" ng-click="changeQuoteRequest(campaignDetails.id, $event)">Change Quote</md-button>-->
 					<md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign</md-button>
 				</div>
+			</div> -->
+			<div class="small-wrapper mt0" ng-if="campaignDetails.status == 400">
+			<div class="smallContainer">
+			  <div class="payment-summary">
+				<ul id="double">
+				  <li class="col1">Total :</li>
+				  <li class="col2">{{campaignDetails.act_budget}}</li>
+				  <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked=true"
+					ng-change="gstuncheck(checked)" />18% GST :</li>
+				  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+				</ul>
+				<ul id="total">
+				  <li class="col1">Grand Total :</li>
+				  <li class="col2">{{TOTAL| number : 2}}</li>
+				  <li class="col3"><input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque</li>
+				  <li style="text-align: center;margin-left: 100px;"><md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign</md-button></li>
+				</ul>
+			  </div>
 			</div>
+		  </div>
 		</div>
-		<div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 600">
-			<div class="d-flex justify-content-end pt-4 align-self-end">
-				<div layout="column" class="payment_inner">
+		
+		<div class="p-2 pl-4 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 600">
+				<div layout="column" class="payment_inner" style="float: right;">
 					<div layout="row">
 						<div class="md-body-1">We have received your request and working on blocking the products you have selected.</div>
 					</div>
@@ -315,9 +334,9 @@
 						<div class="md-body-1">You'll soon hear from us.</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
+
 	<!-- </div> -->
 
 

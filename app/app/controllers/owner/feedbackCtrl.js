@@ -32,10 +32,7 @@ app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Uploa
         
     ]
     $scope.bbisuportdata = function(query){
-        debugger;
-        console.log(query);
         ContactService.sendQuery(query).then(function(result){
-            console.log(result);
             if(result.status == 1){
                 toastr.success(result.message)
             }else{

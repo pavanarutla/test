@@ -106,7 +106,6 @@ app.controller('UserMgmtCtrl', function ($scope, $mdDialog, $http, $rootScope, $
   */
   $scope.addUser = function () {
     AdminUserService.saveUser($scope.user).then(function(result){
-      // console.log("working")
       if(result.status == 1){
         $scope.getUsers();
         $mdDialog.cancel();

@@ -94,15 +94,18 @@
                     </tr>
                     <tr>
                         <td><b>Client Name</b></td>
-                        <td>{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_name|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
                         <td><b>Contact</b></td>
-                        <td>{{campaignDetails.phone|| "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.phone|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_phone|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
                         <td><b>Email</b></td>
-                        <td>{{campaignDetails.email|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.email|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_email|| "N/A" | capitalize}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -113,22 +116,22 @@
                 <tbody>
                     <tr>
                         <td><b>No of Products</b></td>
-                        <td>{{ campaignDetails.products.length}}</td>
+                        <td>{{ campaignDetails.products.length || 0}}</td>
                     </tr>
                     <tr>
-                        <td><b>Starting From</b></td>
-                        <td>{{(campaignDetails.created_at | date: "dd-MM-yyyy") || "N/A"}}</td>
+                        <td><b>Date</b></td>
+                        <td>{{(campaignDetails.created_at | dateify | date:'dd-MM-yyyy') || "N/A"}}</td>
                     </tr>
                     <tr>
                         <td><b>Total Amount</b></td>
                         <td>
-                            <span ng-if="campaignDetails.act_budget">Rs.</span>{{TOTAL| number : 2 || "N/A"}}
+                            <span>Rs.</span>{{TOTAL || "0"}}
                         </td>
                     </tr>
                     <tr>
                         <td><b>Pending Amount</b></td>
                         <td>
-                            <span>Rs.</span>{{PendingPay || "N/A"}}
+                            <span>Rs.</span>{{PendingPay || 0}}
                         </td>
                     </tr>
                     <tr>
@@ -195,7 +198,7 @@
         </div>
         <div class="">
             <div class="md-grid-item-content hoarding-btn">
-                    <a href= "#/admin/campaign-payment-details/{{campaignDetails.id}}" ng-click="downloadOwnerQuote(campaignDetails.id)" download><md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status == 1121">
+                    <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300">
                     Payment Details
                 </md-button>
                 </a>
@@ -317,16 +320,16 @@
                         <p>{{ campaignProduct.booked_to | date }}</p>
                     </td>
                     <td class="table_vertical table_price">
-                        {{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
-                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" ng-change="getdetails()"/>
-                        <span ng-click="myfield = true;"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
-                        <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield"> <i class="material-icons">check</i></button>
+                        <p>{{(!myfield) ? (campaignProduct.owner_price || 'N/A') : ''}}
+                        <input type="text" class="" ng-model="campaignProduct.owner_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
+                        <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons">edit</i></span>
+                        <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
                     </td>
                     <td class="table_vertical">
-                        {{campaignProduct.owner_price|| 'N/A'}}                       
+                        <p>{{campaignProduct.owner_price|| 'N/A'}}</p>                       
                     </td>
                     <td class="table_vertical">
-                        {{campaignProduct.default_price|| 'N/A'}}                       
+                        <p>{{campaignProduct.default_price|| 'N/A'}}</p>                       
                     </td>
                     <td class="table_vertical">
                         <p class=" md-caption">{{campaignProduct.client_name}}</p>
@@ -345,13 +348,13 @@
     </div>
     <!-- table grid end -->
 
-    <div class="row" style="border-top: 1px solid #ddd; margin-right:20px;">
-        <div class="col-md-4 comment_mob">
-            <div class="mt-3 ml-2 form-group">
+    <div class="row border_quest">
+        <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
+            <div class="ml-2 form-group">
                 <form name="SendComment">
                     <div class=" chat_box ">
                         <ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-                            <li ng-if="quote_change.type == 'User'" class="mt-2"><span class="user_dec">U</span>{{quote_change.remark}}</li>
+                            <li ng-if="quote_change.type == 'User'" class=""><span class="user_dec">U</span>{{quote_change.remark}}</li>
                             <li ng-if="quote_change.type == 'Admin'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
                         </ul>
                         <div class="form-group">
@@ -363,12 +366,51 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="mt-3 pull-right" style="font-size: 13px;">
+        <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12">
+                <div class="small-wrapper mt0">
+                        <div class="smallContainer">
+                          <div class="payment-summary">
+                            <ul id="double">
+                              <li class="col1">Total :</li>
+                              <li class="col2">{{campaignDetails.act_budget}}</li>
+                              <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
+                              <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                            </ul>
+                            <ul id="total">
+                              <li class="col1">Grand Total :</li>
+                              <li class="col2">{{ TOTAL || "N/A" }}</li>
+                            </ul>
+                            <md-button
+                    class="md-raised md-warn all_button"  
+                    ng-click="finalizeCampaign(campaignProduct)"
+                    ng-if="campaignDetails.status == 300" style="float:right;">
+                    Send Quote
+                </md-button>
+                <md-button
+                    class="md-raised all_gary"  
+                    ng-if="campaignDetails.status == 400" style="float:right;" disabled="disabled">
+                    Quote Sent
+                </md-button>
+                <md-button
+                    class="md-raised md-primary all_button"
+                    ng-if="campaignDetails.status == 600"
+                    ng-click="launchCampaign(campaignDetails.id, $event)" style="float:right;">
+                    Confirm Booking
+                </md-button>
+                <md-button
+                    class="md-raised md-primary all_gary"
+                    ng-if="campaignDetails.status >= 700" ng-disabled="true" style="float:right;">
+                    Launched
+                </md-button>
+                          </div>
+                        </div>
+                      </div>
+
+
+            <!-- <div class="mt-3 pull-right" style="font-size: 13px;">
                 <div>
                 <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
                 </p>
-                <!-- <p class="text_color" style="text-indent: 31px;">18% GST : <spam class="float-right">{{campaignDetails.gst}}</spam></p> -->
                 <p class="text_color" style="text-indent: 17px;">
                                         <input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" />
                         18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
@@ -397,7 +439,7 @@
                     ng-if="campaignDetails.status >= 700" ng-disabled="true" style="float:right;">
                     Launched
                 </md-button>
-            </div>
+            </div> -->
         </div>
     </div>
 

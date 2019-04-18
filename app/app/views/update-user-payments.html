@@ -1,86 +1,5 @@
-<!-- share campaign sidenav -->
-<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
-    <div layout="row">
-      <div class="md-toolbar-tools">
-        <div flex></div>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
-          <md-tooltip>Close Side Panel</md-tooltip>
-          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
-        </md-button>
-      </div>
-    </div>
-    <md-content layout-align="center center" layout-margin layout-padding>
-      <h3 class="md-headline">Share Campaign</h3>
-      <form name="shareCampaignForm">
-        <div layout="column">
-          <md-input-container class="md-block">
-            <label>Name</label>
-            <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
-            <div ng-messages="shareCampaignForm.name.$error">
-              <div ng-message="required">Name is required.</div>
-              <div ng-message="pattern">Enter a valid Name.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Email</label>
-            <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-            <div ng-messages="shareCampaignForm.email.$error">
-              <div ng-message="required">Email is required.</div>
-              <div ng-message="pattern">Enter a valid Email Id.</div>
-            </div>
-          </md-input-container>
-          <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentOwnerShareCampaign)">Share
-            Campaign</md-button>
-        </div>
-      </form>
-    </md-content>
-  </md-sidenav> -->
-  <!-- share campaign sidenav ends -->
-<!-- <div ng-if="message" class="md-title mt-2 ml-5">{{message}}</div> -->
+
 <div layout="column">
-  <!-- <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
-    <div class="ml-4 update" style="margin-top:38px;">
-      <p class="first">Campaign ID</p>
-      <p class="md-caption second"><b>{{UserPaymentDetails.campaign_details.cid}}</b></p>
-    </div>
-    <div class="update" style="margin-top:38px;">
-      <p>Campaign Name</p>
-      <p class="md-caption"><b>{{UserPaymentDetails.campaign_details.name}}</b></p>
-    </div>
-    <div class="update" style="margin-top:38px;">
-      <p>No of Products</p>
-      <p class="md-caption"><b>{{UserPaymentDetails.campaign_details.no_of_products}}</b></p>
-    </div>
-    <div flex></div>
-    <div>
-      <md-list>
-        <md-list-item style="padding:5px">
-            <div style="margin-top:14px;cursor: pointer;">
-             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav(UserPaymentDetails.campaign_details.id)">
-               <p class="md-caption"><span><i class="material-icons i_icon">
-                     reply_all
-                   </i></span></p>
-               <p class="mob_spanicon share_icon">Share Campaign</p>
-             </div>
-           </div>
-        </md-list-item>
-      </md-list>
-    </div>
-    <div>
-      <md-list>
-        <md-list-item style="padding:5px">
-          <div>
-            <md-button class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-              <span><i class="material-icons">
-                  file_copy
-                </i></span>
-              <div class="md-caption">Download Invoice</div>
-            </md-button>
-          </div>
-        </md-list-item>
-      </md-list>
-    </div>
-  </div> -->
   <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
 		<div class="row" style="margin-left:0px; margin-right:0px;">
 			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
@@ -143,33 +62,19 @@
 					</div>
 				</div>
       </div>
-      <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng">
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+      style="cursor: pointer;">			
         <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-            <a href="assets/images/owner/owner_logo.png" download>
-              <md-button class="dropbtn drop_width">
-                  <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
-                      file_copy
-                    </i></span></p>
-                <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Invoice</p>
-              </md-button>
-            </a>
+          <a ng-click="downloadUserQuote(UserPaymentDetails.campaign_details.id)" download>
+            <md-button class="dropbtn drop_width">
+                <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
+                    file_copy
+                  </i></span></p>
+              <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
+            </md-button>
+          </a>
+        </div>
       </div>
-    </div> -->
-    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-    style="cursor: pointer;">			
-     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-         <a ng-click="downloadUserQuote(UserPaymentDetails.campaign_details.id)" download>
-     <md-button class="dropbtn drop_width">
-         <!-- ng-click="downloadPdf()" with service -->
-         <!-- ng-click="getConvas()"  with out service id="exportthis"-->
-         <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
-             file_copy
-           </i></span></p>
-       <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
-     </md-button>
-   </a>
-   </div>
-   </div>
 		</div>
 	</div>
   <div class="table-responsive">
@@ -187,20 +92,14 @@
           <td>{{Userpayment.type}}</td>
           <td>{{Userpayment.amount}}</td>
         </tr>
-        <!-- <tr>
-          <td>14-08-2018</td>
-          <td>through Left</td>
-          <td>1,15,000.00</td>
-          <td>21-09-2018, 9:00 Am</td>
-        </tr> -->
       </tbody>
     </table>
   </div>
-  <div class="d-flex bg-light mb-5" style="min-height:100px">
+
+  <!-- <div class="d-flex bg-light mb-5" style="min-height:100px">
     <div class="p-2 col-md-6">      
     </div>
     <div class="p-2  col-md-6 align-self-end">
-        <!-- ng-if="UserPaymentDetails.status == 700 || UserPaymentDetails.status == 700" -->
       <div class="d-flex justify-content-end pt-4">
         <div layout="column" class="payment_inner">
           <div layout="row">
@@ -211,7 +110,6 @@
             <div class="md-body-1 text_color">18% GST  :</div>
             <div class="md-body-1 text_color">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</div>
           </div>
-<!--          <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</span></p>          -->
           <div layout="row">
             <div class="md-body-1">paid:</div>
             <div class="md-body-1"> &nbsp;&nbsp;{{UserPaymentDetails.total_paid}}</div>
@@ -221,15 +119,35 @@
             <div class="md-title">Balance :</div>
             <div class="md-title">{{TOTALpay}}</div>
           </div>
-          <!-- <div layout="row">
-            <input type="checkbox" />Request Executive to collect cash / cheque
-          </div> -->
-          <!-- <md-button class="md-raised md-primary">PAY ONLINE</md-button> -->
         </div>
       </div>
     </div>
 
+  </div> -->
+
+  <div class="row border_quest">
+    <div class="col-md-12">
+      <div class="small-wrapper mt0">
+          <div class="smallContainer">
+            <div class="payment-summary">
+              <ul id="double">
+                <li class="col1">Total :</li>
+                <li class="col2">{{UserPaymentDetails.campaign_details.total_amount}}</li>
+                <li class="col1 text_color">18% GST :</li>
+                <li class="col2 text_color">{{ UserPaymentDetails.campaign_details.gst_price |number : 2 ||"N/A" }}</li>
+                <li class="col1">Paid :</li>
+                <li class="col2">{{UserPaymentDetails.total_paid}}</li>
+              </ul>
+              <ul id="total">
+                <li class="col1">Balance :</li>
+                <li class="col2">{{TOTALpay}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
+
 </div>
 <script>
   var loadFile = function (event) {

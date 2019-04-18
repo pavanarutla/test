@@ -112,7 +112,6 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   //  });
 // };
 $scope.applymethod=function(product){
-  //console.log(product);
   var data = {};
           var pageNo = $scope.pagination.pageNo;
           var pageSize= $scope.pagination.pageSize;
@@ -189,7 +188,6 @@ $scope.applymethod=function(product){
   eventHandlers: {
       'apply.daterangepicker': function(ev, picker) { 
           //selectedDateRanges = [];
-          console.log(ev);
       }
   }
   };
@@ -284,7 +282,6 @@ $scope.applymethod=function(product){
 
   var getCountryList = function(){
     OwnerLocationService.getCountries().then(function(result){
-      //console.log(result);
       $scope.countryList = result;
     });
   }
@@ -330,7 +327,6 @@ $scope.applymethod=function(product){
   }
  
   $scope.getStateList = function(product){
-    //console.log(product);
     OwnerLocationService.getStates($scope.product.country).then(function(result){
       $scope.stateList = result;
     });
@@ -357,12 +353,10 @@ $scope.applymethod=function(product){
   }]
 
   $scope.requestedAddProduct = function(product){
-    //console.log(product);
   }
 
   $scope.editUtterance = function(data) {
     data.edit = true;
-    //console.log(data.edit);
   }
   $scope.save = function(data) {
     data.edit = false;
@@ -378,7 +372,6 @@ $scope.applymethod=function(product){
  
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
-    console.log(product);
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
@@ -401,10 +394,8 @@ $scope.applymethod=function(product){
       $scope.areaObj ="";
       $state.reload();
     }, function (resp) {
-      //console.log('Error status: ', resp);
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
     });
   };
 
@@ -556,7 +547,6 @@ $scope.applymethod=function(product){
   $scope.viewSearchText = function(text) {
     
     if(text==''){
-      //console.log("text");
       $scope.getApprovedProductList();
     }
   }

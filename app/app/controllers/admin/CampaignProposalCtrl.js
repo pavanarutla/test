@@ -258,7 +258,6 @@ app.controller("CampaignProposalCtrl", function (
             localStorage.campaignForSuggestion = JSON.stringify(
               updatedCampaignData
             );
-            // console.log(JSON.stringify(updatedCampaignData));
             $scope.campaignActBudget = updatedCampaignData.act_budget;
           });
           _.map($scope.productList, function (product) {
@@ -414,7 +413,6 @@ app.controller("CampaignProposalCtrl", function (
     AdminCampaignService.finalizeCampaignByAdmin(
       $scope.campaignDetails.id, $scope.flag, $scope.GST
     ).then(function (result) {
-      console.log(result);
       if (result.status == 1) {
         $scope.campaignDetails.status = 3;
         $scope.loadCampaignData($scope.campaignDetails.id);
@@ -516,11 +514,9 @@ app.controller("CampaignProposalCtrl", function (
       },
       function (resp) {
         toastr.error("somthing went wrong try again later");
-        // console.log('Error status: ', resp);
       },
       function (evt) {
         var progressPercentage = parseInt((100.0 * evt.loaded) / evt.total);
-        //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
       }
     );
   };
@@ -558,7 +554,6 @@ app.controller("CampaignProposalCtrl", function (
 
   $scope.launchCampaign = function (campaignId, ev) {
     AdminCampaignService.launchCampaign(campaignId).then(function (result) {
-      console.log(result);
       if (result.status == 1) {
         $mdDialog.show(
           $mdDialog
@@ -643,6 +638,13 @@ app.controller("CampaignProposalCtrl", function (
       }
     });
   };
+  $scope.productAdminPrice=function(productPrice,productId ) {
+    $scope.campaignDetails.products.forEach(element => {
+        if(element.admin_price === undefined && element.product_id === productId){
+            element.admin_price = productPrice;
+        }
+    });
+}
 
   $scope.changeQuoteRequest = function (campaignId, remark, type) {
     $scope.changeRequest = {};

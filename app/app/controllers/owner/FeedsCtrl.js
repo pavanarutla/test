@@ -36,8 +36,6 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav,
     getAllOwnerFeeds();
 
     $scope.showCampaignDetails = function($event, campaign){
-      //console.log(campaign);
-      // console.log('#/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
       $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
     }
 

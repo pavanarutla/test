@@ -291,13 +291,13 @@
 	<md-toolbar layout="row">
 		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
 			<h2>
-				<span>Add Product</span>
+				<span>Add Packages</span>
 			</h2>
 			<span flex></span>
 			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()">
 				<md-tooltip>Close Side Panel</md-tooltip>
 				<md-icon class="md-default-theme">
-					<i class="material-icons">close</i>
+					<i class="material-icons" style="color:#fff !important;">close</i>
 				</md-icon>
 			</md-button>
 		</div>
@@ -362,9 +362,11 @@
 			</div>
 			<div class="form-group" style="margin:10px 0">
 				<label class="col-md-3 control-label"></label>
-				<input class="btn btn-primary" value="Add" type="button" ng-click="addPackageInMetroCampaign()">
+				<!-- <input class="btn btn-primary" value="Add" type="button" ng-click="addPackageInMetroCampaign()"> -->
+				<md-button class="md-raised all_button" ng-click="addPackageInMetroCampaign()">Add</md-button>
 				<span></span>
-				<input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()">
+				<!-- <input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()"> -->
+				<md-button class="md-raised Upload_font" ng-click="toggleAddMetroProductSidenav()">Cancel</md-button>
 			</div>
 		</form>
 	</md-content>
@@ -458,7 +460,7 @@
 								<td>{{(metroCampDetails.start_date | date: "dd-MM-yyyy") || "N/A"}}</td>
 							</tr>
 							<tr>
-								<td><b>Actual Budget</b></td>
+								<td><b>Total Budget</b></td>
 								<td>
 									<span ng-if="metroCampDetails.act_budget">$.</span>{{TOTAL || "N/A"}}
 								</td>
@@ -466,7 +468,7 @@
 							<tr>
 								<td><b>Pending payment</b></td>
 								<td ng-if="metroCampDetails.status <= 1101">
-									<span ></span>"N/A"
+									<span ></span>0
 								</td>
 								<td ng-if="metroCampDetails.status >= 1121">
 										<span >$.</span>{{metroCampDetails.pending_payment || "0"}}

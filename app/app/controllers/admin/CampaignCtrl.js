@@ -556,7 +556,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
 //   });
 // }
   $scope.launchMetroCampaign = function (campaignId, ev) {
-    debugger;
     AdminCampaignService.launchMetroCampaign(campaignId).then(function (result) {
       if (result.status == 1) {
         $mdDialog.show(
@@ -577,7 +576,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     });
   }
   $scope.saveMetroCampaign = function (campaign) {
-    debugger;
     MetroService.saveMetroCampaign(campaign).then(function (response) {
       if (response.status == 1) {
         $scope.campaignSavedSuccessfully = true;
@@ -588,6 +586,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
         toastr.success(response.message);        
         adminmetroCampaign();
         getMetroCampaigns();
+        //$window.location.href = '#/{{clientSlug}}/metro-campaign/' + result.metro_camp_id;
       }
       else {
         $scope.saveUserCampaignErrors = response.message;
@@ -652,6 +651,18 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   /*====================================
   | Metro Campaigns end
   ====================================*/
+
+  $scope.downloadOwnerQuote = function (campaignId) {
+    AdminCampaignService.downloadQuote(campaignId).then(function (result) {
+      var campaignPdf = new Blob([result], {
+        type: 'application/pdf;charset=utf-8'
+      });
+      FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+      if (result.status) {
+        toastr.error(result.meesage);
+      }
+    });
+  };
 
   $scope.cancel = function () {
     $mdDialog.hide();
@@ -724,7 +735,6 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     }
   };
   $scope.checkoutMetroCampaign = function (ev, metroCampaignId) {
-    debugger;
     if ($scope.onchecked === true) {
       $scope.flag = 1;
       $scope.GST = ($scope.metroCampaignDetails.act_budget / 100) * 18;
@@ -867,7 +877,6 @@ $scope.getProductUnavailableDates = function (productId, ev) {
                 },
 
 $scope.suggestProductForAdminCampaign = function (adminProduct) {
- // console.log(adminProduct);
   if($stateParams.campaignId) {
       var postObj = {
           campaign_id: $stateParams.campaignId,
@@ -878,7 +887,6 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
           }
       }
       AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
-          //console.log(result);
           if (result.status == 1) {
             CampaignService.getCampaignWithProducts(campaignId).then(function(result){
              // alert("dhajf");
@@ -941,7 +949,6 @@ $scope.suggestProductForAdminCampaign = function (adminProduct) {
     eventHandlers: {
         'apply.daterangepicker': function(ev, picker) { 
             //selectedDateRanges = [];
-            console.log(ev);
         }
     }
      

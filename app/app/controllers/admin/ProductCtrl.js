@@ -125,7 +125,6 @@ app.controller("ProductCtrl", [
         },
         function(evt) {
           var progressPercentage = parseInt((100.0 * evt.loaded) / evt.total);
-          // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
         }
       );
     };
@@ -281,7 +280,6 @@ app.controller("ProductCtrl", [
     eventHandlers: {
         'apply.daterangepicker': function(ev, picker) { 
             //selectedDateRanges = [];
-            console.log(ev);
         }
     }
     };
@@ -345,11 +343,9 @@ app.controller("ProductCtrl", [
         },
         function(resp) {
           toastr.error("somthing went wrong try again later");
-          // console.log('Error status: ', resp);
         },
         function(evt) {
           var progressPercentage = parseInt((100.0 * evt.loaded) / evt.total);
-          //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
         }
       );
     };
