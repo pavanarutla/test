@@ -119,12 +119,7 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference"
-                          required="required" id="reference" ng-model="campaignPayment.reference_no">
-                        <div ng-messages="forms.campPayment.reference.$error" style="color:red"
-                          ng-if="forms.campPayment.reference.$touched">
-                          <div ng-message="required">Reference No is required.</div>
-                        </div>
+                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference" id="reference" ng-model="campaignPayment.reference_no">                        
                       </div>
                     </div>
 
@@ -194,6 +189,7 @@
           <th>Reference</th>
           <th>Received By</th>
           <th>Comments</th>
+          <th>Date</th>
           <td></td>
         </tr>
       </thead>
@@ -204,7 +200,7 @@
           <td class="table_vertical">{{payment.reference_no}}</td>
           <td class="table_vertical">{{payment.received_by}}</td>
           <td class="table_vertical">{{payment.comment}}</td>
-          <td class="table_vertical">{{ payment.created_at | date}}</td>
+          <td class="table_vertical">{{ payment.created_at | dateify}}</td>
         </tr>
 
       </tbody>

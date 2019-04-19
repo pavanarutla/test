@@ -223,8 +223,8 @@
 					<th>Booked From</th>
 					<th>Booked To</th>
 					<th>Price</th>
-					<th></th>
 					<th>Status</th>
+					<th></th>					
 					<th style="text-align:end;">
 						<md-button class="md-raised add_blue" ng-hide="campaignDetails.status >= 400" ng-href="#/location">Add
 							Another Product
@@ -247,15 +247,15 @@
 					</td>		
 					<td class="table_vertical">{{campaignProduct.booked_to | dateify | date: "dd-MM-yyyy"}}
 					</td>
-					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>
-					<td class="table_vertical">
-						<a ng-hide="campaignDetails.status >= 400"><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
-					</td>
+					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>					
 					<td class="table_vertical" >
 						<p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
 						<p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status | stringifyCampaignStatus}} </p>
-						<!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
-						<p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
+						<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 500)">{{campaignDetails.status | stringifyCampaignStatus}}</p>
+						<p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
+					</td>
+					<td class="table_vertical">
+						<a ng-hide="campaignDetails.status >= 400"><i class="material-icons" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
 					</td>
 					<td></td>
 				</tr>
@@ -266,7 +266,7 @@
 
 	<div class="row border_quest">
 		<div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
-				<div class="ml-2 form-group">
+				<div class="ml-2 form-group" ng-hide="campaignDetails.status <= 100">
 				<form name="SendComment">
 						<div class="chat_box">
 							<ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
@@ -285,7 +285,6 @@
 		</div>
 		<div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12 request_adminbutton" ng-if="campaignDetails.status < 300">
 				<md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)" style="float: right;">Request Proposal</md-button>
-			
 		</div>
 
 		

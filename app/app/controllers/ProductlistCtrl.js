@@ -1,4 +1,4 @@
-app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDialog,ProductService,CampaignService,$rootScope,toastr) {
+app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDialog,$state,ProductService,CampaignService,$rootScope,toastr) {
   MapService.mapProducts().then(function (markers) {
      $scope.actualDataCopy=markers;
     $scope.productmarkerslist = markers;
@@ -159,8 +159,9 @@ $scope.FilterProductlist = function(booked_from,booked_to){
             .ariaLabel('shortlist-success')
             .ok('Got it!')
             .targetEvent(ev),
-          $mdSidenav('productDetails').close()
+          $mdSidenav('productDetails').close()          
         );
+        $state.reload();
         getShortListedProducts();
         $mdSidenav('productDetails').close();
       });
