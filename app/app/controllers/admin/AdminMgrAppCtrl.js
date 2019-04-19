@@ -77,6 +77,10 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.toogelCampagin = function () {
     $scope.showCampagin = !$scope.showCampagin;
   }
+  $scope.showPayments = false;
+  $scope.toogelPayments = function () {
+    $scope.showPayments = !$scope.showPayments;
+  }
 
   /*================================
   === Long polling notifications ===
