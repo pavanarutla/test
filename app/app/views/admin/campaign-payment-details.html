@@ -92,6 +92,38 @@
                   <div class="col-md-12">
                     <!-- <form name="PaymentForm" role="form" novalidate="novalidate"> -->
                     <div class="form-group row">
+                        <label for="amount" class="col-sm-4 col-form-label md-body-2">Select Owner :</label>
+                        <div class="col-sm-8">
+                          <select id="paymentType" ng-model="campaignPayment.type" name="mode"
+                            class="form-control md-whiteframe-3dp" required="required">
+                            <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">
+                              {{paymentType.name}}</option>
+                          </select>
+                          <span ng-show="forms.campPayment.mode.$error.required" style="color:red"
+                            ng-if="forms.campPayment.mode.$touched">
+                            Mode Is required!!
+                          </span>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="offset-sm-1 col-sm-10" style="background: #f1f1f1;">
+                              <div class="add-wrapper mt0">
+                                  <div class="addContainer">
+                                    <div class="payment-summary">
+                                      <ul id="add">
+                                        <li class="add1">Total Amount:</li>
+                                        <li class="add2">15,85,000</li>
+                                        <li class="add1">Paid Amount :</li>
+                                        <li class="add2">11,85,000</li>
+                                        <li class="add1">Balance :</li>
+                                        <li class="add2">4,85,000</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+                    <div class="form-group row">
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                       <div class="col-sm-8">
                         <select id="paymentType" ng-model="campaignPayment.type" name="mode"
