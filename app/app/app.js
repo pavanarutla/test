@@ -123,6 +123,11 @@ var app = angular.module('bbManager', [
         templateUrl: 'views/suggest-campaign-four.html',
         controller: 'CampaignCtrl'
     })
+    .state('index.Map-ListView', {
+      url: 'Map-ListView',
+      templateUrl: 'views/Map-ListView.html',
+      controller: 'GmapCtrl'
+    })
     .state('index.location', {
       url: 'location',
       templateUrl: 'views/map-home.html',

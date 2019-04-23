@@ -187,22 +187,6 @@ $scope.FilterProductlist = function(booked_from,booked_to){
     // Save-camp-end
     // SAVE-CAMPPP
     $scope.saveCampaign = function (product_id, selectedDateRanges) {
-      // If we finally decide to use selecting products for a campaign
-      // if($scope.selectedForNewCampaign.length == 0){
-      //   // add all shortlisted products to campaign
-      //   console.log($scope.shortListedProducts);
-      //   // CampaignService.saveCampaign($scope.shortListedProducts).then(function(response){
-      //   //   $scope.campaignSavedSuccessfully = true;
-      //   // });
-      // }
-      // else{
-      //   // add all shortlisted products for new campaign
-      //   console.log($scope.selectedForNewCampaign);
-      //   // CampaignService.saveCampaign($scope.selectedForNewCampaign).then(function(response){
-      //   //   $scope.campaignSavedSuccessfully = true;
-      //   // });
-      // }
-      // campaign.products = $scope.selectedForNewCampaign;
       if (product_id) {
           $scope.campaign.products = [];
           var sendObj = {
