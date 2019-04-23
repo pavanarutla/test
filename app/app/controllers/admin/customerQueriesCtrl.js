@@ -28,7 +28,6 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
   AdminContactService.userQuery().then(function (response) {
     //$scope.gridQueries.data = response.data;
     $scope.QueriesData = response.data;
-    //console.log(response);
   });
 
   $scope.showConfirm = function (data) {
@@ -52,7 +51,6 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
 
       $mdDialog.show(confirm).then(function () {
         response.viewed = 'true';
-        // console.log(response);
         AdminContactService.updateCustomerData(dataId, response).then(function (result) {
           if (result.status == 1) {
             $scope.qerieviewed = true;
@@ -116,8 +114,7 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
 
   AdminContactService.subscribe().then(function (response) {
     $scope.Subscribersdata = response.data;
-    //$scope.gridSubscribers.data = response.data;    
-    //console.log(response);
+    //$scope.gridSubscribers.data = response.data;
   });
 
   $scope.export = function () {
@@ -141,7 +138,6 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
     response.softdelete = 'true';
     AdminContactService.updateCustomerData(value.id, response).then(function (result) {
       if (result.status == 1) {
-        // console.log(result);
         var index = $scope.Subscribersdata.data.indexOf(value);
         $scope.Subscribersdata.data.splice(index, 1);
         toastr.success("CallCenterInfo Unsubscribed successfully");
@@ -169,7 +165,6 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
   AdminContactService.requestCallBack().then(function (response) {
     //$scope.gridcallCenter.data = response.data;
     $scope.callCenterData = response.data;
-    console.log(response.data);
   });
 
   $scope.CallFeedback = function (data) {
@@ -188,7 +183,6 @@ app.controller('customerQueriesCtrl', function ($scope, $http, AdminContactServi
         }
         $scope.savefeedback = function (response) {
           AdminContactService.updateCustomerData(dataId, response).then(function (result) {
-            console.log(result);
             if (result.status == 1) {
               $scope.callinfoviewed = true;
               toastr.success(result.message);

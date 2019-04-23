@@ -72,7 +72,7 @@
         style="margin-top:1em;">
         <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
         <div class="dropdown" style="float: right;">
-          <md-button class="md-raised all_button" onclick="addPayment()" ng-hide="(TOTALpay==0)?true:false">Add
+          <md-button class="md-raised all_button" onclick="addPayment()" ng-hide="(campaignDetails.totalamount - campaignDetails.total_paid==0)?true:false">Add
             Payment
           </md-button>
           <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
@@ -86,11 +86,43 @@
                 </md-button>
               </div>
               <h3 class="md-title" style="margin-top:-28px;">Grand Total : Rs.
-                {{campaignDetails.total_amount - campaignDetails.total_paid}}</h3><br>
+                {{campaignDetails.totalamount}}</h3><br>
               <li>
                 <div class="">
                   <div class="col-md-12">
                     <!-- <form name="PaymentForm" role="form" novalidate="novalidate"> -->
+                    <div class="form-group row">
+                        <label for="amount" class="col-sm-4 col-form-label md-body-2">Select Owner :</label>
+                        <div class="col-sm-8">
+                          <select id="paymentType" ng-model="campaignPayment.type" name="mode"
+                            class="form-control md-whiteframe-3dp" required="required">
+                            <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">
+                              {{paymentType.name}}</option>
+                          </select>
+                          <span ng-show="forms.campPayment.mode.$error.required" style="color:red"
+                            ng-if="forms.campPayment.mode.$touched">
+                            Mode Is required!!
+                          </span>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="offset-sm-1 col-sm-10" style="background: #f1f1f1;">
+                              <div class="add-wrapper mt0">
+                                  <div class="addContainer">
+                                    <div class="payment-summary">
+                                      <ul id="add">
+                                        <li class="add1">Total Amount:</li>
+                                        <li class="add2">15,85,000</li>
+                                        <li class="add1">Paid Amount :</li>
+                                        <li class="add2">11,85,000</li>
+                                        <li class="add1">Balance :</li>
+                                        <li class="add2">4,85,000</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
                     <div class="form-group row">
                       <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode *:</label>
                       <div class="col-sm-8">
@@ -119,12 +151,7 @@
                     <div class="form-group row">
                       <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference"
-                          required="required" id="reference" ng-model="campaignPayment.reference_no">
-                        <div ng-messages="forms.campPayment.reference.$error" style="color:red"
-                          ng-if="forms.campPayment.reference.$touched">
-                          <div ng-message="required">Reference No is required.</div>
-                        </div>
+                        <input type="text" class="form-control md-whiteframe-3dp" only-numeric name="reference" id="reference" ng-model="campaignPayment.reference_no">                        
                       </div>
                     </div>
 
@@ -194,6 +221,7 @@
           <th>Reference</th>
           <th>Received By</th>
           <th>Comments</th>
+          <th>Date</th>
           <td></td>
         </tr>
       </thead>
@@ -204,42 +232,65 @@
           <td class="table_vertical">{{payment.reference_no}}</td>
           <td class="table_vertical">{{payment.received_by}}</td>
           <td class="table_vertical">{{payment.comment}}</td>
-          <td class="table_vertical">{{ payment.created_at | date}}</td>
+          <td class="table_vertical">{{ payment.created_at | dateify}}</td>
         </tr>
 
       </tbody>
     </table>
   </div>
   <!-- table grid end -->
-  <div class="border_quest mr-0 ml-0 ">
-    <div class="d-flex bg-light mb-5" style="min-height:100px">
-      <div class="p-2 col-md-4">
-        <div class="chat_box">
+  <div class="row border_quest">
+    <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
+      <div class="ml-2 form-group">
           <form action="/action_page.php">
-            <div class="form-group">
-              <label for="text" class="text_color">Any questions, Please submit below</label>
-              <textarea type="text" class="form-control" id="text" rows="3"></textarea>
+            <div class="chat_box">
+              <div class="form-group">
+                  <label for="text" class="text_color">Any questions, Please submit below</label>
+                  <textarea type="text" class="form-control" id="text" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn submit_payment float-right">Submit</button>
             </div>
-            <button type="submit" class="btn submit_payment float-right">Submit</button>
           </form>
+      </div>
+    </div>
+    <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12">
+        <div class="small-wrapper mt0">
+        <div class="smallContainer">
+          <div class="payment-summary">
+          <ul id="double">
+            <li class="col1">Total :</li>
+            <li class="col2">{{campaignDetails.total_amount}}</li>
+            <li class="col1 text_color">18% GST :</li>
+            <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+            <li class="col1">Grand Total :</li>
+            <li class="col2">{{campaignDetails.totalamount}}</li>
+            <li class="col1">Paid :</li>
+            <li class="col2">{{campaignDetails.total_paid || "0"}}</li>
+          </ul>
+          <ul id="total">
+            <li class="col1">Balance :</li>
+            <li class="col2">{{campaignDetails.totalamount - campaignDetails.total_paid || "0"}}</li>
+          </ul>
+          </div>
+        </div>
         </div>
       </div>
-      <div class="p-2 col-md-8">
+      <!-- <div class="p-2 col-md-8">
         <div class="d-flex justify-content-end pt-4 align-self-end">
           <div layout="column" class="payment_inner">
             <p class="font-weight-light" style="text-indent: 53px;">Total : <span
                 class="float-right">{{campaignDetails.total_amount}}</span></p>
             <p class="text_color" style="text-indent: 6px;">18% GST : <span
                 class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-            <!-- <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid}}</span></p> -->
+                <p class="" style="text-indent: 30px;">Grand Total : <span class="float-right">{{campaignDetails.totalamount}}</span></p>
+            <p class="" style="text-indent: 30px;">Paid : <span class="float-right">{{campaignDetails.total_paid || "0"}}</span></p>
             <p class="" style="font-size: 15px;font-weight: 500;">Balance : <span
-                class="float-right">{{TOTALpay || "0"}}</span></p>
+                class="float-right">{{campaignDetails.totalamount - campaignDetails.total_paid || "0"}}</span></p>
           </div>
         </div>
-      </div>
-      <div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 600">
-        <div class="d-flex justify-content-end pt-4 align-self-end">
-          <div layout="column" class="payment_inner">
+      </div> -->
+      <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 600">
+          <div layout="column" class="payment_inner" style="float: right;">
             <div layout="row">
               <div class="md-body-1">We have received your request and working on blocking the products you
                 have selected.</div>
@@ -248,9 +299,7 @@
               <div class="md-body-1">You'll soon hear from us.</div>
             </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 </div>
 <script>

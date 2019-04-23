@@ -364,7 +364,7 @@ $scope.hidebutton = function(){
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {              
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -649,6 +649,13 @@ $scope.hidebutton = function(){
         });
     }
 
+    $scope.productOwnerPrice=function(productPrice,productId ) {
+        $scope.campaignDetails.products.forEach(element => {
+            if(element.owner_price === undefined && element.id === productId){
+                element.owner_price = productPrice;
+            }
+        });
+}
     /* ==============================
      | Campaign details section ends
      =============================== */
@@ -732,7 +739,7 @@ $scope.hidebutton = function(){
             _.each(campaignPayments, function (p) {
                 $scope.paid += p.amount;
             });
-            $scope.unpaid = $scope.campaignPaymentDetails.act_budget - $scope.paid;
+            //$scope.unpaid = $scope.campaignPaymentDetails.act_budget + parseInt($scope.campaignPaymentDetails.gst_price);
         });
     }
 

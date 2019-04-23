@@ -379,8 +379,25 @@
 		</div> -->
 		<!-- ------------------------------------------------------------------------------- -->
 		<div class="row border_quest mr-0 ml-0">
-				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status < 1121">
-					<div class="mt-3 pull-right sub_total">
+				<div class="p-2 col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status < 1121">
+						<div class="small-wrapper mt0">
+								<div class="smallContainer">
+								  <div class="payment-summary">
+									<ul id="double">
+									  <li class="col1">Total :</li>
+									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
+									  <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+										ng-change="uncheck(checked)" />18% GST :</li>
+									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									</ul>
+									<ul id="total">
+									  <li class="col1">Grand Total :</li>
+									  <li class="col2">{{TOTAL | number : 2}}</li>
+									</ul>
+								  </div>
+								</div>
+							  </div>
+					<!-- <div class="mt-3 pull-right sub_total">
 						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
 						</p>
 						<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
@@ -388,25 +405,39 @@
 						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
 								TOTAL | number : 2}}</span>
 						</p>
-					</div>
+					</div> -->
 				</div>
-				<div class="col-md-12" ng-if="metroCampaignDetails.status < 1121">
+				<div class="col-md-12 check_outadmin" ng-if="metroCampaignDetails.status < 1121">
 						<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampaignDetails.status != 1101"
 						 ng-click="checkoutMetroCampaign($event, metroCampaignDetails.id)">					
 							Checkout
 						</md-button>
 				</div>
-				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121 ">
-					<div class="mt-3 pull-right sub_total">
+				<div class="p-2 col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121 ">
+						<div class="small-wrapper mt0">
+								<div class="smallContainer">
+								  <div class="payment-summary">
+									<ul id="double">
+									  <li class="col1">Total :</li>
+									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
+									  <li class="col1 text_color">18% GST :</li>
+									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									</ul>
+									<ul id="total">
+									  <li class="col1">Grand Total :</li>
+									  <li class="col2">{{TOTAL | number : 2}}</li>
+									</ul>
+								  </div>
+								</div>
+							  </div>
+					<!-- <div class="mt-3 pull-right sub_total">
 						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
 						</p>
 						<p class="text_color" style="text-indent: 161px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-						<!-- <p class="font-weight-light" style="text-indent: 172px;"><b>Pending : <span class="float-right">{{metroCampaignDetails.pending_payment}}</b></span>
-						</p> -->
 						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
 								TOTAL | number : 2}}</span>
 						</p>				
-					</div>
+					</div> -->
 				</div>
 			</div>
 		<!-- ------------------------------------------------------------------------------------- -->

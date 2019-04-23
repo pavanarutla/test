@@ -188,6 +188,20 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
+                                    <input ng-model="product.lat" class="form-control md-whiteframe-3dp" required="required" placeholder="Latitude" type="text" name="lat" required="required" />
+                                    <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched" style="color:red">
+                                        <div ng-message="required">Latitude is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input ng-model="product.lng" class="form-control md-whiteframe-3dp" required="required" placeholder="Longitude" type="text" name="lng" required="required" />
+                                    <div ng-messages="hordinglistform.lng.$error" ng-if="hordinglistform.lng.$touched" style="color:red">
+                                        <div ng-message="required">Longitude is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
                                     <div class="input-group">
                                         <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                type="text" name="date" readonly options="rqstHrdngsOpts"/>

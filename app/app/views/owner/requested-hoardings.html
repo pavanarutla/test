@@ -159,7 +159,6 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-
                                     <input class="form-control md-whiteframe-3dp" ng-model="product.default_price"
                                         name="default_price" type="text" placeholder="Estimated Product Cost*"
                                         only-numeric required="required">
@@ -184,6 +183,30 @@
                                             <!-- <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
                                             <div ng-message="required">Image is required.</div>
                                         </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input class="form-control md-whiteframe-3dp" ng-model="product.lat"
+                                        placeholder="Latitude" only-numeric type="text" name="lat"
+                                        required="required" />
+                                    <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched"
+                                        style="color:red">
+                                        <div ng-message="required">Latitude is required.</div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6 row">
+                                    <div class="col-sm-7">
+                                        <div class="input-group" style="width: 173px;">
+                                            <input class="form-control md-whiteframe-3dp" ng-model="product.lng"
+                                                placeholder="Longitude" type="text" name="lng" required="required" />
+                                            <div ng-messages="hordinglistform.lng.$error"
+                                                ng-if="hordinglistform.lng.$touched" style="color:red">
+                                                <div ng-message="required">Longitude is required.</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -305,6 +328,7 @@
                     <th class="">Lit</th>
                     <th class="">Price</th>
                     <th class="text-center">Calender</th>
+                    <th class="text-center">Date</th>
                     <th class=""></th>
                     <th class=""></th>
                 </tr>
@@ -312,11 +336,13 @@
             <tbody>
                 <tr ng-repeat="product in requestedProductList">
                     <td class="image_tdwidth hide-xs">
-                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face"
+                            class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
                         <p><b>{{product.siteNo}} -
-                                {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing : {{product.direction|| "N/A" | capitalize}}
+                                {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing :
+                            {{product.direction|| "N/A" | capitalize}}
                             <br>Type : {{product.format_name|| "N/A" | capitalize}}
                         </p>
                     </td>
@@ -336,11 +362,11 @@
                             </i>
                         </a>
                     </td>
+                    <td class="table_vertical text-center">{{product.created_at}}</td>
                     <td class="table_vertical"></td>
                     <td class="text-right table_vertical">
                         <a ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}"><button type="button"
-                                class="btn edit_details">Edit
-                                Details</button></a>
+                                class="btn edit_details">Edit Details</button></a>
                     </td>
                 </tr>
             </tbody>
