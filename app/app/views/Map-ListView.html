@@ -21,8 +21,8 @@
         top:40% !important;
     }
   </style>
-  <div class="row">
-  <div class="col-md-6">
+  <div class="row" style="margin-left: -4px;margin-right: 0px;">
+  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-12 col-12" style="padding-right: 0px;">
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
@@ -42,7 +42,8 @@
           </div>
           <div class="ml-3 mt-2" layout="column">
             <div class="md-body-2"><b>{{product.address}}</b></div>
-            <div class="md-caption">Facing:&nbsp;{{product.direction}}</div>
+            <div class="md-caption"><b>Facing:</b>&nbsp;{{product.direction}}</div>
+            <div class="md-caption"><b>Product Type:</b>&nbsp;{{product.direction}}</div>
           </div>
           <div layout="row" class="mt-2 mb-2">
             <div flex="33" class="border ml-3 p-1">
@@ -180,7 +181,7 @@
   
     <!-- map html start (left side controls) -->
     <div layout="column" style="position:relative;height:100%;" id="map-container">
-      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5"
+      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="100" min-zoom="5"
         disable-default-u-i="true" ng-if="mapContainerHeightSet" styles="[
         {
           elementType: 'geometry',
@@ -400,8 +401,8 @@
     Loading Products{{elipsis}}
   </div>
   </div>
-  <div class="col-md-6">
-  <section class="product_list_view m-2" style="overflow: auto !important;">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12 col-12" style="padding-left: 0px;padding-right: 0px;">
+  <section class="product_list_view" style="height: 897px;overflow: auto !important;">
     <div class="wrapper">
       <!-- <div class="product_heading pl-0 pr-0">
         <div id="myProduct" class="map_filters mt-2"> -->
@@ -480,7 +481,7 @@
           <!--saved campagin html end -->
         <!-- </div>
       </div> -->
-      <div class="pl-0 mt-2">        
+      <div class="pl-0">        
         <div class="table-responsive">
           <table class="table table-hover">
             <thead class="text_color">
@@ -489,10 +490,10 @@
                 <th>Tab ID</th>
                 <th class="">Product Details</th>
                 <!-- <th class="" style="width: 6%;">Views</th> -->
-                <th class="">Product Type</th>
-                <th class="">Size</th>
+                <!-- <th class="">Product Type</th> -->
+                <!-- <th class="">Size</th> -->
                 <!-- <th class="text-center">Lit</th> -->
-                <th class="" style="width: 10%;">Address</th>
+                <!-- <th class="" style="width: 10%;">Address</th> -->
                 <th class=""></th>
               </tr>
             </thead>
@@ -507,13 +508,12 @@
                 </td>
                 <td class="table_vertical">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
                 <!-- <td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td> -->
-                <td class="table_vertical">{{proddetails.format_name}}</td>
-                <td class="table_vertical">{{proddetails.panelSize}}</td>
+                <!-- <td class="table_vertical">{{proddetails.format_name}}</td> -->
+                <!-- <td class="table_vertical">{{proddetails.panelSize}}</td> -->
                 <!-- <td class="table_vertical">{{proddetails.lighting}}</td> -->
-                <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td>
+                <!-- <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td> -->
                 <td class="text-center table_vertical">
-                  <a ng-click="getproddata(proddetails)"><button type="button" class="btn product_btnview">View
-                      Details</button></a>
+                  <a ng-click="selectFromTabIdSearch(proddetails)"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
                 </td>
               </tr>
             </tbody>
