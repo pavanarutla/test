@@ -189,6 +189,7 @@ app.controller('GmapCtrl',
                     $scope.productmarkerslist = markers;
                 });
                 ProductService.getFormatList().then(function (formats) {
+                     $scope.formatList = formats;
                     $scope.formatGrid = [];
                     $scope.selectedFormats = [];
                     var x = 3;
