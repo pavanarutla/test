@@ -442,7 +442,7 @@ app.controller('GmapCtrl',
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                    // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
-                    $mdSidenav('productDetails').toggle();
+                    $mdSidenav('productDetails').open();
                     $scope.selectedProduct = marker;
                 }
 
@@ -460,7 +460,7 @@ app.controller('GmapCtrl',
                     $scope.product.lighting = marker.properties['lighting'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $mdSidenav('productDetails').toggle();
+                    $mdSidenav('productDetails').open();
 
                    // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
@@ -875,7 +875,7 @@ app.controller('GmapCtrl',
                         $scope.product.direction = refToMapMarker.properties['direction'];
                         $scope.product.availableDates = refToMapMarker.properties['availableDates'];
                         $scope.hideSelectedMarkerDetail = false;
-                        $mdSidenav('productDetails').toggle();
+                        $mdSidenav('productDetails').open();
                         $scope.selectedProduct = refToMapMarker;
                     } else {
                         toastr.error('No product found with that tab id', 'error');
