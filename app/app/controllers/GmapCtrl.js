@@ -80,9 +80,11 @@ app.controller('GmapCtrl',
                  | Multi date range picker options end
                  ====================================*/
                  $scope.IsDisabled = true;
-  $scope.EnableDisable = function () {
-    $scope.IsDisabled = $scope.campaign.name.length == 0;
-}
+                    $scope.EnableDisable = function () {
+                    $scope.IsDisabled = $scope.campaign.name.length == 0;
+                }
+
+                // FIlter Dates
                  $scope.FilterDates = function(booked_from,booked_to){    
                     productList = [];
                     locArr = [];
@@ -108,7 +110,7 @@ app.controller('GmapCtrl',
                         }
                     });
                  };
-
+                  // FIlter Dates Ends
                 $scope.hidelocations = false;
                 var setDefaultArea = function () {
                     $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -149,7 +151,7 @@ app.controller('GmapCtrl',
 
                 $scope.$watch(
                         function () {
-                            return $mdSidenav('suggestMe').isOpen();
+                            //return $mdSidenav('suggestMe').isOpen();
                         },
                         function (newValue, oldValue) {
                             if (newValue == false) {
@@ -183,9 +185,10 @@ app.controller('GmapCtrl',
                             selectorMarker.setMap(null);
                         });
                     });
+                    $scope.actualDataCopy=markers;
+                    $scope.productmarkerslist = markers;
                 });
                 ProductService.getFormatList().then(function (formats) {
-                    // $scope.formatList = formats;
                     $scope.formatGrid = [];
                     $scope.selectedFormats = [];
                     var x = 3;
@@ -322,64 +325,64 @@ app.controller('GmapCtrl',
                             .targetEvent(ev)
                             );
                 };
-                $scope.industrySectorList = [
-                    {name: "Aerospace"},
-                    {name: "Agriculture"},
-                    {name: "Automotive"},
-                    {name: "Banking, Financial services and Insurance"},
-                    {name: "Construction, Engineering, Architectural"},
-                    {name: "Classifieds"},
-                    {name: "Consumer Durables"},
-                    {name: "Energy - Oil & Gas"},
-                    {name: "Energy - Other"},
-                    {name: "Energy – Utilities"},
-                    {name: "Entertainment"},
-                    {name: "Ecommerce"},
-                    {name: "Environment"},
-                    {name: "Education"},
-                    {name: "Forestry"},
-                    {name: "Fast-moving consumer goods"},
-                    {name: "Fashion & lifestyle"},
-                    {name: "GIS/Mapping/Cadastral"},
-                    {name: "Global Development"},
-                    {name: "Government – Civil"},
-                    {name: "Government - Defense &Intelligence"},
-                    {name: "Healthcare"},
-                    {name: "Hotels & Restaurant"},
-                    {name: "Insurance"},
-                    {name: "Logistics"},
-                    {name: "Marine / Fishing"},
-                    {name: "Media / Communications"},
-                    {name: "Office Supplies"},
-                    {name: "Public Services"},
-                    {name: "Retail"},
-                    {name: "Real Estate & Infrastructure"},
-                    {name: "Telecom"},
-                    {name: "Travel & Transport"},
-                    {name: "Others"}
-                ];
-                $scope.CampaignDuration = [
-                    {model: "10 Days"},
-                    {model: "15 Days"},
-                    {model: "20 Days"},
-                    {model: "25 Days"},
-                    {model: "30 Days"},
-                    {model: "2 Months"},
-                    {model: "3 Months"},
-                    {model: "6 Months"},
-                    {model: "1 year"}
-                ];
+                // $scope.industrySectorList = [
+                //     {name: "Aerospace"},
+                //     {name: "Agriculture"},
+                //     {name: "Automotive"},
+                //     {name: "Banking, Financial services and Insurance"},
+                //     {name: "Construction, Engineering, Architectural"},
+                //     {name: "Classifieds"},
+                //     {name: "Consumer Durables"},
+                //     {name: "Energy - Oil & Gas"},
+                //     {name: "Energy - Other"},
+                //     {name: "Energy – Utilities"},
+                //     {name: "Entertainment"},
+                //     {name: "Ecommerce"},
+                //     {name: "Environment"},
+                //     {name: "Education"},
+                //     {name: "Forestry"},
+                //     {name: "Fast-moving consumer goods"},
+                //     {name: "Fashion & lifestyle"},
+                //     {name: "GIS/Mapping/Cadastral"},
+                //     {name: "Global Development"},
+                //     {name: "Government – Civil"},
+                //     {name: "Government - Defense &Intelligence"},
+                //     {name: "Healthcare"},
+                //     {name: "Hotels & Restaurant"},
+                //     {name: "Insurance"},
+                //     {name: "Logistics"},
+                //     {name: "Marine / Fishing"},
+                //     {name: "Media / Communications"},
+                //     {name: "Office Supplies"},
+                //     {name: "Public Services"},
+                //     {name: "Retail"},
+                //     {name: "Real Estate & Infrastructure"},
+                //     {name: "Telecom"},
+                //     {name: "Travel & Transport"},
+                //     {name: "Others"}
+                // ];
+                // $scope.CampaignDuration = [
+                //     {model: "10 Days"},
+                //     {model: "15 Days"},
+                //     {model: "20 Days"},
+                //     {model: "25 Days"},
+                //     {model: "30 Days"},
+                //     {model: "2 Months"},
+                //     {model: "3 Months"},
+                //     {model: "6 Months"},
+                //     {model: "1 year"}
+                // ];
                 //export all 
 
-                $scope.exportAllCampaigns = function () {
-                    CampaignService.exportCampaignsPdf().then(function (result) {
-                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
-                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
-                        if (result.status) {
-                            toastr.error(result.meesage);
-                        }
-                    });
-                };
+                // $scope.exportAllCampaigns = function () {
+                //     CampaignService.exportCampaignsPdf().then(function (result) {
+                //         var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                //         FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                //         if (result.status) {
+                //             toastr.error(result.meesage);
+                //         }
+                //     });
+                // };
                 ////////////////////////////////////////////////////////////////////////
                 // tablet filters filtersMap
 
@@ -885,7 +888,7 @@ app.controller('GmapCtrl',
                         $scope.activeUserCampaigns = result;
                     });
                 }
-                $scope.loadActiveUserCampaigns();
+                //$scope.loadActiveUserCampaigns();
 
                 $scope.deleteUserCampaign = function (campaignId) {
                     CampaignService.deleteCampaign(campaignId).then(function (result) {
@@ -1077,7 +1080,7 @@ app.controller('GmapCtrl',
                         } else {
                             toastr.error(result.message);
                         }
-                        $scope.loadActiveUserCampaigns()
+                        //$scope.loadActiveUserCampaigns()
                     });
                 }
 
@@ -1127,12 +1130,7 @@ app.controller('GmapCtrl',
                     });
                 }
 
-                // Product-Controller
-
-                MapService.mapProducts().then(function (markers) {
-                    $scope.actualDataCopy=markers;
-                   $scope.productmarkerslist = markers;
-                 })
+                // Product-Controller               
                  ProductService.getFormatList().then(function (formats) {
                      // $scope.formatList = formats;
                      $scope.formatGrid = [];
@@ -1295,14 +1293,6 @@ app.controller('GmapCtrl',
                        $mdSidenav('productDetails').close();
                      });
                    }
-                   function getShortListedProducts() {
-                     MapService.getshortListProduct(JSON.parse(localStorage.loggedInUser).id).then(function (response) {
-                        shortListedProductsLength = response.length;
-                       $scope.shortListedProducts = response;
-                       $rootScope.$emit("shortListedProducts",shortListedProductsLength)
-                     });
-                   }
-                   getShortListedProducts();
                    $scope.getProductUnavailableDates = function(productId, ev){
                      MapService.getProductUnavailableDates(productId).then(function(dateRanges){
                        $scope.unavailalbeDateRanges = dateRanges;
