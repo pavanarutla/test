@@ -53,19 +53,33 @@
         </div>
         <a href="#/location" class="text_color md-caption pt-1">Switch to Map View</a>
         <div class="col-md-3 mt-2 map_cal" style="margin-left: 20px;">
-            <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Start Date" style="background: none;"></md-datepicker>
+          <div class="row">
+              <div class="col-md-6">
+                  <label for="pwd" class="hide-xs" style="margin-top: 7px;">Start Date</label>
+              </div>
+              <div class="col-md-6" style="margin-left: -30px;padding-left: 0px;">
+                  <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Select Date" style="width: 245px;"></md-datepicker>
+              </div>
+          </div>
         </div>
-        <div class="col-md-4 mt-2 map_cal">
-            <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date" style="background: none;"></md-datepicker>
+        <div class="col-md-3 mt-2 map_cal">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="pwd" class="hide-xs" style="margin-top: 7px;">End Date</label>
+                </div>
+                <div class="col-md-6" style="margin-left: -20px;padding-left: 0px;">
+                    <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="Select Date" style="width: 245px;"></md-datepicker>
+                </div>
+            </div>
         </div>
         <div class="col-md-2 mt-2 text-right">
-          <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)" style="margin-right: 0px;">Filter
+          <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)" style="margin-right: 0px;">Apply
           </md-button>
         </div>
         <div class="col-md-2 mt-2 text-right">
             <md-button class="md-raised md-primary Upload_font" href="#/shortlisted-products" style="cursor:pointer;padding: 3px 13px;margin-left: 0px;">
             <div layout="row">
-              <div class="md-body-1 text-white txt-mrng">Shortlisted</div>
+              <div class="md-body-1 text-white txt-mrng">Shortlisted &nbsp;</div>
               <div flex></div>
               <div class="md-body-1 text-white">
                 ({{shortListedProducts.length}})
@@ -238,7 +252,7 @@
   
     <!-- map html start (left side controls) -->
     <div layout="column" style="position:relative;height:100%;" id="map-container">
-      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="100" min-zoom="2"
+      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="100" min-zoom="5"
         disable-default-u-i="true" ng-if="mapContainerHeightSet" styles="[
         {
           elementType: 'geometry',
