@@ -21,8 +21,65 @@
         top:40% !important;
     }
   </style>
+<div class="m-2 hide_gt_lg hide-xs hide_sm">
+    <!-- <form class="form-inline camp_filters d-flex"  action=""> -->
+      <div class="row">
+        <div class="col-md-3">
+          <md-autocomplete md-min-length="2" md-selected-item="selectedId"
+            md-selected-item-change="selectFromTabIdSearch(items)" md-search-text="searchId"
+            md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
+            md-clear-button="true">
+            <md-item-template>
+              <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
+            </md-item-template>
+          </md-autocomplete>
+        </div>
+        <div class="col-md-4">
+          <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
+            md-selected-item-change="selectedAreaChanged(item)" md-search-text="searchText"
+            md-items="item in autoCompleteArea(searchText)" md-item-text="item.name" placeholder="Search By Area,Location"
+            md-clear-button="true">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
+            </md-item-template>
+          </md-autocomplete>
+        </div>
+        <div class="col-md-3" style="margin-left: -20px;">
+          <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+                    class="form-control md-whiteframe-3dp add_filtermobile" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+                    name="productType">
+                <option value="" disabled selected>Site Type</option>
+            </select>
+        </div>
+        <a href="#/location" class="text_color md-caption pt-1">Switch to Map View</a>
+        <div class="col-md-3 mt-2 map_cal" style="margin-left: 20px;">
+            <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Start Date" style="background: none;"></md-datepicker>
+        </div>
+        <div class="col-md-4 mt-2 map_cal">
+            <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date" style="background: none;"></md-datepicker>
+        </div>
+        <div class="col-md-2 mt-2 text-right">
+          <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)" style="margin-right: 0px;">Filter
+          </md-button>
+        </div>
+        <div class="col-md-2 mt-2 text-right">
+            <md-button class="md-raised md-primary Upload_font" href="#/shortlisted-products" style="cursor:pointer;padding: 3px 13px;margin-left: 0px;">
+            <div layout="row">
+              <div class="md-body-1 text-white txt-mrng">Shortlisted</div>
+              <div flex></div>
+              <div class="md-body-1 text-white">
+                ({{shortListedProducts.length}})
+              </div>
+            </div>
+          </md-button>
+        </div>
+        
+        
+      </div>
+    <!-- </form> -->
+</div>
   <div class="row" style="margin-left: -4px;margin-right: 0px;">
-  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-12 col-12" style="padding-right: 0px;">
+  <div class="col-xl-9 col-lg-9 col-md-7 col-sm-9 col-xs-12 col-12" style="padding-right: 0px;">
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
@@ -181,7 +238,7 @@
   
     <!-- map html start (left side controls) -->
     <div layout="column" style="position:relative;height:100%;" id="map-container">
-      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="100" min-zoom="5"
+      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="100" min-zoom="2"
         disable-default-u-i="true" ng-if="mapContainerHeightSet" styles="[
         {
           elementType: 'geometry',
@@ -271,10 +328,10 @@
         }]">
       </ng-map>
       <!-- sidenave arrow btn-->
-      <button class="slide-button-map-1 right-cls1" id="showLeftPush"></button>
+      <button class="slide-button-map-1 right-cls1 hide_md" id="showLeftPush"></button>
       <!-- //sidenave arrow btn-->
       <!-- sidenav  -->
-      <div id="mydiv" class="map_filters">
+      <div id="mydiv" class="map_filters hide_md">
         <div id="mydivheader">
           <a href="" class="menu__btn">
             <md-icon><i class="material-icons menu_move">
@@ -401,7 +458,7 @@
     Loading Products{{elipsis}}
   </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12 col-12" style="padding-left: 0px;padding-right: 0px;">
+  <div class="col-xl-3 col-lg-3 col-md-5 col-sm-3 col-xs-12 col-12" style="padding-left: 0px;padding-right: 0px;">
   <section class="product_list_view" style="height: 897px;overflow: auto !important;">
     <div class="wrapper">
       <!-- <div class="product_heading pl-0 pr-0">

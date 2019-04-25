@@ -185,7 +185,7 @@ app.controller('GmapCtrl',
                     });
                 });
                 ProductService.getFormatList().then(function (formats) {
-                    // $scope.formatList = formats;
+                     $scope.formatList = formats;
                     $scope.formatGrid = [];
                     $scope.selectedFormats = [];
                     var x = 3;
