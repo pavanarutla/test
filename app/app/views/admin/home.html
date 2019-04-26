@@ -1,12 +1,35 @@
 <div class="contbg" layout="column" flex>
-  <div class="feed-section" style="margin-top:8px">
+
+
+  <div class="feed-section">
     <div class="section-inner">
       <!-- <h4 class="text_color" layout-padding ng-if="requestList.metroCampaignFeeds.length > 0">Metro Feeds</h4> -->
       <h4 class="text_color" layout-padding >Metro Feeds</h4>
       <!-- Metro feeds -->
-      <div ng-if="requestList.metroCampaignFeeds.length < 1" > 
+      <!-- <div ng-if="requestList.metroCampaignFeeds.length < 1" > 
         <h3 layout-padding>There is No Metro Campaigns Feeds Available</h3>
-      </div>
+      </div> -->
+      <!-- <div class="row" style="margin-left:0px;margin-right:0px">
+        <div class="col-sm-3"  ng-if="requestList.metroCampaignFeeds.length > 0" ng-repeat="request in requestList.metroCampaignFeeds" style="margin-bottom:10px">
+          <div style="padding:20px 0;" class="md-whiteframe-3dp contbg">
+            <div layout="column" layout-fill layout-margin>
+              <div layout="column" layout-align="center center" flex>
+                <img ng-src="{{serverUrl + request.user_avatar}}"style="widows: 50px;px;height:50px;" class="md-avatar face" ng-if="request.user_avatar">
+                <img src="assets/images/man_new.png" style="width:50px;height:50px;" class="md-avatar face" ng-if="!request.user_avatar">
+              </div>
+              <div layout="column" layout-align="center start" flex class="feed-hdng">
+                <h3 ng-show="request.status == 121">{{request.contact_name}} has checked out a metro campaign.</h3>
+              </div>
+            </div>
+            <div layout="colmun" style="margin: 0 0 0 8px;">
+              <span class="text_color">Date:{{request.updated_at | datetimeify}}</span>
+            </div>
+            <div layout="colmun" layout-align="center center">
+              <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)" style="font-size: 12px">View Details</md-button>
+            </div>
+          </div>
+        </div>
+      </div> -->
       <div style="margin-top: 1em;">
           <div class="table-responsive">
               <table class="table" ng-if="requestList.metroCampaignFeeds.length > 0">

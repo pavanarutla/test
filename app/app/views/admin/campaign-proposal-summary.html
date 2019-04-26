@@ -98,14 +98,19 @@
                         <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_name|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
-                        <td><b>Contact</b></td>
-                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.phone|| "N/A" | capitalize}}</td>
-                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_phone|| "N/A" | capitalize}}</td>
+                        <td><b>Contact Details</b></td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.phone|| "N/A" | capitalize}} / {{campaignDetails.email|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_phone|| "N/A" | capitalize}} / {{campaignDetails.org_contact_email|| "N/A" | capitalize}}</td>
                     </tr>
                     <tr>
-                        <td><b>Email</b></td>
-                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.email|| "N/A" | capitalize}}</td>
-                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_email|| "N/A" | capitalize}}</td>
+                        <td><b>Refered By</b></td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Estimated Budget</b></td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.est_budget|| "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.est_budget|| "N/A"}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -137,6 +142,10 @@
                     <tr>
                         <td><b>Status</b></td>
                         <td>{{campaignDetails.status | stringifyCampaignStatus }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Campaign Start/End Date</b></td>
+                        <td>N/A</td>
                     </tr>
                 </tbody>
             </table>
@@ -202,7 +211,7 @@
                 </div>
             </div>
         </div>
-        <div class="">
+        <div class="" ng-hide="campaignDetails.status <= 300">
             <div class="md-grid-item-content hoarding-btn">
                     <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue hide-xs" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300">
                     Payment Details

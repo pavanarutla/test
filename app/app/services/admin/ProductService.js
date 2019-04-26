@@ -73,6 +73,11 @@ app.factory('ProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.get(config.apiPath + '/metro-packages').success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
+			},
+			searchAreas: function(query){
+				var dfd = $q.defer();
+				$http.get(config.apiPath + '/search-areas/' + query).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
 			}
 		}
 	}

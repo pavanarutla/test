@@ -377,6 +377,7 @@ $scope.hidebutton = function(){
                         });
                     });
                     toastr.success(result.message);
+                    $state.reload();
                 } else {
                     toastr.error(result.message);
                 }
@@ -751,11 +752,13 @@ $scope.hidebutton = function(){
     ];
     $scope.files = {};
     $scope.updateOwnerCampaignPayment = function (id) {
+        debugger;
         $scope.campaignPayment.campaign_id = id;
         Upload.upload({
             url: config.apiPath + '/update-campaign-payment-owner',
             data: {image: $scope.files.image, campaign_payment: $scope.campaignPayment}
         }).then(function (result) {
+            console.log(result);
             if (result.data.status == "1") {
                 toastr.success(result.data.message);
                 $scope.campaignPayment = {};
@@ -848,12 +851,10 @@ $scope.hidebutton = function(){
     /*==============================
      | Campaign Search
      ==============================*/
-    function shareownerCampaign() {
-        // document.getElementById("sharecampDrop").classList.toggle("show");
-        // document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
-        angular.element(document.querySelector("#sharecampDrop")).addClass("hide");
-        angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
-    }
+    // function shareownerCampaign() {
+    //     angular.element(document.querySelector("#OwnersharecampDrop")).addClass("hide");
+    //     angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
+    // }
 
     /*=========================
      | Page based initial loads

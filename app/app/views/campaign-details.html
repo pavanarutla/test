@@ -33,6 +33,10 @@
 						<td><b>Email</b></td>
 						<td>{{campaignDetails.email | capitalize}}</td>
 					</tr>
+					<tr>
+						<td><b>Estimated Budget</b></td>
+						<td>{{campaignDetails.est_budget || "N/A"}}</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -51,18 +55,22 @@
 					<tr>
 						<td><b>Total Budget</b></td>
 						<td>
-							<span ng-if="campaignDetails.act_budget">Rs.</span>{{campaignDetails.totalamount| number : 2 || "N/A"}}
+							<span ng-if="campaignDetails.act_budget">$</span>{{campaignDetails.totalamount| number : 2 || "N/A"}}
 						</td>
 					</tr>
 					<tr>
 						<td><b>Pending payment</b></td>
 						<td>
-							<span ng-if="campaignDetails.pending_payment">Rs.</span>{{PendingPay || "N/A"}}
+							<span>$</span>{{PendingPay || "N/A"}}
 						</td>
 					</tr>
 					<tr>
 						<td><b>Status</b></td>
 						<td>{{campaignDetails.status | stringifyCampaignStatus }}</td>
+					</tr>
+					<tr>
+						<td><b>Campaign Start/End Date</b></td>
+						<td>N/A</td>
 					</tr>
 				</tbody>
 			</table>
@@ -222,7 +230,8 @@
 					<th>Size</th>
 					<th>Booked From</th>
 					<th>Booked To</th>
-					<th>Price</th>
+					<th>Price in $</th>
+					<th></th>
 					<th>Status</th>
 					<th></th>					
 					<th style="text-align:end;">
