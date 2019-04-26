@@ -484,12 +484,15 @@
 	
 			</div>
 			<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
-			 style="float: right;">
+			class="book_campowner">
 	
 				<div class="">
 					<div class="dropdown">
-						<md-button onclick="sharemetroCampaign()" class="dropbtn Upload_font">
+						<md-button onclick="sharemetroCampaign()" class="dropbtn Upload_font hide-xs">
 							Share Campaign
+						</md-button>
+						<md-button onclick="sharemetroCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
+								Share
 						</md-button>
 						<div id="sharemetroDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
 							<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
@@ -532,15 +535,21 @@
 				</div>
 				<div class="" style="cursor: pointer;">
 					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-						<md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampDetails.id)" download>
+						<md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(metroCampDetails.id)" download>
 							Download Quotation
+						</md-button>
+						<md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(metroCampDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
+							Download
 						</md-button>
 					</div>
 				</div>
 				<div class="">
 					<div class="md-grid-item-content hoarding-btn">
-						<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status >= 1121">
+						<md-button class="md-grid-item-content add_blue hide-xs" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status >= 1121">
 							<!-- ng-disabled="!metroCampDetails || metroCampDetails.status > 1101" -->
+							Add Package
+						</md-button>
+						<md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status >= 1121">
 							Add Package
 						</md-button>
 					</div>
@@ -699,10 +708,10 @@
 			</table>
 		</div>
 		<div class="row border_quest mr-0 ml-0">
-			<div class="col-12 col-sm-6 col-md-12">
+			<!-- <div class="col-12 col-sm-6 col-md-12"> -->
 					<!-- ng-if="metroCampDetails.status >= 1121" -->
 				<!-- ng-if="metroCampDetails.type != 0" -->
-				<div class="mt-3 pull-right sub_total">
+				<!-- <div class="mt-3 pull-right sub_total">
 					<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
 					</p>
 					<p class="text_color" style="text-indent: 173px;"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
@@ -710,19 +719,34 @@
 					<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
 							TOTAL | number : 2}}</span>
 					</p>
-				</div>
-			</div>
-			<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status < 1121">
+				</div> -->
+			<!-- </div> -->
+			<!-- <div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status < 1121">
 				<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
 					<div class="md-caption">Checkout</div>
 				</md-button>
-			</div>
-			<style>
-				.ng-cloak {
-					display: none !important;
-				}
-			</style>
+			</div> -->
 		</div>
+
+			<div class="small-wrapper mt0">
+					<div class="smallContainer">
+						<div class="payment-summary">
+							<ul id="double">
+								<li class="col1">Total :</li>
+								<li class="col2">{{metroCampDetails.act_budget}}</li>
+								<li class="col1 text_color"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
+									ng-change="uncheck(checked)" />18% GST :</li>
+								<li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+							</ul>
+							<ul id="total">
+								<li class="col1">Grand Total :</li>
+								<li class="col2">{{TOTAL | number : 2}}</li>
+							</ul>
+							<md-button class="md-raised md-primary all_button book_campowner"
+							ng-if="metroCampDetails.status < 1121" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">Checkout</md-button>
+						</div>
+					</div>
+				</div>
 	<!-- </div> -->
 </div>
 
