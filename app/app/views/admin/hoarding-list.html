@@ -125,7 +125,7 @@
                                                 <div class="form-group row">
                                                         <div class="col-sm-4">
                                                                 <input class="form-control md-whiteframe-3dp" ng-model="product.impressions"
-                                                                        placeholder="Impressions" type="text" name="impressions"
+                                                                        placeholder="impressions" type="text" name="impressions"
                                                                         required="required" />
                                                         </div>
                                                         <div class="col-sm-4">
@@ -211,18 +211,31 @@
                                     <div ng-message="required">Site type is required.</div>
                                 </div>
 
+                            </div>                          
+                        </div>
+                        <div class="form-group row">
+                                <div class="col-sm-6">
+                                        <label>Select Owner*</label>
+                                    <select ng-model="product.client" class="form-control md-whiteframe-3dp select-value"
+                                            ng-options="cl.id as cl.name for cl in allClients"
+                                            ng-if="product.status != 0">
+                                            <option value="" disabled selected>Select Owner</option>
+                                    </select>
+                                    <input class="form-control md-whiteframe-3dp" ng-model="product.client_name"
+                                            placeholder="Client Name" type="text" name="client_name"
+                                            ng-if="product.status == 0" ng-disabled="true" />
                             </div>
-                            <div class="col-sm-12">
-                                <select ng-model="product.client" class="form-control md-whiteframe-3dp select-value"
-                                        ng-options="cl.id as cl.name for cl in allClients"
-                                        ng-if="product.status != 0">
-                                        <option value="" disabled selected>Select Owner</option>
-                                </select>
-                                <input class="form-control md-whiteframe-3dp" ng-model="product.client_name"
-                                        placeholder="Client Name" type="text" name="client_name"
-                                        ng-if="product.status == 0" ng-disabled="true" />
+                            <div class="col-sm-6">
+                                    <label>Facing*</label>
+                                    <input ng-model="product.direction" class="form-control md-whiteframe-3dp"
+                                        required="required" type="text" name="cost" required="required" />
+                                    <div ng-messages="hordinglistform.cost.$error"
+                                        ng-if="hordinglistform.cost.$touched" style="color:red">
+                                        <div ng-message="required">Facing is required.</div>
+                                    </div>
+                                </div>
                         </div>
-                        </div>
+                        
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>Search DMA</label>
@@ -309,7 +322,7 @@
                             <div class="col-sm-6">
                                 <label>Longitude*</label>
                                 <input type="text" class="form-control md-whiteframe-3dp" name="lat"
-                                    ng-model="product.long" required="required">
+                                    ng-model="product.lng" required="required">
                                 <div ng-messages="hordinglistform.long.$error"
                                     ng-if="hordinglistform.long.$touched" style="color:red">
                                     <div ng-message="required">Longitude is required.</div>
@@ -347,13 +360,10 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label>Facing*</label>
-                                <input ng-model="product.direction" class="form-control md-whiteframe-3dp"
-                                    required="required" type="text" name="cost" required="required" />
-                                <div ng-messages="hordinglistform.cost.$error"
-                                    ng-if="hordinglistform.cost.$touched" style="color:red">
-                                    <div ng-message="required">Facing is required.</div>
-                                </div>
+                                <label>Direction*</label>
+                                <input type="file" class="form-control md-whiteframe-3dp"
+                                        required="required" ngf-select ng-model="files.image" name="imageFile"
+                                        accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*">
                             </div>
                             <div class="col-sm-6">
                                 <label>Select Product Date</label>
@@ -412,11 +422,11 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label>Average Impressions Per Week*</label>
+                                <label>Average impressions Per Week*</label>
                                 <div class="input-group">
 
                                     <input class="form-control md-whiteframe-3dp" type="text"
-                                        name="impressionsperweek" ng-model="product.impressionsperweek"
+                                        name="impressions" ng-model="product.impressions"
                                         only-numeric>
                                     <div ng-messages="hordinglistform.impressionsperweek.$error"
                                         ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
@@ -467,7 +477,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <md-button type="submit" Class="md-raised md-primary register_btn"
-                                ng-click="addProduct()" ng-disabled="addProductForm.$invalid">
+                                ng-click="addProduct(product)" ng-disabled="addProductForm.$invalid">
                                     Submit</md-button>
                             </div>
                         </div>
@@ -561,6 +571,8 @@
                                         <td class="table_vertical">{{product.impressions}}</td>
                                         <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
                                         <td class="table_vertical" ng-if="product.lighting == 0">No</td>
+                                        <td class="table_vertical" ng-if="product.lighting != 0 && product.lighting != 1">
+                                            {{product.lighting}}</td>
                                         <td class="table_vertical">
                                                 <!-- <a ng-href="#/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a> -->
                                                 <a ng-href="#/admin/product-shortlist-campagin/{{product.id}}">{{product.camapigns_count}}

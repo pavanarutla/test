@@ -316,7 +316,8 @@ app.controller("ProductCtrl", [
     $scope.product = {};
 
     $scope.files = {};
-    $scope.addProduct = function() {   
+    $scope.addProduct = function(product) {
+      product.area = $scope.areaObj.id;
       Upload.upload({        
         url: config.apiPath + "/product",
         data: {
@@ -337,6 +338,7 @@ app.controller("ProductCtrl", [
             $scope.addProductErrors = result.data.message;
           }
           // addnewProduct();
+          $scope.areaObj ="";
           $state.reload();
         },
         function(resp) {
