@@ -85,7 +85,7 @@ app.controller('GmapCtrl',
                 }
 
                 // FIlter Dates
-                 $scope.FilterDates = function(booked_from,booked_to){    
+                 $scope.FilterDates = function(booked_from,booked_to){                     
                     productList = [];
                     locArr = [];
                     uniqueMarkers = [];
@@ -438,6 +438,7 @@ app.controller('GmapCtrl',
                     $scope.product.panelSize = marker.properties['panelSize'];
                     $scope.product.address = marker.properties['address'];
                     $scope.product.impressions = marker.properties['impressions'];
+                    $scope.product.format = marker.properties['format_name'];
                     $scope.product.lighting = marker.properties['lighting'];
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
@@ -457,6 +458,7 @@ app.controller('GmapCtrl',
                     $scope.product.panelSize = marker.properties['panelSize'];
                     $scope.product.address = marker.properties['address'];
                     $scope.product.impressions = marker.properties['impressions'];
+                    $scope.product.format = marker.properties['format_name'];
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.lighting = marker.properties['lighting'];
                     $scope.product.availableDates = marker.properties['availableDates'];
@@ -872,6 +874,7 @@ app.controller('GmapCtrl',
                         $scope.product.panelSize = refToMapMarker.properties['panelSize'];
                         $scope.product.address = refToMapMarker.properties['address'];
                         $scope.product.impressions = refToMapMarker.properties['impressions'];
+                        $scope.product.format = refToMapMarker.properties['format_name'];
                         $scope.product.lighting = refToMapMarker.properties['lighting'];
                         $scope.product.direction = refToMapMarker.properties['direction'];
                         $scope.product.availableDates = refToMapMarker.properties['availableDates'];

@@ -25,24 +25,28 @@
     <!-- <form class="form-inline camp_filters d-flex"  action=""> -->
       <div class="row">
         <div class="col-md-3">
-          <md-autocomplete md-min-length="2" md-selected-item="selectedId"
+          <!-- <md-autocomplete md-min-length="2" md-selected-item="selectedId"
             md-selected-item-change="selectFromTabIdSearch(items)" md-search-text="searchId"
             md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
             md-clear-button="true">
             <md-item-template>
               <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
             </md-item-template>
-          </md-autocomplete>
+          </md-autocomplete> -->
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.siteNo"
+          placeholder="Search By Tab ID">
         </div>
         <div class="col-md-4">
-          <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
+          <!-- <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
             md-selected-item-change="selectedAreaChanged(item)" md-search-text="searchText"
             md-items="item in autoCompleteArea(searchText)" md-item-text="item.name" placeholder="Search By Area,Location"
             md-clear-button="true">
             <md-item-template>
               <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
             </md-item-template>
-          </md-autocomplete>
+          </md-autocomplete> -->
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.siteNo"
+          placeholder="Search By Area Name">
         </div>
         <div class="col-md-3" style="margin-left: -20px;">
           <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
@@ -114,7 +118,7 @@
           <div class="ml-3 mt-2" layout="column">
             <div class="md-body-2"><b>{{product.address}}</b></div>
             <div class="md-caption"><b>Facing:</b>&nbsp;{{product.direction}}</div>
-            <div class="md-caption"><b>Product Type:</b>&nbsp;{{product.direction}}</div>
+            <div class="md-caption"><b>Product Type:</b>&nbsp;{{product.format}}</div>
           </div>
           <div layout="row" class="mt-2 mb-2">
             <div flex="33" class="border ml-3 p-1">
@@ -125,7 +129,7 @@
             <div flex="33" class="border ml-3 mr-3 p-1 ">
               <p class="md-caption mb-0">Lit</p>
               <h3 class="md-body-2">{{product.lighting}}</h3>
-              <div class="md-caption">backlit</div>
+              <!-- <div class="md-caption">backlit</div> -->
             </div>
             <div flex="33" class="border mr-3 p-1">
               <p class="md-caption mb-0">Size</p>
@@ -360,24 +364,28 @@
           <a ng-click="clearFields();" class="md-caption float-right pt-1 text_a">Clear Filters</a>
         </div>
         <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
-          <md-autocomplete md-min-length="2" md-selected-item="selectedId"
+          <!-- <md-autocomplete md-min-length="2" md-selected-item="selectedId"
             md-selected-item-change="selectFromTabIdSearch(items)" md-search-text="searchId"
             md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
             md-clear-button="true" style="min-width: 100% !important">
             <md-item-template>
               <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
             </md-item-template>
-          </md-autocomplete>
+          </md-autocomplete> -->
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.siteNo"
+          placeholder="Search By Tab ID">
         </div>
         <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
-          <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
+          <!-- <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
             md-selected-item-change="selectedAreaChanged(item)" md-search-text="searchText"
             md-items="item in autoCompleteArea(searchText)" md-item-text="item.name" placeholder="Search By Area,Location"
             md-clear-button="true" style="min-width: 100% !important">
             <md-item-template>
               <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
             </md-item-template>
-          </md-autocomplete>
+          </md-autocomplete> -->
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.address"
+          placeholder="Search By Area Name">
         </div>
         <!-- filters html start-->
         <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
@@ -570,7 +578,7 @@
               </tr>
             </thead>
             <tbody ng-repeat="proddetail in productmarkerslist">
-              <tr ng-repeat="proddetails in proddetail.product_details | filter:siteNo | filter:area_name">
+              <tr ng-repeat="proddetails in proddetail.product_details | filter:product.siteNo | filter:product.address | filter:proddetails.type">
                 <td class="image_tdwidthproduct">
   
                   <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px"
@@ -578,7 +586,7 @@
                 </td>
                 <td class="table_vertical">{{proddetails.siteNo}}</td>
                 <td class="table_vertical">{{proddetails.siteNo}} - {{proddetails.area_name}}</td>
-                <td class="table_vertical">{{proddetails.price}}</td>
+                <td class="table_vertical">{{proddetails.price}}</td>               
                 <!-- <td class="table_vertical" style="width: 6%;">{{proddetails.adStrength}}</td> -->
                 <!-- <td class="table_vertical">{{proddetails.format_name}}</td> -->
                 <!-- <td class="table_vertical">{{proddetails.panelSize}}</td> -->
