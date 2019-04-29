@@ -296,7 +296,7 @@
                             <form name="hordinglistform" novalidate="novalidate">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <input type="text" class="form-control md-whiteframe-3dp" name="siteNo" ng-model="editRequestedhordings.siteNo"
                                                        placeholder="Product ID*" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
                                                 <div ng-messages="hordinglistform.siteNo.$error" ng-if="hordinglistform.siteNo.$touched" style="color:red">
@@ -304,7 +304,7 @@
                                                     <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="editRequestedhordings.type"
                                                         class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
                                                         name="productType">
@@ -317,7 +317,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <md-autocomplete
                                                     md-min-length="3"
                                                     md-selected-item = "areaObj"
@@ -349,7 +349,7 @@
                                                     </md-not-found>
                                                 </md-autocomplete>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <select ng-model="editRequestedhordings.lighting" required="required" name="light" class="form-control md-whiteframe-3dp"
                                                         md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" ng-init="product.lighting = product.lighting || ''"
                                                         placeholder="Has lighting?*">
@@ -361,14 +361,14 @@
                                                     <div ng-message="required">light*.</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-xs-12 col-12 height_lop edit_formbottom">
                                                 <input type="text" class="form-control md-whiteframe-3dp" name="height" ng-model="editRequestedhordings.panelSize.split('*')[0]"
                                                        placeholder="Height*" required="required">
                                                 <div ng-messages="hordinglistform.height.$error" ng-if="hordinglistform.height.$touched" style="color:red">
                                                     <div ng-message="required">height*.</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-xs-12 col-12 width_lop">
                                                 <input type="text" class="form-control md-whiteframe-3dp" name="width" ng-model="editRequestedhordings.panelSize.split('*')[1]"
                                                        placeholder="Width*" required="required">
                                                 <div ng-messages="hordinglistform.width.$error" ng-if="hordinglistform.width.$touched" style="color:red">
@@ -378,7 +378,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
 
                                                 <input type="text" class="form-control md-whiteframe-3dp" name="Address" ng-model="editRequestedhordings.address"
                                                        placeholder="Address*" required="required">
@@ -387,7 +387,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
 
                                                 <input ng-model="editRequestedhordings.nearlandmark" class="form-control md-whiteframe-3dp" required="required"
                                                        placeholder="Near Land Mark*" type="text" name="nearlandmark" required="required" />
@@ -399,7 +399,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
 
                                                 <input class="form-control md-whiteframe-3dp" ng-model="editRequestedhordings.default_price"  name="default_price" type="text" placeholder="Estimated Product Cost*" only-numeric required="required">
                                                 <div ng-messages="hordinglistform.default_price.$error" ng-if="hordinglistform.default_price.$touched" style="color:red">
@@ -407,7 +407,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <div class="input-group">
                                                     <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
                                                     <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
@@ -420,14 +420,14 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp" required="required" placeholder="Direction / Facing*"
                                                        type="text" name="cost" required="required" />
                                                 <div ng-messages="hordinglistform.cost.$error" ng-if="hordinglistform.cost.$touched" style="color:red">
                                                     <div ng-message="required">Direction is required.</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <div class="input-group">
                                                     <input class="form-control md-whiteframe-3dp" type="text" placeholder="Upload Product Video if Any" name="videoUrl" ng-model="editRequestedhordings.videoUrl">
                                                     <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
@@ -435,14 +435,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <input ng-model="editRequestedhordings.lat" class="form-control md-whiteframe-3dp" required="required" placeholder="Latitude"
                                                        type="text" name="Latitude" required="required" />
                                                 <div ng-messages="hordinglistform.Latitude.$error" ng-if="hordinglistform.Latitude.$touched" style="color:red">
                                                     <div ng-message="required">Latitude is required.</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <div class="input-group">
                                                     <input class="form-control md-whiteframe-3dp" type="text" placeholder="Longitude" name="Longitude" ng-model="editRequestedhordings.lng">
                                                     <div ng-messages="hordinglistform.Longitude.$error" ng-if="hordinglistform.Longitude.$touched" style="color:red">
@@ -452,7 +452,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <div class="input-group">
                                                     <!-- <input date-range-picker ng-model="editRequestedhordings.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
                                                            type="text" name="date" readonly options="rqstHrdngsOpts" ng-click="getProductUnavailableDates(editRequestedhordings.id, $event);"/>
@@ -470,7 +470,7 @@
                                         <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <div class="input-group">
                                                     <input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="editRequestedhordings.impressionsperweek" placeholder="Impressions Per Week*" only-numeric>
                                                     <div ng-messages="hordinglistform.impressionsperweek.$error" ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
@@ -478,7 +478,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <select name="visibility" class="form-control md-whiteframe-3dp" id="Visibility" required="required"
                                                         ng-model="editRequestedhordings.visibility">
                                                     <option value="" disabled selected> Visibility Score</option>
@@ -490,7 +490,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12 edit_formbottom">
                                                 <select name="audience" class="form-control md-whiteframe-3dp" id="Audience" required="required"
                                                         ng-model="editRequestedhordings.audience">
                                                     <option value="" disabled selected>Targeted Audience</option>
@@ -499,7 +499,7 @@
                                                     <option>XYZ</option>
                                                 </select required>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
                                                 <div class="input-group">
                                                     <input class="form-control md-whiteframe-3dp" type="text" name="targetedaudience" ng-model="editRequestedhordings.targetedaudience" placeholder="Targeted Audience">
                                                 </div>
@@ -523,7 +523,7 @@
     </div>
 
     <div class="layout-margin col-md-5 hide-xs">
-        <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:382px;height:480px;overflow:hidden;visibility:hidden;">
+        <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:342px;;height:480px;overflow:hidden;visibility:hidden;">
             <!-- Loading Screen -->
             <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                 <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />

@@ -355,10 +355,10 @@
                   </div> -->
 
             <div layout="row">
-              <div id="AreaSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="30">
+              <div id="AreaSsearchInput" style="margin:8px;" layout-align="center start" layout="column" flex="10">
                 <md-autocomplete ng-disabled="isDisabled" md-selected-item="areaSelectedItem" md-search-text-change="areaSearchTextChange(areaSearchText)"
                   md-search-text="areaSearchText" md-selected-item-change="viewSelectedArea(area)" md-items="area in areaSearch(areaSearchText)"
-                  md-item-text="area.name" md-min-length="3" placeholder="Search..." style="width:100%" md-clear-button="true">
+                  md-item-text="area.name" md-min-length="3" placeholder="Search..." md-clear-button="true">
                   <md-item-template>
                     <span class="item-title">
                       <span> {{area.name}} </span>
@@ -383,10 +383,11 @@
                   </md-not-found>
                 </md-autocomplete>
               </div>
-              <div flex="40">
-                <md-button class="md-raised" ng-click="getAllAreas()">
+              <div flex="10" class="cancel_locationadmin">
+                  <md-button Class="md-raised register_btn" ng-click="getAllAreas()">Cancel</md-button>
+                <!-- <md-button class="md-raised" ng-click="getAllAreas()">
                   Cancel
-                </md-button>
+                </md-button> -->
               </div>
             </div>
 
