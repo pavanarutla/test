@@ -99,6 +99,7 @@ app.controller('GmapCtrl',
                         });
                         markersOnMap = Object.assign([]);
                         $scope.filteredMarkers = markers;
+                        $scope.productmarkerslist = markers;
                         $scope.processMarkers();
                         if (markers.length > 0) {
                             var bounds = new google.maps.LatLngBounds();
@@ -652,20 +653,20 @@ app.controller('GmapCtrl',
                 });
 
                 $scope.applyFilter = function () {
+                    debugger;
                     productList = [];
                     locArr = [];
                     uniqueMarkers = [];
                     concentricMarkers = {};
                     var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
                     $scope.plottingDone = false;
-                    MapService.filterProducts(filterObj).then(function (markers) {
-                        //console.log("filter products",marksers)
+                    MapService.filterProducts(filterObj).then(function (markers) {                        
                         _.each(markersOnMap, function (v, i) {
                             v.setMap(null);
                             $scope.Clusterer.removeMarker(v);
                         });
                         markersOnMap = Object.assign([]);
-                        $scope.filteredMarkers = markers;
+                        $scope.filteredMarkers = markers;                       
                         $scope.processMarkers();
                         if (markers.length > 0) {
                             var bounds = new google.maps.LatLngBounds();

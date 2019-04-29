@@ -372,7 +372,7 @@
               <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
             </md-item-template>
           </md-autocomplete> -->
-          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.siteNo"
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="tabID"
           placeholder="Search By Tab ID">
         </div>
         <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
@@ -384,7 +384,7 @@
               <span md-highlight-text="searchText">{{item.name}}, ({{item.pincode}})</span>
             </md-item-template>
           </md-autocomplete> -->
-          <input type="search" class="form-control md-whiteframe-3dp" ng-model="product.address"
+          <input type="search" class="form-control md-whiteframe-3dp" ng-model="AreaName"
           placeholder="Search By Area Name">
         </div>
         <!-- filters html start-->
@@ -578,7 +578,7 @@
               </tr>
             </thead>
             <tbody ng-repeat="proddetail in productmarkerslist">
-              <tr ng-repeat="proddetails in proddetail.product_details | filter:product.siteNo | filter:product.address | filter:proddetails.type">
+              <tr ng-repeat="proddetails in proddetail.product_details | filter:tabID | filter:AreaName">
                 <td class="image_tdwidthproduct">
   
                   <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px"
