@@ -653,7 +653,6 @@ app.controller('GmapCtrl',
                 });
 
                 $scope.applyFilter = function () {
-                    debugger;
                     productList = [];
                     locArr = [];
                     uniqueMarkers = [];
@@ -666,7 +665,8 @@ app.controller('GmapCtrl',
                             $scope.Clusterer.removeMarker(v);
                         });
                         markersOnMap = Object.assign([]);
-                        $scope.filteredMarkers = markers;                       
+                        $scope.filteredMarkers = markers; 
+                        $scope.productmarkerslist = markers;                      
                         $scope.processMarkers();
                         if (markers.length > 0) {
                             var bounds = new google.maps.LatLngBounds();
@@ -1262,7 +1262,8 @@ app.controller('GmapCtrl',
                                      v.setMap(null);
                                      $scope.Clusterer.removeMarker(v);
                                  });
-                                 markersOnMap = Object.assign([]);
+                                 markersOnMap = Object.assign([]);                                 
+                                 $scope.productmarkerslist = markers;
                                  $scope.filteredMarkers = markers;
                                  $scope.processMarkers();
                                  if (markers.length > 0) {
