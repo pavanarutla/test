@@ -17,7 +17,7 @@
     }
     .aire_d_bar_inner {
         float: left;
-        margin-top: 5px;
+        margin-top: 12px;
         display: inline-flex;
     }
     .aire_d_sub {
@@ -34,7 +34,7 @@
     li.s-depth1-wrap a {
         padding: 1rem 1.5rem;
         font-size: 12px;
-        text-transform: capitalize;
+        text-transform: uppercase;
         line-height: 30px;
         font-weight: 600;
         color: #fff;
@@ -64,6 +64,8 @@
         width: 95%;
         z-index: 11;
         padding: 15px 0;
+        -webkit-box-shadow: 0px 7px 5px 2px #CCCCCC; 
+        box-shadow: 0px 7px 5px 2px #CCCCCC;
     }
     .aire_d_drop-mobile ul {
         width: 100%;
@@ -101,7 +103,7 @@
     }
     .mobile_btn,.mobile_btn_close{
     background: none;
-    color: #fff;
+    color: #ffffffc7;
     border: none;
     font-size: 20px;
     margin-right: 10px;
@@ -258,8 +260,8 @@
                     <ul class="air_d__sub-nav air_main_menu d-none d-sm-none d-md-none d-lg-block d-xl-block ">
                         <li class="s-depth1-wrap"><a ng-href="#/aboutbbi" ng-if="!footerhide" class="s-btn-toggler">about bbi</a></li>
                         <li class="s-depth1-wrap"><a ng-href="#/ourproduct" ng-if="!footerhide"  class="s-btn-toggler">our product</a></li>
-                        <li class="s-depth1-wrap"><a ng-href="#/faq" ng-if="!footerhide" class="s-btn-toggler">faq</a></li>
-                        <li class="s-depth1-wrap"  ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'"><a ng-href="#/suggest/product-detail" class="s-btn-toggler border_right">suggestme</a></li>
+                        <li class="s-depth1-wrap"><a ng-href="#/faq" ng-if="!footerhide" class="s-btn-toggler">faq's</a></li>
+                        <li class="s-depth1-wrap"  ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'"><a ng-href="#/suggest/product-detail" class="s-btn-toggler">suggestme</a></li>
                         <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)" style="color: #fff">suggestme</a></li>
                         <li class="s-depth1-wrap" ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'"><a ng-href="#/location"  class="s-btn-toggler">roadside</a></li>
                         <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)" class="metro_btn">Metro</a></li>
@@ -428,7 +430,7 @@
     <!-- Footer Section-->
     <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
         <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
-            <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+            <div class="user_container py-lg-5 py-md-5 py-sm-4 py-3">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact
@@ -498,7 +500,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
+            <div class="user_container py-lg-3 py-md-3 py-sm-3 py-3">
                 <a ng-href="#home" class="move-top text-center"></a>
                 <div class="row py-2 d-flex align-items-center">
                     <div class="col-md-8 col-lg-9 col-sm-12 col-12">

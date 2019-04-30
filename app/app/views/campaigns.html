@@ -1,3 +1,10 @@
+<style>
+.drp_btn{
+    background: none;
+    border:none;
+}
+</style>
+
 <!-- share campaign sidenav -->
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
     <div layout="row">
@@ -37,6 +44,7 @@
         </form>
     </md-content>
 </md-sidenav>
+<!-- //share campaign sidenav -->
 <div layout="column" layout-fill="layout-fill" class="campagin_page contbg">
 
     <div layout="colmun" layout-align="end center" class="hide-xs campaign_search">
@@ -272,356 +280,9 @@
             </div>
         </div>
     </div>
-    <!-- <md-tabs md-dynamic-height>
-        <md-tab label="Proposals">
-            <div style="margin-top: 1em;">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="text_color">
-                                <th>CID</th>
-                                <th>Campaign Name</th>
-                                <th>Start Date</th>
-                                <th class="text-center">No of Products </th>
-                                <th class="text-center">Total Budget</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="contbg">
-                            <tr ng-repeat="pCampaign in plannedCampaigns| filter:search ">
-                                <td class="table_vertical">{{pCampaign.cid}}</td>
-                                <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
-                                <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
-
-                                <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
-                                <td class="text-center table_vertical">
-                                    <md-menu md-position-mode="target-right target">
-                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                            ng-click="$mdMenu.open($event)">
-                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="2">
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/campaign-details/{{pCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-click="toggleShareCampaignSidenav(pCampaign.id)">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">share</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </td>
-                                <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
-                                    date:'dd-MM-yyyy'}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </md-tab>
-        <md-tab label="Scheduled ">
-            <div style="margin-top: 1em;">
-                <div class="table-responsive">
-                    <table class="table ">
-                        <thead>
-                            <tr class="text_color">
-                                <th>CID</th>
-                                <th>Campaign Name</th>
-                                <th>Start Date</th>
-                                <th class="text-center">No of Products </th>
-                                
-                                <th class="text-center">Total Budget</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="contbg">
-                            <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
-                                <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
-                                <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
-                                
-                                <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
-                                <td class="text-center table_vertical">
-                                    <md-menu md-position-mode="target-right target">
-                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                            ng-click="$mdMenu.open($event)">
-                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="2">
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/campaign-details/{{pCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-click="toggleShareCampaignSidenav(pCampaign.id)">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">share</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/update-user-payments/{{pCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </td>
-                                <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
-                                        date:'dd-MM-yyyy'}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </md-tab>
-        <md-tab label="Running">
-            <div style="margin-top: 1em;">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="text_color">
-                                <th>CID</th>
-                                <th>Campaign Name</th>
-                                <th>Start Date</th>
-                                <th class="text-center">No of Products </th>
-                                <th class="text-center">Paid</th>
-                                <th class="text-center">Total Budget</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="contbg">
-                            <tr ng-repeat="rCampaign in runningCampaigns| filter:search">
-                               
-                                <td class="table_vertical">{{rCampaign.cid}}</td>
-                                <td class="table_vertical">{{rCampaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{rCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="text-center table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{rCampaign.paid|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
-                                <td class="text-center table_vertical">
-                                    <md-menu md-position-mode="target-right target">
-                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                            ng-click="$mdMenu.open($event)">
-                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="2">
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/campaign-details/{{rCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-click="toggleShareCampaignSidenav(rCampaign.id)">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">share</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/update-user-payments/{{rCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </td>
-                                <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{rCampaign.updated_at| dateify |
-                                    date:'dd-MM-yyyy'}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </md-tab>
-        <md-tab label="Closed">
-            <div style="margin-top: 1em;">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="text_color">
-                                <th>CID</th>
-                                <th>Campaign Name</th>
-                                <th>Start Date</th>
-                                <th class="text-center">No of Products </th>
-                                <th class="text-center">Paid</th>
-                                <th class="text-center">Total Budget</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="contbg" ng-repeat="cCampaign in closedCampaigns| filter:search"
-                            ng-if="cCampaign.status == 1000 || cCampaign.status == 1151">
-                            <tr>
-                                <td class="table_vertical">BB-01</td>
-                                <td class="table_vertical">{{cCampaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{cCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="text-center table_vertical">{{cCampaign.product_count|| "0"}}</td>
-                                <td class="text-center table_vertical">{{cCampaign.paid|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
-                                <td class="text-center table_vertical">
-                                    <md-menu md-position-mode="target-right target">
-                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                            ng-click="$mdMenu.open($event)">
-                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="2">
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/campaign-details/{{cCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-click="toggleShareCampaignSidenav(cCampaign.id)">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">share</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/update-user-payments/{{cCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </td>
-                                <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{cCampaign.updated_at| dateify |
-                                    date:'dd-MM-yyyy'}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </md-tab>
-        <md-tab label="Metro">
-            <div style="margin-top: 1em;">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="text_color">
-                                <th>CID</th>
-                                <th>Campaign Name</th>
-                                <th>Start Date</th>
-                                <th class="text-center">No of Products </th>
-                                <th class="text-center">Paid</th>
-                                <th class="text-center">Total Budget</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="contbg">
-                            <tr ng-repeat="mCampaign in metroCampaigns| filter:search">
-                                <td class="table_vertical">{{mCampaign.cid}}</td>
-                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
-                                <td class="table_vertical">{{mCampaign.start_date | date:'medium'}}</td>
-                                <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
-                                <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
-                                <td class="text-center table_vertical">
-                                    <md-menu md-position-mode="target-right target">
-                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                            ng-click="$mdMenu.open($event)">
-                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                        </md-button>
-                                        <md-menu-content width="2">
-                                            <md-menu-item>
-                                                <md-button class="pop_view" ng-href="#/metro-campaign/{{mCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">View Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-click="deleteMetroCampaigns(mCampaign.id)">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">delete_forever</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                            <md-menu-item>
-                                                <md-button class="pop_view"
-                                                    ng-href="#/update-user-payments/{{mCampaign.id}}">
-                                                    <div layout="row">
-                                                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
-                                                    </div>
-                                                </md-button>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </td>
-                                <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{mCampaign.created_at}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </md-tab>
-    </md-tabs> -->
     <md-tabs md-dynamic-height md-stretch-tabs>
         <md-tab label="Road Side">
-            <md-tabs md-dynamic-height md-stretch-tabs>
+            <md-tabs md-dynamic-height>
                 <md-tab label="Proposals">
                     <div style="margin-top: 1em;">
                         <div class="table-responsive">
@@ -648,7 +309,7 @@
                                         <!-- <td>10,1000</td> -->
                                         <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
                                         <td class="text-center table_vertical">
-                                            <md-menu md-position-mode="target-right target">
+                                            <!-- <md-menu md-position-mode="target-right target">
                                                 <md-button aria-label="Open demo menu" class="md-icon-button"
                                                     ng-click="$mdMenu.open($event)">
                                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -675,7 +336,21 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" ng-href="#/campaign-details/{{pCampaign.id}}">
+                                                    <i class="material-icons">remove_red_eye</i>View Details
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(pCampaign.id)"  >
+                                                    <i class="material-icons">share</i>Share Campaign
+                                                  </a>
+                                                  
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
@@ -713,7 +388,7 @@
                                         <!-- <td>10,1000</td> -->
                                         <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
                                         <td class="text-center table_vertical">
-                                            <md-menu md-position-mode="target-right target">
+                                            <!-- <md-menu md-position-mode="target-right target">
                                                 <md-button aria-label="Open demo menu" class="md-icon-button"
                                                     ng-click="$mdMenu.open($event)">
                                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -751,7 +426,23 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" ng-href="#/campaign-details/{{pCampaign.id}}">
+                                                    <i class="material-icons">remove_red_eye</i>View Details
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(pCampaign.id)"  >
+                                                    <i class="material-icons">share</i>Share Campaign
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(pCampaign.id)"  >
+                                                    <i class="material-icons">remove_red_eye</i>Payment Details
+                                                  </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
@@ -790,7 +481,7 @@
                                         <td class="text-center table_vertical">{{rCampaign.paid|| "N/A"}}</td>
                                         <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
                                         <td class="text-center table_vertical">
-                                            <md-menu md-position-mode="target-right target">
+                                            <!-- <md-menu md-position-mode="target-right target">
                                                 <md-button aria-label="Open demo menu" class="md-icon-button"
                                                     ng-click="$mdMenu.open($event)">
                                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -828,7 +519,23 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" ng-href="#/campaign-details/{{rCampaign.id}}">
+                                                    <i class="material-icons">remove_red_eye</i>View Details
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(rCampaign.id)"  >
+                                                    <i class="material-icons">share</i>Share Campaign
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(rCampaign.id)"  >
+                                                    <i class="material-icons">remove_red_eye</i>Payment Details
+                                                  </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{rCampaign.updated_at| dateify |
@@ -867,7 +574,7 @@
                                         <td class="text-center table_vertical">{{cCampaign.paid|| "N/A"}}</td>
                                         <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
                                         <td class="text-center table_vertical">
-                                            <md-menu md-position-mode="target-right target">
+                                            <!-- <md-menu md-position-mode="target-right target">
                                                 <md-button aria-label="Open demo menu" class="md-icon-button"
                                                     ng-click="$mdMenu.open($event)">
                                                     <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -905,7 +612,23 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" ng-href="#/campaign-details/{{cCampaign.id}}">
+                                                    <i class="material-icons">remove_red_eye</i>View Details
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(cCampaign.id)"  >
+                                                    <i class="material-icons">share</i>Share Campaign
+                                                  </a>
+                                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(cCampaign.id)"  >
+                                                    <i class="material-icons">remove_red_eye</i>Payment Details
+                                                  </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{cCampaign.updated_at| dateify |
@@ -922,36 +645,38 @@
         <md-tab label="Hyderabad Metro Rail">
             <md-tabs md-dynamic-height md-stretch-tabs>
                 <md-tab label="Proposal">
-                        <div style="margin-top: 1em;">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="text_color">
-                                                <th>CID</th>
-                                                <th>Campaign Name</th>
-                                                <th>Start Date</th>
-                                                <th class="text-center">No of Products </th>
-                                                <th class="text-center">Paid</th>
-                                                <th class="text-center">Total Budget</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="contbg">
-                                            <tr ng-repeat="mCampaign in metroCampaigns| filter:search" ng-if="mCampaign.status <= 1121">
-                                                <td class="table_vertical">{{mCampaign.cid}}</td>
-                                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
-                                                <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
-                                                <td class="text-center table_vertical">
-                                                    <md-menu md-position-mode="target-right target">
-                                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                                            ng-click="$mdMenu.open($event)">
-                                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                                        </md-button>
-                                                    <md-menu-content width="2">
+                    <div style="margin-top: 1em;">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text_color">
+                                        <th>CID</th>
+                                        <th>Campaign Name</th>
+                                        <th>Start Date</th>
+                                        <th class="text-center">No of Products </th>
+                                        <th class="text-center">Paid</th>
+                                        <th class="text-center">Total Budget</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="contbg">
+                                    <tr ng-repeat="mCampaign in metroCampaigns| filter:search"
+                                        ng-if="mCampaign.status <= 1121">
+                                        <td class="table_vertical">{{mCampaign.cid}}</td>
+                                        <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
+                                        <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}
+                                        </td>
+                                        <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
+                                        <td class="text-center table_vertical">
+                                            <!-- <md-menu md-position-mode="target-right target">
+                                                <md-button aria-label="Open demo menu" class="md-icon-button"
+                                                    ng-click="$mdMenu.open($event)">
+                                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="2">
                                                     <md-menu-item>
                                                         <md-button class="pop_view"
                                                             ng-click="deleteMetroCampaigns(mCampaign.id)">
@@ -963,7 +688,7 @@
                                                             </div>
                                                         </md-button>
                                                     </md-menu-item>
-                                                    <!-- <md-menu-item>
+                                                    <md-menu-item>
                                                                 <md-button class="pop_view"
                                                                     ng-href="#/update-user-payments/{{mCampaign.id}}">
                                                                     <div layout="row">
@@ -971,9 +696,23 @@
                                                                         <p style="margin:0 4px;font-size:11px;">Payment Details</p>
                                                                     </div>
                                                                 </md-button>
-                                                            </md-menu-item> -->
+                                                            </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" ng-href="#/metro-campaign/{{mCampaign.id}}">
+                                                            <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                                                    </a>
+                                                    <a class="dropdown-item" ng-click="deleteMetroCampaigns(mCampaign.id)">
+                                                        <i class="material-icons">delete_forever</i>
+                                                            Delete Campaign
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{mCampaign.created_at}}</span>
@@ -985,37 +724,39 @@
                     </div>
                 </md-tab>
                 <md-tab label="Scheduled">
-                        <div style="margin-top: 1em;">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="text_color">
-                                                <th>CID</th>
-                                                <th>Campaign Name</th>
-                                                <th>Start Date</th>
-                                                <th class="text-center">No of Products </th>
-                                                <th class="text-center">Paid</th>
-                                                <th class="text-center">Total Budget</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="contbg">
-                                            <tr ng-repeat="mCampaign in metroCampaigns| filter:search" ng-if="mCampaign.status == 1131">
-                                                <td class="table_vertical">{{mCampaign.cid}}</td>
-                                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
-                                                <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
-                                                <td class="text-center table_vertical">
-                                                    <md-menu md-position-mode="target-right target">
-                                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                                            ng-click="$mdMenu.open($event)">
-                                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                                        </md-button>
-                                                    <md-menu-content width="2">
-                                                    <!-- <md-menu-item>
+                    <div style="margin-top: 1em;">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text_color">
+                                        <th>CID</th>
+                                        <th>Campaign Name</th>
+                                        <th>Start Date</th>
+                                        <th class="text-center">No of Products </th>
+                                        <th class="text-center">Paid</th>
+                                        <th class="text-center">Total Budget</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="contbg">
+                                    <tr ng-repeat="mCampaign in metroCampaigns| filter:search"
+                                        ng-if="mCampaign.status == 1131">
+                                        <td class="table_vertical">{{mCampaign.cid}}</td>
+                                        <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
+                                        <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}
+                                        </td>
+                                        <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
+                                        <td class="text-center table_vertical">
+                                            <!-- <md-menu md-position-mode="target-right target">
+                                                <md-button aria-label="Open demo menu" class="md-icon-button"
+                                                    ng-click="$mdMenu.open($event)">
+                                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="2">
+                                                    <md-menu-item>
                                                                 <md-button class="pop_view"
                                                                     ng-click="deleteMetroCampaigns(mCampaign.id)">
                                                                     <div layout="row">
@@ -1023,7 +764,7 @@
                                                                         <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
                                                                     </div>
                                                                 </md-button>
-                                                            </md-menu-item> -->
+                                                            </md-menu-item>
                                                     <md-menu-item>
                                                         <md-button class="pop_view"
                                                             ng-href="#/update-user-payments/{{mCampaign.id}}">
@@ -1036,7 +777,20 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right ">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" ng-href="#/metro-campaign/{{mCampaign.id}}">
+                                                        <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                                                    </a>
+                                                    <a class="dropdown-item"  ng-href="#/update-user-payments/{{mCampaign.id}}">
+                                                        <i class="material-icons">remove_red_eye</i>Payment Details
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{mCampaign.created_at}}</span>
@@ -1048,37 +802,39 @@
                     </div>
                 </md-tab>
                 <md-tab label="Running">
-                        <div style="margin-top: 1em;">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="text_color">
-                                                <th>CID</th>
-                                                <th>Campaign Name</th>
-                                                <th>Start Date</th>
-                                                <th class="text-center">No of Products </th>
-                                                <th class="text-center">Paid</th>
-                                                <th class="text-center">Total Budget</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="contbg">
-                                            <tr ng-repeat="mCampaign in metroCampaigns| filter:search" ng-if="mCampaign.status == 1141">
-                                                <td class="table_vertical">{{mCampaign.cid}}</td>
-                                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
-                                                <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
-                                                <td class="text-center table_vertical">
-                                                    <md-menu md-position-mode="target-right target">
-                                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                                            ng-click="$mdMenu.open($event)">
-                                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                                                        </md-button>
-                                                    <md-menu-content width="2">
-                                                    <!-- <md-menu-item>
+                    <div style="margin-top: 1em;">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text_color">
+                                        <th>CID</th>
+                                        <th>Campaign Name</th>
+                                        <th>Start Date</th>
+                                        <th class="text-center">No of Products </th>
+                                        <th class="text-center">Paid</th>
+                                        <th class="text-center">Total Budget</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="contbg">
+                                    <tr ng-repeat="mCampaign in metroCampaigns| filter:search"
+                                        ng-if="mCampaign.status == 1141">
+                                        <td class="table_vertical">{{mCampaign.cid}}</td>
+                                        <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
+                                        <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}
+                                        </td>
+                                        <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
+                                        <td class="text-center table_vertical">
+                                            <!-- <md-menu md-position-mode="target-right target">
+                                                <md-button aria-label="Open demo menu" class="md-icon-button"
+                                                    ng-click="$mdMenu.open($event)">
+                                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="2">
+                                                    <md-menu-item>
                                                                 <md-button class="pop_view"
                                                                     ng-click="deleteMetroCampaigns(mCampaign.id)">
                                                                     <div layout="row">
@@ -1086,7 +842,7 @@
                                                                         <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
                                                                     </div>
                                                                 </md-button>
-                                                            </md-menu-item> -->
+                                                            </md-menu-item>
                                                     <md-menu-item>
                                                         <md-button class="pop_view"
                                                             ng-href="#/update-user-payments/{{mCampaign.id}}">
@@ -1099,7 +855,20 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right ">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" ng-href="#/metro-campaign/{{mCampaign.id}}">
+                                                        <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                                                    </a>
+                                                    <a class="dropdown-item"  ng-href="#/update-user-payments/{{mCampaign.id}}">
+                                                        <i class="material-icons">remove_red_eye</i>Payment Details
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{mCampaign.created_at}}</span>
@@ -1111,45 +880,47 @@
                     </div>
                 </md-tab>
                 <md-tab label="Closed">
-                        <div style="margin-top: 1em;">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="text_color">
-                                                <th>CID</th>
-                                                <th>Campaign Name</th>
-                                                <th>Start Date</th>
-                                                <th class="text-center">No of Products </th>
-                                                <th class="text-center">Paid</th>
-                                                <th class="text-center">Total Budget</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="contbg">
-                                            <tr ng-repeat="mCampaign in metroCampaigns| filter:search" ng-if="mCampaign.status == 1151">
-                                                <td class="table_vertical">{{mCampaign.cid}}</td>
-                                                <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
-                                                <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
-                                                <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
-                                                <td class="text-center table_vertical">
-                                                    <md-menu md-position-mode="target-right target">
-                                                        <md-button aria-label="Open demo menu" class="md-icon-button"
-                                                            ng-click="$mdMenu.open($event)">
-                                                            <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                    <div style="margin-top: 1em;">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text_color">
+                                        <th>CID</th>
+                                        <th>Campaign Name</th>
+                                        <th>Start Date</th>
+                                        <th class="text-center">No of Products </th>
+                                        <th class="text-center">Paid</th>
+                                        <th class="text-center">Total Budget</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="contbg">
+                                    <tr ng-repeat="mCampaign in metroCampaigns| filter:search"
+                                        ng-if="mCampaign.status == 1151">
+                                        <td class="table_vertical">{{mCampaign.cid}}</td>
+                                        <td class="table_vertical">{{mCampaign.name | capitalize}}</td>
+                                        <td class="table_vertical">{{mCampaign.start_date | dateify | date:'medium'}}
+                                        </td>
+                                        <td class="text-center table_vertical">{{mCampaign.product_count}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.campaign_paid}}</td>
+                                        <td class="text-center table_vertical">{{mCampaign.Metrototalamount}}</td>
+                                        <td class="text-center table_vertical">
+                                            <!-- <md-menu md-position-mode="target-right target">
+                                                <md-button aria-label="Open demo menu" class="md-icon-button"
+                                                    ng-click="$mdMenu.open($event)">
+                                                    <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="2">
+                                                    <md-menu-item>
+                                                        <md-button class="pop_view"
+                                                            ng-click="deleteMetroCampaigns(mCampaign.id)">
+                                                            <div layout="row">
+                                                                <md-icon><i class="material-icons">delete_forever</i></md-icon>
+                                                                <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
+                                                            </div>
                                                         </md-button>
-                                                    <md-menu-content width="2">
-                                                    <!-- <md-menu-item>
-                                                                <md-button class="pop_view"
-                                                                    ng-click="deleteMetroCampaigns(mCampaign.id)">
-                                                                    <div layout="row">
-                                                                        <md-icon><i class="material-icons">delete_forever</i></md-icon>
-                                                                        <p style="margin:0 4px;font-size:11px;">Delete Campaign</p>
-                                                                    </div>
-                                                                </md-button>
-                                                            </md-menu-item> -->
+                                                    </md-menu-item>
                                                     <md-menu-item>
                                                         <md-button class="pop_view"
                                                             ng-href="#/update-user-payments/{{mCampaign.id}}">
@@ -1162,7 +933,20 @@
                                                         </md-button>
                                                     </md-menu-item>
                                                 </md-menu-content>
-                                            </md-menu>
+                                            </md-menu> -->
+                                            <div class="dropdown dropleft float-right">
+                                                <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" ng-href="#/metro-campaign/{{mCampaign.id}}">
+                                                        <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                                                    </a>
+                                                    <a class="dropdown-item"  ng-href="#/update-user-payments/{{mCampaign.id}}">
+                                                        <i class="material-icons">remove_red_eye</i>Payment Details
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="text-center table_vertical">
                                             <span class="text_color md-caption">{{mCampaign.created_at}}</span>
