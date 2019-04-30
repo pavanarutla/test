@@ -680,7 +680,7 @@ app.controller('GmapCtrl',
                     });
                 }
 
-                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {                 
                     var sendObj = {
                         product_id: productId,
                         dates: selectedDateRanges
@@ -893,7 +893,7 @@ app.controller('GmapCtrl',
                         $scope.activeUserCampaigns = result;
                     });
                 }
-                //$scope.loadActiveUserCampaigns();
+                $scope.loadActiveUserCampaigns();
 
                 $scope.deleteUserCampaign = function (campaignId) {
                     CampaignService.deleteCampaign(campaignId).then(function (result) {
@@ -983,6 +983,7 @@ app.controller('GmapCtrl',
                             toastr.error(result.message);
                         }
                     });
+                    $state.reload();
                 }
 
                 $scope.shareShortlistedProducts = function (shareShortlisted) {
@@ -1085,7 +1086,7 @@ app.controller('GmapCtrl',
                         } else {
                             toastr.error(result.message);
                         }
-                        //$scope.loadActiveUserCampaigns()
+                        $scope.loadActiveUserCampaigns()
                     });
                 }
 
@@ -1244,6 +1245,7 @@ app.controller('GmapCtrl',
                          toastr.error(result.message);
                      }
                  });
+                 $state.reload();
                }
                $scope.IsDisabled = true;
                $scope.EnableDisable = function () {
@@ -1297,6 +1299,7 @@ app.controller('GmapCtrl',
                        );
                        getShortListedProducts();
                        $mdSidenav('productDetails').close();
+                       $state.reload();
                      });
                    }
                    $scope.getProductUnavailableDates = function(productId, ev){
