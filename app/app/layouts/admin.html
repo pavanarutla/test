@@ -211,13 +211,39 @@
                 ng-click="closeMenuSidenavIfMobile()">
                 Floating Campaign
               </md-button>
-            </md-menu-item> -->
+            </md-menu-item>
             <md-menu-item class="nv-nav-item">
               <md-button class="side_navlist" ng-href="#/admin/admin-payment" ng-class="{'active-link': currStateName == 'admin.admin-payment'}"
                 ng-click="closeMenuSidenavIfMobile()">
                 Payments
               </md-button>
-            </md-menu-item>
+            </md-menu-item> -->
+            <md-menu-item flex layout="column">
+                <md-button aria-expanded="flase" ng-click="toogelPayments()" class="md-button-toggle">
+                  <div layout="row">
+                    <span style="color:#fff">Payments</span>
+                    <span flex></span>
+                    <span>
+                      <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_down_white_24px.svg" ng-hide="showPayments"></md-icon>
+                      <md-icon md-svg-src="assets/images/core/ic_keyboard_arrow_up_white_24px.svg" ng-show="showPayments"></md-icon>
+                    </span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item flex layout="column" ng-show="showPayments">
+                <md-button class="side_navlist" ng-href="#/admin/paid-payment" ng-class="{'active-link': currStateName == 'admin.paid-payment'}" ng-click="changeRequest(); closeMenuSidenavIfMobile()">
+                  <div layout="row">
+                    <span flex="15"></span>
+                    Paid </div>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item flex layout="column" ng-show="showPayments">
+                <md-button class="side_navlist" ng-href="#/admin/received-payment" ng-class="{'active-link': currStateName == 'admin.received-payment'}" ng-click="closeMenuSidenavIfMobile()">
+                  <div layout="row">
+                    <span flex="15"></span>
+                    Received </div>
+                </md-button>
+              </md-menu-item>
             <md-menu-item class="nv-nav-item">
               <md-button class="side_navlist" ng-href="#/admin/admin-feeds" ng-class="{'active-link': currStateName == 'admin.admin-feeds'}"
                 ng-click="closeMenuSidenavIfMobile()">

@@ -49,7 +49,7 @@
                 <table class="table table-striped table-bordered camp_tablewidth">
                     <tbody>
                         <tr>
-                            <td><b>No of Products</b></td>
+                            <td class="camp_tableowner"><b>No of Products</b></td>
                             <td>{{campaignDetails.products.length}}</td>
                         </tr>
                         <tr>
@@ -89,14 +89,17 @@
             </div>
         </div>
         <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" style="float: right;margin-right: 0px;">
+            layout-margin="layout-margin" class="book_campowner">
 
             <div class="">
                 <div class="dropdown">
-                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font">
+                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <div id="OwnersharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
+                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
+                        Share
+                    </md-button>
+                    <div id="sharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
@@ -143,14 +146,20 @@
             <div class="" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
                     ng-click="selectedFormatIndex = 0">
-                    <md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Quotation
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
+                        Download
                     </md-button>
                 </div>
             </div>
             <div class="" ng-if="campaignDetails.products.length == 0">
                 <div class="md-grid-item-content hoarding-btn">
-                    <md-button class="md-grid-item-content add_blue" ng-click="addNewProductToCampaign()">
+                    <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
+                        Add Products
+                    </md-button>
+                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
                         Add Products
                     </md-button>
                 </div>
@@ -158,117 +167,19 @@
             <div class=""  ng-hide="campaignDetails.status <= 300 || campaignDetails.type == 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
-                        <md-button class="md-grid-item-content add_blue">
+                        <md-button class="md-grid-item-content add_blue hide-xs">
                             Payment Details
+                        </md-button>
+                    </a>
+                    <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
+                        <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
+                            Payment
                         </md-button>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg"> -->
-    <!-- <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
-            <div class="row" style="margin-left:0px; margin-right:0px;">
-                <div class="row col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12">
-                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
-                        style="margin-top:14px;">
-                        <p class="cmp_bottom">Campaign ID</p>
-                        <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
-                    </div>
-					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
-					style="margin-top:14px;">
-						<p class="cmp_bottom">Client Name</p>
-						<p class="md-caption mob_span"><b>{{campaignDetails.client_name || "N/A"}}</b></p>
-					</div>
-                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
-                        style="margin-top:14px;">
-                        <p class="cmp_bottom">Campaign Name</p>
-                        <p class="md-caption mob_span"><b>{{campaignDetails.name| capitalize}}</b></p>
-                    </div>
-					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_mng"
-					 style="margin-top:14px;">
-						<p class="cmp_bottom">Contact</p>
-						<p class="md-caption mob_span"><b>{{campaignDetails.org_contact_phone}}</b></p>
-					</div>
-					<div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-12 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_mng"
-					 style="margin-top:14px;">
-						<p class="cmp_bottom">Email</p>
-						<p class="md-caption mob_span"><b>{{campaignDetails.org_contact_email}}</b></p>
-					</div>
-                    <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
-                        style="margin-top:14px;">
-                        <p class="cmp_bottom">No of Products</p>
-                        <p class="md-caption mob_span mob_5"><b>{{campaignDetails.products.length}}</b></p>
-                    </div>
-                </div>
-                <div class="row col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12 metro_cmpnew">
-                <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
-                    <div class="dropdown">
-                        <md-button onclick="shareownerCampaign()" class="dropbtn drop_width">
-                            <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
-                                        reply_all
-                                    </i></span></p>
-                            <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Share Campaign</p>
-                        </md-button>
-                        <div id="sharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
-                            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
-                                <div layout="colmun">
-                                    <span flex></span>
-                                    <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="shareownerCampaign()">
-                                        <md-icon class="md-default-theme">
-                                            <i class="material-icons">close</i>
-                                        </md-icon>
-                                    </md-button>
-                                </div>
-                                <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
-                                <form name="shareCampaignForm">
-                                    <div layout="column" style="padding:10px;">
-                                        <div class="form-group">
-                                            <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name" required="required" />
-                                            <div ng-messages="shareCampaignForm.name.$error">
-                                                <div ng-message="required">Name is required.</div>
-                                                <div ng-message="pattern">Enter a valid Name.</div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-                                            <div ng-messages="shareCampaignForm.email.$error">
-                                                <div ng-message="required">Email is required.</div>
-                                                <div ng-message="pattern">Enter a valid Email Id.</div>
-                                            </div>
-                                        </div>
-                                        <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
-                                            <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">Share
-                                                Campaign</md-button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-                     style="cursor: pointer;">			
-                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-                        <a ng-click="downloadOwnerQuote(campaignDetails.id)" download>
-                            <md-button class="dropbtn drop_width">
-                                <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
-                                            file_copy
-                                        </i></span></p>
-                                <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Quotation</p>
-                            </md-button>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
-                     style="margin-top:2em;text-align: end" ng-if="campaignDetails.products.length == 0">
-                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
-                    </md-button>
-                </div>
-                </div>
-            </div>
-        </div> -->
     <!-- table grid start -->
     <div class="table-responsive" ng-if="campaignDetails.products.length != 0">
         <table class="table">
@@ -308,7 +219,7 @@
                     <td class="table_vertical">{{product.booked_to| dateify | date: "dd-MMM-yyyy"}}
                     </td>
                     <td class="table_vertical table_price">
-                        <p> {{(!myfield && product.owner_price)?product.owner_price:''}}
+                        <p> {{(!myfield && product.owner_price)?product.owner_price:product.price}}
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
@@ -333,21 +244,6 @@
         </table>
     </div>
     <div class="row border_quest mr-0 ml-0 " ng-if="campaignDetails.products.length != 0">
-
-        <!-- <div class="p-2 col-12 col-sm-6 col-md-4 order-2 order-sm-1">
-		    </div>
-            <div class="col-12 col-sm-6  col-md-8 order-1 order-sm-2">
-                <div class="mt-3 pull-right sub_total">
-                    <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <span class="float-right">{{campaignDetails.act_budget}}</b></span>
-                    </p>
-                    <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
-                    <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{ TOTAL || "N/A" }}</span></p>
-                    <md-button class="md-raised md-primary all_button" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700" style="float: right;">Book
-                        Campaign</md-button>
-                    <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total" ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
-                </div>
-            </div>
-            <style> .ng-cloak { display: none !important; } </style> -->
     </div>
 
 
@@ -364,12 +260,11 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL || "N/A" }}</li>
                 </ul>
-                <md-button class="md-raised md-primary all_button"
-                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 "
-                    style="float: right;">Book
+                <md-button class="md-raised md-primary all_button book_campowner"
+                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
                     Campaign</md-button>
-                <md-button class="md-raised md-primary booked_campdetails Upload_font booked_total"
-                    ng-if="campaignDetails.status == 700" style="float: right;">Booked</md-button>
+                <span class="md-raised md-primary camp_bookowner"
+                    ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
         </div>
     </div>

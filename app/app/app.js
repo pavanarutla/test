@@ -390,9 +390,14 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
-    .state('admin.admin-payment', {
-      url: '/admin-payment',
-      templateUrl: 'views/admin/admin-payment.html',
+    .state('admin.paid-payment', {
+      url: '/paid-payment',
+      templateUrl: 'views/admin/paid-payment.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.received-payment', {
+      url: '/received-payment',
+      templateUrl: 'views/admin/received-payment.html',
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.paymentview-details', {
@@ -403,6 +408,11 @@ var app = angular.module('bbManager', [
     .state('admin.campaign-payment-details', {
       url: '/campaign-payment-details/:campaign_id',
       templateUrl: 'views/admin/campaign-payment-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.received-payment-details', {
+      url: '/received-payment-details/:campaign_id',
+      templateUrl: 'views/admin/received-payment-details.html',
       controller: 'AdminCampaignCtrl'
     })
     .state('admin.admin-feeds', {

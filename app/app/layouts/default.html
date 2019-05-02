@@ -1,20 +1,180 @@
 <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 <link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
-<script>
-        var i = 1;
-        var user = localStorage.getItem("loggedInUser");
-        var parsedData = JSON.parse(user);
-        var user_type = parsedData.user_type;
-        if (user_type == 'bbi') {
-            var user_id = '-superAdmin';
-        } else if (user_type == 'basic') {
-            var user_id = parsedData.user_id;
-        } else if (user_type == 'owner') {
-            var user_id = '-' + parsedData.mong_id;
+<style>
+    .main__header {
+        background: #bc2535;
+    }
+
+    .main__header .air_d_header {
+        max-width: 1440px;
+        min-width: 320px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 64px;
+    }
+
+    .aire_d_bar_inner {
+        float: left;
+        margin-top: 12px;
+        display: inline-flex;
+    }
+
+    .aire_d_sub {
+        float: right;
+    }
+
+    ul.air_d__sub-nav.air_main_menu {
+        float: left;
+        margin-top: 16px;
+    }
+
+    li.s-depth1-wrap {
+        float: left;
+        list-style: none;
+    }
+
+    li.s-depth1-wrap a {
+        padding: 1rem 1.5rem;
+        font-size: 12px;
+        text-transform: uppercase;
+        line-height: 30px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    ul.air_d__utility {
+        float: left;
+        margin-top: 16px;
+        padding: 0;
+    }
+
+    ul.air_d__utility .s_login {
+        padding: 0rem 0.5rem;
+        float: left;
+    }
+
+    ul.air_d__utility li a {
+        padding: 1rem 1.5rem;
+        font-size: 12px;
+        text-transform: capitalize;
+        line-height: 30px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .aire_d_drop-mobile {
+        display: none;
+        position: absolute;
+        top: 65px;
+        background: #fff;
+        width: 95%;
+        z-index: 11;
+        padding: 15px 0;
+        -webkit-box-shadow: 0px 7px 5px 2px #CCCCCC;
+        box-shadow: 0px 7px 5px 2px #CCCCCC;
+    }
+
+    .aire_d_drop-mobile ul {
+        width: 100%;
+        padding: 0;
+    }
+
+    .aire_d_drop-mobile ul li {
+        margin: 12px 0;
+        list-style: none;
+    }
+
+    .aire_d_drop-mobile ul li a {
+        padding: 10px 20px;
+        font-size: 14px;
+        text-transform: UPPERCASE;
+        font-weight: 600;
+        color: #000;
+        line-height: 25px;
+        letter-spacing: 1px;
+    }
+
+    .air_d__utility .saved_campaign {
+        background: #fff;
+        color: #000;
+        padding: 0.5rem 1.5rem;
+        border-radius: 9px;
+        font-size: 12px;
+        font-weight: 600;
+        outline: none;
+        border: none;
+    }
+
+    /* #closeBtn{
+        display: none;
+    } */
+    .metro_btn,
+    .login_btn {
+        background: #fff;
+        border-radius: 25px;
+    }
+
+    .mobile_btn,
+    .mobile_btn_close {
+        background: none;
+        color: #ffffffc7;
+        border: none;
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .border_right {
+        border-right: 2px solid #fff;
+    }
+
+    .fst_letter {
+        background: #fff;
+        color: #000 !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .bell_icon {
+        background: none;
+        border: none;
+        line-height: 32px;
+    }
+
+    @media screen and (max-width:450px) {
+        .main__header .air_d_header {
+            padding-left: 10px;
+            padding-right: 0px;
         }
-        var arrayText = [];
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+    }
+
+    @media screen and (max-width:400px) {
+        .mobile_login_btn {
+            display: none;
+        }
+    }
+</style>
+<script>
+    var i = 1;
+    var user = localStorage.getItem("loggedInUser");
+    var parsedData = JSON.parse(user);
+    var user_type = parsedData.user_type;
+    if (user_type == 'bbi') {
+        var user_id = '-superAdmin';
+    } else if (user_type == 'basic') {
+        var user_id = parsedData.user_id;
+    } else if (user_type == 'owner') {
+        var user_id = '-' + parsedData.mong_id;
+    }
+    var arrayText = [];
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
 
     var pusher = new Pusher('83e8ffcc55e67dd5625d', {
         cluster: 'ap2',
@@ -95,7 +255,8 @@
         $('#notification1-count').html(arrayText.length);
         arrayText.forEach(function (element) {
             var j = i % 3;
-            $('#notification-id-' + j).html('<div class ="notification_desc md-whiteframe-2dp pl-3"><p>' + element.desc + '</p></div>');
+            $('#notification-id-' + j).html('<div class ="notification_desc md-whiteframe-2dp pl-3"><p>' +
+                element.desc + '</p></div>');
             i++;
         });
     }
@@ -103,208 +264,211 @@
 <div layout="column" style="position:relative;min-height:100%;">
     <!-- main nav section-->
     <a id="myBtn" class="move-top text-center"></a>
-    <md-toolbar class="md-menu-toolbar header">
-        <div class="container md-toolbar-tools">
-            <md-button ng-click="closeSidenav()" aria-label="menu" class="md-icon-button hide_gt_md menu_btn_mobile">
-                <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
-            </md-button>
 
-            <md-button aria-label="locations" href="#/" md-no-ink class="logo">
-                <img class="png-icon" onclick="topFunction()" src="assets/images/logoamerica.png" width="130px" alt="images">
-            </md-button>
-            <span flex class=""></span>
-            <md-menu-bar class="main-menu  hide_xs hide_sm hide_md" style="padding:0px">
-                <md-button aria-label="about bbi" onclick="topFunction()" ng-href="#/aboutbbi" ng-if="!footerhide" class="toolbar-btn what-we">About
-                    BBI</md-button>
-                <md-button aria-label="products" onclick="topFunction()" ng-href="#/ourproduct" ng-if="!footerhide" class="toolbar-btn">Our
-                    Products</md-button>
-                <md-button aria-label="products" onclick="topFunction()" href="#/faq" ng-if="!footerhide" class="toolbar-btn faq_width">FAQ'S
-                </md-button>
-                <!-- <md-button aria-label="products" ng-href="#/suggestme" ng-if=" isAuthenticated && isUserBasic()"
-                  ng-href="#/suggest/product-detail" class="toolbar-btn suggest_borderright">
-                  Recommend me
-                </md-button> -->
-                <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
-                           ng-click="showSignInDialog($event)"> Recommend me</md-button>
-                <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggest/product-detail"
-                           ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'" style="color:#000"> Recommend me
-                </md-button>
-                <!-- browse-->
-                <md-button aria-label="location" ng-href="#/location"
-                           ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
-                   Roadside
-                </md-button>
-                <!-- <md-button class="md-raised login_button book_now toolbar-btn" ng-show="!isAuthenticated"
-                           style="color:#000 !important" ng-click="showSignInDialog($event)">Metro</md-button> -->
-                <!-- <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'">
-                    Metro</md-button> -->
-                <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
-                           ng-show="!isAuthenticated" style="color: #000 !important;">
-                    Log in
-                </md-button>
-            </md-menu-bar>
-            <md-menu-bar class="hide_gt_md">
-                <!-- <md-button class="md-raised login_button book_now toolbar-btn hide_xs" ng-show="!isAuthenticated"
-                           style="color:#000 !important" ng-click="showSignInDialog($event)">Metro</md-button> -->
-                <md-button aria-label="location" class="md-raised login_button book_now" ng-click="showSignInDialog($event)"
-                           ng-show="!isAuthenticated" style="color: #000 !important;">
-                    Log in
-                </md-button>
+    <header class="main__header">
+        <nav class="air_d_header air_d_2019">
+            <div class="aire_d_bar">
+                <div class="aire_d_bar_inner">
+                    <button class="menu_toggler mobile_btn d-block d-sm-block d-md-block d-lg-none d-xl-none"
+                        id="mobileBtn">
+                        <span><i class="fas fa-bars"></i></span>
+                    </button>
+                    <!-- <button class="mobile_btn_close d-block d-sm-block d-md-block d-lg-none d-xl-none" id="closeBtn">
+                        <span><i class="fas fa-times"></i></span>
+                    </button> -->
+                    <a href="#/home" class="air_d_logo">
+                        <img src="assets/images/logoamerica.png" alt="logo" width="140px" />
+                    </a>
+                </div>
+                <div class="aire_d_sub">
+                    <ul class="air_d__sub-nav air_main_menu d-none d-sm-none d-md-none d-lg-block d-xl-block ">
+                        <li class="s-depth1-wrap"><a ng-href="#/aboutbbi" ng-if="!footerhide"
+                                class="s-btn-toggler">about bbi</a></li>
+                        <li class="s-depth1-wrap"><a ng-href="#/ourproduct" ng-if="!footerhide"
+                                class="s-btn-toggler">our product</a></li>
+                        <li class="s-depth1-wrap"><a ng-href="#/faq" ng-if="!footerhide" class="s-btn-toggler">faq's</a>
+                        </li>
+                        <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a ng-href="#/suggest/product-detail" class="s-btn-toggler">suggestme</a></li>
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
+                                style="color: #fff">suggestme</a></li>
+                        <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
+                            <a ng-href="#/location" class="s-btn-toggler">roadside</a></li>
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)" class="metro_btn">Metro</a></li>
+                        <li class="s-depth1-wrap" ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'"><a ng-href="#/metro" class="s-btn-toggler">Metro</a></li> -->
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated" style=" margin-left:10px;">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
+                        </li>
+                    </ul>
+                    <ul class="air_d__sub-nav air_main_menu d-block d-sm-block d-md-block d-lg-none d-xl-none "
+                        style="margin-right:10px">
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
+                                class="metro_btn">Metro</a></li>
+                        <li class="s-depth1-wrap mobile_login_btn" ng-show="!isAuthenticated"
+                            style=" margin-left:10px;">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
+                        </li>
+                    </ul>
+                    <ul class="air_d__utility" ng-if="isAuthenticated">
 
-            </md-menu-bar>
-
-            <md-menu-bar style="padding:0px">
-                <div class="profile_details_left" style="float:right">
-                    <ul class="nofitications-dropdown">
-                        <li class="dropdown head-dpdn hide_xs" ng-show="isAuthenticated && loggedInUser.user_role=='basic'">
-                            <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved
-                                Campaigns ({{userSavedCampaigns.length}})</a>
-                            <ul class="dropdown-menu animated fadeInDown dropdown-saved">
-                                <li>
-                                    <div class="notification_header ">
-                                        <h3 class="text_color">You have {{userSavedCampaigns.length}} Campaigns</h3>
-                                    </div>
-                                </li>
-                                <li ng-repeat="activeUserCampaign in userSavedCampaigns.slice(0, 3)"><a
+                        <div class="dropdown s_login">
+                            <button type="button" class=" saved_campaign dropdown-toggle d-none d-sm-block"
+                                data-toggle="dropdown">
+                                saved campaign({{userSavedCampaigns.length}})
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 180px;">
+                                <div class="notification_header ">
+                                    <h3 class="text_color">You have {{userSavedCampaigns.length}} Campaigns</h3>
+                                </div>
+                                <div ng-repeat="activeUserCampaign in userSavedCampaigns.slice(0, 3)"><a
                                         ng-href="#/campaign-details/{{activeUserCampaign.id}}">
                                         <div class="notification_desc pl-3">
                                             <p>{{activeUserCampaign.name}}</p>
-                                            <!-- <p><span>1 hour ago</span></p> -->
                                         </div>
                                         <div class="clearfix"></div>
                                     </a>
-                                </li>
-                                <li>
-                                    <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns"> See all campaigns</a> </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown head-dpdn hide-xs"   ng-show="isAuthenticated && loggedInUser.user_role=='owner'">
-                    <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Campaigns ({{ownerNotifs.length}})</a>
-                    <ul class="dropdown-menu animated fadeInDown dropdown-saved">
-                        <li>
-                            <div class="notification_header ">
-                                <h3 class="text_color">You have {{ownerNotifs.length}} Campaigns</h3>
+                                </div>
+                                <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns"> See all
+                                        campaigns</a> </div>
+
                             </div>
-                        </li>
-                        <li ng-repeat="activeUserCampaign in ownerNotifs.slice(0, 3)"><a ng-href="#/owner/{{clientSlug}}/campaign-details/{{activeUserCampaign.id}}">
-                                <div class="notification_desc pl-3">
-                                    <p>{{activeUserCampaign.name}}</p>
-                                    <!-- <p><span>1 hour ago</span></p> -->
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="notification_bottom"> <a ng-href="#/owner/{{clientSlug}}/saved-campaigns">See all campaigns</a> </div>
-                        </li>
-                    </ul>
-                </li>
-                        <li class="dropdown head-dpdn" ng-if="isAuthenticated">
-                            <!-- <a class="dropdown-toggle" data-toggle="dropdown"aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue"
-                              id="notification-count">0</span></a>
-                            <ul class="dropdown-menu dropdown-bell arrrow_box ">
-                              <li>
+                        </div>
+                        <div class="dropdown s_login">
+                            <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown">
+                                <span class="s-ico-login" style="color: #000"><i class="fa fa-bell"
+                                        aria-hidden="true"></i></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
                                 <div class="notification_header">
-                                  <h3 class=""><b>You have <span id="notification1-count">0</span> new notification</b></h3>
+                                    <h3 class="" style="font-size:12px"><b>You have <span
+                                                id="notification1-count">0</span> new notification</b></h3>
                                 </div>
-                              </li>
-                              <li>
-                                <div class="notification_bottom"> <a ng-href="#/user-notifications">See all notifications</a> </div>
-                              </li>
-                            </ul> -->
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span
-                                    class="badge blue" id="notification-count">0</span></a>
-                            <ul class="dropdown-menu animated fadeIn delay-.5s dropdown-logout">
-                                <li>
-                                    <div class="notification_header">
-                                        <h3 class=""><b>You have <span id="notification1-count">0</span> new notification</b></h3>
-                                    </div>
-                                </li>
-                                   <li id="notification-id-0"></li>
-                            <li id="notification-id-1"></li>
-                            <li id="notification-id-2"></li>
-                                <li>
-                                    <div class="notification_bottom"  >
-                                        <a href="#/user-notifications"  ng-show="isAuthenticated &&loggedInUser.user_role=='basic'" >See all notifications</a>
-                                        <a href="#/owner/{{loggedInUser.clientSlug}}/owner-notifications" ng-show="isAuthenticated &&loggedInUser.user_role == 'owner'">See all notifications</a>
-                                    </div>
-<!--                                    <div class="notification_bottom"  >  <a ng-href="#/owner/{{loggedInUser.clientSlug}}/owner-notifications" ng-if="loggedInUser.user_role = 'owner'">See all notifications</a> </div>-->
-                                </li>
-                            </ul>
+                                <div id="notification-id-0"></div>
+                                <div id="notification-id-1"></div>
+                                <div id="notification-id-2"></div>
+                                <div class="notification_bottom">
+                                    <a href="#/user-notifications"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role=='basic'">See all
+                                        notifications</a>
+                                    <a href="#/owner/{{loggedInUser.clientSlug}}/owner-notifications"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role == 'owner'">See all
+                                        notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown s_login">
+                            <button type="button" class=" fst_letter dropdown-toggle" data-toggle="dropdown">
+                                {{loggedInUser.firstName.slice(0, 1)}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px">
+                                <a class="dropdown-item" ng-href="#/profile">{{loggedInUser.firstName}}
+                                    {{loggedInUser.lastName}}</a>
+                                <a class="dropdown-item" ng-href="#/campaigns"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Campaigns</a>
+                                <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/campaigns"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Campaigns</a>
+                                <a class="dropdown-item" ng-href="#/shortlisted-products" ng-if="isUserBasic()">
+                                    Shortlisted Inventory
+                                    ({{shortListedProductsLength}})</a>
+                                <a class="dropdown-item" ng-href="#/user-payments"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Payments</a>
+                                <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/payments"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Payments</a>
+                                <a class="dropdown-item" ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a>
+                                <a class="d-block d-sm-none dropdown-item" ng-href="#/user-saved-campaigns">Saved
+                                    Campaign</a>
+                                <a class="dropdown-item" ng-href="#/reset_password" style="margin-bottom:15px"> Change
+                                    Password</a>
+                                <a ng-click="logout()" class="logout_color" style="    margin: 0 0 0 18px;"> Logout</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class=""></div>
+                </div>
+                <div class="aire_d_drop-mobile d-lg-none d-xl-none " id="mobileMenu">
+                    <ul>
+                        <li class=""><a ng-href="#/aboutbbi" class="s-btn-toggler">about bbi</a></li>
+                        <li class=""><a ng-href="#/ourproduct" class="s-btn-toggler">our product</a></li>
+                        <li class=""><a ng-href="#/faq" class="s-btn-toggler">faq</a></li>
+                        <li class=""
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a ng-href="#/suggest/product-detail" class="s-btn-toggler border_right">suggestme</a></li>
+                        <li class="" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)">suggestme</a>
                         </li>
-
-                        <li class="dropdown head-dpdn" ng-if="isAuthenticated">
-                            <a class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">{{loggedInUser.firstName.slice(0, 1)}}</a>
-                            <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout">
-                                <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
-                                <li  ng-show="isAuthenticated && loggedInUser.user_role=='basic'" >  <a ng-href="#/campaigns"> Campaigns</a> </li>
-                                 <li  ng-show="isAuthenticated && loggedInUser.user_role=='owner'">  <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
-                                <li ng-if="isUserBasic()"> <a ng-href="#/shortlisted-products"> Shortlisted Inventory
-                                        ({{shortListedProductsLength}})</a> </li>
-
-                                <li ng-show="isAuthenticated && loggedInUser.user_role=='basic'" > <a ng-href="#/user-payments"> Payments</a> </li>
-                                <li ng-show="isAuthenticated && loggedInUser.user_role=='owner'" > <a ng-href="#/owner/{{clientSlug}}/payments"> Payments</a> </li>
-                                <li> <a ng-href="#/reset_password"> Change Password</a> </li>
-                                <li> <a ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a> </li>
-                                <li class="hide_gt_xs"><a ng-href="#/user-saved-campaigns">Saved Campaign</a></li>
-                                <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
-                            </ul>
-                            <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout"  >
-                                <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
-                                <li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
-                                <li> <a ng-href="#/payments"> Payments</a> </li>
-                                <li> <a ng-href="#/reset_password"> Change Password</a> </li>
-                                <li> <a ng-click="switchView()"> Switch to Map view</a> </li>
-<!--                                <li> <a ng-href="#"> Team</a> </li>-->
-                                <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
-                            </ul>
-
+                        <li class=""
+                            ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
+                            <a ng-href="#/location" class="s-btn-toggler">roadside</a></li>
+                        <li class="" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
+                                class="metro_btn">Metro</a></li>
+                        <li class=""
+                            ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'">
+                            <a ng-href="#/metro" class="s-btn-toggler">Metro</a></li>
+                        <li class="" ng-show="!isAuthenticated">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
                         </li>
                     </ul>
-                    <div class="clearfix"></div>
                 </div>
-            </md-menu-bar>
-        </div>
-    </md-toolbar>
+
+
+            </div>
+        </nav>
+    </header>
+    <script>
+        $("#mobileBtn").click(function () {
+            $("#mobileBtn").hide();
+            $("#mobileMenu").toggle();
+            $("#closeBtn").show();
+        });
+        $("#closeBtn").click(function () {
+            $("#mobileBtn").show();
+            $("#mobileMenu").toggle();
+            $("#closeBtn").hide();
+        });
+    </script>
     <!--// main nav section-->
 
     <!-- sidenav for mobile and tablet -->
-    <md-sidenav md-component-id="left" class="md-sidenav-left" hide_gt_md>
+    <!-- <md-sidenav md-component-id="left" class="md-sidenav-left" hide_gt_md>
         <div layout="row" class="layout-row">
 
-      <div flex="" class="flex"></div>
-      <a class="md-icon-button close-btn" ng-click="closeSidenav()">
-        <i class="material-icons">close</i>
-      </a>
-    </div>
-    <header layout="column" layout-padding layout-margin>
-      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
-    </header>
-    <div flex layout="column" role="navigation">
-      <md-menu-item flex layout="column">
-        <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we" ng-click="closeMenuSidenavIfMobile()">About
-          BBI</md-button>
-      </md-menu-item>
-      <md-menu-item flex layout="column">
-        <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn" ng-click="closeMenuSidenavIfMobile()">Our
-          Products</md-button>
-      </md-menu-item>
-      <md-menu-item flex layout="column">
-        <md-button aria-label="products" href="#/faq" class="toolbar-btn faq_width" ng-click="closeMenuSidenavIfMobile()">FAQ'S
-        </md-button>
-      </md-menu-item>
-      <md-menu-item flex layout="column">
-        <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
-          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()"> Recommend me</md-button>
-        <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggestme" ng-show="isAuthenticated"
-          style="color:#000"> Recommend me</md-button>
-      </md-menu-item>
-      <md-menu-item flex layout="column">
-        <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated" style="color:#000 !important"
-          ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()">Metro</md-button>
-        <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated ">Metro</md-button>
-      </md-menu-item>
+            <div flex="" class="flex"></div>
+            <a class="md-icon-button close-btn" ng-click="closeSidenav()">
+                <i class="material-icons">close</i>
+            </a>
+        </div>
+        <header layout="column" layout-padding layout-margin>
+            <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
+        </header>
+        <div flex layout="column" role="navigation">
+            <md-menu-item flex layout="column">
+                <md-button aria-label="about bbi" ng-href="#/aboutbbi" class="toolbar-btn what-we"
+                    ng-click="closeMenuSidenavIfMobile()">About
+                    BBI</md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column">
+                <md-button aria-label="products" ng-href="#/ourproduct" class="toolbar-btn"
+                    ng-click="closeMenuSidenavIfMobile()">Our
+                    Products</md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column">
+                <md-button aria-label="products" href="#/faq" class="toolbar-btn faq_width"
+                    ng-click="closeMenuSidenavIfMobile()">FAQ'S
+                </md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column">
+                <md-button class="toolbar-btn suggest_borderright" ng-show="!isAuthenticated" style="color:#000"
+                    ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()"> suggest me</md-button>
+                <md-button class="toolbar-btn suggest_borderright" ng-href="#/suggestme" ng-show="isAuthenticated"
+                    style="color:#000"> suggest me</md-button>
+            </md-menu-item>
+            <md-menu-item flex layout="column">
+                <md-button class=" login_button book_now toolbar-btn" ng-show="!isAuthenticated"
+                    style="color:#000 !important" ng-click="showSignInDialog($event);closeMenuSidenavIfMobile()">Metro
+                </md-button>
+                <md-button class="  toolbar-btn" ng-href="#/metro" ng-show="isAuthenticated ">Metro</md-button>
+            </md-menu-item>
 
             <md-menu-item flex layout="column">
                 <md-button aria-label="location" ng-href="#/location" ng-show="isAuthenticated">
@@ -312,109 +476,139 @@
                 </md-button>
             </md-menu-item>
         </div>
-    </md-sidenav>
+    </md-sidenav> -->
     <!-- //sidenav for mobile and tablet -->
 
     <!-- Content section-->
     <ui-view></ui-view>
     <!-- //Content section-->
 
-  <!-- Footer Section-->
-  <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
-    <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
-      <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact Info</b></h3>
-            <i class="fa fa-home gobalimg" aria-hidden="true"></i>
-            <p class="font-weight-bold p3">BBA Advertising Pvt Ltd.</p>
-            <p class="p4">US West Coast 1110 112th Avenue NE, <br>
-              <span class="span_left">Suite 300C, Bellevue, WA. 98004</span></p>
-            <i class="fa fa-envelope-o email" aria-hidden="true"></i>
-            <p class="font-weight-bold p3">MAIL US</p>
-            <p class="p4">reach@billboardsamerica.com</p>
-            <i class="fa fa-mobile telephone" aria-hidden="true"></i>
-            <p class="font-weight-bold p5">CALL</p>
-            <p class="p5">+ 91 9550224488</p>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 leave_form">
-            <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave Message</b></h3>
-            <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
-            <div class="contact-block-left">
-              <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
-                <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
-                    <input type="text" name="name" placeholder="Name" class="form-control" ng-model="query.name" required>
-                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine" class="help-block form_inputnameleft" style="color: red;">Your name is required.</p>
+    <!-- Footer Section-->
+    <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
+        <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
+            <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact
+                                Info</b></h3>
+                        <i class="fa fa-home gobalimg" aria-hidden="true"></i>
+                        <p class="font-weight-bold p3">BBA Advertising Pvt Ltd.</p>
+                        <p class="p4">US West Coast 1110 112th Avenue NE, <br>
+                            <span class="span_left">Suite 300C, Bellevue, WA. 98004</span></p>
+                        <i class="fa fa-envelope-o email" aria-hidden="true"></i>
+                        <p class="font-weight-bold p3">MAIL US</p>
+                        <p class="p4">reach@billboardsamerica.com</p>
+                        <i class="fa fa-mobile telephone" aria-hidden="true"></i>
+                        <p class="font-weight-bold p5">CALL</p>
+                        <p class="p5">+ 91 9550224488</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 leave_form">
+                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave
+                                Message</b></h3>
+                        <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
+                        <div class="contact-block-left">
+                            <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
+                                <div class="form-group form_inputnameleft"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="name" placeholder="Name" class="form-control"
+                                        ng-model="query.name" required>
+                                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Your name is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameright"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="email" name="email" placeholder="Email" class="form-control"
+                                        ng-model="query.email" required>
+                                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Email Id is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameleft"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <select ng-model="query.subject" name="Subject" class="form-control">
+                                        <option value="" disabled selected>Subject*</option>
+                                        <option>Payment</option>
+                                        <option>Requisted Inventory</option>
+                                        <option>Campaign</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Subject is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameright"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="contact" placeholder="Contact No" class="form-control"
+                                        ng-model="query.contactno" required>
+                                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Contact No. is
+                                        required.</p>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Text Area"
+                                        ng-model="query.message"></textarea>
+                                </div>
+                                <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send
+                                    Message</md-button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
-                    <input type="email" name="email" placeholder="Email" class="form-control" ng-model="query.email" required>
-                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine" class="help-block form_inputnameright" style="color: red;">Email Id is required.</p>
-                </div>
-                <div class="form-group form_inputnameleft" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
-                    <select ng-model="query.subject" name="Subject" class="form-control">
-                        <option value="" disabled selected>Subject*</option>
-                        <option>Payment</option>
-                        <option>Requisted Inventory</option>
-                        <option>Campaign</option>
-                        <option>Other</option>
-                    </select>
-                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine" class="help-block form_inputnameleft" style="color: red;">Subject is required.</p>
-                </div>
-                <div class="form-group form_inputnameright" ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
-                    <input type="text" name="contact" placeholder="Contact No" class="form-control" ng-model="query.contactno" required>
-                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine" class="help-block form_inputnameright" style="color: red;">Contact No. is required.</p>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" placeholder="Text Area" ng-model="query.message"></textarea>
-                </div>
-                <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send Message</md-button>
-              </form>
             </div>
-        </div>
-      </div>
-    </div>
-    <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
-      <a ng-href="#home" class="move-top text-center"></a>
-      <div class="row py-2 d-flex align-items-center">
-        <div class="col-md-8 col-lg-9 col-sm-12 col-12">
-          <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Privacy & Terms</b></span>BBI Advertising
-            pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
-          <a href="https://www.facebook.com/billboardsind/" target="_blank"><i class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
-          <a href="https://www.instagram.com/billboards_india/" target="_blank"><i class="fa fa-instagram white-text mr-4" aria-hidden="true"></i></a>
-          <a href="https://www.linkedin.com/company/billboards-india/?viewAsMember=true" target="_blank"><i class="fa fa-linkedin white-text mr-4" aria-hidden="true"></i></a>
-          <a href="https://twitter.com/billboardsindia" target="_blank"><i class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
-          <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
-        </div>
+            <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
+                <a ng-href="#home" class="move-top text-center"></a>
+                <div class="row py-2 d-flex align-items-center">
+                    <div class="col-md-8 col-lg-9 col-sm-12 col-12">
+                        <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Privacy &
+                                    Terms</b></span>BBA Advertising
+                            pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
+                    </div>
+                    <div
+                        class="col-lg-3 col-md-4 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
+                        <a href="https://www.facebook.com/billboardsind/" target="_blank"><i
+                                class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/billboards_india/" target="_blank"><i
+                                class="fa fa-instagram white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/company/billboards-india/?viewAsMember=true"
+                            target="_blank"><i class="fa fa-linkedin white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/billboardsindia" target="_blank"><i
+                                class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
+                    </div>
     </footer>
     <!-- //Footer Section-->
 </div>
 
 
 
-<!-- <script>	
-	window.onscroll = function() {scrollFunction()};
-	function topFunction() {
-	  document.body.scrollTop = 0;
-	  document.documentElement.scrollTop = 0;
-	}
-    </script> -->
-    <script>
-        $(window).scroll(function() {
-            var height = $(window).scrollTop();
-            if (height > 20) {
-                $('#myBtn').fadeIn();
-            } else {
-                $('#myBtn').fadeOut();
-            }
-        });
-        $(document).ready(function() {
-            $("#myBtn").click(function(event) {
-                event.preventDefault();
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-                return false;
-            });
+<script>
+    window.onscroll = function () {
+        scrollFunction()
+    };
 
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+<script>
+    $(window).scroll(function () {
+        var height = $(window).scrollTop();
+        if (height > 20) {
+            $('#myBtn').fadeIn();
+        } else {
+            $('#myBtn').fadeOut();
+        }
+    });
+    $(document).ready(function () {
+        $("#myBtn").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+            return false;
         });
+
+    });
 </script>
