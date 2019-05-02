@@ -241,11 +241,6 @@
                                 <div class="col-sm-6">
                                         <label>Select Product Date</label>
                                         <div class="input-group">
-                                            <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
-                                                   type="text" name="date" readonly options="rqstHrdngsOpts"/>
-                                            <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                                            </div> -->
-                                            
                                             <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
                                             <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
                                                 <i class="material-icons">
@@ -254,50 +249,25 @@
                                             </a>
                                         </div>
                                     </div>
-                                
                             </div>
                             <div class="form-group row">
                                 
                                 <div class="col-sm-6 ">
                                         <label>Product Images</label>
-                                        
                                         <div class="input-group" style="width: 100%;">
-
-                                            <!--                                        <input class="form-control md-whiteframe-3dp" type="file" placeholder="Upload Product Image" multiple>-->
                                             <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-model="files.image" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
                                             <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                            <!-- <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
-                                                <div ng-message="required">Image is required.</div>
-                                            </div> -->
                                         </div>
-                                    
                                 </div>
                                 <div class="col-sm-6">
-                                    <input ng-model="product.lat" class="form-control md-whiteframe-3dp" required="required" placeholder="Latitude" type="text" name="lat" required="required" />
-                                    <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched" style="color:red">
-                                        <div ng-message="required">Latitude is required.</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input ng-model="product.lng" class="form-control md-whiteframe-3dp" required="required" placeholder="Longitude" type="text" name="lng" required="required" />
-                                    <div ng-messages="hordinglistform.lng.$error" ng-if="hordinglistform.lng.$touched" style="color:red">
-                                        <div ng-message="required">Longitude is required.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
+                                    <label>Upload Product Video if Any</label>
                                     <div class="input-group">
-                                        <!-- <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
-                                               type="text" name="date" readonly options="rqstHrdngsOpts"/>
-                                        <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                                            <div ng-message="required">Date is required.</div>
-                                        </div> -->
-                                        <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                        <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);">
-                                            <i class="material-icons"> calendar_today </i>
-                                        </a>
+                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder=""
+                                            name="videoUrl" ng-model="product.videoUrl">
+                                        <span class="input-group-addon md-whiteframe-3dp"><i
+                                                class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
                                     </div>
+                                </div>
                             </div>
                             <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
 
@@ -325,16 +295,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <!-- <div class="col-sm-6">
-                                    <label>Targeted Audience</label>
-                                    <select name="audience" class="form-control md-whiteframe-3dp" id="Audience" required="required"
-                                            ng-model="product.audience">
-                                        <option value="" disabled selected>Targeted Audience</option>
-                                        <option>College Students</option>
-                                        <option>ABC</option>
-                                        <option>XYZ</option>
-                                    </select required>
-                                </div> -->
                                 <div class="col-sm-3">
                                     <label>Demographics</label>
                                     <div class="input-group">

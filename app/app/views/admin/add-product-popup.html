@@ -1,3 +1,64 @@
+<style>
+       .daterangepicker {
+        /* position: absolute; */
+        color: inherit;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 340px !important;
+        max-width: none;
+        padding: 0;
+        margin-top: 7px;
+        top: 0px;
+        left: 0px;
+        right: 29% !important;
+        z-index: 1111;
+        display: none;
+        font-family: arial;
+        font-size: 15px;
+        line-height: 1em;
+    }
+    @media screen and (min-width:768px) and (max-width:  991px){
+        .daterangepicker {
+        right: 14% !important;
+        }
+        .daterangepicker.opensright:before {
+            left: 316px;
+        }
+        .daterangepicker.opensright:after {
+            left: 317px;
+        }
+    }
+    @media screen and (min-width:320px) and (max-width: 563px){
+        .daterangepicker {
+        /* position: absolute; */
+        color: inherit;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 280px !important;
+        max-width: none;
+        padding: 0;
+        margin-top: 7px;
+        top: 0px;
+        left: 10px;
+        right: 8% !important;
+        z-index: 1;
+        display: none;
+        font-family: arial;
+        font-size: 15px;
+        line-height: 1em;
+    }
+    .daterangepicker.opensright:before {
+        left: 240px;
+    }
+    .daterangepicker.opensright:after {
+        left: 241px;
+    }
+    }
+    
+    
+    </style>
 <md-dialog flex-xs="100" flex="50" flex-md="70" flex-sm="60">
     <md-dialog-content>
         <md-content class="add_productbgcol">
@@ -203,7 +264,7 @@
 
                             <div class="col-sm-6 ">
                                 <label>Product Images</label>
-
+   
                                 <div class="input-group" style="width: 100%;">                                   
                                     <input type="file" class="form-control md-whiteframe-3dp"
                                         required="required" ngf-select ng-model="files.image" name="imageFile"
@@ -229,8 +290,10 @@
                                     <label>Direction</label>
                                     <div class="input-group" style="width: 100%;">                                   
                                         <input type="file" class="form-control md-whiteframe-3dp"
-                                            required="required" ngf-select ng-model="files.image" name="imageFile"
-                                            accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*">                                   
+                                            required="required" ngf-select ng-model="files.symbol" name="imageFile"
+                                            accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*">
+                                            <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o"
+                                                aria-hidden="true"></i></span>                                      
                                     </div>
                                 </div>
                             </div>

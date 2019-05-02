@@ -28,12 +28,23 @@
     margin-top: 7px;
     top: 0px;
     left: 0px;
-    right: 18% !important;
+    right: 8.5% !important;
     z-index: 1;
     display: none;
     font-family: arial;
     font-size: 15px;
     line-height: 1em;
+}
+@media screen and (min-width:768px) and (max-width:  991px){
+    .daterangepicker {
+    right: 14% !important;
+    }
+    .daterangepicker.opensright:before {
+        left: 316px;
+    }
+    .daterangepicker.opensright:after {
+        left: 317px;
+    }
 }
 @media screen and (min-width:320px) and (max-width: 563px){
     .daterangepicker {
@@ -419,7 +430,7 @@
                         </td>
                         <td class="table_address">
                             <p><b>{{product.siteNo}} -
-                                    {{product.area_name}}</b><br>{{product.address | capitalize}}<br>Facing :
+                                    {{product.area_name}}</b><br>{{product.city_name | capitalize}} &nbsp;{{product.country_name | capitalize}}<br>Facing :
                                 {{product.direction|| "N/A" | capitalize}}
                                 <br>Type : {{product.format_name|| "N/A" | capitalize}}
                             </p>
