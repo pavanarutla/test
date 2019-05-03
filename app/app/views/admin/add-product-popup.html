@@ -56,7 +56,12 @@
         left: 241px;
     }
     }
-    
+    .radio-inline {
+                float: left;
+                clear: none;
+                display: block;
+                padding: 2px 1em 0 0;
+        }
     
     </style>
 <md-dialog flex-xs="100" flex="50" flex-md="70" flex-sm="60">
@@ -296,6 +301,22 @@
                                                 aria-hidden="true"></i></span>                                      
                                     </div>
                                 </div>
+                                        <div class="col-sm-6 ">
+                                                <p style="font-size: 12px;letter-spacing: .02em;">
+                                                        Cancelation:</p>
+                                                <form>
+                                                        <label class="radio-inline">
+                                                                <input type="radio"
+                                                                        ng-model="product.cancelation"
+                                                                        value="Yes">&nbsp;Yes
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                                <input type="radio"
+                                                                        ng-model="product.cancelation"
+                                                                        value="No" checked>&nbsp;No
+                                                        </label>
+                                                </form>
+                                        </div>
                             </div>
                         <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
 

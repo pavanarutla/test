@@ -16,6 +16,13 @@
         .red-blocked {
                 background: #f00 !important;
         }
+
+        .radio-inline {
+                float: left;
+                clear: none;
+                display: block;
+                padding: 2px 1em 0 0;
+        }
 </style>
 <div class="hoarding_list">
         <div class="md-whiteframe-2dp contbg md-caption hide-xs" layout="row" layout-margin>
@@ -295,7 +302,7 @@
 
                                                         <div class="col-sm-6 ">
                                                                 <label>Product Images</label>
-                                                                <div class="input-group" style="width: 100%;">                                                                        
+                                                                <div class="input-group" style="width: 100%;">
                                                                         <input type="file"
                                                                                 class="form-control md-whiteframe-3dp"
                                                                                 required="required" ngf-select
@@ -325,6 +332,24 @@
                                                                                         class="fa fa-caret-square-o-up"
                                                                                         aria-hidden="true"></i></span>
                                                                 </div>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-6 ">
+                                                                <p style="font-size: 12px;letter-spacing: .02em;">
+                                                                        Cancelation:</p>
+                                                                <form>
+                                                                        <label class="radio-inline">
+                                                                                <input type="radio"
+                                                                                        ng-model="product.cancelation"
+                                                                                        value="Yes">&nbsp;Yes
+                                                                        </label>
+                                                                        <label class="radio-inline">
+                                                                                <input type="radio"
+                                                                                        ng-model="product.cancelation"
+                                                                                        value="No" checked>&nbsp;No
+                                                                        </label>
+                                                                </form>
                                                         </div>
                                                 </div>
                                                 <h3 class="md-body-2"><span class="md-title">Product Strengths</span>
