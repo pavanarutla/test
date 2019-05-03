@@ -31,7 +31,7 @@
                             <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488 / reach@billboardsamerica.com</td>
                         </tr>                        
                         <tr>
-                            <td><b>Refered By</b></td>
+                            <td><b>Referred By</b></td>
                             <td>{{campaignDetails.referred_by || "N/A"}}
                             </td>                            
                         </tr>
@@ -219,7 +219,8 @@
                     <td class="table_vertical">{{product.booked_to| dateify | date: "dd-MMM-yyyy"}}
                     </td>
                     <td class="table_vertical table_price">
-                        <p> {{(!myfield && product.owner_price)?product.owner_price:product.price}}
+                        <p>{{(!myfield) ? (product.owner_price || 'N/A') : ''}}
+                                <!-- {{(!myfield && product.owner_price)?product.owner_price:product.price}} -->
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
