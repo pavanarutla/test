@@ -226,6 +226,7 @@
     <table class="table">
       <thead class="text_color">
         <tr>
+            <th>Image</th>
           <th>Mode of Payment</th>
           <th>Paid</th>
           <th>Reference</th>
@@ -236,6 +237,9 @@
       </thead>
       <tbody>
         <tr ng-repeat="payment in campaignPayments.all_payments">
+            <td class="image_tdwidth">
+                <img ng-src="{{serverUrl + payment.image}}" alt="Smiley face"
+                class="requ_size img-thumbnail" style="width: 165px !important;height: 100px !important;"></td>
           <td class="table_vertical">{{payment.type}}</td>
           <td class="table_vertical">{{payment.amount}}</td>
           <td class="table_vertical">{{payment.reference_no}}</td>
