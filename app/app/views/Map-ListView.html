@@ -578,7 +578,7 @@
               </tr>
             </thead>
             <tbody ng-repeat="proddetail in productmarkerslist">
-              <tr ng-repeat="proddetails in proddetail.product_details | filter:tabID | filter:AreaName">
+              <tr ng-click="selectFromTabIdSearch(proddetails)" ng-repeat="proddetails in proddetail.product_details | filter:tabID | filter:AreaName">
                 <td class="image_tdwidthproduct">
   
                   <img ng-src=" {{serverUrl + proddetails.image}}" alt="product image" width="77px" height="48px"
@@ -593,7 +593,7 @@
                 <!-- <td class="table_vertical">{{proddetails.lighting}}</td> -->
                 <!-- <td class="table_vertical" style="width: 10%;">{{proddetails.direction}}</td> -->
                 <td class="text-center table_vertical">
-                  <a ng-click="selectFromTabIdSearch(proddetails)"><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
+                  <a><md-icon><i class="material-icons">remove_red_eye</i></md-icon></a>
                 </td>
               </tr>
             </tbody>

@@ -103,12 +103,13 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		UserService.requestResetPassword(sendObj).then(function(result){
 			if(result.status == 1){
 				// $scope.passwordEmailSentSuccess = true;
-				toastr.success(result.message);
-			}
+				toastr.success(result.message);			
+			}			
 			else{
 				toastr.error(result.message);
 			}
 		});
+		$mdDialog.hide();
 	}
 
 	// $scope.close = function () {
