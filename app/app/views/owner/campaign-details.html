@@ -3,89 +3,91 @@
         class="logo hs-lg hide-gt-md hide-md">
         <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
     </md-button>
-    <div class="bg-part">
-        <div layout="row" flex="100" flex-sm="100" flex-xs="100" flex-md="100" layout-xs="column" layout-sm="column"
-            layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
-            <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100"
-                flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
-                class="contbg md-whiteframe-3dp client_info">
-                <table class="table table-striped table-bordered camp_tablewidth">
-                    <tbody>
-                        <tr>
-                            <td><b>Campaign ID</b></td>
-                            <td>{{campaignDetails.cid}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Campaign Name</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
-                        </tr>
-                        <tr>
-                            <td><b>Client Name</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
-                        </tr>
-                        <tr>
-                            <td><b>Contact</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
-                        </tr>
-                        <tr>
-                            <td><b>Email</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}
-                            </td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">
-                                reach@billboardsindia.com</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column"
-                layout-sm="column" layout-gt-sm="column" layout-margin="layout-margin"
-                class="contbg md-whiteframe-3dp Campaign_summary">
-                <table class="table table-striped table-bordered camp_tablewidth">
-                    <tbody>
-                        <tr>
-                            <td class="camp_tableowner"><b>No of Products</b></td>
-                            <td>{{campaignDetails.products.length}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Date</b></td>
-                            <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Total Budget</b></td>
-                            <td>
-                                <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Pending payment</b></td>
-                            <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
-                                <span>Rs.</span>
-                                {{TOTAL - campaignDetails.total_paid}}
-                            </td>
-                            <td ng-if="campaignDetails.type == 0">
-                                <span ng-if="campaignDetails.pending_payment"></span>
-                                N/A
-                            </td>
-                            <td ng-if="campaignDetails.status <= 100">
-                                <span ng-if="campaignDetails.pending_payment">Rs.</span>
-                                0
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Status</b></td>
-                            <td>{{campaignDetails.status | stringifyCampaignStatus}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="campaign_details mt-4">
+        <div class="user_container">
+            <div class="row ml-0 mr-0">
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="contbg md-whiteframe-3dp p-2">
+                        <table class="table table-striped table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <td><b>Campaign ID</b></td>
+                                    <td>{{campaignDetails.cid}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Campaign Name</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Client Name</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Contact</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}
+                                    </td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">
+                                        reach@billboardsindia.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="contbg md-whiteframe-3dp p-2">
+                        <table class="table table-striped table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="camp_tableowner"><b>No of Products</b></td>
+                                    <td>{{campaignDetails.products.length}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date</b></td>
+                                    <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Total Budget</b></td>
+                                    <td>
+                                        <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Pending payment</b></td>
+                                    <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
+                                        <span>Rs.</span>
+                                        {{TOTAL - campaignDetails.total_paid}}
+                                    </td>
+                                    <td ng-if="campaignDetails.type == 0">
+                                        <span ng-if="campaignDetails.pending_payment"></span>
+                                        N/A
+                                    </td>
+                                    <td ng-if="campaignDetails.status <= 100">
+                                        <span ng-if="campaignDetails.pending_payment">Rs.</span>
+                                        0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Status</b></td>
+                                    <td>{{campaignDetails.status | stringifyCampaignStatus}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="book_campowner">
+    </div>
 
-            <div class="">
+    <div class="row ml-0 mr-0 p-3">
+        <div class="col-12 mr-0 d-flex justify-content-end">
+            <div >
                 <div class="dropdown">
                     <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
@@ -174,6 +176,7 @@
             </div>
         </div>
     </div>
+
     <!-- <div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg"> -->
     <!-- <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
             <div class="row" style="margin-left:0px; margin-right:0px;">

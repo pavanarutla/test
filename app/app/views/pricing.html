@@ -107,83 +107,81 @@
 			</div>
 		</div> -->
     </div>
-    
     <!-- keep in touch html start-->
-	<div class="keep_in_touch contbg" layout="column" layout-xs="column" >
+		<div class="keep_in_touch contbg" layout="column" layout-xs="column">
+			<div class="keep_in_touch_top" layout="column" layout-margin layout-align="center center">
+				<h3 class="md-display-1">KEEP IN TOUCH</h3>
+				<h4 class="md-subhead">Send us your brief from the contact form, or feel free to give us a call. 
+					We look forward to working on your next advertising campaign together.</h4>
+			</div>
+			<div class="keep_in_touch_bottom" layout="row" layout-xs="column"  layout-sm="column">
+				<div class="contsl" layout="column" flex="50" flex-sm="100" flex-xs="100"  layout-align-sm="center">
+					<div class="contstS md-whiteframe-2dp" layout="column"  flex-offset-gt-sm="25" layout-margin >
+						
+						<div class="theme-text md-title"><md-icon><i class="material-icons theme-text">location_on</i></md-icon> Address</div>
+						<div class="contsm">
+							<div class="md-title">BBI Advertising Pvt Ltd.</div>
+							<address class="md-subhead"> 
+								People tech group building,<br/>
+								Plot No.1, Whitefields <br/>
+								Hitech City Road, Kondapur,<br/> 
+								Hyderabad,Telangana 500084
+							</address>
+						</div>
 
-		<div class="keep_in_touch_top" layout="column" layout-margin layout-align="center center">
-			<h3 class="md-display-1">KEEP IN TOUCH</h3>
-			<h4 class="md-subhead">Send us your brief from the contact form, or feel free to give us a call. 
-				We look forward to working on your next advertising campaign together.</h4>
-		</div>
-		<div class="keep_in_touch_bottom" layout="row" layout-xs="column"  layout-sm="column">
-			<div class="contsl" layout="column" flex="50" flex-sm="100" flex-xs="100"  layout-align-sm="center">
-				<div class="contstS md-whiteframe-2dp" layout="column"  flex-offset-gt-sm="25" layout-margin >
-					
-					<div class="theme-text md-title"><md-icon><i class="material-icons theme-text">location_on</i></md-icon> Address</div>
-					<div class="contsm">
-						<div class="md-title">BBI Advertising Pvt Ltd.</div>
-						<address class="md-subhead"> 
-							People tech group building,<br/>
-							Plot No.1, Whitefields <br/>
-							Hitech City Road, Kondapur,<br/> 
-							Hyderabad,Telangana 500084
-						</address>
+						<div class="theme-text  md-title" ><md-icon><i class="material-icons theme-text">phone</i></md-icon>Contact Us</div>
+						<div class="md-subhead">+91 9676107913</div>
+						<div class="theme-text  md-title"> <md-icon><i class="material-icons theme-text">email</i></md-icon>Email Us </div>
+						<div class="md-subhead">reach@billboardsindia.com</div>
+
 					</div>
 
-					<div class="theme-text  md-title" ><md-icon><i class="material-icons theme-text">phone</i></md-icon>Contact Us</div>
-					<div class="md-subhead">+91 9676107913</div>
-					<div class="theme-text  md-title"> <md-icon><i class="material-icons theme-text">email</i></md-icon>Email Us </div>
-					<div class="md-subhead">reach@billboardsindia.com</div>
-
 				</div>
+				<div class="contsr" layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100"  layout-matgin layout-padding>
+					<div layout="column" layout-sm="column" class="confor md-whiteframe-2dp">
+						<form name="sendquery" novalidate>
+							<input type="hidden" ng-model="query.type" value="3" />
+							<md-input-container class="md-block">
+								<label>Name</label>
+								<input ng-model="query.name" name="queryname" required="required"  maxlength="30" />
+								<div ng-messages="sendquery.queryname.$error">
+									<div class="alret alert-danger" ng-message="required">Name is required.</div>
+									<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
+								</div>
 
-			</div>
-			<div class="contsr" layout="column" layout-sm="column" flex="50" flex-sm="100" flex-xs="100"  layout-matgin layout-padding>
-				<div layout="column" layout-sm="column" class="confor md-whiteframe-2dp">
-					<form name="sendquery" novalidate>
-						<input type="hidden" ng-model="query.type" value="3" />
-						<md-input-container class="md-block">
-							<label>Name</label>
-							<input ng-model="query.name" name="queryname" required="required"  maxlength="30" />
-							<div ng-messages="sendquery.queryname.$error">
-								<div class="alret alert-danger" ng-message="required">Name is required.</div>
-								<div ng-message="maxlength">Name shouldn't exede 30 characters. </div>
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label> Email</label>
+								<!-- <input ng-model="query.email" required="required"  /> -->
+								<input ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+								/>
+								<div ng-messages="sendquery.queryemail.$error">
+									<div class="alret alert-danger" ng-message="required">Email is required.</div>
+									<div ng-message="maxlength">username shouldn't exede 30 characters. </div>
+									<div ng-message="pattern">Enter a valied email</div>
+								</div>
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label>Company Name</label>
+								<input ng-model="query.companyName" />
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label>Message</label>
+								<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required"  />
+								<div ng-messages="sendquery.querymsg.$error">
+									<div class="alret alert-danger" ng-message="required">message is required.</div>
+									<div ng-message="maxlength">message shouldn't exede 150 characters. </div>
+									<div ng-message="minlength">message should be 10 characters</div>
+									</div>
+							</md-input-container>
+							<div class="forsubmCon">
+								<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
 							</div>
-
-						</md-input-container>
-						<md-input-container class="md-block">
-							<label> Email</label>
-							<!-- <input ng-model="query.email" required="required"  /> -->
-							<input ng-model="query.email" name="queryemail" type="email" maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
-							/>
-							<div ng-messages="sendquery.queryemail.$error">
-							  <div class="alret alert-danger" ng-message="required">Email is required.</div>
-							  <div ng-message="maxlength">username shouldn't exede 30 characters. </div>
-							  <div ng-message="pattern">Enter a valied email</div>
-							</div>
-						</md-input-container>
-						<md-input-container class="md-block">
-							<label>Company Name</label>
-							<input ng-model="query.companyName" />
-						</md-input-container>
-						<md-input-container class="md-block">
-							<label>Message</label>
-							<input ng-model="query.message" name="querymsg" minlength="10" maxlength="150" required="required"  />
-							<div ng-messages="sendquery.querymsg.$error">
-								<div class="alret alert-danger" ng-message="required">message is required.</div>
-								<div ng-message="maxlength">message shouldn't exede 150 characters. </div>
-								<div ng-message="minlength">message should be 10 characters</div>
-							  </div>
-						</md-input-container>
-						<div class="forsubmCon">
-							<md-button class="md-raised md-primary forsubm" ng-disabled="sendquery.$invalid" ng-click="sendQuery()">Send Message</md-button>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- keep in touch html end-->
 </div>  
 
