@@ -153,6 +153,11 @@ app.controller("ProductCtrl", [
     /*
   ======== Formats section ends ========
   */
+ $scope.searchAreas = function(query) {
+    return ProductService.searchAreas(query.toLowerCase()).then(function(res){
+      return res;
+    });
+  }
     $scope.applyFiltersmethod = function(product) {      
       ProductService.getProductList(
         $scope.pagination.pageNo,
@@ -201,14 +206,14 @@ app.controller("ProductCtrl", [
   ======== Products section ========
   */
 
-    $scope.getRequestedHoardings = function() {
+    $scope.getRequestedHoardings = function() {      
       return new Promise((resolve, reject) => {
         ProductService.getRequestedHoardings(
           $scope.pagination.pageNo,
-          $scope.pagination.pageSize
+          $scope.pagination.pageSize         
         ).then(
           result => {
-            $scope.requestedProductList = result.products;
+            $scope.requestedProductList = result.products;           
             $scope.pagination.pageCount = result.page_count;
             createPageLinks();
             resolve(result);
@@ -221,7 +226,7 @@ app.controller("ProductCtrl", [
     };
 
     // Opens the product form popup
-    $scope.showProductForm = function(ev) {
+    $scope.showProductForm = function(ev) {      
       $scope.product = {};
       $mdDialog.show({
         templateUrl: "views/admin/add-product-popup.html",
@@ -277,7 +282,7 @@ app.controller("ProductCtrl", [
         }
     }
     };
-    $scope.getProductUnavailableDates = function(productId, ev){
+    $scope.getProductUnavailableDates = function(productId, ev){      
       MapService.getProductUnavailableDates(productId).then(function(dateRanges){
         $scope.unavailalbeDateRanges = dateRanges;
         $(ev.target).parents().eq(3).find('input').trigger('click');
@@ -295,8 +300,8 @@ app.controller("ProductCtrl", [
 
     // Get products list
 
-    $scope.getProductList = function() {
-      $scope.searchText = null;
+    $scope.getProductList = function() {      
+      $scope.searchText = null;     
       ProductService.getProductList(
         $scope.pagination.pageNo,
         $scope.pagination.pageSize
@@ -311,7 +316,8 @@ app.controller("ProductCtrl", [
     $scope.product = {};
 
     $scope.files = {};
-    $scope.addProduct = function() {
+    $scope.addProduct = function(product) {
+      product.area = $scope.areaObj.id;
       Upload.upload({        
         url: config.apiPath + "/product",
         data: {
@@ -332,6 +338,7 @@ app.controller("ProductCtrl", [
             $scope.addProductErrors = result.data.message;
           }
           // addnewProduct();
+          $scope.areaObj ="";
           $state.reload();
         },
         function(resp) {
@@ -345,7 +352,7 @@ app.controller("ProductCtrl", [
 //     function addnewProduct() {
 //       document.getElementById("hoardingDrop").classList.toggle("show");
 // }
-    $scope.editProduct = function(product) {
+    $scope.editProduct = function(product) {      
       if (product.status != 0) {
         product.country = null;
         product.state = null;
@@ -354,6 +361,7 @@ app.controller("ProductCtrl", [
         // product.company = null;
       }
       $scope.product = product;
+      $scope.location = $scope.product.area_name + ', ' + $scope.product.city_name + ', ' +$scope.product.country_name;
       $mdDialog.show({
         templateUrl: "views/admin/add-product-popup.html",
         fullscreen: $scope.customFullscreen,

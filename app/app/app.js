@@ -123,6 +123,11 @@ var app = angular.module('bbManager', [
         templateUrl: 'views/suggest-campaign-four.html',
         controller: 'CampaignCtrl'
     })
+    .state('index.Map-ListView', {
+      url: 'Map-ListView',
+      templateUrl: 'views/Map-ListView.html',
+      controller: 'GmapCtrl'
+    })
     .state('index.location', {
       url: 'location',
       templateUrl: 'views/map-home.html',
@@ -481,7 +486,7 @@ var app = angular.module('bbManager', [
       controller:  'OwnerCampaignCtrl'
     })
     .state('owner.bbi-campaigns', {
-      url: '/bbi-campaigns',
+      url: '/bba-campaigns',
       templateUrl: 'views/owner/bbi-campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
@@ -780,7 +785,7 @@ app.run(
         // Get all URL parameter index.user-notifications
         $rootScope.currentTitle = transition.to().title;
         $rootScope.currStateName = transition.to().name;
-        if ((transition.to().name == "index.location"|| transition.to().name == "index.reset-password" || transition.to().name == "index.product-list" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail" ||  transition.to().name == "index.user-notifications")&& $auth.isAuthenticated()) {
+        if ((transition.to().name == "index.location"|| transition.to().name == "index.reset-password" || transition.to().name == "index.product-list" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail" ||  transition.to().name == "index.user-notifications" ||transition.to().name == "index.Map-ListView"  )&& $auth.isAuthenticated()) {
           $rootScope.footerhide = true;
         }
         else {

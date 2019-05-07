@@ -25,12 +25,33 @@
     margin-top: 7px;
     top: 0px;
     left: 0px;
-    right: 15% !important;
+    right: 17.5% !important;
     z-index: 1;
     display: none;
     font-family: arial;
     font-size: 15px;
     line-height: 1em;
+}
+@media screen and (min-width:320px) and (max-width: 563px){
+    .daterangepicker {
+    /* position: absolute; */
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 280px !important;
+    max-width: none;
+    padding: 0;
+    margin-top: 7px;
+    top: 0px;
+    left: 10px;
+    right: 8% !important;
+    z-index: 1;
+    display: none;
+    font-family: arial;
+    font-size: 15px;
+    line-height: 1em;
+}
 }
 </style>
 <div layout="column" class="owner_hoarding_list">
@@ -65,7 +86,7 @@
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
 				 style="margin-top:14px;">
-					<p class="cmp_bottom">Total Budget</p>
+					<p class="cmp_bottom">Total Amount</p>
 					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.total_budget || "N/A"}}</b></p>
 				</div>
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
@@ -143,8 +164,8 @@
           <td class="table_address">
             <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
               <br> {{ownerProduct.address | capitalize}}
-              <br>Facing: {{ownerProduct.direction | capitalize}}
-              <br>Type: {{ownerProduct.format_name | capitalize}}
+              <br>Facing : {{ownerProduct.direction | capitalize}}
+              <br>Type : {{ownerProduct.format_name | capitalize}}
           </td>
           <td class="table_vertical text-center">{{ownerProduct.impressions}}</td>
           <td class="table_vertical">

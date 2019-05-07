@@ -67,6 +67,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   | Campaign section
   =================================*/
   $scope.saveCampaign = function () {
+    debugger;
     // If we finally decide to use selecting products for a campaign
     // if($scope.selectedForNewCampaign.length == 0){
     //   // add all shortlisted products to campaign

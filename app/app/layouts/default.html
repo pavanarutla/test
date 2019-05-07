@@ -16,7 +16,6 @@
     var arrayText = [];
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
-
     var pusher = new Pusher('83e8ffcc55e67dd5625d', {
         cluster: 'ap2',
         forceTLS: true
@@ -34,13 +33,11 @@
     var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
     var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
     var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
-
     channel.bind('CampaignLaunchEvent', function (data) {
         arrayText.push(data);
         /* $('#notification-count').html(arrayText.length);
             $('#notification1-count').html(arrayText.length);*/
         notificationText(arrayText);
-
     });
     channel1.bind('campaignClosedEvent', function (data) {
         arrayText.push(data);
@@ -90,7 +87,6 @@
         arrayText.push(data);
         notificationText(arrayText);
     });
-
     function notificationText(arrayText) {
         $('#notification-count').html(arrayText.length);
         $('#notification1-count').html(arrayText.length);
@@ -356,6 +352,5 @@
             $("html, body").animate({ scrollTop: 0 }, "slow");
             return false;
         });
-
     });
 </script>
