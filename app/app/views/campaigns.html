@@ -160,8 +160,8 @@
                                             maxlength="50" required="required" placeholder="Refered By">
                                         <div ng-messages="forms.CampaignForm.refered.$error" style="color:red"
                                             ng-if="forms.CampaignForm.refered.$touched">
-                                            <div ng-message="required">Refered By is required.</div>
-                                            <div ng-message="maxlength">Refered By must have 50 characters.</div>
+                                            <div ng-message="required">Referred By is required.</div>
+                                            <div ng-message="maxlength">Referred By must have 50 characters.</div>
                                         </div>
                                     </div>
                                 </li>
@@ -303,8 +303,7 @@
                                     <tr ng-repeat="pCampaign in plannedCampaigns| filter:search ">
                                         <td class="table_vertical">{{pCampaign.cid}}</td>
                                         <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
-                                        <td class="table_vertical">
-                                            {{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
+                                        <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
                                         <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                         <!-- <td>10,1000</td> -->
                                         <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
@@ -382,8 +381,7 @@
                                     <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
                                         <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
                                         <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
-                                        <td class="table_vertical">
-                                            {{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+                                        <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
                                         <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                         <!-- <td>10,1000</td> -->
                                         <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>

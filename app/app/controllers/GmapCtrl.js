@@ -17,11 +17,11 @@ app.controller('GmapCtrl',
                         postCode: '',
                         district: '',
                         location: {
-                            lat: 17.3850,
-                            lng: 78.4867
-                        }
+                        lat: 17.3850,
+                        lng: 78.4867
+                      }
                     }
-                };
+                  };
                 $scope.format = 'yyyy/MM/dd';
                 $scope.date = new Date();
                 $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -80,10 +80,11 @@ app.controller('GmapCtrl',
                  | Multi date range picker options end
                  ====================================*/
                  $scope.IsDisabled = true;
-  $scope.EnableDisable = function () {
-    $scope.IsDisabled = $scope.campaign.name.length == 0;
-}
-                 $scope.FilterDates = function(booked_from,booked_to){    
+                    $scope.EnableDisable = function () {
+                    $scope.IsDisabled = $scope.campaign.name.length == 0;
+                }
+                // FIlter Dates
+                 $scope.FilterDates = function(booked_from,booked_to){                     
                     productList = [];
                     locArr = [];
                     uniqueMarkers = [];
@@ -97,6 +98,7 @@ app.controller('GmapCtrl',
                         });
                         markersOnMap = Object.assign([]);
                         $scope.filteredMarkers = markers;
+                        $scope.productmarkerslist = markers;
                         $scope.processMarkers();
                         if (markers.length > 0) {
                             var bounds = new google.maps.LatLngBounds();
@@ -108,7 +110,7 @@ app.controller('GmapCtrl',
                         }
                     });
                  };
-
+                  // FIlter Dates Ends
                 $scope.hidelocations = false;
                 var setDefaultArea = function () {
                     $scope.selectedArea = JSON.parse(localStorage.areaFromHome);
@@ -149,7 +151,7 @@ app.controller('GmapCtrl',
 
                 $scope.$watch(
                         function () {
-                            return $mdSidenav('suggestMe').isOpen();
+                            //return $mdSidenav('suggestMe').isOpen();
                         },
                         function (newValue, oldValue) {
                             if (newValue == false) {
@@ -183,9 +185,11 @@ app.controller('GmapCtrl',
                             selectorMarker.setMap(null);
                         });
                     });
+                    $scope.actualDataCopy=markers;
+                    $scope.productmarkerslist = markers;
                 });
                 ProductService.getFormatList().then(function (formats) {
-                    // $scope.formatList = formats;
+                     $scope.formatList = formats;
                     $scope.formatGrid = [];
                     $scope.selectedFormats = [];
                     var x = 3;
@@ -322,64 +326,64 @@ app.controller('GmapCtrl',
                             .targetEvent(ev)
                             );
                 };
-                $scope.industrySectorList = [
-                    {name: "Aerospace"},
-                    {name: "Agriculture"},
-                    {name: "Automotive"},
-                    {name: "Banking, Financial services and Insurance"},
-                    {name: "Construction, Engineering, Architectural"},
-                    {name: "Classifieds"},
-                    {name: "Consumer Durables"},
-                    {name: "Energy - Oil & Gas"},
-                    {name: "Energy - Other"},
-                    {name: "Energy – Utilities"},
-                    {name: "Entertainment"},
-                    {name: "Ecommerce"},
-                    {name: "Environment"},
-                    {name: "Education"},
-                    {name: "Forestry"},
-                    {name: "Fast-moving consumer goods"},
-                    {name: "Fashion & lifestyle"},
-                    {name: "GIS/Mapping/Cadastral"},
-                    {name: "Global Development"},
-                    {name: "Government – Civil"},
-                    {name: "Government - Defense &Intelligence"},
-                    {name: "Healthcare"},
-                    {name: "Hotels & Restaurant"},
-                    {name: "Insurance"},
-                    {name: "Logistics"},
-                    {name: "Marine / Fishing"},
-                    {name: "Media / Communications"},
-                    {name: "Office Supplies"},
-                    {name: "Public Services"},
-                    {name: "Retail"},
-                    {name: "Real Estate & Infrastructure"},
-                    {name: "Telecom"},
-                    {name: "Travel & Transport"},
-                    {name: "Others"}
-                ];
-                $scope.CampaignDuration = [
-                    {model: "10 Days"},
-                    {model: "15 Days"},
-                    {model: "20 Days"},
-                    {model: "25 Days"},
-                    {model: "30 Days"},
-                    {model: "2 Months"},
-                    {model: "3 Months"},
-                    {model: "6 Months"},
-                    {model: "1 year"}
-                ];
+                // $scope.industrySectorList = [
+                //     {name: "Aerospace"},
+                //     {name: "Agriculture"},
+                //     {name: "Automotive"},
+                //     {name: "Banking, Financial services and Insurance"},
+                //     {name: "Construction, Engineering, Architectural"},
+                //     {name: "Classifieds"},
+                //     {name: "Consumer Durables"},
+                //     {name: "Energy - Oil & Gas"},
+                //     {name: "Energy - Other"},
+                //     {name: "Energy – Utilities"},
+                //     {name: "Entertainment"},
+                //     {name: "Ecommerce"},
+                //     {name: "Environment"},
+                //     {name: "Education"},
+                //     {name: "Forestry"},
+                //     {name: "Fast-moving consumer goods"},
+                //     {name: "Fashion & lifestyle"},
+                //     {name: "GIS/Mapping/Cadastral"},
+                //     {name: "Global Development"},
+                //     {name: "Government – Civil"},
+                //     {name: "Government - Defense &Intelligence"},
+                //     {name: "Healthcare"},
+                //     {name: "Hotels & Restaurant"},
+                //     {name: "Insurance"},
+                //     {name: "Logistics"},
+                //     {name: "Marine / Fishing"},
+                //     {name: "Media / Communications"},
+                //     {name: "Office Supplies"},
+                //     {name: "Public Services"},
+                //     {name: "Retail"},
+                //     {name: "Real Estate & Infrastructure"},
+                //     {name: "Telecom"},
+                //     {name: "Travel & Transport"},
+                //     {name: "Others"}
+                // ];
+                // $scope.CampaignDuration = [
+                //     {model: "10 Days"},
+                //     {model: "15 Days"},
+                //     {model: "20 Days"},
+                //     {model: "25 Days"},
+                //     {model: "30 Days"},
+                //     {model: "2 Months"},
+                //     {model: "3 Months"},
+                //     {model: "6 Months"},
+                //     {model: "1 year"}
+                // ];
                 //export all 
 
-                $scope.exportAllCampaigns = function () {
-                    CampaignService.exportCampaignsPdf().then(function (result) {
-                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
-                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
-                        if (result.status) {
-                            toastr.error(result.meesage);
-                        }
-                    });
-                };
+                // $scope.exportAllCampaigns = function () {
+                //     CampaignService.exportCampaignsPdf().then(function (result) {
+                //         var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                //         FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                //         if (result.status) {
+                //             toastr.error(result.meesage);
+                //         }
+                //     });
+                // };
                 ////////////////////////////////////////////////////////////////////////
                 // tablet filters filtersMap
 
@@ -434,12 +438,13 @@ app.controller('GmapCtrl',
                     $scope.product.panelSize = marker.properties['panelSize'];
                     $scope.product.address = marker.properties['address'];
                     $scope.product.impressions = marker.properties['impressions'];
+                    $scope.product.format = marker.properties['format_name'];
                     $scope.product.lighting = marker.properties['lighting'];
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
                    // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
-                    $mdSidenav('productDetails').toggle();
+                    $mdSidenav('productDetails').open();
                     $scope.selectedProduct = marker;
                 }
 
@@ -453,11 +458,12 @@ app.controller('GmapCtrl',
                     $scope.product.panelSize = marker.properties['panelSize'];
                     $scope.product.address = marker.properties['address'];
                     $scope.product.impressions = marker.properties['impressions'];
+                    $scope.product.format = marker.properties['format_name'];
                     $scope.product.direction = marker.properties['direction'];
                     $scope.product.lighting = marker.properties['lighting'];
                     $scope.product.availableDates = marker.properties['availableDates'];
                     $scope.hideSelectedMarkerDetail = false;
-                    $mdSidenav('productDetails').toggle();
+                    $mdSidenav('productDetails').open();
 
                    // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                     $scope.selectedProduct = marker;
@@ -652,14 +658,14 @@ app.controller('GmapCtrl',
                     concentricMarkers = {};
                     var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats};
                     $scope.plottingDone = false;
-                    MapService.filterProducts(filterObj).then(function (markers) {
-                        //console.log("filter products",marksers)
+                    MapService.filterProducts(filterObj).then(function (markers) {                        
                         _.each(markersOnMap, function (v, i) {
                             v.setMap(null);
                             $scope.Clusterer.removeMarker(v);
                         });
                         markersOnMap = Object.assign([]);
-                        $scope.filteredMarkers = markers;
+                        $scope.filteredMarkers = markers; 
+                        $scope.productmarkerslist = markers;                      
                         $scope.processMarkers();
                         if (markers.length > 0) {
                             var bounds = new google.maps.LatLngBounds();
@@ -673,7 +679,7 @@ app.controller('GmapCtrl',
                     });
                 }
 
-                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {                 
                     var sendObj = {
                         product_id: productId,
                         dates: selectedDateRanges
@@ -868,11 +874,12 @@ app.controller('GmapCtrl',
                         $scope.product.panelSize = refToMapMarker.properties['panelSize'];
                         $scope.product.address = refToMapMarker.properties['address'];
                         $scope.product.impressions = refToMapMarker.properties['impressions'];
+                        $scope.product.format = refToMapMarker.properties['format_name'];
                         $scope.product.lighting = refToMapMarker.properties['lighting'];
                         $scope.product.direction = refToMapMarker.properties['direction'];
                         $scope.product.availableDates = refToMapMarker.properties['availableDates'];
                         $scope.hideSelectedMarkerDetail = false;
-                        $mdSidenav('productDetails').toggle();
+                        $mdSidenav('productDetails').open();
                         $scope.selectedProduct = refToMapMarker;
                     } else {
                         toastr.error('No product found with that tab id', 'error');
@@ -975,6 +982,7 @@ app.controller('GmapCtrl',
                             toastr.error(result.message);
                         }
                     });
+                    $state.reload();
                 }
 
                 $scope.shareShortlistedProducts = function (shareShortlisted) {
@@ -1127,7 +1135,237 @@ app.controller('GmapCtrl',
                     });
                 }
 
+                // Product-Controller               
+                 ProductService.getFormatList().then(function (formats) {
+                     // $scope.formatList = formats;
+                     $scope.formatGrid = [];
+                     $scope.selectedFormats = [];
+                     var x = 3;
+                     var y = formats.length / x;
+                     var k = 0;
+                     for (var i = 0; i < y; i++) {
+                       var tempArr = [];
+                       for (var j = 0; j < x; j++) {
+                         tempArr.push(formats[k]);
+                         if (formats[k]) {
+                           $scope.selectedFormats.push(formats[k].id);
+                           k++;
+                         }
+                       }
+                       $scope.formatGrid.push(tempArr);
+                     }
+                   });
+                  $scope.FormatData=function (selectedZone) {
+                      $scope.productmarkerslist=$scope.actualDataCopy.filter(function (item) {
+                          return item.product_details[0].format_name===selectedZone;
+                      });
+                  };
+                  $scope.resetData=function(){
+                      $scope.productmarkerslist=$scope.actualDataCopy;
+                      $scope.siteNo='';
+                      $scope.area_name='';
+                  };
+                   $scope.getproddata = function (proddetails) {            
+                     $scope.productListDetails = proddetails;      
+                     $mdSidenav('productDetails').toggle();
+                   }
+                   $scope.formats = function () {
+                     $scope.filter = false;
+                     $scope.format = !$scope.format;
+                     $scope.shortlist = false;
+                     $scope.savedcampaign = false;
+                   }
+                   /*================================
+               | Multi date range picker options
+               ================================*/
+               $scope.mapProductOpts = {
+                 multipleDateRanges: true,
+                 opens: 'center',
+                 locale: {
+                     applyClass: 'btn-green',
+                     applyLabel: "Book Now",
+                     fromLabel: "From",
+                     format: "DD-MMM-YY",
+                     toLabel: "To",
+                     cancelLabel: 'Cancel',
+                     customRangeLabel: 'Custom range'
+                 },
+                 isInvalidDate: function (dt) {
+                   for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+                       if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                           return true;
+                       }
+                   }
+                   if(moment(dt) < moment()){
+                       return true;
+                   }
+               },
+               isCustomDate: function (dt) {
+                   for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+                       if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                           if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                               return ['red-blocked', 'left-radius'];
+                           } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                               return ['red-blocked', 'right-radius'];
+                           } else {
+                               return 'red-blocked';
+                           }
+                       }
+                   }
+                   if(moment(dt) < moment()){
+                       return 'gray-blocked';
+                   }
+               },
+               eventHandlers: {
+                   'apply.daterangepicker': function(ev, picker) { 
+                       //selectedDateRanges = [];
+                   }
+               } 
+               };
+               /*====================================
+               | Multi date range picker options end
+               ====================================*/      
+               $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
+                 var productToCampaign = {
+                     product_id: productId,
+                     campaign_id: existingCampaignId
+                 };
+                 if (selectedDateRanges.length > 0) {
+                     productToCampaign.dates = selectedDateRanges;
+                 } else {
+                     toastr.error("Please select dates.");
+                     return false;
+                 }
+                 CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
+                     if (result.status == 1) {
+                         toastr.success(result.message);
+                         $mdSidenav('productDetails').close();
+                     } else {
+                         toastr.error(result.message);
+                     }
+                 });
+                 $state.reload();
+               }
+               $scope.IsDisabled = true;
+               $scope.EnableDisable = function () {
+                 $scope.IsDisabled = $scope.campaign.name.length == 0;
+               }
+               $scope.FilterProductlist = function(booked_from,booked_to){
+                 MapService.filterProducts(booked_from,booked_to).then(function (result) {
+                  productList = [];
+                             locArr = [];
+                             uniqueMarkers = [];
+                             concentricMarkers = {};
+                             var filterObj = {area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from,booked_to};
+                             $scope.plottingDone = false;
+                             MapService.filterProducts(filterObj).then(function (markers) {
+                                 _.each(markersOnMap, function (v, i) {
+                                     v.setMap(null);
+                                     $scope.Clusterer.removeMarker(v);
+                                 });
+                                 markersOnMap = Object.assign([]);                                 
+                                 $scope.productmarkerslist = markers;
+                                 $scope.filteredMarkers = markers;
+                                 $scope.processMarkers();
+                                 if (markers.length > 0) {
+                                     var bounds = new google.maps.LatLngBounds();
+                                     _.each(markersOnMap, function (v, i) {
+                                         bounds.extend(v.getPosition());
+                                     });
+                                 } else {
+                                     toastr.error("no marker found for the criteria you selected");
+                                 }
+                             });
+               });
+               }
+                   // SHORT-LIST
+                   $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+                     var sendObj = {
+                       product_id: productId,
+                       dates: selectedDateRanges
+                     }
+                     MapService.shortListProduct(sendObj).then(function (response) {
+                       $mdDialog.show(
+                         $mdDialog.alert()
+                           .parent(angular.element(document.querySelector('body')))
+                           .clickOutsideToClose(true)
+                           .title('Shortlist Product')
+                           .textContent(response.message)
+                           .ariaLabel('shortlist-success')
+                           .ok('Got it!')
+                           .targetEvent(ev),
+                         $mdSidenav('productDetails').close()
+                       );
+                       getShortListedProducts();
+                       $mdSidenav('productDetails').close();
+                       $state.reload();
+                     });
+                   }
+                   $scope.getProductUnavailableDates = function(productId, ev){
+                     MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+                       $scope.unavailalbeDateRanges = dateRanges;
+                       $(ev.target).parents().eq(3).find('input').trigger('click');
+                     });
+                   }
+                   // SHORT-LIST ENDs
+                   // Save-camp
+                   $scope.toggleExistingCampaignSidenav = function () {
+                     $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+                   }
+                   // Save-camp-end
+                   // SAVE-CAMPPP
+                   $scope.saveCampaign = function (product_id, selectedDateRanges) {
+                     if (product_id) {
+                         $scope.campaign.products = [];
+                         var sendObj = {
+                             product_id: product_id,
+                         }
+               
+                         if (selectedDateRanges.length > 0) {
+                             sendObj.dates = selectedDateRanges;
+                         } else {
+                             toastr.error("Please select dates.");
+                             return false;
+                         }
+                         $scope.campaign.products.push(sendObj);
+                         $form = $scope.forms.mySaveCampaignForm;
+                     } else {
+                         if ($scope.shortListedProducts.length > 0) {
+                             $scope.campaign.products = [];
+                             _.each($scope.shortListedProducts, function (v, i) {
+                                 $scope.campaign.products.push(v.id);
+                             });
+                             $form = $scope.forms.viewAndSaveCampaignForm;
+                         } else {
+                             toastr.error("Please shortlist some products first.");
+                         }
+               
+                     }
+                     if ($scope.campaign.products) {
+                         CampaignService.saveUserCampaign($scope.campaign).then(function (response) {
+                             if (response.status == 1) {
+                                 //$scope.campaignSavedSuccessfully = true;
+                                 $timeout(function () {
+                                     $scope.campaign = {};
+                                     $form.$setPristine();
+                                     $form.$setUntouched();
+                                     toastr.success(response.message);
+                                     //$scope.campaignSavedSuccessfully = false;
+                                 }, 3000);
+                                 $scope.loadActiveUserCampaigns();
+                                 getShortListedProducts();
+                             } else {
+                                 $scope.saveUserCampaignErrors = response.message;
+                             }
+                         });
+                     }
+               
+                 }
+
+                // Product-Controller Code - Ends
+
                 // controller ends  
+
             }
         ]
         );
