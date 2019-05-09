@@ -386,6 +386,7 @@ $scope.applymethod=function(product){
         toastr.success(result.data.message);
       }      
       document.getElementById("myDropdown").classList.toggle("show");
+      $state.reload;
       $scope.product = [];
       product.dates="";
       $scope.hordinglistform.$setPristine();
@@ -501,8 +502,8 @@ $scope.applymethod=function(product){
 
   //updated edited product details
 
-  $scope.updateeditProductdetails = function(editRequestedhordings){    
-    editRequestedhordings.area = $scope.areaObj.id;
+  $scope.updateeditProductdetails = function(editRequestedhordings){
+    //editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
@@ -530,6 +531,7 @@ $scope.applymethod=function(product){
   $scope.editRequestedhordings = function(id){
      OwnerProductService.getProductDetails(id).then(function(res){       
       $scope.editRequestedhordings = res.product_details
+     $scope.location= $scope.editRequestedhordings.area_name + ', ' + $scope.editRequestedhordings.city_name + ', ' +$scope.editRequestedhordings.country_name
       return res.product_details;
     })
   };

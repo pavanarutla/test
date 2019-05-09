@@ -377,6 +377,7 @@ $scope.hidebutton = function(){
                         });
                     });
                     toastr.success(result.message);
+                    $state.reload();
                 } else {
                     toastr.error(result.message);
                 }

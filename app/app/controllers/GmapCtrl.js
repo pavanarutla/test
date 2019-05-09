@@ -83,6 +83,7 @@ app.controller('GmapCtrl',
                     $scope.EnableDisable = function () {
                     $scope.IsDisabled = $scope.campaign.name.length == 0;
                 }
+
                 // FIlter Dates
                  $scope.FilterDates = function(booked_from,booked_to){                     
                     productList = [];
