@@ -13,6 +13,7 @@
     .red-blocked{
       background:#f00 !important;
     }
+  
     .daterangepicker {
     /* position: absolute; */
     color: inherit;
@@ -405,7 +406,12 @@
                   placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
                   style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
                 <a ng-click="getProductUnavailableDates(adminprod.id, $event);">
-                  <i class="material-icons">
+                  <i class="material-icons" ng-if="adminprod.booking_dates == 0">
+                    calendar_today
+                  </i>
+                </a>
+                <a>
+                  <i class="material-icons material-Cal"  ng-if="adminprod.booking_dates != 0">
                     calendar_today
                   </i>
                 </a>

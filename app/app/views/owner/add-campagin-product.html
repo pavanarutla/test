@@ -197,11 +197,16 @@
               <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
           </td>
           <td class="table_vertical text-center">
-            <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+            <input date-range-picker ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp date-picker"
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
             <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
-              <i class="material-icons">
+              <i class="material-icons"  ng-if="ownerProduct.booking_dates == 0">
+                calendar_today
+              </i>
+            </a>
+            <a>
+              <i class="material-icons material-Cal"  ng-if="ownerProduct.booking_dates != 0">
                 calendar_today
               </i>
             </a>

@@ -364,7 +364,8 @@ $scope.hidebutton = function(){
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {              
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {    
+                debugger;          
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -373,12 +374,12 @@ $scope.hidebutton = function(){
                             if (product.id == ownerProduct.id) {
                                 product.alreadyAdded = true;
                             }
-                            return product;
+                            return product;                            
                         });
+                        //$state.reload();
                     });
-                    toastr.success(result.message);
-                    $state.reload();
-                } else {
+                    toastr.success(result.message);                   
+                }else{
                     toastr.error(result.message);
                 }
             });
