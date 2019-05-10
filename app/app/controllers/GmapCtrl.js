@@ -286,9 +286,12 @@ app.controller('GmapCtrl',
                         clickOutsideToClose: true,
                         controller: function ($scope, src) {
                             $scope.img_src = src;
-                        }
-                    });
-                };
+                            $scope.closeMdDialog = function(){
+                                $mdDialog.hide();
+                              }                           
+                        }                        
+                    });                    
+                };          
                 $scope.selectedCountry = {};
                 $scope.selectedStates = {};
                 $scope.selectedcitys = {};
@@ -1313,7 +1316,7 @@ app.controller('GmapCtrl',
                    $scope.toggleExistingCampaignSidenav = function () {
                      $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
                    }
-                   // Save-camp-end
+                   // Save-camp-end                  
                    // SAVE-CAMPPP
                    $scope.saveCampaign = function (product_id, selectedDateRanges) {
                      if (product_id) {
