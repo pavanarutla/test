@@ -201,7 +201,12 @@
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
             <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
-              <i class="material-icons">
+              <i class="material-icons" ng-if="ownerProduct.booking_dates == 0">
+                calendar_today
+              </i>
+            </a>
+            <a>
+              <i class="material-icons material-Cal" ng-if="ownerProduct.booking_dates != 0">
                 calendar_today
               </i>
             </a>
