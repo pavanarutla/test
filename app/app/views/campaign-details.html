@@ -141,7 +141,6 @@
                     <th>Booked From</th>
                     <th>Booked To</th>
                     <th>Price in $</th>
-                    <th></th>
                     <th>Status</th>
                     <th></th>
                     <th style="text-align:end;">
@@ -183,34 +182,9 @@
                            ng-if="campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 600)">
                             {{campaignProduct.product_status| stringifyProductStatus}}</p>
                     </td>
-<!--                    <td>
-                         Trigger the modal with a button 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-if="campaignProduct.cancelation=='No'">X</button>
-                         Modal 
-                        <div id="myModal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-
-                                 Modal content
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Inventory Cancel</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Some text in the modal.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </td>-->
                     <td class="table_vertical">
                         <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
-                                                                      ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
+                        ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
                     </td>
                     <td></td>
                 </tr>
