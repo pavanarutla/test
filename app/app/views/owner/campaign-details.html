@@ -151,17 +151,24 @@
                     </md-button>
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.products.length == 0">
+            <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
                         Add Products
                     </md-button>
-                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
+                    <!-- <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
                         Add Products
-                    </md-button>
+                    </md-button> -->
                 </div>
             </div>
-            <div class=""  ng-hide="campaignDetails.status <= 300 || campaignDetails.type == 0">
+            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status == 100 && campaignDetails.status < 700">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
+                            Another Product
+                        </md-button>
+                </div>
+            </div>
+            <div class=""  ng-if="campaignDetails.status == 700 || campaignDetails.type == 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
                         <md-button class="md-grid-item-content add_blue hide-xs">
@@ -189,13 +196,7 @@
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
                     <th class="">Price</th>
-                    <th class="">Default Price</th>
-                    <th class=" text-right">
-                        <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0 && hidebutton()"
-                            ng-click="addNewProductToCampaign()">Add
-                            Another Product
-                        </md-button>
-                    </th>
+                    <th class="">Default Price</th>                    
                 </tr>
             </thead>
             <tbody>
@@ -221,7 +222,7 @@
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
-                                ng-show="!myfield" ng-hide="campaignDetails.status <= 600"> <i
+                                ng-show="!myfield" ng-hide="campaignDetails.status >= 600"> <i
                                     class="material-icons">edit</i></span>
                             <button
                                 ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)"
@@ -258,11 +259,9 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL || "N/A" }}</li>
                 </ul>
-                <md-button class="md-raised md-primary all_button book_campowner"
-                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
+                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
                     Campaign</md-button>
-                <span class="md-raised md-primary camp_bookowner"
-                    ng-if="campaignDetails.status == 700" >Campaign Booked</span>
+                <span class="md-raised md-primary camp_bookowner" ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
         </div>
     </div>
