@@ -10,10 +10,20 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	$scope.showUserRegPanel = function () {
 		$scope.currentNavItem = 'users';
 		$scope.showUserForm = true;
+		$scope.showOwnerForm = false;
+		$scope.showAgencyForm = false;
+	}
+	$scope.showOwnerRegPanel = function () {
+		$scope.currentNavItem = 'owner';
+		$scope.showUserForm = false;
+		$scope.showOwnerForm = true;
+		$scope.showAgencyForm = false;
 	}
 	$scope.showAgencyRegPanel = function () {
 		$scope.currentNavItem = 'agency';
 		$scope.showUserForm = false;
+		$scope.showOwnerForm = false ;
+		$scope.showAgencyForm = true;
 	}
 	/*
 	* ========== Switching registration forms between User and Agency ends ===========
