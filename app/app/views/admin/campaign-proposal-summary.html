@@ -161,7 +161,12 @@
                 </md-button>
                 <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-right: 0px;">
                     Download
-                </md-button>
+                </md-button>               
+            </div>
+        </div>
+        <div class="" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
+                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Another Product</md-button>
             </div>
         </div>
         <div class="">
@@ -240,7 +245,7 @@
                     <th class="">Default Price</th>
                     <th class="">Inventory Owner</th>
                     <th class="">Inventory Status</th>
-                    <th class="text-right"><md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Another Product</md-button></th>
+                    <th class="text-right"></th>
             </tr>
             </thead>
             <tbody>
@@ -291,12 +296,7 @@
                         <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status| stringifyCampaignStatus}} </p>
                         <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
                         <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status| stringifyProductStatus}}</p>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-info table_vertical">
-                                <!-- ng-if="campaignProduct.cancelation == true" -->
-                            Cancelation</button>
-                    </td>
+                    </td>                   
                     <td class=""></td>
                 </tr>
             </tbody>
