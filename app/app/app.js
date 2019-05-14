@@ -609,16 +609,17 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
-    // .state('owner.signIn', {
-    //   url: '/signIn',
-    //   templateUrl: 'views/owner/signin.html',
-    //   controller:'ownerSigninCtrl'
-    // })
+    .state('agency.campagins', {
+      url: '/campagins',
+      templateUrl: 'views/agency/campagins.html',
+      controller:'agencyCampaginsCtrl'
+    })
     ;
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
     $urlRouterProvider.when('/owner', '/owner/:client_slug/feeds');
+    // $urlRouterProvider.when('/agency', '/home');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
