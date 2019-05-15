@@ -197,6 +197,7 @@
                     <th class="">Booked To</th>
                     <th class="">Price</th>
                     <th class="">Default Price</th>                    
+                    <th class=""></th>
                 </tr>
             </thead>
             <tbody>
@@ -235,8 +236,24 @@
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
                         {{product.default_price || product.price || 'N/A'}}</td>
                     <td class="table_vertical ">
-                        <a><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
-                                ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">delete_forever</i></a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
+                                >delete_forever</i></a>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal_bottom">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to cancel this booking ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-footer modal_top">
+                                                        <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">Yes</button>
+                                                        <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                     </td>
                 </tr>
             </tbody>
