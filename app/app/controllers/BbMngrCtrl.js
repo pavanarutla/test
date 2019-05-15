@@ -369,6 +369,7 @@ $scope.sendQuery = function(query){
     // Product Details
     $scope.toggleProductDetailSidenav = function () {
         $mdSidenav('productDetails').toggle();
+        $scope.$broadcast("removeSelection");
     };
     // Share Message
     $scope.toggleShareCampaignSidenav = function (campaign) {
@@ -511,7 +512,7 @@ $scope.sendQuery = function(query){
             });
         });
     }
-    if ($rootScope.currStateName == 'index' || 'index.location') {
+    if (($rootScope.currStateName == 'index' || 'index.location') && $rootScope.isAuthenticated) {
         // $scope.shortListedProductsLength = localStorage.shortListedProducts
         $scope.loadActiveUserCampaigns();
     }
@@ -544,11 +545,11 @@ $scope.sendQuery = function(query){
         $rootScope.formatSelected = index;
     }
     
-     function getUserNotifictaions() {
-    NotificationService.viewUserNotification().then((result) => {
-      $scope.getUserNotifictaions = result.notifications;
-    });
-  }
-  getUserNotifictaions();
+//      function getUserNotifictaions() {
+//     NotificationService.viewUserNotification().then((result) => {
+//       $scope.getUserNotifictaions = result.notifications;
+//     });
+//   }
+//   getUserNotifictaions();
 }
 );

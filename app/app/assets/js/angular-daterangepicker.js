@@ -20,7 +20,8 @@
         max: '=',
         model: '=ngModel',
         opts: '=options',
-        clearable: '='
+        clearable: '=',
+        customOptions: '='
       },
       link: function($scope, element, attrs, modelCtrl) {
         var _clear, _init, _initBoundaryField, _mergeOpts, _picker, _setDatePoint, _setEndDate, _setStartDate, _validate, _validateMax, _validateMin, customOpts, el, opts;
@@ -157,6 +158,12 @@
           }
           );
           _picker = el.data('daterangepicker');
+          angular.extend($scope.customOptions, {
+            clearSelection: function() {
+              _picker.selectedDateRanges = [];
+              $scope.model = [];
+            }
+          })
           results = [];
           for (eventType in opts.eventHandlers) {
             results.push(el.on(eventType, function(e) {
