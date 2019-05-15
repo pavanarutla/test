@@ -1,8 +1,8 @@
 <div class="contbg" ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" class="short_imagecenter" >
+	<div ng-if="shortListedProducts == null" layout="colmun" layout-align="center center" class="short_imagecenter" >
 		<img src="assets/images/owner/Group 383.png" class="rounded mx-auto d-block" alt="...">
 	</div>
-	<div class="table-responsive contbg" ng-if="shortListedProducts.length != 0">
+	<div class="table-responsive contbg">
 		<table class="table">
 			<thead class="text_color">
 				<tr>
@@ -42,9 +42,23 @@
 					</td>
 					<td class="table_vertical">{{shortlisted.admin_price || "N/A"}}</td>
 					<td class="table_vertical">
-						<a><i class="material-icons" ng-click="deleteShortlisted($event, shortlisted.id)">delete_forever</i>
-							
-							</a>
+						<a data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons">delete_forever</i></a>
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+									<div class="modal-content">
+										<div class="modal-header modal_bottom">
+										<h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to cancel this booking ?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-footer modal_top">
+												<button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteShortlisted($event, shortlisted.id)">Yes</button>
+												<button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+										</div>
+									</div>
+								</div>
+							</div>
 					</td>
 					<td></td>
 					<td></td>
@@ -55,8 +69,8 @@
 		</table>
 	</div>
 	<!-- table grid end -->
-	<div class="campaign_payment_inner mb-2">
-		<div class="p-2 align-self-end" ng-if="shortListedProducts.length != 0">
+	<div class="campaign_payment_inner mb-2" ng-if="shortListedProducts != null">
+		<div class="p-2 align-self-end">
 			<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
 				<div class="d-flex justify-content-end pt-4">
 					<md-button class="md-raised md-warn Upload_font" ng-click="toggleSaveCampaignPopup()">Save Campaign</md-button>

@@ -109,8 +109,8 @@
                     </tr>
                     <tr>
                         <td><b>Estimated Budget</b></td>
-                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.est_budget|| "N/A"}}</td>
-                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.est_budget|| "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -130,13 +130,13 @@
                     <tr>
                         <td><b>Total Amount</b></td>
                         <td>
-                            <span>$</span>&nbsp;{{TOTAL || "0"}}
+                            <span>$</span>&nbsp;{{TOTAL |number : 2  || "0"}}
                         </td>
                     </tr>
                     <tr>
                         <td><b>Pending Amount</b></td>
                         <td>
-                            <span>$</span>&nbsp;{{PendingPay || 0}}
+                            <span>$</span>&nbsp;{{PendingPay || "0" |number : 2}}
                         </td>
                     </tr>
                     <tr>
@@ -240,9 +240,9 @@
                     <!-- <th class="">Size</th> -->
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
-                    <th class="">Price Given</th>
-                    <th class="">Price Received</th>
                     <th class="">Default Price</th>
+                    <th class="">Price Received</th>  
+                    <th class="">Price Given</th>                                     
                     <th class="">Inventory Owner</th>
                     <th class="">Inventory Status</th>
                     <th class="text-right"></th>
@@ -275,18 +275,18 @@
                     <td class="table_vertical">
                         <p>{{ campaignProduct.booked_to | date }}</p>
                     </td>
+                    <td class="table_vertical">
+                        <p>{{campaignProduct.default_price |number : 2  || 'N/A'}}</p>                       
+                    </td>
+                    <td class="table_vertical">
+                        <p>{{campaignProduct.owner_price || '0' |number : 2}}</p>                       
+                    </td> 
                     <td class="table_vertical table_price">
-                        <p>{{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
+                        <p>{{(!myfield) ? (campaignProduct.admin_price |number : 2  || 'N/A') : ''}}
                         <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
                         <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons" ng-hide="campaignDetails.status >= 600">edit</i></span>
                         <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{campaignProduct.owner_price|| 'N/A'}}</p>                       
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{campaignProduct.default_price|| 'N/A'}}</p>                       
-                    </td>
+                    </td>                                   
                     <td class="table_vertical">
                         <p class=" md-caption">{{campaignProduct.client_name}}</p>
                         <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
@@ -305,7 +305,7 @@
     <!-- table grid end -->
 
     <div class="row border_quest">
-        <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
+        <!-- <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
             <div class="ml-2 form-group">
                 <form name="SendComment">
                     <div class=" chat_box ">
@@ -321,20 +321,21 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" style="padding-right: 0px;">
+        </div> -->
+    </div>
+        <!-- <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" style="padding-right: 0px;"> -->
                 <div class="small-wrapper mt0">
                         <div class="smallContainer">
                           <div class="payment-summary">
                             <ul id="double">
                               <li class="col1">Total :</li>
-                              <li class="col2">{{campaignDetails.act_budget}}</li>
+                              <li class="col2">{{campaignDetails.act_budget |number : 2 }}</li>
                               <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
                               <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
                             </ul>
                             <ul id="total">
                               <li class="col1">Grand Total :</li>
-                              <li class="col2">{{ TOTAL || "N/A" }}</li>
+                              <li class="col2">{{ TOTAL |number : 2  || "N/A" }}</li>
                             </ul>
                             <md-button
                     class="md-raised md-warn all_button book_campowner"  
@@ -361,8 +362,7 @@
                           </div>
                         </div>
                       </div>
-        </div>
-    </div>
+        <!-- </div> -->
 <script>
     function AdminshareCampaign() {
         document.getElementById("shareadmincampDrop").classList.toggle("show");
