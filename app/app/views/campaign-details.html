@@ -183,31 +183,33 @@
                            ng-if="campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 600)">
                             {{campaignProduct.product_status| stringifyProductStatus}}</p>
                     </td>
-<!--                    <td>
-                         Trigger the modal with a button 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-if="campaignProduct.cancelation=='No'">X</button>
-                         Modal 
-                        <div id="myModal" class="modal fade" role="dialog">
+                    <td>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{campaignProduct.id}}" ng-if="campaignProduct.cancelation=='No' && campaignProduct.product_status !='600' ">X</button>
+                        <!-- Modal -->
+                        <div id="myModal-{{campaignProduct.id}}" class="modal fade" role="dialog">
                             <div class="modal-dialog">
 
-                                 Modal content
+                                <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+<!--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
                                         <h4 class="modal-title">Inventory Cancel</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Some text in the modal.</p>
+                                        <p>Cost Of Product : {{campaignProduct.admin_price}}</p>
+                                        <p>Cancellation Charges : {{campaignProduct.cancellation_charge}}</p>
+                                         <p>Refund Amount :  {{campaignProduct.admin_price-campaignProduct.cancellation_charge}}</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelProductFromCampaign(campaignProduct.id, campaignDetails.id)">Yes</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                    </td>-->
+                    </td>
                     <td class="table_vertical">
                         <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
                                                                       ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
