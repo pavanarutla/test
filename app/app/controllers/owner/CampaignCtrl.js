@@ -839,7 +839,7 @@ $scope.hidebutton = function(){
                         .targetEvent(ev)
                         );
                 //close();  
-                shareownerCampaign();
+                shareOwnerCampaign();
             } else {
                 toastr.error(result.message);
             }
@@ -853,10 +853,12 @@ $scope.hidebutton = function(){
      | Campaign Search
      ==============================*/
     // function shareownerCampaign() {
-    //     angular.element(document.querySelector("#OwnersharecampDrop")).addClass("hide");
+    //     angular.element(document.querySelector("#sharecampDrop")).addClass("hide");
     //     angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
     // }
-
+    function shareOwnerCampaign() {
+        document.getElementById("shareownercampDrop").classList.toggle("show");   
+      }
     /*=========================
      | Page based initial loads
      =========================*/

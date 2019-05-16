@@ -85,23 +85,24 @@
         </div>
     </div>
 
-    <div class="row ml-0 mr-0 p-3">
-        <div class="col-12 mr-0 d-flex justify-content-end">
+    <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+            layout-margin="layout-margin" class="book_campowner">
+        
             <div >
                 <div class="dropdown">
-                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
                         Share
                     </md-button>
-                    <div id="sharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
+                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
                                 <span flex></span>
                                 <md-button class="md-icon-button" aria-label="Close Side Panel"
-                                    onclick="shareownerCampaign()">
+                                    onclick="shareOwnerCampaign()">
                                     <md-icon class="md-default-theme">
                                         <i class="material-icons">close</i>
                                     </md-icon>
@@ -150,17 +151,24 @@
                     </md-button>
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.products.length == 0">
+            <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
                         Add Products
                     </md-button>
-                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
+                    <!-- <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
                         Add Products
-                    </md-button>
+                    </md-button> -->
                 </div>
             </div>
-            <div class=""  ng-hide="campaignDetails.status <= 300 || campaignDetails.type == 0">
+            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status == 100 && campaignDetails.status < 700">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
+                            Another Product
+                        </md-button>
+                </div>
+            </div>
+            <div class=""  ng-if="campaignDetails.status == 700 || campaignDetails.type == 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
                         <md-button class="md-grid-item-content add_blue hide-xs">
@@ -174,7 +182,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+      
     </div>
     <!-- table grid start -->
     <div class="table-responsive" ng-if="campaignDetails.products.length != 0">
@@ -188,13 +196,8 @@
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
                     <th class="">Price</th>
-                    <th class="">Default Price</th>
-                    <th class=" text-right">
-                        <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0 && hidebutton()"
-                            ng-click="addNewProductToCampaign()">Add
-                            Another Product
-                        </md-button>
-                    </th>
+                    <th class="">Default Price</th>                    
+                    <th class=""></th>
                 </tr>
             </thead>
             <tbody>
@@ -220,7 +223,7 @@
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
-                                ng-show="!myfield" ng-hide="campaignDetails.status <= 600"> <i
+                                ng-show="!myfield" ng-hide="campaignDetails.status >= 600"> <i
                                     class="material-icons">edit</i></span>
                             <button
                                 ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)"
@@ -233,8 +236,24 @@
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
                         {{product.default_price || product.price || 'N/A'}}</td>
                     <td class="table_vertical ">
-                        <a><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
-                                ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">delete_forever</i></a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
+                                >delete_forever</i></a>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal_bottom">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to cancel this booking ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-footer modal_top">
+                                                        <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">Yes</button>
+                                                        <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                     </td>
                 </tr>
             </tbody>
@@ -257,11 +276,9 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL || "N/A" }}</li>
                 </ul>
-                <md-button class="md-raised md-primary all_button book_campowner"
-                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
+                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
                     Campaign</md-button>
-                <span class="md-raised md-primary camp_bookowner"
-                    ng-if="campaignDetails.status == 700" >Campaign Booked</span>
+                <span class="md-raised md-primary camp_bookowner" ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
         </div>
     </div>
@@ -269,7 +286,7 @@
 </div>
 
 <script>
-    function shareownerCampaign() {
-        document.getElementById("OwnersharecampDrop").classList.toggle("show");
+    function shareOwnerCampaign () {
+        document.getElementById("shareownercampDrop").classList.toggle("show");
     }
 </script>
