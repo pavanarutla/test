@@ -369,6 +369,7 @@ $scope.sendQuery = function(query){
     // Product Details
     $scope.toggleProductDetailSidenav = function () {
         $mdSidenav('productDetails').toggle();
+        $scope.$broadcast("removeSelection");
     };
     // Share Message
     $scope.toggleShareCampaignSidenav = function (campaign) {

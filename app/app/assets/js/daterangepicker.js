@@ -57,7 +57,7 @@
         this.ranges = {};
         // multiple date range selector related variables
         this.multipleDateRanges = false;
-        this.selectedDateRanges = [];
+        this.selectedDateRanges = [];  
         this.tempDateRange = {
             startDate : false,
             endDate : false
