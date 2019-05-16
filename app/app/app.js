@@ -615,8 +615,8 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
-    .state('agency.campagins', {
-      url: '/campagins',
+    .state('agency.acampagins', {
+      url: '/acampagins',
       templateUrl: 'views/agency/campagins.html',
       controller:'agencyCampaginsCtrl'
     })
