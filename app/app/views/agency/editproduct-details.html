@@ -1,0 +1,436 @@
+<script type="text/javascript">
+    jssor_1_slider_init = function() {
+
+        var jssor_1_SlideshowTransitions = [
+          {$Duration:800,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:-0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:-0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:-0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:-0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,$Cols:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:0.3,$Rows:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:0.3,$Cols:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,y:-0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,$Rows:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:-0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$SlideOut:true,$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,$Delay:20,$Clip:3,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,$Delay:20,$Clip:3,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,$Delay:20,$Clip:12,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+          {$Duration:800,$Delay:20,$Clip:12,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2}
+        ];
+
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $SlideshowOptions: {
+            $Class: $JssorSlideshowRunner$,
+            $Transitions: jssor_1_SlideshowTransitions,
+            $TransitionsOrder: 1
+          },
+          $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$
+          },
+          $ThumbnailNavigatorOptions: {
+            $Class: $JssorThumbnailNavigator$
+          }
+        };
+
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+        /*#region responsive code begin*/
+
+        var MAX_WIDTH = 980;
+
+        function ScaleSlider() {
+            var containerElement = jssor_1_slider.$Elmt.parentNode;
+            var containerWidth = containerElement.clientWidth;
+
+            if (containerWidth) {
+
+                var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+                jssor_1_slider.$ScaleWidth(expectedWidth);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+        }
+
+        ScaleSlider();
+
+        $Jssor$.$AddEvent(window, "load", ScaleSlider);
+        $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+        $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+        /*#endregion responsive code end*/
+    };
+</script>
+<style>
+    /*jssor slider loading skin spin css*/
+    .jssorl-009-spin img {
+        animation-name: jssorl-009-spin;
+        animation-duration: 1.6s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    @keyframes jssorl-009-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /*jssor slider arrow skin 051 css*/
+    .jssora051 {display:block;position:absolute;cursor:pointer;}
+    .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
+    .jssora051:hover {opacity:.8;}
+    .jssora051.jssora051dn {opacity:.5;}
+    .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+
+    /*jssor slider thumbnail skin 111 css*/
+    .jssort111 .p {position:absolute;top:0;left:0;width:200px;height:100px;background-color:#000;}
+    .jssort111 .p img {position:absolute;top:0;left:0;width:100%;height:100%;}
+    .jssort111 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.45;}
+    .jssort111 .p:hover .t{opacity:.8;}
+    .jssort111 .pav .t, .jssort111 .pdn .t, .jssort111 .p:hover.pdn .t{opacity:1;}
+    .jssort111 .ti {position:absolute;bottom:0px;left:0px;width:100%;height:28px;line-height:28px;text-align:center;font-size:12px;color:#fff;background-color:rgba(0,0,0,.3)}
+    .jssort111 .pav .ti, .jssort111 .pdn .ti, .jssort111 .p:hover.pdn .ti{color:#000;background-color:rgba(255,255,255,.6);}
+
+    .daterangepicker option.disabled, .daterangepicker td.disabled {
+    color: #fff;
+    cursor: not-allowed;
+    background: #ddd;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    /* text-decoration: line-through; */
+  }
+  .gray-blocked{
+    background:#ddd;
+  }
+  .red-blocked{
+    background:#f00 !important;
+  }
+  .radio-inline {
+                float: left;
+                clear: none;
+                display: block;
+                padding: 2px 1em 0 0;
+        }
+  .daterangepicker {
+    /* position: absolute; */
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 340px !important;
+    max-width: none;
+    padding: 0;
+    margin-top: 6px;
+    top: 0px;
+    left: 650px !important;
+    right: auto !important;
+    z-index: 21;
+    display: none;
+    font-family: arial;
+    font-size: 15px;
+    line-height: 1em;
+}
+@media screen and (min-width:768px) and (max-width:  991px){
+    .daterangepicker {
+        left: 160px !important;
+    }
+    .daterangepicker.opensright:before {
+    left: 240px;
+    }
+    .daterangepicker.opensright:after {
+        left: 241px;
+    }
+}
+@media screen and (min-width:320px) and (max-width: 563px){
+    .daterangepicker {
+    /* position: absolute; */
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 280px !important;
+    max-width: none;
+    padding: 0;
+    margin-top: 7px;
+    top: 0px;
+    left: 19px !important;
+    right: 0% !important;
+    z-index: 15;
+    display: none;
+    font-family: arial;
+    font-size: 15px;
+    line-height: 1em;
+}
+.daterangepicker.opensright:before {
+    left: 240px;
+}
+.daterangepicker.opensright:after {
+    left: 241px;
+}
+}
+</style>
+
+<div class="md-whiteframe-4dp contbg md-caption mt-3" layout="row" layout-margin>
+    <div class="table-responsive">
+        <table class="table upper_head">
+
+            <tbody>
+                <tr>
+                    <td class="upper_line image_tdwidth">
+                        <img ng-src="{{config.serverUrl + editRequestedhordings.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+                    </td>
+                    <td class="upper_line">
+                        <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
+                            <span>({{editRequestedhordings.panelSize}})</span></p>
+                        <p class="mb-0">{{editRequestedhordings.address}}</p>
+                        <p class="mb-0"> <span class="text_color">Facing:</span>{{editRequestedhordings.direction}}</p>
+                        <p class="mb-0"> <span class="text_color">Type:</span>{{editRequestedhordings.format_name}}</p>
+                    </td>
+                    <td class="table_vertical upper_line hide-xs">
+                      <label><b>Views</b></label>
+                      <p>{{editRequestedhordings.impressionsperweek}}</p>
+                    </td>
+                    <td class="table_vertical upper_line hide-xs">
+                            <label><b>Light</b></label>
+                            <p ng-if="editRequestedhordings.lighting == 1">Yes</p>
+                            <p ng-if="editRequestedhordings.lighting == 0">No</p>
+                            <p ng-if="editRequestedhordings.lighting != 1 && editRequestedhordings.lighting != 0">{{editRequestedhordings.lighting}}</p>
+                        </td>
+                    <td class="table_vertical upper_line hide-xs">
+                            <label><b>Price</b></label>
+                           <p> {{editRequestedhordings.default_price}}</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="contbg md-caption layout-row" layout="column">
+    <div class="md-whiteframe-4dp layout-margin col-xl-6 col-lg-6 col-md-8">
+        <div class="col-md-12">
+            <form name="addProductForm" role="form" novalidate="novalidate">
+                    <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
+                        <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label>Product ID*</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" disabled name="siteNo" ng-model="editRequestedhordings.siteNo"                                                        required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/">
+                                                <div ng-messages="hordinglistform.siteNo.$error" ng-if="hordinglistform.siteNo.$touched" style="color:red">
+                                                    <div ng-message="required">Product Id is required.</div>
+                                                    <div ng-message="pattern">Product id should contain only Alpha Numeric and _ - . symbols.</div>
+                                                </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Product Type*</label>
+                                        <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="editRequestedhordings.type"
+                                                        class="form-control md-whiteframe-3dp" data-md-container-class="selectdemoSelectHeader" required="required"
+                                                        name="productType">
+                                                    <option value="" disabled selected>Product Type*</option>
+                                                </select>
+                                                <div ng-messages="hordinglistform.productType.$error" ng-if="hordinglistform.productType.$touched"
+                                                     style="color:red">
+                                                    <div ng-message="required">Site type is required.</div>
+                                                </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label>Search DMA</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" disabled name="DMA" ng-model="location">                                        
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Lit </label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" name="siteNo" ng-model="editRequestedhordings.lighting">                                       
+                                        <div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched" style="color:red">
+                                            <div ng-message="required">light*.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Height(Ft)</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" disabled name="height" ng-model="editRequestedhordings.panelSize.split('*')[0]"
+                                        placeholder="Height*" required="required">
+                                 <div ng-messages="hordinglistform.height.$error" ng-if="hordinglistform.height.$touched" style="color:red">
+                                     <div ng-message="required">height*.</div>
+                                 </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Width(Ft)</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" disabled name="width" ng-model="editRequestedhordings.panelSize.split('*')[1]"
+                                        placeholder="Width*" required="required">
+                                 <div ng-messages="hordinglistform.width.$error" ng-if="hordinglistform.width.$touched" style="color:red">
+                                     <div ng-message="required">width*.</div>
+                                 </div>
+                                    </div>
+                                </div>
+    
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label>Latitude*</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" disabled name="lat" ng-model="editRequestedhordings.lat"
+                                               required="required">
+                                        <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched" style="color:red">
+                                            <div ng-message="required">Latitude is required.</div>
+                                        </div>
+    
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <label>Longitude*</label>
+                                            <input type="text" class="form-control md-whiteframe-3dp" disabled name="lng" ng-model="editRequestedhordings.lng"
+                                                   required="required">
+                                            <div ng-messages="hordinglistform.long.$error" ng-if="hordinglistform.lng.$touched" style="color:red">
+                                                <div ng-message="required">Longitude is required.</div>
+                                            </div>
+        
+                                        </div>  
+                                </div>
+    
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label>Product Cost per month*</label>
+                                        <input class="form-control md-whiteframe-3dp" ng-model="editRequestedhordings.default_price"  name="default_price" type="text"  only-numeric required="required">
+                                        <div ng-messages="hordinglistform.default_price.$error" ng-if="hordinglistform.default_price.$touched" style="color:red">
+                                            <div ng-message="required">Cost is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Nearest Land Mark</label>                                        
+                                        <input ng-model="editRequestedhordings.nearlandmark" class="form-control md-whiteframe-3dp" type="text" name="nearlandmark"/>
+                                 </div>
+        
+                                        </div>
+    
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label>Facing*</label>
+                                        <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp" required="required" type="text" name="cost" required="required" />
+                                                <div ng-messages="hordinglistform.cost.$error" ng-if="hordinglistform.cost.$touched" style="color:red">
+                                                    <div ng-message="required">Direction is required.</div>
+                                                </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <label>Select Product Date</label>
+                                            <div class="input-group">                                                
+                                                <input date-range-picker ng-model="editRequestedhordings.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" disabled readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                                    <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(editRequestedhordings.id,$event);">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </a>
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    
+                                    <div class="col-sm-6 ">
+                                            <label>Product Images</label>
+                                            
+                                            <div class="input-group" style="width: 100%;">
+                                                <input type="file" class="form-control md-whiteframe-3dp" required="required" ngf-select ng-src="editRequestedhordings.image[0]" ng-model="editRequestedhordings.image[0]" name="imageFile" accept="image/*" ngf-max-size="20MB" placeholder="Upload Product Image*"  multiple >
+                                                <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                                <div ng-messages="hordinglistform.imageFile.$error" ng-if="hordinglistform.imageFile.$touched" style="color:red">
+                                                    <div ng-message="required">image is required.</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Upload Product Video if Any</label>
+                                            <div class="input-group">
+                                                <input class="form-control md-whiteframe-3dp" type="text" placeholder="" name="videoUrl" ng-model="editRequestedhordings.videoUrl">
+                                                <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <div class="col-sm-6 ">
+                                                <p style="font-size: 12px;letter-spacing: .02em;">
+                                                        Cancelation:</p>
+                                                <form>
+                                                        <label class="radio-inline">
+                                                                <input type="radio" 
+                                                                        ng-model="editRequestedhordings.cancelation"
+                                                                        value="Yes" >&nbsp;Yes
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                                <input type="radio" 
+                                                                        ng-model="editRequestedhordings.cancelation"
+                                                                        value="No" checked>&nbsp;No
+                                                        </label>
+                                                </form>
+                                        </div>
+                                </div>
+                                <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
+    
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                            <label>Average Impressions Per Week*</label>
+                                        <div class="input-group">
+                                            
+                                            <input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="editRequestedhordings.impressionsperweek" placeholder="Impressions Per Week*" only-numeric>
+                                            <div ng-messages="hordinglistform.impressionsperweek.$error" ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
+                                                <div ng-message="required">impression.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <label>Read Direction</label>
+                                        <select name="Visibility" class="form-control md-whiteframe-3dp" id="Visibility" required="required"
+                                                ng-model="editRequestedhordings.visibility">
+                                            <option value="" disabled selected> Read Direction</option>
+                                            <option>Right-Hand Read</option>
+                                            <option>Left-Hand Read</option>
+                                            <option>Other</option>
+                                        </select required>
+                                    </div>
+                                </div>
+    
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label>Demographics</label>
+                                        <div class="input-group">
+                                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
+                                                name="Age" ng-model="editRequestedhordings.audience" only-numeric>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Eyes on Impression</label>
+                                        <div class="input-group">
+                                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Eyes on Impression"
+                                                name="Eyes on Impression" ng-model="editRequestedhordings.eyeimpression" only-numeric>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Demographics</label>
+                                        <div class="input-group">
+                                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Ethnicity"
+                                                name="Ethnicity" ng-model="editRequestedhordings.targetedaudience" only-numeric>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-8" style="opacity:0.5;">
+                                        Note: You can change price / details any time you want.<br>
+                                        * Select only booked dates remaining dates consider as available
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <md-button type="submit" Class="md-raised md-primary register_btn" ng-click="updateeditProductdetails(editRequestedhordings)" ng-disabled="hordinglistform.$invalid">Submit</md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">jssor_1_slider_init();</script>

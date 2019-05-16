@@ -620,6 +620,30 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/agency/campagins.html',
       controller:'agencyCampaginsCtrl'
     })
+    .state('agency.abbisupport', {
+      url: '/abbisupport',
+      templateUrl: 'views/agency/bbisupport.html'
+    })
+    .state('agency.apayments', {
+      url: '/apayments',
+      templateUrl: 'views/agency/payments.html'
+    })
+    .state('agency.ahoarding-list', {
+      url: '/ahoarding-list',
+      templateUrl: 'views/agency/hoarding-list.html'
+    })
+    .state('agency.ashortlistproduct', {
+      url: '/ashortlistproduct',
+      templateUrl: 'views/agency/shortlistproduct.html'
+    })
+    .state('agency.aupdatepayment', {
+      url: '/aupdatepayment',
+      templateUrl: 'views/agency/updatepayment.html'
+    })
+    .state('agency.aeditproduct-details', {
+      url: '/aeditproduct-details',
+      templateUrl: 'views/agency/editproduct-details.html'
+    })
     ;
 
     $urlRouterProvider.when('/', '/home');
