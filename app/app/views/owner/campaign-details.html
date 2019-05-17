@@ -3,109 +3,106 @@
         class="logo hs-lg hide-gt-md hide-md">
         <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
     </md-button>
-    <div class="bg-part">
-        <div layout="row" flex="100" flex-sm="100" flex-xs="100" flex-md="100" layout-xs="column" layout-sm="column"
-            layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
-            <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100"
-                flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
-                class="contbg md-whiteframe-3dp client_info">
-                <table class="table table-striped table-bordered camp_tablewidth">
-                    <tbody>
-                        <tr>
-                            <td class="camp_tableowner"><b>Campaign ID</b></td>
-                            <td>{{campaignDetails.cid}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Campaign Name</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards America</td>
-                        </tr>
-                        <tr>
-                            <td><b>Client Name</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards America</td>
-                        </tr>
-                        <tr>
-                            <td><b>Contact Details</b></td>
-                            <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}} / {{campaignDetails.org_contact_email | capitalize}}</td>
-                            <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488 / reach@billboardsamerica.com</td>
-                        </tr>                        
-                        <tr>
-                            <td><b>Referred By</b></td>
-                            <td>{{campaignDetails.referred_by || "N/A"}}
-                            </td>                            
-                        </tr>
-                        <tr>
-                            <td><b>Estimated Budget</b></td>
-                            <td>{{campaignDetails.est_budget || "N/A"}}
-                            </td>                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column"
-                layout-sm="column" layout-gt-sm="column" layout-margin="layout-margin"
-                class="contbg md-whiteframe-3dp Campaign_summary">
-                <table class="table table-striped table-bordered camp_tablewidth">
-                    <tbody>
-                        <tr>
-                            <td class="camp_tableowner"><b>No of Products</b></td>
-                            <td>{{campaignDetails.products.length}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Date</b></td>
-                            <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Total Budget</b></td>
-                            <td>
-                                <span ng-if="campaignDetails.act_budget">$</span>{{ TOTAL || 0 }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Pending payment</b></td>
-                            <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
-                                $ {{TOTAL - campaignDetails.total_paid}}
-                            </td>
-                            <td ng-if="campaignDetails.type == 0">
-                                <span ng-if="campaignDetails.pending_payment"></span>
-                                N/A
-                            </td>
-                            <td ng-if="campaignDetails.status <= 100">
-                                <span ng-if="campaignDetails.pending_payment">$</span>
-                                0
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Status</b></td>
-                            <td>{{campaignDetails.status | stringifyCampaignStatus}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Campaign Start/End Date</b></td>
-                            <td>N/A</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="campaign_details mt-4">
+        <div class="user_container">
+            <div class="row ml-0 mr-0">
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="contbg md-whiteframe-3dp p-2">
+                        <table class="table table-striped table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <td><b>Campaign ID</b></td>
+                                    <td>{{campaignDetails.cid}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Campaign Name</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.name | capitalize}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Client Name</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Contact</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}
+                                    </td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">
+                                        reach@billboardsindia.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="contbg md-whiteframe-3dp p-2">
+                        <table class="table table-striped table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="camp_tableowner"><b>No of Products</b></td>
+                                    <td>{{campaignDetails.products.length}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date</b></td>
+                                    <td>{{campaignDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Total Budget</b></td>
+                                    <td>
+                                        <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Pending payment</b></td>
+                                    <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
+                                        <span>Rs.</span>
+                                        {{TOTAL - campaignDetails.total_paid}}
+                                    </td>
+                                    <td ng-if="campaignDetails.type == 0">
+                                        <span ng-if="campaignDetails.pending_payment"></span>
+                                        N/A
+                                    </td>
+                                    <td ng-if="campaignDetails.status <= 100">
+                                        <span ng-if="campaignDetails.pending_payment">Rs.</span>
+                                        0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Status</b></td>
+                                    <td>{{campaignDetails.status | stringifyCampaignStatus}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="book_campowner">
+    </div>
 
-            <div class="">
+    <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+            layout-margin="layout-margin" class="book_campowner">
+        
+            <div >
                 <div class="dropdown">
-                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-right: 0px;">
                         Share
                     </md-button>
-                    <div id="sharecampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
+                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
                                 <span flex></span>
                                 <md-button class="md-icon-button" aria-label="Close Side Panel"
-                                    onclick="shareownerCampaign()">
+                                    onclick="shareOwnerCampaign()">
                                     <md-icon class="md-default-theme">
                                         <i class="material-icons">close</i>
                                     </md-icon>
@@ -154,17 +151,24 @@
                     </md-button>
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.products.length == 0">
+            <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
                         Add Products
                     </md-button>
-                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
+                    <!-- <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
                         Add Products
-                    </md-button>
+                    </md-button> -->
                 </div>
             </div>
-            <div class=""  ng-hide="campaignDetails.status <= 300 || campaignDetails.type == 0">
+            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status == 100 && campaignDetails.status < 700">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
+                            Another Product
+                        </md-button>
+                </div>
+            </div>
+            <div class=""  ng-if="campaignDetails.status == 700 || campaignDetails.type == 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
                         <md-button class="md-grid-item-content add_blue hide-xs">
@@ -178,7 +182,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+      
     </div>
     <!-- table grid start -->
     <div class="table-responsive" ng-if="campaignDetails.products.length != 0">
@@ -192,13 +196,8 @@
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
                     <th class="">Price</th>
-                    <th class="">Default Price</th>
-                    <th class=" text-right">
-                        <md-button class="md-raised add_blue" ng-if="campaignDetails.type != 0 && hidebutton()"
-                            ng-click="addNewProductToCampaign()">Add
-                            Another Product
-                        </md-button>
-                    </th>
+                    <th class="">Default Price</th>                    
+                    <th class=""></th>
                 </tr>
             </thead>
             <tbody>
@@ -224,7 +223,7 @@
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
-                                ng-show="!myfield" ng-hide="campaignDetails.status <= 600"> <i
+                                ng-show="!myfield" ng-hide="campaignDetails.status >= 600"> <i
                                     class="material-icons">edit</i></span>
                             <button
                                 ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)"
@@ -237,8 +236,24 @@
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
                         {{product.default_price || product.price || 'N/A'}}</td>
                     <td class="table_vertical ">
-                        <a><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
-                                ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">delete_forever</i></a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
+                                >delete_forever</i></a>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal_bottom">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to cancel this booking ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-footer modal_top">
+                                                        <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">Yes</button>
+                                                        <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                     </td>
                 </tr>
             </tbody>
@@ -261,11 +276,9 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL || "N/A" }}</li>
                 </ul>
-                <md-button class="md-raised md-primary all_button book_campowner"
-                    ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
+                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
                     Campaign</md-button>
-                <span class="md-raised md-primary camp_bookowner"
-                    ng-if="campaignDetails.status == 700" >Campaign Booked</span>
+                <span class="md-raised md-primary camp_bookowner" ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
         </div>
     </div>
@@ -273,7 +286,7 @@
 </div>
 
 <script>
-    function shareownerCampaign() {
-        document.getElementById("OwnersharecampDrop").classList.toggle("show");
+    function shareOwnerCampaign () {
+        document.getElementById("shareownercampDrop").classList.toggle("show");
     }
 </script>

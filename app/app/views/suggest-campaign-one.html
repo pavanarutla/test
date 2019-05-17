@@ -1,38 +1,36 @@
-<div layout="row" layout-sm="column" layout-xs="column" class="name-suggest" >
-    <div flex="25" flex-sm="100" flex-xs="100" layout="colmun" >
-        <h3 class="md-subhead">Product Detail</h3>
-    </div>
-    <div flex="70"  flex-sm="100" flex-xs="100">
-        <form name="suggestMeform" novalidate layout-fill>
+<div class="name-suggest row mr-0 ml-0">
+    <div class="col-9">
+        <form name="suggestMeform" novalidate>
             <md-input-container class="md-block">
-            <label>Organisation Name</label>
-            <input md-no-asterisk name="org_name" ng-model="suggestionRequest.org_name" required>
-            <div ng-messages="suggestMeform.org_name.$error">
-                <div ng-message="required">This is required.</div>
-                <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
-            </div>
+                <label>Organisation Name</label>
+                <input md-no-asterisk name="org_name" ng-model="suggestionRequest.org_name" required>
+                <div ng-messages="suggestMeform.org_name.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block">
-            <label>Product</label>
-            <input md-no-asterisk name="product" ng-model="suggestionRequest.product" required>
-            <div ng-messages="suggestMeform.org_name.$error">
-                <div ng-message="required">This is required.</div>
-                <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
-            </div>
+                <label>Product</label>
+                <input md-no-asterisk name="product" ng-model="suggestionRequest.product" required>
+                <div ng-messages="suggestMeform.product.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+                </div>
             </md-input-container>
             <h3 class="md-body-2">
                 Describe your product, this will help us in innovating your ad campaign:
             </h3>
-            <textarea style="width:100%;margin:10px 0 5px" rows="3" ng-model="suggestionRequest.product_desc"></textarea>
+            <textarea style="width:100%;margin:10px 0 5px" rows="3"
+                ng-model="suggestionRequest.product_desc"></textarea>
             <p class="md-caption">
-                Tip: we launched a new car in the market that satisfies the middle class people, which also has a fuel effiency, modern sport design, 
-            </p>            
-    <div class="form-group row pull-right">
-        <a class="btn btn-block btn-info" ng-click="goToNextSuggestData($event)">
-            Next Section 
-        </a>
-    </div>
- </form>
+                Tip: we launched a new car in the market that satisfies the middle class people, which also has a fuel
+                effiency, modern sport design,
+            </p>
+            <div class="form-group row pull-right mt-5">
+                <a class="suggest__btn suggest_btn_next" ng-click="goToNextSuggestData($event)">
+                    Next Section
+                </a>
+            </div>
+        </form>
     </div>
 </div>
-

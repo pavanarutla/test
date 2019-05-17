@@ -77,8 +77,8 @@
             </div>
         </div>
     </div>
-    <div class="row ml-0 mr-0 p-3">
-        <div class="col-12 mr-0 d-flex justify-content-end">
+    <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
+    class="book_campowner">
             <div class="dropdown">
                 <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
                     Share Campaign
@@ -123,7 +123,13 @@
                     </form>
                 </div>
             </div>
-        </div>
+        <div ng-hide="campaignDetails.status >= 400">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue" ng-href="#/location">Add
+                    Another Product
+                </md-button>
+            </div>
+        </div>        
         <div ng-if="campaignDetails.products.length == 0">
             <div class="md-grid-item-content hoarding-btn">
                 <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
@@ -141,14 +147,8 @@
                     <th>Booked From</th>
                     <th>Booked To</th>
                     <th>Price in $</th>
-                    <th></th>
                     <th>Status</th>
-                    <th></th>
-                    <th style="text-align:end;">
-            <md-button class="md-raised add_blue" ng-hide="campaignDetails.status >= 400" ng-href="#/location">Add
-                Another Product
-            </md-button>
-            </th>
+                    <th></th>                 
             </tr>
             </thead>
             <tbody>
@@ -204,17 +204,17 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelProductFromCampaign(campaignProduct.id, campaignDetails.id)">Yes</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </td>
                     <td class="table_vertical">
                         <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
                                                                       ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
+
                     </td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -250,21 +250,7 @@
         </div>
 
 
-        <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 400">
-            <!-- <div class="d-flex justify-content-end pt-4 align-self-end">
-    <div layout="column" class="payment_inner">					
-            <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignDetails.act_budget}}</b></spam>
-            </p>
-            <p class="text_color" style="text-indent: 17px;"><input type="checkbox" ng-model="checked" ng-init="checked=true"
-                    ng-change="gstuncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>					
-            <p class="" style="font-size: 15px;font-weight: 500;">Grand Total : <spam class="float-right">{{TOTAL| number : 2}}</spam>
-            </p>
-            <div layout="row">
-                    <input type="checkbox" ng-model="request_execute"/>Request Executive to collect cash / cheque
-            </div>
-            <md-button class="md-raised md-primary" ng-disabled="!request_execute" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign</md-button>
-    </div>
-</div> -->
+        <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 400">            
             <div class="small-wrapper mt0" ng-if="campaignDetails.status == 400">
                 <div class="smallContainer">
                     <div class="payment-summary">
@@ -307,8 +293,5 @@
 <script>
     function UsershareCampaign() {
         document.getElementById("usershareDrop").classList.toggle("show");
-    }
-// function shareCampaigns() {
-// document.getElementById("myDropdownView").classList.toggle("show");
-// }    
+    }  
 </script>
