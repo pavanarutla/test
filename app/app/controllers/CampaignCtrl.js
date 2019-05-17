@@ -242,14 +242,16 @@ $scope.Getcomment = function (campaignID){
   }
 
   
-
-  $scope.deleteProductFromCampaign = function(productId, campaignId){
-    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
+  $scope.conformDeleteProductFromCampaign = function(shortlistId){
+    $scope.shortlistId = shortlistId
+}
+  $scope.deleteProductFromCampaign = function( campaignId){
+    CampaignService.deleteProductFromUserCampaign(campaignId, $scope.shortlistId).then(function(result){
       if(result.status == 1){
-        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-          $scope.campaignDetails = result;
-        });
         toastr.success(result.message);
+        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+          $scope.campaignDetails = result;     
+        });
       }
       else{
         toastr.error(result.message);
