@@ -65,11 +65,11 @@
                     <h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
                     <h3 class="md-title">Let's start Campaign</h3>
 
-                    <div layout="colmun" layout-margin layout-align="center center">
+                    <div layout="colmun" layout-margin>
                         <label>
                             <!-- <input type="radio" for="chkYes" ng-checked="true" id="chkYes" ng-model="twoforms" value="OOH"
                                 name="chkPassPort" onclick="ShowHideDiv()" /> -->
-                            OOH Campaign
+                            <b>OOH Campaign</b>
                         </label>                      
                     </div>
                     <div ng-switch="twoforms">
@@ -206,7 +206,7 @@
                                 <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}} </td>
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
-                                <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A"}}</td>
+                                <td class="text-center table_vertical">{{pCampaign.est_budget|| "N/A" | number:2}}</td>
                                 <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
@@ -268,7 +268,7 @@
                                 <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
-                                <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A"}}</td>
+                                <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A" | number:2}}</td>
                                 <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
@@ -339,8 +339,8 @@
                                 <td class="table_vertical">{{rCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{rCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{rCampaign.paid|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A"}}</td>
+                                <td class="text-center table_vertical">{{rCampaign.paid|| "N/A" | number:2}}</td>
+                                <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A" | number:2}}</td>
                                 <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
@@ -411,8 +411,8 @@
                                 <td class="table_vertical">{{cCampaign.name | capitalize}}</td>
                                 <td class="table_vertical">{{cCampaign.start_date| dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="text-center table_vertical">{{cCampaign.product_count|| "0"}}</td>
-                                <td class="text-center table_vertical">{{cCampaign.paid|| "N/A"}}</td>
-                                <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A"}}</td>
+                                <td class="text-center table_vertical">{{cCampaign.paid|| "N/A" | number:2 }}</td>
+                                <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A" | number:2}}</td>
                                 <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
