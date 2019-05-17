@@ -620,8 +620,38 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/agency/campagins.html',
       controller:'agencyCampaginsCtrl'
     })
+    .state('agency.agency-proposalscampaign-details',{
+      url:'/agency-proposalscampaign-details',
+      templateUrl:'views/agency/agency-proposalscampaign-details.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    .state('agency.agency-scheduledcampaign-details',{
+      url:'/agency-scheduledcampaign-details',
+      templateUrl:'views/agency/agency-scheduledcampaign-details.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    .state('agency.agency-runningcampaign-details',{
+      url:'/agency-runningcampaign-details',
+      templateUrl:'views/agency/agency-runningcampaign-details.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    .state('agency.agency-closedcampaign-details',{
+      url:'/agency-closedcampaign-details',
+      templateUrl:'views/agency/agency-closedcampaign-details.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    .state('agency.agency-saved-campagins',{
+      url:'/agency-saved-campagins',
+      templateUrl:'views/agency/agency-saved-campagins.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    .state('agency.agency-savedcampaign-details',{
+      url:'/agency-savedcampaign-details',
+      templateUrl:'views/agency/agency-savedcampaign-details.html',
+      controller:'agencyCampaginsCtrl'
+    })
     ;
-
+    
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
     $urlRouterProvider.when('/owner', '/owner/:client_slug/feeds');
