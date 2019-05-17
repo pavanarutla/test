@@ -644,6 +644,18 @@ var app = angular.module('bbManager', [
       url: '/aeditproduct-details',
       templateUrl: 'views/agency/editproduct-details.html'
     })
+    .state('agency.aagency-profile', {
+      url: '/aagency-profile',
+      templateUrl: 'views/agency/agency-profile.html'
+    })
+    .state('agency.areset-password', {
+      url: '/areset-password',
+      templateUrl: 'views/agency/reset-password.html'
+    })
+    .state('agency.asaved-campaigns', {
+      url: '/asaved-campaigns',
+      templateUrl: 'views/agency/saved-campaigns.html'
+    })
     ;
 
     $urlRouterProvider.when('/', '/home');
