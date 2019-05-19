@@ -56,14 +56,14 @@
                                 <tr>
                                     <td><b>Total Budget</b></td>
                                     <td>
-                                        <span
-                                            ng-if="campaignDetails.act_budget">$</span>&nbsp;{{campaignDetails.totalamount| number : 2 || "N/A"}}
+                                        <span>$</span>&nbsp;{{campaignDetails.totalamount| number : 2 || "N/A"}}
+                                        <!-- ng-if="campaignDetails.act_budget" -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Pending payment</b></td>
                                     <td>
-                                        <span ng-if="campaignDetails.pending_payment">$</span>&nbsp;{{PendingPay|| "N/A"}}
+                                        <span>$</span>&nbsp;{{PendingPay|| "N/A" | number : 2}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -160,7 +160,7 @@
                     <td class="table_address">
                         <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name}}
                                 ({{campaignProduct.panelSize}})</b><br>{{campaignProduct.address}}
-                            <br>Views : {{campaignProduct.impressions|| "N/A"}}
+                            <br><b>Views :</b> {{campaignProduct.impressions|| "N/A"}}
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize}}</td>
@@ -168,7 +168,7 @@
                     </td>
                     <td class="table_vertical">{{campaignProduct.booked_to| dateify | date: "dd-MM-yyyy"}}
                     </td>
-                    <td class="table_vertical">{{campaignProduct.admin_price|| "N/A"}}</td>
+                    <td class="table_vertical">{{campaignProduct.admin_price|| "N/A" | number : 2}}</td>
                     <td class="table_vertical">
                         <p class="text_color md-caption"
                            ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">
@@ -207,7 +207,7 @@
 
 <!--
                     <td class="table_vertical">
-                        <a data-toggle="modal" data-target="#exampleModalCenter" ng-hide="campaignDetails.status >= 400"><i class="material-icons">delete_forever</i></a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter" ng-hide="campaignDetails.status >= 400" ng-click="conformDeleteProductFromCampaign(campaignProduct.id)"><i class="material-icons">delete_forever</i></a>
                             
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
@@ -219,7 +219,7 @@
                                         </button>
                                         </div>
                                         <div class="modal-footer modal_top">
-                                                <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">Yes</button>
+                                                <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id)">Yes</button>
                                                 <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
                                         </div>
 -->
