@@ -35,6 +35,7 @@ var app = angular.module('bbManager', [
       'hue-2': '400',
     });
 
+
     $stateProvider.state('index', {
       abstract: true,
       url: '/',
@@ -241,6 +242,11 @@ var app = angular.module('bbManager', [
       params:{
         code: {squash: true, value: null}
       }
+    })
+    .state('agency', {
+      url: '/agency',
+      templateUrl: 'layouts/agency.html',
+      
     })
     .state('admin', {
       abstract: true,
@@ -609,8 +615,8 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/product-shortlist-campagin.html',
       controller:'OwnerCampaignCtrl'
     })
-    .state('agency.campagins', {
-      url: '/campagins',
+    .state('agency.acampagins', {
+      url: '/acampagins',
       templateUrl: 'views/agency/campagins.html',
       controller:'agencyCampaginsCtrl'
     })

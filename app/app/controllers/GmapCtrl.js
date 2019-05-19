@@ -27,6 +27,9 @@ app.controller('GmapCtrl',
                 $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
                 $scope.format = $scope.formats[0];
                 $scope.altInputFormats = ['M!/d!/yyyy'];
+                $scope.ranges = {
+                    selectedDateRanges: []
+                };
 
                 /*================================
                  | Multi date range picker options
@@ -683,7 +686,7 @@ app.controller('GmapCtrl',
                     });
                 }
 
-                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {                 
+                $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
                     var sendObj = {
                         product_id: productId,
                         dates: selectedDateRanges
@@ -700,10 +703,11 @@ app.controller('GmapCtrl',
                                 .targetEvent(ev),
                                 $mdSidenav('productDetails').close()
                                 );
-                                //selectedDateRanges = [];
+                                // $scope.ranges.selectedDateRanges = [];
+                                $scope.removeSelection();
                         getShortListedProducts();
                         $mdSidenav('productDetails').close();
-                        $state.reload();
+                        // $state.reload();
                     });
                 }
                 function getShortListedProducts() {
@@ -966,7 +970,15 @@ app.controller('GmapCtrl',
                 }
                 $scope.toggleExistingCampaignSidenav = function () {
                     $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+                    $scope.removeSelection();
                 }
+                $scope.customOptions = {};
+                $scope.removeSelection = function() {
+                    $scope.customOptions.clearSelection();
+                }
+                $scope.$on("removeSelection", function() {
+                    $scope.removeSelection();
+                })
                 $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
                     var productToCampaign = {
                         product_id: productId,
@@ -1282,29 +1294,6 @@ app.controller('GmapCtrl',
                              });
                });
                }
-                   // SHORT-LIST
-                   $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
-                     var sendObj = {
-                       product_id: productId,
-                       dates: selectedDateRanges
-                     }
-                     MapService.shortListProduct(sendObj).then(function (response) {
-                       $mdDialog.show(
-                         $mdDialog.alert()
-                           .parent(angular.element(document.querySelector('body')))
-                           .clickOutsideToClose(true)
-                           .title('Shortlist Product')
-                           .textContent(response.message)
-                           .ariaLabel('shortlist-success')
-                           .ok('Got it!')
-                           .targetEvent(ev),
-                         $mdSidenav('productDetails').close()
-                       );
-                       getShortListedProducts();
-                       $mdSidenav('productDetails').close();
-                       $state.reload();
-                     });
-                   }
                    $scope.getProductUnavailableDates = function(productId, ev){
                      MapService.getProductUnavailableDates(productId).then(function(dateRanges){
                        $scope.unavailalbeDateRanges = dateRanges;

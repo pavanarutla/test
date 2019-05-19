@@ -369,6 +369,7 @@ $scope.sendQuery = function(query){
     // Product Details
     $scope.toggleProductDetailSidenav = function () {
         $mdSidenav('productDetails').toggle();
+        $scope.$broadcast("removeSelection");
     };
     // Share Message
     $scope.toggleShareCampaignSidenav = function (campaign) {
@@ -430,41 +431,41 @@ $scope.sendQuery = function(query){
     /*================================
      === Long polling notifications ===
      ================================*/
-    $scope.notifs = [];
-    var getUserNotifs = function () {
-        var last_notif = 0;
-        if ($scope.notifs && $scope.notifs.length > 0) {
-            last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
-        }
-        NotificationService.getAllNotifications(last_notif).then(function (result) {
-            $scope.notifs = result.concat($scope.notifs);
-            $timeout(getUserNotifs, 1000);
-        });
-    }
-    if ($rootScope.isAuthenticated) {
-        getUserNotifs();
-    }
+    // $scope.notifs = [];
+    // var getUserNotifs = function () {
+    //     var last_notif = 0;
+    //     if ($scope.notifs && $scope.notifs.length > 0) {
+    //         last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
+    //     }
+    //     NotificationService.getAllNotifications(last_notif).then(function (result) {
+    //         $scope.notifs = result.concat($scope.notifs);
+    //         $timeout(getUserNotifs, 1000);
+    //     });
+    // }
+    // if ($rootScope.isAuthenticated) {
+    //     getUserNotifs();
+    // }
 
     /*===============================
      |   Notification navigation 
      ===============================*/
-    $scope.viewNotification = function (notification) {
-        if (notification.type > 100 && notification.type < 200) {
-            $location.path('metro-campaign/' + notification.data.campaign_id);
-        } else {
-            $location.path('view-campaign/' + notification.data.campaign_id);
-        }
-        NotificationService.updateNotifRead(notification.id).then(function (result) {
-            if (result.status == 1) {
-                $scope.notifs = _.filter($scope.notifs, function (notif) {
-                    return notif.id != notification.id;
-                })
-            } else {
-                toastr.error(result.message);
-            }
-        });
-        $mdSidenav('right').toggle();
-    }
+    // $scope.viewNotification = function (notification) {
+    //     if (notification.type > 100 && notification.type < 200) {
+    //         $location.path('metro-campaign/' + notification.data.campaign_id);
+    //     } else {
+    //         $location.path('view-campaign/' + notification.data.campaign_id);
+    //     }
+    //     NotificationService.updateNotifRead(notification.id).then(function (result) {
+    //         if (result.status == 1) {
+    //             $scope.notifs = _.filter($scope.notifs, function (notif) {
+    //                 return notif.id != notification.id;
+    //             })
+    //         } else {
+    //             toastr.error(result.message);
+    //         }
+    //     });
+    //     $mdSidenav('right').toggle();
+    // }
 
     /*===============================
      |   Switching between views
@@ -511,7 +512,7 @@ $scope.sendQuery = function(query){
             });
         });
     }
-    if ($rootScope.currStateName == 'index' || 'index.location') {
+    if ($rootScope.currStateName == 'index' || 'index.location' && $rootScope.isAuthenticated) {
         // $scope.shortListedProductsLength = localStorage.shortListedProducts
         $scope.loadActiveUserCampaigns();
     }
@@ -544,11 +545,5 @@ $scope.sendQuery = function(query){
         $rootScope.formatSelected = index;
     }
     
-     function getUserNotifictaions() {
-    NotificationService.viewUserNotification().then((result) => {
-      $scope.getUserNotifictaions = result.notifications;
-    });
-  }
-  getUserNotifictaions();
 }
 );

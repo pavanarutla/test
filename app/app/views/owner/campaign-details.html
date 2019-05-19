@@ -55,14 +55,14 @@
                                 <tr>
                                     <td><b>Total Budget</b></td>
                                     <td>
-                                        <span ng-if="campaignDetails.act_budget">Rs.</span>{{ TOTAL || 0 }}
+                                        <span ng-if="campaignDetails.act_budget">$</span>&nbsp;{{ TOTAL |number : 2 || 0 }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Pending payment</b></td>
                                     <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
-                                        <span>Rs.</span>
-                                        {{TOTAL - campaignDetails.total_paid}}
+                                        <span>$</span>
+                                        {{TOTAL - campaignDetails.total_paid |number : 2}}
                                     </td>
                                     <td ng-if="campaignDetails.type == 0">
                                         <span ng-if="campaignDetails.pending_payment"></span>
@@ -161,7 +161,7 @@
                     </md-button> -->
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status == 100 && campaignDetails.status < 700">
+            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status != 100 || campaignDetails.status <= 700">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
                             Another Product
@@ -217,6 +217,9 @@
                     </td>
                     <td class="table_vertical">{{product.booked_to| dateify | date: "dd-MMM-yyyy"}}
                     </td>
+                    <td class="table_vertical">
+                        <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
+                        {{product.default_price || product.price || 'N/A'}}</td>
                     <td class="table_vertical table_price">
                         <p>{{(!myfield) ? (product.owner_price || 'N/A') : ''}}
                                 <!-- {{(!myfield && product.owner_price)?product.owner_price:product.price}} -->
@@ -231,10 +234,7 @@
                                 ng-show="myfield"
                                 style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;">
                                 <i class="material-icons" style="color: #fff;">check</i></button></p>
-                    </td>
-                    <td class="table_vertical">
-                        <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
-                        {{product.default_price || product.price || 'N/A'}}</td>
+                    </td>                   
                     <td class="table_vertical ">
                         <a data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons" ng-if="campaignDetails.type != 0 && campaignDetails.status != 700"
                                 >delete_forever</i></a>
@@ -268,13 +268,13 @@
             <div class="payment-summary">
                 <ul id="double">
                     <li class="col1">Total :</li>
-                    <li class="col2">{{campaignDetails.act_budget}}</li>
+                    <li class="col2">{{campaignDetails.act_budget |number : 2}}</li>
                     <li class="col1 text_color">18% GST :</li>
                     <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
                 </ul>
                 <ul id="total">
                     <li class="col1">Grand Total :</li>
-                    <li class="col2">{{ TOTAL || "N/A" }}</li>
+                    <li class="col2">{{ TOTAL |number : 2 || "N/A" }}</li>
                 </ul>
                 <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status != 700 && campaignDetails.type !=0 ">Book
                     Campaign</md-button>

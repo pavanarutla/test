@@ -28,9 +28,9 @@
 					<tr	class="" ng-repeat="payments in userPayments | filter:search"  ng-if="payments.status > 500"> 
 					<td class="table_vertical">{{payments.cid}}</td>
 					<td class="table_vertical">{{payments.name | capitalize}}</td>
-					<td class="text-center table_vertical">{{payments.paid}}</td>
-					<td class="text-center table_vertical">{{payments.act_budget - payments.paid}}</td>
-					<td class="text-center table_vertical">{{payments.act_budget}}</td>
+					<td class="text-center table_vertical">{{payments.paid | number:2}}</td>
+					<td class="text-center table_vertical">{{payments.act_budget - payments.paid | number:2}}</td>
+					<td class="text-center table_vertical">{{payments.act_budget | number:2}}</td>
 					<td class="text-center table_vertical">
 					  <a style="cursor:pointer;" ng-href="#/update-user-payments/{{payments.id}}">
 						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
