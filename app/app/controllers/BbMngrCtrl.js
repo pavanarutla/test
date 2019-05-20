@@ -544,6 +544,12 @@ $scope.sendQuery = function(query){
     $scope.setSelectedFormat = function (index) {
         $rootScope.formatSelected = index;
     }
+	 function getUserNotifictaions() {
+    NotificationService.viewUserNotification().then((result) => {
+      $scope.getUserNotifictaions = result.notifications;
+    });
+  }
+  getUserNotifictaions();
     
 }
 );
