@@ -259,6 +259,19 @@ $scope.Getcomment = function (campaignID){
     });
   }
 
+$scope.cancelProductFromCampaign = function(productId, campaignId){
+    CampaignService.cancelProductFromUserCampaign(campaignId, productId).then(function(result){
+      if(result.status == 1){
+        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+          $scope.campaignDetails = result;
+        });
+        toastr.success(result.message);
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
   $scope.changeQuoteRequest = function(campaignId,remark,type){
         $scope.changeRequest = {};
         $scope.changeRequest.for_campaign_id = campaignId;

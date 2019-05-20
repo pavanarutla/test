@@ -183,10 +183,32 @@
                            ng-if="campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 600)">
                             {{campaignProduct.product_status| stringifyProductStatus}}</p>
                     </td>
+                    <td>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{campaignProduct.id}}" ng-if="campaignProduct.cancelation=='Yes' && campaignProduct.product_status !='600' && campaignDetails.status > 600 ">X</button>
+                        <!-- Modal -->
+                        <div id="myModal-{{campaignProduct.id}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+<!--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                        <h4 class="modal-title">Inventory Cancel</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Cost Of Product : {{campaignProduct.admin_price}}</p>
+                                        <p>Cancellation Charges : {{campaignProduct.cancellation_charge}}</p>
+                                         <p>Refund Amount :  {{campaignProduct.admin_price-campaignProduct.cancellation_charge}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelProductFromCampaign(campaignProduct.id, campaignDetails.id)">Yes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+<!--
                     <td class="table_vertical">
                         <a data-toggle="modal" data-target="#exampleModalCenter" ng-hide="campaignDetails.status >= 400" ng-click="conformDeleteProductFromCampaign(campaignProduct.id)"><i class="material-icons">delete_forever</i></a>
                             
-                            <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
                                     <div class="modal-content">
@@ -200,9 +222,16 @@
                                                 <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id)">Yes</button>
                                                 <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
                                         </div>
+-->
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </td>
+                    <td class="table_vertical">
+                        <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
+                                                                      ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
+
                     </td>
                 </tr>
             </tbody>

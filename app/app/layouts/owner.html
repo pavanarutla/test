@@ -43,10 +43,11 @@
                             </div>
                         </div>
                         <div class="dropdown s_login">
-                            <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown">
+                            <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown" style="position:relative">
                                 <span class="s-ico-login" style="color: #000"><i class="fa fa-bell"
-                                    aria-hidden="true"></i></span>
+                                    aria-hidden="true"></i><span class="badge blue"id="notification-count" style="position:absolute;top:0px;right:0px;background:#e52435;color:#fff;border-radius: 50%">0</span></span>
                             </button>
+							
                             <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
                                 <div class="notification_header">
                                     <h3 class="" style="font-size:12px"><b>You have <span id="notification1-count">0</span> new notification</b></h3>
@@ -205,7 +206,7 @@
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('83e8ffcc55e67dd5625d', {
+        var pusher = new Pusher('c8b414b2b7d7c918a011', {
             cluster: 'ap2',
             forceTLS: true
         });
