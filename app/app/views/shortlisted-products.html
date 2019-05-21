@@ -11,13 +11,14 @@
 					<th>Size</th>
 					<th>Booked From</th>
 					<th>Booked To</th>
-					<th>Price</th>
+					<th>Price $</th>
 					<th></th>
 					<th></th>
 					<th class="" style="text-align: end;">
 						<md-button class="md-raised add_blue" ng-href="#/location">Add
 							Another Product
 						</md-button>
+						<md-button class="md-raised add_blue" ng-if="shortlisted.length >0" ng-href="#/location">Add Product</md-button>
 					</th>
 				</tr>
 			</thead>
@@ -27,20 +28,21 @@
 						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" class="requ_size img-thumbnail">
 					</td>
 					<td class="table_address">
-						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}} ({{shortlisted.panelSize}})</b><br>
-							{{ shortlisted.address}}<br>
-							Views : 1,54000 Per week<br>
+						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}}</b><br>
+							{{ shortlisted.address || "N/A"}}<br>
+
+							Views : {{shortlisted.impressionsperweek || "N/A"}} Per Week<br>
 							<!-- Live Traffic:
 							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
 								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button> -->
 						</p>
 					</td>
-					<td class="table_vertical">{{shortlisted.panelSize}}</td>
+					<td class="table_vertical">{{shortlisted.panelSize || "N/A"}}</td>
 					<td class="table_vertical">{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
 					<td class="table_vertical">{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
-					<td class="table_vertical">{{shortlisted.admin_price || "N/A"}}</td>
+					<td class="table_vertical"><span>$</span>{{shortlisted.default_price || '0' | number :2}}</td>
 					<td class="table_vertical">
 						<a data-toggle="modal" data-target="#exampleModalCenter" ng-click = 'conformDeleteShortlisted(shortlisted.id)'><i class="material-icons">delete_forever</i></a>
 						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
