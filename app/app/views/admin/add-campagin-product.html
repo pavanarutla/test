@@ -84,12 +84,12 @@
             <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
              style="margin-top:14px;">
               <p class="cmp_bottom">Estimated Budget</p>
-              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.est_budget || "N/A"}}</b></p>
+              <p class="md-caption mob_span mob_5"><b><span>$</span>{{campaignDetails.est_budget || '0' | number:2 }}</b></p>
             </div>
             <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
              style="margin-top:14px;">
               <p class="cmp_bottom">Total Amount</p>
-              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.total_budget || "N/A"}}</b></p>
+              <p class="md-caption mob_span mob_5"><b><span>$</span>{{campaignDetails.total_budget || '0' | number:2}}</b></p>
             </div>
             <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
              style="margin-top:14px;">
@@ -183,7 +183,7 @@
                 <a  ng-href="#/admin/product-shortlist-campagin/{{adminprod.id}}">{{adminprod.camapigns_count}} Campaigns</a>
               </td>
               <td class="table_vertical">
-                  {{adminprod.default_price}}
+                  <span>$</span>{{adminprod.default_price}}
               </td>
               <td class="table_vertical">
                 <input date-range-picker ng-model="adminprod.booking_dates" class="form-control md-whiteframe-3dp date-picker"
@@ -191,11 +191,12 @@
                   style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
                 <a ng-click="getProductUnavailableDates(adminprod.id, $event);">
                  
-                  <i class="fa fa-calendar" aria-hidden="true" ng-if="adminprod.booking_dates == 0"></i>
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                  <!-- ng-if="adminprod.booking_dates == 0" -->
                 </a>
-                <a>
+                <!-- <a>
                  <i class="fa fa-calendar material-Cal" aria-hidden="true" ng-if="adminprod.booking_dates != 0"></i>
-                </a>
+                </a> -->
               </td>
     
               <td class=" table_vertical text-right">

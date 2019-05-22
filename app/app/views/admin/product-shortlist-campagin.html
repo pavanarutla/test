@@ -9,17 +9,18 @@
         </div>
         <section class="product_">
             <div class="row mr-0 ml-0 product_ineer">
-                <div class="col-md-7">
+                <div class="col-md-4">
                     <div class="produt_img">
-                        <img src="assets/images/owner/hoardings2.png" alt="produt_img" class="img-thumbnail"/>
+                        <!-- <img src={{shortlistedproduct.product_detail.image}} alt="produt_img" class="img-thumbnail"/> -->
+                        <img ng-src="{{serverUrl + shortlistedproduct.product_detail.image}}" alt="Smiley face" class="img-thumbnail">
                     </div>
                 </div>
                 <div class="col-md-4 ">
                     <div class="product_detailes">
                         <p class="mb-0 md-body-2">{{shortlistedproduct.product_detail.siteNo}} - {{shortlistedproduct.product_detail.area_name}} ({{shortlistedproduct.product_detail.panelSize}})</p>
-                        <p class="mb-0">{{shortlistedproduct.product_detail.address}}</p>
-                        <p class="mb-0">Facing:{{shortlistedproduct.product_detail.direction}}</p>
-                        <p class="mb-0">Type:{{shortlistedproduct.product_detail.format_name}}</p>
+                        <p class="mb-0"><b>Address:</b>&nbsp;{{shortlistedproduct.product_detail.address}}</p>
+                        <p class="mb-0"><b>Facing:</b>&nbsp;{{shortlistedproduct.product_detail.direction}}</p>
+                        <p class="mb-0"><b>Type:</b>&nbsp;{{shortlistedproduct.product_detail.format_name}}</p>
     
                     </div>
                 </div>
@@ -45,15 +46,15 @@
                             <tr ng-repeat="product in shortlistedproduct.campaign_list">
                                 <td class="table_vertical">{{product.cid}}</td>
                                 <td class="table_vertical">{{product.name | capitalize}}</td>
-                                <td class="table_vertical">{{product.created_at}}</td>
+                                <td class="table_vertical">{{product.created_at | dateify | date:'dd-MM-yyyy'}}</td>
                                 <td class="table_vertical">{{product.no_products}}</td>
-                                <td class="text-center table_vertical">{{product.total_paid}}</td>
-                                <td class="text-center table_vertical">{{product.est_budget}}</td>                               
-                                <td class="text-center table_vertical">
-                                    <a href="#/admin/campaign-proposal-summary/{{campaignId}}">
+                                <td class="text-center table_vertical"><span>$</span>{{product.total_paid}}</td>
+                                <td class="text-center table_vertical"><span>$</span>{{product.est_budget}}</td>                               
+                                <!-- <td class="text-center table_vertical">
+                                    <a href="#/admin/campaign-proposal-summary/{{productId}}">
                                         <i class="material-icons">remove_red_eye</i>
                                     </a>
-                                </td>
+                                </td> -->
                                 <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{product.updated_at}}</span>
                                 </td>

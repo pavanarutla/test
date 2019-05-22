@@ -289,18 +289,18 @@
     <div class="payment-summary">
       <ul id="double">
         <li class="col1">Total :</li>
-        <li class="col2">{{campaignPaymentDetails.act_budget |number : 2}}</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.act_budget || '0' |number : 2}}</li>
         <li class="col1 text_color">18% GST :</li>
-        <li class="col2 text_color">{{ campaignPaymentDetails.gst_price |number : 2 ||"N/A" }}</li>
+        <li class="col2 text_color"><span>$</span>{{ campaignPaymentDetails.gst_price || '0' |number : 2}}</li>
         <li class="col1">Grand Total :</li>
-        <li class="col2">{{campaignPaymentDetails.totalamount |number : 2}}</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.totalamount || '0' |number : 2}}</li>
         <li class="col1">Paid :</li>
-        <li class="col2">{{campaignPaymentDetails.total_paid |number : 2}}</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.total_paid || '0' |number : 2}}</li>
       </ul>
       <div class=""></div>
       <ul id="total">
         <li class="col1">Balance :</li>
-        <li class="col2">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid |number : 2}}</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid || '0' |number : 2}}</li>
       </ul>
       <div class=""></div>
     </div>
