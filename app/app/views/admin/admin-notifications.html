@@ -15,22 +15,30 @@
                 <tr ng-repeat="notifictaion in getAdminNotifictaions">
                     <td class="table_vertical">{{notifictaion.message | capitalize}}</td>
                     <td class="table_vertical">
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" href="#/admin/metro-campaign/{{notifictaion.campaign_id}}">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/metro-campaign/{{notifictaion.campaign_id}}">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>
                         </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" href="#/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>
                         </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" href="#/admin/hoarding-list">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/hoarding-list">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>
                         </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" href="#/admin/requested-hoardings">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/requested-hoardings">
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>

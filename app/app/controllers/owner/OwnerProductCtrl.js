@@ -372,27 +372,28 @@ $scope.applymethod=function(product){
  
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
+    for (var item in product.dates) {
+      product.dates[item].endDate = product.dates[item].endDate.format()
+      product.dates[item].startDate = product.dates[item].startDate.format()
+    };
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/request-owner-product-addition',
       data: { image: $scope.files.image, product: $scope.product }
     }).then(function (result) {
       if(result.data.status == "1"){
-        getRequestedProductList();
-        toastr.success(result.data.message);              
+        // getRequestedProductList();
+        $scope.product = null;
+        // document.getElementById("myDropdown").classList.toggle("show");
+        toastr.success(result.data.message);  
+        $state.reload();            
       }
       else if(result.data.status == 0){
         $scope.requestProductErrors = result.data.message;
-        toastr.success(result.data.message);
+        toastr.error(result.data.message);
       }      
-      document.getElementById("myDropdown").classList.toggle("show");
-      $state.reload;
-      $scope.product = [];
-      product.dates="";
       $scope.hordinglistform.$setPristine();
       $scope.hordinglistform.$setUntouched();
-      $scope.areaObj ="";
-      $state.reload();
     }, function (resp) {
     }, function (evt) {
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
