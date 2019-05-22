@@ -1,105 +1,4 @@
 
- <script>
-    var i = 1;
-    var user = localStorage.getItem("loggedInUser");
-    var parsedData = JSON.parse(user);
-    var user_type = parsedData.user_type;
-    if (user_type == 'bbi') {
-        var user_id = '-superAdmin';
-    } else if (user_type == 'basic') {
-        var user_id = parsedData.user_id;
-    } else if (user_type == 'owner') {
-        var user_id = '-' + parsedData.mong_id;
-    }
-    var arrayText = [];
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('c8b414b2b7d7c918a011', {
-        cluster: 'ap2',
-        forceTLS: true
-    });
-    var channel = pusher.subscribe('CampaignLaunch' + user_id);
-    var channel1 = pusher.subscribe('campaignClosed' + user_id);
-    var channel2 = pusher.subscribe('CampaignLaunchRequested' + user_id);
-    var channel3 = pusher.subscribe('CampaignQuoteProvided' + user_id);
-    var channel4 = pusher.subscribe('CampaignQuoteRequested' + user_id);
-    var channel5 = pusher.subscribe('CampaignQuoteRevision' + user_id);
-    var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
-    var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
-    var channel8 = pusher.subscribe('ProductApproved' + user_id);
-    var channel9 = pusher.subscribe('ProductRequested' + user_id);
-    var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
-    var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
-    var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
-
-    channel.bind('CampaignLaunchEvent', function (data) {
-        arrayText.push(data);
-        /* $('#notification-count').html(arrayText.length);
-            $('#notification1-count').html(arrayText.length);*/
-        notificationText(arrayText);
-
-    });
-    channel1.bind('campaignClosedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel2.bind('CampaignLaunchRequestedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel3.bind('CampaignQuoteProvidedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel4.bind('CampaignQuoteRequestedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel5.bind('CampaignQuoteRevisionEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText)
-    });
-    channel6.bind('CampaignSuggestionRequestEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel7.bind('CampaignSuspendedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel8.bind('ProductApprovedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel9.bind('ProductRequestedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel10.bind('metroCampaignClosedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel11.bind('metroCampaignLaunchedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-    channel12.bind('metroCampignLockedEvent', function (data) {
-        arrayText.push(data);
-        notificationText(arrayText);
-    });
-
-    function notificationText(arrayText) {
-        $('#notification-count').html(arrayText.length);
-        $('#notification1-count').html(arrayText.length);
-        arrayText.forEach(function (element) {
-            var j = i % 3;
-            $('#notification-id-' + j).html('<div class ="notification_desc md-whiteframe-2dp pl-3"><p>' +
-                element.desc + '</p></div>');
-            i++;
-        });
-    }
-</script> 
 <div layout="column" style="position:relative;min-height:100%;">
     <!-- main nav section-->
     <a id="myBtn" class="move-top text-center"></a>
@@ -177,17 +76,15 @@
                         <div class="dropdown s_login">
                              <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown" style="position:relative">
                                 <span class="s-ico-login" style="color: #000"><i class="fa fa-bell"
-                                    aria-hidden="true"></i><span class="badge blue"id="notification-count" style="position:absolute;top:0px;right:0px;background:#e52435;color:#fff;border-radius: 50%">0</span></span>
+                                    aria-hidden="true"></i><span class="badge blue"id="notification-count" style="position:absolute;top:0px;right:0px;background:#e52435;color:#fff;border-radius: 50%">{{unReadNotify.length || 0}}</span></span>
                             </button>
 							
                             <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
                                 <div class="notification_header">
                                     <h3 class="" style="font-size:12px"><b>You have <span
-                                                id="notification1-count">0</span> new notification</b></h3>
+                                                id="notification1-count">{{unReadNotify.length || 0}}</span> new notification</b></h3>
                                 </div>
-                                <div id="notification-id-0"></div>
-                                <div id="notification-id-1"></div>
-                                <div id="notification-id-2"></div>
+                                <div style="padding:10px;" id="notification-id-0" ng-repeat = "notificationItem in unReadNotify.slice(0,3)">{{notificationItem.desc}}</div>
                                 <div class="notification_bottom">
                                     <a href="#/user-notifications"
                                         ng-show="isAuthenticated &&loggedInUser.user_role=='basic'">See all
