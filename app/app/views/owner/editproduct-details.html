@@ -192,8 +192,8 @@
                         <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
                             <span>({{editRequestedhordings.panelSize}})</span></p>
                         <p class="mb-0">{{editRequestedhordings.address}}</p>
-                        <p class="mb-0"> <span class="text_color">Facing:</span>{{editRequestedhordings.direction}}</p>
-                        <p class="mb-0"> <span class="text_color">Type:</span>{{editRequestedhordings.format_name}}</p>
+                        <p class="mb-0"> <span class="text_color"><b>Facing:</b></span>{{editRequestedhordings.direction}}</p>
+                        <p class="mb-0"> <span class="text_color"><b>Type:</b></span>{{editRequestedhordings.format_name}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                       <label><b>Views</b></label>
@@ -207,7 +207,7 @@
                         </td>
                     <td class="table_vertical upper_line hide-xs">
                             <label><b>Price</b></label>
-                           <p> {{editRequestedhordings.default_price}}</p></td>
+                           <p><span>$</span>{{editRequestedhordings.default_price || '0' | number:2}}</p></td>
                 </tr>
             </tbody>
         </table>

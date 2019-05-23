@@ -445,8 +445,8 @@
 
                 </td>
                 <td class="table_address">
-                    <p class=""><b>{{product.siteNo}} - {{product.area_name}} {{product.panelSize}}</b>
-                        <br> {{product.address | capitalize}}
+                    <p class=""><b>{{product.siteNo}} - {{product.area_name}}</b>
+                        <br> {{product.address || "N/A" | capitalize}}
                         <br>Facing : {{product.direction|| "N/A" | capitalize}}
                         <br>Type : {{product.format_name | capitalize}}
                 </td>
@@ -460,7 +460,7 @@
                 <td class="text-center table_vertical table_price">
                     <div class="input-group">
 
-                        {{(!myfield)?product.default_price:''}}
+                        <span>$</span>{{(!myfield)?product.default_price:''}}
                         <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
                         <span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
                         <span ng-click="myfield = false;changeProductPrice(product)"  ng-show="myfield"> <i class="material-icons">check</i></span>

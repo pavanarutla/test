@@ -1,4 +1,137 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService,CampaignService, OwnerProductService, toastr) {
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService,CampaignService, OwnerProductService, toastr,NotificationService) {
+
+
+
+  $scope.getOwnerNotifictaions = function() {
+    OwnerNotificationService.viewOwnerNotification().then((result) => {
+      $scope.getOwnerNotifictaions = result.notifications;
+      $scope.unReadNotify = result.notifications.filter(function(item){
+        if(item.status == 0){
+            return true;
+        }
+      })
+    });
+  }
+  $scope.getOwnerNotifictaions();
+
+  $scope.updateNotifyStatus = function(notificationType,campaignId,notifyId){
+    
+    NotificationService.updateNotification(notifyId).then(function(result){
+    if(notificationType == 'campaign'){
+      $location.path("owner/{{clientSlug}}/campaign-details/" +campaignId + "/0" )
+    }
+    else if(notificationType == 'product'){
+      $location.path("owner/{{clientSlug}}/hoarding-list")
+    }
+    else if(notificationType == 'product-request'){
+      $location.path("owner/{{clientSlug}}/requested-hoardings" )
+    }
+        
+    }) 
+ }
+/* Notification start */
+
+if($auth.isAuthenticated()){
+  var user = localStorage.getItem("loggedInUser");
+  var parsedData = JSON.parse(user);
+  var user_type = parsedData.user_type;
+  if ($auth.getPayload().userMongo.user_type == 'bbi') {
+      var user_id = '-superAdmin';
+  } else if ($auth.getPayload().userMongo.user_type == 'basic') {
+      var user_id = parsedData.user_id;
+  } else if ($auth.getPayload().userMongo.user_type == 'owner') {
+      var user_id = '-' + parsedData.mong_id;
+  }
+
+  var pusher = new Pusher('c8b414b2b7d7c918a011', {
+      cluster: 'ap2',
+      forceTLS: true
+  });
+  var channel = pusher.subscribe('CampaignLaunch' + user_id);
+  var channel1 = pusher.subscribe('campaignClosed' + user_id);
+  var channel2 = pusher.subscribe('CampaignLaunchRequested' + user_id);
+  var channel3 = pusher.subscribe('CampaignQuoteProvided' + user_id);
+  var channel4 = pusher.subscribe('CampaignQuoteRequested' + user_id);
+  var channel5 = pusher.subscribe('CampaignQuoteRevision' + user_id);
+  var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
+  var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
+  var channel8 = pusher.subscribe('ProductApproved' + user_id);
+  var channel9 = pusher.subscribe('ProductRequested' + user_id);
+  var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
+  var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
+  var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
+
+  channel.bind('CampaignLaunchEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel1.bind('campaignClosedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel2.bind('CampaignLaunchRequestedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel3.bind('CampaignQuoteProvidedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel4.bind('CampaignQuoteRequestedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel5.bind('CampaignQuoteRevisionEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel6.bind('CampaignSuggestionRequestEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel7.bind('CampaignSuspendedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel8.bind('ProductApprovedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel9.bind('ProductRequestedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel10.bind('metroCampaignClosedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel11.bind('metroCampaignLaunchedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+  channel12.bind('metroCampignLockedEvent', function (data) {
+    $scope.$apply(function(){
+      $scope.unReadNotify.unshift(data);
+    })
+  });
+
+  
+}
+  
+/* Notification Ends */
+
 
   /*=================================
   | mdDilalog close function
@@ -274,12 +407,7 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
       $location.path('/owner/' + $rootScope.clientSlug + '/hoarding-list');
     }
   }
- function getOwnerNotifictaions() {
-    OwnerNotificationService.viewOwnerNotification().then((result) => {
-      $scope.getOwnerNotifictaions = result.notifications;
-    });
-  }
-  getOwnerNotifictaions();
+ 
 })
 
 // .value('googleChartApiConfig', {

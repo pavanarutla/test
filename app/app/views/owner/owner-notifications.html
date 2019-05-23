@@ -14,17 +14,23 @@
                         <td class="table_vertical">{{notifictaion.message }}</td>
                         <td class="table_vertical">
                           
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" href="#/owner/{{clientSlug}}/campaign-details/{{notifictaion.campaign_id}}/0">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'"
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                         >
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>
                         </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" href="#/owner/{{clientSlug}}/hoarding-list">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" 
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        >
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>
                         </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" href="#/owner/{{clientSlug}}/requested-hoardings">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'"
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        >
                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
                                 <i class="material-icons">remove_red_eye</i>
                             </md-icon>

@@ -40,8 +40,12 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       $scope.shortListedProducts = response;
     });
   }
-  $scope.deleteShortlisted = function (ev, shortlistId) {
-    MapService.deleteShortlistedProduct(shortlistId).then(function (response) {
+
+  $scope.conformDeleteShortlisted = function(shortlistId){
+      $scope.shortlistId = shortlistId
+  }
+  $scope.deleteShortlisted = function (ev) {
+    MapService.deleteShortlistedProduct($scope.shortlistId).then(function (response) {
       $mdDialog.show(
         $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))
@@ -67,6 +71,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   | Campaign section
   =================================*/
   $scope.saveCampaign = function () {
+    // debugger;
     // If we finally decide to use selecting products for a campaign
     // if($scope.selectedForNewCampaign.length == 0){
     //   // add all shortlisted products to campaign
