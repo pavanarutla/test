@@ -109,8 +109,8 @@
                     </tr>
                     <tr>
                         <td><b>Estimated Budget</b></td>
-                        <td ng-if="campaignDetails.type == 0">{{campaignDetails.est_budget|| "N/A"}}</td>
-                        <td ng-if="campaignDetails.type == 1">{{campaignDetails.est_budget|| "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 0"><span>$</span>{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
+                        <td ng-if="campaignDetails.type == 1"><span>$</span>{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -130,13 +130,13 @@
                     <tr>
                         <td><b>Total Amount</b></td>
                         <td>
-                            <span>$</span>&nbsp;{{TOTAL || "0"}}
+                            <span>$</span>{{TOTAL || '0' |number : 2  }}
                         </td>
                     </tr>
                     <tr>
                         <td><b>Pending Amount</b></td>
                         <td>
-                            <span>$</span>&nbsp;{{PendingPay || 0}}
+                            <span>$</span>{{PendingPay || "0" |number : 2}}
                         </td>
                     </tr>
                     <tr>
@@ -166,7 +166,7 @@
         </div>
         <div class="" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
-                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Another Product</md-button>
+                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Product</md-button>
             </div>
         </div>
         <div class="">
@@ -240,9 +240,9 @@
                     <!-- <th class="">Size</th> -->
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
-                    <th class="">Price Given</th>
-                    <th class="">Price Received</th>
                     <th class="">Default Price</th>
+                    <th class="">Price Received</th>  
+                    <th class="">Price Given</th>                                     
                     <th class="">Inventory Owner</th>
                     <th class="">Inventory Status</th>
                     <th class="text-right"></th>
@@ -275,27 +275,27 @@
                     <td class="table_vertical">
                         <p>{{ campaignProduct.booked_to | date }}</p>
                     </td>
+                    <td class="table_vertical">
+                        <p><span>$</span>{{campaignProduct.default_price |number : 2  || 'N/A'}}</p>                       
+                    </td>
+                    <td class="table_vertical">
+                        <p><span>$</span>{{campaignProduct.owner_price || '0' |number : 2}}</p>                       
+                    </td> 
                     <td class="table_vertical table_price">
-                        <p>{{(!myfield) ? (campaignProduct.admin_price || 'N/A') : ''}}
+                        <p><span>$</span>{{(!myfield) ? (campaignProduct.admin_price |number : 2  || 'N/A') : ''}}
                         <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
                         <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons" ng-hide="campaignDetails.status >= 600">edit</i></span>
                         <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{campaignProduct.owner_price|| 'N/A'}}</p>                       
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{campaignProduct.default_price|| 'N/A'}}</p>                       
-                    </td>
+                    </td>                                   
                     <td class="table_vertical">
                         <p class=" md-caption">{{campaignProduct.client_name}}</p>
                         <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
                     </td>
                     <td class="table_vertical addcampaign_details">
-                        <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p>
-                        <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status| stringifyCampaignStatus}} </p>
+                        <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.products.product_status >= 300 && campaignDetails.products.product_status <= 500">Quote Requested</p>
+                        <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.products.product_status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status| stringifyCampaignStatus}} </p>
                         <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
-                        <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status| stringifyProductStatus}}</p>
+                        <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.products.product_status <= 300 || campaignDetails.products.product_status > 600)">{{campaignProduct.product_status| stringifyProductStatus}}</p>
                     </td>                   
                     <td class=""></td>
                 </tr>
@@ -329,13 +329,13 @@
                           <div class="payment-summary">
                             <ul id="double">
                               <li class="col1">Total :</li>
-                              <li class="col2">{{campaignDetails.act_budget}}</li>
+                              <li class="col2">{{campaignDetails.act_budget || '0' |number : 2 }}</li>
                               <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
-                              <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                              <li class="col2 text_color">{{ GST || '0' |number : 2 }}</li>
                             </ul>
                             <ul id="total">
                               <li class="col1">Grand Total :</li>
-                              <li class="col2">{{ TOTAL || "N/A" }}</li>
+                              <li class="col2">{{ TOTAL || "0" |number : 2  }}</li>
                             </ul>
                             <md-button
                     class="md-raised md-warn all_button book_campowner"  

@@ -195,8 +195,9 @@ $scope.Getcomment = function (campaignID){
               $mdDialog.alert()
                 .parent(angular.element(document.querySelector('body')))
                 .clickOutsideToClose(true)
-                .title(result.message)
-                .textContent('The Admin will soon launch your campaign and intimate you about it.')
+                //.title(result.message)
+                .title('Thank you! We have received your request,')
+                .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
                 .ariaLabel('Alert Dialog Demo')
                 .ok('Got it!')
                 .targetEvent(ev)
@@ -241,9 +242,25 @@ $scope.Getcomment = function (campaignID){
   }
 
   
+  $scope.conformDeleteProductFromCampaign = function(shortlistId){
+    $scope.shortlistId = shortlistId
+}
+  $scope.deleteProductFromCampaign = function( campaignId){
+    CampaignService.deleteProductFromUserCampaign(campaignId, $scope.shortlistId).then(function(result){
+      if(result.status == 1){
+        toastr.success(result.message);
+        CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+          $scope.campaignDetails = result;     
+        });
+      }
+      else{
+        toastr.error(result.message);
+      }
+    });
+  }
 
-  $scope.deleteProductFromCampaign = function(productId, campaignId){
-    CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){
+$scope.cancelProductFromCampaign = function(productId, campaignId){
+    CampaignService.cancelProductFromUserCampaign(campaignId, productId).then(function(result){
       if(result.status == 1){
         CampaignService.getCampaignWithProducts(campaignId).then(function(result){
           $scope.campaignDetails = result;
@@ -255,7 +272,6 @@ $scope.Getcomment = function (campaignID){
       }
     });
   }
-
   $scope.changeQuoteRequest = function(campaignId,remark,type){
         $scope.changeRequest = {};
         $scope.changeRequest.for_campaign_id = campaignId;

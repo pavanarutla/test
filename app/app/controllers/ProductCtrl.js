@@ -40,8 +40,12 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       $scope.shortListedProducts = response;
     });
   }
-  $scope.deleteShortlisted = function (ev, shortlistId) {
-    MapService.deleteShortlistedProduct(shortlistId).then(function (response) {
+
+  $scope.conformDeleteShortlisted = function(shortlistId){
+      $scope.shortlistId = shortlistId
+  }
+  $scope.deleteShortlisted = function (ev) {
+    MapService.deleteShortlistedProduct($scope.shortlistId).then(function (response) {
       $mdDialog.show(
         $mdDialog.alert()
           .parent(angular.element(document.querySelector('body')))
@@ -67,7 +71,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   | Campaign section
   =================================*/
   $scope.saveCampaign = function () {
-    debugger;
+    // debugger;
     // If we finally decide to use selecting products for a campaign
     // if($scope.selectedForNewCampaign.length == 0){
     //   // add all shortlisted products to campaign
@@ -117,6 +121,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     }        
   }
   $scope.addProductToExistingCampaign = function (existingCampaignId) {
+    debugger;
     var productToCampaign = {
       campaign_id: existingCampaignId
     };
@@ -124,16 +129,18 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       productToCampaign.shortlisted_products = [];
       _.each($scope.shortListedProducts, function (v, i) {
         productToCampaign.shortlisted_products.push(v.id);
-      });
+      });   
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
       if (result.status == 1) {
-        toastr.success(result.message);
-        $mdSidenav('productDetails').close();
+          toastr.success(result.message);
+
+          // $mdSidenav('productDetails').close();
+          $scope.toggleSaveCampaignPopup();
+          $scope.shortListedProducts = null;
+      } else {
+          toastr.error(result.message);
       }
-      else {
-        toastr.error(result.message);
-      }
-    });
+  });  
   }
 }
 

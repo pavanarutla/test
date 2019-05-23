@@ -63,6 +63,11 @@ app.service('CampaignService',
                         $http.delete(config.apiPath + '/user-campaign/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
+                     cancelProductFromUserCampaign: function (campaignId, productId) {
+                        var dfd = $q.defer();
+                        $http.get(config.apiPath + '/cancel-campaign-product/' + campaignId + '/product/' + productId).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                    },
                     deleteMetroCampaign: function (campaignId) {
                         var dfd = $q.defer();
                         $http.delete(config.apiPath + '/metro-campaign/' + campaignId).success(dfd.resolve).error(dfd.reject);
