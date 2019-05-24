@@ -241,7 +241,7 @@
                 <img ng-src="{{serverUrl + payment.image}}" alt="Smiley face"
                 class="requ_size img-thumbnail" style="width: 165px !important;height: 100px !important;"></td>
           <td class="table_vertical">{{payment.type}}</td>
-          <td class="table_vertical">{{payment.amount}}</td>
+          <td class="table_vertical"><span>$</span>{{payment.amount ||'0'|number : 2}}</td>
           <td class="table_vertical">{{payment.reference_no}}</td>
           <td class="table_vertical">{{payment.received_by}}</td>
           <td class="table_vertical">{{payment.comment}}</td>
@@ -272,17 +272,17 @@
           <div class="payment-summary">
           <ul id="double">
             <li class="col1">Total :</li>
-            <li class="col2">{{campaignDetails.total_amount}}</li>
+            <li class="col2"><span>$</span>{{campaignDetails.total_amount || '0' | number:2}}</li>
             <li class="col1 text_color">18% GST :</li>
-            <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+            <li class="col2 text_color"><span>$</span>{{ GST ||'0'|number : 2 }}</li>
             <li class="col1">Grand Total :</li>
-            <li class="col2">{{campaignDetails.totalamount}}</li>
+            <li class="col2"><span>$</span>{{campaignDetails.totalamount ||'0'|number : 2}}</li>
             <li class="col1">Paid :</li>
-            <li class="col2">{{campaignDetails.total_paid || "0"}}</li>
+            <li class="col2"><span>$</span>{{campaignDetails.total_paid ||'0'|number : 2}}</li>
           </ul>
           <ul id="total">
             <li class="col1">Balance :</li>
-            <li class="col2">{{campaignDetails.totalamount - campaignDetails.total_paid || "0"}}</li>
+            <li class="col2"><span>$</span>{{campaignDetails.totalamount - campaignDetails.total_paid ||'0'|number : 2}}</li>
           </ul>
           </div>
         </div>
