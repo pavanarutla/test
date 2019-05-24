@@ -1,10 +1,7 @@
-app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService,CampaignService, OwnerProductService, toastr,NotificationService) {
-
-
-
+app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $stateParams, $rootScope, $location, $timeout, $auth, $window, config, OwnerNotificationService,CampaignService, OwnerProductService,$state, toastr,NotificationService) {
   $scope.getOwnerNotifictaions = function() {
     OwnerNotificationService.viewOwnerNotification().then((result) => {
-      $scope.getOwnerNotifictaions = result.notifications;
+      $scope.getOwnerNotifictaionss = result.notifications;
       $scope.unReadNotify = result.notifications.filter(function(item){
         if(item.status == 0){
             return true;
@@ -17,6 +14,16 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
   $scope.updateNotifyStatus = function(notificationType,campaignId,notifyId){
     
     NotificationService.updateNotification(notifyId).then(function(result){
+      if(result){
+        OwnerNotificationService.viewOwnerNotification().then((result) => {
+          $scope.getOwnerNotifictaionss = result.notifications;
+          $scope.unReadNotify = result.notifications.filter(function(item){
+            if(item.status == 0){
+                return true;
+            }
+          })
+        });
+      }
     if(notificationType == 'campaign'){
       $location.path("owner/{{clientSlug}}/campaign-details/" +campaignId + "/0" )
     }
@@ -29,6 +36,9 @@ app.controller('OwnerMngrCtrl', function ($scope, $mdSidenav, $log, $mdDialog, $
         
     }) 
  }
+ if($rootScope.currStateName == 'owner.owner-notifications'){
+  $scope.getOwnerNotifictaions();
+}
 /* Notification start */
 
 if($auth.isAuthenticated()){
@@ -64,66 +74,105 @@ if($auth.isAuthenticated()){
   channel.bind('CampaignLaunchEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel1.bind('campaignClosedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel2.bind('CampaignLaunchRequestedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel3.bind('CampaignQuoteProvidedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel4.bind('CampaignQuoteRequestedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel5.bind('CampaignQuoteRevisionEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel6.bind('CampaignSuggestionRequestEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel7.bind('CampaignSuspendedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel8.bind('ProductApprovedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel9.bind('ProductRequestedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel10.bind('metroCampaignClosedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel11.bind('metroCampaignLaunchedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
   channel12.bind('metroCampignLockedEvent', function (data) {
     $scope.$apply(function(){
       $scope.unReadNotify.unshift(data);
+      if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+        $scope.getOwnerNotifictaions();
+    }
     })
   });
 
@@ -349,39 +398,39 @@ if($auth.isAuthenticated()){
   /*================================
   === Long polling notifications ===
   ================================*/
-  $scope.ownerNotifs = [];
-  var getOwnerNotifs = function () {
-    var last_notif = 0;
-    if ($scope.ownerNotifs && $scope.ownerNotifs.length > 0) {
-      last_notif = moment.utc($scope.ownerNotifs[0].updated_at).valueOf();
-    }
-    OwnerNotificationService.getAllOwnerNotifications(last_notif).then(function (result) {
-      $scope.ownerNotifs = result.concat($scope.ownerNotifs);
-      $timeout(getOwnerNotifs, 1000);
-    });
-  }
-  getOwnerNotifs();
+  // $scope.ownerNotifs = [];
+  // var getOwnerNotifs = function () {
+  //   var last_notif = 0;
+  //   if ($scope.ownerNotifs && $scope.ownerNotifs.length > 0) {
+  //     last_notif = moment.utc($scope.ownerNotifs[0].updated_at).valueOf();
+  //   }
+  //   OwnerNotificationService.getAllOwnerNotifications(last_notif).then(function (result) {
+  //     $scope.ownerNotifs = result.concat($scope.ownerNotifs);
+  //     $timeout(getOwnerNotifs, 1000);
+  //   });
+  // }
+  // getOwnerNotifs();
 
   /*===============================
   |   Notification navigation 
   ===============================*/
-  $scope.viewNotification = function (notification) {
-    if (notification.type == 9) {
-      $location.path('owner/' + $rootScope.clientSlug + '/requested-hoardings/' + notification.data.product_id);
-    }
-    else if (notification.type > 0 && notification.type < 8) {
-      $location.path('owner/' + $rootScope.clientSlug + '/campaign-details/' + notification.data.campaign_id + "/0");
-    }
-    OwnerNotificationService.updateNotifRead(notification.id).then(function (result) {
-      if (result.status == 1) {
-        // remove notif from list
-        $scope.ownerNotifs = _.filter($scope.ownerNotifs, function (notif) { return notif.id != notification.id; })
-      }
-      else {
-        toastr.error(result.message);
-      }
-    });
-  }
+  // $scope.viewNotification = function (notification) {
+  //   if (notification.type == 9) {
+  //     $location.path('owner/' + $rootScope.clientSlug + '/requested-hoardings/' + notification.data.product_id);
+  //   }
+  //   else if (notification.type > 0 && notification.type < 8) {
+  //     $location.path('owner/' + $rootScope.clientSlug + '/campaign-details/' + notification.data.campaign_id + "/0");
+  //   }
+  //   OwnerNotificationService.updateNotifRead(notification.id).then(function (result) {
+  //     if (result.status == 1) {
+  //       // remove notif from list
+  //       $scope.ownerNotifs = _.filter($scope.ownerNotifs, function (notif) { return notif.id != notification.id; })
+  //     }
+  //     else {
+  //       toastr.error(result.message);
+  //     }
+  //   });
+  // }
 
   /*=================================
   | Product search

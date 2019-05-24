@@ -1,4 +1,8 @@
-
+<style>
+        .unReadNotifications {
+            background-color: rgb(175, 209, 209)
+        }
+</style>
 <meta http-equiv="content-type" content="application/pdf ">
 <div layout="column" layout-padding>
     <p class="text_color md-title">Notifications</p>
@@ -12,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="notifictaion in getAdminNotifictaions">
+                <tr ng-repeat="notifictaion in getAdminNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
                     <td class="table_vertical">{{notifictaion.message | capitalize}}</td>
                     <td class="table_vertical">
                         <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" 

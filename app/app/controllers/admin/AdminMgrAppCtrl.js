@@ -1,4 +1,4 @@
-app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth,NotificationService, AdminNotificationService, toastr, config,$window) {
+app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $rootScope, $interval, $timeout, $location, $auth,NotificationService, AdminNotificationService, toastr,$state, config,$window) {
 
   /*=================================
   | mdDilalog close function
@@ -11,7 +11,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
    }
    $scope.getAdminNotifictaions = function() {
     AdminNotificationService.viewAdminNotification().then((result) => {
-      $scope.getAdminNotifictaions = result.notifications;
+      $scope.getAdminNotifictaionss = result.notifications;
       $scope.unReadNotify = result.notifications.filter(function(item){
         if(item.status == 0){
             return true;
@@ -24,18 +24,31 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.updateNotifyStatus = function(notificationType,campaignId,notifyId){
     
     NotificationService.updateNotification(notifyId).then(function(result){
-        if(notificationType == 'metro-campaign'){
-          $location.path("admin/metro-campaign/" +campaignId)
-        }
-        else if(notificationType == 'campaign'){
-          $location.path("admin/campaign-proposal-summary/" + campaignId)
-        }
-        else if(notificationType == 'product'){
-          $location.path("admin/hoarding-list" )
-        }
-        else if(notificationType == 'product-request'){
-          $location.path("admin/requested-hoardings" )
-        }
+      if(result){
+        AdminNotificationService.viewAdminNotification().then((result) => {
+          if(result){
+            $scope.getAdminNotifictaionss = result.notifications;
+          $scope.unReadNotify = result.notifications.filter(function(item){
+            if(item.status == 0){
+                return true;
+            }
+          })
+            if(notificationType == 'metro-campaign'){
+              $location.path("admin/metro-campaign/" +campaignId)
+            }
+            else if(notificationType == 'campaign'){
+              $location.path("admin/campaign-proposal-summary/" + campaignId)
+            }
+            else if(notificationType == 'product'){
+              $location.path("admin/hoarding-list" )
+            }
+            else if(notificationType == 'product-request'){
+              $location.path("admin/requested-hoardings" )
+            }
+          }
+        });
+      }
+        
         
     }) 
  }
@@ -75,67 +88,106 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
         channel.bind('CampaignLaunchEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
 
         });
         channel1.bind('campaignClosedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })       
        });
         channel2.bind('CampaignLaunchRequestedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
              });
         channel3.bind('CampaignQuoteProvidedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel4.bind('CampaignQuoteRequestedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel5.bind('CampaignQuoteRevisionEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel6.bind('CampaignSuggestionRequestEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel7.bind('CampaignSuspendedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel8.bind('ProductApprovedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel9.bind('ProductRequestedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel10.bind('metroCampaignClosedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel11.bind('metroCampaignLaunchedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
         channel12.bind('metroCampignLockedEvent', function (data) {
           $scope.$apply(function(){
             $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+              $scope.getAdminNotifictaions();
+          }
         })
         });
       }
@@ -211,6 +263,9 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.toogelPayments = function () {
     $scope.showPayments = !$scope.showPayments;
   }
+  if($rootScope.currStateName == 'admin.admin-notifications'){
+    $scope.getAdminNotifictaions();
+}
 
   /*================================
   === Long polling notifications ===
