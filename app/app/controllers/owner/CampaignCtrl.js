@@ -364,8 +364,7 @@ $scope.hidebutton = function(){
                     price: ownerProduct.default_price
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {    
-                debugger;          
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {             
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);

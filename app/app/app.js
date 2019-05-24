@@ -85,8 +85,7 @@ var app = angular.module('bbManager', [
     })
     .state('index.user-notifications', {
       url: 'user-notifications',
-      templateUrl: 'views/user-notifications.html',
-      controller:"bbMngrCtrl"
+      templateUrl: 'views/user-notifications.html'
     })
     .state('index.user-saved-campaigns', {
       url: 'user-saved-campaigns',
@@ -455,7 +454,21 @@ var app = angular.module('bbManager', [
       .state('admin.admin-notifications', {
       url: '/admin-notifications',
       templateUrl: 'views/admin/admin-notifications.html',
-      controller: 'AdminMgrAppCtrl'
+      // controller: 'AdminMgrAppCtrl'
+    })
+
+    .state('admin.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('admin.profile', {
+      url: '/profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
     })
     // .state('admin.user-management', {
     //   url: '/user-management',
@@ -477,7 +490,6 @@ var app = angular.module('bbManager', [
       .state('owner.owner-notifications', {
       url: '/owner-notifications',
        templateUrl: 'views/owner/owner-notifications.html',
-      controller: 'OwnerMngrCtrl'
     })
     
       
@@ -590,6 +602,29 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/forgotpassword.html',
       controller:''
     })
+    .state('owner.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('owner.location', {
+      url: '/location',
+      templateUrl: 'views/map-home.html',
+      controller: 'GmapCtrl'
+    })
+    .state('owner.profile', {
+      url: '/profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
+    })
+    // .state('owner.shortlisted-products', {
+    //   url: '/shortlisted-products',
+    //   templateUrl: 'views/shortlisted-products.html',
+    //   controller: 'UserProductCtrl'
+    // })
     .state('owner.resetlogin', {
       url: '/resetlogin',
       templateUrl: 'views/owner/resetlogin.html',
@@ -769,6 +804,20 @@ app.run(
               fullscreen: true
             });
           }
+          // else if($auth.isAuthenticated() && $auth.getPayload().userMongo.user_type == 'owner'){
+          //     var locationArray = $location.$$url.split('/')
+          //     var lastValue = locationArray[locationArray.length-1]
+          //     console.log('last value',lastValue)
+          //     var ownerChildRoute = "";
+          //     for(var routeOwner in ownerRoutes){
+          //       var arr = ownerRoutes[routeOwner].split('.');
+          //       ownerChildRoute = arr[arr.length-1]
+          //       if(ownerChildRoute == lastValue){
+          //         return true 
+          //       }
+          //     }
+          //     $location.path('/owner');
+          // }
           else if ($auth.getPayload().userMongo.user_type != "owner") {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
