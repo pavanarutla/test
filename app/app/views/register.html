@@ -1,6 +1,6 @@
 <!-- Register pages-->
 <div class="sign_bgcolor">
-	<md-dialog class="mx-auto reg_width" flex-xs="100" flex="40" flex-md="60" flex-sm="60">
+		<md-dialog class="mx-auto reg_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
 		<md-dialog-content>
 			<div class="d-flex justify-content-end">
 				<md-button class="md-icon-button " aria-label="Close Side Panel" ng-click="closeMdDialog()">
@@ -17,38 +17,50 @@
 					<md-content class="md-padding" style="background:#fff">
 						<form class="mt-2" name="forms.registerUser" novalidate="novalidate">
 							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Your Name</label>
+								<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="user.name" name="name" type="text" maxlength="30"
-								 placeholder="Your Name * " required><br>
+								 placeholder="Your Name * " required>
 								<span ng-show="forms.registerUser.name.$touched && forms.registerUser.name.$invalid" style="color:red;">The
 									name is required.</span>
+								</div>
 							</div>
 							<div class="form-group row">
-								<input class="form-control md-whiteframe-2dp" ng-model="user.company_name" name="companyName" type="text"
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Company Name</label>
+								<div class="col-sm-9">
+									<input class="form-control md-whiteframe-2dp" ng-model="user.company_name" name="companyName" type="text"
 								 minlength="6" maxlength="30" placeholder="Company Name *" required />
-								<span ng-show="forms.registerUser.companyName.$touched && forms.registerUser.companyName.$invalid" style="color:red;">Company
+									<span ng-show="forms.registerUser.companyName.$touched && forms.registerUser.companyName.$invalid" style="color:red;">Company
 									Name is required.</span>
+								</div>
 							</div>
 							
 							<div class="form-group row">
-								
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="user.email" name="email" type="email" maxlength="50"
 								 ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" required="required" placeholder="Email ID *" />
 								<span ng-show="forms.registerUser.email.$touched && forms.registerUser.email.$invalid" style="color:red;">Enter
 									a valid email address.</span>
+									</div>
 							</div>
 							<div class="form-group row">
-								
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="user.password" name="password" type="password"
 								 maxlength="30" placeholder="Password *" required />
 								<span ng-show="forms.registerUser.password.$touched && forms.registerUser.password.$invalid" style="color:red;">Password
 									is required.</span>
+									</div>
 							</div>
 							<div class="form-group row">
-								
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Mobile Number</label>
+									<div class="col-sm-9">
 							<input class="form-control md-whiteframe-2dp" ng-model="user.phone" only-numeric name="phone" type="mobile"
 								 minlength="10" maxlength="10" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" placeholder="Mobile Number *" required/>
 								 <span ng-show="forms.registerUser.phone.$touched && forms.registerUser.phone.$invalid" style="color:red;">Mobile Number
 										is required.</span>
+										</div>
 							</div>
 							<!-- <div class="form-group row">
 								
@@ -66,10 +78,14 @@
 									</li>
 								</ul>
 							</div>
-							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-								<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerUser.$invalid"
-								 ng-click="registerNewUser()">Register</md-button>
-							</md-input-container>
+							<div class="row">
+								<div class="col-sm-6 col-md-6 offset-lg-4 col-lg-4">
+									<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+										<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerUser.$invalid"
+										ng-click="registerNewUser()">Register</md-button>
+									</md-input-container>
+								</div>
+							</div>
 							<!-- <div layout="row" layout-xs="column">
 							<p>Verify the E-mail address to Sign In </p>
 						</div> -->
@@ -80,36 +96,51 @@
 					<md-content class="md-padding" style="background:#fff">
 						<form class="mt-2" name="forms.registerClientForm" novalidate="novalidate">
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Your Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="owner.name" name="ownername" type="text" maxlength="30"
-								 placeholder="Your Name * " required><br>
+								 placeholder="Your Name * " required>
 								<span ng-show="forms.registerClientForm.name.$touched && forms.registerClientForm.name.$invalid" style="color:red;">The
 									name is required.</span>
+									</div>
 							</div>
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Company Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="clientName" type="text" maxlength="200"
 								 required="required" placeholder="Company Name *" required />
 								 <span ng-show="forms.registerClientForm.clientName.$touched && forms.registerClientForm.clientName.$invalid" style="color:red;">Company Name
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Contact Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.contact_name" name="clientContactName" type="text"
 								 maxlength="30" placeholder="Contact Name *" required />
 								 <span ng-show="forms.registerClientForm.clientContactName.$touched && forms.registerClientForm.clientContactName.$invalid" style="color:red;">Contact Name
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.email" name="email" type="email" maxlength="50" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" placeholder="Email *" required />
 								 <span ng-show="forms.registerClientForm.email.$touched && forms.registerClientForm.email.$invalid" style="color:red;">Email
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Mobile Number</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.phone" only-numeric name="phone" type="phone"
 								 minlength="10" maxlength="10" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 								 placeholder="Mobile number *" required />
 								 <span ng-show="forms.registerClientForm.phone.$touched && forms.registerClientForm.phone.$invalid" style="color:red;">Mobile Number is required.</span>
+								 </div>
 							</div>
 							
 							<!-- <div class="form-group row">
@@ -123,10 +154,14 @@
 							<div ng-if="clientErrorMessages.length >=0 && !forms.registerClientForm.$dirty" style="color : red">
 								{{clientErrorMessages}}
 							</div>
-							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-								<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn register_btn" ng-disabled="forms.registerClientForm.$invalid"
-								 ng-click="registerClient(client)">Register</md-button>
-							</md-input-container>
+							<div class="row">
+								<div class="col-sm-6 col-md-6 offset-lg-4 col-lg-4">
+									<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+										<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerClientForm.$invalid"
+										ng-click="registerClient(client)">Register</md-button>
+									</md-input-container>
+								</div>
+							</div>
 							
 						</form>
 					</md-content>
@@ -136,36 +171,51 @@
 						<form class="mt-2" name="forms.registerAgencyForm" novalidate="novalidate">
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Your Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="agency.name" name="agencyname" type="text" maxlength="30"
-								 placeholder="Your Name * " required><br>
+								 placeholder="Your Name * " required>
 								<span ng-show="forms.registerAgencyForm.name.$touched && forms.registerAgencyForm.name.$invalid" style="color:red;">The
 									name is required.</span>
+									</div>
 							</div>
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Agency Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="clientName" type="text" maxlength="200"
 								 required="required" placeholder="Agency Name *" required />
 								 <span ng-show="forms.registerAgencyForm.clientName.$touched && forms.registerAgencyForm.clientName.$invalid" style="color:red;">Agency Name
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Contact Name</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.contact_name" name="clientContactName" type="text"
 								 maxlength="30" placeholder="Contact Name *" required />
 								 <span ng-show="forms.registerAgencyForm.clientContactName.$touched && forms.registerAgencyForm.clientContactName.$invalid" style="color:red;">Contact Name
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.email" name="email" type="email" maxlength="50" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" placeholder="Email *" required />
 								 <span ng-show="forms.registerAgencyForm.email.$touched && forms.registerAgencyForm.email.$invalid" style="color:red;">Email
 										is required.</span>
+										</div>
 							</div>
 							
 							<div class="form-group row">
+									<label class="col-sm-3 col-form-label md-body-2 user_font">Mobile Number</label>
+									<div class="col-sm-9">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.phone" only-numeric name="phone" type="phone"
 								 minlength="10" maxlength="10" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
 								 placeholder="Mobile number *" required />
 								 <span ng-show="forms.registerAgencyForm.phone.$touched && forms.registerAgencyForm.phone.$invalid" style="color:red;">Mobile Number is required.</span>
+								 </div>
 							</div>
 							
 							<!-- <div class="form-group row">
@@ -179,10 +229,14 @@
 							<div ng-if="clientErrorMessages.length >=0 && !forms.registerAgencyForm.$dirty" style="color : red">
 								{{clientErrorMessages}}
 							</div>
-							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
-								<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn register_btn" ng-disabled="forms.registerAgencyForm.$invalid"
-								 ng-click="registerAgency(agency)">Register</md-button>
-							</md-input-container>
+							<div class="row">
+								<div class="col-sm-6 col-md-6 offset-lg-4 col-lg-4">
+									<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+										<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerAgencyForm.$invalid"
+										ng-click="registerAgency(agency)">Register</md-button>
+									</md-input-container>
+								</div>
+							</div>
 							
 						</form>
 					</md-content>
