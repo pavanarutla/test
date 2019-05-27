@@ -925,7 +925,7 @@ $scope.hidebutton = function(){
             if (result.status == 1) {
                 toastr.success(result.message);
                 $state.reload();
-            } else {
+            } else if (result.status == 0) {
                 toastr.error(result.data.message);
             }
         });
