@@ -361,7 +361,8 @@ $scope.hidebutton = function(){
                 product: {
                     id: ownerProduct.id,
                     booking_dates: ownerProduct.booking_dates,
-                    price: ownerProduct.default_price
+                    price: ownerProduct.default_price,
+                    views:ownerProduct.impressions
                 }
             };
             OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {              
@@ -850,10 +851,10 @@ $scope.hidebutton = function(){
      | Campaign Search
      ==============================*/
     function shareownerCampaign() {
-        // document.getElementById("sharecampDrop").classList.toggle("show");
-        // document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
-        angular.element(document.querySelector("#sharecampDrop")).addClass("hide");
-        angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
+        document.getElementById("OwnersharecampDrop").classList.toggle("show");
+        document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
+        // angular.element(document.querySelector("#OwnersharecampDrop")).addClass("hide");
+        // angular.element(document.querySelector("#ownerupdatepaymentDrop")).removeClass("show");
     }
 
     /*=========================

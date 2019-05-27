@@ -1,4 +1,4 @@
-app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Upload) {
+app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Upload,$auth) {
 
       $scope.uploadFiles = function(files, errFiles) {
         $scope.files = files;
@@ -32,10 +32,18 @@ app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Uploa
         
     ]
     $scope.bbisuportdata = function(query){
-        ContactService.sendQuery(query).then(function(result){
+        var userDetails = $auth.getPayload()
+        var querryObj = {
+            subject: query.type,
+            message: query.querymessage,
+            name : userDetails.userMongo.first_name + userDetails.userMongo.last_name,
+            email:userDetails.userMongo.email,            
+            contactno:userDetails.userMongo.phone
+        };
+        ContactService.sendQuery(querryObj).then(function(result){
             if(result.status == 1){
                 toastr.success(result.message)
-            }else{
+            }else if(result.status == 0){
                 toastr.error = result.message;
             }
         });
