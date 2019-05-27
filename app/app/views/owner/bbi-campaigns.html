@@ -1,3 +1,9 @@
+<style>
+    .drp_btn{
+        background: none;
+        border:none;
+    }
+    </style>
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
     <div layout="colmun" layout-align="end center" class="campaign_search hide-xs">
         <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp mt-3 mr-2" style="width:30%;padding: 4px;" />
@@ -32,15 +38,15 @@
                                 <!-- <td class="table_vertical hide-xs">{{campaign.est_budget|| "0"}}</td> -->
                                 <td class="text-center table_vertical">
                         <md-menu md-position-mode="target-right target">
-                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                            <!-- <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                                 <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
-                            </md-button>
-                            <md-menu-content width="2">
+                            </md-button> -->
+                            <!-- <md-menu-content width="2">
                                 <md-menu-item>
                                     <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                            <p style="margin:auto 10px auto 10px">View Details</p>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
                                         </div>
                                     </md-button>
                                 </md-menu-item>
@@ -52,15 +58,29 @@
                                         </div>
                                     </md-button>
                                 </md-menu-item>
-                                <!-- <md-menu-item>
+                                <md-menu-item>
                                     <md-button ng-href="#/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                                             <p style="margin:auto 10px auto 10px">Payment Details</p>
                                         </div>
                                     </md-button>
-                                </md-menu-item> -->
-                            </md-menu-content>
+                                </md-menu-item>
+                            </md-menu-content> -->
+                            <div class="dropdown dropleft float-right">
+                                <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                                  <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(campaign.id)"  >
+                                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                  </a>
+                                  
+                                </div>
+                            </div>
                         </md-menu>
                         </td>
                         <td class="text-center table_vertical">
@@ -106,7 +126,7 @@
                                     <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                            <p style="margin:auto 10px auto 10px">View Details</p>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
                                         </div>
                                     </md-button>
                                 </md-menu-item>
@@ -173,7 +193,7 @@
                                     <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                            <p style="margin:auto 10px auto 10px">View Details</p>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
                                         </div>
                                     </md-button>
                                 </md-menu-item>
@@ -239,7 +259,7 @@
                                     <md-button class="pop_view" ng-href="#/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
                                         <div layout="row">
                                             <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
-                                            <p style="margin:auto 10px auto 10px">View Details</p>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
                                         </div>
                                     </md-button>
                                 </md-menu-item>
