@@ -31,6 +31,7 @@ app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Uploa
     },
         
     ]
+    $scope.query = {};
     $scope.bbisuportdata = function(query){
         var userDetails = $auth.getPayload()
         var querryObj = {
@@ -43,6 +44,7 @@ app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Uploa
         ContactService.sendQuery(querryObj).then(function(result){
             if(result.status == 1){
                 toastr.success(result.message)
+                $scope.query = null;
             }else if(result.status == 0){
                 toastr.error = result.message;
             }
