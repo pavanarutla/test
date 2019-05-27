@@ -193,14 +193,13 @@
                                         });
                                     });
                                     google.visualization.events.addListener($scope.chartWrapper, 'error', function (err) {
-                                        console.log("Chart not displayed due to error: " + err.message + ". Full error object follows.");
-                                        console.log(err);
+                                        // console.log("Chart not displayed due to error: " + err.message + ". Full error object follows.");
+                                        // console.log(err);
                                     });
                                     google.visualization.events.addListener($scope.chartWrapper, 'select', function () {
                                         var selectedItem = $scope.chartWrapper.getChart().getSelection()[0];
                                         $scope.$apply(function () {
                                             if ($attrs.select) {
-                                                console.log('Angular-Google-Chart: The \'select\' attribute is deprecated and will be removed in a future release.  Please use \'onSelect\'.');
                                                 $scope.select({ selectedItem: selectedItem });
                                             }
                                             else {

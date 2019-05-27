@@ -1,39 +1,50 @@
+<style>
+    .unReadNotifications {
+        background-color: rgb(175, 209, 209)
+    }
+</style>
 <div layout="column" layout-padding>
-        <p class="text_color md-title">Notifications</p>
-        <div class="table-responsive">
-            <table class="table">
-                <thead class="text_color">
-                    <tr>
-                        <th>Details</th>
-                        <th>Action</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                 <tr ng-repeat="notifictaion in getOwnerNotifictaions">
-                        <td class="table_vertical">{{notifictaion.message }}</td>
-                        <td class="table_vertical">
-                          
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" href="#/owner/{{clientSlug}}/campaign-details/{{notifictaion.campaign_id}}/0">
-                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
-                                <i class="material-icons">remove_red_eye</i>
-                            </md-icon>
-                        </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" href="#/owner/{{clientSlug}}/hoarding-list">
-                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
-                                <i class="material-icons">remove_red_eye</i>
-                            </md-icon>
-                        </a>
-                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" href="#/owner/{{clientSlug}}/requested-hoardings">
-                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
-                                <i class="material-icons">remove_red_eye</i>
-                            </md-icon>
-                        </a>
-                        </td>
-                         <td class="table_vertical text-right text_color hide-xs">{{notifictaion.created_at | datetimeify}}</td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        </div>
+    <p class="text_color md-title">Notifications</p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+             <tr ng-repeat="notifictaion in getOwnerNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
+                    <td class="table_vertical">{{notifictaion.message }}</td>
+                    <td class="table_vertical">
+                      
+                    <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'"
+                    ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                     >
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                    </a>
+                    <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" 
+                    ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                    >
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                    </a>
+                    <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'"
+                    ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                    >
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                    </a>
+                    </td>
+                     <td class="table_vertical text-right text_color hide-xs">{{notifictaion.created_at | datetimeify}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
     </div>
+</div>

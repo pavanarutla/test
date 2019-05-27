@@ -18,7 +18,6 @@ module.directive( 'expand', [ function() {
 		link: function( scope, element, attrs, ctrls ){
 
 			element.bind( 'click', function() {
-				console.log('clicked');
 				element[0].style.height = '1000px';
 
 				//scope.$apply();

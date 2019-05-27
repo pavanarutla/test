@@ -176,6 +176,7 @@ $scope.Getcomment = function (campaignID){
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(ev, campaignId){
+    console.log("hgfvgfc")
     if ($scope.onchecked === true) {
       $scope.flag = 1;
     } else if ($scope.onchecked === false) {

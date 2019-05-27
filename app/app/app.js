@@ -84,8 +84,7 @@ var app = angular.module('bbManager', [
     })
     .state('index.user-notifications', {
       url: 'user-notifications',
-      templateUrl: 'views/user-notifications.html',
-      controller:"bbMngrCtrl"
+      templateUrl: 'views/user-notifications.html'
     })
     .state('index.user-saved-campaigns', {
       url: 'user-saved-campaigns',
@@ -449,7 +448,19 @@ var app = angular.module('bbManager', [
       .state('admin.admin-notifications', {
       url: '/admin-notifications',
       templateUrl: 'views/admin/admin-notifications.html',
-      controller: 'AdminMgrAppCtrl'
+    })
+    .state('admin.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('admin.profile', {
+      url: '/profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
     })
     // .state('admin.user-management', {
     //   url: '/user-management',
@@ -470,8 +481,7 @@ var app = angular.module('bbManager', [
     
       .state('owner.owner-notifications', {
       url: '/owner-notifications',
-       templateUrl: 'views/owner/owner-notifications.html',
-      controller: 'OwnerMngrCtrl'
+       templateUrl: 'views/owner/owner-notifications.html'
     })
     
       
@@ -584,6 +594,29 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/forgotpassword.html',
       controller:''
     })
+    .state('owner.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('owner.location', {
+      url: '/location',
+      templateUrl: 'views/map-home.html',
+      controller: 'GmapCtrl'
+    })
+    .state('owner.profile', {
+      url: '/profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
+    })
+    // .state('owner.shortlisted-products', {
+    //   url: '/shortlisted-products',
+    //   templateUrl: 'views/shortlisted-products.html',
+    //   controller: 'UserProductCtrl'
+    // })
     .state('owner.resetlogin', {
       url: '/resetlogin',
       templateUrl: 'views/owner/resetlogin.html',
@@ -668,9 +701,31 @@ app.config(['toastrConfig', function (toastrConfig) {
 }]);
 
 app.run(
-  ['$rootScope', '$location', '$http', '$auth', '$mdDialog', '$transitions', 'toastr',
-    function ($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr) {
+  ['$rootScope', '$location', '$http', '$auth', '$mdDialog', '$transitions', 'toastr','$window','$state',
+    function ($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr, $window,$state) {
       $transitions.onStart({}, function (transition) {
+        $rootScope.online = navigator.onLine;
+        $window.addEventListener('online',function(){
+          if(!$rootScope.online){
+          $rootScope.$apply(function(){      
+              $mdDialog.hide();
+              $state.reload();   
+          })
+        }
+        })
+        $window.addEventListener('offline',function(){
+          $rootScope.online = false;
+          if(!$rootScope.online){
+          $rootScope.$apply(function(){
+            $rootScope.online = false;
+            $mdDialog.show({
+              templateUrl: 'views/internet-connection.html',
+              fullscreen: true
+            });
+            return false;
+          })
+        }
+        });
         /*===========================================
           Restricting routes to Authenticated Users
         ===========================================*/

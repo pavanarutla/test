@@ -16,6 +16,11 @@ app.service('NotificationService', ['$http', '$q', 'config',
                 $http.get(config.apiPath + '/get-notifications', {skipInterceptor: true}).success(dfd.resolve).error(dfd.reject);
                 return dfd.promise;
             },
+            updateNotification : function(notifId){
+                var dfd = $q.defer();
+                $http.get(config.apiPath + '/update-notification-status/' + notifId ).success(dfd.resolve).error(dfd.reject);
+                return dfd.promise;
+            }
         }
     }
 ]);

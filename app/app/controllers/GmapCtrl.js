@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
-            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state) {
+        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state','$auth',
+            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state,$auth) {
                 $scope.forms = {};
                 $scope.address = {
                     // name: 'Hyderabad, Telangana, India',
@@ -75,7 +75,7 @@ app.controller('GmapCtrl',
                     eventHandlers: {
                         'apply.daterangepicker': function(ev, picker) { 
                             //selectedDateRanges = [];
-                            console.log(ev);
+                            // console.log(ev);
                         }
                     }
                 };
@@ -1373,6 +1373,9 @@ app.controller('GmapCtrl',
                      }
                
                  }
+                 if($auth.getPayload().userMongo.user_type == 'owner'){
+                    $scope.shortlistedOwnerHide = true;
+                }
 
                 // Product-Controller Code - Ends
 

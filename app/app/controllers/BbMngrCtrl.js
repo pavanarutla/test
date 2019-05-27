@@ -14,6 +14,175 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
     /*=================================
      | mdDilalog close function ends
      =================================*/
+     $scope.getUserNotifictaions= function() {
+        NotificationService.viewUserNotification().then((result) => {
+          $scope.getUserNotifictaionss = result.notifications;
+          $scope.unReadNotify = result.notifications.filter(function(item){
+            if(item.status == 0){
+                return true;
+            }
+          })
+        });
+      }
+      if($auth.isAuthenticated()){
+      $scope.getUserNotifictaions();
+      }
+    //   $scope.updateNotifyStatusDetails = function(campaignId,notifyId){
+    //     NotificationService.updateNotification(notifyId).then(function(result){
+    //         $location.path("campaign-details/" + campaignId)
+    //     }) 
+    //  }
+     /* pusher Notifications Starts*/
+     $scope.updateNotifyStatus = function(campaignId,notifyId){
+        NotificationService.updateNotification(notifyId).then(function(result){
+            NotificationService.viewUserNotification().then((result) => {
+                $scope.getUserNotifictaionss = result.notifications;
+                $scope.unReadNotify = result.notifications.filter(function(item){
+                  if(item.status == 0){
+                      return true;
+                  }
+                })
+                $location.path("campaign-details/" + campaignId);
+              });  
+        }) 
+     }
+if($auth.isAuthenticated()){
+    var user = localStorage.getItem("loggedInUser");
+    var parsedData = JSON.parse(user);
+    var user_type = parsedData.user_type;
+    if ($auth.getPayload().userMongo.user_type == 'bbi') {
+        var user_id = '-superAdmin';
+    } else if ($auth.getPayload().userMongo.user_type == 'basic') {
+        var user_id = parsedData.user_id;
+    } else if ($auth.getPayload().userMongo.user_type == 'owner') {
+        var user_id = '-' + parsedData.mong_id;
+    }
+    
+    var pusher = new Pusher('83e8ffcc55e67dd5625d', {
+        cluster: 'ap2',
+        forceTLS: true
+    });
+    var channel = pusher.subscribe('CampaignLaunch' + user_id);
+    var channel1 = pusher.subscribe('campaignClosed' + user_id);
+    var channel2 = pusher.subscribe('CampaignLaunchRequested' + user_id);
+    var channel3 = pusher.subscribe('CampaignQuoteProvided' + user_id);
+    var channel4 = pusher.subscribe('CampaignQuoteRequested' + user_id);
+    var channel5 = pusher.subscribe('CampaignQuoteRevision' + user_id);
+    var channel6 = pusher.subscribe('CampaignSuggestionRequest' + user_id);
+    var channel7 = pusher.subscribe('CampaignSuspended' + user_id);
+    var channel8 = pusher.subscribe('ProductApproved' + user_id);
+    var channel9 = pusher.subscribe('ProductRequested' + user_id);
+    var channel10 = pusher.subscribe('metroCampaignClosed' + user_id);
+    var channel11 = pusher.subscribe('metroCampaignLaunched' + user_id);
+    var channel12 = pusher.subscribe('metroCampignLocked' + user_id);
+
+    channel.bind('CampaignLaunchEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel1.bind('campaignClosedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel2.bind('CampaignLaunchRequestedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel3.bind('CampaignQuoteProvidedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel4.bind('CampaignQuoteRequestedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel5.bind('CampaignQuoteRevisionEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel6.bind('CampaignSuggestionRequestEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel7.bind('CampaignSuspendedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel8.bind('ProductApprovedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel9.bind('ProductRequestedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel10.bind('metroCampaignClosedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel11.bind('metroCampaignLaunchedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+    channel12.bind('metroCampignLockedEvent', function (data) {
+        $scope.$apply(function(){
+            $scope.unReadNotify.unshift(data);
+            if($state.current.url == 'user-notifications' || $state.current.url == 'admin-notifications' || $state.current.url == 'owner-notifications'){
+                $scope.getUserNotifictaions();
+            }
+        })
+    });
+}
+
+
      $scope.closeMenuSidenavIfMobile = function(){
         if($window.innerWidth >=320){
           $mdSidenav('left').close();
@@ -237,24 +406,6 @@ app.controller('bbMngrCtrl', function ($scope, $mdDialog, $mdSidenav, $timeout, 
         method: {}
     };
 
-    // $scope.query = {};
-    // $scope.sendQuery = function () {
-    //     debugger;
-    //     ContactService.sendQuery($scope.query).then(function (result) {
-    //         console.log(result);
-    //         if (result.status == 1) {
-    //             toastr.success(result.message);
-    //             $scope.sendQueryErrors = null;
-    //             $scope.query = {};
-    //             $scope.forms.sendQueryForm.$setPristine();
-    //             $scope.forms.sendQueryForm.$setUntouched();
-    //         } else if (result.status == 0) {
-    //             $scope.sendQueryErrors = result.message;
-    //         }
-    //     }, function (error) {
-    //         toastr.error("somthing went wrong please try agin later");
-    //     });
-    // }
     $scope.query = {};
 $scope.sendQuery = function(query){
         ContactService.sendQuery(query).then(function(result){
@@ -401,6 +552,10 @@ $scope.sendQuery = function(query){
         $scope.campaignSaved = true;
         // });
     }
+    if($rootScope.currStateName == 'index.user-notifications'){
+        console.log('working!')
+        $scope.getUserNotifictaions();
+    }		    
 
     /*=================================
      |  Sidenav Functionality Ends
@@ -431,41 +586,41 @@ $scope.sendQuery = function(query){
     /*================================
      === Long polling notifications ===
      ================================*/
-    $scope.notifs = [];
-    var getUserNotifs = function () {
-        var last_notif = 0;
-        if ($scope.notifs && $scope.notifs.length > 0) {
-            last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
-        }
-        NotificationService.getAllNotifications(last_notif).then(function (result) {
-            $scope.notifs = result.concat($scope.notifs);
-            $timeout(getUserNotifs, 1000);
-        });
-    }
-    if ($rootScope.isAuthenticated) {
-        getUserNotifs();
-    }
+    // $scope.notifs = [];
+    // var getUserNotifs = function () {
+    //     var last_notif = 0;
+    //     if ($scope.notifs && $scope.notifs.length > 0) {
+    //         last_notif = moment.utc($scope.notifs[0].updated_at).valueOf();
+    //     }
+    //     NotificationService.getAllNotifications(last_notif).then(function (result) {
+    //         $scope.notifs = result.concat($scope.notifs);
+    //         $timeout(getUserNotifs, 1000);
+    //     });
+    // }
+    // if ($rootScope.isAuthenticated) {
+    //     getUserNotifs();
+    // }
 
     /*===============================
      |   Notification navigation 
      ===============================*/
-    $scope.viewNotification = function (notification) {
-        if (notification.type > 100 && notification.type < 200) {
-            $location.path('metro-campaign/' + notification.data.campaign_id);
-        } else {
-            $location.path('view-campaign/' + notification.data.campaign_id);
-        }
-        NotificationService.updateNotifRead(notification.id).then(function (result) {
-            if (result.status == 1) {
-                $scope.notifs = _.filter($scope.notifs, function (notif) {
-                    return notif.id != notification.id;
-                })
-            } else {
-                toastr.error(result.message);
-            }
-        });
-        $mdSidenav('right').toggle();
-    }
+    // $scope.viewNotification = function (notification) {
+    //     if (notification.type > 100 && notification.type < 200) {
+    //         $location.path('metro-campaign/' + notification.data.campaign_id);
+    //     } else {
+    //         $location.path('view-campaign/' + notification.data.campaign_id);
+    //     }
+    //     NotificationService.updateNotifRead(notification.id).then(function (result) {
+    //         if (result.status == 1) {
+    //             $scope.notifs = _.filter($scope.notifs, function (notif) {
+    //                 return notif.id != notification.id;
+    //             })
+    //         } else {
+    //             toastr.error(result.message);
+    //         }
+    //     });
+    //     $mdSidenav('right').toggle();
+    // }
 
     /*===============================
      |   Switching between views
@@ -512,7 +667,7 @@ $scope.sendQuery = function(query){
             });
         });
     }
-    if (($rootScope.currStateName == 'index' || 'index.location') && $rootScope.isAuthenticated) {
+    if ($rootScope.currStateName == 'index' || 'index.location' && $rootScope.isAuthenticated) {
         // $scope.shortListedProductsLength = localStorage.shortListedProducts
         $scope.loadActiveUserCampaigns();
     }
@@ -545,11 +700,5 @@ $scope.sendQuery = function(query){
         $rootScope.formatSelected = index;
     }
     
-//      function getUserNotifictaions() {
-//     NotificationService.viewUserNotification().then((result) => {
-//       $scope.getUserNotifictaions = result.notifications;
-//     });
-//   }
-//   getUserNotifictaions();
 }
 );
