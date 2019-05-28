@@ -47,6 +47,20 @@
                             <i class="material-icons">remove_red_eye</i>
                         </md-icon>
                     </a>
+                    <a style="cursor:pointer;" ng-if="notifictaion.type == 'User_registartion'" 
+                    ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                    href="#/admin/user-management">
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                    </a>
+                    <a style="cursor:pointer;" ng-if="notifictaion.type == 'Owner_registartion'" 
+                    ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                    href="#/admin/user-management">
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                    </a>
                 </td>
                 <td class="table_vertical text-right text_color hide-xs">{{notifictaion.created_at| datetimeify}}</td>
             </tr>

@@ -241,7 +241,9 @@ $scope.Getcomment = function (campaignID){
     
   }
 
-  
+  $scope.conformDeleteShortlisted = function(shortlistId){
+    $scope.shortlistId = shortlistId
+}
 
   $scope.deleteProductFromCampaign = function(productId, campaignId){
     CampaignService.deleteProductFromUserCampaign(campaignId, productId).then(function(result){

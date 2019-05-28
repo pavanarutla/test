@@ -82,13 +82,32 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
                   //  return c.status == 1151 && typeof c.name !== "undefined";
                   return c.status == 1000 || c.status == 900;
       });
+      //admin filters
+      $scope.adminPlannedCampaigns = _.filter(result.admin_campaigns, function (c) {
+        //return c.status < 800 && typeof c.name !== "undefined";
+           return c.status == 100 || c.status == 300 || c.status == 400 || c.status == 500 || c.status == 600; 
+      });
+      $scope.adminScheduledCampaigns = _.filter(result.admin_campaigns, function (c) {
+       // return c.status == 800 && typeof c.name !== "undefined";
+          return c.status == 700;
+      });
+      $scope.adminRunningCampaigns = _.filter(result.admin_campaigns, function (c) {
+    //    return c.status == 1141 && typeof c.name !== "undefined";
+      return c.status == 800;
+      });
+      $scope.adminClosedCampaigns = _.filter(result.admin_campaigns, function (c) {
+                  //  return c.status == 1151 && typeof c.name !== "undefined";
+                  return c.status == 1000 || c.status == 900;
+      });
+      
       // $scope.runningCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'booked') });
       // $scope.closedCampaigns = _.where(result.user_campaigns, { status: _.indexOf($scope.CAMPAIGN_STATUS, 'stopped') });
       $scope.adminCampaigns = result.admin_campaigns;
     });
   }
-  getAllCampaigns();
-
+  if ($rootScope.currStateName == "admin.admin-campaigns" || "admin.campaigns") {
+    getAllCampaigns();
+  }
   /*=====================
   | Filtering Campaigns
   =====================*/

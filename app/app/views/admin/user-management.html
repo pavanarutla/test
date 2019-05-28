@@ -3,6 +3,58 @@
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
   </md-button>
   <md-tabs md-dynamic-height class="padding_cmp">
+      <md-tab label="Users">
+          <div class="md-title" layout="row">
+            <div flex></div>
+            <div flex="20">
+              <input class="hide-xs form-control md-whiteframe-z1" type="text" placeholder="Search by Email..." ng-model="searchByEmail"
+                style="width:317px;border-radius:0px;height:33px;float:right">
+            </div>
+            <div class="hide-xs" layout="row">
+              <div flex></div>
+              <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+                <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
+                <md-button class="md-raised all_button add_button" ng-click="showAddUserPopup()">Add New User</md-button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 1em;">
+            <div class="table-responsive">
+              <table class="table table-hover call_center">
+                <thead>
+                  <tr class="text_color">
+                    <th class="">Name</th>
+                    <th class="">Email</th>
+                    <th class="">Phone</th>
+                    <th class="">User Type</th>
+                    <th class="">Company</th>
+                    <th class="">Activated</th>
+                    <th class=""></th>
+                  </tr>
+                </thead>
+                <tbody class="">
+                  <tr ng-repeat="user in allUsers | filter : searchByEmail">
+                    <td class="table_vertical">{{user.first_name | capitalize}} {{user.last_name}}</td>
+                    <td class="table_vertical">{{user.email | capitalize}}</td>
+                    <td class="table_vertical">{{user.phone || "N/A"}}</td>
+                    <td class="table_vertical">{{user.company_type}}</td>
+                    <td class="table_vertical">{{user.company_name | capitalize}}</td>
+                    <td class="table_vertical">
+                      <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                        {{user.activated | boolToYesNo}}
+                      </a>
+                    </td>
+                    <td class="table_vertical">
+                      <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                        View details
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </md-tab>
     <md-tab label="Companies">
       <div class="md-title" layout="row">
         <div flex></div>
@@ -59,59 +111,7 @@
           </table>
         </div>
       </div>
-    </md-tab>
-    <md-tab label="Users">
-      <div class="md-title" layout="row">
-        <div flex></div>
-        <div flex="20">
-          <input class="hide-xs form-control md-whiteframe-z1" type="text" placeholder="Search by Email..." ng-model="searchByEmail"
-            style="width:317px;border-radius:0px;height:33px;float:right">
-        </div>
-        <div class="hide-xs" layout="row">
-          <div flex></div>
-          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
-            <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
-            <md-button class="md-raised all_button add_button" ng-click="showAddUserPopup()">Add New User</md-button>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top: 1em;">
-        <div class="table-responsive">
-          <table class="table table-hover call_center">
-            <thead>
-              <tr class="text_color">
-                <th class="">Name</th>
-                <th class="">Email</th>
-                <th class="">Phone</th>
-                <th class="">User Type</th>
-                <th class="">Company</th>
-                <th class="">Activated</th>
-                <th class=""></th>
-              </tr>
-            </thead>
-            <tbody class="">
-              <tr ng-repeat="user in allUsers | filter : searchByEmail">
-                <td class="table_vertical">{{user.first_name | capitalize}} {{user.last_name}}</td>
-                <td class="table_vertical">{{user.email | capitalize}}</td>
-                <td class="table_vertical">{{user.phone || "N/A"}}</td>
-                <td class="table_vertical">{{user.company_type}}</td>
-                <td class="table_vertical">{{user.company_name | capitalize}}</td>
-                <td class="table_vertical">
-                  <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
-                    {{user.activated | boolToYesNo}}
-                  </a>
-                </td>
-                <td class="table_vertical">
-                  <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
-                    View details
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </md-tab>
+    </md-tab>   
     <md-tab label="System Roles">
       <div class="md-title" layout="row">
         <div flex></div>

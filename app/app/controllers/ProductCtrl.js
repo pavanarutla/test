@@ -40,7 +40,10 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       $scope.shortListedProducts = response;
     });
   }
-  $scope.deleteShortlisted = function (ev, shortlistId) {
+  $scope.conformDeleteShortlisted = function(shortlistId){
+    $scope.shortlistId = shortlistId
+}
+  $scope.deleteShortlisted = function (ev, shortlistId) {   
     MapService.deleteShortlistedProduct(shortlistId).then(function (response) {
       $mdDialog.show(
         $mdDialog.alert()

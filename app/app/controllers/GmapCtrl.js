@@ -974,28 +974,7 @@ app.controller('GmapCtrl',
                 }
                 $scope.$on("removeSelection", function() {
                     $scope.removeSelection();
-                })
-                $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
-                    var productToCampaign = {
-                        product_id: productId,
-                        campaign_id: existingCampaignId
-                    };
-                    if (selectedDateRanges.length > 0) {
-                        productToCampaign.dates = selectedDateRanges;
-                    } else {
-                        toastr.error("Please select dates.");
-                        return false;
-                    }
-                    CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
-                        if (result.status == 1) {
-                            toastr.success(result.message);
-                            $mdSidenav('productDetails').close();
-                        } else {
-                            toastr.error(result.message);
-                        }
-                    });
-                    $state.reload();
-                }
+                })  
 
                 $scope.shareShortlistedProducts = function (shareShortlisted) {
                     var sendObj = {

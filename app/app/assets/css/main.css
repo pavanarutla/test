@@ -74,6 +74,20 @@ body{
 .box__shadow{
     box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12);
 }
+.suggest__btn{
+    padding: 6px 30px;
+    color: #fff !important;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+.suggest_btn_next{
+    background: #bc2535;
+}
+.suggest_btn_back{
+    background: #171616;
+}
 /* ============= header css start ============*/
 /* Css to disable  */
 .md-button.md-default-theme[disabled], .md-button[disabled] {
@@ -204,8 +218,39 @@ md-toolbar.md-default-theme.md-menu-toolbar, md-toolbar.md-menu-toolbar {
 .material-Cal {
     font-size: 18px;
     margin-top: 3px;
-    color: #14c55b;
+    color: #BC2535;
 }
+
+/* Delete popup-Css */
+#exampleModalCenter {
+    top: 50%;
+    left: 50%;
+    width:33em;
+    height:18em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    /* border: 1px solid #ccc;
+    background-color: #f3f3f3; */
+    position:fixed;
+}
+.modal_bottom{
+    border-bottom: none !important;
+}
+.modal_top{
+    border-top: none !important;
+}
+.popup_yes{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.popup_no {
+    padding-left: 22px;
+    padding-right: 22px;
+    background: #BC2535;
+    color: #fff;
+}
+ /* Delete popup-CSS */
+
 /* =====scroll bar coustom css start  =====*/
 .scrollbar__style::-webkit-scrollbar
 {
@@ -608,20 +653,41 @@ margin: 2px;
 
 /*suggestme page new css*/
 /* form styling */
-#form-container                { background:#FFF; margin-bottom:20px;
-                                 border-radius:5px; }
-#form-container .page-header   { background:#151515; margin:0; padding:30px; 
-                                 border-top-left-radius:5px; border-top-right-radius:5px; }
+#form-container { 
+    background:#FFF; 
+}
+#form-container .page-header{ 
+    background:#FFF; 
+    margin:0; 
+    padding:10px; 
+    height: 90vh;
+    border-right: 3px solid #CCF;
+}
 
 /* numbered buttons */
 #status-buttons                 {  }
-#status-buttons a               { color:#FFF; display:inline-block; font-size:12px; margin-right:10px; text-align:center; text-transform:uppercase; }
-#status-buttons a:hover         { text-decoration:none; }
-#status-buttons span            { background:#080808; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px; 
-                                  border-radius:50%; }
-
+#status-buttons a{ 
+    color:#000; 
+    display:inline-block; 
+    font-size:12px; 
+    margin-right:10px; 
+    text-align:center; 
+    text-transform:uppercase; 
+    width: 100%;
+}
+#status-buttons a:hover{ 
+    text-decoration:none; 
+}
+#status-buttons span{ 
+    /* background:#080808;  */
+    display:block;
+    padding:10px 20px; 
+}
 /* active buttons */
-#status-buttons a.active span   { background:#00BC8C; }
+#status-buttons a.active span   { 
+    background: #bc2535;
+    color: #fff;
+}
 
 /* ANIMATION STYLINGS
 ============================================================================= */
@@ -1443,7 +1509,7 @@ md-checkbox .md-icon {
 .main-banner h4 {
     font-family: 'Lato', sans-serif;
     color: #fff;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: .4px;
     text-transform: uppercase;

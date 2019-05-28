@@ -593,7 +593,9 @@ app.controller("CampaignProposalCtrl", function (
       }
     });
   };
-
+  $scope.conformDeleteShortlisted = function(shortlistId){
+    $scope.shortlistId = shortlistId
+}
   $scope.deleteProductFromCampaign = function (campaignId, productId) {
     AdminCampaignService.deleteProductFromCampaign(campaignId, productId).then(
       function (result) {
