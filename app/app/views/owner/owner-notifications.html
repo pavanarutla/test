@@ -1,3 +1,8 @@
+<style>
+        .unReadNotifications {
+            background-color: rgb(175, 209, 209)
+        }
+</style>
 <div layout="column" layout-padding>
         <p class="text_color md-title">Notifications</p>
         <div class="table-responsive">
@@ -10,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                 <tr ng-repeat="notifictaion in getOwnerNotifictaions">
+                 <tr ng-repeat="notifictaion in getOwnerNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
                         <td class="table_vertical">{{notifictaion.message }}</td>
                         <td class="table_vertical">
                           

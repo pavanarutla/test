@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-        ['$scope', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
-            function ($scope, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state) {
+        ['$scope', '$location','$auth','NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr','$state',
+            function ($scope, $location,$auth, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr,$state) {
                 $scope.forms = {};
                 $scope.address = {
                     // name: 'Hyderabad, Telangana, India',
@@ -1294,6 +1294,17 @@ app.controller('GmapCtrl',
                              });
                });
                }
+               if($auth.getPayload().userMongo.user_type == 'owner'){
+                    $scope.shortlistedOwnerHide = true;
+                } 
+            //    $scope.checkAuthNav = function(){
+            //         if($auth.getPayload().userMongo.user_type == 'basic'){
+            //             $location.path('/shortlisted-products')
+            //         } 
+            //         else if($auth.getPayload().userMongo.user_type == 'owner'){
+            //             $location.path('/owner/'+$rootScope.clientSlug+'/shortlisted-products')
+            //         }
+            //     }
                    $scope.getProductUnavailableDates = function(productId, ev){
                      MapService.getProductUnavailableDates(productId).then(function(dateRanges){
                        $scope.unavailalbeDateRanges = dateRanges;

@@ -71,7 +71,6 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   | Campaign section
   =================================*/
   $scope.saveCampaign = function () {
-    // debugger;
     // If we finally decide to use selecting products for a campaign
     // if($scope.selectedForNewCampaign.length == 0){
     //   // add all shortlisted products to campaign
@@ -121,7 +120,6 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     }        
   }
   $scope.addProductToExistingCampaign = function (existingCampaignId) {
-    debugger;
     var productToCampaign = {
       campaign_id: existingCampaignId
     };
@@ -164,7 +162,7 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   //   $scope.viewCampaignDetails(localStorage.viewCampaignDetailsId)
   // }
 
-  if ($rootScope.currStateName == "index.shortlisted-products") {
+  if ($rootScope.currStateName == "index.shortlisted-products" || $rootScope.currStateName == 'owner.location') {
     getShortListedProducts();
   }
   /*=======================================
