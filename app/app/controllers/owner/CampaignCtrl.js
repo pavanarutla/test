@@ -604,7 +604,7 @@ $scope.hidebutton = function(){
             }
         });
     }
-
+    
     $scope.deleteOwnerCampaign = function (campaignId) {
         OwnerCampaignService.deleteOwnerCampaign(campaignId).then(function (result) {
             if (result.status == 1) {
@@ -635,9 +635,11 @@ $scope.hidebutton = function(){
             }
         });
     }
-
-    $scope.deleteProductFromCampaign = function (campaignId, productId) {
-        OwnerCampaignService.deleteProductFromCampaign(campaignId, productId).then(function (result) {
+    $scope.conformDeleteShortlisted = function(shortlistId){
+        $scope.shortlistId = shortlistId
+    }
+    $scope.deleteProductFromCampaign = function (campaignId) {
+        OwnerCampaignService.deleteProductFromCampaign(campaignId, $scope.shortlistId).then(function (result) {
             if (result.status == 1) {
                 if ($stateParams.campaignType == 2) {
                     $scope.getOwnerCampaignDetails(campaignId);

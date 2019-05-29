@@ -349,10 +349,10 @@
                         <!-- <p class="text_color md-caption" ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">Quote Requested</p> -->
                         <!-- <p class="text_color md-caption" ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">{{campaignDetails.status| stringifyCampaignStatus}} </p> -->
                         <!--<p class="text_color md-caption" ng-if="!campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status >= 500)">Deleted</p>-->
-                        <p class="text_color md-caption" ng-if="campaignProduct.admin_price && (campaignDetails.status <= 300 || campaignDetails.status > 600)">{{campaignProduct.product_status | stringifyProductStatus}}</p>
+                        <p class="text_color md-caption">{{campaignProduct.product_status | stringifyProductStatus}}</p>                        
                     </td>
                     <td class="table_vertical">
-							<a data-toggle="modal" data-target="#exampleModalCenter" ng-click = 'conformDeleteShortlisted(shortlisted.id)'><i class="material-icons">delete_forever</i></a>
+							<a data-toggle="modal" data-target="#exampleModalCenter" ng-click = 'conformDeleteShortlisted(campaignProduct.id)'><i class="material-icons">delete_forever</i></a>
 							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
 										<div class="modal-content">
@@ -363,7 +363,7 @@
 											</button>
 											</div>
 											<div class="modal-footer modal_top">
-													<button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id,campaignProduct.id)">Yes</button>
+													<button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id)">Yes</button>
 													<button type="button" data-dismiss="modal" class="btn popup_no">No</button>
 											</div>
 										</div>
@@ -402,7 +402,7 @@
                             <ul id="double">
                               <li class="col1">Total :</li>
                               <li class="col2">{{campaignDetails.act_budget || '0' | number : 2}}</li>
-                              <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
+                              <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" /> 18% GST :</li>
                               <li class="col2 text_color">{{ GST || '0' | number : 2 }}</li>
                             </ul>
                             <ul id="total">
