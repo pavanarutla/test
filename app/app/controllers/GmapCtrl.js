@@ -1374,11 +1374,8 @@ app.controller('GmapCtrl',
                                         40,42,44,46,48,50,52];
                 var currentDate = parseInt(moment().format('L').split('/')[1]);
                 $scope.weeksArray = []
-                for(var i=1;i<=52;i++){
-                    if(i%2 == 0){
-                        $scope.weeksArray.push(2+ '-' +4)
-                    }else{
-                        $scope.weeksArray.push(1+ '-' +2)
+                for(var i=1;i<=26;i++){
+                    $scope.weeksArray.push(2)
                     }
                 }                
                     
