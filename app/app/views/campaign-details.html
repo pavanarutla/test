@@ -95,11 +95,11 @@
 								</tr>
 								<tr>
 									<td><b>Contact</b></td>
-									<td>{{campaignDetails.phone}}</td>
+									<td>{{campaignDetails.phone}} / {{campaignDetails.email | capitalize}}</td>
 								</tr>
 								<tr>
-									<td><b>Email</b></td>
-									<td>{{campaignDetails.email | capitalize}}</td>
+									<td><b>Estimated Budget</b></td>
+									<td>{{campaignDetails.est_budget || '0' | number:2}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -111,7 +111,7 @@
 							<tbody>
 								<tr>
 									<td><b>No of Products</b></td>
-									<td>{{campaignDetails.products.length}}</td>
+									<td>{{campaignDetails.products.length || '0'}}</td>
 								</tr>
 								<tr>
 									<td><b>Date</b></td>
@@ -231,7 +231,7 @@
 					</td>
 					<td class="table_vertical">{{campaignProduct.booked_to | dateify | date: "dd-MM-yyyy"}}
 					</td>
-					<td class="table_vertical">{{campaignProduct.admin_price || "N/A"}}</td>
+					<td class="table_vertical">{{campaignProduct.admin_price || '0' | number:2}}</td>
 					<td class="table_vertical">
 						<p class="text_color md-caption"
 							ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">
