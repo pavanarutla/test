@@ -629,6 +629,7 @@ app.controller('GmapCtrl',
                         $scope.Clusterer.addMarker(marker);
 
                         google.maps.event.addListener(marker, 'click', function (e) {
+                            $scope.getProductUnavailableDates(marker.properties.id);
                             selectMarker(marker);
                         });
                     }
@@ -1135,10 +1136,12 @@ app.controller('GmapCtrl',
                 productLoader();
 
 
-                $scope.getProductUnavailableDates = function (productId, ev) {
+                $scope.getProductUnavailableDates = function (productId) {
                     MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
                         $scope.unavailalbeDateRanges = dateRanges;
-                        $(ev.target).parents().eq(3).find('input').trigger('click');
+                        console.log('unavailable dates ',$scope.unavailalbeDateRanges)
+                        // $(ev.target).parents().eq(3).find('input').trigger('click');
+                        productDatesCalculator();
                     });
                 }
 
@@ -1305,12 +1308,12 @@ app.controller('GmapCtrl',
             //             $location.path('/owner/'+$rootScope.clientSlug+'/shortlisted-products')
             //         }
             //     }
-                   $scope.getProductUnavailableDates = function(productId, ev){
-                     MapService.getProductUnavailableDates(productId).then(function(dateRanges){
-                       $scope.unavailalbeDateRanges = dateRanges;
-                       $(ev.target).parents().eq(3).find('input').trigger('click');
-                     });
-                   }
+                //    $scope.getProductUnavailableDates = function(productId, ev){
+                //      MapService.getProductUnavailableDates(productId).then(function(dateRanges){
+                //        $scope.unavailalbeDateRanges = dateRanges;
+                //        $(ev.target).parents().eq(3).find('input').trigger('click');
+                //      });
+                //    }
                    // SHORT-LIST ENDs
                    // Save-camp
                    $scope.toggleExistingCampaignSidenav = function () {
@@ -1368,21 +1371,108 @@ app.controller('GmapCtrl',
 
                 // Product-Controller Code - Ends
                 /* ----------------------------
-                    New profuct Nav bars starts
+                    New Hording profuct Nav bars starts
                 -------------------------------*/
-                $scope.yearlyWeeks =[4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
-                                        40,42,44,46,48,50,52];
-                var currentDate = parseInt(moment().format('L').split('/')[1]);
-                $scope.weeksArray = []
+                $scope.yearlyWeeks =[];
+                $scope.weeksArray = [];
+                var  weeklyPackageValue = 4;
+                var selectWeekValue = 0;
+                for(var i=1;i<=25;i++){
+                    $scope.yearlyWeeks.push({weeklyPackage : weeklyPackageValue})
+                    weeklyPackageValue +=2
+                }
+                
                 for(var i=1;i<=26;i++){
-                    $scope.weeksArray.push(2)
+                    $scope.weeksArray.push({twoWeeks : 2})
+                }
+                var currentDay =  moment().format('LLLL').split(',')[0];
+
+                function productDatesCalculator(){
+                    var unavailBoundaries = [];
+                    $scope.unavailalbeDateRanges.forEach((dates) => {
+                        unavailBoundaries.push(moment(dates.booked_from))
+                        unavailBoundaries.push(moment(dates.booked_to))
+                    });
+                    console.log('unavailBoundaries',unavailBoundaries)
+                    if(currentDay == 'Monday'){
+                        var startDay = moment().add(7,'days').format('LLLL').split(',')[1];
+                        var endDay = moment().add(7+14,'days').format('LLLL').split(',')[1];
+                        $scope.weeksArray[0].startDay = startDay;
+                        $scope.weeksArray[0].startDay = endDay;
+                        unavailBoundaries.forEach((date) => {
+                            $scope.weeksArray[0].isBlocked = date.isSameOrAfter(moment().add(7,'days').format('LLLL')) && date.isSameOrBefore(moment().add(7+14,'days').format('LLLL'));
+                        });
+
+                    }else{
+                        var tempDay;
+                        for(i=1;i<=6;i++){
+                             tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
+                             if(tempDay == 'Monday'){
+                                var startDay = moment(new Date()).add(i+7,'days').format('LLLL').split(',')[1];
+                                var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL').split(',')[1]
+                                $scope.weeksArray[0].startDay = startDay;
+                                $scope.weeksArray[0].endDay = endDay;
+                                unavailBoundaries.forEach((date) => {
+                                    $scope.weeksArray[0].isBlocked = date.isSameOrAfter(moment().add(i+7,'days').format('LLLL')) && date.isSameOrBefore(moment().add(i+7+13,'days').format('LLLL'));
+                                });
+                             }
+                        }
+                       
                     }
-                }                
-                    
-                     
+                    var tempororyStartDate = $scope.weeksArray[0].endDay;
+                    $scope.weeksArray.forEach(function(item,index){
+                        if(index > 0){
+                            
+                            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL').split(',')[1];
+                            item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL').split(',')[1];
+                            tempororyStartDate = item.endDay;
+                            unavailBoundaries.forEach((date) => {
+                                $scope.weeksArray[index].isBlocked = date.isSameOrAfter(moment().add(1,'days').format('LLLL')) && date.isSameOrBefore(moment().add(14,'days').format('LLLL'));
+                            });
+                        }
+                    })  
+                }
+                
+                // productDatesCalculator()
+                console.log('blocked dates ',$scope.weeksArray)
+                $scope.selectHordingWeeks = function(weeks) {
+                    $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
+                        week.selectedWeek = false;
+                    });
+                    for(var i=0;i<$scope.yearlyWeeks.length; i++){
+                        if($scope.yearlyWeeks[i].weeklyPackage == weeks.weeklyPackage){
+                            $scope.yearlyWeeks[i].selectedWeek = true;
+                            selectWeekValue = $scope.yearlyWeeks[i]
+
+                        }
+                    }
+                    $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
+                        week.selected = false;
+                    });
+                    for(var i=0; i<weeks.weeklyPackage/2; i++) {
+                        $scope.weeksArray[i].selected = true;
+                    };
+                }
+                $scope.selectUserWeeks = function(weeks,index){
+                    if(!(Object.prototype.toString.call(selectWeekValue) == "[object Object]") || Object.keys(selectWeekValue).length == 0 ){
+                        alert("please select package above")
+                        return false;
+                    }else{
+                        $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
+                            week.selected = false;
+                        });
+                        if(selectWeekValue.weeklyPackage > ($scope.weeksArray.length - index)){
+                            alert("not available");
+                            return false;
+                        };
+                        for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {      
+                            $scope.weeksArray[i].selected = true;
+                        };
+                    };
+                };
 
                 /* ----------------------------
-                    New profuct Nav bars ends
+                    New Hording profuct Nav bars ends
                 -------------------------------*/
 
                 // controller ends  
