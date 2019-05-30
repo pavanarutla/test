@@ -1367,6 +1367,23 @@ app.controller('GmapCtrl',
                  }
 
                 // Product-Controller Code - Ends
+                /* ----------------------------
+                    New profuct Nav bars starts
+                -------------------------------*/
+                $scope.yearlyWeeks =[4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
+                                        40,42,44,46,48,50,52];
+                var currentDate = parseInt(moment().format('L').split('/')[1]);
+                $scope.weeksArray = []
+                for(var i=1;i<=26;i++){
+                    $scope.weeksArray.push(2)
+                    }
+                }                
+                    
+                     
+
+                /* ----------------------------
+                    New profuct Nav bars ends
+                -------------------------------*/
 
                 // controller ends  
 
