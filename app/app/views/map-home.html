@@ -20,6 +20,16 @@
   .daterangepicker {
       top:40% !important;
   }
+  .addWeekColor{
+    background-color: #f00;
+    color:white;
+  }
+  .selectedWeekColor {
+    background-color: green;
+  }
+  .addBlockedColor {
+    background-color: gray;
+  }
 </style>
 <div layout="column" style="position:relative">
 
@@ -87,8 +97,10 @@
         <p class="text-muted ml-3 mb-1">There after you can select your bookings in multiples of two weeks.</p>
         <p class="text-muted ml-3">Price includes all taxes and productions charges</p>
         <div layout="row" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar">
-          <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks">
-            <div class="md-caption setect_padding">{{weeks}}&nbsp;Week</div>
+          <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+           ng-click="selectHordingWeeks(weeks)"
+           ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+            <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
             <h3 class="md-body-2 setect_padbottom">$4500</h3>
           </a>
         </div>
@@ -97,9 +109,10 @@
         <p class="text-muted ml-3">The posters will be placed between Monday and Friday of your first selected week. A specific day cannot
           be guaranteed. However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
         <div layout="row" class="mt-2 mb-2" style="width:100%;overflow:auto;" >
-          <a class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index">
-            <div class="md-caption selected_padding">{{week}}&nbsp; Weeks</div>
-            <h3 class="md-body-2 selected_padbottom"> of June</h3>
+          <a class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+          ng-click="selectUserWeeks(week,$index)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked == true}">
+            <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+            <h3 class="md-body-2 selected_padbottom"> of {{week.endDay}}</h3>
           </a>
         </div>   
 
