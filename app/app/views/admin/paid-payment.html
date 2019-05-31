@@ -28,9 +28,9 @@
           <tr ng-repeat="Adminpay in adminpayments | filter : search">
             <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
             <td class="table_vertical">{{Adminpay.name || "N/A" | capitalize}}</td>
-            <td class="table_vertical">{{Adminpay.total_paid}}</td>
-            <td class="text-center table_vertical">{{Adminpay.est_budget - Adminpay.total_paid || "N/A"}}</td>
-            <td class="text-center table_vertical">{{Adminpay.est_budget || "N/A"}}</td>
+            <td class="table_vertical"><span>$</span>{{Adminpay.total_paid}}</td>
+            <td class="text-center table_vertical"><span>$</span>{{Adminpay.est_budget - Adminpay.total_paid || '0' | number:2}}</td>
+            <td class="text-center table_vertical"><span>$</span>{{Adminpay.est_budget || '0' | number:2}}</td>
             <td class="text-center table_vertical">
               <md-menu md-position-mode="target-right target" id="width_popup">
                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">

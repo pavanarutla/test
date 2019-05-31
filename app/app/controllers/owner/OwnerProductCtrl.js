@@ -84,33 +84,33 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   ===================*/
 
 
-// $scope.getProductByFormat = function(format){
-//   $scope.format = format;
-//console.log(format);
-//  OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
-//   $scope.productList = result.products;
-//     $scope.pagination.pageCount = result.page_count;
-//     if($window.innerWidth >= 420){
-//       createPageLinks();
-//     }
-//     else{
-//       $scope.getRange(0, result.page_count);
-//     }
-//  });
-// };
-// $scope.getBudget = function(price){
-  // $scope.price = price;
-  //  OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format,price).then(function(result){
-  //   $scope.productList = result.products;
-  //     $scope.pagination.pageCount = result.page_count;
-  //     if($window.innerWidth >= 420){
-  //       createPageLinks();
-  //     }
-  //     else{
-  //       $scope.getRange(0, result.page_count);
-  //     }
-  //  });
-// };
+$scope.getProductByFormat = function(format){
+  $scope.format = format;
+console.log(format);
+ OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
+  $scope.productList = result.products;
+    $scope.pagination.pageCount = result.page_count;
+    if($window.innerWidth >= 420){
+      createPageLinks();
+    }
+    else{
+      $scope.getRange(0, result.page_count);
+    }
+ });
+};
+$scope.getBudget = function(price){
+  $scope.price = price;
+   OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format,price).then(function(result){
+    $scope.productList = result.products;
+      $scope.pagination.pageCount = result.page_count;
+      if($window.innerWidth >= 420){
+        createPageLinks();
+      }
+      else{
+        $scope.getRange(0, result.page_count);
+      }
+   });
+};
 $scope.applymethod=function(product){
   var data = {};
           var pageNo = $scope.pagination.pageNo;
@@ -369,16 +369,46 @@ $scope.applymethod=function(product){
   | Product Section
   =====================*/  
   $scope.product = {};
- 
+  
+  $scope.ProductTypes = [
+    { name: "Bulletin"},
+    { name: "Digital Bulletin"},
+    { name: "Transit"}
+  ];
+  $scope.bulletinresult = true;
+  $scope.trasitResult = false;
+  $scope.DigitalResult = false;
+  $scope.product.type = $scope.ProductTypes[0];
+    $scope.getdetails = function () {
+      if ($scope.product.type.name == "Bulletin") {
+      $scope.bulletinresult = true;
+      $scope.trasitResult = false;
+      $scope.DigitalResult = false;
+      }
+      else if ($scope.product.type.name == "Digital Bulletin"){
+              $scope.DigitalResult = true;
+              $scope.trasitResult = false;
+              $scope.bulletinresult = false;
+      }else if($scope.product.type.name == "Transit"){
+              $scope.trasitResult = true;
+              $scope.bulletinresult = false;
+              $scope.DigitalResult = false;
+      }else{
+              $scope.bulletinresult = false;
+      }
+  }
+    
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
     for (var item in product.dates) {
       product.dates[item].endDate = product.dates[item].endDate.format()
       product.dates[item].startDate = product.dates[item].startDate.format()
     };
+    product.type = product.type.name;
     product.area = $scope.areaObj.id;
+    console.log(product);
     Upload.upload({
-      url: config.apiPath + '/request-owner-product-addition',
+      url: config.apiPath + '/save-product-details',
       data: { image: $scope.files.image, product: $scope.product }
     }).then(function (result) {
       if(result.data.status == "1"){
@@ -624,6 +654,7 @@ $scope.applymethod=function(product){
   if($rootScope.currStateName == 'owner.hoarding-list'){
     $scope.getApprovedProductList();
     getShortlistedProductsByOwner();
+    $scope.getdetails();
   }
 
   if($rootScope.currStateName == 'owner.requested-hoardings'){
