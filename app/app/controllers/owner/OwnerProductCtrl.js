@@ -404,7 +404,7 @@ $scope.applymethod=function(product){
       product.dates[item].endDate = product.dates[item].endDate.format()
       product.dates[item].startDate = product.dates[item].startDate.format()
     };
-    
+    product.type = product.type.name;
     product.area = $scope.areaObj.id;
     console.log(product);
     Upload.upload({
