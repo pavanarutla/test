@@ -605,6 +605,7 @@ app.controller('GmapCtrl',
                             marker.properties = markerData.product_details[i];
                             marker.groupSize = markerData.product_details.length;
                             google.maps.event.addListener(marker, 'spider_click', function (e) {
+                                $scope.getProductUnavailableDates(marker.properties.id);
                                 selectSpideredMarker(this);
                             });
                             markersOnMap.push(marker);
@@ -629,6 +630,7 @@ app.controller('GmapCtrl',
                         $scope.Clusterer.addMarker(marker);
 
                         google.maps.event.addListener(marker, 'click', function (e) {
+                            console.log("marker clicked")
                             $scope.getProductUnavailableDates(marker.properties.id);
                             selectMarker(marker);
                         });
@@ -868,6 +870,7 @@ app.controller('GmapCtrl',
                 }
 
                 $scope.selectFromTabIdSearch = function (marker) {
+                    $scope.getProductUnavailableDates(marker.id)
                     if (marker.id) {
                         var refToMapMarker = _.find(markersOnMap, (m) => {
                             return m.properties.id == marker.id;
@@ -1408,13 +1411,18 @@ app.controller('GmapCtrl',
                         for(i=1;i<=6;i++){
                              tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
                              if(tempDay == 'Monday'){
-                                var startDay = moment(new Date()).add(i+7,'days').format('LLLL').split(',')[1];
-                                var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL').split(',')[1]
+                                var startDay = moment(new Date()).add(i+7,'days').format('LLLL');
+                                var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL');
                                 $scope.weeksArray[0].startDay = startDay;
                                 $scope.weeksArray[0].endDay = endDay;
-                                unavailBoundaries.forEach((date) => {
-                                    $scope.weeksArray[0].isBlocked = date.isSameOrAfter(moment().add(i+7,'days').format('LLLL')) && date.isSameOrBefore(moment().add(i+7+13,'days').format('LLLL'));
-                                });
+                                var isBlocked = false;
+                                for (var date of unavailBoundaries) {
+                                    if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+                                        isBlocked = true;
+                                        break;
+                                    }
+                                }
+                                $scope.weeksArray[0].isBlocked = isBlocked;
                              }
                         }
                        
@@ -1423,18 +1431,32 @@ app.controller('GmapCtrl',
                     $scope.weeksArray.forEach(function(item,index){
                         if(index > 0){
                             
-                            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL').split(',')[1];
-                            item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL').split(',')[1];
+                            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
+                            item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL');
                             tempororyStartDate = item.endDay;
-                            unavailBoundaries.forEach((date) => {
-                                $scope.weeksArray[index].isBlocked = date.isSameOrAfter(moment().add(1,'days').format('LLLL')) && date.isSameOrBefore(moment().add(14,'days').format('LLLL'));
-                            });
+                            var isBlocked = false;
+                            for (var date of unavailBoundaries) {
+                                if (index == 1) {
+                                    console.log(date, item.startDay, item.endDay)
+                                    console.log(date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay))
+                                }
+                                if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+                                    isBlocked = true;
+                                    break;
+                                }
+                            }
+                            $scope.weeksArray[index].isBlocked = isBlocked;
+                            // unavailBoundaries.forEach((date) => {
+                            //     $scope.weeksArray[index].isBlocked = date.isSameOrAfter(moment(tempororyStartDate).add(1,'days').format('LLLL')) && date.isSameOrBefore(moment(tempororyStartDate).add(14,'days').format('LLLL'));
+                            // });
                         }
-                    })  
+
+                    })
+                    console.log('blocked dates ',$scope.weeksArray)
+  
                 }
                 
                 // productDatesCalculator()
-                console.log('blocked dates ',$scope.weeksArray)
                 $scope.selectHordingWeeks = function(weeks) {
                     $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
                         week.selectedWeek = false;
@@ -1449,11 +1471,31 @@ app.controller('GmapCtrl',
                     $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
                         week.selected = false;
                     });
+                    var tempValue = 0
                     for(var i=0; i<weeks.weeklyPackage/2; i++) {
-                        $scope.weeksArray[i].selected = true;
+                        if($scope.weeksArray[i].isBlocked == true){
+                            $scope.weeksArray[(weeks.weeklyPackage/2) - tempValue].selected = true;
+                            tempValue +=1;
+                        }else{
+                            $scope.weeksArray[i].selected = true;
+                        }
+                        
                     };
+                    
+                    console.log("checking", $scope.weeksArray)
                 }
-                $scope.selectUserWeeks = function(weeks,index){
+                // $scope.disableBlockedProducts = function(index){
+                //     if($scope.weeksArray[index].isBlocked == true ){
+                //         return true;
+                //     }else {
+                //         return false;
+                //     }
+
+                // }
+                $scope.selectUserWeeks = function(weeks,index,ev){
+                    if($scope.weeksArray[index].isBlocked == true){
+                        ev.preventDefault();
+                    }
                     if(!(Object.prototype.toString.call(selectWeekValue) == "[object Object]") || Object.keys(selectWeekValue).length == 0 ){
                         alert("please select package above")
                         return false;
@@ -1465,7 +1507,7 @@ app.controller('GmapCtrl',
                             alert("not available");
                             return false;
                         };
-                        for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {      
+                        for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {    
                             $scope.weeksArray[i].selected = true;
                         };
                     };
