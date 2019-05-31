@@ -31,6 +31,26 @@
     background-color: gray;
     cursor: not-allowed;
   }
+  .error_popup{
+    width: 75%;
+    position: absolute;
+    bottom: 86px;
+    left: 15%;
+  }
+  .error_popup .error_header{
+    background: #44596d;
+    padding: 3px;
+  }
+  .error_popup .error_header h3{
+    color: #fff;
+    font-size: 15px;
+    margin-top: 5px;
+    text-transform: capitalize;
+  }
+  .error_popup .error_body{
+    background: #fff;
+    padding: 5px 30px 5px 10px;
+}
 </style>
 <div layout="column" style="position:relative">
 
@@ -131,7 +151,7 @@
           </div>
         </div>
       </div>
-            <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
+      <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
         style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
         <div layout="row">
           <div flex></div>
@@ -166,6 +186,22 @@
             ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,ranges.selectedDateRanges)" ng-disabled="!existingCampaign.id">
             add to existing or save Campaign
           </md-button>
+        </div>
+      </div>
+      <div class="error_popup box__shadow">
+        <div class="error_header">
+            <div layout="row">
+              <h3>this panel is not available </h3>
+              <div flex></div>
+              <a class="md-icon-button close-btn">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+        </div>
+        <div class="error_body">
+            <p>Unfortunately, the panel isn't available for the selected Number of weeks,fir the start week you've selected.</p>
+
+            <p>please select anthoer start week</p>
         </div>
       </div>
     </md-content>
