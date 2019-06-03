@@ -1375,8 +1375,8 @@ app.controller('GmapCtrl',
                             startAndEndDates.forEach((item,index)=>{
                             if(index == 0){
                                 paylaunchProduct.startDate = moment(item.startDay).format('YYYY-MM-DD')
-                            }else if(index == startAndEndDates.length -1){
-                                paylaunchProduct.endDate = moment(item.endDate).format('YYYY-MM-DD')
+                            }else if(index == (startAndEndDates.length -1)){
+                                paylaunchProduct.endDate = moment(item.endDay).format('YYYY-MM-DD')
                             }
                         })
                       
