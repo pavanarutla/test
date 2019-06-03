@@ -61,7 +61,7 @@
         <div class="inner">
           <div class="row" style="margin-right:0px;">
             <div class="col-md-10">
-                <h5 class="font-weight-bold ml-3 mt-3 mb-1">OOH048 &nbsp; NY Mets Citibank Marquee</h5>
+                <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp; {{ product.area_name }}</h5>
             </div>
             <div class="col-md-2 text-right">
                 <a class="md-icon-button close-btn" ng-click="toggleProductDetailSidenav()">
@@ -69,7 +69,7 @@
                   </a>
             </div>
             <div class="col-md-8">
-                <h6 class="font-weight-bold ml-3 mt-1">Size: 16 X 20</h6>
+                <h6 class="font-weight-bold ml-3 mt-1">Size: {{product.panelSize}}</h6>
             </div>
           </div>
           <div class="row" style="margin-right:0px;">
@@ -100,19 +100,18 @@
           <div layout="row" class="mt-2 mb-2">
             <div flex="25" class="border ml-3 p-1">
               <p class="text-muted mb-2">Views</p>
-              <h6 class="font-weight-bold">1,55,850</h6>
+              <h6 class="font-weight-bold">{{product.impressions}}</h6>
               <p class="text-muted">Per 4 Weeks</p>
             </div>
             <div flex="30" class="border ml-3 mr-3 p-1 ">
               <p class="text-muted mb-2">Demographic</p>
-              <h6 class="font-weight-bold">35-55 Age Ethnicity</h6>
-            </div>
+              <h6 class="font-weight-bold">{{product.demographicsage}}</h6>
+            </div>           
             <div flex="45" class="border mr-3 p-1">
               <p class="text-muted mb-2">Address</p>
-              <h6 class="font-weight-bold">123-01 Roosevelt Avenue, Queens NY - 11368</h6>
+              <h6 class="font-weight-bold">{{product.addressone}}{{product.addresstwo}}</h6>
             </div>
           </div>
-  
           <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration :</h5>
           <p class="text-muted ml-3 mb-1">This Bulletin minimum booking is 4 weeks.</p>
           <p class="text-muted ml-3 mb-1">There after you can select your bookings in multiples of two weeks.</p>
