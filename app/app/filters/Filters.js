@@ -56,6 +56,31 @@ app.filter('dateify',function(){
     }
   }
 });
+app.filter('jsonConvert',function(){
+  return function(date){
+    if(Object.prototype.toString.call(date) == "[object Array]"){
+      var concatinatedDates = "";
+      date.forEach(item => {
+        concatinatedDates += moment(item.startDate).format('LLLL').split(',')[1] + " to " + moment(item.endDate).format('LLLL').split(',')[1]
+      });
+      return concatinatedDates
+    }
+    else{
+      return "N/A";
+    }
+  }
+});
+app.filter('dateslots',function(){
+  return function(date, format){
+    // format = format || 'DD-MM-YYYY HH:mm:ss';
+    if(date){
+      return date.split(',')[1]
+    }
+    else{
+      return "N/A";
+    }
+  }
+});
 app.filter('timeify',function(){
   return function(date, format){
     format = format || 'HH:mm a';

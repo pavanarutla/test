@@ -70,6 +70,22 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
   /*=================================
   | Campaign section
   =================================*/
+  $scope.payAndLaunch = function(campaignName,productId){
+      var paylaunchProduct ={
+          name : campaignName,
+          shortlisted_products : []
+      };
+      productId.forEach(function(item){
+          paylaunchProduct.shortlisted_products.push(item.id)
+      })
+      CampaignService.payAndLaunch(paylaunchProduct).then(function(res){
+        if(res.status == 1){
+            toastr.success(res.message)
+        }else if(res.status == 0){
+            toastr.error(res.message)
+        }
+    })
+  }
   $scope.saveCampaign = function () {
     // If we finally decide to use selecting products for a campaign
     // if($scope.selectedForNewCampaign.length == 0){

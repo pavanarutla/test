@@ -86,7 +86,6 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 
 $scope.getProductByFormat = function(format){
   $scope.format = format;
-console.log(format);
  OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize,format).then(function(result){
   $scope.productList = result.products;
     $scope.pagination.pageCount = result.page_count;
@@ -400,13 +399,8 @@ $scope.applymethod=function(product){
     
   $scope.files = {};
   $scope.requestAddProduct = function (product) {
-    for (var item in product.dates) {
-      product.dates[item].endDate = product.dates[item].endDate.format()
-      product.dates[item].startDate = product.dates[item].startDate.format()
-    };
     product.type = product.type.name;
     product.area = $scope.areaObj.id;
-    console.log(product);
     Upload.upload({
       url: config.apiPath + '/save-product-details',
       data: { image: $scope.files.image, product: $scope.product }
@@ -698,6 +692,69 @@ $scope.applymethod=function(product){
 
   /*=============================
   | Page based initial loads end
+  =============================*/
+
+  /*=============================
+  | owner slots blocking starts
+  =============================*/
+
+  $scope.weeksArray = [];
+  for(var i=1;i<=26;i++){
+    $scope.weeksArray.push({twoWeeks : 2})
+  }
+  var currentDay =  moment().format('LLLL').split(',')[0];
+  function productDatesCalculator(){
+    if(currentDay == 'Monday'){
+      var startDay = moment().add(7,'days').format('LLLL');
+      var endDay = moment().add(7+13,'days').format('LLLL');
+      $scope.weeksArray[0].startDay = startDay;
+      $scope.weeksArray[0].endDay = endDay;
+  }else{
+      var tempDay;
+      for(i=1;i<=6;i++){
+           tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
+           if(tempDay == 'Monday'){
+              var startDay = moment(new Date()).add(i+7,'days').format('LLLL');
+              var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL');
+              $scope.weeksArray[0].startDay = startDay;
+              $scope.weeksArray[0].endDay = endDay;      
+           }
+      }
+  }
+  var tempororyStartDate = $scope.weeksArray[0].endDay;
+  $scope.weeksArray.forEach(function(item,index){
+      if(index > 0){
+          item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
+          item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL');
+          tempororyStartDate = item.endDay;
+      }
+  })
+}
+productDatesCalculator()
+$scope.slotsClosed = false;
+$scope.selectUserWeeks = function(weeks,index,ev){
+
+  if($scope.weeksArray[index].selected && $scope.weeksArray[index].selected == true){
+    $scope.weeksArray[index].selected = false;
+
+  }else{
+    $scope.weeksArray[index].selected = true;
+  }
+}
+$scope.slotedDatesPopupClosed = function(){
+    $scope.slotsClosed = false;
+}
+$scope.blockedSlotesbtn = function(weeksArray){
+  $scope.product.dates = []
+  weeksArray.filter((week)=>week.selected).forEach(function(item){
+    var startDate = moment(item.startDay).format('YYYY-MM-DD')
+    var endDate = moment(item.endDay).format('YYYY-MM-DD')
+
+    $scope.product.dates.push({startDate : startDate,endDate: endDate})
+  })
+}
+   /*=============================
+  | owner slots blocking ends
   =============================*/
 
 });

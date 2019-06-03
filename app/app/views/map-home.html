@@ -29,7 +29,7 @@
     }
     .addBlockedColor {
       background-color: gray;
-      cursor: not-allowed;
+      cursor: not-allowed !important;
     }
     .error_popup{
       width: 75%;
@@ -129,12 +129,13 @@
           <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Start Date :</h5>
           <p class="text-muted ml-3">The posters will be placed between Monday and Friday of your first selected week. A specific day cannot
             be guaranteed. However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
-          <div layout="row" class="mt-2 mb-2" style="width:100%;overflow:auto;" >
-            <a class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
-              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked == true}">
+          <div layout="row" id="scrollFind" class="mt-2 mb-2" style="width:100%;overflow:auto;" >
+            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+              ng-disabled="week.isBlocked && week.isBlocked == true">
               <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay}}</h3>
-            </a>
+              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+            </button>
           </div>   
   
           <div class="row mt-4 pb-3" style="margin-right:0px;">
@@ -142,11 +143,11 @@
                 <h5 class="font-weight-bold ml-3 mt-3">Total : $20,000</h5>
             </div>
             <div class="col-md-3">
-                <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="ranges.selectedDateRanges.length == 0" ng-if="!alreadyShortlisted"
-                ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)">Shortlist</md-button>
+                <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 
+                ng-click="shortlistSelected(product.id, weeksArray, $event)">Shortlist</md-button>
             </div>
             <div class="col-md-3">
-                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="ranges.selectedDateRanges.length == 0"
+                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
                 ng-click="toggleExistingCampaignSidenav()">Pay & Launch</md-button>
             </div>
           </div>
@@ -170,7 +171,7 @@
                 placeholder="Estimated budget">
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
-              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaign(product.id, ranges.selectedDateRanges)" ng-disabled="IsDisabled">
+              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
                 Save Campaign
               </md-button>
             </div>
@@ -188,20 +189,21 @@
             </md-button>
           </div>
         </div>
-        <div class="error_popup box__shadow">
+        <div class="error_popup box__shadow" ng-if="packagePopUp">
           <div class="error_header">
               <div layout="row">
-                <h3>this panel is not available </h3>
+                <h3>{{selectPackageAbove.head}} </h3>
                 <div flex></div>
-                <a class="md-icon-button close-btn">
+                <a class="md-icon-button close-btn" ng-click = "closeSelectedPopup()">
                   <i class="material-icons">close</i>
                 </a>
               </div>
           </div>
           <div class="error_body">
-              <p>Unfortunately, the panel isn't available for the selected Number of weeks,fir the start week you've selected.</p>
+              <!-- <p>Unfortunately, the panel isn't available for the selected Number of weeks,fir the start week you've selected.</p>
   
-              <p>please select anthoer start week</p>
+              <p>please select anthoer start week</p> -->
+              <p>{{selectPackageAbove.dsc}}</p>
           </div>
         </div>
       </md-content>

@@ -102,6 +102,11 @@ app.service('CampaignService',
                         var dfd = $q.defer();
                         $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
+                    },
+                    payAndLaunch: function (campaignObj) {
+                        var dfd = $q.defer();
+                        $http.post(config.apiPath + '/pay-launch-campaign', campaignObj).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
                     }
                    
                 }

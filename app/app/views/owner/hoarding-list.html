@@ -17,6 +17,10 @@
         background: #f00 !important;
     }
 
+    .selectedWeek {
+        background-color: rgb(117, 170, 117)
+    }
+
     .daterangepicker {
         /* position: absolute; */
         color: inherit;
@@ -285,11 +289,11 @@
                                 <div class="col-sm-3" ng-show='bulletinresult || trasitResult || DigitalResult '>
                                     <label class="font-weight-bold">Select Product Date</label>
                                     <div class="input-group">
-                                        <input  ng-model="product.dates"
+                                        <input  ng-model="product.dates | jsonConvert"
                                             class="form-control md-whiteframe-3dp" type="text" name="date"
                                             readonly id="booking_dates_picker" />
                                         <a class="input-group-addon md-whiteframe-3dp"
-                                            ng-click="getProductUnavailableDates(product.id,$event);"
+                                            ng-click="slotsClosed = true;"
                                             style="padding: 4px 8px;">
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
                                         </a>
@@ -465,7 +469,7 @@
                             </div>
                         </div>
                     </li>
-                    <div class="owner_blocked_date_popup box__shadow">
+                    <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
                         <div class="owner_blocked_header">
                             <div layout="row">
                                 <div>
@@ -474,68 +478,21 @@
                                 </div>
                               
                                 <div flex></div>
-                                <a class="close-btn">
+                                <a class="close-btn" ng-click="slotedDatesPopupClosed()">
                                     <i class="material-icons">close</i>
                                 </a>
                             </div>
                         </div>
                         <div class="owner_blocked_body">
                             <div class="row" class="mt-2  mb-2">
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
+                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
+                                ng-click="selectUserWeeks(week,$index,$event)" ng-class="{selectedWeek : week.selected == true}">
+                                    <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                                    <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
                                 </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                    <div class="md-caption">Week of 14</div>
-                                    <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                </div>
-                                <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                        <div class="md-caption">Week of 14</div>
-                                        <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                    </div>
-                                    <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                        <div class="md-caption">Week of 14</div>
-                                        <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                    </div>
-                                    <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                        <div class="md-caption">Week of 14</div>
-                                        <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                    </div>
-                                    <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                        <div class="md-caption">Week of 14</div>
-                                        <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                    </div>
-                                    <div class="border col-2 mb-2 p-1 text-center cal_divcolor">
-                                        <div class="md-caption">Week of 14</div>
-                                        <h3 class="md-body-2 setect_padbottom">17 Jul</h3>
-                                    </div>
-                                
                             </div>
                         </div>
+                        <button class="btm btm-error" ng-click="blockedSlotesbtn(weeksArray)">block dates</button>
                       </div>
                 </form>
 
