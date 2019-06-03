@@ -18,7 +18,8 @@
     }
 
     .selectedWeek {
-        background-color: rgb(117, 170, 117)
+        background-color: #bc2535 !important;
+        outline: none;
     }
 
     .daterangepicker {
@@ -86,8 +87,8 @@
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product
             </md-button>
-            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;position: relative;">
-                <form name="hordinglistform" novalidate="novalidate">
+            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px; height: 500px;overflow: auto;">
+                <form name="hordinglistform" novalidate="novalidate" style="position:relative;">
                     <div layout="colmun">
                         <span flex></span>
                         <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addnewProduct()">
@@ -491,8 +492,9 @@
                                     <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
                                 </div>
                             </div>
+                            <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button>
+                        <span class="clearfix"></span>
                         </div>
-                        <button class="btm btm-error" ng-click="blockedSlotesbtn(weeksArray)">block dates</button>
                       </div>
                 </form>
 
