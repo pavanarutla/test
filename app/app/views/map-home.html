@@ -121,7 +121,7 @@
              ng-click="selectHordingWeeks(weeks)"
              ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
               <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
-              <h3 class="md-body-2 setect_padbottom">$4500</h3>
+              <h3 class="md-body-2 setect_padbottom">{{weeks.price}}</h3>
             </a>
           </div>
   
@@ -139,7 +139,7 @@
   
           <div class="row mt-4 pb-3" style="margin-right:0px;">
             <div class="col-md-6">
-                <h5 class="font-weight-bold ml-3 mt-3">Total : $20,000</h5>
+                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
             </div>
             <div class="col-md-3">
                 <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 

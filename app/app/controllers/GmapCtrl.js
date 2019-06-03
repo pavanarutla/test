@@ -438,6 +438,7 @@ app.controller('GmapCtrl',
                     selectorMarker.setPosition(marker.position);
                     selectorMarker.setMap($scope.mapObj);
                     $scope.product.id = marker.properties['id'];
+                    $scope.product.price = marker.properties['price'];
                     $scope.product.image = config.serverUrl + marker.properties['image'];
                     $scope.product.siteNo = marker.properties['siteNo'];
                     $scope.product.panelSize = marker.properties['panelSize'];
@@ -458,6 +459,7 @@ app.controller('GmapCtrl',
                     $scope.mapObj.setCenter(marker.position);
                     selectorMarker.setMap(null);
                     $scope.product.id = marker.properties['id'];
+                    $scope.product.price = marker.properties['price'];
                     $scope.product.image = config.serverUrl + marker.properties['image'];
                     $scope.product.siteNo = marker.properties['siteNo'];
                     $scope.product.panelSize = marker.properties['panelSize'];
@@ -878,6 +880,7 @@ app.controller('GmapCtrl',
                         bounds.extend(refToMapMarker.position);
                         $scope.mapObj.fitBounds(bounds);
                         $scope.product.id = refToMapMarker.properties['id'];
+                        $scope.product.price = marker.properties['price'];
                         $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
                         $scope.product.siteNo = refToMapMarker.properties['siteNo'];
                         $scope.product.panelSize = refToMapMarker.properties['panelSize'];
@@ -1047,6 +1050,7 @@ app.controller('GmapCtrl',
                     $scope.product.siteNo = product.siteNo;
                     $scope.product.panelSize = product.panelSize;
                     $scope.product.address = product.address;
+                    $scope.product.price = product.price;
                     $scope.product.impressions = product.impressions;
                     $scope.product.direction = product.direction;
                     $scope.product.lighting = product.lighting;
@@ -1409,6 +1413,16 @@ app.controller('GmapCtrl',
                 var currentDay =  moment().format('LLLL').split(',')[0];
 
                 function productDatesCalculator(){
+                    var slotPrices =0;
+                    for(item in $scope.yearlyWeeks){
+                        if(item == 0){
+                            slotPrices = $scope.product.price;
+                            $scope.yearlyWeeks[item].price = slotPrices;
+                        }else{
+                            slotPrices = parseInt(slotPrices) + (parseInt($scope.product.price)/2)
+                            $scope.yearlyWeeks[item].price = slotPrices;
+                        }
+                    }
                     var unavailBoundaries = [];
                     $scope.unavailalbeDateRanges.forEach((dates) => {
                         unavailBoundaries.push(moment(dates.booked_from))
@@ -1441,6 +1455,7 @@ app.controller('GmapCtrl',
                                 }
                                 $scope.weeksArray[0].isBlocked = isBlocked;
                              }
+
                         }
                        
                     }
@@ -1472,7 +1487,7 @@ app.controller('GmapCtrl',
                     for(var i=0;i<$scope.yearlyWeeks.length; i++){
                         if($scope.yearlyWeeks[i].weeklyPackage == weeks.weeklyPackage){
                             $scope.yearlyWeeks[i].selectedWeek = true;
-                            selectWeekValue = $scope.yearlyWeeks[i]
+                            selectWeekValue = $scope.yearlyWeeks[i];
 
                         }
                     }
@@ -1503,8 +1518,11 @@ app.controller('GmapCtrl',
                             week.selected = false;
                         });
                         $scope.selectPackageAbove = {head : "slots are not available",dsc : "we don't have slots please select another slots"}
+                        $scope.totalSlotAmount = 0
                         return false;
-                        }           
+                        } 
+                        $scope.totalSlotAmount = selectWeekValue.price;
+
                     }
                 $scope.packagePopUp = false;
                 $scope.closeSelectedPopup = function(){
@@ -1520,8 +1538,9 @@ app.controller('GmapCtrl',
                         $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
                             week.selected = false;
                         });
-                        if(selectWeekValue.weeklyPackage > ($scope.weeksArray.length - index)){
-                            alert("not available");
+                        if((selectWeekValue.weeklyPackage/2) > ($scope.weeksArray.length - index)){
+                            $scope.packagePopUp = true;
+                            $scope.selectPackageAbove = {head : "select the package above",dsc : "please Select Campaign Duration"}    
                             return false;
                         };
                         for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {   
