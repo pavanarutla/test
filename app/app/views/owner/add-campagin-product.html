@@ -217,7 +217,7 @@
               <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span>
               <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
           </td>
-          <td class="table_vertical">
+          <!-- <td class="table_vertical"> -->
             <!-- <input ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp "
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
@@ -231,7 +231,7 @@
             
 
 
-              <div class="dropdown">
+              <!-- <div class="dropdown">
                   <md-button onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates"  class="dropbtn" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)">
                       <i class="fa fa-calendar" aria-hidden="true"></i>
                   </md-button>
@@ -285,10 +285,62 @@
                           </div>
                         </div>
                   </div>
-              </div>
+              </div> -->
             <!-- calender slots Ends-->
+          <!-- </td> -->
+          <td class="table_vertical">
+              <a data-toggle="modal" data-target="#exampleModalcalendar" onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                      <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header modal_bottom">
+                                      <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="OwnerSlotsBooking()">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button> 
+                                      </div>
+                                      <div class="modal-body">
+                                          <p class="text-muted mb-1">This Bulletin minimum booking is 4 weeks.</p>
+                                          <p class="text-muted mb-1">There after you can select your bookings in multiples of two weeks.</p>
+                                          <p class="text-muted ">Price includes all taxes and productions charges</p>
+                                          <div layout="row" class="mt-2  mb-2 mostly-customized-scrollbar">
+                                            <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+                                            ng-click="selectHordingWeeks(weeks)"
+                                            ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+                                              <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
+                                              <h3 class="md-body-2 setect_padbottom">{{weeks.price}}</h3>
+                                            </a>
+                                          </div>
+                          
+                                          <h5 class="font-weight-bold  mt-3">Select Campaign Start Date :</h5>
+                                          <p class="text-muted mb-1">The posters will be placed between Monday and Friday of your first selected week.
+                                            </p>
+                                            <p class="text-muted mb-1">A specific day cannot be guaranteed.</p>
+                                            <p class="text-muted mb-1">However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+                                          <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" >
+                                            <button class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                                              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+                                              ng-disabled="week.isBlocked && week.isBlocked == true">
+                                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                                            </button>
+                                          </div> 
+                                      </div>
+                                      <div class="modal-body modal_top">
+                                          <div class="row" style="margin-right:0px;">
+                                              <div class="col-md-8">
+                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
+                                              </div>
+                                              <div class="col-md-4">
+                                                  <md-button layout-fill class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
           </td>
-
          
           <!-- <td class=" table_vertical text-right">
             <md-button class="md-raised md-primary all_button" ng-class = "{addBlockedColor : ownerProductBlocked.length !== 1}" ng-disabled="ownerProductBlocked.length !== 1" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
