@@ -30,12 +30,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact/Email</b></td>
-                                    <td>{{campaignDetails.phone}} {{campaignDetails.email| capitalize}}</td>
+                                    <td><b>Contact</b></td>
+                                    <td>{{campaignDetails.phone}}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Estimated Budget</b></td>
-                                    <td><span>$</span>{{campaignDetails.est_budget || '0' | number:2}}</td>
+                                    <td><b>Email</b></td>
+                                    <td>{{campaignDetails.email| capitalize}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -79,6 +79,16 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
+        <div class="" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                    Download Quotation
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-right: 0px;">
+                    Download
+                </md-button>               
+            </div>
+        </div>
         <div class="dropdown">
             <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
                 Share Campaign
@@ -160,9 +170,9 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b>
-                            <br>{{campaignProduct.address || "N/A"}}<br>
-                            <b>Views :</b> {{campaignProduct.impressions|| "N/A"}}
+                        <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b></br>
+                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo || "N/A"}}<br>
+                            <b>Views :</b> {{campaignProduct.impressions|| '0'}}
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>
@@ -249,7 +259,7 @@
 </div>
 <!-- table grid end -->
 <div class="row border_quest">
-    <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
+    <!-- <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
         <div class="ml-2 form-group" ng-hide="campaignDetails.status <= 100">
             <form name="SendComment">
                 <div class="chat_box">
@@ -270,13 +280,13 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12 request_adminbutton"
         ng-if="campaignDetails.status < 300">
         <md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)"
             style="float: right;">Request Proposal</md-button>
     </div> -->
-    <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" >
+    <!-- <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" >
         <div class="small-wrapper mt0">
             <div class="smallContainer">
                 <div class="payment-summary">
@@ -287,7 +297,7 @@
                                 ng-change="gstuncheck(checked)" />18% GST :</li>
                         <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
                     </ul>
-                    <ul id="total">
+                    <ul id="total" ng-if="campaignDetails.status < 700">
                         <li class="col1">Grand Total :</li>
                         <li class="col2">{{TOTAL| number : 2}}</li>
                         <li class="col3"><input type="checkbox" ng-model="request_execute" />Request Executive to
@@ -302,7 +312,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- <div class="p-2 pl-4 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12"
              ng-if="campaignDetails.status == 600">

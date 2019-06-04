@@ -55,23 +55,18 @@
                                 <tr>
                                     <td><b>Total Budget</b></td>
                                     <td>
-                                        <span ng-if="campaignDetails.act_budget">$</span>&nbsp;{{ campaignDetails.act_budget}}
+                                        ${{ campaignDetails.act_budget |number : 2 || 0 }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Pending payment</b></td>
-                                    <td ng-if="campaignDetails.status >= 400 && campaignDetails.type != 0">
-                                        <span>$</span>
-                                        {{PendingPay}}
+                                    <td ng-if="campaignDetails.type != 0">
+                                        ${{PendingPay | number:2 || '0'}}
                                     </td>
                                     <td ng-if="campaignDetails.type == 0">
                                         <span ng-if="campaignDetails.pending_payment"></span>
-                                        N/A
-                                    </td>
-                                    <td ng-if="campaignDetails.status <= 100">
-                                        <span ng-if="campaignDetails.pending_payment">Rs.</span>
-                                        0
-                                    </td>
+                                        ${{PendingPay | number:2 || '0'}}
+                                    </td>                                    
                                 </tr>
                                 <tr>
                                     <td><b>Status</b></td>
@@ -161,7 +156,7 @@
                     </md-button> -->
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.type != 0 && campaignDetails.status != 100 || campaignDetails.status <= 700">
+            <div class="" ng-if="campaignDetails.status < 700">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
                             Another Product
@@ -207,9 +202,9 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p><b>{{product.siteNo}} - {{product.area_name}} (40Ft X 40Ft)</b><br>Address :
-                            {{product.address || "N/A"}}<br>Views : {{product.impressions|| "N/A"}}
-                            <br>Type : {{product.format_name|| "N/A"}}
+                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br>Address :
+                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo || "N/A"}}<br>Views : {{product.impressions|| "N/A"}}
+                            <br>Type : {{product.type|| "N/A"}}
                     </td>
                     <td class="table_vertical ">{{product.panelSize}}</td>
                     <td class="table_vertical">
@@ -219,9 +214,9 @@
                     </td>
                     <td class="table_vertical">
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
-                        {{product.default_price || product.price || 'N/A'}}</td>
+                        ${{product.price || '0' | number:2}}</td>
                     <td class="table_vertical table_price">
-                        <p>{{(!myfield) ? (product.owner_price || 'N/A') : ''}}
+                        <p>${{(!myfield) ? (product.owner_price || 'N/A') : ''}}                              
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"
@@ -265,13 +260,13 @@
     <div class="small-wrapper mt0" ng-if="campaignDetails.products.length != 0">
         <div class="smallContainer">
             <div class="payment-summary">
-                <!-- <ul id="double"> -->
-                    <!-- <li class="col1">Total :</li>
-                    <li class="col2">{{campaignDetails.act_budget |number : 2}}</li> -->
-                    <!-- <li class="col1 text_color">18% GST :</li> -->
-                    <!-- <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li> -->
-                <!-- </ul> -->
-                <!-- <ul id="total">
+                <!-- <ul id="double">
+                    <li class="col1">Total :</li>
+                    <li class="col2">{{campaignDetails.act_budget |number : 2}}</li>
+                    <li class="col1 text_color">18% GST :</li>
+                    <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                </ul>
+                <ul id="total">
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL |number : 2 || "N/A" }}</li>
                 </ul> -->
