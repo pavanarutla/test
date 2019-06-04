@@ -880,7 +880,7 @@ app.controller('GmapCtrl',
                         bounds.extend(refToMapMarker.position);
                         $scope.mapObj.fitBounds(bounds);
                         $scope.product.id = refToMapMarker.properties['id'];
-                        $scope.product.price = marker.properties['price'];
+                        $scope.product.price = refToMapMarker.properties['price'];
                         $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
                         $scope.product.siteNo = refToMapMarker.properties['siteNo'];
                         $scope.product.panelSize = refToMapMarker.properties['panelSize'];
