@@ -177,7 +177,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="ownerProduct in productList">
+        <tr ng-repeat="ownerProduct in productList" ng-class="{}">
           <td class="image_tdwidth hide-xs">
             <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
             <img ng-src="{{serverUrl + ownerProduct.image}}" alt="Smiley face" class="requ_size img-thumbnail">
@@ -232,7 +232,7 @@
 
 
               <div class="dropdown">
-                  <md-button onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates"  class="dropbtn" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.price)">
+                  <md-button onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates"  class="dropbtn" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)">
                       <i class="fa fa-calendar" aria-hidden="true"></i>
                   </md-button>
                   <div id="ownerSlots" class="dropdown-content box_shadow contbg "
@@ -275,12 +275,12 @@
           
                           <div class="row mt-4 pb-3" style="margin-right:0px;">
                             <div class="col-md-6">
-                                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
+                                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
                             </div>
                             
                             <div class="col-md-6">
                                 <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
-                                ng-click="blockedSlotesbtn(weeksArray)">Block Dates</md-button>
+                                ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
                             </div>
                           </div>
                         </div>
@@ -289,11 +289,12 @@
             <!-- calender slots Ends-->
           </td>
 
-          <td class=" table_vertical text-right">
+         
+          <!-- <td class=" table_vertical text-right">
             <md-button class="md-raised md-primary all_button" ng-class = "{addBlockedColor : ownerProductBlocked.length !== 1}" ng-disabled="ownerProductBlocked.length !== 1" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
               campaign</md-button>
-              <!-- <md-button class="md-raised Upload_font" ng-if="$scope.ownerProductBlocked" >Added</md-button> -->
-          </td>          
+               <md-button class="md-raised Upload_font" ng-if="$scope.ownerProductBlocked" >Added</md-button> -->
+          <!-- </td>           -->
         </tr>
       </tbody>
     </table>

@@ -352,17 +352,25 @@ $scope.hidebutton = function(){
         });
     }
 
-    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {
-
+    $scope.suggestProductForOwnerCampaign = function (ownerProduct,weeksArray) {
+        ownerProduct.dates  = [{}]
+        var startAndEndDates = weeksArray.filter((week)=>week.selected)
+        startAndEndDates.forEach(function(item,index){
+            if(index == 0){
+                ownerProduct.dates[0].startDate = moment(item.startDay).format('YYYY-MM-DD')
+            }else if(index == (startAndEndDates.length -1)){
+                ownerProduct.dates[0].endDate = moment(item.endDay).format('YYYY-MM-DD')
+            }
+        })
         if (!localStorage.selectedOwnerCampaign) {
             toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
         } else {
             var postObj = {
                 campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
                 product: {
-                    id: ownerProduct.id,
-                    booking_dates: $scope.ownerProductBlocked,
-                    price: ownerProduct.booking_dates
+                    id: $scope.adeddOwnerProductId,
+                    booking_dates: ownerProduct.dates,
+                    price: $scope.ownerTotalPrice
                 }
             };
             OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {             
@@ -378,7 +386,9 @@ $scope.hidebutton = function(){
                         });
                         //$state.reload();
                     });
-                    toastr.success(result.message);                   
+                    toastr.success(result.message); 
+                    ownerProduct.addedToCampaign = true;
+                    document.getElementById("ownerSlots").classList.toggle("show");                  
                 }else{
                     toastr.error(result.message);
                 }
@@ -386,7 +396,9 @@ $scope.hidebutton = function(){
         }
     }
     $scope.getProductUnavailableDates = function (productId, ev,price) {
+        console.log(productId)
         if(price){
+            $scope.adeddOwnerProductId = productId;
             $scope.ownerProductPrice = price;
         }
         OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
@@ -407,39 +419,42 @@ $scope.hidebutton = function(){
         OwnerCampaignService.getCampaignWithProductsForOwner(campaignId).then(function (result) {
             $scope.campaignDetails = result;
             if (typeof result.act_budget === 'number' && result.act_budget % 1 == 0) {
-                $scope.campaignDetails.gst = result.act_budget * 18 / 100;
-                $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
+                // $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+                $scope.campaignDetails.subTotal = result.act_budget;
                 $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
-                $scope.PendingPay = $scope.campaignDetails.totalamount - $scope.campaignDetails.total_paid;
+                $scope.PendingPay = $scope.campaignDetails.act_budget - result.total_paid;
             }
-            if ($scope.campaignDetails.gst_price != "0") {
-                $scope.onchecked = true;
-                $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-              } else {
-                $scope.onchecked = false;
-                $scope.GST = "0";
-                $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
-              }           
+            // if ($scope.campaignDetails.gst_price != "0") {
+            //     $scope.onchecked = true;
+                // $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            // $scope.TOTAL = $scope.campaignDetails.act_budget;
+            //   } else {
+            //     $scope.onchecked = false;
+            //     $scope.GST = "0";
+            //     $scope.TOTAL = $scope.campaignDetails.act_budget;
+            //   }  
+            $scope.TOTAL = $scope.campaignDetails.act_budget         
         });
     }
     $scope.getOwnerCampaignDetails = function (campaignId) {
         OwnerCampaignService.getOwnerCampaignDetails(campaignId).then(function (result) {
             $scope.campaignDetails = result;
+            console.log(result.total_paid)
             if (typeof result.act_budget === 'number' && result.act_budget % 1 == 0) {
-                $scope.campaignDetails.gst = result.act_budget * 18 / 100;
-                $scope.campaignDetails.subTotal = result.act_budget + $scope.campaignDetails.gst;
-                $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+                // $scope.campaignDetails.gst = result.act_budget * 18 / 100;
+                // $scope.campaignDetails.subTotal = result.act_budget ;
+                // $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
+                $scope.PendingPay = $scope.campaignDetails.act_budget - result.total_paid;
             }
-            if ($scope.campaignDetails.gst_price != "0") {
-                $scope.onchecked = true;
-                $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-            $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-              } else {
-                $scope.onchecked = false;
-                $scope.GST = "0";
-                $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
-              }
+            // if ($scope.campaignDetails.gst_price != "0") {
+            //     $scope.onchecked = true;
+            //     $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+            // $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+            //   } else {
+            //     $scope.onchecked = false;
+            //     $scope.GST = "0";
+            //     $scope.TOTAL = $scope.campaignDetails.act_budget +  parseInt($scope.GST);
+            //   }
         });
     }
     // $scope.uncheck = function(checked) {
@@ -571,16 +586,16 @@ $scope.hidebutton = function(){
     }
 
     $scope.bookOwnerCampaign = function (campaignId, ev) {
-        if ($scope.onchecked === true) {
-            $scope.flag = 1;
-            $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-          } else if ($scope.onchecked === false) {
-            $scope.flag = 0;
-            $scope.GST = "0";
-          } else{
-            $scope.flag = 1;
-          }    
-        OwnerCampaignService.bookNonUserCampaign(campaignId,$scope.flag,$scope.GST).then(function (result) {
+        // if ($scope.onchecked === true) {
+        //     $scope.flag = 1;
+        //     // $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+        //   } else if ($scope.onchecked === false) {
+        //     $scope.flag = 0;
+        //     // $scope.GST = "0";
+        //   } else{
+        //     $scope.flag = 1;
+        //   }    
+        OwnerCampaignService.bookNonUserCampaign(campaignId).then(function (result) {
             if (result.status == 1) {
                 $mdDialog.show(
                         $mdDialog.alert()
@@ -955,21 +970,6 @@ $scope.hidebutton = function(){
      | Page based initial loads end
      =============================*/
 
-    //Add campaign product starts
-
-     $scope.blockedSlotesbtn = function(weeksArray){
-        $scope.ownerProductBlocked = [{}]
-        var startAndEndDates = weeksArray.filter((week)=>week.selected)
-        startAndEndDates.forEach(function(item,index){
-            if(index == 0){
-                $scope.ownerProductBlocked[0].startDate = moment(item.startDay).format('YYYY-MM-DD')
-            }else if(index == (startAndEndDates.length -1)){
-                $scope.ownerProductBlocked[0].endDate = moment(item.endDay).format('YYYY-MM-DD')
-            }
-        })
-      }
-
-          //Add campaign product Ends
 
 
      /* ----------------------------
@@ -1069,7 +1069,7 @@ $scope.hidebutton = function(){
                         if($scope.yearlyWeeks[i].weeklyPackage == weeks.weeklyPackage){
                             $scope.yearlyWeeks[i].selectedWeek = true;
                             selectWeekValue = $scope.yearlyWeeks[i];
-
+                            $scope.ownerTotalPrice = selectWeekValue.price;
                         }
                     }
                     $scope.weeksArray.filter((week) => week.selected).forEach((week) => {

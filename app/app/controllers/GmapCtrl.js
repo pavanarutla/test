@@ -1390,7 +1390,8 @@ app.controller('GmapCtrl',
                  $scope.saveCampaignName = function(campaignName,productId,selectedDateRanges){                     
                         var paylaunchProduct ={
                             productId : productId,
-                            name : campaignName
+                            name : campaignName,
+                            price : $scope.totalSlotAmount
                         };
                         $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
                         var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
