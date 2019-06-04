@@ -507,11 +507,12 @@ $scope.applymethod=function(product){
     });
   }
 
-  $scope.getProductUnavailableDatesEdit = function(productId,ev){
+  $scope.getProductUnavailableDatesEdit = function(){
     var productId = $stateParams.id;
     OwnerProductService.getProductUnavailableDates(productId).then(function(dateRanges){
       $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parent().parent().find('input').trigger('click');
+      productDatesCalculator()
+      // $(ev.target).parent().parent().find('input').trigger('click');
     });
   }
 
@@ -528,10 +529,11 @@ $scope.applymethod=function(product){
   //updated edited product details
 
   $scope.updateeditProductdetails = function(editRequestedhordings){
-    //ditRequestedhordings.area = $scope.areaObj.id;
+    //editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
+    editRequestedhordings.dates = $scope.product.dates;
     Upload.upload({
-      url: config.apiPath + '/request-owner-product-addition',
+      url: config.apiPath + '/save-product-details',
       data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }
     }).then(function (result) {
       if(result.data.status == "1"){
@@ -704,11 +706,19 @@ $scope.applymethod=function(product){
   }
   var currentDay =  moment().format('LLLL').split(',')[0];
   function productDatesCalculator(){
+    var unavailBoundaries = [];
+    $scope.unavailalbeDateRanges.forEach((dates) => {
+        unavailBoundaries.push(moment(dates.booked_from))
+        unavailBoundaries.push(moment(dates.booked_to))
+    });
     if(currentDay == 'Monday'){
       var startDay = moment().add(7,'days').format('LLLL');
       var endDay = moment().add(7+13,'days').format('LLLL');
       $scope.weeksArray[0].startDay = startDay;
       $scope.weeksArray[0].endDay = endDay;
+      unavailBoundaries.forEach((date) => {
+        $scope.weeksArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+    });
   }else{
       var tempDay;
       for(i=1;i<=6;i++){
@@ -717,7 +727,15 @@ $scope.applymethod=function(product){
               var startDay = moment(new Date()).add(i+7,'days').format('LLLL');
               var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL');
               $scope.weeksArray[0].startDay = startDay;
-              $scope.weeksArray[0].endDay = endDay;      
+              $scope.weeksArray[0].endDay = endDay;    
+              var isBlocked = false;
+              for (var date of unavailBoundaries) {
+                  if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+                      isBlocked = true;
+                      break;
+                  }
+              }
+              $scope.weeksArray[0].isBlocked = isBlocked;  
            }
       }
   }
@@ -727,6 +745,14 @@ $scope.applymethod=function(product){
           item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
           item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL');
           tempororyStartDate = item.endDay;
+          var isBlocked = false;
+                            for (var date of unavailBoundaries) {
+                                if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+                                    isBlocked = true;
+                                    break;
+                                }
+                            }
+                            $scope.weeksArray[index].isBlocked = isBlocked;
       }
   })
 }

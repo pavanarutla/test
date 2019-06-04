@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     jssor_1_slider_init = function() {
 
         var jssor_1_SlideshowTransitions = [
@@ -69,7 +69,7 @@
         $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
         /*#endregion responsive code end*/
     };
-</script>
+</script> -->
 <style>
     /*jssor slider loading skin spin css*/
     .jssorl-009-spin img {
@@ -77,6 +77,14 @@
         animation-duration: 1.6s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
+    }
+    .selectedWeek {
+        background-color: #bc2535 !important;
+        outline: none;
+    }
+    .addBlockedColor {
+      background-color: orange !important;
+      cursor: not-allowed !important;
     }
 
     @keyframes jssorl-009-spin {
@@ -192,12 +200,12 @@
                         <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
                             <span>({{editRequestedhordings.panelSize}})</span></p>
                         <p class="mb-0">{{editRequestedhordings.address}}</p>
-                        <p class="mb-0"> <span class="text_color"><b>Facing:</b></span>{{editRequestedhordings.direction}}</p>
-                        <p class="mb-0"> <span class="text_color"><b>Type:</b></span>{{editRequestedhordings.format_name}}</p>
+                        <p class="mb-0"> <span class="text_color"><b>Facing:</b>&nbsp;</span>{{editRequestedhordings.direction}}</p>
+                        <p class="mb-0"> <span class="text_color"><b>Type:</b>&nbsp;</span>{{editRequestedhordings.type}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                       <label><b>Views</b></label>
-                      <p>{{editRequestedhordings.impressionsperweek}}</p>
+                      <p>{{editRequestedhordings.impressions}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
                             <label><b>Light</b></label>
@@ -219,7 +227,7 @@
         <div class="col-md-12">
             <form name="addProductForm" role="form" novalidate="novalidate">
                     <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <label>Product ID*</label>
@@ -393,16 +401,7 @@
                                     </div>
                                 </div>
     
-                                <div class="form-group row">
-                                    <!-- <div class="col-sm-6">
-                                        <select name="audience" class="form-control md-whiteframe-3dp" id="Audience" required="required"
-                                                ng-model="editRequestedhordings.audience">
-                                            <option value="" disabled selected>Targeted Audience</option>
-                                            <option>College Students</option>
-                                            <option>ABC</option>
-                                            <option>XYZ</option>
-                                        </select required>
-                                    </div> -->
+                                <div class="form-group row">                                   
                                     <div class="col-sm-3">
                                         <label>Demographics</label>
                                         <div class="input-group">
@@ -416,12 +415,7 @@
                                             <input class="form-control md-whiteframe-3dp" type="text" placeholder="Eyes on Impression"
                                                 name="Eyes on Impression" ng-model="editRequestedhordings.eyeimpression" only-numeric>
                                         </div>
-                                    </div>
-                                    <!-- <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <input class="form-control md-whiteframe-3dp" type="text" name="targetedaudience" ng-model="editRequestedhordings.targetedaudience" placeholder="Targeted Audience">
-                                        </div>
-                                    </div> -->
+                                    </div>                                  
                                     <div class="col-sm-6">
                                         <label>Demographics</label>
                                         <div class="input-group">
@@ -439,11 +433,334 @@
                                         <md-button type="submit" Class="md-raised md-primary register_btn" ng-click="updateeditProductdetails(editRequestedhordings)" ng-disabled="hordinglistform.$invalid">Submit</md-button>
                                     </div>
                                 </div>
+                            </div> -->
+            <!-- New Form to Edit Product -->
+            <div class="col-md-12">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Product Type</label>
+                        <!-- <select id="productType" ng-options="productType.name for productType in ProductTypes" ng-model="product.type"  name="type" ng-change="getdetails()"
+                                class="form-control md-whiteframe-3dp">
+                                <option value="{{editRequestedhordings[0].type}}">                                      
+                                 {{editRequestedhordings.type}}</option>
+                        </select> -->
+                        <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                            ng-model="editRequestedhordings.type">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Product Title</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="type"
+                            ng-model="editRequestedhordings.title">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Search DMA</label>
+                        <!-- <md-autocomplete md-min-length="3" md-selected-item="areaObj"
+                            md-selected-item-change="selectSearchedArea(item)" md-search-text="searchedArea"
+                            md-items="item in searchableAreas(searchedArea)" md-item-text="item.name"
+                            placeholder="Search DMA" md-clear-button="true"
+                            style="min-width: 100% !important"
+                            md-menu-class="form-control md-whiteframe-3dp">
+                            <md-item-template>
+                                <span class="item-title">
+                                    <span> {{item.name}} </span>
+                                </span>
+                                <span class="item-metadata">
+                                    <span>
+                                        <strong>{{item.city_name}}</strong>
+                                    </span>
+                                    <span>
+                                        <strong>{{item.state_name}}</strong>
+                                    </span>
+                                    <span>
+                                        <strong>{{item.country_name}}</strong>
+                                    </span>
+                                </span>
+                            </md-item-template>
+                            <md-not-found>
+                                No matches found.
+                            </md-not-found>
+                        </md-autocomplete> -->
+                        <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                            ng-model="editRequestedhordings.area_name">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="font-weight-bold">Width(Ft)</label>
+                        <input type="text" class="form-control md-whiteframe-3dp"  name="width"
+                        ng-model="editRequestedhordings.panelSize.split('*')[0]">
+                        <div ng-messages="hordinglistform.width.$error"
+                            ng-if="hordinglistform.width.$touched" style="color:red">
+                            <div ng-message="required">width*.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="font-weight-bold">Height(Ft)</label>
+                        <input type="text" class="form-control md-whiteframe-3dp"  name="height"
+                        ng-model="editRequestedhordings.panelSize.split('*')[1]">
+                        <div ng-messages="hordinglistform.height.$error"
+                            ng-if="hordinglistform.height.$touched" style="color:red">
+                            <div ng-message="required">height*.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" ng-show='bulletinresult'>
+                        <label class="font-weight-bold">Lit </label>
+                        <select ng-model="editRequestedhordings.lighting" name="light"
+                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                            data-md-container-class="selectdemoSelectHeader"
+                            ng-init="product.lighting = product.lighting || ''"
+                            placeholder="Has lighting?">
+                            <option value="" disabled selected>Light</option>                                        
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+
+                        <div ng-messages="hordinglistform.light.$error"
+                            ng-if="hordinglistform.light.$touched" style="color:red">
+                            <div ng-message="required">light*.</div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Street Address 1</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="addressone"
+                            ng-model="editRequestedhordings.addressone">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Street Address 2</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="addresstwo"
+                            ng-model="editRequestedhordings.addresstwo">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Zipcode</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="zipcode"
+                            ng-model="editRequestedhordings.zipcode">
+                    </div>                    
+                    <div class="col-sm-3" ng-show='bulletinresult || DigitalResult'>
+                        <label class="font-weight-bold">Image Direction</label>
+                        <select ng-model="editRequestedhordings.imgdrection" name="ImageDirection"
+                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                            data-md-container-class="selectdemoSelectHeader"                                      
+                            placeholder="Has ImageDirection?">
+                            <option value="" disabled selected>Image Direction</option>
+                            <option>Right</option>
+                            <option>Left</option>
+                        </select>
+
+                        <div ng-messages="hordinglistform.ImageDirectionerror"
+                            ng-if="hordinglistform.ImageDirectiontouched" style="color:red">
+                            <div ng-message="required">Image Direction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Latitude</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="lat"
+                            ng-model="editRequestedhordings.lat">
+                        <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched"
+                            style="color:red">
+                            <div ng-message="required">Latitude is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Longitude</label>
+                        <input type="text" class="form-control md-whiteframe-3dp" name="lng"
+                            ng-model="editRequestedhordings.lng">
+                        <div ng-messages="hordinglistform.lng.$error" ng-if="hordinglistform.lng.$touched"
+                            style="color:red">
+                            <div ng-message="required">Longitude is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-3"  ng-show='bulletinresult || DigitalResult'>
+                        <label class="font-weight-bold">Face Direction</label>
+                        <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp"
+                         type="text" name="direction" />
+                        <div ng-messages="hordinglistform.direction.$error" ng-if="hordinglistform.direction.$touched"
+                            style="color:red">
+                            <div ng-message="required">Direction is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-show='bulletinresult'>
+                        <label class="font-weight-bold">Price for 28 Days</label>
+                        <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp"
+                         type="text" name="price" />
+                        <!-- <div ng-messages="hordinglistform.price.$error" ng-if="hordinglistform.price.$touched"
+                            style="color:red">
+                            <div ng-message="required">Price is required.</div>
+                        </div> -->
+                    </div>
+                    <div class="col-sm-3" ng-show='bulletinresult || trasitResult || DigitalResult '>
+                        <label class="font-weight-bold">Select Product Date</label>
+                        <div class="input-group">
+                            <input  ng-model="product.dates | jsonConvert"
+                                class="form-control md-whiteframe-3dp" type="text" name="date"
+                                readonly id="booking_dates_picker" />
+                            <a class="input-group-addon md-whiteframe-3dp"
+                                ng-click="slotsClosed = true; getProductUnavailableDatesEdit()"
+                                style="padding: 4px 8px;">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-show='bulletinresult'>
+                        <label class="font-weight-bold">Cancellation</label>
+                        <select ng-model="editRequestedhordings.cancellation" name="cancellation"
+                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                            data-md-container-class="selectdemoSelectHeader"
+                            ng-init="editRequestedhordings.cancellation = editRequestedhordings.cancellation || ''"
+                            placeholder="Has cancellation?">
+                            <option value="" disabled selected>Cancellation</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+
+                        <div ng-messages="hordinglistform.cancellationerror"
+                            ng-if="hordinglistform.cancellationtouched" style="color:red">
+                            <div ng-message="required">Cancellation</div>
+                        </div>
+                    </div>
+                    <!----Transit Start------------------->
+                    <div class="col-sm-6" ng-show='trasitResult'>
+                            <label class="font-weight-bold">Price for 28 days for 30 Buses</label>
+                            <input ng-model="editRequestedhordings.price" class="form-control md-whiteframe-3dp"
+                             type="text" name="price" />
+                            <div ng-messages="hordinglistform.price.$error" ng-if="hordinglistform.price.$touched"
+                                style="color:red">
+                                <div ng-message="required">Price is required.</div>
                             </div>
                         </div>
-                </form>
-        </div>
+                    <!----Transit End------------------->
+                    <!----Digital Bulletin Start------------------->
+                    <div class="col-sm-3" ng-show='DigitalResult'>
+                        <label class="font-weight-bold">Price for 1 Week</label>
+                        <input ng-model="editRequestedhordings.price" class="form-control md-whiteframe-3dp"
+                         type="text" name="price" />
+                        <div ng-messages="hordinglistform.price.$error" ng-if="hordinglistform.price.$touched"
+                            style="color:red">
+                            <div ng-message="required">Price is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                        <label class="font-weight-bold">No of Slots per hour</label>
+                        <input ng-model="editRequestedhordings.slots" class="form-control md-whiteframe-3dp"
+                         type="text" name="Slots" />
+                        <div ng-messages="hordinglistform.slots.$error" ng-if="hordinglistform.slots.$touched"
+                            style="color:red">
+                            <div ng-message="required">Slots is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                        <label class="font-weight-bold">Play hours in a day</label>
+                        <input ng-model="editRequestedhordings.hour" class="form-control md-whiteframe-3dp"
+                         type="text" name="Hous" />
+                        <div ng-messages="hordinglistform.hour.$error" ng-if="hordinglistform.hour.$touched"
+                            style="color:red">
+                            <div ng-message="required">Hour is required.</div>
+                        </div>
+                    </div>
+                    <!----Digital Bulletin End------------------->
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Average Impressions Per Week*</label>
+                        <div class="input-group">
+
+                            <input class="form-control md-whiteframe-3dp" type="text"
+                                name="impressions" ng-model="editRequestedhordings.impressions"
+                                >
+                            <div ng-messages="hordinglistform.impressions.$error"
+                                ng-if="hordinglistform.impressions.$touched" style="color:red">
+                                <div ng-message="required">Impression.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="font-weight-bold">Demographics Age</label>
+                        <div class="input-group">
+                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
+                                name="Age" ng-model="editRequestedhordings.demographicsage" >
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="font-weight-bold">Ethinicity</label>
+                        <div class="input-group">
+                            <input class="form-control md-whiteframe-3dp" type="text"
+                                placeholder="Ethnicity" name="Ethnicity" ng-model="editRequestedhordings.ethnicity">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="font-weight-bold">Product Video ( YouTube embedded code)</label>
+                        <div class="input-group">
+                            <input class="form-control md-whiteframe-3dp" type="text" placeholder=""
+                                name="videoUrl" ng-model="editRequestedhordings.videoUrl">
+                            <span class="input-group-addon md-whiteframe-3dp"><i
+                                    class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <label class="font-weight-bold">Upload Product Images</label>
+                        <div class="input-group" style="width: 100%;">
+                            <input type="file" class="form-control md-whiteframe-3dp"
+                                ngf-select ng-model="files.image" name="imageFile" accept="image/*"
+                                ngf-max-size="20MB" placeholder="Upload Product Image*" multiple>
+                            <span class="input-group-addon md-whiteframe-3dp"><i class="fa fa-picture-o"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <p class="text-right mt-2"><b>Upto 2 Images</b></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-8" style="opacity:0.5;">
+                        Note: You can change price / details any time you want.<br>
+                        * Select only booked dates remaining dates consider as available
+                    </div>
+                    <div class="col-sm-4">
+                        <md-button type="submit" Class="md-raised md-primary register_btn"
+                        ng-click="updateeditProductdetails(editRequestedhordings)">
+                            Submit</md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
+                <div class="owner_blocked_header">
+                    <div layout="row">
+                        <div>
+                            <h3>select the blocked dates-52/2 week calender </h3>
+                            <p>Campaign start with frist day of week end with last day of week</p>
+                        </div>
+                      
+                        <div flex></div>
+                        <a class="" ng-click="slotedDatesPopupClosed()">
+                            <i class="material-icons" style="color:white !important">close</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="owner_blocked_body">
+                    <div class="row" class="mt-2  mb-2">
+                        <button class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
+                        ng-click="selectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
+                            <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                            <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
+                    </button>
+                    </div>
+                    <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button>
+                <span class="clearfix"></span>
+                </div>
+              </div>
+            
+            </form>
+        </div>            
     </div>
+</div>
 
     <!-- <div class="layout-margin col-md-5 hide-xs">
         <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:342px;;height:480px;overflow:hidden;visibility:hidden;">

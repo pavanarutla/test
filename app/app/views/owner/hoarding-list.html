@@ -87,7 +87,7 @@
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product
             </md-button>
-            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px; height: 500px;overflow: auto;">
+            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:680px;">
                 <form name="hordinglistform" novalidate="novalidate" style="position:relative;">
                     <div layout="colmun">
                         <span flex></span>
@@ -154,19 +154,19 @@
                                     <label class="font-weight-bold">Width(Ft)</label>
                                     <input type="text" class="form-control md-whiteframe-3dp"  name="width"
                                         ng-model="product.width">
-                                    <div ng-messages="hordinglistform.width.$error"
+                                    <!-- <div ng-messages="hordinglistform.width.$error"
                                         ng-if="hordinglistform.width.$touched" style="color:red">
                                         <div ng-message="required">width*.</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="font-weight-bold">Height(Ft)</label>
                                     <input type="text" class="form-control md-whiteframe-3dp"  name="height"
                                         ng-model="product.height">
-                                    <div ng-messages="hordinglistform.height.$error"
+                                    <!-- <div ng-messages="hordinglistform.height.$error"
                                         ng-if="hordinglistform.height.$touched" style="color:red">
                                         <div ng-message="required">height*.</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-sm-2" ng-show='bulletinresult'>
                                     <label class="font-weight-bold">Lit </label>
@@ -618,7 +618,7 @@
 
                 </td>
                 <td class="table_address">
-                    <p class=""><b>{{product.title || "N/A"}} - {{product.area_name || "N/A"}}</b>
+                    <p class=""><b>{{product.siteNo}}</b>&nbsp;<b>{{product.title || "N/A"}} - {{product.area_name || "N/A"}}</b>
                         <br><b>Address</b>: {{product.addressone || "N/A" | capitalize}}{{product.addresstwo || "N/A" | capitalize}}
                         <br><b>Facing</b>: {{product.direction|| "N/A" | capitalize}}
                         <br><b>Type</b>: {{product.type || "N/A"}}
