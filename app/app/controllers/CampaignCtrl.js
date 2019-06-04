@@ -118,19 +118,28 @@ app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interva
   // if($stateParams.campaignId){
   //   $scope.getCampaignDetails($stateParams.campaignId);
   // }
-  $scope.gstuncheck = function(checked) {
-    if (!checked) {
-      $scope.GST = "0";
-      $scope.onchecked = false;
-      // $scope.checked = true;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-    } else {
-      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-      $scope.onchecked = true;
-      // $scope.checked = false;
-    }
-  };
+  // $scope.gstuncheck = function(checked) {
+  //   if (!checked) {
+  //     $scope.GST = "0";
+  //     $scope.onchecked = false;
+  //     // $scope.checked = true;
+  //     $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+  //   } else {
+  //     $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+  //     $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+  //     $scope.onchecked = true;
+  //     // $scope.checked = false;
+  //   }
+  // };
+  $scope.downloadAdminQuote = function (campaignId) {
+    CampaignService.downloadQuote(campaignId).then(function (result) {
+                        var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+                        FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+                        if (result.status) {
+                            toastr.error(result.meesage);
+                        }
+                    });
+                },
   $scope.viewProductImage = function(image){
     var imagePath = config.serverUrl + image;
     $mdDialog.show({

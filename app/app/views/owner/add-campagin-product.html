@@ -184,9 +184,9 @@
           </td>
           <td class="table_address">
             <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
-              <br> {{ownerProduct.address | capitalize}}
+              <br> {{ownerProduct.addressone | capitalize}}&nbsp;{{ownerProduct.addresstwo | capitalize}}
               <br>Facing : {{ownerProduct.direction | capitalize}}
-              <br>Type : {{ownerProduct.format_name | capitalize}}
+              <br>Type : {{ownerProduct.type | capitalize}}
           </td>
           <td class="table_vertical text-center">{{ownerProduct.impressions}}</td>
           <td class="table_vertical">
@@ -212,7 +212,7 @@
               <span ng-click="myfield=false;changeProductPrice(ownerProduct)"  ng-show="myfield"> <i class="material-icons">check</i></span>
             
             </div> -->
-              <p>{{(!myfield)?ownerProduct.default_price:''}}
+              <p>${{(!myfield)?ownerProduct.default_price:''}}
               <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
               <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span>
               <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>

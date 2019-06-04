@@ -739,20 +739,26 @@
                         </div>
                       
                         <div flex></div>
-                        <a class="" ng-click="slotedDatesPopupClosed()">
+                        <a class="m-3" ng-click="slotedDatesPopupClosed()">
                             <i class="material-icons" style="color:white !important">close</i>
                         </a>
                     </div>
                 </div>
                 <div class="owner_blocked_body">
-                    <div class="row" class="mt-2  mb-2">
+                    <div class="row" class="mt-2 mb-2">
                         <button class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
                         ng-click="selectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
                             <div class="md-caption">Week of {{week.twoWeeks}}</div>
                             <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
                     </button>
+                    <div class="col-md-8 mt-3">
+                        <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksArray)">Block Dates</md-button>
                     </div>
-                    <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button>
+                    </div>
+                    <!-- <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button> -->
+                    <!-- <md-button Class="md-raised md-primary all_button"
+                    ng-click="blockedSlotesbtn(weeksArray)">
+                    Block Dates</md-button> -->
                 <span class="clearfix"></span>
                 </div>
               </div>

@@ -777,7 +777,9 @@ $scope.blockedSlotesbtn = function(weeksArray){
     var endDate = moment(item.endDay).format('YYYY-MM-DD')
 
     $scope.product.dates.push({startDate : startDate,endDate: endDate})
+    $scope.slotedDatesPopupClosed();
   })
+  
 }
    /*=============================
   | owner slots blocking ends

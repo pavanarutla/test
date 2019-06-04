@@ -168,10 +168,10 @@
             <div class="form-group mt-3 mr-2 ml-2">
               <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
             </div>
-            <div class="form-group mt-3 mr-2 ml-2">
+            <!-- <div class="form-group mt-3 mr-2 ml-2">
               <input type="text" class="form-control" id="text" ng-disabled="existingCampaign.id" ng-model="campaign.est_budget"
                 placeholder="Estimated budget">
-            </div>
+            </div> -->
             <div layout="column" class="mr-2 ml-2 mb-3">
               <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
                 pay and launch
@@ -374,7 +374,7 @@
             md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
             md-clear-button="true" style="min-width: 100% !important">
             <md-item-template>
-              <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.format_name}})</span>
+              <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.type}})</span>
             </md-item-template>
           </md-autocomplete>
         </div>

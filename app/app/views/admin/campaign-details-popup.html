@@ -45,10 +45,10 @@
                 <td>Contact Email:</td>
               <td>{{selectedRequestDetails.email}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Estimated Budget:</td>
               <td><span>$</span>{{selectedRequestDetails.est_budget || '0' | number:2 }}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
         <div layout="column" layout-margin="layout-margin" layout-align="center end" ng-if="selectedRequestDetails.status == 5">
@@ -59,10 +59,10 @@
         </div> -->
       </div>
       <div layout-align="center center" layout="column">
-        <md-input-container ng-if="selectedRequestDetails.status == 200">
-          <md-button type="submit" layout-fill="layout-fill" class="md-raised  all_button regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Prepare Quote</md-button>
+        <md-input-container>
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  all_button regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Booking Requested</md-button>
         </md-input-container>
-        <md-input-container ng-if="selectedRequestDetails.status == 300">
+        <!-- <md-input-container ng-if="selectedRequestDetails.status == 300">
           <md-button type="submit" layout-fill="layout-fill" class="md-raised  all_button regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Prepare Quote</md-button>
         </md-input-container>
         <md-input-container ng-if="selectedRequestDetails.status == 400">
@@ -73,7 +73,7 @@
         </md-input-container>
         <md-input-container ng-if="selectedRequestDetails.status == 121">
           <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/metro-campaign/{{selectedRequestDetails.id}}">View Details</md-button>
-        </md-input-container>
+        </md-input-container> -->
       </div>
     </md-content>
   </md-dialog-content>
