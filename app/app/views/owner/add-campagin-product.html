@@ -32,6 +32,27 @@
     font-size: 15px;
     line-height: 1em;
 }
+#ownerSlots{
+  width:500px;
+}
+/* .owner-calender-slots {
+  position: absolute;
+    bottom: 50%;
+    right: 10px;
+    width: 500px;
+    background: #aaa;
+} */
+.addWeekColor{
+      background-color: #f00;
+      color:white;
+    }
+    .selectedWeekColor {
+      background-color: green;
+    }
+    .addBlockedColor {
+      background-color: gray !important;
+      cursor: not-allowed !important;
+    }
 @media screen and (min-width:320px) and (max-width: 563px){
     .daterangepicker {
     /* position: absolute; */
@@ -54,7 +75,7 @@
 }
 }
 </style>
-<div layout="column" class="owner_hoarding_list">
+<div layout="column" class="owner_hoarding_list" style="position:relative;">
   <!-- <div layout="row" layout-margin class="md-whiteframe-3dp">
       
     <p class="mb-0 mt-4">Campaign Name : <span class="text_color">{{selectedOwnerCampaign.name | capitalize}}</span></p>
@@ -141,7 +162,7 @@
     <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
   </form>
   <!-- product list -->
-  <div class="table-responsive" style="margin-bottom:115px !important">
+  <div class="table-responsive" style="margin-bottom:115px !important;position:relative;">
     <table class="table">
       <thead class="text_color">
         <tr>
@@ -196,25 +217,93 @@
               <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span>
               <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
           </td>
-          <td class="table_vertical text-center">
-            <input date-range-picker ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp date-picker"
+          <td class="table_vertical">
+            <!-- <input ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp "
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
             <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
               <i class="fa fa-calendar" aria-hidden="true" ng-if="ownerProduct.booking_dates == 0"></i>
-            </a>
-            <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+            </a> -->
+            <!-- <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
               <i class="fa fa-calendar material-Cal" aria-hidden="true" ng-if="ownerProduct.booking_dates != 0"></i>
-            </a>
+            </a> -->
+            <!-- calender slots starts-->
+            
+
+
+              <div class="dropdown">
+                  <md-button onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates"  class="dropbtn" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.price)">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </md-button>
+                  <div id="ownerSlots" class="dropdown-content box_shadow contbg "
+                      style="padding:10px;">
+                      <div class="">
+                        <div class="row">
+                          <div class="col-md-9"><h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration :</h5></div>
+                          <div class="col-md-3 text-right">
+                            <md-button class="md-icon-button" onclick="OwnerSlotsBooking()" >
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </md-button>
+                          </div>
+                            
+                        </div>
+                          
+
+                          <p class="text-muted ml-3 mb-1">This Bulletin minimum booking is 4 weeks.</p>
+                          <p class="text-muted ml-3 mb-1">There after you can select your bookings in multiples of two weeks.</p>
+                          <p class="text-muted ml-3">Price includes all taxes and productions charges</p>
+                          <div layout="row" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar">
+                            <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+                            ng-click="selectHordingWeeks(weeks)"
+                            ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+                              <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
+                              <h3 class="md-body-2 setect_padbottom">{{weeks.price}}</h3>
+                            </a>
+                          </div>
+          
+                          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Start Date :</h5>
+                          <p class="text-muted ml-3">The posters will be placed between Monday and Friday of your first selected week. A specific day cannot
+                            be guaranteed. However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+                          <div layout="row" id="scrollFind" class="mt-2 mb-2" style="width:100%;overflow:auto;" >
+                            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+                              ng-disabled="week.isBlocked && week.isBlocked == true">
+                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                            </button>
+                          </div>   
+          
+                          <div class="row mt-4 pb-3" style="margin-right:0px;">
+                            <div class="col-md-6">
+                                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                                ng-click="blockedSlotesbtn(weeksArray)">Block Dates</md-button>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+            <!-- calender slots Ends-->
           </td>
 
           <td class=" table_vertical text-right">
-            <md-button class="md-raised md-primary all_button" ng-if="!ownerProduct.alreadyAdded" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+            <md-button class="md-raised md-primary all_button" ng-class = "{addBlockedColor : ownerProductBlocked.length !== 1}" ng-disabled="ownerProductBlocked.length !== 1" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
               campaign</md-button>
-              <md-button class="md-raised Upload_font" ng-if="ownerProduct.alreadyAdded" >Added</md-button>
+              <!-- <md-button class="md-raised Upload_font" ng-if="$scope.ownerProductBlocked" >Added</md-button> -->
           </td>          
         </tr>
       </tbody>
     </table>
+
   </div>
+ 
+
 </div>
+<script>
+    function OwnerSlotsBooking() {
+        document.getElementById("ownerSlots").classList.toggle("show");
+    }
+</script>
