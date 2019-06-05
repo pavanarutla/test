@@ -996,6 +996,8 @@ app.controller('GmapCtrl',
                     $scope.removeSelection();
                 })
                 $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
+                    console.log('selectedDateRanges',selectedDateRanges)
+
                     var productToCampaign = {
                         product_id: productId,
                         campaign_id: existingCampaignId
@@ -1006,15 +1008,22 @@ app.controller('GmapCtrl',
                         toastr.error("Please select dates.");
                         return false;
                     }
+                    var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
+                        startAndEndDates.forEach((item,index)=>{
+                        if(index == 0){
+                            productToCampaign.startDate = moment(item.startDay).format('YYYY-MM-DD')
+                        }else if(index == (startAndEndDates.length -1)){
+                            productToCampaign.endDate = moment(item.endDay).format('YYYY-MM-DD')
+                        }
+                    })
                     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
                         if (result.status == 1) {
                             toastr.success(result.message);
                             $mdSidenav('productDetails').close();
-                        } else {
+                        } else if(result.status == 0){
                             toastr.error(result.message);
                         }
                     });
-                    $state.reload();
                 }
 
                 $scope.shareShortlistedProducts = function (shareShortlisted) {
@@ -1263,27 +1272,6 @@ app.controller('GmapCtrl',
                /*====================================
                | Multi date range picker options end
                ====================================*/      
-               $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
-                 var productToCampaign = {
-                     product_id: productId,
-                     campaign_id: existingCampaignId
-                 };
-                 if (selectedDateRanges.length > 0) {
-                     productToCampaign.dates = selectedDateRanges;
-                 } else {
-                     toastr.error("Please select dates.");
-                     return false;
-                 }
-                 CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
-                     if (result.status == 1) {
-                         toastr.success(result.message);
-                         $mdSidenav('productDetails').close();
-                     } else {
-                         toastr.error(result.message);
-                     }
-                 });
-                 $state.reload();
-               }
                $scope.IsDisabled = true;
                $scope.EnableDisable = function () {
                  $scope.IsDisabled = $scope.campaign.name.length == 0;
@@ -1393,6 +1381,13 @@ app.controller('GmapCtrl',
                             name : campaignName,
                             price : $scope.totalSlotAmount
                         };
+
+
+
+
+
+
+
                         $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
                         var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                             startAndEndDates.forEach((item,index)=>{
