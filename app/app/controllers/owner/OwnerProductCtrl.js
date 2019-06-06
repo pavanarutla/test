@@ -403,7 +403,9 @@ $scope.applymethod=function(product){
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, product: $scope.product }
+      data: { image: $scope.files.image,
+        symbol: $scope.files.symbol,
+        product: $scope.product }
     }).then(function (result) {
       if(result.data.status == "1"){
         // getRequestedProductList();
