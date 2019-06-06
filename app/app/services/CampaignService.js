@@ -83,9 +83,9 @@ app.service('CampaignService',
                         $http.get(config.apiPath + '/request-proposal/' + campaignId).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
-                    confirmCampaignBooking: function (campaignId , flag, GST) {
+                    confirmCampaignBooking: function (campaignId) {
                         var dfd = $q.defer();
-                        $http.get(config.apiPath + '/confirm-campaign-booking/' + campaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);
+                        $http.get(config.apiPath + '/confirm-campaign-booking/' + campaignId ).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
                     requestChangeInQuote: function (sendObj) {
@@ -107,7 +107,7 @@ app.service('CampaignService',
                         var dfd = $q.defer();
                         $http.post(config.apiPath + '/pay-launch-campaign', campaignObj).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
-                    }
+                    },
                    
                 }
             }
