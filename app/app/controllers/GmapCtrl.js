@@ -1173,7 +1173,10 @@ app.controller('GmapCtrl',
                 $scope.getProductUnavailableDates = function (productId) {
                     MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
                         $scope.unavailalbeDateRanges = dateRanges;
+                        console.log('$scope.unavailalbeDateRanges',$scope.unavailalbeDateRanges)
                         // $(ev.target).parents().eq(3).find('input').trigger('click');
+
+                        productDatesDigitalCalculator()
                         productDatesCalculator();
                     });
                 }
@@ -1413,8 +1416,135 @@ app.controller('GmapCtrl',
                  
 
                 // Product-Controller Code - Ends
+
                 /* ----------------------------
-                    New Hording profuct Nav bars starts
+                    New Hording bullitin product Nav bars starts
+                -------------------------------*/
+
+
+
+
+                /* ----------------------------
+                    New Hording bullitin product Nav bars Ends
+                -------------------------------*/
+                $scope.weeksDigitalArray = [];
+
+                for(var i=1;i<=26;i++){
+                    $scope.weeksDigitalArray.push({twoWeeks : 1})
+                }
+                function productDatesDigitalCalculator(){
+                    var slotPrices =0;
+                    for(item in $scope.weeksDigitalArray){
+                        if(item == 0){
+                            slotPrices = $scope.product.price;
+                            $scope.weeksDigitalArray[item].price = slotPrices;
+                        }else{
+                            slotPrices = parseInt(slotPrices) + (parseInt($scope.product.price)/2)
+                            $scope.weeksDigitalArray[item].price = slotPrices;
+                        }
+                    }
+                    var unavailBoundaries = [];
+                    $scope.unavailalbeDateRanges.forEach((dates) => {
+                        unavailBoundaries.push(moment(dates.booked_from))
+                        unavailBoundaries.push(moment(dates.booked_to))
+                    });
+                    if(currentDay == 'Monday'){
+                        var startDay = moment(new Date()).add(7,'days').format('LLLL');
+                        var endDay = moment(new Date()).add(6,'days').format('LLLL');
+                        $scope.weeksDigitalArray[0].startDay = startDay;
+                        $scope.weeksDigitalArray[0].endDay = endDay;
+                        unavailBoundaries.forEach((date) => {
+                            $scope.weeksDigitalArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+                        });
+
+                    }else{
+                        var tempDay;
+                        for(i=1;i<=6;i++){
+                             tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
+                             if(tempDay == 'Monday'){
+                                var startDay = moment(new Date()).add(i,'days').format('LLLL');
+                                var endDay = moment(new Date()).add(i+6,'days').format('LLLL');
+                                $scope.weeksDigitalArray[0].startDay = startDay;
+                                $scope.weeksDigitalArray[0].endDay = endDay;
+                                var isBlocked = false;
+                                for (var date of unavailBoundaries) {
+                                    if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+                                        isBlocked = true;
+                                        break;
+                                    }
+                                }
+                                $scope.weeksDigitalArray[0].isBlocked = isBlocked;
+                             }
+
+                        }
+                       
+                    }
+                    var tempororyStartDate = $scope.weeksDigitalArray[0].endDay;
+                    $scope.weeksDigitalArray.forEach(function(item,index){
+                        if(index > 0){
+                            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
+                            item.endDay = moment(tempororyStartDate).add(7,'days').format('LLLL');
+                            tempororyStartDate = item.endDay;
+                            var isBlocked = false;
+                            for (var date of unavailBoundaries) {
+                                if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+                                    isBlocked = true;
+                                    break;
+                                }
+                            }
+                            $scope.weeksDigitalArray[index].isBlocked = isBlocked;
+                        }
+
+                    })
+                    console.log('$scope.weeksDigitalArray',$scope.weeksDigitalArray)
+                    
+                }
+               
+                // };
+                $scope.totalDigitalSlotAmount = 0;
+                $scope.selectUserDigitalWeeks = function(weeks,index,ev){
+                    // if(!(Object.prototype.toString.call(selectWeekValue) == "[object Object]") || Object.keys(selectWeekValue).length == 0 ){
+                    //     // alert("please select package above")
+                    //     $scope.packagePopUp = true;
+                    //     $scope.selectPackageAbove = {head : "select the package above",dsc : "please Select Campaign Duration"}
+                    //     return false;
+                    // }else{
+                    //     $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
+                    //         week.selected = false;
+                    //     });
+                        // if((selectWeekValue.weeklyPackage/2) > ($scope.weeksArray.length - index)){
+                        //     $scope.packagePopUp = true;
+                        //     $scope.selectPackageAbove = {head : "select the package above",dsc : "please Select Campaign Duration"}    
+                        //     return false;
+                        // };
+                        // for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {   
+                        //     if($scope.weeksArray[i].isBlocked && $scope.weeksArray[i].isBlocked == true){
+                        //         $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
+                        //             week.selected = false;
+                        //         });
+                        //         $scope.packagePopUp = true;
+                        //         $scope.selectPackageAbove = {head : "select the another slots",dsc : "please Select another slots these are not available"}
+                        //         return false;                                
+                        //     } else{
+                        //         $scope.weeksArray[i].selected = true;
+                        //     }
+                        // };
+                        if($scope.weeksDigitalArray[index].selected == true){
+                            $scope.weeksDigitalArray[index].selected = false;
+                            $scope.totalDigitalSlotAmount -= parseInt($scope.weeksDigitalArray[index].price);
+
+                        }else{
+                            $scope.totalDigitalSlotAmount += parseInt($scope.weeksDigitalArray[index].price);
+                            $scope.weeksDigitalArray[index].selected = true;
+
+                        }
+                        // $scope.weeksDigitalArray.filter((week) => week.selected).forEach((week) => {
+                        //             week.selected = false;
+                        // });
+                    };
+                // productDatesDigitalCalculator()
+                /* ----------------------------
+                    New Hording bullitin product Nav bars starts
                 -------------------------------*/
                 $scope.yearlyWeeks =[];
                 $scope.weeksArray = [];
@@ -1588,7 +1718,7 @@ app.controller('GmapCtrl',
                 }
 
                 /* ----------------------------
-                    New Hording profuct Nav bars ends
+                    New Hording bullitin product Nav bars ends
                 -------------------------------*/
 
                 // controller ends  

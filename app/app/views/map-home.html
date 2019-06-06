@@ -55,6 +55,8 @@
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
+
+
     <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
       style="z-index:1 !important;width: 500px !important;max-width:500px !important;" >
       <md-content class="save_r_excited">
@@ -204,6 +206,9 @@
       </md-content>
   
     </md-sidenav> -->
+
+
+
     <!-- Selected product detail sidenav ends-->
 
     <!--Select product detail for digital sidenav start-->
@@ -279,17 +284,17 @@
             </div>
           
           <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" style="width:100%;overflow:auto;" >
-            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
-              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
+            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
+             ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
               <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-              <h3 class="md-body-2 setect_padbottom">$500</h3>
+              <h3 class="md-body-2 setect_padbottom">{{week.price}}</h3>
               <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
             </button>
           </div>   
   
           <div class="row mt-4 pb-3" style="margin-right:0px;">
             <div class="col-md-6">
-                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
+                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
             </div>
             <div class="col-md-3">
                 <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 
