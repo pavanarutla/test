@@ -55,7 +55,7 @@
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
+    <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
       style="z-index:1 !important;width: 500px !important;max-width:500px !important;" >
       <md-content class="save_r_excited">
         <div class="inner">
@@ -168,10 +168,6 @@
             <div class="form-group mt-3 mr-2 ml-2">
               <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
             </div>
-            <!-- <div class="form-group mt-3 mr-2 ml-2">
-              <input type="text" class="form-control" id="text" ng-disabled="existingCampaign.id" ng-model="campaign.est_budget"
-                placeholder="Estimated budget">
-            </div> -->
             <div layout="column" class="mr-2 ml-2 mb-3">
               <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
                 pay and launch
@@ -202,16 +198,160 @@
               </div>
           </div>
           <div class="error_body">
-              <!-- <p>Unfortunately, the panel isn't available for the selected Number of weeks,fir the start week you've selected.</p>
+              <p>{{selectPackageAbove.dsc}}</p>
+          </div>
+        </div>
+      </md-content>
   
-              <p>please select anthoer start week</p> -->
+    </md-sidenav> -->
+    <!-- Selected product detail sidenav ends-->
+
+    <!--Select product detail for digital sidenav start-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
+      style="z-index:1 !important;width: 500px !important;max-width:500px !important;" >
+      <md-content class="save_r_excited">
+        <div class="inner">
+          <div class="row" style="margin-right:0px;">
+            <div class="col-md-8">
+                <h5 class="font-weight-bold ml-3 mt-3 mb-1">OOH048  &nbsp;- NY Mets Citibank Marquee</h5>
+                <h6 class="font-weight-bold ml-3 mt-1">Size:16'x20'</h6>
+              </div>
+            <div class="col-md-4 text-right pr-0">
+                <a herf="#" class="ml-3">Artwork Guidlines</a>
+                <a class="md-icon-button close-btn" ng-click="toggleProductDetailSidenav()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+          </div>
+          <div id="productImages" class="carousel slide" data-ride="carousel">
+            
+              <!-- The slideshow -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{product.image}}" alt="product" width="100%" height="300">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{product.image}}" alt="Chicago" width="100%" height="300">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{product.image}}" alt="New York" width="100%" height="300">
+                </div>
+              </div>
+            
+              <!-- Left and right controls -->
+              <a class="carousel-control-prev" data-target="#productImages" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" data-target="#productImages" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            
+          </div>
+          <div class="mt-2">
+              <p class=" ml-3 mb-1">This digital bulletin minimum booking is 1 weeks .</p>
+              <p class=" ml-3 mb-1">Total No of busses is 30 busses.</p>
+              <p class=" ml-3 mb-1">Your 10 second ad will be shown 1 time per 70 seconds.</p>
+              <p class=" ml-3 mb-1">Total slots available in this digital bulletin is 7 slots.</p>
+          </div> 
+          <div class="row ml-0 mr-0">
+              <div class="col-md-6 p-2" style="padding-left:0px;padding-right: 0px;">
+                  <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
+                      <img ng-src="{{product.image}}" style="width:100%;height:100%;" />
+                  </div>
+              </div>
+              <div class="col-md-6 p-2" style="padding-left:0px;padding-right: 0px;">
+                  <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
+                      <img ng-src="{{product.image}}" style="width:100%;height:100%;" />
+                  </div>
+              </div>
+          </div>
+          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration, Start Date & No of slots
+              :</h5>
+
+          <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
+              <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
+              <select class="form-control col-md-3" id="slot">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+          
+          <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" style="width:100%;overflow:auto;" >
+            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
+              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+              <h3 class="md-body-2 setect_padbottom">$500</h3>
+              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+            </button>
+          </div>   
+  
+          <div class="row mt-4 pb-3" style="margin-right:0px;">
+            <div class="col-md-6">
+                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
+            </div>
+            <div class="col-md-3">
+                <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 
+                ng-click="shortlistSelected(product.id, weeksArray, $event)">Shortlist</md-button>
+            </div>
+            <div class="col-md-3">
+                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                ng-click="toggleExistingCampaignSidenav()">Pay & Launch</md-button>
+            </div>
+          </div>
+        </div>
+        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
+          style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+          <div layout="row">
+            <div flex></div>
+            <a class="md-icon-button close-btn" ng-click="toggleExistingCampaignSidenav()">
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+          <form name="forms.mySaveCampaignForm">
+            <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+            <div class="md-title  m-2">Let's work Together!</div>
+            <div class="form-group mt-3 mr-2 ml-2">
+              <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
+            </div>
+            <div layout="column" class="mr-2 ml-2 mb-3">
+              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
+                pay and launch
+              </md-button>
+            </div>
+          </form>
+          <p class="text-center md-body-2">(OR)</p>
+          <div class="form-group mr-2 ml-2">
+            <select class="form-control"  ng-model="existingCampaign.id" ng-disabled="campaign.name" required="required">
+              <option ng-value="campaign.id" ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+            </select>
+          </div>
+          <div layout="column" class="mr-2 ml-2 mb-3">
+            <md-button class="md-raised all_button" layout-fill
+              ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,weeksArray)" ng-disabled="!existingCampaign.id">
+              add to existing or save Campaign
+            </md-button>
+          </div>
+        </div>
+        <div class="error_popup box__shadow" ng-if="packagePopUp">
+          <div class="error_header">
+              <div layout="row">
+                <h3>{{selectPackageAbove.head}} </h3>
+                <div flex></div>
+                <a class="md-icon-button close-btn" ng-click = "closeSelectedPopup()">
+                  <i class="material-icons">close</i>
+                </a>
+              </div>
+          </div>
+          <div class="error_body">
               <p>{{selectPackageAbove.dsc}}</p>
           </div>
         </div>
       </md-content>
   
     </md-sidenav>
-    <!-- Selected product detail sidenav ends-->
+    <!--Select product detail for digital sidenav end -->
   
     <!-- Share Campaign Sidenav -->
     <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaign"
