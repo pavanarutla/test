@@ -93,13 +93,13 @@
 		<div class="form-group mt-3 mr-2 ml-2">
 			<input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
 		</div>
-		<div class="form-group mt-3 mr-2 ml-2">
+		<!-- <div class="form-group mt-3 mr-2 ml-2">
 			<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" ng-disabled="existingCampaign.id" placeholder="Estimated budget">
-		</div>
+		</div> -->
 		<div layout="column" class="mr-2 ml-2 mb-3">
-			<md-button class="md-raised all_button" layout-fill ng-click="payAndLaunch(campaign.name,shortListedProducts)" >
-				Pay and Launch
-			</md-button>
+			<md-button class="md-raised all_button" layout-fill ng-click="saveCampaign(product.id, selectedDateRanges)" ng-disabled="IsDisabled">
+                    Save Campaign
+                  </md-button>
 		</div>
 		<p class="text-center md-body-2">(OR)</p>
 		<div class="form-group mr-2 ml-2">
