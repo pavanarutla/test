@@ -184,70 +184,28 @@ $scope.Getcomment = function (campaignID){
 }*/
   // Send and Get comment Ends
 
-  $scope.confirmCampaignBooking = function(ev, campaignId){
-    if ($scope.onchecked === true) {
-      $scope.flag = 1;
-    } else if ($scope.onchecked === false) {
-      $scope.flag = 0;
-    } else{
-      $scope.flag = 1;
-    } 
-    $i = 0;
-    angular.forEach($scope.campaignDetails.products, function (value, key) {
-      if(value.admin_price) ++$i;
-    });
-    if($i > 0){
-      if($i == $scope.campaignDetails.products.length){
-        CampaignService.confirmCampaignBooking(campaignId,$scope.flag,$scope.GST).then(function(result){
-          if(result.status == 1){
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.querySelector('body')))
-                .clickOutsideToClose(true)
-                //.title(result.message)
-                .title('Thank you! We have received your request,')
-                .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-            $scope.getCampaignDetails(campaignId);
-          }
-          else{
-            toastr.error(result.message);
-          }
-        });
-      }else{
-        var confirm = $mdDialog.confirm()
-          .title('Campaign Confirm')
-          .textContent('Do you really want to confirm? Once you confirm your not deciced product will be deleted')
-          .targetEvent(ev)
-          .ok('Please do it!')
-          .cancel('Cancel');
-            $mdDialog.show(confirm).then(function() {
-              CampaignService.confirmCampaignBooking(campaignId).then(function(result){
-                if(result.status == 1){
-                  $mdDialog.show(
-                    $mdDialog.alert()
-                      .parent(angular.element(document.querySelector('body')))
-                      .clickOutsideToClose(true)
-                      .title(result.message)
-                      .textContent('The Admin will soon launch your campaign and intimate you about it.')
-                      .ariaLabel('Alert Dialog Demo')
-                      .ok('Got it!')
-                      .targetEvent(ev)
-                  );
-                  $scope.getCampaignDetails(campaignId);
-                }
-                else{
-                  toastr.error(result.message);
-                }
-              });
-            });
-      } 
+  $scope.confirmCampaignBooking = function(campaignId,ev){
+    CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            //.title(result.message)
+            .title('Thank you! We have received your request,')
+            .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
+      }
+        else if(result.status == 0){
+          toastr.error(result.message);
+        }
       
-    }
-    
+      
+    });
   }
 
   

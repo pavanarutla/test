@@ -103,22 +103,22 @@
 					<p class="md-caption mob_span"><b><span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
               "0"}}</span></b></p>
 				</div>
-				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
+				<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
 				 style="margin-top:14px;">
 					<p class="cmp_bottom">Estimated Budget</p>
 					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.est_budget || "N/A"}}</b></p>
-				</div>
-				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+				</div> -->
+				<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
 				 style="margin-top:14px;">
 					<p class="cmp_bottom">Total Amount</p>
 					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.total_budget || "N/A"}}</b></p>
-				</div>
+				</div> -->
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
 				 style="margin-top:14px;">
 					<p class="cmp_bottom">Created On</p>
 					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.created_at || "N/A"}}</b></p>
 				</div>
-				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+				<div class="offset-xl-4 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
 				 style="margin-top:1.2em;text-align: end" >
          <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
 				</div>
@@ -176,7 +176,6 @@
           <th class="">Shortlisted in</th>
           <th class="">Price</th>
           <th class="text-center">Calender</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -291,11 +290,11 @@
               </div> -->
             <!-- calender slots Ends-->
           <!-- </td> -->
-          <td class="table_vertical">
+          <td class="table_vertical text-center">
               <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                       <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
-                                  <div class="modal-content">
+                                  <div class="modal-content text-left">
                                       <div class="modal-header modal_bottom">
                                       <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav()">

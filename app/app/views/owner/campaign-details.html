@@ -146,21 +146,19 @@
                     </md-button>
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
+            <!-- <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
                         Add Products
                     </md-button>
-                    <!-- <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
+                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
                         Add Products
-                    </md-button> -->
+                    </md-button>
                 </div>
-            </div>
-            <div class="" ng-if="campaignDetails.status < 700">
+            </div> -->
+            <div class="" ng-if="campaignDetails.status < 600">
                 <div class="md-grid-item-content hoarding-btn">
-                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add
-                            Another Product
-                        </md-button>
+                    <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Product</md-button>
                 </div>
             </div>
             <div class=""  ng-if="campaignDetails.status == 700 || campaignDetails.type == 0">
@@ -202,9 +200,9 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br>Address :
-                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo || "N/A"}}<br>Views : {{product.impressions|| "N/A"}}
-                            <br>Type : {{product.type|| "N/A"}}
+                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b>Address</b>:
+                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo || "N/A"}}<br><b>Views</b>: {{product.impressions|| "N/A"}}
+                            <br><b>Type</b>: {{product.type|| "N/A"}}
                     </td>
                     <td class="table_vertical ">{{product.panelSize}}</td>
                     <td class="table_vertical">
@@ -216,7 +214,7 @@
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
                         ${{product.price || '0' | number:2}}</td>
                     <td class="table_vertical table_price">
-                        <p>${{(!myfield) ? (product.owner_price || 'N/A') : ''}}                              
+                        <p>${{(!myfield) ? (product.owner_price || '0' | number:2) : ''}}                              
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"

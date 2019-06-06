@@ -198,7 +198,7 @@
                         <!-- Trigger the modal with a button -->
                         <button type="button" class="btn btn-info" data-toggle="modal"
                             data-target="#myModal-{{campaignProduct.id}}"
-                            ng-if="campaignProduct.cancelation=='Yes' && campaignProduct.product_status !='600' && campaignDetails.status > 600 ">X</button>
+                            ng-if="campaignProduct.cancelation=='Yes' && campaignProduct.product_status !='600' && campaignDetails.status == 700">X</button>
                         <!-- Modal -->
                         <div id="myModal-{{campaignProduct.id}}" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -257,10 +257,16 @@
     </table>
 </div>
 <!-- table grid end -->
-<div class="row border_quest">
-        <md-button class="md-raised all_button" layout-fill ng-click="payAndLaunch(campaignDetails.name,campaignDetails.products)" >
-				Pay and Launch
-			</md-button>
+<div class="row border_quest" ng-if="campaignDetails.status == 100">
+    <div class="offset-md-11 col-md-1 mt-4 mb-4 float-right">
+            <!-- <md-button class="md-raised all_button" layout-fill ng-click="payAndLaunch(campaignDetails.name,campaignDetails.products)" >
+                    Pay and Launch
+                </md-button> -->
+                <md-button class="md-raised md-primary" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Pay & Launch Campaign</md-button>
+    </div>
+
+    
+        
     <!-- <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
         <div class="ml-2 form-group" ng-hide="campaignDetails.status <= 100">
             <form name="SendComment">

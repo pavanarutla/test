@@ -7,6 +7,7 @@ app.controller("ProductCtrl", [
   "$window",
   "ProductService",
   "AdminLocationService",
+  "OwnerLocationService",
   "CompanyService",
   "MapService",  
   "config",
@@ -22,6 +23,7 @@ app.controller("ProductCtrl", [
     $window,
     ProductService,
     AdminLocationService,
+    OwnerLocationService,
     CompanyService,
     MapService,
     config,
@@ -205,8 +207,7 @@ app.controller("ProductCtrl", [
     /*
   ======== Products section ========
   */
-
-    $scope.getRequestedHoardings = function() {      
+     $scope.getRequestedHoardings = function() {      
       return new Promise((resolve, reject) => {
         ProductService.getRequestedHoardings(
           $scope.pagination.pageNo,
@@ -314,12 +315,40 @@ app.controller("ProductCtrl", [
     $scope.getProductList();
 
     $scope.product = {};
-
+  
+    $scope.ProductTypes = [
+     { name: "Bulletin"},
+     { name: "Digital Bulletin"},
+     { name: "Transit"}
+   ];
+     $scope.bulletinresult = true;
+     $scope.trasitResult = false;
+     $scope.DigitalResult = false;
+     $scope.product.type = $scope.ProductTypes[0];
+       $scope.getdetails = function () {
+         if ($scope.product.type.name == "Bulletin") {
+         $scope.bulletinresult = true;
+         $scope.trasitResult = false;
+         $scope.DigitalResult = false;
+         }
+         else if ($scope.product.type.name == "Digital Bulletin"){
+                 $scope.DigitalResult = true;
+                 $scope.trasitResult = false;
+                 $scope.bulletinresult = false;
+         }else if($scope.product.type.name == "Transit"){
+                 $scope.trasitResult = true;
+                 $scope.bulletinresult = false;
+                 $scope.DigitalResult = false;
+         }else{
+                 $scope.bulletinresult = false;
+         }
+     }
     $scope.files = {};
     $scope.addProduct = function(product) {
+      product.type = product.type.name;
       product.area = $scope.areaObj.id;
       Upload.upload({        
-        url: config.apiPath + "/product",
+        url: config.apiPath + "/save-product-details",
         data: {
           image: $scope.files.image,
           symbol: $scope.files.symbol,
@@ -349,6 +378,11 @@ app.controller("ProductCtrl", [
         }
       );
     };
+    $scope.searchableAreas = function(query) {
+      return OwnerLocationService.searchAreas(query.toLowerCase()).then(function(res){
+        return res;
+      });
+    }
 //     function addnewProduct() {
 //       document.getElementById("hoardingDrop").classList.toggle("show");
 // }
@@ -445,7 +479,10 @@ app.controller("ProductCtrl", [
     //     });
     //   });
     // }
-
+    if($rootScope.currStateName == 'admin.hoarding-list'){
+      $scope.getdetails();
+    }
+   
     if ($rootScope.currStateName == "admin.requested-hoardings") {
       if ($stateParams.productId) {
         $scope.getRequestedHoardings().then(requestedProducts => {
@@ -458,5 +495,86 @@ app.controller("ProductCtrl", [
         $scope.getRequestedHoardings();
       }
     }
+$scope.slotedDatesPopupClosed = function(){
+    $scope.slotsClosed = false;
+}
+
+    $scope.weeksArray = [];
+  for(var i=1;i<=26;i++){
+    $scope.weeksArray.push({twoWeeks : 2})
+  }
+  var currentDay =  moment().format('LLLL').split(',')[0];
+    function productDatesCalculator (){
+      // var unavailBoundaries = [];
+      // $scope.unavailalbeDateRanges.forEach((dates) => {
+      //     unavailBoundaries.push(moment(dates.booked_from))
+      //     unavailBoundaries.push(moment(dates.booked_to))
+      // });
+      if(currentDay == 'Monday'){
+        var startDay = moment().add(7,'days').format('LLLL');
+        var endDay = moment().add(7+13,'days').format('LLLL');
+        $scope.weeksArray[0].startDay = startDay;
+        $scope.weeksArray[0].endDay = endDay;
+      //   unavailBoundaries.forEach((date) => {
+      //     $scope.weeksArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+      // });
+    }else{
+        var tempDay;
+        for(i=1;i<=6;i++){
+             tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
+             if(tempDay == 'Monday'){
+                var startDay = moment(new Date()).add(i+7,'days').format('LLLL');
+                var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL');
+                $scope.weeksArray[0].startDay = startDay;
+                $scope.weeksArray[0].endDay = endDay;    
+                // var isBlocked = false;
+                // for (var date of unavailBoundaries) {
+                //     if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+                //         isBlocked = true;
+                //         break;
+                //     }
+                // }
+                // $scope.weeksArray[0].isBlocked = isBlocked;  
+             }
+        }
+    }
+    var tempororyStartDate = $scope.weeksArray[0].endDay;
+    $scope.weeksArray.forEach(function(item,index){
+        if(index > 0){
+            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
+            item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL');
+            tempororyStartDate = item.endDay;
+            // var isBlocked = false;
+            //                   for (var date of unavailBoundaries) {
+            //                       if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+            //                           isBlocked = true;
+            //                           break;
+            //                       }
+            //                   }
+            //                   $scope.weeksArray[index].isBlocked = isBlocked;
+        }
+    })
+  }
+  productDatesCalculator()
+  $scope.blockedSlotesbtn = function(weeksArray){
+    $scope.product.dates = []
+    weeksArray.filter((week)=>week.selected).forEach(function(item){
+      var startDate = moment(item.startDay).format('YYYY-MM-DD')
+      var endDate = moment(item.endDay).format('YYYY-MM-DD')
+  
+      $scope.product.dates.push({startDate : startDate,endDate: endDate})
+      $scope.slotedDatesPopupClosed();
+    })
+    
+  }
+  $scope.selectUserWeeks = function(weeks,index,ev){
+
+    if($scope.weeksArray[index].selected && $scope.weeksArray[index].selected == true){
+      $scope.weeksArray[index].selected = false;
+  
+    }else{
+      $scope.weeksArray[index].selected = true;
+    }
+  }
   }
 ]);
