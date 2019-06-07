@@ -135,6 +135,17 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
       toastr.error("Please shortlist some products first.");
     }        
   }
+  $scope.activeUserCampaigns = [];
+                $scope.loadActiveUserCampaigns = function () {
+                    CampaignService.getActiveUserCampaigns().then(function (result) {
+                        $scope.activeUserCampaigns = result.filter(function(item){
+                            if(item.status == 100){
+                                return true;
+                            }
+                        });
+                    });
+                }
+                $scope.loadActiveUserCampaigns();
   $scope.addProductToExistingCampaign = function (existingCampaignId) {
     var productToCampaign = {
       campaign_id: existingCampaignId
@@ -147,7 +158,6 @@ app.controller('UserProductCtrl', function ($scope, $rootScope, $mdSidenav, $mdD
     CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
       if (result.status == 1) {
           toastr.success(result.message);
-
           // $mdSidenav('productDetails').close();
           $scope.toggleSaveCampaignPopup();
           $scope.shortListedProducts = null;

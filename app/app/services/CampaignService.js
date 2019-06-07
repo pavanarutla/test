@@ -85,7 +85,7 @@ app.service('CampaignService',
                     },
                     confirmCampaignBooking: function (campaignId) {
                         var dfd = $q.defer();
-                        $http.get(config.apiPath + '/confirm-campaign-booking/' + campaignId ).success(dfd.resolve).error(dfd.reject);
+                        $http.get(config.apiPath + '/confirm-campaign-booking/' + campaignId).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
                     requestChangeInQuote: function (sendObj) {

@@ -185,28 +185,28 @@ $scope.Getcomment = function (campaignID){
   // Send and Get comment Ends
 
   $scope.confirmCampaignBooking = function(campaignId,ev){
-        CampaignService.confirmCampaignBooking(campaignId).then(function(result){
-          if(result.status == 1){
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.querySelector('body')))
-                .clickOutsideToClose(true)
-                //.title(result.message)
-                .title('Thank you! We have received your request,')
-                .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-                .targetEvent(ev)
-            );
-            $scope.getCampaignDetails(campaignId);
-          }
-            else if(result.status == 0){
-              toastr.error(result.message);
-            }
-          
-          
-        });
+    CampaignService.confirmCampaignBooking(campaignId).then(function(result){
+      if(result.status == 1){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            //.title(result.message)
+            .title('Thank you! We have received your request,')
+            .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+        $scope.getCampaignDetails(campaignId);
       }
+        else if(result.status == 0){
+          toastr.error(result.message);
+        }
+      
+      
+    });
+  }
 
   
   $scope.conformDeleteProductFromCampaign = function(shortlistId){

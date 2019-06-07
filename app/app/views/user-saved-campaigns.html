@@ -220,7 +220,7 @@
                         <td class="table_vertical">{{activeUserCampaign.created_at| dateify | date:'dd-MM-yyyy'}}</td>
                         <td class="text-center table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
                         <!-- <td>10,1000</td> -->
-                        <td class="text-center table_vertical"><span>$</span>{{activeUserCampaign.est_budget || 'N/A'}}</td>
+                        <td class="text-center table_vertical"><span>$</span>{{activeUserCampaign.act_budget || '0' | number:2}}</td>
                         <td class="text-center table_vertical">
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">

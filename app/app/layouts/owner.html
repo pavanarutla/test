@@ -24,13 +24,13 @@
                         
                         <div class="dropdown s_login">
                             <button type="button" class=" saved_campaign dropdown-toggle d-none d-sm-none d-md-block" data-toggle="dropdown">
-                                saved campaign({{activeUserCampaigns.length}})
+                                saved campaign({{activeOwnerCampaignsList.length}})
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" style="width: 180px;">
                                 <div class="notification_header ">
-                                    <h3 class="text_color">You have {{activeUserCampaigns.length}} Campaigns</h3>
+                                    <h3 class="text_color">You have {{activeOwnerCampaignsList.length}} Campaigns</h3>
                                 </div>
-                                <div ng-repeat="activeUserCampaign in activeUserCampaigns.slice(0, 3)">
+                                <div ng-repeat="activeUserCampaign in activeOwnerCampaignsList.slice(0, 3)">
                                     <a ng-href="#/owner/{{clientSlug}}/campaign-details/{{activeUserCampaign.id}}/{{activeUserCampaign.type}}">
                                     <div class="notification_desc pl-3">
                                         <p>{{activeUserCampaign.name}}</p>
