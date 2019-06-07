@@ -1498,6 +1498,7 @@ app.controller('GmapCtrl',
 
                     })
                 }
+                $scope.totalSlotAmount = 0;
                 $scope.selectHordingWeeks = function(weeks) {
                     $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
                         week.selectedWeek = false;

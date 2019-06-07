@@ -165,6 +165,15 @@
                                                 required.</span>
                                         </span>
                                     </md-autocomplete>
+                                </div>                                
+                                <div class="col-sm-2">
+                                    <label class="font-weight-bold">Height(Ft)</label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="height" only-numeric
+                                        ng-model="product.height" required>
+                                    <div ng-messages="hordinglistform.height.$error"
+                                        ng-if="hordinglistform.height.$touched" style="color:red">
+                                        <div ng-message="required">Height required</div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="font-weight-bold">Width(Ft)</label>
@@ -173,15 +182,6 @@
                                     <div ng-messages="hordinglistform.width.$error"
                                         ng-if="hordinglistform.width.$touched" style="color:red">
                                         <div ng-message="required">Width required</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label class="font-weight-bold">Height(Ft)</label>
-                                    <input type="text" class="form-control md-whiteframe-3dp" name="height" only-numeric
-                                        ng-model="product.height" required>
-                                    <div ng-messages="hordinglistform.height.$error"
-                                        ng-if="hordinglistform.height.$touched" style="color:red">
-                                        <div ng-message="required">Height required</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-2" ng-show='bulletinresult'>
@@ -214,11 +214,7 @@
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Street Address 2</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="addresstwo"
-                                        ng-model="product.addresstwo" required>
-                                    <div ng-messages="hordinglistform.addresstwo.$error"
-                                        ng-if="hordinglistform.addresstwo.$touched" style="color:red">
-                                        <div ng-message="required">Address required</div>
-                                    </div>
+                                        ng-model="product.addresstwo">                                   
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -246,7 +242,7 @@
                                     </div>
                                 </div> -->
                                 <div class="col-sm-6" ng-show='bulletinresult || DigitalResult'>
-                                    <label>Image Direction*</label>
+                                    <label>Image Direction</label>
                                     <input type="file"
                                             class="form-control md-whiteframe-3dp"
                                             required="required" ngf-select

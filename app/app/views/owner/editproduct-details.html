@@ -484,6 +484,15 @@
                         </md-autocomplete> -->
                         <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
                             ng-model="editRequestedhordings.area_name">
+                    </div>                   
+                    <div class="col-sm-2">
+                        <label class="font-weight-bold">Height(Ft)</label>
+                        <input type="text" class="form-control md-whiteframe-3dp"  name="height"
+                        ng-model="editRequestedhordings.panelSize.split('*')[1]">
+                        <div ng-messages="hordinglistform.height.$error"
+                            ng-if="hordinglistform.height.$touched" style="color:red">
+                            <div ng-message="required">height*.</div>
+                        </div>
                     </div>
                     <div class="col-sm-2">
                         <label class="font-weight-bold">Width(Ft)</label>
@@ -492,15 +501,6 @@
                         <div ng-messages="hordinglistform.width.$error"
                             ng-if="hordinglistform.width.$touched" style="color:red">
                             <div ng-message="required">width*.</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="font-weight-bold">Height(Ft)</label>
-                        <input type="text" class="form-control md-whiteframe-3dp"  name="height"
-                        ng-model="editRequestedhordings.panelSize.split('*')[1]">
-                        <div ng-messages="hordinglistform.height.$error"
-                            ng-if="hordinglistform.height.$touched" style="color:red">
-                            <div ng-message="required">height*.</div>
                         </div>
                     </div>
                     <div class="col-sm-2" ng-show='bulletinresult'>
@@ -539,7 +539,7 @@
                         <input type="text" class="form-control md-whiteframe-3dp" name="zipcode"
                             ng-model="editRequestedhordings.zipcode">
                     </div>                    
-                    <div class="col-sm-3" ng-show='bulletinresult || DigitalResult'>
+                    <!-- <div class="col-sm-3" ng-show='bulletinresult || DigitalResult'>
                         <label class="font-weight-bold">Image Direction</label>
                         <select ng-model="editRequestedhordings.imgdrection" name="ImageDirection"
                             class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -554,6 +554,19 @@
                             ng-if="hordinglistform.ImageDirectiontouched" style="color:red">
                             <div ng-message="required">Image Direction</div>
                         </div>
+                    </div> -->
+                    <div class="col-sm-6" ng-show='bulletinresult || DigitalResult'>
+                        <label class="font-weight-bold">Image Direction</label>
+                        <input type="file"
+                                class="form-control md-whiteframe-3dp"
+                                required="required" ngf-select
+                                ng-model="files.symbol" name="symbolFile"
+                                accept="image/*" ngf-max-size="20MB"
+                                placeholder="Upload Product Image*" required="required">
+                                <div ng-messages="hordinglistform.symbolFile.$error"
+                                ng-if="hordinglistform.symbolFile.$touched" style="color:red">
+                                <div ng-message="required">Image Direction</div>
+                            </div>
                     </div>
                 </div>
                 <div class="form-group row">

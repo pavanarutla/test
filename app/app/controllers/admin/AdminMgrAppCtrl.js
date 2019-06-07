@@ -43,7 +43,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
               $location.path("admin/hoarding-list" )
             }
             else if(notificationType == 'product-request'){
-              $location.path("admin/requested-hoardings" )
+              $location.path("admin/hoarding-list" )
             }
           }
         });

@@ -320,12 +320,12 @@
                                             <p class="text-muted mb-1">A specific day cannot be guaranteed.</p>
                                             <p class="text-muted mb-1">However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
                                           <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" >
-                                            <button class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                                            <a class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
                                               ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
                                               ng-disabled="week.isBlocked && week.isBlocked == true">
                                               <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
                                               <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
-                                            </button>
+                                            </a>
                                           </div> 
                                       </div>
                                       <div class="modal-body modal_top">
@@ -334,7 +334,7 @@
                                                   <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
                                               </div>
                                               <div class="col-md-4">
-                                                  <md-button layout-fill class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
                                                   ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
                                               </div>
                                           </div>
