@@ -193,7 +193,7 @@ $scope.Getcomment = function (campaignID){
             .clickOutsideToClose(true)
             //.title(result.message)
             .title('Thank you! We have received your request,')
-            .textContent('We will be in touch with you shortly , for any querues, Call: 9550224488.')
+            .textContent('We will be in touch with you shortly , for any queries, Call: 9550224488.')
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
             .targetEvent(ev)

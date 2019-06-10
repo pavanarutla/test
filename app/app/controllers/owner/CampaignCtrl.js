@@ -774,7 +774,6 @@ $scope.hidebutton = function(){
     ];
     $scope.files = {};
     $scope.updateOwnerCampaignPayment = function (id) {
-        debugger;
         $scope.campaignPayment.campaign_id = id;
         Upload.upload({
             url: config.apiPath + '/update-campaign-payment-owner',
