@@ -504,6 +504,9 @@ $scope.cancelProductFromCampaign = function(productId, campaignId){
   if ($rootScope.currStateName == "index.campaign-details") {
     $scope.getCampaignDetails($stateParams.campaignId)
   }
+  if ($rootScope.currStateName == "index.user-saved-campaigns") {
+    $scope.getUserCampaigns();
+  }
 
   $scope.deleteMetroCampaigns = function(campaignId){
         if ($window.confirm("Are you really want to delete this camapaign?")) {

@@ -147,12 +147,12 @@
                 <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
             </div>
             <div class="col-md-3">
-                <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 
-                ng-click="shortlistSelected(product.id, weeksArray, $event)">Shortlist</md-button>
+                <md-button layout-fill class="md-raised md-warn Upload_font"                 
+                ng-click="shortlistSelected(product.id, weeksArray, $event)"  ng-disabled="totalSlotAmount <= 0">Shortlist</md-button>
             </div>
             <div class="col-md-3">
-                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
-                ng-click="toggleExistingCampaignSidenav()">Pay & Launch</md-button>
+                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;"
+                ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalSlotAmount <= 0" >Pay & Launch</md-button>
             </div>
           </div>
         </div>

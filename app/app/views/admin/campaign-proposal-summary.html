@@ -169,9 +169,9 @@
                 </md-button>               
             </div>
         </div>
-        <div class="" style="cursor: pointer;">
+        <div class="" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
-                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" ng-hide="campaignDetails.status >= 400">Add Product</md-button>
+                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Product</md-button>
             </div>
         </div>
         <div class="">
@@ -352,7 +352,7 @@
                 </md-button>
                 <md-button
                     class="md-raised md-primary all_button book_campowner"
-                    ng-if="campaignDetails.status == 600"
+                    ng-if="campaignDetails.status == 100"
                     ng-click="launchCampaign(campaignDetails.id, $event)">
                     Confirm Booking
                 </md-button>
