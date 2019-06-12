@@ -218,8 +218,9 @@
         <div class="inner">
           <div class="row" style="margin-right:0px;">
             <div class="col-md-8">
-                <h5 class="font-weight-bold ml-3 mt-3 mb-1">OOH048  &nbsp;- NY Mets Citibank Marquee</h5>
-                <h6 class="font-weight-bold ml-3 mt-1">Size:16'x20'</h6>
+                <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
+                <h6 class="font-weight-bold ml-3 mt-1">Size:{{product.panelSize}}</h6>
+                <h6 class="font-weight-bold ml-3 mt-1">Type:{{product.type}}</h6>
               </div>
             <div class="col-md-4 text-right pr-0">
                 <a herf="#" class="ml-3">Artwork Guidlines</a>
@@ -297,7 +298,7 @@
             </div>
             <div class="col-md-3">
                 <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="false" 
-                ng-click="shortlistSelected(product.id, weeksArray, $event)">Shortlist</md-button>
+                ng-click="shortlistSelected(product.id, weeksDigitalArray,product.type, $event)">Shortlist</md-button>
             </div>
             <div class="col-md-3">
                 <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
@@ -333,7 +334,7 @@
           </div>
           <div layout="column" class="mr-2 ml-2 mb-3">
             <md-button class="md-raised all_button" layout-fill
-              ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,weeksArray)" ng-disabled="!existingCampaign.id">
+              ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,weeksDigitalArray)" ng-disabled="!existingCampaign.id">
               add to existing or save Campaign
             </md-button>
           </div>

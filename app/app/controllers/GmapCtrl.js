@@ -724,20 +724,33 @@ app.controller('GmapCtrl',
                 });
             }
 
-            $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+            $scope.shortlistSelected = function (productId, selectedDateRanges, producttype, ev) {                
                 var arr = [];
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                 startAndEndDates.forEach((item, index) => {
-                    if (index == 0) {
-                        arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD') })
-                    } else if (index == startAndEndDates.length - 1) {
-                        arr[0].endDate = moment(item.endDay).format('YYYY-MM-DD');
+                    if(startAndEndDates.length == 1){
+                            arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD'), endDate : moment(item.endDay).format('YYYY-MM-DD') })
+                    }else{
+                        if (index == 0) {
+                            arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD') })
+                        } else if (index == startAndEndDates.length - 1) {
+                            arr[0].endDate = moment(item.endDay).format('YYYY-MM-DD');
+                        }
                     }
                 })
-                var sendObj = {
-                    product_id: productId,
-                    dates: arr
+                if(producttype == "Digital Bulletin" || producttype == "Bulletin" ){
+                    var sendObj = {
+                        product_id: productId,
+                        dates: arr,                       
+                        numOfSlots : $scope.numOfSlots
+                    }
+                }else{
+                    var sendObj = {
+                        product_id: productId,
+                        dates: arr
+                    }
                 }
+                
                 MapService.shortListProduct(sendObj).then(function (response) {
                     getShortListedProducts();
                     $mdDialog.show(
@@ -1065,6 +1078,7 @@ app.controller('GmapCtrl',
                         toastr.error(result.message);
                     }
                 });
+                $scope.toggleProductDetailSidenav();
             }
 
             $scope.shareShortlistedProducts = function (shareShortlisted) {
