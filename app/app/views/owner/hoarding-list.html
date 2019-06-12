@@ -295,7 +295,7 @@
                                         <div ng-message="required">Price is required.</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3" ng-show='bulletinresult || trasitResult || DigitalResult '>
+                                <!-- <div class="col-sm-3" ng-show='trasitResult'>
                                     <label class="font-weight-bold">Select Product Date</label>
                                     <div class="input-group">
                                         <input ng-model="product.dates | jsonConvert"
@@ -310,7 +310,39 @@
                                         style="color:red">
                                         <div ng-message="required">Date is required.</div>
                                     </div>
-                                </div>
+                                </div> -->
+                                <div class="col-sm-3" ng-show='bulletinresult'>
+                                        <label class="font-weight-bold">Select Product Date</label>
+                                        <div class="input-group">
+                                            <input ng-model="product.dates | jsonConvert"
+                                                class="form-control md-whiteframe-3dp" type="text" name="date" readonly
+                                                id="booking_dates_picker" required />
+                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="slotsClosed = true;"
+                                                style="padding: 4px 8px;">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Date is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                                            <label class="font-weight-bold">Select Product Date</label>
+                                            <div class="input-group">
+                                                <input ng-model="product.dates | jsonConvert"
+                                                    class="form-control md-whiteframe-3dp" type="text" name="date" readonly
+                                                    id="booking_dates_picker" required />
+                                                <a class="input-group-addon md-whiteframe-3dp" ng-click="digitalSlotsClosed = true;"
+                                                    style="padding: 4px 8px;">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
+                                                style="color:red">
+                                                <div ng-message="required">Date is required.</div>
+                                            </div>
+                                        </div>
                                 <div class="col-sm-3" ng-show='bulletinresult'>
                                     <label class="font-weight-bold">Cancellation</label>
                                     <select ng-model="product.cancellation" name="cancellation"
@@ -515,7 +547,7 @@
                         <div class="owner_blocked_body">
                             <div class="row" class="mt-2  mb-2">
                                 <div class="border col-2 mb-2 p-1 text-center cal_divcolor"
-                                    ng-repeat="week in weeksArray" ng-click="selectUserWeeks(week,$index,$event)"
+                                    ng-repeat="week in weeksArray" ng-click="  selectUserWeeks(week,$index,$event)"
                                     ng-class="{selectedWeek : week.selected == true}">
                                     <div class="md-caption">Week of {{week.twoWeeks}}</div>
                                     <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
@@ -527,6 +559,35 @@
                             <span class="clearfix"></span>
                         </div>
                     </div>
+                    <div class="owner_blocked_date_popup box__shadow" ng-if="digitalSlotsClosed">
+                            <div class="owner_blocked_header">
+                                <div layout="row">
+                                    <div>
+                                        <h3>select the blocked dates-52/2 week calender </h3>
+                                        <p>Campaign start with frist day of week end with last day of week</p>
+                                    </div>
+    
+                                    <div flex></div>
+                                    <a class="" ng-click="digitalSlotedDatesPopupClosed()">
+                                        <i class="material-icons" style="color:white !important">close</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owner_blocked_body">
+                                <div class="row" class="mt-2  mb-2">
+                                    <div class="border col-2 mb-2 p-1 text-center cal_divcolor"
+                                        ng-repeat="week in weeksDigitalArray" ng-click="digitalSelectUserWeeks(week,$index,$event)"
+                                        ng-class="{selectedWeek : week.selected == true}">
+                                        <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                                        <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
+                                    </div>
+                                    <div class="col-md-8 mt-3">
+                                        <md-button Class="md-raised md-primary all_button float-right" ng-click="digitalBlockedSlotesbtn(weeksDigitalArray)">Block Dates</md-button>
+                                    </div>
+                                </div>
+                                <span class="clearfix"></span>
+                            </div>
+                        </div>
                 </form>
 
             </div>

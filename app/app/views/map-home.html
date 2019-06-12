@@ -57,7 +57,7 @@
     <!-- Selected product detail sidenav-->
 
 
-    <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
       style="z-index:1 !important;width: 500px !important;max-width:500px !important;" >
       <md-content class="save_r_excited">
         <div class="inner">
@@ -205,14 +205,14 @@
         </div>
       </md-content>
   
-    </md-sidenav> -->
+    </md-sidenav>
 
 
 
     <!-- Selected product detail sidenav ends-->
 
     <!--Select product detail for digital sidenav start-->
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="digitalProductDetails"
       style="z-index:1 !important;width: 500px !important;max-width:500px !important;" >
       <md-content class="save_r_excited">
         <div class="inner">
@@ -275,11 +275,7 @@
 
           <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
               <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
-              <select class="form-control col-md-3" id="slot">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+              <select class="form-control col-md-3" ng-model = "numOfSlots" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots">
               </select>
             </div>
           
@@ -287,8 +283,11 @@
             <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
              ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
               <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-              <h3 class="md-body-2 setect_padbottom">{{week.price}}</h3>
               <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+              <h3 class="md-body-2 setect_padbottom">${{week.price || 0}}</h3>
+              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21)" ng-if="numOfSlots && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
+              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64)" ng-if="numOfSlots && !week.availableSlots && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
+
             </button>
           </div>   
   
@@ -321,7 +320,7 @@
               <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
-              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
+              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksDigitalArray)" >
                 pay and launch
               </md-button>
             </div>
