@@ -40,16 +40,16 @@
                   <div class="form-group ">
 
                     <input ng-model="ownerCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp"
-                      type="text" minlength="3" maxlength="60" required="required" placeholder="Company Name">
+                      type="text" minlength="3" maxlength="60" required="required" placeholder="Client Name">
                     <div ng-messages="forms.CampaignForm.org_name.$error" style="color:red"
                       ng-if="forms.CampaignForm.org_name.$touched">
-                      <div ng-message="required">Company Name is required.</div>
-                      <div ng-message="minlength">Company Name must have 3 characters.</div>
-                      <div ng-message="maxlength">Company Name shouldn't exceed 30 characters. </div>
+                      <div ng-message="required">Client Name is required.</div>
+                      <div ng-message="minlength">Client Name must have 3 characters.</div>
+                      <div ng-message="maxlength">Client Name shouldn't exceed 30 characters. </div>
                     </div>
                   </div>
                 </li>
-                <li>
+                <!-- <li>
                   <div class="form-group">
 
                     <input ng-model="ownerCampaign.org_contact_name" name="contact_name"
@@ -58,6 +58,19 @@
                     <div ng-messages="forms.CampaignForm.org_name.$error" style="color:red"
                       ng-if="forms.CampaignForm.contact_name.$touched">
                       <div ng-message="required">Contact Person is required.</div>
+                    </div>
+                  </div>
+                </li> -->
+                <li>
+                  <div class="form-group ">
+
+                    <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric
+                      class="form-control md-whiteframe-3dp" type="text" maxlength="10" required="required"
+                      placeholder="Contact No">
+                    <div ng-messages="forms.CampaignForm.phone.$error" style="color:red"
+                      ng-if="forms.CampaignForm.phone.$touched">
+                      <div ng-message="required">Contact No is required.</div>
+                      <div ng-message="maxlength">Contact No must have 10 characters.</div>
                     </div>
                   </div>
                 </li>
@@ -73,20 +86,7 @@
                       <div ng-message="pattern">Enter a valid EmailId.</div>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div class="form-group ">
-
-                    <input ng-model="ownerCampaign.org_contact_phone" name="phone" only-numeric
-                      class="form-control md-whiteframe-3dp" type="text" maxlength="10" required="required"
-                      placeholder="Phone Number">
-                    <div ng-messages="forms.CampaignForm.phone.$error" style="color:red"
-                      ng-if="forms.CampaignForm.phone.$touched">
-                      <div ng-message="required">Phone No is required.</div>
-                      <div ng-message="maxlength">Phone No must have 10 characters.</div>
-                    </div>
-                  </div>
-                </li>
+                </li>               
                 <li>
                   <div class="form-group ">
 

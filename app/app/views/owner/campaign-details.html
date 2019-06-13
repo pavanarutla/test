@@ -25,7 +25,7 @@
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact</b></td>
+                                    <td><b>Contact No.</b></td>
                                     <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
                                 </tr>
@@ -145,23 +145,13 @@
                         Download
                     </md-button>
                 </div>
-            </div>
-            <!-- <div class="" ng-if="campaignDetails.products.length == 0 && campaignDetails.status == 100">
-                <div class="md-grid-item-content hoarding-btn">
-                    <md-button class="md-grid-item-content add_blue hide-xs" ng-click="addNewProductToCampaign()">
-                        Add Products
-                    </md-button>
-                    <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="addNewProductToCampaign()"  style="margin-left: 0px;margin-right: 0px;">
-                        Add Products
-                    </md-button>
-                </div>
-            </div> -->
-            <div class="" ng-if="campaignDetails.status < 600">
+            </div>           
+            <div class="" ng-if="campaignDetails.status <= 600">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Product</md-button>
                 </div>
             </div>
-            <div class=""  ng-if="campaignDetails.status == 700 || campaignDetails.type == 0">
+            <div class=""  ng-if="campaignDetails.status > 600">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
                         <md-button class="md-grid-item-content add_blue hide-xs">
