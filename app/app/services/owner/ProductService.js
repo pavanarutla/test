@@ -115,7 +115,12 @@ app.factory('OwnerProductService', ['$http', '$q', 'config',
 				var dfd = $q.defer();
 				$http.put(config.apiPath + '/product-visibility/' + product_id,visibility).success(dfd.resolve).error(dfd.reject);
 				return dfd.promise;
-			}
+			},
+			getProductDigitalUnavailableDates : function(productId){
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/digital-product-unavailable-dates', {product_id: productId}).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			  }
 		}
 	}
 ]);
