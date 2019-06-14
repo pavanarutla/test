@@ -388,7 +388,7 @@ $scope.hidebutton = function(){
                 campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
                 product: {
                     id: $scope.adeddOwnerProductId,
-                    dates: ownerProduct.dates,
+                    booking_dates: ownerProduct.dates,
                     price: (ownerProduct.type == "Bulletin") ? $scope.ownerTotalPrice : $scope.totalDigitalSlotAmount
                 }
             };
