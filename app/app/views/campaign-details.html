@@ -56,7 +56,7 @@
                                 <tr>
                                     <td><b>Total Budget</b></td>
                                     <td>
-                                        <span>$</span>{{campaignDetails.act_budget || '0' | number : 2}}
+                                        <span>$</span>{{campaignDetails.totalamount || '0' | number : 2}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -135,17 +135,15 @@
         </div>
         <div ng-hide="campaignDetails.status >= 300">
             <div class="md-grid-item-content hoarding-btn">
-                <md-button class="md-raised add_blue" ng-href="#/location">Add
-                    Another Product
-                </md-button>
+                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
         </div>
-        <div ng-if="campaignDetails.products.length == 0">
+        <!-- <div ng-if="campaignDetails.products.length == 0">
             <div class="md-grid-item-content hoarding-btn">
                 <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
                 </md-button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -171,7 +169,8 @@
                     <td class="table_address">
                         <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b></br>
                             <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo || "N/A"}}<br>
-                            <b>Views :</b> {{campaignProduct.impressions|| '0'}}
+                            <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
+                            <b>Type :</b> {{campaignProduct.type|| '0'}}
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>

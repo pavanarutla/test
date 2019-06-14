@@ -724,20 +724,33 @@ app.controller('GmapCtrl',
                 });
             }
 
-            $scope.shortlistSelected = function (productId, selectedDateRanges, ev) {
+            $scope.shortlistSelected = function (productId, selectedDateRanges, producttype, ev) {                
                 var arr = [];
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                 startAndEndDates.forEach((item, index) => {
-                    if (index == 0) {
-                        arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD') })
-                    } else if (index == startAndEndDates.length - 1) {
-                        arr[0].endDate = moment(item.endDay).format('YYYY-MM-DD');
+                    if(startAndEndDates.length == 1){
+                            arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD'), endDate : moment(item.endDay).format('YYYY-MM-DD') })
+                    }else{
+                        if (index == 0) {
+                            arr.push({ startDate: moment(item.startDay).format('YYYY-MM-DD') })
+                        } else if (index == startAndEndDates.length - 1) {
+                            arr[0].endDate = moment(item.endDay).format('YYYY-MM-DD');
+                        }
                     }
                 })
-                var sendObj = {
-                    product_id: productId,
-                    dates: arr
+                if(producttype == "Digital Bulletin" || producttype == "Bulletin" ){
+                    var sendObj = {
+                        product_id: productId,
+                        dates: arr,                       
+                        numOfSlots : $scope.numOfSlots
+                    }
+                }else{
+                    var sendObj = {
+                        product_id: productId,
+                        dates: arr
+                    }
                 }
+                
                 MapService.shortListProduct(sendObj).then(function (response) {
                     getShortListedProducts();
                     $mdDialog.show(
@@ -1065,6 +1078,7 @@ app.controller('GmapCtrl',
                         toastr.error(result.message);
                     }
                 });
+                $scope.toggleProductDetailSidenav();
             }
 
             $scope.shareShortlistedProducts = function (shareShortlisted) {
@@ -1434,14 +1448,14 @@ app.controller('GmapCtrl',
                 }
 
             }
-            $scope.numOfSlots = 0;
             $scope.saveCampaignName = function (campaignName, productId, selectedDateRanges, ) {
                 if ($scope.numOfSlots > 0) {
                     var paylaunchProduct = {
                         productId: productId,
                         name: campaignName,
                         price: $scope.totalDigitalSlotAmount,
-                        booking_slots: $scope.numOfSlots
+                        booking_slots: $scope.numOfSlots,
+                        dates : []
                     };
                 } else {
                     var paylaunchProduct = {
@@ -1452,18 +1466,69 @@ app.controller('GmapCtrl',
                 }
                 $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
-                if (startAndEndDates.length == 1) {
-                    paylaunchProduct.startDate = moment(startAndEndDates[0].startDay).format('YYYY-MM-DD')
-                    paylaunchProduct.endDate = moment(startAndEndDates[0].endDay).format('YYYY-MM-DD')
+                startAndEndDates.forEach((item, index) => {
+                    if (startAndEndDates.length == 1) {
+                        paylaunchProduct.startDate = moment(startAndEndDates[0].startDay).format('YYYY-MM-DD')
+                        paylaunchProduct.endDate = moment(startAndEndDates[0].endDay).format('YYYY-MM-DD')
+                    } else {
+                        startAndEndDates.forEach((item, index) => {
+                            if (index == 0) {
+                                paylaunchProduct.startDate = moment(item.startDay).format('YYYY-MM-DD')
+                            } else if (index == (startAndEndDates.length - 1)) {
+                                paylaunchProduct.endDate = moment(item.endDay).format('YYYY-MM-DD')
+                            }
+                        })
+                    }
+
+                })
+                
+                CampaignService.payAndLaunch(paylaunchProduct).then(function (res) {
+                    if (res.status == 1) {
+                        $scope.toggleProductDetailSidenav()
+                        toastr.success(res.message)
+                    } else if (res.status == 0) {
+                        toastr.error(res.message)
+                    }
+                })
+            }
+            $scope.numOfSlots = 0;
+            $scope.saveDigitalCampaignName = function (campaignName, productId, selectedDateRanges, ) {
+                if ($scope.numOfSlots > 0) {
+                    var paylaunchProduct = {
+                        productId: productId,
+                        name: campaignName,
+                        price: $scope.totalDigitalSlotAmount,
+                        booking_slots: $scope.numOfSlots,
+                        dates : []
+                    };
                 } else {
-                    startAndEndDates.forEach((item, index) => {
-                        if (index == 0) {
-                            paylaunchProduct.startDate = moment(item.startDay).format('YYYY-MM-DD')
-                        } else if (index == (startAndEndDates.length - 1)) {
-                            paylaunchProduct.endDate = moment(item.endDay).format('YYYY-MM-DD')
-                        }
-                    })
+                    var paylaunchProduct = {
+                        productId: productId,
+                        name: campaignName,
+                        price: $scope.totalSlotAmount,
+                    };
                 }
+                $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+                var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
+                startAndEndDates.forEach((item,index)=>{
+                    paylaunchProduct.dates.push({
+                        startDate : moment(item.startDay).format('YYYY-MM-DD'),
+                        endDate : moment(item.endDay).format('YYYY-MM-DD')
+                    })
+
+                })
+                // if (startAndEndDates.length == 1) {
+                //     paylaunchProduct.startDate = moment(startAndEndDates[0].startDay).format('YYYY-MM-DD')
+                //     paylaunchProduct.endDate = moment(startAndEndDates[0].endDay).format('YYYY-MM-DD')
+                // } else {
+                //     startAndEndDates.forEach((item, index) => {
+                //         if (index == 0) {
+                //             paylaunchProduct.startDate = moment(item.startDay).format('YYYY-MM-DD')
+                //         } else if (index == (startAndEndDates.length - 1)) {
+                //             paylaunchProduct.endDate = moment(item.endDay).format('YYYY-MM-DD')
+                //         }
+                //     })
+                // }
                 CampaignService.payAndLaunch(paylaunchProduct).then(function (res) {
                     if (res.status == 1) {
                         $scope.toggleProductDetailSidenav()
@@ -1507,7 +1572,6 @@ app.controller('GmapCtrl',
                             if (item.availableSlots == 0) {
                                 item.isBlocked = true;
                             }
-
                         }
                     })
                 })
@@ -1735,23 +1799,22 @@ app.controller('GmapCtrl',
                 };
             };
             $scope.toggleProductDetailSidenav = function () {
-                if ($scope.product.type == "Bulletin") {
-                    selectWeekValue = 0;
-                    $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
-                        week.selectedWeek = false;
-                    });
-                    $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                        week.selected = false;
-                    });
-                    $mdSidenav('productDetails').close()
-                } else if ($scope.product.type == "Digital Bulletin" || $scope.product.type == "Transit") {
-                    $scope.weeksDigitalArray.filter((week) => week.selected).forEach((week) => {
-                        week.selected = false;
-                    });
-                    var leftPos = $('#scrollFind').scrollLeft();
-                    $("#scrollFind").animate({ scrollLeft: leftPos * 0 }, 0);
-                    $mdSidenav('digitalProductDetails').close()
-                }
+                  if ($scope.product.type == "Digital Bulletin" || $scope.product.type == "Transit") {
+                        $scope.weeksDigitalArray.filter((week) => week.selected).forEach((week) => {
+                            week.selected = false;
+                            week.isBlocked = false;
+                        });
+                        $mdSidenav('digitalProductDetails').close()
+                    }else{
+                        selectWeekValue = 0;
+                        $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
+                            week.selectedWeek = false;
+                        });
+                        $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
+                            week.selected = false;
+                        });
+                        $mdSidenav('productDetails').close()
+                    }
             }
 
             /* ----------------------------
