@@ -290,14 +290,14 @@
               </div> -->
             <!-- calender slots Ends-->
           <!-- </td> -->
-          <td class="table_vertical text-center">
-              <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+          <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Bulletin' ">
+              <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                       <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
                                   <div class="modal-content text-left">
                                       <div class="modal-header modal_bottom">
                                       <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav()">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav(ownerProduct.type)">
                                           <span aria-hidden="true">&times;</span>
                                       </button> 
                                       </div>
@@ -338,6 +338,66 @@
                                                   ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
                                               </div>
                                           </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+          </td>
+          <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Transit' || ownerProduct.type == 'Digital Bulletin'">
+              <a data-toggle="modal" data-target="#digitalTransitCalender" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                      <div class="modal fade" id="digitalTransitCalender" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                  <div class="modal-content text-left">
+                                      <div class="modal-header modal_bottom">
+                                      <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav(ownerProduct.type)">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button> 
+                                      </div>
+                                      <div class="modal-body">
+                                          <p class="text-muted mb-1">This Bulletin minimum booking is 4 weeks.</p>
+                                          <p class="text-muted mb-1">There after you can select your bookings in multiples of two weeks.</p>
+                                          <p class="text-muted ">Price includes all taxes and productions charges</p>
+                                          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration, Start Date & No of slots
+                                              :</h5>
+                                
+                                          <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
+                                              <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
+                                              <select class="form-control col-md-3" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots">
+                                              </select>
+                                            </div>
+                                          
+                                          <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" style="width:100%;overflow:auto;" >
+                                            <button class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
+                                             ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
+                                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                                              <h3 class="md-body-2 setect_padbottom">${{week.price || 0}}</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21)" ng-if="digitalNumOfSlots.value && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64)" ng-if="digitalNumOfSlots.value && (!week.availableSlots || week.availableSlots == 0) && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
+                                
+                                            </button>
+                                          </div>
+                                      </div>
+                                      <div class="modal-body modal_top">
+                                          <!-- <div class="row" style="margin-right:0px;">
+                                              <div class="col-md-8">
+                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
+                                              </div>
+                                              <div class="col-md-4">
+                                                  <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
+                                              </div>
+                                          </div> -->
+                                          <div class="row" style="margin-right:0px;">
+                                              <div class="col-md-6">
+                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksDigitalArray)">Pay & Launch</md-button>
+                                              </div>
+                                            </div>
                                       </div>
                                   </div>
                               </div>
