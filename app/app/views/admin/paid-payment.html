@@ -31,7 +31,7 @@
             <td class="table_vertical"><span>$</span>{{Adminpay.total_paid}}</td>
             <td class="text-center table_vertical"><span>$</span>{{Adminpay.est_budget - Adminpay.total_paid || '0' | number:2}}</td>
             <td class="text-center table_vertical"><span>$</span>{{Adminpay.est_budget || '0' | number:2}}</td>
-            <td class="text-center table_vertical">
+            <!-- <td class="text-center table_vertical">
               <md-menu md-position-mode="target-right target" id="width_popup">
                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                   <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
@@ -46,6 +46,20 @@
                     </md-button>
                   </md-menu-item>
                 </md-menu-content>
+              </md-menu>
+            </td> -->
+            <td class="text-center table_vertical">
+              <md-menu md-position-mode="target-right target">
+                <div class="dropdown dropleft">
+                  <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                    <i class="fa fa-ellipsis-v"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item pop_view dropactive" ng-href="#/admin/campaign-payment-details/{{Adminpay.id}}" style="font-size:11px;">
+                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                    </a>
+                  </div>
+                </div>
               </md-menu>
             </td>
             <!-- <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
