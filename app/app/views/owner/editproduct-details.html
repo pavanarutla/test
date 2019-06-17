@@ -609,19 +609,32 @@
                             <div ng-message="required">Price is required.</div>
                         </div> -->
                     </div>
-                    <div class="col-sm-3" ng-show='bulletinresult || trasitResult || DigitalResult '>
+                    <div class="col-sm-3" ng-show="editRequestedhordings.type == 'Bulletin'">
                         <label class="font-weight-bold">Select Product Date</label>
                         <div class="input-group">
                             <input  ng-model="product.dates | jsonConvert"
                                 class="form-control md-whiteframe-3dp" type="text" name="date"
                                 readonly id="booking_dates_picker" />
                             <a class="input-group-addon md-whiteframe-3dp"
-                                ng-click="slotsClosed = true; getProductUnavailableDatesEdit()"
+                                ng-click="slotsClosed = true; getProductUnavailableDatesEdit(editRequestedhordings.type)"
                                 style="padding: 4px 8px;">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
+                    <div class="col-sm-3" ng-show="editRequestedhordings.type !== 'Bulletin'">
+                            <label class="font-weight-bold">Select Product Date</label>
+                            <div class="input-group">
+                                <input  ng-model="product.dates | jsonConvert"
+                                    class="form-control md-whiteframe-3dp" type="text" name="date"
+                                    readonly id="booking_dates_picker" />
+                                <a class="input-group-addon md-whiteframe-3dp"
+                                    ng-click="digitalSlotsClosed = true; getProductUnavailableDatesEdit(editRequestedhordings.type)"
+                                    style="padding: 4px 8px;">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
                     <div class="col-sm-3" ng-show='bulletinresult'>
                         <label class="font-weight-bold">Cancellation</label>
                         <select ng-model="editRequestedhordings.cancellation" name="cancellation"
@@ -752,7 +765,7 @@
                         </div>
                       
                         <div flex></div>
-                        <a class="m-3" ng-click="slotedDatesPopupClosed()">
+                        <a class="m-3" ng-click="slotedDatesPopupClosed(editRequestedhordings.type)">
                             <i class="material-icons" style="color:white !important">close</i>
                         </a>
                     </div>
@@ -765,7 +778,7 @@
                             <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
                     </button>
                     <div class="col-md-8 mt-3">
-                        <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksArray)">Block Dates</md-button>
+                        <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksArray, editRequestedhordings.type)">Block Dates</md-button>
                     </div>
                     </div>
                     <!-- <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button> -->
@@ -775,6 +788,38 @@
                 <span class="clearfix"></span>
                 </div>
               </div>
+              <div class="owner_blocked_date_popup box__shadow" ng-if="digitalSlotsClosed">
+                    <div class="owner_blocked_header">
+                        <div layout="row">
+                            <div>
+                                <h3>select the blocked dates-52/2 week calender </h3>
+                                <p>Campaign start with frist day of week end with last day of week</p>
+                            </div>
+                          
+                            <div flex></div>
+                            <a class="m-3" ng-click="slotedDatesPopupClosed(editRequestedhordings.type)">
+                                <i class="material-icons" style="color:white !important">close</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="owner_blocked_body">
+                        <div class="row" class="mt-2 mb-2">
+                            <button class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksDigitalArray"
+                            ng-click="digitalSelectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
+                                <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                                <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
+                        </button>
+                        <div class="col-md-8 mt-3">
+                            <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksDigitalArray , editRequestedhordings.type)">Block Dates</md-button>
+                        </div>
+                        </div>
+                        <!-- <button class="md-raised md-primary all_button float-right"  ng-click="blockedSlotesbtn(weeksArray)">block dates</button> -->
+                        <!-- <md-button Class="md-raised md-primary all_button"
+                        ng-click="blockedSlotesbtn(weeksArray)">
+                        Block Dates</md-button> -->
+                    <span class="clearfix"></span>
+                    </div>
+                  </div>
             
             </form>
         </div>            

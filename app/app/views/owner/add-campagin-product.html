@@ -90,7 +90,7 @@
     <span flex></span>    
     <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
   </div> -->
-  <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
+  <!-- <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
 			<div class="row" style="margin-left:0px; margin-right:0px;">
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
 				 style="margin-top:14px;">
@@ -103,16 +103,6 @@
 					<p class="md-caption mob_span"><b><span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
               "0"}}</span></b></p>
 				</div>
-				<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
-				 style="margin-top:14px;">
-					<p class="cmp_bottom">Estimated Budget</p>
-					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.est_budget || "N/A"}}</b></p>
-				</div> -->
-				<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-				 style="margin-top:14px;">
-					<p class="cmp_bottom">Total Amount</p>
-					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.total_budget || "N/A"}}</b></p>
-				</div> -->
 				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
 				 style="margin-top:14px;">
 					<p class="cmp_bottom">Created On</p>
@@ -123,7 +113,88 @@
          <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
 				</div>
 			</div>
-		</div>
+    </div> -->
+    <div class="campaign_details mt-4">
+      <div class="">
+          <div class="row ml-0 mr-0">
+              <div class="col-12 col-sm-12 col-md-6">
+                  <div class="contbg md-whiteframe-3dp p-2">
+                      <table class="table table-striped table-bordered mb-0">
+                          <tbody>
+                              <tr>
+                                  <td><b>Campaign ID</b></td>
+                                  <td>{{selectedOwnerCampaign.cid}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Campaign Name</b></td>
+                                  <td>{{selectedOwnerCampaign.name | capitalize}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Client Name</b></td>
+                                  <td>{{selectedOwnerCampaign.client_name || "N/A"}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Contact No.</b></td>
+                                  <td>{{selectedOwnerCampaign.org_contact_phone}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">+ 91 9550224488</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Email</b></td>
+                                  <td>{{selectedOwnerCampaign.org_contact_email | capitalize}}
+                                    <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  </td>
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">
+                                      reach@billboardsindia.com</td> -->
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                  <div class="contbg md-whiteframe-3dp p-2">
+                      <table class="table table-striped table-bordered mb-0">
+                          <tbody>
+                              <tr>
+                                  <td class="camp_tableowner"><b>No of Products</b></td>
+                                  <td>{{selectedOwnerCampaign.products.length || 0}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Date</b></td>
+                                  <td>{{selectedOwnerCampaign.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Total Budget</b></td>
+                                  <td>
+                                      ${{ selectedOwnerCampaign.act_budget || 0 | number : 2}}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><b>Pending payment</b></td>
+                                  <td>
+                                      <!-- ng-if="selectedOwnerCampaign.type != 0" -->
+                                      ${{campaignDetails.act_budget - result.total_paid || 0 | number:2}}
+                                  </td>
+                                  <!-- <td ng-if="selectedOwnerCampaign.type == 0">
+                                      <span ng-if="selectedOwnerCampaign.pending_payment"></span>
+                                      ${{PendingPay | number:2 || '0'}}
+                                  </td>                                     -->
+                              </tr>
+                              <tr>
+                                  <td><b>Status</b></td>
+                                  <td>{{selectedOwnerCampaign.status | stringifyCampaignStatus}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>     
+  </div>
 
   <!-- filters-->
   <form class="form-inline camp_filters" action="">
@@ -143,11 +214,17 @@
     </md-autocomplete>
     <label for="pwd" class="add_filterby hide-xs">Filter By:</label>
     <div class="form-group hide-xs">
-      <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+      <!-- <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
       class="form-control md-whiteframe-3dp add_filtermobile" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
       name="productType">
       <option value="" disabled selected>Site Type</option>
-    </select>
+    </select> -->
+    <select id="productType" ng-options="productType.name for productType in ProductTypes"
+                ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
+                ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
+                name="productType">
+                <option value="" disabled selected>Site Type</option>
+            </select>
     </div>
 
     <div class="form-group form_cal hide-xs">
@@ -163,6 +240,9 @@
       </select>
     </div>
     <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng">
+    <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+   </div>
   </form>
   <!-- product list -->
   <div class="table-responsive" style="margin-bottom:115px !important;position:relative;">

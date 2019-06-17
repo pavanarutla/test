@@ -80,8 +80,8 @@
             direction: 'ltr',
             format: moment.localeData().longDateFormat('L'),
             separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
+             applyLabel: 'Apply',
+             cancelLabel: 'Cancel',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment.weekdaysMin(),
@@ -119,8 +119,8 @@
                 '</div>' +
                 '<div class="drp-buttons">' +
                 '<span class="drp-selected"></span>' +
-                '<button class="cancelBtn" type="button"></button>' +
-                '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                // '<button class="cancelBtn" type="button"></button>' +
+                // '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
                 '</div>' +
                 '</div>';
 

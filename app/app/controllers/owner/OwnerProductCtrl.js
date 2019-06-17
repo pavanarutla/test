@@ -511,13 +511,23 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
-  $scope.getProductUnavailableDatesEdit = function () {
-    var productId = $stateParams.id;
-    OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      productDatesCalculator()
-      // $(ev.target).parent().parent().find('input').trigger('click');
-    });
+  $scope.getProductUnavailableDatesEdit = function (Type) {
+    if(Type == 'Bulletin'){
+      var productId = $stateParams.id;
+      OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        productDatesCalculator()
+        // $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }else{
+      var productId = $stateParams.id;
+      OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        productDatesDigitalCalculator()
+        // $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }
+   
   }
 
   $scope.getProductUnavailableDates = function (productId, ev) {
@@ -736,6 +746,11 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     for (var i = 1; i <= digitalSlots; i++) {
       $scope.digitalSlots.push(i)
     }
+    var unavailBoundaries = [];
+    $scope.unavailalbeDateRanges.forEach((dates) => {
+      unavailBoundaries.push(moment(dates.booked_from))
+      unavailBoundaries.push(moment(dates.booked_to))
+    });
     // var slotPrices =0;
     for (item in $scope.weeksDigitalArray) {
       $scope.weeksDigitalArray[item].price = $scope.product.price;
@@ -746,7 +761,9 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       var endDay = moment(new Date()).add(7 + 6, 'days').format('LLLL');
       $scope.weeksDigitalArray[0].startDay = startDay;
       $scope.weeksDigitalArray[0].endDay = endDay;
-
+      unavailBoundaries.forEach((date) => {
+        $scope.weeksDigitalArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+      });
     } else {
       var tempDay;
       for (i = 1; i <= 6; i++) {
@@ -756,6 +773,14 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
           var endDay = moment(new Date()).add(i + 6, 'days').format('LLLL');
           $scope.weeksDigitalArray[0].startDay = startDay;
           $scope.weeksDigitalArray[0].endDay = endDay;
+          var isBlocked = false;
+          for (var date of unavailBoundaries) {
+            if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+              isBlocked = true;
+              break;
+            }
+          }
+          $scope.weeksDigitalArray[0].isBlocked = isBlocked;
         }
 
       }
@@ -767,9 +792,17 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
         item.startDay = moment(tempororyStartDate).add(1, 'days').format('LLLL');
         item.endDay = moment(tempororyStartDate).add(7, 'days').format('LLLL');
         tempororyStartDate = item.endDay;
+        var isBlocked = false;
+        for (var date of unavailBoundaries) {
+          if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+            isBlocked = true;
+            break;
+          }
+        }
+        $scope.weeksDigitalArray[index].isBlocked = isBlocked;
       }
 
-    })
+    })    
   }
 
   // };
@@ -894,19 +927,22 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.weeksArray[index].selected = true;
     }
   }
-  $scope.slotedDatesPopupClosed = function () {
-    $scope.slotsClosed = false;
-  }
-  $scope.blockedSlotesbtn = function (weeksArray) {
-    $scope.product.dates = []
+  $scope.slotedDatesPopupClosed = function (Type) {
+    if(Type == 'Bulletin'){
+      $scope.slotsClosed = false;
+    }else{
+      $scope.digitalSlotsClosed = false;
+      }
+    }
+  $scope.blockedSlotesbtn = function (weeksArray,Type) {
+    $scope.product.dates = []  
     weeksArray.filter((week) => week.selected).forEach(function (item) {
       var startDate = moment(item.startDay).format('YYYY-MM-DD')
       var endDate = moment(item.endDay).format('YYYY-MM-DD')
 
       $scope.product.dates.push({ startDate: startDate, endDate: endDate })
-      $scope.slotedDatesPopupClosed();
+      $scope.slotedDatesPopupClosed(Type);
     })
-
   }
   /*=============================
  | owner slots blocking ends
