@@ -302,29 +302,29 @@
                                       </button> 
                                       </div>
                                       <div class="modal-body">
-                                          <p class="text-muted mb-1">This Bulletin minimum booking is 4 weeks.</p>
-                                          <p class="text-muted mb-1">There after you can select your bookings in multiples of two weeks.</p>
-                                          <p class="text-muted ">Price includes all taxes and productions charges</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>This Bulletin minimum booking is 4 weeks.</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>There after you can select your bookings in multiples of two weeks.</p>
+                                          <p class=""><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>Price includes all taxes and productions charges</p>
                                           <div layout="row" class="mt-2  mb-2 mostly-customized-scrollbar">
                                             <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
                                             ng-click="selectHordingWeeks(weeks)"
                                             ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
                                               <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
-                                              <h3 class="md-body-2 setect_padbottom">{{weeks.price}}</h3>
+                                              <h3 class="md-body-2 setect_padbottom">${{weeks.price}}</h3>
                                             </a>
                                           </div>
                           
                                           <h5 class="font-weight-bold  mt-3">Select Campaign Start Date :</h5>
-                                          <p class="text-muted mb-1">The posters will be placed between Monday and Friday of your first selected week.
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>The posters will be placed between Monday and Friday of your first selected week.
                                             </p>
-                                            <p class="text-muted mb-1">A specific day cannot be guaranteed.</p>
-                                            <p class="text-muted mb-1">However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+                                            <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>A specific day cannot be guaranteed.</p>
+                                            <p class="mb-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
                                           <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" >
                                             <a class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
                                               ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
                                               ng-disabled="week.isBlocked && week.isBlocked == true">
-                                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-                                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                                              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
+                                              <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots }}</h3>
                                             </a>
                                           </div> 
                                       </div>
@@ -355,28 +355,30 @@
                                       </button> 
                                       </div>
                                       <div class="modal-body">
-                                          <p class="text-muted mb-1">This Bulletin minimum booking is 4 weeks.</p>
-                                          <p class="text-muted mb-1">There after you can select your bookings in multiples of two weeks.</p>
-                                          <p class="text-muted ">Price includes all taxes and productions charges</p>
-                                          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration, Start Date & No of slots
-                                              :</h5>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> This digital bulletin minimum booking is 1 weeks.</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>There after you can select your bookings in multiples of two weeks.</p>
+                                          <p class="mb-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>Price includes all taxes and productions charges.</p>
                                 
-                                          <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
+                                          <!-- <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
                                               <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
                                               <select class="form-control col-md-3" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots">
                                               </select>
-                                            </div>
+                                            </div> -->
+                                            <h5 class="font-weight-bold mt-3 mb-3">Select Duration, Start Date & No of slots -:
+                                                <select class="browser-default" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots" style="width: 140px; background: #e9e9e9; border:none;">
+                                                  </select>
+                                            </h5>
                                           
                                           <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" style="width:100%;overflow:auto;" >
-                                            <button class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
+                                            <a class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
                                              ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
-                                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-                                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                                              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                                              <h3 class="md-body-2 setect_paddingweek"> of {{week.startDay | dateslots }}</h3>
                                               <h3 class="md-body-2 setect_padbottom">${{week.price || 0}}</h3>
-                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21)" ng-if="digitalNumOfSlots.value && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
-                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64)" ng-if="digitalNumOfSlots.value && (!week.availableSlots || week.availableSlots == 0) && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21);font-size: 11px;" ng-if="digitalNumOfSlots.value && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64);font-size: 11px;" ng-if="digitalNumOfSlots.value && (!week.availableSlots || week.availableSlots == 0) && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
                                 
-                                            </button>
+                                            </a>
                                           </div>
                                       </div>
                                       <div class="modal-body modal_top">
@@ -390,11 +392,11 @@
                                               </div>
                                           </div> -->
                                           <div class="row" style="margin-right:0px;">
-                                              <div class="col-md-6">
+                                              <div class="col-md-8">
                                                   <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
                                               </div>
-                                              <div class="col-md-3">
-                                                  <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                                              <div class="col-md-4" style="text-align: right;padding-right: 0px;">
+                                                  <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
                                                   ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksDigitalArray)">Pay & Launch</md-button>
                                               </div>
                                             </div>
