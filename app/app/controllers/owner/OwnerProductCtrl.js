@@ -927,19 +927,22 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.weeksArray[index].selected = true;
     }
   }
-  $scope.slotedDatesPopupClosed = function () {
-    $scope.slotsClosed = false;
-  }
-  $scope.blockedSlotesbtn = function (weeksArray) {
-    $scope.product.dates = []
+  $scope.slotedDatesPopupClosed = function (Type) {
+    if(Type == 'Bulletin'){
+      $scope.slotsClosed = false;
+    }else{
+      $scope.digitalSlotsClosed = false;
+      }
+    }
+  $scope.blockedSlotesbtn = function (weeksArray,Type) {
+    $scope.product.dates = []  
     weeksArray.filter((week) => week.selected).forEach(function (item) {
       var startDate = moment(item.startDay).format('YYYY-MM-DD')
       var endDate = moment(item.endDay).format('YYYY-MM-DD')
 
       $scope.product.dates.push({ startDate: startDate, endDate: endDate })
-      $scope.slotedDatesPopupClosed();
+      $scope.slotedDatesPopupClosed(Type);
     })
-
   }
   /*=============================
  | owner slots blocking ends

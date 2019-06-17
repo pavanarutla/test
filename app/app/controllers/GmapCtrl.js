@@ -929,6 +929,7 @@ app.controller('GmapCtrl',
             }
 
             $scope.selectFromTabIdSearch = function (marker) {
+                $scope.toggleProductDetailSidenav();
                 if (marker.id) {
                     var refToMapMarker = _.find(markersOnMap, (m) => {
                         return m.properties.id == marker.id;
@@ -1047,10 +1048,7 @@ app.controller('GmapCtrl',
                     $scope.campaignDetails = campaignDetails;
                 });
             }
-            $scope.toggleExistingCampaignSidenav = function () {
-                $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
-                $scope.removeSelection();
-            }
+           
             $scope.customOptions = {};
             $scope.removeSelection = function () {
                 $scope.customOptions.clearSelection();
@@ -1061,31 +1059,25 @@ app.controller('GmapCtrl',
             $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
                 var productToCampaign = {
                     product_id: productId,
-                    campaign_id: existingCampaignId
-                };
-                if (selectedDateRanges.length > 0) {
-                    productToCampaign.dates = selectedDateRanges;
-                } else {
-                    toastr.error("Please select dates.");
-                    return false;
-                }
+                    campaign_id: existingCampaignId,
+                    dates :[]
+                };                
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                 startAndEndDates.forEach((item, index) => {
-                    if (index == 0) {
-                        productToCampaign.startDate = moment(item.startDay).format('YYYY-MM-DD')
-                    } else if (index == (startAndEndDates.length - 1)) {
-                        productToCampaign.endDate = moment(item.endDay).format('YYYY-MM-DD')
-                    }
+                    productToCampaign.dates.push({startDate : moment(item.startDay).format('YYYY-MM-DD'),endDate : moment(item.endDay).format('YYYY-MM-DD')})
                 })
                 CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
                     if (result.status == 1) {
+                        $scope.existingCampaign.id = null;                       
                         toastr.success(result.message);
-                        $mdSidenav('productDetails').close();
+                        // $mdSidenav('productDetails').close();
+                        $scope.toggleExistingCampaignSidenav();
+                        $scope.toggleProductDetailSidenav();
                     } else if (result.status == 0) {
                         toastr.error(result.message);
                     }
                 });
-                $scope.toggleProductDetailSidenav();
+                // $scope.toggleProductDetailSidenav();
             }
 
             $scope.shareShortlistedProducts = function (shareShortlisted) {
@@ -1470,8 +1462,7 @@ app.controller('GmapCtrl',
                         name: campaignName,
                         price: $scope.totalSlotAmount,
                     };
-                }
-                $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
+                }                
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                 startAndEndDates.forEach((item, index) => {
                     if (startAndEndDates.length == 1) {
@@ -1490,9 +1481,11 @@ app.controller('GmapCtrl',
                 })
                 
                 CampaignService.payAndLaunch(paylaunchProduct).then(function (res) {
-                    if (res.status == 1) {
-                        $scope.toggleProductDetailSidenav()
-                        toastr.success(res.message)
+                    if (res.status == 1) {     
+                        $scope.campaign.name = null;   
+                        $scope.toggleExistingCampaignSidenav();                
+                        $scope.toggleProductDetailSidenav();
+                        toastr.success(res.message)                        
                     } else if (res.status == 0) {
                         toastr.error(res.message)
                     }
@@ -1515,7 +1508,6 @@ app.controller('GmapCtrl',
                         price: $scope.totalSlotAmount,
                     };
                 }
-                $scope.showSaveCampaignPopup = !$scope.showSaveCampaignPopup;
                 var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
                 startAndEndDates.forEach((item,index)=>{
                     paylaunchProduct.dates.push({
@@ -1538,7 +1530,9 @@ app.controller('GmapCtrl',
                 // }
                 CampaignService.payAndLaunch(paylaunchProduct).then(function (res) {
                     if (res.status == 1) {
-                        $scope.toggleProductDetailSidenav()
+                        $scope.campaign.name = null;
+                        $scope.toggleExistingCampaignSidenav();
+                        $scope.toggleProductDetailSidenav();                       
                         toastr.success(res.message)
                     } else if (res.status == 0) {
                         toastr.error(res.message)

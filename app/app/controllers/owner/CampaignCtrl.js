@@ -1195,7 +1195,7 @@ $scope.hidebutton = function(){
                         }).forEach((week) => {
                             week.selected = false;
                             week.isBlocked = false;
-                            week.availableSlots = 0;
+                            // week.availableSlots = 0;
                         });
                         $scope.digitalNumOfSlots.value = 0;
                         
