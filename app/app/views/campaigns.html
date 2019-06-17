@@ -205,7 +205,7 @@
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
                                 <td class="text-center table_vertical">{{pCampaign.act_budget|| '0' | number:2}}</td>
-                                <td class="text-center table_vertical">
+                                <!-- <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
                                             ng-click="$mdMenu.open($event)">
@@ -232,7 +232,24 @@
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
-                                </td>
+                                </td> -->
+                                <td class="text-center table_vertical">
+                                    <md-menu md-position-mode="target-right target">
+                                      <div class="dropdown dropleft float-right">
+                                        <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                          <i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{pCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(pCampaign.id)" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </md-menu>
+                                  </td>
                                 <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
                                                     date:'dd-MM-yyyy'}}</span>
@@ -267,7 +284,7 @@
                                 <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
                                 <!-- <td>10,1000</td> -->
                                 <td class="text-center table_vertical">{{pCampaign.act_budget|| "N/A" | number:2}}</td>
-                                <td class="text-center table_vertical">
+                                <!-- <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
                                             ng-click="$mdMenu.open($event)">
@@ -303,7 +320,27 @@
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
-                                </td>
+                                </td> -->
+                                <td class="text-center table_vertical">
+                                    <md-menu md-position-mode="target-right target">
+                                      <div class="dropdown dropleft float-right">
+                                        <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                          <i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{pCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(pCampaign.id)" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/update-user-payments/{{pCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </md-menu>
+                                  </td>
                                 <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{pCampaign.updated_at| dateify |
                                                         date:'dd-MM-yyyy'}}</span>
@@ -339,7 +376,7 @@
                                 <td class="text-center table_vertical">{{rCampaign.product_count|| "N/A"}}</td>
                                 <td class="text-center table_vertical">{{rCampaign.paid|| "N/A" | number:2}}</td>
                                 <td class="text-center table_vertical">{{rCampaign.act_budget|| "N/A" | number:2}}</td>
-                                <td class="text-center table_vertical">
+                                <!-- <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
                                             ng-click="$mdMenu.open($event)">
@@ -375,7 +412,27 @@
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
-                                </td>
+                                </td> -->
+                                <td class="text-center table_vertical">
+                                    <md-menu md-position-mode="target-right target">
+                                      <div class="dropdown dropleft float-right">
+                                        <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                          <i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{rCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(rCampaign.id)" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/update-user-payments/{{rCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </md-menu>
+                                  </td>
                                 <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{rCampaign.updated_at| dateify |
                                                     date:'dd-MM-yyyy'}}</span>
@@ -411,7 +468,7 @@
                                 <td class="text-center table_vertical">{{cCampaign.product_count|| "0"}}</td>
                                 <td class="text-center table_vertical">{{cCampaign.paid|| "N/A" | number:2 }}</td>
                                 <td class="text-center table_vertical">{{cCampaign.act_budget|| "N/A" | number:2}}</td>
-                                <td class="text-center table_vertical">
+                                <!-- <td class="text-center table_vertical">
                                     <md-menu md-position-mode="target-right target">
                                         <md-button aria-label="Open demo menu" class="md-icon-button"
                                             ng-click="$mdMenu.open($event)">
@@ -447,7 +504,27 @@
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
-                                </td>
+                                </td> -->
+                                <td class="text-center table_vertical">
+                                    <md-menu md-position-mode="target-right target">
+                                      <div class="dropdown dropleft float-right">
+                                        <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                          <i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{cCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(cCampaign.id)" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                          </a>
+                                          <a class="dropdown-item pop_view dropactive" ng-href="#/update-user-payments/{{cCampaign.id}}" style="font-size:11px;">
+                                          <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </md-menu>
+                                  </td>
                                 <td class="text-center table_vertical">
                                     <span class="text_color md-caption">{{cCampaign.updated_at| dateify |
                                                     date:'dd-MM-yyyy'}}</span>
