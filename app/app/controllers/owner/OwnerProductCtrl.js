@@ -802,7 +802,7 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
         $scope.weeksDigitalArray[index].isBlocked = isBlocked;
       }
 
-    })
+    })    
   }
 
   // };

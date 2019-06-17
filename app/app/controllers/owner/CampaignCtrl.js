@@ -183,7 +183,11 @@ $scope.hidebutton = function(){
     //     reader.readAsDataURL(input.files[0]);
     //   }
     // };
-
+    $scope.ProductTypes = [
+        { name: "Bulletin" },
+        { name: "Digital Bulletin" },
+        { name: "Transit" }
+      ];
     function setDatesForOwnerProductsToSuggest(campaign) {
         $scope.SuggestprodStartDate = new Date(campaign.start_date);
         $scope.SuggestprodEndDate = new Date(campaign.end_date);
@@ -254,7 +258,7 @@ $scope.hidebutton = function(){
             });
         });
     }
-    var loadOwnerProductList = function () {
+    var loadOwnerProductList = function () {        
         OwnerProductService.getApprovedProductList($scope.pagination.pageNo, $scope.pagination.pageSize).then(function (result) {
             if (localStorage.selectedOwnerCampaign) {
                 var selectedOwnerCampaign = JSON.parse(localStorage.selectedOwnerCampaign);
@@ -477,7 +481,7 @@ $scope.hidebutton = function(){
                 // $scope.campaignDetails.gst = result.act_budget * 18 / 100;
                 // $scope.campaignDetails.subTotal = result.act_budget ;
                 // $scope.campaignDetails.grandTotal = $scope.campaignDetails.subTotal;
-                $scope.PendingPay = $scope.campaignDetails.act_budget - result.total_paid;
+                //$scope.PendingPay = $scope.campaignDetails.act_budget - result.total_paid;
             }
             // if ($scope.campaignDetails.gst_price != "0") {
             //     $scope.onchecked = true;
@@ -1329,8 +1333,8 @@ $scope.hidebutton = function(){
 
 //page width
     $scope.innerWidth = $window.innerWidth;
-    loadMetroCampaigns();
-    getMetroCampaignDetails();
+    // loadMetroCampaigns();
+    // getMetroCampaignDetails();
     getActiveUserCampaigns();
-    getMetroCampDetails($stateParams.metroCampaignId);
+    //getMetroCampDetails($stateParams.metroCampaignId);
 });

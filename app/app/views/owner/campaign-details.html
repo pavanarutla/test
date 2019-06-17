@@ -61,11 +61,11 @@
                                 <tr>
                                     <td><b>Pending payment</b></td>
                                     <td ng-if="campaignDetails.type != 0">
-                                        ${{PendingPay | number:2 || '0'}}
+                                        ${{campaignDetails.act_budget - result.total_paid | number:2 || '0'}}
                                     </td>
                                     <td ng-if="campaignDetails.type == 0">
                                         <span ng-if="campaignDetails.pending_payment"></span>
-                                        ${{PendingPay | number:2 || '0'}}
+                                        ${{campaignDetails.act_budget - result.total_paid | number:2 || '0'}}
                                     </td>                                    
                                 </tr>
                                 <tr>

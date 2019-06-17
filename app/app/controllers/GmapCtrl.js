@@ -737,7 +737,7 @@ app.controller('GmapCtrl',
                             arr[0].endDate = moment(item.endDay).format('YYYY-MM-DD');
                         }
                     }
-                })
+                })                
                 if(producttype == "Digital Bulletin" || producttype == "Bulletin" ){
                     var sendObj = {
                         product_id: productId,
@@ -751,20 +751,27 @@ app.controller('GmapCtrl',
                     }
                 }
                 
-                MapService.shortListProduct(sendObj).then(function (response) {
+                MapService.shortListProduct(sendObj).then(function (response) {                    
                     getShortListedProducts();
-                    $mdDialog.show(
-                        $mdDialog.alert()
-                            .parent(angular.element(document.querySelector('body')))
-                            .clickOutsideToClose(true)
-                            .title('Shortlist Product')
-                            .textContent(response.message)
-                            .ariaLabel('shortlist-success')
-                            .ok('Got it!')
-                            .targetEvent(ev),
-                        // $mdSidenav('productDetails').close()
-                    );
-                    $scope.toggleProductDetailSidenav();
+                    if(response.status == 0){
+                        toastr.error(response.message);
+                    }else if((response.status == 1)){
+                        toastr.success(response.message);
+                        $scope.toggleProductDetailSidenav();
+                    }
+                    
+                    // $mdDialog.show(
+                    //     $mdDialog.alert()
+                    //         .parent(angular.element(document.querySelector('body')))
+                    //         .clickOutsideToClose(true)
+                    //         .title('Shortlist Product')
+                    //         .textContent(response.message)
+                    //         .ariaLabel('shortlist-success')
+                    //         .ok('Got it!')
+                    //         .targetEvent(ev),
+                    //      $mdSidenav('productDetails').close()
+                    // );
+                  
                     // $mdSidenav('productDetails').close()
                 });
             }
