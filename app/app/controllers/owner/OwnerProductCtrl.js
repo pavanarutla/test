@@ -740,7 +740,8 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     for (item in $scope.weeksDigitalArray) {
       $scope.weeksDigitalArray[item].price = $scope.product.price;
     }
-    if (currentDay == 'Monday') {
+    var digitalCurrentDay = moment().format('LLLL').split(',')[0];
+    if (digitalCurrentDay == 'Monday') {
       var startDay = moment(new Date()).add(7, 'days').format('LLLL');
       var endDay = moment(new Date()).add(7 + 6, 'days').format('LLLL');
       $scope.weeksDigitalArray[0].startDay = startDay;
