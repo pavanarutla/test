@@ -62,20 +62,33 @@
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
             </div>
-            <div class="col-md-2 text-right">
+            <div class="col-md-3 text-right pr-0 mt-3">
+                <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
+            </div>
+          <div class="col-md-1 text-right pr-0 mt-3">
+              <a class=" close-btn" ng-click="toggleProductDetailSidenav()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
+          </div>
+            <!-- <div class="col-md-2 text-right">
                 <a class="md-icon-button close-btn" ng-click="toggleProductDetailSidenav()">
                     <i class="material-icons">close</i>
                   </a>
-            </div>
+            </div> -->
             <div class="col-md-8">
-                <h6 class="font-weight-bold ml-3 mt-1">Size: {{product.panelSize}}</h6>
+              <div class="row">
+                <div class="col-md-6" style="margin-right: -43px;">
+                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Size:</span> {{product.panelSize}}</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Type:</span> {{product.type}}</h6>
+                </div>
+              </div>
             </div>
-            <div class="col-md-8">
-              <h6 class="font-weight-bold ml-3 mt-1">Type: {{product.type}}</h6>
-          </div>
+            
           </div>
           <div class="row" style="margin-right:0px;">
             <div class="col-md-12" style="padding-right:0px;">
@@ -104,23 +117,23 @@
           
           <div layout="row" class="mt-2 mb-2">
             <div flex="25" class="border ml-3 p-1">
-              <p class="text-muted mb-2">Views</p>
-              <h6 class="font-weight-bold">{{product.impressions}}</h6>
-              <p class="text-muted">Per 4 Weeks</p>
+              <p class="text-muted mb-2 ml-2">Views</p>
+              <h6 class="font-weight-bold ml-2">{{product.impressions}}</h6>
+              <p class=" ml-2">Per 4 Weeks</p>
             </div>
             <div flex="30" class="border ml-3 mr-3 p-1 ">
-              <p class="text-muted mb-2">Demographic</p>
-              <h6 class="font-weight-bold">{{product.demographicsage}}</h6>
+              <p class="text-muted mb-2 ml-2">Demographic</p>
+              <h6 class="font-weight-bold ml-2">{{product.demographicsage}}</h6>
             </div>           
             <div flex="45" class="border mr-3 p-1">
-              <p class="text-muted mb-2">Address</p>
-              <h6 class="font-weight-bold">{{product.addressone}}{{product.addresstwo}}</h6>
+              <p class="text-muted mb-2 ml-2">Address</p>
+              <h6 class="font-weight-bold ml-2">{{product.addressone}}{{product.addresstwo}}</h6>
             </div>
           </div>
           <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration :</h5>
-          <p class="text-muted ml-3 mb-1">This Bulletin minimum booking is 4 weeks.</p>
-          <p class="text-muted ml-3 mb-1">There after you can select your bookings in multiples of two weeks.</p>
-          <p class="text-muted ml-3">Price includes all taxes and productions charges</p>
+          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>This Bulletin minimum booking is 4 weeks.</p>
+          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>There after you can select your bookings in multiples of two weeks.</p>
+          <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>Price includes all taxes and productions charges</p>
           <div layout="row" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar">
             <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
              ng-click="selectHordingWeeks(weeks)"
@@ -131,27 +144,28 @@
           </div>
   
           <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Start Date :</h5>
-          <p class="text-muted ml-3 mb-1">The posters will be placed between Monday and Friday of your first selected week.</p>
-          <p class="text-muted ml-3 mb-1">A specific day cannot be guaranteed.</p>
-          <p class="text-muted ml-3">However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>The posters will be placed between Monday and Friday of your first selected week.</p>
+          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>A specific day cannot be guaranteed.</p>
+          <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
           <div layout="row" id="scrollFind" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar" >
-            <button class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+            <a class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
               ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
               ng-disabled="week.isBlocked && week.isBlocked == true">
-              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
-              <h3 class="md-body-2 selected_padbottom">{{week.startDay | dateslots }}</h3>
-            </button>
+              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
+              <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots }}</h3>
+            </a>
           </div> 
-          <p class="ml-3 mb-1">Jan 1 - Jan 28 - $4500</p>
-          <div class="row mt-4 pb-3" style="margin-right:0px;">
+          
+          <span class="mt-1 ml-3 mb-1">Jan 1 - Jan 28 - $4500</span>
+          <div class="row pb-3" style="margin-right:0px;">
             <div class="col-md-6">
                 <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="margin-left: 33px;">
                 <md-button class="md-raised md-warn Upload_font"                 
                 ng-click="shortlistSelected(product.id, weeksArray, $event)"  ng-disabled="totalSlotAmount <= 0">Shortlist</md-button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="margin-left: 20px;">
                 <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"
                 ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalSlotAmount <= 0" >Pay & Launch</md-button>
             </div>
@@ -220,8 +234,8 @@
           <div class="row" style="margin-right:0px;">
             <div class="col-md-8">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
-                <h6 class="font-weight-bold ml-3 mt-1">Size:{{product.panelSize}}</h6>
-                <h6 class="font-weight-bold ml-3 mt-1">Type:{{product.type}}</h6>
+                <!-- <h6 class="ml-3 mt-1"><span class="font-weight-bold">Size:</span> {{product.panelSize}}</h6>
+                <h6 class="ml-3 mt-1"><span class="font-weight-bold">Type:</span> {{product.type}}</h6> -->
               </div>
               <div class="col-md-3 text-right pr-0 mt-3">
                   <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
@@ -230,6 +244,16 @@
                 <a class=" close-btn" ng-click="toggleProductDetailSidenav()">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-6" style="margin-right: -43px;">
+                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Size:</span> {{product.panelSize}}</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Type:</span> {{product.type}}</h6>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row" style="margin-left: 0px;margin-right:0px;">
@@ -241,10 +265,10 @@
         </div>
       
           <div class="mt-2">
-              <p class="mt-3 ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true"></i> This digital bulletin minimum booking is 1 weeks.</p>
-              <p class="ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true"></i> There after you can select your bookings in multiples of one week.</p>
-              <p class="ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true"></i> Your 10 second ad will be shown 1 time per 70 seconds.</p>
-              <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true"></i> Total slots available in this digital bulletin is 7 slots</p>
+              <p class="mt-3 ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> This digital bulletin minimum booking is 1 weeks.</p>
+              <p class="ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> There after you can select your bookings in multiples of one week.</p>
+              <p class="ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> Your 10 second ad will be shown 1 time per 70 seconds.</p>
+              <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> Total slots available in this digital bulletin is 7 slots</p>
           </div> 
           <!-- <div class="row" style="margin-left: 0px;margin-right:0px;">
               <div class="col-md-6" style="padding-left:0px;padding-right: 0px;">
@@ -271,25 +295,25 @@
                
               
           <div layout="row" id="scrollFind" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar">
-            <button class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
+            <a class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
              ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
-              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
-              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
+              <h3 class="md-body-2 setect_paddingweek"> of {{week.startDay | dateslots }}</h3>
               <h3 class="md-body-2 setect_padbottom">${{week.price || 0}}</h3>
-              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21)" ng-if="numOfSlots && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
-              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64)" ng-if="numOfSlots && !week.availableSlots && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
-            </button>
+              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21);font-size: 11px;" ng-if="numOfSlots && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
+              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64);font-size: 11px;" ng-if="numOfSlots && !week.availableSlots && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
+            </a>
           </div>   
-          <p class="ml-3 mb-1">Jan 1 - Jan 28 - $4500</p>
-          <div class="row mt-4 pb-3" style="margin-right:0px;">
+          <span class="mt-1 ml-3 mb-1">Jan 1 - Jan 28 - $4500</span>
+          <div class="row pb-3" style="margin-right:0px;">
             <div class="col-md-6">
                 <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="margin-left: 33px;">
                 <md-button class="md-raised md-warn Upload_font" ng-disabled="false" 
                 ng-click="shortlistSelected(product.id, weeksDigitalArray,product.type, $event)">Shortlist</md-button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" style="margin-left: 20px;">
                 <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
                 ng-click="toggleExistingCampaignSidenav()">Pay & Launch</md-button>
             </div>
