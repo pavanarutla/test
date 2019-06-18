@@ -96,7 +96,6 @@ app.controller('GmapCtrl',
                     var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from, booked_to };
                     $scope.plottingDone = false;
                     MapService.filterProducts(filterObj).then(function (markers) {
-                        console.log(markers)
                         _.each(markersOnMap, function (v, i) {
                             v.setMap(null);
                             $scope.Clusterer.removeMarker(v);
