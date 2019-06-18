@@ -58,6 +58,15 @@
     height: 90vh;
     margin-top: 64px;
 }
+.md-datepicker-calendar-pane{
+  width: 304px;
+}
+.md-datepicker-input-mask{
+  width: 304px;
+}
+.md-datepicker-input{
+  font-size: 12px;
+}
   </style>
   <div layout="column" style="position:relative">
   
@@ -534,7 +543,7 @@
           <span flex></span>
           <a  class="md-caption float-right pt-1 text_a" ng-click="clearFields();">Clear Filters</a>
         </div>
-        <div layout="row" class="mt-2 search_tab md-whiteframe-2dp">
+        <div layout="row" class="mt-2 mb-4 search_tab md-whiteframe-2dp">
           <md-autocomplete md-min-length="2" md-selected-item="selectedId"
             md-selected-item-change="selectFromTabIdSearch(items)" md-search-text="searchId"
             md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
@@ -544,7 +553,7 @@
             </md-item-template>
           </md-autocomplete>
         </div>
-        <div layout="row" class="mt-2 search_area md-whiteframe-2dp">
+        <div layout="row" class="mt-2 mb-4 search_area md-whiteframe-2dp">
           <md-autocomplete md-min-length="2" md-selected-item="selectedArea"
             md-selected-item-change="selectedAreaChanged(item)" md-search-text="searchText"
             md-items="item in autoCompleteArea(searchText)" md-item-text="item.name" placeholder="Search By Area,Location"
@@ -555,7 +564,7 @@
           </md-autocomplete>
         </div>
         <!-- filters html start-->
-        <div layout="column" class="filters md-whiteframe-2dp mt-2" style="padding:8px;background: #fff !important;">
+        <div layout="column" class="filters md-whiteframe-2dp mb-4 mt-2" style="padding:8px;background: #fff !important;">
           <div layout="row">
             <div class="md-caption text-left">Show products available between</div>
             <div flex></div>
@@ -568,11 +577,10 @@
             <div class="col-md-6 text-center mt-2 map_cal ">
               <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
             </div>
-            <div class="col-12 mt-2 text-right">
+            <!-- <div class="col-12 mt-2 text-right">
               <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)">Filter
               </md-button>
-              <!-- <button type="button" class="btn all_button" ng-click="FilterDates(booked_from,booked_to)">Filter</button> -->
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- filters html end-->
@@ -593,7 +601,7 @@
                   ng-repeat="format in formatGroup track by $index" class="formatgridpart">
   
                   <div ng-cloak style="border-right:1px solid #ccc">
-                    <md-button class="md-grid-item-content" ng-click="toggleFormatSelection(format.id)"
+                    <md-button class="md-grid-item-content mt-2" ng-click="toggleFormatSelection(format.id)"
                       ng-class="{'red' : isFormatSelected(format.id)}" ng-if="format" style="margin:0px;padding :0px;">
                       <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                       <img ng-src="{{serverUrl + format.image}}" class="img-size">
