@@ -88,30 +88,36 @@ app.controller('GmapCtrl',
 
             // FIlter Dates
             $scope.FilterDates = function (booked_from, booked_to) {
-                productList = [];
-                locArr = [];
-                uniqueMarkers = [];
-                concentricMarkers = {};
-                var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from, booked_to };
-                $scope.plottingDone = false;
-                MapService.filterProducts(filterObj).then(function (markers) {
-                    _.each(markersOnMap, function (v, i) {
-                        v.setMap(null);
-                        $scope.Clusterer.removeMarker(v);
-                    });
-                    markersOnMap = Object.assign([]);
-                    $scope.filteredMarkers = markers;
-                    $scope.productmarkerslist = markers;
-                    $scope.processMarkers();
-                    if (markers.length > 0) {
-                        var bounds = new google.maps.LatLngBounds();
+                if(booked_from &&  booked_to){
+                    productList = [];
+                    locArr = [];
+                    uniqueMarkers = [];
+                    concentricMarkers = {};
+                    var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from, booked_to };
+                    $scope.plottingDone = false;
+                    MapService.filterProducts(filterObj).then(function (markers) {
+                        console.log(markers)
                         _.each(markersOnMap, function (v, i) {
-                            bounds.extend(v.getPosition());
+                            v.setMap(null);
+                            $scope.Clusterer.removeMarker(v);
                         });
-                    } else {
-                        toastr.error("no marker found for the criteria you selected");
-                    }
-                });
+                        markersOnMap = Object.assign([]);
+                        $scope.filteredMarkers = markers;
+                        $scope.productmarkerslist = markers;
+                        $scope.processMarkers();
+                        if (markers.length > 0) {
+                            var bounds = new google.maps.LatLngBounds();
+                            _.each(markersOnMap, function (v, i) {
+                                bounds.extend(v.getPosition());
+                            });
+                        } else {
+                            toastr.error("no marker found for the criteria you selected");
+                        }
+                    });
+                }else {
+                    return false;
+                }
+              
             };
             // FIlter Dates Ends
             $scope.hidelocations = false;

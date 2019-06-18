@@ -563,10 +563,10 @@
   
           <div class="row ml-0 mr-0">
             <div class="col-md-6 text-center mt-2 map_cal">
-              <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Start Date"></md-datepicker>
+              <md-datepicker class="form-control " ng-model="booked_from" md-placeholder="Start Date" ng-change = "FilterDates(booked_from,booked_to)"></md-datepicker>
             </div>
             <div class="col-md-6 text-center mt-2 map_cal ">
-              <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date"></md-datepicker>
+              <md-datepicker class="form-control " ng-model="booked_to" md-placeholder="End Date" ng-change="FilterDates(booked_from,booked_to)"></md-datepicker>
             </div>
             <div class="col-12 mt-2 text-right">
               <md-button class="md-raised md-primary all_button" ng-click="FilterDates(booked_from,booked_to)">Filter
