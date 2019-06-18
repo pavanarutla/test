@@ -1,8 +1,8 @@
 <div class="contbg" ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
-	<div ng-if="shortListedProducts == null" layout="colmun" layout-align="center center" class="short_imagecenter" >
+	<div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" class="short_imagecenter" >
 		<img src="assets/images/owner/Group 383.png" class="rounded mx-auto d-block" alt="...">
 	</div>
-	<div class="table-responsive contbg">
+	<div class="table-responsive contbg" ng-if="shortListedProducts.length > 0">
 		<table class="table">
 			<thead class="text_color">
 				<tr>
@@ -68,7 +68,7 @@
 		</table>
 	</div>
 	<!-- table grid end -->
-	<div class="campaign_payment_inner mb-2" ng-if="shortListedProducts != null">
+	<div class="campaign_payment_inner mb-2" ng-if="shortListedProducts.length > 0">
 		<div class="p-2 align-self-end">
 			<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
 				<div class="d-flex justify-content-end pt-4">

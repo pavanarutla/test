@@ -399,7 +399,6 @@ $scope.hidebutton = function(){
             };
             OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {             
                 if (result.status == 1) {
-                    $scope.selectedOwnerCampaign.products.length += 1;
                      $scope.productList.forEach(function(item){
                         if(item.id == $scope.adeddOwnerProductId){
                             item.added = true
@@ -419,6 +418,10 @@ $scope.hidebutton = function(){
                     });
                     toastr.success(result.message); 
                     ownerProduct.addedToCampaign = true;
+                    if(Array.isArray($scope.selectedOwnerCampaign)){
+                        $scope.selectedOwnerCampaign.products.length += 1;
+                    }
+
                 }else{
                     toastr.error(result.message);
                 }
