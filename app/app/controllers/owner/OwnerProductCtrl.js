@@ -927,16 +927,13 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.weeksArray[index].selected = true;
     }
   }
-  $scope.slotedDatesPopupClosed = function () {
-    $scope.slotsClosed = false;
-  }
-  // $scope.slotedDatesPopupClosed = function (Type) {
-  //   if(Type == 'Bulletin'){
-  //     $scope.slotsClosed = true;
-  //   }else{
-  //     $scope.digitalSlotsClosed = false;
-  //     }
-  //   }
+  $scope.slotedDatesPopupClosed = function (Type) {
+    if(Type == 'Bulletin'){
+      $scope.slotsClosed = false;
+    }else{
+      $scope.digitalSlotsClosed = false;
+      }
+    }
   $scope.blockedSlotesbtn = function (weeksArray,Type) {
     $scope.product.dates = []  
     weeksArray.filter((week) => week.selected).forEach(function (item) {
