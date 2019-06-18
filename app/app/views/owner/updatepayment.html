@@ -74,7 +74,7 @@
       </div>
   </div>
 </div>
-<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+<div layout="row" flex-offset-gt-md="70"  flex-xs="100" flex-sm="100" flex-gt-md="70"
             layout-margin="layout-margin" class="book_campowner">
         
             <div >
@@ -398,8 +398,12 @@
           <td class="table_vertical">${{payment.amount | number:2 || '0'}}</td>
           <td class="table_vertical">{{payment.comment}}</td>   
           <td class="image_tdwidth">
-              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face"
-              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;"></td>      
+            <a ng-click="paymentrefImage(payment.image)">
+                <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face"
+                class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;">
+            </a>
+              
+          </td>      
       </tr>
     </tbody>
   </table>
@@ -441,9 +445,9 @@
     </div>
   </div>
 </div> -->
+<!-- model popup payment image -->
 
-
-
+<!-- model popup payment image -->
 <script>
   function shareownerCampaign() {
     document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");

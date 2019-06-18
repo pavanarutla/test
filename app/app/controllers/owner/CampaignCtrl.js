@@ -95,6 +95,21 @@ app.controller('OwnerCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $in
     //     $mdSidenav('shareCampaignSidenav').toggle();
     // };
 
+    $scope.paymentrefImage = function (img_src) {
+        $mdDialog.show({
+            locals: { src: config.serverUrl + img_src },
+            templateUrl: 'views/owner/image-large.html',
+            fullscreen: $scope.customFullscreen,
+            clickOutsideToClose: true,
+            controller: function ($scope, src) {
+                $scope.img_src = src;
+                $scope.closeMdDialog = function () {
+                    $mdDialog.hide();
+                }
+            }
+        });
+    };
+
     /*===========================
      | MdDialogs and sidenavs end
      ===========================*/
