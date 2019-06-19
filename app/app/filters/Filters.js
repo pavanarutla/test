@@ -56,6 +56,16 @@ app.filter('dateify',function(){
     }
   }
 });
+app.filter('dateFormat',function(){
+  var currentDate = moment(new Date()).local().format('YYYY-MM-DD')
+  return function(date, format){
+    if(currentDate == moment(date).format('YYYY-MM-DD')){
+      return moment(date).local().format('LLLL').split(',')[2].split(' ')[2] + " " + moment(date).local().format('LLLL').split(',')[2].split(' ')[3];
+    }else{
+      return moment(date).local().format('llll').split(',')[1];
+    }
+  }
+});
 app.filter('jsonConvert',function(){
   return function(date){
     if(Object.prototype.toString.call(date) == "[object Array]"){

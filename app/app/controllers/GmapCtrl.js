@@ -88,30 +88,35 @@ app.controller('GmapCtrl',
 
             // FIlter Dates
             $scope.FilterDates = function (booked_from, booked_to) {
-                productList = [];
-                locArr = [];
-                uniqueMarkers = [];
-                concentricMarkers = {};
-                var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from, booked_to };
-                $scope.plottingDone = false;
-                MapService.filterProducts(filterObj).then(function (markers) {
-                    _.each(markersOnMap, function (v, i) {
-                        v.setMap(null);
-                        $scope.Clusterer.removeMarker(v);
-                    });
-                    markersOnMap = Object.assign([]);
-                    $scope.filteredMarkers = markers;
-                    $scope.productmarkerslist = markers;
-                    $scope.processMarkers();
-                    if (markers.length > 0) {
-                        var bounds = new google.maps.LatLngBounds();
+                if(booked_from &&  booked_to){
+                    productList = [];
+                    locArr = [];
+                    uniqueMarkers = [];
+                    concentricMarkers = {};
+                    var filterObj = { area: $scope.selectedAreas, product_type: $scope.selectedFormats, booked_from, booked_to };
+                    $scope.plottingDone = false;
+                    MapService.filterProducts(filterObj).then(function (markers) {
                         _.each(markersOnMap, function (v, i) {
-                            bounds.extend(v.getPosition());
+                            v.setMap(null);
+                            $scope.Clusterer.removeMarker(v);
                         });
-                    } else {
-                        toastr.error("no marker found for the criteria you selected");
-                    }
-                });
+                        markersOnMap = Object.assign([]);
+                        $scope.filteredMarkers = markers;
+                        $scope.productmarkerslist = markers;
+                        $scope.processMarkers();
+                        if (markers.length > 0) {
+                            var bounds = new google.maps.LatLngBounds();
+                            _.each(markersOnMap, function (v, i) {
+                                bounds.extend(v.getPosition());
+                            });
+                        } else {
+                            toastr.error("no marker found for the criteria you selected");
+                        }
+                    });
+                }else {
+                    return false;
+                }
+              
             };
             // FIlter Dates Ends
             $scope.hidelocations = false;
@@ -970,7 +975,18 @@ app.controller('GmapCtrl',
                     toastr.error('No product found with that tab id', 'error');
                 }
             }
-
+            $scope.ListMapView = true;
+            $scope.openRightMenu = function() {
+                $scope.ListMapView = false;
+                $mdSidenav('productList').toggle();
+             };
+             $scope.closedRightMenu = function() {
+                $scope.ListMapView = true;
+                $mdSidenav('productList').toggle();
+             };
+            //  $scope.openLeftMenu = function() {
+            //     $mdSidenav('productList').toggle();
+            //  };
             $scope.activeUserCampaigns = [];
             $scope.loadActiveUserCampaigns = function () {
                 CampaignService.getActiveUserCampaigns().then(function (result) {
@@ -1616,6 +1632,7 @@ app.controller('GmapCtrl',
             }
 
             // };
+            $scope.selectedSlotsdateDetails = [];
             $scope.totalDigitalSlotAmount = 0;
             $scope.selectUserDigitalWeeks = function (weeks, index, ev) {
                 if ($scope.numOfSlots == 0) {
@@ -1629,8 +1646,14 @@ app.controller('GmapCtrl',
                 if ($scope.weeksDigitalArray[index].selected == true) {
                     $scope.weeksDigitalArray[index].selected = false;
                     $scope.totalDigitalSlotAmount -= parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
+                    $scope.selectedSlotsdateDetails.forEach(function(item,index){
+                        if(item.startDate == moment(weeks.startDay).format('LLLL').split(',')[1]){
+                            $scope.selectedSlotsdateDetails.splice(index,1);
+                        }
+                    })
 
                 } else {
+                    $scope.selectedSlotsdateDetails.push({startDate : moment(weeks.startDay).format('LLLL').split(',')[1], endDate : moment(weeks.endDay).format('LLLL').split(',')[1],price: weeks.price})
                     $scope.totalDigitalSlotAmount += parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
                     $scope.weeksDigitalArray[index].selected = true;
 

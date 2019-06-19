@@ -223,7 +223,7 @@
 </div>
 
 <div class="contbg md-caption layout-row" layout="column">
-    <div class="md-whiteframe-4dp layout-margin col-xl-6 col-lg-6 col-md-8">
+    <div class="md-whiteframe-4dp layout-margin col-xl-6 col-lg-6 col-md-10">
         <div class="col-md-12">
             <form name="addProductForm" role="form" novalidate="novalidate">
                     <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
@@ -772,7 +772,7 @@
                 </div>
                 <div class="owner_blocked_body">
                     <div class="row" class="mt-2 mb-2">
-                        <button class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
+                        <button class="border col-2 mb-1 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
                         ng-click="selectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
                             <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
                             <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
@@ -804,9 +804,9 @@
                     </div>
                     <div class="owner_blocked_body">
                         <div class="row" class="mt-2 mb-2">
-                            <button class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat= "week in weeksDigitalArray"
+                            <button class="border col-2 mb-1 p-1 text-center cal_divcolor" ng-repeat= "week in weeksDigitalArray"
                             ng-click="digitalSelectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
-                                <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                                <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
                                 <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
                         </button>
                         <div class="col-md-8 mt-3">
