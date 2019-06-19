@@ -52,8 +52,8 @@
       padding: 5px 30px 5px 10px;
   }
   .sidenav-listview {
-    width: 440px !important;
-    max-width: 440px !important;
+    width: 500px !important;
+    max-width: 500px !important;
     z-index: 9 !important;
     height: 90vh;
     margin-top: 64px;
@@ -343,14 +343,14 @@
               <i class="material-icons">close</i>
             </a>
           </div>
-          <form name="forms.mySaveCampaignForm">
+          <form name="forms.mySaveCampaignForm" ng-submit="saveDigitalCampaignName(campaign.name,product.id,weeksDigitalArray)">
             <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
-            <div class="md-title  m-2">Let's work Together!</div>
+            <div class="md-title  m-2">Let's work Together!gfh</div>
             <div class="form-group mt-3 mr-2 ml-2">
               <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
-              <md-button class="md-raised all_button" layout-fill ng-click="saveDigitalCampaignName(campaign.name,product.id,weeksDigitalArray)" >
+              <md-button class="md-raised all_button" layout-fill type="submit">
                 pay and launch
               </md-button>
             </div>
@@ -543,11 +543,11 @@
           <span flex></span>
           <a  class="md-caption float-right pt-1 text_a" ng-click="clearFields();">Clear Filters</a>
         </div>
-        <div layout="row" class="mt-2 mb-4 search_tab md-whiteframe-2dp">
+        <div class="mt-2 mb-4 search_tab md-whiteframe-2dp">
           <md-autocomplete md-min-length="2" md-selected-item="selectedId"
             md-selected-item-change="selectFromTabIdSearch(items)" md-search-text="searchId"
             md-items="items in searchByTabId(searchId)" md-item-text="items.siteNo" placeholder="Search By Tab id"
-            md-clear-button="true" style="min-width: 100% !important">
+            md-clear-button="true">
             <md-item-template>
               <span md-highlight-text="searchId">{{items.siteNo}}, ({{items.type}})</span>
             </md-item-template>

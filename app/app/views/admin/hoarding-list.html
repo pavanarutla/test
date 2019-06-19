@@ -462,11 +462,11 @@
                                                         </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                                <!-- md-selected-item="areaObj" -->
                                                         <div class="col-sm-6">
                                                                 <label class="font-weight-bold">Search DMA</label>
-                                                                <md-autocomplete md-min-length="3"
-                                                                        md-selected-item="areaObj"
-                                                                        md-selected-item-change="selectSearchedArea(item)"
+                                                                <md-autocomplete md-min-length="3"                                                                       
+                                                                        md-selected-item-change="selectSearchedArea(item)" md-selected-item="areaObj"
                                                                         md-search-text="searchedArea"
                                                                         md-items="item in searchableAreas(searchedArea)"
                                                                         md-item-text="item.name"
@@ -978,7 +978,7 @@
                                                         {{product.panelSize}}</b>
                                                 <br> {{product.city_name}} {{product.country_name}}
                                                 <br>Facing : {{product.direction || "N/A"}}
-                                                <br>Type : {{product.format_name}}</p>
+                                                <br>Type : {{product.type}}</p>
                                 </td>
                                 <td class="table_vertical">{{product.impressions}}</td>
                                 <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
