@@ -26,15 +26,20 @@
                                 </tr>
                                 <tr>
                                     <td><b>Contact No.</b></td>
-                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}}</td>
-                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488</td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}} / {{campaignDetails.org_contact_email | capitalize}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488 / reach@billboardsindia.com</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td><b>Email</b></td>
                                     <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_email | capitalize}}
                                     </td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">
                                         reach@billboardsindia.com</td>
+                                </tr> -->
+                                <tr>
+                                    <td><b>Referred By</b></td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.referred_by || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -196,7 +201,7 @@
                     </td>
                     <td class="table_address">
                         <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b>Address</b>:
-                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo || "N/A"}}<br><b>Views</b>: {{product.impressions|| "N/A"}}
+                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo}}<br><b>Views</b>: {{product.impressions|| "N/A"}}
                             <br><b>Type</b>: {{product.type|| "N/A"}}
                     </td>
                     <td class="table_vertical ">{{product.panelSize}}</td>

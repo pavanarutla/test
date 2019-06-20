@@ -89,11 +89,6 @@
                 <i class="fa fa-times" aria-hidden="true"></i>
               </a>
           </div>
-            <!-- <div class="col-md-2 text-right">
-                <a class="md-icon-button close-btn" ng-click="toggleProductDetailSidenav()">
-                    <i class="material-icons">close</i>
-                  </a>
-            </div> -->
             <div class="col-md-8">
               <div class="row">
                 <div class="col-md-6" style="margin-right: -43px;">
@@ -107,29 +102,15 @@
             
           </div>
           <div class="row" style="margin-right:0px;">
+            
             <div class="col-md-12" style="padding-right:0px;">
-                <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                    <img ng-src="{{product.image}}" style="width:100%;height: 267px !important;padding: 0px 10px 0px 10px;" />
+                <div class="mt-2" ng-click="showProductImagePopup($event, product)">
+                    <!-- src="{{serverUrl + productmarkerslist[8].product_details[13].image[0]}}" -->
+                  <img src="{{product.image}}" style="width:100%;height: 267px !important;padding: 0px 10px 0px 10px;" />
                 </div>
             </div>
           </div>
-            <!-- <div class="row" style="margin-left: 0px;margin-right:0px;">
-                  <div class="col-md-4" style="padding-left: 0px;padding-right:0px;">
-                      <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                          <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
-                      </div>
-                  </div>
-                  <div class="col-md-4" style="padding-left: 0px;padding-right:0px;">
-                      <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                          <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
-                      </div>
-                  </div>
-                  <div class="col-md-4" style="padding-left: 0px;padding-right:0px;">
-                      <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                          <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
-                      </div>
-                  </div>
-            </div> -->
+            
           
           <div layout="row" class="mt-2 mb-2">
             <div flex="25" class="border ml-3 p-1">
@@ -183,7 +164,7 @@
             </div>
             <div class="col-md-2" style="margin-left: 20px;">
                 <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"
-                ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalSlotAmount <= 0" >Pay & Launch</md-button>
+                ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalSlotAmount <= 0" >Launch Campaign </md-button>
             </div>
           </div>
         </div>
@@ -203,7 +184,7 @@
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
               <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
-                pay and launch
+                  Launch Campaign
               </md-button>
             </div>
           </form>
@@ -274,8 +255,8 @@
           </div>
           <div class="row" style="margin-left: 0px;margin-right:0px;">
             <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
-                <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                    <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
+                <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">                                    
+                  <img ng-src="{{serverUrl + productmarkerslist[8].product_details[13].image[0]}}" style="width:100%;height: 267px !important;padding: 0px 10px 0px 10px;" />
                 </div>
             </div>
         </div>
@@ -286,20 +267,9 @@
               <p class="ml-3 mb-1"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> Your 10 second ad will be shown 1 time per 70 seconds.</p>
               <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i> Total slots available in this digital bulletin is 7 slots</p>
           </div> 
-          <!-- <div class="row" style="margin-left: 0px;margin-right:0px;">
-              <div class="col-md-6" style="padding-left:0px;padding-right: 0px;">
-                  <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                      <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
-                  </div>
-              </div>
-              <div class="col-md-6" style="padding-left:0px;padding-right: 0px;">
-                  <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
-                      <img ng-src="{{product.image}}" style="width:100%;height:100%;padding: 0px 10px 0px 10px;" />
-                  </div>
-              </div>
-          </div> -->
+        
           <h5 class="font-weight-bold ml-3 mt-3 mb-3">Select Duration, Start Date & No of slots -:
-              <select class="browser-default" ng-model = "numOfSlots" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots" style="width: 140px; background: #e9e9e9; border:none;">
+              <select class="browser-default" ng-model = "numOfSlots" id="slot" placeholder="I am" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots" style="width: 140px; background: #e9e9e9; border:none;">
                 </select>
           </h5>
 
@@ -326,12 +296,11 @@
                 <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
             </div>
             <div class="col-md-2" style="margin-left: 33px;">
-                <md-button class="md-raised md-warn Upload_font" ng-disabled="false" 
-                ng-click="shortlistSelected(product.id, weeksDigitalArray,product.type, $event)">Shortlist</md-button>
+                <md-button class="md-raised md-warn Upload_font"
+                ng-click="shortlistSelected(product.id, weeksDigitalArray,product.type, $event)" ng-disabled="totalDigitalSlotAmount <= 0">Shortlist</md-button>
             </div>
             <div class="col-md-2" style="margin-left: 20px;">
-                <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
-                ng-click="toggleExistingCampaignSidenav()">Pay & Launch</md-button>
+                <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"  ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalDigitalSlotAmount <= 0">Launch Campaign</md-button>
             </div>
           </div>
         </div>
@@ -351,7 +320,7 @@
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
               <md-button class="md-raised all_button" layout-fill type="submit">
-                pay and launch
+                  Launch Campaign
               </md-button>
             </div>
           </form>
@@ -661,6 +630,7 @@
         </a>
       </div>
       <div class="mt-2" ng-click="showProductImagePopup($event, product.image)">
+        
         <img ng-src="{{product.image}}" style="width:100%;height:270px;padding: 0px 10px 0px 10px;" />
       </div>
       <div class="ml-3 mt-2" layout="column">

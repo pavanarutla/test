@@ -241,7 +241,7 @@
     </div>
     <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng">
-    <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+    <md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}" ng-disabled="selectedOwnerCampaign.products.length <=0">view campaign</md-button>
    </div>
   </form>
   <!-- product list -->
@@ -262,7 +262,7 @@
         <tr ng-repeat="ownerProduct in productList" ng-class="{productAdded : ownerProduct.added == true}">
           <td class="image_tdwidth hide-xs">
             <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
-            <img ng-src="{{serverUrl + ownerProduct.image}}" alt="Smiley face" class="requ_size img-thumbnail">
+            <img ng-src="{{serverUrl + ownerProduct.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
           </td>
           <td class="table_address">
             <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
@@ -414,7 +414,7 @@
                                                   <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
                                               </div>
                                               <div class="col-md-4">
-                                                  <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" 
                                                   ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
                                               </div>
                                           </div>
@@ -476,7 +476,7 @@
                                                   <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
                                               </div>
                                               <div class="col-md-4" style="text-align: right;padding-right: 0px;">
-                                                  <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                  <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="totalDigitalSlotAmount <= 0"
                                                   ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksDigitalArray)">Add to campaign</md-button>
                                               </div>
                                             </div>

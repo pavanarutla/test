@@ -123,7 +123,7 @@
             <div class="" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
-                        Download Quotation
+                        Download Invoice
                     </md-button>
                 </div>
             </div>
@@ -151,7 +151,8 @@
                             <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
                             <div class="col-sm-8">
                               <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
-                                <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
+                                <option selected>Select Payment Mode</option>
+                                <option ng-repeat="paymentType in paymentTypes">{{paymentType.name}}</option>
                               </select>
                               <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
                                 Mode Is required!!
@@ -398,7 +399,8 @@
           <td class="table_vertical">${{payment.amount | number:2 || '0'}}</td>
           <td class="table_vertical">{{payment.comment}}</td>   
           <td class="image_tdwidth text-center">
-              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face"
+            <p ng-if="payment.type === 'Cash'"><b>Cash</b></p>
+              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face" ng-if="payment.type === 'Cheque' || payment.type === 'Online' || payment.type === 'Transfer'"
               class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;"></td>      
       </tr>
     </tbody>

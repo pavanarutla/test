@@ -242,7 +242,7 @@
                                     </div>
                                 </div> -->
                                 <div class="col-sm-6" ng-show='bulletinresult || DigitalResult || trasitResult'>
-                                    <label>Image Direction</label>
+                                    <label>Product Direction</label>
                                     <input type="file"
                                             class="form-control md-whiteframe-3dp"
                                             required="required" ngf-select
@@ -251,7 +251,7 @@
                                             placeholder="Upload Product Image*" required="required">
                                             <div ng-messages="hordinglistform.symbolFile.$error"
                                             ng-if="hordinglistform.symbolFile.$touched" style="color:red">
-                                            <div ng-message="required">Image Direction</div>
+                                            <div ng-message="required">Product Direction</div>
                                         </div>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                     </div>
                                 </div> -->
                                 <div class="col-sm-3" ng-show='bulletinresult'>
-                                        <label class="font-weight-bold">Select Product Date</label>
+                                        <label class="font-weight-bold">Select Booked Date</label>
                                         <div class="input-group">
                                             <input ng-model="product.dates | jsonConvert"
                                                 class="form-control md-whiteframe-3dp" type="text" name="date" readonly
@@ -328,7 +328,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
-                                            <label class="font-weight-bold">Select Product Date</label>
+                                            <label class="font-weight-bold">Select Booked Date</label>
                                             <div class="input-group">
                                                 <input ng-model="product.dates | jsonConvert"
                                                     class="form-control md-whiteframe-3dp" type="text" name="date" readonly
@@ -466,7 +466,7 @@
                                         <div ng-message="required" ng-if="files.image.length > 2">Select only 2 Images.
                                         </div>
                                     </div>
-                                    <p class="text-right mt-2"><b>Upto 2 Images</b></p>
+                                    <!-- <p class="text-right mt-2"><b>Upto 2 Images</b></p> -->
                                 </div>
                             </div>
                             <!-- <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3> -->
@@ -706,7 +706,7 @@
         <tbody>
             <tr ng-repeat="product in productList">
                 <td class="image_tdwidth hide-xs">
-                    <img src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size img-thumbnail">
+                    <img src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
 
                 </td>
                 <td class="table_address">
