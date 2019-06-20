@@ -45,6 +45,9 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
             else if(notificationType == 'product-request'){
               $location.path("admin/hoarding-list" )
             }
+            else if(notificationType == 'Owner_registartion' || notificationType == 'User_registartion'){
+              $location.path("admin/user-management" )
+            }
           }
         });
       }

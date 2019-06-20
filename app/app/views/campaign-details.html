@@ -170,7 +170,8 @@
                         <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b></br>
                             <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo || "N/A"}}<br>
                             <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
-                            <b>Type :</b> {{campaignProduct.type|| '0'}}
+                            <b>Type :</b> {{campaignProduct.type|| '0'}}</br>
+                            <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b>{{campaignProduct.booked_slots || 'N/A'}}</span>
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>
@@ -251,10 +252,10 @@
                         <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
                         ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
                     </td> -->
-    </tr>
-    </tbody>
-    </table>
-</div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 <!-- table grid end -->
 <div class="row border_quest mr-0 ml-0">
 </div>

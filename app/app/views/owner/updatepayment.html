@@ -391,7 +391,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
-          <td class="table_vertical">{{payment.updated_at | dateify | date: "dd-MMM-yyyy" || "N/A"}}</td>
+          <td class="table_vertical">{{payment.updated_at | dateFormat || "N/A"}}</td>
           <td class="table_vertical">{{payment.type || "N/A" | capitalize}}</td>
           <td class="table_vertical">{{payment.reference_no || "N/A"}}</td>
           <td class="table_vertical">{{payment.received_by || "N/A"}}</td>

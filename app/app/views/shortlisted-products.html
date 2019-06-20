@@ -28,11 +28,11 @@
 						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}}</b><br>
 							<b>Address:</b>{{ shortlisted.addressone || "N/A"}} {{ shortlisted.addresstwo || "N/A"}}<br>
 							<b>Views :</b> {{shortlisted.impressions || '0'}} Per Week<br>
-							<b>Type :</b> {{shortlisted.type || "N/A"}} Per Week<br>
+							<b>Type :</b> {{shortlisted.type || "N/A"}}<br>				<span ng-if="shortlisted.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b> {{shortlisted.booked_slots || "N/A"}}</span>			
 							<!-- Live Traffic:
 							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
 								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button> -->
-						</p>
+						</p>						
 					</td>
 					<td class="table_vertical">{{shortlisted.panelSize || "N/A"}}</td>
 					<td class="table_vertical">{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}
