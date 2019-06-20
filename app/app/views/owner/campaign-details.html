@@ -88,7 +88,7 @@
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
             layout-margin="layout-margin" class="book_campowner">
         
-            <div >
+            <div class="button_leftright">
                 <div class="dropdown">
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
@@ -140,7 +140,7 @@
                     </div>
                 </div>
             </div>
-            <div class="" style="cursor: pointer;">
+            <div class="button_leftright" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
                     ng-click="selectedFormatIndex = 0">
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
@@ -151,17 +151,17 @@
                     </md-button>
                 </div>
             </div>           
-            <div class="" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2">
+            <div class="button_leftlast" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Product</md-button>
                 </div>
             </div>
-            <div class="" ng-if="campaignDetails.status == 600 && campaignDetails.type !== 0">
+            <div class="button_leftlast" ng-if="campaignDetails.status == 600 && campaignDetails.type !== 0">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Product</md-button>
                 </div>
             </div>
-            <div class=""  ng-if="campaignDetails.status > 600">
+            <div class="button_leftlast"  ng-if="campaignDetails.status > 600">
                 <div class="md-grid-item-content hoarding-btn">
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
                         <md-button class="md-grid-item-content add_blue hide-xs">
@@ -183,7 +183,7 @@
 
             <thead class="text_color">
                 <tr>
-                    <th style="width:250px;">Product Details</th>
+                    <th class="table_firstthpadding">Product Details</th>
                     <th class="hide-xs"></th>
                     <th class="">Size</th>
                     <th class="">Booked From</th>
@@ -195,14 +195,14 @@
             </thead>
             <tbody>
                 <tr ng-repeat="product in campaignDetails.products">
-                    <td class="hide-xs image_tdwidth">
+                    <td class="hide-xs image_tdwidth table_firstthpadding">
                         <img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face"
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b>Address</b>:
-                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo}}<br><b>Views</b>: {{product.impressions|| "N/A"}}
-                            <br><b>Type</b>: {{product.type|| "N/A"}}
+                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b style="color: #44596D;">Address</b>:
+                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo}}<br><b style="color: #44596D;">Views</b>: {{product.impressions|| "N/A"}}
+                            <br><b style="color: #44596D;">Type</b>: {{product.type|| "N/A"}}
                     </td>
                     <td class="table_vertical ">{{product.panelSize}}</td>
                     <td class="table_vertical">

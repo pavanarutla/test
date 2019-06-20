@@ -78,7 +78,7 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
-        <div class="" style="cursor: pointer;">
+        <div class="button_leftright" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download Quotation
@@ -88,7 +88,7 @@
                 </md-button>               
             </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown button_leftright">
             <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
                 Share Campaign
             </md-button>
@@ -133,7 +133,7 @@
                 </form>
             </div>
         </div>
-        <div ng-hide="campaignDetails.status >= 300">
+        <div ng-hide="campaignDetails.status >= 300" class="button_leftlast">
             <div class="md-grid-item-content hoarding-btn">
                 <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
@@ -167,10 +167,10 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b></br>
-                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo}}<br>
-                            <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
-                            <b>Type :</b> {{campaignProduct.type|| '0'}}
+                        <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b><br>
+                            <b style="color: #44596D;">Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo}}<br>
+                            <b style="color: #44596D;">Views :</b> {{campaignProduct.impressions|| '0'}}<br>
+                            <b style="color: #44596D;">Type :</b> {{campaignProduct.type|| '0'}}
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>
