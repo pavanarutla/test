@@ -97,10 +97,10 @@
                         </div>
                         <div class="dropdown s_login">
                             <button type="button" class=" fst_letter dropdown-toggle" data-toggle="dropdown">
-                                {{loggedInUser.firstName.slice(0, 1)}}
+                                {{loggedInUser.firstName.slice(0, 1) | capitalize}}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px">
-                                <a class="dropdown-item" ng-href="#/profile">{{loggedInUser.firstName}}
+                                <a class="dropdown-item" ng-href="#/profile">{{loggedInUser.firstName | capitalize}}
                                     {{loggedInUser.lastName}}</a>
                                 <a class="dropdown-item" ng-href="#/campaigns"
                                     ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Campaigns</a>

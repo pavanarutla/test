@@ -61,10 +61,10 @@
                         </div>
                         <div class="dropdown s_login">
                             <button type="button" class=" fst_letter dropdown-toggle" data-toggle="dropdown">
-                                {{loggedInUser.firstName.slice(0, 1)}}
+                                {{loggedInUser.firstName.slice(0, 1) | capitalize}}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px">
-                                <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> 
+                                <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/profile">{{loggedInUser.firstName | capitalize}} {{loggedInUser.lastName}}</a> 
                                 <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a>
                                 <a class="dropdown-item" ng-href="#/owner/{{clientSlug}}/payments"> Payments</a>
                                 <!-- <a class="dropdown-item" ng-href="#/location"> Switch view</a> -->
