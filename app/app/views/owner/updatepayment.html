@@ -74,7 +74,7 @@
       </div>
   </div>
 </div>
-<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+<div layout="row" flex-offset-gt-md="70"  flex-xs="100" flex-sm="100" flex-gt-md="70"
             layout-margin="layout-margin" class="book_campowner">
         
             <div class="button_leftright">
@@ -392,16 +392,19 @@
     </thead>
     <tbody>
       <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
-          <td class="table_vertical table_firstthpadding">{{payment.updated_at | dateify | date: "dd-MMM-yyyy" || "N/A"}}</td>
+          <td class="table_vertical table_firstthpadding">{{payment.updated_at | dateFormat}}</td>
           <td class="table_vertical">{{payment.type || "N/A" | capitalize}}</td>
           <td class="table_vertical">{{payment.reference_no || "N/A"}}</td>
           <td class="table_vertical">{{payment.received_by || "N/A"}}</td>
           <td class="table_vertical">${{payment.amount | number:2 || '0'}}</td>
           <td class="table_vertical">{{payment.comment}}</td>   
           <td class="image_tdwidth text-center">
+              <a ng-click="paymentrefImage(payment.image)">
             <p ng-if="payment.type === 'Cash'"><b>Cash</b></p>
               <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face" ng-if="payment.type === 'Cheque' || payment.type === 'Online' || payment.type === 'Transfer'"
-              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;"></td>      
+              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;">
+            </a>
+            </td>      
       </tr>
     </tbody>
   </table>
@@ -443,9 +446,9 @@
     </div>
   </div>
 </div> -->
+<!-- model popup payment image -->
 
-
-
+<!-- model popup payment image -->
 <script>
   function shareownerCampaign() {
     document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
