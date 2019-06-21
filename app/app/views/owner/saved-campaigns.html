@@ -167,7 +167,7 @@
                         <td class="table_vertical">{{ownerSave.name | capitalize}}</td>
                         <td class="table_vertical">{{ownerSave.created_at | dateify | date:'dd-MM-yyyy'|| "N/A"}}</td>
                         <td class="text-center table_vertical">{{ownerSave.product_count || "N/A"}}</td>                        
-                        <td class="text-center table_vertical">{{ownerSave.est_budget || "N/A"}}</td>
+                        <td class="text-center table_vertical">{{ownerSave.act_budget || "N/A"}}</td>
                         <td class="text-center table_vertical">
                             <md-menu md-position-mode="target-right target">
                                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -194,7 +194,7 @@
                             </md-menu>
                         </td>
                         <td class="text-center table_vertical">
-                            <span class="text_color md-caption">26-09-2018,09:10Am</span>
+                            <span class="text_color md-caption">{{ownerSave.created_at | dateFormat}}</span>
                         </td>
                     </tr>
                 </tbody>

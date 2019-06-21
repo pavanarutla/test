@@ -140,7 +140,7 @@
               </tr>
             </thead>
             <tbody class="">
-              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status <= 600">
+              <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status < 700">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
@@ -192,7 +192,7 @@
                   </md-menu>
                 </td>
                 <td class="text-center table_vertical">
-                  <span class="text_color md-caption">{{campaign.updated_at || "N/A"}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
                 </td>
               </tr>
             </tbody>
@@ -217,7 +217,7 @@
               </tr>
             </thead>
             <tbody class="">
-              <tr ng-repeat="campaign in ownerCampaigns  | filter:search">
+              <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status == 700">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="table_vertical">{{campaign.name | capitalize}}</td>
                 <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
@@ -279,7 +279,7 @@
                   </md-menu>
                 </td>
                 <td class="text-center table_vertical">
-                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
                 </td>
               </tr>
             </tbody>
@@ -367,7 +367,7 @@
                   </md-menu>
                 </td>
                 <td class="text-center table_vertical">
-                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
                 </td>
               </tr>
             </tbody>
@@ -454,7 +454,7 @@
                   </md-menu>
                 </td>
                 <td class="text-center table_vertical">
-                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
+                  <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
                 </td>
               </tr>
             </tbody>

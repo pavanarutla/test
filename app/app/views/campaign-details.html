@@ -78,7 +78,7 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
-        <div class="" style="cursor: pointer;">
+        <div class="button_leftright" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download Quotation
@@ -88,7 +88,7 @@
                 </md-button>               
             </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown button_leftright">
             <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
                 Share Campaign
             </md-button>
@@ -133,7 +133,7 @@
                 </form>
             </div>
         </div>
-        <div ng-hide="campaignDetails.status >= 300">
+        <div ng-if="campaignDetails.status == 100">
             <div class="md-grid-item-content hoarding-btn">
                 <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
@@ -168,9 +168,10 @@
                     </td>
                     <td class="table_address">
                         <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b></br>
-                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo || "N/A"}}<br>
+                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo}}<br>
                             <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
-                            <b>Type :</b> {{campaignProduct.type|| '0'}}
+                            <b>Type :</b> {{campaignProduct.type|| '0'}}</br>
+                            <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b>{{campaignProduct.booked_slots || 'N/A'}}</span>
                         </p>
                     </td>
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>
@@ -251,17 +252,17 @@
                         <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
                         ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
                     </td> -->
-    </tr>
-    </tbody>
-    </table>
-</div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 <!-- table grid end -->
 <div class="row border_quest mr-0 ml-0">
 </div>
 <div class="small-wrapper mt0"  ng-if="campaignDetails.status == 100">
     <div class="smallContainer">
         <div class="payment-summary">
-            <md-button class="md-raised md-primary all_button book_campowner" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Pay & Launch Campaign</md-button>
+            <md-button class="md-raised md-primary all_button book_campowner" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
         </div>
     </div>
 </div>

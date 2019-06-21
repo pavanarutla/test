@@ -74,10 +74,10 @@
       </div>
   </div>
 </div>
-<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+<div layout="row" flex-offset-gt-md="70"  flex-xs="100" flex-sm="100" flex-gt-md="70"
             layout-margin="layout-margin" class="book_campowner">
         
-            <div >
+            <div class="button_leftright">
               <div class="dropdown">
                 <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs" style="margin-left: 30em;">
                   Share Campaign
@@ -120,14 +120,14 @@
                 </div>
               </div>
             </div>
-            <div class="" style="cursor: pointer;">
+            <div class="button_leftright" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
-                        Download Quotation
+                        Download Invoice
                     </md-button>
                 </div>
             </div>
-            <div>
+            <div class="button_leftlast">
               <div class="dropdown" style="float: right;">
                 <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
                 Add Payment
@@ -151,7 +151,8 @@
                             <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
                             <div class="col-sm-8">
                               <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
-                                <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
+                                <option selected>Select Payment Mode</option>
+                                <option ng-repeat="paymentType in paymentTypes">{{paymentType.name}}</option>
                               </select>
                               <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
                                 Mode Is required!!
@@ -380,7 +381,7 @@
   <table class="table table-hover">
     <thead class="text_color">
       <tr>
-          <th>Date</th>
+          <th class="table_firstthpadding">Date</th>
           <th>Mode of Payment</th>
           <th>Reference No.</th>
           <th>Received By</th>
@@ -391,15 +392,19 @@
     </thead>
     <tbody>
       <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
-          <td class="table_vertical">{{payment.updated_at | dateify | date: "dd-MMM-yyyy" || "N/A"}}</td>
+          <td class="table_vertical table_firstthpadding">{{payment.updated_at | dateFormat}}</td>
           <td class="table_vertical">{{payment.type || "N/A" | capitalize}}</td>
           <td class="table_vertical">{{payment.reference_no || "N/A"}}</td>
           <td class="table_vertical">{{payment.received_by || "N/A"}}</td>
           <td class="table_vertical">${{payment.amount | number:2 || '0'}}</td>
           <td class="table_vertical">{{payment.comment}}</td>   
           <td class="image_tdwidth text-center">
-              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face"
-              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;"></td>      
+              <a ng-click="paymentrefImage(payment.image)">
+            <p ng-if="payment.type === 'Cash'"><b>Cash</b></p>
+              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face" ng-if="payment.type === 'Cheque' || payment.type === 'Online' || payment.type === 'Transfer'"
+              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;">
+            </a>
+            </td>      
       </tr>
     </tbody>
   </table>
@@ -441,9 +446,9 @@
     </div>
   </div>
 </div> -->
+<!-- model popup payment image -->
 
-
-
+<!-- model popup payment image -->
 <script>
   function shareownerCampaign() {
     document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");

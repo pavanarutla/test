@@ -159,7 +159,7 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
     class="book_campowner">
-        <div class="" style="cursor: pointer;">
+        <div class="button_leftright" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download Quotation
@@ -169,12 +169,12 @@
                 </md-button>               
             </div>
         </div>
-        <div class="" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
+        <div class="button_leftright" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
                 <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Product</md-button>
             </div>
         </div>
-        <div class="">
+        <div class="button_leftright">
             <div class="dropdown">
                 <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-xs">
                     Share Campaign
@@ -221,7 +221,7 @@
                 </div>
             </div>
         </div>
-        <div class="" ng-hide="campaignDetails.status <= 300">
+        <div class="button_leftlast" ng-hide="campaignDetails.status <= 300">
             <div class="md-grid-item-content hoarding-btn">
                     <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue hide-xs" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300">
                     Payment Details
@@ -268,7 +268,7 @@
                     <td class="table_address">
                         <p class="">
                             <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.area_name}}
-                                {{ campaignProduct.panelSize}}</b><br />Address : {{ campaignProduct.addressone}} &nbsp; {{ campaignProduct.addresstwo}} <br />Views :
+                                {{ campaignProduct.panelSize}}</b><br /><b style="color: #44596D;">Address :</b> {{ campaignProduct.addressone}} &nbsp; {{ campaignProduct.addresstwo}} <br /><b style="color: #44596D;">Views :</b>
                             {{campaignProduct.impressions || '0'}} Per week<br />
                             <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
                         </p>

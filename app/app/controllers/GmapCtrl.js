@@ -298,6 +298,21 @@ app.controller('GmapCtrl',
             $scope.pointermap = function () {
                 $scope.ispointer = !$scope.ispointer;
             };
+            // $scope.showProductImagePopup = function (ev, img_src) {
+            //     $mdDialog.show({
+            //         locals: { src: img_src },
+            //         templateUrl: 'views/image-popup-large.html',
+            //         fullscreen: $scope.customFullscreen,
+            //         clickOutsideToClose: true,
+            //         controller: function ($scope, src) {
+            //             $scope.img_src = src;
+            //             $scope.closeMdDialog = function () {
+            //                 $mdDialog.hide();
+            //             }
+            //         }
+            //     });
+            // };
+             // need to check
             $scope.showProductImagePopup = function (ev, img_src) {
                 $mdDialog.show({
                     locals: { src: img_src },
@@ -305,13 +320,15 @@ app.controller('GmapCtrl',
                     fullscreen: $scope.customFullscreen,
                     clickOutsideToClose: true,
                     controller: function ($scope, src) {
-                        $scope.img_src = src;
+                        $scope.img_src_0 = src.image;
+                        $scope.img_src_1 = src.f_image;
                         $scope.closeMdDialog = function () {
                             $mdDialog.hide();
                         }
                     }
                 });
             };
+             // need to check
             $scope.selectedCountry = {};
             $scope.selectedStates = {};
             $scope.selectedcitys = {};
@@ -946,7 +963,11 @@ app.controller('GmapCtrl',
                     $scope.mapObj.fitBounds(bounds);
                     $scope.product.id = refToMapMarker.properties['id'];
                     $scope.product.price = refToMapMarker.properties['price'];
-                    $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
+                    // $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
+                    // need to check
+                    $scope.product.image = config.serverUrl + refToMapMarker.properties.image[0];
+                    $scope.product.f_image = config.serverUrl + refToMapMarker.properties.image[1];
+                     // need to check
                     $scope.product.siteNo = refToMapMarker.properties['siteNo'];
                     $scope.product.panelSize = refToMapMarker.properties['panelSize'];
                     $scope.product.type = refToMapMarker.properties['type'];
