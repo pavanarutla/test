@@ -21,11 +21,11 @@
                                 </tr>
                                 <tr>
                                     <td><b>Client Name</b></td>
-                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A" | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact No.</b></td>
+                                    <td><b>Contact</b></td>
                                     <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}} / {{campaignDetails.org_contact_email | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488 / reach@billboardsindia.com</td>
                                 </tr>
@@ -38,7 +38,7 @@
                                 </tr> -->
                                 <tr>
                                     <td><b>Referred By</b></td>
-                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.referred_by || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.referred_by || "N/A" | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                             </tbody>
@@ -246,7 +246,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 </div>
-                                                <div class="modal-footer modal_top">
+                                                <div class="modal-footer modal_top" style="padding-top: 20px;">
                                                         <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">Yes</button>
                                                         <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
                                                 </div>
