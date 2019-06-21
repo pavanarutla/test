@@ -149,9 +149,18 @@
             </div>
             <div class="button_leftright" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
-                    ng-click="selectedFormatIndex = 0">
+                    ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status <= 800">
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Quotation
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
+                        Download
+                    </md-button>
+                </div>
+				  <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
+                    ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
+                        Download Invoice
                     </md-button>
                     <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
                         Download
