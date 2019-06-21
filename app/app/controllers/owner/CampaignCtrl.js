@@ -1016,6 +1016,15 @@ $scope.hidebutton = function(){
             }
         });
     };
+    $scope.downloadOwnerPop = function (campaignId) {
+        OwnerCampaignService.generatepop(campaignId).then(function (result) {
+            var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+            FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+            if (result.status) {
+                toastr.error(result.meesage);
+            }
+        });
+    };
     // if ($rootScope.currStateName == 'owner.update-payments') {
 
     // }

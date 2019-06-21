@@ -87,7 +87,14 @@
 
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
             layout-margin="layout-margin" class="book_campowner">
-        
+            <div class="button_leftright" style="cursor: pointer;">
+                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
+                        ng-click="selectedFormatIndex = 0">
+                        <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
+                            Download POP
+                        </md-button>                       
+                    </div>
+                </div> 
             <div class="button_leftright">
                 <div class="dropdown">
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
