@@ -328,7 +328,7 @@ app.controller('GmapCtrl',
                     }
                 });
             };
-            $scope.showProductDate = function () {
+            $scope.showProductDate = function (ev,product) {
                 $mdDialog.show({
                     templateUrl: 'views/map-calendar-popup.html',
                     fullscreen: $scope.customFullscreen,
