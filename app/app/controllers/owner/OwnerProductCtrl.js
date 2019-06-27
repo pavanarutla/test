@@ -45,6 +45,38 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Sidenavs and popups ends
   ========================*/
 
+  $scope.showBlockDate = function () {
+    $mdDialog.show({
+        templateUrl: 'views/map-calendar-popup.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose: true,
+        controller: function ($scope) {
+            $scope.closeMdDialog = function () {
+                $mdDialog.hide();
+            }
+        }
+    });
+};
+
+/*===================
+Colipos  ===================*/
+  $scope.choices = [{id: 'Strength 1', name: 'Strength 1'}, {id: 'Strength 2', name: 'Strength 2'}, {id: 'Strength 3', name: 'Strength 3'}];
+   
+   $scope.addNewChoice = function() {
+     var newItemNo = $scope.choices.length+1;
+     $scope.choices.push({'id' : 'Strength' + newItemNo, 'name' : 'Strength ' + newItemNo});
+   };   
+   $scope.removeNewChoice = function() {
+     var newItemNo = $scope.choices.length-1;
+     if ( newItemNo !== 0 ) {
+      $scope.choices.pop();
+     }
+   };   
+   $scope.showAddChoice = function(choice) {
+     return choice.id === $scope.choices[$scope.choices.length-1].id;
+   };
+
+
   /*===================
   | Pagination
   ===================*/
