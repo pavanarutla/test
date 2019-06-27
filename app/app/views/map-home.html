@@ -67,6 +67,7 @@
 .md-datepicker-input{
   font-size: 12px;
 }
+
   </style>
   <div layout="column" style="position:relative">
   
@@ -78,93 +79,109 @@
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
-            <div class="col-md-8">
+            <div class="col-md-11">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
             </div>
-            <div class="col-md-3 text-right pr-0 mt-3">
-                <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
+            <div class="col-md-1 text-right mt-3">
+                <a class="close-btn" ng-click="toggleProductDetailSidenav()">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
             </div>
-          <div class="col-md-1 text-right pr-0 mt-3">
-              <a class=" close-btn" ng-click="toggleProductDetailSidenav()">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </a>
-          </div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-6" style="margin-right: -43px;">
-                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Size:</span> {{product.panelSize}}</h6>
-                </div>
-                <div class="col-md-6">
-                    <h6 class="ml-3 mt-1"><span class="font-weight-bold">Type:</span> {{product.type}}</h6>
-                </div>
-              </div>
-            </div>
-            
           </div>
           <div class="row" style="margin-right:0px;">
-            
             <div class="col-md-12" style="padding-right:0px;">
                 <div class="mt-2" ng-click="showProductImagePopup($event, product)">
-                    <!-- src="{{serverUrl + productmarkerslist[8].product_details[13].image[0]}}" -->
                   <img src="{{product.image}}" style="width:100%;height: 267px !important;padding: 0px 10px 0px 10px;" />
                 </div>
             </div>
           </div>
             
-          
-          <div layout="row" class="mt-2 mb-2">
-            <div flex="25" class="border ml-3 p-1">
-              <p class="text-muted mb-2 ml-2">Views</p>
-              <h6 class="font-weight-bold ml-2">{{product.impressions}}</h6>
-              <p class=" ml-2">Per 4 Weeks</p>
-            </div>
-            <div flex="30" class="border ml-3 mr-3 p-1 ">
-              <p class="text-muted mb-2 ml-2">Demographic</p>
-              <h6 class="font-weight-bold ml-2">{{product.demographicsage}}</h6>
-            </div>           
-            <div flex="45" class="border mr-3 p-1">
-              <p class="text-muted mb-2 ml-2">Address</p>
-              <h6 class="font-weight-bold ml-2">{{product.addressone}}{{product.addresstwo}}</h6>
-            </div>
-          </div>
-          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration :</h5>
-          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;This Bulletin minimum booking is 4 weeks.</p>
-          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;There after you can select your bookings in multiples of two weeks.</p>
-          <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Price includes all taxes and productions charges</p>
-          <div layout="row" class="mt-2 ml-3 mb-2 mr-3 mostly-customized-scrollbar">
-            <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
-             ng-click="selectHordingWeeks(weeks)"
-             ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
-              <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
-              <h3 class="md-body-2 setect_padbottom">${{weeks.price}}</h3>
-            </a>
-          </div>
-  
-          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Start Date :</h5>
-          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;The posters will be placed between Monday and Friday of your first selected week.</p>
-          <p class="ml-3 mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;A specific day cannot be guaranteed.</p>
-          <p class="ml-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;However, the poster will run for the amount of paid weeks.</p>
-          <div layout="row" id="scrollFind" class="mt-2 ml-3 mb-2 mr-3 mostly-customized-scrollbar" >
-            <a class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
-              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
-              ng-disabled="week.isBlocked && week.isBlocked == true">
-              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
-              <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots }}</h3>
-            </a>
+          <div class="row mt-2" style="margin-right:0px;">
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Type</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.type}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Size</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.panelSize}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Venue</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: Sport Stadium</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Address</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.addressone}}{{product.addresstwo}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Ethinicity</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: General</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Demographic</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="ml-2">: Age: 18 - 24 : <span class="font-weight-bold">25%</span><br>
+                      &nbsp;&nbsp;Age: 25 - 40 : <span class="font-weight-bold">55%</span><br>
+                      &nbsp;&nbsp;Age: 40 - 80 : <span class="font-weight-bold">20%</span>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Impressions</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.impressions}} per week</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Price</p>
+                </div>
+                <div class="col-md-5">
+                    <p class="font-weight-bold mb-1 ml-2">: $ {{product.price}} for 28 days</p>
+                </div>
+                <div class="col-md-4 text-right">
+                    <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
+                </div>
           </div> 
-          
-          <!-- <span class="mt-1 ml-3 mb-1">Jan 1 - Jan 28 - $4500</span> -->
+          <hr class="ml-3 mr-3">
+          <ul style="list-style: disc;padding-left: 28px;">
+            <li>This Bulletin minimum booking is 4 weeks.</li>
+            <li>There after you can select your bookings in multiples of two weeks.</li>
+            <li>Price includes all taxes and productions charges</li>
+          </ul>
+          <hr class="ml-3 mr-3">
+
+          <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
+            <div class="row mt-2 mb-2" style="margin-right:0px;">
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Dates Selected</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <i class="material-icons">edit</i></p>
+                </div>
+                <div class="col-md-3">
+                    <p class="mb-1 ml-3">Total Price</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="mb-1 ml-2">: <span class="font-weight-bold">$ 1450000</span> ( 34 Days selected )</p>
+                </div>
+            </div>
           <div class="row pb-3" style="margin-right:0px;">
-            <div class="col-md-6">
-                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalSlotAmount || 0}}</h5>
-            </div>
-            <div class="col-md-2" style="margin-left: 12px;">
+              <div class="col-md-3 ml-3">
+                  <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="showProductDate($event, product)">Select Dates</md-button>
+              </div>
+            <div class="offset-md-5 col-md-3">
                 <md-button class="md-raised md-warn Upload_font"                 
-                ng-click="shortlistSelected(product.id, weeksArray, $event)"  ng-disabled="totalSlotAmount <= 0">Shortlist</md-button>
-            </div>
-            <div class="col-md-2" style="margin-left: 20px;">
-                <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"
-                ng-click="toggleExistingCampaignSidenav()" ng-disabled="totalSlotAmount <= 0" >Launch Campaign </md-button>
+                ng-click="shortlistSelected(product.id, weeksArray, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">Shortlist</md-button>
             </div>
           </div>
         </div>

@@ -328,6 +328,18 @@ app.controller('GmapCtrl',
                     }
                 });
             };
+            $scope.showProductDate = function () {
+                $mdDialog.show({
+                    templateUrl: 'views/map-calendar-popup.html',
+                    fullscreen: $scope.customFullscreen,
+                    clickOutsideToClose: true,
+                    controller: function ($scope) {
+                        $scope.closeMdDialog = function () {
+                            $mdDialog.hide();
+                        }
+                    }
+                });
+            };
              // need to check
             $scope.selectedCountry = {};
             $scope.selectedStates = {};
