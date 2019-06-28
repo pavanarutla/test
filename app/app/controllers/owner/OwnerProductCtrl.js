@@ -59,6 +59,25 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
 };
 
 /*===================
+Form Age  ===================*/
+
+$scope.FromTo = [{id: 'From', name: 'From'}];
+   
+   $scope.addNewFromTo = function() {
+     var newItemNo = $scope.FromTo.length+1;
+     $scope.FromTo.push({'id' : 'From' + newItemNo, 'name' : 'From ', 'id' : 'To' + newItemNo, 'name2' : 'To '});
+   };   
+   $scope.removeNewChoice = function() {
+     var newItemNo = $scope.FromTo.length-1;
+     if ( newItemNo !== 0 ) {
+      $scope.FromTo.pop();
+     }
+   };   
+   $scope.showAddFromTo = function(from) {
+     return from.id === $scope.FromTo[$scope.FromTo.length-1].id;
+   };
+
+/*===================
 Colipos  ===================*/
   $scope.choices = [{id: 'Strength 1', name: 'Strength 1'}, {id: 'Strength 2', name: 'Strength 2'}, {id: 'Strength 3', name: 'Strength 3'}];
    
