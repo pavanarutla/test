@@ -263,6 +263,8 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.unavailalbeDateRanges = dateRanges;
       $(ev.target).parents().eq(3).find('input').trigger('click');
     });
+    $(ev.target).parents().eq(3).find('input').trigger('click');
+
   }
   // SHORT-LIST ENDs
   // Save-camp

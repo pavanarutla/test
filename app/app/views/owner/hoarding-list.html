@@ -332,7 +332,7 @@ md-icon{
                                         <div ng-message="required">Date is required.</div>
                                     </div>
                                 </div> -->
-                                <div class="col-sm-3" ng-show='bulletinresult'>
+                                <!-- <div class="col-sm-3">
                                         <label class="font-weight-bold">Select Booked Date</label>
                                         <div class="input-group">
                                             <input ng-model="product.dates | jsonConvert"
@@ -347,8 +347,20 @@ md-icon{
                                             style="color:red">
                                             <div ng-message="required">Date is required.</div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                                    </div> -->
+                                    <div class="col-sm-3">
+                                            <label>Select Product Date</label>
+                                            <div class="input-group">
+                                                <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                                <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
+                                                    <i class="material-icons">
+                                                        calendar_today
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                </div>
+                                    <!-- <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
                                             <label class="font-weight-bold">Select Booked Date</label>
                                             <div class="input-group">
                                                 <input ng-model="product.dates | jsonConvert"
@@ -363,7 +375,7 @@ md-icon{
                                                 style="color:red">
                                                 <div ng-message="required">Date is required.</div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                 <div class="col-sm-3" ng-show='bulletinresult'>
                                     <label class="font-weight-bold">Cancellation</label>
                                     <select ng-model="product.cancellation" name="cancellation"

@@ -18,8 +18,17 @@
       background: #f00 !important;
     }
     .daterangepicker {
-        top:40% !important;
+      top: 50% !important;
+    /* right: auto !important; */
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    padding: 40px;
     }
+    .daterangepicker .calendar-table td,
+.daterangepicker .calendar-table th {
+  width: 41px !important;
+    height: 41px !important;
+}
     .addWeekColor{
       background-color: #f00;
       color:white;
@@ -175,13 +184,41 @@
                     <p class="mb-1 ml-2">: <span class="font-weight-bold">$ 1450000</span> ( 34 Days selected )</p>
                 </div>
             </div>
+            
           <div class="row pb-3" style="margin-right:0px;">
-              <div class="col-md-3 ml-3">
+              <!-- <div class="col-md-3 ml-3">
                   <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="showProductDate($event, product)">Select Dates</md-button>
-              </div>
-            <div class="offset-md-5 col-md-3">
+              </div> -->
+              <div layout="column" class=" mt-2" style="padding:8px">
+                  <div class="form-group mb-2 mt-2" id="hideCalenderInput">
+                    <input date-range-picker ng-model="ranges.selectedDateRanges" 
+                     custom-options="customOptions" class="form-control md-whiteframe-3dp date-picker"
+                      placeholder="Product date" type="text" name="date" readonly options="mapProductOpts"
+                      id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                    
+                    <div class="input-group" style="z-index: 0;">
+                      <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
+                        class="form-control">
+                      <div class="input-group-addon" id="calender-autolaod-div" ng-click="getProductUnavailableDates(product.id, $event);">
+                        <a>
+                          <i class="material-icons">
+                            calendar_today
+                          </i>
+                        </a>
+                      </div>
+                    </div>
+                    <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
+                      <div ng-message="required">Date is required.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2" style="margin-left: 20px;" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
+                    <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"
+                    ng-click="toggleExistingCampaignSidenav()" >Book Product </md-button>
+                </div>
+            <div class="offset-md-5 col-md-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
                 <md-button class="md-raised md-warn Upload_font"                 
-                ng-click="shortlistSelected(product.id, weeksArray, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">Shortlist</md-button>
+                ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">Shortlist</md-button>
             </div>
           </div>
         </div>
@@ -200,7 +237,7 @@
               <input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">
             </div>
             <div layout="column" class="mr-2 ml-2 mb-3">
-              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,weeksArray)" >
+              <md-button class="md-raised all_button" layout-fill ng-click="saveCampaignName(campaign.name,product.id,ranges.selectedDateRanges)" >
                   Launch Campaign
               </md-button>
             </div>
@@ -241,15 +278,14 @@
     <!-- Selected product detail sidenav ends-->
 
     <!--Select product detail for digital sidenav start-->
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="digitalProductDetails"
+    <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="digitalProductDetails"
       style="z-index:10 !important;width: 500px !important;max-width:500px !important;" >
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
             <div class="col-md-8">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
-                <!-- <h6 class="ml-3 mt-1"><span class="font-weight-bold">Size:</span> {{product.panelSize}}</h6>
-                <h6 class="ml-3 mt-1"><span class="font-weight-bold">Type:</span> {{product.type}}</h6> -->
+               
               </div>
               <div class="col-md-3 text-right pr-0 mt-3">
                   <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
@@ -290,10 +326,7 @@
                 </select>
           </h5>
 
-          <!-- <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
-              <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
-              
-            </div> -->
+          
             
                
               
@@ -370,7 +403,7 @@
         </div>
       </md-content>
   
-    </md-sidenav>
+    </md-sidenav> -->
     <!--Select product detail for digital sidenav end -->
   
     <!-- Share Campaign Sidenav -->
@@ -671,7 +704,7 @@
           <div class="md-caption"></div>
         </div>
       </div>
-      <div layout="column" class=" mt-2" style="padding:8px">
+      <!-- <div layout="column" class=" mt-2" style="padding:8px">
         <div class="md-body-2 text-left mb-2">Product Availability</div>
         <div class="form-group mb-2 mt-2">
           <input date-range-picker ng-model="ranges.selectedDateRanges" class="form-control md-whiteframe-3dp date-picker"
@@ -690,7 +723,7 @@
             <div ng-message="required">Date is required.</div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div layout="row" class="pb-3" layout-margin layout-align="space-between end">
         <md-button layout-fill class="md-raised md-warn Upload_font" ng-disabled="ranges.selectedDateRanges.length == 0" ng-if="!alreadyShortlisted"
           ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)">Shortlist</md-button>
