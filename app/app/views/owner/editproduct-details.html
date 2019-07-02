@@ -604,37 +604,16 @@
                         <label class="font-weight-bold">Price for 28 Days</label>
                         <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp"
                          type="text" name="price" />
-                        <!-- <div ng-messages="hordinglistform.price.$error" ng-if="hordinglistform.price.$touched"
-                            style="color:red">
-                            <div ng-message="required">Price is required.</div>
-                        </div> -->
                     </div>
-                    <div class="col-sm-3" ng-show="editRequestedhordings.type == 'Bulletin'">
-                        <label class="font-weight-bold">Select Product Date</label>
-                        <div class="input-group">
-                            <input  ng-model="product.dates | jsonConvert"
-                                class="form-control md-whiteframe-3dp" type="text" name="date"
-                                readonly id="booking_dates_picker" />
-                            <a class="input-group-addon md-whiteframe-3dp"
-                                ng-click="slotsClosed = true; getProductUnavailableDatesEdit(editRequestedhordings.type)"
-                                style="padding: 4px 8px;">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-3" ng-show="editRequestedhordings.type !== 'Bulletin'">
-                            <label class="font-weight-bold">Select Product Date</label>
-                            <div class="input-group">
-                                <input  ng-model="product.dates | jsonConvert"
-                                    class="form-control md-whiteframe-3dp" type="text" name="date"
-                                    readonly id="booking_dates_picker" />
-                                <a class="input-group-addon md-whiteframe-3dp"
-                                    ng-click="digitalSlotsClosed = true; getProductUnavailableDatesEdit(editRequestedhordings.type)"
-                                    style="padding: 4px 8px;">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <div class="col-sm-6">
+                        <label>Select Product Date</label>
+                        <div class="input-group">                                                
+                            <input date-range-picker ng-model="editRequestedhordings.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" disabled readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(editRequestedhordings.id,$event);">
+                                    <i class="material-icons"> calendar_today </i>
                                 </a>
-                            </div>
                         </div>
+                    </div>                   
                     <div class="col-sm-3" ng-show='bulletinresult'>
                         <label class="font-weight-bold">Cancellation</label>
                         <select ng-model="editRequestedhordings.cancellation" name="cancellation"

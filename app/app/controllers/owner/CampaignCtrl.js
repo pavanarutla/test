@@ -123,50 +123,50 @@ $scope.hidebutton = function(){
     /*================================
      | Multi date range picker options
      ================================*/
-    // $scope.suggestProductOpts = {
-    //     multipleDateRanges: true,
-    //     opens: 'center',
-    //     locale: {
-    //         applyClass: 'btn-green',
-    //         applyLabel: "Book Now",
-    //         fromLabel: "From",
-    //         format: "DD-MMM-YY",
-    //         toLabel: "To",
-    //         cancelLabel: 'Cancel',
-    //         customRangeLabel: 'Custom range'
-    //     },
-    //     isInvalidDate: function (dt) {
-    //         for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-    //             if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-    //                 return true;
-    //             }
-    //         }
-    //         if (moment(dt) < moment()) {
-    //             return true;
-    //         }
-    //     },
-    //     isCustomDate: function (dt) {
-    //         for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-    //             if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-    //                 if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
-    //                     return ['red-blocked', 'left-radius'];
-    //                 } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
-    //                     return ['red-blocked', 'right-radius'];
-    //                 } else {
-    //                     return 'red-blocked';
-    //                 }
-    //             }
-    //         }
-    //         if (moment(dt) < moment()) {
-    //             return 'gray-blocked';
-    //         }
-    //     },
-    //     eventHandlers: {
-    //         'apply.daterangepicker': function (ev, picker) {
-    //             //selectedDateRanges = [];
-    //         }
-    //     },
-    // };
+     $scope.suggestProductOpts = {
+        multipleDateRanges: true,
+        opens: 'center',
+        locale: {
+            applyClass: 'btn-green',
+            applyLabel: "Book Now",
+            fromLabel: "From",
+            format: "DD-MMM-YY",
+            toLabel: "To",
+            cancelLabel: 'Cancel',
+            customRangeLabel: 'Custom range'
+        },
+        isInvalidDate: function (dt) {
+            for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+                if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                    return true;
+                }
+            }
+            if (moment(dt) < moment()) {
+                return true;
+            }
+        },
+        isCustomDate: function (dt) {
+            for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+                if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                    if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                        return ['red-blocked', 'left-radius'];
+                    } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                        return ['red-blocked', 'right-radius'];
+                    } else {
+                        return 'red-blocked';
+                    }
+                }
+            }
+            if (moment(dt) < moment()) {
+                return 'gray-blocked';
+            }
+        },
+        eventHandlers: {
+            'apply.daterangepicker': function (ev, picker) {
+                //selectedDateRanges = [];
+            }
+        },
+    };
     /*====================================
      | Multi date range picker options end
      ====================================*/
@@ -371,55 +371,21 @@ $scope.hidebutton = function(){
         });
     }
 
-    $scope.suggestProductForOwnerCampaign = function (ownerProduct,weeksArray) {
-        ownerProduct.dates  = [];
-        if(ownerProduct.type == "Bulletin"){
-            var startAndEndDates = weeksArray.filter((week)=>week.selected)
-            startAndEndDates.forEach(function(item,index){
-                if(startAndEndDates.length == 1){
-                    ownerProduct.dates.push({startDate:moment(item.startDay).format('YYYY-MM-DD'),endDate:moment(item.endDay).format('YYYY-MM-DD')})
-    
-                    }else{
-                        if(index == 0){
-                            ownerProduct.dates.push({startDate:moment(item.startDay).format('YYYY-MM-DD')})  
-                        }else{
-                            if(index == (startAndEndDates.length -1)){
-                                ownerProduct.dates[0].endDate = moment(item.endDay).format('YYYY-MM-DD')
-                        }
-                }
-            }
-                
-            })
-                
-        }else{
-            var startAndEndDates = weeksArray.filter((week)=>week.selected)
-            startAndEndDates.forEach(function(item,index){
-            ownerProduct.dates.push({
-                startDate:moment(item.startDay).format('YYYY-MM-DD'),
-                endDate:moment(item.endDay).format('YYYY-MM-DD')
-            })
-        })
-        }
+    $scope.suggestProductForOwnerCampaign = function (ownerProduct) {
         if (!localStorage.selectedOwnerCampaign) {
             toastr.error("No Campaign is seleted. Please select which campaign you're adding this product in to.")
         } else {
             var postObj = {
                 campaign_id: JSON.parse(localStorage.selectedOwnerCampaign).id,
                 product: {
-                    id: $scope.adeddOwnerProductId,
-                    booked_slots: $scope.digitalNumOfSlots.value,
-                    booking_dates: ownerProduct.dates,
-                    price: (ownerProduct.type == "Bulletin") ? $scope.ownerTotalPrice : $scope.totalDigitalSlotAmount
+                    id: ownerProduct.id,
+                    booking_dates: ownerProduct.booking_dates,
+                    price: ownerProduct.default_price,
+                    views:ownerProduct.impressions
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {             
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {              
                 if (result.status == 1) {
-                     $scope.productList.forEach(function(item){
-                        if(item.id == $scope.adeddOwnerProductId){
-                            item.added = true
-                        }
-                        $scope.toggleProductDetailSidenav(ownerProduct);
-                    })
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
                         $scope.campaignActBudget = updatedCampaignData.act_budget;
@@ -427,43 +393,23 @@ $scope.hidebutton = function(){
                             if (product.id == ownerProduct.id) {
                                 product.alreadyAdded = true;
                             }
-                            return product;                            
+                            return product;
                         });
-                        //$state.reload();
                     });
-                    toastr.success(result.message); 
-                    ownerProduct.addedToCampaign = true;
-                    if(Array.isArray($scope.selectedOwnerCampaign)){
-                        $scope.selectedOwnerCampaign.products.length += 1;
-                    }
-
-                }else{
+                    toastr.success(result.message);
+                    $state.reload();
+                } else {
                     toastr.error(result.message);
                 }
             });
         }
     }
-
     
-    $scope.getProductUnavailableDates = function (productId, ev,price,productType,slots) {
-        digitalSlots =0;
-        $scope.digitalSlots = [];
-        if(price){
-            $scope.adeddOwnerProductId = productId;
-            $scope.ownerProductPrice = price;
-            digitalSlots = slots
-        }
-        if(productType  == "Transit" || productType  == "Digital Bulletin"){
-            OwnerProductService.getProductDigitalUnavailableDates(productId).then(function (dateRanges) {
-                $scope.unavailalbeDateRanges = dateRanges;
-                productDatesDigitalCalculator()
-            });
-        }else{
-            OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-                $scope.unavailalbeDateRanges = dateRanges;
-                productDatesCalculator()
-            });
-        }
+    $scope.getProductUnavailableDates = function (productId, ev) {
+        OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
+            $scope.unavailalbeDateRanges = dateRanges;
+            $(ev.target).parent().parent().find('input').trigger('click');
+        });
     }
 
     /* ============================
