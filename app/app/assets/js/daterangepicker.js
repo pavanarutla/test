@@ -72,7 +72,7 @@
             this.drops = 'up';
 
         this.buttonClasses = 'btn btn-sm';
-        this.applyButtonClasses = 'btn-primary';
+        this.applyButtonClasses = 'btn-danger';
         this.cancelButtonClasses = 'btn-default';
         
 
