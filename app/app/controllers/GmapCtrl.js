@@ -519,6 +519,7 @@ app.controller('GmapCtrl',
             }
 
             function selectSpideredMarker(marker) {
+                // console.log('marker',marker)
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setMap(null);
@@ -1417,8 +1418,14 @@ app.controller('GmapCtrl',
                     });
                 }else{
                     MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
-                        console.log(blockedDatesAndSlots)
-                        $scope.unavailalbeDateRanges = blockedDatesAndSlots;
+                        // console.log(blockedDatesAndSlots)
+                        $scope.unavailalbeDateRanges = [];
+                        // console.log('product',$scope.product)
+                        blockedDatesAndSlots.forEach((item)=>{
+                            if(item.booked_slots == $scope.product.availableDates){
+                                $scope.unavailalbeDateRanges.push(item);
+                            }
+                        })
                         $(ev.target).parents().eq(3).find('input').trigger('click') ;
                     })
                 }
