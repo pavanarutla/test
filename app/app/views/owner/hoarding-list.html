@@ -108,7 +108,7 @@ md-icon{
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product
             </md-button>
-            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown mostly-customized-scrollbar" style="width:680px;height:75vh;overflow: auto">
+            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown mostly-customized-scrollbar" style="width:730px;height:75vh;overflow: auto">
                 <form name="hordinglistform" novalidate="novalidate" style="position:relative;">
                     <div layout="colmun">
                         <span flex></span>
@@ -205,7 +205,7 @@ md-icon{
                                         <div ng-message="required">Width required</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" ng-show='bulletinresult'>
+                                <div class="col-sm-2">
                                     <label class="font-weight-bold">Lit </label>
                                     <select ng-model="product.lighting" name="light"
                                         class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -224,22 +224,80 @@ md-icon{
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label class="font-weight-bold">Street Address 1</label>
+                                    <label class="font-weight-bold">Venue</label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" ng-model="product.venue" name="venue">                                   
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="font-weight-bold">Street Address</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="addressone"
-                                        ng-model="product.addressone" required>
+                                        ng-model="product.address" required>
                                     <div ng-messages="hordinglistform.addressone.$error"
                                         ng-if="hordinglistform.addressone.$touched" style="color:red">
                                         <div ng-message="required">Address required</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label class="font-weight-bold">Street Address 2</label>
-                                    <input type="text" class="form-control md-whiteframe-3dp" name="addresstwo"
-                                        ng-model="product.addresstwo">                                   
-                                </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">City</label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="city"
+                                        ng-model="product.city" required>
+                                    <div ng-messages="hordinglistform.city.$error"
+                                        ng-if="hordinglistform.city.$touched" style="color:red">
+                                        <div ng-message="required">City required</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" ng-show='bulletinresult || DigitalResult || trasitResult'>
+                                    <label class="font-weight-bold">Product Direction</label>
+                                    <select ng-model="product.imgdirection" name="direction"
+                                        class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                        data-md-container-class="selectdemoSelectHeader"
+                                        ng-init="product.direction = product.direction || ''"
+                                        placeholder="Has direction?" required>
+                                        <option value="" disabled selected>No</option>
+                                        <option>Left</option>
+                                        <option>Right</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="col-sm-3">
+                                        <label class="font-weight-bold">Select Booked Date</label>
+                                        <div class="input-group" ng-click="showBlockDate($event, product)">
+                                            <input ng-model="product.dates | jsonConvert"
+                                                class="form-control md-whiteframe-3dp" type="text" name="date" readonly
+                                                id="booking_dates_picker" required />
+                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="slotsClosed = true;"
+                                                style="padding: 4px 8px;">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Date is required.</div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-3">
+                                        <label>Select Product Date</label>
+                                        <div class="input-group">
+                                            <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
+                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
+                                                <i class="material-icons">
+                                                    calendar_today
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                            <label class="font-weight-bold">Impressions / Week</label>
+                                        <input ng-model="product.impressions" class="form-control md-whiteframe-3dp" type="text"
+                                            name="Slots" required />
+                                        <div ng-messages="hordinglistform.impressions.$error"
+                                            ng-if="hordinglistform.impressions.$touched" style="color:red">
+                                            <div ng-message="required">Impressions is required.</div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
                                     <label class="font-weight-bold">Zipcode</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="zipcode"
                                         ng-model="product.zipcode" required>
@@ -248,36 +306,7 @@ md-icon{
                                         <div ng-message="required">Zipcode required</div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-3" ng-show='bulletinresult || DigitalResult'>
-                                    <label class="font-weight-bold">Image Direction</label>
-                                    <select ng-model="product.imgdirection" name="imageDirection"
-                                        class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()" 
-                                        ng-init="product.imgdirection = product.imgdirection || ''" placeholder="Has ImageDirection?" required="required">
-                                        <option value="" disabled selected>Image Direction</option>
-                                        <option>Right</option>
-                                        <option>Left</option>
-                                    </select>
-                                    <div ng-messages="hordinglistform.imageDirection.$error"
-                                        ng-if="hordinglistform.imageDirection.$touched" style="color:red">
-                                        <div ng-message="required">Image Direction</div>
-                                    </div>
-                                </div> -->
-                                <div class="col-sm-6" ng-show='bulletinresult || DigitalResult || trasitResult'>
-                                    <label>Product Direction</label>
-                                    <input type="file"
-                                            class="form-control md-whiteframe-3dp"
-                                            required="required" ngf-select
-                                            ng-model="files.symbol" name="symbolFile"
-                                            accept="image/*" ngf-max-size="20MB"
-                                            placeholder="Upload Product Image*" required="required">
-                                            <div ng-messages="hordinglistform.symbolFile.$error"
-                                            ng-if="hordinglistform.symbolFile.$touched" style="color:red">
-                                            <div ng-message="required">Product Direction</div>
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <label class="font-weight-bold">Latitude</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="lat"
                                         ng-model="product.lat" required>
@@ -286,13 +315,25 @@ md-icon{
                                         <div ng-message="required">Latitude is required.</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <label class="font-weight-bold">Longitude</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="lng"
                                         ng-model="product.lng" required>
                                     <div ng-messages="hordinglistform.lng.$error" ng-if="hordinglistform.lng.$touched"
                                         style="color:red">
                                         <div ng-message="required">Longitude is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">Ethinicity</label>
+                                    <div class="input-group">
+                                        <input class="form-control md-whiteframe-3dp" type="text"
+                                            placeholder="General" name="Ethnicity" ng-model="product.ethnicity"
+                                            required>
+                                    </div>
+                                    <div ng-messages="hordinglistform.Ethnicity.$error"
+                                        ng-if="hordinglistform.Ethnicity.$touched" style="color:red">
+                                        <div ng-message="required">Ethnicity is required.</div>
                                     </div>
                                 </div>
                             </div>
@@ -316,67 +357,52 @@ md-icon{
                                         <div ng-message="required">Price is required.</div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-3" ng-show='trasitResult'>
-                                    <label class="font-weight-bold">Select Product Date</label>
-                                    <div class="input-group">
-                                        <input ng-model="product.dates | jsonConvert"
-                                            class="form-control md-whiteframe-3dp" type="text" name="date" readonly
-                                            id="booking_dates_picker" required />
-                                        <a class="input-group-addon md-whiteframe-3dp" ng-click="slotsClosed = true;"
-                                            style="padding: 4px 8px;">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </a>
+                                <div class="col-sm-3" ng-show='DigitalResult'>
+                                    <label class="font-weight-bold">Price for Week</label>
+                                    <input ng-model="product.price" class="form-control md-whiteframe-3dp" type="text"
+                                        name="price" required />
+                                    <div ng-messages="hordinglistform.price.$error"
+                                        ng-if="hordinglistform.price.$touched" style="color:red">
+                                        <div ng-message="required">Price is required.</div>
                                     </div>
-                                    <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
-                                        style="color:red">
-                                        <div ng-message="required">Date is required.</div>
+                                </div>
+                                <div class="col-sm-3">
+                                        <!-- ng-show='bulletinresult' -->
+                                    <label class="font-weight-bold">Min. Booking Days</label>
+                                    <select ng-model="product.bookingDates" name="bookingDates"
+                                        class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                        data-md-container-class="selectdemoSelectHeader"
+                                        ng-init="product.bookingDates = product.bookingDates || ''"
+                                        placeholder="Has bookingDates?" required>
+                                        <option value="" disabled selected>No</option>
+                                        <option>2 Weeks</option>
+                                        <option>28 Days</option>
+                                        <option>45 Days</option>
+                                    </select>
+                                    <div ng-messages="hordinglistform.bookingDates.$error"
+                                        ng-if="hordinglistform.bookingDates.$touched" style="color:red">
+                                        <div ng-message="required">Days required</div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                                    <label class="font-weight-bold">Min. Booking Days</label>
+                                    <select ng-model="product.cancellation" name="cancellation"
+                                        class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                        data-md-container-class="selectdemoSelectHeader"
+                                        ng-init="product.cancellation = product.cancellation || ''"
+                                        placeholder="Has cancellation?" required>
+                                        <option value="" disabled selected>No</option>
+                                        <option>2 Days</option>
+                                        <option>4 Days</option>
+                                        <option>5 Days</option>
+                                        <option>7 Days</option>
+                                    </select>
+                                    <div ng-messages="hordinglistform.cancellation.$error"
+                                        ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                                        <div ng-message="required">Days required</div>
                                     </div>
                                 </div> -->
-                                <!-- <div class="col-sm-3">
-                                        <label class="font-weight-bold">Select Booked Date</label>
-                                        <div class="input-group">
-                                            <input ng-model="product.dates | jsonConvert"
-                                                class="form-control md-whiteframe-3dp" type="text" name="date" readonly
-                                                id="booking_dates_picker" required />
-                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="slotsClosed = true;"
-                                                style="padding: 4px 8px;">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                        <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
-                                            style="color:red">
-                                            <div ng-message="required">Date is required.</div>
-                                        </div>
-                                    </div> -->
-                                    <div class="col-sm-3">
-                                            <label>Select Product Date</label>
-                                            <div class="input-group">
-                                                <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                                <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
-                                                    <i class="material-icons">
-                                                        calendar_today
-                                                    </i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                </div>
-                                    <!-- <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
-                                            <label class="font-weight-bold">Select Booked Date</label>
-                                            <div class="input-group">
-                                                <input ng-model="product.dates | jsonConvert"
-                                                    class="form-control md-whiteframe-3dp" type="text" name="date" readonly
-                                                    id="booking_dates_picker" required />
-                                                <a class="input-group-addon md-whiteframe-3dp" ng-click="digitalSlotsClosed = true;"
-                                                    style="padding: 4px 8px;">
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
-                                                style="color:red">
-                                                <div ng-message="required">Date is required.</div>
-                                            </div>
-                                        </div> -->
-                                <div class="col-sm-3" ng-show='bulletinresult'>
+                                <div class="col-sm-3">
                                     <label class="font-weight-bold">Cancellation</label>
                                     <select ng-model="product.cancellation" name="cancellation"
                                         class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -403,87 +429,41 @@ md-icon{
                                     </div>
                                 </div>
                                 <!----Transit End------------------->
-                                <!----Digital Bulletin Start------------------->
-                                <div class="col-sm-3" ng-show='DigitalResult'>
-                                    <label class="font-weight-bold">Price for 1 Week</label>
-                                    <input ng-model="product.price" class="form-control md-whiteframe-3dp" type="text"
-                                        name="price" required />
-                                    <div ng-messages="hordinglistform.price.$error"
-                                        ng-if="hordinglistform.price.$touched" style="color:red">
-                                        <div ng-message="required">Price is required.</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
-                                    <label class="font-weight-bold">No of Slots per hour</label>
-                                    <input ng-model="product.slots" class="form-control md-whiteframe-3dp" type="text"
-                                        name="Slots" required />
-                                    <div ng-messages="hordinglistform.slots.$error"
-                                        ng-if="hordinglistform.slots.$touched" style="color:red">
-                                        <div ng-message="required">Slots is required.</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
-                                    <label class="font-weight-bold">Play hours in a day</label>
-                                    <input ng-model="product.hour" class="form-control md-whiteframe-3dp" type="text"
-                                        name="hour" required />
-                                    <div ng-messages="hordinglistform.hour.$error" ng-if="hordinglistform.hour.$touched"
-                                        style="color:red">
-                                        <div ng-message="required">Hour is required.</div>
-                                    </div>
-                                </div>
-                                <!----Digital Bulletin End------------------->
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <label class="font-weight-bold">Average Impressions Per Week*</label>
-                                    <div class="input-group">
 
-                                        <input class="form-control md-whiteframe-3dp" type="text"
-                                            name="impressionsperweek" ng-model="product.impressionsperweek" required>
-                                        <div ng-messages="hordinglistform.impressionsperweek.$error"
-                                            ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
-                                            <div ng-message="required">Impression.</div>
+                            <!----Digital Bulletin Start------------------->
+                            <div class="form-group row" ng-show='DigitalResult || trasitResult'>
+                                    <div class="col-sm-3">
+                                        <label class="font-weight-bold">Total no flips available</label>
+                                        <input ng-model="product.flips" class="form-control md-whiteframe-3dp" type="text"
+                                            name="flips" required />
+                                        <div ng-messages="hordinglistform.flips.$error"
+                                            ng-if="hordinglistform.flips.$touched" style="color:red">
+                                            <div ng-message="required">flips is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="font-weight-bold">No of flips for loop</label>
+                                        <input ng-model="product.flipsloops" class="form-control md-whiteframe-3dp" type="text"
+                                            name="flipsloops" required />
+                                        <div ng-messages="hordinglistform.flipsloops.$error"
+                                            ng-if="hordinglistform.flipsloops.$touched" style="color:red">
+                                            <div ng-message="required">loop is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="font-weight-bold">Loop per day</label>
+                                        <input ng-model="product.loops" class="form-control md-whiteframe-3dp" type="text"
+                                            name="loops" required />
+                                        <div ng-messages="hordinglistform.loops.$error" ng-if="hordinglistform.loops.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Day is required.</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <label class="font-weight-bold">Demographics Age</label>
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
-                                            name="Age" ng-model="product.demographicsage" required>
-                                    </div>
-                                    <div ng-messages="hordinglistform.Age.$error" ng-if="hordinglistform.Age.$touched"
-                                        style="color:red">
-                                        <div ng-message="required">Age is required.</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label class="font-weight-bold">Ethinicity</label>
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text"
-                                            placeholder="Ethnicity" name="Ethnicity" ng-model="product.ethnicity"
-                                            required>
-                                    </div>
-                                    <div ng-messages="hordinglistform.Ethnicity.$error"
-                                        ng-if="hordinglistform.Ethnicity.$touched" style="color:red">
-                                        <div ng-message="required">Ethnicity is required.</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!----Digital Bulletin End------------------->
+
                             <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <label class="font-weight-bold">Product Video ( YouTube embedded code)</label>
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder=""
-                                            name="videoUrl" ng-model="product.videoUrl" required>
-                                        <span class="input-group-addon md-whiteframe-3dp"><i
-                                                class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
-                                    </div>
-                                    <div ng-messages="hordinglistform.videoUrl.$error"
-                                        ng-if="hordinglistform.videoUrl.$touched" style="color:red">
-                                        <div ng-message="required">video Url is required.</div>
-                                    </div>
-                                </div>
                                 <div class="col-sm-6 ">
                                     <label class="font-weight-bold">Upload Product Images</label>
                                     <div class="input-group" style="width: 100%;">
@@ -499,76 +479,87 @@ md-icon{
                                         <div ng-message="required" ng-if="files.image.length > 2">Select only 2 Images.
                                         </div>
                                     </div>
-                                    <!-- <p class="text-right mt-2"><b>Upto 2 Images</b></p> -->
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="font-weight-bold">Product Video ( YouTube embedded code)</label>
+                                    <div class="input-group">
+                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder=""
+                                            name="videoUrl" ng-model="product.videoUrl" required>
+                                        <span class="input-group-addon md-whiteframe-3dp"><i
+                                                class="fa fa-caret-square-o-up" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div ng-messages="hordinglistform.videoUrl.$error"
+                                        ng-if="hordinglistform.videoUrl.$touched" style="color:red">
+                                        <div ng-message="required">video Url is required.</div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3> -->
-
-                            <!-- <div class="form-group row">
-                                <div class="col-sm-6">
-                                        <label>Average Impressions Per Week*</label>
-                                    <div class="input-group">
-                                        
-                                        <input class="form-control md-whiteframe-3dp" type="text" name="impressionsperweek" ng-model="product.impressionsperweek"  >
-                                        <div ng-messages="hordinglistform.impressionsperweek.$error" ng-if="hordinglistform.impressionsperweek.$touched" style="color:red">
-                                            <div ng-message="required">impression.</div>
-                                        </div>
+                            <div class="form-group row mb-0">
+                                    <div class="col-sm-4" style="padding-right: 0px;">
+                                        <label class="font-weight-bold">Demographics Age</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="font-weight-bold">Percentage</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                        <label>Read Direction</label>
-                                    <select name="Visibility" class="form-control md-whiteframe-3dp" id="Visibility"
-                                            ng-model="product.visibility">
-                                        <option value="" disabled selected>Read Direction</option>
-                                        <option>Right-Hand Read</option>
-                                        <option>Left-Hand Read</option>
-                                        <option>Other</option>
-                                    </select required>
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <label>Demographics</label>
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder="Age"
-                                            name="Age" ng-model="product.audience" >
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Eyes on Impression</label>
-                                    <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text" placeholder="Eyes on Impression"
-                                            name="Eyes on Impression" ng-model="product.eyeimpression" >
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                        <label>Demographics</label>
+                                <div class="form-group row" data-ng-repeat="from in FromTo">
+                                    <div class="col-sm-2">
+                                            <label class="font-weight-bold">From</label>
                                         <div class="input-group">
-                                            <input class="form-control md-whiteframe-3dp" type="text" placeholder="Ethnicity"
-                                                name="Ethnicity" ng-model="product.targetedaudience" >
+                                            <input ng-model="from.fromage" class="form-control md-whiteframe-3dp" type="text"
+                                            name="fromage" required />
                                         </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="font-weight-bold">To</label>
+                                        <div class="input-group">
+                                            <input ng-model="from.toage" class="form-control md-whiteframe-3dp" type="text"
+                                                name="toage" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="font-weight-bold"></label>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input ng-model="from.percentage" class="form-control md-whiteframe-3dp" type="text"
+                                                name="Slots" required />
+                                            <span class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> -->
-                            <div class="form-group row">
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
+                                </div>                                
+                            </div>
+                            <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
+                                <div class="col-md-2">
+                                    <label for="strength">{{strength.name}}</label>
+                                </div>
+                                <div class="col-md-9" style="padding-right: 0;">
+                                    <input type="text" ng-model="strength.strname" name="" class="form-control md-whiteframe-3dp" >
+                                </div>
+                                <div class="col-md-1 text-right" style="margin-top: 4px;">
+                                        <span class="md-whiteframe-3dp" ng-show="showAddChoice(strength)" ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
+                                    </div>
+                            </div>
+                            <div class="form-group row mt-5">
                                 <div class="col-sm-8">
-                                    Note: You can change price / details any time you want.<br>
+                                    <b>Note:</b> You can change price / details any time you want.<br>
                                     * Select only booked dates remaining dates consider as available
                                 </div>
-                                <div class="col-sm-4">
-                                    <md-button type="submit" Class="md-raised md-primary register_btn"
-                                        ng-click="requestAddProduct(product)">
+                                <div class="col-sm-4 text-right">
+                                    <md-button type="submit" Class="md-raised md-primary all_button"
+                                        ng-click="requestAddProduct(product,FromTo,Strengths)" style="margin-right: 0px;">
                                         Submit</md-button>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
+                    <!-- <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
                         <div class="owner_blocked_header">
                             <div layout="row">
                                 <div>
-                                    <h3>select the blocked dates-52/2 week calender </h3>
-                                    <p>Campaign start with frist day of week end with last day of week</p>
+                                    <h3>Product Calender</h3>
                                 </div>
 
                                 <div flex></div>
@@ -591,7 +582,7 @@ md-icon{
                             </div>
                             <span class="clearfix"></span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="owner_blocked_date_popup box__shadow" ng-if="digitalSlotsClosed">
                             <div class="owner_blocked_header">
                                 <div layout="row">

@@ -45,6 +45,57 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Sidenavs and popups ends
   ========================*/
 
+  $scope.showBlockDate = function () {
+    $mdDialog.show({
+        templateUrl: 'views/map-calendar-popup.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose: true,
+        controller: function ($scope) {
+            $scope.closeMdDialog = function () {
+                $mdDialog.hide();
+            }
+        }
+    });
+};
+
+/*===================
+Form Age  ===================*/
+
+$scope.FromTo = [{id: 'From', name: 'From'}];
+   
+   $scope.addNewFromTo = function() {
+     var newItemNo = $scope.FromTo.length+1;
+     $scope.FromTo.push({'id' : 'From' + newItemNo, 'name' : 'From ', 'id' : 'To' + newItemNo, 'name2' : 'To '});
+   };   
+  //  $scope.removeNewChoice = function() {
+  //    var newItemNo = $scope.FromTo.length-1;
+  //    if ( newItemNo !== 0 ) {
+  //     $scope.FromTo.pop();
+  //    }
+  //  };   
+   $scope.showAddFromTo = function(from) {
+     return from.id === $scope.FromTo[$scope.FromTo.length-1].id;
+   };
+
+/*===================
+Colipos  ===================*/
+  $scope.Strengths = [{id: 'Strength 1', name: 'Strength 1'}];
+   
+   $scope.addNewChoice = function() {
+     var newItemNo = $scope.Strengths.length+1;
+     $scope.Strengths.push({'id' : 'Strength' + newItemNo, 'name' : 'Strength ' + newItemNo});
+   };   
+  //  $scope.removeNewChoice = function() {
+  //    var newItemNo = $scope.Strengths.length-1;
+  //    if ( newItemNo !== 0 ) {
+  //     $scope.Strengths.pop();
+  //    }
+  //  };   
+   $scope.showAddChoice = function(strength) {
+     return strength.id === $scope.Strengths[$scope.Strengths.length-1].id;
+   };
+
+
   /*===================
   | Pagination
   ===================*/
@@ -428,7 +479,18 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
   //   });
   // };
-  $scope.requestAddProduct = function (product) {
+  $scope.requestAddProduct = function (product, formdata,Strengths ) {
+    product.DemographicsAge = formdata;
+    product.Strengths=Strengths;
+  // for(element in product){
+    //   if(element.DemographicsAge){
+    //     for(var i = 0; i<element.DemographicsAge.length; i++ ){
+    //       if(element.DemographicsAge[i] == $$hashKey){
+    //         delete element.DemographicsAge[i]
+    //       }
+    //     }
+    //   }
+    // }
     for (var item in product.dates) {
       product.dates[item].endDate = moment(product.dates[item].endDate).format('YYYY-MM-DD')
       product.dates[item].startDate = moment(product.dates[item].startDate).format('YYYY-MM-DD')
