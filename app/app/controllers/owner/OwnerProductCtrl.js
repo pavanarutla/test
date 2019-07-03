@@ -80,7 +80,6 @@ $scope.FromTo = [{id: 'From', name: 'From'}];
 /*===================
 Colipos  ===================*/
   $scope.Strengths = [{id: 'Strength 1', name: 'Strength 1'}];
-  // , {id: 'Strength 2', name: 'Strength 2'}, {id: 'Strength 3', name: 'Strength 3'}
    
    $scope.addNewChoice = function() {
      var newItemNo = $scope.Strengths.length+1;
@@ -480,7 +479,18 @@ Colipos  ===================*/
   //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
   //   });
   // };
-  $scope.requestAddProduct = function (product) {
+  $scope.requestAddProduct = function (product, formdata,Strengths ) {
+    product.DemographicsAge = formdata;
+    product.Strengths=Strengths;
+  // for(element in product){
+    //   if(element.DemographicsAge){
+    //     for(var i = 0; i<element.DemographicsAge.length; i++ ){
+    //       if(element.DemographicsAge[i] == $$hashKey){
+    //         delete element.DemographicsAge[i]
+    //       }
+    //     }
+    //   }
+    // }
     for (var item in product.dates) {
       product.dates[item].endDate = moment(product.dates[item].endDate).format('YYYY-DD-MM')
       product.dates[item].startDate = moment(product.dates[item].startDate).format('YYYY-DD-MM')

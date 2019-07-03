@@ -506,41 +506,41 @@ md-icon{
                                     <div class="col-sm-2">
                                             <label class="font-weight-bold">From</label>
                                         <div class="input-group">
-                                            <input ng-model="product.fromage" class="form-control md-whiteframe-3dp" type="text"
+                                            <input ng-model="from.fromage" class="form-control md-whiteframe-3dp" type="text"
                                             name="fromage" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <label class="font-weight-bold">To</label>
                                         <div class="input-group">
-                                            <input ng-model="product.toage" class="form-control md-whiteframe-3dp" type="text"
+                                            <input ng-model="from.toage" class="form-control md-whiteframe-3dp" type="text"
                                                 name="toage" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <label class="font-weight-bold"></label>
                                         <div class="input-group" style="margin-top: 7px;">
-                                            <input ng-model="product.percentage" class="form-control md-whiteframe-3dp" type="text"
+                                            <input ng-model="from.percentage" class="form-control md-whiteframe-3dp" type="text"
                                                 name="Slots" required />
-                                            <span class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</span>
+                                            <span class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
                                         </div>
                                     </div>
                                 </div>
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
-                                </div>
-                                <div class="col-md-6 text-right" style="margin-top: -10px;">
-                                    <span class="md-whiteframe-3dp" ng-show="showAddChoice(strength)" ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</span>
-                                </div>
+                                </div>                                
                             </div>
-                            <div class="form-group row" data-ng-repeat="strength in Strengths">
+                            <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
                                 <div class="col-md-2">
                                     <label for="strength">{{strength.name}}</label>
                                 </div>
-                                <div class="col-md-10">
-                                    <input type="text" ng-modal="{{product.name2}}" name="" class="form-control md-whiteframe-3dp" >
+                                <div class="col-md-9" style="padding-right: 0;">
+                                    <input type="text" ng-model="strength.strname" name="" class="form-control md-whiteframe-3dp" >
                                 </div>
+                                <div class="col-md-1 text-right" style="margin-top: 4px;">
+                                        <span class="md-whiteframe-3dp" ng-show="showAddChoice(strength)" ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
+                                    </div>
                             </div>
                             <div class="form-group row mt-5">
                                 <div class="col-sm-8">
@@ -549,7 +549,7 @@ md-icon{
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <md-button type="submit" Class="md-raised md-primary all_button"
-                                        ng-click="requestAddProduct(product)" style="margin-right: 0px;">
+                                        ng-click="requestAddProduct(product,FromTo,Strengths)" style="margin-right: 0px;">
                                         Submit</md-button>
                                 </div>
                             </div>
