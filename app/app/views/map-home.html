@@ -2,33 +2,14 @@
     md-backdrop.md-sidenav-backdrop {
       z-index: -1;
     }
-    .daterangepicker option.disabled,
-    .daterangepicker td.disabled {
-      color: #fff;
-      cursor: not-allowed;
-      background: #ddd;
-      border: 1px solid #fff;
-      border-radius: 0px;
-      /* text-decoration: line-through; */
-    }
+  
     .gray-blocked {
       background: #ddd;
     }
     .red-blocked {
-      background: #f00 !important;
+      color: #f00 !important;
+      font-weight: bold;
     }
-    .daterangepicker {
-      top: 50% !important;
-    /* right: auto !important; */
-    left: 50% !important;
-    transform: translate(-50%,-50%) !important;
-    padding: 40px;
-    }
-    .daterangepicker .calendar-table td,
-.daterangepicker .calendar-table th {
-  width: 41px !important;
-    height: 41px !important;
-}
     .addWeekColor{
       background-color: #f00;
       color:white;
@@ -168,14 +149,37 @@
             <li>Price includes all taxes and productions charges</li>
           </ul>
           <hr class="ml-3 mr-3">
-
-          <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
+          <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
+            <div layout="column" class="" style="padding:8px">
+                <div class="form-group mb-2 mt-2" id="hideCalenderInput">
+                  <input date-range-picker ng-model="ranges.selectedDateRanges" 
+                   custom-options="customOptions" class="form-control md-whiteframe-3dp date-picker"
+                    placeholder="Product date" type="text" name="date" readonly options="mapProductOpts"
+                    id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                  
+                  <div class="input-group" style="z-index: 0;">
+                    <!-- <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
+                      class="form-control"> -->
+                    <div class="ibtn btn-danger" id="calender-autolaod-div" ng-click="getProductUnavailableDates(product, $event);">
+                      <a class="btn btn-danger">
+                        Select Dates
+                      </a>
+                    </div>
+                  </div>
+                  <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
+                    <div ng-message="required">Date is required.</div>
+                  </div>
+                </div>
+            </div>    
+          </div>
+          <div class="Order_S pb-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
+            <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
             <div class="row mt-2 mb-2" style="margin-right:0px;">
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <i class="material-icons">edit</i></p>
+                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <a ng-click="getProductUnavailableDates(product, $event);"><i class="material-icons">edit</i></a></p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Total Price</p>
@@ -184,43 +188,23 @@
                     <p class="mb-1 ml-2">: <span class="font-weight-bold">$ 1450000</span> ( 34 Days selected )</p>
                 </div>
             </div>
+              
             
-          <div class="row pb-3" style="margin-right:0px;">
-              <!-- <div class="col-md-3 ml-3">
-                  <md-button class="md-raised md-primary all_button" style="margin-left: 2px;" ng-click="showProductDate($event, product)">Select Dates</md-button>
-              </div> -->
-              <div layout="column" class=" mt-2" style="padding:8px">
-                  <div class="form-group mb-2 mt-2" id="hideCalenderInput">
-                    <input date-range-picker ng-model="ranges.selectedDateRanges" 
-                     custom-options="customOptions" class="form-control md-whiteframe-3dp date-picker"
-                      placeholder="Product date" type="text" name="date" readonly options="mapProductOpts"
-                      id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    
-                    <div class="input-group" style="z-index: 0;">
-                      <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
-                        class="form-control">
-                      <div class="input-group-addon" id="calender-autolaod-div" ng-click="getProductUnavailableDates(product, $event);">
-                        <a>
-                          <i class="material-icons">
-                            calendar_today
-                          </i>
-                        </a>
-                      </div>
-                    </div>
-                    <div ng-messages="addProductForm.date.$error" ng-if="addProductForm.date.$touched" style="color:red">
-                      <div ng-message="required">Date is required.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2" style="margin-left: 20px;" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
-                    <md-button class="md-raised md-primary all_button" style="margin-left: 2px;"
-                    ng-click="toggleExistingCampaignSidenav()" >Book Product </md-button>
-                </div>
-            <div class="offset-md-5 col-md-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
-                <md-button class="md-raised md-warn Upload_font"                 
-                ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">Shortlist</md-button>
+            <div class="row m-0">
+              <div class="col-md-6 ">
+                <md-button class="md-raised md-primary all_button m-0"
+                  ng-click="toggleExistingCampaignSidenav()" >
+                  Book Product
+                </md-button>
+              </div>
+            <div class=" col-md-6 text-right">
+              <md-button class="md-raised md-warn Upload_font m-0"                 
+                ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">
+                Shortlist
+              </md-button>
             </div>
-          </div>
+            </div>
+          </div>  
         </div>
         <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
           style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
@@ -620,7 +604,7 @@
                   ng-repeat="format in formatGroup track by $index" class="formatgridpart">
   
                   <div ng-cloak style="border-right:1px solid #ccc">
-                    <md-button class="md-grid-item-content mt-2" ng-click="toggleFormatSelection(format.id)"
+                    <md-button class="md-grid-item-content mt-2 mb-2" ng-click="toggleFormatSelection(format.id)"
                       ng-class="{'red' : isFormatSelected(format.id)}" ng-if="format" style="margin:0px;padding :0px;">
                       <!-- <md-icon><i class="material-icons">keyboard_arrow_up</i></md-icon> -->
                       <img ng-src="{{serverUrl + format.image}}" class="img-size">
