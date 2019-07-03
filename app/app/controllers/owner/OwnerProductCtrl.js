@@ -492,8 +492,8 @@ Colipos  ===================*/
     //   }
     // }
     for (var item in product.dates) {
-      product.dates[item].endDate = moment(product.dates[item].endDate).format('YYYY-DD-MM')
-      product.dates[item].startDate = moment(product.dates[item].startDate).format('YYYY-DD-MM')
+      product.dates[item].endDate = moment(product.dates[item].endDate).format('YYYY-MM-DD')
+      product.dates[item].startDate = moment(product.dates[item].startDate).format('YYYY-MM-DD')
     };
     product.type = product.type.name;
     product.area = $scope.areaObj.id;
@@ -633,9 +633,14 @@ Colipos  ===================*/
 
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
+    console.log(editRequestedhordings.dates)
     //editRequestedhordings.area = $scope.areaObj.id;
+
+
+
+
     editRequestedhordings.id = $stateParams.id;
-    editRequestedhordings.dates = $scope.editRequestedhordings.dates;
+    // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
       data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }

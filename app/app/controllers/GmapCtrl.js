@@ -519,6 +519,7 @@ app.controller('GmapCtrl',
             }
 
             function selectSpideredMarker(marker) {
+                // console.log('marker',marker)
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setMap(null);
@@ -716,6 +717,7 @@ app.controller('GmapCtrl',
                         marker.groupSize = markerData.product_details.length;
                         google.maps.event.addListener(marker, 'spider_click', function (e) {
                             console.log('spider_click')
+                            $scope.toggleProductDetailSidenav();
                             selectSpideredMarker(this);
                         });
                         markersOnMap.push(marker);
@@ -1402,11 +1404,32 @@ app.controller('GmapCtrl',
                     productDatesDigitalCalculator();
                 })
             }
-            $scope.getProductUnavailableDates = function (productId, ev) {
-                MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-                    $scope.unavailalbeDateRanges = dateRanges;
-                    $(ev.target).parents().eq(3).find('input').trigger('click') ;
-                });
+
+
+
+
+            $scope.getProductUnavailableDates = function (product, ev) {
+                console.log(product)
+                if(product.type == "Bulletin"){
+                    MapService.getProductUnavailableDates(product.id).then(function (dateRanges) {
+                        console.log('from service',dateRanges)
+                        $scope.unavailalbeDateRanges = dateRanges;
+                        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+                    });
+                }else{
+                    MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
+                        // console.log(blockedDatesAndSlots)
+                        $scope.unavailalbeDateRanges = [];
+                        // console.log('product',$scope.product)
+                        blockedDatesAndSlots.forEach((item)=>{
+                            if(item.booked_slots == $scope.product.availableDates){
+                                $scope.unavailalbeDateRanges.push(item);
+                            }
+                        })
+                        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+                    })
+                }
+                
             }
 
             $scope.getProductUnavailableDatesautoload = function (productId) {
