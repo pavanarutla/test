@@ -39,11 +39,11 @@ app.controller('GmapCtrl',
                     opens: 'center',
                     locale: {
                         applyClass: 'btn-green',
-                        applyLabel: "Book Now",
+                        applyLabel: "Select Dates",
                         fromLabel: "From",
                         format: "DD-MMM-YY",
                         toLabel: "To",
-                        cancelLabel: 'Cancel',
+                        cancelLabel: 'X',
                         customRangeLabel: 'Custom range'
                     },
                     isInvalidDate: function (dt) {
