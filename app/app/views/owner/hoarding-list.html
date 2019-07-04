@@ -240,30 +240,12 @@ md-icon{
                                         <option>Right</option>
                                     </select>
                                 </div>
-                                <!-- <div class="col-sm-3">
-                                        <label class="font-weight-bold">Select Booked Date</label>
-                                        <div class="input-group" ng-click="showBlockDate($event, product)">
-                                            <input ng-model="product.dates | jsonConvert"
-                                                class="form-control md-whiteframe-3dp" type="text" name="date" readonly
-                                                id="booking_dates_picker" required />
-                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="slotsClosed = true;"
-                                                style="padding: 4px 8px;">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                        <div ng-messages="hordinglistform.date.$error" ng-if="hordinglistform.date.$touched"
-                                            style="color:red">
-                                            <div ng-message="required">Date is required.</div>
-                                        </div>
-                                    </div> -->
                                     <div class="col-sm-3">
-                                        <label>Select Product Date</label>
+                                        <label class="font-weight-bold">Select Product Date</label>
                                         <div class="input-group">
                                             <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
                                             <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
-                                                <i class="material-icons">
-                                                    calendar_today
-                                                </i>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -347,8 +329,7 @@ md-icon{
                                         <div ng-message="required">Price is required.</div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                        <!-- ng-show='bulletinresult' -->
+                                <div class="col-sm-3" ng-show='bulletinresult'>
                                     <label class="font-weight-bold">Min. Booking Days</label>
                                     <select ng-model="product.bookingDates" name="bookingDates"
                                         class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -365,7 +346,7 @@ md-icon{
                                         <div ng-message="required">Days required</div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                                <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
                                     <label class="font-weight-bold">Min. Booking Days</label>
                                     <select ng-model="product.cancellation" name="cancellation"
                                         class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -377,12 +358,14 @@ md-icon{
                                         <option>4 Days</option>
                                         <option>5 Days</option>
                                         <option>7 Days</option>
+                                        <option>14 Days</option>
+                                        <option>28 Days</option>
                                     </select>
                                     <div ng-messages="hordinglistform.cancellation.$error"
                                         ng-if="hordinglistform.cancellation.$touched" style="color:red">
                                         <div ng-message="required">Days required</div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="col-sm-3">
                                     <label class="font-weight-bold">Cancellation</label>
                                     <select ng-model="product.cancellation" name="cancellation"
