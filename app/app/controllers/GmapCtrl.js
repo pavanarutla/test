@@ -765,8 +765,6 @@ app.controller('GmapCtrl',
                     $scope.Clusterer.addMarker(marker);
 
                     google.maps.event.addListener(marker, 'click', function (e) {
-                        console.log('marker')
-
                         selectMarker(marker);
                         // setTimeout(() => {
                         //     angular.element($('#calender-autolaod-div')).trigger('click');
@@ -774,10 +772,6 @@ app.controller('GmapCtrl',
                         // },100)
                     });
                 }
-
-
-
-
                 //var latLngGroups = _.groupBy($scope.filteredMarkers, function (item) {
                 //return item.lat + ', ' + item.lng;
                 //});
