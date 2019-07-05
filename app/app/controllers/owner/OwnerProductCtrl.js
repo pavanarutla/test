@@ -622,15 +622,13 @@ Colipos  ===================*/
   // }
 
   $scope.getProductUnavailableDates = function (productId, ev) {
-    console.log(productId)
     if(productId.type == "Bulletin"){
       OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
         $scope.unavailalbeDateRanges = dateRanges;
         $(ev.target).parent().parent().find('input').trigger('click');
       });
-    }else{
+    }else if(productId.type == "Digital Bulletin" || productId.type == "Transit"){
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
-        console.log('blockedDatesAndSlots',blockedDatesAndSlots)
         $scope.unavailalbeDateRanges = [];
         blockedDatesAndSlots.forEach((item)=>{
             if(item.booked_slots == productId.slots){
@@ -640,6 +638,9 @@ Colipos  ===================*/
         $(ev.target).parent().parent().find('input').trigger('click');
     })
     }
+    else{
+      $(ev.target).parent().parent().find('input').trigger('click');
+    }
   }
   /*=====================
   | Product Section Ends
@@ -647,12 +648,7 @@ Colipos  ===================*/
 
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
-    console.log(editRequestedhordings.dates)
     //editRequestedhordings.area = $scope.areaObj.id;
-
-
-
-
     editRequestedhordings.id = $stateParams.id;
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
