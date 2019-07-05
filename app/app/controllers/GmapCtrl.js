@@ -514,11 +514,11 @@ app.controller('GmapCtrl',
                 //     $mdSidenav('digitalProductDetails').open();
                 // }
                 $mdSidenav('productDetails').open();
+
                 $scope.selectedProduct = marker;
             }
 
             function selectSpideredMarker(marker) {
-                console.log('selectSpideredMarker',marker)
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setMap(null);
@@ -1131,7 +1131,6 @@ app.controller('GmapCtrl',
                     $scope.product.lighting = refToMapMarker.properties['lighting'];
                     $scope.product.direction = refToMapMarker.properties['direction'];
                     $scope.product.availableDates = refToMapMarker.properties['availableDates'];
-                    $scope.product.slots = refToMapMarker.properties['slots'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').open();
                     $scope.selectedProduct = refToMapMarker;
@@ -1424,9 +1423,11 @@ app.controller('GmapCtrl',
                     });
                 }else{
                     MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
+                        // console.log(blockedDatesAndSlots)
                         $scope.unavailalbeDateRanges = [];
+                        // console.log('product',$scope.product)
                         blockedDatesAndSlots.forEach((item)=>{
-                            if(item.booked_slots == $scope.product.slots){
+                            if(item.booked_slots == $scope.product.availableDates){
                                 $scope.unavailalbeDateRanges.push(item);
                             }
                         })
@@ -1652,7 +1653,6 @@ app.controller('GmapCtrl',
                             productId: productId,
                             name: campaignName,
                             dates: selectedDateRanges,
-                            booking_slots : 1
                         };
                 // if ($scope.numOfSlots > 0) {
                 //     var paylaunchProduct = {

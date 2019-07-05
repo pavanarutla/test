@@ -696,7 +696,8 @@ Colipos  ===================*/
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }
+      data: { image: $scope.files.image, editRequestedhordings: JSON.parse(angular.toJson($scope.editRequestedhordings)) }
+     
     }).then(function (result) {
       if (result.data.status == "1") {
         getRequestedProductList();
