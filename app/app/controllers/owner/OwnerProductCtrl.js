@@ -202,7 +202,50 @@ Colipos  ===================*/
     multipleDateRanges: true,
     locale: {
       applyClass: 'btn-green',
-      applyLabel: "Book Now",
+     applyLabel: "Book Now",
+      fromLabel: "From",
+      format: "DD-MMM-YY",
+      toLabel: "To",
+      cancelLabel: 'X',
+      customRangeLabel: 'Custom range'
+    },    
+    isInvalidDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          return true;
+        }
+      }
+      if (moment(dt) < moment()) {
+        return true;
+      }
+    },
+    isCustomDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+            return ['red-blocked', 'left-radius'];
+          } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+            return ['red-blocked', 'right-radius'];
+          } else {
+            return 'red-blocked';
+          }
+        }
+      }
+      if (moment(dt) < moment()) {
+        return 'gray-blocked';
+      }
+    },
+    eventHandlers: {
+      'apply.daterangepicker': function (ev, picker) {
+        //selectedDateRanges = [];
+      }
+    }
+  };
+  $scope.addProdOpts = {
+    multipleDateRanges: true,
+    locale: {
+      applyClass: 'btn-green',
+     applyLabel: "Book Now",
       fromLabel: "From",
       format: "DD-MMM-YY",
       toLabel: "To",
@@ -309,12 +352,12 @@ Colipos  ===================*/
     });
   }
   getShortListedProducts();
-  $scope.getProductUnavailableDates = function (productId, ev) {
-    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parents().eq(3).find('input').trigger('click');
-    });
-  }
+  // $scope.getProductUnavailableDates = function (productId, ev) {
+  //   MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //     $scope.unavailalbeDateRanges = dateRanges;
+  //     $(ev.target).parents().eq(3).find('input').trigger('click');
+  //   });
+  // }
   // SHORT-LIST ENDs
   // Save-camp
   $scope.toggleExistingCampaignSidenav = function () {
@@ -499,7 +542,7 @@ Colipos  ===================*/
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, product: $scope.product }
+      data: { image: $scope.files.image, product: JSON.parse(angular.toJson($scope.product)) }
     }).then(function (result) {
       if(result.data.status == "1"){
         // getRequestedProductList();
@@ -622,10 +665,25 @@ Colipos  ===================*/
   // }
 
   $scope.getProductUnavailableDates = function (productId, ev) {
-    OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
+    if(productId.type == "Bulletin"){
+      OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }else if(productId.type == "Digital Bulletin" || productId.type == "Transit"){
+      OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots == productId.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parent().parent().find('input').trigger('click');
+    })
+    }
+    else{
       $(ev.target).parent().parent().find('input').trigger('click');
-    });
+    }
   }
   /*=====================
   | Product Section Ends
@@ -633,12 +691,7 @@ Colipos  ===================*/
 
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
-    console.log(editRequestedhordings.dates)
     //editRequestedhordings.area = $scope.areaObj.id;
-
-
-
-
     editRequestedhordings.id = $stateParams.id;
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({

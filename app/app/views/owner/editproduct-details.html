@@ -1,190 +1,28 @@
-<!-- <script type="text/javascript">
-    jssor_1_slider_init = function() {
-
-        var jssor_1_SlideshowTransitions = [
-          {$Duration:800,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:-0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:-0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:-0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:-0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,$Cols:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:0.3,$Rows:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:0.3,$Cols:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,y:-0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,$Rows:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:-0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$SlideOut:true,$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,$Delay:20,$Clip:3,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,$Delay:20,$Clip:3,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,$Delay:20,$Clip:12,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
-          {$Duration:800,$Delay:20,$Clip:12,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2}
-        ];
-
-        var jssor_1_options = {
-          $AutoPlay: 1,
-          $SlideshowOptions: {
-            $Class: $JssorSlideshowRunner$,
-            $Transitions: jssor_1_SlideshowTransitions,
-            $TransitionsOrder: 1
-          },
-          $ArrowNavigatorOptions: {
-            $Class: $JssorArrowNavigator$
-          },
-          $ThumbnailNavigatorOptions: {
-            $Class: $JssorThumbnailNavigator$
-          }
-        };
-
-        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-        /*#region responsive code begin*/
-
-        var MAX_WIDTH = 980;
-
-        function ScaleSlider() {
-            var containerElement = jssor_1_slider.$Elmt.parentNode;
-            var containerWidth = containerElement.clientWidth;
-
-            if (containerWidth) {
-
-                var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-                jssor_1_slider.$ScaleWidth(expectedWidth);
-            }
-            else {
-                window.setTimeout(ScaleSlider, 30);
-            }
-        }
-
-        ScaleSlider();
-
-        $Jssor$.$AddEvent(window, "load", ScaleSlider);
-        $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-        $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-        /*#endregion responsive code end*/
-    };
-</script> -->
 <style>
-    /*jssor slider loading skin spin css*/
-    .jssorl-009-spin img {
-        animation-name: jssorl-009-spin;
-        animation-duration: 1.6s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-    }
-    .selectedWeek {
+    /* .selectedWeek {
         background-color: #bc2535 !important;
         outline: none;
     }
+
     .addBlockedColor {
-      background-color: orange !important;
-      cursor: not-allowed !important;
+        background-color: orange !important;
+        cursor: not-allowed !important;
+    } */
+
+    .gray-blocked {
+      background: #ddd;
+    }
+    .red-blocked {
+      color: #f00 !important;
+      font-weight: bold;
     }
 
-    @keyframes jssorl-009-spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    .radio-inline {
+        float: left;
+        clear: none;
+        display: block;
+        padding: 2px 1em 0 0;
     }
-
-    /*jssor slider arrow skin 051 css*/
-    .jssora051 {display:block;position:absolute;cursor:pointer;}
-    .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
-    .jssora051:hover {opacity:.8;}
-    .jssora051.jssora051dn {opacity:.5;}
-    .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-
-    /*jssor slider thumbnail skin 111 css*/
-    .jssort111 .p {position:absolute;top:0;left:0;width:200px;height:100px;background-color:#000;}
-    .jssort111 .p img {position:absolute;top:0;left:0;width:100%;height:100%;}
-    .jssort111 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.45;}
-    .jssort111 .p:hover .t{opacity:.8;}
-    .jssort111 .pav .t, .jssort111 .pdn .t, .jssort111 .p:hover.pdn .t{opacity:1;}
-    .jssort111 .ti {position:absolute;bottom:0px;left:0px;width:100%;height:28px;line-height:28px;text-align:center;font-size:12px;color:#fff;background-color:rgba(0,0,0,.3)}
-    .jssort111 .pav .ti, .jssort111 .pdn .ti, .jssort111 .p:hover.pdn .ti{color:#000;background-color:rgba(255,255,255,.6);}
-
-    .daterangepicker option.disabled, .daterangepicker td.disabled {
-    color: #fff;
-    cursor: not-allowed;
-    background: #ddd;
-    border: 1px solid #fff;
-    border-radius: 0px;
-    /* text-decoration: line-through; */
-  }
-  .gray-blocked{
-    background:#ddd;
-  }
-  .red-blocked{
-    background:#f00 !important;
-  }
-  .radio-inline {
-                float: left;
-                clear: none;
-                display: block;
-                padding: 2px 1em 0 0;
-        }
-  .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 340px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 6px;
-    top: 0px;
-    left: 650px !important;
-    right: auto !important;
-    z-index: 21;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
-}
-@media screen and (min-width:768px) and (max-width:  991px){
-    .daterangepicker {
-        left: 160px !important;
-    }
-    .daterangepicker.opensright:before {
-    left: 240px;
-    }
-    .daterangepicker.opensright:after {
-        left: 241px;
-    }
-}
-@media screen and (min-width:320px) and (max-width: 563px){
-    .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 280px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 7px;
-    top: 0px;
-    left: 19px !important;
-    right: 0% !important;
-    z-index: 15;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
-}
-.daterangepicker.opensright:before {
-    left: 240px;
-}
-.daterangepicker.opensright:after {
-    left: 241px;
-}
-}
 </style>
 
 <div class="md-whiteframe-4dp contbg md-caption mt-3" layout="row" layout-margin>
@@ -194,28 +32,34 @@
             <tbody>
                 <tr>
                     <td class="upper_line image_tdwidth">
-                        <img ng-src="{{config.serverUrl + editRequestedhordings.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+                        <img ng-src="{{config.serverUrl + editRequestedhordings.image[0]}}" alt="Smiley face"
+                            class="requ_size img-thumbnail">
                     </td>
                     <td class="upper_line">
-                        <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> - <span>{{editRequestedhordings.area_name}}</span>
+                        <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> -
+                            <span>{{editRequestedhordings.area_name}}</span>
                             <span>({{editRequestedhordings.panelSize}})</span></p>
                         <p class="mb-0">{{editRequestedhordings.address}}</p>
-                        <p class="mb-0"> <span class="text_color"><b>Facing:</b>&nbsp;</span>{{editRequestedhordings.direction}}</p>
-                        <p class="mb-0"> <span class="text_color"><b>Type:</b>&nbsp;</span>{{editRequestedhordings.type}}</p>
+                        <p class="mb-0"> <span
+                                class="text_color"><b>Facing:</b>&nbsp;</span>{{editRequestedhordings.direction}}</p>
+                        <p class="mb-0"> <span
+                                class="text_color"><b>Type:</b>&nbsp;</span>{{editRequestedhordings.type}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
-                      <label><b>Views</b></label>
-                      <p>{{editRequestedhordings.impressions}}</p>
+                        <label><b>Views</b></label>
+                        <p>{{editRequestedhordings.impressions}}</p>
                     </td>
                     <td class="table_vertical upper_line hide-xs">
-                            <label><b>Light</b></label>
-                            <p ng-if="editRequestedhordings.lighting == 1">Yes</p>
-                            <p ng-if="editRequestedhordings.lighting == 0">No</p>
-                            <p ng-if="editRequestedhordings.lighting != 1 && editRequestedhordings.lighting != 0">{{editRequestedhordings.lighting}}</p>
-                        </td>
+                        <label><b>Light</b></label>
+                        <p ng-if="editRequestedhordings.lighting == 1">Yes</p>
+                        <p ng-if="editRequestedhordings.lighting == 0">No</p>
+                        <p ng-if="editRequestedhordings.lighting != 1 && editRequestedhordings.lighting != 0">
+                            {{editRequestedhordings.lighting}}</p>
+                    </td>
                     <td class="table_vertical upper_line hide-xs">
-                            <label><b>Price</b></label>
-                           <p><span>$</span>{{editRequestedhordings.default_price || '0' | number:2}}</p></td>
+                        <label><b>Price</b></label>
+                        <p><span>$</span>{{editRequestedhordings.default_price || '0' | number:2}}</p>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -226,8 +70,8 @@
     <div class="md-whiteframe-4dp layout-margin col-xl-6 col-lg-6 col-md-10">
         <div class="col-md-12">
             <form name="addProductForm" role="form" novalidate="novalidate">
-                    <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
-                        <!-- <div class="col-md-12">
+                <h4 class="mt-1" style="margin-left:-20px;">Update Product Details</h4><br>
+                <!-- <div class="col-md-12">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <label>Product ID*</label>
@@ -434,29 +278,29 @@
                                     </div>
                                 </div>
                             </div> -->
-            <!-- New Form to Edit Product -->
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label class="font-weight-bold">Product Type</label>
-                        <!-- <select id="productType" ng-options="productType.name for productType in ProductTypes" ng-model="product.type"  name="type" ng-change="getdetails()"
+                <!-- New Form to Edit Product -->
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label class="font-weight-bold">Product Type</label>
+                            <!-- <select id="productType" ng-options="productType.name for productType in ProductTypes" ng-model="product.type"  name="type" ng-change="getdetails()"
                                 class="form-control md-whiteframe-3dp">
                                 <option value="{{editRequestedhordings[0].type}}">                                      
                                  {{editRequestedhordings.type}}</option>
                         </select> -->
-                        <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
-                            ng-model="editRequestedhordings.type">
+                            <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                                ng-model="editRequestedhordings.type">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="font-weight-bold">Product Title</label>
+                            <input type="text" class="form-control md-whiteframe-3dp" name="type"
+                                ng-model="editRequestedhordings.title">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label class="font-weight-bold">Product Title</label>
-                        <input type="text" class="form-control md-whiteframe-3dp" name="type"
-                            ng-model="editRequestedhordings.title">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label class="font-weight-bold">Search DMA</label>
-                        <!-- <md-autocomplete md-min-length="3" md-selected-item="areaObj"
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label class="font-weight-bold">Search DMA</label>
+                            <!-- <md-autocomplete md-min-length="3" md-selected-item="areaObj"
                             md-selected-item-change="selectSearchedArea(item)" md-search-text="searchedArea"
                             md-items="item in searchableAreas(searchedArea)" md-item-text="item.name"
                             placeholder="Search DMA" md-clear-button="true"
@@ -482,42 +326,42 @@
                                 No matches found.
                             </md-not-found>
                         </md-autocomplete> -->
-                        <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
-                            ng-model="editRequestedhordings.area_name">
-                    </div>                   
-                    <div class="col-sm-2">
-                        <label class="font-weight-bold">Height(Ft)</label>
-                        <input type="text" class="form-control md-whiteframe-3dp"  name="height"
-                        ng-model="editRequestedhordings.panelSize.split('*')[1]">
-                        <div ng-messages="hordinglistform.height.$error"
-                            ng-if="hordinglistform.height.$touched" style="color:red">
-                            <div ng-message="required">height*.</div>
+                            <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                                ng-model="editRequestedhordings.area_name">
                         </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="font-weight-bold">Width(Ft)</label>
-                        <input type="text" class="form-control md-whiteframe-3dp"  name="width"
-                        ng-model="editRequestedhordings.panelSize.split('*')[0]">
-                        <div ng-messages="hordinglistform.width.$error"
-                            ng-if="hordinglistform.width.$touched" style="color:red">
-                            <div ng-message="required">width*.</div>
+                        <div class="col-sm-2">
+                            <label class="font-weight-bold">Height(Ft)</label>
+                            <input type="text" class="form-control md-whiteframe-3dp" name="height"
+                                ng-model="editRequestedhordings.panelSize.split('*')[1]">
+                            <div ng-messages="hordinglistform.height.$error" ng-if="hordinglistform.height.$touched"
+                                style="color:red">
+                                <div ng-message="required">height*.</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-2" ng-show='bulletinresult'>
-                        <label class="font-weight-bold">Lit </label>
-                        <select ng-model="editRequestedhordings.lighting" name="light"
-                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
-                            data-md-container-class="selectdemoSelectHeader"
-                            ng-init="product.lighting = product.lighting || ''"
-                            placeholder="Has lighting?">
-                            <option value="" disabled selected>Light</option>                                        
-                            <option>Yes</option>
-                            <option>No</option>
-                        </select>
+                        <div class="col-sm-2">
+                            <label class="font-weight-bold">Width(Ft)</label>
+                            <input type="text" class="form-control md-whiteframe-3dp" name="width"
+                                ng-model="editRequestedhordings.panelSize.split('*')[0]">
+                            <div ng-messages="hordinglistform.width.$error" ng-if="hordinglistform.width.$touched"
+                                style="color:red">
+                                <div ng-message="required">width*.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" ng-show='bulletinresult'>
+                            <label class="font-weight-bold">Lit </label>
+                            <select ng-model="editRequestedhordings.lighting" name="light"
+                                class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                data-md-container-class="selectdemoSelectHeader"
+                                ng-init="product.lighting = product.lighting || ''" placeholder="Has lighting?">
+                                <option value="" disabled selected>Light</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
 
-                        <div ng-messages="hordinglistform.light.$error"
-                            ng-if="hordinglistform.light.$touched" style="color:red">
-                            <div ng-message="required">light*.</div>
+                            <div ng-messages="hordinglistform.light.$error" ng-if="hordinglistform.light.$touched"
+                                style="color:red">
+                                <div ng-message="required">light*.</div>
+                            </div>
                         </div>
                     </div>  
                 </div>
@@ -562,7 +406,7 @@
                             <label class="font-weight-bold">Select Product Date</label>
                             <div class="input-group">
                                 <input date-range-picker ng-model="editRequestedhordings.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(editRequestedhordings.id,$event);" style="padding: 4px 16px;">
+                                <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(editRequestedhordings,$event);" style="padding: 4px 16px;">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -717,7 +561,7 @@
                     <div class="form-group row" ng-if="editRequestedhordings.type != 'Bulletin'">
                             <div class="col-sm-3">
                                 <label class="font-weight-bold">Total no flips available</label>
-                                <input ng-model="editRequestedhordings.flips" class="form-control md-whiteframe-3dp" type="text"
+                                <input ng-model="editRequestedhordings.slots" class="form-control md-whiteframe-3dp" type="text"
                                     name="flips" required />
                                 <div ng-messages="hordinglistform.flips.$error"
                                     ng-if="hordinglistform.flips.$touched" style="color:red">
@@ -735,7 +579,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="font-weight-bold">Loop per day</label>
-                                <input ng-model="editRequestedhordings.loops" class="form-control md-whiteframe-3dp" type="text"
+                                <input ng-model="editRequestedhordings.hour" class="form-control md-whiteframe-3dp" type="text"
                                     name="loops" required />
                                 <div ng-messages="hordinglistform.loops.$error" ng-if="hordinglistform.loops.$touched"
                                     style="color:red">
@@ -776,8 +620,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="form-group row mb-0">
                         <div class="col-sm-4" style="padding-right: 0px;">
                             <label class="font-weight-bold">Demographics Age</label>
@@ -786,7 +628,7 @@
                             <label class="font-weight-bold">Percentage</label>
                         </div>
                     </div>
-                    <div class="form-group row" data-ng-repeat="from in FromTo">
+                    <div class="form-group row" data-ng-repeat="from in editRequestedhordings.demographicsage">
                         <div class="col-sm-2">
                                 <label class="font-weight-bold">From</label>
                             <div class="input-group">
@@ -810,13 +652,12 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-5">
                         <div class="col-md-6">
                             <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
                         </div>                                
                     </div>
-                    <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
+                    <div class="form-group row" data-ng-repeat="strength in editRequestedhordings.strengths">                                   
                         <div class="col-md-2">
                             <label for="strength">{{strength.name}}</label>
                         </div>
@@ -854,16 +695,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="owner_blocked_body">
-                    <div class="row" class="mt-2 mb-2">
-                        <button class="border col-2 mb-1 p-1 text-center cal_divcolor" ng-repeat= "week in weeksArray"
-                        ng-click="selectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
-                            <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
-                            <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
-                    </button>
-                    <div class="col-md-8 mt-3">
-                        <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksArray, editRequestedhordings.type)">Block Dates</md-button>
-                    </div>
+                <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
+                    <div class="owner_blocked_header">
+                        <div layout="row">
+                            <div>
+                                <h3>select the blocked dates-52/2 week calender </h3>
+                                <p>Campaign start with frist day of week end with last day of week</p>
+                            </div>
+
+                            <div flex></div>
+                            <a class="m-3" ng-click="slotedDatesPopupClosed(editRequestedhordings.type)">
+                                <i class="material-icons" style="color:white !important">close</i>
+                            </a>
+                        </div>
                     </div>
                 <span class="clearfix"></span>
                 </div>
@@ -875,7 +719,7 @@
                                 <h3>select the blocked dates-52/2 week calender </h3>
                                 <p>Campaign start with frist day of week end with last day of week</p>
                             </div>
-                          
+
                             <div flex></div>
                             <a class="m-3" ng-click="slotedDatesPopupClosed(editRequestedhordings.type)">
                                 <i class="material-icons" style="color:white !important">close</i>
@@ -884,25 +728,30 @@
                     </div>
                     <div class="owner_blocked_body">
                         <div class="row" class="mt-2 mb-2">
-                            <button class="border col-2 mb-1 p-1 text-center cal_divcolor" ng-repeat= "week in weeksDigitalArray"
-                            ng-click="digitalSelectUserWeeks(week,$index,$event)"  ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}" ng-disabled="week.isBlocked && week.isBlocked == true">
+                            <button class="border col-2 mb-1 p-1 text-center cal_divcolor"
+                                ng-repeat="week in weeksDigitalArray"
+                                ng-click="digitalSelectUserWeeks(week,$index,$event)"
+                                ng-class="{selectedWeek : week.selected == true, addBlockedColor: week.isBlocked && week.isBlocked == true}"
+                                ng-disabled="week.isBlocked && week.isBlocked == true">
                                 <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
                                 <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
-                        </button>
-                        <div class="col-md-8 mt-3">
-                            <md-button Class="md-raised md-primary all_button float-right" ng-click="blockedSlotesbtn(weeksDigitalArray , editRequestedhordings.type)">Block Dates</md-button>
-                        </div>
+                            </button>
+                            <div class="col-md-8 mt-3">
+                                <md-button Class="md-raised md-primary all_button float-right"
+                                    ng-click="blockedSlotesbtn(weeksDigitalArray , editRequestedhordings.type)">Block
+                                    Dates</md-button>
+                            </div>
                         </div>
                     <span class="clearfix"></span>
                     </div>
                   </div> -->
             
             </form>
-        </div>            
+        </div>
     </div>
 </div>
 
-    <!-- <div class="layout-margin col-md-5 hide-xs">
+<!-- <div class="layout-margin col-md-5 hide-xs">
         <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:342px;;height:480px;overflow:hidden;visibility:hidden;">
             <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                 <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
