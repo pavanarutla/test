@@ -202,7 +202,50 @@ Colipos  ===================*/
     multipleDateRanges: true,
     locale: {
       applyClass: 'btn-green',
-      applyLabel: "Book Now",
+     applyLabel: "Book Now",
+      fromLabel: "From",
+      format: "DD-MMM-YY",
+      toLabel: "To",
+      cancelLabel: 'X',
+      customRangeLabel: 'Custom range'
+    },    
+    isInvalidDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          return true;
+        }
+      }
+      if (moment(dt) < moment()) {
+        return true;
+      }
+    },
+    isCustomDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+            return ['red-blocked', 'left-radius'];
+          } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+            return ['red-blocked', 'right-radius'];
+          } else {
+            return 'red-blocked';
+          }
+        }
+      }
+      if (moment(dt) < moment()) {
+        return 'gray-blocked';
+      }
+    },
+    eventHandlers: {
+      'apply.daterangepicker': function (ev, picker) {
+        //selectedDateRanges = [];
+      }
+    }
+  };
+  $scope.addProdOpts = {
+    multipleDateRanges: true,
+    locale: {
+      applyClass: 'btn-green',
+     applyLabel: "Book Now",
       fromLabel: "From",
       format: "DD-MMM-YY",
       toLabel: "To",
@@ -499,7 +542,7 @@ Colipos  ===================*/
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, product: $scope.product }
+      data: { image: $scope.files.image, product: JSON.parse(angular.toJson($scope.product)) }
     }).then(function (result) {
       if(result.data.status == "1"){
         // getRequestedProductList();

@@ -66,15 +66,13 @@
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
-
-
     <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
-      style="z-index:10 !important;width: 500px !important;max-width:500px !important;" >
+      style="z-index:10 !important;width: 500px !important;max-width:500px !important;" >    
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
             <div class="col-md-11">
-                <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp;-  {{ product.area_name }}</h5>
+                <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp; {{product.area_name}}</h5>
             </div>
             <div class="col-md-1 text-right mt-3">
                 <a class="close-btn" ng-click="toggleProductDetailSidenav()">
@@ -107,34 +105,33 @@
                     <p class="mb-1 ml-3">Venue</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: Sport Stadium</p>
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.venue}}</p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Address</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: {{product.addressone}}{{product.addresstwo}}</p>
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.address}}</p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Ethinicity</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: General</p>
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.ethnicity}}</p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Demographic</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="ml-2">: Age: 18 - 24 : <span class="font-weight-bold">25%</span><br>
-                      &nbsp;&nbsp;Age: 25 - 40 : <span class="font-weight-bold">55%</span><br>
-                      &nbsp;&nbsp;Age: 40 - 80 : <span class="font-weight-bold">20%</span>
-                    </p>
+                  <p ng-repeat = "demoage in product.demographicsage">
+                      : Age: {{demoage.fromage}} - {{demoage.toage}} : <span class="font-weight-bold">{{demoage.percentage}}%</span><br>                     
+                  </p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Impressions</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: {{product.impressions}} per week</p>
+                    <p class="font-weight-bold mb-1 ml-2">: {{product.impressions || '0'}} per week</p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Price</p>
@@ -147,10 +144,8 @@
                 </div>
           </div> 
           <hr class="ml-3 mr-3">
-          <ul style="list-style: disc;padding-left: 28px;">
-            <li>This Bulletin minimum booking is 4 weeks.</li>
-            <li>There after you can select your bookings in multiples of two weeks.</li>
-            <li>Price includes all taxes and productions charges</li>
+          <ul style="list-style: disc;padding-left: 28px;" ng-repeat="strength in product.strengths">
+            <li> {{strength.strname | capitalize}}</li>
           </ul>
           <hr class="ml-3 mr-3">
           <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
@@ -183,7 +178,10 @@
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <a ng-click="getProductUnavailableDates(product);"><i class="material-icons">edit</i></a></p>
+                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12</p>
+                    <div id="calender-autolaod-div" style="width: 25px; cursor: pointer;" ng-click="getProductUnavailableDates(product, $event);">
+                      <i class="material-icons">edit</i>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Total Price</p>

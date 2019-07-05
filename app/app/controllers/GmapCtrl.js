@@ -494,11 +494,11 @@ app.controller('GmapCtrl',
                 $scope.product.price = marker.properties['price'];
                 $scope.product.image = config.serverUrl + marker.properties['image'];
                 $scope.product.siteNo = marker.properties['siteNo'];
+                $scope.product.city = marker.properties['city'];
                 $scope.product.panelSize = marker.properties['panelSize'];
                 $scope.product.type = marker.properties['type'];
                 $scope.product.demographicsage = marker.properties['demographicsage'];
-                $scope.product.addressone = marker.properties['addressone'];
-                $scope.product.addresstwo = marker.properties['addresstwo'];
+                $scope.product.address = marker.properties['address'];               
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
                 $scope.product.format = marker.properties['format_name'];
@@ -526,11 +526,11 @@ app.controller('GmapCtrl',
                 $scope.product.price = marker.properties['price'];
                 $scope.product.image = config.serverUrl + marker.properties['image'];
                 $scope.product.siteNo = marker.properties['siteNo'];
+                $scope.product.city = marker.properties['city'];
                 $scope.product.panelSize = marker.properties['panelSize'];
                 $scope.product.type = marker.properties['type'];
                 $scope.product.demographicsage = marker.properties['demographicsage'];
-                $scope.product.addressone = marker.properties['addressone'];
-                $scope.product.addresstwo = marker.properties['addresstwo'];
+                $scope.product.address = marker.properties['address'];               
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
                 $scope.product.format = marker.properties['format_name'];
@@ -1057,52 +1057,53 @@ app.controller('GmapCtrl',
 
             }
 
-            // $scope.selectFromTabIdSearch = function (marker) {
-            //     $scope.toggleProductDetailSidenav();
-            //     if (marker.id) {
-            //         var refToMapMarker = _.find(markersOnMap, (m) => {
-            //             return m.properties.id == marker.id;
-            //         });
-            //         $scope.$parent.alreadyShortlisted = false;
-            //         $scope.mapObj.setCenter(refToMapMarker.position);
-            //         var bounds = new google.maps.LatLngBounds();
-            //         bounds.extend(refToMapMarker.position);
-            //         $scope.mapObj.fitBounds(bounds);
-            //         $scope.product.id = refToMapMarker.properties['id'];
-            //         $scope.product.price = refToMapMarker.properties['price'];
-            //         // $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
-            //         // need to check
-            //         $scope.product.image = config.serverUrl + refToMapMarker.properties.image[0];
-            //         $scope.product.f_image = config.serverUrl + refToMapMarker.properties.image[1];
-            //          // need to check
-            //         $scope.product.siteNo = refToMapMarker.properties['siteNo'];
-            //         $scope.product.panelSize = refToMapMarker.properties['panelSize'];
-            //         $scope.product.type = refToMapMarker.properties['type'];
-            //         $scope.product.demographicsage = refToMapMarker.properties['demographicsage'];
-            //         $scope.product.area_name = refToMapMarker.properties['area_name'];
-            //         $scope.product.addressone = refToMapMarker.properties['addressone'];
-            //         $scope.product.addresstwo = refToMapMarker.properties['addresstwo'];
-            //         $scope.product.address = refToMapMarker.properties['address'];
-            //         $scope.product.impressions = refToMapMarker.properties['impressions'];
-            //         $scope.product.format = refToMapMarker.properties['format_name'];
-            //         $scope.product.lighting = refToMapMarker.properties['lighting'];
-            //         $scope.product.direction = refToMapMarker.properties['direction'];
-            //         $scope.product.availableDates = refToMapMarker.properties['availableDates'];
-            //         $scope.product.slots = refToMapMarker.properties['slots'];
-            //         $scope.hideSelectedMarkerDetail = false;
-            //         if (refToMapMarker.properties['type'] == "Bulletin") {
-            //             $scope.getProductUnavailableDates(marker.id);
-            //             $mdSidenav('productDetails').open();
-            //         } else if (refToMapMarker.properties['type'] == "Digital Bulletin" || refToMapMarker.properties['type'] == "Transit") {
-            //             $scope.getProductDigitalUnavailableDates(marker.id, marker.slots);
-            //             $mdSidenav('digitalProductDetails').open();
-            //         }
-            //         // $mdSidenav('productDetails').open();
-            //         $scope.selectedProduct = refToMapMarker;
-            //     } else {
-            //         toastr.error('No product found with that tab id', 'error');
-            //     }
-            // }
+            $scope.selectFromTabIdSearch = function (marker) {
+                $scope.toggleProductDetailSidenav();
+                if (marker.id) {
+                    var refToMapMarker = _.find(markersOnMap, (m) => {
+                        return m.properties.id == marker.id;
+                    });
+                    $scope.$parent.alreadyShortlisted = false;
+                    $scope.mapObj.setCenter(refToMapMarker.position);
+                    var bounds = new google.maps.LatLngBounds();
+                    bounds.extend(refToMapMarker.position);
+                    $scope.mapObj.fitBounds(bounds);
+                    $scope.product.id = refToMapMarker.properties['id'];
+                    $scope.product.price = refToMapMarker.properties['price'];
+                    // $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
+                    // need to check
+                    $scope.product.image = config.serverUrl + refToMapMarker.properties.image[0];
+                    $scope.product.f_image = config.serverUrl + refToMapMarker.properties.image[1];
+                     // need to check
+                    $scope.product.siteNo = refToMapMarker.properties['siteNo'];
+                    $scope.product.panelSize = refToMapMarker.properties['panelSize'];
+                    $scope.product.type = refToMapMarker.properties['type'];
+                    $scope.product.demographicsage = refToMapMarker.properties['demographicsage'];
+                    $scope.product.strengths = refToMapMarker.properties['strengths'];
+                    $scope.product.area_name = refToMapMarker.properties['area_name'];
+                    $scope.product.city = refToMapMarker.properties['city'];
+                    $scope.product.venue = refToMapMarker.properties['venue'];
+                    $scope.product.ethnicity = refToMapMarker.properties['ethnicity'];
+                    $scope.product.address = refToMapMarker.properties['address'];
+                    $scope.product.impressions = refToMapMarker.properties['impressions'];                   
+                    $scope.product.lighting = refToMapMarker.properties['lighting'];
+                    $scope.product.direction = refToMapMarker.properties['direction'];
+                    $scope.product.availableDates = refToMapMarker.properties['availableDates'];
+                    $scope.product.slots = refToMapMarker.properties['slots'];
+                    $scope.hideSelectedMarkerDetail = false;
+                    if (refToMapMarker.properties['type'] == "Bulletin") {
+                        $scope.getProductUnavailableDates(marker.id);
+                        $mdSidenav('productDetails').open();
+                    } else if (refToMapMarker.properties['type'] == "Digital Bulletin" || refToMapMarker.properties['type'] == "Transit") {
+                        $scope.getProductDigitalUnavailableDates(marker.id, marker.slots);
+                        $mdSidenav('digitalProductDetails').open();
+                    }
+                    // $mdSidenav('productDetails').open();
+                    $scope.selectedProduct = refToMapMarker;
+                } else {
+                    toastr.error('No product found with that tab id', 'error');
+                }
+            }
             $scope.selectFromTabIdSearch = function (marker) {
                 if (marker.id) {
                     var refToMapMarker = _.find(markersOnMap, (m) => {
@@ -1116,10 +1117,17 @@ app.controller('GmapCtrl',
                     $scope.product.id = refToMapMarker.properties['id'];
                     $scope.product.image = config.serverUrl + refToMapMarker.properties['image'];
                     $scope.product.siteNo = refToMapMarker.properties['siteNo'];
+                    $scope.product.area_name = refToMapMarker.properties['area_name'];
                     $scope.product.panelSize = refToMapMarker.properties['panelSize'];
+                    $scope.product.demographicsage = refToMapMarker.properties['demographicsage'];
+                    $scope.product.strengths = refToMapMarker.properties['strengths'];
                     $scope.product.address = refToMapMarker.properties['address'];
+                    $scope.product.city = refToMapMarker.properties['city'];
                     $scope.product.impressions = refToMapMarker.properties['impressions'];
-                    $scope.product.format = refToMapMarker.properties['format_name'];
+                    $scope.product.type = refToMapMarker.properties['type'];
+                    $scope.product.ethnicity = refToMapMarker.properties['ethnicity'];
+                    $scope.product.price = refToMapMarker.properties['price'];
+                    $scope.product.venue = refToMapMarker.properties['venue'];
                     $scope.product.lighting = refToMapMarker.properties['lighting'];
                     $scope.product.direction = refToMapMarker.properties['direction'];
                     $scope.product.availableDates = refToMapMarker.properties['availableDates'];
@@ -1299,8 +1307,7 @@ app.controller('GmapCtrl',
                 $scope.product.panelSize = product.panelSize;
                 $scope.product.type = product.type;
                 $scope.product.demographicsage = product.demographicsage;
-                $scope.product.addressone = product.addressone;
-                $scope.product.addresstwo = product.addresstwo;
+                $scope.product.address = product.address;               
                 $scope.product.area_name = product.area_name;
                 $scope.product.address = product.address;
                 $scope.product.price = product.price;
@@ -1409,7 +1416,6 @@ app.controller('GmapCtrl',
 
 
             $scope.getProductUnavailableDates = function (product, ev) {
-                console.log(product)
                 if(product.type == "Bulletin"){
                     MapService.getProductUnavailableDates(product.id).then(function (dateRanges) {
                         console.log('from service',dateRanges)

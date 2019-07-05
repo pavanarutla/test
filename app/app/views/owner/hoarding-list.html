@@ -348,11 +348,11 @@ md-icon{
                                 </div>
                                 <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
                                     <label class="font-weight-bold">Min. Booking Days</label>
-                                    <select ng-model="product.cancellation" name="cancellation"
+                                    <select ng-model="product.bookingDates" name="bookingDates"
                                         class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                         data-md-container-class="selectdemoSelectHeader"
-                                        ng-init="product.cancellation = product.cancellation || ''"
-                                        placeholder="Has cancellation?" required>
+                                        ng-init="product.bookingDates = product.bookingDates || ''"
+                                        placeholder="Has bookingDates?" required>
                                         <option value="" disabled selected>No</option>
                                         <option>2 Days</option>
                                         <option>4 Days</option>
@@ -725,10 +725,10 @@ md-icon{
                     <p class=""><b>{{product.siteNo}}</b>&nbsp;<b>{{product.title || "N/A"}} -
                             {{product.area_name || "N/A"}}</b>
                         <br><b style="color: #44596D;">Address</b>:
-                        {{product.addressone || "N/A" | capitalize}}{{product.addresstwo | capitalize}}
+                        {{product.address | capitalize}}
                         <br><b style="color: #44596D;">Facing</b>: {{product.direction|| "N/A" | capitalize}}
                         <br><b style="color: #44596D;">Type</b>: {{product.type || "N/A"}}
-                        <br><b style="color: #44596D;">Views</b>: {{product.impressions || "N/A"}}
+                        <br><b style="color: #44596D;">Views</b>: {{product.impressions || '0'}}
                 </td>
                 <td class="table_vertical">{{product.panelSize}}</td>
                 <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>

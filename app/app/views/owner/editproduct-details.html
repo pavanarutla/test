@@ -561,7 +561,7 @@
                     <div class="form-group row" ng-if="editRequestedhordings.type != 'Bulletin'">
                             <div class="col-sm-3">
                                 <label class="font-weight-bold">Total no flips available</label>
-                                <input ng-model="editRequestedhordings.flips" class="form-control md-whiteframe-3dp" type="text"
+                                <input ng-model="editRequestedhordings.slots" class="form-control md-whiteframe-3dp" type="text"
                                     name="flips" required />
                                 <div ng-messages="hordinglistform.flips.$error"
                                     ng-if="hordinglistform.flips.$touched" style="color:red">
@@ -579,7 +579,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="font-weight-bold">Loop per day</label>
-                                <input ng-model="editRequestedhordings.loops" class="form-control md-whiteframe-3dp" type="text"
+                                <input ng-model="editRequestedhordings.hour" class="form-control md-whiteframe-3dp" type="text"
                                     name="loops" required />
                                 <div ng-messages="hordinglistform.loops.$error" ng-if="hordinglistform.loops.$touched"
                                     style="color:red">
@@ -620,8 +620,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="form-group row mb-0">
                         <div class="col-sm-4" style="padding-right: 0px;">
                             <label class="font-weight-bold">Demographics Age</label>
@@ -630,7 +628,7 @@
                             <label class="font-weight-bold">Percentage</label>
                         </div>
                     </div>
-                    <div class="form-group row" data-ng-repeat="from in FromTo">
+                    <div class="form-group row" data-ng-repeat="from in editRequestedhordings.demographicsage">
                         <div class="col-sm-2">
                                 <label class="font-weight-bold">From</label>
                             <div class="input-group">
@@ -654,13 +652,12 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-5">
                         <div class="col-md-6">
                             <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
                         </div>                                
                     </div>
-                    <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
+                    <div class="form-group row" data-ng-repeat="strength in editRequestedhordings.strengths">                                   
                         <div class="col-md-2">
                             <label for="strength">{{strength.name}}</label>
                         </div>
