@@ -352,12 +352,12 @@ Colipos  ===================*/
     });
   }
   getShortListedProducts();
-  $scope.getProductUnavailableDates = function (productId, ev) {
-    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parents().eq(3).find('input').trigger('click');
-    });
-  }
+  // $scope.getProductUnavailableDates = function (productId, ev) {
+  //   MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //     $scope.unavailalbeDateRanges = dateRanges;
+  //     $(ev.target).parents().eq(3).find('input').trigger('click');
+  //   });
+  // }
   // SHORT-LIST ENDs
   // Save-camp
   $scope.toggleExistingCampaignSidenav = function () {
@@ -665,10 +665,25 @@ Colipos  ===================*/
   // }
 
   $scope.getProductUnavailableDates = function (productId, ev) {
-    OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
+    if(productId.type == "Bulletin"){
+      OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }else if(productId.type == "Digital Bulletin" || productId.type == "Transit"){
+      OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots == productId.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parent().parent().find('input').trigger('click');
+    })
+    }
+    else{
       $(ev.target).parent().parent().find('input').trigger('click');
-    });
+    }
   }
   /*=====================
   | Product Section Ends
@@ -677,10 +692,6 @@ Colipos  ===================*/
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
     //editRequestedhordings.area = $scope.areaObj.id;
-
-
-
-
     editRequestedhordings.id = $stateParams.id;
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
