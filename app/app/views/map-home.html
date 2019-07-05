@@ -56,7 +56,12 @@
 .md-datepicker-input{
   font-size: 12px;
 }
-
+.gmnoprint{
+    right: 170em !important;
+}
+.gmnoprint .gm-style-cc{
+  right: 0px !important;
+}
   </style>
   <div layout="column" style="position:relative">
   
@@ -437,7 +442,7 @@
   
     <!-- map html start (left side controls) -->
     <div layout="column" style="position:relative;height:100%;" id="map-container">
-      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5"
+      <ng-map center="{{address.name}}" zoom="4" style="width:100%;height:100%;" max-zoom="16" min-zoom="5" zoom-control="true"
         disable-default-u-i="true" ng-if="mapContainerHeightSet" styles="[
         {
           elementType: 'geometry',

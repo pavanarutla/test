@@ -309,12 +309,12 @@ Colipos  ===================*/
     });
   }
   getShortListedProducts();
-  $scope.getProductUnavailableDates = function (productId, ev) {
-    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parents().eq(3).find('input').trigger('click');
-    });
-  }
+  // $scope.getProductUnavailableDates = function (productId, ev) {
+  //   MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //     $scope.unavailalbeDateRanges = dateRanges;
+  //     $(ev.target).parents().eq(3).find('input').trigger('click');
+  //   });
+  // }
   // SHORT-LIST ENDs
   // Save-camp
   $scope.toggleExistingCampaignSidenav = function () {
@@ -622,10 +622,24 @@ Colipos  ===================*/
   // }
 
   $scope.getProductUnavailableDates = function (productId, ev) {
-    OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parent().parent().find('input').trigger('click');
-    });
+    console.log(productId)
+    if(productId.type == "Bulletin"){
+      OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parent().parent().find('input').trigger('click');
+      });
+    }else{
+      OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
+        console.log('blockedDatesAndSlots',blockedDatesAndSlots)
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots == productId.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parent().parent().find('input').trigger('click');
+    })
+    }
   }
   /*=====================
   | Product Section Ends
