@@ -539,12 +539,11 @@ app.controller('GmapCtrl',
                 $scope.product.availableDates = marker.properties['availableDates'];
                 $scope.product.slots = marker.properties['slots'];
                 $scope.hideSelectedMarkerDetail = false;
-                // $mdSidenav('productDetails').open();
-                // if (marker.properties['type'] == "Bulletin") {
-                //     $mdSidenav('productDetails').open();
-                // } else if (marker.properties['type'] == "Digital Bulletin" || marker.properties['type'] == "Transit") {
-                //     $mdSidenav('digitalProductDetails').open();
-                // }
+                if (marker.properties['type'] == "Bulletin") {
+                    $scope.productPerDay = $scope.product.price / 28;
+                } else if (marker.properties['type'] == "Digital Bulletin" || marker.properties['type'] == "Transit") {
+                    // $scope.productPerDay = $scope.product.price / 28;
+                }
                 $mdSidenav('productDetails').open();
                 // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                 $scope.selectedProduct = marker;
@@ -2022,6 +2021,22 @@ app.controller('GmapCtrl',
                 //         $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
                 //             week.selected = false;
                 //         });
+
+
+                //   if ($scope.product.type == "Digital Bulletin" || $scope.product.type == "Transit") {
+
+                //   }else{
+                //     for(item in $scope.ranges.selectedDateRanges){
+                //         var startDate = moment(item.startDate)
+                //         var endDate = 
+
+                //         for(var i =0; i<item){
+
+                //         }
+                //     }
+                //     $scope.productPerDay
+                //   }
+
                         $mdSidenav('productDetails').close()
                     // }
             }

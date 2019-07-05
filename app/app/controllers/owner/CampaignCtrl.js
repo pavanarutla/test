@@ -380,7 +380,7 @@ $scope.hidebutton = function(){
                     id: ownerProduct.id,
                     booking_dates: ownerProduct.booking_dates,
                     price: ownerProduct.default_price,
-                    views:ownerProduct.impressions
+                    booked_slots:1
                 }
             };
             OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {   
