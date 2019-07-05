@@ -2,7 +2,6 @@
     md-backdrop.md-sidenav-backdrop {
       z-index: -1;
     }
-  
     .gray-blocked {
       background: #ddd;
     }
@@ -184,7 +183,7 @@
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <a ng-click="getProductUnavailableDates(product, $event);"><i class="material-icons">edit</i></a></p>
+                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12  <a ng-click="getProductUnavailableDates(product);"><i class="material-icons">edit</i></a></p>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Total Price</p>
@@ -627,7 +626,7 @@
         </div>
         <!-- formats html end-->
         <!--Shortlisted Product html start -->
-        <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" ng-if="currStateName != 'owner.location'" ng-disabled = "shortListedProducts.length === 0 " >
+        <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2" ng-if="currStateName != 'owner.location'" ng-hide = "shortListedProducts.length === 0 " >
           <a class=" main-part" layout="column" href="#/shortlisted-products" style="cursor:pointer;padding: 5px 10px;">
             <div layout="row">
               <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
