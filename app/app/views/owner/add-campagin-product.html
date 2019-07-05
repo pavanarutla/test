@@ -1,82 +1,18 @@
 <style>
-.daterangepicker option.disabled, .daterangepicker td.disabled {
-    color: #fff;
-    cursor: not-allowed;
-    background: #ddd;
-    border: 1px solid #fff;
-    border-radius: 0px;
-    /* text-decoration: line-through; */
-  }
-  .gray-blocked{
-    background:#ddd;
-  }
-  .red-blocked{
-    background:#f00 !important;
-  }
-  .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 340px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 7px;
-    top: 0px;
-    left: 0px;
-    right: 17.5% !important;
-    z-index: 1;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
-}
+
+.gray-blocked {
+      background: #ddd;
+    }
+    .red-blocked {
+      color: #f00 !important;
+      font-weight: bold;
+    }
 #ownerSlots{
   width:500px;
 }
-/* .owner-calender-slots {
-  position: absolute;
-    bottom: 50%;
-    right: 10px;
-    width: 500px;
-    background: #aaa;
-} */
-.addWeekColor{
-      background-color: #f00;
-      color:white;
-    }
-    .selectedWeekColor {
-      background-color: green;
-    }
-    .addBlockedColor {
-      background-color: gray !important;
-      cursor: not-allowed !important;
-    }
-    .productAdded {
-      background-color: #f2f3f2;
-    }
-@media screen and (min-width:320px) and (max-width: 563px){
-    .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 280px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 7px;
-    top: 0px;
-    left: 10px;
-    right: 8% !important;
-    z-index: 1;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
-}
-}
+
+
+
 .md-datepicker-input{
   font-size: 12px;
   min-width: 100px;
@@ -375,9 +311,7 @@ md-icon{
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
             <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
-              <i class="material-icons">
-                calendar_today
-              </i>
+              <i class="fa fa-calendar"></i>
             </a>
           </td>
           <td class=" table_vertical text-right">
