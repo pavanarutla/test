@@ -260,7 +260,7 @@ md-icon{
                                         <label>Select Product Date</label>
                                         <div class="input-group">
                                             <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product.id,$event);" style="padding: 4px 16px;">
+                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product,$event);" style="padding: 4px 16px;">
                                                 <i class="material-icons">
                                                     calendar_today
                                                 </i>
@@ -777,18 +777,18 @@ md-icon{
                         class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text"
                         name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
                         style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                    <!-- <a ng-click="getProductUnavailableDates(product.id, $event);">
+                    <a ng-click="getProductUnavailableDates(product, $event);">
                         <i class="material-icons">
                             calendar_today
                         </i>
-                    </a> -->
-                    <a ng-click="getProductUnavailableDates(product.id, $event);">
+                    </a>
+                    <!-- <a ng-click="getProductUnavailableDates(product.id, $event);">
                         <i class="fa fa-calendar" aria-hidden="true" ng-if="product.booking_dates == 0"></i>
                     </a>
                     <a ng-click="getProductUnavailableDates(product.id, $event);">
                         <i class="fa fa-calendar material-Cal" aria-hidden="true"
                             ng-if="product.booking_dates != 0"></i>
-                    </a>
+                    </a> -->
                 </td>
                 <td class="text-center table_vertical">
                     <div class="form-group form_yes"
