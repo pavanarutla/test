@@ -1131,6 +1131,7 @@ app.controller('GmapCtrl',
                     $scope.product.lighting = refToMapMarker.properties['lighting'];
                     $scope.product.direction = refToMapMarker.properties['direction'];
                     $scope.product.availableDates = refToMapMarker.properties['availableDates'];
+                    $scope.product.slots = refToMapMarker.properties['slots'];
                     $scope.hideSelectedMarkerDetail = false;
                     $mdSidenav('productDetails').open();
                     $scope.selectedProduct = refToMapMarker;
@@ -1427,7 +1428,7 @@ app.controller('GmapCtrl',
                         $scope.unavailalbeDateRanges = [];
                         // console.log('product',$scope.product)
                         blockedDatesAndSlots.forEach((item)=>{
-                            if(item.booked_slots == $scope.product.availableDates){
+                            if(item.booked_slots == $scope.product.slots){
                                 $scope.unavailalbeDateRanges.push(item);
                             }
                         })
@@ -1653,6 +1654,7 @@ app.controller('GmapCtrl',
                             productId: productId,
                             name: campaignName,
                             dates: selectedDateRanges,
+                            booking_slots : 1
                         };
                 // if ($scope.numOfSlots > 0) {
                 //     var paylaunchProduct = {
