@@ -178,7 +178,7 @@
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="font-weight-bold mb-1 ml-2">: Jan 14 - Feb 12</p>
+                    <p class="font-weight-bold mb-1 ml-2" ng-repeat = "selectedDates in ranges.selectedDateRanges">: {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}</p>
                     <div id="calender-autolaod-div" style="width: 25px; cursor: pointer;" ng-click="getProductUnavailableDates(product, $event);">
                       <i class="material-icons">edit</i>
                     </div>
