@@ -1080,6 +1080,7 @@ app.controller('GmapCtrl',
                     $scope.product.panelSize = refToMapMarker.properties['panelSize'];
                     $scope.product.type = refToMapMarker.properties['type'];
                     $scope.product.demographicsage = refToMapMarker.properties['demographicsage'];
+                    $scope.product.strengths = refToMapMarker.properties['strengths'];
                     $scope.product.area_name = refToMapMarker.properties['area_name'];
                     $scope.product.city = refToMapMarker.properties['city'];
                     $scope.product.venue = refToMapMarker.properties['venue'];
@@ -1119,6 +1120,8 @@ app.controller('GmapCtrl',
                     $scope.product.siteNo = refToMapMarker.properties['siteNo'];
                     $scope.product.area_name = refToMapMarker.properties['area_name'];
                     $scope.product.panelSize = refToMapMarker.properties['panelSize'];
+                    $scope.product.demographicsage = refToMapMarker.properties['demographicsage'];
+                    $scope.product.strengths = refToMapMarker.properties['strengths'];
                     $scope.product.address = refToMapMarker.properties['address'];
                     $scope.product.city = refToMapMarker.properties['city'];
                     $scope.product.impressions = refToMapMarker.properties['impressions'];

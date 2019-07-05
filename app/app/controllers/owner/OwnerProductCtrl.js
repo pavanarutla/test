@@ -676,7 +676,6 @@ Colipos  ===================*/
 
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
-    console.log(editRequestedhordings.dates)
     //editRequestedhordings.area = $scope.areaObj.id;
 
 

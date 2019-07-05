@@ -124,13 +124,9 @@
                     <p class="mb-1 ml-3">Demographic</p>
                 </div>
                 <div class="col-md-7">
-                  <p ng-repeat="demoage in demographicsage">
-                      : Age: {{product.demoage.fromage}} - {{product.demographicsage.toage}} : <span class="font-weight-bold">{{product.demographicsage.percentage}}%</span><br>
+                  <p ng-repeat = "demoage in product.demographicsage">
+                      : Age: {{demoage.fromage}} - {{demoage.toage}} : <span class="font-weight-bold">{{demoage.percentage}}%</span><br>                     
                   </p>
-                    <!-- <p class="ml-2">
-                      &nbsp;&nbsp;Age: 25 - 40 : <span class="font-weight-bold">55%</span><br>
-                      &nbsp;&nbsp;Age: 40 - 80 : <span class="font-weight-bold">20%</span>
-                    </p> -->
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Impressions</p>
@@ -149,10 +145,8 @@
                 </div>
           </div> 
           <hr class="ml-3 mr-3">
-          <ul style="list-style: disc;padding-left: 28px;">
-            <li>This Bulletin minimum booking is 4 weeks.</li>
-            <li>There after you can select your bookings in multiples of two weeks.</li>
-            <li>Price includes all taxes and productions charges</li>
+          <ul style="list-style: disc;padding-left: 28px;" ng-repeat="strength in product.strengths">
+            <li> {{strength.strname | capitalize}}</li>
           </ul>
           <hr class="ml-3 mr-3">
           <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
