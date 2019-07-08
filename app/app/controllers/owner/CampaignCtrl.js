@@ -308,17 +308,16 @@ $scope.hidebutton = function(){
                     localStorage.selectedOwnerCampaign = JSON.stringify(result);
                     $location.path('/owner/' + $rootScope.clientSlug + '/add-campagin-product');
                 });
+                CreatecampFunction();
             } else if (result.status == 0) {
-                $rootScope.closeMdDialog();
-                if (result.message.constructor == Array) {
-                    $scope.ownerCampaignErrors = result.message;
-                } else {
+                // $rootScope.closeMdDialog();
+                // if (result.message.constructor == Array) {
+                //     $scope.ownerCampaignErrors = result.message;
+                // } else {
                     toastr.error(result.message);
-                }
-            } else {
-                toastr.error(result.message);
-            }
-            CreatecampFunction();
+                // }
+            } 
+            // CreatecampFunction();
         });
     }
     function CreatecampFunction() {
