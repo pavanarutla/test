@@ -712,7 +712,6 @@ Colipos  ===================*/
 
     })
     editRequestedhordings.dates = $scope.ranges.selectedDateRanges;
-    console.log('editRequestedhordings',editRequestedhordings)
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
