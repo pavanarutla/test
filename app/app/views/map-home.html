@@ -123,7 +123,7 @@
                     <p class="mb-1 ml-3">Demographic</p>
                 </div>
                 <div class="col-md-7">
-                  <p ng-repeat = "demoage in product.demographicsage">
+                  <p class="mb-1 ml-2" ng-repeat = "demoage in product.demographicsage">
                       : Age: {{demoage.fromage}} - {{demoage.toage}} : <span class="font-weight-bold">{{demoage.percentage}}%</span><br>                     
                   </p>
                 </div>
@@ -159,7 +159,7 @@
                   <div class="input-group" style="z-index: 0;">
                     <!-- <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
                       class="form-control"> -->
-                    <div class="ibtn btn-danger" id="calender-autolaod-div" ng-click="getProductUnavailableDates(product, $event);">
+                    <div class="ibtn btn-danger" id="calender-autolaod-div" ng-if="currStateName != 'owner.location'" ng-click="getProductUnavailableDates(product, $event);">
                       <a class="btn btn-danger">
                         Select Dates
                       </a>
