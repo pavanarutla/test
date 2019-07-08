@@ -472,8 +472,8 @@ Colipos  ===================*/
 
   $scope.ProductTypes = [
     { name: "Bulletin" },
-    { name: "Digital Bulletin" },
-    { name: "Transit" }
+    { name: "Digital" },
+    { name: "Transit Digital" }
   ];
   $scope.bulletinresult = true;
   $scope.trasitResult = false;
@@ -485,11 +485,11 @@ Colipos  ===================*/
       $scope.trasitResult = false;
       $scope.DigitalResult = false;
     }
-    else if ($scope.product.type.name == "Digital Bulletin") {
+    else if ($scope.product.type.name == "Digital") {
       $scope.DigitalResult = true;
       $scope.trasitResult = false;
       $scope.bulletinresult = false;
-    } else if ($scope.product.type.name == "Transit") {
+    } else if ($scope.product.type.name == "Transit Digital") {
       $scope.trasitResult = true;
       $scope.bulletinresult = false;
       $scope.DigitalResult = false;
@@ -679,7 +679,7 @@ Colipos  ===================*/
           $(".drp-buttons").hide();
         }
       });
-    }else if(productId.type == "Digital Bulletin" || productId.type == "Transit"){
+    }else if(productId.type == "Digital" || productId.type == "Transit Digital"){
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
         $scope.unavailalbeDateRanges = [];
         blockedDatesAndSlots.forEach((item)=>{
