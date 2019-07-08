@@ -380,11 +380,10 @@ $scope.hidebutton = function(){
                     id: ownerProduct.id,
                     booking_dates: ownerProduct.booking_dates,
                     price: ownerProduct.default_price,
-                    views:ownerProduct.impressions
+                    booked_slots:1
                 }
             };
             OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {   
-                console.log(result)           
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -397,7 +396,6 @@ $scope.hidebutton = function(){
                         });
                     });
                     if($scope.selectedOwnerCampaign.products || $scope.selectedOwnerCampaign.products.length >= 0){
-                        console.log('$scope.selectedOwnerCampaign.products',$scope.selectedOwnerCampaign.products)
                         $scope.selectedOwnerCampaign.products.length++;
                     }
                     toastr.success(result.message);
@@ -419,7 +417,7 @@ $scope.hidebutton = function(){
             OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
                             $scope.unavailalbeDateRanges = [];
                             blockedDatesAndSlots.forEach((item)=>{
-                                if(item.booked_slots == productId.slots){
+                                if(item.booked_slots >= productId.slots){
                                     $scope.unavailalbeDateRanges.push(item);
                                 }
                             })

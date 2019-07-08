@@ -674,7 +674,7 @@ Colipos  ===================*/
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
         $scope.unavailalbeDateRanges = [];
         blockedDatesAndSlots.forEach((item)=>{
-            if(item.booked_slots == productId.slots){
+            if(item.booked_slots >= productId.slots){
                 $scope.unavailalbeDateRanges.push(item);
             }
         })
@@ -696,7 +696,8 @@ Colipos  ===================*/
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }
+      data: { image: $scope.files.image, editRequestedhordings: JSON.parse(angular.toJson($scope.editRequestedhordings)) }
+     
     }).then(function (result) {
       if (result.data.status == "1") {
         getRequestedProductList();
