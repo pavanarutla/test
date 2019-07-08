@@ -775,7 +775,11 @@ app.run(
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/sign-in.html',
-              fullscreen: true
+              fullscreen: true,
+              // clickOutsideToClose: true, 
+			        // preserveScope: true, 
+			        scope: $scope,
+              controller : AuthCtrl
             });
             return false;
           }
@@ -786,7 +790,11 @@ app.run(
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/sign-in.html',
-              fullscreen: true
+              fullscreen: true,
+              clickOutsideToClose: true, 
+			        // preserveScope: true, 
+			        scope: $scope,
+              controller : AuthCtrl
             });
             return false;
           }
@@ -801,7 +809,11 @@ app.run(
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/sign-in.html',
-              fullscreen: true
+              fullscreen: true,
+              clickOutsideToClose: true, 
+              // preserveScope: true, 
+              scope: $scope,
+              controller : AuthCtrl
             });
           }
           // else if($auth.isAuthenticated() && $auth.getPayload().userMongo.user_type == 'owner'){
@@ -829,7 +841,11 @@ app.run(
             $location.path('/');
             $mdDialog.show({
               templateUrl: 'views/sign-in.html',
-              fullscreen: true
+              fullscreen: true,
+              clickOutsideToClose: true, 
+              // preserveScope: true, 
+              scope: $scope,
+              controller : AuthCtrl
             });
           }
           else if ($auth.getPayload().userMongo.user_type != "basic") {

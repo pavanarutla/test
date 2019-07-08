@@ -194,6 +194,13 @@ Colipos  ===================*/
       }
     });
   }
+  $scope.ranges = {
+    selectedDateRanges: []
+  };
+  $scope.customOptions = {};
+            $scope.removeSelection = function () {
+                $scope.customOptions.clearSelection();
+            }
 
   /*================================
   | Multi date range picker options
@@ -682,6 +689,8 @@ Colipos  ===================*/
     })
     }
     else{
+      $scope.unavailalbeDateRanges = [];
+      console.log("bfg")
       $(ev.target).parent().parent().find('input').trigger('click');
     }
   }
@@ -693,6 +702,13 @@ Colipos  ===================*/
   $scope.updateeditProductdetails = function (editRequestedhordings) {
     //editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
+    $scope.ranges.selectedDateRanges.map(function(item){
+      item.startDate = moment(item.startDate).format('YYYY-MM-DD')
+      item.endDate = moment(item.endDate).format('YYYY-MM-DD')
+
+    })
+    editRequestedhordings.dates = $scope.ranges.selectedDateRanges;
+    console.log('editRequestedhordings',editRequestedhordings)
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
@@ -702,6 +718,7 @@ Colipos  ===================*/
       if (result.data.status == "1") {
         getRequestedProductList();
         toastr.success(result.data.message);
+        $scope.removeSelection();
       }
       else if (result.data.status == 0) {
         $scope.requestProductErrors = result.data.message;
