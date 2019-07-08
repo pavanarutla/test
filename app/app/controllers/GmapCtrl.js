@@ -541,11 +541,11 @@ app.controller('GmapCtrl',
                 $scope.product.slots = marker.properties['slots'];
                 $scope.product.minimumbooking = marker.properties['minimumbooking'];
                 $scope.hideSelectedMarkerDetail = false;
-                if (marker.properties['type'] == "Bulletin") {
-                    $scope.productPerDay = $scope.product.price / 28;
-                } else if (marker.properties['type'] == "Digital Bulletin" || marker.properties['type'] == "Transit") {
+                // if (marker.properties['type'] == "Bulletin") {
+                //     $scope.productPerDay = $scope.product.price / 28;
+                // } else if (marker.properties['type'] == "Digital" || marker.properties['type'] == "Transit Bulletin") {
                     // $scope.productPerDay = $scope.product.price / 28;
-                }
+                // }
                 $mdSidenav('productDetails').open();
                 // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                 $scope.selectedProduct = marker;
@@ -565,7 +565,6 @@ app.controller('GmapCtrl',
 
 
             google.maps.event.addListener(selectorMarker, 'click', function (e) {
-                console.log('selectorMarker')
                 $scope.selectedProduct = null;
                 selectorMarker.setMap(null);
             });
@@ -1368,15 +1367,12 @@ app.controller('GmapCtrl',
             $scope.getProductUnavailableDates = function (product, ev) {
                 if(product.type == "Bulletin"){
                     MapService.getProductUnavailableDates(product.id).then(function (dateRanges) {
-                        console.log('from service',dateRanges)
                         $scope.unavailalbeDateRanges = dateRanges;
                         $(ev.target).parents().eq(3).find('input').trigger('click') ;
                     });
                 }else{
                     MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
-                        // console.log(blockedDatesAndSlots)
                         $scope.unavailalbeDateRanges = [];
-                        // console.log('product',$scope.product)
                         blockedDatesAndSlots.forEach((item)=>{
                             if(item.booked_slots >= $scope.product.slots){
                                 $scope.unavailalbeDateRanges.push(item);
@@ -1389,7 +1385,6 @@ app.controller('GmapCtrl',
             }
 
             $scope.getProductUnavailableDatesautoload = function (productId) {
-
                 MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
                     $scope.unavailalbeDateRanges = dateRanges;
                     $('#calender-autolaod-div').parents().eq(3).find('input').trigger('click');
@@ -1680,7 +1675,7 @@ app.controller('GmapCtrl',
             $scope.$watch('ranges.selectedDateRanges',function(){
                 $scope.totalPriceUserSelected = 0;
                 $scope.totalnumDays = 0;
-                  if ($scope.product.type == "Digital Bulletin" || $scope.product.type == "Transit") {
+                  if ($scope.product.type == "Digital" || $scope.product.type == "Transit Bulletin") {
                     var productPerDay = $scope.product.price / 7;
                     for(item in $scope.ranges.selectedDateRanges){
                         var startDate = moment($scope.ranges.selectedDateRanges[item].startDate).format('YYYY-MM-DD')
