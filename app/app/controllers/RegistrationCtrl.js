@@ -7,6 +7,7 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	*/
 	$scope.currentNavItem = 'users';
 	$scope.showUserForm = true;
+	$scope.showOwnerForm = false;
 	$scope.showUserRegPanel = function () {
 		$scope.currentNavItem = 'users';
 		$scope.showUserForm = true;
@@ -38,12 +39,13 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 			if(result.status == 1){
 				$mdDialog.hide();
 				toastr.success(result.message);
-				if($scope.regNewUserErrors){
-					$scope.regNewUserErrors.length = 0;
-				}
+				// if($scope.regNewUserErrors){
+				// 	$scope.regNewUserErrors.length = 0;
+				// }
 			}
 			else if(result.status == 0){
-				$scope.regNewUserErrors = result.message;
+				// $scope.regNewUserErrors = result.message;
+				toastr.error(result.message);
 			}
 		}, function(result){
 			toastr.error(result);
@@ -66,19 +68,20 @@ app.controller("RegistrationCtrl", function ($scope, $mdDialog, UserService, Com
 	getClientTypes();
 
 	$scope.client = {};
-	$scope.registerClient = function () {
-		CompanyService.registerClient($scope.client).then(function(result){
+	$scope.registerClient = function (client) {
+		CompanyService.registerClient(client).then(function(result){
 			if(result.status == 1){
 				$scope.forms.registerClientForm.$setUntouched();
 				$scope.forms.registerClientForm.$setPristine();
 				toastr.success(result.message);
-				if($scope.clientErrorMessages){
-					$scope.clientErrorMessages = null;
-				}
+				// if($scope.clientErrorMessages){
+				// 	$scope.clientErrorMessages = null;
+				// }
 				$mdDialog.hide();
 			}
 			else if(result.status == 0){
-				$scope.clientErrorMessages = result.message;
+				// $scope.clientErrorMessages = result.message;
+				toastr.error(result.message);
 			}
 		});
 	}
