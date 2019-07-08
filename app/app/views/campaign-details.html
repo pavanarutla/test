@@ -60,7 +60,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Pending payment</b></td>
+                                    <td><b>Pending Price</b></td>
                                     <td>
                                         <span>$</span>{{PendingPay || '0' | number : 2}}
                                     </td>
@@ -168,7 +168,7 @@
                     </td>
                     <td class="table_address">
                         <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b><br>
-                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo}}<br>
+                            <b>Address :</b> {{campaignProduct.address}}<br>
                             <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
                             <b>Type :</b> {{campaignProduct.type|| '0'}}<br>
                             <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b>{{campaignProduct.booked_slots || 'N/A'}}</span>
@@ -179,7 +179,7 @@
                     </td>
                     <td class="table_vertical">{{campaignProduct.booked_to| dateify | date: "dd-MM-yyyy"}}
                     </td>
-                    <td class="table_vertical"><span>$</span>{{campaignProduct.default_price || '0' | number : 2}}</td>
+                    <td class="table_vertical"><span>$</span>{{campaignProduct.price || '0' | number : 2}}</td>
                     <td class="table_vertical">
                         <p class="text_color md-caption"
                             ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">

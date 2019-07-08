@@ -90,7 +90,7 @@ md-icon{
                               </tr>
                               <tr>
                                   <td><b>Client Name</b></td>
-                                  <td>{{selectedOwnerCampaign.client_name || "N/A"}}</td>
+                                  <td>{{selectedOwnerCampaign.client_name | capitalize}}</td>
                                   <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
                                   <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
                               </tr>
@@ -131,7 +131,7 @@ md-icon{
                                   </td>
                               </tr>
                               <tr>
-                                  <td><b>Pending payment</b></td>
+                                  <td><b>Pending Price</b></td>
                                   <td>
                                       <!-- ng-if="selectedOwnerCampaign.type != 0" -->
                                       ${{campaignDetails.act_budget - result.total_paid || 0 | number:2}}
@@ -258,11 +258,12 @@ md-icon{
         <tr>
           <th class="table_firstthpadding">Product Details</th>
           <th class="hide-xs"></th>
-          <th class="text-center">Views</th>
+          <th class="text-center">Size</th>
           <th class="">Lit</th>
           <th class="">Shortlisted in</th>
           <th class="">Price</th>
           <th class="text-center">Calender</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -272,12 +273,13 @@ md-icon{
             <img ng-src="{{serverUrl + ownerProduct.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
           </td>
           <td class="table_address">
-            <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
-              <br> {{ownerProduct.addressone | capitalize}}&nbsp;{{ownerProduct.addresstwo | capitalize}}
+            <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}}</b>
+              <br><b style="color: #44596D;">Address :</b> {{ownerProduct.address | capitalize}}
               <br><b style="color: #44596D;">Facing :</b> {{ownerProduct.direction | capitalize}}
+              <br><b style="color: #44596D;">Views :</b> {{ownerProduct.impressions}}
               <br><b style="color: #44596D;">Type :</b> {{ownerProduct.type | capitalize}}
           </td>
-          <td class="table_vertical text-center">{{ownerProduct.impressions}}</td>
+          <td class="table_vertical text-center">{{ownerProduct.panelSize}}</td>
           <td class="table_vertical">
             <span class="md-caption">{{ownerProduct.lighting | boolToYesNo}}</span>
           </td>
