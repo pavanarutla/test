@@ -674,7 +674,7 @@ Colipos  ===================*/
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
         $scope.unavailalbeDateRanges = [];
         blockedDatesAndSlots.forEach((item)=>{
-            if(item.booked_slots == productId.slots){
+            if(item.booked_slots >= productId.slots){
                 $scope.unavailalbeDateRanges.push(item);
             }
         })
