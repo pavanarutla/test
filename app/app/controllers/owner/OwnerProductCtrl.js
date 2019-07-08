@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, MapService, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr, $state) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, MapService, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr, $state,$location) {
 
   $scope.unavailalbeDateRanges = [];
   // $scope.loadCalendar = false;
@@ -670,12 +670,14 @@ Colipos  ===================*/
   //   }
    
   // }
-
   $scope.getProductUnavailableDates = function (productId, ev) {
     if(productId.type == "Bulletin"){
       OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
         $scope.unavailalbeDateRanges = dateRanges;
         $(ev.target).parent().parent().find('input').trigger('click');
+        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+          $(".drp-buttons").hide();
+        }
       });
     }else if(productId.type == "Digital Bulletin" || productId.type == "Transit"){
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
@@ -686,11 +688,13 @@ Colipos  ===================*/
             }
         })
         $(ev.target).parent().parent().find('input').trigger('click');
+        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+          $(".drp-buttons").hide();
+        }
     })
     }
     else{
       $scope.unavailalbeDateRanges = [];
-      console.log("bfg")
       $(ev.target).parent().parent().find('input').trigger('click');
     }
   }
