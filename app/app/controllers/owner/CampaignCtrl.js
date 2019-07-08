@@ -200,8 +200,8 @@ $scope.hidebutton = function(){
     // };
     $scope.ProductTypes = [
         { name: "Bulletin" },
-        { name: "Digital Bulletin" },
-        { name: "Transit" }
+        { name: "Digital" },
+        { name: "Transit digital" }
       ];
     function setDatesForOwnerProductsToSuggest(campaign) {
         $scope.SuggestprodStartDate = new Date(campaign.start_date);
