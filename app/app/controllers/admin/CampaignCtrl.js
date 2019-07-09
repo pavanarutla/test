@@ -914,7 +914,6 @@ $scope.getProductUnavailableDates = function (product, ev) {
                             $scope.removeSelection();
                             CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(result){
                              // alert("dhajf");
-                             console.log("dsdfds")
                                   $scope.campaignDetails = result;
                                   _.map($scope.AdminProduct, function (product) {
                                       if (product.id == adminProduct.id) {
