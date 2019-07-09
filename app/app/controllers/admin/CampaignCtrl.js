@@ -901,6 +901,7 @@ $scope.getProductUnavailableDates = function (product, ev) {
                   if($stateParams.campaignId) {
                       var postObj = {
                           campaign_id: $stateParams.campaignId,
+                          booked_slots:1,
                           product: {
                               id: adminProduct.id,
                               booking_dates: $scope.ranges.selectedDateRanges,
@@ -909,9 +910,11 @@ $scope.getProductUnavailableDates = function (product, ev) {
                       }
                       AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
                           if (result.status == 1) {
+                            toastr.success(result.message);
                             $scope.removeSelection();
-                            CampaignService.getCampaignWithProducts(campaignId).then(function(result){
+                            CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(result){
                              // alert("dhajf");
+                             console.log("dsdfds")
                                   $scope.campaignDetails = result;
                                   _.map($scope.AdminProduct, function (product) {
                                       if (product.id == adminProduct.id) {
@@ -919,8 +922,8 @@ $scope.getProductUnavailableDates = function (product, ev) {
                                       }                     
                                       return product;
                                   });
+    
                               });
-                              toastr.success(result.message);
                           } else {
                               toastr.error(result.message);
                           }
@@ -931,9 +934,13 @@ $scope.getProductUnavailableDates = function (product, ev) {
     $scope.ranges = {
       selectedDateRanges: []
     };
+    $scope.customOptions = {};
     $scope.removeSelection = function () {
       $scope.customOptions.clearSelection();
   }
+  $scope.$on("removeSelection", function () {
+    $scope.removeSelection();
+})
 /*================================
      | Multi date range picker options
      ================================*/

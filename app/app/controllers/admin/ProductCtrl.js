@@ -283,17 +283,18 @@ app.controller("ProductCtrl", [
         }
     }
     };
-    $scope.getProductUnavailableDates = function(product, ev){      
+    $scope.getProductUnavailableDates = function(product, ev){  
+      console.log(product)    
       // MapService.getProductUnavailableDates(productId).then(function(dateRanges){
       //   $scope.unavailalbeDateRanges = dateRanges;
       //   $(ev.target).parents().eq(3).find('input').trigger('click');
       // });
-      if(product.type == "Bulletin"){
+      if(product.type == "Bulletin"){ 
         MapService.getProductUnavailableDates(product.id).then(function (dateRanges) {
             $scope.unavailalbeDateRanges = dateRanges;
             $(ev.target).parents().eq(3).find('input').trigger('click') ;
         });
-    }else{
+    }else if(product.type == "Digital" || product.type == "Transit Digital"){
         MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
             $scope.unavailalbeDateRanges = [];
             blockedDatesAndSlots.forEach((item)=>{
@@ -302,8 +303,10 @@ app.controller("ProductCtrl", [
                 }
             })
             $(ev.target).parents().eq(3).find('input').trigger('click') ;
-    
         })
+    }else{
+      $scope.unavailalbeDateRanges = [];
+      $(ev.target).parents().eq(3).find('input').trigger('click') ;
     }
     }
     // $scope.getProductUnavailableDates = function(productId, ev){
@@ -362,17 +365,31 @@ app.controller("ProductCtrl", [
      }
     $scope.files = {};
     $scope.addProduct = function(product) {
+      product.dates.forEach(function(item){
+        item.startDate = moment(item.startDate).format('YYYY-MM-DD');
+        item.endDate = moment(item.endDate).format('YYYY-MM-DD')
+      })
+      console.log(product.dates)
       product.type = product.type.name;
       // product.area = $scope.areaObj.id;
-      Upload.upload({        
-        url: config.apiPath + "/save-product-details",
-        data: {
+      if(product.type == "Bulletin"){
+        var data = {
           image: $scope.files.image,
           symbol: $scope.files.symbol,
-          product: $scope.product
+          product: product
         }
-      }).then(
-        function(result) {
+      }else{
+        var data = {
+          image: $scope.files.image,
+          symbol: $scope.files.symbol,
+          product: product,
+          booked_slots : 1
+        }
+      }
+      Upload.upload({        
+        url: config.apiPath + "/save-product-details",
+        data: data
+      }).then(function(result) {
           if (result.data.status == "1") {
             $scope.getProductList();
             if ($rootScope.currStateName == "admin.requested-hoardings") {
