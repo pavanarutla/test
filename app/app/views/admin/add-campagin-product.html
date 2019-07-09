@@ -189,7 +189,7 @@
                 <p class=""><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
                   <br> {{adminprod.address}}
                   <br>Facing : {{adminprod.direction}}
-                  <br>Type : {{adminprod.format_name}}
+                  <br>Type : {{adminprod.type}}
               </td>
               <td class="table_vertical">{{adminprod.impressions}}</td>
               <td class="table_vertical">
@@ -201,16 +201,16 @@
               <td class="table_vertical">
                   <span>$</span>{{adminprod.default_price}}
               </td>
-              <!-- <td class="table_vertical">
-                <input date-range-picker ng-model="adminprod.booking_dates" class="form-control md-whiteframe-3dp date-picker"
-                  placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+              <td class="table_vertical text-center">
+                <input date-range-picker ng-model="ranges.selectedDateRanges" class="form-control md-whiteframe-3dp date-picker"
+                custom-options="customOptions" placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
                   style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-                <a ng-click="getProductUnavailableDates(adminprod.id, $event);">
+                <a ng-click="getProductUnavailableDates(adminprod, $event);">
                  
                   <i class="fa fa-calendar" aria-hidden="true"></i>
                 </a>
-              </td> -->
-              <td class="table_vertical text-center">
+              </td>
+              <!-- <td class="table_vertical text-center">
                 <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="adminprod.booking_dates" ng-click = "getProductUnavailableDates(adminprod.id, $event,adminprod.default_price)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                         <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
@@ -262,12 +262,12 @@
                                     </div>
                                 </div>
                             </div>
-            </td>
+            </td> -->
     
-              <!-- <td class=" table_vertical text-right">
+              <td class=" table_vertical text-right">
                 <md-button class="md-raised all_button" ng-if="!adminprod.alreadyAdded" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
                 <md-button class="md-raised Upload_font" ng-if="adminprod.alreadyAdded" >Added</md-button>
-              </td> -->
+              </td>
             </tr>
           </tbody>
         </table>

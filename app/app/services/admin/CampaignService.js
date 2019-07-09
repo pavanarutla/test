@@ -163,6 +163,11 @@ app.service('AdminCampaignService',
                         $http.get(config.apiPath + '/checkout-metro-campaign/' + metroCampaignId + '/' + flag + '/' + GST).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                       },
+                      getProductDigitalUnavailableDates : function(productId){
+                        var dfd = $q.defer();
+                        $http.post(config.apiPath + '/digital-product-unavailable-dates', {product_id: productId}).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                      }
                 }
             }
         ]
