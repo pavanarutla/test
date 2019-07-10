@@ -463,7 +463,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3" ng-show='bulletinresult || DigitalResult'>
+                        <div class="col-sm-3" ng-if="!editRequestedhordings.type === 'Transit Digital'">
                             <label class="font-weight-bold">Face Direction</label>
                             <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp"
                                 type="text" name="direction" required />
@@ -472,25 +472,34 @@
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-show='bulletinresult'>
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital' || 'Bulletin' ">
+                            <label class="font-weight-bold">Face Direction</label>
+                            <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp"
+                                type="text" name="direction" required />
+                            <div ng-messages="hordinglistform.direction.$error"
+                                ng-if="hordinglistform.direction.$touched" style="color:red">
+                                <div ng-message="required">Direction is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" ng-if="!editRequestedhordings.type === 'Digital' || 'Bulletin' ">
                             <label class="font-weight-bold">Price for 28 Days</label>
-                            <input ng-model="editRequestedhordings.price" class="form-control md-whiteframe-3dp" type="text"
+                            <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp" type="text"
                                 name="pricess" required />
                             <div ng-messages="hordinglistform.pricess.$error"
                                 ng-if="hordinglistform.pricess.$touched" style="color:red">
                                 <div ng-message="required">Price is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-show='DigitalResult'>
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital'">
                             <label class="font-weight-bold">Price for Week</label>
-                            <input ng-model="editRequestedhordings.price" class="form-control md-whiteframe-3dp" type="text"
+                            <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp" type="text"
                                 name="price" required />
                             <div ng-messages="hordinglistform.price.$error"
                                 ng-if="hordinglistform.price.$touched" style="color:red">
                                 <div ng-message="required">Price is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-show='bulletinresult'>
+                        <div class="col-sm-3"  ng-if="editRequestedhordings.type === 'Bulletin'">
                             <label class="font-weight-bold">Min. Booking Days</label>
                             <select ng-model="editRequestedhordings.bookingDates" name="bookingDates"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -498,7 +507,7 @@
                                 ng-init="editRequestedhordings.bookingDates = editRequestedhordings.bookingDates || ''"
                                 placeholder="Has bookingDates?" required>
                                 <option value="" disabled selected>No</option>
-                                <option>2 Weeks</option>
+                                <option>14 Days</option>
                                 <option>28 Days</option>
                                 <option>45 Days</option>
                             </select>
@@ -507,7 +516,47 @@
                                 <div ng-message="required">Days required</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-show='DigitalResult || trasitResult'>
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital'">
+                            <label class="font-weight-bold">Min. Booking Days</label>
+                            <select ng-model="editRequestedhordings.cancellation" name="cancellation"
+                                class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                data-md-container-class="selectdemoSelectHeader"
+                                ng-init="editRequestedhordings.cancellation = editRequestedhordings.cancellation || ''"
+                                placeholder="Has cancellation?" required>
+                                <option value="" disabled selected>No</option>
+                                <option>2 Days</option>
+                                <option>4 Days</option>
+                                <option>5 Days</option>
+                                <option>7 Days</option>
+                                <option>14 Days</option>
+                                <option>28 Days</option>
+                            </select>
+                            <div ng-messages="hordinglistform.cancellation.$error"
+                                ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                                <div ng-message="required">Days required</div>
+                            </div>
+                        </div>
+                         <!----Transit Start------------------->
+                         <div class="col-sm-3"ng-if="editRequestedhordings.type === 'Transit Digital'">
+                            <label class="font-weight-bold">Number of Buses</label>
+                            <input ng-model="product.buses" class="form-control md-whiteframe-3dp" type="text"
+                                name="buses" only-numeric required />
+                            <div ng-messages="hordinglistform.buses.$error"
+                                ng-if="hordinglistform.buses.$touched" style="color:red">
+                                <div ng-message="required">No.Buses is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"ng-if="editRequestedhordings.type === 'Transit Digital'">
+                            <label class="font-weight-bold">Price for 7 days</label>
+                            <input ng-model="product.default_price" class="form-control md-whiteframe-3dp" type="text"
+                                name="prices" only-numeric required />
+                            <div ng-messages="hordinglistform.prices.$error"
+                                ng-if="hordinglistform.prices.$touched" style="color:red">
+                                <div ng-message="required">Price is required.</div>
+                            </div>
+                        </div>
+                        <!----Transit End------------------->
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Transit Digital'">
                             <label class="font-weight-bold">Min. Booking Days</label>
                             <select ng-model="editRequestedhordings.cancellation" name="cancellation"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
@@ -542,18 +591,7 @@
                                 ng-if="hordinglistform.cancellation.$touched" style="color:red">
                                 <div ng-message="required">Cancellation required</div>
                             </div>
-                        </div>
-                        <!----Transit Start------------------->
-                        <div class="col-sm-6" ng-show='trasitResult'>
-                            <label class="font-weight-bold">Price for 28 days for 30 Buses</label>
-                            <input ng-model="editRequestedhordings.price" class="form-control md-whiteframe-3dp" type="text"
-                                name="prices" required />
-                            <div ng-messages="hordinglistform.prices.$error"
-                                ng-if="hordinglistform.prices.$touched" style="color:red">
-                                <div ng-message="required">Price is required.</div>
-                            </div>
-                        </div>
-                        <!----Transit End------------------->
+                        </div>                       
                     </div>
 
                     <!----Digital Bulletin Start------------------->

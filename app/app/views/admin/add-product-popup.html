@@ -12,7 +12,7 @@
         top: 0px;
         left: 0px;
         right: 29% !important;
-        z-index: 1111;
+        z-index: 9999;
         display: none;
         font-family: arial;
         font-size: 15px;
@@ -599,21 +599,19 @@
                                                 </div>
                                         </div>
                                 </div>
-                                <div class="col-sm-3"
-                                        ng-show='bulletinresult || trasitResult || DigitalResult '>
-                                        <label class="font-weight-bold">Select Product
-                                                Date</label>
+                                <div class="col-sm-3">
+                                        <label>Select Product Date</label>
                                         <div class="input-group">
-                                                <input ng-model="product.dates | jsonConvert"
-                                                        class="form-control md-whiteframe-3dp"
-                                                        type="text" name="date" readonly
-                                                        id="booking_dates_picker" required />
-                                                <a class="input-group-addon md-whiteframe-3dp"
-                                                        ng-click="slotsClosed = true;"
-                                                        style="padding: 4px 8px;">
-                                                        <i class="fa fa-calendar"
-                                                                aria-hidden="true"></i>
-                                                </a>
+                                        <input date-range-picker ng-model="product.dates"
+                                                class="form-control md-whiteframe-3dp date-picker" placeholder="Product date"
+                                                type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker" />
+                                        <a class="input-group-addon md-whiteframe-3dp"
+                                                ng-click="getProductUnavailableDates(product,$event);">
+                                                <i class="material-icons">
+                                                calendar_today
+                                                </i>
+                                        </a>
+                        </div>
                                         </div>
                                         <div ng-messages="hordinglistform.date.$error"
                                                 ng-if="hordinglistform.date.$touched"
@@ -809,7 +807,7 @@
                                 <div class="col-sm-4">
                                         <md-button type="submit"
                                                 Class="md-raised md-primary register_btn"
-                                                ng-click="editProduct(product)">
+                                                ng-click="addProduct(product)">
                                                 Submit</md-button>
                                 </div>
                         </div>

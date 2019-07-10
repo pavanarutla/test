@@ -107,7 +107,7 @@
         //html template for the picker UI
         if (typeof options.template !== 'string' && !(options.template instanceof $))
             options.template =
-                '<div class="daterangepicker" style="z-index:20;">' +
+                '<div class="daterangepicker" >' +
                 '<div class="ranges"></div>' +
                 '<div class="drp-calendar left">' +
                 '<div class="calendar-table"></div>' +
