@@ -878,11 +878,13 @@ app.controller('GmapCtrl',
             $scope.shortlistSelected = function (productId, selectedDateRanges, ev) { 
                 var sendObj = {
                     product_id: productId,
-                    dates: selectedDateRanges
+                    dates: selectedDateRanges,
+                    booked_slots: 1
                 }
 
                 MapService.shortListProduct(sendObj).then(function (response) {
-                    $mdDialog.show(
+                    if(response.status == 1){
+                        $mdDialog.show(
                             $mdDialog.alert()
                             .parent(angular.element(document.querySelector('body')))
                             .clickOutsideToClose(true)
@@ -894,8 +896,12 @@ app.controller('GmapCtrl',
                             $mdSidenav('productDetails').close()
                             );
                             $scope.removeSelection();
-                    getShortListedProducts();
-                    $mdSidenav('productDetails').close();
+                            getShortListedProducts();
+                            $mdSidenav('productDetails').close();
+                    }else if(response.status == 0){
+                        toastr.error(response.message)
+                    }     
+                     
                 });
             }
             function getShortListedProducts() {
@@ -1675,7 +1681,7 @@ app.controller('GmapCtrl',
             $scope.$watch('ranges.selectedDateRanges',function(){
                 $scope.totalPriceUserSelected = 0;
                 $scope.totalnumDays = 0;
-                  if ($scope.product.type == "Digital" || $scope.product.type == "Transit Bulletin") {
+                  if ($scope.product.type == "Digital" || $scope.product.type == "Transit Digital") {
                     var productPerDay = $scope.product.price / 7;
                     for(item in $scope.ranges.selectedDateRanges){
                         var startDate = moment($scope.ranges.selectedDateRanges[item].startDate).format('YYYY-MM-DD')
@@ -1702,8 +1708,6 @@ app.controller('GmapCtrl',
                 $scope.removeSelection();
                 $mdSidenav('productDetails').close();
             }
-
-
             // controller ends  
 
         }

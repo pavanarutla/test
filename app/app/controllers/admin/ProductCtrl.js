@@ -248,7 +248,7 @@ app.controller("ProductCtrl", [
           fromLabel: "From",
           format: "DD-MMM-YY",
           toLabel: "To",
-          cancelLabel: 'Cancel',
+          cancelLabel: 'X',
           customRangeLabel: 'Custom range'
       },
       isInvalidDate: function (dt) {

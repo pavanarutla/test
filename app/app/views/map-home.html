@@ -2,23 +2,9 @@
     md-backdrop.md-sidenav-backdrop {
       z-index: -1;
     }
-    .gray-blocked {
-      background: #ddd;
-    }
     .red-blocked {
       color: #f00 !important;
       font-weight: bold;
-    }
-    .addWeekColor{
-      background-color: #f00;
-      color:white;
-    }
-    .selectedWeekColor {
-      background-color: green;
-    }
-    .addBlockedColor {
-      background-color: gray;
-      cursor: not-allowed !important;
     }
     .error_popup{
       width: 75%;
@@ -39,29 +25,29 @@
     .error_popup .error_body{
       background: #fff;
       padding: 5px 30px 5px 10px;
-  }
-  .sidenav-listview {
-    width: 500px !important;
-    max-width: 500px !important;
-    z-index: 9 !important;
-    height: 90vh;
-    margin-top: 64px;
-}
-.md-datepicker-calendar-pane{
-  width: 304px;
-}
-.md-datepicker-input-mask{
-  width: 304px;
-}
-.md-datepicker-input{
-  font-size: 12px;
-}
-.gmnoprint{
-  left: 0em !important;
-}
-.gmnoprint .gm-style-cc{
-  right: 0px !important;
-}
+    }
+    .sidenav-listview {
+      width: 500px !important;
+      max-width: 500px !important;
+      z-index: 9 !important;
+      height: 90vh;
+      margin-top: 64px;
+    }
+    .md-datepicker-calendar-pane{
+    width: 304px;
+    }
+    .md-datepicker-input-mask{
+    width: 304px;
+    }
+    .md-datepicker-input{
+    font-size: 12px;
+    }
+    .gmnoprint{
+      left: 0em !important;
+    }
+    .gmnoprint .gm-style-cc{
+      right: 0px !important;
+    }
   </style>
   <div layout="column" style="position:relative">
   
@@ -147,8 +133,9 @@
           <hr class="ml-3 mr-3">
           <ul style="list-style: disc;padding-left: 28px;" ng-repeat="strength in product.strengths">
             <li> {{strength.strname | capitalize}}</li>
+              <hr class="ml-3 mr-3">
           </ul>
-          <hr class="ml-3 mr-3">
+        
           <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
             <div layout="column" class="" style="padding:8px">
                 <div class="form-group mb-2 mt-2" id="hideCalenderInput">
@@ -160,8 +147,8 @@
                   <div class="input-group" style="z-index: 0;">
                     <!-- <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
                       class="form-control"> -->
-                    <div class="ibtn btn-danger" id="calender-autolaod-div" ng-if="currStateName != 'owner.location'" ng-click="getProductUnavailableDates(product, $event);">
-                      <a class="btn btn-danger">
+                    <div class="ibtn all_button" id="calender-autolaod-div" ng-if="currStateName != 'owner.location'" ng-click="getProductUnavailableDates(product, $event);">
+                      <a class="btn">
                         Select Dates
                       </a>
                     </div>
@@ -178,11 +165,12 @@
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
-                <div class="col-md-7">
-                  <p class="font-weight-bold mb-1 ml-2" style="float: left;" ng-repeat = "selectedDates in ranges.selectedDateRanges">: {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}</p>
-                    <span id="calender-autolaod-div" style="width: 25px; cursor: pointer;float: left;margin-left: 10px;" ng-click="getProductUnavailableDates(product, $event);">
-                      <i class="material-icons">edit</i>
-                    </span>
+                <div class="col-md-9" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
+                  <!-- <p class="font-weight-bold mb-1 ml-2" style="float: left;" ></p> -->
+                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
+                    : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}
+                  </a>
+                  <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Total Price</p>
@@ -210,7 +198,7 @@
           </div>  
         </div>
         <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
-          style="width:320px;position: absolute;left: 100px;margin-bottom:50px;padding:15px; ">
+          style="width:320px;position: absolute;left: 100px;margin-bottom:50px;padding:5px; ">
           <form name="forms.mySaveCampaignForm">
             <div layout="row">
                 <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>

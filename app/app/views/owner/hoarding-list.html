@@ -734,6 +734,7 @@ md-icon{
                 <th>Product Details</th>
                 <th class="hide-xs"></th>
                 <th class="">Size</th>
+                <th class="">Views</th>
                 <th class="">Lit</th>
                 <th class="text-center">Shortlisted in</th>
                 <th class="">Price</th>
@@ -751,15 +752,17 @@ md-icon{
 
                 </td>
                 <td class="table_address">
-                    <p class=""><b>{{product.siteNo}}</b>&nbsp;<b>{{product.title || "N/A"}} -
-                            {{product.area_name || "N/A"}}</b>
+                    <p class=""><b>{{product.siteNo}}</b>&nbsp;<b>{{product.title || "N/A"}}</b>
                         <br><b style="color: #44596D;">Address</b>:
-                        {{product.address | capitalize}}
-                        <br><b style="color: #44596D;">Facing</b>: {{product.direction|| "N/A" | capitalize}}
+                        {{product.address | capitalize}}  {{product.city | capitalize}}
+                        <br><b style="color: #44596D;">State</b>: {{product.state_name | capitalize}}
+                        <br><b style="color: #44596D;">Venue</b>: {{product.venue | capitalize}}
                         <br><b style="color: #44596D;">Type</b>: {{product.type || "N/A"}}
-                        <br><b style="color: #44596D;">Views</b>: {{product.impressions || '0'}}
+                        <br><b style="color: #44596D;">Facing</b>: {{product.direction|| "N/A" | capitalize}}
+                    </p>
                 </td>
                 <td class="table_vertical">{{product.panelSize}}</td>
+                <td class="table_vertical">{{product.impressions}}</td>
                 <td class="table_vertical" ng-if="product.lighting == 1">Yes</td>
                 <td class="table_vertical" ng-if="product.lighting == 0">No</td>
                 <td class="table_vertical" ng-if="product.lighting != 0 && product.lighting != 1">
