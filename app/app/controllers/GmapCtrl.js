@@ -497,6 +497,8 @@ app.controller('GmapCtrl',
                 $scope.product.city = marker.properties['city'];
                 $scope.product.panelSize = marker.properties['panelSize'];
                 $scope.product.type = marker.properties['type'];
+                $scope.product.ethnicity =  marker.properties['ethnicity'];
+                $scope.product.venue = marker.properties['venue'];
                 $scope.product.demographicsage = marker.properties['demographicsage'];
                 $scope.product.address = marker.properties['address'];               
                 $scope.product.area_name = marker.properties['area_name'];
@@ -715,7 +717,6 @@ app.controller('GmapCtrl',
                         marker.properties = markerData.product_details[i];
                         marker.groupSize = markerData.product_details.length;
                         google.maps.event.addListener(marker, 'spider_click', function (e) {
-                            console.log('spider_click',marker)
                             $scope.toggleProductDetailSidenav();
                             selectSpideredMarker(this);
                         });
@@ -879,7 +880,6 @@ app.controller('GmapCtrl',
                     product_id: productId,
                     dates: selectedDateRanges
                 }
-                console.log(sendObj)
 
                 MapService.shortListProduct(sendObj).then(function (response) {
                     $mdDialog.show(

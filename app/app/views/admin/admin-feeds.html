@@ -4,21 +4,21 @@
             <table class="table">
                 <thead class="text_color">
                     <tr>
-                        <th>Name</th>
-                        <th class="">Email ID</th>
-                        <th>Subject</th>
-                        <th class="">Comments</th>
-                        <th>Contact No.</th>
+                        <th style="width:10%;">Name</th>
+                        <th style="width:15%;">Email ID</th>
+                        <th style="width:15%;">Subject</th>
+                        <th style="width:40%;">Comments</th>
+                        <th style="width:10%;">Contact No.</th>
                         <th class="">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="Queries in QueriesData | limitTo:limit">
-                      <td>{{Queries.name | capitalize}}</td>
-                      <td>{{Queries.email | capitalize}}</td>
-                      <td>{{Queries.subject | capitalize}}</td>
-                      <td class="">{{Queries.message | capitalize}}</td>
-                      <td>{{Queries.contactno}}</td>
+                      <td class="table_vertical">{{Queries.name | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.email | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.subject | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.message | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.contactno}}</td>
                       <td class="table_vertical">{{Queries.updated_at | dateFormat}}</td>
                     </tr>
                   </tbody>
