@@ -877,12 +877,13 @@ app.controller('GmapCtrl',
             $scope.shortlistSelected = function (productId, selectedDateRanges, ev) { 
                 var sendObj = {
                     product_id: productId,
-                    dates: selectedDateRanges
+                    dates: selectedDateRanges,
+                    booked_slots: 1
                 }
-                console.log(sendObj)
 
                 MapService.shortListProduct(sendObj).then(function (response) {
-                    $mdDialog.show(
+                    if(response.status == 1){
+                        $mdDialog.show(
                             $mdDialog.alert()
                             .parent(angular.element(document.querySelector('body')))
                             .clickOutsideToClose(true)
@@ -894,8 +895,12 @@ app.controller('GmapCtrl',
                             $mdSidenav('productDetails').close()
                             );
                             $scope.removeSelection();
-                    getShortListedProducts();
-                    $mdSidenav('productDetails').close();
+                            getShortListedProducts();
+                            $mdSidenav('productDetails').close();
+                    }else if(response.status == 0){
+                        toastr.error(response.message)
+                    }     
+                     
                 });
             }
             function getShortListedProducts() {
