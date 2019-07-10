@@ -283,8 +283,7 @@ app.controller("ProductCtrl", [
         }
     }
     };
-    $scope.getProductUnavailableDates = function(product, ev){  
-      console.log(product)    
+    $scope.getProductUnavailableDates = function(product, ev){
       // MapService.getProductUnavailableDates(productId).then(function(dateRanges){
       //   $scope.unavailalbeDateRanges = dateRanges;
       //   $(ev.target).parents().eq(3).find('input').trigger('click');
@@ -328,6 +327,7 @@ app.controller("ProductCtrl", [
         $scope.pagination.pageSize
       ).then(function(result) {
         $scope.productList = result.products;
+        
         $scope.pagination.pageCount = result.page_count;
         createPageLinks();
       });
@@ -338,8 +338,8 @@ app.controller("ProductCtrl", [
   
     $scope.ProductTypes = [
      { name: "Bulletin"},
-     { name: "Digital Bulletin"},
-     { name: "Transit"}
+     { name: "Digital"},
+     { name: "Transit Digital"}
    ];
      $scope.bulletinresult = true;
      $scope.trasitResult = false;
@@ -351,11 +351,11 @@ app.controller("ProductCtrl", [
          $scope.trasitResult = false;
          $scope.DigitalResult = false;
          }
-         else if ($scope.product.type.name == "Digital Bulletin"){
+         else if ($scope.product.type.name == "Digital"){
                  $scope.DigitalResult = true;
                  $scope.trasitResult = false;
                  $scope.bulletinresult = false;
-         }else if($scope.product.type.name == "Transit"){
+         }else if($scope.product.type.name == "Transit Digital"){
                  $scope.trasitResult = true;
                  $scope.bulletinresult = false;
                  $scope.DigitalResult = false;
@@ -364,25 +364,26 @@ app.controller("ProductCtrl", [
          }
      }
     $scope.files = {};
-    $scope.addProduct = function(product) {
-      product.dates.forEach(function(item){
+    $scope.addProduct = function(adminProductEdit, formdata,Strengths) {
+      adminProductEdit.DemographicsAge = formdata;
+      adminProductEdit.Strengths=Strengths;
+      adminProductEdit.dates.forEach(function(item){
         item.startDate = moment(item.startDate).format('YYYY-MM-DD');
         item.endDate = moment(item.endDate).format('YYYY-MM-DD')
       })
-      console.log(product.dates)
-      product.type = product.type.name;
-      // product.area = $scope.areaObj.id;
-      if(product.type == "Bulletin"){
+      adminProductEdit.type = adminProductEdit.type.name;
+      // adminProductEdit.area = $scope.areaObj.id;
+      if(adminProductEdit.type == "Bulletin"){
         var data = {
           image: $scope.files.image,
           symbol: $scope.files.symbol,
-          product: product
+          product: JSON.parse(angular.toJson(adminProductEdit))
         }
       }else{
         var data = {
           image: $scope.files.image,
           symbol: $scope.files.symbol,
-          product: product,
+          product: JSON.parse(angular.toJson(adminProductEdit)),
           booked_slots : 1
         }
       }
@@ -402,7 +403,7 @@ app.controller("ProductCtrl", [
           }
           // addnewProduct();
           // $scope.areaObj ="";
-           $state.reload();
+          //  $state.reload();
         },
         function(resp) {
           toastr.error("somthing went wrong try again later");
@@ -420,16 +421,16 @@ app.controller("ProductCtrl", [
 //     function addnewProduct() {
 //       document.getElementById("hoardingDrop").classList.toggle("show");
 // }
-    $scope.editProduct = function(product) {      
-      if (product.status != 0) {
-        product.country = null;
-        product.state = null;
-        product.city = null;
-        product.area = null;
-        // product.company = null;
-      }
-      $scope.product = product;
-      $scope.location = $scope.product.area_name + ', ' + $scope.product.city_name + ', ' +$scope.product.country_name;
+    $scope.editProduct = function(product) {
+      // if (product.status != 0) {
+      //   product.country = null;
+      //   product.state = null;
+      //   product.city = null;
+      //   product.area = null;
+      //   product.company = null;
+      // }
+      $scope.adminProductEdit = product;
+      $scope.location = $scope.adminProductEdit.area_name + ', ' + $scope.adminProductEdit.city_name + ', ' +$scope.adminProductEdit.country_name;
       $mdDialog.show({
         templateUrl: "views/admin/add-product-popup.html",
         fullscreen: $scope.customFullscreen,

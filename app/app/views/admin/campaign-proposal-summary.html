@@ -293,11 +293,11 @@
                         <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
                     </td>                                    -->
                     <td class="table_vertical">
-                        <p class=" md-caption">{{campaignProduct.client_name}}</p>
+                        <p class=" md-caption">{{campaignProduct.client_name | capitalize}}</p>
                         <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
                     </td>
                     <td class="table_vertical addcampaign_details">
-                        <p>{{campaignProduct.product_status |stringifyProductStatus}}</p>                        
+                        <p>{{campaignProduct.product_status |stringifyProductStatus | capitalize}}</p>                        
                     </td>                   
                     <td class=""></td>
                 </tr>
