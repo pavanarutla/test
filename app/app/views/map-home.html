@@ -147,8 +147,8 @@
                   <div class="input-group" style="z-index: 0;">
                     <!-- <input type="text" readonly ng-value="'Please Select booking dates: ' + ranges.selectedDateRanges.length"
                       class="form-control"> -->
-                    <div class="ibtn btn-danger" id="calender-autolaod-div" ng-if="currStateName != 'owner.location'" ng-click="getProductUnavailableDates(product, $event);">
-                      <a class="btn btn-danger">
+                    <div class="ibtn all_button" id="calender-autolaod-div" ng-if="currStateName != 'owner.location'" ng-click="getProductUnavailableDates(product, $event);">
+                      <a class="btn">
                         Select Dates
                       </a>
                     </div>
@@ -165,11 +165,12 @@
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-9" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
                   <!-- <p class="font-weight-bold mb-1 ml-2" style="float: left;" ></p> -->
-                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges" ng-click="getProductUnavailableDates(product, $event);">
-                    : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}<i class="fas fa-pencil-alt"></i>
+                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
+                    : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}
                   </a>
+                  <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
                 </div>
                 <div class="col-md-3">
                     <p class="mb-1 ml-3">Total Price</p>
