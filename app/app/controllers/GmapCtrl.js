@@ -1675,7 +1675,7 @@ app.controller('GmapCtrl',
             $scope.$watch('ranges.selectedDateRanges',function(){
                 $scope.totalPriceUserSelected = 0;
                 $scope.totalnumDays = 0;
-                  if ($scope.product.type == "Digital" || $scope.product.type == "Transit Bulletin") {
+                  if ($scope.product.type == "Digital" || $scope.product.type == "Transit Digital") {
                     var productPerDay = $scope.product.price / 7;
                     for(item in $scope.ranges.selectedDateRanges){
                         var startDate = moment($scope.ranges.selectedDateRanges[item].startDate).format('YYYY-MM-DD')
@@ -1702,8 +1702,6 @@ app.controller('GmapCtrl',
                 $scope.removeSelection();
                 $mdSidenav('productDetails').close();
             }
-
-
             // controller ends  
 
         }
