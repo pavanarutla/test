@@ -405,7 +405,10 @@ $scope.hidebutton = function(){
         }
     }
     
-    $scope.getProductUnavailableDates = function (productId, ev) {
+    $scope.getProductUnavailableDates = function (productId, ev,index) {
+        if(typeof index == "number"){
+            $scope.productList[index].focusProduct = true
+        }
         if(productId.type == "Bulletin"){
             OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
                 $scope.unavailalbeDateRanges = dateRanges;

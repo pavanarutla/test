@@ -10,7 +10,9 @@
 #ownerSlots{
   width:500px;
 }
-
+.productAdded {
+  background-color: rgb(202, 224, 231)
+}
 
 
 .md-datepicker-input{
@@ -267,7 +269,7 @@ md-icon{
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="ownerProduct in productList" ng-class="{productAdded : ownerProduct.added == true}">
+        <tr ng-repeat="ownerProduct in productList" ng-class="{productAdded : ownerProduct.focusProduct == true}">
           <td class="image_tdwidth hide-xs table_firstthpadding">
             <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
             <img ng-src="{{serverUrl + ownerProduct.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
@@ -312,7 +314,7 @@ md-icon{
             <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
               style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
-            <a ng-click="getProductUnavailableDates(ownerProduct, $event);">
+            <a ng-click="getProductUnavailableDates(ownerProduct, $event,$index);">
               <i class="fa fa-calendar"></i>
             </a>
           </td>
