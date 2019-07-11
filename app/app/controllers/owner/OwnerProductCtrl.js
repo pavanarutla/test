@@ -67,34 +67,31 @@ $scope.FromTo = [{id: 'From', name: 'From'}];
      var newItemNo = $scope.FromTo.length+1;
      $scope.FromTo.push({'id' : 'From' + newItemNo, 'name' : 'From ', 'id' : 'To' + newItemNo, 'name2' : 'To '});
    };   
-  //  $scope.removeNewChoice = function() {
-  //    var newItemNo = $scope.FromTo.length-1;
-  //    if ( newItemNo !== 0 ) {
-  //     $scope.FromTo.pop();
-  //    }
-  //  };   
+   $scope.removeNewChoice = function(index) {
+     var newItemNo = $scope.FromTo.length-1;
+     if ( newItemNo !== 0 ) {
+     // $scope.FromTo.pop();
+      $scope.FromTo.splice(index,1);
+     }
+   };   
    $scope.showAddFromTo = function(from) {
      return from.id === $scope.FromTo[$scope.FromTo.length-1].id;
    };
 
 /*===================
 Colipos  ===================*/
-  $scope.Strengths = [{id: 'Strength 1', name: 'Strength 1'}];
-   
+  $scope.Strengths = [{id: 'Strength 1', name: 'Strength 1'}];   
    $scope.addNewChoice = function() {
      var newItemNo = $scope.Strengths.length+1;
-     $scope.Strengths.push({'id' : 'Strength' + newItemNo, 'name' : 'Strength ' + newItemNo});
+     $scope.Strengths.push({'id' : 'Strength' + newItemNo});
    };   
-  //  $scope.removeNewChoice = function() {
-  //    var newItemNo = $scope.Strengths.length-1;
-  //    if ( newItemNo !== 0 ) {
-  //     $scope.Strengths.pop();
-  //    }
-  //  };   
-   $scope.showAddChoice = function(strength) {
-     return strength.id === $scope.Strengths[$scope.Strengths.length-1].id;
-   };
-
+   $scope.removeStrength = function(index) {
+     var newItemNo = $scope.Strengths.length-1;
+     if ( newItemNo !== 0 ) {
+      //$scope.Strengths.pop();
+      $scope.Strengths.splice(index,1);
+     }
+   };      
 
   /*===================
   | Pagination
