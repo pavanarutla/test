@@ -642,8 +642,7 @@ md-icon{
                     <select id="productType" ng-options="productType.name for productType in ProductTypes"
                         ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
-                        name="productType">
-                        <option value="" disabled selected>Site Type</option>
+                        name="productType">                       
                     </select>
                 </div></td>
                 <td style="width: 170px;">
@@ -664,7 +663,7 @@ md-icon{
                 </select>
               </td>
               <td>
-                    <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
+                    <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
             </td>
               <td></td>
             </tr>
@@ -838,4 +837,8 @@ md-icon{
       bt.disabled = true;
   }
 }  
+function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
 </script>

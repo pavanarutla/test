@@ -471,6 +471,7 @@ Colipos  ===================*/
   $scope.product = {};
 
   $scope.ProductTypes = [
+    { name: "All" },
     { name: "Bulletin" },
     { name: "Digital" },
     { name: "Transit Digital" }

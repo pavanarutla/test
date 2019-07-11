@@ -178,8 +178,8 @@ md-icon{
             <select id="productType" ng-options="productType.name for productType in ProductTypes"
                         ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
-                        name="productType">
-                        <option value="" disabled selected>Site Type</option>
+                        name="productType">  
+                        <option value="" selected>All</option>                   
                     </select>
             </div></td>
             <td style="width: 170px;">
@@ -201,7 +201,7 @@ md-icon{
             </select>
           </td>
           <td>
-            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;" ng-click="applymethod(product)">Apply Filters</md-button></td>
+            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button></td>
           <td class="text-right"><md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}"  style="margin: 0px;margin-right:8px;" ng-disabled="selectedOwnerCampaign.products.length == 0">view campaign</md-button></td>
         </tr>
       </tbody>
@@ -510,3 +510,9 @@ md-icon{
  
 
 </div>
+<script>
+function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
+</script>

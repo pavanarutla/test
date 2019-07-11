@@ -676,7 +676,7 @@
                                 ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                                 ng-change="getProductByFormat(product.type)"
                                 data-md-container-class="selectdemoSelectHeader" required="required" name="productType">
-                                <option value="" disabled selected>Site Type</option>
+                                <option value="" selected>Site Type</option>
                         </select>
                     </div>
                 </td>
@@ -699,7 +699,7 @@
                         </select>
                   </td>
                   <td>
-                    <md-button class="md-raised apply_filter hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;" ng-click="applyFiltersmethod(product)">Apply
+                    <md-button class="md-raised apply_filter hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;" onClick="onClickHandler(this)" ng-click="applyFiltersmethod(product)">Apply
                             Filters</md-button>
                 </td>
                   <td></td>
@@ -791,4 +791,8 @@
           bt.disabled = true;
       }
     }  
+    function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
     </script>
