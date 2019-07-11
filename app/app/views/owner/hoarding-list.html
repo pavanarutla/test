@@ -110,7 +110,7 @@ md-icon{
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Product Type</label>
                                     <select id="productType"
-                                        ng-options="productType.name for productType in ProductTypes"
+                                        ng-options="productType.name for productType in addProductType"
                                         ng-model="product.type" name="type" ng-change="getdetails()"
                                         class="form-control md-whiteframe-3dp" required>
                                         <option value="{{productType[0].name}}">
@@ -344,7 +344,7 @@ md-icon{
                                         data-md-container-class="selectdemoSelectHeader"
                                         ng-init="product.bookingDates = product.bookingDates || ''"
                                         placeholder="Has bookingDates?" required>
-                                        <option value="" disabled selected>NA</option>
+                                        <option value="" selected>No</option>
                                         <option>14 Days</option>
                                         <option>28 Days</option>
                                         <option>45 Days</option>
@@ -381,7 +381,7 @@ md-icon{
                                         data-md-container-class="selectdemoSelectHeader"
                                         ng-init="product.bookingDates = product.bookingDates || ''"
                                         placeholder="Has bookingDates?" required>
-                                        <option value="" disabled selected>No</option>
+                                        <option value="" selected>No</option>
                                         <option>2 Days</option>
                                         <option>4 Days</option>
                                         <option>5 Days</option>
@@ -508,22 +508,25 @@ md-icon{
                                         <label class="font-weight-bold"></label>
                                         <div class="input-group" style="margin-top: 7px;">
                                             <input ng-model="from.percentage" maxlength="3" only-numeric onkeyup="demoage(this)" class="form-control md-whiteframe-3dp" type="text"
-                                                name="Percent" required />
-                                            <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;"  disabled>+</button>
+                                                name="Percent" required />                                                                                           
                                         </div>
                                         <span ng-messages="hordinglistform.Percent.$error" ng-if="hordinglistform.Percent.$touched" style="color:red">
                                             <span ng-message="required">% required</span>
                                         </span>
-                                    </div>
-                                </div>                                
+                                    </div> 
+                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">-</button>  
+                                    
+                                      
+                                <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</button>  
+                                </div>                            
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
                                 </div>                                
-                            </div>
+                            </div>                         
                             <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
                                 <div class="col-md-2">
-                                    <label for="strength">{{strength.name}}</label>
+                                    <label for="strength">Strength</label>
                                 </div>
                                 <div class="col-md-9" style="padding-right: 0;">
                                     <input type="text" ng-model="strength.strname" name="strength" class="form-control md-whiteframe-3dp"  required/>
@@ -532,9 +535,11 @@ md-icon{
                                     </span>
                                 </div>
                                 <div class="col-md-1 text-right" style="margin-top: 4px;">
-                                        <span class="md-whiteframe-3dp" ng-show="showAddChoice(strength)" ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
+                                        <span class="md-whiteframe-3dp"  ng-click="removeStrength($index)" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</span>
+                                       
                                     </div>
                             </div>
+                            <span class="md-whiteframe-3dp"  ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
                             <div class="form-group row mt-5">
                                 <div class="col-sm-8">
                                     <b>Note:</b> You can change price / details any time you want.<br>
@@ -642,8 +647,7 @@ md-icon{
                     <select id="productType" ng-options="productType.name for productType in ProductTypes"
                         ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
-                        name="productType">
-                        <option value="" disabled selected>Site Type</option>
+                        name="productType">                       
                     </select>
                 </div></td>
                 <td style="width: 170px;">
@@ -663,8 +667,9 @@ md-icon{
                     <option value="0">Budget Low to High </option>
                 </select>
               </td>
-              <td>
-                    <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
+              <td style="padding-top:0px;">
+                    <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
+                    <md-button class="md-raised all_button hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
             </td>
               <td></td>
             </tr>
@@ -838,4 +843,8 @@ md-icon{
       bt.disabled = true;
   }
 }  
+function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
 </script>

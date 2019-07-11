@@ -21,7 +21,7 @@
                           <tr>
                               <td><b>Client Name</b></td>
                             
-                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.client_name || "N/A"}}</td>
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.org_name | capitalize}}</td>
                               <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">Advertiser Campaign</td>
                           </tr>
                           <tr>
@@ -385,7 +385,7 @@
           <th>Mode of Payment</th>
           <th>Reference No.</th>
           <th>Received By</th>
-          <th>Price</th>
+          <th>Received Price</th>
           <th>Comment</th> 
         <th class="text-center">Image</th>
       </tr>

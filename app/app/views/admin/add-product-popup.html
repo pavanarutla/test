@@ -41,7 +41,6 @@
                             ng-model="adminProductEdit.title">
                     </div>
                 </div>
-                <div class="form-group row">
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label class="font-weight-bold">Search DMA</label>
@@ -209,7 +208,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3" ng-if="!adminProductEdit.type === 'Transit Digital'">
+                        <div class="col-sm-3" ng-if="adminProductEdit.type === 'Digital'">
                             <label class="font-weight-bold">Face Direction</label>
                             <input ng-model="adminProductEdit.direction" class="form-control md-whiteframe-3dp"
                                 type="text" name="direction" required />
@@ -218,7 +217,7 @@
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-if="adminProductEdit.type === 'Digital' || 'Bulletin' ">
+                        <div class="col-sm-3" ng-if="adminProductEdit.type === 'Bulletin' ">
                             <label class="font-weight-bold">Face Direction</label>
                             <input ng-model="adminProductEdit.direction" class="form-control md-whiteframe-3dp"
                                 type="text" name="direction" required />
@@ -227,7 +226,7 @@
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-if="!adminProductEdit.type === 'Digital' || 'Bulletin' ">
+                        <div class="col-sm-3" ng-if="adminProductEdit.type === 'Bulletin' ">
                             <label class="font-weight-bold">Price for 28 Days</label>
                             <input ng-model="adminProductEdit.default_price" class="form-control md-whiteframe-3dp" type="text"
                                 name="pricess" required />
@@ -462,7 +461,6 @@
                         ng-click="addProduct(adminProductEdit)">
                             Submit</md-button>
                     </div>
-                </div>
                 </div>
             </div>
 

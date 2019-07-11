@@ -92,7 +92,7 @@ md-icon{
                               </tr>
                               <tr>
                                   <td><b>Client Name</b></td>
-                                  <td>{{selectedOwnerCampaign.client_name | capitalize}}</td>
+                                  <td>{{selectedOwnerCampaign.org_name | capitalize}}</td>
                                   <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
                                   <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
                               </tr>
@@ -180,8 +180,8 @@ md-icon{
             <select id="productType" ng-options="productType.name for productType in ProductTypes"
                         ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
-                        name="productType">
-                        <option value="" disabled selected>Site Type</option>
+                        name="productType">  
+                        <option value="" selected>All</option>                   
                     </select>
             </div></td>
             <td style="width: 170px;">
@@ -203,7 +203,7 @@ md-icon{
             </select>
           </td>
           <td>
-            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;" ng-click="applymethod(product)">Apply Filters</md-button></td>
+            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button></td>
           <td class="text-right"><md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}"  style="margin: 0px;margin-right:8px;" ng-disabled="selectedOwnerCampaign.products.length == 0">view campaign</md-button></td>
         </tr>
       </tbody>
@@ -305,10 +305,11 @@ md-icon{
               <span ng-click="myfield=false;changeProductPrice(ownerProduct)"  ng-show="myfield"> <i class="material-icons">check</i></span>
             
             </div> -->
-              <p>${{(!myfield)?ownerProduct.default_price:''}}
-              <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
-              <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span>
-              <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 6px 7px 4px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
+              <p>${{ownerProduct.default_price}}
+              <!-- <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric  style="width: 70px;padding: 8px 5px 2px 5px;"/> -->
+              <!-- <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span> ng-if="myfield" ${{(!myfield)?ownerProduct.default_price:''}}
+              <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 6px 7px 4px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button> -->
+            </p>
           </td>
           <td class="table_vertical text-center">
             <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
@@ -512,3 +513,9 @@ md-icon{
  
 
 </div>
+<script>
+function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
+</script>
