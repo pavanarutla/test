@@ -231,7 +231,7 @@
                         <!-- ng-if="campaignDetails.type == 0 && campaignDetails.status!=300" -->
                         ${{product.price || '0' | number:2}}</td>
                     <td class="table_vertical table_price">
-                        <p>${{(!myfield) ? (product.owner_price || '0' | number:2) : ''}}                              
+                        <p>${{(!myfield) ? (product.owner_price || product.price | number:2) : ''}}                              
                             <input type="text" class="" ng-model="product.owner_price" placeholder="Price" only-numeric
                                 ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
                             <span ng-click="myfield = true; productOwnerPrice(product.price ,product.id)"

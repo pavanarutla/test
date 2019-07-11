@@ -1700,6 +1700,11 @@ app.controller('GmapCtrl',
                         $scope.totalPriceUserSelected =  productPerDay * $scope.totalnumDays;
                     }
                   }
+                  if($scope.totalnumDays < $scope.product.minimumbooking.split(" ")[0] && $scope.ranges.selectedDateRanges.length > 0){
+                    $scope.ranges.selectedDateRanges =[];
+                    toastr.error("please select minimum " + $scope.product.minimumbooking )
+                      return false;
+                  }
             })
             $scope.toggleProductDetailSidenav = function () {
                 $scope.ranges.selectedDateRanges = [];
