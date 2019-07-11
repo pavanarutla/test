@@ -110,7 +110,7 @@ md-icon{
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Product Type</label>
                                     <select id="productType"
-                                        ng-options="productType.name for productType in ProductTypes"
+                                        ng-options="productType.name for productType in addProductType"
                                         ng-model="product.type" name="type" ng-change="getdetails()"
                                         class="form-control md-whiteframe-3dp" required>
                                         <option value="{{productType[0].name}}">
@@ -344,7 +344,7 @@ md-icon{
                                         data-md-container-class="selectdemoSelectHeader"
                                         ng-init="product.bookingDates = product.bookingDates || ''"
                                         placeholder="Has bookingDates?" required>
-                                        <option value="" disabled selected>NA</option>
+                                        <option value="" selected>No</option>
                                         <option>14 Days</option>
                                         <option>28 Days</option>
                                         <option>45 Days</option>
@@ -381,7 +381,7 @@ md-icon{
                                         data-md-container-class="selectdemoSelectHeader"
                                         ng-init="product.bookingDates = product.bookingDates || ''"
                                         placeholder="Has bookingDates?" required>
-                                        <option value="" disabled selected>No</option>
+                                        <option value="" selected>No</option>
                                         <option>2 Days</option>
                                         <option>4 Days</option>
                                         <option>5 Days</option>

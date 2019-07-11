@@ -466,7 +466,12 @@ Colipos  ===================*/
   | Product Section
   =====================*/
   $scope.product = {};
-
+  $scope.addProductType = [
+    // { name: "All" },
+    { name: "Bulletin" },
+    { name: "Digital" },
+    { name: "Transit Digital" }
+  ];
   $scope.ProductTypes = [
     { name: "All" },
     { name: "Bulletin" },
