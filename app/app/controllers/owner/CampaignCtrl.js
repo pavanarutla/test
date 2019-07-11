@@ -382,7 +382,7 @@ $scope.hidebutton = function(){
                     booked_slots:1
                 }
             };
-            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) {   
+            OwnerCampaignService.proposeProductForCampaign(postObj).then(function (result) { 
                 if (result.status == 1) {
                     OwnerCampaignService.getOwnerCampaignDetails(JSON.parse(localStorage.selectedOwnerCampaign).id).then(function (updatedCampaignData) {
                         localStorage.selectedOwnerCampaign = JSON.stringify(updatedCampaignData);
@@ -398,7 +398,7 @@ $scope.hidebutton = function(){
                         $scope.selectedOwnerCampaign.products.length++;
                     }
                     toastr.success(result.message);
-                } else {
+                } else if(result.status == 0){
                     toastr.error(result.message);
                 }
             });
