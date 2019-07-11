@@ -39,8 +39,8 @@
                         <p class="md-title mb-0"><span>{{editRequestedhordings.siteNo || "N/A"}}</span> -
                             <span>{{editRequestedhordings.area_name}}</span>
                             <span>({{editRequestedhordings.panelSize}})</span></p>
-                        <p class="mb-0">{{editRequestedhordings.address}}</p>
-                        <p class="mb-0"> <span
+                        <p class="mb-0"><span class="text_color"><b>Address:</b>&nbsp;</span>{{editRequestedhordings.address}}</p>
+                        <p class="mb-0"> <span ng-if="!editRequestedhordings.type == 'Transit Digital'"
                                 class="text_color"><b>Facing:</b>&nbsp;</span>{{editRequestedhordings.direction}}</p>
                         <p class="mb-0"> <span
                                 class="text_color"><b>Type:</b>&nbsp;</span>{{editRequestedhordings.type}}</p>
@@ -463,7 +463,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3" ng-if="!editRequestedhordings.type === 'Transit Digital'">
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Bulletin'">
                             <label class="font-weight-bold">Face Direction</label>
                             <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp"
                                 type="text" name="direction" required />
@@ -472,7 +472,7 @@
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital' || 'Bulletin' ">
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital' ">
                             <label class="font-weight-bold">Face Direction</label>
                             <input ng-model="editRequestedhordings.direction" class="form-control md-whiteframe-3dp"
                                 type="text" name="direction" required />
@@ -481,7 +481,7 @@
                                 <div ng-message="required">Direction is required.</div>
                             </div>
                         </div>
-                        <div class="col-sm-3" ng-if="!editRequestedhordings.type === 'Digital' || 'Bulletin' ">
+                        <div class="col-sm-3" ng-if="editRequestedhordings.type ==='Bulletin' ">
                             <label class="font-weight-bold">Price for 28 Days</label>
                             <input ng-model="editRequestedhordings.default_price" class="form-control md-whiteframe-3dp" type="text"
                                 name="pricess" required />
@@ -501,12 +501,12 @@
                         </div>
                         <div class="col-sm-3"  ng-if="editRequestedhordings.type === 'Bulletin'">
                             <label class="font-weight-bold">Min. Booking Days</label>
-                            <select ng-model="editRequestedhordings.bookingDates" name="bookingDates"
+                            <select ng-model="editRequestedhordings.minimumbooking" name="bookingDates"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                 data-md-container-class="selectdemoSelectHeader"
-                                ng-init="editRequestedhordings.bookingDates = editRequestedhordings.bookingDates || ''"
-                                placeholder="Has bookingDates?" required>
-                                <option value="" disabled selected>No</option>
+                                ng-init="editRequestedhordings.minimumbooking = editRequestedhordings.minimumbooking || ''"
+                                placeholder="Has minimumbooking?" required>
+                                <option selected>No</option>
                                 <option>14 Days</option>
                                 <option>28 Days</option>
                                 <option>45 Days</option>
@@ -518,12 +518,12 @@
                         </div>
                         <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital'">
                             <label class="font-weight-bold">Min. Booking Days</label>
-                            <select ng-model="editRequestedhordings.cancellation" name="cancellation"
+                            <select ng-model="editRequestedhordings.minimumbooking" name="cancellation"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                 data-md-container-class="selectdemoSelectHeader"
-                                ng-init="editRequestedhordings.cancellation = editRequestedhordings.cancellation || ''"
-                                placeholder="Has cancellation?" required>
-                                <option value="" disabled selected>No</option>
+                                ng-init="editRequestedhordings.minimumbooking = editRequestedhordings.minimumbooking || ''"
+                                placeholder="Has minimumbooking?" required>
+                                <option selected>No</option>
                                 <option>2 Days</option>
                                 <option>4 Days</option>
                                 <option>5 Days</option>
@@ -558,12 +558,12 @@
                         <!----Transit End------------------->
                         <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Transit Digital'">
                             <label class="font-weight-bold">Min. Booking Days</label>
-                            <select ng-model="editRequestedhordings.cancellation" name="cancellation"
+                            <select ng-model="editRequestedhordings.minimumbooking" name="cancellation"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                 data-md-container-class="selectdemoSelectHeader"
-                                ng-init="editRequestedhordings.cancellation = editRequestedhordings.cancellation || ''"
-                                placeholder="Has cancellation?" required>
-                                <option value="" disabled selected>No</option>
+                                ng-init="editRequestedhordings.minimumbooking = editRequestedhordings.minimumbooking || ''"
+                                placeholder="Has minimumbooking?" required>
+                                <option selected>No</option>
                                 <option>2 Days</option>
                                 <option>4 Days</option>
                                 <option>5 Days</option>
