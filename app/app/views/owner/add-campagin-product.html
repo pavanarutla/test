@@ -1,82 +1,20 @@
 <style>
-.daterangepicker option.disabled, .daterangepicker td.disabled {
-    color: #fff;
-    cursor: not-allowed;
-    background: #ddd;
-    border: 1px solid #fff;
-    border-radius: 0px;
-    /* text-decoration: line-through; */
-  }
-  .gray-blocked{
-    background:#ddd;
-  }
-  .red-blocked{
-    background:#f00 !important;
-  }
-  .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 340px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 7px;
-    top: 0px;
-    left: 0px;
-    right: 17.5% !important;
-    z-index: 1;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
-}
+
+.gray-blocked {
+      background: #ddd;
+    }
+    .red-blocked {
+      color: #f00 !important;
+      font-weight: bold;
+    }
 #ownerSlots{
   width:500px;
 }
-/* .owner-calender-slots {
-  position: absolute;
-    bottom: 50%;
-    right: 10px;
-    width: 500px;
-    background: #aaa;
-} */
-.addWeekColor{
-      background-color: #f00;
-      color:white;
-    }
-    .selectedWeekColor {
-      background-color: green;
-    }
-    .addBlockedColor {
-      background-color: gray !important;
-      cursor: not-allowed !important;
-    }
-    .productAdded {
-      background-color: #f2f3f2;
-    }
-@media screen and (min-width:320px) and (max-width: 563px){
-    .daterangepicker {
-    /* position: absolute; */
-    color: inherit;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    width: 280px !important;
-    max-width: none;
-    padding: 0;
-    margin-top: 7px;
-    top: 0px;
-    left: 10px;
-    right: 8% !important;
-    z-index: 1;
-    display: none;
-    font-family: arial;
-    font-size: 15px;
-    line-height: 1em;
+.productAdded {
+  background-color: rgb(202, 224, 231)
 }
-}
+
+
 .md-datepicker-input{
   font-size: 12px;
   min-width: 100px;
@@ -154,7 +92,7 @@ md-icon{
                               </tr>
                               <tr>
                                   <td><b>Client Name</b></td>
-                                  <td>{{selectedOwnerCampaign.client_name || "N/A"}}</td>
+                                  <td>{{selectedOwnerCampaign.org_name | capitalize}}</td>
                                   <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
                                   <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
                               </tr>
@@ -189,13 +127,13 @@ md-icon{
                                   <td>{{selectedOwnerCampaign.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
                               </tr>
                               <tr>
-                                  <td><b>Total Budget</b></td>
+                                  <td><b>Total Price</b></td>
                                   <td>
                                       ${{ selectedOwnerCampaign.act_budget || 0 | number : 2}}
                                   </td>
                               </tr>
                               <tr>
-                                  <td><b>Pending payment</b></td>
+                                  <td><b>Pending Price</b></td>
                                   <td>
                                       <!-- ng-if="selectedOwnerCampaign.type != 0" -->
                                       ${{campaignDetails.act_budget - result.total_paid || 0 | number:2}}
@@ -242,8 +180,8 @@ md-icon{
             <select id="productType" ng-options="productType.name for productType in ProductTypes"
                         ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
-                        name="productType">
-                        <option value="" disabled selected>Site Type</option>
+                        name="productType">  
+                        <option value="" selected>All</option>                   
                     </select>
             </div></td>
             <td style="width: 170px;">
@@ -265,8 +203,8 @@ md-icon{
             </select>
           </td>
           <td>
-            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;" ng-click="applymethod(product)">Apply Filters</md-button></td>
-          <td class="text-right"><md-button class="md-raised md-primary all_button" ng-disabled="selectedOwnerCampaign.products.length <= 0" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}" style="margin: 0px;margin-right:8px;">view campaign</md-button></td>
+            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button></td>
+          <td class="text-right"><md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}"  style="margin: 0px;margin-right:8px;" ng-disabled="selectedOwnerCampaign.products.length == 0">view campaign</md-button></td>
         </tr>
       </tbody>
     </table>
@@ -322,26 +260,28 @@ md-icon{
         <tr>
           <th class="table_firstthpadding">Product Details</th>
           <th class="hide-xs"></th>
-          <th class="text-center">Views</th>
+          <th class="text-center">Size</th>
           <th class="">Lit</th>
           <th class="">Shortlisted in</th>
           <th class="">Price</th>
           <th class="text-center">Calender</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="ownerProduct in productList" ng-class="{productAdded : ownerProduct.added == true}">
+        <tr ng-repeat="ownerProduct in productList" ng-class="{productAdded : ownerProduct.focusProduct == true}">
           <td class="image_tdwidth hide-xs table_firstthpadding">
             <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
             <img ng-src="{{serverUrl + ownerProduct.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
           </td>
           <td class="table_address">
-            <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}} ({{ownerProduct.panelSize}})</b>
-              <br> {{ownerProduct.addressone | capitalize}}&nbsp;{{ownerProduct.addresstwo | capitalize}}
+            <p class=""><b>{{ownerProduct.siteNo}} - {{ownerProduct.area_name}}</b>
+              <br><b style="color: #44596D;">Address :</b> {{ownerProduct.address | capitalize}}
               <br><b style="color: #44596D;">Facing :</b> {{ownerProduct.direction | capitalize}}
+              <br><b style="color: #44596D;">Views :</b> {{ownerProduct.impressions}}
               <br><b style="color: #44596D;">Type :</b> {{ownerProduct.type | capitalize}}
           </td>
-          <td class="table_vertical text-center">{{ownerProduct.impressions}}</td>
+          <td class="table_vertical text-center">{{ownerProduct.panelSize}}</td>
           <td class="table_vertical">
             <span class="md-caption">{{ownerProduct.lighting | boolToYesNo}}</span>
           </td>
@@ -365,11 +305,25 @@ md-icon{
               <span ng-click="myfield=false;changeProductPrice(ownerProduct)"  ng-show="myfield"> <i class="material-icons">check</i></span>
             
             </div> -->
-              <p>${{(!myfield)?ownerProduct.default_price:''}}
-              <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
-              <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span>
-              <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 6px 7px 4px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
+              <p>${{ownerProduct.default_price}}
+              <!-- <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric  style="width: 70px;padding: 8px 5px 2px 5px;"/> -->
+              <!-- <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span> ng-if="myfield" ${{(!myfield)?ownerProduct.default_price:''}}
+              <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 6px 7px 4px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button> -->
+            </p>
           </td>
+          <td class="table_vertical text-center">
+            <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+              placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+              style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+            <a ng-click="getProductUnavailableDates(ownerProduct, $event,$index);">
+              <i class="fa fa-calendar"></i>
+            </a>
+          </td>
+          <td class=" table_vertical text-right">
+            <md-button class="md-raised md-primary all_button" ng-if="!ownerProduct.alreadyAdded" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+              campaign</md-button>
+              <md-button class="md-raised Upload_font" ng-if="ownerProduct.alreadyAdded" >Added</md-button>
+          </td>    
           <!-- <td class="table_vertical"> -->
             <!-- <input ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp "
               placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
@@ -441,7 +395,7 @@ md-icon{
               </div> -->
             <!-- calender slots Ends-->
           <!-- </td> -->
-          <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Bulletin' ">
+          <!-- <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Bulletin' ">
               <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                       <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
@@ -493,8 +447,8 @@ md-icon{
                                   </div>
                               </div>
                           </div>
-          </td>
-          <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Transit' || ownerProduct.type == 'Digital Bulletin'">
+          </td> -->
+          <!-- <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Transit' || ownerProduct.type == 'Digital Bulletin'">
               <a data-toggle="modal" data-target="#digitalTransitCalender" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                       <div class="modal fade" id="digitalTransitCalender" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
@@ -511,11 +465,7 @@ md-icon{
                                           <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Your 10 second ad will be shown 1 time per 70 seconds.</p>
                                           <p class="mb-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Total slots available in this digital bulletin is 7 slots.</p>
                                 
-                                          <!-- <div class=" row form-group ml-0 mr-0 mt-3 mb-3">
-                                              <label for="slot" class="col-md-4 font-weight-bold">Select No Of Slots:</label>
-                                              <select class="form-control col-md-3" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots">
-                                              </select>
-                                            </div> -->
+                                          
                                             <h5 class="font-weight-bold mt-3 mb-3">Select Duration, Start Date & No of slots -:
                                                 <select class="browser-default" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots" style="width: 140px; background: #e9e9e9; border:none;">
                                                   </select>
@@ -534,15 +484,7 @@ md-icon{
                                           </div>
                                       </div>
                                       <div class="modal-body modal_top">
-                                          <!-- <div class="row" style="margin-right:0px;">
-                                              <div class="col-md-8">
-                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
-                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
-                                              </div>
-                                          </div> -->
+                                        
                                           <div class="row" style="margin-right:0px;">
                                               <div class="col-md-8">
                                                   <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
@@ -556,7 +498,7 @@ md-icon{
                                   </div>
                               </div>
                           </div>
-          </td>
+          </td> -->
          
           <!-- <td class=" table_vertical text-right">
             <md-button class="md-raised md-primary all_button" ng-class = "{addBlockedColor : ownerProductBlocked.length !== 1}" ng-disabled="ownerProductBlocked.length !== 1" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
@@ -571,3 +513,9 @@ md-icon{
  
 
 </div>
+<script>
+function onClickHandler(elem) {
+elem.style.background = '#bc2535';
+elem.style.color = 'white';
+}
+</script>

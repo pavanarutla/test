@@ -16,13 +16,13 @@
                               <td><b>Campaign Name</b></td>
                            
                               <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.name | capitalize}}</td>
-                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">BillBoards India</td>                          
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">Advertiser Campaign</td>                          
                           </tr>
                           <tr>
                               <td><b>Client Name</b></td>
                             
-                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.client_name || "N/A"}}</td>
-                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">BillBoards India</td>
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.org_name | capitalize}}</td>
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">Advertiser Campaign</td>
                           </tr>
                           <tr>
                               <td><b>Contact No.</b></td>
@@ -54,13 +54,13 @@
                               <td>{{campaignPaymentDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
                           </tr>
                           <tr>
-                              <td><b>Total Budget</b></td>
+                              <td><b>Total Price</b></td>
                               <td>
                                   ${{ campaignPaymentDetails.act_budget |number : 2 || 0 }}
                               </td>
                           </tr>
                           <tr>
-                              <td><b>Pending payment</b></td>
+                              <td><b>Pending Price</b></td>
                               <td>${{campaignPaymentDetails.totalamount - campaignPaymentDetails.total_paid | number:2 || '0'}}</td>                                                               
                           </tr>
                           <tr>
@@ -385,7 +385,7 @@
           <th>Mode of Payment</th>
           <th>Reference No.</th>
           <th>Received By</th>
-          <th>Received</th>
+          <th>Received Price</th>
           <th>Comment</th> 
         <th class="text-center">Image</th>
       </tr>
@@ -397,7 +397,7 @@
           <td class="table_vertical">{{payment.reference_no || "N/A"}}</td>
           <td class="table_vertical">{{payment.received_by || "N/A"}}</td>
           <td class="table_vertical">${{payment.amount | number:2 || '0'}}</td>
-          <td class="table_vertical">{{payment.comment}}</td>   
+          <td class="table_vertical">{{payment.comment | capitalize}}</td>   
           <td class="image_tdwidth text-center">
               <a ng-click="paymentrefImage(payment.image)">
             <p ng-if="payment.type === 'Cash'"><b>Cash</b></p>

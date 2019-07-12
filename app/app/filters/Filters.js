@@ -66,6 +66,14 @@ app.filter('dateFormat',function(){
     }
   }
 });
+app.filter('dateFormatForSelected',function(){
+  return function(date){
+    //   return moment(date).local().format('LLLL').split(',')[2].split(' ')[2] + " " + moment(date).local().format('LLLL').split(',')[2].split(' ')[3];
+    // }else{
+      return moment(date).local().format('llll').split(',')[1];
+    // }
+  }
+});
 app.filter('jsonConvert',function(){
   return function(date){
     if(Object.prototype.toString.call(date) == "[object Array]"){

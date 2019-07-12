@@ -62,7 +62,6 @@ app.factory('MapService', ['$http', '$q', 'config', function ($http, $q, config)
       return dfd.promise;
     },
     getProductDigitalUnavailableDates : function(productId){
-      console.log(productId)
       var dfd = $q.defer();
       $http.post(config.apiPath + '/digital-product-unavailable-dates', {product_id: productId}).success(dfd.resolve).error(dfd.reject);
       return dfd.promise;

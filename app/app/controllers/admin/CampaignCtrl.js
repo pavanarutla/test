@@ -63,7 +63,7 @@ app.controller('AdminCampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $st
   /*===================================
   | Popups and Sidenavs end
   ===================================*/
-
+  
   var getAllCampaigns = function () {
     AdminCampaignService.getAllCampaigns().then(function (result) {
       $scope.plannedCampaigns = _.filter(result.user_campaigns, function (c) {
@@ -860,13 +860,32 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     $scope.loadCampaignData(campaignId);
   }
 // Date-Picker
-$scope.getProductUnavailableDates = function (productId, ev,productPrice) {
-  $scope.ownerProductPrice = productPrice
-  AdminCampaignService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      productDatesCalculator()
+$scope.getProductUnavailableDates = function (product, ev) {
+  // $scope.ownerProductPrice = productPrice
+  // AdminCampaignService.getProductUnavailableDates(productId).then(function (dateRanges) {
+      // $scope.unavailalbeDateRanges = dateRanges;
+      // productDatesCalculator()
       // $(ev.target).parent().parent().find('input').trigger('click');
-  });
+  // });
+  if(product.type == "Bulletin"){
+    AdminCampaignService.getProductUnavailableDates(product.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+              // $(ev.target).parent().parent().find('input').trigger('click');
+    });
+}else{
+  AdminCampaignService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots >= product.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+              // $(ev.target).parent().parent().find('input').trigger('click');
+
+    })
+}
 },
   $scope.downloadAdminQuote = function (campaignId) {
     AdminCampaignService.downloadQuote(campaignId).then(function (result) {
@@ -878,93 +897,97 @@ $scope.getProductUnavailableDates = function (productId, ev,productPrice) {
                     });
                 },
 
-$scope.suggestProductForAdminCampaign = function (adminProduct,weeksArray) {
-  adminProduct.dates  = [{}]
-  var startAndEndDates = weeksArray.filter((week)=>week.selected)
-  startAndEndDates.forEach(function(item,index){
-      if(index == 0){
-          adminProduct.dates[0].startDate = moment(item.startDay).format('YYYY-MM-DD')
-      }else if(index == (startAndEndDates.length -1)){
-          adminProduct.dates[0].endDate = moment(item.endDay).format('YYYY-MM-DD')
-      }
-  })
-  if($stateParams.campaignId) {
-      var postObj = {
-          campaign_id: $stateParams.campaignId,
-          product: {
-              id: adminProduct.id,
-              booking_dates: adminProduct.dates,
-              price: adminProduct.default_price
-          }
-      }
-      AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
-          if (result.status == 1) {
-            CampaignService.getCampaignWithProducts(campaignId).then(function(result){
-             // alert("dhajf");
-                  $scope.campaignDetails = result;
-                  _.map($scope.AdminProduct, function (product) {
-                      if (product.id == adminProduct.id) {
-                          product.alreadyAdded = true;
-                      }                     
-                      $scope.toggleProductDetailSidenav();
-                      return product;
-                  });                  
-              });
-              toastr.success(result.message);
-          } else {
-              toastr.error(result.message);
-          }
-      });
+                $scope.suggestProductForAdminCampaign = function (adminProduct) {
+                  if($stateParams.campaignId) {
+                      var postObj = {
+                          campaign_id: $stateParams.campaignId,
+                          booked_slots:1,
+                          product: {
+                              id: adminProduct.id,
+                              booking_dates: $scope.ranges.selectedDateRanges,
+                              price: adminProduct.default_price
+                          }
+                      }
+                      AdminCampaignService.proposeProductForCampaign(postObj).then(function (result) {
+                          if (result.status == 1) {
+                            toastr.success(result.message);
+                            $scope.removeSelection();
+                            CampaignService.getCampaignWithProducts($stateParams.campaignId).then(function(result){
+                             // alert("dhajf");
+                                  $scope.campaignDetails = result;
+                                  _.map($scope.AdminProduct, function (product) {
+                                      if (product.id == adminProduct.id) {
+                                          product.alreadyAdded = true;
+                                      }                     
+                                      return product;
+                                  });
+    
+                              });
+                          } else {
+                              toastr.error(result.message);
+                          }
+                      });
+                  }
+                }
+
+    $scope.ranges = {
+      selectedDateRanges: []
+    };
+    $scope.customOptions = {};
+    $scope.removeSelection = function () {
+      $scope.customOptions.clearSelection();
   }
-}
+  $scope.$on("removeSelection", function () {
+    $scope.removeSelection();
+})
 /*================================
      | Multi date range picker options
      ================================*/
-  //    $scope.suggestProductOpts = {
-  //     multipleDateRanges: true,
-  //     opens: 'center',
-  //     locale: {
-  //         applyClass: 'btn-green',
-  //         applyLabel: "Book Now",
-  //         fromLabel: "From",
-  //         format: "DD-MMM-YY",
-  //         toLabel: "To",
-  //         cancelLabel: 'Cancel',
-  //         customRangeLabel: 'Custom range'
-  //     },
-  //     isInvalidDate: function (dt) {
-  //       for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-  //           if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-  //               return true;
-  //           }
-  //       }
-  //       if(moment(dt) < moment()){
-  //           return true;
-  //       }
-  //   },
-  //   isCustomDate: function (dt) {
-  //       for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
-  //           if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
-  //               if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
-  //                   return ['red-blocked', 'left-radius'];
-  //               } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
-  //                   return ['red-blocked', 'right-radius'];
-  //               } else {
-  //                   return 'red-blocked';
-  //               }
-  //           }
-  //       }
-  //       if(moment(dt) < moment()){
-  //           return 'gray-blocked';
-  //       }
-  //   },
-  //   eventHandlers: {
-  //       'apply.daterangepicker': function(ev, picker) { 
-  //           //selectedDateRanges = [];
-  //       }
-  //   }
+     $scope.suggestProductOpts = {
+      multipleDateRanges: true,
+      opens: 'center',
+      locale: {
+          applyClass: 'btn-green',
+          applyLabel: "Book Now",
+          fromLabel: "From",
+          format: "DD-MMM-YY",
+          toLabel: "To",
+          cancelLabel: 'X',
+          customRangeLabel: 'Custom range'
+      },
+      isInvalidDate: function (dt) {
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                return true;
+            }
+        }
+        if(moment(dt) < moment()){
+            return true;
+        }
+    },
+    isCustomDate: function (dt) {
+        for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+            if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+                if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+                    return ['red-blocked', 'left-radius'];
+                } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+                    return ['red-blocked', 'right-radius'];
+                } else {
+                    return 'red-blocked';
+                }
+            }
+        }
+        if(moment(dt) < moment()){
+            return 'gray-blocked';
+        }
+    },
+    eventHandlers: {
+        'apply.daterangepicker': function(ev, picker) { 
+            //selectedDateRanges = [];
+        }
+    }
      
-  // };
+  };
   /*====================================
    | Multi date range picker options end
    ====================================*/
@@ -973,170 +996,6 @@ $scope.suggestProductForAdminCampaign = function (adminProduct,weeksArray) {
 /* ----------------------------
                     New Hording profuct Nav bars starts
                 -------------------------------*/
-                $scope.yearlyWeeks =[];
-                $scope.weeksArray = [];
-                var  weeklyPackageValue = 4;
-                var selectWeekValue = 0;
-                for(var i=1;i<=25;i++){
-                    $scope.yearlyWeeks.push({weeklyPackage : weeklyPackageValue})
-                    weeklyPackageValue +=2
-                }
-                
-                for(var i=1;i<=26;i++){
-                    $scope.weeksArray.push({twoWeeks : 2})
-                }
-                var currentDay =  moment().format('LLLL').split(',')[0];
-
-                function productDatesCalculator(){
-                    var slotPrices =0;
-                    for(item in $scope.yearlyWeeks){
-                        if(item == 0){
-                            slotPrices = $scope.ownerProductPrice;
-                            $scope.yearlyWeeks[item].default_price = slotPrices;
-                        }else{
-                            slotPrices = parseInt(slotPrices) + (parseInt($scope.ownerProductPrice)/2)
-                            $scope.yearlyWeeks[item].default_price = slotPrices;
-                        }
-                    }
-                    var unavailBoundaries = [];
-                    $scope.unavailalbeDateRanges.forEach((dates) => {
-                        unavailBoundaries.push(moment(dates.booked_from))
-                        unavailBoundaries.push(moment(dates.booked_to))
-                    });
-                    if(currentDay == 'Monday'){
-                        var startDay = moment(new Date()).add(7,'days').format('LLLL');
-                        var endDay = moment(new Date()).add(7+13,'days').format('LLLL');
-                        $scope.weeksArray[0].startDay = startDay;
-                        $scope.weeksArray[0].endDay = endDay;
-                        unavailBoundaries.forEach((date) => {
-                            $scope.weeksArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
-                        });
-
-                    }else{
-                        var tempDay;
-                        for(i=1;i<=6;i++){
-                             tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
-                             tempDay = moment(new Date()).add(i,'days').format('LLLL').split(',')[0];
-                             if(tempDay == 'Monday'){
-                                var startDay = moment(new Date()).add(i+7,'days').format('LLLL');
-                                var endDay = moment(new Date()).add(i+7+13,'days').format('LLLL');
-                                $scope.weeksArray[0].startDay = startDay;
-                                $scope.weeksArray[0].endDay = endDay;
-                                var isBlocked = false;
-                                for (var date of unavailBoundaries) {
-                                    if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
-                                        isBlocked = true;
-                                        break;
-                                    }
-                                }
-                                $scope.weeksArray[0].isBlocked = isBlocked;
-                             }
-
-                        }
-                       
-                    }
-
-                    var tempororyStartDate = $scope.weeksArray[0].endDay;
-                    $scope.weeksArray.forEach(function(item,index){
-                        if(index > 0){
-                            item.startDay = moment(tempororyStartDate).add(1,'days').format('LLLL');
-                            item.endDay = moment(tempororyStartDate).add(14,'days').format('LLLL');
-                            tempororyStartDate = item.endDay;
-                            var isBlocked = false;
-                            for (var date of unavailBoundaries) {
-                                if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
-                                    isBlocked = true;
-                                    break;
-                                }
-                            }
-                            $scope.weeksArray[index].isBlocked = isBlocked;
-                        }
-
-                    })
-
-                }
-                // productDatesCalculator();
-                $scope.selectHordingWeeks = function(weeks) {
-                    $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {
-                        week.selectedWeek = false;
-                    });
-                    for(var i=0;i<$scope.yearlyWeeks.length; i++){
-                        if($scope.yearlyWeeks[i].weeklyPackage == weeks.weeklyPackage){
-                            $scope.yearlyWeeks[i].selectedWeek = true;
-                            selectWeekValue = $scope.yearlyWeeks[i];
-                            $scope.ownerTotalPrice = selectWeekValue.default_price;
-                        }
-                    }
-                    $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                        week.selected = false;
-                    });
-                    var countWeeks = 0;
-                    for(var nextSelected in $scope.weeksArray){
-                        if($scope.weeksArray[nextSelected].isBlocked && $scope.weeksArray[nextSelected].isBlocked == true){
-                            $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                                 week.selected = false;
-                            });
-                            countWeeks =0;
-                        }else{ 
-                            $scope.weeksArray[nextSelected].selected = true;
-                            countWeeks +=1;
-                            var leftPos = $('#scrollFind').scrollLeft();
-                            $("#scrollFind").animate({scrollLeft: leftPos*0}, 0);
-                            if(countWeeks == weeks.weeklyPackage/2){
-                                $("#scrollFind").animate({scrollLeft: leftPos + ((nextSelected - (weeks.weeklyPackage/2)) * 115)}, 800);
-                                break;
-                            }
-                        }
-                    }
-                    if(weeks.weeklyPackage/2 > countWeeks ){
-                        $scope.packagePopUp = true;
-                        $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                            week.selected = false;
-                        });
-                        alert("we don't have slots please select another slots")
-                        // $scope.selectPackageAbove = {head : "slots are not available",dsc : "we don't have slots please select another slots"}
-                        // $scope.totalSlotAmount = 0
-                        return false;
-                        } 
-                        // $scope.totalSlotAmount = selectWeekValue.price;
-
-                    }
-                $scope.packagePopUp = false;
-                $scope.closeSelectedPopup = function(){
-                    $scope.packagePopUp = false;
-                }
-                $scope.selectUserWeeks = function(weeks,index,ev){
-                    if(!(Object.prototype.toString.call(selectWeekValue) == "[object Object]") || Object.keys(selectWeekValue).length == 0 ){
-                        alert("please select package above")
-                        // $scope.packagePopUp = true;
-                        // $scope.selectPackageAbove = {head : "select the package above",dsc : "please Select Campaign Duration"}
-                        return false;
-                    }else{
-                        $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                            week.selected = false;
-                        });
-                        if((selectWeekValue.weeklyPackage/2) > ($scope.weeksArray.length - index)){
-                            
-                            alert("please Select Campaign Duration")
-                            // $scope.packagePopUp = true;
-                            // $scope.selectPackageAbove = {head : "select the package above",dsc : "please Select Campaign Duration"}    
-                            return false;
-                        };
-                        for(var i=index; i < (selectWeekValue.weeklyPackage/2 + index); i++) {   
-                            if($scope.weeksArray[i].isBlocked && $scope.weeksArray[i].isBlocked == true){
-                                $scope.weeksArray.filter((week) => week.selected).forEach((week) => {
-                                    week.selected = false;
-                                });
-                                alert("select the another slots")
-                                // $scope.packagePopUp = true;
-                                // $scope.selectPackageAbove = {head : "select the another slots",dsc : "please Select another slots these are not available"}
-                                return false;                                
-                            } else{
-                                $scope.weeksArray[i].selected = true;
-                            }
-                        };
-                    };
-                };
                 $scope.toggleProductDetailSidenav = function(){
                     $("#exampleModalcalendar").modal("hide");                    selectWeekValue = 0;
                     $scope.yearlyWeeks.filter((week) => week.selectedWeek).forEach((week) => {

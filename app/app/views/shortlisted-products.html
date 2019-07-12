@@ -78,15 +78,18 @@
 		</div>
 
 	</div>
-	<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
-		<div layout="row">
-			<div flex></div>
-			<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
-				<i class="material-icons">close</i>
-			</a>
-		</div>
+	<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right:11px;margin-bottom:10px;padding:15px; ">
+		
 		<form ng-submit="saveCampaign(product.id, selectedDateRanges)">
-		<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+			<div layout="row">
+				<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+				<div flex></div>
+				<div>
+					<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
+							<i class="material-icons"style="margin-top: 5px;background: #eee;padding: 5px;">close</i>
+					</a>
+				</div>
+			</div>
 		<div class="md-title  m-2">Let's work Together!</div>
 		<div class="form-group mt-3 mr-2 ml-2">
 			<input type="text" class="form-control" id="text" ng-model="campaign.name" ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup = "EnableDisable()">

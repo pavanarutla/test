@@ -54,13 +54,13 @@
                                     <td>{{(campaignDetails.created_at| dateify | date: "dd-MM-yyyy") || "N/A"}}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Total Budget</b></td>
+                                    <td><b>Total Price</b></td>
                                     <td>
                                         <span>$</span>{{campaignDetails.totalamount || '0' | number : 2}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Pending payment</b></td>
+                                    <td><b>Pending Price</b></td>
                                     <td>
                                         <span>$</span>{{PendingPay || '0' | number : 2}}
                                     </td>
@@ -133,7 +133,7 @@
                 </form>
             </div>
         </div>
-        <div ng-if="campaignDetails.status == 100">
+        <div class="button_leftright" ng-if="campaignDetails.status == 100">
             <div class="md-grid-item-content hoarding-btn">
                 <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
@@ -152,6 +152,7 @@
                     <th>Product Details</th>
                     <th class="hide-xs"></th>
                     <th>Size</th>
+                    <th >Views</th>
                     <th>Booked From</th>
                     <th>Booked To</th>
                     <th>Price in $</th>
@@ -167,19 +168,23 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p class=""><b>{{campaignProduct.siteNo}} - {{campaignProduct.area_name || "N/A"}}</b><br>
-                            <b>Address :</b> {{campaignProduct.addressone || "N/A"}}&nbsp;{{campaignProduct.addresstwo}}<br>
-                            <b>Views :</b> {{campaignProduct.impressions|| '0'}}<br>
-                            <b>Type :</b> {{campaignProduct.type|| '0'}}<br>
-                            <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b>{{campaignProduct.booked_slots || 'N/A'}}</span>
-                        </p>
-                    </td>
+                            <p class=""><b>{{campaignProduct.siteNo}}</b>&nbsp;<b>{{campaignProduct.title || "N/A"}}</b>
+                                <br><b style="color: #44596D;">Address</b>:
+                                {{campaignProduct.address | capitalize}}  {{campaignProduct.city | capitalize}}
+                                <br><b style="color: #44596D;">State</b>: {{campaignProduct.state_name | capitalize}}
+                                <br><b style="color: #44596D;">Venue</b>: {{campaignProduct.venue | capitalize}}
+                                <br><b style="color: #44596D;">Type</b>: {{campaignProduct.type || "N/A"}}
+                                <br><b style="color: #44596D;">Facing</b>: {{campaignProduct.direction|| "N/A" | capitalize}}
+                                <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>No Of Slots :</b>{{campaignProduct.booked_slots || 'N/A'}}</span>
+                                </p>
+                        </td>                  
                     <td class="table_vertical">{{campaignProduct.panelSize || "N/A"}}</td>
+                    <td class="table_vertical">{{campaignProduct.impressions}}</td>
                     <td class="table_vertical">{{campaignProduct.booked_from| dateify | date: "dd-MM-yyyy"}}
                     </td>
                     <td class="table_vertical">{{campaignProduct.booked_to| dateify | date: "dd-MM-yyyy"}}
                     </td>
-                    <td class="table_vertical"><span>$</span>{{campaignProduct.default_price || '0' | number : 2}}</td>
+                    <td class="table_vertical"><span>$</span>{{campaignProduct.price || '0' | number : 2}}</td>
                     <td class="table_vertical">
                         <p class="text_color md-caption"
                             ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">

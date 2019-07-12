@@ -1,4 +1,4 @@
-app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, MapService, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr, $state) {
+app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $stateParams, $rootScope, $window, MapService, OwnerProductService, ProductService, OwnerLocationService, OwnerCampaignService, Upload, config, toastr, $state,$location) {
 
   $scope.unavailalbeDateRanges = [];
   // $scope.loadCalendar = false;
@@ -44,6 +44,54 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   /*========================
   | Sidenavs and popups ends
   ========================*/
+
+  $scope.showBlockDate = function () {
+    $mdDialog.show({
+        templateUrl: 'views/map-calendar-popup.html',
+        fullscreen: $scope.customFullscreen,
+        clickOutsideToClose: true,
+        controller: function ($scope) {
+            $scope.closeMdDialog = function () {
+                $mdDialog.hide();
+            }
+        }
+    });
+};
+
+/*===================
+Form Age  ===================*/
+
+$scope.FromTo = [{id: 'From', name: 'From'}];
+   
+   $scope.addNewFromTo = function() {
+     var newItemNo = $scope.FromTo.length+1;
+     $scope.FromTo.push({'id' : 'From' + newItemNo, 'name' : 'From ', 'id' : 'To' + newItemNo, 'name2' : 'To '});
+   };   
+   $scope.removeNewChoice = function(index) {
+     var newItemNo = $scope.FromTo.length-1;
+     if ( newItemNo !== 0 ) {
+     // $scope.FromTo.pop();
+      $scope.FromTo.splice(index,1);
+     }
+   };   
+   $scope.showAddFromTo = function(from) {
+     return from.id === $scope.FromTo[$scope.FromTo.length-1].id;
+   };
+
+/*===================
+Colipos  ===================*/
+  $scope.Strengths = [{id: 'Strength 1', name: 'Strength 1'}];   
+   $scope.addNewChoice = function() {
+     var newItemNo = $scope.Strengths.length+1;
+     $scope.Strengths.push({'id' : 'Strength' + newItemNo});
+   };   
+   $scope.removeStrength = function(index) {
+     var newItemNo = $scope.Strengths.length-1;
+     if ( newItemNo !== 0 ) {
+      //$scope.Strengths.pop();
+      $scope.Strengths.splice(index,1);
+     }
+   };      
 
   /*===================
   | Pagination
@@ -143,6 +191,13 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       }
     });
   }
+  $scope.ranges = {
+    selectedDateRanges: []
+  };
+  $scope.customOptions = {};
+            $scope.removeSelection = function () {
+                $scope.customOptions.clearSelection();
+            }
 
   /*================================
   | Multi date range picker options
@@ -151,11 +206,54 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     multipleDateRanges: true,
     locale: {
       applyClass: 'btn-green',
-      applyLabel: "Book Now",
+     applyLabel: "Book Now",
       fromLabel: "From",
       format: "DD-MMM-YY",
       toLabel: "To",
-      cancelLabel: 'Cancel',
+      cancelLabel: 'X',
+      customRangeLabel: 'Custom range'
+    },    
+    isInvalidDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          return true;
+        }
+      }
+      if (moment(dt) < moment()) {
+        return true;
+      }
+    },
+    isCustomDate: function (dt) {
+      for (var i = 0; i < $scope.unavailalbeDateRanges.length; i++) {
+        if (moment(dt) >= moment($scope.unavailalbeDateRanges[i].booked_from) && moment(dt) <= moment($scope.unavailalbeDateRanges[i].booked_to)) {
+          if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_from), 'day')) {
+            return ['red-blocked', 'left-radius'];
+          } else if (moment(dt).isSame(moment($scope.unavailalbeDateRanges[i].booked_to), 'day')) {
+            return ['red-blocked', 'right-radius'];
+          } else {
+            return 'red-blocked';
+          }
+        }
+      }
+      if (moment(dt) < moment()) {
+        return 'gray-blocked';
+      }
+    },
+    eventHandlers: {
+      'apply.daterangepicker': function (ev, picker) {
+        //selectedDateRanges = [];
+      }
+    }
+  };
+  $scope.addProdOpts = {
+    multipleDateRanges: true,
+    locale: {
+      applyClass: 'btn-green',
+     applyLabel: "Book Now",
+      fromLabel: "From",
+      format: "DD-MMM-YY",
+      toLabel: "To",
+      cancelLabel: 'X',
       customRangeLabel: 'Custom range'
     },
     isInvalidDate: function (dt) {
@@ -258,12 +356,12 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
   getShortListedProducts();
-  $scope.getProductUnavailableDates = function (productId, ev) {
-    MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
-      $(ev.target).parents().eq(3).find('input').trigger('click');
-    });
-  }
+  // $scope.getProductUnavailableDates = function (productId, ev) {
+  //   MapService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //     $scope.unavailalbeDateRanges = dateRanges;
+  //     $(ev.target).parents().eq(3).find('input').trigger('click');
+  //   });
+  // }
   // SHORT-LIST ENDs
   // Save-camp
   $scope.toggleExistingCampaignSidenav = function () {
@@ -368,11 +466,17 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | Product Section
   =====================*/
   $scope.product = {};
-
-  $scope.ProductTypes = [
+  $scope.addProductType = [
+    // { name: "All" },
     { name: "Bulletin" },
-    { name: "Digital Bulletin" },
-    { name: "Transit" }
+    { name: "Digital" },
+    { name: "Transit Digital" }
+  ];
+  $scope.ProductTypes = [
+    { name: "All" },
+    { name: "Bulletin" },
+    { name: "Digital" },
+    { name: "Transit Digital" }
   ];
   $scope.bulletinresult = true;
   $scope.trasitResult = false;
@@ -384,11 +488,11 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       $scope.trasitResult = false;
       $scope.DigitalResult = false;
     }
-    else if ($scope.product.type.name == "Digital Bulletin") {
+    else if ($scope.product.type.name == "Digital") {
       $scope.DigitalResult = true;
       $scope.trasitResult = false;
       $scope.bulletinresult = false;
-    } else if ($scope.product.type.name == "Transit") {
+    } else if ($scope.product.type.name == "Transit Digital") {
       $scope.trasitResult = true;
       $scope.bulletinresult = false;
       $scope.DigitalResult = false;
@@ -398,28 +502,69 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   }
 
   $scope.files = {};
-  $scope.requestAddProduct = function (product) {
+  // $scope.requestAddProduct = function (product) {
+  //   console.log('Product',product)
+  //   product.type = product.type.name;
+  //   product.area = $scope.areaObj.id;
+  //   Upload.upload({
+  //     url: config.apiPath + '/save-product-details',
+  //     data: {
+  //       image: $scope.files.image,
+  //       symbol: $scope.files.symbol,
+  //       product: $scope.product
+  //     }
+  //   }).then(function (result) {
+  //     if (result.data.status == "1") {
+  //       // getRequestedProductList();
+  //       $scope.product = null;
+  //       // document.getElementById("myDropdown").classList.toggle("show");
+  //       toastr.success(result.data.message);
+  //       $state.reload();
+  //     }
+  //     else if (result.data.status == 0) {
+  //       $scope.requestProductErrors = result.data.message;
+  //       toastr.error(result.data.message);
+  //     }
+  //     $scope.hordinglistform.$setPristine();
+  //     $scope.hordinglistform.$setUntouched();
+  //   }, function (resp) {
+  //   }, function (evt) {
+  //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+  //   });
+  // };
+  $scope.requestAddProduct = function (product, formdata,Strengths ) {
+    product.DemographicsAge = formdata;
+    product.Strengths=Strengths;
+  // for(element in product){
+    //   if(element.DemographicsAge){
+    //     for(var i = 0; i<element.DemographicsAge.length; i++ ){
+    //       if(element.DemographicsAge[i] == $$hashKey){
+    //         delete element.DemographicsAge[i]
+    //       }
+    //     }
+    //   }
+    // }
+    for (var item in product.dates) {
+      product.dates[item].endDate = moment(product.dates[item].endDate).format('YYYY-MM-DD')
+      product.dates[item].startDate = moment(product.dates[item].startDate).format('YYYY-MM-DD')
+    };
     product.type = product.type.name;
     product.area = $scope.areaObj.id;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: {
-        image: $scope.files.image,
-        symbol: $scope.files.symbol,
-        product: $scope.product
-      }
+      data: { image: $scope.files.image, product: JSON.parse(angular.toJson($scope.product)) }
     }).then(function (result) {
-      if (result.data.status == "1") {
+      if(result.data.status == "1"){
         // getRequestedProductList();
         $scope.product = null;
         // document.getElementById("myDropdown").classList.toggle("show");
-        toastr.success(result.data.message);
-        $state.reload();
+        toastr.success(result.data.message);  
+        $state.reload();            
       }
-      else if (result.data.status == 0) {
+      else if(result.data.status == 0){
         $scope.requestProductErrors = result.data.message;
         toastr.error(result.data.message);
-      }
+      }      
       $scope.hordinglistform.$setPristine();
       $scope.hordinglistform.$setUntouched();
     }, function (resp) {
@@ -427,7 +572,6 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     });
   };
-
   var getOwnerProductDetails = function (productId) {
     OwnerProductService.getOwnerProductDetails(productId).then(function (result) {
       $scope.productDetails = result;
@@ -511,48 +655,76 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
     });
   }
 
-  $scope.getProductUnavailableDatesEdit = function (Type) {
-    if(Type == 'Bulletin'){
-      var productId = $stateParams.id;
-      OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-        $scope.unavailalbeDateRanges = dateRanges;
-        productDatesCalculator()
-        // $(ev.target).parent().parent().find('input').trigger('click');
-      });
-    }else{
-      var productId = $stateParams.id;
-      OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-        $scope.unavailalbeDateRanges = dateRanges;
-        productDatesDigitalCalculator()
-        // $(ev.target).parent().parent().find('input').trigger('click');
-      });
-    }
+  // $scope.getProductUnavailableDatesEdit = function (Type) {
+  //   if(Type == 'Bulletin'){
+  //     var productId = $stateParams.id;
+  //     OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //       $scope.unavailalbeDateRanges = dateRanges;
+  //       productDatesCalculator()
+  //       // $(ev.target).parent().parent().find('input').trigger('click');
+  //     });
+  //   }else{
+  //     var productId = $stateParams.id;
+  //     OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
+  //       $scope.unavailalbeDateRanges = dateRanges;
+  //       productDatesDigitalCalculator()
+  //       // $(ev.target).parent().parent().find('input').trigger('click');
+  //     });
+  //   }
    
-  }
-
+  // }
   $scope.getProductUnavailableDates = function (productId, ev) {
-    OwnerProductService.getProductUnavailableDates(productId).then(function (dateRanges) {
-      $scope.unavailalbeDateRanges = dateRanges;
+    if(productId.type == "Bulletin"){
+      OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parent().parent().find('input').trigger('click');
+        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+          $(".drp-buttons").hide();
+        }
+      });
+    }else if(productId.type == "Digital" || productId.type == "Transit Digital"){
+      OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots >= productId.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parent().parent().find('input').trigger('click');
+        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+          $(".drp-buttons").hide();
+        }
+    })
+    }
+    else{
+      $scope.unavailalbeDateRanges = [];
       $(ev.target).parent().parent().find('input').trigger('click');
-    });
+    }
   }
   /*=====================
   | Product Section Ends
   =====================*/
 
   //updated edited product details
-
   $scope.updateeditProductdetails = function (editRequestedhordings) {
     //editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
-    editRequestedhordings.dates = $scope.product.dates;
+    $scope.ranges.selectedDateRanges.map(function(item){
+      item.startDate = moment(item.startDate).format('YYYY-MM-DD')
+      item.endDate = moment(item.endDate).format('YYYY-MM-DD')
+
+    })
+    editRequestedhordings.dates = $scope.ranges.selectedDateRanges;
+    // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
     Upload.upload({
       url: config.apiPath + '/save-product-details',
-      data: { image: $scope.files.image, editRequestedhordings: $scope.editRequestedhordings }
+      data: { image: $scope.files.image, editRequestedhordings: JSON.parse(angular.toJson($scope.editRequestedhordings)) }
+     
     }).then(function (result) {
       if (result.data.status == "1") {
         getRequestedProductList();
         toastr.success(result.data.message);
+        $scope.removeSelection();
       }
       else if (result.data.status == 0) {
         $scope.requestProductErrors = result.data.message;
@@ -715,141 +887,141 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
               New Hording digital bullitin product Nav bars Start
           -------------------------------*/
 
-  var digitalSlots = 0;
-  $scope.digitalSlots = [];
-  $scope.weeksDigitalArray = [];
-  $scope.digitalSlotsClosed = false;
+  // var digitalSlots = 0;
+  // $scope.digitalSlots = [];
+  // $scope.weeksDigitalArray = [];
+  // $scope.digitalSlotsClosed = false;
 
-  for (var i = 1; i <= 26; i++) {
-    $scope.weeksDigitalArray.push({ twoWeeks: 1 })
-  }
-  $scope.blockSlotChange = function () {
-    $scope.weeksDigitalArray.forEach((item) => { item.selected = false; item.isBlocked = false; $scope.totalDigitalSlotAmount = 0 })
-    $scope.weeksDigitalArray.forEach(function (item) {
-      $scope.unavailalbeDateRanges.forEach(function (unAvailable) {
-        if ((moment(item.startDay).format('DD-MM-YYYY') == moment(unAvailable.booked_from).format('DD-MM-YYYY')) && (moment(item.endDay).format('DD-MM-YYYY') == moment(unAvailable.booked_to).format('DD-MM-YYYY'))) {
-          item.availableSlots = ($scope.digitalSlots.length - unAvailable.booked_slots)
-          if (item.availableSlots == 0) {
-            item.isBlocked = true;
-          }
-        } else if ((moment(unAvailable.booked_from).isSameOrAfter(moment(item.startDay).format('YYYY-MM-DD')) && moment(unAvailable.booked_from).isSameOrBefore(moment(item.endDay).format('YYYY-MM-DD'))) || (moment(moment(unAvailable.booked_to).format('YYYY-MM-DD')).isSameOrAfter(moment(item.startDay).format('YYYY-MM-DD')) && moment(moment(unAvailable.booked_to).format('YYYY-MM-DD')).isSameOrBefore(moment(item.endDay).format('YYYY-MM-DD')))) {
-          item.availableSlots = ($scope.digitalSlots.length - unAvailable.booked_slots)
-          if (item.availableSlots == 0) {
-            item.isBlocked = true;
-          }
+  // for (var i = 1; i <= 26; i++) {
+  //   $scope.weeksDigitalArray.push({ twoWeeks: 1 })
+  // }
+  // $scope.blockSlotChange = function () {
+  //   $scope.weeksDigitalArray.forEach((item) => { item.selected = false; item.isBlocked = false; $scope.totalDigitalSlotAmount = 0 })
+  //   $scope.weeksDigitalArray.forEach(function (item) {
+  //     $scope.unavailalbeDateRanges.forEach(function (unAvailable) {
+  //       if ((moment(item.startDay).format('DD-MM-YYYY') == moment(unAvailable.booked_from).format('DD-MM-YYYY')) && (moment(item.endDay).format('DD-MM-YYYY') == moment(unAvailable.booked_to).format('DD-MM-YYYY'))) {
+  //         item.availableSlots = ($scope.digitalSlots.length - unAvailable.booked_slots)
+  //         if (item.availableSlots == 0) {
+  //           item.isBlocked = true;
+  //         }
+  //       } else if ((moment(unAvailable.booked_from).isSameOrAfter(moment(item.startDay).format('YYYY-MM-DD')) && moment(unAvailable.booked_from).isSameOrBefore(moment(item.endDay).format('YYYY-MM-DD'))) || (moment(moment(unAvailable.booked_to).format('YYYY-MM-DD')).isSameOrAfter(moment(item.startDay).format('YYYY-MM-DD')) && moment(moment(unAvailable.booked_to).format('YYYY-MM-DD')).isSameOrBefore(moment(item.endDay).format('YYYY-MM-DD')))) {
+  //         item.availableSlots = ($scope.digitalSlots.length - unAvailable.booked_slots)
+  //         if (item.availableSlots == 0) {
+  //           item.isBlocked = true;
+  //         }
 
-        }
-      })
-    })
-  }
-  function productDatesDigitalCalculator() {
-    for (var i = 1; i <= digitalSlots; i++) {
-      $scope.digitalSlots.push(i)
-    }
-    var unavailBoundaries = [];
-    $scope.unavailalbeDateRanges.forEach((dates) => {
-      unavailBoundaries.push(moment(dates.booked_from))
-      unavailBoundaries.push(moment(dates.booked_to))
-    });
-    // var slotPrices =0;
-    for (item in $scope.weeksDigitalArray) {
-      $scope.weeksDigitalArray[item].price = $scope.product.price;
-    }
-    var digitalCurrentDay = moment().format('LLLL').split(',')[0];
-    if (digitalCurrentDay == 'Monday') {
-      var startDay = moment(new Date()).add(7, 'days').format('LLLL');
-      var endDay = moment(new Date()).add(7 + 6, 'days').format('LLLL');
-      $scope.weeksDigitalArray[0].startDay = startDay;
-      $scope.weeksDigitalArray[0].endDay = endDay;
-      unavailBoundaries.forEach((date) => {
-        $scope.weeksDigitalArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
-      });
-    } else {
-      var tempDay;
-      for (i = 1; i <= 6; i++) {
-        tempDay = moment(new Date()).add(i, 'days').format('LLLL').split(',')[0];
-        if (tempDay == 'Monday') {
-          var startDay = moment(new Date()).add(i, 'days').format('LLLL');
-          var endDay = moment(new Date()).add(i + 6, 'days').format('LLLL');
-          $scope.weeksDigitalArray[0].startDay = startDay;
-          $scope.weeksDigitalArray[0].endDay = endDay;
-          var isBlocked = false;
-          for (var date of unavailBoundaries) {
-            if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
-              isBlocked = true;
-              break;
-            }
-          }
-          $scope.weeksDigitalArray[0].isBlocked = isBlocked;
-        }
+  //       }
+  //     })
+  //   })
+  // }
+  // function productDatesDigitalCalculator() {
+  //   for (var i = 1; i <= digitalSlots; i++) {
+  //     $scope.digitalSlots.push(i)
+  //   }
+  //   var unavailBoundaries = [];
+  //   $scope.unavailalbeDateRanges.forEach((dates) => {
+  //     unavailBoundaries.push(moment(dates.booked_from))
+  //     unavailBoundaries.push(moment(dates.booked_to))
+  //   });
+  //   // var slotPrices =0;
+  //   for (item in $scope.weeksDigitalArray) {
+  //     $scope.weeksDigitalArray[item].price = $scope.product.price;
+  //   }
+  //   var digitalCurrentDay = moment().format('LLLL').split(',')[0];
+  //   if (digitalCurrentDay == 'Monday') {
+  //     var startDay = moment(new Date()).add(7, 'days').format('LLLL');
+  //     var endDay = moment(new Date()).add(7 + 6, 'days').format('LLLL');
+  //     $scope.weeksDigitalArray[0].startDay = startDay;
+  //     $scope.weeksDigitalArray[0].endDay = endDay;
+  //     unavailBoundaries.forEach((date) => {
+  //       $scope.weeksDigitalArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+  //     });
+  //   } else {
+  //     var tempDay;
+  //     for (i = 1; i <= 6; i++) {
+  //       tempDay = moment(new Date()).add(i, 'days').format('LLLL').split(',')[0];
+  //       if (tempDay == 'Monday') {
+  //         var startDay = moment(new Date()).add(i, 'days').format('LLLL');
+  //         var endDay = moment(new Date()).add(i + 6, 'days').format('LLLL');
+  //         $scope.weeksDigitalArray[0].startDay = startDay;
+  //         $scope.weeksDigitalArray[0].endDay = endDay;
+  //         var isBlocked = false;
+  //         for (var date of unavailBoundaries) {
+  //           if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+  //             isBlocked = true;
+  //             break;
+  //           }
+  //         }
+  //         $scope.weeksDigitalArray[0].isBlocked = isBlocked;
+  //       }
 
-      }
+  //     }
 
-    }
-    var tempororyStartDate = $scope.weeksDigitalArray[0].endDay;
-    $scope.weeksDigitalArray.forEach(function (item, index) {
-      if (index > 0) {
-        item.startDay = moment(tempororyStartDate).add(1, 'days').format('LLLL');
-        item.endDay = moment(tempororyStartDate).add(7, 'days').format('LLLL');
-        tempororyStartDate = item.endDay;
-        var isBlocked = false;
-        for (var date of unavailBoundaries) {
-          if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
-            isBlocked = true;
-            break;
-          }
-        }
-        $scope.weeksDigitalArray[index].isBlocked = isBlocked;
-      }
+  //   }
+  //   var tempororyStartDate = $scope.weeksDigitalArray[0].endDay;
+  //   $scope.weeksDigitalArray.forEach(function (item, index) {
+  //     if (index > 0) {
+  //       item.startDay = moment(tempororyStartDate).add(1, 'days').format('LLLL');
+  //       item.endDay = moment(tempororyStartDate).add(7, 'days').format('LLLL');
+  //       tempororyStartDate = item.endDay;
+  //       var isBlocked = false;
+  //       for (var date of unavailBoundaries) {
+  //         if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+  //           isBlocked = true;
+  //           break;
+  //         }
+  //       }
+  //       $scope.weeksDigitalArray[index].isBlocked = isBlocked;
+  //     }
 
-    })    
-  }
+  //   })    
+  // }
 
   // };
-  productDatesDigitalCalculator()
-  $scope.totalDigitalSlotAmount = 0;
-  $scope.selectUserDigitalWeeks = function (weeks, index, ev) {
-    if ($scope.numOfSlots == 0) {
-      alert("please select no. of slots")
-      return false;
-    }
-    if ($scope.numOfSlots > weeks.availableSlots) {
-      alert("As you are exceeding the slots. you can't book it");
-      return false;
-    }
-    if ($scope.weeksDigitalArray[index].selected == true) {
-      $scope.weeksDigitalArray[index].selected = false;
-      $scope.totalDigitalSlotAmount -= parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
+  // productDatesDigitalCalculator()
+  // $scope.totalDigitalSlotAmount = 0;
+  // $scope.selectUserDigitalWeeks = function (weeks, index, ev) {
+  //   if ($scope.numOfSlots == 0) {
+  //     alert("please select no. of slots")
+  //     return false;
+  //   }
+  //   if ($scope.numOfSlots > weeks.availableSlots) {
+  //     alert("As you are exceeding the slots. you can't book it");
+  //     return false;
+  //   }
+  //   if ($scope.weeksDigitalArray[index].selected == true) {
+  //     $scope.weeksDigitalArray[index].selected = false;
+  //     $scope.totalDigitalSlotAmount -= parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
 
-    } else {
-      $scope.totalDigitalSlotAmount += parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
-      $scope.weeksDigitalArray[index].selected = true;
+  //   } else {
+  //     $scope.totalDigitalSlotAmount += parseInt(parseInt($scope.numOfSlots) * parseInt($scope.weeksDigitalArray[index].price));
+  //     $scope.weeksDigitalArray[index].selected = true;
 
-    }
-  };
-  $scope.digitalSelectUserWeeks = function (weeks, index, ev) {
+  //   }
+  // };
+  // $scope.digitalSelectUserWeeks = function (weeks, index, ev) {
 
-    if ($scope.weeksDigitalArray[index].selected && $scope.weeksDigitalArray[index].selected == true) {
-      $scope.weeksDigitalArray[index].selected = false;
+  //   if ($scope.weeksDigitalArray[index].selected && $scope.weeksDigitalArray[index].selected == true) {
+  //     $scope.weeksDigitalArray[index].selected = false;
 
-    } else {
-      $scope.weeksDigitalArray[index].selected = true;
-    }
-  }
-  $scope.digitalSlotedDatesPopupClosed = function () {
-    $scope.digitalSlotsClosed = false;
-  }
-  $scope.digitalBlockedSlotesbtn = function (weeksArray) {
-    $scope.product.dates = [];
-    weeksArray.filter((week) => week.selected).forEach(function (item) {
-      var startDate = moment(item.startDay).format('YYYY-MM-DD')
-      var endDate = moment(item.endDay).format('YYYY-MM-DD')
+  //   } else {
+  //     $scope.weeksDigitalArray[index].selected = true;
+  //   }
+  // }
+  // $scope.digitalSlotedDatesPopupClosed = function () {
+  //   $scope.digitalSlotsClosed = false;
+  // }
+  // $scope.digitalBlockedSlotesbtn = function (weeksArray) {
+  //   $scope.product.dates = [];
+  //   weeksArray.filter((week) => week.selected).forEach(function (item) {
+  //     var startDate = moment(item.startDay).format('YYYY-MM-DD')
+  //     var endDate = moment(item.endDay).format('YYYY-MM-DD')
 
-      $scope.product.dates.push({ startDate: startDate, endDate: endDate })
-      $scope.digitalSlotedDatesPopupClosed();
-    })
+  //     $scope.product.dates.push({ startDate: startDate, endDate: endDate })
+  //     $scope.digitalSlotedDatesPopupClosed();
+  //   })
 
-  }
+  // }
 
   /* ----------------------------
   New Hording Digital bullitin product Nav bars Ends
@@ -860,90 +1032,90 @@ app.controller('OwnerProductCtrl', function ($scope, $mdDialog, $mdSidenav, $sta
   | owner slots blocking starts
   =============================*/
 
-  $scope.weeksArray = [];
-  for (var i = 1; i <= 26; i++) {
-    $scope.weeksArray.push({ twoWeeks: 2 })
-  }
-  var currentDay = moment().format('LLLL').split(',')[0];
-  function productDatesCalculator() {
-    var unavailBoundaries = [];
-    $scope.unavailalbeDateRanges.forEach((dates) => {
-      unavailBoundaries.push(moment(dates.booked_from))
-      unavailBoundaries.push(moment(dates.booked_to))
-    });
-    if (currentDay == 'Monday') {
-      var startDay = moment().add(7, 'days').format('LLLL');
-      var endDay = moment().add(7 + 13, 'days').format('LLLL');
-      $scope.weeksArray[0].startDay = startDay;
-      $scope.weeksArray[0].endDay = endDay;
-      unavailBoundaries.forEach((date) => {
-        $scope.weeksArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
-      });
-    } else {
-      var tempDay;
-      for (i = 1; i <= 6; i++) {
-        tempDay = moment(new Date()).add(i, 'days').format('LLLL').split(',')[0];
-        if (tempDay == 'Monday') {
-          var startDay = moment(new Date()).add(i + 7, 'days').format('LLLL');
-          var endDay = moment(new Date()).add(i + 7 + 13, 'days').format('LLLL');
-          $scope.weeksArray[0].startDay = startDay;
-          $scope.weeksArray[0].endDay = endDay;
-          var isBlocked = false;
-          for (var date of unavailBoundaries) {
-            if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
-              isBlocked = true;
-              break;
-            }
-          }
-          $scope.weeksArray[0].isBlocked = isBlocked;
-        }
-      }
-    }
-    var tempororyStartDate = $scope.weeksArray[0].endDay;
-    $scope.weeksArray.forEach(function (item, index) {
-      if (index > 0) {
-        item.startDay = moment(tempororyStartDate).add(1, 'days').format('LLLL');
-        item.endDay = moment(tempororyStartDate).add(14, 'days').format('LLLL');
-        tempororyStartDate = item.endDay;
-        var isBlocked = false;
-        for (var date of unavailBoundaries) {
-          if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
-            isBlocked = true;
-            break;
-          }
-        }
-        $scope.weeksArray[index].isBlocked = isBlocked;
-      }
-    })
-  }
-  productDatesCalculator()
-  $scope.slotsClosed = false;
-  $scope.selectUserWeeks = function (weeks, index, ev) {
+  // $scope.weeksArray = [];
+  // for (var i = 1; i <= 26; i++) {
+  //   $scope.weeksArray.push({ twoWeeks: 2 })
+  // }
+  // var currentDay = moment().format('LLLL').split(',')[0];
+  // function productDatesCalculator() {
+  //   var unavailBoundaries = [];
+  //   $scope.unavailalbeDateRanges.forEach((dates) => {
+  //     unavailBoundaries.push(moment(dates.booked_from))
+  //     unavailBoundaries.push(moment(dates.booked_to))
+  //   });
+  //   if (currentDay == 'Monday') {
+  //     var startDay = moment().add(7, 'days').format('LLLL');
+  //     var endDay = moment().add(7 + 13, 'days').format('LLLL');
+  //     $scope.weeksArray[0].startDay = startDay;
+  //     $scope.weeksArray[0].endDay = endDay;
+  //     unavailBoundaries.forEach((date) => {
+  //       $scope.weeksArray[0].isBlocked = date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay);
+  //     });
+  //   } else {
+  //     var tempDay;
+  //     for (i = 1; i <= 6; i++) {
+  //       tempDay = moment(new Date()).add(i, 'days').format('LLLL').split(',')[0];
+  //       if (tempDay == 'Monday') {
+  //         var startDay = moment(new Date()).add(i + 7, 'days').format('LLLL');
+  //         var endDay = moment(new Date()).add(i + 7 + 13, 'days').format('LLLL');
+  //         $scope.weeksArray[0].startDay = startDay;
+  //         $scope.weeksArray[0].endDay = endDay;
+  //         var isBlocked = false;
+  //         for (var date of unavailBoundaries) {
+  //           if (date.isSameOrAfter(startDay) && date.isSameOrBefore(endDay)) {
+  //             isBlocked = true;
+  //             break;
+  //           }
+  //         }
+  //         $scope.weeksArray[0].isBlocked = isBlocked;
+  //       }
+  //     }
+  //   }
+  //   var tempororyStartDate = $scope.weeksArray[0].endDay;
+  //   $scope.weeksArray.forEach(function (item, index) {
+  //     if (index > 0) {
+  //       item.startDay = moment(tempororyStartDate).add(1, 'days').format('LLLL');
+  //       item.endDay = moment(tempororyStartDate).add(14, 'days').format('LLLL');
+  //       tempororyStartDate = item.endDay;
+  //       var isBlocked = false;
+  //       for (var date of unavailBoundaries) {
+  //         if (date.isSameOrAfter(item.startDay) && date.isSameOrBefore(item.endDay)) {
+  //           isBlocked = true;
+  //           break;
+  //         }
+  //       }
+  //       $scope.weeksArray[index].isBlocked = isBlocked;
+  //     }
+  //   })
+  // }
+  // productDatesCalculator()
+  // $scope.slotsClosed = false;
+  // $scope.selectUserWeeks = function (weeks, index, ev) {
 
-    if ($scope.weeksArray[index].selected && $scope.weeksArray[index].selected == true) {
-      $scope.weeksArray[index].selected = false;
+  //   if ($scope.weeksArray[index].selected && $scope.weeksArray[index].selected == true) {
+  //     $scope.weeksArray[index].selected = false;
 
-    } else {
-      $scope.weeksArray[index].selected = true;
-    }
-  }
-  $scope.slotedDatesPopupClosed = function (Type) {
-    if(Type == 'Bulletin'){
-      $scope.slotsClosed = false;
-    }else{
-      $scope.digitalSlotsClosed = false;
-      }
-    }
-  $scope.blockedSlotesbtn = function (weeksArray,Type) {
-    $scope.product.dates = []  
-    weeksArray.filter((week) => week.selected).forEach(function (item) {
-      var startDate = moment(item.startDay).format('YYYY-MM-DD')
-      var endDate = moment(item.endDay).format('YYYY-MM-DD')
+  //   } else {
+  //     $scope.weeksArray[index].selected = true;
+  //   }
+  // }
+  // $scope.slotedDatesPopupClosed = function (Type) {
+  //   if(Type == 'Bulletin'){
+  //     $scope.slotsClosed = false;
+  //   }else{
+  //     $scope.digitalSlotsClosed = false;
+  //     }
+  //   }
+  // $scope.blockedSlotesbtn = function (weeksArray,Type) {
+  //   $scope.product.dates = []  
+  //   weeksArray.filter((week) => week.selected).forEach(function (item) {
+  //     var startDate = moment(item.startDay).format('YYYY-MM-DD')
+  //     var endDate = moment(item.endDay).format('YYYY-MM-DD')
 
-      $scope.product.dates.push({ startDate: startDate, endDate: endDate })
-      $scope.slotedDatesPopupClosed(Type);
-    })
-  }
+  //     $scope.product.dates.push({ startDate: startDate, endDate: endDate })
+  //     $scope.slotedDatesPopupClosed(Type);
+  //   })
+  // }
   /*=============================
  | owner slots blocking ends
  =============================*/
