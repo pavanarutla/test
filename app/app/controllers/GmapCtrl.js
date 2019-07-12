@@ -3,8 +3,7 @@ app.controller('GmapCtrl',
         function ($scope, $location, $auth, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr, $state) {
             $scope.forms = {};
             $scope.address = {
-                // name: 'Hyderabad, Telangana, India',
-                name: 'United States of America',
+                name: 'Hyderabad, Telangana, India',
                 place: '',
                 components: {
                     placeId: '',
@@ -17,8 +16,8 @@ app.controller('GmapCtrl',
                     postCode: '',
                     district: '',
                     location: {
-                        lat: 40.254050,
-                        lng: -100.726083
+                        lat: 17.3850,
+                        lng: -78.4867
                     }
                 }
             };
