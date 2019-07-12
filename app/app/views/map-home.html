@@ -191,23 +191,23 @@
                   </a>
                   <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Total Price</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-8">
                     <p class="mb-1 ml-2"><b>:</b> <span class="font-weight-bold">{{totalPriceUserSelected | currency:undefined:0}}</span> ( {{totalnumDays}} Days selected )</p>
                 </div>
             </div>
               
             
             <div class="row m-0">
-              <div class="col-md-6 ">
+              <div class="col-md-3 col-6">
                 <md-button class="md-raised md-primary all_button m-0"
                   ng-click="toggleExistingCampaignSidenav()" >
                   Book Product
                 </md-button>
               </div>
-            <div class=" col-md-6 text-right">
+            <div class="col-md-3 col-6">
               <md-button class="md-raised md-warn Upload_font m-0"                 
                 ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">
                 Shortlist
@@ -216,8 +216,7 @@
             </div>
           </div>  
         </div>
-        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
-          style="width:320px;position: absolute;left: 100px;margin-bottom:50px;padding:5px; ">
+        <div class="book_prodct md-whiteframe-2dp float-right " ng-show="showSaveCampaignPopup">
           <form name="forms.mySaveCampaignForm">
             <div layout="row">
                 <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>

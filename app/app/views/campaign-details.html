@@ -6,14 +6,25 @@
     md-list-item {
         padding: 0 0px !important;
     }
+    @media screen and (max-width: 575px){
+        .dropdown-content {
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 300px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            right: -72px;
+            z-index: 1;
+        }
+    }
+
 </style>
 <div class="contbg">
     <div class="campaign_details mt-4">
-        <div class="user_container">
             <div class="row ml-0 mr-0">
                 <div class="col-12 col-sm-12 col-md-6">
-                    <div class="contbg box__shadow p-2">
-                        <table class="table table-striped table-bordered mb-0">
+                    <div class="contbg md-whiteframe-3dp p-2">
+                        <table class="table table-striped table-bordered mb-0 table_user">
                             <tbody>
                                 <tr>
                                     <td><b>Campaign ID</b></td>
@@ -42,8 +53,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-6">
-                    <div class="contbg box__shadow p-2">
-                        <table class="table table-striped table-bordered mb-0">
+                    <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                        <table class="table table-striped table-bordered mb-0 table_user">
                             <tbody>
                                 <tr>
                                     <td><b>No of Products</b></td>
@@ -74,25 +85,17 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
-        <div class="button_leftright" style="cursor: pointer;">
-            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download Quotation
-                </md-button>
-                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-right: 0px;">
-                    Download
-                </md-button>               
-            </div>
-        </div>
         <div class="dropdown button_leftright">
-            <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
+            <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs">
                 Share Campaign
             </md-button>
-            <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown contant_drop share_campviews"
+            <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="margin-left: 0px;">
+                    Share
+                </md-button>
+            <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown"
                 style="padding:10px;">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                     <div layout="colmun">
@@ -131,6 +134,16 @@
                         </div>
                     </form>
                 </form>
+            </div>
+        </div>
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                    Download Quotation
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                    Download
+                </md-button>               
             </div>
         </div>
         <div class="button_leftright" ng-if="campaignDetails.status == 100">
