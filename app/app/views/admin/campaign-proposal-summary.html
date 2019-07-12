@@ -78,7 +78,86 @@
 </md-sidenav>
 <!-- share campaign sidenav ends -->
 <div class="bg-part">
-    <div layout="row" flex="100" flex-sm="100" flex-xs="100" flex-md="100" layout-xs="column" layout-sm="column"
+        <div class="campaign_details mt-4">
+                <div class="">
+                    <div class="row ml-0 mr-0">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="contbg md-whiteframe-3dp p-2">
+                                <table class="table table-striped table-bordered mb-0 table_user">
+                                    <tbody>
+                                        <tr>
+                                            <td class="camp_tableowner"><b>Campaign ID</b></td>
+                                            <td>{{ campaignDetails.cid}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Campaign Name</b></td>
+                                            <td>{{ campaignDetails.name | capitalize}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Client Name</b></td>
+                                            <td ng-if="campaignDetails.type == 0">{{campaignDetails.first_name|| "N/A" | capitalize}}</td>
+                                            <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_name|| "N/A" | capitalize}}</td> 
+                                        </tr>
+                                        <tr>
+                                            <td><b>Contact Number</b></td>
+                                            <td ng-if="campaignDetails.type == 0">{{campaignDetails.phone|| "N/A" | capitalize}}</td>
+                                            <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_phone|| "N/A" | capitalize}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Email</b></td>
+                                            <td ng-if="campaignDetails.type == 0">{{campaignDetails.email|| "N/A" | capitalize}}</td>
+                                            <td ng-if="campaignDetails.type == 1">{{campaignDetails.org_contact_email|| "N/A" | capitalize}}</td>
+                                            </tr>
+                                        <tr>
+                                            <td><b>Referred By</b></td>
+                                            <td ng-if="campaignDetails.type == 0">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
+                                            <td ng-if="campaignDetails.type == 1">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                                <table class="table table-striped table-bordered mb-0 table_user">
+                                    <tbody>
+                                        <tr>
+                                            <td class="camp_tableowner"><b>No of Products</b></td>
+                                            <td>{{ campaignDetails.products.length || 0}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Date</b></td>
+                                            <td>{{(campaignDetails.created_at | dateify | date:'dd-MM-yyyy') || "N/A"}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Total Amount</b></td>
+                                            <td>
+                                                <span>$</span>{{TOTAL || '0' |number : 2  }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Pending Amount</b></td>
+                                            <td>
+                                                <span>$</span>{{PendingPay || "0" |number : 2}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Status</b></td>
+                                            <td>{{campaignDetails.status | stringifyCampaignStatus }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Campaign Start/End Date</b></td>
+                                            <td>N/A</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- <div layout="row" flex="100" flex-sm="100" flex-xs="100" flex-md="100" layout-xs="column" layout-sm="column"
      layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
         <div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100"
          flex-gt-sm="50" layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
@@ -112,11 +191,6 @@
                         <td ng-if="campaignDetails.type == 0">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
                         <td ng-if="campaignDetails.type == 1">{{campaignDetails.referred_by|| "N/A" | capitalize}}</td>
                     </tr>
-                    <!-- <tr>
-                        <td><b>Estimated Budget</b></td>
-                        <td ng-if="campaignDetails.type == 0"><span>$</span>{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
-                        <td ng-if="campaignDetails.type == 1"><span>$</span>{{campaignDetails.est_budget |number : 2 || "N/A"}}</td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -156,7 +230,7 @@
             </table>
         </div>
 
-    </div>
+    </div> -->
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
     class="book_campowner">
         <div class="button_leftright" style="cursor: pointer;">
@@ -164,7 +238,7 @@
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download Quotation
                 </md-button>
-                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-right: 0px;">
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download
                 </md-button>               
             </div>
@@ -179,7 +253,7 @@
                 <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-xs">
                     Share Campaign
                 </md-button>
-                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;margin-right: 0px;">
+                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
                     Share
                 </md-button>
                 <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">

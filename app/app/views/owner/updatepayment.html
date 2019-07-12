@@ -6,7 +6,7 @@
       <div class="row ml-0 mr-0">
           <div class="col-12 col-sm-12 col-md-6">
               <div class="contbg md-whiteframe-3dp p-2">
-                  <table class="table table-striped table-bordered mb-0">
+                  <table class="table table-striped table-bordered mb-0 table_user">
                       <tbody>
                           <tr>
                               <td><b>Campaign ID</b></td>
@@ -42,8 +42,8 @@
               </div>
           </div>
           <div class="col-12 col-sm-12 col-md-6">
-              <div class="contbg md-whiteframe-3dp p-2">
-                  <table class="table table-striped table-bordered mb-0">
+              <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                  <table class="table table-striped table-bordered mb-0 table_user">
                       <tbody>
                           <tr>
                               <td class="camp_tableowner"><b>No of Products</b></td>
@@ -79,9 +79,12 @@
         
             <div class="button_leftright">
               <div class="dropdown">
-                <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs" style="margin-left: 30em;">
+                <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
                   Share Campaign
               </md-button>
+              <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm">
+                Share
+            </md-button>
                 <div id="ownerupdatepaymentDrop" class="dropdown-content contbg animated fadeInDown contant_drop share_detailsmob" style="padding:10px;">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                   <div layout="colmun">
@@ -125,13 +128,19 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
                         Download Invoice
                     </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download  style="margin-left: 0px;">
+                        Download
+                    </md-button>
                 </div>
             </div>
             <div class="button_leftlast">
               <div class="dropdown" style="float: right;">
-                <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
+                <md-button class="md-raised md-primary all_button update_mrg hide-xs" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
                 Add Payment
               </md-button>
+              <md-button class="md-raised md-primary all_button hide-gt-lg hide-lg hide-md hide-sm" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0" style="margin-left: 0px;">
+                Add Payment
+            </md-button>
               <div id="addpaymentdrop" class="dropdown-content contbg animated fadeInDown add_paymentowner">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                   <div layout="colmun">
