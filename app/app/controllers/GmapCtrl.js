@@ -1194,7 +1194,7 @@ app.controller('GmapCtrl',
             $scope.$on("removeSelection", function () {
                 $scope.removeSelection();
             })
-            $scope.addProductToExistingCampaign = function (existingCampaignId, productId, ) {
+            $scope.addProductToExistingCampaign = function (existingCampaignId, productId ) {
                 var productToCampaign = {
                     product_id: productId,
                     campaign_id: existingCampaignId,
