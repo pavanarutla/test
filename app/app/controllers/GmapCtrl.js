@@ -486,6 +486,7 @@ app.controller('GmapCtrl',
             //  }
 
             function selectMarker(marker) {
+                $scope.toggleProductDetailSidenav()
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setPosition(marker.position);
@@ -517,11 +518,11 @@ app.controller('GmapCtrl',
                 //     $mdSidenav('digitalProductDetails').open();
                 // }
                 $mdSidenav('productDetails').open();
-
                 $scope.selectedProduct = marker;
             }
 
             function selectSpideredMarker(marker) {
+                $scope.toggleProductDetailSidenav()
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setMap(null);
@@ -533,7 +534,9 @@ app.controller('GmapCtrl',
                 $scope.product.panelSize = marker.properties['panelSize'];
                 $scope.product.type = marker.properties['type'];
                 $scope.product.demographicsage = marker.properties['demographicsage'];
-                $scope.product.address = marker.properties['address'];               
+                $scope.product.address = marker.properties['address']; 
+                $scope.product.ethnicity =  marker.properties['ethnicity'];
+                $scope.product.venue = marker.properties['venue'];
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
                 $scope.product.format = marker.properties['format_name'];
