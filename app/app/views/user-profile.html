@@ -1,17 +1,23 @@
 <!--userprofie page -->
-<div class="profile-details md-whiteframe-3dp contbg"  layout-margin flex-offset-gt-sm="25"
-	flex="50" flex-xs="100" flex-sm="100" style=" padding-bottom: 20px">
-	<div class="profile_inner" layout="row" layout-xs="column" flex-offset-gt-sm="15" flex="70" flex-xs="100" flex-sm="100">
-		<div>
-			<div ng-if="userProfile.user.profile_pic">
+<div class="profile-details md-whiteframe-3dp contbg"  layout-margin flex-offset-gt-sm="20"
+	flex="60" flex-xs="100" flex-sm="100" style=" padding-bottom: 20px">
+	<div class="profile_inner" layout="column" layout-xs="column"  flex="100" flex-xs="100" flex-sm="100">
+		<div style="width:125px;margin-left: 40px">
+			<div ng-if="userProfile.user.profile_pic" style="position:relative">
 				<img ng-src="{{serverUrl + userProfile.user.profile_pic}}" alt="team" class="md-avatar profile__img center">
-			</div>
-			<div ng-if="!userProfile.user.profile_pic">
-				<img src="assets/images/product/user_avatar.png" alt="team" class="md-avatar profile__img">
-			</div>
-			<div style="position:relative">
+				
 				<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required>
-					<md-icon class="edit__icon" style="">
+					<md-icon class="edit__icon">
+						<i class="material-icons" style="color:#fff;">mode_edit</i>
+					</md-icon>
+				</div>
+					
+			</div>
+			<div ng-if="!userProfile.user.profile_pic" style="position:relative">
+				<img src="assets/images/product/user_avatar.png" alt="team" class="md-avatar profile__img">
+			
+				<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required>
+					<md-icon class="edit__icon">
 						<i class="material-icons" style="color:#fff;">mode_edit</i>
 					</md-icon>
 				</div>
@@ -19,8 +25,8 @@
 		</div>
 		<div class="prof_name">
 			<h3>{{userProfile.user.name}}</h3>
-			<h4 class="md-caption"><span>Email: </span>{{userProfile.user.email}}</h4>
-			<h4 class="md-caption"><span>Phone: </span>(+91) {{userProfile.user.phone}}</h4>
+			<h4 class="md-caption" style="width:320px"><span>Email: </span>{{userProfile.user.email}}</h4>
+			<h4 class="md-caption" style="width:320px"><span>Phone: </span>(+91) {{userProfile.user.phone}}</h4>
 		</div>
 	</div>
 	<!-- <div>{{userProfile.user.email}}</div>

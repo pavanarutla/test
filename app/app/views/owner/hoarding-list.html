@@ -1,12 +1,4 @@
 <style>
-    /* .daterangepicker option.disabled,
-    .daterangepicker td.disabled {
-        color: #fff;
-        cursor: not-allowed;
-        background: #ddd;
-        border: 1px solid #fff;
-        border-radius: 0px;
-    } */
 
     .gray-blocked {
         background: #ddd;
@@ -21,37 +13,6 @@
         outline: none;
     }
 
-    
-
-    /* @media screen and (min-width:320px) and (max-width: 563px) {
-        .daterangepicker {
-    
-            color: inherit;
-            background-color: #fff;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            width: 280px !important;
-            max-width: none;
-            padding: 0;
-            margin-top: 7px;
-            top: 0px;
-            left: 10px;
-            right: 8% !important;
-            z-index: 1;
-            display: none;
-            font-family: arial;
-            font-size: 15px;
-            line-height: 1em;
-        }
-
-        .daterangepicker.opensright:before {
-            left: 240px;
-        }
-
-        .daterangepicker.opensright:after {
-            left: 241px;
-        }
-    } */
     .md-datepicker-input{
   font-size: 12px;
   min-width: 100px;
@@ -70,9 +31,15 @@ md-icon{
 .md-icon-button+.md-datepicker-input-container{
       margin-left: 0px;
 }
-/* .form-group{
-  margin-bottom: 0px;
-} */
+#btSubmit{
+    font-size: 17px;
+    background: #44596D;
+    padding: 0px 10px;
+    height: 30px;
+    margin-left: 2px;
+    color: #fff;
+    margin-top: 25px;
+}
 </style>
 <!-- <div layout="column" class="owner_hoarding_list"> -->
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent"
@@ -514,10 +481,10 @@ md-icon{
                                             <span ng-message="required">% required</span>
                                         </span>
                                     </div> 
-                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">-</button>  
+                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" >-</button>  
                                     
                                       
-                                <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</button>  
+                                    <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" >+</button>  
                                 </div>                            
                             <div class="row mt-5">
                                 <div class="col-md-6">
@@ -649,7 +616,8 @@ md-icon{
                         ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
                         name="productType">                       
                     </select>
-                </div></td>
+                </div>
+            </td>
                 <td style="width: 170px;">
                         <md-datepicker class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false"
                         md-placeholder="Available From" layout-fill style="border: none;padding: 0px;"></md-datepicker>
@@ -667,11 +635,12 @@ md-icon{
                     <option value="0">Budget Low to High </option>
                 </select>
               </td>
-              <td style="padding-top:0px;">
-                    <md-button class="md-raised apply_filter hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
-                    <md-button class="md-raised all_button hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
+              <td>
+                <md-button class="md-raised apply_filter" ng-click="applymethod(product)" onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px; color: #000;">Apply Filters</md-button>
             </td>
-              <td></td>
+            <td>
+                <md-button class="md-raised all_button " ng-click="applymethod(product)" onClick="onClickHandler(this)" style="margin: 0px;">Clear Filters</md-button>
+            </td>
             </tr>
           </tbody>
         </table>
@@ -743,9 +712,9 @@ md-icon{
                 <th class="">Lit</th>
                 <th class="text-center">Shortlisted in</th>
                 <th class="">Price</th>
-                <th class="text-center">Calender</th>
+                <th class="text-center d-none d-sm-none d-md-block">Calender</th>
                 <th class="">Visible on Map</th>
-                <th class="">
+                <th class="d-none d-sm-none d-md-block">
                     <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
                 </th>
             </tr>
@@ -780,7 +749,7 @@ md-icon{
                 <td class="text-center table_vertical table_price">
                     <div class="input-group">
 
-                        <span>$</span>{{(!myfield)?product.default_price:''}}
+                        {{(!myfield)?product.default_price:''}}
                         <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield"
                             style="width: 70px;padding: 4px 5px;" />
                         <span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
@@ -789,14 +758,14 @@ md-icon{
 
                     </div>
                 </td>
-                <td class="text-center table_vertical text-center">
+                <td class="text-center table_vertical text-center d-none d-sm-none d-md-block">
                     <!-- <a href="#"><i class="material-icons">
                       date_range
                       </i></a> -->
                     <input date-range-picker ng-model="product.booking_dates"
                         class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text"
                         name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"
-                        style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                        style="visibility: hidden;" />
                     <a ng-click="getProductUnavailableDates(product, $event);">
                         <i class="fa fa-calendar"></i>
                     </a>
@@ -819,8 +788,8 @@ md-icon{
                         </select>
                     </div>
                 </td>
-                <td class="table_vertical text-right">
-                    <md-button class="md-raised inv_details"
+                <td class="table_vertical text-right ">
+                    <md-button class="md-raised inv_details d-none d-sm-none d-md-block"
                         ng-href="#/owner/{{clientSlug}}/editproduct-details/{{product.id}}">Edit Details</md-button>
                 </td>
 

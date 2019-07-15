@@ -2,11 +2,11 @@
     .metro_pack {
         background: rgb(255, 255, 255);
         position: absolute !important;
-        width: 35%;
-        top: 5% !important;
-        left: 31%;
-        padding: 10px 10px 0px 10px;
-        z-index: 99 ;
+        padding: 10px;
+        z-index: 9;
+        top: 5%;
+        width: 50%;
+        left: 30%;
     }
     .start_daterv{
         background:#ededed;
@@ -54,63 +54,50 @@
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
         .metro_pack {
-            width: 60%;
-            top: 20% !important;
-            left: 25%;
-            z-index: 0 !important;
+            width: 80%;
+            top: 30% !important;
+            left: 10%;
         }
     }
     
     @media only screen and (max-width: 768px) and (min-width: 560px){
         .metro_pack {
-			width: 80%;
+			width: 100%;
 			top: 30% !important;
-			left: 10%;
-			z-index: 0 !important;
+			left: 0%;
 		}
     }
     @media screen and (min-width: 1025px) and (max-width: 1365px){
         .metro_pack {
 			width: 65%;
-			top: 15% !important;
-			left: 25%;
-			z-index: 0 !important;
+            top: 2% !important;
+            left: 33%;
+            z-index: 0 !important;
 		}
 	}
     @media screen and (min-width: 1366px) and (max-width: 1439px){
         .metro_pack {
-			position: absolute !important;
-        	top: 15% !important;
-            width: 50%;
-            left: 24%;
-            z-index: 99;
+            top: 5% !important;
         }
     }
     @media screen and (min-width: 1440px) and (max-width: 1599px) {
         .metro_pack {
             width: 55%;
-            top: 15% !important;
-            left: 29%;
-            z-index: 99 !important;
         }
     }
     @media screen and (min-width: 1600px) and (max-width: 1919px) {
         .metro_pack {
             width: 40%;
-            left: 29%;
-            top: 15% !important;
-            z-index: 99 !important;
         }
-
     }
     @media screen and (max-width:575px){
         .img_logo{
-            width: 114%;
+            width: 50%;
         }
         .metro_pack {
             width: 100%;
             top: 30% !important;
-            left: 1%;
+            left: 0% !important;
            
         }
         .back_red{
@@ -148,15 +135,11 @@
 
     <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
 
-
-
     <div id="mydiv" class="map_filters metro_new">
         <div id="mydivheader">
             <h3 class="md-body-2 pt-1">L&T Metro</h3>
             <h4>Digital Signage - Inside Train</h4>
         </div>
-
-
 
         <!--SHORTLIST html start -->
         <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
@@ -209,7 +192,7 @@
 
     <div class="metro_pack md-whiteframe-z2">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
                 <div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
                     <h3 class="text-white">{{metroPackage.corridor}}</h3>
                     <h5 class="text-white">{{metroPackage.format}}</h5>
@@ -246,7 +229,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" >
+        <div class="row ml-0 mr-0 mt-3">
             <div class="col-12 col-sm-12 col-md-6 show_bug">
                 <p class="md-caption">
                     Estimated Budget for {{getEstBudgetForSelectedPackages().months == '0.5'? ' 15 Days ': getEstBudgetForSelectedPackages().months + ' Months'}}, {{getEstBudgetForSelectedPackages().selected_trains}} Trains

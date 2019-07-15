@@ -1190,14 +1190,15 @@ app.controller('GmapCtrl',
             $scope.$on("removeSelection", function () {
                 $scope.removeSelection();
             })
-            $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
+            $scope.addProductToExistingCampaign = function (existingCampaignId, productId) {
                 var productToCampaign = {
                     product_id: productId,
                     campaign_id: existingCampaignId,
                     dates :[]
                 };                
-                var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
-                startAndEndDates.forEach((item, index) => {
+    
+
+                $scope.ranges.selectedDateRanges.forEach((item, index) => {
                     productToCampaign.dates.push({startDate : moment(item.startDay).format('YYYY-MM-DD'),endDate : moment(item.endDay).format('YYYY-MM-DD')})
                 })
                 CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
