@@ -316,7 +316,7 @@
                 <tr>
                     <th>Product Details</th>
                     <th class="hide-xs"></th>
-                    <!-- <th class="">Size</th> -->
+                    <th class="">Size</th>
                     <th class="">Booked From</th>
                     <th class="">Booked To</th>
                     <th class="">Price in $</th>
@@ -341,13 +341,20 @@
                     </td>
                     <td class="table_address">
                         <p class="">
-                            <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.area_name}}
-                                {{ campaignProduct.panelSize}}</b><br /><b style="color: #44596D;">Address :</b> {{ campaignProduct.addressone}} &nbsp; {{ campaignProduct.addresstwo}} <br /><b style="color: #44596D;">Views :</b>
-                            {{campaignProduct.impressions || '0'}} Per week<br />
+                            <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.title}}
+                               </b><br /><b style="color: #44596D;">Address :</b> {{ campaignProduct.address}} <br />
+                            <b style="color: #44596D;">State :</b> {{ campaignProduct.state_name}} <br />
+                            <b style="color: #44596D;">Venue :</b> {{ campaignProduct.venue}} <br />
+                            <b style="color: #44596D;">Type :</b> {{ campaignProduct.type}} <br />
+                            <b style="color: #44596D;">Facing :</b> {{ campaignProduct.direction}} <br />
+                            <b style="color: #44596D;">Views :</b>{{campaignProduct.impressions || '0'}} Per week<br />
                             <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
                         </p>
                     </td>
                     <!-- <td class="table_vertical">60*60</td> -->
+                    <td class="table_vertical">
+                        <p>{{campaignProduct.panelSize}}</p>
+                    </td>
                     <td class="table_vertical">
                         <p>{{ campaignProduct.booked_from | date }}</p>
                     </td>
