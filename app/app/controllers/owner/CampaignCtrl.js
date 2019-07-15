@@ -1326,8 +1326,8 @@ $scope.hidebutton = function(){
 
 //page width
     $scope.innerWidth = $window.innerWidth;
-    // loadMetroCampaigns();
-    // getMetroCampaignDetails();
+     loadMetroCampaigns();
+     //getMetroCampaignDetails();
     getActiveUserCampaigns();
     //getMetroCampDetails($stateParams.metroCampaignId);
 });
