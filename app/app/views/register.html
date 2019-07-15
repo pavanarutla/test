@@ -1,10 +1,21 @@
+<style>
+@media screen and (max-width:575px){
+	md-content{
+		overflow: inherit;
+	}
+	.form_mobile{
+		margin-left: 10px;
+    	margin-right: 10px;
+	}
+}
+</style>
 <!-- Register pages-->
 <div class="sign_bgcolor">
-	<md-dialog class="mx-auto reg_width" flex-xs="100" flex="40" flex-md="60" flex-sm="60">
+	<md-dialog class="mx-auto form_width reg_width" flex-xs="100" flex="40" flex-md="60" flex-sm="60">
 		<md-dialog-content>
 			<div class="d-flex justify-content-end">
 				<md-button class="md-icon-button " aria-label="Close Side Panel" ng-click="closeMdDialog()">
-					<md-icon class="md-default-theme close_mb"><i class="material-icons">close</i></md-icon>
+					<md-icon class="md-default-theme close_rg"><i class="material-icons">close</i></md-icon>
 				</md-button>
 			</div>	
 			<md-content class="md-padding " style="background:#fff">
@@ -15,7 +26,7 @@
 				</md-nav-bar>
 				<div ng-if="showUserForm">
 					<md-content class="md-padding" style="background:#fff">
-						<form class="mt-2" name="forms.registerUser" novalidate="novalidate">
+						<form class="mt-2 form_mobile" name="forms.registerUser" novalidate="novalidate">
 							<div class="form-group row">
 								<input class="form-control md-whiteframe-2dp" ng-model="user.name" name="name" type="text" maxlength="30"
 								 placeholder="Your Name * " required><br>
@@ -78,7 +89,7 @@
 				</div>
 				<div ng-if="showOwnerForm">
 					<md-content class="md-padding" style="background:#fff">
-						<form class="mt-2" name="forms.registerClientForm" novalidate="novalidate">
+						<form class="mt-2 form_mobile" name="forms.registerClientForm" novalidate="novalidate">
 							<div class="form-group row">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="ownername" type="text" maxlength="30"
 								 placeholder="Your Name * " required><br>

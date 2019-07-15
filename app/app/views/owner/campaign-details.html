@@ -84,12 +84,15 @@
     </div>
 
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="book_campowner">
+            layout-margin="layout-margin" class="addshare_campowner">
             <div class="button_leftright" style="cursor: pointer;">
                     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
                         ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
                         <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
                             Download POP
+                        </md-button> 
+                        <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerPop(campaignDetails.id)" download style="margin-right: 0px;min-width: 38px;">
+                            POP
                         </md-button>                       
                     </div>
                 </div> 
@@ -98,10 +101,10 @@
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm">
-                        Share
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
                     </md-button>
-                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
+                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
@@ -151,8 +154,8 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Quotation
                     </md-button>
-                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;">
-                        Download
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
                     </md-button>
                 </div>
 				  <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
@@ -160,8 +163,8 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Invoice
                     </md-button>
-                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
-                        Download
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                        <i class="fas fa-file-invoice-dollar" style="font-size: 17px;"></i>
                     </md-button>
                 </div>
             </div>           
@@ -183,7 +186,7 @@
                         </md-button>
                     </a>
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
-                        <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
+                        <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm">
                             Payment
                         </md-button>
                     </a>

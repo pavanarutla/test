@@ -1,20 +1,10 @@
 <style>
-    .md-button {
-        min-width: 64px !important;
-    }
-
     md-list-item {
         padding: 0 0px !important;
     }
     @media screen and (max-width: 575px){
-        .dropdown-content {
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 300px;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            right: -72px;
-            z-index: 1;
+        .share_usercamp{
+            right: -32px !important;
         }
     }
 
@@ -88,14 +78,19 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
+        <div class="button_leftright" ng-if="campaignDetails.status == 100">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
+            </div>
+        </div>
         <div class="dropdown button_leftright">
             <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs">
                 Share Campaign
             </md-button>
-            <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="margin-left: 0px;">
-                    Share
+            <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="min-width: 38px;margin-left: 0px;">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
                 </md-button>
-            <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown"
+            <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown share_usercamp"
                 style="padding:10px;">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                     <div layout="colmun">
@@ -141,14 +136,9 @@
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
                     Download Quotation
                 </md-button>
-                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
                 </md-button>               
-            </div>
-        </div>
-        <div class="button_leftright" ng-if="campaignDetails.status == 100">
-            <div class="md-grid-item-content hoarding-btn">
-                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
         </div>
         <!-- <div ng-if="campaignDetails.products.length == 0">
@@ -199,18 +189,18 @@
                     </td>
                     <td class="table_vertical"><span>$</span>{{campaignProduct.price || '0' | number : 2}}</td>
                     <td class="table_vertical">
-                        <p class="text_color md-caption"
+                        <p class="text_color md-caption" style="margin-top: 12px;"
                             ng-if=" !campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 500">
-                            Quote Requested</p>
-                        <p class="text_color md-caption"
+                            <b>Quote Requested</b></p>
+                        <p class="text_color md-caption" style="margin-top: 12px;"
                             ng-if=" campaignProduct.admin_price && campaignDetails.status >= 300 && campaignDetails.status <= 600">
-                            {{campaignDetails.status| stringifyCampaignStatus}} </p>
-                        <p class="text_color md-caption"
+                            <b>{{campaignDetails.status| stringifyCampaignStatus}} </b></p>
+                        <p class="text_color md-caption" style="margin-top: 12px;"
                             ng-if="!campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 500)">
-                            {{campaignDetails.status| stringifyCampaignStatus}}</p>
-                        <p class="text_color md-caption"
+                            <b>{{campaignDetails.status| stringifyCampaignStatus}}</b></p>
+                        <p class="text_color md-caption" style="margin-top: 12px;"
                             ng-if="campaignProduct.admin_price && (campaignDetails.status < 300 || campaignDetails.status > 600)">
-                            {{campaignProduct.product_status| stringifyProductStatus}}</p>
+                            <b>{{campaignProduct.product_status| stringifyProductStatus}}</b></p>
                     </td>
                     <td class="table_vertical">
                         <!-- Trigger the modal with a button -->

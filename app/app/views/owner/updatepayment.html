@@ -1,16 +1,3 @@
-<style>
-@media screen and (max-width: 575px){
-    .dropdown-content {
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 300px;
-      overflow: auto;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      right: -190px;
-      z-index: 1;
-   }
-}
-</style>
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
   <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
@@ -87,16 +74,15 @@
       </div>
   </div>
 </div>
-<div layout="row" flex-offset-gt-md="70"  flex-xs="100" flex-sm="100" flex-gt-md="70"
+<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
             layout-margin="layout-margin" class="book_campowner">
-        
             <div class="button_leftright">
               <div class="dropdown">
                 <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs">
                   Share Campaign
               </md-button>
-              <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm">
-                Share
+              <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
             </md-button>
                 <div id="ownerupdatepaymentDrop" class="dropdown-content contbg animated fadeInDown" style="padding:10px;">
                 <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
@@ -141,8 +127,8 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
                         Download Invoice
                     </md-button>
-                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download  style="margin-left: 0px;">
-                        Download
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download  style="min-width: 38px;margin-left: 0px;">
+                      <i class="fas fa-file-invoice-dollar" style="font-size: 17px;"></i>
                     </md-button>
                 </div>
             </div>
