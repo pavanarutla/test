@@ -2,11 +2,7 @@
     md-list-item {
         padding: 0 0px !important;
     }
-    @media screen and (max-width: 575px){
-        .share_usercamp{
-            right: -32px !important;
-        }
-    }
+    
 
 </style>
 <div class="contbg">
@@ -77,58 +73,55 @@
             </div>
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-        layout-margin="layout-margin" class="book_campowner">
-        <div class="button_leftright" ng-if="campaignDetails.status == 100">
-            <div class="md-grid-item-content hoarding-btn">
-                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
-            </div>
-        </div>
-        <div class="dropdown button_leftright">
-            <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs">
-                Share Campaign
-            </md-button>
-            <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="min-width: 38px;margin-left: 0px;">
-                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+        layout-margin="layout-margin" class="book_campuser">
+        <div class="button_leftright">
+            <div class="dropdown">
+                <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs">
+                    Share Campaign
                 </md-button>
-            <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown share_usercamp"
-                style="padding:10px;">
-                <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
-                    <div layout="colmun">
-                        <span flex></span>
-                        <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="UsershareCampaign()">
-                            <md-icon class="md-default-theme">
-                                <i class="material-icons">close</i>
-                            </md-icon>
-                        </md-button>
-                    </div>
-                    <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
-                    <form name="shareCampaignForm">
-                        <div layout="column" style="padding:10px;">
-                            <div class="form-group">
-                                <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name"
-                                    placeholder="Name" required="required" />
-                                <div ng-messages="shareCampaignForm.name.$error">
-                                    <div ng-message="required">Name is required.</div>
-                                    <div ng-message="pattern">Enter a valid Name.</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input ng-model="shareCampaign.email" name="email" class="form-control"
-                                    placeholder="Email" type="email" required="required"
-                                    ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
-                                <div ng-messages="shareCampaignForm.email.$error">
-                                    <div ng-message="required">Email is required.</div>
-                                    <div ng-message="pattern">Enter a valid Email Id.</div>
-                                </div>
-                            </div>
-                            <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
-                                <md-button class="md-raised md-warn Upload_font" layout-fill
-                                    ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">Share
-                                    Campaign</md-button>
-                            </div>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="min-width: 38px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </md-button>
+                <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown share_usercamp"
+                    style="padding:10px;">
+                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="UsershareCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
                         </div>
+                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+                        <form name="shareCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name"
+                                        placeholder="Name" required="required" />
+                                    <div ng-messages="shareCampaignForm.name.$error">
+                                        <div ng-message="required">Name is required.</div>
+                                        <div ng-message="pattern">Enter a valid Name.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.email" name="email" class="form-control"
+                                        placeholder="Email" type="email" required="required"
+                                        ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                    <div ng-messages="shareCampaignForm.email.$error">
+                                        <div ng-message="required">Email is required.</div>
+                                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                                    </div>
+                                </div>
+                                <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                    <md-button class="md-raised md-warn Upload_font" layout-fill
+                                        ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">Share
+                                        Campaign</md-button>
+                                </div>
+                            </div>
+                        </form>
                     </form>
-                </form>
+                </div>
             </div>
         </div>
         <div class="button_leftright" style="cursor: pointer;">
@@ -139,6 +132,11 @@
                 <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
                         <i class="fa fa-download" aria-hidden="true"></i>
                 </md-button>               
+            </div>
+        </div>
+        <div class="button_leftright" ng-if="campaignDetails.status == 100">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
         </div>
         <!-- <div ng-if="campaignDetails.products.length == 0">
@@ -270,7 +268,7 @@
 <div class="small-wrapper mt0"  ng-if="campaignDetails.status == 100">
     <div class="smallContainer">
         <div class="payment-summary">
-            <md-button class="md-raised md-primary all_button book_campowner" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
+            <md-button class="md-raised md-primary all_button book_campownerbutton" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
         </div>
     </div>
 </div>
