@@ -233,30 +233,15 @@
     </div> -->
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
     class="book_campowner">
-        <div class="button_leftright" style="cursor: pointer;">
-            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download Quotation
-                </md-button>
-                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download
-                </md-button>               
-            </div>
-        </div>
-        <div class="button_leftright" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
-            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
-                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Product</md-button>
-            </div>
-        </div>
         <div class="button_leftright">
             <div class="dropdown">
                 <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-xs">
                     Share Campaign
                 </md-button>
-                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
-                    Share
+                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;margin-left: 0px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
                 </md-button>
-                <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+                <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown camp_preparing" style="padding:10px;">
                     <form name="forms.adminCampaignForm" role="form" novalidate="novalidate">
                         <div layout="colmun">
                             <span flex></span>
@@ -293,6 +278,21 @@
                         </form>
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download >
+                    Download Quotation
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-left: 0px;min-width: 38px;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                </md-button>               
+            </div>
+        </div>
+        <div class="button_leftright" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
+                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}" style="margin-left: 0px;">Add Product</md-button>
             </div>
         </div>
         <div class="button_leftlast" ng-hide="campaignDetails.status <= 300">

@@ -84,12 +84,15 @@
     </div>
 
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="book_campowner">
+            layout-margin="layout-margin" class="addshare_campowner">
             <div class="button_leftright" style="cursor: pointer;">
                     <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
                         ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
                         <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
                             Download POP
+                        </md-button> 
+                        <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerPop(campaignDetails.id)" download style="margin-right: 0px;min-width: 38px;">
+                            POP
                         </md-button>                       
                     </div>
                 </div> 
@@ -98,10 +101,53 @@
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm">
-                        Share
+                    <md-button onclick="shareOwnerPopCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                            <a data-toggle="modal" data-target="#sharePopup"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                     </md-button>
-                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop"
+                        <div class="modal fade" id="sharePopup" tabindex="-1" role="dialog" aria-labelledby="sharePopupTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title" id="sharePopupTitle">Share Campaign</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                                        <form name="shareCampaignForm">
+                                            <div layout="column" style="padding:10px;">
+                                                <div class="form-group">
+                                                    <input ng-model="shareCampaign.receiver_name" class="form-control"
+                                                        name="receiver_name" placeholder="Name" required="required" />
+                                                    <div ng-messages="shareCampaignForm.name.$error">
+                                                        <div ng-message="required">Name is required.</div>
+                                                        <div ng-message="pattern">Enter a valid Name.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input ng-model="shareCampaign.email" name="email" class="form-control"
+                                                        placeholder="Email" type="email" required="required"
+                                                        ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                                    <div ng-messages="shareCampaignForm.email.$error">
+                                                        <div ng-message="required">Email is required.</div>
+                                                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                                    <md-button class="md-raised md-warn Upload_font" layout-fill
+                                                        ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">
+                                                        Share
+                                                        Campaign</md-button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div id="shareownercampDrop" class="hide-xs dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
@@ -151,8 +197,8 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Quotation
                     </md-button>
-                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;">
-                        Download
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
                     </md-button>
                 </div>
 				  <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
@@ -160,8 +206,8 @@
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Invoice
                     </md-button>
-                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
-                        Download
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                        <i class="fas fa-file-invoice-dollar" style="font-size: 17px;"></i>
                     </md-button>
                 </div>
             </div>           
@@ -183,7 +229,7 @@
                         </md-button>
                     </a>
                     <a href="#/owner/{{clientSlug}}/updatepayment/{{campaignDetails.id}}">
-                        <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
+                        <md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm">
                             Payment
                         </md-button>
                     </a>
@@ -297,5 +343,8 @@
 <script>
     function shareOwnerCampaign () {
         document.getElementById("shareownercampDrop").classList.toggle("show");
+    }
+    function shareOwnerPopCampaign () {
+        document.getElementById("sharePopup").classList.toggle("show");
     }
 </script>

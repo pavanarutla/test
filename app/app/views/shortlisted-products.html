@@ -12,8 +12,6 @@
 					<th>Booked From</th>
 					<th>Booked To</th>
 					<th>Price $</th>
-					<th></th>
-					<th></th>
 					<th class="" style="text-align: end;">						
 						<md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
 					</th>
@@ -40,7 +38,7 @@
 					<td class="table_vertical">{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
 					<td class="table_vertical"><span>$</span>{{shortlisted.price || '0' | number :2}}</td>
-					<td class="table_vertical">
+					<td class="table_vertical text-center">
 						<a data-toggle="modal" data-target="#exampleModalCenter" ng-click = 'conformDeleteShortlisted(shortlisted.id)'><i class="material-icons">delete_forever</i></a>
 						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
@@ -59,8 +57,6 @@
 								</div>
 							</div>
 					</td>
-					<td></td>
-					<td></td>
 					<!-- <td class="table_vertical text-center">
 						<p class="text_color md-caption">This Inventory Campaign Completed</p>
 					</td> -->
@@ -78,7 +74,7 @@
 		</div>
 
 	</div>
-	<div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right:11px;margin-bottom:10px;padding:15px; ">
+	<div class="prodct_savecamp md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style=" ">
 		
 		<form ng-submit="saveCampaign(product.id, selectedDateRanges)">
 			<div layout="row">
