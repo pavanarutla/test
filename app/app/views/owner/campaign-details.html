@@ -101,10 +101,53 @@
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
-                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    <md-button onclick="shareOwnerPopCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                            <a data-toggle="modal" data-target="#sharePopup"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                     </md-button>
-                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
+                        <div class="modal fade" id="sharePopup" tabindex="-1" role="dialog" aria-labelledby="sharePopupTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title" id="sharePopupTitle">Share Campaign</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                                        <form name="shareCampaignForm">
+                                            <div layout="column" style="padding:10px;">
+                                                <div class="form-group">
+                                                    <input ng-model="shareCampaign.receiver_name" class="form-control"
+                                                        name="receiver_name" placeholder="Name" required="required" />
+                                                    <div ng-messages="shareCampaignForm.name.$error">
+                                                        <div ng-message="required">Name is required.</div>
+                                                        <div ng-message="pattern">Enter a valid Name.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input ng-model="shareCampaign.email" name="email" class="form-control"
+                                                        placeholder="Email" type="email" required="required"
+                                                        ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                                    <div ng-messages="shareCampaignForm.email.$error">
+                                                        <div ng-message="required">Email is required.</div>
+                                                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                                    <md-button class="md-raised md-warn Upload_font" layout-fill
+                                                        ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">
+                                                        Share
+                                                        Campaign</md-button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div id="shareownercampDrop" class="hide-xs dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
@@ -300,5 +343,8 @@
 <script>
     function shareOwnerCampaign () {
         document.getElementById("shareownercampDrop").classList.toggle("show");
+    }
+    function shareOwnerPopCampaign () {
+        document.getElementById("sharePopup").classList.toggle("show");
     }
 </script>
