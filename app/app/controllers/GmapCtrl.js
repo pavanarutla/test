@@ -486,6 +486,7 @@ app.controller('GmapCtrl',
             //  }
 
             function selectMarker(marker) {
+                $scope.toggleProductDetailSidenav()
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setPosition(marker.position);
@@ -517,11 +518,11 @@ app.controller('GmapCtrl',
                 //     $mdSidenav('digitalProductDetails').open();
                 // }
                 $mdSidenav('productDetails').open();
-
                 $scope.selectedProduct = marker;
             }
 
             function selectSpideredMarker(marker) {
+                $scope.toggleProductDetailSidenav()
                 $scope.$parent.alreadyShortlisted = false;
                 $scope.mapObj.setCenter(marker.position);
                 selectorMarker.setMap(null);
@@ -533,7 +534,9 @@ app.controller('GmapCtrl',
                 $scope.product.panelSize = marker.properties['panelSize'];
                 $scope.product.type = marker.properties['type'];
                 $scope.product.demographicsage = marker.properties['demographicsage'];
-                $scope.product.address = marker.properties['address'];               
+                $scope.product.address = marker.properties['address']; 
+                $scope.product.ethnicity =  marker.properties['ethnicity'];
+                $scope.product.venue = marker.properties['venue'];
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
                 $scope.product.format = marker.properties['format_name'];
@@ -1191,15 +1194,14 @@ app.controller('GmapCtrl',
             $scope.$on("removeSelection", function () {
                 $scope.removeSelection();
             })
-            $scope.addProductToExistingCampaign = function (existingCampaignId, productId, selectedDateRanges) {
+            $scope.addProductToExistingCampaign = function (existingCampaignId, productId ) {
                 var productToCampaign = {
                     product_id: productId,
                     campaign_id: existingCampaignId,
                     dates :[]
-                };                
-                var startAndEndDates = selectedDateRanges.filter((item) => item.selected)
-                startAndEndDates.forEach((item, index) => {
-                    productToCampaign.dates.push({startDate : moment(item.startDay).format('YYYY-MM-DD'),endDate : moment(item.endDay).format('YYYY-MM-DD')})
+                }; 
+                $scope.ranges.selectedDateRanges.forEach((item, index) => {
+                    productToCampaign.dates.push({startDate : moment(item.startDate).format('YYYY-MM-DD'),endDate : moment(item.endDate).format('YYYY-MM-DD')})
                 })
                 CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
                     if (result.status == 1) {

@@ -53,33 +53,19 @@
     .gmnoprint .gm-style-cc{
       right: 0px !important;
     }
-
-    @media screen and (max-width:575px){
-      .sidenav-listview {
-          width: 300px !important;
-          max-width: 300px !important;
-          z-index: 9 !important;
-          height: 90vh;
-          margin-top: 64px;
-      }
-      .sidenav_imageright{
-          z-index:10 !important;
-          width: 300px !important;
-          max-width:300px !important;
-        }
-    }
   </style>
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map sidenav_imageright" md-component-id="productDetails">    
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
+      style="z-index:10 !important;width: 500px !important;max-width:500px !important;" >    
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
-            <div class="col-md-11 col-10">
+            <div class="col-md-11">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp; {{product.area_name}}</h5>
             </div>
-            <div class="col-md-1 col-1 text-right mt-3">
+            <div class="col-md-1 text-right mt-3">
                 <a class="close-btn" ng-click="toggleProductDetailSidenav()">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
@@ -94,54 +80,54 @@
           </div>
             
           <div class="row mt-2" style="margin-right:0px;">
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Type</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.type}}</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Size</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.panelSize}}</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Venue</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.venue}}</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Address</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.address}}</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Ethinicity</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.ethnicity}}</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Demographic</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                   <p class="mb-1 ml-2" ng-repeat = "demoage in product.demographicsage">
                       : Age: {{demoage.fromage}} - {{demoage.toage}} : <span class="font-weight-bold">{{demoage.percentage}}%</span><br>                     
                   </p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Impressions</p>
                 </div>
-                <div class="col-md-7 col-6">
+                <div class="col-md-7">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.impressions || '0'}} per week</p>
                 </div>
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Price</p>
                 </div>
-                <div class="col-md-5 col-6">
+                <div class="col-md-5">
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Bulletin' ">: $ {{product.price}} for 28 days</p>
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Digital' || product.type == 'Transit Digital' ">: $ {{product.price}} for 7 days</p>
                 </div>
@@ -181,12 +167,12 @@
           <div class="Order_S pb-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
             <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
             <div class="row mt-2 mb-2" style="margin-right:0px;">
-                <div class="col-md-3 col-4">
+                <div class="col-md-3">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
-                <div class="col-md-9 col-6" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
+                <div class="col-md-9" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
                   <!-- <p class="font-weight-bold mb-1 ml-2" style="float: left;" ></p> -->
-                  <a class="font-weight-bold ml-2" id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
+                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
                     : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}
                   </a>
                   <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
@@ -244,7 +230,7 @@
           </div>
           <div layout="column" class="mr-2 ml-2 mb-3">
             <md-button class="md-raised all_button" layout-fill
-              ng-click="addProductToExistingCampaign(existingCampaign.id, product.id,weeksArray)" ng-disabled="!existingCampaign.id">
+              ng-click="addProductToExistingCampaign(existingCampaign.id, product.id)" ng-disabled="!existingCampaign.id">
               add to existing or save Campaign
             </md-button>
           </div>
@@ -601,7 +587,7 @@
         <div layout="column" class="formats_block md-whiteframe-2dp mt-2">
           <div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
             <div layout="row">
-              <div class="md-body-1 text-white txt-mrng">Select Ad Formats</div>
+              <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
               <div flex></div>
               <div>
               </div>
@@ -769,10 +755,10 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-listview" md-component-id="productList">
       <div class="">
           <section class="product_list_view">
-            <div class="">
+            <div class="wrapper">
               <div class="pl-0">        
                 <div class="table-responsive">
-                  <table class="table table-hover table_user">
+                  <table class="table table-hover">
                     <thead class="text_color">
                       <tr>
                         <th>Image</th>

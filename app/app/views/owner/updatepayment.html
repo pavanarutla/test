@@ -175,6 +175,16 @@
                     </md-button>
                 </div>
             </div>
+            <div class="button_leftright" style="cursor: pointer;" ng-if="campaignPaymentDetails.payment_details.length > 0">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download>
+                        Download Reciepts
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download  style="margin-left: 0px;">
+                        Download Reciepts
+                    </md-button>
+                </div>
+            </div>
             <div class="button_leftlast">
               <div class="dropdown" style="float: right;">
                 <md-button class="md-raised md-primary all_button update_mrg hide-xs" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">

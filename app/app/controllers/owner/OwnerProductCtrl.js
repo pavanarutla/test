@@ -158,6 +158,10 @@ Colipos  ===================*/
       }
     });
   };
+  $scope.clearOwnerProductFilter = function(product){
+    $scope.product = {};
+    $scope.getProductByFormat("All")
+  }
   $scope.applymethod = function (product) {
     var data = {};
     var pageNo = $scope.pagination.pageNo;

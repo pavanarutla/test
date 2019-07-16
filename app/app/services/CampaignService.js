@@ -108,6 +108,11 @@ app.service('CampaignService',
                         $http.post(config.apiPath + '/pay-launch-campaign', campaignObj).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
+                    downloadOwnerReciepts: function (campaign_id) {
+                        var dfd = $q.defer();
+                        $http.get(config.apiPath + '/payments-info-download/' + campaign_id,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                    },
                    
                 }
             }

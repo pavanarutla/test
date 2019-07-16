@@ -92,6 +92,11 @@ app.service('OwnerCampaignService',
                         $http.get(config.apiPath + '/download-quote/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
+                    downloadOwnerReciepts: function (campaign_id) {
+                        var dfd = $q.defer();
+                        $http.get(config.apiPath + '/payments-info-download/' + campaign_id,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);
+                        return dfd.promise;
+                    },
                     generatepop: function (campaignId) {
                         var dfd = $q.defer();
                         $http.get(config.apiPath + '/generate-pop/' + campaignId,{responseType: 'arraybuffer'}).success(dfd.resolve).error(dfd.reject);

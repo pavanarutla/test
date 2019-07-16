@@ -10,7 +10,7 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
           if(result.status == 0 ){
             $scope.message = result.message;
           }   
-          $scope.TOTALpay = $scope.UserPaymentDetails.campaign_details.total_amount +parseInt($scope.UserPaymentDetails.campaign_details.gst_price) - $scope.UserPaymentDetails.total_paid;
+          $scope.TOTALpay = $scope.UserPaymentDetails.campaign_details.total_amount - parseInt($scope.UserPaymentDetails.total_paid);
         });
       }
 
@@ -55,6 +55,15 @@ app.controller('UserPaymentCtrl', function ($scope,CampaignService,$rootScope,$s
             }
         });
     };
+    $scope.downloadOwnerReciepts = function(campaignId){
+      CampaignService.downloadOwnerReciepts(campaignId).then(function (result) {
+          var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+          FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+          if (result.status) {
+              toastr.error(result.meesage);
+          }
+      });
+  }
         if ($rootScope.currStateName == "index.user-payments") {
             $scope.getUserPayment();
           }
