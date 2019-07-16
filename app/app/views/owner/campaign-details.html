@@ -224,10 +224,14 @@
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
-                        <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b style="color: #44596D;">Address</b>:
-                            {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo}}<br><b style="color: #44596D;">Views</b>: {{product.impressions|| "N/A"}}
-                            <br><b style="color: #44596D;">Type</b>: {{product.type|| "N/A"}}<br>                            
-                            <span ng-if="product.type != 'Bulletin'"><b style="color: #44596D;">No Of Slots:</b> {{product.booked_slots || '0'}}</span>
+                        <p><b>{{product.siteNo}} - {{product.title}}</b><br>
+                           <b style="color: #44596D;">Address</b>:{{product.address}}<br>
+                           <b style="color: #44596D;">State</b>:{{product.state_name}}<br>
+                           <b style="color: #44596D;">Venue</b>:{{product.venue}}<br>
+                           <b style="color: #44596D;">Type</b>: {{product.type|| "N/A"}}<br> 
+                           <b style="color: #44596D;">Facing</b>: {{product.direction}}<br>
+                           <b style="color: #44596D;">Views</b>: {{product.impressions|| "N/A"}}<br>                                                    
+                           <span ng-if="product.type != 'Bulletin'"><b style="color: #44596D;">No Of Slots:</b> {{product.booked_slots || '0'}}</span>
                     </td>                   
                     <td class="table_vertical ">{{product.panelSize}}</td>
                     <td class="table_vertical">

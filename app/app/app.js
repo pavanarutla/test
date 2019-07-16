@@ -615,6 +615,11 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
     })
+    .state('owner.product-list', {
+      url: '/product-list',
+      templateUrl: 'views/product-list',
+      controller: 'ProductlistCtrl'
+    })
     .state('owner.profile', {
       url: '/profile',
       templateUrl: 'views/user-profile.html',
