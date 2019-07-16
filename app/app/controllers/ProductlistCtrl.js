@@ -22,6 +22,10 @@ app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDial
         $scope.formatGrid.push(tempArr);
       }
     });
+     $scope.toggleProductDetailSidenav = function () {
+        $mdSidenav('productDetails').toggle();
+        $scope.$broadcast("removeSelection");
+    };
    $scope.FormatData=function (selectedZone) {
        $scope.productmarkerslist=$scope.actualDataCopy.filter(function (item) {
            return item.product_details[0].format_name===selectedZone;
@@ -32,8 +36,8 @@ app.controller('ProductlistCtrl', function ($scope,MapService,$mdSidenav,$mdDial
        $scope.siteNo='';
        $scope.area_name='';
    };
-    $scope.getproddata = function (proddetails) {            
-      $scope.productListDetails = proddetails;      
+    $scope.getproddata = function (proddetails) { 
+      $scope.productListDetails = proddetails;   
       $mdSidenav('productDetails').toggle();
     }
     $scope.formats = function () {
