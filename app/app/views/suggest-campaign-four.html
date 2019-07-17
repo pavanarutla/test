@@ -2,20 +2,20 @@
     <!-- <div flex="25" flex-sm="100" flex-xs="100" layout="colmun">
         <h3 class="md-subhead">Other Info</h3>
     </div> -->
-    <div class="col-9">
-        <h3 class="md-body-2" style="margin:15px 0">
+    <div class="col-12 col-md-8" style="padding-left: 30px;">
+        <h3 class="md-body-2">
             What Geographic region will we be advertising to with this Ad campaign?
         </h3>
         <textarea style="width:100%" rows="3" ng-model="suggestionRequest.geo_region"></textarea>
-        <p class="md-caption">
+        <p class="md-caption" style="margin-bottom:15px">
             Tip:I would to place my advertisements in Hyderabad and Bangalore cities and in these cities I would like to
             advertise in the commercial areas etc.
         </p>
         <div class="prefer">
-            <h3 class="md-body-2" style="margin-bottom:15px">
+            <h3 class="md-body-2">
                 Would you prefer your own design for your ad-campaign or would you want us to design it?
             </h3>
-            <md-input-container layout-fill>
+            <md-input-container layout-fill  style="margin-bottom:15px">
                 <label>Select</label>
                 <md-select name="ad_design" ng-model="suggestionRequest.ad_design" required>
                     <md-option value="client">My own</md-option>
@@ -26,11 +26,11 @@
                 </div>
             </md-input-container>
         </div>
-        <div class="duration" style="margin-top: 15px;">
-            <h3 class="md-body-2" style="margin-bottom:15px">
-                what would be your campaign duration?
+        <div class="duration">
+            <h3 class="md-body-2">
+                What would be your campaign duration?
             </h3>
-            <md-input-container layout-fill>
+            <md-input-container layout-fill style="margin-bottom:15px">
                 <label>Select</label>
                 <md-select name="duration" ng-model="suggestionRequest.duration" required>
                     <md-option value="15">15 days</md-option>
@@ -46,23 +46,23 @@
                 </div>
             </md-input-container>
         </div>
-        <div class="adcamapgin" style="margin-top: 15px;">
-            <h3 class="md-body-2" style="margin-bottom:15px">
-                when would you like to start your ad campaign
+        <div class="adcamapgin">
+            <h3 class="md-body-2">
+                When would you like to start your ad campaign?
             </h3>
             <textarea style="width:100%" rows="3" ng-model="suggestionRequest.start_end_date"></textarea>
-            <p class="md-caption">
+            <p class="md-caption" style="margin-bottom:15px">
                 Tip: In the first quarter of 2018. (OR) 14-jan-2018
             </p>
         </div>
-        <div class="bugest" style="margin-top: 15px;">
-            <h3 class="md-body-2" style="margin-bottom:15px">
+        <div class="bugest">
+            <h3 class="md-body-2">
                 what would be your approximate budget for this campaign?
             </h3>
             <p class="caption">
                 Tip:based on your budget we will strategically plan your ad campaign
             </p>
-            <md-input-container layout-fill>
+            <md-input-container layout-fill style="margin-bottom:15px">
                 <label>Select budget Range</label>
                 <md-select name="est_budget" ng-model="suggestionRequest.est_budget" required>
                     <md-option value="below 1 lakh">below 1 lakh</md-option>
@@ -86,7 +86,7 @@
                 </a>
             </div>
             <div class="col-4">
-                <a class="btn btn-block btn-info" style="padding:6px 30px;color:#fff" ng-click="resetSuggestionForm()">
+                <a class="btn btn-block btn-info" style="color:#fff" ng-click="resetSuggestionForm()">
                     Reset
                 </a>
             </div>
