@@ -23,7 +23,10 @@
                   <h3 class="text_color">You have <span id="notification1-count">{{(unReadNotify.length) || 0}}</span> new notification</h3>
                 </div>
               </li>
-              <li style="padding:10px;" id="notification-id-0" ng-repeat="notificationItem in unReadNotify.slice(0,3)">{{notificationItem.desc}}</li>
+              <li style="padding:10px;" id="notification-id-0" ng-repeat="notificationItem in unReadNotify.slice(0,3)">
+                <a  ng-click = "updateNotifyStatus(notificationItem.type,notificationItem.campaign_id,notificationItem.id)"
+                href="#/admin/metro-campaign/{{notificationItem.campaign_id}}">{{notificationItem.desc}}</a>
+              </li>
           
              <!-- <li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
                 <div class="notification_desc pl-3">

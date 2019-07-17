@@ -454,7 +454,7 @@ var app = angular.module('bbManager', [
       .state('admin.admin-notifications', {
       url: '/admin-notifications',
       templateUrl: 'views/admin/admin-notifications.html',
-      // controller: 'AdminMgrAppCtrl'
+      controller: 'AdminMgrAppCtrl'
     })
 
     .state('admin.reset-password', {

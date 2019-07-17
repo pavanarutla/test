@@ -143,7 +143,7 @@
 							<tr>
 								<td><b>Total Price</b></td>
 								<td>
-									<span ng-if="metroCampDetails.act_budget"></span>{{TOTAL || "N/A"}}
+									<span ng-if="metroCampDetails.act_budget"></span>{{metroCampDetails.act_budget || "N/A"}}
 								</td>
 							</tr>
 							<tr>
@@ -271,7 +271,7 @@
 						<td class="text-right"><b>Total :</b></td>
 						<td>{{metroCampDetails.act_budget}}</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td class="text-right text_color">
 							<input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
 								ng-change="uncheck(checked)" /><b>18% GST :</b></td>
@@ -280,7 +280,7 @@
 					<tr>
 						<td class="text-right"><b>Grand Total :</b></td>
 						<td><b>{{TOTAL | number : 2}}</b></td>
-					</tr>
+					</tr> -->
 				</table>
 				<div class="mt-4" ng-if="metroCampDetails.status < 1121">
 					<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
