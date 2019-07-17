@@ -33,9 +33,9 @@
                                 <th>CID</th>
                                 <th>Campaign Name</th>
                                 <th>Start Date</th>
-                                <th>No of Products </th>
+                                <!-- <th>No of Products </th>
                                 <th class="text-center">Paid</th>
-                                <th class="text-center">Total Price</th>
+                                <th class="text-center">Total Price</th> -->
                                 <th></th>
                             </tr>
                         </thead>
@@ -45,16 +45,16 @@
                                 <td class="table_vertical">{{product.cid}}</td>
                                 <td class="table_vertical">{{product.name | capitalize}}</td>
                                 <td class="table_vertical">{{product.created_at | dateify | date:'dd-MM-yyyy'}}</td>
-                                <td class="table_vertical">{{product.no_products}}</td>
+                                <!-- <td class="table_vertical">{{product.no_products}}</td>
                                 <td class="text-center table_vertical"><span>$</span>{{product.total_paid}}</td>
-                                <td class="text-center table_vertical"><span>$</span>{{product.est_budget}}</td>                               
+                                <td class="text-center table_vertical"><span>$</span>{{product.est_budget}}</td>                                -->
                                 <!-- <td class="text-center table_vertical">
                                     <a href="#/admin/campaign-proposal-summary/{{productId}}">
                                         <i class="material-icons">remove_red_eye</i>
                                     </a>
                                 </td> -->
                                 <td class="text-center table_vertical">
-                                    <span class="text_color md-caption">{{product.updated_at}}</span>
+                                    <span class="text_color md-caption">{{product.updated_at | dateFormat}}</span>
                                 </td>
                             </tr>
                         </tbody>
