@@ -510,6 +510,7 @@ app.controller('GmapCtrl',
                 $scope.product.availableDates = marker.properties['availableDates'];
                 $scope.product.slots = marker.properties['slots'];
                 $scope.product.minimumbooking = marker.properties['minimumbooking'];
+                $scope.product.strengths = marker.properties['strengths'];
                 $scope.hideSelectedMarkerDetail = false;
                 // $scope.getProductUnavailableDatesautoload(marker.properties['id']);
                 // if (marker.properties['type'] == "Bulletin") {
@@ -545,6 +546,7 @@ app.controller('GmapCtrl',
                 $scope.product.availableDates = marker.properties['availableDates'];
                 $scope.product.slots = marker.properties['slots'];
                 $scope.product.minimumbooking = marker.properties['minimumbooking'];
+                $scope.product.strengths = marker.properties['strengths'];
                 $scope.hideSelectedMarkerDetail = false;
                 // if (marker.properties['type'] == "Bulletin") {
                 //     $scope.productPerDay = $scope.product.price / 28;
