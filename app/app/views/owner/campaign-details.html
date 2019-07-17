@@ -84,27 +84,16 @@
     </div>
 
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="addshare_campowner">
-            <div class="button_leftright" style="cursor: pointer;">
-                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
-                        ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
-                        <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
-                            Download POP
-                        </md-button> 
-                        <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerPop(campaignDetails.id)" download style="margin-right: 0px;min-width: 38px;">
-                            POP
-                        </md-button>                       
-                    </div>
-                </div> 
+            layout-margin="layout-margin" class="addshare_campowner"> 
             <div class="button_leftright">
                 <div class="dropdown">
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
                         Share Campaign
                     </md-button>
-                    <md-button onclick="shareOwnerPopCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
-                            <a data-toggle="modal" data-target="#sharePopup"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                    <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                            <i class="fa fa-share-alt" aria-hidden="true"></i>
                     </md-button>
-                        <div class="modal fade" id="sharePopup" tabindex="-1" role="dialog" aria-labelledby="sharePopupTitle" aria-hidden="true">
+                        <!-- <div class="modal fade" id="sharePopup" tabindex="-1" role="dialog" aria-labelledby="sharePopupTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header modal_bottom">
@@ -146,8 +135,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <div id="shareownercampDrop" class="hide-xs dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
+                        </div> -->
+                    <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop camp_preparing"
                         style="padding:10px;">
                         <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
                             <div layout="colmun">
@@ -210,7 +199,18 @@
                         <i class="fas fa-file-invoice-dollar" style="font-size: 17px;"></i>
                     </md-button>
                 </div>
-            </div>           
+            </div> 
+            <div class="button_leftright" style="cursor: pointer;">
+                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
+                        ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
+                        <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
+                            Download POP
+                        </md-button> 
+                        <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerPop(campaignDetails.id)" download style="margin-right: 0px;min-width: 38px;">
+                            POP
+                        </md-button>                       
+                    </div>
+                </div>          
             <div class="button_leftlast" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2">
                 <div class="md-grid-item-content hoarding-btn">
                     <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Product</md-button>
@@ -329,9 +329,9 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{ TOTAL |number : 2 || "N/A" }}</li>
                 </ul> -->
-                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 600">Book
+                <md-button class="md-raised md-primary all_button book_campownerbutton" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 600">Book
                     Campaign</md-button>
-                    <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2 ">Book
+                    <md-button class="md-raised md-primary all_button book_campownerbutton" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2 ">Book
                         Campaign</md-button>
                 <span class="md-raised md-primary camp_bookowner" ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
