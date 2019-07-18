@@ -22,8 +22,7 @@ app.controller('AdminMgrAppCtrl', function ($scope, $mdDialog, $mdSidenav, $root
   $scope.getAdminNotifictaions();
 
   $scope.updateNotifyStatus = function(notificationType,campaignId,notifyId){
-    
-    NotificationService.updateNotification(notifyId).then(function(result){
+     NotificationService.updateNotification(notifyId).then(function(result){
       if(result){
         AdminNotificationService.viewAdminNotification().then((result) => {
           if(result){

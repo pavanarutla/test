@@ -502,6 +502,7 @@ app.controller('GmapCtrl',
                 $scope.product.address = marker.properties['address'];               
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
+                $scope.product.strengths = marker.properties['strengths'];
                 $scope.product.format = marker.properties['format_name'];
                 $scope.product.lighting = marker.properties['lighting'];
                 $scope.product.direction = marker.properties['direction'];
@@ -535,6 +536,7 @@ app.controller('GmapCtrl',
                 $scope.product.address = marker.properties['address'];               
                 $scope.product.area_name = marker.properties['area_name'];
                 $scope.product.impressions = marker.properties['impressions'];
+                $scope.product.strengths = marker.properties['strengths'];
                 $scope.product.format = marker.properties['format_name'];
                 $scope.product.direction = marker.properties['direction'];
                 $scope.product.lighting = marker.properties['lighting'];
