@@ -72,14 +72,16 @@
         <md-button class="md-raised all_button" onclick="myFunction()">Create Campaign</md-button>
         <div id="myDropdown" class="dropdown-content contbg animated fadeInDown">
           <form name="forms.AdminownerCampaignForm" role="form" novalidate="novalidate">
-              <div layout="colmun">
-                  <span flex></span>
-                  <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
-                    <md-icon class="md-default-theme">
-                      <i class="material-icons">close</i>
-                    </md-icon>
-                  </md-button>
-                </div>
+            <div layout="colmun">
+              <!-- <h3 class="md-body-2">Great,</h3> -->
+              <h3 class="md-title mt-3">Let's Start OOH Campaign</h3>
+              <span flex></span>
+              <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="myFunction()">
+                <md-icon class="md-default-theme">
+                  <i class="material-icons">close</i>
+                </md-icon>
+              </md-button>
+            </div>
             <div layout="row" layout-margin layout-align="center center" class="" >
               <div id="dvPassport" style="width:100%;">
                   <li>
@@ -197,7 +199,7 @@
                   <td class="text-center table_vertical">{{campaign.total_paid || '0'}}</td>
                   <td class="text-center table_vertical">{{campaign.total_price || '0'}}</td>
                   <td class="table_vertical text-center">
-                    <md-menu md-position-mode="target-right target" id="width_popup">
+                    <!-- <md-menu md-position-mode="target-right target" id="width_popup">
                       <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                       </md-button>
@@ -219,15 +221,29 @@
                           </md-button>
                         </md-menu-item>
                         
-                          <!-- <md-button class="pop_view" ng-href="#">
+                          <md-button class="pop_view" ng-href="#">
                             <div layout="row">
                               <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
                               <p style="margin:0 4px;font-size:11px;">Payment Details</p>
                             </div>
                           </md-button>
-                        </md-menu-item> -->
+                        </md-menu-item>
                       </md-menu-content>
-                    </md-menu>
+                    </md-menu> -->
+                    <div class="dropdown dropleft float-right">
+                        <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
+                                    <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                            </a>
+                            <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                <i class="material-icons">share</i>
+                                    share Campaign
+                            </a>
+                        </div>
+                    </div>
                   </td>
                   <td class="table_vertical text-center">
                     <span class="text_color md-caption">{{campaign.updated_at| dateFormat}}</span>
@@ -263,7 +279,7 @@
                   <td class="text-center table_vertical">{{campaign.total_paid || '0'}}</td>
                   <td class="text-center table_vertical">{{campaign.total_price || '0'}}</td>
                   <td class="text-center table_vertical">
-                    <md-menu md-position-mode="target-right target">
+                    <!-- <md-menu md-position-mode="target-right target">
                       <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                       </md-button>
@@ -293,7 +309,24 @@
                           </md-button>
                       </md-menu-item>
                       </md-menu-content>
-                    </md-menu>
+                    </md-menu> -->
+                    <div class="dropdown dropleft float-right">
+                        <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
+                                    <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                            </a>
+                            <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                <i class="material-icons">share</i>
+                                    share Campaign
+                            </a>
+                            <a class="dropdown-item" ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <p><i class="material-icons">remove_red_eye</i> Payment Details</p>
+                      </a>
+                        </div>
+                    </div>
                   </td>
                   <td class="text-center table_vertical">
                     <span class="text_color md-caption">{{campaign.updated_at | dateFormat }}</span>
@@ -331,7 +364,7 @@
                   <td class="text-center table_vertical">{{campaign.total_paid || '0'}}</td>
                   <td class="text-center table_vertical">{{campaign.total_price || '0'}}</td>
                   <td class="text-center table_vertical">
-                    <md-menu md-position-mode="target-right target">
+                    <!-- <md-menu md-position-mode="target-right target">
                       <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                       </md-button>
@@ -361,7 +394,24 @@
                           </md-button>
                       </md-menu-item>
                       </md-menu-content>
-                    </md-menu>
+                    </md-menu> -->
+                    <div class="dropdown dropleft float-right">
+                        <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
+                                    <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                            </a>
+                            <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                <i class="material-icons">share</i>
+                                    share Campaign
+                            </a>
+                            <a class="dropdown-item" ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <p><i class="material-icons">remove_red_eye</i> Payment Details</p>
+                      </a>
+                        </div>
+                    </div>
                   </td>
                   <td class="text-center table_vertical">
                     <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
@@ -398,7 +448,7 @@
                   <td class="text-center table_vertical">{{campaign.total_paid || '0'}}</td>
                   <td class="text-center table_vertical">{{campaign.total_price || '0'}}</td>
                   <td class="text-center table_vertical">
-                    <md-menu md-position-mode="target-right target">
+                    <!-- <md-menu md-position-mode="target-right target">
                       <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
                         <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
                       </md-button>
@@ -428,7 +478,24 @@
                           </md-button>
                       </md-menu-item>
                       </md-menu-content>
-                    </md-menu>
+                    </md-menu> -->
+                    <div class="dropdown dropleft float-right">
+                        <button type="button" class=" dropdown-toggle drp_btn" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" ng-href="#/admin/campaign-proposal-summary/{{campaign.id}}">
+                                    <p><i class="material-icons">remove_red_eye</i> View Details</p>
+                            </a>
+                            <a class="dropdown-item" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                <i class="material-icons">share</i>
+                                    share Campaign
+                            </a>
+                            <a class="dropdown-item" ng-href="#/admin/campaign-payment-details/{{campaign.id}}">
+                              <p><i class="material-icons">remove_red_eye</i> Payment Details</p>
+                      </a>
+                        </div>
+                    </div>
                   </td>
                   <td class="text-center table_vertical">
                     <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>

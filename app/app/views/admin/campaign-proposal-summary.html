@@ -155,9 +155,8 @@
                 </tbody>
             </table>
         </div>
-
     </div>
-    <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
+    <div layout="row" flex-offset-gt-md="60" flex="40" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
     class="book_campowner">
         <div class="button_leftright" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
@@ -235,145 +234,114 @@
         </div>
     </div>
 </div>
-    <!-- table grid start  -->
-    <div class="table-responsive">
-        <table class="table">
-            <thead class="text_color">
-                <tr>
-                    <th>Product Details</th>
-                    <th class="hide-xs"></th>
-                    <th class="">Size</th>
-                    <th class="">Views</th>
-                    <th class="">Booked From</th>
-                    <th class="">Booked To</th>
-                    <th class="">Price</th>
-                    <!-- <th class="">Price Received</th>  
-                    <th class="">Price Given</th>                                      -->
-                    <th class="">Inventory Owner</th>
-                    <th class="">Inventory Status</th>
-                    <th class="text-right"></th>
+<!-- table grid start  -->
+<div class="table-responsive">
+    <table class="table">
+        <thead class="text_color">
+            <tr>
+                <th>Product Details</th>
+                <th class="hide-xs"></th>
+                <th class="">Size</th>
+                <th class="">Views</th>
+                <th class="">Booked From</th>
+                <th class="">Booked To</th>
+                <th class="">Price</th>
+                <!-- <th class="">Price Received</th>  
+                <th class="">Price Given</th>                                      -->
+                <th class="">Inventory Owner</th>
+                <th class="">Inventory Status</th>
+                <th class="text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr
+                ng-repeat="campaignProduct in campaignProducts| limitTo:limit"
+                ng-class="{'striked-out': campaignProduct.unavailable}"
+                >
+                <td class="hide-xs image_tdwidth">
+                    <img
+                        ng-src="{{serverUrl + campaignProduct.image}}"
+                        alt="Smiley face"
+                        class="requ_size img-thumbnail"
+                        />
+                </td>
+                <td class="table_address">
+                    <p class="">
+                        <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.title}}
+                            {{ campaignProduct.panelSize}}</b><br /><b style="color: #44596D;">Address :</b> {{ campaignProduct.address}}<br />                                
+                            <b style="color: #44596D;">State :</b>{{campaignProduct.state_name}}<br />
+                            <b style="color: #44596D;">Venue :</b>{{campaignProduct.venue}}<br />
+                            <b style="color: #44596D;">Type :</b>{{campaignProduct.type}}<br />
+                            <b style="color: #44596D;">Facing :</b>{{campaignProduct.direction}}<br />
+                        <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
+                    </p>
+                </td>
+                <td class="table_vertical"> 
+                    <p>{{ campaignProduct.panelSize}}</p>
+                </td>
+                <td class="table_vertical">
+                        <p>{{campaignProduct.impressions || '0'}} Per week</p>
+                    </td>
+                <td class="table_vertical">
+                    <p>{{ campaignProduct.booked_from | date }}</p>
+                </td>
+                <td class="table_vertical">
+                    <p>{{ campaignProduct.booked_to | date }}</p>
+                </td>
+                <td class="table_vertical">
+                    <p>{{campaignProduct.price |number : 2  || 'N/A'}}</p>                       
+                </td>
+                <!-- <td class="table_vertical">
+                    <p><span>$</span>{{campaignProduct.owner_price || '0' |number : 2}}</p>                       
+                </td>  -->
+                <!-- <td class="table_vertical table_price">
+                    <p><span>$</span>{{(!myfield) ? (campaignProduct.admin_price |number : 2  || 'N/A') : ''}}
+                    <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
+                    <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons" ng-hide="campaignDetails.status >= 600">edit</i></span>
+                    <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
+                </td>                                    -->
+                <td class="table_vertical">
+                    <p class=" md-caption">{{campaignProduct.client_name | capitalize}}</p>
+                    <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
+                </td>
+                <td class="table_vertical addcampaign_details">
+                    <p>{{campaignProduct.product_status |stringifyProductStatus | capitalize}}</p>                        
+                </td>                   
+                <td class=""></td>
             </tr>
-            </thead>
-            <tbody>
-                <tr
-                    ng-repeat="campaignProduct in campaignProducts| limitTo:limit"
-                    ng-class="{'striked-out': campaignProduct.unavailable}"
-                    >
-                    <td class="hide-xs image_tdwidth">
-                        <img
-                            ng-src="{{serverUrl + campaignProduct.image}}"
-                            alt="Smiley face"
-                            class="requ_size img-thumbnail"
-                            />
-                    </td>
-                    <td class="table_address">
-                        <p class="">
-                            <b>{{ campaignProduct.siteNo}} - {{ campaignProduct.title}}
-                                {{ campaignProduct.panelSize}}</b><br /><b style="color: #44596D;">Address :</b> {{ campaignProduct.address}}<br />                                
-                                <b style="color: #44596D;">State :</b>{{campaignProduct.state_name}}<br />
-                                <b style="color: #44596D;">Venue :</b>{{campaignProduct.venue}}<br />
-                                <b style="color: #44596D;">Type :</b>{{campaignProduct.type}}<br />
-                                <b style="color: #44596D;">Facing :</b>{{campaignProduct.direction}}<br />
-                            <!-- Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i class="fa fa-eye"></i>1,25,589</button> -->
-                        </p>
-                    </td>
-                    <td class="table_vertical"> 
-                        <p>{{ campaignProduct.panelSize}}</p>
-                    </td>
-                    <td class="table_vertical">
-                            <p>{{campaignProduct.impressions || '0'}} Per week</p>
-                        </td>
-                    <td class="table_vertical">
-                        <p>{{ campaignProduct.booked_from | date }}</p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{ campaignProduct.booked_to | date }}</p>
-                    </td>
-                    <td class="table_vertical">
-                        <p>{{campaignProduct.price |number : 2  || 'N/A'}}</p>                       
-                    </td>
-                    <!-- <td class="table_vertical">
-                        <p><span>$</span>{{campaignProduct.owner_price || '0' |number : 2}}</p>                       
-                    </td>  -->
-                    <!-- <td class="table_vertical table_price">
-                        <p><span>$</span>{{(!myfield) ? (campaignProduct.admin_price |number : 2  || 'N/A') : ''}}
-                        <input type="text" class="" ng-model="campaignProduct.admin_price" placeholder="Price" only-numeric ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;"/>
-                        <span ng-click="myfield = true; productAdminPrice(campaignProduct.default_price ,campaignProduct.product_id)"  ng-show="(!myfield && campaignDetails.status <= 600)"> <i class="material-icons" ng-hide="campaignDetails.status >= 600">edit</i></span>
-                        <button ng-click="myfield = false;changeCampaignProductPrice(campaignProduct.campaign_id, campaignProduct.admin_price, campaignProduct.product_id, campaignProduct.id)" ng-disabled="(campaignProduct.admin_price > 0 && campaignProduct.admin_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button></p>
-                    </td>                                    -->
-                    <td class="table_vertical">
-                        <p class=" md-caption">{{campaignProduct.client_name | capitalize}}</p>
-                        <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
-                    </td>
-                    <td class="table_vertical addcampaign_details">
-                        <p>{{campaignProduct.product_status |stringifyProductStatus | capitalize}}</p>                        
-                    </td>                   
-                    <td class=""></td>
-                </tr>
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+</div>
+<!-- table grid end -->
+<div class="small-wrapper mt0">
+    <div class="smallContainer">
+        <div class="payment-summary">
+        <!-- <ul id="double">
+            <li class="col1">Total :</li>
+            <li class="col2">{{campaignDetails.act_budget || '0' |number : 2 }}</li>
+            <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
+            <li class="col2 text_color">{{ GST || '0' |number : 2 }}</li>
+        </ul>
+        <ul id="total">
+            <li class="col1">Grand Total :</li>
+            <li class="col2">{{ TOTAL || "0" |number : 2  }}</li>
+        </ul> -->
+            <md-button class="md-raised md-warn all_button book_campowner" ng-click="finalizeCampaign(campaignProduct)" ng-if="campaignDetails.status == 300">
+                Send Quote
+            </md-button>
+            <md-button class="md-raised all_gary book_campowner" ng-if="campaignDetails.status == 400" disabled="disabled">
+                Quote Sent
+            </md-button>
+            <md-button class="md-raised md-primary all_button book_campowner" ng-if="campaignDetails.status >= 100 && campaignDetails.status < 700" ng-click="launchCampaign(campaignDetails.id, $event)">
+                Confirm Booking
+            </md-button>
+            <md-button class="md-raised md-primary all_gary book_campowner" ng-if="campaignDetails.status >= 700" ng-disabled="true">
+                Launched
+            </md-button>
+        </div>
     </div>
-    <!-- table grid end -->
+</div>
 
-    <div class="row border_quest">
-        <!-- <div class="p-2 pl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 col-12 comment_mob">
-            <div class="ml-2 form-group">
-                <form name="SendComment">
-                    <div class=" chat_box ">
-                        <ul ng-repeat="quote_change in campaignDetails.quote_change" class="p-2">
-                            <li ng-if="quote_change.type == 'User'" class=""><span class="user_dec">U</span>{{quote_change.remark}}</li>
-                            <li ng-if="quote_change.type == 'Admin'"><span class="user_bi">BI</span>{{quote_change.remark}}</li>
-                        </ul>
-                        <div class="form-group">
-                            <label for="text" class="text_color">Any questions, Please submit below</label>
-                            <textarea type="text" ng-model="campaignDetails.message" class="form-control" id="text" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn user_submit float-right" ng-click="changeQuoteRequest(campaignDetails.id, campaignDetails.message, 'Admin')">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div> -->
-    </div>
-        <!-- <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" style="padding-right: 0px;"> -->
-                <div class="small-wrapper mt0">
-                        <div class="smallContainer">
-                          <div class="payment-summary">
-                            <!-- <ul id="double">
-                              <li class="col1">Total :</li>
-                              <li class="col2">{{campaignDetails.act_budget || '0' |number : 2 }}</li>
-                              <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true" ng-change="uncheck(checked)" ng-if="campaignDetails.status < 400" /> 18% GST :</li>
-                              <li class="col2 text_color">{{ GST || '0' |number : 2 }}</li>
-                            </ul>
-                            <ul id="total">
-                              <li class="col1">Grand Total :</li>
-                              <li class="col2">{{ TOTAL || "0" |number : 2  }}</li>
-                            </ul> -->
-                            <md-button
-                    class="md-raised md-warn all_button book_campowner"  
-                    ng-click="finalizeCampaign(campaignProduct)"
-                    ng-if="campaignDetails.status == 300">
-                    Send Quote
-                </md-button>
-                <md-button
-                    class="md-raised all_gary book_campowner"  
-                    ng-if="campaignDetails.status == 400" disabled="disabled">
-                    Quote Sent
-                </md-button>
-                <md-button
-                    class="md-raised md-primary all_button book_campowner"
-                    ng-if="campaignDetails.status >= 100 && campaignDetails.status < 700"
-                    ng-click="launchCampaign(campaignDetails.id, $event)">
-                    Confirm Booking
-                </md-button>
-                <md-button
-                    class="md-raised md-primary all_gary book_campowner"
-                    ng-if="campaignDetails.status >= 700" ng-disabled="true">
-                    Launched
-                </md-button>
-                          </div>
-                        </div>
-                      </div>
-        <!-- </div> -->
 <script>
     function AdminshareCampaign() {
         document.getElementById("shareadmincampDrop").classList.toggle("show");
