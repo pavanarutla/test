@@ -265,7 +265,28 @@
     </tbody>
   </table>
 </div>
-
+<div class="small-wrapper mt0">
+  <div class="smallContainer">
+    <div class="payment-summary">
+      <ul id="double">
+        <li class="col1">Total :</li>
+        <li class="col2">{{campaignPaymentDetails.act_budget}}</li>
+        <li class="col1 text_color">18% GST :</li>
+        <li class="col2 text_color">{{ campaignPaymentDetails.gst_price |number : 2 ||"N/A" }}</li>
+        <li class="col1">Grand Total :</li>
+        <li class="col2">{{campaignPaymentDetails.totalamount}}</li>
+        <li class="col1">Paid :</li>
+        <li class="col2">{{campaignPaymentDetails.total_paid}}</li>
+      </ul>
+      <div class=""></div>
+      <ul id="total">
+        <li class="col1">Balance :</li>
+        <li class="col2">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid}}</li>
+      </ul>
+      <div class=""></div>
+    </div>
+  </div>
+</div>
 <script>
   function shareownerCampaign() {
     document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
