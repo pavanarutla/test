@@ -263,11 +263,11 @@
                         </div>
                         <div class="col-sm-3" ng-if="adminProductEdit.type === 'Digital'">
                             <label class="font-weight-bold">Min. Booking Days</label>
-                            <select ng-model="adminProductEdit.cancellation" name="cancellation"
+                            <select ng-model="adminProductEdit.minimumbooking" name="minimumbooking"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                 data-md-container-class="selectdemoSelectHeader"
-                                ng-init="adminProductEdit.cancellation = adminProductEdit.cancellation || ''"
-                                placeholder="Has cancellation?" required>
+                                ng-init="adminProductEdit.minimumbooking = adminProductEdit.minimumbooking || ''"
+                                placeholder="Has minimumbooking?" required>
                                 <option value="" disabled selected>No</option>
                                 <option>2 Days</option>
                                 <option>4 Days</option>
@@ -276,15 +276,15 @@
                                 <option>14 Days</option>
                                 <option>28 Days</option>
                             </select>
-                            <div ng-messages="hordinglistform.cancellation.$error"
-                                ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                            <div ng-messages="hordinglistform.minimumbooking.$error"
+                                ng-if="hordinglistform.minimumbooking.$touched" style="color:red">
                                 <div ng-message="required">Days required</div>
                             </div>
                         </div>
                          <!----Transit Start------------------->
                          <div class="col-sm-3" ng-if="adminProductEdit.type === 'Transit Digital'">
                             <label class="font-weight-bold">Number of Buses</label>
-                            <input ng-model="product.buses" class="form-control md-whiteframe-3dp" type="text"
+                            <input ng-model="adminProductEdit.buses" class="form-control md-whiteframe-3dp" type="text"
                                 name="buses" only-numeric required />
                             <div ng-messages="hordinglistform.buses.$error"
                                 ng-if="hordinglistform.buses.$touched" style="color:red">
@@ -293,7 +293,7 @@
                         </div>
                         <div class="col-sm-3"ng-if="adminProductEdit.type === 'Transit Digital'">
                             <label class="font-weight-bold">Price for 7 days</label>
-                            <input ng-model="product.default_price" class="form-control md-whiteframe-3dp" type="text"
+                            <input ng-model="adminProductEdit.default_price" class="form-control md-whiteframe-3dp" type="text"
                                 name="prices" only-numeric required />
                             <div ng-messages="hordinglistform.prices.$error"
                                 ng-if="hordinglistform.prices.$touched" style="color:red">
@@ -303,11 +303,11 @@
                         <!----Transit End------------------->
                         <div class="col-sm-3" ng-if="adminProductEdit.type === 'Transit Digital'">
                             <label class="font-weight-bold">Min. Booking Days</label>
-                            <select ng-model="adminProductEdit.cancellation" name="cancellation"
+                            <select ng-model="adminProductEdit.minimumbooking" name="minimumbooking"
                                 class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                 data-md-container-class="selectdemoSelectHeader"
-                                ng-init="adminProductEdit.cancellation = adminProductEdit.cancellation || ''"
-                                placeholder="Has cancellation?" required>
+                                ng-init="adminProductEdit.minimumbooking = adminProductEdit.minimumbooking || ''"
+                                placeholder="Has minimumbooking?" required>
                                 <option value="" disabled selected>No</option>
                                 <option>2 Days</option>
                                 <option>4 Days</option>
@@ -316,8 +316,8 @@
                                 <option>14 Days</option>
                                 <option>28 Days</option>
                             </select>
-                            <div ng-messages="hordinglistform.cancellation.$error"
-                                ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                            <div ng-messages="hordinglistform.minimumbooking.$error"
+                                ng-if="hordinglistform.minimumbooking.$touched" style="color:red">
                                 <div ng-message="required">Days required</div>
                             </div>
                         </div>
@@ -458,7 +458,7 @@
                     </div>
                     <div class="col-sm-4">
                         <md-button type="submit" Class="md-raised md-primary register_btn"
-                        ng-click="addProduct(adminProductEdit)">
+                        ng-click="editAdminProduct(adminProductEdit)">
                             Submit</md-button>
                     </div>
                 </div>

@@ -167,7 +167,7 @@
 							<tr>
 								<td><b>Total Price</b></td>
 								<td>
-									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{TOTAL || "0"}}
+									<span>Rs. </span>{{metroCampaignDetails.Metrototalamount}}
 								</td>
 							</tr>
 							<tr>
@@ -202,7 +202,7 @@
 						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
 						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.total_paid || 0 }}</div>
 					</div>
-					<div layout="row" ng-if="campaignMetroPayments.total_paid < TOTAL">
+					<div layout="row" ng-if="campaignMetroPayments.total_paid < metroCampaignDetails.Metrototalamount">
 						<div flex="100" layout="column" layout-align="center center">
 							<md-button Class="md-raised md-primary all_button" type="submit" ng-click="showConfirmMetroPaymentPopup()">
 								Update Payment
@@ -271,8 +271,8 @@
 					</md-button>
 				</div>
 				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2">
-
-					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 ) || (metroCampaignDetails.type ==1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
+						<!-- || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 ) || (metroCampaignDetails.type ==1 && metroCampaignDetails.status == 1101 ) -->
+					<md-button ng-disabled=" campaignMetroPayments.total_paid <= metroCampaignDetails.Metrototalamount" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
 						Update Payment 
 					</md-button>
 				</div>
@@ -388,11 +388,11 @@
 									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
 									  <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true"
 										ng-change="uncheck(checked)" />18% GST :</li>
-									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									  <li class="col2 text_color">{{ metroCampaignDetails.gstAmount |number : 2 }}</li>
 									</ul>
 									<ul id="total">
 									  <li class="col1">Grand Total :</li>
-									  <li class="col2">{{TOTAL | number : 2}}</li>
+									  <li class="col2">{{metroCampaignDetails.Metrototalamount | number : 2}}</li>
 									</ul>
 								  </div>
 								</div>
@@ -421,11 +421,11 @@
 									  <li class="col1">Total :</li>
 									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
 									  <li class="col1 text_color">18% GST :</li>
-									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									  <li class="col2 text_color">{{ metroCampaignDetails.gstAmount |number : 2 }}</li>
 									</ul>
 									<ul id="total">
 									  <li class="col1">Grand Total :</li>
-									  <li class="col2">{{TOTAL | number : 2}}</li>
+									  <li class="col2">{{metroCampaignDetails.Metrototalamount | number : 2}}</li>
 									</ul>
 								  </div>
 								</div>

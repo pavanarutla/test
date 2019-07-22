@@ -485,17 +485,17 @@ $scope.hidebutton = function(){
     //     }
     // };
     
-  $scope.uncheck = function(checked) {
-    if (!checked) {
-      $scope.GST = "0";
-      $scope.onchecked = false;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-    } else {
-      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-      $scope.onchecked = true;
-    }
-  };
+//   $scope.uncheck = function(checked) {
+//     if (!checked) {
+//       $scope.GST = "0";
+//       $scope.onchecked = false;
+//       $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+//     } else {
+//       $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+//       $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+//       $scope.onchecked = true;
+//     }
+//   };
     function getMetroCampaignDetails() {
         MetroService.getMetroCampaigns().then((result) => {
             $scope.metrocampaign = result;
@@ -862,7 +862,7 @@ $scope.hidebutton = function(){
         };
         CampaignService.shareCampaignToEmail(campaignToEmail).then(function (result) {
             if (result.status == 1) {
-                $mdSidenav('shareCampaignSidenav').close();
+                //$mdSidenav('shareCampaignSidenav').close();
                 $mdDialog.show(
                         $mdDialog.alert()
                         .parent(angular.element(document.querySelector('body')))
@@ -894,6 +894,9 @@ $scope.hidebutton = function(){
     function shareOwnerCampaign() {
         document.getElementById("shareownercampDrop").classList.toggle("show");   
       }
+    //   function shareOwner2Campaign() {
+    //     document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");   
+    //   }
     /*=========================
      | Page based initial loads
      =========================*/
@@ -981,6 +984,15 @@ $scope.hidebutton = function(){
             }
         });
     };
+    $scope.downloadOwnerReciepts = function(campaignId){
+        OwnerCampaignService.downloadOwnerReciepts(campaignId).then(function (result) {
+            var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});
+            FileSaver.saveAs(campaignPdf, 'campaigns.pdf');
+            if (result.status) {
+                toastr.error(result.meesage);
+            }
+        });
+    }
     $scope.downloadOwnerPop = function (campaignId) {
         OwnerCampaignService.generatepop(campaignId).then(function (result) {
             var campaignPdf = new Blob([result], {type: 'application/pdf;charset=utf-8'});

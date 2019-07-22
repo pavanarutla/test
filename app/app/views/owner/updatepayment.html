@@ -63,7 +63,7 @@
                           <tr>
                               <td><b>Total Price</b></td>
                               <td>
-                                  {{ campaignPaymentDetails.act_budget |number : 2 || 0 }}
+                                  {{ campaignPaymentDetails.totalamount |number : 2 || 0 }}
                               </td>
                           </tr>
                           <tr>
@@ -89,7 +89,7 @@
       <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font d-none d-sm-block">
         Share Campaign
     </md-button>
-      <div id="ownerupdatepaymentDrop" class="dropdown-content contbg animated fadeInDown contant_drop share_detailsmob" style="padding:10px;">
+      <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop share_detailsmob" style="padding:10px;">
       <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
         <div layout="colmun">
         <span flex></span>
@@ -134,6 +134,16 @@
           </md-button>
       </div>
   </div>
+  <div class="button_leftright" style="cursor: pointer;" ng-if="campaignPaymentDetails.payment_details.length > 0">
+    <div class="md-grid-item-content hoarding-btn">
+        <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download>
+            Download Receipts
+        </md-button>
+        <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download  style="margin-left: 0px;">
+            Receipts
+        </md-button>
+    </div>
+</div>
   <div class="button_leftlast">
     <div class="dropdown" style="float: right;">
       <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
@@ -229,8 +239,7 @@
       </form>
     </div>
   </div>
-  </div>
-
+  </div> 
 </div>
 
 <div class="table-responsive">
@@ -272,16 +281,16 @@
         <li class="col1">Total :</li>
         <li class="col2">{{campaignPaymentDetails.act_budget}}</li>
         <li class="col1 text_color">18% GST :</li>
-        <li class="col2 text_color">{{ campaignPaymentDetails.gst_price |number : 2 ||"N/A" }}</li>
+        <li class="col2 text_color">{{ campaignPaymentDetails.gstAmount |number : 2 }}</li>
         <li class="col1">Grand Total :</li>
-        <li class="col2">{{campaignPaymentDetails.totalamount}}</li>
+        <li class="col2">{{campaignPaymentDetails.totalamount |number : 2}}</li>
         <li class="col1">Paid :</li>
-        <li class="col2">{{campaignPaymentDetails.total_paid}}</li>
+        <li class="col2">{{campaignPaymentDetails.total_paid |number : 2}}</li>
       </ul>
       <div class=""></div>
       <ul id="total">
         <li class="col1">Balance :</li>
-        <li class="col2">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid}}</li>
+        <li class="col2">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid |number : 2}}</li>
       </ul>
       <div class=""></div>
     </div>
@@ -289,7 +298,7 @@
 </div>
 <script>
   function shareownerCampaign() {
-    document.getElementById("ownerupdatepaymentDrop").classList.toggle("show");
+    document.getElementById("shareownercampDrop").classList.toggle("show");
   }
   function addPayment() {
     document.getElementById("addpaymentdrop").classList.toggle("show");

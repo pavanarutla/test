@@ -67,17 +67,17 @@
                                 <tr>
                                     <td><b>Total Price</b></td>
                                     <td>
-                                       {{ campaignDetails.act_budget |number : 2 || 0 }}
+                                       {{campaignDetails.totalAmount |number : 2}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Pending Price</b></td>
                                     <td ng-if="campaignDetails.type != 0">
-                                        {{campaignDetails.act_budget - result.total_paid | number:2 || '0'}}
+                                        {{campaignDetails.totalAmount - result.total_paid | number:2 || '0'}}
                                     </td>
                                     <td ng-if="campaignDetails.type == 0">
                                         <span ng-if="campaignDetails.pending_payment"></span>
-                                        {{campaignDetails.act_budget - result.total_paid | number:2 || '0'}}
+                                        {{campaignDetails.totalAmount - result.total_paid | number:2 || '0'}}
                                     </td>                                    
                                 </tr>
                                 <tr>
@@ -287,16 +287,16 @@
     <div class="small-wrapper mt0" ng-if="campaignDetails.products.length != 0">
         <div class="smallContainer">
             <div class="payment-summary">
-                <!-- <ul id="double">
+                <ul id="double">
                     <li class="col1">Total :</li>
                     <li class="col2">{{campaignDetails.act_budget |number : 2}}</li>
                     <li class="col1 text_color">18% GST :</li>
-                    <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                    <li class="col2 text_color">{{ campaignDetails.gstAmount |number : 2}}</li>
                 </ul>
                 <ul id="total">
                     <li class="col1">Grand Total :</li>
-                    <li class="col2">{{ TOTAL |number : 2 || "N/A" }}</li>
-                </ul> -->
+                    <li class="col2">{{campaignDetails.totalAmount |number : 2 || "N/A" }}</li>
+                </ul>
                 <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 600">Book
                     Campaign</md-button>
                     <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2 ">Book
