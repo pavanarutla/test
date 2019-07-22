@@ -9,7 +9,7 @@
 </style>
 <div class="contbg">
     <div class="campaign_details mt-4">
-        <div class="user_container">
+        <div class="">
             <div class="row ml-0 mr-0">
                 <div class="col-12 col-sm-12 col-md-6">
                     <div class="contbg box__shadow p-2">
@@ -78,6 +78,12 @@
     </div>
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
         layout-margin="layout-margin" class="book_campowner">
+        <div class="button_leftright" ng-if="campaignDetails.status == 100">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue hide-xs" ng-href="#/location">Add Product</md-button>
+                <md-button class="md-raised add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-href="#/location" style="margin-right: 0px;">Add Product</md-button>
+            </div>
+        </div>
         <div class="button_leftright" style="cursor: pointer;">
             <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
                 <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
@@ -88,7 +94,7 @@
                 </md-button>               
             </div>
         </div>
-        <div class="dropdown button_leftright">
+        <div class="dropdown button_leftlast">
             <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font">
                 Share Campaign
             </md-button>
@@ -131,11 +137,6 @@
                         </div>
                     </form>
                 </form>
-            </div>
-        </div>
-        <div class="button_leftright" ng-if="campaignDetails.status == 100">
-            <div class="md-grid-item-content hoarding-btn">
-                <md-button class="md-raised add_blue" ng-href="#/location">Add Product</md-button>
             </div>
         </div>
         <!-- <div ng-if="campaignDetails.products.length == 0">
