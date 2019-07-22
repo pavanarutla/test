@@ -141,15 +141,15 @@ app.controller("CampaignProposalCtrl", function (
         $scope.campaignDetails = result;
         $scope.campaignProducts = result.products;
         setDatesForProductsToSuggest($scope.campaignDetails);
-        if ($scope.campaignDetails.gst_price != "0") {
-          $scope.onchecked = true;
-          $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-          $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-        } else {
-          $scope.onchecked = false;
-          $scope.GST = "0";
-          $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-        }
+        // if ($scope.campaignDetails.gst_price != "0") {
+        //   $scope.onchecked = true;
+        //   $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+        //   $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+        // } else {
+        //   $scope.onchecked = false;
+        //   $scope.GST = "0";
+        //   $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+        // }
         if (result.status > 7) {
           loadCampaignPayments(campaignId);
         }
@@ -158,17 +158,17 @@ app.controller("CampaignProposalCtrl", function (
     });
   };
 
-  $scope.uncheck = function (checked) {
-    if (!checked) {
-      $scope.GST = "0";
-      $scope.onchecked = false;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
-    } else {
-      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-      $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
-      $scope.onchecked = true;
-    }
-  };
+  // $scope.uncheck = function (checked) {
+  //   if (!checked) {
+  //     $scope.GST = "0";
+  //     $scope.onchecked = false;
+  //     $scope.TOTAL = $scope.campaignDetails.act_budget + parseInt($scope.GST);
+  //   } else {
+  //     $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+  //     $scope.TOTAL = $scope.campaignDetails.act_budget + $scope.GST;
+  //     $scope.onchecked = true;
+  //   }
+  // };
   $scope.downloadAdminQuote = function (campaignId) {
     AdminCampaignService.downloadQuote(campaignId).then(function (result) {
       var campaignPdf = new Blob([result], {
@@ -401,15 +401,15 @@ app.controller("CampaignProposalCtrl", function (
   };
 
   $scope.finalizeCampaign = function () {
-    if ($scope.onchecked === true) {
-      $scope.flag = 1;
-      $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
-    } else if ($scope.onchecked === false) {
-      $scope.flag = 0;
-      $scope.GST = "0";
-    } else {
-      $scope.flag = 1;
-    }
+    // if ($scope.onchecked === true) {
+    //   $scope.flag = 1;
+    //   $scope.GST = ($scope.campaignDetails.act_budget / 100) * 18;
+    // } else if ($scope.onchecked === false) {
+    //   $scope.flag = 0;
+    //   $scope.GST = "0";
+    // } else {
+    //   $scope.flag = 1;
+    // }
     AdminCampaignService.finalizeCampaignByAdmin(
       $scope.campaignDetails.id, $scope.flag, $scope.GST
     ).then(function (result) {

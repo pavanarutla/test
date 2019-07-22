@@ -140,7 +140,7 @@
 									<tr>
 										<td><b>Actual Budget</b></td>
 										<td>
-											<span ng-if="metroCampDetails.act_budget">Rs.</span>{{TOTAL || "0"}}
+											<span ng-if="metroCampDetails.act_budget">Rs.</span>{{metroCampDetails.Metrototalamount || "0"}}
 										</td>
 									</tr>
 									<tr>
@@ -217,7 +217,7 @@
 		</div>
 		<div class="">
 			<div class="md-grid-item-content hoarding-btn">
-				<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status == 1121">					
+				<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status == 1141">					
 					Add Package
 				</md-button>
 			</div>
@@ -281,13 +281,14 @@
 						</tr>
 						<tr>
 							<td class="text-right text_color">
-								<input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
-									ng-change="uncheck(checked)" /><b>18% GST :</b></td>
-							<td>{{ GST |number : 2 ||"N/A" }}</td>
+								<!-- <input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
+									ng-change="uncheck(checked)" /><b> -->
+								18% GST :</b></td>
+							<td>{{ metroCampDetails.gstAmount |number : 2 ||"N/A" }}</td>
 						</tr>
 						<tr>
 							<td class="text-right"><b>Grand Total :</b></td>
-							<td><b>{{TOTAL | number : 2}}</b></td>
+							<td><b>{{metroCampDetails.Metrototalamount | number : 2}}</b></td>
 						</tr>
 					</table>
 					<div class="mt-4" ng-if="metroCampDetails.status < 1121">
@@ -323,11 +324,11 @@
 							<td class="text-right text_color">
 								<input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
 									ng-change="uncheck(checked)" /><b>18% GST :</b></td>
-							<td>{{ GST |number : 2 ||"N/A" }}</td>
+							<td>{{ metroCampDetails.gstAmount |number : 2 ||"N/A" }}</td>
 						</tr>
 						<tr>
 							<td class="text-right"><b>Grand Total :</b></td>
-							<td><b>{{TOTAL | number : 2}}</b></td>
+							<td><b>{{metroCampDetails.Metrototalamount | number : 2}}</b></td>
 						</tr>
 					</table>
 					<div class="mt-4" ng-if="metroCampDetails.status < 1121">
