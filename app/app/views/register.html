@@ -1,3 +1,11 @@
+<style>
+@media screen and (max-width:575px){
+	.form_mobile{
+		margin-left: 10px;
+    	margin-right: 10px;
+	}
+}
+</style>
 <!-- Register pages-->
 <div class="sign_bgcolor">
 	<md-dialog class="mx-auto reg_width" flex-xs="100" flex="40" flex-md="60" flex-sm="60">
@@ -15,7 +23,7 @@
 				</md-nav-bar>
 				<div ng-if="showUserForm">
 					<md-content class="md-padding" style="background:#fff">
-						<form class="mt-2" name="forms.registerUser" novalidate="novalidate">
+						<form class="mt-2 form_mobile" name="forms.registerUser" novalidate="novalidate">
 							<div class="form-group row">
 								<input class="form-control md-whiteframe-2dp" ng-model="user.name" name="name" type="text" maxlength="30"
 								 placeholder="Your Name * " required><br>
@@ -78,7 +86,7 @@
 				</div>
 				<div ng-if="showOwnerForm">
 					<md-content class="md-padding" style="background:#fff">
-						<form class="mt-2" name="forms.registerClientForm" novalidate="novalidate">
+						<form class="mt-2 form_mobile" name="forms.registerClientForm" novalidate="novalidate">
 							<div class="form-group row">
 								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="ownername" type="text" maxlength="30"
 								 placeholder="Your Name * " required><br>
