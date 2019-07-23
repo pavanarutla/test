@@ -1,29 +1,23 @@
 <div layout="column" layout-fill="layout-fill" class="campagin_page">
 	<md-tabs md-dynamic-height class="padding_cmp">
 		<md-tab label="Companies">
-			<!-- <div layout-align="center end" layout="column" flex="100">
-						<md-button class="md-raised md-warn all_button" ng-click="showAddCompanyPopup()">
-							Add New Company
-						</md-button>
-					</div> -->
-			<div class="hide-xs" layout="row">
+			<div layout="row">
 				<div flex></div>
 				<div class="dropdown">
 					<md-button class="md-raised all_button" onclick="addnewCompany()">Add New Company</md-button>
-					<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="width:300px;">
-						<md-content class="md-padding" style="background: #fff;">
-							<div layout="row" layout-margin>
-								<h4>Enter Company Details</h4>
-								<div flex></div>
-								<md-button class="md-icon-button md-button" type="button"  onclick="addnewCompany()">
-									<i class="material-icons">close</i>
-									<div class="md-ripple-container"></div>
-								</md-button>
+					<div id="myDropdown" class="dropdown-content contbg animated fadeInDown" style="min-width:300px;z-index: 9;">
+						<md-content  style="background: #fff;">
+							<div class="row ml-0 mr-0 pt-2">
+								<h5 class="">Enter Company Details</h5>
+								
+								<button class="ml-auto"  type="button"  onclick="addnewCompany()">
+									X
+								</button>
 							</div>
-							<form name="addCompanyForm" novalidate="novalidate">
+							<form name="addCompanyForm" novalidate="novalidate" class="mt-2">
 								<input type="hidden" ng-model="company.id" />
 								<div layout="column" layout-xs="column" flex="100">
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 										<input ng-model="company.name" type="text" name="name" placeholder="Company Name" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
 										 aria-invalid="true" />
 										<div ng-messages="addCompanyForm.name.$error" ng-if="addCompanyForm.name.$touched" style="color: red;" class="ng-scope ng-active"
@@ -31,7 +25,7 @@
 											<div ng-message="required" class="ng-scope">Company Name is required.</div>
 										</div>
 									</div>
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 											<input ng-model="company.company_type" type="text" name="company_type" placeholder="Company Type" minlength="2" maxlength="60" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
 											 aria-invalid="true" />
 											<div ng-messages="addCompanyForm.company_type.$error" ng-if="addCompanyForm.company_type.$touched" style="color: red;" class="ng-scope ng-active"
@@ -39,41 +33,41 @@
 												<div ng-message="required" class="ng-scope">Company Type is required.</div>
 											</div>
 										</div>
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 											<input ng-model="company.contact_name" type="text" name="contact_name" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9_-\s]+$/" placeholder="Contact Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
 											<div ng-messages="addCompanyForm.contact_name.$error" ng-if="addCompanyForm.contact_name.$touched" style="color: red;" class="ng-scope ng-active"
 											 aria-live="assertive">
 												<div ng-message="required" class="ng-scope">Contact Name is required.</div>
 											</div>
 										</div>
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 											<input  ng-model="company.contact_email" name="email" type="email" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/" placeholder="Email" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
 											<div ng-messages="addCompanyForm.email.$error" ng-if="addCompanyForm.email.$touched" style="color: red;" class="ng-scope ng-active"
 											 aria-live="assertive">
 												<div ng-message="required" class="ng-scope">Email is required.</div>
 											</div>
 										</div>
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 											<input  ng-model="company.contact_phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" placeholder="Phone No" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
 											<div ng-messages="addCompanyForm.phone.$error" ng-if="addCompanyForm.phone.$touched" style="color: red;" class="ng-scope ng-active"
 											 aria-live="assertive">
 												<div ng-message="required" class="ng-scope">Phone No is required.</div>
 											</div>
 										</div>
-									<div class="form-group row">
+									<div class="form-group row ml-0 mr-0">
 											<input  ng-model="company.address" type="text" name="address" required="required" placeholder="Address" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
 											<div ng-messages="addCompanyForm.address.$error" ng-if="addCompanyForm.address.$touched" style="color: red;" class="ng-scope ng-active"
 											 aria-live="assertive">
 												<div ng-message="required" class="ng-scope">Address is required.</div>
 											</div>
 										</div>
-									<div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
+									<!-- <div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
 										<ul>
 											<li ng-repeat="error in comapnyErrors">
 												{{error}}
 											</li>
 										</ul>
-									</div>
+									</div> -->
 								</div>
 								<div layout="row" layout-align="center center">
 									<md-button Class="md-raised md-primary register_btn" type="submit" ng-click="addCompany()" ng-disabled="addCompanyForm.$invalid">Submit</md-button>
@@ -130,89 +124,83 @@
 			</div>
 		</md-tab>
 		<md-tab label="Clients">
-			<!-- <div layout-align="center end" layout="column" flex="100">
-				<md-button class="md-raised md-warn all_button" ng-click="showAddClientPopup()">
-					Add New Client
-				</md-button>
-			</div> -->
-			<div class="hide-xs" layout="row">
-					<div flex></div>
-					<div class="dropdown">
-						<md-button class="md-raised all_button" onclick="addnewClient()">Add New Client</md-button>
-						<div id="myDropdownclient" class="dropdown-content contbg animated fadeInDown" style="width:300px;">
-							<md-content class="md-padding" style="background: #fff;">
-								<div layout="row" layout-margin>
-									<h4>Enter Client Details</h4>
-									<div flex></div>
-									<md-button class="md-icon-button md-button" type="button" onclick="addnewClient()">
-										<i class="material-icons">close</i>
-										<div class="md-ripple-container"></div>
-									</md-button>
-								</div>
-								<form name="addClientForm" novalidate="novalidate">
-									<input type="hidden" ng-model="company.id" />
-									<div layout="column" layout-xs="column" layout-padding flex="100">
-										<div class="form-group row">
-											<input ng-model="client.name" type="text" name="name" minlength="5" maxlength="60" required="required" placeholder="Client Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
-											 aria-invalid="true" />
-											<div ng-messages="addClientForm.name.$error" ng-if="addClientForm.name.$touched" style="color: red;" class="ng-scope ng-active"
-											 aria-live="assertive">
-												<div ng-message="required" class="ng-scope">Client Name is required.</div>
-											</div>
-										</div>
-										<div class="form-group row">
-												<input ng-model="client.type" type="text" name="clientType" placeholder="Client Type" minlength="2" maxlength="60" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
-												 aria-invalid="true" />
-												<div ng-messages="addClientForm.clientType.$error" ng-if="addClientForm.clientType.$touched" style="color: red;" class="ng-scope ng-active"
-												 aria-live="assertive">
-													<div ng-message="required" class="ng-scope">Client Type is required.</div>
-												</div>
-											</div>
-										<div class="form-group row">
-												<input ng-model="client.contact_name" type="text" name="contactName" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/" placeholder="Contact Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
-												<div ng-messages="addClientForm.contactName.$error" ng-if="addClientForm.contactName.$touched" style="color: red;" class="ng-scope ng-active"
-												 aria-live="assertive">
-													<div ng-message="required" class="ng-scope">Contact Name is required.</div>
-												</div>
-											</div>
-										<div class="form-group row">
-												<input ng-model="client.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" placeholder="Phone No" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
-												<div ng-messages="addClientForm.phone.$error" ng-if="addClientForm.phone.$touched" style="color: red;" class="ng-scope ng-active"
-												 aria-live="assertive">
-													<div ng-message="required" class="ng-scope">Phone No is required.</div>
-												</div>
-											</div>
-											<div class="form-group row">
-													<input  ng-model="client.contact_email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/" placeholder="Email" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
-													<div ng-messages="addClientForm.email.$error" ng-if="addClientForm.email.$touched" style="color: red;" class="ng-scope ng-active"
-													 aria-live="assertive">
-														<div ng-message="required" class="ng-scope">Email is required.</div>
-													</div>
-												</div>
-										<div class="form-group row">
-												<input ng-model="client.address" type="text" name="address" required="required" placeholder="Address" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
-												<div ng-messages="addClientForm.address.$error" ng-if="addClientForm.address.$touched" style="color: red;" class="ng-scope ng-active"
-												 aria-live="assertive">
-													<div ng-message="required" class="ng-scope">Address is required.</div>
-												</div>
-											</div>
-										<div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
-											<ul>
-												<li ng-repeat="error in comapnyErrors">
-													{{error}}
-												</li>
-											</ul>
+			<div layout="row">
+				<div flex></div>
+				<div class="dropdown">
+					<md-button class="md-raised all_button" onclick="addnewClient()">Add New Client</md-button>
+					<div id="myDropdownclient" class="dropdown-content contbg animated fadeInDown" style="min-width:300px;z-index: 9;">
+						<md-content style="background: #fff;">
+							<div class="row ml-0 mr-0 pt-2">
+								<h4 class="">Enter Client Details</h4>
+								<div flex></div>
+								<button type="button" onclick="addnewClient()">
+									X
+								</button>
+							</div>
+							<form name="addClientForm" novalidate="novalidate" class="mt-2">
+								<input type="hidden" ng-model="company.id" />
+								<div layout="column" layout-xs="column" flex="100">
+									<div class="form-group row ml-0 mr-0">
+										<input ng-model="client.name" type="text" name="name" minlength="5" maxlength="60" required="required" placeholder="Client Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+											aria-invalid="true" />
+										<div ng-messages="addClientForm.name.$error" ng-if="addClientForm.name.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Client Name is required.</div>
 										</div>
 									</div>
-									<div layout="row" layout-align="center center">
-											<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addClient(client)" ng-disabled="addClientForm.$invalid">Submit</md-button>
-											<md-button Class="md-raised register_btn" onclick="addnewClient()">Cancel</md-button>
+									<div class="form-group row ml-0 mr-0">
+										<input ng-model="client.type" type="text" name="clientType" placeholder="Client Type" minlength="2" maxlength="60" required="required" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
+											aria-invalid="true" />
+										<div ng-messages="addClientForm.clientType.$error" ng-if="addClientForm.clientType.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Client Type is required.</div>
 										</div>
-								</form>
-							</md-content>
-						</div>
+									</div>
+									<div class="form-group row ml-0 mr-0">
+										<input ng-model="client.contact_name" type="text" name="contactName" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/" placeholder="Contact Name" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+										<div ng-messages="addClientForm.contactName.$error" ng-if="addClientForm.contactName.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Contact Name is required.</div>
+										</div>
+									</div>
+									<div class="form-group row ml-0 mr-0">
+										<input ng-model="client.phone" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" placeholder="Phone No" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+										<div ng-messages="addClientForm.phone.$error" ng-if="addClientForm.phone.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Phone No is required.</div>
+										</div>
+									</div>
+									<div class="form-group row ml-0 mr-0">
+										<input  ng-model="client.contact_email" name="email" type="email" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/" placeholder="Email" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+										<div ng-messages="addClientForm.email.$error" ng-if="addClientForm.email.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Email is required.</div>
+										</div>
+									</div>
+									<div class="form-group row ml-0 mr-0">
+										<input ng-model="client.address" type="text" name="address" required="required" placeholder="Address" class="form-control md-whiteframe-3dp ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched" aria-invalid="true" />
+										<div ng-messages="addClientForm.address.$error" ng-if="addClientForm.address.$touched" style="color: red;" class="ng-scope ng-active"
+											aria-live="assertive">
+											<div ng-message="required" class="ng-scope">Address is required.</div>
+										</div>
+									</div>
+									<div class="serverErrors" ng-if="comapnyErrors" style="padding-left:0px;">
+										<ul>
+											<li ng-repeat="error in comapnyErrors">
+												{{error}}
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div layout="row" layout-align="center center">
+										<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addClient(client)" ng-disabled="addClientForm.$invalid">Submit</md-button>
+										<md-button Class="md-raised register_btn" onclick="addnewClient()">Cancel</md-button>
+									</div>
+							</form>
+						</md-content>
 					</div>
 				</div>
+			</div>
 			<div style="margin-top: 1em;">
 				<div class="table-responsive">
 					<table class="table table-hover call_center">
@@ -262,16 +250,13 @@
 		</md-tab>
 	</md-tabs>
 </div>
-
-
 <script>
 	function addnewCompany() {
 		document.getElementById("myDropdown").classList.toggle("show");
 	}
 </script>
-
 <script>
-		function addnewClient() {
-			document.getElementById("myDropdownclient").classList.toggle("show");
-		}
-	</script>
+	function addnewClient() {
+		document.getElementById("myDropdownclient").classList.toggle("show");
+	}
+</script>
