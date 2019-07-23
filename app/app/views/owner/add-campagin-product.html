@@ -170,7 +170,9 @@ md-icon{
             </select>
           </td>
           <td>
-            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button></td>
+            <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button>
+            <md-button class="md-raised all_button " ng-click="clearOwnerProductFilter(product)" onClick="onClickHandler(this)" style="margin: 0px;">Clear Filters</md-button>
+          </td>
           <td class="text-right"><md-button class="md-raised md-primary all_button" ng-href="#/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}"  style="margin: 0px;margin-right:8px;" ng-disabled="selectedOwnerCampaign.products.length == 0">view campaign</md-button></td>
         </tr>
       </tbody>

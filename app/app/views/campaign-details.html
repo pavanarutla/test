@@ -265,15 +265,6 @@
 <!-- table grid end -->
 <div class="row border_quest mr-0 ml-0">
 </div>
-<div class="small-wrapper mt0"  ng-if="campaignDetails.status == 100">
-    <div class="smallContainer">
-        <div class="payment-summary">
-            <md-button class="md-raised md-primary all_button book_campowner" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
-        </div>
-    </div>
-</div>
-
-
 <!-- <div class="row border_quest" ng-if="campaignDetails.status == 100"> -->
     <!-- <div class="offset-md-11 col-md-1 mt-4 mb-4 float-right">
                 <md-button class="md-raised md-primary" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Pay & Launch Campaign</md-button>
@@ -308,30 +299,39 @@
         <md-button class="md-raised all_button" ng-click="requestProposalForCampaign(campaignDetails.id, $event)"
             style="float: right;">Request Proposal</md-button>
     </div> -->
-    <!-- <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" >
+    <!-- <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" > -->
         <div class="small-wrapper mt0">
             <div class="smallContainer">
                 <div class="payment-summary">
                     <ul id="double">
                         <li class="col1">Total :</li>
                         <li class="col2">{{campaignDetails.act_budget}}</li>
-                        <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true"
-                                ng-change="gstuncheck(checked)" />18% GST :</li>
-                        <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+                        <!-- <input type="checkbox" ng-model="checked" ng-init="checked = true"
+                                ng-change="gstuncheck(checked)" /> -->
+                        <li class="col1 text_color">18% GST :</li>
+                        <li class="col2 text_color">{{ campaignDetails.gstAmount |number : 2 ||"N/A" }}</li>
                     </ul>
-                    <ul id="total" ng-if="campaignDetails.status < 700">
+                    <ul id="total">
                         <li class="col1">Grand Total :</li>
-                        <li class="col2">{{TOTAL| number : 2}}</li>
-                        <li class="col3"><input type="checkbox" ng-model="request_execute" />Request Executive to
+                        <li class="col2">{{campaignDetails.totalamount| number : 2}}</li>
+                        <!-- <li class="col3"><input type="checkbox" ng-model="request_execute" />Request Executive to
                             collect cash
                             / cheque</li>
                         <li style="text-align: center;margin-left: 100px;">
                             <md-button class="md-raised md-primary" ng-disabled="!request_execute"
                                 ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay & Launch Campaign
                             </md-button>
-                        </li>
+                        </li> -->
                     </ul>
+                    <md-button class="md-raised md-primary all_button book_campowner" ng-if="campaignDetails.status == 100" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
                 </div>
+            </div>
+        </div>
+    <!-- </div> -->
+    <!-- <div class="small-wrapper mt0"  ng-if="campaignDetails.status == 100">
+        <div class="smallContainer">
+            <div class="payment-summary">
+                
             </div>
         </div>
     </div> -->

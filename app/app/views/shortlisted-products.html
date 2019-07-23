@@ -9,6 +9,7 @@
 					<th>Product Details</th>
 					<th class="hide-xs"></th>
 					<th>Size</th>
+					<th>Views</th>
 					<th>Booked From</th>
 					<th>Booked To</th>
 					<th>Price In INR</th>
@@ -25,16 +26,20 @@
 						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face" class="requ_size img-thumbnail">
 					</td>
 					<td class="table_address">
-						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.area_name}}</b><br>
-							<b style="color: #44596D;">Address:</b>{{ shortlisted.addressone || "N/A"}} {{ shortlisted.addresstwo}}<br>
-							<b style="color: #44596D;">Views :</b> {{shortlisted.impressions || '0'}} Per Week<br>
-							<b style="color: #44596D;">Type :</b> {{shortlisted.type || "N/A"}}<br>				<span ng-if="shortlisted.type === 'Digital Bulletin' && 'Transit'"><b style="color: #44596D;">No Of Slots :</b> {{shortlisted.booked_slots || "N/A"}}</span>			
+						<p class=""><b>{{shortlisted.siteNo}} - {{shortlisted.title}}</b><br>
+							<b style="color: #44596D;">Address:</b>{{ shortlisted.address}}<br>
+							<b style="color: #44596D;">State:</b>{{ shortlisted.state_name}}<br>
+							<b style="color: #44596D;">Venue:</b>{{ shortlisted.venue}}<br>
+							<b style="color: #44596D;">Type :</b> {{shortlisted.type || "N/A"}}<br>
+							<b style="color: #44596D;">Venue:</b>{{ shortlisted.direction}}<br>							
+							<span ng-if="shortlisted.type === 'Digital Bulletin' && 'Transit'"><b style="color: #44596D;">No Of Slots :</b> {{shortlisted.booked_slots || "N/A"}}</span>			
 							<!-- Live Traffic:
 							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
 								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button> -->
 						</p>						
 					</td>
 					<td class="table_vertical">{{shortlisted.panelSize || "N/A"}}</td>
+					<td class="table_vertical"> {{shortlisted.impressions || '0'}}</td>
 					<td class="table_vertical">{{shortlisted.from_date | dateify | date: "dd-MMM-yyyy"}}
 					</td>
 					<td class="table_vertical">{{shortlisted.to_date | dateify | date: "dd-MMM-yyyy"}}

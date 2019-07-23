@@ -710,6 +710,10 @@ $scope.hidebutton = function(){
             return res;
         });
     }
+    $scope.clearOwnerProductFilter = function(product){        
+        $scope.product = {};
+        loadOwnerProductList("All")
+      }
 
     $scope.applymethod = function (product) {
         var data = {};
