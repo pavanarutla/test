@@ -1,6 +1,6 @@
 app.controller('GmapCtrl',
-    ['$scope', '$location', '$auth', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr', '$state',
-        function ($scope, $location, $auth, NgMap, $mdSidenav, $mdDialog, $timeout, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr, $state) {
+    ['$scope', '$location', '$auth', 'NgMap', '$mdSidenav', '$mdDialog', '$timeout','$window', '$rootScope', 'MapService', 'LocationService', 'ProductService', 'CampaignService', 'FileSaver', 'Blob', 'config', 'toastr', '$state',
+        function ($scope, $location, $auth, NgMap, $mdSidenav, $mdDialog, $timeout, $window, $rootScope, MapService, LocationService, ProductService, CampaignService, FileSaver, Blob, config, toastr, $state) {
             $scope.forms = {};
             $scope.address = {
                 // name: 'Hyderabad, Telangana, India',
@@ -1623,10 +1623,11 @@ app.controller('GmapCtrl',
                         $scope.campaign.name = null;   
                         $scope.toggleExistingCampaignSidenav();                
                         $scope.toggleProductDetailSidenav();
+                        $window.location.href = '#/campaign-details/' + res.campaign_id;
                         toastr.success(res.message)                        
                     } else if (res.status == 0) {
                         toastr.error(res.message)
-                    }
+                    }                   
                 })
             }
             $scope.numOfSlots = 0;
