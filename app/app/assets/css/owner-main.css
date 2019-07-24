@@ -23,7 +23,7 @@ body a:hover {
 }
 .main_view{
     /* margin-bottom:40px; */
-    padding: 65px 0 40px 180px;
+    padding: 65px 0 28px 180px;
 }
 .contbg{
     background: #fff !important;
@@ -211,11 +211,6 @@ line-height: 32px;
         padding-right: 0px;
     }
 }
-@media screen and (max-width:400px){
-    .mobile_login_btn{
-        display: none;
-    }
-}
 /*main header css end */
 .logo_image{
     width:124px;
@@ -356,6 +351,7 @@ md-menu-item>.md-button {
 }
 .button_leftlast{
     margin-left: 0px;
+    margin-right: 0px;
 }
 .md-button {
     text-transform: capitalize;
@@ -595,7 +591,20 @@ md-autocomplete input:not(.md-input) {
     font-size: 15px;
     font-weight: 700;
 }
+.addshare_campowner{
+    float: right;
+}
+.book_campuser{
+    float: right;
+}
+.book_admincamp{
+    float: right;
+}
 .book_campowner{
+    float: right;
+    /* margin-right: 0px; */
+}
+.book_campownerbutton{
     float: right;
     margin-right: 0px;
 }
@@ -927,6 +936,12 @@ ul.dropdown-menu.drp-mnu li {
     text-transform: capitalize;
 } */
 .campaign_search {
+    position: absolute;
+    right: 0;
+    width: 45%;
+    z-index: 1 !important;
+}
+.campaign_create{
     position: absolute;
     right: 0;
     width: 45%;
@@ -1458,12 +1473,6 @@ table {
     .camp_tableadmin{
         width: 105px;
     }
-    .add_paymentowner{
-        right: 0px !important;
-    }
-    .add_paymentadmin{
-        right: -10px !important;
-    }
     .share_campviews{
         right: 6px !important;
     }
@@ -1486,7 +1495,10 @@ table {
     .apply_mob {
         padding-top: 8px !important;
     }
-    .contant_drop{
+    /* .contant_drop{
+        margin-right: -198px;
+    } */
+    contant_ownerupdate{
         margin-right: -198px;
     }
     .dropdown-content {
@@ -1498,7 +1510,62 @@ table {
         right: 8px;
         z-index: 1;
     }
+    .add_paymentowner{
+        right: 0px !important;
+        left: -96px !important;
+    }
+    .addshare_campowner{
+        float: left;
+    }
+    .book_campowner{
+        float: left;
+    }
+    .camp_preparing{
+        left:10px;
+        overflow: hidden;
+    }
+    .book_campuser{
+        float: left;
+    }
+    .book_admincamp{
+        float: left;
+    }
+    .share_usercamp{
+        left:10px;
+        overflow: hidden;
+    }
+    .add_paymentadmin{
+        left: -184px !important;
+    }
+    .form_width{
+        max-width: 290px !important;
+        border-radius:0px;
+        margin-top: 150px;
+    }
+    .reg_width{
+        max-width: 290px !important;
+        border-radius:0px;
+        margin-top: 150px;
+    }
     #exampleModalCenter {
+        top: 50%;
+        left: 56%;
+        width: 27em;
+        height: 18em;
+        margin-top: -9em;
+        margin-left: -15em;
+        position: fixed;
+    }
+    #sharePopup{
+        top: 50%;
+        left: 56%;
+        width: 27em;
+        height: 18em;
+        margin-top: -9em;
+        margin-left: -15em;
+        position: fixed;
+    }
+    #sharePopupdate{
         top: 50%;
         left: 56%;
         width: 27em;
@@ -1659,7 +1726,11 @@ table {
         margin-left: 0px;
     }
     .close_mb {
-        margin-top: -23px;
+        margin-top: 7px;
+        margin-left: 0px;
+    }
+    .close_rg {
+        margin-top: 7px;
         margin-left: -10px;
     }
     .card-signin .card-body {
@@ -1679,6 +1750,12 @@ table {
     }
     .add_filtermobile{
         width: 240px;
+    }
+    .all_filtermobile{
+        width: 160px;
+    }
+    .all_formfilter{
+        width: 160px;
     }
     .add_filterby{
         margin-right:10px;
@@ -1700,6 +1777,12 @@ table {
         position: relative;
         right: 0px;
         width: 45%;
+        z-index: 1 !important;
+    }
+    .campaign_create{
+        position: relative;
+        right: 0px;
+        width: 100%;
         z-index: 1 !important;
     }
     .request_adminbutton{
@@ -1780,6 +1863,9 @@ table {
     .hide_gt_xs{
         display: none !important;
     }
+    .apply_mob {
+        padding-top: 8px !important;
+    }
 }
 @media screen and (min-width:320px) and (max-width: 407px){
 .hide-browse{
@@ -1795,11 +1881,24 @@ table {
     .hide-sm{
         display: none ;
     } 
+    .table_user {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
     .hide-md{
         display: none;
     }
     .owner__sidenav{
         margin-top: 56px !important;
+    }
+    .table {
+        width: 200%;
+        max-width: 200%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+    }
+    .table_campmob{
+        margin-top:10px;
     }
     /* .second-method p {
         float: left;
@@ -1848,6 +1947,19 @@ table {
         /* padding: 0.25rem; */
         vertical-align: top;
         border-top: 1px solid #e9ecef;
+    }
+    .table_user {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .table_address{
+        width: 220px;
+    }
+    .table {
+        width: 150%;
+        max-width: 150%;
+        margin-bottom: 1rem;
+        background-color: transparent;
     }
     .camp_tableowner {
         width: 169px;
@@ -1920,6 +2032,6 @@ table {
 }
 @media screen and (max-width: 990px){
     .main_view {
-        padding: 65px 0 40px 0px;
+        padding: 65px 0 28px 0px;
     }
 }

@@ -76,7 +76,7 @@ md-icon{
 </style>
 <!-- <div layout="column" class="owner_hoarding_list"> -->
 <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent"
-    class="logo hs-lg hide-gt-md hide-md">
+    class="logo hide-xs hs-lg hide-gt-md hide-md">
     <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
 </md-button>
 
@@ -619,10 +619,10 @@ md-icon{
 </div>
 <!-- filters-->
 <div class="table-responsive">
-        <table class="table">
+        <table class="table table_user">
           <tbody>
             <tr>
-              <td>
+              <td class="hide-xs hide-sm">
                 <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem"
                     md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)"
                     md-search-text-change="viewSearchText(searchText)" md-items="item in productSearch(searchText)"
@@ -643,23 +643,23 @@ md-icon{
                 </md-autocomplete>
             </td>
               <td>
-                <div class="form-group">
+                <div class="form-group all_formfilter">
                     <select id="productType" ng-options="productType.name for productType in ProductTypes"
-                        ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
-                         data-md-container-class="selectdemoSelectHeader"
+                        ng-model="product.type" class="form-control md-whiteframe-3dp all_filtermobile"
+                        data-md-container-class="selectdemoSelectHeader"
                         name="productType">                       
                     </select>
                 </div></td>
-                <td style="width: 170px;">
+                <td class="hide-xs hide-md" style="width: 170px;">
                         <md-datepicker class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false"
                         md-placeholder="Available From" layout-fill style="border: none;padding: 0px;"></md-datepicker>
               </td>
-              <td style="width: 170px;">
+              <td class="hide-xs hide-md" style="width: 170px;">
                     <md-datepicker class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false"
                     md-placeholder="Available To" md-min-date="product.start_date" layout-fill style="border: none;padding: 0px;">
                 </md-datepicker>
               </td>
-              <td style="width: 170px;">
+              <td class="hide-xs" style="width: 170px;">
                 <select class="form-control" ng-model="product.budgetprice" id="sel1"
                     ng-change="getBudget(product.budgetprice)">
                     <option value="" disabled selected>Budget</option>
@@ -731,7 +731,7 @@ md-icon{
 
 
 <!-- product list -->
-<div class="table-responsive" style="margin-bottom:115px !important">
+<div class="table-responsive">
 
     <table class="table">
         <thead class="text_color">

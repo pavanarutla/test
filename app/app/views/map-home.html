@@ -33,6 +33,11 @@
       height: 90vh;
       margin-top: 64px;
     }
+    .sidenav_imageright{
+      z-index:10 !important;
+      width: 410px !important;
+      max-width:410px !important;
+    }
     .md-datepicker-calendar-pane{
     width: 304px;
     }
@@ -48,19 +53,33 @@
     .gmnoprint .gm-style-cc{
       right: 0px !important;
     }
+
+    @media screen and (max-width:575px){
+      .sidenav-listview {
+          width: 300px !important;
+          max-width: 300px !important;
+          z-index: 9 !important;
+          height: 90vh;
+          margin-top: 64px;
+      }
+      .sidenav_imageright{
+          z-index:10 !important;
+          width: 300px !important;
+          max-width:300px !important;
+        }
+    }
   </style>
   <div layout="column" style="position:relative">
   
     <!-- Selected product detail sidenav-->
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map" md-component-id="productDetails"
-      style="z-index:10 !important;width: 500px !important;max-width:500px !important;" >    
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width_map sidenav_imageright" md-component-id="productDetails">    
       <md-content class="save_r_excited">
         <div class="inner">
           <div class="row" style="margin-right:0px;">
-            <div class="col-md-11">
+            <div class="col-md-11 col-10">
                 <h5 class="font-weight-bold ml-3 mt-3 mb-1">{{product.siteNo}} &nbsp; {{product.area_name}}</h5>
             </div>
-            <div class="col-md-1 text-right mt-3">
+            <div class="col-md-1 col-1 text-right mt-3">
                 <a class="close-btn" ng-click="toggleProductDetailSidenav()">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
@@ -75,54 +94,54 @@
           </div>
             
           <div class="row mt-2" style="margin-right:0px;">
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Type</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.type}}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Size</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.panelSize}}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Venue</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.venue}}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Address</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.address}}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Ethinicity</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.ethnicity}}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Demographic</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                   <p class="mb-1 ml-2" ng-repeat = "demoage in product.demographicsage">
                       : Age: {{demoage.fromage}} - {{demoage.toage}} : <span class="font-weight-bold">{{demoage.percentage}}%</span><br>                     
                   </p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Impressions</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-6">
                     <p class="font-weight-bold mb-1 ml-2">: {{product.impressions || '0'}} per week</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Price</p>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 col-6">
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Bulletin' ">: $ {{product.price}} for 28 days</p>
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Digital' || product.type == 'Transit Digital' ">: $ {{product.price}} for 7 days</p>
                 </div>
@@ -133,8 +152,8 @@
           <hr class="ml-3 mr-3">
           <ul style="list-style: disc;padding-left: 28px;" ng-repeat="strength in product.strengths">
             <li> {{strength.strname | capitalize}}</li>
-              <hr class="ml-3 mr-3">
           </ul>
+          <hr class="ml-3 mr-3">
         
           <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
             <div layout="column" class="" style="padding:8px">
@@ -162,33 +181,33 @@
           <div class="Order_S pb-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
             <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
             <div class="row mt-2 mb-2" style="margin-right:0px;">
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
-                <div class="col-md-9" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
+                <div class="col-md-9 col-6" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
                   <!-- <p class="font-weight-bold mb-1 ml-2" style="float: left;" ></p> -->
-                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
+                  <a class="font-weight-bold ml-2" id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
                     : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}
                   </a>
                   <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Total Price</p>
                 </div>
-                <div class="col-md-7">
-                    <p class="mb-1 ml-2">: <span class="font-weight-bold">{{totalPriceUserSelected | currency:undefined:0}}</span> ( {{totalnumDays}} Days selected )</p>
+                <div class="col-md-7 col-8">
+                    <p class="mb-1 ml-2"><b>:</b> <span class="font-weight-bold">{{totalPriceUserSelected | currency:undefined:0}}</span> ( {{totalnumDays}} Days selected )</p>
                 </div>
             </div>
               
             
             <div class="row m-0">
-              <div class="col-md-6 ">
+              <div class="col-md-3 col-6">
                 <md-button class="md-raised md-primary all_button m-0"
                   ng-click="toggleExistingCampaignSidenav()" >
                   Book Product
                 </md-button>
               </div>
-            <div class=" col-md-6 text-right">
+            <div class="col-md-3 col-6">
               <md-button class="md-raised md-warn Upload_font m-0"                 
                 ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">
                 Shortlist
@@ -197,8 +216,7 @@
             </div>
           </div>  
         </div>
-        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
-          style="width:320px;position: absolute;left: 100px;margin-bottom:50px;padding:5px; ">
+        <div class="book_prodct md-whiteframe-2dp float-right " ng-show="showSaveCampaignPopup">
           <form name="forms.mySaveCampaignForm">
             <div layout="row">
                 <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
@@ -583,7 +601,7 @@
         <div layout="column" class="formats_block md-whiteframe-2dp mt-2">
           <div class="main-part" layout="column" ng-click="formats()" style="cursor:pointer;padding: 5px 10px;">
             <div layout="row">
-              <div class="md-body-1 text-white txt-mrng">Select Ad Formate</div>
+              <div class="md-body-1 text-white txt-mrng">Select Ad Formats</div>
               <div flex></div>
               <div>
               </div>
@@ -751,15 +769,15 @@
   <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-listview" md-component-id="productList">
       <div class="">
           <section class="product_list_view">
-            <div class="wrapper">
+            <div class="">
               <div class="pl-0">        
                 <div class="table-responsive">
-                  <table class="table table-hover">
+                  <table class="table table-hover table_user">
                     <thead class="text_color">
                       <tr>
                         <th>Image</th>
                         <th>Tab ID</th>
-                        <th class="">Product Details</th>
+                        <th class="hide-xs">Product Details</th>
                         <th class="">Price</th>
                         <th class="">
                           <a class="close-btn" ng-click="closedRightMenu()">
@@ -776,7 +794,7 @@
                             style="border-radius: 2px;" />
                         </td>
                         <td class="table_vertical">{{proddetails.siteNo}}<br/> <b>Type:</b>{{proddetails.type}}</td>
-                        <td class="table_vertical">{{proddetails.area_name}} <br/> <b>Size</b> {{proddetails.panelSize}}</td>
+                        <td class="table_vertical hide-xs">{{proddetails.area_name}} <br/> <b>Size</b> {{proddetails.panelSize}}</td>
                         <td class="table_vertical">{{proddetails.price}}</td>               
                         
                         <td class="text-center table_vertical">

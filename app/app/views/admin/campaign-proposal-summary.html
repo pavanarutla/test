@@ -232,31 +232,16 @@
 
     </div> -->
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
-    class="book_campowner">
-        <div class="button_leftright" style="cursor: pointer;">
-            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
-                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download Quotation
-                </md-button>
-                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download>
-                    Download
-                </md-button>               
-            </div>
-        </div>
-        <div class="button_leftright" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
-            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
-                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Product</md-button>
-            </div>
-        </div>
+    class="book_admincamp">
         <div class="button_leftright">
             <div class="dropdown">
                 <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-xs">
                     Share Campaign
                 </md-button>
-                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="margin-left: 0px;">
-                    Share
+                <md-button onclick="AdminshareCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
                 </md-button>
-                <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+                <div id="shareadmincampDrop" class="dropdown-content contbg animated fadeInDown camp_preparing" style="padding:10px;">
                     <form name="forms.adminCampaignForm" role="form" novalidate="novalidate">
                         <div layout="colmun">
                             <span flex></span>
@@ -295,13 +280,28 @@
                 </div>
             </div>
         </div>
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadAdminQuote(campaignDetails.id)" download >
+                    Download Quotation
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadAdminQuote(campaignDetails.id)" download style="margin-left: 0px;margin-right: 0px;min-width: 38px;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                </md-button>               
+            </div>
+        </div>
+        <div class="button_leftright" style="cursor: pointer;"  ng-hide="campaignDetails.status >= 400">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}">                
+                <md-button class="md-raised add_blue" ng-href="#/admin/add-campagin-product/{{campaignDetails.id}}">Add Product</md-button>
+            </div>
+        </div>
         <div class="button_leftlast" ng-hide="campaignDetails.status <= 300">
             <div class="md-grid-item-content hoarding-btn">
                     <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue hide-xs" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300">
                     Payment Details
                 </md-button>
                 </a>
-                <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300"  style="margin-left: 0px;">
+                <a ng-href="#/admin/campaign-payment-details/{{campaignDetails.id}}"><md-button class="md-grid-item-content add_blue hide-gt-lg hide-lg hide-md hide-sm" ng-click="toggleAddMetroProductSidenav()" ng-disabled="campaignDetails.status <= 300">
                     Payment
                 </md-button>
                 </a>
@@ -421,24 +421,24 @@
                               <li class="col2">{{ TOTAL || "0" |number : 2  }}</li>
                             </ul> -->
                             <md-button
-                    class="md-raised md-warn all_button book_campowner"  
+                    class="md-raised md-warn all_button book_campownerbutton"  
                     ng-click="finalizeCampaign(campaignProduct)"
                     ng-if="campaignDetails.status == 300">
                     Send Quote
                 </md-button>
                 <md-button
-                    class="md-raised all_gary book_campowner"  
+                    class="md-raised all_gary book_campownerbutton"  
                     ng-if="campaignDetails.status == 400" disabled="disabled">
                     Quote Sent
                 </md-button>
                 <md-button
-                    class="md-raised md-primary all_button book_campowner"
+                    class="md-raised md-primary all_button book_campownerbutton"
                     ng-if="campaignDetails.status >= 100 && campaignDetails.status < 700"
                     ng-click="launchCampaign(campaignDetails.id, $event)">
                     Confirm Booking
                 </md-button>
                 <md-button
-                    class="md-raised md-primary all_gary book_campowner"
+                    class="md-raised md-primary all_gary book_campownerbutton"
                     ng-if="campaignDetails.status >= 700" ng-disabled="true">
                     Launched
                 </md-button>

@@ -1,4 +1,6 @@
+<style>
 
+</style>
 <div layout="column">
   <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
 		<div class="row" style="margin-left:0px; margin-right:0px;">
@@ -17,7 +19,7 @@
 				<p class="">No of Products</p>
 				<p class="md-caption mob_span mob_5"><b>{{UserPaymentDetails.campaign_details.no_of_products}}</b></p>
 			</div>
-			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng">
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="padding-left: 0px;">
 				<div class="dropdown">
 					<md-button onclick="shareCampaign()" class="dropbtn drop_width">
 							<p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icon">
@@ -25,7 +27,7 @@
 								</i></span></p>
 						<p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Share Campaign</p>
 					</md-button>
-					<div id="myDropdown" class="dropdown-content contbg animated fadeInDown contant_drop share_detailsmob" style="padding:10px;">
+					<div id="myDropdown" class="dropdown-content contbg animated fadeInDown contant_dropuser" style="padding:10px;">
 					<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
 						<div layout="colmun">
 						<span flex></span>
@@ -63,7 +65,7 @@
 				</div>
       </div>
       <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-      style="cursor: pointer;">			
+      style="cursor: pointer;padding-left: 0px;">			
         <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
           <a ng-click="downloadUserQuote(UserPaymentDetails.campaign_details.id)" download>
             <md-button class="dropbtn drop_width">
@@ -75,15 +77,15 @@
           </a>
         </div>
       </div>
-      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
-      style="cursor: pointer;" ng-if="UserPaymentDetails.all_payments.length > 0">			
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+      style="cursor: pointer;padding-left: 0px;" ng-if="UserPaymentDetails.all_payments.length > 0">			
         <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
           <a ng-click="downloadOwnerReciepts(UserPaymentDetails.campaign_details.id)" download>
             <md-button class="dropbtn drop_width">
                 <p class="cmp_bottom md-caption" style="margin-bottom: 0px;"><span><i class="material-icons i_icondown">
                     file_copy
                   </i></span></p>
-              <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Reciepts</p>
+              <p class="mob_spanicon share_icon" style="margin-bottom: 0px;">Download Receipts</p>
             </md-button>
           </a>
         </div>
@@ -108,7 +110,7 @@
       </tbody>
     </table>
   </div>
-  <div ng-if="UserPaymentDetails.status == 0" style="color:red;font-size: 4em;">{{UserPaymentDetails.message}}</div>
+  <div ng-if="UserPaymentDetails.status == 0" class="m-2" style="font-size: 2em;">{{UserPaymentDetails.message}}</div>
 
   <!-- <div class="d-flex bg-light mb-5" style="min-height:100px">
     <div class="p-2 col-md-6">      

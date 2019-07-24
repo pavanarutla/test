@@ -65,44 +65,62 @@
         </div>
       
       <!-- filters-->
-      <form class="form-inline camp_filters" action="">
-        <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
-          md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
-          md-min-length="4" placeholder="Search..." md-clear-button="true">
-          <md-item-template>
-            <span class="item-title">
-              <span> {{item.siteNo}} </span>
-            </span>
-            <span class="item-metadata">
-              <span>
-                <strong>{{item.address}}</strong>
-              </span>
-            </span>
-          </md-item-template>
-        </md-autocomplete>
-        <label class="hide-xs" for="pwd">Filter By:</label>
-        <div class="form-group hide-xs">
-          <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
-          class="form-control md-whiteframe-3dp" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
-          name="productType">
-          <option value="" disabled selected>Site Type</option>
-        </select>
-        </div>
-    
-        <div class="form-group form_cal hide-xs">
-          <md-datepicker  class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
-        </div>
-        <div class="form-group form_cal hide-xs">
-          <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;"></md-datepicker>
-        </div>
-        <div class="form-group form_cal hide-xs">
-          <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
-            <option selected value="1">Budget High to Low</option>
-            <option value="0">Budget Low to High </option>
-          </select>
-        </div>
+
+      <div class="table-responsive">
+          <table class="table table_user">
+            <tbody>
+              <tr>
+                  <td  class="hide-xs">
+                      <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+                        md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+                        md-min-length="4" placeholder="Search..." md-clear-button="true">
+                        <md-item-template>
+                          <span class="item-title">
+                            <span> {{item.siteNo}} </span>
+                          </span>
+                          <span class="item-metadata">
+                            <span>
+                              <strong>{{item.address}}</strong>
+                            </span>
+                          </span>
+                        </md-item-template>
+                      </md-autocomplete>
+                  </td>
+                  <td>
+                      <!-- <label for="pwd" class="add_filterby hide-xs">Filter By:</label> -->
+                        <div class="form-group all_formfilter">
+                          <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+                          class="form-control md-whiteframe-3dp all_filtermobile" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+                          name="productType">
+                          <option value="" disabled selected>Site Type</option>
+                        </select>
+                        </div>
+                  </td>
+                  <td class="hide-xs" style="width: 170px;">
+                      <md-datepicker  class="" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                  </td>
+                  <td class="hide-xs" style="width: 170px;">
+                      <md-datepicker  class="" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                  </td>
+                  <td class="hide-xs" style="width: 170px;">
+                      <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+                          <option selected value="1">Budget High to Low</option>
+                          <option value="0">Budget Low to High </option>
+                        </select>
+                  </td>
+                  <td class="apply_mob">
+                    <md-button class="md-raised md-primary register_btn" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button>
+                    <md-button class="md-raised all_button hide-xs" ng-click="applymethod(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+
+      <!-- <form class="form-inline camp_filters" action="">
+        
         <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
-      </form>
+      </form> -->
     
     
       <!-- product list -->
@@ -131,9 +149,9 @@
               </td>
               <td class="table_address">
                 <p class=""><b>{{adminprod.siteNo}} - {{adminprod.area_name}} ({{adminprod.panelSize}})</b>
-                  <br> {{adminprod.address}}
-                  <br>Facing : {{adminprod.direction}}
-                  <br>Type : {{adminprod.type}}
+                  <br><b style="color: #44596D;">Address</b>: {{adminprod.address}}
+                  <br><b style="color: #44596D;">Facing</b>: {{adminprod.direction}}
+                  <br><b style="color: #44596D;">Type</b>: {{adminprod.type}}
               </td>
               <td class="table_vertical">{{adminprod.impressions}}</td>
               <td class="table_vertical">

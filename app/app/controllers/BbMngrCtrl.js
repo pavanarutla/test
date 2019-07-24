@@ -202,6 +202,17 @@ if($auth.isAuthenticated()){
           $mdSidenav('left').close();
         }
       }
+
+      $scope.closeMenuSidenavIfMobile = function(){
+        if($window.innerWidth <=420){
+          $('#mobileMenu').hide();
+        }
+      }
+      $scope.closeMenuSidenavIfMobile = function(){
+        if($window.innerWidth <=991){
+          $('#mobileMenu').hide();
+        }
+      }
       
 
     $scope.forms = {};

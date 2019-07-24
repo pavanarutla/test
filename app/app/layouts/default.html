@@ -42,9 +42,7 @@
                     </ul>
                     <ul class="air_d__sub-nav air_main_menu d-block d-sm-block d-md-block d-lg-none d-xl-none "
                         style="margin-right:10px">
-                        <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
-                                class="metro_btn">Metro</a></li>
-                        <li class="s-depth1-wrap mobile_login_btn" ng-show="!isAuthenticated"
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated"
                             style=" margin-left:10px;">
                             <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
                         </li>
@@ -52,7 +50,7 @@
                     <ul class="air_d__utility" ng-if="isAuthenticated">
 
                         <div class="dropdown s_login">
-                            <button type="button" class=" saved_campaign dropdown-toggle d-none d-sm-block"
+                            <button type="button" class="saved_campaign dropdown-toggle d-none d-sm-block"
                                 data-toggle="dropdown">
                                 Saved Campaign ({{userSavedCampaigns.length}})
                             </button>
@@ -118,7 +116,7 @@
                                     Campaign</a>
                                 <a class="dropdown-item" ng-href="#/reset_password" style="margin-bottom:15px"> Change
                                     Password</a>
-                                <a ng-click="logout()" class="logout_color" style="    margin: 0 0 0 18px;"> Logout</a>
+                                <a ng-click="logout()" class="logout_color" style="margin: 0 0 0 18px;"> Logout</a>
                             </div>
                         </div>
                     </ul>
@@ -126,23 +124,18 @@
                 </div>
                 <div class="aire_d_drop-mobile d-lg-none d-xl-none " id="mobileMenu">
                     <ul>
-                        <li class=""><a ng-href="#/aboutbbi" class="s-btn-toggler">about bbi</a></li>
-                        <li class=""><a ng-href="#/ourproduct" class="s-btn-toggler">our product</a></li>
-                        <li class=""><a ng-href="#/faq" class="s-btn-toggler">faq</a></li>
-                        <li class=""
+                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/aboutbbi" class="s-btn-toggler">about bba</a></li>
+                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/ourproduct" class="s-btn-toggler">our product</a></li>
+                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/faq" class="s-btn-toggler">faq</a></li>
+                        <li ng-click="closeMenuSidenavIfMobile()"
                             ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
                             <a ng-href="#/suggest/product-detail" class="s-btn-toggler border_right">suggestme</a></li>
-                        <li class="" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)">suggestme</a>
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)">suggestme</a>
                         </li>
-                        <li class=""
+                        <li ng-click="closeMenuSidenavIfMobile()"
                             ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
                             <a ng-href="#/location" class="s-btn-toggler">roadside</a></li>
-                        <!-- <li class="" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
-                                class="metro_btn">Metro</a></li>
-                        <li class=""
-                            ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'">
-                            <a ng-href="#/metro" class="s-btn-toggler">Metro</a></li> -->
-                        <li class="" ng-show="!isAuthenticated">
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
                             <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
                         </li>
                     </ul>
