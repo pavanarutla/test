@@ -352,11 +352,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="contbg">
-                                    <tr ng-repeat="pCampaign in SheduledCampaigns| filter:search ">
-                                        <td class="table_vertical">{{pCampaign.cid|| "N/A"}}</td>
-                                        <td class="table_vertical">{{pCampaign.name | capitalize}}</td>
-                                        <td class="table_vertical">{{pCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
-                                        <td class="text-center table_vertical">{{pCampaign.product_count|| "N/A"}}</td>
+                                    <tr ng-repeat="sCampaign in SheduledCampaigns| filter:search ">
+                                        <td class="table_vertical">{{sCampaign.cid|| "N/A"}}</td>
+                                        <td class="table_vertical">{{sCampaign.name | capitalize}}</td>
+                                        <td class="table_vertical">{{sCampaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+                                        <td class="text-center table_vertical">{{sCampaign.product_count|| "N/A"}}</td>
+                                        <td class="text-center table_vertical">{{sCampaign.act_budget|| '0' | number:2}}</td>
                                         <td class="text-center table_vertical">
                                             <md-menu md-position-mode="target-right target">
                                             <div class="dropdown dropleft float-right">
@@ -364,13 +365,13 @@
                                                 <i class="fa fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{pCampaign.id}}" style="font-size:11px;">
+                                                <a class="dropdown-item pop_view dropactive" ng-href="#/campaign-details/{{sCampaign.id}}" style="font-size:11px;">
                                                 <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
                                                 </a>
-                                                <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(pCampaign.id)" style="font-size:11px;">
+                                                <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(sCampaign.id)" style="font-size:11px;">
                                                 <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
                                                 </a>
-                                                <a class="dropdown-item pop_view dropactive" ng-href="#/update-user-payments/{{pCampaign.id}}" style="font-size:11px;">
+                                                <a class="dropdown-item pop_view dropactive" ng-href="#/update-user-payments/{{sCampaign.id}}" style="font-size:11px;">
                                                 <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
                                                 </a>
                                                 </div>
@@ -378,7 +379,7 @@
                                             </md-menu>
                                         </td>
                                         <td class="text-center table_vertical">
-                                            <span class="text_color md-caption">{{pCampaign.updated_at| dateFormat}}</span>
+                                            <span class="text_color md-caption">{{sCampaign.updated_at| dateFormat}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
