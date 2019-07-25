@@ -1196,7 +1196,7 @@ app.controller('GmapCtrl',
             $scope.$on("removeSelection", function () {
                 $scope.removeSelection();
             })
-            $scope.addProductToExistingCampaign = function (existingCampaignId, productId ) {
+            $scope.addProductToExistingCampaign = function (existingCampaignId, productId ) {          
                 var productToCampaign = {
                     product_id: productId,
                     campaign_id: existingCampaignId,
@@ -1205,13 +1205,14 @@ app.controller('GmapCtrl',
                 $scope.ranges.selectedDateRanges.forEach((item, index) => {
                     productToCampaign.dates.push({startDate : moment(item.startDate).format('YYYY-MM-DD'),endDate : moment(item.endDate).format('YYYY-MM-DD')})
                 })
-                CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {
+                CampaignService.addProductToExistingCampaign(productToCampaign).then(function (result) {                 
                     if (result.status == 1) {
-                        $scope.existingCampaign.id = null;                       
+                        //$scope.existingCampaign.id = null;                       
                         toastr.success(result.message);
                         // $mdSidenav('productDetails').close();
                         $scope.toggleExistingCampaignSidenav();
                         $scope.toggleProductDetailSidenav();
+                        $window.location.href = '#/campaign-details/' + existingCampaignId;
                     } else if (result.status == 0) {
                         toastr.error(result.message);
                     }
