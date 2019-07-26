@@ -345,8 +345,7 @@ app.controller('MetroCtrl',
         });
       }
       $scope.deleteProductFromCampaign = function (metroCampaignId,package) {
-
-        if ($window.confirm("Are you sure you want to delete this package?")) {
+        // if ($window.confirm("Are you sure you want to delete this package?")) {
           MetroService.deleteMetroPackageFromCampaign(metroCampaignId,package).then(function (result) {
             if (result.status == 1) {
               getMetroCampDetails($stateParams.metroCampaignId);
@@ -356,9 +355,9 @@ app.controller('MetroCtrl',
               toastr.error(result.message);
             }
           });
-        } else {
-          $scope.Message = "You clicked NO.";
-        }
+        // } else {
+        //   $scope.Message = "You clicked NO.";
+        // }
 
       }
 
