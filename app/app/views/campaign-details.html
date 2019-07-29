@@ -56,13 +56,13 @@
                                 <tr>
                                     <td><b>Total Price</b></td>
                                     <td>
-                                        {{campaignDetails.totalamount || '0' | number : 2}}
+                                        {{campaignDetails.totalAmount || '0' | number : 2}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Pending Price</b></td>
                                     <td>
-                                       {{PendingPay || '0' | number : 2}}
+                                       {{campaignDetails.totalAmount - campaignDetails.total_paid | number:2 || '0'}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -313,7 +313,7 @@
                     </ul>
                     <ul id="total">
                         <li class="col1">Grand Total :</li>
-                        <li class="col2">{{campaignDetails.totalamount| number : 2}}</li>
+                        <li class="col2">{{campaignDetails.totalAmount| number : 2}}</li>
                         <!-- <li class="col3"><input type="checkbox" ng-model="request_execute" />Request Executive to
                             collect cash
                             / cheque</li>
