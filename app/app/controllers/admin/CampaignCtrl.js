@@ -617,20 +617,20 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
     }
   }
   $scope.deleteProductFromCampaign = function (campaignId, productId) {
-    if ($window.confirm("Are you sure you want to delete this package?")) {
+    // if ($window.confirm("Are you sure you want to delete this package?")) {
       MetroService.deleteMetroPackageFromCampaign(campaignId, productId).then(function (result) {
         if (result.status == 1) {
           getMetroCampaignDetails(campaignId);
-          loadCampaignPayments($stateParams.metroCampaignId);
+          $scope.loadCampaignPayments($stateParams.metroCampaignId);
           toastr.success(result.message);
         }
         else {
           toastr.error(result.message);
         }
       });
-    } else {
-      $scope.Message = "You clicked NO.";
-    }
+    // } else {
+    //   $scope.Message = "You clicked NO.";
+    // }
   }
   $scope.deleteMetroCampaign = function (campaignId) {
     if ($window.confirm("Are you really want to delete this camapaign?")) {
