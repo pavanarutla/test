@@ -488,19 +488,23 @@ md-icon{
                                             <span ng-message="required">% required</span>
                                         </span>
                                     </div> 
-                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" >-</button>  
-                                    
-                                      
-                                    <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" >+</button>  
-                                </div>                            
+                                    <!-- <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" >-</button>  
+                                    <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" >+</button>   -->
+                                    <div class="col-sm-2" style="padding: 0px;">
+                                        <label class="font-weight-bold" style="margin-top: 38px;"></label>
+                                        <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">-</button> 
+                                        <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</button>
+                                    </div>
+                                </div>  
+
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
                                 </div>                                
                             </div>                         
                             <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
-                                <div class="col-md-2">
-                                    <label for="strength">Strength</label>
+                                <div class="col-md-1">
+                                    <label for="strength" class="font-weight-bold mt-2">Strength</label>
                                 </div>
                                 <div class="col-md-9" style="padding-right: 0;">
                                     <input type="text" ng-model="strength.strname" name="strength" class="form-control md-whiteframe-3dp"  required/>
@@ -508,12 +512,13 @@ md-icon{
                                         <span ng-message="required">Strength is required</span>
                                     </span>
                                 </div>
-                                <div class="col-md-1 text-right" style="margin-top: 4px;">
-                                        <span class="md-whiteframe-3dp"  ng-click="removeStrength($index)" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</span>
-                                       
-                                    </div>
+                                <div class="col-md-1">
+                                        <!-- <span class="md-whiteframe-3dp"  ng-click="removeStrength($index)" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</span> -->
+                                        <button type="submit" class="md-whiteframe-3dp"  ng-click="removeStrength($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</button>
+                                </div>
                             </div>
-                            <span class="md-whiteframe-3dp"  ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span>
+                            <!-- <span class="md-whiteframe-3dp"  ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 3px 10px;margin-left: 2px;color: #fff;cursor: pointer;">+</span> -->
+                            <button type="submit" class="md-whiteframe-3dp"  ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;float: right;margin-top: -43px;margin-right: 18px;">+</button>
                             <div class="form-group row mt-5">
                                 <div class="col-sm-8">
                                     <b>Note:</b> You can change price / details any time you want.<br>
@@ -705,7 +710,7 @@ md-icon{
 
 
 <!-- product list -->
-<div class="table-responsive" style="margin-bottom:115px !important">
+<div class="table-responsive">
 
     <table class="table">
         <thead class="text_color">
