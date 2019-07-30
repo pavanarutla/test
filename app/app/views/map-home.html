@@ -125,15 +125,15 @@
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Bulletin' ">: {{product.price}} for 28 days</p>
                   <p class="font-weight-bold mb-1 ml-2" ng-if="product.type == 'Digital' || product.type == 'Transit Digital' ">:  {{product.price}} for 7 days</p>
                 </div>
-                <div class="col-12 col-md-4 text-right">
+                <div class="col-md-4 text-right">
                     <a herf="#" class="ml-3"><b><u>Artwork Guidlines</u></b></a>
                 </div>
           </div> 
           <hr class="ml-3 mr-3">
           <ul style="list-style: disc;padding-left: 28px;" ng-repeat="strength in product.strengths">
             <li> {{strength.strname | capitalize}}</li>
-              <hr class="ml-3 mr-3">
           </ul>
+          <hr class="ml-3 mr-3">
         
           <div class="row pb-3 m-2" ng-hide="ranges.selectedDateRanges.length > 0" >
             <div layout="column" class="" style="padding:8px">
@@ -161,33 +161,33 @@
           <div class="Order_S pb-3" ng-if="ranges.selectedDateRanges && ranges.selectedDateRanges.length > 0">
             <h5 class="font-weight-bold ml-3 mt-3">Order Summary</h5>
             <div class="row mt-2 mb-2" style="margin-right:0px;">
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Dates Selected</p>
                 </div>
-                <div class="col-md-9" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
+                <div class="col-md-9 col-6" ng-click="getProductUnavailableDates(product, $event);" style="outline:none;">
                   <!-- <p class="font-weight-bold mb-1 ml-2" style="float: left;" ></p> -->
-                  <a id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
+                  <a class="font-weight-bold ml-2" id="calender-autolaod-div" ng-repeat = "selectedDates in ranges.selectedDateRanges">
                     : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}}
                   </a>
                   <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px"></i>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-4">
                     <p class="mb-1 ml-3">Total Price</p>
                 </div>
-                <div class="col-md-7">
-                    <p class="mb-1 ml-2"> <span class="font-weight-bold">{{totalPriceUserSelected | currency:undefined:0}}</span> ( {{totalnumDays}} Days selected )</p>
+                <div class="col-md-7 col-8">
+                    <p class="mb-1 ml-2"><b>:</b> <span class="font-weight-bold">{{totalPriceUserSelected | currency:undefined:0}}</span> ( {{totalnumDays}} Days selected )</p>
                 </div>
             </div>
               
             
             <div class="row m-0">
-              <div class="col-md-6 ">
+              <div class="col-md-3 col-6">
                 <md-button class="md-raised md-primary all_button m-0"
                   ng-click="toggleExistingCampaignSidenav()" >
                   Book Product
                 </md-button>
               </div>
-            <div class=" col-md-6 text-right">
+            <div class="col-md-3 col-6">
               <md-button class="md-raised md-warn Upload_font m-0"                 
                 ng-click="shortlistSelected(product.id, ranges.selectedDateRanges, $event)"  ng-disabled="totalSlotAmount <= 0" style="margin-left: 45px;">
                 Shortlist
@@ -196,8 +196,7 @@
             </div>
           </div>  
         </div>
-        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup"
-          style="width:320px;position: absolute;left: 10px;right:auto;margin-bottom:50px;padding:5px; ">
+        <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup">
           <form name="forms.mySaveCampaignForm">
             <div layout="row">
                 <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
