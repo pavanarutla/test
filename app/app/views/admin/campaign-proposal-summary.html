@@ -104,13 +104,14 @@
                                     <tr>
                                         <td><b>Total Amount</b></td>
                                         <td>
-                                            {{TOTAL || '0' |number : 2  }}
+                                            {{campaignDetails.totalAmount || '0' |number : 2  }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><b>Pending Amount</b></td>
+                                        <td><b>Pending Price</b></td>
                                         <td>
-                                            {{PendingPay || "0" |number : 2}}
+                                            <!-- {{PendingPay || "0" |number : 2}} -->
+                                            {{campaignDetails.totalAmount - campaignDetails.total_paid | number:2 || '0'}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -119,7 +120,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Campaign Start/End Date</b></td>
-                                        <td>N/A</td>
+                                        <td>{{campaignDetails.startDate}} to {{campaignDetails.endDate}}</td>                            
                                     </tr>
                                 </tbody>
                         </table>
@@ -298,7 +299,7 @@
         </ul>
         <ul id="total">
             <li class="col1">Grand Total :</li>
-            <li class="col2">{{ campaignDetails.totalamount || '0' |number : 2  }}</li>
+            <li class="col2">{{ campaignDetails.totalAmount || '0' |number : 2  }}</li>
         </ul>
             <md-button class="md-raised md-warn all_button book_campowner" ng-click="finalizeCampaign(campaignProduct)" ng-if="campaignDetails.status == 300">
                 Send Quote
