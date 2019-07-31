@@ -160,6 +160,10 @@ app.controller("ProductCtrl", [
       return res;
     });
   }
+  $scope.clearOwnerProductFilter = function(product){
+    $scope.product = {};
+    $scope.getProductList("All")
+  }
     $scope.applyFiltersmethod = function(product) {      
       ProductService.getProductList(
         $scope.pagination.pageNo,
@@ -364,6 +368,7 @@ app.controller("ProductCtrl", [
          }
      }
     $scope.files = {};
+    $scope.areaObj = {};
     $scope.addProduct = function(adminProductEdit, formdata,Strengths) {
       adminProductEdit.DemographicsAge = formdata;
       adminProductEdit.Strengths=Strengths;
@@ -372,7 +377,7 @@ app.controller("ProductCtrl", [
         item.endDate = moment(item.endDate).format('YYYY-MM-DD')
       })
       adminProductEdit.type = adminProductEdit.type.name;
-      // adminProductEdit.area = $scope.areaObj.id;
+      adminProductEdit.area = $scope.areaObj.id;
       if(adminProductEdit.type == "Bulletin"){
         var data = {
           image: $scope.files.image,

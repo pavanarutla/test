@@ -84,7 +84,9 @@
                                     <h3 class="" style="font-size:12px"><b>You have <span
                                                 id="notification1-count">{{unReadNotify.length || 0}}</span> new notification</b></h3>
                                 </div>
-                                <div style="padding:10px;" id="notification-id-0" ng-repeat = "notificationItem in unReadNotify.slice(0,3)">{{notificationItem.desc}}</div>
+                                <div style="padding:10px;" id="notification-id-0" ng-repeat = "notificationItem in unReadNotify.slice(0,3)">                                 
+                                    <a  ng-click = "updateNotifyStatus(notificationItem.type,notificationItem.campaign_id,notificationItem.id)">{{notificationItem.desc}}</a>
+                                </div>
                                 <div class="notification_bottom">
                                     <a href="#/user-notifications"
                                         ng-show="isAuthenticated &&loggedInUser.user_role=='basic'">See all
