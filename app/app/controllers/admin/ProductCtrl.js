@@ -368,7 +368,6 @@ app.controller("ProductCtrl", [
          }
      }
     $scope.files = {};
-    $scope.areaObj = {};
     $scope.addProduct = function(adminProductEdit, formdata,Strengths) {
       adminProductEdit.DemographicsAge = formdata;
       adminProductEdit.Strengths=Strengths;
@@ -377,7 +376,7 @@ app.controller("ProductCtrl", [
         item.endDate = moment(item.endDate).format('YYYY-MM-DD')
       })
       adminProductEdit.type = adminProductEdit.type.name;
-      adminProductEdit.area = $scope.areaObj.id;
+      adminProductEdit.area = adminProductEdit.areaObj.id;
       if(adminProductEdit.type == "Bulletin"){
         var data = {
           image: $scope.files.image,
