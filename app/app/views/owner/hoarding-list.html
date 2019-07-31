@@ -21,7 +21,7 @@
         outline: none;
     }
 
-    
+
 
     /* @media screen and (min-width:320px) and (max-width: 563px) {
         .daterangepicker {
@@ -52,25 +52,30 @@
             left: 241px;
         }
     } */
-    .md-datepicker-input{
-  font-size: 12px;
-  min-width: 100px;
-}
-.form-control{
-  background: none;
-}
-.md-button.md-icon-button{
-  margin-right: 0px;
-  margin-left: 0px;
-}
-md-icon{
-  width: 20px;
-  min-width: 20px;
-}
-.md-icon-button+.md-datepicker-input-container{
-      margin-left: 0px;
-}
-/* .form-group{
+    .md-datepicker-input {
+        font-size: 12px;
+        min-width: 100px;
+    }
+
+    .form-control {
+        background: none;
+    }
+
+    .md-button.md-icon-button {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    md-icon {
+        width: 20px;
+        min-width: 20px;
+    }
+
+    .md-icon-button+.md-datepicker-input-container {
+        margin-left: 0px;
+    }
+
+    /* .form-group{
   margin-bottom: 0px;
 } */
 </style>
@@ -89,7 +94,8 @@ md-icon{
         <div class="dropdown hide-xs">
             <md-button class="md-raised md-primary all_button" onclick="addnewProduct()" class="dropbtn">Add New Product
             </md-button>
-            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown mostly-customized-scrollbar" style="width:730px;height:75vh;overflow: auto">
+            <div id="myDropdown" class="dropdown-content contbg animated fadeInDown mostly-customized-scrollbar"
+                style="width:730px;height:75vh;overflow: auto">
                 <form name="hordinglistform" novalidate="novalidate" style="position:relative;">
                     <div layout="colmun">
                         <span flex></span>
@@ -110,7 +116,7 @@ md-icon{
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Product Type</label>
                                     <select id="productType"
-                                        ng-options="productType.name for productType in addProductType"
+                                    ng-options="format.id as format.name for format in formatList"
                                         ng-model="product.type" name="type" ng-change="getdetails()"
                                         class="form-control md-whiteframe-3dp" required>
                                         <option value="{{productType[0].name}}">
@@ -167,7 +173,7 @@ md-icon{
                                                 required.</span>
                                         </span>
                                     </md-autocomplete>
-                                </div>                                
+                                </div>
                                 <div class="col-sm-2">
                                     <label class="font-weight-bold">Height(Ft)</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="height" only-numeric
@@ -206,11 +212,12 @@ md-icon{
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Venue</label>
-                                    <input type="text" class="form-control md-whiteframe-3dp" ng-model="product.venue" name="Venue" required />       
+                                    <input type="text" class="form-control md-whiteframe-3dp" ng-model="product.venue"
+                                        name="Venue" required />
                                     <div ng-messages="hordinglistform.Venue.$error"
-                                    ng-if="hordinglistform.Venue.$touched" style="color:red">
-                                    <div ng-message="required">Venue required</div>
-                                </div>                            
+                                        ng-if="hordinglistform.Venue.$touched" style="color:red">
+                                        <div ng-message="required">Venue required</div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="font-weight-bold">Street Address</label>
@@ -227,8 +234,8 @@ md-icon{
                                     <label class="font-weight-bold">City</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="city"
                                         ng-model="product.city" required>
-                                    <div ng-messages="hordinglistform.city.$error"
-                                        ng-if="hordinglistform.city.$touched" style="color:red">
+                                    <div ng-messages="hordinglistform.city.$error" ng-if="hordinglistform.city.$touched"
+                                        style="color:red">
                                         <div ng-message="required">City required</div>
                                     </div>
                                 </div>
@@ -248,24 +255,29 @@ md-icon{
                                         <div ng-message="required">Image Direction required</div>
                                     </div>
                                 </div>
-                                    <div class="col-sm-3">
-                                        <label class="font-weight-bold">Select Product Date</label>
-                                        <div class="input-group">
-                                            <input date-range-picker ng-model="product.dates" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                            <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(product,$event);" style="padding: 4px 16px;">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">Select Product Date</label>
+                                    <div class="input-group">
+                                        <input date-range-picker ng-model="product.dates"
+                                            class="form-control md-whiteframe-3dp date-picker"
+                                            placeholder="Product date" type="text" name="date" readonly
+                                            options="rqstHrdngsOpts" id="booking_dates_picker" />
+                                        <a class="input-group-addon md-whiteframe-3dp"
+                                            ng-click="getProductUnavailableDates(product,$event);"
+                                            style="padding: 4px 16px;">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        </a>
                                     </div>
-                                    <div class="col-sm-3">
-                                            <label class="font-weight-bold">Impressions / Week</label>
-                                        <input ng-model="product.impressions" class="form-control md-whiteframe-3dp" type="text"
-                                            name="weeks" only-numeric required />
-                                        <div ng-messages="hordinglistform.weeks.$error"
-                                            ng-if="hordinglistform.weeks.$touched" style="color:red">
-                                            <div ng-message="required">Impressions is required.</div>
-                                        </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">Impressions</label>
+                                    <input ng-model="product.impressions" class="form-control md-whiteframe-3dp"
+                                        type="text" name="weeks" only-numeric required />
+                                    <div ng-messages="hordinglistform.weeks.$error"
+                                        ng-if="hordinglistform.weeks.$touched" style="color:red">
+                                        <div ng-message="required">Impressions is required.</div>
                                     </div>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3">
@@ -280,7 +292,7 @@ md-icon{
                                 <div class="col-sm-3">
                                     <label class="font-weight-bold">Latitude</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="lat"
-                                        ng-model="product.lat"  required>
+                                        ng-model="product.lat" required>
                                     <div ng-messages="hordinglistform.lat.$error" ng-if="hordinglistform.lat.$touched"
                                         style="color:red">
                                         <div ng-message="required">Latitude is required.</div>
@@ -289,7 +301,7 @@ md-icon{
                                 <div class="col-sm-3">
                                     <label class="font-weight-bold">Longitude</label>
                                     <input type="text" class="form-control md-whiteframe-3dp" name="lng"
-                                        ng-model="product.lng"  required>
+                                        ng-model="product.lng" required>
                                     <div ng-messages="hordinglistform.lng.$error" ng-if="hordinglistform.lng.$touched"
                                         style="color:red">
                                         <div ng-message="required">Longitude is required.</div>
@@ -298,9 +310,17 @@ md-icon{
                                 <div class="col-sm-3">
                                     <label class="font-weight-bold">Ethinicity</label>
                                     <div class="input-group">
-                                        <input class="form-control md-whiteframe-3dp" type="text"
-                                            placeholder="General" name="Ethnicity" ng-model="product.ethnicity"
-                                            required>
+                                        <!-- <input class="form-control md-whiteframe-3dp" type="text" placeholder="General"
+                                            name="Ethnicity" ng-model="product.ethnicity" required> -->
+                                        <!-- <select ng-model="product.ethnicity" name="Ethnicity"
+                                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                            data-md-container-class="selectdemoSelectHeader"
+                                            ng-init="product.Ethnicity = product.Ethnicity || ''"
+                                            placeholder="Has Ethnicity?" required>
+                                            <option selected>General</option>
+                                            <option>Hispanic </option>                                            
+                                        </select> -->
+                                        <select class="form-control md-whiteframe-3dp" ng-model='product.ethnicity' required ng-options='option.value as option.name for option in typeOptions'></select>
                                     </div>
                                     <div ng-messages="hordinglistform.Ethnicity.$error"
                                         ng-if="hordinglistform.Ethnicity.$touched" style="color:red">
@@ -314,8 +334,8 @@ md-icon{
                                     <label class="font-weight-bold">Face Direction</label>
                                     <input ng-model="product.direction" class="form-control md-whiteframe-3dp"
                                         type="text" name="Face" required />
-                                    <div ng-messages="hordinglistform.Face.$error"
-                                        ng-if="hordinglistform.Face.$touched" style="color:red">
+                                    <div ng-messages="hordinglistform.Face.$error" ng-if="hordinglistform.Face.$touched"
+                                        style="color:red">
                                         <div ng-message="required">Direction is required.</div>
                                     </div>
                                 </div>
@@ -389,8 +409,8 @@ md-icon{
                                         <option>14 Days</option>
                                         <option>28 Days</option>
                                     </select>
-                                    <div ng-messages="hordinglistform.cancellation.$error"
-                                        ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                                    <div ng-messages="hordinglistform.bookingDates.$error"
+                                        ng-if="hordinglistform.bookingDates.$touched" style="color:red">
                                         <div ng-message="required">Days required</div>
                                     </div>
                                 </div>
@@ -414,34 +434,34 @@ md-icon{
 
                             <!----Digital Bulletin Start------------------->
                             <div class="form-group row" ng-show='DigitalResult || trasitResult'>
-                                    <div class="col-sm-3">
-                                        <label class="font-weight-bold">Total no flips available</label>
-                                        <input ng-model="product.flips" class="form-control md-whiteframe-3dp" type="text"
-                                            name="flips" only-numeric required />
-                                        <div ng-messages="hordinglistform.flips.$error"
-                                            ng-if="hordinglistform.flips.$touched" style="color:red">
-                                            <div ng-message="required">Flips is required.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="font-weight-bold">No of flips for loop</label>
-                                        <input ng-model="product.flipsloops" class="form-control md-whiteframe-3dp" type="text"
-                                            name="flipsloops" only-numeric required />
-                                        <div ng-messages="hordinglistform.flipsloops.$error"
-                                            ng-if="hordinglistform.flipsloops.$touched" style="color:red">
-                                            <div ng-message="required">Loop is required.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="font-weight-bold">Loop per day</label>
-                                        <input ng-model="product.loops" class="form-control md-whiteframe-3dp" type="text"
-                                            name="loops" only-numeric required />
-                                        <div ng-messages="hordinglistform.loops.$error" ng-if="hordinglistform.loops.$touched"
-                                            style="color:red">
-                                            <div ng-message="required">Day is required.</div>
-                                        </div>
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">Total no flips available</label>
+                                    <input ng-model="product.flips" class="form-control md-whiteframe-3dp" type="text"
+                                        name="flips" only-numeric required />
+                                    <div ng-messages="hordinglistform.flips.$error"
+                                        ng-if="hordinglistform.flips.$touched" style="color:red">
+                                        <div ng-message="required">Flips is required.</div>
                                     </div>
                                 </div>
+                                <div class="col-sm-3">
+                                    <label class="font-weight-bold">No of flips for loop</label>
+                                    <input ng-model="product.flipsloops" class="form-control md-whiteframe-3dp"
+                                        type="text" name="flipsloops" only-numeric required />
+                                    <div ng-messages="hordinglistform.flipsloops.$error"
+                                        ng-if="hordinglistform.flipsloops.$touched" style="color:red">
+                                        <div ng-message="required">Loop is required.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="font-weight-bold">Loop per day</label>
+                                    <input ng-model="product.loops" class="form-control md-whiteframe-3dp" type="text"
+                                        name="loops" only-numeric required />
+                                    <div ng-messages="hordinglistform.loops.$error"
+                                        ng-if="hordinglistform.loops.$touched" style="color:red">
+                                        <div ng-message="required">Day is required.</div>
+                                    </div>
+                                </div>
+                            </div>
                             <!----Digital Bulletin End------------------->
 
                             <div class="form-group row">
@@ -485,61 +505,74 @@ md-icon{
                             </div>
                             <div class="form-group row" data-ng-repeat="from in FromTo">
                                 <div class="col-sm-2">
-                                        <label class="font-weight-bold">From</label>
+                                    <label class="font-weight-bold">From</label>
                                     <div class="input-group">
-                                        <input ng-model="from.fromage" only-numeric maxlength="2" class="form-control md-whiteframe-3dp" type="text" 
-                                        name="Fromage" required />
+                                        <input ng-model="from.fromage" only-numeric maxlength="2"
+                                            class="form-control md-whiteframe-3dp" type="text" name="Fromage"
+                                            required />
                                     </div>
-                                    <span ng-messages="hordinglistform.Fromage.$error" ng-if="hordinglistform.Fromage.$touched" style="color:red">
+                                    <span ng-messages="hordinglistform.Fromage.$error"
+                                        ng-if="hordinglistform.Fromage.$touched" style="color:red">
                                         <span ng-message="required">Age required</span>
                                     </span>
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="font-weight-bold">To</label>
                                     <div class="input-group">
-                                        <input ng-model="from.toage" only-numeric maxlength="2" class="form-control md-whiteframe-3dp" type="text"
-                                            name="Toage" required />   
+                                        <input ng-model="from.toage" only-numeric maxlength="2"
+                                            class="form-control md-whiteframe-3dp" type="text" name="Toage" required />
                                     </div>
-                                    <span ng-messages="hordinglistform.Toage.$error" ng-if="hordinglistform.Toage.$touched" style="color:red">
+                                    <span ng-messages="hordinglistform.Toage.$error"
+                                        ng-if="hordinglistform.Toage.$touched" style="color:red">
                                         <span ng-message="required">Age required</span>
                                     </span>
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="font-weight-bold"></label>
                                     <div class="input-group" style="margin-top: 7px;">
-                                        <input ng-model="from.percentage" maxlength="3" only-numeric onkeyup="demoage(this)" class="form-control md-whiteframe-3dp" type="text"
-                                            name="Percent" required />                                                                                           
+                                        <input ng-model="from.percentage" only-numeric
+                                            onkeyup="demoage(this)" class="form-control md-whiteframe-3dp" type="text" maxlength="100"
+                                            name="Percent" required />
                                     </div>
-                                    <span ng-messages="hordinglistform.Percent.$error" ng-if="hordinglistform.Percent.$touched" style="color:red">
+                                    <span ng-messages="hordinglistform.Percent.$error"
+                                        ng-if="hordinglistform.Percent.$touched" style="color:red">
                                         <span ng-message="required">% required</span>
                                     </span>
-                                </div> 
+                                </div>
                                 <div class="col-sm-2" style="padding: 0px;">
                                     <label class="font-weight-bold" style="margin-top: 38px;"></label>
-                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit" ng-click="removeNewChoice($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">-</button> 
-                                    <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)" id="btSubmit" ng-click="addNewFromTo()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</button>
+                                    <button type="submit" class="md-whiteframe-3dp" id="btSubmit"
+                                        ng-click="removeNewChoice($index)"
+                                        style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">-</button>
+                                    <button type="submit" class="md-whiteframe-3dp" ng-show="showAddFromTo(from)"
+                                        id="btSubmit" ng-click="addNewFromTo()"
+                                        style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;">+</button>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <h3 class="md-body-2"><span class="md-title">Product Strengths</span></h3>
-                                </div>                                
-                            </div>                         
-                            <div class="form-group row" data-ng-repeat="strength in Strengths">                                   
+                                </div>
+                            </div>
+                            <div class="form-group row" data-ng-repeat="strength in Strengths">
                                 <div class="col-md-1">
                                     <label for="strength" class="font-weight-bold mt-2">Strength</label>
                                 </div>
                                 <div class="col-md-9" style="padding-right: 0;">
-                                    <input type="text" ng-model="strength.strname" name="strength" class="form-control md-whiteframe-3dp"  required/>
-                                    <span ng-messages="hordinglistform.strength.$error" ng-if="hordinglistform.strength.$touched" style="color:red">
+                                    <input type="text" ng-model="strength.strname" name="strength"
+                                        class="form-control md-whiteframe-3dp" required />
+                                    <span ng-messages="hordinglistform.strength.$error"
+                                        ng-if="hordinglistform.strength.$touched" style="color:red">
                                         <span ng-message="required">Strength is required</span>
                                     </span>
                                 </div>
                                 <div class="col-md-1">
-                                    <button type="submit" class="md-whiteframe-3dp"  ng-click="removeStrength($index)" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</button>
+                                    <button type="submit" class="md-whiteframe-3dp" ng-click="removeStrength($index)"
+                                        style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;">-</button>
                                 </div>
                             </div>
-                            <button type="submit" class="md-whiteframe-3dp"  ng-click="addNewChoice()" style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;float: right;margin-top: -43px;margin-right: 18px;">+</button>
+                            <button type="submit" class="md-whiteframe-3dp" ng-click="addNewChoice()"
+                                style="font-size: 17px;background: #44596D;padding: 1px 10px;margin-left: 2px;color: #fff;cursor: pointer;float: right;margin-top: -43px;margin-right: 18px;">+</button>
                             <div class="form-group row mt-5">
                                 <div class="col-sm-8">
                                     <b>Note:</b> You can change price / details any time you want.<br>
@@ -547,7 +580,8 @@ md-icon{
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <md-button type="submit" Class="md-raised md-primary all_button"
-                                        ng-click="requestAddProduct(product,FromTo,Strengths)" style="margin-right: 0px;">
+                                        ng-click="requestAddProduct(product,FromTo,Strengths)"
+                                        style="margin-right: 0px;">
                                         Submit</md-button>
                                 </div>
                             </div>
@@ -582,34 +616,36 @@ md-icon{
                         </div>
                     </div> -->
                     <div class="owner_blocked_date_popup box__shadow" ng-if="digitalSlotsClosed">
-                            <div class="owner_blocked_header">
-                                <div layout="row">
-                                    <div>
-                                        <h3>select the blocked dates-52/2 week calender </h3>
-                                        <p>Campaign start with frist day of week end with last day of week</p>
-                                    </div>
-    
-                                    <div flex></div>
-                                    <a class="" ng-click="digitalSlotedDatesPopupClosed()">
-                                        <i class="material-icons" style="color:white !important">close</i>
-                                    </a>
+                        <div class="owner_blocked_header">
+                            <div layout="row">
+                                <div>
+                                    <h3>select the blocked dates-52/2 week calender </h3>
+                                    <p>Campaign start with frist day of week end with last day of week</p>
                                 </div>
-                            </div>
-                            <div class="owner_blocked_body">
-                                <div class="row" class="mt-2  mb-2">
-                                    <div class="border col-2 mb-1 p-1 text-center cal_divcolor"
-                                        ng-repeat="week in weeksDigitalArray" ng-click="digitalSelectUserWeeks(week,$index,$event)"
-                                        ng-class="{selectedWeek : week.selected == true}">
-                                        <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
-                                        <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
-                                    </div>
-                                    <div class="col-md-8 mt-3">
-                                        <md-button Class="md-raised md-primary all_button float-right" ng-click="digitalBlockedSlotesbtn(weeksDigitalArray)">Block Dates</md-button>
-                                    </div>
-                                </div>
-                                <span class="clearfix"></span>
+
+                                <div flex></div>
+                                <a class="" ng-click="digitalSlotedDatesPopupClosed()">
+                                    <i class="material-icons" style="color:white !important">close</i>
+                                </a>
                             </div>
                         </div>
+                        <div class="owner_blocked_body">
+                            <div class="row" class="mt-2  mb-2">
+                                <div class="border col-2 mb-1 p-1 text-center cal_divcolor"
+                                    ng-repeat="week in weeksDigitalArray"
+                                    ng-click="digitalSelectUserWeeks(week,$index,$event)"
+                                    ng-class="{selectedWeek : week.selected == true}">
+                                    <div class="md-caption setect_padding">Week of {{week.twoWeeks}}</div>
+                                    <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
+                                </div>
+                                <div class="col-md-8 mt-3">
+                                    <md-button Class="md-raised md-primary all_button float-right"
+                                        ng-click="digitalBlockedSlotesbtn(weeksDigitalArray)">Block Dates</md-button>
+                                </div>
+                            </div>
+                            <span class="clearfix"></span>
+                        </div>
+                    </div>
                 </form>
 
             </div>
@@ -619,63 +655,69 @@ md-icon{
 </div>
 <!-- filters-->
 <div class="table-responsive">
-        <table class="table table_user">
-          <tbody>
+    <table class="table table_user">
+        <tbody>
             <tr>
-              <td class="hide-xs hide-sm">
-                <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem"
-                    md-search-text="searchText" md-selected-item-change="viewSelectedProduct(item)"
-                    md-search-text-change="viewSearchText(searchText)" md-items="item in productSearch(searchText)"
-                    md-item-text="item.siteNo" md-min-length="3" placeholder="Search..." md-clear-button="true">
-                    <md-item-template>
-                        <span class="item-title">
-                            <span> {{item.siteNo}} </span>
-                        </span>
-                        <span class="item-metadata">
-                            <span>
-                                <strong>{{item.company_name}}</strong>
+                <td class="hide-xs hide-sm">
+                    <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled"
+                        md-selected-item="selectedItem" md-search-text="searchText"
+                        md-selected-item-change="viewSelectedProduct(item)"
+                        md-search-text-change="viewSearchText(searchText)" md-items="item in productSearch(searchText)"
+                        md-item-text="item.siteNo" md-min-length="3" placeholder="Search..." md-clear-button="true">
+                        <md-item-template>
+                            <span class="item-title">
+                                <span> {{item.siteNo}} </span>
                             </span>
-                            <span>
-                                <strong>{{item.address}}</strong>
+                            <span class="item-metadata">
+                                <span>
+                                    <strong>{{item.company_name}}</strong>
+                                </span>
+                                <span>
+                                    <strong>{{item.address}}</strong>
+                                </span>
                             </span>
-                        </span>
-                    </md-item-template>
-                </md-autocomplete>
-            </td>
-              <td>
-                <div class="form-group all_formfilter">
-                    <select id="productType" ng-options="productType.name for productType in ProductTypes"
-                        ng-model="product.type" class="form-control md-whiteframe-3dp all_filtermobile"
-                        data-md-container-class="selectdemoSelectHeader"
-                        name="productType">                       
-                    </select>
-                </div></td>
+                        </md-item-template>
+                    </md-autocomplete>
+                </td>
+                <td>
+                    <div class="form-group all_formfilter">
+                        <select id="productType" ng-options="productType.name for productType in ProductTypes"
+                            ng-model="product.type" class="form-control md-whiteframe-3dp all_filtermobile"
+                            data-md-container-class="selectdemoSelectHeader" name="productType">
+                        </select>
+                    </div>
+                </td>
                 <td class="hide-xs hide-md" style="width: 170px;">
-                        <md-datepicker class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false"
-                        md-placeholder="Available From" layout-fill style="border: none;padding: 0px;"></md-datepicker>
-              </td>
-              <td class="hide-xs hide-md" style="width: 170px;">
-                    <md-datepicker class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false"
-                    md-placeholder="Available To" md-min-date="product.start_date" layout-fill style="border: none;padding: 0px;">
-                </md-datepicker>
-              </td>
-              <td class="hide-xs" style="width: 170px;">
-                <select class="form-control" ng-model="product.budgetprice" id="sel1"
-                    ng-change="getBudget(product.budgetprice)">
-                    <option value="" disabled selected>Budget</option>
-                    <option selected value="1">Budget High to Low</option>
-                    <option value="0">Budget Low to High </option>
-                </select>
-              </td>
-              <td class="apply_mob">
-                    <md-button class="md-raised apply_filter" ng-click="applymethod(product)" onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply Filters</md-button>
-                    <md-button class="md-raised all_button hide-xs" ng-click="clearOwnerProductFilter(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
-            </td>
-              <td></td>
+                    <md-datepicker class="form-control" name="startDate" ng-model="product.start_date"
+                        onkeydown="return false" md-placeholder="Available From" layout-fill
+                        style="border: none;padding: 0px;"></md-datepicker>
+                </td>
+                <td class="hide-xs hide-md" style="width: 170px;">
+                    <md-datepicker class="form-control" name="endDate" ng-model="product.end_date"
+                        onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"
+                        layout-fill style="border: none;padding: 0px;">
+                    </md-datepicker>
+                </td>
+                <td class="hide-xs" style="width: 170px;">
+                    <select class="form-control" ng-model="product.budgetprice" id="sel1"
+                        ng-change="getBudget(product.budgetprice)">
+                        <option value="" disabled selected>Price</option>
+                        <option selected value="1">Budget High to Low</option>
+                        <option value="0">Budget Low to High </option>
+                    </select>
+                </td>
+                <td class="apply_mob">
+                    <md-button class="md-raised apply_filter" ng-click="applymethod(product)"
+                        onClick="onClickHandler(this)" style="background-color:#f2f3f2;margin: 0px;color: #000;">Apply
+                        Filters</md-button>
+                    <md-button class="md-raised all_button hide-xs" ng-click="clearOwnerProductFilter(product)"
+                        onClick="onClickHandler(this)">Clear Filters</md-button>
+                </td>
+                <td></td>
             </tr>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+    </table>
+</div>
 
 
 <!-- <div class="product__filter">
@@ -753,14 +795,15 @@ md-icon{
         <tbody>
             <tr ng-repeat="product in productList">
                 <td class="image_tdwidth hide-xs">
-                    <img src="{{config.serverUrl + product.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+                    <img src="{{config.serverUrl + product.image[0]}}" alt="Smiley face"
+                        class="requ_size img-thumbnail">
 
                 </td>
                 <td class="table_address">
                     <p class=""><b>{{product.siteNo}}</b>&nbsp;<b>{{product.title || "N/A"}}</b>
                         <br><b style="color: #44596D;">Address</b>:
-                        {{product.address | capitalize}}  {{product.city | capitalize}}
-                        <br><b style="color: #44596D;">State</b>: {{product.state_name | capitalize}}
+                        {{product.address | capitalize}} {{product.city | capitalize}}
+                        <br><b style="color: #44596D;">DMA</b>: {{product.city_name | capitalize}}
                         <br><b style="color: #44596D;">Venue</b>: {{product.venue | capitalize}}
                         <br><b style="color: #44596D;">Type</b>: {{product.type || "N/A"}}
                         <br><b style="color: #44596D;">Facing</b>: {{product.direction|| "N/A" | capitalize}}
@@ -783,7 +826,8 @@ md-icon{
                         <span>$</span>{{(!myfield)?product.default_price:''}}
                         <input type="text" class="" ng-model="product.default_price" placeholder="Price" ng-if="myfield"
                             style="width: 70px;padding: 4px 5px;" />
-                        <span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons" style="cursor: pointer;">edit</i></span>
+                        <span ng-click="myfield = true;" ng-show="!myfield"> <i class="material-icons"
+                                style="cursor: pointer;">edit</i></span>
                         <span ng-click="myfield = false;changeProductPrice(product)" ng-show="myfield"> <i
                                 class="material-icons" style="cursor: pointer;">check</i></span>
 
@@ -834,17 +878,18 @@ md-icon{
     function addnewProduct() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
+
     function demoage(txt) {
-  var bt = document.getElementById('btSubmit');
-  if (txt.value != '') {
-      bt.disabled = false;
-  }
-  else {
-      bt.disabled = true;
-  }
-}  
-function onClickHandler(elem) {
-elem.style.background = '#bc2535';
-elem.style.color = 'white';
-}
+        var bt = document.getElementById('btSubmit');
+        if (txt.value != '') {
+            bt.disabled = false;
+        } else {
+            bt.disabled = true;
+        }
+    }
+
+    function onClickHandler(elem) {
+        elem.style.background = '#bc2535';
+        elem.style.color = 'white';
+    }
 </script>

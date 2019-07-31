@@ -468,7 +468,7 @@ Colipos  ===================*/
 
   /*=====================
   | Product Section
-  =====================*/
+  =====================*/ 
   $scope.product = {};
   $scope.addProductType = [
     // { name: "All" },
@@ -476,12 +476,22 @@ Colipos  ===================*/
     { name: "Digital" },
     { name: "Transit Digital" }
   ];
+  //$scope.product.form = {ethnicity : $scope.addProductType[0].value};
   $scope.ProductTypes = [
     { name: "All" },
     { name: "Bulletin" },
     { name: "Digital" },
     { name: "Transit Digital" }
   ];
+  $scope.typeOptions = [
+    { name: 'General', value: 'general' }, 
+    { name: 'Hispanic', value: 'hispanic' },    
+    ];    
+    $scope.product = {ethnicity : $scope.typeOptions[0].value};
+    $scope.edittypeOptions = [
+      { name: 'General', value: 'general' }, 
+      { name: 'Hispanic', value: 'hispanic' },    
+      ];
   $scope.bulletinresult = true;
   $scope.trasitResult = false;
   $scope.DigitalResult = false;

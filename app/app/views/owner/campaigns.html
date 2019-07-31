@@ -143,7 +143,7 @@
               <tr ng-repeat="campaign in ownerCampaigns | filter:search" ng-if="campaign.status < 700">
                 <td class="table_vertical">{{campaign.cid}}</td>
                 <td class="table_vertical">{{campaign.name | capitalize}}</td>
-                <td class="table_vertical">{{campaign.start_date| dateify | date: "dd-MM-yyyy" || "N/A" }}</td>
+                <td class="table_vertical">{{campaign.start_date| dateify | date: "MM-dd-yyyy" || "N/A" }}</td>
                 <td class="text-center table_vertical">{{campaign.product_count || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.total_paid || "0"}}</td>
                 <td class="text-center table_vertical">{{campaign.Totalamount || "0"}}</td>

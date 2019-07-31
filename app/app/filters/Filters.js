@@ -47,7 +47,7 @@ app.filter('address', function () {
 
 app.filter('dateify',function(){
   return function(date, format){
-    format = format || 'YYYY-MM-DD';
+    format = format || 'MM-DD-YYYY';
     if(date){
       return moment(date).local().format(format);
     }
@@ -57,9 +57,9 @@ app.filter('dateify',function(){
   }
 });
 app.filter('dateFormat',function(){
-  var currentDate = moment(new Date()).local().format('YYYY-MM-DD')
+  var currentDate = moment(new Date()).local().format('MM-DD-YYYY')
   return function(date, format){
-    if(currentDate == moment(date).format('YYYY-MM-DD')){
+    if(currentDate == moment(date).format('MM-DD-YYYY')){
       return moment(date).local().format('LLLL').split(',')[2].split(' ')[2] + " " + moment(date).local().format('LLLL').split(',')[2].split(' ')[3];
     }else{
       return moment(date).local().format('llll').split(',')[1];
