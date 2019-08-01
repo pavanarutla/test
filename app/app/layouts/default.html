@@ -20,12 +20,18 @@
                 </div>
                 <div class="aire_d_sub">
                     <ul class="air_d__sub-nav air_main_menu d-none d-sm-none d-md-none d-lg-block d-xl-block ">
+                            <li class="s-depth1-wrap" ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                                <a ng-href="#/home" class="s-btn-toggler">Home</a>
+                            </li>
+                            <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                                <a ng-href="#/home" style="color: #fff">Home</a>
+                            </li>
                         <li class="s-depth1-wrap"><a ng-href="#/aboutbbi" ng-if="!footerhide"
                                 class="s-btn-toggler">about bba</a></li>
-                        <li class="s-depth1-wrap"><a ng-href="#/ourproduct" ng-if="!footerhide"
+                        <!-- <li class="s-depth1-wrap"><a ng-href="#/ourproduct" ng-if="!footerhide"
                                 class="s-btn-toggler">our product</a></li>
                         <li class="s-depth1-wrap"><a ng-href="#/faq" ng-if="!footerhide" class="s-btn-toggler">faq's</a>
-                        </li>
+                        </li> -->
                         <li class="s-depth1-wrap"
                             ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
                             <a ng-href="#/suggest/product-detail" class="s-btn-toggler">Help</a></li>
@@ -33,7 +39,7 @@
                                 style="color: #fff">Help</a></li>
                         <li class="s-depth1-wrap"
                             ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
-                            <a ng-href="#/location" class="s-btn-toggler">roadside</a></li>
+                            <a ng-href="#/location" class="s-btn-toggler">Traffic</a></li>
                         <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)" class="metro_btn">Metro</a></li>
                         <li class="s-depth1-wrap" ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'"><a ng-href="#/metro" class="s-btn-toggler">Metro</a></li> -->
                         <li class="s-depth1-wrap" ng-show="!isAuthenticated" style=" margin-left:10px;">
@@ -125,16 +131,16 @@
                 <div class="aire_d_drop-mobile d-lg-none d-xl-none " id="mobileMenu">
                     <ul>
                         <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/aboutbbi" class="s-btn-toggler">about bba</a></li>
-                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/ourproduct" class="s-btn-toggler">our product</a></li>
-                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/faq" class="s-btn-toggler">faq</a></li>
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/ourproduct" class="s-btn-toggler">our product</a></li>
+                        <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="#/faq" class="s-btn-toggler">faq</a></li> -->
                         <li ng-click="closeMenuSidenavIfMobile()"
                             ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
-                            <a ng-href="#/suggest/product-detail" class="s-btn-toggler border_right">suggestme</a></li>
-                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)">suggestme</a>
+                            <a ng-href="#/suggest/product-detail" class="s-btn-toggler border_right">Help</a></li>
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)">Help</a>
                         </li>
                         <li ng-click="closeMenuSidenavIfMobile()"
                             ng-show="isAuthenticated && currStateName != 'index.location' && loggedInUser.user_role!='bbi'">
-                            <a ng-href="#/location" class="s-btn-toggler">roadside</a></li>
+                            <a ng-href="#/location" class="s-btn-toggler">Traffic</a></li>
                         <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
                             <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
                         </li>
@@ -243,7 +249,7 @@
                                     Terms</b></span>BBA Advertising
                             pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
                     </div>
-                    <div
+                    <!-- <div
                         class="col-lg-3 col-md-4 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
                         <a href="https://www.facebook.com/billboardsind/" target="_blank"><i
                                 class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
@@ -254,7 +260,7 @@
                         <a href="https://twitter.com/billboardsindia" target="_blank"><i
                                 class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
                         <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
-                    </div>
+                    </div> -->
     </footer>
     <!-- //Footer Section -->
 </div>
