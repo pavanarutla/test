@@ -411,6 +411,15 @@
                                             <div ng-message="required">Cancellation required</div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-3" ng-if="product.cancellation === 'Yes'">
+                                            <label class="font-weight-bold">Number of days</label>
+                                            <input ng-model="product.cancellationDays" class="form-control" type="text"
+                                                name="prices" only-numeric required />
+                                            <!-- <div ng-messages="hordinglistform.prices.$error"
+                                                ng-if="hordinglistform.prices.$touched" style="color:red">
+                                                <div ng-message="required">Price is required.</div>
+                                            </div> -->
+                                        </div> 
                                 </div>
     
                                 <!----Digital Bulletin Start------------------->
@@ -1047,7 +1056,7 @@
                                             </div>
                                             <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Digital'">
                                                 <label class="font-weight-bold">Min. Booking Days</label>
-                                                <select ng-model="editRequestedhordings.minimumbooking" name="cancellation"
+                                                <select ng-model="editRequestedhordings.minimumbooking" name="minimumbooking"
                                                     class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                                     data-md-container-class="selectdemoSelectHeader"
                                                     ng-init="editRequestedhordings.minimumbooking = editRequestedhordings.minimumbooking || ''"
@@ -1060,8 +1069,8 @@
                                                     <option>14 Days</option>
                                                     <option>28 Days</option>
                                                 </select>
-                                                <div ng-messages="hordinglistform.cancellation.$error"
-                                                    ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                                                <div ng-messages="hordinglistform.minimumbooking.$error"
+                                                    ng-if="hordinglistform.minimumbooking.$touched" style="color:red">
                                                     <div ng-message="required">Days required</div>
                                                 </div>
                                             </div>
@@ -1087,7 +1096,7 @@
                                             <!----Transit End------------------->
                                             <div class="col-sm-3" ng-if="editRequestedhordings.type === 'Transit Digital'">
                                                 <label class="font-weight-bold">Min. Booking Days</label>
-                                                <select ng-model="editRequestedhordings.minimumbooking" name="cancellation"
+                                                <select ng-model="editRequestedhordings.minimumbooking" name="minimumbooking"
                                                     class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
                                                     data-md-container-class="selectdemoSelectHeader"
                                                     ng-init="editRequestedhordings.minimumbooking = editRequestedhordings.minimumbooking || ''"
@@ -1100,8 +1109,8 @@
                                                     <option>14 Days</option>
                                                     <option>28 Days</option>
                                                 </select>
-                                                <div ng-messages="hordinglistform.cancellation.$error"
-                                                    ng-if="hordinglistform.cancellation.$touched" style="color:red">
+                                                <div ng-messages="hordinglistform.minimumbooking.$error"
+                                                    ng-if="hordinglistform.minimumbooking.$touched" style="color:red">
                                                     <div ng-message="required">Days required</div>
                                                 </div>
                                             </div>
@@ -1120,7 +1129,7 @@
                                                     ng-if="hordinglistform.cancellation.$touched" style="color:red">
                                                     <div ng-message="required">Cancellation required</div>
                                                 </div>
-                                            </div>                       
+                                            </div>                    
                                         </div>
                         
                                         <!----Digital Bulletin Start------------------->

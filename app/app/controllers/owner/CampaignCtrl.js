@@ -252,7 +252,7 @@ $scope.hidebutton = function(){
     var loadOwnerCampaigns = function () {
         return new Promise((resolve, reject) => {
             OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-                $scope.ownerCampaigns = result;
+                $scope.ownerCampaigns = result;               
                 $scope.ownerCampaigns = _.filter(result, function (c) {
                     return c.status < 800;
                 });
@@ -774,8 +774,7 @@ $scope.hidebutton = function(){
     $scope.getCampaignPaymentDetails = function (campaignId) {
         // localStorage.campaignPaymentDetailsCampaignId= campaignId;
         OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-            //$scope.showCampaignPaymentSidenav();
-            $scope.campaignPaymentDetails = result;
+            $scope.campaignPaymentDetails = result;           
             var campaignPayments = $scope.campaignPaymentDetails.payment_details;
             $scope.paid = 0;
             _.each(campaignPayments, function (p) {
@@ -784,7 +783,12 @@ $scope.hidebutton = function(){
             //$scope.unpaid = $scope.campaignPaymentDetails.act_budget + parseInt($scope.campaignPaymentDetails.gst_price);
         });
     }
-
+     
+        $scope.payAmount = function(campaignId){      
+        $scope.amountPay = _.filter($scope.ownerSaved, function (c) {
+                return c.cid == campaignId;
+        });
+        };
     $scope.paymentTypes = [
         {name: "Cash"},
         {name: "Cheque"},
