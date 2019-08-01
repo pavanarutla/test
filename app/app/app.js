@@ -523,6 +523,10 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/owner/campaign-details.html',
       controller: 'OwnerCampaignCtrl'
     })
+    .state('owner.product-camp-details', {
+      url: '/product-camp-details',
+      templateUrl: 'views/owner/product-camp-details.html'
+    })
     .state('owner.requested-hoardings', {
       url: '/requested-hoardings',
       templateUrl: 'views/owner/requested-hoardings.html',
