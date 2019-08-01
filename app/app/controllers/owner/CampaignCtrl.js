@@ -758,7 +758,10 @@ $scope.hidebutton = function(){
             });
         });
     }
-
+    $scope.clearOwnerProductFilter = function(product){
+        $scope.product = {};
+        loadOwnerProductList("All")
+      }
     /* ==============================
      | Campaign payment section
      =============================== */
