@@ -82,9 +82,8 @@
                 </div>
             </div>
     </div>
-
-    <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
-            layout-margin="layout-margin" class="addshare_campowner"> 
+    <div layout="row" flex="100" flex-xs="100" flex-sm="100" layout-margin="layout-margin"> 
+    <p class="hide-xs" style="width:80%;margin-top: 14px;"><button onclick="goBack()" style="border: none;min-height: 30px;line-height: 30px;border-radius: .25rem !important;">&laquo; Back</button></p>
             <div class="button_leftright">
                 <div class="dropdown">
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
@@ -235,6 +234,7 @@
                     </a>
                 </div>
             </div>
+            <p class="hide-gt-lg hide-lg hide-md hide-sm" style="width:80%;margin-top: 13px;margin-left: 0px;"><button onclick="goBack()" style="border: none;min-height: 30px;line-height: 30px;border-radius: .25rem !important;width: 40%;"><b>&laquo;</b> </button></p>
       
     </div>
     <!-- table grid start -->
@@ -256,8 +256,8 @@
             <tbody>
                 <tr ng-repeat="product in campaignDetails.products">
                     <td class="hide-xs image_tdwidth table_firstthpadding">
-                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face"
-                            class="requ_size img-thumbnail">
+                            <a ng-href="#/owner/{{clientSlug}}/product-camp-details"><img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face"
+                            class="requ_size img-thumbnail"></a>
                     </td>
                     <td class="table_address">
                         <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b style="color: #44596D;">Address</b>:
@@ -346,5 +346,12 @@
     }
     function shareOwnerPopCampaign () {
         document.getElementById("sharePopup").classList.toggle("show");
+    }
+
+</script>
+
+<script>
+    function goBack() {
+      window.history.back();
     }
 </script>
