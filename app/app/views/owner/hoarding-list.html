@@ -832,7 +832,8 @@
                     </td>
                     <td class="table_vertical">
                         <div class="dropdown hide-xs">
-                            <md-button class="md-raised md-primary all_button" onclick="edittableProduct()" class="dropbtn">Clone Details</md-button>
+                            <md-button class="md-raised md-primary all_button" onclick="edittableProduct()" ng-click = "cloneProductDetails(product)" class="dropbtn">Clone Details</md-button>
+                            
                             <div id="edittableDropdown" class="dropdown-content contbg animated fadeInDown mostly-customized-scrollbar" style="width:730px;height:75vh;overflow: auto">
                                 <form name="addProductForm" role="form" novalidate="novalidate">
                                     <div layout="colmun">
@@ -943,7 +944,7 @@
                                                 <div class="input-group">
                                                     <input date-range-picker ng-model="ranges.selectedDateRanges" 
                                                     custom-options="customOptions" class="form-control md-whiteframe-3dp date-picker" placeholder="Product date" type="text" name="date" readonly options="rqstHrdngsOpts" id="booking_dates_picker"/>
-                                                    <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDates(editRequestedhordings,$event);" style="padding: 4px 16px;">
+                                                    <a class="input-group-addon md-whiteframe-3dp" ng-click="getProductUnavailableDatesCloned($event);" style="padding: 4px 16px;">
                                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
@@ -1250,7 +1251,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <md-button type="submit" Class="md-raised md-primary register_btn"
-                                                ng-click="updateeditProductdetails(editRequestedhordings)">
+                                                ng-click="newProductCloned(editRequestedhordings)">
                                                     Submit</md-button>
                                             </div>
                                         </div>
