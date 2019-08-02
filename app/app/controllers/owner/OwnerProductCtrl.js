@@ -401,6 +401,34 @@ Colipos  ===================*/
     });
   }
 
+  //clone product Details
+
+  $scope.cloneProductDetails = function(product){
+    $scope.editRequestedhordings = {}
+    $scope.editRequestedhordings.type = product.type;
+    $scope.editRequestedhordings.area_name = product.area_name;
+    $scope.editRequestedhordings.lighting = product.lighting;
+    $scope.editRequestedhordings.venue = product.venue;
+    $scope.editRequestedhordings.address = product.address;
+    $scope.editRequestedhordings.city = product.city;
+    $scope.editRequestedhordings.imgdirection = product.imgdirection;
+    $scope.editRequestedhordings.impressions = product.impressions;
+    $scope.editRequestedhordings.zipcode = product.zipcode;
+    $scope.editRequestedhordings.panelSize = product.panelSize;
+    $scope.editRequestedhordings.imgdirection = product.imgdirection;
+    $scope.editRequestedhordings.minimumbooking = product.minimumbooking;
+    $scope.editRequestedhordings.cancellation = product.cancellation;
+    $scope.editRequestedhordings.direction = product.direction;
+    $scope.editRequestedhordings.default_price = product.default_price;
+    $scope.editRequestedhordings.ethnicity = product.ethnicity;
+    $scope.editRequestedhordings.hour = product.hour;
+    $scope.editRequestedhordings.flipsloops = product.flipsloops;
+    $scope.editRequestedhordings.slots = product.slots;
+    $scope.editRequestedhordings.area = product.area;
+
+  }
+
+
   $scope.filterOwnerProductsWithDates = function (dateFilter) {
     OwnerProductService.getApprovedProductListByDates(moment(dateFilter.start_date).toISOString(), moment(dateFilter.end_date).toISOString()).then(function (result) {
       $scope.productList = result.products;
@@ -687,14 +715,18 @@ Colipos  ===================*/
   //   }
    
   // }
+  $scope.getProductUnavailableDatesCloned = function(ev){
+    $scope.unavailalbeDateRanges = [];
+      $(ev.target).parent().parent().find('input').trigger('click');
+  }
   $scope.getProductUnavailableDates = function (productId, ev) {
     if(productId.type == "Bulletin"){
       OwnerProductService.getProductUnavailableDates(productId.id).then(function (dateRanges) {
         $scope.unavailalbeDateRanges = dateRanges;
         $(ev.target).parent().parent().find('input').trigger('click');
-        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
-          $(".drp-buttons").hide();
-        }
+        // if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+        //   $(".drp-buttons").hide();
+        // }
       });
     }else if(productId.type == "Digital" || productId.type == "Transit Digital"){
       OwnerProductService.getProductDigitalUnavailableDates(productId.id).then(function (blockedDatesAndSlots) {
@@ -705,9 +737,9 @@ Colipos  ===================*/
             }
         })
         $(ev.target).parent().parent().find('input').trigger('click');
-        if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
-          $(".drp-buttons").hide();
-        }
+        // if($location.$$path.split("/")[$location.$$path.split("/").length - 1] == "hoarding-list"){
+        //   $(".drp-buttons").hide();
+        // }
     })
     }
     else{
@@ -719,8 +751,43 @@ Colipos  ===================*/
   | Product Section Ends
   =====================*/
 
+  //create new product with editable cloned product
+
+  $scope.newProductCloned = function(editProduct){
+    // editRequestedhording.id = $stateParams.id;
+    $scope.ranges.selectedDateRanges.map(function(item){
+      item.startDate = moment(item.startDate).format('YYYY-MM-DD')
+      item.endDate = moment(item.endDate).format('YYYY-MM-DD')
+
+    })
+    $scope.editRequestedhordings.dates = $scope.ranges.selectedDateRanges;
+    // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
+
+    Upload.upload({
+      url: config.apiPath + '/save-product-details',
+      data: { image: $scope.files.image, product: JSON.parse(angular.toJson($scope.editRequestedhordings)) }
+     
+    }).then(function (result) {
+      if (result.data.status == "1") {
+        getRequestedProductList();
+        document.getElementById("edittableDropdown").classList.toggle("show");
+        toastr.success(result.data.message);
+        $scope.removeSelection();
+        $scope.editRequestedhordings = null
+      }
+      else if (result.data.status == 0) {
+        $scope.requestProductErrors = result.data.message;
+        toastr.error(result.data.message);
+      }
+    }, function (resp) {
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    });
+  }
+
   //updated edited product details
   $scope.updateeditProductdetails = function (editRequestedhordings) {
+    console.log(editRequestedhordings)
     //editRequestedhordings.area = $scope.areaObj.id;
     editRequestedhordings.id = $stateParams.id;
     $scope.ranges.selectedDateRanges.map(function(item){
