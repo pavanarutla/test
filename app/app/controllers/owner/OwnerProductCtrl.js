@@ -414,11 +414,14 @@ Colipos  ===================*/
     $scope.editRequestedhordings.imgdirection = product.imgdirection;
     $scope.editRequestedhordings.impressions = product.impressions;
     $scope.editRequestedhordings.zipcode = product.zipcode;
-    $scope.editRequestedhordings.panelSize = product.panelSize;
+    // $scope.editRequestedhordings.panelSize = product.panelSize;
+    $scope.editRequestedhordings.height = product.height;
+    $scope.editRequestedhordings.width = product.width;
     $scope.editRequestedhordings.imgdirection = product.imgdirection;
     $scope.editRequestedhordings.minimumbooking = product.minimumbooking;
     $scope.editRequestedhordings.cancellation = product.cancellation;
     $scope.editRequestedhordings.direction = product.direction;
+    $scope.editRequestedhordings.price = product.default_price;
     $scope.editRequestedhordings.default_price = product.default_price;
     $scope.editRequestedhordings.ethnicity = product.ethnicity;
     $scope.editRequestedhordings.hour = product.hour;
@@ -498,13 +501,13 @@ Colipos  ===================*/
   | Product Section
   =====================*/ 
   $scope.product = {};
+  $scope.editRequestedhordings={};
   $scope.addProductType = [
     // { name: "All" },
     { name: "Bulletin" },
     { name: "Digital" },
     { name: "Transit Digital" }
   ];
-  //$scope.product.form = {ethnicity : $scope.addProductType[0].value};
   $scope.ProductTypes = [
     { name: "All" },
     { name: "Bulletin" },
@@ -516,10 +519,12 @@ Colipos  ===================*/
     { name: 'Hispanic', value: 'hispanic' },    
     ];    
     $scope.product = {ethnicity : $scope.typeOptions[0].value};
+    $scope.editRequestedhordings = {ethnicity : $scope.typeOptions[0].value};
     $scope.edittypeOptions = [
       { name: 'General', value: 'general' }, 
       { name: 'Hispanic', value: 'hispanic' },    
       ];
+      //$scope.editRequestedhordings = {ethnicity : $scope.typeOptions[0].value};
   $scope.bulletinresult = true;
   $scope.trasitResult = false;
   $scope.DigitalResult = false;
@@ -761,6 +766,7 @@ Colipos  ===================*/
 
     })
     $scope.editRequestedhordings.dates = $scope.ranges.selectedDateRanges;
+    $scope.editRequestedhordings.price = $scope.editRequestedhordings.default_price;
     // editRequestedhordings.dates = $scope.editRequestedhordings.dates;
 
     Upload.upload({

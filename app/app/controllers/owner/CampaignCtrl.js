@@ -784,7 +784,7 @@ $scope.hidebutton = function(){
         });
     }
      
-        $scope.payAmount = function(campaignId){      
+        $scope.payAmount = function(campaignId){ 
         $scope.amountPay = _.filter($scope.ownerSaved, function (c) {
                 return c.cid == campaignId;
         });
@@ -796,6 +796,34 @@ $scope.hidebutton = function(){
         {name: "Transfer"}
     ];
     $scope.files = {};
+    $scope.autopayOwnerCampaignPayment = function (id) {
+        $scope.campaignPayment.campaign_id = $scope.amountPay[0].id;
+        Upload.upload({
+            url: config.apiPath + '/update-campaign-payment-owner',
+            data: {image: $scope.files.image, campaign_payment: $scope.campaignPayment}
+        }).then(function (result) {
+            if (result.data.status == "1") {
+                toastr.success(result.data.message);
+                $scope.campaignPayment = {};
+                $scope.files.image = "";
+                // setTimout(() => {
+                //     $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+                // }, 2500);
+                document.getElementById("addpaydrop").classList.toggle("show");
+                loadOwnerCampaigns();               
+            } else {
+                if (result.data.message.constructor == Array) {
+                    $scope.updateCampaignPaymentErrors = result.data.message;
+                } else {
+                    toastr.error(result.data.message);
+                }
+            }
+        }, function (resp) {
+            toastr.error("somthing went wrong try again later");
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
     $scope.updateOwnerCampaignPayment = function (id) {
         $scope.campaignPayment.campaign_id = id;
         Upload.upload({

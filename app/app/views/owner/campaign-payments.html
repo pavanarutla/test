@@ -24,7 +24,8 @@
                         <div class="form-group row">
                                 <label for="amount" class="col-sm-4 col-form-label md-body-2">Campaign :</label>
                                 <div class="col-sm-8">
-                                  <select id="paymentType" ng-model="campaignPayment.id" name="mode" class="form-control md-whiteframe-3dp" ng-change="payAmount(campaignPayment.id)" required="required">
+                                  <select id="paymentType" ng-model="campaignPayment.id" name="mode" class="form-control md-whiteframe-3dp" 
+                                    ng-change="payAmount(campaignPayment.id)" required="required">
                                     <option ng-repeat="ownerCampName in ownerSaved" value={{ownerCampName.cid}}>{{ownerCampName.cid}} {{ownerCampName.name}}</option>
                                   </select>
                                   <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
@@ -101,7 +102,7 @@
                         <div class="col-sm-4">
                         </div>
                         <div class="col-sm-4">
-                          <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="updateOwnerCampaignPayment(campaignPaymentDetails.id,campaignPayment.id)">Submit</md-button>
+                          <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="autopayOwnerCampaignPayment(campaignPaymentDetails.id,campaignPayment.id)">Submit</md-button>
                         </div>                        
                       </div>
                   </div>
