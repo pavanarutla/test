@@ -40,7 +40,7 @@
                             <th>Campaign Name</th>
                             <th>Start Date</th>
                             <th class="text-center">End Date</th>
-                            <th class="text-center">Total Price</th>
+                            <!-- <th class="text-center">Total Price</th> -->
                             <th class="text-center">Status</th>
                             <th></th>
                             <th></th>
@@ -51,9 +51,9 @@
                         <tr ng-repeat="product in shortlistedproduct.campaign_list">
                             <td>{{product.cid}}</td>
                             <td>{{product.name | capitalize}}</td>
-                            <td>N/A</td>
-                            <td class="text-center table_vertical">{{product.total_paid}}</td>
-                            <td class="text-center table_vertical">{{product.est_budget}}</td>
+                            <td>{{product.startDate}}</td>
+                            <td class="text-center table_vertical">{{product.endDate}}</td>
+                            <!-- <td class="text-center table_vertical">{{product.est_budget}}</td> -->
                             <th class="text-center table_vertical">{{product.status | stringifyCampaignStatus}}</th>
                             <td class="text-center table_vertical">
                                     <a href="#/owner/{{clientSlug}}/campaign-details/{{product.id}}/{{product.type}}">
@@ -62,7 +62,7 @@
                                    
                             </td>
                             <td class="text-center table_vertical">
-                                <span class="text_color md-caption">{{product.created_at | date}}</span>
+                                <span class="text_color md-caption">{{product.created_at | dateFormat}}</span>
                             </td>
                         </tr>
                     </tbody>

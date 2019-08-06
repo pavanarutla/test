@@ -252,7 +252,7 @@ $scope.hidebutton = function(){
     var loadOwnerCampaigns = function () {
         return new Promise((resolve, reject) => {
             OwnerCampaignService.getOwnerCampaigns().then(function (result) {
-                $scope.ownerCampaigns = result;
+                $scope.ownerCampaigns = result;               
                 $scope.ownerCampaigns = _.filter(result, function (c) {
                     return c.status < 800;
                 });
@@ -774,8 +774,7 @@ $scope.hidebutton = function(){
     $scope.getCampaignPaymentDetails = function (campaignId) {
         // localStorage.campaignPaymentDetailsCampaignId= campaignId;
         OwnerCampaignService.getCampaignPaymentDetails(campaignId).then(function (result) {
-            //$scope.showCampaignPaymentSidenav();
-            $scope.campaignPaymentDetails = result;
+            $scope.campaignPaymentDetails = result;           
             var campaignPayments = $scope.campaignPaymentDetails.payment_details;
             $scope.paid = 0;
             _.each(campaignPayments, function (p) {
@@ -784,7 +783,12 @@ $scope.hidebutton = function(){
             //$scope.unpaid = $scope.campaignPaymentDetails.act_budget + parseInt($scope.campaignPaymentDetails.gst_price);
         });
     }
-
+     
+        $scope.payAmount = function(campaignId){ 
+        $scope.amountPay = _.filter($scope.ownerSaved, function (c) {
+                return c.cid == campaignId;
+        });
+        };
     $scope.paymentTypes = [
         {name: "Cash"},
         {name: "Cheque"},
@@ -792,6 +796,34 @@ $scope.hidebutton = function(){
         {name: "Transfer"}
     ];
     $scope.files = {};
+    $scope.autopayOwnerCampaignPayment = function (id) {
+        $scope.campaignPayment.campaign_id = $scope.amountPay[0].id;
+        Upload.upload({
+            url: config.apiPath + '/update-campaign-payment-owner',
+            data: {image: $scope.files.image, campaign_payment: $scope.campaignPayment}
+        }).then(function (result) {
+            if (result.data.status == "1") {
+                toastr.success(result.data.message);
+                $scope.campaignPayment = {};
+                $scope.files.image = "";
+                // setTimout(() => {
+                //     $location.path('/owner/' + $rootScope.clientSlug + '/payments');
+                // }, 2500);
+                document.getElementById("addpaydrop").classList.toggle("show");
+                loadOwnerCampaigns();               
+            } else {
+                if (result.data.message.constructor == Array) {
+                    $scope.updateCampaignPaymentErrors = result.data.message;
+                } else {
+                    toastr.error(result.data.message);
+                }
+            }
+        }, function (resp) {
+            toastr.error("somthing went wrong try again later");
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
     $scope.updateOwnerCampaignPayment = function (id) {
         $scope.campaignPayment.campaign_id = id;
         Upload.upload({

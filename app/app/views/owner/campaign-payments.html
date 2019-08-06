@@ -4,7 +4,115 @@
     </md-button> -->
     <div layout="colmun" layout-align="end center" class="hide-xs campaign_search mt-3 mr-3">
         <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp bbi_campsearch"/>
+        <div class="dropdown" style="float: right;">
+            <md-button class="md-raised md-primary all_button update_mrg hide-xs" onclick="paymentaddPayment()" class="dropbtn">
+            Add Payment
+          </md-button>
+          <div id="addpaydrop" class="dropdown-content contbg animated fadeInDown add_paymentowner">
+            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+              <div layout="colmun">
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="paymentaddPayment()">
+                  <md-icon class="md-default-theme">
+                    <i class="material-icons">close</i>
+                  </md-icon>
+                </md-button>
+              </div>
+              <li>
+                <div class="">
+                  <div class="col-md-12">
+                        <div class="form-group row">
+                                <label for="amount" class="col-sm-4 col-form-label md-body-2">Campaign :</label>
+                                <div class="col-sm-8">
+                                  <select id="paymentType" ng-model="campaignPayment.id" name="mode" class="form-control md-whiteframe-3dp" 
+                                    ng-change="payAmount(campaignPayment.id)" required="required">
+                                    <option ng-repeat="ownerCampName in ownerSaved" value={{ownerCampName.cid}}>{{ownerCampName.cid}} {{ownerCampName.name}}</option>
+                                  </select>
+                                  <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                                    Campaign Is required!!
+                                  </span>                        
+                                </div>
+                              </div>
+                      <div class="form-group row">
+                        <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
+                        <div class="col-sm-8">
+                          <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
+                            <option selected>Select Payment Mode</option>
+                            <option ng-repeat="paymentType in paymentTypes">{{paymentType.name}}</option>
+                          </select>
+                          <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                            Mode Is required!!
+                          </span>                        
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" name="amount" required="required" only-numeric id="amount" ng-model="campaignPayment.amount">
+                          <div ng-messages="forms.ownerCampaignForm.amount.$error" style="color:red" ng-if="forms.ownerCampaignForm.amount.$touched">
+                              <div ng-message="required">Amount is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" only-numeric required="required" ng-model="campaignPayment.reference_no">
+                          <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
+                              <div ng-message="required">Reference No is required.</div>
+                            </div>
+                        </div>
+                      </div>                                       
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By :</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input  name="recived" required="required" ng-model="campaignPayment.received_by">
+                          <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
+                              <div ng-message="required">Received By is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"
+                            ng-model="campaignPayment.comment"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                        <div class="col-sm-8">
+                          <span class="input-group-btn">
+                            <span class="">
+                              <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                                accept="image/*" ngf-max-size="1MB">
+                            </span>
+                          </span>
+                          <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                            style="color:red">
+                            <div ng-message="required">Image is required.</div>
+                          </div>
+                        </div>
+                      </div>
+                        <span>Paid : ${{amountPay[0].paid |number : 2 || 0 }}</span><br>
+                        <span>Pending : ${{amountPay[0].act_budget - amountPay[0].paid | number:2 || 0}}</span><br>
+                        <span>Total :  ${{amountPay[0].act_budget}}</span>                   
+                      <div class="form-group row">
+                        <div flex></div>
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4">
+                          <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="autopayOwnerCampaignPayment(campaignPaymentDetails.id,campaignPayment.id)">Submit</md-button>
+                        </div>                        
+                      </div>
+                  </div>
+                </div>
+              </li>
+            </form>
+          </div>
+        </div>       
     </div>
+    
     <md-tabs md-dynamic-height class="padding_cmp">
         <md-tab label="My Campaign Payments">
             <div style="margin-top: 1em;">
@@ -99,3 +207,10 @@
         </md-tab>
     </md-tabs>
 </div>
+
+
+<script>
+   function paymentaddPayment() {
+     document.getElementById("addpaydrop").classList.toggle("show");
+   }
+ </script>
