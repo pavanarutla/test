@@ -1,0 +1,64 @@
+<style>
+        .unReadNotifications {
+            background-color: #f2f3f2;
+        }
+</style>
+<meta http-equiv="content-type" content="application/pdf ">
+<div layout="column" layout-padding>
+    <p class="text_color md-title">Notifications</p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="notifictaion in getAdminNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
+                    <td class="table_vertical">{{notifictaion.message | capitalize}}</td>
+                    <td class="table_vertical">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/metro-campaign/{{notifictaion.campaign_id}}">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'Owner_registartion' || notifictaion.type == 'User_registartion'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="#/admin/user-management">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical text-right text_color hide-xs">{{notifictaion.created_at| dateFormat}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

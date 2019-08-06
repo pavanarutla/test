@@ -1,4 +1,4 @@
-app.controller('feedback', function($scope,$mdDialog,Upload) {
+app.controller('feedback', function($scope,$mdDialog,ContactService,toastr,Upload,$auth) {
 
       $scope.uploadFiles = function(files, errFiles) {
         $scope.files = files;
@@ -22,4 +22,33 @@ app.controller('feedback', function($scope,$mdDialog,Upload) {
             });
         });
     }
+
+    // bbisuport page script
+    $scope.concernabouts = [
+        {"Name" : "Alfreds Futterkiste",
+        "Age": 24,
+        "Place": "Hyderabad"
+    },
+        
+    ]
+    $scope.query = {};
+    $scope.bbisuportdata = function(query){
+        var userDetails = $auth.getPayload()
+        var querryObj = {
+            subject: query.type,
+            message: query.querymessage,
+            name : userDetails.userMongo.first_name + userDetails.userMongo.last_name,
+            email:userDetails.userMongo.email,            
+            contactno:userDetails.userMongo.phone
+        };
+        ContactService.sendQuery(querryObj).then(function(result){
+            if(result.status == 1){
+                toastr.success(result.message)
+                $scope.query = null;
+            }else if(result.status == 0){
+                toastr.error = result.message;
+            }
+        });
+    }
+     // bbisuport page script Ends
 });

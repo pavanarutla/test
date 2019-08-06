@@ -1,16 +1,44 @@
 <div layout="column" layout-fill="layout-fill">
-    <div class="md-title" style="background: #447bde;color: #fff;" layout="row">
-        <div flex="50">
-            <div class="md-title" style="margin: 10px 0 0 15px;">Total List Of Formats</div>
-        </div>
-         <div layout-align="center end" layout="column" flex="50">
-            <md-button class="md-raised md-warn" ng-click="showFormatForm()">
-                 Add New Format <span><md-icon md-svg-icon="assets/images/finalise.svg"></md-icon></span> 
-            </md-button>
-        </div> 
-    </div>
-    <div layout-margin layout="column">
-  
-    <div ui-grid="gridFormats"  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    </div>
+	<div class="md-title" layout="row">
+		<div layout-align="center end" layout="column" flex="100">
+			<md-button class="md-raised md-warn all_button" ng-click="showFormatForm()">
+				Add New Format
+			</md-button>
+		</div>
+	</div>
+	<div style="margin-top: 1em;">
+		<div class="table-responsive">
+			<table class="table" style="width: 100% !important">
+				<thead class="text_color">
+					<tr>
+						<th>Icon</th>
+						<th>Formats type</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="format in formatList | limitTo:limit">
+						<td class="table_vertical"><img ng-src="{{serverUrl + format.image}}" style="width:60px;height:60px;"/></td>
+						<td class="table_vertical">{{format.name}}</td>
+						<td class="table_vertical">
+							<span>
+								<a style="cursor:pointer;" ng-click="editFormat(format)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+							<span>
+								<a style="cursor:pointer;" ng-click="deleteFormat(format)">
+									<md-icon>
+										<i class="material-icons">delete</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

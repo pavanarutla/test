@@ -1,0 +1,46 @@
+<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+  <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+</md-button>
+<div class="owner_feeds">
+  <div class="table-responsive">
+    <div ng-if="!requestList || requestList.length == 0">
+      <h3 class="m-2">There is no campaigns available</h3>
+    </div>
+    <table class="table table-hover" ng-if="requestList.length > 0">
+      <thead class="text_color">
+        <tr>
+          <th>CID</th>
+          <th class="">Campaign Name</th>
+          <th>Status</th>
+          <th>Action</th>
+          <th class=""></th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="request in requestList">
+        <tr>
+          <td class="table_vertical">{{request.cid}}</td>
+          <td class="table_vertical">{{request.name | capitalize}}</td>
+          <td class="table_vertical">
+            <!-- <span ng-show="request.status == 100" >Preparing</span> -->
+            <!-- <span ng-show="request.status == 200" >A user has asked for a quote for your products.</span> -->
+            <!-- <span ng-show="request.status == 300" >Quote Requested</span>                
+                <span ng-show="request.status == 400" >Quote Given</span>
+                <span ng-show="request.status == 500" >Change Requested</span>
+                <span ng-show="request.status == 600" >Booking Requested</span>
+                <span ng-show="request.status == 700" >Booked</span> -->
+            <span>{{request.status | stringifyCampaignStatus}}</span>
+          </td>
+          <td class="table_vertical">
+            <a style="cursor:pointer;" ng-click="showCampaignDetails($event, request)">
+              <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                <i class="material-icons">remove_red_eye</i>
+              </md-icon>
+            </a>
+          </td>
+          <td class="table_vertical mr-5 feeds_paddingright" style="">{{request.updated_at | dateFormat}}</td>
+        </tr> 
+       
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,63 +1,120 @@
-<div layout="column" flex style="height:570px !important;" >
-  <div class="md-title" style="background: #447bde;color: #fff;" layout-padding>Your Daily feed</div>
-  <md-content layout="column" layout-sm="column" layout-xs="column" class="contbg">
-    <md-tabs md-dynamic-height md-border-bottom>
-      <!-- <md-tab label="Latest updates">
-        <md-content class="md-padding" layout="column">
-          <h3>Latest updates</h3>
-        </md-content>
-      </md-tab> -->
-      <!-- <md-tab label="Task">
-        <md-content class="md-padding" layout="column">
-          <h3>Task Tab Hera</h3>
-        </md-content>
-      </md-tab> -->
-      <md-tab label="Request">
-        <!-- <div layout="column" flex="40" layout-margin>
-          <h4>Send A Request</h4>
-          <div>
-            <label>Title:</label>
-            <input type="text" name="title" placeholder="title" style="width:85%">
+<md-tabs md-dynamic-height class="contbg">
+  <md-tab label="Metro Feeds">
+      <div ng-if="requestList.metroCampaignFeeds.length < 1">
+          <h3 class="m-2">There is no metro campaign requests</h3>
+        </div>
+      <div style="margin-top: 1em;" ng-if="requestList.metroCampaignFeeds.length > 0">
+          <div class="table-responsive">
+              <table class="table" >
+                <thead class="text_color">
+                  <tr>
+                    <th>CID</th>
+                    <th class="">Campaign Name</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th class=""></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="request in requestList.metroCampaignFeeds">
+                    <td class="table_vertical">{{request.cid}}</td>
+                    <td class="table_vertical">{{request.name | capitalize}}</td>
+                    <td class="table_vertical">
+                      <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
+                    </td>
+                    <td class="table_vertical">
+                      <a style="cursor:pointer;" ng-click="showCampaignDetailsPopup($event, request)" >
+                          <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                          </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+          </div>
+      </div>
+  </md-tab>
+  <md-tab label="OOH Feeds"> 
+      <div ng-if="requestList.otherCampaignFeeds.length < 1" > 
+          <h3 class="m-2">There is no OOH campaigns available</h3>
+        </div>
+        <div style="margin-top: 1em;" ng-if="requestList.otherCampaignFeeds.length > 0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text_color">
+                <tr>
+                  <th>CID</th>
+                  <th class="">Campaign Name</th>
+                  <th>Details</th>
+                  <th>Action</th>
+                  <th class=""></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  ng-repeat="request in requestList.otherCampaignFeeds">
+                  <td class="table_vertical">{{request.cid}}</td>
+                  <td class="table_vertical">{{request.name | capitalize}}</td>
+                  <td class="table_vertical">
+                    <span ng-show="request.status == 200">{{request.contact_name}} has requested for a campaign proposal.</span>
+                    <span ng-show="request.status == 300">{{request.contact_name}} has requested for Quote.</span>
+                    <span ng-show="request.status == 400">{{request.contact_name}} has requested for a change in provided quote.</span>
+                    <span ng-show="request.status == 500">{{request.contact_name}} has requested for the launch of their campaign.</span>
+                  </td>
+                  <td class="table_vertical">
+                    <a style="cursor:pointer;"  ng-click="showCampaignDetailsPopup($event, request)">
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                          <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                      </a>
+                  </td>
+                  <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+                </tr>
+                
+              </tbody>
+            </table>
           </div>
         </div>
-        <div layout="row">
-          <div flex="40">
-            <label>Details:</label>
-            <textarea cols="5" rows="5" placeholder="Enter Details" style="width:81%"></textarea>
-          </div>
-          <div flex="30">
-            <md-button class="md-raised md-primary" style="margin-top:55px">Send</md-button>
-          </div>
-        </div> -->
-        <div layout="column" layout-margin layout-padding ng-show="requestList.length == 0">
-          <div layout="row" layout-fill layout-margin>
-            <h4>No new feeds. Please come back later.</h4>
+  </md-tab>
+  <md-tab label="SuggestMe">
+      <div ng-if="requestList.campaignSuggestionRequests.length < 1">
+          <h3 class="m-2">There is no suggest requests</h3>
+        </div>
+
+        <!-- Campaign suggestion requests -->
+  
+        <div style="margin-top: 1em;" ng-if="requestList.campaignSuggestionRequests.length > 0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text_color">
+                <tr>
+                  <!-- <th>CID</th>
+                  <th class="feeds_width">Camapaign Name</th> -->
+                  <th>Details</th>
+                  <th>Action</th>
+                  <th class=""></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  ng-repeat="request in requestList.campaignSuggestionRequests">
+                  <td class="table_vertical">
+                    <span class="">{{request.user_full_name}} has requested for campaign suggestion.</span>
+                  </td>
+                  <td class="table_vertical">
+                    <a style="cursor:pointer;" ng-click="showCampaignSuggestionRequestPopup($event, request)">
+                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                          <i class="material-icons">remove_red_eye</i>
+                        </md-icon>
+                      </a>
+                  </td>
+                  <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+                </tr>
+                
+              </tbody>
+            </table>
           </div>
         </div>
-        <div layout="column" layout-margin layout-padding ng-repeat="request in requestList">
-          <div layout="row" layout-fill layout-margin style="background-color: #a3c4e8">
-            <div layout="column" layout-align="center center" flex="10">
-              <img ng-src="{{serverUrl + request.user_avatar}}" class="md-avatar face" ng-if="request.user_avatar">
-              <img src="assets/images/product/person.png" class="md-avatar face" ng-if="!request.user_avatar">
-            </div>
-            <div flex="70" layout="column" layout-align="center start" layout-margin>
-              <div>
-                <h3 ng-show="request.status == 0">{{request.user_full_name}} has requested for a campaign suggestion.</h3>
-                <h3 ng-show="request.status == 3">{{request.user_full_name}} has requested for a campaign proposal.</h3> <!-- Proposal = quote -->
-                <h3 ng-show="request.status == 5">{{request.user_full_name}} has requested for a change in provided quote.</h3> <!-- Proposal = quote -->
-                <h3 ng-show="request.status == 6">{{request.user_full_name}} has requested for the launch of their campaign.</h3>
-              </div>
-              <div><span>{{request.updated_at | dateify | date:'dd-MM-yyyy HH:mm:ss'}}</span></div>
-              <div>
-                <md-button class="md-raised md-primary" ng-click="showCampaignDetailsPopup($event, request)">View Details</md-button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div layout="column" layout-margin>
-          <md-button class="md-raised md-primary" layout-fill ng-click='loadMore()'>Show More</md-button>
-        </div> -->
-      </md-tab>
-    </md-tabs>
-  </md-content>
-</div>
+  </md-tab>
+</md-tabs>

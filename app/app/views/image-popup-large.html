@@ -1,18 +1,43 @@
 <!-- //////////// show image start \\\\\\\\\\\\\\\\\\\\ -->
-<md-dialog flex="50"  flex-lg="50" flex-md="60"  flex-sm="70" style="border-radius: 0;" ng-class="{'layout-fill':mdMedia('xs')  }">
-	<!-- <md-toolbar>
-		<div  class="md-toolbar-tools md-whiteframe-4dp">
-			<span  class="md-title">Image</span>
-			<span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
-			<button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button" ng-transclude="" ng-click="cancel()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X<div class="md-ripple-container"></div></button>
-		</div>
-	</md-toolbar> -->
+<md-dialog flex="50"  flex-lg="50" flex-md="60" flex-xs="100" flex-sm="70" style="border-radius: 0;z-index: 99;" ng-class="{'layout-fill':mdMedia('xs')}">
+
 	<md-dialog-content>
-		
-		<div layout="column">
-			<div class="map-image">
-					<img ng-src="{{img_src}}" alt="image" style="width: 100%;height: auto">
+		<div class="pop_close_btn">
+			<button class="md-icon-button product_closebtn" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</button>
+		</div>
+		<div id="productImage" class="carousel slide" data-ride="carousel">
+
+			<!-- Indicators -->
+			<ul class="carousel-indicators">
+			  <li data-target="#productImage" data-slide-to="0" class="active"></li>
+			  <li data-target="#productImage" data-slide-to="1"></li>
+			  <li data-target="#productImage" data-slide-to="2"></li>
+			</ul>
+			<!-- The slideshow -->
+			<div class="carousel-inner">
+			  <!-- <div class="carousel-item">
+				<img ng-src="{{img_src}}" alt="product image" style="width:100%;height:100%;padding: 10px 10px;">
+			  </div> -->
+			  <!-- need to check -->
+			  <div class="carousel-item active">
+				<img ng-src="{{img_src_0}}" alt="product image"  style="width:100%;height:500px;padding: 10px 10px;">
+			  </div>
+			  <div class="carousel-item">
+				<img ng-src="{{img_src_1}}" alt="product image"  style="width:100%;height:500px;padding: 10px 10px;">
+			  </div>
+			   <!-- need to check -->
 			</div>
+		  
+			<!-- Left and right controls -->
+			<a class="carousel-control-prev" data-target="#productImage" data-slide="prev">
+			  <span class="carousel-control-prev-icon"></span>
+			</a>
+			<a class="carousel-control-next" data-target="#productImage" data-slide="next">
+			  <span class="carousel-control-next-icon"></span>
+			</a>
+		  
 		</div>
 	</md-dialog-content>
 </md-dialog>

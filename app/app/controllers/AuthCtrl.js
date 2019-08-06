@@ -1,42 +1,62 @@
-'user strict'
 app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $auth, $state, toastr, UserService) {
 
 	$scope.showSignin = true;
 	$scope.forgotPasswordpage = false;
 
 	$scope.user = {};
-	$scope.signInUser = function () {
+	
+	$scope.signInUser = function () {		
 		$auth.login($scope.user).then(function (res) {
 			if ($auth.isAuthenticated()) {
-				var userData = $auth.getPayload().user;
-				_.each($auth.getPayload().userMongo, function (v, k) {
-					userData[k] = v;
-				});
+                            localStorage.removeItem('loggedInUser');
+				var loggedInUser = {};
+				var payload = $auth.getPayload();
+				var userData = payload.user;
+				var userMongoData = payload.userMongo;
+				loggedInUser.clientId = userData.client_id;
+				loggedInUser.user_id = userMongoData.id;
+                                                                                          loggedInUser.mong_id = userMongoData.client_mongo_id;
+				loggedInUser.client_slug = userData.client_slug;
+				loggedInUser.email = userData.email;
+				loggedInUser.firstName = userMongoData.first_name;
+				loggedInUser.lastName = userMongoData.last_name;
+				loggedInUser.user_type = userMongoData.user_type;
+                                                                                         loggedInUser.user_role = userMongoData.user_type;
+				loggedInUser.avatar = userMongoData.user_avatar;
 				$rootScope.isAuthenticated = true;
-				$rootScope.loggedInUser = userData;
-				localStorage.isAuthenticated = true;
-				localStorage.loggedInUser = JSON.stringify(userData);
+				$rootScope.loggedInUser = loggedInUser;
+				localStorage.loggedInUser = JSON.stringify(loggedInUser);
 				toastr.success('You have successfully signed in!');
+				$mdDialog.hide();
+				$rootScope.$emit("listeningActiveUserCampaigns")
 				if($rootScope.postLoginState){
 					$state.go($rootScope.postLoginState, null);
 				}
+				else if($auth.getPayload().userMongo.user_type == "bbi"){
+					$state.go("admin.home", null);
+				}
+				else if($auth.getPayload().userMongo.user_type == "owner"){
+					$location.path("/owner/" + payload.userMongo.client_slug + "/feeds");
+				}
 				else{
-					$state.go("index.location", null);
+                                
+					$state.go("index.location", null,{reload: true});
 				}
 			}
-			else {
+			else if(res.data.status == 0){
+				// $scope.signInUserError = res.data.message;
 				toastr.error(res.data.message);
 			}
-			$mdDialog.hide();
+			//$mdDialog.hide();
 		}).catch(function (error) {
 			toastr.error(error.data.message, error.status);
 			$mdDialog.hide();
 		});
 	}
 
-	$scope.close = function(){
-		$mdDialog.hide();		
-	}
+	// $scope.close = function(){
+	// 	$mdDialog.hide();		
+	// }
 	
 	///Agency Sign In functionolity
 
@@ -48,15 +68,18 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		$mdDialog.show({
 			templateUrl: 'views/register.html',
 			fullscreen: $scope.customFullscreen,
-			clickOutsideToClose: true
+			clickOutsideToClose: true, 
+			preserveScope: true, 
+			scope: $scope,
+			controller: 'RegistrationCtrl'
 		})
 	};
 
 	$scope.showForgotPasswordDialog = function () {
-		$scope.userForm = false;
+		// $scope.userForm = false;
 		$scope.forgotPasswordpage = true;
-		$scope.agencyForm = false;
-		$scope.userAgencyHeader = false;
+		// $scope.agencyForm = false;
+		// $scope.userAgencyHeader = false;
 	}
 	//form
 	$scope.currentNavItem = 'users';
@@ -79,16 +102,18 @@ app.controller("AuthCtrl", function ($scope, $mdDialog, $location, $rootScope, $
 		};
 		UserService.requestResetPassword(sendObj).then(function(result){
 			if(result.status == 1){
-				toastr.success(result.message);
-			}
+				// $scope.passwordEmailSentSuccess = true;
+				toastr.success(result.message);			
+			}			
 			else{
-				toastr.error(result.error);
+				toastr.error(result.message);
 			}
 		});
+		$mdDialog.hide();
 	}
 
-	$scope.close = function () {
-		$mdDialog.hide();
-		$state.reload();
-	}
+	// $scope.close = function () {
+	// 	$mdDialog.hide();
+	// 	$state.reload();
+	// }
 })

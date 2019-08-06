@@ -2,9 +2,13 @@ app.service('AdminUserService',
 ['$http', '$q', 'config', 
   function($http, $q, config){
     return {
-      getUsers: function(){
+      getUsers: function(pageNo, pageSize){
+        var pageData = "";
+				if(pageNo && pageSize){
+					var pageData = "?page_no=" + pageNo + "&page_size=" + pageSize;
+				}
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/users').success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/users' + pageData).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       getAgencies: function(){
@@ -22,9 +26,9 @@ app.service('AdminUserService',
         $http.post(config.apiPath + '/agencyByAdmin', agency).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
-      activateUser: function(userMID){
+      toggleActivationUser: function(userMID){
         var dfd = $q.defer();
-        $http.get(config.apiPath + '/activate-user/' + userMID).success(dfd.resolve).error(dfd.reject);
+        $http.get(config.apiPath + '/switch-activation-user/' + userMID).success(dfd.resolve).error(dfd.reject);
         return dfd.promise;
       },
       deleteUser: function(userMID){

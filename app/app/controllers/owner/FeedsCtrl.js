@@ -1,4 +1,4 @@
-app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$location, AdminCampaignService, ProductService, toastr) {
+app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http, $mdSidenav, $location, $rootScope, OwnerCampaignService, ProductService, toastr) {
   
     $scope.msg = {};
     $scope.limit = 3;
@@ -22,30 +22,37 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
         $scope.productList = $scope.productList.concat(result);
       });
     }
-    $scope.loadProductList();
+    // $scope.loadProductList();
 
     /*
     ======== Campaign requests =======
     */
-    AdminCampaignService.getAllCampaignRequests().then(function(result){
-      $scope.requestList = result;
-      // $scope.groupedRequests = _.groupBy(requestList, function(request){
-      //   return request.status;
-      // });
-    });
+
+    var getAllOwnerFeeds = function(){
+      OwnerCampaignService.getOwnerFeeds().then(function(result){
+        $scope.requestList = result;
+      });
+    }
+    getAllOwnerFeeds();
+
+    $scope.showCampaignDetails = function($event, campaign){
+      $location.path('/owner/' + $rootScope.clientSlug + '/campaign-details/' + campaign.id + "/" + campaign.type);
+    }
+
     /*
     ======== Campaign requests ends =======
     */
 
     $scope.showCampaignDetailsPopup = function (ev, campaignData) {
-      $scope.selectedRequestDetails = campaignData;
-      $mdDialog.show({
-        templateUrl: 'views/admin/campaign-details-popup.html',
-        fullscreen: $scope.customFullscreen,
-        clickOutsideToClose: true,
-        preserveScope: true,
-        scope: $scope
-      })
+      // console.log(campaignData);
+      // $scope.selectedRequestDetails = campaignData;
+      // $mdDialog.show({
+      //   templateUrl: 'views/admin/campaign-details-popup.html',
+      //   fullscreen: $scope.customFullscreen,
+      //   clickOutsideToClose: true,
+      //   preserveScope: true,
+      //   scope: $scope
+      // })
     };
 
     $scope.closeCampaignRequestDetails = function(){
@@ -139,6 +146,14 @@ app.controller('OwnerFeedsCtrl', function ($scope, $mdDialog, $http,$mdSidenav,$
 
     $scope.shortlistProduct = function() {
         $mdSidenav('shortlistAndSaveOwnerSidenav').toggle();
-      };
+    };
+    // add product
+
+    $scope.addProductOwner = function() {
+        $mdSidenav('addProductOwnerSidenav').toggle();
+    };
+    $scope.shareProducts = function() {
+        $mdSidenav('shareProductOwner').toggle();
+    };
   });
  

@@ -18,11 +18,11 @@ var app = angular.module('bbManager', [
   'ui.grid.pagination',
   'ngFileSaver',
   'googlechart',
-  // 'angular-carousel'
+  'ui.grid.selection',
+  'daterangepicker'
 ])
 .config(['$locationProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdAriaProvider', '$authProvider', '$stateProvider', '$httpProvider', 'config',
   function ($locationProvider, $urlRouterProvider, $mdThemingProvider, $mdAriaProvider, $authProvider, $stateProvider, $httpProvider, config) {
-
     $mdThemingProvider.theme('default')
     .primaryPalette('red', {
       'default': '800',
@@ -35,6 +35,7 @@ var app = angular.module('bbManager', [
       'hue-2': '400',
     });
 
+
     $stateProvider.state('index', {
       abstract: true,
       url: '/',
@@ -45,25 +46,107 @@ var app = angular.module('bbManager', [
       url: 'home',
       templateUrl: 'views/home.html'
     })
+    .state('index.aboutbbi', {
+      url: 'aboutbbi',
+      templateUrl: 'views/about_bbi.html'
+    })
+    .state('index.ourproduct', {
+      url: 'ourproduct',
+      templateUrl: 'views/our_product.html'
+    })
+    .state('index.faq', {
+      url: 'faq',
+      templateUrl: 'views/faq_product.html'
+    })
+    .state('index.suggestme', {
+      url: 'suggestme',
+      templateUrl: 'views/suggest_me.html'
+    })
+    .state('index.homemetro', {
+      url: 'homemetro',
+      templateUrl: 'views/homemetro.html'
+    })
+    .state('index.ourteam', {
+      url: 'ourteam',
+      templateUrl: 'views/our_team.html'
+    })
+    .state('index.fullservices', {
+      url: 'fullservices',
+      templateUrl: 'views/full_services.html'
+    })
+    .state('index.joincareers', {
+      url: 'joincareers',
+      templateUrl: 'views/join_careers.html'
+    })
     .state('index.formats', {
       url: 'formats',
       templateUrl: 'views/formats.html',
-      controller: 'FormatsCtrl'
+      controller: 'ProductCtrl'
     })
-    .state('index.pricing', {
-      url: 'pricing',
-      templateUrl: 'views/pricing.html',
-      controller: 'PricingCtrl'
+    .state('index.user-notifications', {
+      url: 'user-notifications',
+      templateUrl: 'views/user-notifications.html'
     })
-    .state('index.suggest_campaign', {
-      url: 'suggest-campaign',
+    .state('index.user-saved-campaigns', {
+      url: 'user-saved-campaigns',
+      templateUrl: 'views/user-saved-campaigns.html',
+      controller:'CampaignCtrl'
+    })
+    $stateProvider.state('index.suggest', {
+      url: 'suggest',
       templateUrl: 'views/suggest-a-campaign.html',
       controller: 'CampaignCtrl'
+    })   
+    // nested states 
+    // each of these sections will have their own view
+    // url will be suggest-Product-Detail
+    .state('index.suggest.product-detail', {
+        url: '/product-detail',
+        templateUrl: 'views/suggest-campaign-one.html',
+        controller: 'CampaignCtrl'
+    })
+    // url will be suggest-market-Detail
+    .state('index.suggest.marketing-objectives', {
+        url: '/marketing-objectives',
+        templateUrl: 'views/suggest-campaign-two.html',
+        controller: 'CampaignCtrl'
+    })
+    // url will be suggest-Advertising-Detail
+    .state('index.suggest.advertising-objectives', {
+        url: '/advertising-objectives',
+        templateUrl: 'views/suggest-campaign-three.html',
+        controller: 'CampaignCtrl'
+    })
+      // url will be suggest-Advertising-Detail
+    .state('index.suggest.other-info', {
+        url: '/other-info',
+        templateUrl: 'views/suggest-campaign-four.html',
+        controller: 'CampaignCtrl'
+    })
+    .state('index.Map-ListView', {
+      url: 'Map-ListView',
+      templateUrl: 'views/Map-ListView.html',
+      controller: 'GmapCtrl'
     })
     .state('index.location', {
       url: 'location',
       templateUrl: 'views/map-home.html',
       controller: 'GmapCtrl'
+    })
+    .state('index.product-list', {
+      url: 'product-list',
+      templateUrl: 'views/product-list.html',
+      controller: 'ProductlistCtrl'
+    })
+    .state('index.shortlisted-products', {
+      url: 'shortlisted-products',
+      templateUrl: 'views/shortlisted-products.html',
+      controller: 'UserProductCtrl'
+    })
+    .state('index.metro', {
+      url: 'metro',
+      templateUrl: 'views/metro.html',
+      controller: 'MetroCtrl'
     })
     .state('index.campaign', {
       url: 'campaign',
@@ -80,35 +163,36 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/campaign.html',
       controller: 'CampaignCtrl'
     })
+    // .state('index.campaign-details', {
+    //   url: 'campaign-details',
+    //   templateUrl: 'views/campaign-details.html',
+    //   controller: 'CampaignCtrl'
+    // })
+    .state('index.campaign-details', {
+      url: 'campaign-details/{campaignId}',
+      templateUrl: 'views/campaign-details.html',
+      controller: 'CampaignCtrl'
+    })
+    .state('index.user-payments', {
+      url: 'user-payments',
+      templateUrl: 'views/user-payments.html',
+      controller:'UserPaymentCtrl'
+    })
+    .state('index.update-user-payments', {
+      url: 'update-user-payments/:id',
+      templateUrl: 'views/update-user-payments.html',
+      controller:'UserPaymentCtrl'
+    })
+    .state('index.metro-campaign', {
+      url: 'metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/metro-campaign-details.html',
+      controller: 'MetroCtrl'
+    })
     .state('index.profile', {
       url: 'profile',
       templateUrl: 'views/user-profile.html',
       controller: 'UserProfileCtrl'
     })
-    .state('index.agency-rofile', {
-      url: 'agency-profile',
-      templateUrl: 'views/agency-profile.html'
-    })
-    
-    // .state('index.shortlist-mobile', {
-    //   url: 'shortlist-mobile',
-    //   templateUrl: 'views/shortlist-mobile.html'
-    // })
-    // .state('index.formats-mobile', {
-    //   url: 'formats-mobile',
-    //   templateUrl: 'views/formats-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.suggest-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/suggest-mobile.html',
-    //   controller: 'GmapCtrl'
-    // })
-    // .state('index.savedcamapign-mobile', {
-    //   url: 'suggest-mobile',
-    //   templateUrl: 'views/savedcamapign-mobile.html',
-
-    // })
     .state('index.verify_email', {
       url: 'verify_email/{code}',
       templateUrl: 'views/home.html',
@@ -128,10 +212,26 @@ var app = angular.module('bbManager', [
         $scope.goToLogin = function () {
           $location.path('/');
           $mdDialog.show({
-            templateUrl: 'views/signIn.html',
+            templateUrl: 'views/sign-in.html',
             fullscreen: true
           });
         }
+      }
+    })
+    .state('index.complete_registration', {
+      url: 'complete_registration/:code',
+      templateUrl: 'views/complete_registration.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
+      }
+    })
+    .state('index.generate_password', {
+      url: 'generate_password/:code',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl',
+      params:{
+        code: {squash: true, value: null}
       }
     })
     .state('index.reset-password', {
@@ -142,47 +242,69 @@ var app = angular.module('bbManager', [
         code: {squash: true, value: null}
       }
     })
-    // .state('index.reset-password', {
-    //   url: 'reset_password',
-    //   templateUrl: 'views/reset-password.html',
-    //   controller: 'UserSettingsCtrl'
-    // })
+    .state('agency', {
+      url: '/agency',
+      templateUrl: 'layouts/agency.html',
+      
+    })
     .state('admin', {
       abstract: true,
       url: '/admin',
       templateUrl: 'layouts/admin.html',
       controller: 'AdminMgrAppCtrl'
     })
-    // .state('admin.products', {
-    //   url: '/admin/products',
-    //   templateUrl: 'views/admin/products.html',
-    //   controller: 'ProductsCtrl'
-    // })
-    // .state('admin.add-products', {
-    //   url: '/admin/add-products',
-    //   templateUrl: 'views/admin/add-products.html',
-    //   controller: 'ProductsCtrl'
-    // })
     .state('admin.home', {
-      url: '/home',
+      url: '/home/:campSuggReqId',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminFeedsCtrl',
-      title: 'Feeds'
+      title: 'Feeds',
+      params:{
+        campSuggReqId: {squash: true, value: null}
+      }
     })
-    .state('admin.Feeds', {
+    .state('admin.suggest-products', {
       url: '/suggest-products',
       templateUrl: 'views/admin/suggest-products.html',
-      controller: 'AdminFeedsCtrl',
+      controller: 'CampaignProposalCtrl',
       title: 'Feeds'
     })
-    .state('admin.campaign-suggestion', {
-      url: '/campaign-suggestion',
-      templateUrl: 'views/admin/campaignsugg.html',
-      title: 'Campaign Suggestion'
-    })
     .state('admin.campaign', {
-      url: '/campaign',
+      url: '/campaigns',
       templateUrl: 'views/admin/campaign-list.html',
+      controller: 'AdminCampaignCtrl',
+      title: 'Campaign'
+    })
+    .state('admin.admincampaign', {
+      url: '/admin-campaigns',
+      templateUrl: 'views/admin/campaign-admin-list.html',
+      controller: 'AdminCampaignCtrl',
+      title: 'Campaign'
+    })
+    .state('admin.metro-campaign-payment', {
+      url: '/metro-campaign-payment',
+      templateUrl: 'views/admin/metro-campaign-payment.html'
+      //controller: 'AdminCampaignCtrl',
+      //title: 'Campaign'
+    })
+    .state('admin.metro-campaigns', {
+      url: '/metro-campaigns',
+      templateUrl: 'views/admin/metro-campaign-list.html',
+      controller: 'AdminCampaignCtrl',
+      title: 'Campaign'
+    })
+    .state('admin.metro-corridors', {
+      url: '/metro-corridors',
+      templateUrl: 'views/admin/metro-corridors.html',
+      controller: 'AdminMetroCtrl'
+    })
+    .state('admin.metro-packages', {
+      url: '/metro-packages',
+      templateUrl: 'views/admin/metro-packages.html',
+      controller: 'AdminMetroCtrl'
+    })
+    .state('admin.metro-campaign', {
+      url: '/metro-campaign/{metroCampaignId}',
+      templateUrl: 'views/admin/metro-campaign-details.html',
       controller: 'AdminCampaignCtrl',
       title: 'Campaign'
     })
@@ -191,19 +313,14 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/campaign-proposal-summary.html',
       controller: 'CampaignProposalCtrl',
     })
-    .state('admin.campaign-running-summary', {
-      url: '/campaign-running-summary',
-      templateUrl: 'views/admin/campaignrunningsummary.html'
-    })
-    .state('admin.campaign-closed-summary', {
-      url: '/campaign-closed-summary',
-      templateUrl: 'views/admin/campaignclosedsummary.html'
-    })
-    .state('admin.registration', {
-      url: '/registration',
-      templateUrl: 'views/admin/registration.html',
-      controller: 'AdminRegistrationCtrl',
-      title: "User Registration"
+    .state('admin.user-management', {
+      url: '/user-management/:clientID',
+      templateUrl: 'views/admin/user-management.html',
+      controller: 'UserMgmtCtrl',
+      params: {
+        clientID: {squash: true, value: null}
+      },
+      title: "User Management"
     })
     .state('admin.companies', {
       url: '/companies',
@@ -219,6 +336,19 @@ var app = angular.module('bbManager', [
       url: '/formats',
       templateUrl: 'views/admin/formats.html',
       controller: 'ProductCtrl'
+    })
+    .state('admin.metro-formats', {
+      url: '/metro-formats',
+      templateUrl: 'views/admin/metro-formtas.html',
+      controller: 'AdminMetroCtrl'
+    })
+    .state('admin.requested-hoardings', {
+      url: '/requested-hoardings/:productId',
+      templateUrl: 'views/admin/requested-hoardings.html',
+      controller: 'ProductCtrl',
+      params: {
+        productId: {squash: true, value: null}
+      }
     })
     .state('admin.locations', {
       url: '/locations',
@@ -248,12 +378,12 @@ var app = angular.module('bbManager', [
     .state('admin.subscribers', {
       url: '/subscribers',
       templateUrl: 'views/admin/subscribers.html',
-      controller: 'subscribersCtrl'
+      controller: 'subscriberCtrl'
     })
     .state('admin.queries', {
       url: '/queries',
       templateUrl: 'views/admin/queries.html',
-      controller: 'queriesCtrl'
+      controller: 'customerQueriesCtrl'
     })
     .state('admin.callcenterinfo', {
       url: '/callcenterinfo',
@@ -265,80 +395,284 @@ var app = angular.module('bbManager', [
       templateUrl: 'views/admin/floating-campaign.html',
       controller: 'AdminCampaignCtrl'
     })
+    .state('admin.paid-payment', {
+      url: '/paid-payment',
+      templateUrl: 'views/admin/paid-payment.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.received-payment', {
+      url: '/received-payment',
+      templateUrl: 'views/admin/received-payment.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.paymentview-details', {
+      url: '/paymentview-details/:campaignId',
+      templateUrl: 'views/admin/paymentview-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.campaign-payment-details', {
+      url: '/campaign-payment-details/:campaign_id',
+      templateUrl: 'views/admin/campaign-payment-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.received-payment-details', {
+      url: '/received-payment-details/:campaign_id',
+      templateUrl: 'views/admin/received-payment-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.admin-feeds', {
+      url: '/admin-feeds',
+      templateUrl: 'views/admin/admin-feeds.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.feedback-view', {
+      url: '/feedback-view',
+      templateUrl: 'views/admin/feedback-view.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.productfull-details', {
+      url: '/productfull-details',
+      templateUrl: 'views/admin/productfull-details.html',
+      controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.add-campagin-product', {
+      url: '/add-campagin-product/{campaignId}',
+      templateUrl: 'views/admin/add-campagin-product.html',
+       controller: 'AdminCampaignCtrl'
+    })
+    .state('admin.campaign-details', {
+      url: '/campaign-details',
+      templateUrl: 'views/admin/campaign-details.html',
+      // controller: 'OwnerCampaignCtrl'
+    })
+    .state('admin.product-shortlist-campagin', {
+      url: '/product-shortlist-campagin/:productId',
+      templateUrl: 'views/admin/product-shortlist-campagin.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    
+      .state('admin.admin-notifications', {
+      url: '/admin-notifications',
+      templateUrl: 'views/admin/admin-notifications.html',
+      controller: 'AdminMgrAppCtrl'
+    })
+
+    .state('admin.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('admin.profile', {
+      url: '/profile',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
+    })
+    // .state('admin.user-management', {
+    //   url: '/user-management',
+    //   templateUrl: 'views/admin/user-management.html',
+    //   controller: 'UserManagementCtrl'
+    // })
+    // .state('admin.user-details', {
+    //   url: '/user-details/:userMId',
+    //   templateUrl: 'views/admin/user-details.html',
+    //   controller: 'UserManagementCtrl'
+    // })
     .state('owner', {
       abstract: true,
-      url: '/owner',
+      url: '/owner/:client_slug',
       templateUrl: 'layouts/owner.html',
       controller: 'OwnerMngrCtrl'
     })
-    .state('owner.dashboard', {
-      url: '/dashboard',
-      templateUrl: 'views/owner/dashboard.html',
+    
+      .state('owner.owner-notifications', {
+      url: '/owner-notifications',
+       templateUrl: 'views/owner/owner-notifications.html',
+    })
+    
+      
+    .state('owner.feeds', {
+      url: '/feeds',
+      templateUrl: 'views/owner/feeds.html',
       controller: 'OwnerFeedsCtrl',
     })
-    .state('owner.ownerCampaign', {
-      url: '/ownerCampaign',
-      templateUrl: 'views/owner/campaign.html',
+    .state('owner.campaigns', {
+      url: '/campaigns',
+      templateUrl: 'views/owner/campaigns.html',
       controller:  'OwnerCampaignCtrl'
     })
-    .state('owner.editCampaign', {
-      url: '/editCampaign',
-      templateUrl: 'views/owner/editcampaign.html',
+    .state('owner.bbi-campaigns', {
+      url: '/bba-campaigns',
+      templateUrl: 'views/owner/bbi-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
+    .state('owner.saved-campaigns', {
+      url: '/saved-campaigns',
+      templateUrl: 'views/owner/saved-campaigns.html',
+      controller:  'OwnerCampaignCtrl'
+    })
+    .state('owner.metro-campaign-details', {
+      url: '/metro-campaign-details/{metroCampaignId}',
+      templateUrl: 'views/owner/metro-campaign-details.html',
+      controller:  'MetroCtrl'
+    })
+    .state('owner.campaign-details', {
+      url: '/campaign-details/:campaignId/:campaignType',
+      templateUrl: 'views/owner/campaign-details.html',
       controller: 'OwnerCampaignCtrl'
     })
-    .state('owner.requestHoarding', {
-      url: '/requestHoarding',
-      templateUrl: 'views/owner/requesthoarding.html',
+    .state('owner.requested-hoardings', {
+      url: '/requested-hoardings',
+      templateUrl: 'views/owner/requested-hoardings.html',
+      controller: 'OwnerProductCtrl'
+    })
+    // .state('owner.suggest-products', {
+    //   url: '/suggest-products',
+    //   templateUrl: 'views/owner/suggest-products.html',
+    //   controller: 'OwnerCampaignCtrl'
+    // })
+    .state('owner.hoarding-list', {
+      url: '/hoarding-list',
+      templateUrl: 'views/owner/hoarding-list.html',
+      controller: 'OwnerProductCtrl'
+    })
+    .state('owner.add-campagin-product', {
+      url: '/add-campagin-product',
+      templateUrl: 'views/owner/add-campagin-product.html',
       controller: 'OwnerCampaignCtrl'
     })
-    .state('owner.suggestproducts', {
-      url: '/suggestproducts',
-      templateUrl: 'views/owner/suggest-products.html',
-      controller: 'OwnerFeedsCtrl'
-    })
-    .state('owner.hoardinglist', {
-      url: '/hoardinglist',
-      templateUrl: 'views/owner/hoardinglist.html',
-      controller: 'OwnerFeedsCtrl'
+    .state('owner.product-details', {
+      url: '/product-details/:productId',
+      templateUrl: 'views/owner/product-details.html',
+      controller: 'OwnerProductCtrl'
     })
     .state('owner.settings', {
       url: '/settings',
       templateUrl: 'views/owner/accountsetting.html',
       controller: ''
     })
+    // .state('owner.profile', {
+    //   url: '/profile',
+    //   templateUrl: 'views/owner/user-profile.html',
+    // })
+    // .state('owner.home', {
+    //   url: '/home',
+    //   templateUrl: 'views/owner/home.html',
+    //   controller: 'OwnerHomeCtrl'
+    // })
+    // .state('owner.outsourcingagent', {
+    //   url: '/outsourcingagent',
+    //   templateUrl: 'views/owner/outsourcingagent.html',
+    //   controller:'outSourcing'
+    // })
+    .state('owner.notifications', {
+      url: '/notifications',
+      templateUrl: 'views/owner/owne-notifications.html',
+      controller:'OwnerMngrCtrl'
+    })
+    .state('owner.addmetropkg', {
+      url: '/addmetropkg',
+      templateUrl: 'views/owner/addmetro-packages.html',
+      controller:'feedback'
+    })
+    .state('owner.bbisupport', {
+      url: '/bbisupport',
+      templateUrl: 'views/owner/bbisupport.html',
+      controller:'feedback'
+    })
+    .state('owner.updatepayment', {
+      url: '/updatepayment/:id',
+      templateUrl: 'views/owner/updatepayment.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.editproduct-details', {
+      url: '/editproduct-details/:id',
+      templateUrl: 'views/owner/editproduct-details.html',
+      controller:'OwnerProductCtrl'
+    })
+    // .state('owner.loginpage', {
+    //   url: '/loginpage',
+    //   templateUrl: 'views/owner/loginpage.html',
+    //   controller:''
+    // })
+    .state('owner.forgotpassword', {
+      url: '/forgotpassword',
+      templateUrl: 'views/owner/forgotpassword.html',
+      controller:''
+    })
+    .state('owner.reset-password', {
+      url: '/reset_password',
+      templateUrl: 'views/reset-password.html',
+      controller: 'UserSettingsCtrl'
+      // params:{
+      //   code: {squash: true, value: null}
+      // }
+    })
+    .state('owner.location', {
+      url: '/location',
+      templateUrl: 'views/map-home.html',
+      controller: 'GmapCtrl'
+    })
+    .state('owner.product-list', {
+      url: '/product-list',
+      templateUrl: 'views/product-list',
+      controller: 'ProductlistCtrl'
+    })
     .state('owner.profile', {
       url: '/profile',
-      templateUrl: 'views/owner/user-profile.html',
+      templateUrl: 'views/user-profile.html',
+      controller: 'UserProfileCtrl'
     })
-    .state('owner.home', {
-      url: '/home',
-      templateUrl: 'views/owner/home.html',
-      controller: 'HomeCtrl'
+    // .state('owner.shortlisted-products', {
+    //   url: '/shortlisted-products',
+    //   templateUrl: 'views/shortlisted-products.html',
+    //   controller: 'UserProductCtrl'
+    // })
+    .state('owner.resetlogin', {
+      url: '/resetlogin',
+      templateUrl: 'views/owner/resetlogin.html',
+      controller:''
     })
-    .state('owner.outsourcingagent', {
-      url: '/outsourcingagent',
-      templateUrl: 'views/owner/outsourcingagent.html',
-      controller:'outSourcing'
-    }).state('owner.teamPage', {
-      url: '/teamPage',
-      templateUrl: 'views/owner/team.html',
-      controller:'teamPage'
+    // .state('owner.createaccount', {
+    //   url: '/createaccount',
+    //   templateUrl: 'views/owner/createaccount.html',
+    //   controller:''
+    // })
+    .state('owner.payments', {
+      url: '/payments',
+      templateUrl: 'views/owner/campaign-payments.html',
+      controller:'OwnerCampaignCtrl'
     })
-    .state('owner.feedBack', {
-      url: '/feedBack',
-      templateUrl: 'views/owner/feedback.html',
-      controller:'feedback'
-    });
+    .state('owner.update-payments', {
+      url: '/update-payments',
+      templateUrl: 'views/owner/add-payment.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('owner.product-shortlist-campagin', {
+      url: '/product-shortlist-campagin/:productId',
+      templateUrl: 'views/owner/product-shortlist-campagin.html',
+      controller:'OwnerCampaignCtrl'
+    })
+    .state('agency.acampagins', {
+      url: '/acampagins',
+      templateUrl: 'views/agency/campagins.html',
+      controller:'agencyCampaginsCtrl'
+    })
+    ;
 
     $urlRouterProvider.when('/', '/home');
     $urlRouterProvider.when('/admin', '/admin/home');
-    $urlRouterProvider.when('/owner', '/owner/dashboard');
+    $urlRouterProvider.when('/owner', '/owner/:client_slug/feeds');
+    // $urlRouterProvider.when('/agency', '/home');
     $urlRouterProvider.otherwise('/');
 
     $authProvider.baseUrl = config.apiPath;
     $authProvider.loginUrl = '/login';
     $authProvider.logoutUrl = '/logout'
     $authProvider.signupUrl = '/signup';
+    $authProvider.storageType = 'localStorage';
     // $authProvider.unlinkUrl = '/auth/unlink/';
 
     $mdAriaProvider.disableWarnings();
@@ -355,14 +689,14 @@ app.config(['slickCarouselConfig', function (slickCarouselConfig) {
   slickCarouselConfig.autoplay = false;
 }]);
 
-app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+/*app.config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
   datepickerConfig.startingDay = "Today";
   datepickerConfig.showWeeks = false;
   datepickerPopupConfig.datepickerPopup = "MM/dd/yyyy";
   // datepickerPopupConfig.currentText = "Now";
   // datepickerPopupConfig.clearText = "Erase";
   // datepickerPopupConfig.closeText = "Close";
-}]);
+}]);*/
 
 /*========================
   Toastr Config
@@ -384,15 +718,6 @@ app.run(
   ['$rootScope', '$location', '$http', '$auth', '$mdDialog', '$transitions', 'toastr',
     function ($rootScope, $location, $http, $auth, $mdDialog, $transitions, toastr) {
       $transitions.onStart({}, function (transition) {
-        // Get all URL parameter
-        $rootScope.currentTitle = transition.to().title;
-        if (transition.to().name == "index.location" && $auth.isAuthenticated()) {
-          $rootScope.footerhide = true;
-        }
-        else {
-          $rootScope.footerhide = false;
-        }
-
         /*===========================================
           Restricting routes to Authenticated Users
         ===========================================*/
@@ -407,7 +732,7 @@ app.run(
           'admin.campaign-proposal-summary',
           'admin.campaign-running-summary',
           'admin.campaign-closed-summary',
-          'admin.registration',
+          'admin.user-management',
           'admin.companies',
           'admin.hoarding-list',
           'admin.formats',
@@ -421,9 +746,31 @@ app.run(
           'admin.callcenterinfo'
         ];
         var ownerRoutes = [
+          // 'owner.home',
+          'owner.feeds',
+          'owner.campaigns',
+          'owner.campaign-details',
+          'owner.requested-hoardings',
+          //'owner.suggest-products',
+          'owner.hoarding-list',
+          'owner.product-details',
+          'owner.settings',
+          'owner.profile',
+          'owner.payments',
+          'owner.update-payments'
         ];
         var requiresLogin = [
-          'index.location'
+          'index.location',
+        ];
+        var userRoutes = [
+          'index.suggest',
+          'index.suggest.product-detail',
+          'index.suggest.marketing-objectives',
+          'index.suggest.advertising-objectives',
+          'index.suggest.other-info',
+          'index.update-user-payments',
+          'index.user-payments'
+
         ];
 
         // routes for authenticated Users
@@ -432,8 +779,12 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
-              fullscreen: true
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true,
+              // clickOutsideToClose: true, 
+			        // preserveScope: true, 
+			        scope: $scope,
+              controller : AuthCtrl
             });
             return false;
           }
@@ -443,15 +794,16 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
-              fullscreen: true
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true,
+              clickOutsideToClose: true, 
+			        // preserveScope: true, 
+			        scope: $scope,
+              controller : AuthCtrl
             });
             return false;
           }
-          else if (
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'admin') == -1 && 
-            _.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1
-          ) {
+          else if ($auth.getPayload().userMongo.user_type != "bbi") {
             toastr.error("You don't have the rights to access this page. Please contact the owner.", "Error");
             return false;
           }
@@ -461,15 +813,62 @@ app.run(
             $rootScope.postLoginState = transition.to().name;
             $location.path('/');
             $mdDialog.show({
-              templateUrl: 'views/signIn.html',
-              fullscreen: true
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true,
+              clickOutsideToClose: true, 
+              // preserveScope: true, 
+              scope: $scope,
+              controller : AuthCtrl
             });
           }
-          else if (_.indexOf(_.pluck($auth.getPayload().user.roles, 'name'), 'owner') == -1) {
+          // else if($auth.isAuthenticated() && $auth.getPayload().userMongo.user_type == 'owner'){
+          //     var locationArray = $location.$$url.split('/')
+          //     var lastValue = locationArray[locationArray.length-1]
+          //     console.log('last value',lastValue)
+          //     var ownerChildRoute = "";
+          //     for(var routeOwner in ownerRoutes){
+          //       var arr = ownerRoutes[routeOwner].split('.');
+          //       ownerChildRoute = arr[arr.length-1]
+          //       if(ownerChildRoute == lastValue){
+          //         return true 
+          //       }
+          //     }
+          //     $location.path('/owner');
+          // }
+          else if ($auth.getPayload().userMongo.user_type != "owner") {
             toastr.error("You don't have the rights to access this page. Please contact the admin.", "Error");
             return false;
           }
         }
+        else if (_.indexOf(userRoutes, transition.to().name) != -1) {
+          if (!$auth.isAuthenticated()) {
+            $rootScope.postLoginState = transition.to().name;
+            $location.path('/');
+            $mdDialog.show({
+              templateUrl: 'views/sign-in.html',
+              fullscreen: true,
+              clickOutsideToClose: true, 
+              // preserveScope: true, 
+              scope: $scope,
+              controller : AuthCtrl
+            });
+          }
+          else if ($auth.getPayload().userMongo.user_type != "basic") {
+            toastr.error("You don't have the rights to access this page.", "Error");
+            return false;
+          }
+        }
+
+        // Get all URL parameter index.user-notifications
+        $rootScope.currentTitle = transition.to().title;
+        $rootScope.currStateName = transition.to().name;
+        if ((transition.to().name == "index.location"|| transition.to().name == "index.reset-password" || transition.to().name == "index.product-list" ||  transition.to().name == "index.update-user-payments" || transition.to().name == "index.profile" || transition.to().name == "index.user-payments" || transition.to().name == "index.shortlisted-products" || transition.to().name == "index.user-saved-campaigns" || transition.to().name == "index.metro-campaign" || transition.to().name == "index.campaign-details" || transition.to().name == "index.metro" || transition.to().name == "index.campaigns" || transition.to().name == "index.suggest.product-detail" ||  transition.to().name == "index.user-notifications" ||transition.to().name == "index.Map-ListView"  )&& $auth.isAuthenticated()) {
+          $rootScope.footerhide = true;
+        }
+        else {
+          $rootScope.footerhide = false;
+        }
+
       });
     }
   ]

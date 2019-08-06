@@ -1,13 +1,36 @@
-<div layout="column" layout-fill="layout-fill" >
-    <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
-        <div><h3>Subscribers</h3></div>
+<div layout="column" layout-fill="layout-fill">
+    <!-- <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+        <div>
+            <label>Export Email Ids as  <input type="radio" name="gender" value="male"> pdf / <input type="radio" name="gender" value="male">csv</label>
+            <button ng-click="export()">Export</button>
+        </div>
+    </div> -->
+    <div class="table-responsive">
+        <table class="table table-hover" style="width: 100% !important">
+            <thead>
+                <tr class="text_color">
+                    <th>Email Id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr ng-repeat="Subscribers in Subscribersdata | limitTo:limit">
+                    <td class="table_vertical">{{Subscribers.email}}</td>
+                 
+                    <td class="table_vertical">
+                        <input type="radio" id="huey" name="drone" value="Subscribe">
+                        <label for="huey">Subscribe</label>
+                        <!-- <input type="radio" id="huey" name="drone" value="Unsubscribe">
+                        <label for="huey">Unsubscribe</label> -->               
+                    </td>
+                    <td class="table_vertical">
+                        <!-- <input type="radio" id="huey" name="drone" value="Subscribe">
+                        <label for="huey">Subscribe</label> -->
+                        <input type="radio" id="huey" name="drone" value="Unsubscribe">
+                        <label for="huey">Unsubscribe</label>            
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div layout-margin layout="column"  style="background: #fff;color:#000;" class="md-whiteframe-2dp">
-        <div><h3>List Of Subscribers</h3></div>
-    </div>
-    <div layout-margin layout="column">
-        <div ui-grid="gridSubscribers" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
-    </div>
-  
-    
 </div>
