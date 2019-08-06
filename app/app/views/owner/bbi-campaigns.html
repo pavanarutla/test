@@ -72,7 +72,7 @@
                             </md-menu>
                           </td>
                         <td class="text-center table_vertical">
-                            <span class="text_color md-caption">{{campaign.updated_at| | dateFormat || "N/A" }}</span>
+                            <span class="text_color md-caption">{{campaign.updated_at | dateFormat  }}</span>
                         </td>
                         </tr>
                         </tbody>
@@ -147,7 +147,7 @@
                             </md-menu>
                           </td>
                         <td class="text-center table_vertical">
-                            <span class="text_color md-caption">{{campaign.updated_at|  dateFormat|| "N/A" }}</span>
+                            <span class="text_color md-caption">{{campaign.updated_at | dateFormat }}</span>
                         </td>
                         </tr>
                         </tbody>
@@ -171,7 +171,7 @@
                                 <th class=""></th>
                             </tr>
                         </thead>
-                        <tbody class="" ng-repeat="campaign in scheduledCampaigns| filter:search">
+                        <tbody class="" ng-repeat="campaign in runningCampaigns | filter:search">
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">Billboards America</td>
@@ -222,7 +222,7 @@
                             </md-menu>
                           </td>
                         <td class="text-center table_vertical">
-                            <span class="text_color md-caption">{{campaign.updated_at| dateFormat || "N/A" }}</span>
+                            <span class="text_color md-caption">{{campaign.updated_at | dateFormat }}</span>
                         </td>
                         </tr>
                         </tbody>
@@ -246,7 +246,7 @@
                                 <th class=""></th>
                             </tr>
                         </thead>
-                        <tbody class="text-center" ng-repeat="campaign in scheduledCampaigns| filter:search" ng-if="campaign.status == 900 || campaign.status == 1000" >
+                        <tbody class="text-center" ng-repeat="campaign in closedCampaigns | filter:search" ng-if="campaign.status == 900 || campaign.status == 1000" >
                             <tr>
                                 <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
                                 <td class="text-left table_vertical">Billboards America</td>
@@ -297,7 +297,7 @@
                             </md-menu>
                           </td>
                         <td class="text-center table_vertical">
-                            <span class="text_color md-caption">{{campaign.updated_at| dateFormat || "N/A" }}</span>
+                            <span class="text_color md-caption">{{campaign.updated_at | dateFormat  }}</span>
                         </td>
                         </tr>
                         </tbody>

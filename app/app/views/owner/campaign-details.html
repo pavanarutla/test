@@ -21,11 +21,11 @@
                                 </tr>
                                 <tr>
                                     <td><b>Client Name</b></td>
-                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.client_name || "N/A" | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact No.</b></td>
+                                    <td><b>Contact</b></td>
                                     <td ng-hide="campaignDetails.type == 0">{{campaignDetails.org_contact_phone}} / {{campaignDetails.org_contact_email | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">+ 91 9550224488 / reach@billboardsindia.com</td>
                                 </tr>
@@ -38,7 +38,7 @@
                                 </tr> -->
                                 <tr>
                                     <td><b>Referred By</b></td>
-                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.referred_by || "N/A"}}</td>
+                                    <td ng-hide="campaignDetails.type == 0">{{campaignDetails.referred_by || "N/A" | capitalize}}</td>
                                     <td ng-hide="campaignDetails.type == 2 || campaignDetails.type == 1">BillBoards India</td>
                                 </tr>
                             </tbody>
@@ -87,7 +87,14 @@
 
     <div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
             layout-margin="layout-margin" class="book_campowner">
-        
+            <div class="button_leftright" style="cursor: pointer;">
+                    <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
+                        ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
+                        <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerPop(campaignDetails.id)" download>
+                            Download POP
+                        </md-button>                       
+                    </div>
+                </div> 
             <div class="button_leftright">
                 <div class="dropdown">
                     <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
@@ -142,9 +149,18 @@
             </div>
             <div class="button_leftright" style="cursor: pointer;">
                 <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
-                    ng-click="selectedFormatIndex = 0">
+                    ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status <= 800">
                     <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
                         Download Quotation
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
+                        Download
+                    </md-button>
+                </div>
+				  <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}"
+                    ng-click="selectedFormatIndex = 0" ng-if="campaignDetails.status == 1000">
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignDetails.id)" download>
+                        Download Invoice
                     </md-button>
                     <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignDetails.id)" download  style="margin-left: 0px;margin-right: 0px;">
                         Download
@@ -196,14 +212,15 @@
             <tbody>
                 <tr ng-repeat="product in campaignDetails.products">
                     <td class="hide-xs image_tdwidth table_firstthpadding">
-                        <img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face"
+                        <img ng-src="{{config.serverUrl + product.image[0]}}" alt="Smiley face"
                             class="requ_size img-thumbnail">
                     </td>
                     <td class="table_address">
                         <p><b>{{product.siteNo}} - {{product.area_name}}</b><br><b style="color: #44596D;">Address</b>:
                             {{product.addressone || "N/A"}} &nbsp; {{product.addresstwo}}<br><b style="color: #44596D;">Views</b>: {{product.impressions|| "N/A"}}
-                            <br><b style="color: #44596D;">Type</b>: {{product.type|| "N/A"}}
-                    </td>
+                            <br><b style="color: #44596D;">Type</b>: {{product.type|| "N/A"}}<br>                            
+                            <span ng-if="product.type != 'Bulletin'"><b style="color: #44596D;">No Of Slots:</b> {{product.booked_slots || '0'}}</span>
+                    </td>                   
                     <td class="table_vertical ">{{product.panelSize}}</td>
                     <td class="table_vertical">
                         {{product.booked_from| dateify | date: "dd-MMM-yyyy"}}
@@ -239,7 +256,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 </div>
-                                                <div class="modal-footer modal_top">
+                                                <div class="modal-footer modal_top" style="padding-top: 20px;">
                                                         <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal" ng-click="deleteProductFromCampaign(campaignDetails.id, product.id)">Yes</button>
                                                         <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
                                                 </div>
