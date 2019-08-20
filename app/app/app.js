@@ -58,6 +58,30 @@ var app = angular.module('bbManager', [
       url: 'faq',
       templateUrl: 'views/faq_product.html'
     })
+    .state('index.listing_policies', {
+      url: 'listing_policies',
+      templateUrl: 'views/listing_policies.html'
+    })
+    .state('index.member_behavior', {
+      url: 'member_behavior',
+      templateUrl: 'views/member_behavior.html'
+    })
+    .state('index.privacy_notice', {
+      url: 'privacy_notice',
+      templateUrl: 'views/privacy_notice.html'
+    })
+    .state('index.prohibited_restricted', {
+      url: 'prohibited_restricted',
+      templateUrl: 'views/prohibited_restricted.html'
+    })
+    .state('index.rules_buyers', {
+      url: 'rules_buyers',
+      templateUrl: 'views/rules_buyers.html'
+    })
+    .state('index.user_agreement', {
+      url: 'user_agreement',
+      templateUrl: 'views/user_agreement.html'
+    })
     .state('index.suggestme', {
       url: 'suggestme',
       templateUrl: 'views/suggest_me.html'
