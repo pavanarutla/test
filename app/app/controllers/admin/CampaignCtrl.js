@@ -1006,6 +1006,8 @@ $scope.getProductUnavailableDates = function (product, ev) {
                     });
                     
                 }
+				
+
 
                 /* ----------------------------
                     New Hording profuct Nav bars ends

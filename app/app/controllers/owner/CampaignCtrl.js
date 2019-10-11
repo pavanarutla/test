@@ -978,6 +978,18 @@ $scope.hidebutton = function(){
         });
 
     }
+	
+	$scope.updateProductDates = function (product) {
+        OwnerProductService.updateProductDates(product).then(function (result) {
+            if (result.status == 1) {
+                toastr.success(result.message);
+                $state.reload();
+            } else {
+                toastr.error(result.data.message);
+            }
+        });
+
+    }
 
     $scope.downloadOwnerQuote = function (campaignId) {
         OwnerCampaignService.downloadQuote(campaignId).then(function (result) {

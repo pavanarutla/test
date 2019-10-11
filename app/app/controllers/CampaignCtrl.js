@@ -1,4 +1,4 @@
-app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MetroService, config, toastr,FileSaver,$state) {
+app.controller('CampaignCtrl', function ($scope, $mdDialog, $mdSidenav, $interval, $stateParams, $window, $location, $rootScope, CampaignService, MapService, MetroService, config, toastr,FileSaver,$state) {
 
   $scope.config = config;
 
@@ -541,6 +541,39 @@ $scope.cancelProductFromCampaign = function(productId, campaignId){
                         }
                     });
                 };
+				
+				 $scope.getProductUnavailableDates = function (product, ev) {
+					 console.log(product); 
+                if(product.type == "Bulletin"){
+                    MapService.getProductUnavailableDates(product.id).then(function (dateRanges) {
+                        $scope.unavailalbeDateRanges = dateRanges;
+                        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+                    });
+                }else{
+                    MapService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
+                        $scope.unavailalbeDateRanges = [];
+                        blockedDatesAndSlots.forEach((item)=>{
+                            if(item.booked_slots >= $scope.product.slots){
+                                $scope.unavailalbeDateRanges.push(item);
+                            }
+                        })
+                        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+                    })
+                }
+                
+            }
+
+$scope.updateProductDates = function (product) {
+        CampaignService.updateProductDates(product).then(function (result) {
+            if (result.status == 1) {
+                toastr.success(result.message);
+                $state.reload();
+            } else {
+                toastr.error(result.data.message);
+            }
+        });
+
+    }
   /*=============================
   | Page based initial loads end
   =============================*/

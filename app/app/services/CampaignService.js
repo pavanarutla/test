@@ -108,6 +108,11 @@ app.service('CampaignService',
                         $http.post(config.apiPath + '/pay-launch-campaign', campaignObj).success(dfd.resolve).error(dfd.reject);
                         return dfd.promise;
                     },
+					updateProductDates: function (data) {
+				var dfd = $q.defer();
+				$http.post(config.apiPath + '/change-product-dates' ,data).success(dfd.resolve).error(dfd.reject);
+				return dfd.promise;
+			},
                    
                 }
             }

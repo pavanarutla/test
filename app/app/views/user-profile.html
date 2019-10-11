@@ -27,6 +27,79 @@
 			<h3>{{userProfile.user.name}}</h3>
 			<h4 class="md-caption email_phone"><span>Email: </span>{{userProfile.user.email}}</h4>
 			<h4 class="md-caption email_phone"><span>Phone: </span>(+91) {{userProfile.user.phone}}</h4>
+			
+			                           
+                         <h4 class="md-caption email_phone"><span>GST: </span>  
+
+						<!-- <input type="text" class="" ng-model="user.gst" placeholder="GST" only-numeric
+                                ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
+                            <span ng-click="myfield = true;" ng-show="!myfield" > 
+							<i class="material-icons">edit</i></span>
+									
+								
+                            <button
+                                ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)"
+                                ng-disabled="(product.owner_price > 0 && product.owner_price.length !== 0 ) ? false : true"
+                                ng-show="myfield"
+                                style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;">
+                                <i class="material-icons" style="color: #fff;">check</i></button>-->
+								
+                  
+					</h4>
+					
+				                            
+                          <h4 class="md-caption email_phone"><span>PAN: </span> 
+						 <!-- <input type="text" class="md-caption email_phone" ng-model="user.pan" placeholder="PAN" 
+                                ng-if="myfield" style="width: 70px;padding: 8px 5px 2px 5px;" />
+                            <span ng-click="myfield = true;" ng-show="!myfield"> <i
+                                    class="material-icons">edit</i></span>
+                            <button
+                                ng-click="myfield = false;changeCampaignProductPrice(campaignDetails.id, product.owner_price, product.id,product.product_id)"
+                                ng-disabled="(product.owner_price > 0 && product.owner_price.length !== 0 ) ? false : true"
+                                ng-show="myfield"
+                                style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;">
+                                <i class="material-icons" style="color: #fff;">check</i></button>-->
+								</h4>   
+								
+					<div class="button_leftlast">
+                    <div class="dropdown">
+                        <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
+                            Edit
+                        </md-button>
+                        <div id="shareownercampDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px; left:5px; width:400px;">
+                            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                                <div layout="colmun">
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                        onclick="shareOwnerCampaign()">
+                                        <md-icon class="md-default-theme">
+                                            <i class="material-icons">close</i>
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                                <h3 class="md-title" style="margin-top:0px;margin-left: 11px;">Edit Details
+                                <form name="shareCampaignForm">
+                                    <div layout="column" style="padding:10px;">
+                                        <div class="form-group">
+                                            <input ng-model="userProfile.gst" class="form-control"
+                                                name="gst" placeholder="GST" required="required" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input ng-model="userProfile.pan" name="pan" class="form-control"
+                                                placeholder="PAN" required="required" />
+                                            
+                                        </div>
+                                        <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                            <md-button class="md-raised md-warn Upload_font" layout-fill
+                                                ng-click="updateProfile($event, userProfile)">
+                                                Update</md-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 		</div>
 	</div>
 	<!-- <div>{{userProfile.user.email}}</div>
@@ -109,4 +182,8 @@
 
 </div>
 		
-
+<script>
+    function shareOwnerCampaign () {
+        document.getElementById("shareownercampDrop").classList.toggle("show");
+    }
+</script>

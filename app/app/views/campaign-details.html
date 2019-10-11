@@ -210,6 +210,16 @@
                             {{campaignProduct.product_status| stringifyProductStatus}}</p>
                     </td>
                     <td class="table_vertical">
+					<p ng-if="campaignDetails.status == 100">
+					<input date-range-picker ng-model="campaignProduct.booking_dates"
+                        class="form-control md-whiteframe-3dp date-picker pull-left" placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                    <a ng-click="getProductUnavailableDates(campaignProduct, $event);"> 
+                        <i class="fa fa-calendar"></i>
+                    </a>
+					
+                    <md-button class="md-raised md-primary all_button" ng-click="updateProductDates(campaignProduct)" >Update Dates</md-button>
+                    
+					</p>
                         <!-- Trigger the modal with a button -->
                         <button type="button" class="btn btn-info" data-toggle="modal"
                             data-target="#myModal-{{campaignProduct.id}}"
@@ -332,7 +342,7 @@
                             </md-button>
                         </li> -->
                     </ul>
-                    <md-button class="md-raised md-primary all_button book_campowner" ng-if="campaignDetails.status == 100" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Launch Campaign</md-button>
+                    <md-button class="md-raised md-primary all_button book_campowner" ng-if="campaignDetails.status == 100" ng-click="confirmCampaignBooking(campaignDetails.id,$event)">Request for Campaign</md-button><!--Launch Campaign-->
                 </div>
             </div>
         </div>

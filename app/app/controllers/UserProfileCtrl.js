@@ -38,7 +38,7 @@ app.controller('UserProfileCtrl', function($scope, $stateParams, $window, UserSe
     Upload.upload({
       url: config.apiPath + '/update-profile-pic',
       data: { profile_pic: $scope.files.image}
-    }).then(function (result) {
+    }).then(function (result) { 
       if(result.data.status == "1"){
         $window.location.reload();   
       }
