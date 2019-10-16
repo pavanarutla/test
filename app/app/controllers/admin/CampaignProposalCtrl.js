@@ -12,6 +12,7 @@ app.controller("CampaignProposalCtrl", function (
   toastr,
   OwnerProductService,
   Upload,
+  $state,
   FileSaver
 ) {
   $scope.productList = [];
@@ -644,7 +645,39 @@ app.controller("CampaignProposalCtrl", function (
             element.admin_price = productPrice;
         }
     });
+},
+
+$scope.getProductUnavailableDates = function (product, ev) {
+ 
+  if(product.type == "Bulletin"){
+    AdminCampaignService.getProductUnavailableDates(product.id).then(function (dateRanges) {
+        $scope.unavailalbeDateRanges = dateRanges;
+        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+    });
+}else{
+  AdminCampaignService.getProductDigitalUnavailableDates(product.id).then(function (blockedDatesAndSlots) {
+        $scope.unavailalbeDateRanges = [];
+        blockedDatesAndSlots.forEach((item)=>{
+            if(item.booked_slots >= product.slots){
+                $scope.unavailalbeDateRanges.push(item);
+            }
+        })
+        $(ev.target).parents().eq(3).find('input').trigger('click') ;
+    })
 }
+},
+
+$scope.updateProductDates = function (product) {
+        AdminCampaignService.updateProductDates(product).then(function (result) {
+            if (result.status == 1) {
+                toastr.success(result.message);
+                $state.reload();
+            } else {
+                toastr.error(result.data.message);
+            }
+        });
+
+    }
 
   $scope.changeQuoteRequest = function (campaignId, remark, type) {
     $scope.changeRequest = {};
@@ -663,6 +696,9 @@ app.controller("CampaignProposalCtrl", function (
       }
     });
   };
+  
+  
+  
 
   /*=========================
   | Page based initial loads

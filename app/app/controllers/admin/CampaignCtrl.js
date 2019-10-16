@@ -861,6 +861,7 @@ $scope.toggleShareCampaignSidenav = function (campaign) {
   }
 // Date-Picker
 $scope.getProductUnavailableDates = function (product, ev) {
+	
   // $scope.ownerProductPrice = productPrice
   // AdminCampaignService.getProductUnavailableDates(productId).then(function (dateRanges) {
       // $scope.unavailalbeDateRanges = dateRanges;
