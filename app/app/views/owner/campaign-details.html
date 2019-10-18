@@ -256,7 +256,7 @@
                                 style="border: none;background: #44596D;color: #fff !important;padding: 3px 7px;margin-left: -3px;">
                                 <i class="material-icons" style="color: #fff;">check</i></button></p>
                     </td>                   
-                    <td class="table_vertical" ng-if="campaignDetails.status < 600">
+                    <td class="table_vertical" ng-if="campaignDetails.status < 700">
 					
 					
 					
@@ -308,10 +308,10 @@
                     <li class="col1">Grand Total :</li>
                     <li class="col2">{{campaignDetails.totalAmount |number : 2 || '0'}}</li>
                 </ul>
-                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 600">Book
+                <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status < 700">Book
                     Campaign</md-button>
-                    <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2 ">Book
-                        Campaign</md-button>
+                  <!--  <md-button class="md-raised md-primary all_button book_campowner" ng-click="bookOwnerCampaign(campaignDetails.id, $event)" ng-if="campaignDetails.status == 100 && campaignDetails.type == 2 ">Book
+                        Campaign</md-button>-->
                 <span class="md-raised md-primary camp_bookowner" ng-if="campaignDetails.status == 700" >Campaign Booked</span>
             </div>
         </div>
