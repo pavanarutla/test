@@ -295,7 +295,7 @@
                     <p>{{campaignProduct.product_status |stringifyProductStatus | capitalize}}</p>                        
                 </td>                   
                 <td class=""> 
-				<p>
+				<p ng-if="campaignDetails.status < 700">
 					<input date-range-picker ng-model="campaignProduct.booking_dates"
                         class="form-control md-whiteframe-3dp date-picker pull-left" placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker" style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
                     <a ng-click="getProductUnavailableDates(campaignProduct,$event)"> 
